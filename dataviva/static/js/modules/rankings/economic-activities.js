@@ -6,25 +6,23 @@ var EconomicActivitiesTable = function () {
         "sAjaxSource": "/rais/all/all/show.1/all/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
+        "columns": [
+            {data: 10},
+            {data: 11},
             null,
-            { "bVisible": false },
-            null,
-            { "bVisible": false },
-            null,
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            null,
-            null,
-            null,
-            null,
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false }
+            {data: 0},
+            {data: 2},
+            {data: 4},
+            {data: 12},
+            {data: 13}
+        ],
+        "columnDefs": [
+            {
+                "targets": 2,
+                "render": function (data, type, row, meta){
+                    return dataviva.cnae[row[11]].name
+                }
+            },
         ],
         "deferRender": true,
         "scrollY": 500,
@@ -34,10 +32,15 @@ var EconomicActivitiesTable = function () {
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
                 buttons = $("<div></div>").addClass("btn-group");
 
-            select.append( $('<option value="">Ano</option>') );
-            buttons.append($("<button>Seções</button>").attr("id", 'economic-activities-sections').addClass("btn btn-white"));
-            buttons.append($("<button>Divisões</button>").attr("id", 'economic-activities-divisions').addClass("btn btn-white"));
-            buttons.append($("<button>Classes</button>").attr("id", 'economic-activities-classes').addClass("btn btn-white"));
+            var cnae_1 = dataviva.dictionary['cnae_1'],
+                cnae_3 = dataviva.dictionary['cnae_3'],
+                cnae_6 = dataviva.dictionary['cnae_6'],
+                year = dataviva.dictionary['year'];
+
+            select.append($('<option value="">'+year+'</option>'));
+            buttons.append($("<button>"+cnae_1+"</button>").attr("id", 'economic-activities-sections').addClass("btn btn-white"));
+            buttons.append($("<button>"+cnae_3+"</button>").attr("id", 'economic-activities-divisions').addClass("btn btn-white"));
+            buttons.append($("<button>"+cnae_6+"</button>").attr("id", 'economic-activities-classes').addClass("btn btn-white"));
 
             $('.rankings-content .rankings-control').append(buttons);
             $('.rankings-content .rankings-control').append(select);
@@ -62,30 +65,22 @@ var EconomicActivitiesTable = function () {
             $('#economic-activities-table_filter').addClass('pull-right');
 
             $('#economic-activities-sections').click(function() {
-                economicActivitiesSections();
+                economicActivities.table.ajax.url("/rais/all/all/show.1/all/?order=num_jobs.desc").load();
             });
 
             $('#economic-activities-divisions').click(function() {
-                economicActivitiesDivisions();
+                economicActivities.table.ajax.url("/rais/all/all/show.3/all/?order=num_jobs.desc").load();
             });
 
             $('#economic-activities-classes').click(function() {
-                economicActivitiesClasses();
+                economicActivities.table.ajax.url("/rais/all/all/show.6/all/?order=num_jobs.desc").load();
             });
         }
     });
 };
 
-var economicActivities = new EconomicActivitiesTable();
-
-var economicActivitiesSections = function() {
-    economicActivities.table.ajax.url("/rais/all/all/show.1/all/?order=num_jobs.desc").load();
-};
-
-var economicActivitiesDivisions = function() {
-    economicActivities.table.ajax.url("/rais/all/all/show.3/all/?order=num_jobs.desc").load();
-};
-
-var economicActivitiesClasses = function() {
-    economicActivities.table.ajax.url("/rais/all/all/show.6/all/?order=num_jobs.desc").load();
-};
+$(document).ready(function() {
+    dataviva.requireAttrs(['cnae'], function() {
+        window.economicActivities = new EconomicActivitiesTable();
+    });
+});
