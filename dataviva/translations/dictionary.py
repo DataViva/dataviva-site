@@ -591,7 +591,6 @@ def dictionary():
         "best_regards": gettext("Best Regards,"),
         "team": gettext("Team"),
 
-<<<<<<< HEAD
         #product
         "wages_and_jobs": gettext("Wages and Jobs"),
         "avg_month_income": gettext("Average Monthly Income"),
@@ -615,9 +614,6 @@ def dictionary():
         "jobs_by": gettext("Jobs by"),
 
 
-
-=======
->>>>>>> origin/develop
     }
 
 def plurals(key=None, n=1):
