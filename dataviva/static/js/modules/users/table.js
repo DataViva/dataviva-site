@@ -1,41 +1,72 @@
-var UsersTable = function () {
+var UserTable = function () {
     this.tableId = '#users-table';
 
-    this.table = $('#users-table').DataTable( {
-                "sAjaxSource": "/users/all",
-                "sAjaxDataProp": "users",
-                "aoColumnsDefs": [
-                    { "data": "id" },
-                    { "data": "title" },
-                    { "data": "authors" },
-                    { "data": "role"},
-                ],
-                "columnDefs": [ {
-                    'className' : 'body-checkbox',
-                    'targets':   3,
-                    'render': function(data, type,users, meta){
-                        if(data){
-                            return '<input type="checkbox" name="checkboxAdmin" value="'+users[0]+'" checked>'
-                        }else{
-                            return '<input type="checkbox" name="checkboxAdmin" value="'+users[0]+'">'
-                        }
+    this.table = $(this.tableId).DataTable({
+        "sAjaxSource": "/users/all",
+        "sAjaxDataProp": "users",
+        "order": [],
+        "columnDefs": [
+            {
+                "targets": 0,
+                "orderable": false,
+                "className": "column-checkbox",
+                "render": function (data, type, users, meta){
+                    var checkbox = '<div class="checkbox checkbox-success">' +
+                                   '    <input name="selected-item" id="item'+users[0]+'" value="'+users[0]+'" type="checkbox">' +
+                                   '    <label for="'+users[0]+'"></label>'
+                                   '</div>';
+
+                    return checkbox;
+                }
+            },
+            {
+                "targets": 1,
+                "className": "column-title",
+                "render": function (data, type, users, meta){
+                    return '<a href="/blog/users/'+users[0]+'">'+users[1]+'</a>';
+                }
+            },
+            {
+                "targets": 4,
+                "orderable": false,
+                "className": "column-checkbox",
+                "render": function (data, type, users, meta){
+                    if (data){
+                       return '<input type="checkbox" class="js-switch" name="activate'+users[0]+'" value="'+users[0]+'" checked>';
+                    } else {
+                       return '<input type="checkbox" class="js-switch" name="activate'+users[0]+'" value="'+users[0]+'">';
                     }
-                } ],
-                "columns": [
-                   { "width": "10%" },
-                   { "width": "30%" },
-                   null,
-                   { "width": "19%" },
-                 ],              
-               "paging": false,
-               "bFilter": false,
-               "info": false //number of rows in footer table
+                }
+              }],
+        "paging": false,
+        "bFilter": true,
+        "info": false,
+        "initComplete": function(settings, json) {
+            $( ".js-switch" ).each(function() {
+                var switchery = new Switchery(this, {
+                    size: 'small',
+                    color: '#5A9DC4'
+                });
+
+                $(this).next().click(function() {
+                    if($(this).siblings().get(0).checked) {
+                        activate([$(this).siblings().get(0).value]);
+                    } else {
+                        deactivate([$(this).siblings().get(0).value]);
+                    }
+                });
             });
 
-    $('#users-table thead tr th').first().addClass('check-all')
+            $('input[name="selected-item"]').change(function() {
+                checkManySelected();
+            });
+        }
+    });
 
-    $('#users-table .check-all').click(function() {
-        var checked = $('#users-table .check-all input:checkbox').get(0).checked;
+    $('#blog-table thead tr th').first().addClass('check-all')
+
+    $('#blog-table .check-all').click(function() {
+        var checked = $('#blog-table .check-all input:checkbox').get(0).checked;
         $('input[name="selected-item"]').each(function() {
             $(this).prop('checked', checked);
         });
@@ -53,7 +84,7 @@ UsersTable.prototype.getCheckedIds = function(first_argument) {
     return checkedIds;
 };
 
-var newsTable = new UsersTable();
+var usersTable = new UsersTable();
 
 var changeStatus = function(ids, status, status_value){
     if (ids.length) {
@@ -81,7 +112,7 @@ var changeStatus = function(ids, status, status_value){
             }
         });
     } else {
-        showMessage('Por favor selecione algum post para alterar.', 'warning', 8000);
+        showMessage('Por favor selecione algum users para alterar.', 'warning', 8000);
     }
 }
 
