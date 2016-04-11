@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('general.home') }}">Home</a></li>
+        <li><a href="#">Banco de Dados</a></li>
+        <li class="active"><span>Download<span></li>
+    </ol>
+    <div class="row">
+        <div class="sidebar no-padding col-xs-15 col-md-4">
+            <h4>Outros Recursos</h4>
+            <ul class="sub-menu">
+                <li><a href="02-pesquisa-publico.html" title="Inicie uma pesquisa">Inicie uma pesquisa</a></li>
+                <li><a href="07-ranking-tabela.html" title="Construa gráficos">Construa gráficos</a></li>
+            </ul>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="institucional">
+                <form action="#" class="form-dataviva bordered">
+                    <h2>Download de banco de dados</h2>
+                    <div class="row">
+                        <div class="col-xs-15 col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="big block" for="select-db">Banco de Dados</label>
+                                <select name="select-db" id="select-db" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Comércio Internacional</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-15 col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="big block" for="select-periodo">Período</label>
+                                <select name="select-periodo" id="select-periodo" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Todos os Anos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-15 col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="big block">&nbsp;</label>
+                                <select name="select-db" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Todos os Meses</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-15">
+                            <label class="big block">Filtros</label>
+                        </div>
+                        <div class="col-xs-15 col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="block">Localidade</label>
+                                <select name="select-regiao" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Região</option>
+                                </select>
+                                <select name="select-estado" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Estado</option>
+                                </select>
+                                <select name="select-municipio" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Município</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-15 col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="block" for="select-produto">Produto</label>
+                                <select name="select-produto" id="select-produto" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Todos</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-15 col-sm-6 col-md-4">
+                            <div class="form-group">
+                                <label class="block" for="select-parceiro">Parceiro Comercial</label>
+                                <select name="select-parceiro" id="select-parceiro" class="input-lg">
+                                    <option value="option-1">Opção 1</option>
+                                    <option value="option-2" selected="selected">Todos</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="18-download-banco-visualizar.html" class="btn btn-default btn-lg btn-dataviva pull-right">
+                    Visualizar
+                    </a>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
