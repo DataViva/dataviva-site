@@ -1,4 +1,4 @@
-var WagesTable = function () {
+var LocationWages = function () {
     this.tableId = '#location-wages-table';
 
     this.table = $(this.tableId).DataTable({
@@ -6,25 +6,22 @@ var WagesTable = function () {
         "sAjaxSource": "/rais/all/show.1/all/all/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
-            null, //year
-            { "bVisible": false }, //wage
-            { "bVisible": false }, //num_emp
-            null, //num_jobs
-            null, //num_est
-            null, //wage_avg
-            { "bVisible": false }, //age_avg
-            { "bVisible": false }, //wage_growth
-            { "bVisible": false }, //wage_growth_5
-            { "bVisible": false }, //num_emp_growth
-            { "bVisible": false }, //num_emp_growth_5
-            null, //bra_id
-            null, //cnae_diversity
-            null, //cnae_diversity_eff
-            { "bVisible": false }, //cbo_diversity
-            { "bVisible": false }, //cbo_diversity_eff
-            { "bVisible": false }, //hist
-            { "bVisible": false } //gini
+        "columns": [
+            {data: 0},
+            {data: 11},
+            {data: 3},
+            {data: 4},
+            {data: 5},
+            {data: 12},
+            {data: 13}
+        ],
+        "columnDefs": [
+            {
+                "targets": 1,
+                "render": function (data, type, row, meta){
+                    return dataviva.bra[row[11]].name
+                }
+            },
         ],
         "deferRender": true,
         "scrollY": 500,
@@ -34,17 +31,24 @@ var WagesTable = function () {
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
                 buttons = $("<div></div>").addClass("btn-group");
 
-            select.append( $('<option value="">Ano</option>') );
-            buttons.append($("<button>Regiões</button>").attr("id", 'location-wages-regions').addClass("btn btn-white"));
-            buttons.append($("<button>Estados</button>").attr("id", 'location-wages-states').addClass("btn btn-white"));
-            buttons.append($("<button>Mesoregiões</button>").attr("id", 'location-wages-mesoregions').addClass("btn btn-white"));
-            buttons.append($("<button>Microregiões</button>").attr("id", 'location-wages-microregions').addClass("btn btn-white"));
-            buttons.append($("<button>Municípios</button>").attr("id", 'location-wages-municipalities').addClass("btn btn-white"));
+            var bra_1 = dataviva.dictionary['bra_1'],
+                bra_3 = dataviva.dictionary['bra_3'],
+                bra_5 = dataviva.dictionary['bra_5'],
+                bra_7 = dataviva.dictionary['bra_7'],
+                bra_9 = dataviva.dictionary['bra_9'],
+                year = dataviva.dictionary['year'];
+
+            select.append($('<option value="">'+year+'</option>'));
+            buttons.append($("<button>"+bra_1+"</button>").attr("id", 'location-wages-regions').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_3+"</button>").attr("id", 'location-wages-states').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_5+"</button>").attr("id", 'location-wages-mesoregions').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_7+"</button>").attr("id", 'location-wages-microregions').addClass("btn btn-white"));
+            buttons.append($("<button>"+bra_9+"</button>").attr("id", 'location-wages-municipalities').addClass("btn btn-white"));
 
             $('.rankings-content .rankings-control').append(buttons);
             $('.rankings-content .rankings-control').append(select);
 
-            wagesTable.table
+            locationWages.table
                 .column( 0 )
                 .cache( 'search' )
                 .sort()
@@ -54,7 +58,7 @@ var WagesTable = function () {
                 } );
 
             select.on( 'change', function () {
-               wagesTable.table
+               locationWages.table
                     .column( 0 )
                     .search( $(this).val() )
                     .draw();
@@ -64,46 +68,30 @@ var WagesTable = function () {
             $('#location-wages-table_filter').addClass('pull-right');
 
             $('#location-wages-regions').click(function() {
-                wagesRegions();
+                locationWages.table.ajax.url("/rais/all/show.1/all/all/?order=num_jobs.desc").load();
             });
 
             $('#location-wages-states').click(function() {
-                wagesStates();
+                locationWages.table.ajax.url("/rais/all/show.3/all/all/?order=num_jobs.desc").load();
             });
 
             $('#location-wages-mesoregions').click(function() {
-                wagesMesoregions();
+                locationWages.table.ajax.url("/rais/all/show.5/all/all/?order=num_jobs.desc").load();
             });
 
             $('#location-wages-microregions').click(function() {
-                wagesMicroregions();
+                locationWages.table.ajax.url("/rais/all/show.7/all/all/?order=num_jobs.desc").load();
             });
 
             $('#location-wages-municipalities').click(function() {
-                wagesMunicipalities();
+                locationWages.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load();
             });
         }
     });
 };
 
-var wagesTable = new WagesTable();
-
-var wagesRegions = function() {
-    wagesTable.table.ajax.url("/rais/all/show.1/all/all/?order=num_jobs.desc").load();
-};
-
-var wagesStates = function() {
-    wagesTable.table.ajax.url("/rais/all/show.3/all/all/?order=num_jobs.desc").load();
-};
-
-var wagesMesoregions = function() {
-    wagesTable.table.ajax.url("/rais/all/show.5/all/all/?order=num_jobs.desc").load();
-};
-
-var wagesMicroregions = function() {
-    wagesTable.table.ajax.url("/rais/all/show.7/all/all/?order=num_jobs.desc").load();
-};
-
-var wagesMunicipalities = function() {
-    wagesTable.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load();
-};
+$(document).ready(function() {
+    dataviva.requireAttrs(['bra', 'hs', 'university'], function() {
+        window.locationWages = new LocationWages();
+    });
+});
