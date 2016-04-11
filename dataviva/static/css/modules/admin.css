@@ -15,7 +15,12 @@
 .admin .admin-main .btn {
     font-size: 30px;
     min-width: 300px;
+    min-height: 130px;
     margin-bottom: 15px;
+}
+
+.admin .admin-main .btn .admin-icon{
+    margin-top: 15px;
 }
 
 @media (max-width: 991px) {
