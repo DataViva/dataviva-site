@@ -29,7 +29,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    pass
+    return redirect(url_for('admin.index'))
 
 
 @mod.route('/question/all', methods=['GET'])
@@ -61,10 +61,6 @@ def create():
     else:
         question = SearchQuestion()
         profile_id = form.profile.data
-        #Id=1, profile=Entrepreneurs / Empreendedores
-        #Id=2, profile=Development Agents / Agentes de Desenvolvimento
-        #Id=3, profile=Students and Professionals / Estudantes e Profissionais
-        profile_id = 1
         question.profile_id = profile_id
         question.description = form.description.data
         question.answer = form.answer.data
@@ -101,10 +97,6 @@ def update(id):
     else:
         question = SearchQuestion.query.filter_by(id=id).first_or_404()
         profile_id = form.profile.data
-        #Id=1, profile=Entrepreneurs / Empreendedores
-        #Id=2, profile=Development Agents / Agentes de Desenvolvimento
-        #Id=3, profile=Students and Professionals / Estudantes e Profissionais
-        profile_id = 1
         question.profile_id = profile_id
         question.description = form.description.data
         question.answer = form.answer.data
