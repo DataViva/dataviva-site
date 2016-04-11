@@ -26,7 +26,6 @@ var CallsTable = function () {
                 "targets": 2,
                 "className": "column-title",
                 "render": function (data, type, call, meta){
-                    
                     return "<a href='"+call[2]+"' target='_blank'>"+call[2]+"</a>";
                 }
             },

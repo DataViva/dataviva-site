@@ -488,14 +488,14 @@ def dictionary():
         "International RCA": gettext("International RCA"),
         "International Distance": gettext("International Distance"),
         "International Opportunity Gain": gettext("International Opportunity Gain"),
-        "The product ": gettext("The product "),
-        "occupy the": gettext("occupy the"),
-        "position in imports and the": gettext("position in imports and the"),
-        "position in exports in Brazil. In": gettext("position in exports in Brazil. In"),
-        "earned": gettext("earned"),
-        "in trade value, representing a variation of": gettext("in trade value, representing a variation of"),
-        "in five years. The municipality in Brazil which exports more": gettext("in five years. The municipality in Brazil which exports more"),
-        "and which imports more is": gettext("and that imports more is"),
+        "The_product": gettext("The products of the position of "),
+        "are_number": gettext("are number "),
+        " in imports and number": gettext(" in imports and number "),
+        " in exports in Brazil. In ": gettext(" in exports in Brazil. In "),
+        "its commercial value was of ": gettext("its commercial value was of "),
+        ", representing a variation of ": gettext(", representing a variation of "),
+        "in five years. The Brazilian state that most exports": gettext("in five years. The Brazilian state that most exports"),
+        " and the one that imports the most is ": gettext(" and the one that imports the most is "),
         "occupies the": gettext("occupies the"),
         "position in exports": gettext("position in exports"),
         "in this location": gettext("in this location"),
@@ -511,6 +511,12 @@ def dictionary():
         "by Total Value Imported": gettext("by Total Value Imported"),
         "Main Destination": gettext("Main Destination"),
         "Main Origin": gettext("Main Origin"),
+        "municipality_in": gettext("in five years. The municipality in "),
+        "product_state": gettext("in imports in the state of"),
+        "mesoregions_in": gettext(" in imports in the mesoregions of"),
+        "microregions_in": gettext(" in imports in the microregion of"),
+        "five_years": gettext("in five years."),
+        "and_number": gettext(" and number"),
 
         #all
         "preview": gettext("Preview"),
@@ -584,8 +590,6 @@ def dictionary():
         "check_here": gettext("Check here."),
         "best_regards": gettext("Best Regards,"),
         "team": gettext("Team"),
-
-
 
     }
 

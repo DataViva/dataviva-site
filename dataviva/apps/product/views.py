@@ -42,6 +42,7 @@ def index(product_id):
     body = {}
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    language = g.locale
 
     if location:
         location_id = location.id
@@ -146,4 +147,4 @@ def index(product_id):
             header['import_value_ranking'] = ranking + 1
             break
 
-    return render_template('product/index.html', header=header, body=body, product=product, location=location)
+    return render_template('product/index.html', header=header, body=body, product=product, location=location, language=language)
