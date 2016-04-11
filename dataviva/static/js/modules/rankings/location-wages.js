@@ -9,6 +9,7 @@ var LocationWages = function () {
         "columns": [
             {data: 0},
             {data: 11},
+            {data: 11},
             {data: 3},
             {data: 4},
             {data: 5},
@@ -18,6 +19,17 @@ var LocationWages = function () {
         "columnDefs": [
             {
                 "targets": 1,
+                "render": function (data, type, row, meta){
+                    if (dataviva.bra[row[11]].id_ibge === false){
+                        return '-'
+                    }
+                    else {
+                        return dataviva.bra[row[11]].id_ibge
+                    }
+                }
+            },
+            {
+                "targets": 2,
                 "render": function (data, type, row, meta){
                     return dataviva.bra[row[11]].name
                 }

@@ -9,6 +9,7 @@ var LocationTradeRanking = function () {
         "columns": [
             {data: 0},
             {data: 15},
+            {data: 15},
             {data: 2},
             {data: 3},
             {data: 12},
@@ -18,6 +19,17 @@ var LocationTradeRanking = function () {
         "columnDefs": [
             {
                 "targets": 1,
+                "render": function (data, type, row, meta){
+                    if (dataviva.bra[row[15]].id_ibge === false){
+                        return '-'
+                    }
+                    else {
+                        return dataviva.bra[row[15]].id_ibge
+                    }
+                }
+            },
+            {
+                "targets": 2,
                 "render": function (data, type, row, meta){
                     return dataviva.bra[row[15]].name
                 }
