@@ -34,7 +34,7 @@ var UsersTable = function () {
                                     '" value="'+users[0]+ (data ? '" checked>' : '" >');
                     },
                 } ],             
-               "paging": false,
+               "paging": true,
                "bFilter": false,
                "info": false, //number of rows in footer table
                "initComplete": function(settings, json) {
@@ -88,7 +88,7 @@ var changeStatus = function(ids, status, status_value){
     if (ids.length) {
         $.ajax({
             method: "POST",
-            url: "/"+lang+"/news/admin/users/"+status+"/"+status_value,
+            url: "/"+lang+"/users/admin/users/"+status+"/"+status_value,
             data: {ids:ids},
             statusCode: {
                 500: function () {
@@ -96,7 +96,7 @@ var changeStatus = function(ids, status, status_value){
                 },
                 404: function () {
                     showMessage('Uma ou mais notícias selecionadas não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
-                    newsTable.table.fnReloadAjax();
+                    usersTable.table.fnReloadAjax();
                 }
             },
             success: function (message) {
@@ -118,21 +118,21 @@ var destroy = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
-            url: "/"+lang+"/news/admin/delete",
+            url: "/"+lang+"/users/admin/delete",
             data: {ids:ids},
             statusCode: {
                 500: function () {
-                    showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
+                    showMessage('Não foi possível alterar o(s) usuário(s) selecionado(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
-                    newsTable.table.fnReloadAjax();
+                    showMessage('Um ou mais usuários selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
+                    usersTable.table.fnReloadAjax();
                 }
             },
             success: function (message) {
                 for (item in ids) {
                     itemId = '#item'+ids[item];
-                    newsTable.table.row($(itemId).parents('tr')).remove().draw();
+                    usersTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
 
                 showMessage(message, 'success', 8000);
@@ -145,14 +145,14 @@ var destroy = function(ids){
 
 var edit = function(ids){
     if (ids.length) {
-        window.location = '/'+lang+'/news/admin/users/'+ids[0]+'/edit';
+        window.location = '/'+lang+'/users/admin/users/'+ids[0]+'/edit';
     } else {
         showMessage('Por favor selecione para editar.', 'warning', 8000);
     }
 }
 
 var checkManySelected = function() {
-    if (newsTable.getCheckedIds().length > 1) {
+    if (usersTable.getCheckedIds().length > 1) {
         $('#admin-edit').prop('disabled', true);
     } else {
         $('#admin-edit').prop('disabled', false);
@@ -162,16 +162,16 @@ var checkManySelected = function() {
 
 $(document).ready(function(){
     $('#admin-delete').click(function() {
-        destroy(newsTable.getCheckedIds());
+        destroy(usersTable.getCheckedIds());
     });
     $('#admin-edit').click(function() {
-        edit(newsTable.getCheckedIds());
+        edit(usersTable.getCheckedIds());
     });
     $('#admin-activate').click(function() {
-        changeStatus(newsTable.getCheckedIds(), 'active', true);
+        changeStatus(usersTable.getCheckedIds(), 'active', true);
     });
     $('#admin-deactivate').click(function() {
-        changeStatus(newsTable.getCheckedIds(), 'active', false);
+        changeStatus(usersTable.getCheckedIds(), 'active', false);
     });
 
     setAlertTimeOut(8000);

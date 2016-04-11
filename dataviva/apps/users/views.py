@@ -39,3 +39,17 @@ def all():
     for row in result:
         users += [(row.id, row.fullname, row.email, row.role)]
     return jsonify(users=users)
+
+
+@mod.route('/admin/delete', methods=['POST'])
+def admin_delete():
+    ids = request.form.getlist('ids[]')
+    if ids:
+        users = User.query.filter(User.id.in_(ids)).all()
+        for user in users:
+            db.session.delete(user)
+
+        db.session.commit()
+        return u"Usuário(s) excluído(s) com sucesso!", 200
+    else:
+        return u'Selecione algum usuário para excluí-lo.', 205
