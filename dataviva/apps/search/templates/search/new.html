@@ -6,18 +6,17 @@
             <ol class="breadcrumb">
                 <li><a href="{{ url_for('general.home') }}">Home</a></li>
                 <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-                <li><a href="{{ url_for('blog.index') }}">Blog</a></li>
-                <li class="active">Publicar</li>
+                <li><a href="{{ url_for('search.index') }}">Inicie uma Pesquisa</a></li>
+                <li class="active">Criar</li>
             </ol>
         </div>
     </div>
 
     <div class="container m-b-lg">
-        <h1>Publique um post</h1>
-        {% include "blog/_form.html" %}
+        {% include "search/_form.html" %}
     </div>
 {% endblock content %}
 
 {% block js_assets %}
-    <script src="/static/js/modules/blog/table.js"></script>
+    <script src="/static/js/modules/search/table.js"></script>
 {% endblock js_assets %}
