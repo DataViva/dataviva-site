@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-11 14:46-0300\n"
+"POT-Creation-Date: 2016-04-11 14:57-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -225,7 +225,7 @@ msgid "Wages and Employment"
 msgstr "Salários e Emprego"
 
 #: dataviva/apps/data/views.py:81
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:107
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:109
 #: dataviva/apps/product/templates/product/index.html:57
 #: dataviva/apps/product/templates/product/tab-general.html:253
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:2
@@ -409,11 +409,13 @@ msgstr "Ano"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:54
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:64
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:73
 msgid "The "
 msgstr "A ocupação de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:55
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:65
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
 #, fuzzy
 msgid "occupation employs "
 msgstr "emprega "
@@ -465,107 +467,111 @@ msgstr ""
 "trabalhadores dessa ocupação na região é de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:69
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:78
 #, fuzzy
 msgid " and the average age of workers is "
 msgstr "e a idade média dos empregados é de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:70
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:79
 msgid "The city that employs the most in this occupation is "
 msgstr "O município que mais emprega nessa ocupação é "
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:72
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:80
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:88
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:96
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:75
+#, fuzzy
+msgid "professionals in the state of "
+msgstr "profissionais no estado de "
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:76
+#, fuzzy
+msgid "being number "
+msgstr "ocupando o "
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:77
+#, fuzzy
+msgid " in the state occupation ranking. The average monthly income is "
+msgstr ""
+"lugar no ranking de ocupações do estado. A renda mensal média dos "
+"trabalhadores dessa ocupação no estado é de "
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:82
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:90
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:98
 msgid "A ocupação de "
 msgstr ""
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:73
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:81
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:89
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:97
-msgid "emprega "
-msgstr ""
-
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
-msgid "profissionais "
-msgstr ""
-
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:75
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:83
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:91
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:99
-msgid "ocupando o "
-msgstr ""
-
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:76
-msgid ""
-"lugar no ranking de ocupações do estado. A renda mensal média dos "
-"trabalhadores dessa ocupação no estado é de "
-msgstr ""
-
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:77
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:85
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:93
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:101
-msgid "reais e a idade média dos empregados é de "
-msgstr ""
-
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:78
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:86
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:94
-msgid "O município que mais emprega nessa ocupação é "
-msgstr ""
-
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:82
-msgid "profissionais na mesorrregião "
+msgid "emprega "
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:84
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:92
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:100
+msgid "profissionais na mesorrregião "
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:85
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:93
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:101
+msgid "ocupando o "
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:86
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:94
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:102
 msgid ""
 "lugar em seu ranking de ocupações. A renda mensal média dos trabalhadores"
 " dessa ocupação nesta localidade é de "
 msgstr ""
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:90
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:87
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:95
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:103
+msgid "reais e a idade média dos empregados é de "
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:88
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:96
+msgid "O município que mais emprega nessa ocupação é "
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:92
 msgid "profissionais na microrregião "
 msgstr ""
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:98
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:100
 msgid "profissionais no município "
 msgstr ""
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:114
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:116
 #: dataviva/translations/dictionary.py:602
 #, fuzzy
 msgid "Main employer Municipality"
 msgstr "Principal Município por Empregos"
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:118
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:128
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:120
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:130
 #, fuzzy
 msgid "Jobs"
 msgstr "empregos"
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:124
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:126
 #: dataviva/translations/dictionary.py:603
 msgid "Main employer activity"
 msgstr "Principal Atividade por Empregos"
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:134
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:136
 #: dataviva/translations/dictionary.py:604
 msgid "Municipality with highest monthly average income"
 msgstr "Município com maior renda média mensal"
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:144
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:146
 #: dataviva/translations/dictionary.py:605
 #, fuzzy
 msgid "Activity with highest monthly average income"
 msgstr "Atividade com maior renda média mensal"
 
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:155
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:157
 #: dataviva/apps/product/templates/product/tab-general.html:299
 #: dataviva/translations/dictionary.py:482
 msgid "More details"
