@@ -1,22 +1,11 @@
 # -*- coding: utf-8 -*-
-import urllib2
-import json
-from datetime import datetime as dt
-from sqlalchemy import func
-from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, redirect, url_for
-from flask.ext.babel import gettext as _
-
-from dataviva import db, view_cache, __year_range__
-from dataviva.utils.cached_query import cached_query, api_cache_key
-from dataviva.translations.dictionary import dictionary
-
-from dataviva.apps.account.models import User, Starred
+from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.embed.models import UI
-from dataviva.api.attrs.models import Bra, Wld, Hs, Cnae, Cbo, University, Course_hedu, Course_sc
 
 
-mod = Blueprint('data', __name__, url_prefix='/<lang_code>/data')
+mod = Blueprint('data', __name__,
+                template_folder='templates',
+                url_prefix='/<lang_code>/data')
 
 
 @mod.before_request
@@ -37,4 +26,4 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('data_download/index.html')
+    return render_template('data/index.html')
