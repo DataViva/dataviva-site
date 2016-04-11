@@ -80,7 +80,7 @@ var EconomicActivitiesTable = function () {
 };
 
 $(document).ready(function() {
-    dataviva.requireAttrs(['bra', 'cnae'], function() {
+    dataviva.requireAttrs(['cnae'], function() {
         window.economicActivities = new EconomicActivitiesTable();
     });
 });
