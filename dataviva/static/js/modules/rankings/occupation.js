@@ -8,7 +8,7 @@ var OccupationTable = function () {
         "order": [],
         "columns": [
             {data: 0},
-            {data: 11},
+            null,
             {data: 11},
             {data: 1},
             {data: 3},
@@ -74,7 +74,7 @@ var OccupationTable = function () {
 };
 
 $(document).ready(function() {
-    dataviva.requireAttrs(['bra', 'cbo'], function() {
+    dataviva.requireAttrs(['cbo'], function() {
         window.occupationTable = new OccupationTable();
     });
 });
