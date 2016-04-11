@@ -61,14 +61,13 @@
          {% trans %}and the average age of workers is{%endtrans%}{{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
     {% else %}
         {% if location.id|length == 1 %}
-            <p>{% trans %}A ocupação de {% endtrans %}{{occupation.name()}} 
-            {% trans %}emprega {% endtrans %}{{header.total_employment}} 
-            {% trans %}profissionais na região {% endtrans %}{{location.name()}}, 
-            {% trans %}ocupando o {% endtrans %}{{header.ranking}}&ordm 
-            {% trans %}lugar no ranking de ocupações da região. A renda mensal média dos trabalhadores dessa ocupação na região {% endtrans %}{{location.name()}} 
-            {% trans %}é de {% endtrans %}{{header.average_monthly_income}} 
-            {% trans %}reais e a idade média dos empregados é de {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}). 
-            {% trans %}O município que mais emprega nessa ocupação é {% endtrans %}{{location.article()}} {{body.municipality_with_biggest_wage_avg}}.</p>
+            <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+            {% trans %}professionals in the{%endtrans%} {{location.name()}}
+            {% trans %}region, being number {% endtrans %}{{header.ranking}}&ordm 
+            {% trans %} in the region occupation ranking. The average monthly income is {% endtrans %}{{header.average_monthly_income}} 
+            {% trans %} and the average age of workers is {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}). 
+            {% trans %}The city that employs the most in this occupation is {% endtrans %}{{location.article()}} {{body.municipality_with_biggest_wage_avg}}.</p>
         {% elif location.id|length == 3 %}
             <p>{% trans %}A ocupação de {% endtrans %}{{occupation.name()}} 
             {% trans %}emprega {% endtrans %}{{header.total_employment}} 
