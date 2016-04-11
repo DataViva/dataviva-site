@@ -8,8 +8,8 @@ var LocationWages = function () {
         "order": [],
         "columns": [
             {data: 0},
-            {data: 11},
-            {data: 11},
+            null,
+            null,
             {data: 3},
             {data: 4},
             {data: 5},
@@ -103,7 +103,7 @@ var LocationWages = function () {
 };
 
 $(document).ready(function() {
-    dataviva.requireAttrs(['bra', 'hs', 'university'], function() {
+    dataviva.requireAttrs(['bra'], function() {
         window.locationWages = new LocationWages();
     });
 });

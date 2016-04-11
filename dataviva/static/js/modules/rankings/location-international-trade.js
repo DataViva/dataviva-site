@@ -8,8 +8,8 @@ var LocationTradeRanking = function () {
         "order": [],
         "columns": [
             {data: 0},
-            {data: 15},
-            {data: 15},
+            null,
+            null,
             {data: 2},
             {data: 3},
             {data: 12},
@@ -103,7 +103,7 @@ var LocationTradeRanking = function () {
 };
 
 $(document).ready(function() {
-    dataviva.requireAttrs(['bra', 'hs', 'university'], function() {
+    dataviva.requireAttrs(['bra'], function() {
         window.locationTradeRanking = new LocationTradeRanking();
     });
 });
