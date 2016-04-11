@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
- python data_download/school_census/sc_download_files.py
- The files will be saved in /data/files_sc
+ python scripts/data_download/sc_download_files.py
+ The files will be saved in scripts/data/files_sc
 '''
 from collections import namedtuple
 from sqlalchemy import create_engine
@@ -35,7 +35,7 @@ def get_colums(table, engine):
 def save(engine, years, locations, courses):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path='data/files_sc/'
+    output_path='scripts/data/files_sc/'
 
     for year in years:
         conditions[0] = year.condition

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
- python data_download/higher_education/higher_education_download_files.py
- The files will be saved in /data/files_hedu
+ python scripts/data_download/higher_education_download_files.py
+ The files will be saved in scripts/data/files_hedu
 '''
 from collections import namedtuple
 from sqlalchemy import create_engine
@@ -36,7 +36,7 @@ def get_colums(table, engine):
 def save(engine, years, locations, majors):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path='data/files_hedu/'
+    output_path='scripts/data/files_hedu/'
 
     for year in years:
         conditions[0] = year.condition

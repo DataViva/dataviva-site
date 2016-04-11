@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
- python data_download/rais/rais_download_files.py
- The files will be saved in /data/files_rais
+ python scripts/data_download/rais_download_files.py
+ The files will be saved in scripts/data/files_rais
 '''
 from collections import namedtuple
 from sqlalchemy import create_engine
@@ -36,7 +36,7 @@ def get_colums(table, engine):
 def save(engine, years, locations, industrys, occupations):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
     table_columns = {}
-    output_path='data/files_rais/'
+    output_path='scripts/data/files_rais/'
 
     for year in years:
         conditions[0] = year.condition

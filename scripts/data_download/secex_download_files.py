@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 '''
- python data_download/secex/secex_download_files.py
- The files will be saved in /data/files_secex
+ python scripts/data_download/secex_download_files.py
+ The files will be saved in scripts/data/files_secex
 '''
 from collections import namedtuple
 from sqlalchemy import create_engine
@@ -36,7 +36,7 @@ def get_colums(table, engine):
 def save(engine, years, months, locations, products, trade_partners):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path='data/files_secex/'
+    output_path='scripts/data/files_secex/'
 
     for year in years:
         conditions[0] = year.condition
@@ -55,7 +55,7 @@ def save(engine, years, months, locations, products, trade_partners):
                             table_columns[table] = get_colums(table, engine)
 
                         f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
-
+                        
                         new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
                         f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
 
