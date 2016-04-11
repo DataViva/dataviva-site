@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            <li class="active">Download de Banco de Dados</a></li>
+        </ol>
+    </div>
+</div>
+<section id="data">
+    <div class="container">
+        <nav class="sidebar col-md-3">
+            <h3>Assuntos</h3>
+            <ul class="sub-menu">
+                <li><a href="{{ url_for('general.search') }}" title="Inicie uma pesquisa">Inicie uma pesquisa</a></li>
+                <li><a href="{{ url_for('build_graph.index') }}" title="Construa gráficos">Construa gráficos</a></li>
+            </ul>
+        </nav>
+         <div class="col-md-9 m-b-lg data-content">
+            <h1>Download de banco de dados</h1>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Banco de Dados</label>
+                    <select class="form-control" name="account">
+                        <option>Rais</option>
+                        <option>Secex</option>
+                        <option>IES</option>
+                        <option>Comtrade</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Ano</label>
+                    <select class="form-control" name="account">
+                        <option>2010</option>
+                        <option>2011</option>
+                        <option>2012</option>
+                        <option>2013</option>
+                        <option>2014</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">Detalhamento</label>
+                    <select class="form-control" name="account">
+                        <option>Anual</option>
+                        <option>Mensal</option>
+                    </select>
+                </div>
+            </div>
+            <h2>Filtros</h2>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label">Select</label>
+                    <select class="form-control" name="account">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">Select</label>
+                    <select class="form-control" name="account">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">Select</label>
+                    <select class="form-control" name="account">
+                        <option>option 1</option>
+                        <option>option 2</option>
+                        <option>option 3</option>
+                        <option>option 4</option>
+                    </select>
+                </div>
+            </div>
+            <a href="#" class="btn btn-primary pull-right" disabled>
+                <i class="fa fa-download m-r-sm"></i> Download
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock content %}
