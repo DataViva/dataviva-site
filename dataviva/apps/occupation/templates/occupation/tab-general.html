@@ -51,14 +51,14 @@
 
     <h2 class="m-t-xl">Perfil Geral</h2>
     {% if not location.id %}
-        <p>{% trans %}A ocupação de {% endtrans %}{{occupation.name()}}
-         {% trans %}emprega {% endtrans %}{{header.total_employment}} 
-         {% trans %}profissionais, ocupando o {% endtrans %}{{header.ranking}}&ordm 
-         {% trans %}lugar no ranking de ocupações no Brasil. O município brasileiro que mais emprega nessa ocupação é {% endtrans %}{{body.municipality_with_more_jobs}} 
-         {% trans %}e a atividade de {% endtrans %}{{body.activity_with_more_jobs}} 
-         {% trans %}é a que mais possui {% endtrans %}{{occupation.name()}}. 
-         {% trans %}A renda mensal média é de {% endtrans %}{{header.average_monthly_income}} 
-         {% trans %}e a idade média dos empregados é de {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
+        <p>{% trans %}The {% endtrans %}{{occupation.name()}}
+         {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+         {% trans %}professionals, being number {% endtrans %}{{header.ranking}}&ordm 
+         {% trans %}in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is{% endtrans %}{{body.municipality_with_more_jobs}} 
+         {% trans %}and the {% endtrans %}{{body.activity_with_more_jobs}} 
+         {% trans %} activity is the one that employs more {% endtrans %}{{occupation.name()}}. 
+         {% trans %} The average monthly income is {% endtrans %}{{header.average_monthly_income}} 
+         {% trans %}and the average age of workers is{%endtrans%}{{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
     {% else %}
         {% if location.id|length == 1 %}
             <p>{% trans %}A ocupação de {% endtrans %}{{occupation.name()}} 
@@ -116,7 +116,7 @@
                             </th>
                             <td>
                                 <p class="label">{{body.municipality_with_more_jobs}}</p>
-                                USD <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> <span>{{body.municipality_with_more_jobs_value | magnitude}} empregos</span>
+                                USD <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> <span>{{body.municipality_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -126,7 +126,7 @@
                             </th>
                             <td>
                                 <p class="label">{{body.activity_with_more_jobs}}</p>
-                                USD <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong> <span>{{body.activity_with_more_jobs_value | magnitude}} empregos</span>
+                                USD <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong> <span>{{body.activity_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                             </td>
                         </tr>
                         {% if body.is_not_municipality %}

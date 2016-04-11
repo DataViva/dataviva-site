@@ -612,6 +612,7 @@ def dictionary():
         "monthly_average_income": gettext("Monthly Average Income"),
         "activity": gettext("Activity with Highest"),
         "jobs_by": gettext("Jobs by"),
+        "jobs": gettext("jobs"),
 
 
     }
