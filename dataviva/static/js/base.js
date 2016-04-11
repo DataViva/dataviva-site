@@ -41,7 +41,6 @@ dataviva.requireAttrs = function(attrs, callBack) {
     var queue = attrs;
 
     var ready = function(attr) {
-
         queue.splice(queue.indexOf(attr), 1);
 
         if (queue.length == 0) {
