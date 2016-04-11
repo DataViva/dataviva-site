@@ -1,11 +1,15 @@
-{% extends "rankings/index.html" %}
+{% extends "rankings/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Rankings</li>
+{% endblock %}
 
 {% block rankings_content %}
 <table id="location-international-trade-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>{% trans %}Year{% endtrans %}</th>
-            <th>{% trans %}BRA ID{% endtrans %}</th>
+            <th>{% trans %}Location{% endtrans %}</th>
             <th>{% trans %}Imports{% endtrans %}</th>
             <th>{% trans %}Exports{% endtrans %}</th>
             <th>{% trans %}Product Diversity{% endtrans %}</th>
