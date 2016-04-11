@@ -142,14 +142,14 @@ def delete(id):
         return make_response(render_template('not_found.html'), 404)
 
 
-@mod.route('/approval', methods=['GET'])
-def approval():
+@mod.route('/admin', methods=['GET'])
+def admin():
     articles = Article.query.all()
-    return render_template('scholar/approval.html', articles=articles)
+    return render_template('scholar/admin.html', articles=articles)
 
 
-@mod.route('/approval', methods=['POST'])
-def approval_update():
+@mod.route('/admin', methods=['POST'])
+def admin_update():
     for id, approval_status in request.form.iteritems():
         article = Article.query.filter_by(id=id).first_or_404()
         article.approval_status = approval_status == u'true'
