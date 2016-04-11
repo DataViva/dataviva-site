@@ -1,7 +1,6 @@
 var LocationTradeRanking = function () {
     this.tableId = '#location-international-trade-table';
 
-
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/secex/all-0/show.1/all/all/?order=eci.desc",
@@ -39,7 +38,7 @@ var LocationTradeRanking = function () {
                 bra_9 = dataviva.dictionary['bra_9'],
                 year = dataviva.dictionary['year'];
 
-            select.append( $('<option value="">'+year+'</option>') );
+            select.append($('<option value="">'+year+'</option>'));
             buttons.append($("<button>"+bra_1+"</button>").attr("id", 'location-international-trade-regions').addClass("btn btn-white"));
             buttons.append($("<button>"+bra_3+"</button>").attr("id", 'location-international-trade-states').addClass("btn btn-white"));
             buttons.append($("<button>"+bra_5+"</button>").attr("id", 'location-international-trade-mesoregions').addClass("btn btn-white"));
