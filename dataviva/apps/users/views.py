@@ -53,3 +53,17 @@ def admin_delete():
         return u"Usuário(s) excluído(s) com sucesso!", 200
     else:
         return u'Selecione algum usuário para excluí-lo.', 205
+
+
+@mod.route('/admin/users/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        users = User.query.filter_by(id=id).first_or_404()
+        if status_value == 'true':
+            users.role = 1
+        else:
+            users.role = 0
+        db.session.commit()
+
+    message = u"Usuário(s) alterado(s) com sucesso!"
+    return message, 200

@@ -95,7 +95,7 @@ var changeStatus = function(ids, status, status_value){
                     showMessage('Não foi possível alterar o(s) usuário(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
                 },
                 404: function () {
-                    showMessage('Uma ou mais notícias selecionadas não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
+                    showMessage('Um ou mais usuários selecionados não puderam ser encontrados, a lista de usuários será atualizada.', 'info', 8000);
                     usersTable.table.fnReloadAjax();
                 }
             },
@@ -110,7 +110,7 @@ var changeStatus = function(ids, status, status_value){
             }
         });
     } else {
-        showMessage('Por favor selecione algum users para alterar.', 'warning', 8000);
+        showMessage('Por favor selecione algum usuário para alterar.', 'warning', 8000);
     }
 }
 
