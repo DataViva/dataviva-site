@@ -79,7 +79,7 @@
                 {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
                 {% trans %}with{% endtrans %}{{ header.location_enrolled| max_digits(3) }} {{ header.location_enrolled | magnitude }} 
                 {% trans %}students. The region has a total of {% endtrans %}{{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
-                {% trans %}enrolled students in this course/field, with {% endtrans %}{ header.course_average_class_size|max_digits(3) }} 
+                {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
                 {% trans %}students per class in average{% endtrans %}.</p>
             {% elif location.id|length == 3 %}
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{ basic_course.name() }}
