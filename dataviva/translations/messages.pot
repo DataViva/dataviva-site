@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-12 14:19-0300\n"
+"POT-Creation-Date: 2016-04-12 14:53-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -388,6 +388,7 @@ msgstr ""
 #: dataviva/apps/rankings/templates/rankings/product.html:11
 #: dataviva/apps/rankings/templates/rankings/trade-partner.html:11
 #: dataviva/apps/rankings/templates/rankings/university.html:11
+#: dataviva/apps/university/templates/university/tab-general.html:39
 #: dataviva/translations/dictionary.py:102
 msgid "Year"
 msgstr ""
@@ -659,6 +660,7 @@ msgid "International Opportunity Gain"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:101
+#: dataviva/apps/university/templates/university/tab-general.html:42
 #: dataviva/translations/dictionary.py:525
 msgid "General Profile"
 msgstr ""
@@ -1042,7 +1044,83 @@ msgid "Shift"
 msgstr ""
 
 #: dataviva/apps/university/templates/university/index.html:49
+#: dataviva/apps/university/templates/university/tab-general.html:52
 msgid "Enrollments"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-enrollments.html:11
+#: dataviva/apps/university/templates/university/tab-enrollments.html:15
+#: dataviva/apps/university/templates/university/tab-enrollments.html:19
+msgid "Main Course"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-enrollments.html:12
+msgid "by Number of Enrolled Students"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-enrollments.html:16
+msgid "by Number of Entering Students"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-enrollments.html:20
+msgid "by Number of Graduates"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:7
+msgid "Number of Enrollments"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:16
+msgid "Number of Entering Students "
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:25
+msgid "Number of Graduates"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:43
+msgid "The institution "
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:44
+msgid " is a"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:45
+msgid "educational establishment. Its main course is"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:46
+#: dataviva/translations/dictionary.py:408
+msgid "with"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:47
+msgid "students. The University has a total of"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:48
+msgid "enrolled students and"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:49
+msgid "graduates"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:58
+msgid "Main Course by Number of Enrolled Students"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:67
+msgid "Main Course by Number of Entering Students"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:76
+msgid "Main Course by Number of Graduates"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/tab-general.html:87
+msgid "More Details"
 msgstr ""
 
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4
@@ -3529,10 +3607,6 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:407
 msgid "of"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:408
-msgid "with"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:410
