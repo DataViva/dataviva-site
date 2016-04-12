@@ -13,3 +13,4 @@ dataviva/static/uploads/*/*
 .htpasswd
 dump.rdb
 *.log
+scripts/data
