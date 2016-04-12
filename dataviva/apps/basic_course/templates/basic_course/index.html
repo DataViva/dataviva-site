@@ -39,7 +39,7 @@
                        role="tab"
                        data-id="{{ basic_course.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Geral</a>
+                       data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#enrollments"
@@ -48,7 +48,7 @@
                        graph
                        data-id="{{ basic_course.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Matrículas</a>
+                       data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
                 </li>
             </ul>
         </nav>
