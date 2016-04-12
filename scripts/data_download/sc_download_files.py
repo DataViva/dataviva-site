@@ -5,8 +5,10 @@
 '''
 from collections import namedtuple
 from sqlalchemy import create_engine
+from dictionary import pt, en
 import pandas as pd
-import os, bz2
+import os
+import bz2
 
 
 # sc_yb, sc_yc, sc_ybc
@@ -28,14 +30,15 @@ def select_table(conditions):
 
 
 def get_colums(table, engine):
-    column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
+    column_rows = engine.execute(
+        "SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
     return [row[0] for row in column_rows]
 
 
 def save(engine, years, locations, courses):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path='scripts/data/files_sc/'
+    output_path = 'scripts/data/files_sc/'
 
     for year in years:
         conditions[0] = year.condition
@@ -44,15 +47,23 @@ def save(engine, years, locations, courses):
             for course in courses:
                 conditions[2] = course.condition
                 table = select_table(conditions)
-                name_file = 'sc-'+str(year.name)+'-'+str(location.name)+'-'+str(course.name)
+                name_file = 'sc-' + \
+                    str(year.name)+'-'+str(location.name)+'-'+str(course.name)
+
 
                 if table not in table_columns.keys():
-                        table_columns[table] = get_colums(table, engine)
+                    table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, engine)]
 
-                f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
+                
 
-                new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
-                f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
+                f = pd.read_sql_query(
+                    'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
+
+                new_file_path = os.path.abspath(
+                    os.path.join(output_path, name_file+".csv.bz2"))  # pega desda da rais do pc
+
+                f.to_csv(bz2.BZ2File(new_file_path, 'wb'),
+                         sep=",", index=False, float_format="%.3f")
 
 
 Condition = namedtuple('Condition', ['condition', 'name'])
