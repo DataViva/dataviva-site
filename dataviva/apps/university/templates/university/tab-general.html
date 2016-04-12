@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">Número de Matrículas</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.enrolled | magnitude }}</small>
@@ -13,7 +13,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students {% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">Número de Ingressantes</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.entrants | magnitude }}</small>
@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">Número de Concluintes</h2>
                         <div class="number">
                             <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.graduates | magnitude }}</small>
@@ -36,26 +36,20 @@
     </div>
 
     <div class="m-t-sm col-xs-12 year">
-        {% trans %}Year{% endtrans %}: {{ header.year }}
+        Ano: {{ header.year }}
     </div>
 
-    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
-    <p>{% trans %}The institution {% endtrans %} {{ university.name() }} 
-    {% trans %} is a{% endtrans %} {{ header.type }}, 
-    {% trans %}educational establishment. Its main course is{% endtrans %} {{ body.major_with_more_enrollments }}, 
-    {% trans %}with{% endtrans %} {{ body.highest_enrollment_number_by_major }} 
-    {% trans %}students. The University has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
-    {% trans %}enrolled students and{%endtrans%}{{ header.graduates | max_digits(3) }} {{ header.graduates | magnitude }} 
-    {% trans %}graduates{% endtrans %}.</p>
+    <h2 class="m-t-xl">Perfil Geral</h2>
+    <p>A instituição {{ university.name() }} é um estabelecimento de ensino {{ header.type }}, que tem como principal curso {{ body.major_with_more_enrollments }}, com {{ body.highest_enrollment_number_by_major }} estudantes. No total, a instituição possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} estudantes matriculados e {{ header.graduates | max_digits(3) }} {{ header.graduates | magnitude }} concluintes.</p>
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>{% trans %}Enrollments{% endtrans %}</h3>
+            <h3>Matrículas</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         <tr>
                             <th>
-                                {% trans %}Main Course by Number of Enrolled Students{% endtrans %}
+                                Principal Curso por Número de Alunos Matriculados
                             </th>
                             <td>
                                 <p class="label">{{ body.major_with_more_enrollments }}</p>
@@ -64,7 +58,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {% trans %}Main Course by Number of Entering Students{% endtrans %}
+                                Principal Curso por Número de Alunos Ingressantes
                             </th>
                             <td>
                                 <p class="label">{{ body.major_with_more_entrants }}</p>
@@ -73,7 +67,7 @@
                         </tr>
                         <tr>
                             <th>
-                                {% trans %}Main Course by Number of Graduates{% endtrans %}
+                                Principal Curso por Número de Alunos Concluintes
                             </th>
                             <td>
                                 <p class="label">{{ body.major_with_more_graduates }}</p>
@@ -84,7 +78,7 @@
                 </table>
                 </div>
                 <a href="#enrollments" aria-controls="enrollments" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                    {% trans %}More Details{% endtrans %}
+                    mais detalhes
                 </a>
             </div>
         </div>
