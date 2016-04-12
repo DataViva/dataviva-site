@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
- python scripts/data_download/secex_download_files.py
+python scripts/data_download/secex_create_files.py
  The files will be saved in scripts/data/files_secex
 '''
 from collections import namedtuple
@@ -53,7 +53,7 @@ def save(engine, years, months, locations, products, trade_partners):
                         name_file = 'secex-'+str(year.name)+'-'+str(month.name)+'-'+str(location.name)+'-'+str(product.name)+'-'+str(trade_partner.name)
 
                         if table not in table_columns.keys():
-                            table_columns[table] = get_colums(table, engine)
+                            table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, engine)]
 
                         f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
                         

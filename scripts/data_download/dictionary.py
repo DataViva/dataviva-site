@@ -1,4 +1,7 @@
 en = {
+    'rcd':u'unutilized field',
+    'eci_wld':u'indicator of economic complexity would',
+    'eci_old':u'indicator of economic complexity old',
     'distortion_rate':u'Distortion Rate',
     'color_desc_network': u'Changes the variable used to color the circles.',
     'rais_footer': u'Data provided by RAIS',
