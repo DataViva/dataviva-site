@@ -6,14 +6,14 @@
             <ol class="breadcrumb">
                 <li><a href="{{ url_for('general.home') }}">Home</a></li>
                 <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-                <li><a href="{{ url_for('users.index') }}">Usuários</a></li>
+                <li><a href="{{ url_for('users.admin') }}">Usuários</a></li>
                 <li class="active">Editar</li>
             </ol>
         </div>
     </div>
 
     <div class="container m-b-lg">
-        {% include "blog/_form.html" %}
+        {% include "users/_form.html" %}
     </div>
 {% endblock content %}
 
