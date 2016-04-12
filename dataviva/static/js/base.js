@@ -16,15 +16,15 @@ dataviva.load = function(name, url, callBack) {
             method: 'GET',
             url: url,
             success: function (response) {
-                localforage.setItem(url, parseAttr(response.data), loadData);
+                localforage.setItem(url, response, loadData);
             }
         });
     }
 
     var loadData = function() {
-        localforage.getItem(url, function(err, data) {
-            if(data) {
-                window.dataviva[name] = data;
+        localforage.getItem(url, function(err, attr) {
+            if(attr) {
+                window.dataviva[name] = parseAttr(attr.data);
                 if (callBack) {
                     callBack(name);
                 }

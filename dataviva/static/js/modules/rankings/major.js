@@ -6,19 +6,21 @@ var MajorTable = function () {
         "sAjaxSource": "/hedu/all/all/all/show.2/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
-            null, //enrolled
-            null, //graduates
-            null, //entrants
-            { "bVisible": false }, //morning
-            { "bVisible": false }, //afternoon
-            { "bVisible": false }, //night
-            { "bVisible": false }, //full_time
-            { "bVisible": false }, //age
-            { "bVisible": false }, //graduates_growth
-            { "bVisible": false }, //enrolled_growth
-            null, //year
-            null //course_hedu_id
+        "columns": [
+            {data: 10},
+            {data: 11},
+            null,
+            {data: 0},
+            {data: 1},
+            {data: 2},
+        ],
+        "columnDefs": [
+            {
+                "targets": 2,
+                "render": function (data, type, row, meta){
+                    return dataviva.course_hedu[row[11]].name
+                }
+            },
         ],
         "deferRender": true,
         "scrollY": 500,
@@ -28,15 +30,19 @@ var MajorTable = function () {
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
                 buttons = $("<div></div>").addClass("btn-group");
 
-            select.append( $('<option value="">Ano</option>') );
-            buttons.append($("<button>Campos</button>").attr("id", 'major-fields').addClass("btn btn-white"));
-            buttons.append($("<button>Ensino Superior</button>").attr("id", 'major-majors').addClass("btn btn-white"));
+            var course_hedu_2 = dataviva.dictionary['course_hedu_2'],
+                course_hedu_6 = dataviva.dictionary['course_hedu_6'],
+                year = dataviva.dictionary['year'];
+
+            select.append( $('<option value="">'+year+'</option>') );
+            buttons.append($("<button>"+course_hedu_2+"</button>").attr("id", 'major-fields').addClass("btn btn-white"));
+            buttons.append($("<button>"+course_hedu_6+"</button>").attr("id", 'major-majors').addClass("btn btn-white"));
 
             $('.rankings-content .rankings-control').append(buttons);
             $('.rankings-content .rankings-control').append(select);
 
             majorTable.table
-                .column( 10 )
+                .column( 0 )
                 .cache( 'search' )
                 .sort()
                 .unique()
@@ -46,7 +52,7 @@ var MajorTable = function () {
 
             select.on( 'change', function () {
                majorTable.table
-                    .column( 10 )
+                    .column( 0 )
                     .search( $(this).val() )
                     .draw();
             });
@@ -55,22 +61,18 @@ var MajorTable = function () {
             $('#major-table_filter').addClass('pull-right');
 
             $('#major-fields').click(function() {
-                majorFields();
+                majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
             });
 
             $('#major-majors').click(function() {
-                majorMajors();
+                majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
             });
         }
     });
 };
 
-var majorTable = new MajorTable();
-
-var majorFields = function() {
-    majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
-};
-
-var majorMajors = function() {
-    majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
-};
+$(document).ready(function() {
+    dataviva.requireAttrs(['course_hedu'], function() {
+        window.majorTable = new MajorTable();
+    });
+});
