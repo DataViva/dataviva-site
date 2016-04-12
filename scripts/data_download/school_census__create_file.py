@@ -44,9 +44,8 @@ def save(years, locations, courses):
             for course in courses:
                 conditions[2] = course.condition
                 table = select_table(conditions)
-                name_file = 'sc-' + \
-                    str(year.name)+'-'+str(location.name)+'-'+str(course.name)
-
+                name_file = 'sc' + \
+                    str(year.name)+str(location.name)+str(course.name)
 
                 if table not in table_columns.keys():
                     table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
@@ -57,34 +56,34 @@ def save(years, locations, courses):
                 new_file_path = os.path.abspath(
                     os.path.join(output_path, name_file+".csv.bz2"))  # pega desda da rais do pc
 
-                f.to_csv(bz2.BZ2File(new_file_path, 'wb'),
+                 f.to_csv(bz2.BZ2File(new_file_path, 'wb'),
                          sep=",", index=False, float_format="%.3f")
-
+                
 
 Condition = namedtuple('Condition', ['condition', 'name'])
 
 years = [
-    Condition('year=2007', '2007'),
-    Condition('year=2008', '2008'),
-    Condition('year=2009', '2009'),
-    Condition('year=2010', '2010'),
-    Condition('year=2011', '2011'),
-    Condition('year=2012', '2012'),
-    Condition('year=2013', '2013'),
-    Condition('year=2014', '2014')]
+    Condition('year=2007', '-2007'),
+    Condition('year=2008', '-2008'),
+    Condition('year=2009', '-2009'),
+    Condition('year=2010', '-2010'),
+    Condition('year=2011', '-2011'),
+    Condition('year=2012', '-2012'),
+    Condition('year=2013', '-2013'),
+    Condition('year=2014', '-2014')]
 
 locations = [
-    Condition(' 1 = 1 ', 'all'),
-    Condition('bra_id_len=1', 'regions'),
-    Condition('bra_id_len=3', 'states'),
-    Condition('bra_id_len=5', 'mesoregions'),
-    Condition('bra_id_len=7', 'microregions'),
-    Condition('bra_id_len=9', 'municipalities')]
+    Condition(' 1 = 1 ', ''),
+    Condition('bra_id_len=1', '-regions'),
+    Condition('bra_id_len=3', '-states'),
+    Condition('bra_id_len=5', '-mesoregions'),
+    Condition('bra_id_len=7', '-microregions'),
+    Condition('bra_id_len=9', '-municipalities')]
 
 courses = [
-    Condition(' 1 = 1 ', 'all'),
-    Condition('course_sc_id_len=2', 'field'),
-    Condition('course_sc_id_len=5', 'course')]
+    Condition(' 1 = 1 ', ''),
+    Condition('course_sc_id_len=2', '-field'),
+    Condition('course_sc_id_len=5', '-course')]
 
 
 save(years=years, locations=locations, courses=courses)

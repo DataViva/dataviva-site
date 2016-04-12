@@ -50,7 +50,7 @@ def save(years, months, locations, products, trade_partners):
                     for trade_partner in trade_partners:
                         conditions[4] = trade_partner.condition
                         table = select_table(conditions)
-                        name_file = 'secex-'+str(year.name)+'-'+str(month.name)+'-'+str(location.name)+'-'+str(product.name)+'-'+str(trade_partner.name)
+                        name_file = 'secex'+str(year.name)+str(month.name)+str(location.name)+str(product.name)+str(trade_partner.name)
 
                         if table not in table_columns.keys():
                             table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
@@ -65,41 +65,41 @@ Condition = namedtuple('Condition', ['condition', 'name'])
 
 
 years = [
-    Condition('year=2002', '2002'),
-    Condition('year=2003', '2003'),
-    Condition('year=2004', '2004'),
-    Condition('year=2005', '2005'),
-    Condition('year=2006', '2006'),
-    Condition('year=2007', '2007'),
-    Condition('year=2008', '2008'),
-    Condition('year=2009', '2009'),
-    Condition('year=2010', '2010'),
-    Condition('year=2011', '2011'),
-    Condition('year=2012', '2012'),
-    Condition('year=2013', '2013'),
-    Condition('year=2014', '2014')]
+    Condition('year=2002', '-2002'),
+    Condition('year=2003', '-2003'),
+    Condition('year=2004', '-2004'),
+    Condition('year=2005', '-2005'),
+    Condition('year=2006', '-2006'),
+    Condition('year=2007', '-2007'),
+    Condition('year=2008', '-2008'),
+    Condition('year=2009', '-2009'),
+    Condition('year=2010', '-2010'),
+    Condition('year=2011', '-2011'),
+    Condition('year=2012', '-2012'),
+    Condition('year=2013', '-2013'),
+    Condition('year=2014', '-2014')]
 
 months = [
-    Condition('month=0', 'all'),
-    Condition('month!=0', 'monthly')]
+    Condition('month=0', ''),
+    Condition('month!=0', '-all')]
 
 locations = [
-    Condition(' 1 = 1 ', 'all'),
-    Condition('bra_id_len=1', 'regions'),
-    Condition('bra_id_len=3', 'states'),
-    Condition('bra_id_len=5', 'mesoregions'),
-    Condition('bra_id_len=7', 'microregions'),
-    Condition('bra_id_len=9', 'municipalities')]
+    Condition(' 1 = 1 ', ''),
+    Condition('bra_id_len=1', '-regions'),
+    Condition('bra_id_len=3', '-states'),
+    Condition('bra_id_len=5', '-mesoregions'),
+    Condition('bra_id_len=7', '-microregions'),
+    Condition('bra_id_len=9', '-municipalities')]
 
 products = [
-    Condition(' 1 = 1 ', 'all'),
-    Condition('hs_id_len=2', 'sections'),
-    Condition('hs_id_len=6', 'position')]
+    Condition(' 1 = 1 ', ''),
+    Condition('hs_id_len=2', '-sections'),
+    Condition('hs_id_len=6', '-position')]
 
 trade_partners = [
-    Condition(' 1 = 1 ', 'all'),
-    Condition('wld_id_len=2', 'continents'),
-    Condition('wld_id_len=5', 'countries')]
+    Condition(' 1 = 1 ', ''),
+    Condition('wld_id_len=2', '-continents'),
+    Condition('wld_id_len=5', '-countries')]
 
 
 save(years=years, months=months, locations=locations, products=products, trade_partners=trade_partners)

@@ -43,7 +43,7 @@ def save(years, locations, majors):
             for major in majors:
                 conditions[2] = major.condition
                 table = select_table(conditions)
-                name_file = 'hedu-'+str(year.name)+'-'+str(location.name)+'-'+str(major.name)
+                name_file = 'hedu'+str(year.name)+str(location.name)+str(major.name)
 
                 if table not in table_columns.keys():
                         table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
@@ -58,24 +58,24 @@ Condition = namedtuple('Condition', ['condition', 'name'])
 
 
 years = [
-    Condition('year=2009', '2009'),
-    Condition('year=2010', '2010'),
-    Condition('year=2011', '2011'),
-    Condition('year=2012', '2012'),
-    Condition('year=2013', '2013')]
+    Condition('year=2009', '-2009'),
+    Condition('year=2010', '-2010'),
+    Condition('year=2011', '-2011'),
+    Condition('year=2012', '-2012'),
+    Condition('year=2013', '-2013')]
 
 locations = [
-    Condition(' 1 = 1 ', 'all'),
-    Condition('bra_id_len=1', 'regions'),
-    Condition('bra_id_len=3', 'states'),
-    Condition('bra_id_len=5', 'mesoregions'),
-    Condition('bra_id_len=7', 'microregions'),
-    Condition('bra_id_len=9', 'municipalities')]
+    Condition(' 1 = 1 ', ''),
+    Condition('bra_id_len=1', '-regions'),
+    Condition('bra_id_len=3', '-states'),
+    Condition('bra_id_len=5', '-mesoregions'),
+    Condition('bra_id_len=7', '-microregions'),
+    Condition('bra_id_len=9', '-municipalities')]
 
 majors = [
-    Condition(' 1 = 1 ', 'all'),
-    Condition('course_hedu_id_len=2', 'field'),
-    Condition('course_hedu_id_len=6', 'majors')]
+    Condition(' 1 = 1 ', ''),
+    Condition('course_hedu_id_len=2', '-field'),
+    Condition('course_hedu_id_len=6', '-majors')]
 
 
 save(years=years, locations=locations, majors=majors)
