@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-12 14:53-0300\n"
+"POT-Creation-Date: 2016-04-12 15:14-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -225,6 +225,82 @@ msgstr "Você precisa fazer o login para votar."
 msgid "You need to be logged in to flag replies."
 msgstr "Você precisa fazer o login para marcar respostas."
 
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:3
+#: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:3
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:3
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:3
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:3
+#: dataviva/translations/dictionary.py:522
+msgid "Preview"
+msgstr "Visualize"
+
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
+#: dataviva/translations/dictionary.py:179
+#: dataviva/translations/dictionary.py:181
+msgid "Courses"
+msgstr "Cursos"
+
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:7
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:25
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:52
+msgid "Map"
+msgstr ""
+
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:9
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:14
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:29
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:41
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:56
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:24
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:39
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:55
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:70
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:11
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:18
+#: dataviva/templates/about.html:98 dataviva/templates/site.html:73
+#: dataviva/templates/about/apps/stacked.html:1
+#: dataviva/translations/dictionary.py:15
+msgid "Stacked"
+msgstr "Evolução"
+
+#: dataviva/apps/basic_course/templates/basic_course/index.html:42
+#: dataviva/apps/occupation/templates/occupation/index.html:48
+#: dataviva/apps/product/templates/product/index.html:48
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
+#: dataviva/apps/university/templates/university/index.html:41
+#: dataviva/translations/dictionary.py:479
+msgid "General"
+msgstr "Geral"
+
+#: dataviva/apps/basic_course/templates/basic_course/index.html:51
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
+#: dataviva/apps/university/templates/university/index.html:49
+#: dataviva/apps/university/templates/university/tab-enrollments.html:3
+#: dataviva/apps/university/templates/university/tab-general.html:52
+#, fuzzy
+msgid "Enrollments"
+msgstr "Matrículas"
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:12
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:11
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:15
+#: dataviva/translations/dictionary.py:509
+#, fuzzy
+msgid "Main Municipality"
+msgstr "Principal Município"
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:13
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:18
+#: dataviva/apps/university/templates/university/tab-enrollments.html:12
+msgid "by Number of Enrolled Students"
+msgstr "por Número de Alunos Matriculados"
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:17
+msgid "Main School"
+msgstr "Principal Escola"
+
 #: dataviva/apps/embed/views.py:220
 msgid "You need to be logged in to star visualizations."
 msgstr "Você precisa fazer o login para favoritar visualizações."
@@ -279,15 +355,6 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Próximo"
 
-#: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:3
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:3
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
-#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:3
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:3
-#: dataviva/translations/dictionary.py:522
-msgid "Preview"
-msgstr "Visualize"
-
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/index.html:67
 #: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:2
@@ -318,22 +385,6 @@ msgstr "Empregos por"
 msgid "Economic Activities"
 msgstr "Atividades Econômicas"
 
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:14
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:29
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:41
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:56
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:24
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:39
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:55
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:70
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:11
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:18
-#: dataviva/templates/about.html:98 dataviva/templates/site.html:73
-#: dataviva/templates/about/apps/stacked.html:1
-#: dataviva/translations/dictionary.py:15
-msgid "Stacked"
-msgstr "Evolução"
-
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:17
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:44
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:12
@@ -341,19 +392,6 @@ msgstr "Evolução"
 #: dataviva/translations/dictionary.py:133
 msgid "Municipality"
 msgstr "Município"
-
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:25
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:52
-msgid "Map"
-msgstr ""
-
-#: dataviva/apps/occupation/templates/occupation/index.html:48
-#: dataviva/apps/product/templates/product/index.html:48
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
-#: dataviva/apps/university/templates/university/index.html:41
-#: dataviva/translations/dictionary.py:479
-msgid "General"
-msgstr "Geral"
 
 #: dataviva/apps/occupation/templates/occupation/index.html:57
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:2
@@ -889,13 +927,6 @@ msgstr "Principal Destino por Valor Total Exportado"
 msgid "Main Origin by Total Value Exported"
 msgstr "Principal Origem por Valor Total Exportado"
 
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:11
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:15
-#: dataviva/translations/dictionary.py:509
-#, fuzzy
-msgid "Main Municipality"
-msgstr "Principal Município"
-
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:12
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:21
 #: dataviva/translations/dictionary.py:510
@@ -1091,12 +1122,6 @@ msgstr "Universidade"
 msgid "University"
 msgstr "Universidade"
 
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
-#: dataviva/translations/dictionary.py:179
-#: dataviva/translations/dictionary.py:181
-msgid "Courses"
-msgstr "Cursos"
-
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:12
 #, fuzzy
 msgid "Students Status"
@@ -1106,21 +1131,11 @@ msgstr "Situação dos Estudantes"
 msgid "Shift"
 msgstr "Turno"
 
-#: dataviva/apps/university/templates/university/index.html:49
-#: dataviva/apps/university/templates/university/tab-general.html:52
-#, fuzzy
-msgid "Enrollments"
-msgstr "Matrículas"
-
 #: dataviva/apps/university/templates/university/tab-enrollments.html:11
 #: dataviva/apps/university/templates/university/tab-enrollments.html:15
 #: dataviva/apps/university/templates/university/tab-enrollments.html:19
 msgid "Main Course"
 msgstr "Principal Curso"
-
-#: dataviva/apps/university/templates/university/tab-enrollments.html:12
-msgid "by Number of Enrolled Students"
-msgstr "por Número de Alunos Matriculados"
 
 #: dataviva/apps/university/templates/university/tab-enrollments.html:16
 msgid "by Number of Entering Students"
