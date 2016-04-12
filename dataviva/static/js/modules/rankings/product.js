@@ -6,24 +6,23 @@ var ProductTable = function () {
         "sAjaxSource": "/secex/all-0/all/show.6/all/?order=pci.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
-            null, //year
-            { "bVisible": false }, //month
-            null, //import_val
-            null, //export_val
-            { "bVisible": false }, //import_kg
-            { "bVisible": false }, //export_kg
-            { "bVisible": false }, //import_val_growth
-            { "bVisible": false }, //import_val_growth_5
-            { "bVisible": false }, //export_val_growth
-            { "bVisible": false }, //export_val_growth_5
-            { "bVisible": false }, //bra_diversity
-            { "bVisible": false }, //bra_diversity_eff
-            null, //wld_diversity
-            null, //wld_diversity_eff
-            { "bVisible": false }, //rca_wld
-            null, //pci
-            null //hs_id
+        "columns": [
+            {data: 0},
+            {data: 16},
+            null,
+            {data: 2},
+            {data: 3},
+            {data: 15},
+            {data: 12},
+            {data: 13}
+        ],
+        "columnDefs": [
+            {
+                "targets": 2,
+                "render": function (data, type, row, meta){
+                    return dataviva.hs[row[16]].name
+                }
+            },
         ],
         "deferRender": true,
         "scrollY": 500,
@@ -33,9 +32,13 @@ var ProductTable = function () {
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
                 buttons = $("<div></div>").addClass("btn-group");
 
-            select.append( $('<option value="">Ano</option>') );
-            buttons.append($("<button>Seções</button>").attr("id", 'product-sections').addClass("btn btn-white"));
-            buttons.append($("<button>Posições</button>").attr("id", 'product-postions').addClass("btn btn-white"));
+            var hs_2 = dataviva.dictionary['hs_2'],
+                hs_6 = dataviva.dictionary['hs_6'],
+                year = dataviva.dictionary['year'];
+
+            select.append( $('<option value="">'+year+'</option>') );
+            buttons.append($("<button>"+hs_2+"</button>").attr("id", 'product-sections').addClass("btn btn-white"));
+            buttons.append($("<button>"+hs_6+"</button>").attr("id", 'product-postions').addClass("btn btn-white"));
 
             $('.rankings-content .rankings-control').append(buttons);
             $('.rankings-content .rankings-control').append(select);
@@ -61,22 +64,19 @@ var ProductTable = function () {
 
 
             $('#product-sections').click(function() {
-                productSections();
+                product.table.ajax.url("/secex/all-0/all/show.2/all/?order=export_val.desc").load();
             });
 
             $('#product-postions').click(function() {
-                productPositions();
+                product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load();
             });
         }
     });
 };
 
-var product = new ProductTable();
+$(document).ready(function() {
+    dataviva.requireAttrs(['hs'], function() {
+        window.product = new ProductTable();
+    });
+});
 
-var productSections = function() {
-    product.table.ajax.url("/secex/all-0/all/show.2/all/?order=export_val.desc").load();
-};
-
-var productPositions = function() {
-    product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load();
-};

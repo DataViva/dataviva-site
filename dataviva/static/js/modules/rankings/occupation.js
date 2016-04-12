@@ -8,8 +8,8 @@ var OccupationTable = function () {
         "order": [],
         "columns": [
             {data: 0},
-            null,
             {data: 11},
+            null,
             {data: 1},
             {data: 3},
             {data: 5},
@@ -36,7 +36,7 @@ var OccupationTable = function () {
                 cbo_4 = dataviva.dictionary['cbo_4'],
                 year = dataviva.dictionary['year'];
 
-            select.append( $('<option value="">'+year+'</option>') );
+            select.append($('<option value="">'+year+'</option>'));
             buttons.append($("<button>"+cbo_1+"</button>").attr("id", 'occupation-groups').addClass("btn btn-white"));
             buttons.append($("<button>"+cbo_4+"</button>").attr("id", 'occupation-families').addClass("btn btn-white"));
 
