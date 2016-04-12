@@ -1,10 +1,9 @@
 from collections import namedtuple
 
 
-DataBase = namedtuple('DataBase', ['dimensions'])
-Dimension = namedtuple('Dimension', ['name', 'depths'])
+DataBase = namedtuple('DataBase', ['dimensions', 'years'])
+Dimension = namedtuple('Dimension', ['id', 'depths'])
 Depth = namedtuple('Depth', ['id', 'value'])
-
 
 locations = Dimension('bra_plural', [
     Depth('bra_1', 'regions'),
@@ -25,4 +24,7 @@ occupations = Dimension('cbo_plural', [
     Depth('cbo_4', 'families'),
 ])
 
-rais_dimensions = [locations, occupations, industries]
+
+attrs_databases = {
+    'rais': DataBase([locations, occupations, industries], [str(year) for year in range(2002, 2014)]),
+}

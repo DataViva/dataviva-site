@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, jsonify
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.data.mocks import rais_dimensions
+from dataviva.apps.data.mocks import attrs_databases
 
 
 mod = Blueprint('data', __name__,
@@ -32,8 +32,4 @@ def index():
 
 @mod.route('/databases')
 def databases():
-    databases = {
-        'rais': rais_dimensions,
-    }
-
-    return jsonify(databases)
+    return jsonify(attrs_databases)
