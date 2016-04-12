@@ -4,7 +4,7 @@ python scripts/data_download/secex_create_files.py
  The files will be saved in scripts/data/files_secex
 '''
 from collections import namedtuple
-from sqlalchemy import create_engine
+from engine import engine
 from dictionary import en
 import pandas as pd
 import os
@@ -29,12 +29,12 @@ def select_table(conditions):
     return 'secex_' + s
 
 
-def get_colums(table, engine):
+def get_colums(table):
     column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
     return [row[0] for row in column_rows]
 
 
-def save(engine, years, months, locations, products, trade_partners):
+def save(years, months, locations, products, trade_partners):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
     output_path='scripts/data/files_secex/'
@@ -53,7 +53,7 @@ def save(engine, years, months, locations, products, trade_partners):
                         name_file = 'secex-'+str(year.name)+'-'+str(month.name)+'-'+str(location.name)+'-'+str(product.name)+'-'+str(trade_partner.name)
 
                         if table not in table_columns.keys():
-                            table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, engine)]
+                            table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
 
                         f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
                         
@@ -81,7 +81,7 @@ years = [
 
 months = [
     Condition('month=0', 'all'),
-    Condition('month!=0', 'months')]
+    Condition('month!=0', 'monthly')]
 
 locations = [
     Condition(' 1 = 1 ', 'all'),
@@ -101,9 +101,5 @@ trade_partners = [
     Condition('wld_id_len=2', 'continents'),
     Condition('wld_id_len=5', 'countries')]
 
-engine = create_engine(
-    'mysql://dataviva-dev:D4t4v1v4-d3v@dataviva-dev.cr7l9lbqkwhn.'
-    'sa-east-1.rds.amazonaws.com:3306/dataviva', echo=False)
 
-
-save(engine=engine, years=years, months=months, locations=locations, products=products, trade_partners=trade_partners)
+save(years=years, months=months, locations=locations, products=products, trade_partners=trade_partners)

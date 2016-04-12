@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 '''
- python scripts/data_download/rais_download_files.py
+ python scripts/data_download/rais_create_files.py
  The files will be saved in scripts/data/files_rais
+
+clear data files 
+rm scripts/data/files_*/*
 '''
 from collections import namedtuple
-from sqlalchemy import create_engine
+from engine import engine
 from dictionary import en
 import pandas as pd
 import os
@@ -29,12 +32,12 @@ def select_table(conditions):
     return 'rais_' + s
 
 
-def get_colums(table, engine):
+def get_colums(table):
     column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
     return [row[0] for row in column_rows]
 
 
-def save(engine, years, locations, industrys, occupations):
+def save(years, locations, industrys, occupations):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
     table_columns = {}
     output_path='scripts/data/files_rais/'
@@ -49,9 +52,9 @@ def save(engine, years, locations, industrys, occupations):
                     conditions[3] = occupation.condition
                     table = select_table(conditions)
                     name_file = 'rais-'+str(year.name)+'-'+str(location.name)+'-'+str(industry.name)+'-'+str(occupation.name)
-
+  
                     if table not in table_columns.keys():
-                        table_columns[table] = get_colums(table, engine)
+                        table_columns[table] = get_colums(table) # [ i+" as '"+en[i]+"'" for i in get_colums(table)]
 
                     f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
@@ -95,9 +98,5 @@ occupations = [
     Condition('cbo_id_len=1', 'main_groups'),
     Condition('cbo_id_len=4', 'families')]
 
-engine = create_engine(
-    'mysql://dataviva-dev:D4t4v1v4-d3v@dataviva-dev.cr7l9lbqkwhn.'
-    'sa-east-1.rds.amazonaws.com:3306/dataviva', echo=False)
 
-
-save(engine=engine, years=years, locations=locations, industrys=industrys, occupations=occupations)
+save(years=years, locations=locations, industrys=industrys, occupations=occupations)

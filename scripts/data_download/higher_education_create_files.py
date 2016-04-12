@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 '''
- python scripts/data_download/higher_education_download_files.py
+ python scripts/data_download/higher_education_create_files.py
  The files will be saved in scripts/data/files_hedu
 '''
 from collections import namedtuple
-from sqlalchemy import create_engine
+from engine import engine
 from dictionary import en
 import pandas as pd
 import os
@@ -26,12 +26,12 @@ def select_table(conditions):
     return 'hedu_' + s
 
 
-def get_colums(table, engine):
+def get_colums(table):
     column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
     return [row[0] for row in column_rows]
 
 
-def save(engine, years, locations, majors):
+def save(years, locations, majors):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
     output_path='scripts/data/files_hedu/'
@@ -46,7 +46,7 @@ def save(engine, years, locations, majors):
                 name_file = 'hedu-'+str(year.name)+'-'+str(location.name)+'-'+str(major.name)
 
                 if table not in table_columns.keys():
-                        table_columns[table] = get_colums(table, engine)
+                        table_columns[table] = get_colums(table)
 
                 f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
@@ -77,9 +77,5 @@ majors = [
     Condition('course_hedu_id_len=2', 'field'),
     Condition('course_hedu_id_len=6', 'majors')]
 
-engine = create_engine(
-    'mysql://dataviva-dev:D4t4v1v4-d3v@dataviva-dev.cr7l9lbqkwhn.'
-    'sa-east-1.rds.amazonaws.com:3306/dataviva', echo=False)
 
-
-save(engine=engine, years=years, locations=locations, majors=majors)
+save(years=years, locations=locations, majors=majors)

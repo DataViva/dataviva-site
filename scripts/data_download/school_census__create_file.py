@@ -4,7 +4,7 @@
  The files will be saved in scripts/data/files_sc
 '''
 from collections import namedtuple
-from sqlalchemy import create_engine
+from engine import engine
 from dictionary import en
 import pandas as pd
 import os
@@ -26,13 +26,13 @@ def select_table(conditions):
     return 'sc_' + s
 
 
-def get_colums(table, engine):
+def get_colums(table):
     column_rows = engine.execute(
         "SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
     return [row[0] for row in column_rows]
 
 
-def save(engine, years, locations, courses):
+def save(years, locations, courses):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
     output_path = 'scripts/data/files_sc/'
@@ -49,7 +49,7 @@ def save(engine, years, locations, courses):
 
 
                 if table not in table_columns.keys():
-                    table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, engine)]
+                    table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
 
                 f = pd.read_sql_query(
                     'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
@@ -86,9 +86,5 @@ courses = [
     Condition('course_sc_id_len=2', 'field'),
     Condition('course_sc_id_len=5', 'course')]
 
-engine = create_engine(
-    'mysql://dataviva-dev:D4t4v1v4-d3v@dataviva-dev.cr7l9lbqkwhn.'
-    'sa-east-1.rds.amazonaws.com:3306/dataviva', echo=False)
 
-
-save(engine=engine, years=years, locations=locations, courses=courses)
+save(years=years, locations=locations, courses=courses)
