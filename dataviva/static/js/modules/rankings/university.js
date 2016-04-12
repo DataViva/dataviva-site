@@ -6,19 +6,21 @@ var universityTable = function () {
         "sAjaxSource": "/hedu/all/all/show/all/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
+        "columns": [
+            {data: 10},
+            {data: 11},
             null,
-            null,
-            null,
-            null,
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            { "bVisible": false },
-            null,
-            null
+            {data: 0},
+            {data: 1},
+            {data: 2},
+        ],
+        "columnDefs": [
+            {
+                "targets": 2,
+                "render": function (data, type, row, meta){
+                    return dataviva.university[row[11]].name
+                }
+            },
         ],
         "deferRender": true,
         "scrollY": 500,
@@ -28,7 +30,10 @@ var universityTable = function () {
 
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control");
 
-            select.append( $('<option value="">Ano</option>') );
+            var year = dataviva.dictionary['year'];
+
+            select.append($('<option value="">'+year+'</option>'));
+
             $('.rankings-content .rankings-control').append(select);
 
             universityTable.table
@@ -53,4 +58,8 @@ var universityTable = function () {
     });
 };
 
-var universityTable = new universityTable();
+$(document).ready(function() {
+    dataviva.requireAttrs(['university'], function() {
+        window.universityTable = new universityTable();
+    });
+});
