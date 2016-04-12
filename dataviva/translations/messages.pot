@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-12 13:51-0300\n"
+"POT-Creation-Date: 2016-04-12 14:19-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -323,6 +323,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:55
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:70
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:11
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:18
 #: dataviva/templates/about.html:98 dataviva/templates/site.html:73
 #: dataviva/templates/about/apps/stacked.html:1
 #: dataviva/translations/dictionary.py:15
@@ -345,6 +346,7 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/index.html:48
 #: dataviva/apps/product/templates/product/index.html:48
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
+#: dataviva/apps/university/templates/university/index.html:41
 #: dataviva/translations/dictionary.py:479
 msgid "General"
 msgstr ""
@@ -595,6 +597,7 @@ msgstr ""
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:35
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:66
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:14
 #: dataviva/templates/about.html:126 dataviva/templates/site.html:76
 #: dataviva/templates/about/apps/line.html:1
 msgid "Line"
@@ -1036,6 +1039,10 @@ msgstr ""
 
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:15
 msgid "Shift"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/index.html:49
+msgid "Enrollments"
 msgstr ""
 
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4

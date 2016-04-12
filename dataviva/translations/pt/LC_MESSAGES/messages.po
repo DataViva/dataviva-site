@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-12 13:51-0300\n"
+"POT-Creation-Date: 2016-04-12 14:19-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -327,6 +327,7 @@ msgstr "Atividades Econômicas"
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:55
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:70
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:11
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:18
 #: dataviva/templates/about.html:98 dataviva/templates/site.html:73
 #: dataviva/templates/about/apps/stacked.html:1
 #: dataviva/translations/dictionary.py:15
@@ -349,10 +350,10 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/index.html:48
 #: dataviva/apps/product/templates/product/index.html:48
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
+#: dataviva/apps/university/templates/university/index.html:41
 #: dataviva/translations/dictionary.py:479
-#, fuzzy
 msgid "General"
-msgstr "Estatísticas Gerais"
+msgstr "Geral"
 
 #: dataviva/apps/occupation/templates/occupation/index.html:57
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:2
@@ -631,6 +632,7 @@ msgstr "Destino"
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:35
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:66
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:14
 #: dataviva/templates/about.html:126 dataviva/templates/site.html:76
 #: dataviva/templates/about/apps/line.html:1
 msgid "Line"
@@ -1101,6 +1103,11 @@ msgstr "Situação dos Estudantes"
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:15
 msgid "Shift"
 msgstr "Turno"
+
+#: dataviva/apps/university/templates/university/index.html:49
+#, fuzzy
+msgid "Enrollments"
+msgstr "Matrículas"
 
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4
 #: dataviva/templates/about/ask/index.html:4
