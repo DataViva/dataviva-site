@@ -1,7 +1,21 @@
+var data = {}
+data.downloadLink = function() {
+    dataSelection = []
+    dataSelection.push($('#databases').val());
+    dataSelection.push($('select[name=year]').val());
+    dataSelection.push($('#monthly-detail select').val());
 
+    $('#dimensions select').each(function() {
+        dataSelection.push(this.value);
+    });
 
+    dataSelection = dataSelection.filter(function(n){ return n != "" && n !== null && n != "all" });
+    return "https://dataviva.s3.amazonaws.com/download/" + dataSelection.join("-") + '.csv.bz2';
+}
 
 $(document).ready(function() {
+
+
     $.ajax({
         url: 'databases',
         dataType: 'json',
@@ -41,6 +55,7 @@ $(document).ready(function() {
 
                 $('#dimensions').append(div.append(label).append(select));
 
+                select.append($('<option value="all">'+dataviva.dictionary['all']+'</option>'));
                 dimension.depths.forEach(function(depth) {
                     select.append($('<option value="'+depth.value+'">'+dataviva.dictionary[depth.id]+'</option>'));
                 });

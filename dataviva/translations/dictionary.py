@@ -385,6 +385,7 @@ def dictionary():
         "svg_desc": gettext("A vector-based file that can be resized without worrying about pixel resolution."),
 
         # App Builder
+        "all": gettext("All"),
         "basics": gettext("Basic Values"),
         "growth": gettext("Growth"),
         "calculations": gettext("Strategic Indicators"),
@@ -475,7 +476,7 @@ def dictionary():
         "no_items": gettext("No Data Available"),
 
 
-        #product profile 
+        #product profile
         "General": gettext("General"),
         "International Trade": gettext("International Trade"),
         "Economic Opportunities": gettext("Economic Opportunities"),
@@ -521,7 +522,7 @@ def dictionary():
         #all
         "preview": gettext("Preview"),
         "exports_by": gettext("Exports By"),
-        "imports_by": gettext("Imports By"), 
+        "imports_by": gettext("Imports By"),
         "general_profile": gettext("General Profile"),
 
         #header
