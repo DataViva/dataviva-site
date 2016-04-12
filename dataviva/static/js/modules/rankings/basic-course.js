@@ -6,14 +6,21 @@ var BasicCourseTable = function () {
         "sAjaxSource": "/sc/all/all/all/show.2/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
-            null, //year
-            null, //age
-            null, //classes
-            null, //enrolled
-            { "bVisible": false }, //enrolled_growth
-            { "bVisible": false }, //enrolled_growth_5
-            null //course_sc_id
+        "columns": [
+            {data: 0},
+            {data: 6},
+            null,
+            {data: 3},
+            {data: 2},
+            {data: 1},
+        ],
+        "columnDefs": [
+            {
+                "targets": 2,
+                "render": function (data, type, row, meta){
+                    return dataviva.course_sc[row[6]].name
+                }
+            },
         ],
         "deferRender": true,
         "scrollY": 500,
@@ -23,9 +30,13 @@ var BasicCourseTable = function () {
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
                 buttons = $("<div></div>").addClass("btn-group");
 
-            select.append( $('<option value="">Ano</option>') );
-            buttons.append($("<button>Campos</button>").attr("id", 'basic-course-fields').addClass("btn btn-white"));
-            buttons.append($("<button>Cursos</button>").attr("id", 'basic-course-courses').addClass("btn btn-white"));
+            var course_sc_2 = dataviva.dictionary['course_sc_2'],
+                course_sc_5 = dataviva.dictionary['course_sc_5'],
+                year = dataviva.dictionary['year'];
+
+            select.append( $('<option value="">'+year+'</option>') );
+            buttons.append($("<button>"+course_sc_2+"</button>").attr("id", 'basic-course-fields').addClass("btn btn-white"));
+            buttons.append($("<button>"+course_sc_5+"</button>").attr("id", 'basic-course-courses').addClass("btn btn-white"));
 
             $('.rankings-content .rankings-control').append(buttons);
             $('.rankings-content .rankings-control').append(select);
@@ -50,22 +61,18 @@ var BasicCourseTable = function () {
             $('#basic-course-table_filter').addClass('pull-right');
 
             $('#basic-course-fields').click(function() {
-                basicCourseFields();
+                basicCourseTable.table.ajax.url("/sc/all/all/all/show.2/?order=enrolled.desc").load();
             });
 
             $('#basic-course-courses').click(function() {
-                basicCourseCourses();
+                basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load();
             });
         }
     });
 };
 
-var basicCourseTable = new BasicCourseTable();
-
-var basicCourseFields = function() {
-    basicCourseTable.table.ajax.url("/sc/all/all/all/show.2/?order=enrolled.desc").load();
-};
-
-var basicCourseCourses = function() {
-    basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load();
-};
+$(document).ready(function() {
+    dataviva.requireAttrs(['course_sc'], function() {
+        window.basicCourseTable = new BasicCourseTable();
+    });
+});
