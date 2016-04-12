@@ -31,24 +31,20 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label">Ano</label>
-                    <select class="form-control" name="account">
-                        <option>2010</option>
-                        <option>2011</option>
-                        <option>2012</option>
-                        <option>2013</option>
-                        <option>2014</option>
+                    <select class="form-control" name="year">
+                        <option>Ano</option>
                     </select>
                 </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label">Detalhamento</label>
-                    <select class="form-control" name="account">
-                        <option>Anual</option>
-                        <option>Mensal</option>
+                <div id="monthly-detail" class="form-group col-md-4">
+                    <label for="detailing" class="control-label">Detalhamento</label>
+                    <select class="form-control" id="detailing" name="detailing">
+                        <option value="anual">Anual</option>
+                        <option value="monthly">Mensal</option>
                     </select>
                 </div>
             </div>
             <h2>Filtros</h2>
-            <div class="row">
+            <div id="dimensions" class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label">Select</label>
                     <select class="form-control" name="account">
