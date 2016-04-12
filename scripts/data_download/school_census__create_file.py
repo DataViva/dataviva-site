@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 '''
- python scripts/data_download/sc_download_files.py
+ python scripts/data_download/school_census__create_file.py
  The files will be saved in scripts/data/files_sc
 '''
 from collections import namedtuple
