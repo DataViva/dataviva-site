@@ -100,3 +100,31 @@ def update(id):
         message = u'Usuário editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('users.admin'))
+
+
+@mod.route('/admin/users/new', methods=['GET'])
+def new():
+    form = RegistrationForm()
+    return render_template('users/new.html', form=form, action=url_for('users.create'))
+
+
+@mod.route('/admin/users/new', methods=['POST'])
+def create():
+    form = RegistrationForm()
+    if form.validate() is False:
+        return render_template('users/new.html', form=form)
+    else:
+        users = User()
+        users.nickname = form.nickname.data
+        users.email = form.email.data
+        users.fullname = form.fullname.data
+        users.country = form.country.data
+        users.gender = form.gender.data
+        users.role = 0
+
+        db.session.add(users)
+        db.session.commit()
+
+        message = u'Seu usuário foi criado com sucesso!'
+        flash(message, 'success')
+        return redirect(url_for('users.admin'))
