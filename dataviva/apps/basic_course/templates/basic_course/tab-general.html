@@ -6,7 +6,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de matrículas</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{header["course_enrolled"] | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{header["course_enrolled"] | magnitude }}</small>
@@ -15,7 +15,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de turmas</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{header["course_classes"] | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header["course_classes"] | magnitude }}</small>
@@ -24,7 +24,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de escolas</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Schools{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{header["school_count"] | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header["school_count"] | magnitude }}</small>
@@ -33,20 +33,20 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Tamanho médio das turmas</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Average Size of Classes{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.course_average_class_size|max_digits(3) }}</strong><br/>
-                            <small class="magnitude">alunos</small>
+                            <small class="magnitude">{% trans %}students{% endtrans %}</small>
                         </div>
                     </div>
                 </li>
                 {% if header.course_age %}
                     <li>
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">Média de idade</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Average Age{% endtrans %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.course_age|max_digits(3) }}</strong><br/>
-                                <small class="magnitude">anos</small>
+                                <small class="magnitude">{% trans %}years{% endtrans %}</small>
                             </div>
                         </div>
                     </li>
@@ -61,36 +61,70 @@
     {% endif %}
 
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {% trans %}Year{% endtrans %}: {{ header.year }}
     </div>
 
-    <h2 class="m-t-xl">Perfil Geral</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
         {% if not location.id %}
-        <p>O maior número de matrículas para {{basic_course.name()}} do Brasil encontra-se no município de {{body["city_name"]}}, com {{body["city_enrolled"]}} alunos. No total, o país possui {{header["course_enrolled"]}} alunos matriculados nesse curso, com turmas médias de {{header["course_average_class_size"]}} alunos.</p>
+            <p>O maior número de matrículas para {{basic_course.name()}} 
+            do Brasil encontra-se no município de {{body["city_name"]}}, 
+            com {{body["city_enrolled"]}} 
+            alunos. No total, o país possui {{header["course_enrolled"]}} 
+            alunos matriculados nesse curso, com turmas médias de {{header["course_average_class_size"]}} 
+            alunos.</p>
         {% else %}
-        {% if location.id|length == 1 %}
-        <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }} na {{ location.name() }} encontra-se no município de {{ header.location_rank }}, com {{ header.location_enrolled
-        | max_digits(3) }} {{ header.location_enrolled | magnitude }} alunos. No total, a região possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} alunos.</p>
-        {% elif location.id|length == 3 %}
-        <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }} no estado {{location.preposition('de')}} {{ location.name() }} encontra-se no município de {{ header.location_rank }}, com {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} alunos. No total, o estado possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} alunos.</p>
-        {% elif location.id|length == 5 %}
-        <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }} na mesorregião {{location.preposition('de')}} {{ location.name() }} encontra-se no município de {{ header.location_rank }}, com {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} alunos. No total, a mesorregião possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} alunos.</p>
-        {% elif location.id|length == 7 %}
-        <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }} na microrregião {{location.preposition('de')}} {{ location.name() }} encontra-se no município de {{ header.location_rank }}, com {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} alunos. No total, a microrregião possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} alunos.</p>
-        {% else %}
-        <p>{{ location.name() }} ocupa o {{ header.rank }}º lugar entre os municípios com maior número de matrículas para o curso/campo de {{ basic_course.name() }} no estado {{location.preposition('de')}} {{ header.state_name }}. No total, o município possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} alunos.</p>
-        {% endif %}
+            {% if location.id|length == 1 %}
+                <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }} 
+                na {{ location.name() }} 
+                encontra-se no município de {{ header.location_rank }}, 
+                com {{ header.location_enrolled| max_digits(3) }} {{ header.location_enrolled | magnitude }} 
+                alunos. No total, a região possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} 
+                alunos.</p>
+            {% elif location.id|length == 3 %}
+                <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }}
+                 no estado {{location.preposition('de')}} {{ location.name() }} 
+                 encontra-se no município de {{ header.location_rank }}, 
+                 com {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
+                 alunos. No total, o estado possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                 alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} 
+                 alunos.</p>
+            {% elif location.id|length == 5 %}
+                <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }} 
+                na mesorregião {{location.preposition('de')}} {{ location.name() }} 
+                encontra-se no município de {{ header.location_rank }}, 
+                com {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
+                alunos. No total, a mesorregião possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} 
+                alunos.</p>
+            {% elif location.id|length == 7 %}
+                <p>O maior número de matrículas para o curso/campo de {{ basic_course.name() }} 
+                na microrregião {{location.preposition('de')}} {{ location.name() }} 
+                encontra-se no município de {{ header.location_rank }}, 
+                com {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
+                alunos. No total, a microrregião possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} 
+                alunos.</p>
+            {% else %}
+                <p>{{ location.name() }} 
+                ocupa o {{ header.rank }}º 
+                lugar entre os municípios com maior número de matrículas para o curso/campo de {{ basic_course.name() }} 
+                no estado {{location.preposition('de')}} {{ header.state_name }}. 
+                No total, o município possui {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                alunos matriculados nesse curso/campo, com turmas médias de {{ header.course_average_class_size|max_digits(3) }} 
+                alunos.</p>
+            {% endif %}
         {% endif %}
 
     <div class="row">
         <div class="col-xs-12 col-md-10 col-lg-8">
-            <h3>Salário e Emprego</h3>
+            <h3>{% trans %}Wages and Jobs{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                        <tr>
                             <th>
-                                Principal Escola por Número de Alunos Matriculados
+                                {% trans %}Main School{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body["school_name"]}}</p>
@@ -100,7 +134,7 @@
                         {% if location.id | length < 9 %}
                         <tr>
                             <th>
-                                PPrincipal Município por Número de Alunos Matriculados
+                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body["city_name"]}}</p>
@@ -112,7 +146,7 @@
                 </table>
             </div>
             <a href="#wages" aria-controls="wages" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More detais{% endtrans %}
             </a>
         </div>
     </div>
