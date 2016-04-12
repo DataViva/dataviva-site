@@ -37,7 +37,7 @@ var universityTable = function () {
             $('.rankings-content .rankings-control').append(select);
 
             universityTable.table
-                .column( 10 )
+                .column( 0 )
                 .cache( 'search' )
                 .sort()
                 .unique()
@@ -47,7 +47,7 @@ var universityTable = function () {
 
             select.on( 'change', function () {
                universityTable.table
-                    .column( 10 )
+                    .column( 0 )
                     .search( $(this).val() )
                     .draw();
             });
