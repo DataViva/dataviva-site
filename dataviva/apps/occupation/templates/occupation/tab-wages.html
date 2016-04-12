@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="wages">
-    <h2>Estatísticas de Salário e Emprego</h2>
+    <h2>{% trans %}Wages and Jobs{% endtrans %}</h2>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
             <div class="table-responsive">
@@ -8,23 +8,23 @@
                         <tr>
                             {% if body.is_not_municipality %}
                             <th>
-                                Principal Município
-                                <small>por Valor Total Exportado</small>
+                                {% trans %}Main{% endtrans %}
+                                <small>{% trans %}Employer Municipality{% endtrans %}</small>
                             </th>
                             {% endif %}
                             <th>
-                                Principal Atividade
-                                <small>por Empregos</small>
+                                {% trans %}Main{% endtrans %}
+                                <small>{% trans %}Employer Activity{% endtrans %}</small>
                             </th>
                             {% if body.is_not_municipality %}
                             <th>
-                                Município
-                                <small>com maior renda média mensal</small>
+                                {% trans %}Municipality with Highest{% endtrans %}
+                                <small>{% trans %}Monthly Average Income{% endtrans %}</small>
                             </th>
                             {% endif %}
                             <th>
-                                Atividade
-                                <small>com maior renda média mensal</small>
+                                {% trans %}Activity with Highest{% endtrans %}
+                                <small>{% trans %}Monthly Average Income{% endtrans %}</small>
                             </th>
                         </tr>
                     </thead>

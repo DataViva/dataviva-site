@@ -6,25 +6,23 @@ var OccupationTable = function () {
         "sAjaxSource": "/rais/all/all/all/show.1/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
-        "aoColumns": [
-            null, //year a
-            null, //wage a
-           { "bVisible": false }, //num_emp
-            null, //num_jobs a
-            { "bVisible": false }, //num_est
-            null, //wage_avg a
-            { "bVisible": false }, //age_avg
-            { "bVisible": false }, //wage_growth
-            { "bVisible": false }, //wage_growth_5
-            { "bVisible": false }, //num_emp_growth
-            { "bVisible": false }, //num_emp_growth_5
-            null, //cbo_id
-            null, //cnae_diversity a
-            null, //cnae_diversity_eff a
-            { "bVisible": false }, //bra_diversity
-            { "bVisible": false }, //bra_diversity_eff
-            { "bVisible": false }, //hist
-            { "bVisible": false } //gini
+        "columns": [
+            {data: 0},
+            {data: 11},
+            null,
+            {data: 1},
+            {data: 3},
+            {data: 5},
+            {data: 12},
+            {data: 13}
+        ],
+        "columnDefs": [
+            {
+                "targets": 2,
+                "render": function (data, type, row, meta){
+                    return dataviva.cbo[row[11]].name
+                }
+            },
         ],
         "deferRender": true,
         "scrollY": 500,
@@ -34,9 +32,13 @@ var OccupationTable = function () {
             var select = $("<select></select>").attr("id", 'year-selector').addClass("year-selector form-control"),
                 buttons = $("<div></div>").addClass("btn-group");
 
-            select.append( $('<option value="">Ano</option>') );
-            buttons.append($("<button>Grandes Grupos</button>").attr("id", 'occupation-groups').addClass("btn btn-white"));
-            buttons.append($("<button>Famílias</button>").attr("id", 'occupation-families').addClass("btn btn-white"));
+            var cbo_1 = dataviva.dictionary['cbo_1'],
+                cbo_4 = dataviva.dictionary['cbo_4'],
+                year = dataviva.dictionary['year'];
+
+            select.append($('<option value="">'+year+'</option>'));
+            buttons.append($("<button>"+cbo_1+"</button>").attr("id", 'occupation-groups').addClass("btn btn-white"));
+            buttons.append($("<button>"+cbo_4+"</button>").attr("id", 'occupation-families').addClass("btn btn-white"));
 
             $('.rankings-content .rankings-control').append(buttons);
             $('.rankings-content .rankings-control').append(select);
@@ -61,22 +63,18 @@ var OccupationTable = function () {
             $('#occupation-table_filter').addClass('pull-right');
 
             $('#occupation-groups').click(function() {
-                occupationGroups();
+                occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
             });
 
             $('#occupation-families').click(function() {
-                occupationFamilies();
+                occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
             });
         }
     });
 };
 
-var occupationTable = new OccupationTable();
-
-var occupationGroups = function() {
-    occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
-};
-
-var occupationFamilies = function() {
-    occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
-};
+$(document).ready(function() {
+    dataviva.requireAttrs(['cbo'], function() {
+        window.occupationTable = new OccupationTable();
+    });
+});
