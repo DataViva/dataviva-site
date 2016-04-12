@@ -52,12 +52,12 @@ def save(years, locations, industrys, occupations):
                     conditions[3] = occupation.condition
                     table = select_table(conditions)
                     name_file = 'rais-'+str(year.name)+'-'+str(location.name)+'-'+str(industry.name)+'-'+str(occupation.name)
-  
+
                     if table not in table_columns.keys():
-                        table_columns[table] = get_colums(table) # [ i+" as '"+en[i]+"'" for i in get_colums(table)]
+                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)] # get_colums(table) # 
 
                     f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
-
+                    
                     new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
                     f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
 

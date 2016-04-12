@@ -1,8 +1,8 @@
 en = {
-    'gini': u'',
-    'hist': u'Lorem ipsum',
+    'gini': u'Gini coefficient',
+    'hist': u'hist',
     'age_avg': u'Average salary',
-    'num_emp': u'Number of people employed.',
+    'num_emp': u'Number of people employed',
     'rcd': u'Unutilized field',
     'eci_wld': u'Indicator of economic complexity would',
     'eci_old': u'Indicator of economic complexity old',
