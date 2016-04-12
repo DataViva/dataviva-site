@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-12 16:14-0300\n"
+"POT-Creation-Date: 2016-04-12 16:45-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -428,7 +428,8 @@ msgid "students. The state has a total of "
 msgstr "alunos. No total, o estado possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:94
-msgid "in the mesoregion of "
+#, fuzzy
+msgid "in the mesoregion "
 msgstr "na mesorregião "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:97
@@ -438,7 +439,7 @@ msgstr "alunos. No total, a mesoregiāo possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:102
 #, fuzzy
-msgid "in the microregion of "
+msgid "in the microregion "
 msgstr "na microrregião "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:105
@@ -4416,7 +4417,7 @@ msgstr "Outro"
 
 #: dataviva/translations/dictionary.py:464
 msgid "Select"
-msgstr "Escolher"
+msgstr "Selecione"
 
 #: dataviva/translations/dictionary.py:465
 msgid "Show"
@@ -4986,54 +4987,6 @@ msgstr "com"
 #~ msgid "and which imports more is"
 #~ msgstr "e o que mais importa é"
 
-#~ msgid "A ocupação de "
-#~ msgstr ""
-
-#~ msgid "emprega "
-#~ msgstr ""
-
-#~ msgid "profissionais, ocupando o "
-#~ msgstr ""
-
-#~ msgid "e a atividade de "
-#~ msgstr ""
-
-#~ msgid "é a que mais possui "
-#~ msgstr ""
-
-#~ msgid "A renda mensal média é de "
-#~ msgstr ""
-
-#~ msgid "e a idade média dos empregados é de "
-#~ msgstr ""
-
-#~ msgid "profissionais na região "
-#~ msgstr ""
-
-#~ msgid "ocupando o "
-#~ msgstr ""
-
-#~ msgid "é de "
-#~ msgstr ""
-
-#~ msgid "reais e a idade média dos empregados é de "
-#~ msgstr ""
-
-#~ msgid "O município que mais emprega nessa ocupação é "
-#~ msgstr ""
-
-#~ msgid "profissionais "
-#~ msgstr ""
-
-#~ msgid "profissionais na mesorrregião "
-#~ msgstr ""
-
-#~ msgid "profissionais na microrregião "
-#~ msgstr ""
-
-#~ msgid "profissionais no município "
-#~ msgstr ""
-
 #~ msgid "Jobs"
 #~ msgstr "Empregos"
 
@@ -5064,9 +5017,6 @@ msgstr "com"
 #~ msgid "Note"
 #~ msgstr "Nota"
 
-#~ msgid "The A ocupação de "
-#~ msgstr ""
-
 #~ msgid "Wages and Employment"
 #~ msgstr "Salários e Emprego"
 
@@ -5094,87 +5044,6 @@ msgstr "com"
 #~ msgid "Run Query"
 #~ msgstr "Executar Consulta"
 
-#~ msgid "é um estabelecimento de ensino"
-#~ msgstr ""
-
-#~ msgid "que tem como principal curso"
-#~ msgstr ""
-
-#~ msgid "com"
-#~ msgstr "Seja bem vindo"
-
-#~ msgid "estudantes. No total, a instituição possui"
-#~ msgstr "estudantes. No total, a instituição possui"
-
-#~ msgid "estudantes matriculados e"
-#~ msgstr ""
-
-#~ msgid "concluintes"
-#~ msgstr "Incluindo"
-
-#~ msgid "alunos"
-#~ msgstr ""
-
-#~ msgid "do Brasil encontra-se no município de "
-#~ msgstr ""
-
-#~ msgid "O maior número de matrículas para o curso/campo de "
-#~ msgstr ""
-
-#~ msgid "O maior número de matrículas para o curso/campo de"
-#~ msgstr ""
-
-#~ msgid "with "
-#~ msgstr "com"
-
-#~ msgid "com "
-#~ msgstr "Seja bem vindo"
-
-#~ msgid "alunos. No total, o país possui "
-#~ msgstr ""
-
-#~ msgid "alunos matriculados nesse curso, com turmas médias de "
-#~ msgstr ""
-
-#~ msgid "na "
-#~ msgstr ""
-
-#~ msgid "no estado "
-#~ msgstr ""
-
-#~ msgid "na mesorregião"
-#~ msgstr "Mesorregião"
-
-#~ msgid "na microrregião"
-#~ msgstr "Microrregião"
-
-#~ msgid "no estado"
-#~ msgstr ""
-
-#~ msgid "encontra-se no município de "
-#~ msgstr ""
-
-#~ msgid "encontra-se no município de"
-#~ msgstr ""
-
-#~ msgid "alunos matriculados nesse curso/campo, com turmas médias de "
-#~ msgstr ""
-
-#~ msgid "alunos. No total, o estado possui"
-#~ msgstr ""
-
-#~ msgid "alunos matriculados nesse curso/campo, com turmas médias de"
-#~ msgstr ""
-
-#~ msgid "alunos. No total, a região possui "
-#~ msgstr ""
-
-#~ msgid "alunos. No total, a mesorregião possui"
-#~ msgstr ""
-
-#~ msgid "alunos. No total, a microrregião possui"
-#~ msgstr ""
-
-#~ msgid "No total, o município possui"
-#~ msgstr ""
+#~ msgid "All"
+#~ msgstr "Todos"
 

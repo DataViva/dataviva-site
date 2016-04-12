@@ -91,7 +91,7 @@
                  {% trans %}students per class in average{% endtrans %}.</p>
             {% elif location.id|length == 5 %}
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %} {{ basic_course.name() }} 
-                {% trans %}in the mesoregion of {% endtrans %} {{location.preposition('de')}} {{ location.name() }} 
+                {% trans %}in the mesoregion {% endtrans %} {{ location.name() }} 
                 {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
                 {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
                 {% trans %}students. The mesoregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
@@ -99,7 +99,7 @@
                 {% trans %}students per class in average{% endtrans %}.</p>
             {% elif location.id|length == 7 %}
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %} {{ basic_course.name() }} 
-                {% trans %}in the microregion of {% endtrans %} {{location.preposition('de')}} {{ location.name() }} 
+                {% trans %}in the microregion {% endtrans %} {{ location.name() }} 
                 {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
                 {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
                 {% trans %}students. The microregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 

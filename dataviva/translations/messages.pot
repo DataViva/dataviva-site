@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-12 16:14-0300\n"
+"POT-Creation-Date: 2016-04-12 16:45-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -422,7 +422,7 @@ msgid "students. The state has a total of "
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:94
-msgid "in the mesoregion of "
+msgid "in the mesoregion "
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:97
@@ -430,7 +430,7 @@ msgid "students. The mesoregion has a total of "
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:102
-msgid "in the microregion of "
+msgid "in the microregion "
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:105
