@@ -26,5 +26,5 @@ occupations = Dimension('cbo_plural', [
 
 
 attrs_databases = {
-    'rais': DataBase([locations, occupations, industries], [str(year) for year in range(2002, 2014)]),
+    'rais': DataBase([locations, industries, occupations], [str(year) for year in range(2002, 2014)]),
 }

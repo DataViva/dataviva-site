@@ -1,3 +1,6 @@
+
+
+
 $(document).ready(function() {
     $.ajax({
         url: 'databases',
@@ -14,11 +17,18 @@ $(document).ready(function() {
 
             if(this.value == 'secex') {
                 $('#monthly-detail').show();
+                $('#monthly-detail select').prop('disabled', false);
+
             } else {
                 $('#detailing').val('anual');
                 $('#monthly-detail').hide();
             }
 
+            $('select[name=year]').empty().prop('disabled', false);;
+
+            databases[this.value].years.forEach(function(year) {
+                $('select[name=year]').append($('<option value="'+year+'">'+year+'</option>'));
+            });
 
             $('#dimensions').empty();
             databases[this.value].dimensions.forEach(function(dimension) {
@@ -35,10 +45,6 @@ $(document).ready(function() {
                     select.append($('<option value="'+depth.value+'">'+dataviva.dictionary[depth.id]+'</option>'));
                 });
             });
-
-
-
-
         });
     });
 });
