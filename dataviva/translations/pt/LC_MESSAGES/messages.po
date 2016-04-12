@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-12 15:29-0300\n"
+"POT-Creation-Date: 2016-04-12 16:14-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -356,6 +356,109 @@ msgstr "Ano"
 #, fuzzy
 msgid "General Profile"
 msgstr "Perfil Geral"
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:69
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:77
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:85
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:93
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:101
+msgid "The highest number of enrollments in the "
+msgstr "O maior número de matrículas para o curso/campo de "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:70
+msgid "course/field of study in Brazil is in the municipality of "
+msgstr "do Brasil encontra-se no município de "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:71
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:80
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:88
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:96
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:104
+#: dataviva/apps/university/templates/university/tab-general.html:46
+#: dataviva/translations/dictionary.py:408
+msgid "with"
+msgstr "com"
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:72
+msgid "students. The country has a total of"
+msgstr "alunos. No total, o país possui "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:73
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:82
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:90
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:98
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:106
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:114
+#, fuzzy
+msgid "enrolled students in this course/field, with "
+msgstr "alunos matriculados nesse curso, com turmas médias de "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:74
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:83
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:91
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:99
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:107
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:115
+msgid "students per class in average"
+msgstr "alunos"
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:78
+msgid "in "
+msgstr "na "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:79
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:87
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:95
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:103
+msgid "is in the municipality of "
+msgstr "encontra-se no município de "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:81
+#, fuzzy
+msgid "students. The region has a total of "
+msgstr "alunos. No total, o país possui "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:86
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:112
+msgid "in the state of "
+msgstr "no estado "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:89
+msgid "students. The state has a total of "
+msgstr "alunos. No total, o estado possui "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:94
+msgid "in the mesoregion of "
+msgstr "na mesorregião "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:97
+#, fuzzy
+msgid "students. The mesoregion has a total of "
+msgstr "alunos. No total, a mesoregiāo possui "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:102
+#, fuzzy
+msgid "in the microregion of "
+msgstr "na microrregião "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:105
+#, fuzzy
+msgid "students. The microregion has a total of "
+msgstr "alunos. No total, a microregiāo possui "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:110
+msgid "ocupa o"
+msgstr ""
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:111
+msgid ""
+"lugar entre os municípios com maior número de matrículas para o "
+"curso/campo de "
+msgstr ""
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:113
+msgid "The city has "
+msgstr "No total, o município possui"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:121
 #: dataviva/apps/occupation/templates/occupation/index.html:57
@@ -1204,11 +1307,6 @@ msgstr "é um estabelecimento de ensino"
 #: dataviva/apps/university/templates/university/tab-general.html:45
 msgid "educational establishment. Its main course is"
 msgstr "que tem como principal curso"
-
-#: dataviva/apps/university/templates/university/tab-general.html:46
-#: dataviva/translations/dictionary.py:408
-msgid "with"
-msgstr "com"
 
 #: dataviva/apps/university/templates/university/tab-general.html:47
 msgid "students. The University has a total of"
@@ -5003,7 +5101,7 @@ msgstr "com"
 #~ msgstr ""
 
 #~ msgid "com"
-#~ msgstr "com"
+#~ msgstr "Seja bem vindo"
 
 #~ msgid "estudantes. No total, a instituição possui"
 #~ msgstr "estudantes. No total, a instituição possui"
@@ -5013,4 +5111,70 @@ msgstr "com"
 
 #~ msgid "concluintes"
 #~ msgstr "Incluindo"
+
+#~ msgid "alunos"
+#~ msgstr ""
+
+#~ msgid "do Brasil encontra-se no município de "
+#~ msgstr ""
+
+#~ msgid "O maior número de matrículas para o curso/campo de "
+#~ msgstr ""
+
+#~ msgid "O maior número de matrículas para o curso/campo de"
+#~ msgstr ""
+
+#~ msgid "with "
+#~ msgstr "com"
+
+#~ msgid "com "
+#~ msgstr "Seja bem vindo"
+
+#~ msgid "alunos. No total, o país possui "
+#~ msgstr ""
+
+#~ msgid "alunos matriculados nesse curso, com turmas médias de "
+#~ msgstr ""
+
+#~ msgid "na "
+#~ msgstr ""
+
+#~ msgid "no estado "
+#~ msgstr ""
+
+#~ msgid "na mesorregião"
+#~ msgstr "Mesorregião"
+
+#~ msgid "na microrregião"
+#~ msgstr "Microrregião"
+
+#~ msgid "no estado"
+#~ msgstr ""
+
+#~ msgid "encontra-se no município de "
+#~ msgstr ""
+
+#~ msgid "encontra-se no município de"
+#~ msgstr ""
+
+#~ msgid "alunos matriculados nesse curso/campo, com turmas médias de "
+#~ msgstr ""
+
+#~ msgid "alunos. No total, o estado possui"
+#~ msgstr ""
+
+#~ msgid "alunos matriculados nesse curso/campo, com turmas médias de"
+#~ msgstr ""
+
+#~ msgid "alunos. No total, a região possui "
+#~ msgstr ""
+
+#~ msgid "alunos. No total, a mesorregião possui"
+#~ msgstr ""
+
+#~ msgid "alunos. No total, a microrregião possui"
+#~ msgstr ""
+
+#~ msgid "No total, o município possui"
+#~ msgstr ""
 
