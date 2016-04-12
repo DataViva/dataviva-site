@@ -5,9 +5,10 @@
 '''
 from collections import namedtuple
 from sqlalchemy import create_engine
+from dictionary import en
 import pandas as pd
-import zipfile
-import os, bz2
+import os
+import bz2
 
 
 def select_table(conditions):

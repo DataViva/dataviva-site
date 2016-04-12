@@ -5,13 +5,10 @@
 '''
 from collections import namedtuple
 from sqlalchemy import create_engine
-from dictionary import pt, en
+from dictionary import en
 import pandas as pd
 import os
 import bz2
-
-
-# sc_yb, sc_yc, sc_ybc
 
 
 def select_table(conditions):
@@ -53,8 +50,6 @@ def save(engine, years, locations, courses):
 
                 if table not in table_columns.keys():
                     table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, engine)]
-
-                
 
                 f = pd.read_sql_query(
                     'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
