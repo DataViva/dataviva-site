@@ -15,6 +15,9 @@ data.downloadLink = function() {
 
 $(document).ready(function() {
 
+    $("#download").on('click', function() {
+        console.log(data.downloadLink());
+    });
 
     $.ajax({
         url: 'databases',
@@ -60,6 +63,7 @@ $(document).ready(function() {
                     select.append($('<option value="'+depth.value+'">'+dataviva.dictionary[depth.id]+'</option>'));
                 });
             });
+            $("#download").prop('disabled', false);
         });
     });
 });
