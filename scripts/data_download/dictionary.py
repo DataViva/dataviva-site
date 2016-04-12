@@ -1,4 +1,6 @@
 en = {
+    'num_universities': u'Number of universities',
+    'students': u'Number of students',
     'gini': u'Gini coefficient',
     'hist': u'hist',
     'age_avg': u'Average salary',

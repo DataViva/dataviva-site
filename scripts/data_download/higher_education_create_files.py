@@ -46,7 +46,7 @@ def save(years, locations, majors):
                 name_file = 'hedu-'+str(year.name)+'-'+str(location.name)+'-'+str(major.name)
 
                 if table not in table_columns.keys():
-                        table_columns[table] = get_colums(table)
+                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
 
                 f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 

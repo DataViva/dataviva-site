@@ -54,7 +54,7 @@ def save(years, locations, industrys, occupations):
                     name_file = 'rais-'+str(year.name)+'-'+str(location.name)+'-'+str(industry.name)+'-'+str(occupation.name)
 
                     if table not in table_columns.keys():
-                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)] # get_colums(table) # 
+                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
 
                     f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
                     
