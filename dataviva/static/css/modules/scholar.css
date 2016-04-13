@@ -1,0 +1,172 @@
+.scholar section {
+  margin-bottom: 4.5rem;
+}
+.scholar .main-content {
+    padding-bottom: 2rem;
+}
+.scholar a {
+  text-decoration: none;
+}
+.scholar h1 {
+    margin: 0px 0px 30px 0px;
+}
+.scholar textarea {
+    resize: none;
+}
+.scholar .publication .thumbnail {
+  border: none;
+  float: left;
+  margin-right: 20px;
+  padding: 0;
+  position: relative;
+}
+
+.scholar .thumbnail {
+    height: 227px;
+    width: 350px;
+}
+
+.scholar .publication .thumbnail span {
+  background: #5a9dc4;
+  bottom: 0;
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 300;
+  height: 33px;
+  line-height: 33px;
+  padding: 0 10px;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+}
+.scholar .related h4 {
+  color: #666;
+  font-size: 25px;
+  font-weight: 300;
+}
+.scholar .related p {
+  font-size: 14px;
+  font-weight: 300;
+}
+.scholar .related p,
+.scholar .related p a {
+  color: #666;
+}
+.scholar .single big {
+  color: #5a9dc4;
+}
+.scholar .single blockquote {
+  border: none;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  padding-bottom: 0;
+}
+.scholar .single p {
+  color: #666;
+  font-size: 14px;
+}
+.scholar .social {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+.scholar .social li {
+  display: inline-block;
+  height: 20px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+
+.scholar .comments h4 {
+  color: #666;
+  font-size: 25px;
+  font-weight: 300;
+}
+.scholar .item h4 {
+  font-size: 20px;
+  margin: 0;
+}
+.scholar .item h4 a {
+  color: #423434;
+}
+.scholar .item h4 a:hover {
+  opacity: 0.8;
+}
+.scholar .item p {
+  color: #9c9c9c;
+  font-size: 13px;
+  margin: 0;
+}
+.scholar .item + .item {
+  margin-top: 2rem;
+}
+.scholar .publication h4 {
+  font-size: 25px;
+  font-weight: 300;
+}
+.scholar .publication h4,
+.scholar .publication h4 a {
+  color: #666;
+}
+.scholar .publication p {
+  color: #666;
+  font-size: 13px;
+}
+.scholar .publication p.data {
+  color: #5a9dc4;
+  text-transform: uppercase;
+}
+.scholar .publication h4,
+.scholar .publication p {
+  margin: 0 0 10px;
+}
+
+.scholar .publication:before {
+  display: none;
+}
+.scholar .publication-list nav {
+    text-align: center;
+}
+.scholar .publication-list nav .pagination {
+    font-size: 10px;
+    display: inline-block;
+}
+
+
+.scholar .thumb .thumb-controls img {
+    width: 350px;
+    height: 227px;
+}
+.scholar .thumb .thumb-controls .crop-preview {
+    overflow: hidden;
+    text-align: center;
+    display: none;
+    width: 350px;
+    height: 227px;
+}
+.scholar .thumb .thumb-controls .crop-buttons {
+    display: none;
+}
+.scholar .thumb .thumb-controls .thumb-buttons,
+.scholar .thumb .thumb-controls .crop-buttons {
+    text-align: center;
+}
+.scholar .thumb .thumb-controls label {
+    display: inline-block;
+}
+.scholar .thumb .thumb-crop {
+    max-height: 550px;
+}
+.scholar .checkbox-switch {
+    padding: 0px;
+    border: none;
+}
+
+.scholar .checkbox-switch .switchery{
+    height: 33px;
+}
+
+.scholar .checkbox-switch .switchery > small {
+    height: 33px;
+    width: 33px;
+}
