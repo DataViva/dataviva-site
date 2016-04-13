@@ -1,48 +1,33 @@
-<!-- extend from base layout -->
 {% extends "base.html" %}
 
 {% block content %}
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="{{ url_for('general.home') }}">Home</a></li>
-        <li><a href="{{ url_for('scholar.index') }}"><span>Estudos</span></a></li>
-        <li class="active"><span>Publique um estudo<span></li>
+        {% block breadcrumb %}{% endblock %}
     </ol>
-    <div class="row">
-        <div class="sidebar col-xs-15 col-md-4">
-            <a href="{{ url_for('scholar.new') }}" class="btn btn-default btn-lg btn-dataviva blue">Publique um estudo</a>
-            <h4>Temas</h4>
-            <ul class="sub-menu">
-                <li><a href="#" title="Todos"><strong>Todos</strong></a></li>
-                <li><a href="#" title="Visualizações">Visualizações</a></li>
-                <li><a href="#" title="Tecnologia da Informação">Tecnologia da Informação</a></li>
-                <li><a href="#" title="Economia">Economia</a></li>
-                <li><a href="#" title="Matemática">Matemática</a></li>
-                <li><a href="#" title="Estatística">Estatística</a></li>
-                <li><a href="#" title="Design">Design</a></li>
-                <li><a href="#" title="Políticas Públicas">Políticas Públicas</a></li>
-            </ul>
-        </div>
-        <div class="main-content col-xs-15 col-md-11">
+<div class="container">
+    <nav class="sidebar col-md-3">
+        <a href="{{ url_for('scholar.new') }}" class="btn btn-default btn-lg btn-dataviva blue">Publique um estudo</a>
+        <h4>Temas</h4>
+        <ul class="sub-menu">
+            <li><a href="#" title="Todos"><strong>Todos</strong></a></li>
+            <li><a href="#" title="Visualizações">Visualizações</a></li>
+            <li><a href="#" title="Tecnologia da Informação">Tecnologia da Informação</a></li>
+            <li><a href="#" title="Economia">Economia</a></li>
+            <li><a href="#" title="Matemática">Matemática</a></li>
+            <li><a href="#" title="Estatística">Estatística</a></li>
+            <li><a href="#" title="Design">Design</a></li>
+            <li><a href="#" title="Políticas Públicas">Políticas Públicas</a></li>
+        </ul>
+    </nav>
 
-        <script type="text/javascript">
-            window.ScholarController = (function () {
-                return {
-                    deleteArticle: deleteArticle
-                }
-
-                function deleteArticle(response) {
-                    {% if form %}
-                        window.location = '/en/scholar/?message='+response;
-                    {% endif %}
-                }
-
-            })();
-        </script>
-
-        {% block scholar_content %}
-        {% endblock scholar_content %}
-        </div>
-    </div>
+    <section id="scholar" class="col-md-9">
+    {% block scholar_content %}
+    {% endblock scholar_content %}
+    </section>
 </div>
 {% endblock content %}
+
+{% block js_assets %}
+{% endblock js_assets %}
