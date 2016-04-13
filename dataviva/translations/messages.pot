@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-13 17:41-0300\n"
+"POT-Creation-Date: 2016-04-13 18:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -277,6 +277,7 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:42
 #: dataviva/apps/industry/templates/industry/index.html:48
+#: dataviva/apps/major/templates/major/index.html:42
 #: dataviva/apps/occupation/templates/occupation/index.html:48
 #: dataviva/apps/product/templates/product/index.html:48
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:49
@@ -287,6 +288,8 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:51
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
+#: dataviva/apps/major/templates/major/index.html:51
+#: dataviva/apps/major/templates/major/tab-enrollments.html:3
 #: dataviva/apps/university/templates/university/index.html:49
 #: dataviva/apps/university/templates/university/tab-enrollments.html:3
 #: dataviva/apps/university/templates/university/tab-general.html:52
@@ -295,6 +298,9 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:12
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:137
+#: dataviva/apps/major/templates/major/tab-enrollments.html:15
+#: dataviva/apps/major/templates/major/tab-enrollments.html:23
+#: dataviva/apps/major/templates/major/tab-enrollments.html:31
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:11
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:15
 #: dataviva/translations/dictionary.py:510
@@ -757,6 +763,10 @@ msgstr ""
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:18
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:15
 msgid "Shift"
+msgstr ""
+
+#: dataviva/apps/major/templates/major/tab-enrollments.html:11
+msgid "Main University"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:6
