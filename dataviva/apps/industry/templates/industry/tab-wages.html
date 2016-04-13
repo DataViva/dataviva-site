@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="wages">
-    <h2>Estatísticas de Salário e Emprego</h2>
+    <h2>{% trans %}Wages and Jobs{% endtrans %}</h2>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
             <div class="table-responsive">
@@ -7,23 +7,23 @@
                     <thead>
                         <tr>
                             <th>
-                                Ocupação
-                                <small>com maior número de empregos</small>
+                                {% trans %}Occupation{% endtrans %}
+                                <small>{% trans %}with highest number of jobs{% endtrans %}</small>
                             </th>
                             {%if (location.id|length) != 9 %}
                                 <th>
-                                    Município
-                                    <small>com maior número de empregos</small>
+                                    {% trans %}Municipality{% endtrans %}
+                                    <small>{% trans %}with highest number of jobs{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             <th>
-                                Ocupação
-                                <small>com maior renda média mensal</small>
+                                {% trans %}Occupation{% endtrans %}
+                                <small>{% trans %}with highest monthly average income{% endtrans %}</small>
                             </th>
                             {%if (location.id|length) != 9 %}
                                 <th>
-                                    Município
-                                    <small>com maior renda média mensal</small>
+                                    {% trans %}Municipality{% endtrans %}
+                                    <small>{% trans %}with highest monthly average income{% endtrans %}</small>
                                 </th>
                             {% endif %}
                         </tr>

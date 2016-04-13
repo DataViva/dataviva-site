@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-13 15:36-0300\n"
+"POT-Creation-Date: 2016-04-13 16:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -466,6 +466,7 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:121
 #: dataviva/apps/industry/templates/industry/index.html:57
 #: dataviva/apps/industry/templates/industry/tab-general.html:111
+#: dataviva/apps/industry/templates/industry/tab-wages.html:2
 #: dataviva/apps/occupation/templates/occupation/index.html:57
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:2
 #: dataviva/translations/dictionary.py:596
@@ -572,6 +573,7 @@ msgid "Bar Chart"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:67
+#: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/index.html:67
 #: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:2
@@ -697,19 +699,39 @@ msgstr ""
 msgid "More details"
 msgstr ""
 
-#: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:6
-#: dataviva/templates/about.html:106 dataviva/templates/site.html:75
-#: dataviva/templates/about/apps/network.html:1
-#: dataviva/translations/dictionary.py:12
-msgid "Network"
+#: dataviva/apps/industry/templates/industry/tab-wages.html:10
+#: dataviva/apps/industry/templates/industry/tab-wages.html:20
+#: dataviva/apps/rankings/templates/rankings/occupation.html:13
+#: dataviva/templates/site.html:65 dataviva/translations/dictionary.py:138
+#: dataviva/translations/dictionary.py:353
+msgid "Occupation"
 msgstr ""
 
+#: dataviva/apps/industry/templates/industry/tab-wages.html:11
+#: dataviva/apps/industry/templates/industry/tab-wages.html:16
+msgid "with highest number of jobs"
+msgstr ""
+
+#: dataviva/apps/industry/templates/industry/tab-wages.html:15
+#: dataviva/apps/industry/templates/industry/tab-wages.html:25
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:17
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:44
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:12
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:43
 #: dataviva/translations/dictionary.py:133
 msgid "Municipality"
+msgstr ""
+
+#: dataviva/apps/industry/templates/industry/tab-wages.html:21
+#: dataviva/apps/industry/templates/industry/tab-wages.html:26
+msgid "with highest monthly average income"
+msgstr ""
+
+#: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:6
+#: dataviva/templates/about.html:106 dataviva/templates/site.html:75
+#: dataviva/templates/about/apps/network.html:1
+#: dataviva/translations/dictionary.py:12
+msgid "Network"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:54
@@ -1265,12 +1287,6 @@ msgstr ""
 #: dataviva/apps/rankings/templates/rankings/occupation.html:12
 #: dataviva/translations/dictionary.py:329
 msgid "CBO ID"
-msgstr ""
-
-#: dataviva/apps/rankings/templates/rankings/occupation.html:13
-#: dataviva/templates/site.html:65 dataviva/translations/dictionary.py:138
-#: dataviva/translations/dictionary.py:353
-msgid "Occupation"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/occupation.html:14
