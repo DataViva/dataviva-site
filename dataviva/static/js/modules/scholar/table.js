@@ -26,7 +26,7 @@ var ScholarTable = function () {
                 "targets": 1,
                 "className": "column-title",
                 "render": function (data, type, articles, meta){
-                    return '<a href="/scholar/articles/'+articles[0]+'">'+articles[1]+'</a>';
+                    return '<a href="/scholar/article/'+articles[0]+'">'+articles[1]+'</a>';
                 }
             },
             {
