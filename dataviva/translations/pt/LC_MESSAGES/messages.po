@@ -553,7 +553,6 @@ msgstr "Empregos por"
 #: dataviva/templates/general/index.html:78
 #: dataviva/templates/include/footer.html:21
 #: dataviva/translations/dictionary.py:566
-#, fuzzy
 msgid "Economic Activities"
 msgstr "Atividades Econômicas"
 
