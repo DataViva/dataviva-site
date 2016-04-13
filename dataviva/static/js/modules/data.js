@@ -16,7 +16,7 @@ data.downloadLink = function() {
 $(document).ready(function() {
 
     $("#download").on('click', function() {
-        console.log(data.downloadLink());
+        window.open(data.downloadLink());
     });
 
     $.ajax({
