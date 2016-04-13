@@ -21,11 +21,9 @@
             <p>
                 {{ article.abstract }}
             </p>
-            <p><a class="btn btn-default btn-lg btn-dataviva blue">Baixar arquivo (PDF)</a></p>
+            <p><a class="btn btn-success btn-md">Baixar arquivo (PDF)</a></p>
         </div>
     </div>
 </div>
 
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ article.id }}/delete">Deletar</a>
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ article.id }}/edit">Editar</a>
 {% endblock scholar_content %}
