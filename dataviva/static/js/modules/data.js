@@ -37,11 +37,11 @@ $(document).ready(function() {
                 $('#monthly-detail select').prop('disabled', false);
 
             } else {
-                $('#detailing').val('anual');
                 $('#monthly-detail').hide();
+                $('#detailing').val('');
             }
 
-            $('select[name=year]').empty().prop('disabled', false);;
+            $('select[name=year]').empty().prop('disabled', false);
 
             databases[this.value].years.forEach(function(year) {
                 $('select[name=year]').append($('<option value="'+year+'">'+year+'</option>'));
