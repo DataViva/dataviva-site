@@ -166,7 +166,13 @@ var destroy = function(ids){
     }
 }
 
-
+var edit = function(ids){
+    if (ids.length) {
+        window.location = '/'+lang+'/scholar/admin/article/'+ids[0]+'/edit';
+    } else {
+        showMessage('Por favor selecione para editar.', 'warning', 8000);
+    }
+}
 
 var checkManySelected = function() {
     if (scholarTable.getCheckedIds().length > 1) {
