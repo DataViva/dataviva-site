@@ -56,7 +56,7 @@ def save(years, months, locations, products, trade_partners):
                             table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
 
                         f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
-                        
+
                         new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
                         f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
 
@@ -81,7 +81,7 @@ years = [
 
 months = [
     Condition('month=0', ''),
-    Condition('month!=0', '-all')]
+    Condition('month!=0', '-monthly')]
 
 locations = [
     Condition(' 1 = 1 ', ''),

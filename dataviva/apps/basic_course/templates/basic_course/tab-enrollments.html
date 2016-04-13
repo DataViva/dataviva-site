@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="enrollments">
     <p>{{ body.enrollment_statistics_description }}</p>
-    <h2>Estatísticas de matrículas do Brasil</h2>
+    <h2>{% trans %}Enrollments{% endtrans %}</h2>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
             <div class="table-responsive">
@@ -9,13 +9,13 @@
                         <tr>
                             {% if location.id | length < 9 %}
                                 <th>
-                                    Principal Município
-                                    <small>por Número de Alunos Matriculados</small>
+                                    {% trans %}Main Municipality{% endtrans %}
+                                    <small>{% trans %}by Number of Enrolled Students{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             <th>
-                                Principal Escola
-                                <small>por Número de Alunos Matriculados</small>
+                                {% trans %}Main School{% endtrans %}
+                                <small>{% trans %}by Number of Enrolled Students{% endtrans %}</small>
                             </th>
                         </tr>
                     </thead>

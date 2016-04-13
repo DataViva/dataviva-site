@@ -1,11 +1,14 @@
 <div id="graphs-enrollments" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
-        <h3>Visualize:</h3>
+        <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
-            <h4>Curso</h4>
-            <a href="/pt/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled" target="graphs-frame-enrollments" class="list-group-item">Mapa</a>
-            <a href="/pt/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?y=enrolled&layout=value&order=color" target="graphs-frame-enrollments" class="list-group-item">Evoluçāo</a>
-            <a href="/pt/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled&controls=true&year=2014" target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
+            <h4>{% trans %}Courses{% endtrans %}</h4>
+            <a href="/pt/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled" 
+                target="graphs-frame-enrollments" class="list-group-item">{% trans %}Map{% endtrans %}</a>
+            <a href="/pt/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?y=enrolled&layout=value&order=color" 
+                target="graphs-frame-enrollments" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+            <a href="/pt/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled&controls=true&year=2014" 
+                target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
