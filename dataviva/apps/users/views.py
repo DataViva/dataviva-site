@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, jsonify, request, flash
+from flask import Blueprint, render_template, g, redirect, url_for, jsonify, request
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.account.models import User
 from dataviva import db
-from forms import RegistrationForm
 
 
 mod = Blueprint('users', __name__,
@@ -67,64 +66,3 @@ def admin_activate(status, status_value):
 
     message = u"Usuário(s) alterado(s) com sucesso!"
     return message, 200
-
-
-@mod.route('/admin/users/<id>/edit', methods=['GET'])
-def edit(id):
-    form = RegistrationForm()
-    users = User.query.filter_by(id=id).first_or_404()
-    form.nickname.data = users.nickname
-    form.email.data = users.email
-    form.fullname.data = users.fullname
-    form.country.data = users.country
-    form.gender.data = users.gender
-    return render_template('users/edit.html', form=form, action=url_for('users.update', id=id))
-
-
-@mod.route('/admin/users/<id>/edit', methods=['POST'])
-def update(id):
-    form = RegistrationForm()
-    id = int(id.encode())
-    if form.validate() is False:
-        return render_template('users/edit.html', form=form)
-    else:
-        users = User.query.filter_by(id=id).first_or_404()
-        users.nickname = form.nickname.data
-        users.email = form.email.data
-        users.fullname = form.fullname.data
-        users.country = form.country.data
-        users.gender = form.gender.data
-
-        db.session.commit()
-
-        message = u'Usuário editado com sucesso!'
-        flash(message, 'success')
-        return redirect(url_for('users.admin'))
-
-
-@mod.route('/admin/users/new', methods=['GET'])
-def new():
-    form = RegistrationForm()
-    return render_template('users/new.html', form=form, action=url_for('users.create'))
-
-
-@mod.route('/admin/users/new', methods=['POST'])
-def create():
-    form = RegistrationForm()
-    if form.validate() is False:
-        return render_template('users/new.html', form=form)
-    else:
-        users = User()
-        users.nickname = form.nickname.data
-        users.email = form.email.data
-        users.fullname = form.fullname.data
-        users.country = form.country.data
-        users.gender = form.gender.data
-        users.role = 0
-
-        db.session.add(users)
-        db.session.commit()
-
-        message = u'Seu usuário foi criado com sucesso!'
-        flash(message, 'success')
-        return redirect(url_for('users.admin'))
