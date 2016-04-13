@@ -46,7 +46,7 @@ var EconomicActivitiesTable = function () {
             $('.rankings-content .rankings-control').append(select);
 
             economicActivities.table
-                .column( 10 )
+                .column( 0 )
                 .cache( 'search' )
                 .sort()
                 .unique()
@@ -56,7 +56,7 @@ var EconomicActivitiesTable = function () {
 
             select.on( 'change', function () {
                economicActivities.table
-                    .column( 10 )
+                    .column( 0 )
                     .search( $(this).val() )
                     .draw();
             });

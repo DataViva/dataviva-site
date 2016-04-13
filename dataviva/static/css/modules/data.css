@@ -8,3 +8,11 @@
     font-size: 18px;
     font-weight: 300;
 }
+
+.data .popover {
+    margin-left: 25px;
+}
+
+.data #monthly-detail {
+    display: none;
+}
