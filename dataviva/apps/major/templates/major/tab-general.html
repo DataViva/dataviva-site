@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de Matrículas</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.enrolled | magnitude }}</small>
@@ -13,7 +13,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de Ingressantes</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.entrants | magnitude }}</small>
@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de Concluintes</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.graduates | magnitude }}</small>
@@ -37,10 +37,10 @@
     </div>
 
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {% trans %}Year{% endtrans %}: {{ header.year }}
     </div>
 
-    <h2 class="m-t-xl">Perfil Geral</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not header.bra_id %}
         <p>O curso/campo de {{ header.name }} é o {{ header.rank }}º em número de matrículas no Brasil. A universidade que possui mais alunos é {{ major.article() }}
         {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
@@ -87,13 +87,13 @@
     {% endif %}
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Matrículas</h3>
+            <h3>{% trans %}Enrollments{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         <tr>
                             <th>
-                                Principal Universidade por Número de Alunos Matriculados
+                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.university_with_more_enrolled }}</p>
@@ -102,7 +102,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Município por Número de Alunos Matriculados
+                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_with_more_enrolled }}</p>
@@ -111,7 +111,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Universidade por Número de Alunos Ingressantes
+                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.university_with_more_entrants }}</p>
@@ -120,7 +120,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Município por Número de Alunos Ingressantes
+                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_with_more_entrants }}</p>
@@ -129,7 +129,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Universidade por Número de Alunos Concluintes
+                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.university_with_more_graduates }}</p>
@@ -138,7 +138,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Município por Número de Alunos Concluintes
+                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_with_more_graduates }}</p>
@@ -149,7 +149,7 @@
                 </table>
                 </div>
                 <a href="#enrollments" aria-controls="enrollments" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                    mais detalhes
+                    {% trans %}More details{% endtrans %}
                 </a>
             </div>
         </div>

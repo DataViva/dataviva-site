@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-13 18:10-0300\n"
+"POT-Creation-Date: 2016-04-13 18:23-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -314,6 +314,8 @@ msgstr "Principal Município"
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:18
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:127
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:137
+#: dataviva/apps/major/templates/major/tab-enrollments.html:12
+#: dataviva/apps/major/templates/major/tab-enrollments.html:16
 #: dataviva/apps/university/templates/university/tab-enrollments.html:12
 msgid "by Number of Enrolled Students"
 msgstr "por Número de Alunos Matriculados"
@@ -723,6 +725,7 @@ msgid "Municipality with highest monthly average income"
 msgstr "Município com maior renda média mensal"
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:161
+#: dataviva/apps/major/templates/major/tab-general.html:152
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:163
 #: dataviva/apps/product/templates/product/tab-general.html:299
 #: dataviva/translations/dictionary.py:483
@@ -787,8 +790,22 @@ msgid "Shift"
 msgstr "Turno"
 
 #: dataviva/apps/major/templates/major/tab-enrollments.html:11
+#: dataviva/apps/major/templates/major/tab-enrollments.html:19
+#: dataviva/apps/major/templates/major/tab-enrollments.html:27
 msgid "Main University"
 msgstr "Principal Universidade"
+
+#: dataviva/apps/major/templates/major/tab-enrollments.html:20
+#: dataviva/apps/major/templates/major/tab-enrollments.html:24
+#: dataviva/apps/university/templates/university/tab-enrollments.html:16
+msgid "by Number of Entering Students"
+msgstr "por Número de Alunos Ingressantes"
+
+#: dataviva/apps/major/templates/major/tab-enrollments.html:28
+#: dataviva/apps/major/templates/major/tab-enrollments.html:32
+#: dataviva/apps/university/templates/university/tab-enrollments.html:20
+msgid "by Number of Graduates"
+msgstr "por Número de Alunos Concluintes"
 
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:6
 #: dataviva/templates/about.html:106 dataviva/templates/site.html:75
@@ -1455,14 +1472,6 @@ msgstr "Universidade"
 #: dataviva/apps/university/templates/university/tab-enrollments.html:19
 msgid "Main Course"
 msgstr "Principal Curso"
-
-#: dataviva/apps/university/templates/university/tab-enrollments.html:16
-msgid "by Number of Entering Students"
-msgstr "por Número de Alunos Ingressantes"
-
-#: dataviva/apps/university/templates/university/tab-enrollments.html:20
-msgid "by Number of Graduates"
-msgstr "por Número de Alunos Concluintes"
 
 #: dataviva/apps/university/templates/university/tab-general.html:16
 msgid "Number of Entering Students "
