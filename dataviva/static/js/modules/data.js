@@ -1,7 +1,7 @@
 var data = {}
 data.downloadLink = function() {
     dataSelection = []
-    dataSelection.push($('#databases').val());
+    dataSelection.push($('#datasets').val());
     dataSelection.push($('select[name=year]').val());
     dataSelection.push($('#monthly-detail select').val());
 
@@ -20,17 +20,17 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: 'databases',
+        url: 'datasets',
         dataType: 'json',
     })
-    .done(function(databases) {
+    .done(function(datasets) {
 
-        for (database in databases) {
-            $('#databases').append( $('<option value="'+database+'">'+dataviva.dictionary[database]+'</option>'));
+        for (dataset in datasets) {
+            $('#datasets').append( $('<option value="'+dataset+'">'+dataviva.dictionary[dataset]+'</option>'));
         }
 
-        $('#databases').on('change', function() {
-            $('#databases #database-empty-option').remove();
+        $('#datasets').on('change', function() {
+            $('#datasets #dataset-empty-option').remove();
 
             if(this.value == 'secex') {
                 $('#monthly-detail').show();
@@ -43,12 +43,12 @@ $(document).ready(function() {
 
             $('select[name=year]').empty().prop('disabled', false);
 
-            databases[this.value].years.forEach(function(year) {
+            datasets[this.value].years.forEach(function(year) {
                 $('select[name=year]').append($('<option value="'+year+'">'+year+'</option>'));
             });
 
             $('#dimensions').empty();
-            databases[this.value].dimensions.forEach(function(dimension) {
+            datasets[this.value].dimensions.forEach(function(dimension) {
 
                 var div = $("<div></div>").addClass("form-group col-md-4"),
                     label = $("<label></label>").attr("for", dimension.name).addClass("control-label"),
