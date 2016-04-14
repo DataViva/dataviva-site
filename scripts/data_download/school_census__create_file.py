@@ -37,6 +37,10 @@ def save(years, locations, courses):
         for location in locations:
             conditions[1] = location.condition
             for course in courses:
+
+                if location.condition == ' 1 = 1 ' and course.condition == ' 1 = 1 ':
+                            continue;
+
                 conditions[2] = course.condition
                 table = select_table(conditions)
                 name_file = 'sc' + \

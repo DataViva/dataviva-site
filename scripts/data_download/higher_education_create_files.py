@@ -37,6 +37,10 @@ def save(years, locations, majors):
         for location in locations:
             conditions[1] = location.condition
             for major in majors:
+
+                if location.condition == ' 1 = 1 ' and major.condition == ' 1 = 1 ':
+                    continue;
+
                 conditions[2] = major.condition
                 table = select_table(conditions)
                 name_file = 'hedu'+str(year.name)+str(location.name)+str(major.name)

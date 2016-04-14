@@ -45,6 +45,10 @@ def save(years, locations, industrys, occupations):
             for industry in industrys:
                 conditions[2] = industry.condition
                 for occupation in occupations:
+
+                    if location.condition == ' 1 = 1 ' and industry.condition == ' 1 = 1 ' and occupation.condition == ' 1 = 1 ':
+                            continue;
+
                     conditions[3] = occupation.condition
                     table = select_table(conditions)
                     name_file = 'rais'+str(year.name)+str(location.name)+str(industry.name)+str(occupation.name)

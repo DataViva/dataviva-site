@@ -33,7 +33,7 @@ def save(years, months, locations, products, trade_partners):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
     output_path='scripts/data/secex/'
-    columns_deleted=['bra_id_len', 'eci_old', 'eci_wld', 'hs_id_len', 'wld_id_len', 'month: se Anual']
+    columns_deleted=['bra_id_len', 'eci_old', 'eci_wld', 'hs_id_len', 'wld_id_len'] # tira  month para ano, tira bra_id para agregado mensal
 
     for year in years:
         conditions[0] = year.condition
@@ -44,12 +44,18 @@ def save(years, months, locations, products, trade_partners):
                 for product in products:
                     conditions[3] = product.condition
                     for trade_partner in trade_partners:
+
+                        if location.condition == ' 1 = 1 ' and product.condition == ' 1 = 1 ' and trade_partner.condition == ' 1 = 1 ':
+                            continue;
+
                         conditions[4] = trade_partner.condition
                         table = select_table(conditions)
                         name_file = 'secex'+str(year.name)+str(month.name)+str(location.name)+str(product.name)+str(trade_partner.name)
 
                         if table not in table_columns.keys():
                             table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, columns_deleted)]
+
+                        
 
                         f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
