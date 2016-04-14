@@ -42,46 +42,64 @@
 
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not header.bra_id %}
-        <p>O curso/campo de {{ header.name }} é o {{ header.rank }}º em número de matrículas no Brasil. A universidade que possui mais alunos é {{ major.article() }}
-        {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-        {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso possui {{ header.enrolled | max_digits(3) }}
-        {{ header.enrolled | magnitude }} alunos matriculados em todo o país.</p>
+        <p>{% trans %}The course of{% endtrans %} {{ header.name }} 
+        {% trans %}is {% endtrans %}{{ header.rank }}
+        {% if g.locale == "pt" %}&ordm{% endif %}
+        {% trans %} in number of enrollments in Brazil. The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+        {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+        {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+        {% trans %}students enrolled in the country{% endtrans %}.</p>
 
     {% else %}
         {% if header.bra_id|length == 1 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas {{ location.preposition("de") }} {{ header.location_name }}.
-            A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }} {{ body.university_with_more_enrolled }}, com
-            {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }}
-            estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos
-            matriculados em toda a região.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{{ location.preposition("de") }} {{ header.location_name }}.
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+            {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }}
+            {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+            {% trans %}students enrolled in the region{% endtrans %}.</p>
 
         {% elif header.bra_id|length == 3 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no estado {{ location.preposition("de") }}
-            {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-            {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-            {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-            {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o estado.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the state of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the state{% endtrans %}</p>
 
         {% elif header.bra_id|length == 5 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na mesorregião
-            {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-            {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-            {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-            {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a mesorregião.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the mesoregion of{% endtrans %} {{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the mesoregion{% endtrans %}.</p>
 
         {% elif header.bra_id|length == 7 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na microrregião {{ location.preposition("de") }}
-             {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-             {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-             {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-             {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a microrregião.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the microregion of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the microregion{% endtrans %}.</p>
 
         {% else %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no município {{ location.preposition("de") }}
-            {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-            {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-            {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-            {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o município.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the municipality of{% endtrans %} {{ location.preposition("de") }}{{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }}{{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the municipality{% endtrans %}.</p>
 
         {% endif %}
     {% endif %}
