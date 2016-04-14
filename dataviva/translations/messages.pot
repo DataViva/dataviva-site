@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-14 16:10-0300\n"
+"POT-Creation-Date: 2016-04-14 16:18-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -313,6 +313,8 @@ msgstr ""
 #: dataviva/apps/major/templates/major/tab-general.html:159
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:11
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:15
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:10
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:14
 #: dataviva/translations/dictionary.py:510
 msgid "Main Municipality"
 msgstr ""
@@ -1035,6 +1037,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:253
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:2
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:100
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:2
 #: dataviva/translations/dictionary.py:481
 msgid "International Trade"
 msgstr ""
@@ -1100,6 +1103,8 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:7
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:8
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:7
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:27
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:31
 #: dataviva/translations/dictionary.py:281
 msgid "Trade Balance"
 msgstr ""
@@ -1358,12 +1363,16 @@ msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:12
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:21
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:11
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:19
 #: dataviva/translations/dictionary.py:511
 msgid "by Total Value Exported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:16
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:25
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:15
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:23
 #: dataviva/translations/dictionary.py:512
 msgid "by Total Value Imported"
 msgstr ""
@@ -1608,6 +1617,19 @@ msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:159
 msgid "Product with Lowest Trade Balance Surplus"
+msgstr ""
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:18
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:22
+msgid "Main Product"
+msgstr ""
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:26
+msgid "Product with Highest"
+msgstr ""
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:30
+msgid "Product with Lowest"
 msgstr ""
 
 #: dataviva/apps/university/templates/university/tab-enrollments.html:11
