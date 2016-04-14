@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import FileField, HiddenField, TextField, TextAreaField, validators, ValidationError
+from wtforms import FileField, TextField, TextAreaField, validators, ValidationError
 
 
 class NumberOfWords(object):
@@ -42,20 +42,16 @@ class RegistrationForm(Form):
         NumberOfWords(max=250)
     ])
 
-    article_file = FileField('article_file', validators=[
-        validators.Required(u"Por favor, insira o arquivo do artigo.")
-    ])
-
-    file_path = HiddenField('file_path', validators=[
-        validators.Required(u"Por favor, insira um arquivo para o artigo.")
+    article = FileField('article', validators=[
+        validators.Required(u"Por favor, insira o arquivo para o artigo.")
     ])
 
 '''
 REGRAS FORMULÁRIO:
-    Título - (Máximo 400 caracteres) >>> OK
-    Tema - (Máximo 5 palavras) >>> OK
-    Autor - (Exibir FREITAS, E;) >>> NO
-    Palavras-Chave - (Máximo 3 conjuntos) >>> OK
-    Resumo - (Máximo 250 palavras) >>> OK
-    Formato - (PDF, DOC, DOCX - Tamanho máximo de arquivo: 50MB) >>> Definir Regra
+    Título - (Máximo 400 caracteres)
+    Tema - (Máximo 5 palavras)
+    Autor - (Exibir FREITAS, E;)
+    Palavras-Chave - (Máximo 3 conjuntos)
+    Resumo - (Máximo 250 palavras)
+    Formato - (PDF, DOC, DOCX - Tamanho máximo de arquivo: 50MB)
 '''
