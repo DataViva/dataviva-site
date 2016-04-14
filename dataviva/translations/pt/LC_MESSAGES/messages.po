@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-14 14:16-0300\n"
+"POT-Creation-Date: 2016-04-14 16:10-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -252,6 +252,8 @@ msgstr "Cursos"
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:10
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:25
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:52
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:35
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:62
 msgid "Map"
 msgstr "Mapa"
 
@@ -268,6 +270,10 @@ msgstr "Mapa"
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:39
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:55
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:70
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:20
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:31
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:47
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:58
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:11
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:18
 #: dataviva/templates/about.html:98 dataviva/templates/site.html:73
@@ -373,6 +379,7 @@ msgstr "anos"
 #: dataviva/apps/rankings/templates/rankings/product.html:11
 #: dataviva/apps/rankings/templates/rankings/trade-partner.html:11
 #: dataviva/apps/rankings/templates/rankings/university.html:11
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:63
 #: dataviva/apps/university/templates/university/tab-general.html:39
 #: dataviva/translations/dictionary.py:102
 msgid "Year"
@@ -382,6 +389,7 @@ msgstr "Ano"
 #: dataviva/apps/industry/templates/industry/tab-general.html:81
 #: dataviva/apps/major/templates/major/tab-general.html:43
 #: dataviva/apps/product/templates/product/tab-general.html:101
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:66
 #: dataviva/apps/university/templates/university/tab-general.html:42
 #: dataviva/translations/dictionary.py:526
 #, fuzzy
@@ -743,6 +751,7 @@ msgstr "Município com maior renda média mensal"
 #: dataviva/apps/major/templates/major/tab-general.html:170
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:163
 #: dataviva/apps/product/templates/product/tab-general.html:299
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:170
 #: dataviva/translations/dictionary.py:483
 msgid "More details"
 msgstr "Mais detalhes"
@@ -767,6 +776,8 @@ msgstr "com maior número de empregos"
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:44
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:12
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:43
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:23
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:50
 #: dataviva/translations/dictionary.py:133
 msgid "Municipality"
 msgstr "Município"
@@ -1074,6 +1085,7 @@ msgstr "e a idade média dos empregados é de "
 #: dataviva/apps/product/templates/product/index.html:57
 #: dataviva/apps/product/templates/product/tab-general.html:253
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:2
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:100
 #: dataviva/translations/dictionary.py:481
 msgid "International Trade"
 msgstr "Comércio Internacional"
@@ -1144,11 +1156,14 @@ msgstr "Atividade com Maior"
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:8
 #: dataviva/apps/product/templates/product/tab-general.html:7
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:8
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:7
 #: dataviva/translations/dictionary.py:281
 msgid "Trade Balance"
 msgstr "Balança Comercial"
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:11
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:11
 #: dataviva/translations/dictionary.py:524
 #, fuzzy
 msgid "Exports By"
@@ -1168,6 +1183,7 @@ msgid "Destination"
 msgstr "Destino"
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:42
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:38
 #: dataviva/translations/dictionary.py:525
 #, fuzzy
 msgid "Imports By"
@@ -1179,23 +1195,26 @@ msgid "Origin"
 msgstr "Origem"
 
 #: dataviva/apps/product/templates/product/tab-general.html:16
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:16
 #: dataviva/translations/dictionary.py:484
-#, fuzzy
 msgid "Total Value Exported"
 msgstr "Total de Exportações"
 
 #: dataviva/apps/product/templates/product/tab-general.html:25
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:26
 #: dataviva/translations/dictionary.py:485
 msgid "Ratio Net Weight / Total Value Exported"
 msgstr "Relação Peso Líquido / Valor Total Exportado"
 
 #: dataviva/apps/product/templates/product/tab-general.html:34
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:36
 #: dataviva/translations/dictionary.py:486
 #, fuzzy
 msgid "Total Value Imported"
 msgstr "Total de Importações"
 
 #: dataviva/apps/product/templates/product/tab-general.html:43
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:46
 #: dataviva/translations/dictionary.py:487
 #, fuzzy
 msgid "Ratio Net Weight / Total Value Imported"
@@ -1253,7 +1272,6 @@ msgstr "ocupam a "
 #: dataviva/apps/product/templates/product/tab-general.html:120
 #: dataviva/apps/product/templates/product/tab-general.html:231
 #: dataviva/apps/product/templates/product/tab-general.html:242
-#, fuzzy
 msgid " in imports and number"
 msgstr " posição em importações e a "
 
@@ -1387,12 +1405,14 @@ msgid "in five years."
 msgstr "em cinco anos."
 
 #: dataviva/apps/product/templates/product/tab-general.html:260
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:107
 #: dataviva/translations/dictionary.py:506
 #, fuzzy
 msgid "Main Municipality by Total Value Exported"
 msgstr "Principal Município por Valor Total Exportado"
 
 #: dataviva/apps/product/templates/product/tab-general.html:269
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:118
 #: dataviva/translations/dictionary.py:507
 #, fuzzy
 msgid "Main Municipality by Total Value Imported"
@@ -1562,6 +1582,8 @@ msgid "HS ID"
 msgstr "ID HS"
 
 #: dataviva/apps/rankings/templates/rankings/product.html:13
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:12
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:39
 #: dataviva/templates/site.html:62 dataviva/translations/dictionary.py:355
 msgid "Product"
 msgstr "Produto"
@@ -1598,6 +1620,82 @@ msgstr "Universidade"
 #: dataviva/translations/dictionary.py:361
 msgid "University"
 msgstr "Universidade"
+
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:58
+msgid "Trade with Brazil"
+msgstr "Comércio com o Brasil"
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:69
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:78
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:84
+msgid " is number "
+msgstr " ocupa/ocupam a posição de número "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:70
+msgid " in the import origins of "
+msgstr " em importações para"
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:71
+msgid "and number"
+msgstr " e a posiçāo de número "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:72
+msgid "in the export destinations of "
+msgstr "em destinos de exportações "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:73
+#, fuzzy
+msgid "The most exported product is "
+msgstr "O produto mais exportado para esse país é "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:74
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:81
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:92
+msgid " and the total of imports is "
+msgstr "e o total de importações é de "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:79
+msgid " in the import origins of Brazil and number "
+msgstr " em importações para o Brasil e a posiçāo de número "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:80
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:91
+msgid ""
+" in the export destinations of Brazil by trade value. The most exported "
+"product from Brazil to this continent is "
+msgstr ""
+"  em exportações realizadas pelo Brasil. O produto mais exportado do "
+"Brasil para esse país é "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:85
+msgid " in the import origins of Brazil and "
+msgstr " em importações e a "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:87
+msgid "there are no exports from Brazil. The total of imports is of"
+msgstr ""
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:89
+msgid "number "
+msgstr "posiçāo de número "
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:129
+#, fuzzy
+msgid "Main Product by Total Value Exported"
+msgstr "Principal Origem por Valor Total Exportado"
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:140
+#, fuzzy
+msgid "Main Product by Total Value Imported"
+msgstr "Principal Município por Valor Total Importado"
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:150
+msgid "Product with Highest Trade Balance Surplus"
+msgstr ""
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:159
+msgid "Product with Lowest Trade Balance Surplus"
+msgstr ""
 
 #: dataviva/apps/university/templates/university/tab-enrollments.html:11
 #: dataviva/apps/university/templates/university/tab-enrollments.html:15
@@ -4756,9 +4854,8 @@ msgid "in five years. The Brazilian state that most exports"
 msgstr "em cinco anos. O estado no Brasil que mais exporta"
 
 #: dataviva/translations/dictionary.py:499
-#, fuzzy
 msgid " and the one that imports the most is "
-msgstr "e o que mais importa é"
+msgstr "e o que mais importa é "
 
 #: dataviva/translations/dictionary.py:500
 #, fuzzy
@@ -5329,4 +5426,40 @@ msgstr "com"
 
 #~ msgid "students enrolled in the country."
 #~ msgstr ""
+
+#~ msgid " is number "
+#~ msgstr " ocupa a posição de número "
+
+#~ msgid " in the import origins of "
+#~ msgstr " em importações para "
+
+#~ msgid "and number"
+#~ msgstr "e número"
+
+#~ msgid "in the export destinations of "
+#~ msgstr "em exportações realizadas "
+
+#~ msgid " in the import origins of Brazil and number "
+#~ msgstr " em importações para o Brasil e "
+
+#~ msgid " and the total of imports is "
+#~ msgstr " e seu total de importações é de "
+
+#~ msgid " in the import origins of Brazil and "
+#~ msgstr " em importações para o Brasil e "
+
+#~ msgid "there are no exports from Brazil. The total of imports is of"
+#~ msgstr "não há exportações realizadas pelo Brasil. O total de importações é de"
+
+#~ msgid "Main Product by Total Value Exported"
+#~ msgstr "Principal Origem por Valor Total Exportado"
+
+#~ msgid "Main Product by Total Value Imported"
+#~ msgstr "Principal Município por Valor Total Importado"
+
+#~ msgid "Product with Highest Trade Balance Surplus"
+#~ msgstr "Produto com Maior Saldo da Balança Comercial"
+
+#~ msgid "Product with Lowest Trade Balance Surplus"
+#~ msgstr "Produto com Menor Saldo da Balança Comercial"
 
