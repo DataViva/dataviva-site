@@ -10,13 +10,13 @@ data.downloadLink = function() {
     });
 
     dataSelection = dataSelection.filter(function(n){ return n != "" && n !== null && n != "all" });
-    return "https://dataviva.s3.amazonaws.com/download/" + dataSelection.join("-") + '.csv.bz2';
+    return "https://dataviva.s3.amazonaws.com/data-download/"+lang+"/" + dataSelection.join("-") + '.csv.bz2';
 }
 
 $(document).ready(function() {
 
     $("#download").on('click', function() {
-        console.log(data.downloadLink());
+        window.open(data.downloadLink());
     });
 
     $.ajax({
@@ -37,11 +37,11 @@ $(document).ready(function() {
                 $('#monthly-detail select').prop('disabled', false);
 
             } else {
-                $('#detailing').val('anual');
                 $('#monthly-detail').hide();
+                $('#detailing').val('');
             }
 
-            $('select[name=year]').empty().prop('disabled', false);;
+            $('select[name=year]').empty().prop('disabled', false);
 
             databases[this.value].years.forEach(function(year) {
                 $('select[name=year]').append($('<option value="'+year+'">'+year+'</option>'));

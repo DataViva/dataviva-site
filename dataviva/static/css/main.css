@@ -265,14 +265,6 @@ body {
   background-size: cover;
 }
 
-.bg-o-bac {
-  background: url(/static/img/bbg- {gs/.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
 .bg-4mg_1 {
   background: url(https://dataviva.s3.amazonaws.com/img/4mg_1.jpg) no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -818,7 +810,7 @@ footer .form-control:focus,
   display: none;
 }
 .pace .pace-progress {
-  background: #9EDDBF;
+  background: #905262;
   position: fixed;
   z-index: 2040;
   top: 0;
@@ -1177,6 +1169,17 @@ footer .form-control:focus,
 }
 .dataTable > thead > tr > td {
     border-bottom-width: 1px;
+}
+.dataTable .column-checkbox {
+    text-align: center;
+    min-width: 30px;
+}
+.dataTable .column-checkbox .checkbox {
+    padding-left: 8px;
+}
+.dataTable .checkbox input[type="checkbox"]:checked + label::after,
+.dataTable .checkbox input[type="radio"]:checked + label::after {
+    padding-right: 2px;
 }
 
 /* BLUE TABLE */

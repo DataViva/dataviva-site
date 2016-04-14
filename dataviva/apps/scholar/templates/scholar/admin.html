@@ -1,12 +1,15 @@
 {% extends "admin.html" %}
 
+
 {% block breadcrumb %}
     <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-    <li class="active">Notícias</li>
+    <li class="active">Scholar</li>
 {% endblock %}
 
+
+
 {% block admin_content %}
-<h1>Notícias</h1>
+<h1>Estudos</h1>
 
 <div id="message">
 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -21,25 +24,26 @@
 {% endwith %}
 </div>
 
-<table id="news-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+
+
+<table id="scholar-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th class="column-checkbox">
                 <div class="checkbox checkbox-success">
-                    <input name="postselector" id="check-all" type="checkbox">
+                    <input name="postselector" type="checkbox">
                     <label for="check-all"></label>
                 </div>
             </th>
             <th>Título</th>
             <th>Autor(es)</th>
-            <th>Data</th>
-            <th>Exibir Home</th>
-            <th>Ativo</th>
+            <th>Publication Date</th>
+            <th>Approve</th>
         </tr>
     </thead>
 </table>
 
-<a id="admin-new" class="btn btn-success" href="/news/admin/publication/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
+<a id="admin-new" class="btn btn-success" href="/scholar/admin/article/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
 <button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
 <button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
 <button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
@@ -49,5 +53,5 @@
 
 
 {% block js_assets %}
-    <script src="/static/js/modules/news/table.js"></script>
+    <script src="/static/js/modules/scholar/table.js"></script>
 {% endblock js_assets %}

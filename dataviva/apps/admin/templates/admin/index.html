@@ -35,7 +35,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-md-offset-1 col-lg-offset-0">
-            <a  class="btn btn-outline btn-success" href="#" title="Estudos">
+            <a  class="btn btn-outline btn-success" href="{{ url_for('news.admin') }}" title="Estudos">
                 <div class="admin-icon">
                     <i class="fa fa-book"></i>
                 </div>
@@ -68,7 +68,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
-            <a  class="btn btn-outline btn-success" href="#" title="Usuários">
+            <a  class="btn btn-outline btn-success" href="{{ url_for('users.admin') }}" title="Usuários">
                 <div class="admin-icon">
                     <i class="fa fa-users"></i>
                 </div>
@@ -77,18 +77,6 @@
                 </div>
             </a>
         </div>
-
-    </div>
-    <div class="col-xs-6 col-sm-5 col-md-3">
-        <a  class="btn btn-outline btn-success" href="{{ url_for('blog.admin') }}" title="Usuários">
-            <div class="admin-icon">
-                <i class="fa fa-users"></i>
-            </div>
-            <div class="admin-btn-description">
-                Usuários
-            </div>
-        </a>
-    </div>
 </div>
 
 {% endblock admin_content %}
