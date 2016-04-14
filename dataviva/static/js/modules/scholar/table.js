@@ -7,7 +7,7 @@ var ScholarTable = function () {
         },
         "sAjaxSource": "/scholar/articles/all",
         "sAjaxDataProp": "articles",
-        "order": [],
+        "order": [[ 3, "desc" ]],
         "columnDefs": [
             {
                 "targets": 0,
@@ -16,7 +16,7 @@ var ScholarTable = function () {
                 "render": function (data, type, articles, meta){
                     var checkbox = '<div class="checkbox checkbox-success">' +
                                    '    <input name="selected-item" id="item'+articles[0]+'" value="'+articles[0]+'" type="checkbox">' +
-                                   '    <label for="'+articles[0]+'"></label>'
+                                   '    <label for="item'+articles[0]+'"></label>'
                                    '</div>';
 
                     return checkbox;
