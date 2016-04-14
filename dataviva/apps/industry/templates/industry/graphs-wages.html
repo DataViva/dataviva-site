@@ -2,8 +2,7 @@
     <nav class="nav-graph col-xs-12 col-md-3" >
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
-<<<<<<< HEAD
-            <h4>{% trans %}Employment By{% endtrans %}</h4>
+            <h4>{% trans %}Jobs By{% endtrans %}</h4>
             <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs" target="graphs-frame-wages" class="list-group-item">TreeMap</a>
             <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=num_jobs" target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
             <h4>{% trans %}Wages By{% endtrans %}</h4>
@@ -11,24 +10,7 @@
             <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs" target="graphs-frame-wages" class="list-group-item">TreeMap</a>
             <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=num_jobs&layout=value&sort=asc" target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
             <h4>{% trans %}Distribution{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" target="graphs-frame-wages" class="list-group-item">{% trans %}Bar{% endtrans %}</a>
-=======
-            <h4>{% trans %}Jobs by{% endtrans %}</h4>
-            <a href="/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs" 
-            target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-            <a href="/pt/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=num_jobs" 
-            target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-            <h4>{% trans %}Wages by{% endtrans %}</h4>
-            <a href="/pt/embed/geo_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=num_jobs" 
-            target="graphs-frame-wages" class="list-group-item">{% trans %}Map{% endtrans %}</a>
-            <a href="/pt/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs" 
-            target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-            <a href="/pt/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=num_jobs&layout=value&sort=asc" 
-            target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-            <h4>{% trans %}Distribution{% endtrans %}</h4>
-            <a href="/pt/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" 
-            target="graphs-frame-wages" class="list-group-item">{% trans %}Bar Chart{% endtrans %}</a>
->>>>>>> 404c2697d74821733a8a76dfa3fa91c39801b546
+            <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" target="graphs-frame-wages" class="list-group-item">{% trans %}Bar Chart{% endtrans %}</a>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
