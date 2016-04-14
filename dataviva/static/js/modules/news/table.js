@@ -7,7 +7,7 @@ var NewsTable = function () {
         },
         "sAjaxSource": "/news/publication/all",
         "sAjaxDataProp": "publications",
-        "order": [],
+        "order": [[ 3, "desc" ]],
         "columnDefs": [
             {
                 "targets": 0,
@@ -16,7 +16,7 @@ var NewsTable = function () {
                 "render": function (data, type, publication, meta){
                     var checkbox = '<div class="checkbox checkbox-success">' +
                                    '    <input name="selected-item" id="item'+publication[0]+'" value="'+publication[0]+'" type="checkbox">' +
-                                   '    <label for="'+publication[0]+'"></label>'
+                                   '    <label for="item'+publication[0]+'"></label>'
                                    '</div>';
 
                     return checkbox;
