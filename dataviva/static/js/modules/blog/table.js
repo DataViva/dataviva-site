@@ -16,7 +16,7 @@ var BlogTable = function () {
                 "render": function (data, type, post, meta){
                     var checkbox = '<div class="checkbox checkbox-success">' +
                                    '    <input name="selected-item" id="item'+post[0]+'" value="'+post[0]+'" type="checkbox">' +
-                                   '    <label for="'+post[0]+'"></label>'
+                                   '    <label for="item'+post[0]+'"></label>'
                                    '</div>';
 
                     return checkbox;
