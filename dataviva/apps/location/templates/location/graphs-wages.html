@@ -1,60 +1,60 @@
 <div id="graphs-wages" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
-    <h3>Visualize:</h3>
+    <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
-            <h4>Emprego por</h4>
-            <a href="#jobs-industry" class="list-group-item" data-toggle="collapse" data-parent="#jobs-industry">Atividade Econômica</a>
+            <h4>{% trans %}Employment By{% endtrans %}</h4>
+            <a href="#jobs-industry" class="list-group-item" data-toggle="collapse" data-parent="#jobs-industry">{% trans %}Industry{% endtrans %}</a>
             <div class="collapse" id="jobs-industry">
-                <a href="/pt/embed/tree_map/rais/{{location.id}}/all/all/cnae/?color=color&depth=cnae_6&size=num_jobs"
+                <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/cnae/?color=color&depth=cnae_6&size=num_jobs"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#jobs-industry">
                     TreeMap
                 </a>
-                <a href="/pt/embed/stacked/rais/{{location.id}}/all/all/cnae/?sort=asc&layout=value&y=num_jobs&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cnae/?sort=asc&layout=value&y=num_jobs&order=color"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#jobs-industry">
-                    Evoluçāo
+                    {% trans %}Stacked{% endtrans %}
                </a>
             </div>
 
-            <a href="#jobs-occupation" class="list-group-item" data-toggle="collapse" data-parent="#jobs-occupation">Ocupaçāo</a>
+            <a href="#jobs-occupation" class="list-group-item" data-toggle="collapse" data-parent="#jobs-occupation">{% trans %}Occupation{% endtrans %}</a>
             <div class="collapse" id="jobs-occupation">
-                <a href="/pt/embed/tree_map/rais/{{location.id}}/all/all/cbo/?color=color&depth=cbo_4&size=num_jobs"
+                <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/cbo/?color=color&depth=cbo_4&size=num_jobs"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#jobs-occupation">
                     TreeMap
                 </a>
-                <a href="/pt/embed/stacked/rais/{{location.id}}/all/all/cbo/?sort=asc&layout=value&y=num_jobs&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cbo/?sort=asc&layout=value&y=num_jobs&order=color"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#jobs-occupation">
-                    Evoluçāo
+                    {% trans %}Stacked{% endtrans %}
                </a>
             </div>
 
-            <h4>Massa Salarial por</h4>
-            <a href="#wage-industry" class="list-group-item" data-toggle="collapse" data-parent="#wage-industry">Atividade Econômica : </a>
+            <h4>{% trans %}Salary Mass By</h4>
+            <a href="#wage-industry" class="list-group-item" data-toggle="collapse" data-parent="#wage-industry">{% trans %}Industry{% endtrans %} </a>
             <div class="collapse" id="wage-industry">
-                <a href="/pt/embed/tree_map/rais/{{location.id}}/all/all/cnae/?color=color&depth=cnae_6&size=wage"
+                <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/cnae/?color=color&depth=cnae_6&size=wage"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#wage-industry">
                     TreeMap
                 </a>
-                <a href="/pt/embed/stacked/rais/{{location.id}}/all/all/cnae/?sort=asc&layout=value&y=wage&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cnae/?sort=asc&layout=value&y=wage&order=color"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#wage-industry">
-                    Evoluçāo
+                    {% trans %}Stacked{% endtrans %}
                </a>
             </div>
 
-            <a href="#wage-occupation" class="list-group-item" data-toggle="collapse" data-parent="#wage-occupation">Ocupaçāo</a>
+            <a href="#wage-occupation" class="list-group-item" data-toggle="collapse" data-parent="#wage-occupation">{% trans %}Occupation{% endtrans %}</a>
             <div class="collapse" id="wage-occupation">
-                <a href="/pt/embed/tree_map/rais/{{location.id}}/all/all/cbo/?color=color&depth=cbo_4&size=wage"
+                <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/cbo/?color=color&depth=cbo_4&size=wage"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#wage-occupation">
                     TreeMap
                 </a>
-                <a href="/pt/embed/stacked/rais/{{location.id}}/all/all/cbo/?sort=asc&layout=value&y=wage&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cbo/?sort=asc&layout=value&y=wage&order=color"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#wage-occupation">
-                    Evoluçāo
+                    {% trans %}Stacked{% endtrans %}
                </a>
             </div>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/pt/embed/tree_map/rais/{{location.id}}/all/all/cnae/?color=color&depth=cnae_6&size=num_jobs"
+        <iframe src="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/cnae/?color=color&depth=cnae_6&size=num_jobs"
                 name="graphs-frame-wages"
                 id="graphs-frame-wages"
                 class="embed-responsive-item" >
