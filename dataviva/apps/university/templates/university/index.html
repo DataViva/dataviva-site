@@ -25,7 +25,7 @@
                 {{ university.name() }} <a href="#" title="Trocar" onclick="start_selector('University');"> (trocar)</a>
             </h1>
         </div>
-        <span class="portrait dv-hs-{{ university.id[0:2] }} hidden-xs"></span>
+        <span class="portrait dv-university-{{ university.id[0:2] }} hidden-xs"></span>
     </div>
 </section>
 
@@ -38,15 +38,15 @@
                        aria-controls="general"
                        role="tab"
                        data-university="{{ university.id }}"
-                       data-toggle="tab">Geral</a>
+                       data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#enrollments"
                        aria-controls="enrollments"
                        role="tab"
                        graph
-                       data-university="{{ university.id }}"
-                       data-toggle="tab">Matrículas</a>
+                       data-id="{{ university.id }}"
+                       data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
                 </li>
             </ul>
         </nav>

@@ -1,0 +1,45 @@
+{% extends "rankings/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Rankings</li>
+{% endblock %}
+
+{% block rankings_content %}
+<table id="economic-activities-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}Year{% endtrans %}</th>
+            <th>CNAE ID</th>
+            <th>Industry</th>
+            <th>Total Monthly Wages</th>
+            <th>Total Jobs</th>
+            <th>Average Monthly Wage</th>
+            <th>Occupation Diversity</th>
+            <th>Effective Occupation Diversity</th>
+        </tr>
+    </thead>
+</table>
+{% endblock rankings_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/economic-activities.js"></script>
+{% endblock js_assets %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

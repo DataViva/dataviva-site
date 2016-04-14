@@ -1,19 +1,23 @@
-# ipython a WAY better interactive python shell
-ipython
-readline
-
-# helpful library for advanced math / data manipulation similar to matlab
-# required for pandas
-numpy
-
-# charting library also similar to matlab
-matplotlib
-
-# scipy for calculations and regressions
-# required for pandas
-scipy
-scikits.statsmodels
-
-# Pandas library for doing matrix math, dataframes etc. similar to R
-pandas
-patsy
+appnope==0.1.0
+decorator==4.0.9
+gnureadline==6.3.3
+ipython==4.1.2
+ipython-genutils==0.1.0
+MySQL-python==1.2.5
+numpy==1.11.0
+pandas==0.18.0
+pathlib2==2.1.0
+patsy==0.4.1
+pexpect==4.0.1
+pickleshare==0.7.2
+ptyprocess==0.5.1
+python-dateutil==2.5.2
+pytz==2016.3
+readline==6.2.4.1
+scikits.statsmodels==0.3.1
+scipy==0.17.0
+simplegeneric==0.8.1
+six==1.10.0
+SQLAlchemy==1.0.12
+traitlets==4.2.1
+wheel==0.24.0

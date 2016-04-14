@@ -37,18 +37,18 @@
                     <a href="#general"
                        aria-controls="general"
                        role="tab"
-                       data-basic_course="{{ basic_course.id }}"
+                       data-id="{{ basic_course.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Geral</a>
+                       data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#enrollments"
                        aria-controls="enrollments"
                        role="tab"
                        graph
-                       data-basic_course="{{ basic_course.id }}"
+                       data-id="{{ basic_course.id }}"
                        data-location="{{ location.id }}"
-                       data-toggle="tab">Matrículas</a>
+                       data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
                 </li>
             </ul>
         </nav>

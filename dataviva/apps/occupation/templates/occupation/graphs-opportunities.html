@@ -1,9 +1,9 @@
 <div id="graphs-opportunities" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
-        <h3>Visualize:</h3>
+        <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
-            <h4>Oportunidades Econômicas</h4>
-            <a href="/pt/embed/network/rais/{{ location.id if location else 'all' }}/all/all/cnae/?color=color&size=wage&spotlight=true" target="graphs-frame-opportunities" class="list-group-item">Rede</a>
+            <h4>{% trans %}Economic Opportunities{% endtrans %}</h4>
+            <a href="/pt/embed/network/rais/{{ location.id if location else 'all' }}/all/all/cnae/?color=color&size=wage&spotlight=true" target="graphs-frame-opportunities" class="list-group-item">{% trans %}Network{% endtrans %}</a>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">

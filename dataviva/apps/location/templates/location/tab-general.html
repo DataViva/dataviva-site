@@ -59,7 +59,7 @@
                         <h2 class="text-left text-uppercase">ECI</h2>
                         <div class="number">
                             <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.eci|magnitude }} {{"de" }} KM</small>
+                            <small class="magnitude">{{ header.eci|magnitude }}</small>
                         </div>
                     </div>
                 </li>
@@ -70,7 +70,6 @@
         <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
         <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
     </div>
-
     <div class="m-t-sm col-xs-12 year">
         Ano: {{ header.year }}
     </div>
@@ -94,7 +93,7 @@
         <div class="col-xs-12 col-md-6 col-lg-6">
             <h3>Comércio Internacional</h3>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table data-detail">
                     <tbody>
                         {% if body.main_product_by_export_value %}
                         <tr>
@@ -102,7 +101,7 @@
                                 Principal Produto por Valor Exportado
                             </th>
                             <td>
-                                <p class="label">{{ body.main_product_by_export_value_name }}</p>
+                                <p class="label">{{ body.main_product_by_export_value_name | truncate(length=30, killwords=False, end='...')}}</p>
                                 USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
                             </td>
                         </tr>
@@ -113,7 +112,7 @@
                                 Principal Produto por Valor Importado
                             </th>
                             <td>
-                                <p class="label">{{ body.main_product_by_import_value_name }}</p>
+                                <p class="label">{{ body.main_product_by_import_value_name | truncate(length=30, killwords=False, end='...')}}</p>
                                 USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_import_value | magnitude }}</span>
                             </td>
                         </tr>
@@ -144,7 +143,7 @@
         <div class="col-xs-12 col-md-6 col-lg-6">
             <h3>Salário e Emprego</h3>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table data-detail">
                     <tbody>
                         <tr>
                             <th>
@@ -191,7 +190,7 @@
         <div class="col-xs-12 col-md-6 col-lg-6">
             <h3>Oportunidades Econômicas</h3>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table data-detail">
                     <tbody>
                         <tr>
                         {% if body.less_distance_by_product %}
@@ -218,7 +217,7 @@
                         {% if body.opportunity_gain_by_product %}
                         <tr>
                             <th>
-                                Produto com Maior Ganho de Oportunidade
+                                Produto com Maior Oportunidade
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -229,7 +228,7 @@
                         {% if body.opportunity_gain_by_occupation %}
                         <tr>
                             <th>
-                                Atividade Econômica com Maior Ganho de Oportunidade
+                                Atividade Econômica com Maior Oportunidade
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -248,12 +247,12 @@
         <div class="col-xs-12 col-md-6 col-lg-6">
             <h3>Educação</h3>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table data-detail">
                     <tbody>
                         {% if body.highest_enrolled_by_university %}
                         <tr>
                             <th>
-                                Universidade com Maior Número de Matrículas
+                                Universidade com mais Matrículas
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_university_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -264,7 +263,7 @@
                         {% if body.highest_enrolled_by_major %}
                         <tr>
                             <th>
-                                Curso Superior com Maior Número de Matrículas
+                                Curso Superior com mais Matrículas
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_major_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -275,7 +274,7 @@
                         {% if body.highest_enrolled_by_school %}
                         <tr>
                             <th>
-                                Escola com Maior Número de Matrículas em Cursos Técnicos
+                                Escola com mais Matrículas em Cursos Técnicos
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_school_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -286,7 +285,7 @@
                         {% if body.highest_enrolled_by_basic_course %}
                         <tr>
                             <th>
-                                Curso Técnico com Maior Número de Matrículas
+                                Curso Técnico com mais Matrículas
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_basic_course_name | truncate(length=30, killwords=False, end='...')}}</p>

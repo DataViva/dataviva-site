@@ -11,11 +11,11 @@
 
     <link rel='shortcut icon' href='/static/img/favicon.ico' type='image/x-icon' />
     <!-- Bootstrap core CSS -->
-    <link href="/static/css/libs/bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- CSS Libs -->
-    <link href="/static/css/libs/animate.css" rel="stylesheet">
+    <link href="/static/css/libs/bootstrap.css" rel="stylesheet">
     <link href="/static/css/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/libs/animate.css" rel="stylesheet">
     <link href="/static/css/libs/font-dataviva/font-dataviva.css" rel="stylesheet">
 
     <!-- CSS Plugins -->
@@ -58,6 +58,9 @@
     <!-- Javascript Libs -->
     <script src="/static/js/libs/jquery-2.1.1.js"></script>
     <script src="/static/js/libs/bootstrap.min.js"></script>
+    <script src="/static/js/libs/localforage.js"></script>
+    <script src="/static/js/libs/object.watch.js"></script>
+
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 
     <!-- Javascript plugins -->
@@ -101,8 +104,13 @@
 
     <!-- Javascript modules -->
     <script src="/static/js/base.js"></script>
+
+    <script>
+      dataviva.dictionary = {{ g.dictionary|safe }};
+    </script>
     {% block js_assets %}
         <script src="/static/js/modules/{{ g.page_type }}.js"></script>
     {% endblock js_assets %}
+
 </body>
 </html>

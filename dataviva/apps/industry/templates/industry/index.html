@@ -40,31 +40,31 @@
         <nav class="col-sm-5 col-md-4 col-lg-3">
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a  href="#general" 
-                        aria-controls="general" 
-                        role="tab" 
-                        data-industry="{{ industry.id }}"
+                    <a  href="#general"
+                        aria-controls="general"
+                        role="tab"
+                        data-id="{{ industry.id }}"
                         data-location="{{ location.id }}"
-                        data-toggle="tab">Geral</a>
+                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
                 <li role="presentation">
-                    <a  href="#wages" 
-                        aria-controls="wages" 
+                    <a  href="#wages"
+                        aria-controls="wages"
                         role="tab"
                         graph
-                        data-industry="{{ industry.id }}"
-                        data-location="{{ location.id }}" 
-                        data-toggle="tab">Salário e emprego</a>
+                        data-id="{{ industry.id }}"
+                        data-location="{{ location.id }}"
+                        data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
                 </li>
                 {% if (industry.id|length) == 6 %}
                 <li role="presentation">
-                    <a  href="#opportunities" 
-                        aria-controls="opportunities" 
-                        role="tab" 
+                    <a  href="#opportunities"
+                        aria-controls="opportunities"
+                        role="tab"
                         graph
-                        data-industry="{{ industry.id }}"
+                        data-id="{{ industry.id }}"
                         data-location="{{ location.id }}"
-                        data-toggle="tab">Oportunidade Econômica</a>
+                        data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
                 {% endif %}
             </ul>

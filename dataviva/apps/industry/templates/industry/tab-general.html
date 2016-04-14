@@ -1,12 +1,10 @@
 <div role="tabpanel" class="tab-pane active" id="general">
-    {% if location and industry.id | length == 6%}
     <div class="jcarousel-wrapper">
-    {% endif %}
         <div class="jcarousel">
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">RENDA MÉDIA MENSAL</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Average Monthly Income{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.average_monthly_income | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.average_monthly_income | magnitude  }}</small>
@@ -15,7 +13,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">MASSA SALARIAL</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Payroll{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.salary_mass | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.salary_mass | magnitude }}</small>
@@ -24,7 +22,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">TOTAL DE EMPREGOS</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total Employment{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.num_jobs | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.num_jobs | magnitude }}</small>
@@ -33,7 +31,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">TOTAL DE ESTABELECIMENTOS</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.num_establishments | magnitude }}</small>
@@ -43,7 +41,7 @@
                 {% if location and industry.id | length == 6%}
                     <li>
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">RCA DOMÉSTICO</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Domestic RCA{% endtrans %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.rca | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.rca | magnitude}}</small>
@@ -52,7 +50,7 @@
                     </li>
                     <li>
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">DISTÂNCIA</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Distance{% endtrans %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.distance | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_establishments | magnitude }} {{"de" }} KM</small>
@@ -61,7 +59,7 @@
                     </li>
                     <li>
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">GANHO DE OPORTUNIDADE</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Opportunity Gain{% endtrans %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.opportunity_gain | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.opportunity_gain | magnitude}}</small>
@@ -74,44 +72,52 @@
 
         <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
         <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
-    {% if location and industry.id | length == 6%}
     </div>
-    {% endif %}
 
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {% trans %}Year{% endtrans %}: {{ header.year }}
     </div>
 
-    <h2 class="m-t-xl">Perfil Geral</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not location %}
-        <p>A atividade econômica {{industry.preposition('de')}} {{industry.name()}} é a {{header.ranking}}ª em número de empregados no Brasil,
-        os quais estão mais concentrados no município de {{body.municipality_with_more_num_jobs_name }} com
-        {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}} empregados.
-        A ocupação com maior número de empregados nessa atividade é a de {{body.occ_with_more_number_jobs_name}}.
-        No total, o Brasil possui {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}}
-        estabelecimentos que trabalham com {{industry.name()}}.</p>
+        <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}} 
+        {% trans %}is the{% endtrans %} {{header.ranking}}
+        {% if g.locale == "pt" %}&ordm{% endif %} 
+        {% trans %}in number of employees in Brazil, and these workers are concentrated in the city of{% endtrans %} {{body.municipality_with_more_num_jobs_name }} 
+        {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}} 
+        {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
+        {% trans %}Brazil has a total of{% endtrans %} {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}}
+        {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
     {% else %}
         {% if location.id|length != 9 %}
-            <p>A atividade econômica {{industry.preposition('de')}} {{industry.name()}} é a {{header.ranking}}ª em número de empregados,
-            os quais estão mais concentrados no município {{location.preposition('de')}} {{body.municipality_with_more_num_jobs_name}},
-            com {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}} empregados.
-            A ocupação com maior número de empregados {{industry.preposition('em')}} {{industry.name()}} na região é a de {{body.occ_with_more_number_jobs_name}}.
-            Nesta região, {{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}} estabelecimentos trabalham com {{industry.name()}}.</p>
+            <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}} 
+            {% trans %}is the{% endtrans %} {{header.ranking}}
+            {% if g.locale == "pt" %}&ordm{% endif %}
+            {% trans %}in number of employees in {% endtrans %}{{location.preposition('de')}} {{location.name}}, 
+            {% trans %}and these workers are concentrated in the city of{% endtrans %} {{location.preposition('de')}} {{body.municipality_with_more_num_jobs_name}},
+            {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}} 
+            {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
+            {% trans %}This region has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}} 
+            {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
         {% else %}
-            <p>A atividade econômica de {{industry.name()}} é a {{header.ranking}}ª em número de empregados. A ocupação com maior número de empregados nessa atividade de {{body.occ_with_more_number_jobs_name}}.
-            Neste município, {{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}} estabelecimentos trabalham com {{industry.name()}}.</p>
+            <p>{% trans %}The economic activity{% endtrans %} {{industry.name()}} 
+            {% trans %}is the{% endtrans %} {{header.ranking}}
+            {% if g.locale == "pt" %}&ordm{% endif %}
+            {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
+            {% trans %}This municipality has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}} 
+            {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
         {% endif %}
     {% endif %}
 
     <div class="row">
         <div class="col-xs-12 col-md-10 col-lg-8">
-            <h3>Salário e Emprego</h3>
+            <h3>{% trans %}Wages and Jobs{% endtrans %}</h3>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table data-detail">
                     <tbody>
                         <tr>
                             <th>
-                                 Ocupação com maior número de empregos
+                                 {% trans %}Occupation with highest number of jobs{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.occ_with_more_number_jobs_name }}</p>
@@ -121,8 +127,7 @@
                         {% if location.id|length != 9 %}
                         <tr>
                             <th>
-                                Município com maior número de empregos
-                            </th>
+                                {% trans %}Municipality with highest number of jobs{% endtrans %}
                             <td>
                                 <p class="label">{{ body.municipality_with_more_num_jobs_name }}</p>
                                 USD <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong> <span>{{ body.municipality_with_more_num_jobs_value | magnitude }}</span>
@@ -131,7 +136,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                Ocupação com maior renda média mensal
+                                {% trans %}Occupation with highest monthly average income{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.occ_with_more_wage_avg_name }}</p>
@@ -141,7 +146,7 @@
                         {% if location.id|length != 9 %}
                         <tr>
                             <th>
-                                Município com maior renda média mensal
+                                {% trans %}Municipality with highest monthly average income{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_with_more_wage_avg_name }}</p>
@@ -153,7 +158,7 @@
                 </table>
             </div>
             <a href="#wages" aria-controls="wages" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
     </div>
