@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">PIB</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.gdp|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.gdp|magnitude }}</small>
@@ -14,7 +14,7 @@
                 {% if header.life_expectation %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Esperança de Vida</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.life_expectation|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.life_expectation|magnitude }}</small>
@@ -25,7 +25,7 @@
                 {% if header.population %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">População Total</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total Population{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.population|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.population|magnitude }}</small>
@@ -33,9 +33,9 @@
                     </div>
                 </li>
                 {% endif %}
-                <li>
+                <li>{% endtrans %}
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">PIB Per Capta</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.gdp_per_capita|magnitude }}</small>
@@ -45,7 +45,7 @@
                 {% if header.hdi %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">IDHM</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}HDI{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.hdi|magnitude }}</small>
@@ -56,7 +56,7 @@
                 {% if header.eci %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">ECI</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}ECI{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.eci|magnitude }}</small>
