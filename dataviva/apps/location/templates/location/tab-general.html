@@ -98,7 +98,7 @@
                         {% if body.main_product_by_export_value %}
                         <tr>
                             <th>
-                                Principal Produto por Valor Exportado
+                                {% trans %}Main Product by Export Value{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_product_by_export_value_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -109,7 +109,7 @@
                         {% if body.main_product_by_import_value %}
                         <tr>
                             <th>
-                                Principal Produto por Valor Importado
+                                {% trans %}Main Product by Import Value{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_product_by_import_value_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -119,7 +119,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                Total de Exportações
+                                {% trans %}Total of Exports{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong> <span>{{ body.total_exports | magnitude }}</span>
@@ -127,7 +127,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Total de Importações
+                                {% trans %}Total of Imports{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong> <span>{{ body.total_imports | magnitude }}</span>
@@ -141,13 +141,13 @@
             </a>
         </div>
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Salário e Emprego</h3>
+            <h3>{% trans %}Wage and Jobs{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         <tr>
                             <th>
-                                Principal Atividade Econômica
+                                {% trans %}Main Economic Activity{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_industry_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -156,7 +156,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Ocupação
+                                {% trans %}Main Occupation{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_occupation_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -165,7 +165,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Salário Médio
+                                {% trans %}Average Wage{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> <span>{{ body.avg_wage | magnitude }}</span>
@@ -173,7 +173,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Total de Empregos
+                                {% trans %}Total of Jobs{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> <span>{{ body.total_jobs | magnitude }}</span>
@@ -195,7 +195,7 @@
                         <tr>
                         {% if body.less_distance_by_product %}
                             <th>
-                                Produto com Menor Distância
+                                {% trans %}Product with Less Distance{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.less_distance_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -206,7 +206,7 @@
                         {% if body.less_distance_by_occupation %}
                         <tr>
                             <th>
-                                Atividade Econômica com Menor Distância
+                                {% trans %}Economic Activity with Less Distance{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.less_distance_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -217,7 +217,7 @@
                         {% if body.opportunity_gain_by_product %}
                         <tr>
                             <th>
-                                Produto com Maior Oportunidade
+                                {% trans %}Product with Most Opportunity Gain{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -228,7 +228,7 @@
                         {% if body.opportunity_gain_by_occupation %}
                         <tr>
                             <th>
-                                Atividade Econômica com Maior Oportunidade
+                                {% trans %}Economic Activity with Most Opportunity Gain{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -252,7 +252,7 @@
                         {% if body.highest_enrolled_by_university %}
                         <tr>
                             <th>
-                                Universidade com mais Matrículas
+                                {% trans %}University with Most Enrolled{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_university_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -263,7 +263,7 @@
                         {% if body.highest_enrolled_by_major %}
                         <tr>
                             <th>
-                                Curso Superior com mais Matrículas
+                                {% trans %}Major with Most Enrolled{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_major_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -274,7 +274,7 @@
                         {% if body.highest_enrolled_by_school %}
                         <tr>
                             <th>
-                                Escola com mais Matrículas em Cursos Técnicos
+                                {% trans %}School with Most Enrolled{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_school_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -285,7 +285,7 @@
                         {% if body.highest_enrolled_by_basic_course %}
                         <tr>
                             <th>
-                                Curso Técnico com mais Matrículas
+                                {% trans %}Basic Course with Most Enrolled{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_basic_course_name | truncate(length=30, killwords=False, end='...')}}</p>
