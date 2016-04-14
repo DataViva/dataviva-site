@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Saldo da Balança Comercial</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Trade Balance{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.trade_balance | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.trade_balance | magnitude }}</small>
@@ -13,7 +13,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Valor Total Exportado</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total Value Exported{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{header.total_exported | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{header.total_exported | magnitude }}</small>
@@ -23,7 +23,7 @@
                 {% if header.unity_weight_export_price %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Relação Peso Líquido(kg)/ Valor Total Exportado</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Ratio Net Weight / Total Value Exported{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{header.unity_weight_export_price | max_digits(3) }}</strong><br/>
                             <small class="magnitude">kg / USD</small>
@@ -33,7 +33,7 @@
                 {% endif %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Valor Total Importado</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total Value Imported{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{header.total_imported | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{header.total_imported | magnitude }}</small>
@@ -43,7 +43,7 @@
                 {% if header.unity_weight_import_price %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Relação Peso Líquido(kg)/ Valor Total Importado</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Ratio Net Weight / Total Value Imported{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{header.unity_weight_import_price | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{header.unity_weight_import_price | magnitude }}</small>
@@ -60,31 +60,51 @@
     </div>
 
     <div class="col-xs-15 col-sm-15 year">
-        Ano: {{header.year}}
+        {% trans %}Year{% endtrans %}: {{header.year}}
     </div>
 
-    <h2 class="m-t-xl">Perfil Geral</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if header.bra_id %}
-        <p>{{ trade_partner.article() | capitalize }} {{ header.name }} ocupa/ocupam a posição de número {{ header.import_rank }}º em importações para {{ location.article() }} {{ header.location_name }} e {{ header.export_rank }}º em exportações realizadas {{ location.preposition("em") }} {{ header.location_type }}. O produto mais exportado da localidade para esse país {{ trade_partner.preposition("em") }} {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
+        <p>{{ trade_partner.article() | capitalize }} {{ header.name }} 
+        {% trans %} is number {% endtrans %}{{ header.import_rank }}
+        {% trans %} in the import origins of {% endtrans %}{{ location.article() }} {{ header.location_name }} 
+        {% trans %}and number{% endtrans %} {{ header.export_rank }}
+        {% trans %}in the export destinations of {% endtrans %}{{ location.preposition("em") }} {{ header.location_type }}. 
+        {% trans %}The most exported product is {% endtrans %} {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) 
+        {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}.</p>
     {% else %}
         {% if header.wld_id|length == 2 %}
-            <p>{{ trade_partner.article() | capitalize }} {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse continente é/são {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e seu total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}</p>
+            <p>{{ trade_partner.article() | capitalize }} {{ header.name }}
+            {% trans %} is number {% endtrans %}{{ header.import_rank }}
+            {% trans %} in the import origins of Brazil and number {% endtrans %}{{ header.export_rank }}
+            {% trans %} in the export destinations of Brazil by trade value. The most exported product from Brazil to this continent is {% endtrans %}{{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) 
+            {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}.</p>
         {% else %}
-            <p>{{ trade_partner.article() | capitalize }} país {{ header.name }} ocupa a posição de número {{ header.import_rank }}º em importações para o Brasil e {% if header.total_exported == 0 %} não há exportações realizadas pelo Brasil. O total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}{% else %}{{ header.export_rank }}º em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é o {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) e o total de importações é de {{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }} {% endif %}</p>
+            <p>{{ trade_partner.article() | capitalize }} {{ header.name }} 
+            {% trans %} is number {% endtrans %}{{ header.import_rank }}
+            {% trans %} in the import origins of Brazil and {% endtrans %} 
+            {% if header.total_exported == 0 %} 
+                {% trans %}there are no exports from Brazil. The total of imports is of{% endtrans %}{{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }}.
+            {% else %}
+                {% trans %}number {% endtrans %}
+                {{ header.export_rank }}
+                {% trans %} in the export destinations of Brazil by trade value. The most exported product from Brazil to this continent is {% endtrans %}{{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) 
+                {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ header.total_imported | magnitude }} .
+            {% endif %}</p>
         {% endif %}
     {% endif %}
 
 
     <div class="row">
         <div class="col-xs-12 col-md-10 col-lg-8">
-            <h3>Comércio Internacional</h3>
+            <h3>{% trans %}International Trade{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         {% if body.highest_export_value %}
                         <tr>
                             <th>
-                                Principal Município por Valor Total Exportado
+                                {% trans %}Main Municipality by Total Value Exported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.municipality_with_more_exports}}</p>
@@ -95,7 +115,7 @@
                         {% if body.highest_import_value %}
                         <tr>
                             <th>
-                                Principal Município por Valor Total Importado
+                                {% trans %}Main Municipality by Total Value Imported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.municipality_with_more_imports}}</p>
@@ -106,7 +126,7 @@
                         {% if body.product_with_highest_export_value %}
                         <tr>
                             <th>
-                                Principal Produto por Valor Total Exportado
+                                {% trans %}Main Product by Total Value Exported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.product_with_more_exports}}</p>
@@ -117,7 +137,7 @@
                         {% if body.product_with_highest_import_value %}
                         <tr>
                             <th>
-                                Principal Produto por Valor Total Importado
+                                {% trans %}Main Product by Total Value Imported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{body.product_with_more_imports}}</p>
@@ -127,7 +147,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                Produto com maior Saldo da Balança Comercial
+                                {% trans %}Product with Highest Trade Balance Surplus{% endtrans %}
                             </th>
                             <td>
                                 <p class = "label">{{body.product_with_highest_balance}}</p>
@@ -136,7 +156,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Produto com menor Saldo da Balança Comercial
+                                {% trans %}Product with Lowest Trade Balance Surplus{% endtrans %}
                             </th>
                             <td>
                                 <p class = "label">{{body.product_with_lowest_balance}}</p>
@@ -147,7 +167,7 @@
                 </table>
             </div>
             <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="btn btn-xs btn-dataviva">
-                    mais detalhes
+                    {% trans %}More details{% endtrans %}
             </a>
         </div>
     </div>
