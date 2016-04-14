@@ -7,7 +7,7 @@ var BlogTable = function () {
         },
         "sAjaxSource": "/blog/post/all",
         "sAjaxDataProp": "posts",
-        "order": [[ 3, "desc" ]],
+        "order": [[ 3, "asc" ]],
         "columnDefs": [
             {
                 "targets": 0,
