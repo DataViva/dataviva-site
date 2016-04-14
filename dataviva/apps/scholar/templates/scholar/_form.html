@@ -6,7 +6,7 @@
     {% endfor %}
 {%- endmacro %}
 
-<form method="post" action="{{ action }}" class="form-dataviva">
+<form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>
         <label for="title">Título</label>
@@ -37,13 +37,8 @@
         <label for="file">Formato<br />
             <small>Aceitamos artigos somente em formato PDF.</small>
         </label>
-        <label title="Upload pdf file" for="thumb-input" class="btn btn-primary m-t-sm">
-            <input type="file" accept="pdf/*" name="file" id="thumb-input" class="hide">
-            <i class="fa fa-upload m-r-sm"></i>Nova Imagem
-        </label>
-
-        {{ form.article_file}}
-        {{ messages(form.article_file) }}
+        {{ form.article}}
+        {{ messages(form.article) }}
     </p>
     <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
 </form>
