@@ -1170,6 +1170,17 @@ footer .form-control:focus,
 .dataTable > thead > tr > td {
     border-bottom-width: 1px;
 }
+.dataTable .column-checkbox {
+    text-align: center;
+    min-width: 30px;
+}
+.dataTable .column-checkbox .checkbox {
+    padding-left: 8px;
+}
+.dataTable .checkbox input[type="checkbox"]:checked + label::after,
+.dataTable .checkbox input[type="radio"]:checked + label::after {
+    padding-right: 2px;
+}
 
 /* BLUE TABLE */
 table.data-blue td,
