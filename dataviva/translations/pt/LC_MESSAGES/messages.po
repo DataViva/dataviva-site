@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-14 16:18-0300\n"
+"POT-Creation-Date: 2016-04-14 16:50-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1223,7 +1223,7 @@ msgstr "Total de Importações"
 #: dataviva/translations/dictionary.py:487
 #, fuzzy
 msgid "Ratio Net Weight / Total Value Imported"
-msgstr "Relação Peso Líquido / Valor Total Exportado"
+msgstr "Relação Peso Líquido / Valor Total Importado"
 
 #: dataviva/apps/product/templates/product/tab-general.html:53
 #: dataviva/apps/rankings/templates/rankings/product.html:16
