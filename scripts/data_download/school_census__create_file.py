@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 '''
  python scripts/data_download/school_census__create_file.py
- The files will be saved in scripts/data/files_sc
+ The files will be saved in scripts/data/sc
 '''
 from collections import namedtuple
-from engine import engine
+from common import engine, get_colums
 from dictionary import en
 import pandas as pd
 import os
@@ -26,16 +26,11 @@ def select_table(conditions):
     return 'sc_' + s
 
 
-def get_colums(table):
-    column_rows = engine.execute(
-        "SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
-    return [row[0] for row in column_rows]
-
-
 def save(years, locations, courses):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path = 'scripts/data/files_sc/'
+    output_path = 'scripts/data/sc/'
+    columns_deleted=['bra_id_len', 'distortion_rate', 'course_sc_id_len']
 
     for year in years:
         conditions[0] = year.condition
@@ -48,15 +43,15 @@ def save(years, locations, courses):
                     str(year.name)+str(location.name)+str(course.name)
 
                 if table not in table_columns.keys():
-                    table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
+                    table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table,columns_deleted)]
 
                 f = pd.read_sql_query(
                     'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
                 new_file_path = os.path.abspath(
-                    os.path.join(output_path, name_file+".csv.bz2"))  # pega desda da rais do pc
-
-                 f.to_csv(bz2.BZ2File(new_file_path, 'wb'),
+                   os.path.join(output_path, name_file+".csv.bz2"))  # pega desda da rais do pc
+                # new_file_path='/home/ubuntu/files/sc/'+name_file+'.csv.bz2';
+                f.to_csv(bz2.BZ2File(new_file_path, 'wb'),
                          sep=",", index=False, float_format="%.3f")
                 
 

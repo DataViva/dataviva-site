@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 '''
  python scripts/data_download/rais_create_files.py
- The files will be saved in scripts/data/files_rais
+ The files will be saved in scripts/data/rais
 
 clear data files 
 rm scripts/data/files_*/*
 '''
 from collections import namedtuple
-from engine import engine
+from common import engine, get_colums
 from dictionary import en
 import pandas as pd
 import os
@@ -32,15 +32,11 @@ def select_table(conditions):
     return 'rais_' + s
 
 
-def get_colums(table):
-    column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
-    return [row[0] for row in column_rows]
-
-
 def save(years, locations, industrys, occupations):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
     table_columns = {}
-    output_path='scripts/data/files_rais/'
+    output_path='scripts/data/rais/'
+    columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
 
     for year in years:
         conditions[0] = year.condition
@@ -54,12 +50,14 @@ def save(years, locations, industrys, occupations):
                     name_file = 'rais'+str(year.name)+str(location.name)+str(industry.name)+str(occupation.name)
                     
                     if table not in table_columns.keys():
-                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
+                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, columns_deleted)]
 
                     f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
                     
                     new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
+                    # new_file_path='/home/ubuntu/files/rais/'+name_file+'.csv.bz2';
                     f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
+
 
 
 Condition = namedtuple('Condition', ['condition', 'name'])

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 '''
 python scripts/data_download/secex_create_files.py
- The files will be saved in scripts/data/files_secex
+ The files will be saved in scripts/data/secex
 '''
 from collections import namedtuple
-from engine import engine
+from common import engine, get_colums
 from dictionary import en
 import pandas as pd
 import os
@@ -29,15 +29,11 @@ def select_table(conditions):
     return 'secex_' + s
 
 
-def get_colums(table):
-    column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
-    return [row[0] for row in column_rows]
-
-
 def save(years, months, locations, products, trade_partners):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path='scripts/data/files_secex/'
+    output_path='scripts/data/secex/'
+    columns_deleted=['bra_id_len', 'eci_old', 'eci_wld', 'hs_id_len', 'wld_id_len', 'month: se Anual']
 
     for year in years:
         conditions[0] = year.condition
@@ -53,13 +49,14 @@ def save(years, months, locations, products, trade_partners):
                         name_file = 'secex'+str(year.name)+str(month.name)+str(location.name)+str(product.name)+str(trade_partner.name)
 
                         if table not in table_columns.keys():
-                            table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
+                            table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, columns_deleted)]
 
                         f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
                         new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
-                        f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
+                        # new_file_path='/home/ubuntu/files/secex/'+name_file+'.csv.bz2';
 
+                        f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
 
 Condition = namedtuple('Condition', ['condition', 'name'])
 

@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 '''
  python scripts/data_download/higher_education_create_files.py
- The files will be saved in scripts/data/files_hedu
+ The files will be saved in scripts/data/hedu
 '''
 from collections import namedtuple
-from engine import engine
+from common import engine, get_colums
 from dictionary import en
 import pandas as pd
 import os
@@ -26,15 +26,11 @@ def select_table(conditions):
     return 'hedu_' + s
 
 
-def get_colums(table):
-    column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
-    return [row[0] for row in column_rows]
-
-
 def save(years, locations, majors):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path='scripts/data/files_hedu/'
+    output_path='scripts/data/hedu/'
+    columns_deleted=['bra_id_len', 'course_hedu_id_len', 'enrolled_rca']
 
     for year in years:
         conditions[0] = year.condition
@@ -46,11 +42,12 @@ def save(years, locations, majors):
                 name_file = 'hedu'+str(year.name)+str(location.name)+str(major.name)
 
                 if table not in table_columns.keys():
-                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
+                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, columns_deleted)]
 
                 f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
                 new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
+                # new_file_path='/home/ubuntu/files/hedu/'+name_file+'.csv.bz2';
                 f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
 
 
