@@ -60,7 +60,7 @@ def save(years, months, locations, products, trade_partners):
                         f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
                         new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
-                        # new_file_path='/home/ubuntu/files/secex/'+name_file+'.csv.bz2';
+                        # new_file_path='/home/ubuntu/files/secex/en/'+name_file+'.csv.bz2';
 
                         f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
 

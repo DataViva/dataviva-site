@@ -54,7 +54,7 @@ def save(years, locations, courses):
 
                 new_file_path = os.path.abspath(
                    os.path.join(output_path, name_file+".csv.bz2"))  # pega desda da rais do pc
-                # new_file_path='/home/ubuntu/files/sc/'+name_file+'.csv.bz2';
+                # new_file_path='/home/ubuntu/files/sc/en/'+name_file+'.csv.bz2';
                 f.to_csv(bz2.BZ2File(new_file_path, 'wb'),
                          sep=",", index=False, float_format="%.3f")
                 
