@@ -69,7 +69,14 @@ def create():
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
-        article.file_path = 'test'
+        form.article.data
+
+        import os
+        file = request.files['article']
+        last_article = Article.query.order_by(desc(Article.postage_date)).first_or_404()
+        filename = str(last_article.id)
+        file.save(os.path.join('/home/fvieira/Desktop', filename+'.pdf'))
+
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.approval_status = 0
 
@@ -105,7 +112,7 @@ def update(id):
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
-        article.file_path = 'test'
+        form.article = 'test'
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.authors = []
         article.keywords = []
