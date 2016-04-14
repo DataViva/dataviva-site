@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de Matrículas</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.enrolled | magnitude }}</small>
@@ -13,7 +13,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de Ingressantes</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.entrants | magnitude }}</small>
@@ -22,7 +22,7 @@
                 </li>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Número de Concluintes</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.graduates | magnitude }}</small>
@@ -37,63 +37,81 @@
     </div>
 
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {% trans %}Year{% endtrans %}: {{ header.year }}
     </div>
 
-    <h2 class="m-t-xl">Perfil Geral</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not header.bra_id %}
-        <p>O curso/campo de {{ header.name }} é o {{ header.rank }}º em número de matrículas no Brasil. A universidade que possui mais alunos é {{ major.article() }}
-        {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-        {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso possui {{ header.enrolled | max_digits(3) }}
-        {{ header.enrolled | magnitude }} alunos matriculados em todo o país.</p>
+        <p>{% trans %}The course of{% endtrans %} {{ header.name }} 
+        {% trans %}is {% endtrans %}{{ header.rank }}
+        {% if g.locale == "pt" %}&ordm{% endif %}
+        {% trans %} in number of enrollments in Brazil. The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+        {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+        {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+        {% trans %}students enrolled in the country{% endtrans %}.</p>
 
     {% else %}
         {% if header.bra_id|length == 1 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas {{ location.preposition("de") }} {{ header.location_name }}.
-            A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }} {{ body.university_with_more_enrolled }}, com
-            {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }}
-            estudantes. No total, o curso/campo possui {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos
-            matriculados em toda a região.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{{ location.preposition("de") }} {{ header.location_name }}.
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+            {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }}
+            {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+            {% trans %}students enrolled in the region{% endtrans %}.</p>
 
         {% elif header.bra_id|length == 3 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no estado {{ location.preposition("de") }}
-            {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-            {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-            {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-            {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o estado.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the state of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the state{% endtrans %}</p>
 
         {% elif header.bra_id|length == 5 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na mesorregião
-            {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-            {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-            {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-            {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a mesorregião.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the mesoregion of{% endtrans %} {{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the mesoregion{% endtrans %}.</p>
 
         {% elif header.bra_id|length == 7 %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas na microrregião {{ location.preposition("de") }}
-             {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-             {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-             {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-             {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em toda a microrregião.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the microregion of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the microregion{% endtrans %}.</p>
 
         {% else %}
-            <p>O curso/campo de {{ header.name }} é o {{ header.rank }}° em número de matrículas no município {{ location.preposition("de") }}
-            {{ header.location_name }}. A universidade que possui mais alunos neste curso/campo na localidade é {{ major.article() }}
-            {{ body.university_with_more_enrolled }}, com {{ body.highest_enrolled_number_by_university | max_digits(3) }}
-            {{ body.highest_enrolled_number_by_university | magnitude }} estudantes. No total, o curso/campo possui
-            {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} alunos matriculados em todo o município.</p>
+            <p>{% trans %}The course of{% endtrans %} {{ header.name }}
+             {% trans %} is {% endtrans %}{{ header.rank }}
+             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} in number of enrollments in {% endtrans %}{% trans %}the municipality of{% endtrans %} {{ location.preposition("de") }}{{ header.location_name }}. 
+             {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }}{{ body.university_with_more_enrolled }}, 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}students enrolled in the municipality{% endtrans %}.</p>
 
         {% endif %}
     {% endif %}
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Matrículas</h3>
+            <h3>{% trans %}Enrollments{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         <tr>
                             <th>
-                                Principal Universidade por Número de Alunos Matriculados
+                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.university_with_more_enrolled }}</p>
@@ -102,7 +120,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Município por Número de Alunos Matriculados
+                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_with_more_enrolled }}</p>
@@ -111,7 +129,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Universidade por Número de Alunos Ingressantes
+                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.university_with_more_entrants }}</p>
@@ -120,7 +138,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Município por Número de Alunos Ingressantes
+                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_with_more_entrants }}</p>
@@ -129,7 +147,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Universidade por Número de Alunos Concluintes
+                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.university_with_more_graduates }}</p>
@@ -138,7 +156,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Município por Número de Alunos Concluintes
+                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.municipality_with_more_graduates }}</p>
@@ -149,7 +167,7 @@
                 </table>
                 </div>
                 <a href="#enrollments" aria-controls="enrollments" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                    mais detalhes
+                    {% trans %}More details{% endtrans %}
                 </a>
             </div>
         </div>
