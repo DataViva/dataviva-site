@@ -3,16 +3,16 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Courses{% endtrans %}</h4>
-            <a href="/pt/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled" 
+            <a href="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled" 
                 target="graphs-frame-enrollments" class="list-group-item">{% trans %}Map{% endtrans %}</a>
-            <a href="/pt/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?y=enrolled&layout=value&order=color" 
+            <a href="/{{ g.locale }}/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?y=enrolled&layout=value&order=color" 
                 target="graphs-frame-enrollments" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-            <a href="/pt/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled&controls=true&year=2014" 
+            <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled&controls=true&year=2014" 
                 target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/pt/embed/geo_map/sc/all/all/{{basic_course.id}}/bra/?color=enrolled" target="frame-tab-enrollments"
+        <iframe src="/{{ g.locale }}/embed/geo_map/sc/all/all/{{basic_course.id}}/bra/?color=enrolled" target="frame-tab-enrollments"
                 name="graphs-frame-enrollments"
                 id="graphs-frame-enrollments"
                 class="embed-responsive-item">
