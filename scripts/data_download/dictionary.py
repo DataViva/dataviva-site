@@ -6,7 +6,7 @@ en = {
     'age_avg': u'Average salary',
     'num_emp': u'Number of people employed',
     'rcd': u'Unutilized field',
-    'eci_wld': u'Indicator of economic complexity would',
+    'eci_wld': u'Indicator of economic complexity world',
     'eci_old': u'Indicator of economic complexity old',
     'distortion_rate': u'Distortion Rate',
     'color_desc_network': u'Changes the variable used to color the circles.',
