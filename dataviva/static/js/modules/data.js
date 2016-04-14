@@ -10,7 +10,7 @@ data.downloadLink = function() {
     });
 
     dataSelection = dataSelection.filter(function(n){ return n != "" && n !== null && n != "all" });
-    return "https://dataviva.s3.amazonaws.com/"+lang+"/data-download/" + dataSelection.join("-") + '.csv.bz2';
+    return "https://dataviva.s3.amazonaws.com/data-download/"+lang+"/" + dataSelection.join("-") + '.csv.bz2';
 }
 
 $(document).ready(function() {
