@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-DataBase = namedtuple('DataBase', ['dimensions', 'years'])
+DataSet = namedtuple('DataSet', ['dimensions', 'years'])
 Dimension = namedtuple('Dimension', ['id', 'depths'])
 Depth = namedtuple('Depth', ['id', 'value'])
 
@@ -43,9 +43,9 @@ courses = Dimension('course_sc_plural', [
     Depth('course_sc_5', 'course')
 ])
 
-attrs_databases = {
-    'rais': DataBase([locations, industries, occupations], [str(year) for year in range(2002, 2014)]),
-    'secex': DataBase([locations, products, trade_partners], [str(year) for year in range(2002, 2015)]),
-    'hedu': DataBase([locations, majors], [str(year) for year in range(2009, 2014)]),
-    'sc': DataBase([locations, courses], [str(year) for year in range(2007, 2015)])
+attrs_datasets = {
+    'rais': DataSet([locations, industries, occupations], [str(year) for year in range(2002, 2014)]),
+    'secex': DataSet([locations, products, trade_partners], [str(year) for year in range(2002, 2015)]),
+    'hedu': DataSet([locations, majors], [str(year) for year in range(2009, 2014)]),
+    'sc': DataSet([locations, courses], [str(year) for year in range(2007, 2015)])
 }
