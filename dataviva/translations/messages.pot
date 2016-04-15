@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 14:35-0300\n"
+"POT-Creation-Date: 2016-04-15 15:23-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -511,6 +511,7 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/tab-general.html:114
 #: dataviva/apps/industry/templates/industry/tab-wages.html:2
 #: dataviva/apps/location/templates/location/index.html:58
+#: dataviva/apps/location/templates/location/tab-general.html:210
 #: dataviva/apps/location/templates/location/tab-wages.html:2
 #: dataviva/apps/occupation/templates/occupation/index.html:57
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:2
@@ -739,6 +740,10 @@ msgid "Municipality with highest monthly average income"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:161
+#: dataviva/apps/location/templates/location/tab-general.html:206
+#: dataviva/apps/location/templates/location/tab-general.html:252
+#: dataviva/apps/location/templates/location/tab-general.html:309
+#: dataviva/apps/location/templates/location/tab-general.html:366
 #: dataviva/apps/major/templates/major/tab-general.html:170
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:163
 #: dataviva/apps/product/templates/product/tab-general.html:299
@@ -821,6 +826,7 @@ msgid "Activities Space"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/index.html:50
+#: dataviva/apps/location/templates/location/tab-general.html:160
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:2
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:115
 #: dataviva/apps/product/templates/product/index.html:57
@@ -1039,11 +1045,13 @@ msgid "cities"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:167
-msgid "Main Product by Export Value"
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:129
+msgid "Main Product by Total Value Exported"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:178
-msgid "Main Product by Import Value"
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:140
+msgid "Main Product by Total Value Imported"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:188
@@ -1056,10 +1064,6 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:20
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:57
 msgid "Total of Imports"
-msgstr ""
-
-#: dataviva/apps/location/templates/location/tab-general.html:210
-msgid "Wage and Jobs"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:216
@@ -1084,35 +1088,35 @@ msgid "Total of Jobs"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:264
-msgid "Product with Less Distance"
+msgid "Product with Shortest Distance"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:275
-msgid "Economic Activity with Less Distance"
+msgid "Economic Activity with Shortest Distance"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:286
-msgid "Product with Most Opportunity Gain"
+msgid "Product with Highest Opportunity Gain"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:297
-msgid "Economic Activity with Most Opportunity Gain"
+msgid "Economic Activity with Highest Opportunity Gain"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:321
-msgid "University with Most Enrolled"
+msgid "University with Highest Number of Enrollments"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:332
-msgid "Major with Most Enrolled"
+msgid "Major with Highest Number of Enrollments"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:343
-msgid "School with Most Enrolled"
+msgid "School with Highest Number of Enrollments"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:354
-msgid "Basic Course with Most Enrolled"
+msgid "Basic Course with Highest Number of Enrollments"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-opportunities.html:12
@@ -1987,14 +1991,6 @@ msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:89
 msgid "number "
-msgstr ""
-
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:129
-msgid "Main Product by Total Value Exported"
-msgstr ""
-
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:140
-msgid "Main Product by Total Value Imported"
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:150

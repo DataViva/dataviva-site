@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 14:35-0300\n"
+"POT-Creation-Date: 2016-04-15 15:23-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -521,6 +521,7 @@ msgstr "No total, o município possui"
 #: dataviva/apps/industry/templates/industry/tab-general.html:114
 #: dataviva/apps/industry/templates/industry/tab-wages.html:2
 #: dataviva/apps/location/templates/location/index.html:58
+#: dataviva/apps/location/templates/location/tab-general.html:210
 #: dataviva/apps/location/templates/location/tab-wages.html:2
 #: dataviva/apps/occupation/templates/occupation/index.html:57
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:2
@@ -760,6 +761,10 @@ msgid "Municipality with highest monthly average income"
 msgstr "Município com maior renda média mensal"
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:161
+#: dataviva/apps/location/templates/location/tab-general.html:206
+#: dataviva/apps/location/templates/location/tab-general.html:252
+#: dataviva/apps/location/templates/location/tab-general.html:309
+#: dataviva/apps/location/templates/location/tab-general.html:366
 #: dataviva/apps/major/templates/major/tab-general.html:170
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:163
 #: dataviva/apps/product/templates/product/tab-general.html:299
@@ -845,6 +850,7 @@ msgid "Activities Space"
 msgstr "Espaço de Atividades"
 
 #: dataviva/apps/location/templates/location/index.html:50
+#: dataviva/apps/location/templates/location/tab-general.html:160
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:2
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:115
 #: dataviva/apps/product/templates/product/index.html:57
@@ -1066,92 +1072,80 @@ msgid "cities"
 msgstr "municípios"
 
 #: dataviva/apps/location/templates/location/tab-general.html:167
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:129
 #, fuzzy
-msgid "Main Product by Export Value"
-msgstr "Principal Produto por Valor Exportado"
+msgid "Main Product by Total Value Exported"
+msgstr "Principal Produto por Valor Total Exportado"
 
 #: dataviva/apps/location/templates/location/tab-general.html:178
-#, fuzzy
-msgid "Main Product by Import Value"
-msgstr "Principal Produto por Valor Exportado"
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:140
+msgid "Main Product by Total Value Imported"
+msgstr "Principal Município por Valor Total Importado"
 
 #: dataviva/apps/location/templates/location/tab-general.html:188
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:17
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:51
-#, fuzzy
 msgid "Total of Exports"
 msgstr "Total de Exportações"
 
 #: dataviva/apps/location/templates/location/tab-general.html:196
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:20
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:57
-#, fuzzy
 msgid "Total of Imports"
 msgstr "Total de Importações"
 
-#: dataviva/apps/location/templates/location/tab-general.html:210
-#, fuzzy
-msgid "Wage and Jobs"
-msgstr "Salário e Emprego"
-
 #: dataviva/apps/location/templates/location/tab-general.html:216
 #: dataviva/apps/location/templates/location/tab-wages.html:10
-#, fuzzy
 msgid "Main Economic Activity"
-msgstr "A atividade econômica"
+msgstr "Principal atividade econômica"
 
 #: dataviva/apps/location/templates/location/tab-general.html:225
-#, fuzzy
 msgid "Main Occupation"
-msgstr "Ocupações Comuns"
+msgstr "Principal Ocupaçāo"
 
 #: dataviva/apps/location/templates/location/tab-general.html:234
 #: dataviva/apps/location/templates/location/tab-wages.html:16
 #: dataviva/apps/location/templates/location/tab-wages.html:41
-#, fuzzy
 msgid "Average Wage"
-msgstr "Idade Média"
+msgstr "Salário Médio"
 
 #: dataviva/apps/location/templates/location/tab-general.html:242
 #: dataviva/apps/location/templates/location/tab-wages.html:22
 #: dataviva/apps/location/templates/location/tab-wages.html:53
-#, fuzzy
 msgid "Total of Jobs"
 msgstr "Total de Empregos"
 
 #: dataviva/apps/location/templates/location/tab-general.html:264
-#, fuzzy
-msgid "Product with Less Distance"
-msgstr "Produto com Menor"
+msgid "Product with Shortest Distance"
+msgstr "Produto com Menor Distância"
 
 #: dataviva/apps/location/templates/location/tab-general.html:275
-#, fuzzy
-msgid "Economic Activity with Less Distance"
-msgstr "Atividades Econômicas"
+msgid "Economic Activity with Shortest Distance"
+msgstr "Atividade Econômica com Menor Distância"
 
 #: dataviva/apps/location/templates/location/tab-general.html:286
-msgid "Product with Most Opportunity Gain"
-msgstr ""
+msgid "Product with Highest Opportunity Gain"
+msgstr "Produto com Maior Ganho de Oportunidade"
 
 #: dataviva/apps/location/templates/location/tab-general.html:297
-msgid "Economic Activity with Most Opportunity Gain"
-msgstr ""
+msgid "Economic Activity with Highest Opportunity Gain"
+msgstr "Atividade Econômica com Maior Ganho de Oportunidade"
 
 #: dataviva/apps/location/templates/location/tab-general.html:321
-msgid "University with Most Enrolled"
-msgstr ""
+msgid "University with Highest Number of Enrollments"
+msgstr "Universidade com Maior Número de Matrículas"
 
 #: dataviva/apps/location/templates/location/tab-general.html:332
-msgid "Major with Most Enrolled"
-msgstr ""
+msgid "Major with Highest Number of Enrollments"
+msgstr "Curso Superior com Maior Número de Matrículas"
 
 #: dataviva/apps/location/templates/location/tab-general.html:343
-msgid "School with Most Enrolled"
-msgstr ""
+msgid "School with Highest Number of Enrollments"
+msgstr "Escola com Maior Número de Matrículas"
 
 #: dataviva/apps/location/templates/location/tab-general.html:354
-msgid "Basic Course with Most Enrolled"
-msgstr ""
+msgid "Basic Course with Highest Number of Enrollments"
+msgstr "Curso Básico com Maior Número de Matrículas"
 
 #: dataviva/apps/location/templates/location/tab-opportunities.html:12
 #: dataviva/apps/rankings/templates/rankings/product.html:13
@@ -2097,15 +2091,6 @@ msgstr ""
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:89
 msgid "number "
 msgstr "posiçāo de número "
-
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:129
-#, fuzzy
-msgid "Main Product by Total Value Exported"
-msgstr "Principal Origem por Valor Total Exportado"
-
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:140
-msgid "Main Product by Total Value Imported"
-msgstr "Principal Município por Valor Total Importado"
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:150
 msgid "Product with Highest Trade Balance Surplus"
@@ -5866,4 +5851,28 @@ msgstr "com"
 
 #~ msgid "Product with Lowest Trade Balance Surplus"
 #~ msgstr "Produto com Menor Saldo da Balança Comercial"
+
+#~ msgid "University with Most Enrolled"
+#~ msgstr ""
+
+#~ msgid "Major with Most Enrolled"
+#~ msgstr ""
+
+#~ msgid "School with Most Enrolled"
+#~ msgstr ""
+
+#~ msgid "Basic Course with Most Enrolled"
+#~ msgstr ""
+
+#~ msgid "Main Product by Import Value"
+#~ msgstr "Principal Produto por Valor Exportado"
+
+#~ msgid "Product with Most Opportunity Gain"
+#~ msgstr ""
+
+#~ msgid "Economic Activity with Most Opportunity Gain"
+#~ msgstr ""
+
+#~ msgid "Wage and Jobs"
+#~ msgstr "Salário e Emprego"
 

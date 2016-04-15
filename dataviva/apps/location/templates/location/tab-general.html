@@ -157,14 +157,14 @@
 
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Comércio Internacional</h3>
+            <h3>{% trans %}International Trade{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         {% if body.main_product_by_export_value %}
                         <tr>
                             <th>
-                                {% trans %}Main Product by Export Value{% endtrans %}
+                                {% trans %}Main Product by Total Value Exported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_product_by_export_value_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -175,7 +175,7 @@
                         {% if body.main_product_by_import_value %}
                         <tr>
                             <th>
-                                {% trans %}Main Product by Import Value{% endtrans %}
+                                {% trans %}Main Product by Total Value Imported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_product_by_import_value_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -203,11 +203,11 @@
                 </table>
             </div>
             <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>{% trans %}Wage and Jobs{% endtrans %}</h3>
+            <h3>{% trans %}Wages and Jobs{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
@@ -249,19 +249,19 @@
                 </table>
             </div>
             <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
 
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Oportunidades Econômicas</h3>
+            <h3>{% trans %}Economic Opportunities{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         <tr>
                         {% if body.less_distance_by_product %}
                             <th>
-                                {% trans %}Product with Less Distance{% endtrans %}
+                                {% trans %}Product with Shortest Distance{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.less_distance_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -272,7 +272,7 @@
                         {% if body.less_distance_by_occupation %}
                         <tr>
                             <th>
-                                {% trans %}Economic Activity with Less Distance{% endtrans %}
+                                {% trans %}Economic Activity with Shortest Distance{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.less_distance_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -283,7 +283,7 @@
                         {% if body.opportunity_gain_by_product %}
                         <tr>
                             <th>
-                                {% trans %}Product with Most Opportunity Gain{% endtrans %}
+                                {% trans %}Product with Highest Opportunity Gain{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -294,7 +294,7 @@
                         {% if body.opportunity_gain_by_occupation %}
                         <tr>
                             <th>
-                                {% trans %}Economic Activity with Most Opportunity Gain{% endtrans %}
+                                {% trans %}Economic Activity with Highest Opportunity Gain{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -306,7 +306,7 @@
                 </table>
             </div>
             <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
 
@@ -318,7 +318,7 @@
                         {% if body.highest_enrolled_by_university %}
                         <tr>
                             <th>
-                                {% trans %}University with Most Enrolled{% endtrans %}
+                                {% trans %}University with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_university_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -329,7 +329,7 @@
                         {% if body.highest_enrolled_by_major %}
                         <tr>
                             <th>
-                                {% trans %}Major with Most Enrolled{% endtrans %}
+                                {% trans %}Major with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_major_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -340,7 +340,7 @@
                         {% if body.highest_enrolled_by_school %}
                         <tr>
                             <th>
-                                {% trans %}School with Most Enrolled{% endtrans %}
+                                {% trans %}School with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_school_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -351,7 +351,7 @@
                         {% if body.highest_enrolled_by_basic_course %}
                         <tr>
                             <th>
-                                {% trans %}Basic Course with Most Enrolled{% endtrans %}
+                                {% trans %}Basic Course with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_basic_course_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -363,7 +363,7 @@
                 </table>
             </div>
             <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
     </div>
