@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask.ext.babel import gettext, ngettext
 
+
 def dictionary():
 
     return {
@@ -458,7 +459,8 @@ def dictionary():
         "remove_confirmation": gettext("Are you sure to delete this item?"),
 
         # Selector & Search
-        "search": gettext("Search"),
+        "loading": gettext("Loading"),
+        "processing": gettext("Processing"),
         "search_results": gettext("Search Results"),
         "search_empty": gettext("No Matches"),
         "other": gettext("Other"),
@@ -476,7 +478,7 @@ def dictionary():
         "no_items": gettext("No Data Available"),
 
 
-        #product profile
+        # product profile
         "General": gettext("General"),
         "International Trade": gettext("International Trade"),
         "Economic Opportunities": gettext("Economic Opportunities"),
@@ -519,13 +521,13 @@ def dictionary():
         "five_years": gettext("in five years."),
         "and_number": gettext(" and number"),
 
-        #all
+        # all
         "preview": gettext("Preview"),
         "exports_by": gettext("Exports By"),
         "imports_by": gettext("Imports By"),
         "general_profile": gettext("General Profile"),
 
-        #header
+        # header
         "studies": gettext("Studies"),
         "news": gettext("News"),
         "contact": gettext("Contact"),
@@ -537,7 +539,7 @@ def dictionary():
         "partners": gettext("PARTNERS"),
         "help": gettext("HELP"),
         "login": gettext("Login"),
-        "singup": gettext("Sing Up"),
+        "singup": gettext("Sign2 Up"),
         "or": gettext("or"),
         "basic_features": gettext("Basic Features"),
         "advanced_features": gettext("Advanced Features"),
@@ -547,13 +549,13 @@ def dictionary():
         "make_graphs": gettext("MAKE GRAPHS"),
         "DATABASE_download": gettext("DATABASE DOWNLOAD"),
 
-        #home
+        # home
         "largest_plataform": gettext("Brazils largest platform for social and economic data search."),
         "totaly_open_and_free": gettext("Totally open and free."),
         "description": gettext("DataViva is a research tool that provides official data about exportation, economic activity, locality, education and occupation in Brazil. It consists of 11 apps that combined enable more than 1 billion visualizations."),
         "get_started": gettext("Get started "),
         "watch_videos": gettext("Watch the site video"),
-        "testemonials":gettext("watch the testimonials"),
+        "testemonials": gettext("watch the testimonials"),
         "entrepreneurs": gettext("Entrepreneurs"),
         "entrepreneurs_text": gettext("Identify the economic profile and business opportunities of a region"),
         "development_agents": gettext("DEVELOPMENT AGENTS"),
@@ -571,7 +573,7 @@ def dictionary():
         "partners": gettext("Partners"),
         "promoters": gettext("Promoters"),
 
-        #footer
+        # footer
         "about_min": gettext("About"),
         "support": gettext("Support"),
         "contact_us": gettext("Contact Us"),
@@ -583,7 +585,7 @@ def dictionary():
         "virtual_tour": gettext("Virtual Tour"),
         "message": gettext("Message"),
 
-        #about
+        # about
         "dataviva_answer": gettext("DataViva Answer"),
         "dear_admin": gettext("Dear Administrator."),
         "the_question": gettext("The question"),
@@ -592,14 +594,14 @@ def dictionary():
         "best_regards": gettext("Best Regards,"),
         "team": gettext("Team"),
 
-        #product
+        # product
         "wages_and_jobs": gettext("Wages and Jobs"),
         "avg_month_income": gettext("Average Monthly Income"),
         "payroll": gettext("Payroll"),
         "total_employment": gettext("Total Employment"),
         "total_establishment": gettext("Total of Establishments"),
 
-        #occupation
+        # occupation
         "main_employer_Municipality": gettext("Main employer Municipality"),
         "main_employer_activiy": gettext("Main employer activity"),
         "Municipality_highest_avg_income": gettext("Municipality with highest monthly average income"),
@@ -615,8 +617,15 @@ def dictionary():
         "jobs_by": gettext("Jobs by"),
         "jobs": gettext("jobs"),
 
-
+        # data table
+        "dataTableSearch": gettext("Search"),
+        "emptyTable": gettext("No data available"),
+        "infoResults": gettext("Showing _START_ to _END_ of _TOTAL_ results"),
+        "infoEmpty": gettext("No data to show"),
+        "infoFiltered": gettext(" (filtering _MAX_ results)"),
+        "zeroRecords": gettext("No records found"),
     }
+
 
 def plurals(key=None, n=1):
 

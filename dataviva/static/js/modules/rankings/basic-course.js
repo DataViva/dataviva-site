@@ -1,26 +1,6 @@
 var BasicCourseTable = function () {
     this.tableId = '#basic-course-table';
 
-    var url = window.location.href;
-    var lang = url.split('/');
-
-    console.log(lang);
-
-    if (lang[3] == 'en') {
-        var language = {}
-    } else {
-        var language =  {
-            "loadingRecords": "Carregando...",
-            "emptyTable": "Não há dados disponíveis na tabela",
-            "info": "Mostrando _START_ a _END_ de _TOTAL_ resultados",
-            "infoEmpty": "Não há resultados para mostrar",
-            "infoFiltered": " (filtrado de _MAX_ resultados)",
-            "processing": "Processando...",
-            "search": "Busca:",
-            "zeroRecords": "Não foram encontrados resultados"
-        }
-    }
-
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/sc/all/all/all/show.2/?order=enrolled.desc",
@@ -43,7 +23,7 @@ var BasicCourseTable = function () {
             },
         ],
         "deferRender": true,
-        "language": language,
+        "language": dataviva.datatables.language,
         "scrollY": 500,
         "scrollCollapse": true,
         "scroller": true,

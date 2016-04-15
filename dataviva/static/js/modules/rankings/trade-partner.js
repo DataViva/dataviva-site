@@ -25,6 +25,7 @@ var TradePartnerTable = function () {
             },
         ],
         "deferRender": true,
+        "language": dataviva.datatables.language,
         "scrollY": 500,
         "scrollCollapse": true,
         "scroller": true,
