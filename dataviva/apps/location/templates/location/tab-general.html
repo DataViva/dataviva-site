@@ -33,7 +33,7 @@
                     </div>
                 </li>
                 {% endif %}
-                <li>{% endtrans %}
+                <li>
                     <div class="widget">
                         <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %}</h2>
                         <div class="number">
@@ -71,20 +71,77 @@
         <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
     </div>
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {% trans %}Year{% endtrans %}: {{ header.year }}
     </div>
 
     <h2 class="m-t-xl">Perfil Geral</h2>
         {% if profile.bra_id|length == 9 %}
-        <p>{{ header.name }} é um dos {{ profile.number_of_municipalities }} municípios do estado {{ location.preposition('de') }} {{ profile.state_name }}. Com área de {{ profile.area }} km², possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes e PIB per Capita de R$ {{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. Localizado na Mesorregião {{ profile.mesoregion_name }}, é o {{ profile.gdp_rank }}º município do estado em PIB.</p>
+            <p>{{ header.name }} 
+            {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
+            {% trans %} With {% endtrans %}{{ profile.area }} 
+            {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. 
+            {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }}, 
+            {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}
+            º 
+            {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
         {% elif profile.bra_id|length == 7 %}
-        <p>A Microrregião {{ header.name }} é uma das {{ profile.number_of_microregions }} subdivisões da Mesorregião {{ profile.mesoregion_name }}, localizada no estado {{ location.preposition('de') }} {{ profile.state_name }}. Compreende um total de {{ profile.number_of_municipalities }} municípios e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
+            <p>A Microrregião {{ header.name }} 
+            é uma das {{ profile.number_of_microregions }} 
+            subdivisões da Mesorregião {{ profile.mesoregion_name }}, 
+            localizada no estado {{ location.preposition('de') }} {{ profile.state_name }}. 
+            Compreende um total de {{ profile.number_of_municipalities }} 
+            municípios e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            de habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
+            e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.
+            </p>
         {% elif profile.bra_id|length == 5 %}
-        <p>A Mesorregião {{ header.name }} é uma das {{ profile.number_of_mesoregions }} subdivisões do estado {{ location.preposition('de') }} {{ profile.state_name }}. É a {{ profile.eci_rank }}ª mesorregião brasileira em índice de complexidade e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
+            <p>A Mesorregião {{ header.name }} 
+            é uma das {{ profile.number_of_mesoregions }} 
+            subdivisões do estado {{ location.preposition('de') }} {{ profile.state_name }}. 
+            É a {{ profile.eci_rank }}
+            ª 
+            mesorregião brasileira em índice de complexidade e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
+            e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.
+            </p>
         {% elif profile.bra_id|length == 1 %}
-        <p>A região {{ header.name }} é uma das {{ profile.number_of_regions-1 }} divisões regionais brasileiras, composta pelos estados {% for states in profile.region_states %}{% if states == profile.region_states[profile.region_states|length-1] %}e {{ states }}{% else %}{{ states }}, {% endif %}{% endfor %}. No total, a região {{ header.name }} possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. É a {{ profile.gdp_pc_rank }}ª região em PIB per Capita do país e a {{ profile.pop_rank }}ª em população.</p>
+            <p>A região {{ header.name }} 
+            é uma das {{ profile.number_of_regions-1 }} 
+            divisões regionais brasileiras, composta pelos estados 
+            {% for states in profile.region_states %}
+                {% if states == profile.region_states[profile.region_states|length-1] %}
+                    e {{ states }}
+                {% else %}
+                    {{ states }}, 
+                {% endif %}
+            {% endfor %}. 
+            No total, a região {{ header.name }} 
+            possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            habitantes. É a {{ profile.gdp_pc_rank }}
+            ª 
+            região em PIB per Capita do país e a {{ profile.pop_rank }}
+            ª em população.</p>
         {% else %}
-        <p>{{ header.name }} é uma das {{ profile.number_of_states-1 }} unidades federativas do Brasil, localizada na {{ profile.region_name }} do país, sendo o {{ profile.area_rank }}º estado com a maior área territorial e o {{ profile.pop_rank }}º em quantidade de habitantes. Limita-se a {% for neighbors in profile.neighbors %}{% if neighbors == profile.neighbors[profile.neighbors|length-1] %}e {{ neighbors }}{% else %}{{ neighbors }}, {% endif %}{% endfor %}. Seu território é subdividido em {{ profile.number_of_municipalities }} municípios, o {{ profile.municipality_rank }}º dentre os estados brasileiros.</p>
+            <p>{{ header.name }} 
+            {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }} 
+            {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }}, 
+            {% trans %}being the {% endtrans %}{{ profile.area_rank }}
+            º 
+            {% trans %}state in territorial area and {% endtrans %}{{ profile.pop_rank }}
+            º 
+            {% trans %}in population. Its territory is limited for {% endtrans %}
+            {% for neighbors in profile.neighbors %}
+                {% if neighbors == profile.neighbors[profile.neighbors|length-1] %}
+                    {% trans %}and{% endtrans %} {{ neighbors }}
+                {% else %}
+                    {{ neighbors }}, 
+                {% endif %}
+            {% endfor %}. 
+            {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}cities{% endtrans %} {{ profile.municipality_rank }}
+            .</p>
         {% endif %}
 
 
