@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 15:39-0300\n"
+"POT-Creation-Date: 2016-04-15 15:47-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -866,9 +866,8 @@ msgstr "Comércio Internacional"
 #: dataviva/apps/location/templates/location/index.html:74
 #: dataviva/apps/location/templates/location/tab-education.html:2
 #: dataviva/apps/location/templates/location/tab-general.html:314
-#, fuzzy
 msgid "Education"
-msgstr "Seção"
+msgstr "Educaçāo"
 
 #: dataviva/apps/location/templates/location/tab-education.html:10
 #: dataviva/apps/rankings/templates/rankings/university.html:13
@@ -878,27 +877,27 @@ msgstr "Seção"
 msgid "University"
 msgstr "Universidade"
 
-#: dataviva/apps/location/templates/location/tab-education.html:10
-#: dataviva/apps/location/templates/location/tab-education.html:13
-#: dataviva/apps/location/templates/location/tab-education.html:16
+#: dataviva/apps/location/templates/location/tab-education.html:11
+#: dataviva/apps/location/templates/location/tab-education.html:15
 #: dataviva/apps/location/templates/location/tab-education.html:19
-msgid "with Most Enrolled"
-msgstr ""
+#: dataviva/apps/location/templates/location/tab-education.html:23
+msgid "with Highest Number of Enrollments"
+msgstr "com Maior Número de Matrículas"
 
-#: dataviva/apps/location/templates/location/tab-education.html:13
+#: dataviva/apps/location/templates/location/tab-education.html:14
 #: dataviva/templates/site.html:67 dataviva/translations/dictionary.py:170
 #: dataviva/translations/dictionary.py:172
 #: dataviva/translations/dictionary.py:363
 msgid "Major"
 msgstr "Curso"
 
-#: dataviva/apps/location/templates/location/tab-education.html:16
+#: dataviva/apps/location/templates/location/tab-education.html:18
 #: dataviva/translations/dictionary.py:186
 #: dataviva/translations/dictionary.py:365
 msgid "School"
 msgstr "Escola"
 
-#: dataviva/apps/location/templates/location/tab-education.html:19
+#: dataviva/apps/location/templates/location/tab-education.html:22
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:13
 #: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
 #: dataviva/translations/dictionary.py:367
@@ -1158,13 +1157,12 @@ msgstr "Produto"
 #: dataviva/apps/location/templates/location/tab-opportunities.html:13
 #: dataviva/apps/location/templates/location/tab-opportunities.html:18
 msgid "with Less Distance"
-msgstr ""
+msgstr "com Menor Distância"
 
 #: dataviva/apps/location/templates/location/tab-opportunities.html:18
 #: dataviva/apps/location/templates/location/tab-opportunities.html:28
-#, fuzzy
 msgid "Economic Activity"
-msgstr "A atividade econômica"
+msgstr "Atividade econômica"
 
 #: dataviva/apps/location/templates/location/tab-opportunities.html:23
 #, fuzzy
@@ -1175,7 +1173,7 @@ msgstr "Produto"
 #: dataviva/apps/location/templates/location/tab-opportunities.html:28
 #, fuzzy
 msgid "with Most Opportunity Gain"
-msgstr "Ganho de Oportunidade"
+msgstr "com Maior Ganho de Oportunidade"
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:10
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:14
@@ -5881,5 +5879,8 @@ msgstr "com"
 #~ msgstr "IDH"
 
 #~ msgid "By Import Value"
+#~ msgstr ""
+
+#~ msgid "with Most Enrolled"
 #~ msgstr ""
 

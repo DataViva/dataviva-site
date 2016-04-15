@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 15:39-0300\n"
+"POT-Creation-Date: 2016-04-15 15:47-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -853,27 +853,27 @@ msgstr ""
 msgid "University"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-education.html:10
-#: dataviva/apps/location/templates/location/tab-education.html:13
-#: dataviva/apps/location/templates/location/tab-education.html:16
+#: dataviva/apps/location/templates/location/tab-education.html:11
+#: dataviva/apps/location/templates/location/tab-education.html:15
 #: dataviva/apps/location/templates/location/tab-education.html:19
-msgid "with Most Enrolled"
+#: dataviva/apps/location/templates/location/tab-education.html:23
+msgid "with Highest Number of Enrollments"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-education.html:13
+#: dataviva/apps/location/templates/location/tab-education.html:14
 #: dataviva/templates/site.html:67 dataviva/translations/dictionary.py:170
 #: dataviva/translations/dictionary.py:172
 #: dataviva/translations/dictionary.py:363
 msgid "Major"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-education.html:16
+#: dataviva/apps/location/templates/location/tab-education.html:18
 #: dataviva/translations/dictionary.py:186
 #: dataviva/translations/dictionary.py:365
 msgid "School"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-education.html:19
+#: dataviva/apps/location/templates/location/tab-education.html:22
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:13
 #: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
 #: dataviva/translations/dictionary.py:367
