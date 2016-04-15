@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, jsonify
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.build_graph.mocks import datasets as all_datasets
 from dataviva.apps.embed.models import Build
 
 mod = Blueprint('build_graph', __name__,
@@ -27,11 +26,6 @@ def add_language_code(endpoint, values):
 @mod.route('/')
 def index():
     return render_template('build_graph/index.html')
-
-
-@mod.route('/datasets')
-def datasets():
-    return jsonify(all_datasets)
 
 
 @mod.route('/views/<dataset>/<filter1>/<filter2>')
