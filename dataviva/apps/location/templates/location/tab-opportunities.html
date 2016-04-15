@@ -10,22 +10,25 @@
                             {% if body.less_distance_by_product %}
                                 <th>
                                     {% trans %}Product{% endtrans %}
-                                    <small>{% trans %}with Less Distance{% endtrans %}</small>
+                                    <small>{% trans %}with Shortest Distance{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             {% if body.less_distance_by_occupation %}
                                 <th>
-                                    {% trans %}Economic Activity{% endtrans %}<small>{% trans %}with Less Distance{% endtrans %}</small>
+                                    {% trans %}Economic Activity{% endtrans %}
+                                    <small>{% trans %}with Shortest Distance{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             {% if body.opportunity_gain_by_product %}
                                 <th>
-                                    {% trans %}Product {% endtrans %}<small>{% trans %}with Most Opportunity Gain{% endtrans %}</small>
+                                    {% trans %}Product {% endtrans %}
+                                    <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             {% if body.opportunity_gain_by_occupation %}
                                 <th>
-                                    {% trans %}Economic Activity{% endtrans %}<small>{% trans %}with Most Opportunity Gain{% endtrans %}</small>
+                                    {% trans %}Economic Activity{% endtrans %}
+                                    <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
                                 </th>
                             {% endif %}
                         </tr>

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 16:36-0300\n"
+"POT-Creation-Date: 2016-04-15 16:54-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -288,7 +288,7 @@ msgstr "Evolução"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:42
 #: dataviva/apps/industry/templates/industry/index.html:48
-#: dataviva/apps/location/templates/location/index.html:42
+#: dataviva/apps/location/templates/location/index.html:46
 #: dataviva/apps/major/templates/major/index.html:42
 #: dataviva/apps/occupation/templates/occupation/index.html:48
 #: dataviva/apps/product/templates/product/index.html:48
@@ -520,7 +520,7 @@ msgstr "No total, o município possui"
 #: dataviva/apps/industry/templates/industry/index.html:57
 #: dataviva/apps/industry/templates/industry/tab-general.html:114
 #: dataviva/apps/industry/templates/industry/tab-wages.html:2
-#: dataviva/apps/location/templates/location/index.html:58
+#: dataviva/apps/location/templates/location/index.html:62
 #: dataviva/apps/location/templates/location/tab-general.html:210
 #: dataviva/apps/location/templates/location/tab-wages.html:2
 #: dataviva/apps/occupation/templates/occupation/index.html:57
@@ -633,7 +633,7 @@ msgstr "Barras"
 
 #: dataviva/apps/industry/templates/industry/index.html:67
 #: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
-#: dataviva/apps/location/templates/location/index.html:66
+#: dataviva/apps/location/templates/location/index.html:70
 #: dataviva/apps/location/templates/location/tab-general.html:257
 #: dataviva/apps/location/templates/location/tab-opportunities.html:2
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
@@ -850,7 +850,7 @@ msgstr "Dispersão"
 msgid "Activities Space"
 msgstr "Espaço de Atividades"
 
-#: dataviva/apps/location/templates/location/index.html:50
+#: dataviva/apps/location/templates/location/index.html:54
 #: dataviva/apps/location/templates/location/tab-general.html:160
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:2
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:115
@@ -863,7 +863,7 @@ msgstr "Espaço de Atividades"
 msgid "International Trade"
 msgstr "Comércio Internacional"
 
-#: dataviva/apps/location/templates/location/index.html:74
+#: dataviva/apps/location/templates/location/index.html:78
 #: dataviva/apps/location/templates/location/tab-education.html:2
 #: dataviva/apps/location/templates/location/tab-general.html:314
 msgid "Education"
@@ -1155,24 +1155,23 @@ msgid "Product"
 msgstr "Produto"
 
 #: dataviva/apps/location/templates/location/tab-opportunities.html:13
-#: dataviva/apps/location/templates/location/tab-opportunities.html:18
-msgid "with Less Distance"
+#: dataviva/apps/location/templates/location/tab-opportunities.html:19
+msgid "with Shortest Distance"
 msgstr "com Menor Distância"
 
 #: dataviva/apps/location/templates/location/tab-opportunities.html:18
-#: dataviva/apps/location/templates/location/tab-opportunities.html:28
+#: dataviva/apps/location/templates/location/tab-opportunities.html:30
 msgid "Economic Activity"
 msgstr "Atividade econômica"
 
-#: dataviva/apps/location/templates/location/tab-opportunities.html:23
+#: dataviva/apps/location/templates/location/tab-opportunities.html:24
 #, fuzzy
 msgid "Product "
 msgstr "Produto"
 
-#: dataviva/apps/location/templates/location/tab-opportunities.html:23
-#: dataviva/apps/location/templates/location/tab-opportunities.html:28
-#, fuzzy
-msgid "with Most Opportunity Gain"
+#: dataviva/apps/location/templates/location/tab-opportunities.html:25
+#: dataviva/apps/location/templates/location/tab-opportunities.html:31
+msgid "with Highest Opportunity Gain"
 msgstr "com Maior Ganho de Oportunidade"
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:10
@@ -5883,4 +5882,7 @@ msgstr "com"
 
 #~ msgid "with Most Enrolled"
 #~ msgstr ""
+
+#~ msgid "with Less Distance"
+#~ msgstr "com Menor Distância"
 
