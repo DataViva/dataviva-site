@@ -1,12 +1,8 @@
 $(document).ready(function() {
 
-    $.ajax({
-        url: 'datasets',
-        dataType: 'json',
-    })
-    .done(function(datasets) {
+    dataviva.requireAttrs(['datasets'], function() {
 
-        for (dataset in datasets) {
+        for (dataset in dataviva.datasets) {
             $('#datasets').append( $('<option value="'+dataset+'">'+dataviva.dictionary[dataset]+'</option>'));
         }
 
@@ -14,11 +10,11 @@ $(document).ready(function() {
             $('#datasets #dataset-empty-option').remove();
 
             $('#dimensions').empty();
-            datasets[this.value].dimensions.forEach(function(dimension) {
+            dataviva.datasets[this.value].dimensions.forEach(function(dimension) {
 
                 var div = $("<div></div>").addClass("form-group"),
-                    label = $("<label></label>").attr("for", dimension.name).addClass("control-label"),
-                    select = $("<select></select>").attr("id", dimension.name).addClass("form-control");
+                    label = $("<label></label>").attr("for", dimension.id).addClass("control-label"),
+                    select = $("<select></select>").attr("id", dimension.id).addClass("form-control");
 
                 label.html(dataviva.dictionary[dimension.id]);
 
