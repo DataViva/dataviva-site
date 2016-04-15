@@ -111,22 +111,27 @@
             {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 1 %}
-            <p>A região {{ header.name }} 
-            é uma das {{ profile.number_of_regions-1 }} 
-            divisões regionais brasileiras, composta pelos estados 
+            <p>{% if g.locale == "pt" %}
+                A
+                {% else %}
+                    The
+            {% endif %}{{ header.name }} 
+            {% trans %} is one of the {% endtrans %}{{ profile.number_of_regions-1 }} 
+            {% trans %}regional divisions in Brazil, consisting of the states of {% endtrans %}
             {% for states in profile.region_states %}
                 {% if states == profile.region_states[profile.region_states|length-1] %}
-                    e {{ states }}
+                    {% trans %}and{% endtrans %} {{ states }}.
                 {% else %}
                     {{ states }}, 
                 {% endif %}
-            {% endfor %}. 
-            No total, a região {{ header.name }} 
-            possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
-            habitantes. É a {{ profile.gdp_pc_rank }}
-            ª 
-            região em PIB per Capita do país e a {{ profile.pop_rank }}
-            ª em população.</p>
+            {% endfor %}
+            {% trans %}The region {% endtrans %}
+            {% trans %}has a total of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }}
+            {% trans %}people. It is the number {% endtrans %}{{ profile.gdp_pc_rank }}
+            {% if g.locale == "pt" %}ª{% endif %}
+             {% trans %}region in GDP per capita of Brazil and number {% endtrans %}{{ profile.pop_rank }}
+            {% if g.locale == "pt" %}ª{% endif %} 
+            {% trans %}in population{% endtrans %}.</p>
         {% else %}
             <p>{{ header.name }} 
             {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }} 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 14:13-0300\n"
+"POT-Creation-Date: 2016-04-15 14:35-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -989,7 +989,8 @@ msgid "The mesoregion "
 msgstr "A mesorregião "
 
 #: dataviva/apps/location/templates/location/tab-general.html:105
-#: dataviva/apps/location/templates/location/tab-general.html:132
+#: dataviva/apps/location/templates/location/tab-general.html:119
+#: dataviva/apps/location/templates/location/tab-general.html:137
 msgid " is one of the "
 msgstr " é uma das "
 
@@ -1009,121 +1010,146 @@ msgstr "mesorregião brasileira em índice de complexidade e possui população 
 msgid "people. Its GDP is R$ "
 msgstr "habitantes. Seu PIB é de R$ "
 
-#: dataviva/apps/location/templates/location/tab-general.html:133
-msgid "federated states of Brazil, located in the "
-msgstr "unidades federativas do Brasil, localizada na "
+#: dataviva/apps/location/templates/location/tab-general.html:120
+msgid "regional divisions in Brazil, consisting of the states of "
+msgstr "divisões regionais brasileiras, composta pelos estados "
 
-#: dataviva/apps/location/templates/location/tab-general.html:134
-msgid "being the "
-msgstr "do país, sendo o "
-
-#: dataviva/apps/location/templates/location/tab-general.html:136
-msgid "state in territorial area and "
-msgstr "estado com a maior área territorial e o "
-
-#: dataviva/apps/location/templates/location/tab-general.html:138
-msgid "in population. Its territory is limited for "
-msgstr "em quantidade de habitantes. Limita-se a "
-
-#: dataviva/apps/location/templates/location/tab-general.html:141
+#: dataviva/apps/location/templates/location/tab-general.html:123
+#: dataviva/apps/location/templates/location/tab-general.html:146
 #: dataviva/translations/dictionary.py:405
 #: dataviva/translations/dictionary.py:410 dataviva/utils/title_format.py:12
 msgid "and"
 msgstr "e"
 
-#: dataviva/apps/location/templates/location/tab-general.html:146
+#: dataviva/apps/location/templates/location/tab-general.html:128
+msgid "The region "
+msgstr "No total, a região "
+
+#: dataviva/apps/location/templates/location/tab-general.html:129
+msgid "has a total of "
+msgstr "possui "
+
+#: dataviva/apps/location/templates/location/tab-general.html:130
+msgid "people. It is the number "
+msgstr "de habitantes. É a "
+
+#: dataviva/apps/location/templates/location/tab-general.html:132
+msgid "region in GDP per capita of Brazil and number "
+msgstr "região em PIB per Capita do país e a "
+
+#: dataviva/apps/location/templates/location/tab-general.html:134
+msgid "in population"
+msgstr "em população"
+
+#: dataviva/apps/location/templates/location/tab-general.html:138
+msgid "federated states of Brazil, located in the "
+msgstr "unidades federativas do Brasil, localizada na "
+
+#: dataviva/apps/location/templates/location/tab-general.html:139
+msgid "being the "
+msgstr "do país, sendo o "
+
+#: dataviva/apps/location/templates/location/tab-general.html:141
+msgid "state in territorial area and "
+msgstr "estado com a maior área territorial e o "
+
+#: dataviva/apps/location/templates/location/tab-general.html:143
+msgid "in population. Its territory is limited for "
+msgstr "em quantidade de habitantes. Limita-se a "
+
+#: dataviva/apps/location/templates/location/tab-general.html:151
 msgid "Its territory is subdivided in "
 msgstr "Seu território é subdividido em "
 
-#: dataviva/apps/location/templates/location/tab-general.html:147
+#: dataviva/apps/location/templates/location/tab-general.html:152
 msgid "cities"
 msgstr "municípios"
 
-#: dataviva/apps/location/templates/location/tab-general.html:162
+#: dataviva/apps/location/templates/location/tab-general.html:167
 #, fuzzy
 msgid "Main Product by Export Value"
 msgstr "Principal Produto por Valor Exportado"
 
-#: dataviva/apps/location/templates/location/tab-general.html:173
+#: dataviva/apps/location/templates/location/tab-general.html:178
 #, fuzzy
 msgid "Main Product by Import Value"
 msgstr "Principal Produto por Valor Exportado"
 
-#: dataviva/apps/location/templates/location/tab-general.html:183
+#: dataviva/apps/location/templates/location/tab-general.html:188
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:17
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:51
 #, fuzzy
 msgid "Total of Exports"
 msgstr "Total de Exportações"
 
-#: dataviva/apps/location/templates/location/tab-general.html:191
+#: dataviva/apps/location/templates/location/tab-general.html:196
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:20
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:57
 #, fuzzy
 msgid "Total of Imports"
 msgstr "Total de Importações"
 
-#: dataviva/apps/location/templates/location/tab-general.html:205
+#: dataviva/apps/location/templates/location/tab-general.html:210
 #, fuzzy
 msgid "Wage and Jobs"
 msgstr "Salário e Emprego"
 
-#: dataviva/apps/location/templates/location/tab-general.html:211
+#: dataviva/apps/location/templates/location/tab-general.html:216
 #: dataviva/apps/location/templates/location/tab-wages.html:10
 #, fuzzy
 msgid "Main Economic Activity"
 msgstr "A atividade econômica"
 
-#: dataviva/apps/location/templates/location/tab-general.html:220
+#: dataviva/apps/location/templates/location/tab-general.html:225
 #, fuzzy
 msgid "Main Occupation"
 msgstr "Ocupações Comuns"
 
-#: dataviva/apps/location/templates/location/tab-general.html:229
+#: dataviva/apps/location/templates/location/tab-general.html:234
 #: dataviva/apps/location/templates/location/tab-wages.html:16
 #: dataviva/apps/location/templates/location/tab-wages.html:41
 #, fuzzy
 msgid "Average Wage"
 msgstr "Idade Média"
 
-#: dataviva/apps/location/templates/location/tab-general.html:237
+#: dataviva/apps/location/templates/location/tab-general.html:242
 #: dataviva/apps/location/templates/location/tab-wages.html:22
 #: dataviva/apps/location/templates/location/tab-wages.html:53
 #, fuzzy
 msgid "Total of Jobs"
 msgstr "Total de Empregos"
 
-#: dataviva/apps/location/templates/location/tab-general.html:259
+#: dataviva/apps/location/templates/location/tab-general.html:264
 #, fuzzy
 msgid "Product with Less Distance"
 msgstr "Produto com Menor"
 
-#: dataviva/apps/location/templates/location/tab-general.html:270
+#: dataviva/apps/location/templates/location/tab-general.html:275
 #, fuzzy
 msgid "Economic Activity with Less Distance"
 msgstr "Atividades Econômicas"
 
-#: dataviva/apps/location/templates/location/tab-general.html:281
+#: dataviva/apps/location/templates/location/tab-general.html:286
 msgid "Product with Most Opportunity Gain"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:292
+#: dataviva/apps/location/templates/location/tab-general.html:297
 msgid "Economic Activity with Most Opportunity Gain"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:316
+#: dataviva/apps/location/templates/location/tab-general.html:321
 msgid "University with Most Enrolled"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:327
+#: dataviva/apps/location/templates/location/tab-general.html:332
 msgid "Major with Most Enrolled"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:338
+#: dataviva/apps/location/templates/location/tab-general.html:343
 msgid "School with Most Enrolled"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:349
+#: dataviva/apps/location/templates/location/tab-general.html:354
 msgid "Basic Course with Most Enrolled"
 msgstr ""
 
