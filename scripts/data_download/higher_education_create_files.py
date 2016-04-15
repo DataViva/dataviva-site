@@ -5,10 +5,11 @@
 '''
 from collections import namedtuple
 from common import engine, get_colums
-from dictionary import en
+from dictionary import en, pt
 import pandas as pd
 import os
 import bz2
+import sys
 
 
 def select_table(conditions):
@@ -26,11 +27,16 @@ def select_table(conditions):
     return 'hedu_' + s
 
 
-def save(years, locations, majors):
+def save(years, locations, majors, lang):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path='scripts/data/hedu/'
+    output_path='scripts/data/hedu/'+lang
     columns_deleted=['bra_id_len', 'course_hedu_id_len', 'enrolled_rca']
+
+    if lang == 'en':
+        dic_lang = en
+    else:
+        dic_lang = pt
 
     for year in years:
         conditions[0] = year.condition
@@ -46,13 +52,13 @@ def save(years, locations, majors):
                 name_file = 'hedu'+str(year.name)+str(location.name)+str(major.name)
 
                 if table not in table_columns.keys():
-                        table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table, columns_deleted)]
+                        table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in get_colums(table, columns_deleted)]
 
                 f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
-                new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
-                # new_file_path='/home/ubuntu/files/hedu/en/'+name_file+'.csv.bz2';
-                f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
+                #new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
+                new_file_path='/home/ubuntu/files/hedu/'+lang+'/'+name_file+'.csv.bz2';
+                f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
 
 
 Condition = namedtuple('Condition', ['condition', 'name'])
@@ -79,4 +85,8 @@ majors = [
     Condition('course_hedu_id_len=6', '-majors')]
 
 
-save(years=years, locations=locations, majors=majors)
+if len(sys.argv) != 2 or (sys.argv[1:][0] not in ['pt', 'en']):
+    print "ERROR! use :\npython scripts/data_download/secex_create_files.py en/pt"
+    exit()
+
+save(years=years, locations=locations, majors=majors, lang=sys.argv[1:][0])
