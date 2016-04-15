@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 15:23-0300\n"
+"POT-Creation-Date: 2016-04-15 15:32-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -620,6 +620,7 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/index.html:67
 #: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
 #: dataviva/apps/location/templates/location/index.html:66
+#: dataviva/apps/location/templates/location/tab-general.html:257
 #: dataviva/apps/location/templates/location/tab-opportunities.html:2
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/index.html:67
@@ -895,7 +896,7 @@ msgid "GDP per capita"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:48
-msgid "HDI"
+msgid "MHDI"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:59

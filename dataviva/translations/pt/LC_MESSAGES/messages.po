@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 15:23-0300\n"
+"POT-Creation-Date: 2016-04-15 15:32-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -634,6 +634,7 @@ msgstr "Barras"
 #: dataviva/apps/industry/templates/industry/index.html:67
 #: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
 #: dataviva/apps/location/templates/location/index.html:66
+#: dataviva/apps/location/templates/location/tab-general.html:257
 #: dataviva/apps/location/templates/location/tab-opportunities.html:2
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/index.html:67
@@ -905,29 +906,27 @@ msgstr "Cursos Básicos"
 
 #: dataviva/apps/location/templates/location/tab-general.html:7
 msgid "GDP"
-msgstr ""
+msgstr "PIB"
 
 #: dataviva/apps/location/templates/location/tab-general.html:17
 msgid "Life Expectancy"
-msgstr ""
+msgstr "Expectativa de Vida"
 
 #: dataviva/apps/location/templates/location/tab-general.html:28
-#, fuzzy
 msgid "Total Population"
-msgstr "População"
+msgstr "População Total"
 
 #: dataviva/apps/location/templates/location/tab-general.html:38
 msgid "GDP per capita"
-msgstr ""
+msgstr "PIB per capita"
 
 #: dataviva/apps/location/templates/location/tab-general.html:48
-msgid "HDI"
-msgstr ""
+msgid "MHDI"
+msgstr "IDHM"
 
 #: dataviva/apps/location/templates/location/tab-general.html:59
-#, fuzzy
 msgid "ECI"
-msgstr "Dez"
+msgstr "ECI"
 
 #: dataviva/apps/location/templates/location/tab-general.html:80
 msgid "is one of the "
@@ -5875,4 +5874,7 @@ msgstr "com"
 
 #~ msgid "Wage and Jobs"
 #~ msgstr "Salário e Emprego"
+
+#~ msgid "HDI"
+#~ msgstr "IDH"
 

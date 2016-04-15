@@ -45,7 +45,7 @@
                 {% if header.hdi %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}HDI{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.hdi|magnitude }}</small>
@@ -311,7 +311,7 @@
         </div>
 
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Educação</h3>
+            <h3>{% trans %}Education{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
