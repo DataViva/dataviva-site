@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="wages">
-    <h2>Estatísticas de Salário e Emprego</h2>
+    <h2>{% trans %}Wages and Jobs{% endtrans %}</h2>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
             <div class="table-responsive">
@@ -7,19 +7,19 @@
                     <thead>
                         <tr>
                             <th>
-                                Principal Atividade Econômica <small>por Número de Empregos</small>
+                                {% trans %}Main Economic Activity{% endtrans %}<small>{% trans %}By Number of Jobs{% endtrans %}</small>
                             </th>
                             <th>
-                                Principal Ocupação <small>por Número de Empregos</small>
+                                {% trans %}Principal Ocupação{% endtrans %}<small>{% trans %}By Number of Jobs{% endtrans %}</small>
                             </th>
                             <th>
-                                Salário Médio
+                                {% trans %}Average Wage{% endtrans %}
                             </th>
                             <th>
-                                Massa Salarial
+                                {% trans %}Salary Mass{% endtrans %}
                             </th>
                             <th>
-                                Total de Empregos
+                                {% trans %}Total of Jobs{% endtrans %}
                             </th>
                         </tr>
                     </thead>
@@ -38,19 +38,19 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="label">Salário Médio</p>
+                                <p class="label">{% trans %}Average Wage{% endtrans %}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong><span>{{ body.avg_wage | magnitude }}</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">Massa Salarial</p>
+                                <p class="label">{% trans %}Wage Mass{% endtrans %}l</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.wage | max_digits(3) }}</strong><span>{{ body.wage | magnitude }}</span>
                                 </div>
                             </td>
                             <td>
-                                <p class="label">Total de Empregos</p>
+                                <p class="label">{% trans %}Total of Jobs{% endtrans %}</p>
                                 <div class="number">
                                     USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong><span>{{ body.total_jobs | magnitude }}</span>
                                 </div>
