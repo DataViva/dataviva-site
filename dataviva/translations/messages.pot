@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 14:00-0300\n"
+"POT-Creation-Date: 2016-04-15 14:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -953,11 +953,33 @@ msgid "people. Its GDP is "
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:101
+#: dataviva/apps/location/templates/location/tab-general.html:111
 msgid "and its main product for export value is "
 msgstr ""
 
+#: dataviva/apps/location/templates/location/tab-general.html:104
+msgid "The mesoregion "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:105
 #: dataviva/apps/location/templates/location/tab-general.html:132
 msgid " is one of the "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:106
+msgid "subdivisions of the state of "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:107
+msgid "It is the "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:109
+msgid "Brazilian meso-region in complexity index and has the population of "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:110
+msgid "people. Its GDP is R$ "
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:133

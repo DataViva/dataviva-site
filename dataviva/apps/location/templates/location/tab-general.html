@@ -101,14 +101,14 @@
             {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 5 %}
-            <p>A Mesorregião {{ header.name }} 
-            é uma das {{ profile.number_of_mesoregions }} 
-            subdivisões do estado {{ location.preposition('de') }} {{ profile.state_name }}. 
-            É a {{ profile.eci_rank }}
+            <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
+            {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions }} 
+            {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
+            {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}
             ª 
-            mesorregião brasileira em índice de complexidade e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
-            habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
-            e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.
+            {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
+            {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 1 %}
             <p>A região {{ header.name }} 

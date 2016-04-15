@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 14:00-0300\n"
+"POT-Creation-Date: 2016-04-15 14:13-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -980,12 +980,34 @@ msgid "people. Its GDP is "
 msgstr "de habitantes. Seu PIB é de R$ "
 
 #: dataviva/apps/location/templates/location/tab-general.html:101
+#: dataviva/apps/location/templates/location/tab-general.html:111
 msgid "and its main product for export value is "
 msgstr "e seu principal produto por valor exportado é "
 
+#: dataviva/apps/location/templates/location/tab-general.html:104
+msgid "The mesoregion "
+msgstr "A mesorregião "
+
+#: dataviva/apps/location/templates/location/tab-general.html:105
 #: dataviva/apps/location/templates/location/tab-general.html:132
 msgid " is one of the "
 msgstr " é uma das "
+
+#: dataviva/apps/location/templates/location/tab-general.html:106
+msgid "subdivisions of the state of "
+msgstr "subdivisões do estado "
+
+#: dataviva/apps/location/templates/location/tab-general.html:107
+msgid "It is the "
+msgstr "É a "
+
+#: dataviva/apps/location/templates/location/tab-general.html:109
+msgid "Brazilian meso-region in complexity index and has the population of "
+msgstr "mesorregião brasileira em índice de complexidade e possui população de "
+
+#: dataviva/apps/location/templates/location/tab-general.html:110
+msgid "people. Its GDP is R$ "
+msgstr "habitantes. Seu PIB é de R$ "
 
 #: dataviva/apps/location/templates/location/tab-general.html:133
 msgid "federated states of Brazil, located in the "
