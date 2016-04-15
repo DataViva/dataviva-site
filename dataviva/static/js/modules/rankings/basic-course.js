@@ -23,6 +23,10 @@ var BasicCourseTable = function () {
             },
         ],
         "deferRender": true,
+        "language": {
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ resultados",
+            "search": "Busca:"
+        },
         "scrollY": 500,
         "scrollCollapse": true,
         "scroller": true,
