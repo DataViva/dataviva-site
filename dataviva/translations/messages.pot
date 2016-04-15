@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 12:00-0300\n"
+"POT-Creation-Date: 2016-04-15 14:00-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -928,114 +928,142 @@ msgstr ""
 msgid "city of the state regarding the GDP ranking"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:128
-msgid " is one of the "
+#: dataviva/apps/location/templates/location/tab-general.html:95
+msgid "microregion is one of the"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:129
-msgid "federated states of Brazil, located in the "
+#: dataviva/apps/location/templates/location/tab-general.html:96
+msgid "subdivisions of the "
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:130
-msgid "being the "
+#: dataviva/apps/location/templates/location/tab-general.html:97
+msgid "mesoregion, located in the state of "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:98
+msgid "It comprehends "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:99
+msgid "cities and has a population of "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:100
+msgid "people. Its GDP is "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:101
+msgid "and its main product for export value is "
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:132
-msgid "state in territorial area and "
+msgid " is one of the "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:133
+msgid "federated states of Brazil, located in the "
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:134
+msgid "being the "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:136
+msgid "state in territorial area and "
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-general.html:138
 msgid "in population. Its territory is limited for "
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:137
+#: dataviva/apps/location/templates/location/tab-general.html:141
 #: dataviva/translations/dictionary.py:405
 #: dataviva/translations/dictionary.py:410 dataviva/utils/title_format.py:12
 msgid "and"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:142
+#: dataviva/apps/location/templates/location/tab-general.html:146
 msgid "Its territory is subdivided in "
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:143
+#: dataviva/apps/location/templates/location/tab-general.html:147
 msgid "cities"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:158
+#: dataviva/apps/location/templates/location/tab-general.html:162
 msgid "Main Product by Export Value"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:169
+#: dataviva/apps/location/templates/location/tab-general.html:173
 msgid "Main Product by Import Value"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:179
+#: dataviva/apps/location/templates/location/tab-general.html:183
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:17
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:51
 msgid "Total of Exports"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:187
+#: dataviva/apps/location/templates/location/tab-general.html:191
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:20
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:57
 msgid "Total of Imports"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:201
+#: dataviva/apps/location/templates/location/tab-general.html:205
 msgid "Wage and Jobs"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:207
+#: dataviva/apps/location/templates/location/tab-general.html:211
 #: dataviva/apps/location/templates/location/tab-wages.html:10
 msgid "Main Economic Activity"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:216
+#: dataviva/apps/location/templates/location/tab-general.html:220
 msgid "Main Occupation"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:225
+#: dataviva/apps/location/templates/location/tab-general.html:229
 #: dataviva/apps/location/templates/location/tab-wages.html:16
 #: dataviva/apps/location/templates/location/tab-wages.html:41
 msgid "Average Wage"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:233
+#: dataviva/apps/location/templates/location/tab-general.html:237
 #: dataviva/apps/location/templates/location/tab-wages.html:22
 #: dataviva/apps/location/templates/location/tab-wages.html:53
 msgid "Total of Jobs"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:255
+#: dataviva/apps/location/templates/location/tab-general.html:259
 msgid "Product with Less Distance"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:266
+#: dataviva/apps/location/templates/location/tab-general.html:270
 msgid "Economic Activity with Less Distance"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:277
+#: dataviva/apps/location/templates/location/tab-general.html:281
 msgid "Product with Most Opportunity Gain"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:288
+#: dataviva/apps/location/templates/location/tab-general.html:292
 msgid "Economic Activity with Most Opportunity Gain"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:312
+#: dataviva/apps/location/templates/location/tab-general.html:316
 msgid "University with Most Enrolled"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:323
+#: dataviva/apps/location/templates/location/tab-general.html:327
 msgid "Major with Most Enrolled"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:334
+#: dataviva/apps/location/templates/location/tab-general.html:338
 msgid "School with Most Enrolled"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-general.html:345
+#: dataviva/apps/location/templates/location/tab-general.html:349
 msgid "Basic Course with Most Enrolled"
 msgstr ""
 

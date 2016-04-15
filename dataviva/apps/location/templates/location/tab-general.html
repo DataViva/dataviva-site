@@ -87,14 +87,18 @@
             º 
             {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
         {% elif profile.bra_id|length == 7 %}
-            <p>A Microrregião {{ header.name }} 
-            é uma das {{ profile.number_of_microregions }} 
-            subdivisões da Mesorregião {{ profile.mesoregion_name }}, 
-            localizada no estado {{ location.preposition('de') }} {{ profile.state_name }}. 
-            Compreende um total de {{ profile.number_of_municipalities }} 
-            municípios e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
-            de habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
-            e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.
+            <p>
+            {% if g.locale == "pt" %}
+                A Microrregião
+            {% endif %}
+            {{ header.name }} 
+            {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions }} 
+            {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }}, 
+            {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
+            {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
+            {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 5 %}
             <p>A Mesorregião {{ header.name }} 
@@ -126,7 +130,7 @@
         {% else %}
             <p>{{ header.name }} 
             {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }} 
-            {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }}, 
+            {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }} 
             {% trans %}being the {% endtrans %}{{ profile.area_rank }}
             º 
             {% trans %}state in territorial area and {% endtrans %}{{ profile.pop_rank }}
@@ -140,7 +144,7 @@
                 {% endif %}
             {% endfor %}. 
             {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities }} 
-            {% trans %}cities{% endtrans %} {{ profile.municipality_rank }}
+            {% trans %}cities{% endtrans %}
             .</p>
         {% endif %}
 
