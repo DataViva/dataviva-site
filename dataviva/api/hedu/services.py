@@ -58,9 +58,6 @@ class University:
     def university_type(self):
         return self.__hedu__().university.school_type_pt
 
-    def university_type_id(self):
-        return self.__hedu__().university.school_type_id
-
     def enrolled(self):
         return self.__hedu__().enrolled
 
