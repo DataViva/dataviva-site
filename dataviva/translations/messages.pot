@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 15:32-0300\n"
+"POT-Creation-Date: 2016-04-15 15:37-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -841,6 +841,7 @@ msgstr ""
 
 #: dataviva/apps/location/templates/location/index.html:74
 #: dataviva/apps/location/templates/location/tab-education.html:2
+#: dataviva/apps/location/templates/location/tab-general.html:314
 msgid "Education"
 msgstr ""
 
@@ -1056,14 +1057,14 @@ msgid "Main Product by Total Value Imported"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:188
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:17
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:51
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:18
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:52
 msgid "Total of Exports"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:196
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:20
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:57
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:21
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:58
 msgid "Total of Imports"
 msgstr ""
 
@@ -1155,23 +1156,23 @@ msgid "Main Product"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:11
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:24
-msgid "By Export Value"
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:25
+msgid "by Export Value"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:14
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:15
 msgid "by Imported Value"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:23
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:27
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:24
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:28
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:20
 #: dataviva/translations/dictionary.py:513
 msgid "Main Destination"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:28
-msgid "By Import Value"
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:29
+msgid "by Import Value"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-wages.html:10
