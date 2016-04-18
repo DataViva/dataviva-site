@@ -25,4 +25,4 @@ def upload_s3_file(file_path, bucket, file_id, extra_args={'ContentType': "html/
 
     transfer = S3Transfer(client)
 
-    return transfer.upload_file(file_path, bucket, file_id, extra_args)
+    return transfer.upload_file(file_path, bucket, file_id, extra_args=extra_args)
