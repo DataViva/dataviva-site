@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-18 14:40-0300\n"
+"POT-Creation-Date: 2016-04-18 16:16-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,6 +210,78 @@ msgstr ""
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:16
 #: dataviva/translations/dictionary.py:312
 msgid "Average Age"
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:14
+#: dataviva/templates/include/footer.html:5
+#: dataviva/translations/dictionary.py:577
+msgid "About"
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:24
+msgid ""
+"DataViva is an open search platform that allows users to access more than"
+" 1 billion visualizations of socioeconomic data from more than 5 thousand"
+" Brazilian cities."
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:27
+#: dataviva/templates/include/footer.html:6
+#: dataviva/translations/dictionary.py:580
+msgid "The"
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:31
+msgid ""
+"Collaborative planning, economy diversification, competitiveness and "
+"transparency: these are the DataViva goals, created to strengthen the "
+"culture of data use and guide the development of the country. A tool for "
+"information and analysis that proposes a new way of thinking about the "
+"construction of the future through the conversion of data into knowledge "
+"and action."
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:33
+msgid "The project’s history"
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:34
+msgid ""
+"DataViva is an initiative of the Government of the State of Minas Gerais "
+"and Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG) – "
+"The State of Minas Gerais foundation for research funding and support – "
+"that offers its users a dynamic access experience to a large range of "
+"public data. Totally developed in free software and with open access to "
+"all, DataViva was created to contribute to the implementation of public "
+"policies, private and public investments, and to help academic studies."
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:35
+msgid ""
+"Initially designed to assist the economic development policy of the "
+"Government of the State of Minas Gerais, the project came from the need "
+"to make the access to Brazilian economy data easier and intuitive. "
+"Developed in partnership with MIT Media Lab researchers (one of the main "
+"innovation centers in the world), the platform offers an unprecedented "
+"solution in the country, through the database provided by the Ministério "
+"do Trabalho e Emprego (MTE), Ministério do Desenvolvimento, Indústria e "
+"Comércio Exterior (MDIC) and Ministério da Educação (MEC) – the "
+"Ministries of Employment; Development, Industry and International Trade; "
+"and Education, respectively."
+msgstr ""
+
+#: dataviva/apps/about/templates/about/index.html:36
+msgid ""
+"One of the conception pillars of DataViva is the BigData technology, a "
+"technique designed to generate knowledge and intelligence from the "
+"processing of a large volume of data. Based on international references, "
+"the project features, in its current version, national data from the last"
+" decade concerning economy, education, industry, labor market, and other "
+"categories, viewed by location. Providing open and free access to these "
+"information, DataViva offers a more detailed knowledge of the Brazilian "
+"economy, generating inputs for the planning and decision making by "
+"entrepreneurs, students, investors and professionals of any economic "
+"sector and from anywhere in the world."
 msgstr ""
 
 #: dataviva/apps/account/views.py:362 dataviva/apps/account/views.py:374
@@ -526,6 +598,89 @@ msgstr ""
 msgid "More detais"
 msgstr ""
 
+#: dataviva/apps/blog/templates/blog/_base.html:16
+#: dataviva/apps/data/templates/data/index.html:15
+#: dataviva/apps/news/templates/news/_base.html:16
+msgid "Topics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:18
+#: dataviva/apps/news/templates/news/_base.html:18
+#: dataviva/templates/about/ask/index.html:51
+#: dataviva/templates/account/index.html:24
+#: dataviva/translations/dictionary.py:389
+msgid "All"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:19
+#: dataviva/apps/embed/templates/embed/info.html:4
+#: dataviva/apps/news/templates/news/_base.html:19
+msgid "Visualizations"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:20
+#: dataviva/apps/news/templates/news/_base.html:20
+msgid "Information Technology"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:21
+#: dataviva/apps/news/templates/news/_base.html:21
+msgid "Economy"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:22
+#: dataviva/apps/news/templates/news/_base.html:22
+msgid "Mathematics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:23
+#: dataviva/apps/news/templates/news/_base.html:23
+msgid "Statistics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:24
+#: dataviva/apps/news/templates/news/_base.html:24
+msgid "Design"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:25
+#: dataviva/apps/news/templates/news/_base.html:25
+msgid "Public Policies"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/index.html:22
+#: dataviva/apps/news/templates/news/index.html:22
+msgid "Continue reading"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:5
+#: dataviva/apps/location/templates/location/graphs-opportunities.html:3
+#: dataviva/apps/news/templates/news/show.html:5
+msgid "Visualize"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:14
+#: dataviva/apps/news/templates/news/show.html:14
+msgid "By"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:21
+#: dataviva/apps/news/templates/news/show.html:21
+msgid "Tweet"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:33
+#: dataviva/apps/news/templates/news/show.html:33
+msgid "See also"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:48
+#: dataviva/apps/news/templates/news/show.html:48
+#: dataviva/templates/about/ask/index.html:55
+#: dataviva/templates/about/ask/index.html:182
+msgid "Comment"
+msgstr ""
+
 #: dataviva/apps/build_graph/templates/build_graph/index.html:21
 #: dataviva/apps/data/templates/data/index.html:27
 #: dataviva/apps/data/templates/data/index.html:35
@@ -539,10 +694,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:29
 #: dataviva/translations/dictionary.py:581
 msgid "Database Download"
-msgstr ""
-
-#: dataviva/apps/data/templates/data/index.html:15
-msgid "Topics"
 msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:17
@@ -618,10 +769,6 @@ msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:64
 msgid "Show/Hide Controls"
-msgstr ""
-
-#: dataviva/apps/embed/templates/embed/info.html:4
-msgid "Visualizations"
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/info.html:28
@@ -846,10 +993,6 @@ msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-education.html:13
 msgid "Basic Education By"
-msgstr ""
-
-#: dataviva/apps/location/templates/location/graphs-opportunities.html:3
-msgid "Visualize"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:5
@@ -1405,6 +1548,15 @@ msgstr ""
 
 #: dataviva/apps/major/templates/major/tab-general.html:102
 msgid "students enrolled in the municipality"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_base.html:29
+#: dataviva/apps/news/templates/news/show.html:4
+#: dataviva/templates/general/index.html:130
+#: dataviva/templates/include/footer.html:8
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:532
+msgid "News"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:5
@@ -2881,21 +3033,10 @@ msgstr ""
 msgid "Most Recent"
 msgstr ""
 
-#: dataviva/templates/about/ask/index.html:51
-#: dataviva/templates/account/index.html:24
-#: dataviva/translations/dictionary.py:389
-msgid "All"
-msgstr ""
-
 #: dataviva/templates/about/ask/index.html:53
 #: dataviva/templates/admin/admin_questions.html:3
 #: dataviva/templates/admin/admin_questions.html:28
 msgid "Question"
-msgstr ""
-
-#: dataviva/templates/about/ask/index.html:55
-#: dataviva/templates/about/ask/index.html:182
-msgid "Comment"
 msgstr ""
 
 #: dataviva/templates/about/ask/index.html:57
@@ -3561,13 +3702,6 @@ msgstr ""
 msgid "Free Sign Up"
 msgstr ""
 
-#: dataviva/templates/general/index.html:130
-#: dataviva/templates/include/footer.html:8
-#: dataviva/templates/include/header.html:5
-#: dataviva/translations/dictionary.py:532
-msgid "News"
-msgstr ""
-
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
 msgstr ""
@@ -3618,16 +3752,6 @@ msgid ""
 "Because of the technology used, we cannot support versions of Internet "
 "Explorer older than version 9. Please update your browser to use the "
 "site."
-msgstr ""
-
-#: dataviva/templates/include/footer.html:5
-#: dataviva/translations/dictionary.py:577
-msgid "About"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:6
-#: dataviva/translations/dictionary.py:580
-msgid "The"
 msgstr ""
 
 #: dataviva/templates/include/footer.html:7
