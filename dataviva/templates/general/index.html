@@ -10,7 +10,7 @@
         </div>
         <div class="m-t-lg col-xs-12 col-sm-6 wow fadeInRight">
             <ul>
-                <li data-toggle="popover" data-placement="top" data-content="Número de estabelecimentos por atividade econômica, porcentagem de profissionais graduados por ano em determinado curso por região, produtos similares por região, salário médio por segmento, e mais...">
+                <li data-toggle="popover" data-placement="top" data-content="{% trans %}Number of establishments per economic activity, percentage of graduated professionals per year in a given course by region, similar products by region, average wage by segment, and more… {% endtrans %}">
                     <a onclick="fire_wizard('entrepreneur')">
                         <h3 class="text-uppercase">{% trans %}Entrepreneurs{% endtrans %}</h3>
                         <p>
@@ -18,7 +18,7 @@
                         </p>
                     </a>
                 </li>
-                <li data-toggle="popover" data-placement="top" data-content="Principais parceiros comerciais de um produto por região, estados que mais importam um produto específico, atividade econômica por localidade, emprego e renda por segmento, e mais...">
+                <li data-toggle="popover" data-placement="top" data-content="{% trans %}Main business partners of a product by region, states that lead importation of a specific product, economic activity by locality, employment and income by segment, and more…{% endtrans %}">
                     <a onclick="fire_wizard('development_agents')">
                         <h3 class="text-uppercase">{%trans%}DEVELOPMENT AGENTS{%endtrans%}</h3>
                         <p>
@@ -26,7 +26,7 @@
                         </p>
                     </a>
                 </li>
-                <li data-toggle="popover" data-placement="top" data-content="Salário médio de uma atividade ou ocupação, cidades que concentram a maior taxa de empregos em uma atividade, cursos oferecidos por região, quantidade de matriculados em cada universidade, e mais...">
+                <li data-toggle="popover" data-placement="top" data-content="{% trans %}Average wage of an activity or occupation, cities with best employment rates in an activity, courses offered by region, number of students enrolled in each university and more…{% endtrans %}">
                     <a onclick="fire_wizard('student')">
                         <h3 class="text-uppercase">{% trans %}STUDENTS AND PROFESSIONALS{% endtrans %}</h3>
                         <p>
@@ -62,49 +62,49 @@
 
         <div class="row database-icons wow fadeInDown">
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Location');" data-toggle="popover" data-placement="top" data-content="Perfil geral por região, estado, mesorregião, microrregião ou município brasileiro. Visualize dados de comércio exterior, atividade econômica, empregos e educação. Exemplos: Sudeste, Mato Grosso, Recife, Região Metropolitana de Porto Alegre.">
+                <a href="#" onclick="start_selector('Location');" data-toggle="popover" data-placement="top" data-content="{% trans %}General profile by region, state, mesoregion, micro-region or city. Check its international trade, economic activity, employment and education data. Examples: Southeast, Mato Grosso, Recife, Metropolitan Region of Porto Alegre.{% endtrans %}">
                     <p>{% trans %}Brazilian Locations{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-bra"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Occupation');" data-toggle="popover" data-placement="top" data-content="Regiões que mais empregam por atividade profissional, cursos relacionados, salário médio e estatísticas de emprego por ano. Exemplos: Técnicos de Nível Médio, Trabalhadores da Indústria, Recepcionistas, Médicos Clínicos.">
+                <a href="#" onclick="start_selector('Occupation');" data-toggle="popover" data-placement="top" data-content="{% trans %}Regions with best employment rates by professional activity, related courses, average wage and job statistics per year. Examples: Medium level technicians, Industry workers, Receptionists, Clinicians.{% endtrans %}">
                     <p>{% trans %}Occupations{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-occupation"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Industry');" data-toggle="popover" data-placement="top" data-content="Informações sobre taxa de empregos por região, salário médio por tipo de ocupação, renda mensal média e oportunidades econômicas. Exemplos: Comércio, Serviços Domésticos, Educação, Restaurantes, Teleatendimento, Organizações Religiosas.">
+                <a href="#" onclick="start_selector('Industry');" data-toggle="popover" data-placement="top" data-content="{% trans %}Information on employment rate by region, average wage by occupation, average monthly income and economic opportunities. Examples: Businesses, Domestic Service, Education, Restaurants, Call Center, Religious Organizations.{% endtrans %}">
                     <p>{% trans %}Economic Activities{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-industry"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Product');" data-toggle="popover" data-placement="top" data-content="Dados da Balança Comercial por produto, origem das importações e destino das exportações, ranking por localidade, atividades econômicas e ocupações relacionadas. Exemplos: Gêneros Alimentícios, Artes e Antiguidades, Minério de Ferro, Café, Peças para Veículos.">
+                <a href="#" onclick="start_selector('Product');" data-toggle="popover" data-placement="top" data-content="{% trans %}Trade Balance data by product, import origin and export destination, ranking by location, economic activities and related occupations. Examples: Food, Art and Antiques, Iron Ore, Coffee, Auto Parts.{% endtrans %}">
                     <p>{% trans %}Products{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-product"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('TradePartner');" data-toggle="popover" data-placement="top" data-content="Nações que importam ou exportam produtos para o Brasil, dados de comercialização por tipo de produto ou por município comercializador. Exemplos: Ásia, África, Europa, México, Japão, Estados Unidos, China, Holanda, Irã.">
+                <a href="#" onclick="start_selector('TradePartner');" data-toggle="popover" data-placement="top" data-content="{% trans %}Brazil’s top import and export partners, trade data by type of product or supplier city. Examples: Asia, Africa, Europe, Mexico, Japan, United States of America, China, The Netherlands, Iran.{% endtrans %}">
                     <p>{% trans %}Trade Partners{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-trade-partner"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('University');" data-toggle="popover" data-placement="top" data-content="Número de matrículas em cada curso ofertado, situação dos estudantes e perfis semelhantes de universidades. Exemplos: Universidade de São Paulo, Pontifícia Universidade Católica de Goiás, Universidade Federal de Minas Gerais.">
+                <a href="#" onclick="start_selector('University');" data-toggle="popover" data-placement="top" data-content="{% trans %}Number of enrollments in each offered course, student status and similar university profiles. Examples: Universidade de São Paulo, Universidade Federal de Minas Gerais, PUC Goiás.{% endtrans %}">
                     <p>{% trans %}Universities{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-university"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2 col-sm-offset-2 col-md-offset-0 col-lg-offset-4">
-                <a href="#" onclick="start_selector('Major');" data-toggle="popover" data-placement="top" data-content="Lista de universidades e municípios que ofertam o curso de Educação Superior ou o campo de estudo selecionado. Exemplos: Educação, Ciências da Saúde, Direito, Engenharia de Produção, Fisioterapia.">
+                <a href="#" onclick="start_selector('Major');" data-toggle="popover" data-placement="top" data-content="{% trans %}List of universities and cities that offer post-secondary courses or the selected field of study. Examples: Education, Health Sciences, Law, Production Engineering, Physiotherapy.{% endtrans %}">
                     <p>{% trans %}Higher Education{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-major"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('BasicCourse');" data-toggle="popover" data-placement="top" data-content="Escolas do Brasil que oferecem educação profissional e ranking de matrículas na Educação Básica por município. Exemplos: Ensino Fundamental, Ensino Médio, Técnico em Enfermagem, Técnico em Agropecuária.">
+                <a href="#" onclick="start_selector('BasicCourse');" data-toggle="popover" data-placement="top" data-content="{% trans %}Brazilian schools that offer professional education and enrollment ranking by city. Examples: Elementary School, High School, Nursing Technician, Agriculture and Livestock Technician.{% endtrans %}">
                     <p>{% trans %}Basic Course{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-basic-course"></i></button>
                 </a>

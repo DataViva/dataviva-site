@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 17:19-0300\n"
+"POT-Creation-Date: 2016-04-18 13:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3349,6 +3349,13 @@ msgid ""
 "visualizations."
 msgstr ""
 
+#: dataviva/templates/general/index.html:13
+msgid ""
+"Number of establishments per economic activity, percentage of graduated "
+"professionals per year in a given course by region, similar products by "
+"region, average wage by segment, and more… "
+msgstr ""
+
 #: dataviva/templates/general/index.html:15
 #: dataviva/translations/dictionary.py:559
 msgid "Entrepreneurs"
@@ -3359,6 +3366,13 @@ msgstr ""
 msgid "Identify the economic profile and business opportunities of a region"
 msgstr ""
 
+#: dataviva/templates/general/index.html:21
+msgid ""
+"Main business partners of a product by region, states that lead "
+"importation of a specific product, economic activity by locality, "
+"employment and income by segment, and more…"
+msgstr ""
+
 #: dataviva/templates/general/index.html:23
 #: dataviva/translations/dictionary.py:561
 msgid "DEVELOPMENT AGENTS"
@@ -3367,6 +3381,13 @@ msgstr ""
 #: dataviva/templates/general/index.html:25
 #: dataviva/translations/dictionary.py:562
 msgid "Assess development policies setting by location"
+msgstr ""
+
+#: dataviva/templates/general/index.html:29
+msgid ""
+"Average wage of an activity or occupation, cities with best employment "
+"rates in an activity, courses offered by region, number of students "
+"enrolled in each university and more…"
 msgstr ""
 
 #: dataviva/templates/general/index.html:31
@@ -3413,10 +3434,68 @@ msgid ""
 "Superior) and UN Comtrade International Trade."
 msgstr ""
 
+#: dataviva/templates/general/index.html:65
+msgid ""
+"General profile by region, state, mesoregion, micro-region or city. Check"
+" its international trade, economic activity, employment and education "
+"data. Examples: Southeast, Mato Grosso, Recife, Metropolitan Region of "
+"Porto Alegre."
+msgstr ""
+
+#: dataviva/templates/general/index.html:71
+msgid ""
+"Regions with best employment rates by professional activity, related "
+"courses, average wage and job statistics per year. Examples: Medium level"
+" technicians, Industry workers, Receptionists, Clinicians."
+msgstr ""
+
+#: dataviva/templates/general/index.html:77
+msgid ""
+"Information on employment rate by region, average wage by occupation, "
+"average monthly income and economic opportunities. Examples: Businesses, "
+"Domestic Service, Education, Restaurants, Call Center, Religious "
+"Organizations."
+msgstr ""
+
+#: dataviva/templates/general/index.html:83
+msgid ""
+"Trade Balance data by product, import origin and export destination, "
+"ranking by location, economic activities and related occupations. "
+"Examples: Food, Art and Antiques, Iron Ore, Coffee, Auto Parts."
+msgstr ""
+
+#: dataviva/templates/general/index.html:89
+msgid ""
+"Brazil’s top import and export partners, trade data by type of product or"
+" supplier city. Examples: Asia, Africa, Europe, Mexico, Japan, United "
+"States of America, China, The Netherlands, Iran."
+msgstr ""
+
 #: dataviva/templates/general/index.html:90
 #: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:361
 msgid "Trade Partners"
+msgstr ""
+
+#: dataviva/templates/general/index.html:95
+msgid ""
+"Number of enrollments in each offered course, student status and similar "
+"university profiles. Examples: Universidade de São Paulo, Universidade "
+"Federal de Minas Gerais, PUC Goiás."
+msgstr ""
+
+#: dataviva/templates/general/index.html:101
+msgid ""
+"List of universities and cities that offer post-secondary courses or the "
+"selected field of study. Examples: Education, Health Sciences, Law, "
+"Production Engineering, Physiotherapy."
+msgstr ""
+
+#: dataviva/templates/general/index.html:107
+msgid ""
+"Brazilian schools that offer professional education and enrollment "
+"ranking by city. Examples: Elementary School, High School, Nursing "
+"Technician, Agriculture and Livestock Technician."
 msgstr ""
 
 #: dataviva/templates/general/index.html:121
@@ -3622,8 +3701,7 @@ msgid "HELP"
 msgstr ""
 
 #: dataviva/templates/include/header.html:49
-#: dataviva/translations/dictionary.py:542
-msgid "Sing Up"
+msgid "Sign Up"
 msgstr ""
 
 #: dataviva/templates/include/header.html:51
@@ -4742,6 +4820,10 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:519
 msgid " in imports in the mesoregions of"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:542
+msgid "Sign2 Up"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:553
