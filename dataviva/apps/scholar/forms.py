@@ -42,10 +42,6 @@ class RegistrationForm(Form):
         NumberOfWords(max=250)
     ])
 
-    article = FileField('article', validators=[
-        validators.Required(u"Por favor, insira o arquivo para o artigo.")
-    ])
-
 '''
 REGRAS FORMULÁRIO:
     Título - (Máximo 400 caracteres)
