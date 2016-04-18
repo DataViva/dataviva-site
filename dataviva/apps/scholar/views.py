@@ -10,34 +10,15 @@ from datetime import datetime
 
 import os
 import simplejson
-import upload_file as uploadfile
+from upload_file import UploadFile
 from werkzeug import secure_filename
 from dataviva import app
 
 app.config['UPLOAD_FOLDER'] = os.getcwd()+'/dataviva/static/data/scholar/'
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
-ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx'])
+ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
 IGNORED_FILES = set(['.gitignore'])
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def gen_file_name(filename):
-    """
-    If file was exist already, rename it and return a new name
-    """
-
-    i = 1
-    while os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
-        name, extension = os.path.splitext(filename)
-        filename = '%s_%s%s' % (name, str(i), extension)
-        i = i + 1
-
-    return filename
 
 
 mod = Blueprint('scholar', __name__,
@@ -58,6 +39,25 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
+def gen_file_name(filename):
+    """
+    If file was exist already, rename it and return a new name
+    """
+
+    i = 1
+    while os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
+        name, extension = os.path.splitext(filename)
+        filename = '%s_%s%s' % (name, str(i), extension)
+        i = i + 1
+
+    return filename
 
 
 @mod.route('/', methods=['GET'])
@@ -88,17 +88,6 @@ def admin_update():
     return message
 
 
-@mod.route('/admin/article/<status>/<status_value>', methods=['POST'])
-def admin_activate(status, status_value):
-    for id in request.form.getlist('ids[]'):
-        article = Article.query.filter_by(id=id).first_or_404()
-        setattr(article, status, status_value == u'true')
-        db.session.commit()
-
-    message = u"Artigo(s) alterada(s) com sucesso!"
-    return message, 200
-
-
 @mod.route('/admin/article/new', methods=['GET'])
 def new():
     form = RegistrationForm()
@@ -115,31 +104,6 @@ def create():
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
-        form.article.data
-
-        file = request.files['file']
-
-        if file:
-            filename = secure_filename(file.filename)
-            filename = gen_file_name(filename)
-            mimetype = file.content_type
-
-            if not allowed_file(file.filename):
-                result = uploadfile(name=filename, type=mimetype, size=0, not_allowed_msg="Filetype not allowed")
-
-            else:
-                # save file to disk
-                uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(uploaded_file_path)
-
-                # get file size after saving
-                size = os.path.getsize(uploaded_file_path)
-
-                # return json for js call back
-                result = uploadfile(name=filename, type=mimetype, size=size)
-
-            #return simplejson.dumps({"files": [result.get_file()]})
-
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.approval_status = 0
 
@@ -175,18 +139,6 @@ def edit(id):
     form.keywords.data = article.keywords_str()
     form.abstract.data = article.abstract
 
-    files = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isfile(
-        os.path.join(app.config['UPLOAD_FOLDER'], f)) and f not in IGNORED_FILES]
-
-    file_display = []
-
-    for f in files:
-        size = os.path.getsize(os.path.join(app.config['UPLOAD_FOLDER'], f))
-        file_saved = uploadfile(name=f, size=size)
-        file_display.append(file_saved.get_file())
-
-    #return simplejson.dumps({"files": file_display})
-
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
 
 
@@ -200,30 +152,6 @@ def update(id):
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
-
-        file = request.files['file']
-
-        if file:
-            filename = secure_filename(file.filename)
-            filename = gen_file_name(filename)
-            mimetype = file.content_type
-
-            if not allowed_file(file.filename):
-                result = uploadfile(name=filename, type=mimetype, size=0, not_allowed_msg="Filetype not allowed")
-
-            else:
-                # save file to disk
-                uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-                file.save(uploaded_file_path)
-
-                # get file size after saving
-                size = os.path.getsize(uploaded_file_path)
-
-                # return json for js call back
-                result = uploadfile(name=filename, type=mimetype, size=size)
-
-            #return simplejson.dumps({"files": [result.get_file()]})
-
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.authors = []
         article.keywords = []
@@ -270,6 +198,61 @@ def all():
         articles += [(row.id, row.title, row.authors_str(),
                       row.postage_date.strftime('%d/%m/%Y'), row.approval_status)]
     return jsonify(articles=articles)
+
+
+@mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
+@mod.route('/admin/article/upload', methods=['GET', 'POST'])
+def upload(id=None):
+    if request.method == 'POST':
+        file = request.files['file']
+
+        if file:
+            filename = secure_filename(file.filename)
+            filename = gen_file_name(filename)
+            mimetype = file.content_type
+
+            if not allowed_file(file.filename):
+                result = UploadFile(name=filename, type=mimetype, size=0, not_allowed_msg="Filetype not allowed")
+
+            else:
+                # save file to disk
+                uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(uploaded_file_path)
+
+                # get file size after saving
+                size = os.path.getsize(uploaded_file_path)
+
+                # return json for js call back
+                result = UploadFile(name=filename, type=mimetype, size=size)
+
+            return simplejson.dumps({"files": [result.get_file()]})
+
+    if request.method == 'GET':
+        # get all file in ./data directory
+        files = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isfile(
+            os.path.join(app.config['UPLOAD_FOLDER'], f)) and f not in IGNORED_FILES]
+
+        file_display = []
+
+        for f in files:
+            size = os.path.getsize(os.path.join(app.config['UPLOAD_FOLDER'], f))
+            file_saved = UploadFile(name=f, size=size)
+            file_display.append(file_saved.get_file())
+
+        return simplejson.dumps({"files": file_display})
+
+    return redirect(url_for('scholar.index'))
+
+
+@mod.route('/admin/article/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        article = Article.query.filter_by(id=id).first_or_404()
+        setattr(article, status, status_value == u'true')
+        db.session.commit()
+
+    message = u"Artigo(s) alterada(s) com sucesso!"
+    return message, 200
 
 
 @mod.route("/delete/<string:filename>", methods=['DELETE'])
