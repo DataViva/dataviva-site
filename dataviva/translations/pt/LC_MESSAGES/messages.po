@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-18 14:40-0300\n"
+"POT-Creation-Date: 2016-04-18 16:16-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -211,6 +211,115 @@ msgstr "Principal Município por Matrículas"
 #: dataviva/translations/dictionary.py:312
 msgid "Average Age"
 msgstr "Idade Média"
+
+#: dataviva/apps/about/templates/about/index.html:14
+#: dataviva/templates/include/footer.html:5
+#: dataviva/translations/dictionary.py:577
+msgid "About"
+msgstr "Sobre"
+
+#: dataviva/apps/about/templates/about/index.html:24
+msgid ""
+"DataViva is an open search platform that allows users to access more than"
+" 1 billion visualizations of socioeconomic data from more than 5 thousand"
+" Brazilian cities."
+msgstr ""
+"DataViva é uma plataforma aberta de pesquisa, que permite ao usuário "
+"acessar mais de 1 bilhão de visualizações com dados socioeconômicos dos "
+"mais de 5 mil municípios brasileiros."
+
+#: dataviva/apps/about/templates/about/index.html:27
+#: dataviva/templates/include/footer.html:6
+#: dataviva/translations/dictionary.py:580
+msgid "The"
+msgstr "O"
+
+#: dataviva/apps/about/templates/about/index.html:31
+msgid ""
+"Collaborative planning, economy diversification, competitiveness and "
+"transparency: these are the DataViva goals, created to strengthen the "
+"culture of data use and guide the development of the country. A tool for "
+"information and analysis that proposes a new way of thinking about the "
+"construction of the future through the conversion of data into knowledge "
+"and action."
+msgstr ""
+"Planejamento Colaborativo, diversificação da economia, competitividade e "
+"transparência: são esses os objetivos do DataViva, que foi criado para "
+"fortalecer a cultura do uso de dados e orientar o desenvolvimento do "
+"país. Uma ferramenta de informações e análises, que propõe uma nova forma"
+" de pensar a construção do futuro, a partir da transformação de dados em "
+"conhecimento e ação."
+
+#: dataviva/apps/about/templates/about/index.html:33
+msgid "The project’s history"
+msgstr "História do Projeto"
+
+#: dataviva/apps/about/templates/about/index.html:34
+msgid ""
+"DataViva is an initiative of the Government of the State of Minas Gerais "
+"and Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG) – "
+"The State of Minas Gerais foundation for research funding and support – "
+"that offers its users a dynamic access experience to a large range of "
+"public data. Totally developed in free software and with open access to "
+"all, DataViva was created to contribute to the implementation of public "
+"policies, private and public investments, and to help academic studies."
+msgstr ""
+"O DataViva é uma iniciativa do Governo de Minas Gerais e da Fundação de "
+"Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG) que oferece ao "
+"usuário uma experiência dinâmica de acesso a um grande conjunto de dados "
+"públicos. Totalmente desenvolvido em software livre e aberto ao acesso de"
+" todos, o DataViva foi criado com o objetivo de contribuir para a "
+"implementação de políticas públicas, investimentos públicos e privados, "
+"bem como para a realização de estudos acadêmicos."
+
+#: dataviva/apps/about/templates/about/index.html:35
+msgid ""
+"Initially designed to assist the economic development policy of the "
+"Government of the State of Minas Gerais, the project came from the need "
+"to make the access to Brazilian economy data easier and intuitive. "
+"Developed in partnership with MIT Media Lab researchers (one of the main "
+"innovation centers in the world), the platform offers an unprecedented "
+"solution in the country, through the database provided by the Ministério "
+"do Trabalho e Emprego (MTE), Ministério do Desenvolvimento, Indústria e "
+"Comércio Exterior (MDIC) and Ministério da Educação (MEC) – the "
+"Ministries of Employment; Development, Industry and International Trade; "
+"and Education, respectively."
+msgstr ""
+"Elaborado inicialmente para auxiliar a política de desenvolvimento "
+"econômico do governo do Estado de Minas Gerais, o projeto surgiu a partir"
+" da necessidade de tornar o acesso aos dados sobre a economia brasileira "
+"mais fácil e intuitivo. Desenvolvida pelo Governo de Minas Gerais, em "
+"parceria com pesquisadores do MIT Media Lab (um dos principais centros de"
+" inovação do mundo), a plataforma apresenta uma solução inédita no país, "
+"a partir de bases de dados disponibilizadas pelo Ministério do Trabalho e"
+" Emprego (MTE), Ministério do Desenvolvimento, Indústria e Comércio "
+"Exterior (MDIC) e Ministério da Educação (MEC)."
+
+#: dataviva/apps/about/templates/about/index.html:36
+msgid ""
+"One of the conception pillars of DataViva is the BigData technology, a "
+"technique designed to generate knowledge and intelligence from the "
+"processing of a large volume of data. Based on international references, "
+"the project features, in its current version, national data from the last"
+" decade concerning economy, education, industry, labor market, and other "
+"categories, viewed by location. Providing open and free access to these "
+"information, DataViva offers a more detailed knowledge of the Brazilian "
+"economy, generating inputs for the planning and decision making by "
+"entrepreneurs, students, investors and professionals of any economic "
+"sector and from anywhere in the world."
+msgstr ""
+"Um dos pilares de concepção do DataViva é a tecnologia do BigData, "
+"técnica de geração de conhecimento e inteligência a partir do "
+"processamento de um grande volume de dados. Baseado em referências "
+"internacionais, o projeto disponibiliza, na versão atual, dados nacionais"
+" dos últimos dez anos, referentes à economia, educação, indústria, "
+"mercado profissional, entre outras categorias, visualizadas por "
+"localidade. Ao proporcionar o acesso livre e gratuito a essas "
+"informações, o DataViva disponibiliza um conhecimento mais detalhado da "
+"economia brasileira, gerando insumos para o planejamento e a tomada de "
+"decisão por parte de empresários, estudantes, investidores e "
+"profissionais de qualquer setor econômico e a partir de qualquer lugar do"
+" mundo."
 
 #: dataviva/apps/account/views.py:362 dataviva/apps/account/views.py:374
 msgid "Preferences updated."
@@ -536,6 +645,91 @@ msgstr "Salário e Emprego"
 msgid "More detais"
 msgstr "Mais detalhes"
 
+#: dataviva/apps/blog/templates/blog/_base.html:16
+#: dataviva/apps/data/templates/data/index.html:15
+#: dataviva/apps/news/templates/news/_base.html:16
+msgid "Topics"
+msgstr "Assuntos"
+
+#: dataviva/apps/blog/templates/blog/_base.html:18
+#: dataviva/apps/news/templates/news/_base.html:18
+#: dataviva/templates/about/ask/index.html:51
+#: dataviva/templates/account/index.html:24
+#: dataviva/translations/dictionary.py:389
+msgid "All"
+msgstr "Tudo"
+
+#: dataviva/apps/blog/templates/blog/_base.html:19
+#: dataviva/apps/embed/templates/embed/info.html:4
+#: dataviva/apps/news/templates/news/_base.html:19
+msgid "Visualizations"
+msgstr "Visualizações"
+
+#: dataviva/apps/blog/templates/blog/_base.html:20
+#: dataviva/apps/news/templates/news/_base.html:20
+msgid "Information Technology"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:21
+#: dataviva/apps/news/templates/news/_base.html:21
+msgid "Economy"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:22
+#: dataviva/apps/news/templates/news/_base.html:22
+msgid "Mathematics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:23
+#: dataviva/apps/news/templates/news/_base.html:23
+msgid "Statistics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:24
+#: dataviva/apps/news/templates/news/_base.html:24
+msgid "Design"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:25
+#: dataviva/apps/news/templates/news/_base.html:25
+msgid "Public Policies"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/index.html:22
+#: dataviva/apps/news/templates/news/index.html:22
+msgid "Continue reading"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:5
+#: dataviva/apps/location/templates/location/graphs-opportunities.html:3
+#: dataviva/apps/news/templates/news/show.html:5
+#, fuzzy
+msgid "Visualize"
+msgstr "Visualização"
+
+#: dataviva/apps/blog/templates/blog/show.html:14
+#: dataviva/apps/news/templates/news/show.html:14
+#, fuzzy
+msgid "By"
+msgstr "por"
+
+#: dataviva/apps/blog/templates/blog/show.html:21
+#: dataviva/apps/news/templates/news/show.html:21
+msgid "Tweet"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:33
+#: dataviva/apps/news/templates/news/show.html:33
+msgid "See also"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:48
+#: dataviva/apps/news/templates/news/show.html:48
+#: dataviva/templates/about/ask/index.html:55
+#: dataviva/templates/about/ask/index.html:182
+msgid "Comment"
+msgstr "Comentário"
+
 #: dataviva/apps/build_graph/templates/build_graph/index.html:21
 #: dataviva/apps/data/templates/data/index.html:27
 #: dataviva/apps/data/templates/data/index.html:35
@@ -550,10 +744,6 @@ msgstr "Selecione"
 #: dataviva/translations/dictionary.py:581
 msgid "Database Download"
 msgstr "Download de Dados"
-
-#: dataviva/apps/data/templates/data/index.html:15
-msgid "Topics"
-msgstr "Assuntos"
 
 #: dataviva/apps/data/templates/data/index.html:17
 msgid "Start a Search"
@@ -631,10 +821,6 @@ msgstr "Mostrar Tutorial da Visualização"
 #: dataviva/apps/embed/templates/embed/embed.html:64
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
-
-#: dataviva/apps/embed/templates/embed/info.html:4
-msgid "Visualizations"
-msgstr "Visualizações"
 
 #: dataviva/apps/embed/templates/embed/info.html:28
 msgid "Previous"
@@ -869,11 +1055,6 @@ msgstr "profissionais na "
 #: dataviva/apps/location/templates/location/graphs-education.html:13
 msgid "Basic Education By"
 msgstr ""
-
-#: dataviva/apps/location/templates/location/graphs-opportunities.html:3
-#, fuzzy
-msgid "Visualize"
-msgstr "Visualização"
 
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:5
 msgid "Product Space"
@@ -1447,6 +1628,15 @@ msgstr "no município "
 #, fuzzy
 msgid "students enrolled in the municipality"
 msgstr "alunos matriculados em todo o país"
+
+#: dataviva/apps/news/templates/news/_base.html:29
+#: dataviva/apps/news/templates/news/show.html:4
+#: dataviva/templates/general/index.html:130
+#: dataviva/templates/include/footer.html:8
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:532
+msgid "News"
+msgstr "Notícias"
 
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:5
 #: dataviva/translations/dictionary.py:617
@@ -3217,22 +3407,11 @@ msgstr "Mais Frequente"
 msgid "Most Recent"
 msgstr "Mais Recente"
 
-#: dataviva/templates/about/ask/index.html:51
-#: dataviva/templates/account/index.html:24
-#: dataviva/translations/dictionary.py:389
-msgid "All"
-msgstr "Tudo"
-
 #: dataviva/templates/about/ask/index.html:53
 #: dataviva/templates/admin/admin_questions.html:3
 #: dataviva/templates/admin/admin_questions.html:28
 msgid "Question"
 msgstr "Pergunta"
-
-#: dataviva/templates/about/ask/index.html:55
-#: dataviva/templates/about/ask/index.html:182
-msgid "Comment"
-msgstr "Comentário"
 
 #: dataviva/templates/about/ask/index.html:57
 #: dataviva/templates/include/header.html:7
@@ -4107,13 +4286,6 @@ msgstr ""
 msgid "Free Sign Up"
 msgstr "Cadastrar Gratuitamente"
 
-#: dataviva/templates/general/index.html:130
-#: dataviva/templates/include/footer.html:8
-#: dataviva/templates/include/header.html:5
-#: dataviva/translations/dictionary.py:532
-msgid "News"
-msgstr "Notícias"
-
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
 msgstr "Selecionar uma Classificação"
@@ -4170,16 +4342,6 @@ msgstr ""
 "Devido à tecnologia utilizada, não podemos apoiar as versões do Internet "
 "Explorer anteriores à versão 9. Por favor, atualize seu navegador para "
 "utilizar o site."
-
-#: dataviva/templates/include/footer.html:5
-#: dataviva/translations/dictionary.py:577
-msgid "About"
-msgstr "Sobre"
-
-#: dataviva/templates/include/footer.html:6
-#: dataviva/translations/dictionary.py:580
-msgid "The"
-msgstr "O"
 
 #: dataviva/templates/include/footer.html:7
 #: dataviva/templates/include/partners.html:4
