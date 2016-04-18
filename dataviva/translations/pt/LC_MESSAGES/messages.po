@@ -1,4 +1,3 @@
-# Portuguese translations for PROJECT.
 # Copyright (C) 2013 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
@@ -7,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-15 17:19-0300\n"
+"POT-Creation-Date: 2016-04-18 13:55-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -3843,6 +3842,16 @@ msgstr ""
 "de todo o Brasil. São 11 aplicativos, que, juntos, formam mais de 1 "
 "bilhão de possibilidades de visualizações."
 
+#: dataviva/templates/general/index.html:13
+msgid ""
+"Number of establishments per economic activity, percentage of graduated "
+"professionals per year in a given course by region, similar products by "
+"region, average wage by segment, and more… "
+msgstr ""
+"Número de estabelecimentos por atividade econômica, porcentagem de "
+"profissionais graduados por ano em determinado curso por região, produtos"
+" similares por região, salário médio por segmento, e mais..."
+
 #: dataviva/templates/general/index.html:15
 #: dataviva/translations/dictionary.py:559
 msgid "Entrepreneurs"
@@ -3855,6 +3864,16 @@ msgstr ""
 "Identifique o perfil econômico e as oportunidades de negócios de uma "
 "região"
 
+#: dataviva/templates/general/index.html:21
+msgid ""
+"Main business partners of a product by region, states that lead "
+"importation of a specific product, economic activity by locality, "
+"employment and income by segment, and more…"
+msgstr ""
+"Principais parceiros comerciais de um produto por região, estados que "
+"mais importam um produto específico, atividade econômica por localidade, "
+"emprego e renda por segmento, e mais..."
+
 #: dataviva/templates/general/index.html:23
 #: dataviva/translations/dictionary.py:561
 msgid "DEVELOPMENT AGENTS"
@@ -3866,6 +3885,16 @@ msgid "Assess development policies setting by location"
 msgstr ""
 "Avalie a criação de políticas de desenvolvimento de acordo com a "
 "localidade"
+
+#: dataviva/templates/general/index.html:29
+msgid ""
+"Average wage of an activity or occupation, cities with best employment "
+"rates in an activity, courses offered by region, number of students "
+"enrolled in each university and more…"
+msgstr ""
+"Salário médio de uma atividade ou ocupação, cidades que concentram a "
+"maior taxa de empregos em uma atividade, cursos oferecidos por região, "
+"quantidade de matriculados em cada universidade, e mais..."
 
 #: dataviva/templates/general/index.html:31
 #: dataviva/translations/dictionary.py:563
@@ -3917,11 +3946,100 @@ msgstr ""
 "Técnico (Censo Escolar), Ensino Superior (Censo da Educação Superior) e "
 "Comércio Internacional (UN Comtrade)."
 
+#: dataviva/templates/general/index.html:65
+msgid ""
+"General profile by region, state, mesoregion, micro-region or city. Check"
+" its international trade, economic activity, employment and education "
+"data. Examples: Southeast, Mato Grosso, Recife, Metropolitan Region of "
+"Porto Alegre."
+msgstr ""
+"Perfil geral por região, estado, mesorregião, microrregião ou município "
+"brasileiro. Visualize dados de comércio exterior, atividade econômica, "
+"empregos e educação. Exemplos: Sudeste, Mato Grosso, Recife, Região "
+"Metropolitana de Porto Alegre."
+
+#: dataviva/templates/general/index.html:71
+msgid ""
+"Regions with best employment rates by professional activity, related "
+"courses, average wage and job statistics per year. Examples: Medium level"
+" technicians, Industry workers, Receptionists, Clinicians."
+msgstr ""
+"Regiões que mais empregam por atividade profissional, cursos "
+"relacionados, salário médio e estatísticas de emprego por ano. Exemplos: "
+"Técnicos de Nível Médio, Trabalhadores da Indústria, Recepcionistas, "
+"Médicos Clínicos."
+
+#: dataviva/templates/general/index.html:77
+msgid ""
+"Information on employment rate by region, average wage by occupation, "
+"average monthly income and economic opportunities. Examples: Businesses, "
+"Domestic Service, Education, Restaurants, Call Center, Religious "
+"Organizations."
+msgstr ""
+"Informações sobre taxa de empregos por região, salário médio por tipo de "
+"ocupação, renda mensal média e oportunidades econômicas. Exemplos: "
+"Comércio, Serviços Domésticos, Educação, Restaurantes, Teleatendimento, "
+"Organizações Religiosas."
+
+#: dataviva/templates/general/index.html:83
+msgid ""
+"Trade Balance data by product, import origin and export destination, "
+"ranking by location, economic activities and related occupations. "
+"Examples: Food, Art and Antiques, Iron Ore, Coffee, Auto Parts."
+msgstr ""
+"Dados da Balança Comercial por produto, origem das importações e destino "
+"das exportações, ranking por localidade, atividades econômicas e "
+"ocupações relacionadas. Exemplos: Gêneros Alimentícios, Artes e "
+"Antiguidades, Minério de Ferro, Café, Peças para Veículos."
+
+#: dataviva/templates/general/index.html:89
+msgid ""
+"Brazil’s top import and export partners, trade data by type of product or"
+" supplier city. Examples: Asia, Africa, Europe, Mexico, Japan, United "
+"States of America, China, The Netherlands, Iran."
+msgstr ""
+"Nações que importam ou exportam produtos para o Brasil, dados de "
+"comercialização por tipo de produto ou por município comercializador. "
+"Exemplos: Ásia, África, Europa, México, Japão, Estados Unidos, China, "
+"Holanda, Irã."
+
 #: dataviva/templates/general/index.html:90
 #: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:361
 msgid "Trade Partners"
 msgstr "Parceiros Comerciais"
+
+#: dataviva/templates/general/index.html:95
+msgid ""
+"Number of enrollments in each offered course, student status and similar "
+"university profiles. Examples: Universidade de São Paulo, Universidade "
+"Federal de Minas Gerais, PUC Goiás."
+msgstr ""
+"Número de matrículas em cada curso ofertado, situação dos estudantes e "
+"perfis semelhantes de universidades. Exemplos: Universidade de São Paulo,"
+" Pontifícia Universidade Católica de Goiás, Universidade Federal de Minas"
+" Gerais."
+
+#: dataviva/templates/general/index.html:101
+msgid ""
+"List of universities and cities that offer post-secondary courses or the "
+"selected field of study. Examples: Education, Health Sciences, Law, "
+"Production Engineering, Physiotherapy."
+msgstr ""
+"Lista de universidades e municípios que ofertam o curso de Educação "
+"Superior ou o campo de estudo selecionado. Exemplos: Educação, Ciências "
+"da Saúde, Direito, Engenharia de Produção, Fisioterapia."
+
+#: dataviva/templates/general/index.html:107
+msgid ""
+"Brazilian schools that offer professional education and enrollment "
+"ranking by city. Examples: Elementary School, High School, Nursing "
+"Technician, Agriculture and Livestock Technician."
+msgstr ""
+"Escolas do Brasil que oferecem educação profissional e ranking de "
+"matrículas na Educação Básica por município. Exemplos: Ensino "
+"Fundamental, Ensino Médio, Técnico em Enfermagem, Técnico em "
+"Agropecuária."
 
 #: dataviva/templates/general/index.html:121
 #: dataviva/translations/dictionary.py:570
@@ -4138,7 +4256,6 @@ msgid "HELP"
 msgstr "AJUDA"
 
 #: dataviva/templates/include/header.html:49
-#: dataviva/translations/dictionary.py:542
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
@@ -5304,6 +5421,11 @@ msgstr "posição em importações"
 #: dataviva/translations/dictionary.py:519
 msgid " in imports in the mesoregions of"
 msgstr ""
+
+#: dataviva/translations/dictionary.py:542
+#, fuzzy
+msgid "Sign2 Up"
+msgstr "Cadastre-se"
 
 #: dataviva/translations/dictionary.py:553
 #, fuzzy
