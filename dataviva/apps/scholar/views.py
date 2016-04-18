@@ -88,6 +88,17 @@ def admin_update():
     return message
 
 
+@mod.route('/admin/article/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        article = Article.query.filter_by(id=id).first_or_404()
+        setattr(article, status, status_value == u'true')
+        db.session.commit()
+
+    message = u"Artigo(s) alterada(s) com sucesso!"
+    return message, 200
+
+
 @mod.route('/admin/article/new', methods=['GET'])
 def new():
     form = RegistrationForm()
@@ -243,18 +254,6 @@ def upload(id=None):
 
     return redirect(url_for('scholar.index'))
 
-
-@mod.route('/admin/article/<status>/<status_value>', methods=['POST'])
-def admin_activate(status, status_value):
-    for id in request.form.getlist('ids[]'):
-        article = Article.query.filter_by(id=id).first_or_404()
-        setattr(article, status, status_value == u'true')
-        db.session.commit()
-
-    message = u"Artigo(s) alterada(s) com sucesso!"
-    return message, 200
-
-
 @mod.route("/delete/<string:filename>", methods=['DELETE'])
 def delete(filename):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
@@ -271,3 +270,5 @@ def delete(filename):
 @mod.route("/data/<string:filename>", methods=['GET'])
 def get_file(filename):
     return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER']), filename=filename)
+
+
