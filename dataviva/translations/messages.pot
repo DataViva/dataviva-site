@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-18 14:40-0300\n"
+"POT-Creation-Date: 2016-04-18 15:30-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -526,6 +526,56 @@ msgstr ""
 msgid "More detais"
 msgstr ""
 
+#: dataviva/apps/blog/templates/blog/_base.html:16
+#: dataviva/apps/data/templates/data/index.html:15
+msgid "Topics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:18
+#: dataviva/templates/about/ask/index.html:51
+#: dataviva/templates/account/index.html:24
+#: dataviva/translations/dictionary.py:389
+msgid "All"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:19
+#: dataviva/apps/embed/templates/embed/info.html:4
+msgid "Visualizations"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:20
+msgid "Information Technology"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:21
+msgid "Economy"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:22
+msgid "Mathematics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:23
+msgid "Statistics"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:24
+msgid "Design"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_base.html:25
+msgid "Public Policies"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/index.html:22
+msgid "Continue reading"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/show.html:5
+#: dataviva/apps/location/templates/location/graphs-opportunities.html:3
+msgid "Visualize"
+msgstr ""
+
 #: dataviva/apps/build_graph/templates/build_graph/index.html:21
 #: dataviva/apps/data/templates/data/index.html:27
 #: dataviva/apps/data/templates/data/index.html:35
@@ -539,10 +589,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:29
 #: dataviva/translations/dictionary.py:581
 msgid "Database Download"
-msgstr ""
-
-#: dataviva/apps/data/templates/data/index.html:15
-msgid "Topics"
 msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:17
@@ -618,10 +664,6 @@ msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:64
 msgid "Show/Hide Controls"
-msgstr ""
-
-#: dataviva/apps/embed/templates/embed/info.html:4
-msgid "Visualizations"
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/info.html:28
@@ -846,10 +888,6 @@ msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-education.html:13
 msgid "Basic Education By"
-msgstr ""
-
-#: dataviva/apps/location/templates/location/graphs-opportunities.html:3
-msgid "Visualize"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:5
@@ -2879,12 +2917,6 @@ msgstr ""
 #: dataviva/templates/about/ask/index.html:45
 #: dataviva/translations/dictionary.py:442
 msgid "Most Recent"
-msgstr ""
-
-#: dataviva/templates/about/ask/index.html:51
-#: dataviva/templates/account/index.html:24
-#: dataviva/translations/dictionary.py:389
-msgid "All"
 msgstr ""
 
 #: dataviva/templates/about/ask/index.html:53
