@@ -1,4 +1,4 @@
-class uploadfile():
+class UploadFile():
 
     def __init__(self, name, type=None, size=None, not_allowed_msg=''):
         self.name = name
