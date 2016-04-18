@@ -131,6 +131,10 @@ def create():
             else:
                 article.keywords.append(keyword)
 
+        #if not os.path.exists(directory):
+        #    os.makedirs(directory)
+        #form.csrf_token._value()
+
         db.session.add(article)
         db.session.commit()
 
