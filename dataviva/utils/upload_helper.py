@@ -2,8 +2,8 @@ import boto3
 import os
 from boto3.s3.transfer import S3Transfer
 
-ACCESS_KEY = os.environ['DATAVIVA_OAUTH_ACCESS_KEY_ID']
-SECRET_KEY = os.environ['DATAVIVA_OAUTH_SECRET_KEY_SECRET']
+ACCESS_KEY = os.environ['DATAVIVA_OAUTH_AWS_ID']
+SECRET_KEY = os.environ['DATAVIVA_OAUTH_AWS_SECRET']
 
 
 def upload_s3_file(file_id):
@@ -28,4 +28,4 @@ def delete_s3_file(file_path, bucket, file_id, extra_args={'ContentType': "html/
 
     transfer = S3Transfer(client)
 
-    transfer.upload_file(file_path, bucket, file_id, extra_args)
+    return transfer.upload_file(file_path, bucket, file_id, extra_args)
