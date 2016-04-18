@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-18 13:55-0300\n"
+"POT-Creation-Date: 2016-04-18 14:37-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -543,6 +543,52 @@ msgstr "Mais detalhes"
 #: dataviva/translations/dictionary.py:467
 msgid "Select"
 msgstr "Selecione"
+
+#: dataviva/apps/data/templates/data/index.html:8
+#: dataviva/apps/data/templates/data/index.html:22
+#: dataviva/templates/include/footer.html:29
+#: dataviva/translations/dictionary.py:581
+msgid "Database Download"
+msgstr "Download de Dados"
+
+#: dataviva/apps/data/templates/data/index.html:15
+msgid "Topics"
+msgstr "Assuntos"
+
+#: dataviva/apps/data/templates/data/index.html:17
+msgid "Start a Search"
+msgstr "Inicie uma Pesquisa"
+
+#: dataviva/apps/data/templates/data/index.html:18
+#: dataviva/templates/include/footer.html:28
+#: dataviva/translations/dictionary.py:582
+msgid "Make Graphs"
+msgstr "Crie seu Gráfico"
+
+#: dataviva/apps/data/templates/data/index.html:25
+msgid "Database"
+msgstr "Banco de Dados"
+
+#: dataviva/apps/data/templates/data/index.html:33
+#: dataviva/apps/data/templates/data/index.html:49
+msgid "To start select a Database"
+msgstr "Para começar selecione um Banco de Dados"
+
+#: dataviva/apps/data/templates/data/index.html:39
+msgid "Detailing"
+msgstr "Detalhamento"
+
+#: dataviva/apps/data/templates/data/index.html:41
+msgid "Yearly"
+msgstr "Anual"
+
+#: dataviva/apps/data/templates/data/index.html:42
+msgid "Monthly"
+msgstr "Mensal"
+
+#: dataviva/apps/data/templates/data/index.html:46
+msgid "Filters"
+msgstr "Filtros"
 
 #: dataviva/apps/embed/views.py:220
 msgid "You need to be logged in to star visualizations."
@@ -4156,16 +4202,6 @@ msgstr "Localidades"
 msgid "View Rankings"
 msgstr "Visualize Rankings"
 
-#: dataviva/templates/include/footer.html:28
-#: dataviva/translations/dictionary.py:582
-msgid "Make Graphs"
-msgstr "Crie seu Gráfico"
-
-#: dataviva/templates/include/footer.html:29
-#: dataviva/translations/dictionary.py:581
-msgid "Database Download"
-msgstr "Download de Dados"
-
 #: dataviva/templates/include/footer.html:34
 #: dataviva/translations/dictionary.py:578
 msgid "Support"
@@ -6054,4 +6090,7 @@ msgstr "com"
 
 #~ msgid "with Less Distance"
 #~ msgstr "com Menor Distância"
+
+#~ msgid "Issues"
+#~ msgstr "Assuntos"
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-18 13:55-0300\n"
+"POT-Creation-Date: 2016-04-18 14:37-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -532,6 +532,52 @@ msgstr ""
 #: dataviva/apps/data/templates/data/index.html:51
 #: dataviva/translations/dictionary.py:467
 msgid "Select"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:8
+#: dataviva/apps/data/templates/data/index.html:22
+#: dataviva/templates/include/footer.html:29
+#: dataviva/translations/dictionary.py:581
+msgid "Database Download"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:15
+msgid "Topics"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:17
+msgid "Start a Search"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:18
+#: dataviva/templates/include/footer.html:28
+#: dataviva/translations/dictionary.py:582
+msgid "Make Graphs"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:25
+msgid "Database"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:33
+#: dataviva/apps/data/templates/data/index.html:49
+msgid "To start select a Database"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:39
+msgid "Detailing"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:41
+msgid "Yearly"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:42
+msgid "Monthly"
+msgstr ""
+
+#: dataviva/apps/data/templates/data/index.html:46
+msgid "Filters"
 msgstr ""
 
 #: dataviva/apps/embed/views.py:220
@@ -3602,16 +3648,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:27
 #: dataviva/translations/dictionary.py:583
 msgid "View Rankings"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:28
-#: dataviva/translations/dictionary.py:582
-msgid "Make Graphs"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:29
-#: dataviva/translations/dictionary.py:581
-msgid "Database Download"
 msgstr ""
 
 #: dataviva/templates/include/footer.html:34
