@@ -79,6 +79,9 @@ TWITTER_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_TWITTER_ID")
 TWITTER_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_TWITTER_SECRET")
 FACEBOOK_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_ID")
 FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
+AWS_ACCESS_KEY = get_env_variable('DATAVIVA_OAUTH_AWS_ID')
+AWS_SECRET_KEY = get_env_variable('DATAVIVA_OAUTH_AWS_SECRET')
+
 
 '''
     Mail credentials to send automatic emails to users
