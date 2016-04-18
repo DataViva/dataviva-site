@@ -8,14 +8,14 @@
         function ($scope, $http, $templateRequest, $compile, Selectors, $timeout) {
 
             $scope.initialize = function(selector_name, selection_callback) {
-                $scope.selector_model = new  Selectors[selector_name];
+                $scope.selector_model = new Selectors[selector_name](selection_callback);
 
                 $templateRequest($scope.selector_model.templateUrl).then(function(html){
                     var template = angular.element(html);
                     $(".selector-area").append(template);
                     $timeout(function(){
                         $compile(template)($scope);
-                        
+
                         // Some selectors might have no tabs (e.g: University)
                         // so we should check
                         var firstTab = $('.nav-tabs li a')[0];
@@ -29,6 +29,6 @@
                 });
 
             };
-            
+
         }]);
 }());

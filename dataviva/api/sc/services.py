@@ -2,8 +2,8 @@
 from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva import db
-from flask import g
-from sqlalchemy import func, desc, asc, not_
+from sqlalchemy import func, not_
+
 
 class Basic_course:
     def __init__(self, course_sc_id):
@@ -55,16 +55,18 @@ class Basic_course:
     def state_name(self):
         return Bra.query.filter(Bra.id == self.bra_id[:3]).one().name()
 
+
 class Basic_course_by_location(Basic_course):
     def __init__(self, course_sc_id, bra_id):
         Basic_course.__init__(self, course_sc_id)
         self.bra_id = bra_id
         self.max_year_subquery = db.session.query(
-            func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+            func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id, bra_id=bra_id)
         self.course_query = Ybc_sc.query.join(Course_sc).filter(
                 Ybc_sc.course_sc_id == self.course_sc_id,
                 Ybc_sc.year == self.max_year_subquery,
                 Ybc_sc.bra_id == self.bra_id)
+
 
 class Basic_course_school(Basic_course):
     def __init__(self, course_sc_id):
@@ -107,16 +109,18 @@ class Basic_course_school(Basic_course):
         school_count = self.total_schools_query.count()
         return school_count
 
+
 class Basic_course_school_by_location(Basic_course_school):
     def __init__(self, course_sc_id, bra_id):
         Basic_course_school.__init__(self, course_sc_id)
         self.bra_id = bra_id
         self.max_year_subquery = db.session.query(
-            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id, bra_id=bra_id)
         self.total_schools_query = Ybsc.query.filter(
                 Ybsc.course_sc_id == self.course_sc_id,
                 Ybsc.year == self.max_year_subquery,
                 Ybsc.bra_id == self.bra_id)
+
 
 class Basic_course_city(Basic_course):
     def __init__(self, course_sc_id):
@@ -148,12 +152,13 @@ class Basic_course_city(Basic_course):
         city_enrolled = self.__city_sorted_by_enrollment__()[0]
         return city_enrolled.enrolled
 
+
 class Basic_course_by_state(Basic_course_city):
     def __init__(self, course_sc_id, bra_id):
         Basic_course_city.__init__(self, course_sc_id)
         self.bra_id = bra_id
         self.max_year_subquery = db.session.query(
-            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id, bra_id=bra_id)
         self.most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
                 Ybc_sc.course_sc_id == self.course_sc_id,
                 Ybc_sc.year == self.max_year_subquery,
@@ -168,17 +173,19 @@ class Basic_course_by_state(Basic_course_city):
         state_enrolled = self.__city_sorted_by_enrollment__()[0]
         return state_enrolled.enrolled
 
+
 class Basic_course_city_by_location(Basic_course_city):
     def __init__(self, course_sc_id, bra_id):
         Basic_course_city.__init__(self, course_sc_id)
         self.bra_id = bra_id
         self.max_year_subquery = db.session.query(
-            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id,bra_id=bra_id)
+            func.max(Ybsc.year)).filter_by(course_sc_id=course_sc_id, bra_id=bra_id)
         self.most_enrolled_city_query = Ybc_sc.query.join(Bra).filter(
                 Ybc_sc.course_sc_id == self.course_sc_id,
                 Ybc_sc.year == self.max_year_subquery,
                 Ybc_sc.bra_id.like(str(self.bra_id)+'%'),
                 Ybc_sc.bra_id_len == 9)
+
 
 class LocationSchool:
     def __init__(self, bra_id):
@@ -189,8 +196,7 @@ class LocationSchool:
 
         self.sc_query = db.session.query(
                             func.sum(Ybsc.enrolled).label("enrolled"),
-                            School) \
-                        .join(School).filter(
+                            School).join(School).filter(
                             Ybsc.bra_id == self.bra_id,
                             not_(Ybsc.course_sc_id.like('xx%')),
                             Ybsc.year == self.max_year_query).group_by(Ybsc.school_id)
@@ -223,13 +229,13 @@ class LocationSchool:
         else:
             return None
 
+
 class LocationBasicCourse(LocationSchool):
     def __init__(self, bra_id):
         LocationSchool.__init__(self, bra_id)
         self.sc_query = db.session.query(
                             func.sum(Ybsc.enrolled).label("enrolled"),
-                            Course_sc) \
-                        .join(Course_sc).filter(
+                            Course_sc).join(Course_sc).filter(
                             Ybsc.bra_id == self.bra_id,
                             not_(Ybsc.course_sc_id.like('xx%')),
                             Ybsc.year == self.max_year_query).group_by(Ybsc.course_sc_id)

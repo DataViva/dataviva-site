@@ -8,28 +8,33 @@
 			<div class="modal-body clearfix">
 				<div class="institucional search" ng-show="!selector_model">
 					<h2>{$ wizard.title $}</h2>
-					<form class="form-dataviva form-inline filter">
-						<div class="form-group">
-							<i class="fa fa-search"></i>
-							<input
-							id="field-search"
-							type="text"
-							name="questions_filter"
-							ng-model="wizard.filter_string"
-							ng-trim="true"
-							class="busca form-control">
-						</div>
-						<div class="search-items" style="">
+					<form class="form-inline filter">
+
+
+                        <div class="form-group search">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="text"
+                                id="field-search"
+                                name="questions_filter"
+                                class="form-control"
+                                ng-model="wizard.filter_string"
+                                ng-trim="true"
+                                autocomplete="false"/>
+                            </div>
+                        </div>
+
+						<div class="selector-list">
 							<h4>Escolha uma opção ou digite o que procura</h4>
 							<div class="list-group list-stripped">
-								<a href="#"
-									class="list-group-item"
-									data-ng-repeat="question in wizard.questions"
-									data-ng-click="wizard.select(question)"
-									data-ng-class="{'selected': question == wizard.selected_question }"
-									>
-									{$ question.title $}
-								</a>
+								<div class="selector-list-item"
+								     data-ng-repeat="question in wizard.questions|filter:wizard.filter_string"
+								     data-ng-click="wizard.select(question)"
+								     data-ng-class="{'selected': question == wizard.selected_question }">
+                                    <div class="item-title">
+                                        {$ question.title $}
+                                    </div>
+								</div>
 							</div>
 						</div>
 					</form>
@@ -38,8 +43,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-link pull-left" data-dismiss="modal" aria-label="Close">Cancelar</button>
-				<button class="btn btn-dataviva" ng-click="submit()">Avancar</button>
+				<button class="btn btn-primary pull-left" data-dismiss="modal" aria-label="Close">Cancelar</button>
+				<button class="btn btn-primary" ng-click="submit()">Avancar</button>
 			</div>
 		</div>
 	</div>

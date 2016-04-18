@@ -8,6 +8,7 @@ from flask import (Blueprint, request, jsonify, g,
 
 from dataviva import db, __year_range__, view_cache
 from dataviva.api.attrs.models import Bra, Wld, Hs, Cnae, Cbo, Yb, Course_hedu, Course_sc, University, School, bra_pr, Search
+from dataviva.api.attrs.mocks import attrs_datasets
 from dataviva.api.secex.models import Ymp, Ymw
 from dataviva.api.rais.models import Yi, Yo
 from dataviva.api.hedu.models import Yu, Yc_hedu
@@ -26,7 +27,6 @@ from dataviva.translations.translate import translate
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
 
-
 def fix_name(attr, lang):
 
     for col in ["desc", "name", "gender", "article", "keywords"]:
@@ -35,16 +35,21 @@ def fix_name(attr, lang):
             attr[col] = title_case(attr["{}_{}".format(col, lang)])
         else:
             attr[col] = False
-        if "{}_en".format(col) in attr: del attr["{}_en".format(col)]
-        if "{}_pt".format(col) in attr: del attr["{}_pt".format(col)]
+        if "{}_en".format(col) in attr:
+            del attr["{}_en".format(col)]
+        if "{}_pt".format(col) in attr:
+            del attr["{}_pt".format(col)]
 
     school_type_lang = "school_type_" + lang
     if school_type_lang in attr:
         attr["school_type"] = attr[school_type_lang]
-    if "school_type_en" in attr: del attr["school_type_en"]
-    if "school_type_pt" in attr: del attr["school_type_pt"]
+    if "school_type_en" in attr:
+        del attr["school_type_en"]
+    if "school_type_pt" in attr:
+        del attr["school_type_pt"]
 
-    if "is_vocational" in attr: del attr["is_vocational"]
+    if "is_vocational" in attr:
+        del attr["is_vocational"]
     return attr
 
 ############################################################
@@ -52,10 +57,13 @@ def fix_name(attr, lang):
 # All attribute views
 #
 ############################################################
+
+
 def get_planning_region_map():
     prs = db.session.query(bra_pr).all()
-    pr_map = {k:v for k,v in prs}
+    pr_map = {k: v for k, v in prs}
     return pr_map
+
 
 @mod.route("/school/")
 @view_cache.cached(key_prefix=api_cache_key("attrs"))
@@ -64,6 +72,7 @@ def voc_schools():
     lang = request.args.get('lang', None) or g.locale
     data = [fix_name(a.serialize(), lang) for a in attrs]
     return jsonify(data=data)
+
 
 @mod.route("/school/in/<bra_id>/")
 @gzipped
@@ -77,14 +86,15 @@ def school_attrs(bra_id):
         WHERE sc_ybs.bra_id = %s;
     ''', bra_id)
 
-    data = [{'id': row[0], 'school_type_id': row[1], 'name': row[2], 'color': row[3], 'icon': '/static/img/icons/school/school_{}.png'.format(row[1].lower())} for row in results]
+    data = [{'id': row[0], 'school_type_id': row[1], 'name': row[2], 'color': row[3],
+             'icon': '/static/img/icons/school/school_{}.png'.format(row[1].lower())} for row in results]
 
     return jsonify(data=data)
 
+
 @mod.route('/<attr>/')
 @mod.route('/<attr>/<Attr_id>/')
-def attrs(attr="bra",Attr_id=None, depth=None):
-
+def attrs(attr="bra", Attr_id=None, depth=None):
     Attr = globals()[attr.capitalize()]
     Attr_weight_mergeid = "{0}_id".format(attr)
 
@@ -169,8 +179,8 @@ def attrs(attr="bra",Attr_id=None, depth=None):
             this_attr, ret["nesting_level"] = Attr_id.split(".show.")
             # filter table by requested nesting level
             attrs = Attr.query \
-                    .filter(Attr.id.startswith(this_attr)) \
-                    .filter(func.char_length(Attr.id) == ret["nesting_level"]).all()
+                .filter(Attr.id.startswith(this_attr)) \
+                .filter(func.char_length(Attr.id) == ret["nesting_level"]).all()
 
         # the 'show.' indicates that we are looking for a specific nesting
         elif "show." in Attr_id:
@@ -197,14 +207,13 @@ def attrs(attr="bra",Attr_id=None, depth=None):
             latest_month = int(latest_month)
         latest_year = int(latest_year)
 
-        conds = [getattr(Attr_weight_tbl,"{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year]
+        conds = [getattr(Attr_weight_tbl, "{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year]
         if latest_month:
             conds.append(Attr_weight_tbl.month == latest_month)
 
-        query = db.session.query(Attr,Attr_weight_tbl).outerjoin(Attr_weight_tbl, and_(*conds))
+        query = db.session.query(Attr, Attr_weight_tbl).outerjoin(Attr_weight_tbl, and_(*conds))
         if Attr == School:
             query = query.filter(Attr.is_vocational == 1)
-
 
         if depth:
             query = query.filter(func.char_length(Attr.id) == depth)
@@ -223,14 +232,14 @@ def attrs(attr="bra",Attr_id=None, depth=None):
                 o = "name_{0}".format(lang)
 
             if o == Attr_weight_col:
-                order_table  = Attr_weight_tbl
+                order_table = Attr_weight_tbl
             else:
                 order_table = Attr
 
             if direction == "asc":
-                query = query.order_by(asc(getattr(order_table,o)))
+                query = query.order_by(asc(getattr(order_table, o)))
             elif direction == "desc":
-                query = query.order_by(desc(getattr(order_table,o)))
+                query = query.order_by(desc(getattr(order_table, o)))
 
         if limit:
             query = query.limit(limit).offset(offset)
@@ -289,10 +298,12 @@ def attrs(attr="bra",Attr_id=None, depth=None):
 
     return ret
 
+
 def wrapcsv(x):
     if "," in x or u"," in x:
         return u'"{}"'.format(x)
     return x
+
 
 @mod.route('/download/', methods=['GET'])
 def dl_csv():
@@ -314,8 +325,8 @@ def dl_csv():
     for item in data['data']:
         for h in item:
             if h not in checkHeader:
-               checkHeader.append(h)
-               headerArray.append(wrapcsv(h))
+                checkHeader.append(h)
+                headerArray.append(wrapcsv(h))
 
     for item in data['data']:
         lineArray = []
@@ -438,21 +449,6 @@ def industry():
     )
 
 
-@mod.route('/university/')
-@view_cache.cached(key_prefix=api_cache_key("attrs_university"))
-def university():
-
-    depth = request.args.get('depth', None)
-    if not depth:
-        return Response("You must specify a querying parameter!", status=400)
-    returned_entries = collection_by_depth(University, depth)
-
-    return Response(
-        json.dumps(map(lambda x: x.serialize(), returned_entries)),
-        status=(200 if returned_entries.count() else 404)
-    )
-
-
 @mod.route('/occupation/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_occupation"))
 def occupation():
@@ -481,3 +477,8 @@ def trade_partner():
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
         status=(200 if returned_entries.count() else 404)
     )
+
+
+@mod.route('/datasets/')
+def datasets():
+    return jsonify({'data': attrs_datasets})

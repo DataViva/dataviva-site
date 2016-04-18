@@ -2,19 +2,25 @@
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
-    LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings, LocationMunicipalityRankings
+    LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings, LocationMunicipalityRankings, Bra
 from dataviva.api.secex.models import Ymb
 from dataviva.api.secex.services import Location as LocationBodyService, LocationWld, LocationEciRankings
 from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
     LocationJobs, LocationDistance, LocationOppGain
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
 from dataviva.api.sc.services import LocationSchool, LocationBasicCourse
-from sqlalchemy import desc
+from sqlalchemy import desc, func
+from random import randint
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/location',
                 static_folder='static')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = 'category'
 
 
 @mod.url_value_preprocessor
@@ -27,8 +33,16 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+@mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
+def graphs(bra_id, tab):
+    location = Bra.query.filter_by(id=bra_id).first()
+    return render_template('location/graphs-'+tab+'.html', location=location)
+
+
 @mod.route('/<bra_id>')
 def index(bra_id):
+
+    location = Bra.query.filter_by(id=bra_id).first_or_404()
 
     location_service = LocationService(bra_id=bra_id)
     location_gdp_rankings_service = LocationGdpRankings(
@@ -55,25 +69,30 @@ def index(bra_id):
     eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
         .order_by(desc(Ymb.year)).limit(1).first()
 
+    ''' Background Image'''
+    if len(bra_id) == 1:
+        countys = Bra.query.filter(Bra.id.like(bra_id+'%'), func.length(Bra.id) == 3).all()
+        background_image = "bg-"+str(countys[randint(0, len(countys)-1)].id)+"_"+str(randint(1, 2))
+    else:
+        background_image = "bg-"+location.id[:3]+"_"+str(randint(1, 2))
+
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
             'name': location_service.name(),
-            'bra_id': bra_id[:3],
-            'id':bra_id,
             'gdp': location_service.gdp(),
             'population': location_service.population(),
-            'gdp_per_capita': location_service.gdp()/location_service.population(),
+            'gdp_per_capita': location_service.gdp_per_capita(),
+            'bg_class_image': background_image
         }
     else:
         header = {
             'name': location_service.name(),
-            'bra_id': bra_id[:3],
-            'id':bra_id,
             'gdp': location_service.gdp(),
             'life_expectation': location_service.life_expectation(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
+            'bg_class_image': background_image
         }
 
     if eci is not None:
@@ -159,4 +178,4 @@ def index(bra_id):
         }
 
     return render_template('location/index.html',
-                           header=header, body=body, profile=profile)
+                           header=header, body=body, profile=profile, location=location)

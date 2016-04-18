@@ -16,9 +16,21 @@ mod = Blueprint('occupation', __name__,
                 url_prefix='/<lang_code>/occupation')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = 'category'
+
+
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
+
+
+@mod.route('/<occupation_id>/graphs/<tab>', methods=['POST'])
+def graphs(occupation_id, tab):
+    occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location)
 
 
 @mod.url_defaults
@@ -34,6 +46,7 @@ def index(occupation_id):
     # Use Example /occupation/2122 OR /occupation/2122?bra_id=4mg
     bra_id = request.args.get('bra_id')
     location = Bra.query.filter_by(id=bra_id).first()
+    language = g.locale
     header = {}
     body = {}
     body = {}
@@ -102,4 +115,4 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location)
+    return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language)

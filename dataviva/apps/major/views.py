@@ -2,15 +2,20 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.hedu.models import Yc_hedu, Ybc_hedu
+from dataviva.api.attrs.models import Bra, Course_hedu
 from dataviva.api.hedu.services import Major, MajorUniversities, MajorMunicipalities
 from dataviva import db
 from sqlalchemy.sql.expression import func
 
-static_folder = '../../static/img/icons/course_hedu'
 mod = Blueprint('major', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/major',
-                static_folder=static_folder)
+                static_folder='static')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = 'category'
 
 
 @mod.url_value_preprocessor
@@ -69,11 +74,12 @@ def index(course_hedu_id):
             'profile': major_service.profile(),
             'year': major_service.year(),
             'field_id': course_hedu_id[:2],
+            'id': course_hedu_id,
             'bra_id': bra_id,
             'location_name': major_service.location_name()
         }
 
-    content = {
+    body = {
         'university_with_more_enrolled': universities_service.university_with_more_enrolled(),
         'highest_enrolled_number_by_university': universities_service.highest_enrolled_number(),
         'municipality_with_more_enrolled': municipalities_service.municipality_with_more_enrolled(),
@@ -93,5 +99,16 @@ def index(course_hedu_id):
             header['rank'] = index
             break
 
-    return render_template('major/index.html', header=header, content=content,
-                           body_class='perfil-estado', static_folder=static_folder)
+    location = Bra.query.filter(Bra.id == bra_id).first()
+
+    major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
+
+    return render_template('major/index.html', header=header, body=body, location=location, major=major)
+
+
+@mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
+def graphs(course_hedu_id, tab):
+    bra = request.args.get('bra_id')
+    major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
+    location = Bra.query.filter_by(id=bra).first()
+    return render_template('major/graphs-'+tab+'.html', major=major, location=location)

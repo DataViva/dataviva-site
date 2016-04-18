@@ -3,14 +3,17 @@ from flask import Blueprint, render_template, g, request, current_app, session, 
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.babel import gettext
 from urlparse import urlparse
+from random import randrange
 import time
 
 mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
 
-from dataviva import app, db, babel, view_cache, data_api
+from dataviva import app, db, babel, view_cache, data_viva_apis
 from dataviva.apps.general.forms import AccessForm
 from dataviva.apps.general.models import Short
 from dataviva.apps.account.models import User
+from dataviva.apps.news.models import Publication
+
 from dataviva.api.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
 from dataviva.translations.dictionary import dictionary
 from dataviva.api.stats.helper import stats_list, make_items
@@ -32,7 +35,6 @@ def before_request():
     g.user = current_user
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
-    g.page_type = mod.name
     g.dictionary = json.dumps(dictionary())
     g.attr_version = 14
     g.production = False if DEBUG else True
@@ -50,7 +52,7 @@ def before_request():
         #     db.session.add(g.user)
         #     db.session.commit()
 
-        if url_path[1] not in data_api:
+        if url_path[1] not in data_viva_apis:
             if g.locale not in url_path:
                 if url.query:
                     new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc, g.locale, url.path, url.query)
@@ -117,16 +119,21 @@ def get_timezone():
 def after_request(response):
     return response
 
-
 @mod.route('/', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("homepage"))
 def home():
-    return render_template("general/index.html")
+    g.page_type = 'home'
+
+    publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
+    if len(publications) > 3:
+        news = [publications.pop(randrange(len(publications))) for _ in range(3)]
+    else:
+        news = publications
+    return render_template("general/index.html", news=news)
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("browsecat"))
 def search():
+    g.page_type = 'search'
     return render_template("general/browse_categories.html")
 
 

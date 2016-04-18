@@ -17,6 +17,11 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
+
+
 @mod.route('/')
 def index():
     return render_template('about/index.html')
