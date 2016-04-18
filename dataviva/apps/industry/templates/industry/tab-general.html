@@ -93,7 +93,7 @@
             <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}} 
             {% trans %}is the{% endtrans %} {{header.ranking}}
             {% if g.locale == "pt" %}&ordm{% endif %}
-            {% trans %}in number of employees in {% endtrans %}{{location.preposition('de')}} {{location.name}}, 
+            {% trans %}in number of employees in {% endtrans %}{{location.preposition('de')}} {{location.name()}}, 
             {% trans %}and these workers are concentrated in the city of{% endtrans %} {{location.preposition('de')}} {{body.municipality_with_more_num_jobs_name}},
             {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}} 
             {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
