@@ -4,7 +4,7 @@
             <ul>
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">PIB</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.gdp|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.gdp|magnitude }}</small>
@@ -14,7 +14,7 @@
                 {% if header.life_expectation %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">Esperança de Vida</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.life_expectation|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.life_expectation|magnitude }}</small>
@@ -25,7 +25,7 @@
                 {% if header.population %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">População Total</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Total Population{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.population|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.population|magnitude }}</small>
@@ -35,7 +35,7 @@
                 {% endif %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">PIB Per Capta</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %}</h2>
                         <div class="number">
                             R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.gdp_per_capita|magnitude }}</small>
@@ -45,7 +45,7 @@
                 {% if header.hdi %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">IDHM</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.hdi|magnitude }}</small>
@@ -56,7 +56,7 @@
                 {% if header.eci %}
                 <li>
                     <div class="widget">
-                        <h2 class="text-left text-uppercase">ECI</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}ECI{% endtrans %}</h2>
                         <div class="number">
                             <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{ header.eci|magnitude }}</small>
@@ -71,34 +71,100 @@
         <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
     </div>
     <div class="m-t-sm col-xs-12 year">
-        Ano: {{ header.year }}
+        {% trans %}Year{% endtrans %}: {{ header.year }}
     </div>
 
     <h2 class="m-t-xl">Perfil Geral</h2>
         {% if profile.bra_id|length == 9 %}
-        <p>{{ header.name }} é um dos {{ profile.number_of_municipalities }} municípios do estado {{ location.preposition('de') }} {{ profile.state_name }}. Com área de {{ profile.area }} km², possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes e PIB per Capita de R$ {{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. Localizado na Mesorregião {{ profile.mesoregion_name }}, é o {{ profile.gdp_rank }}º município do estado em PIB.</p>
+            <p>{{ header.name }} 
+            {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
+            {% trans %} With {% endtrans %}{{ profile.area }} 
+            {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. 
+            {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }}, 
+            {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}
+            º 
+            {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
         {% elif profile.bra_id|length == 7 %}
-        <p>A Microrregião {{ header.name }} é uma das {{ profile.number_of_microregions }} subdivisões da Mesorregião {{ profile.mesoregion_name }}, localizada no estado {{ location.preposition('de') }} {{ profile.state_name }}. Compreende um total de {{ profile.number_of_municipalities }} municípios e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} de habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
+            <p>
+            {% if g.locale == "pt" %}
+                A Microrregião
+            {% endif %}
+            {{ header.name }} 
+            {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions }} 
+            {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }}, 
+            {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
+            {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
+            {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
+            </p>
         {% elif profile.bra_id|length == 5 %}
-        <p>A Mesorregião {{ header.name }} é uma das {{ profile.number_of_mesoregions }} subdivisões do estado {{ location.preposition('de') }} {{ profile.state_name }}. É a {{ profile.eci_rank }}ª mesorregião brasileira em índice de complexidade e possui população de {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. Seu PIB é de R$ {{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) e seu principal produto por valor exportado é {{ body.main_product_by_export_value_name }}.</p>
+            <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
+            {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions }} 
+            {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
+            {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}
+            ª 
+            {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
+            {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
+            {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
+            </p>
         {% elif profile.bra_id|length == 1 %}
-        <p>A região {{ header.name }} é uma das {{ profile.number_of_regions-1 }} divisões regionais brasileiras, composta pelos estados {% for states in profile.region_states %}{% if states == profile.region_states[profile.region_states|length-1] %}e {{ states }}{% else %}{{ states }}, {% endif %}{% endfor %}. No total, a região {{ header.name }} possui {{ header.population|max_digits(3) }} {{ header.population|magnitude }} habitantes. É a {{ profile.gdp_pc_rank }}ª região em PIB per Capita do país e a {{ profile.pop_rank }}ª em população.</p>
+            <p>{% if g.locale == "pt" %}
+                A
+                {% else %}
+                    The
+            {% endif %}{{ header.name }} 
+            {% trans %} is one of the {% endtrans %}{{ profile.number_of_regions-1 }} 
+            {% trans %}regional divisions in Brazil, consisting of the states of {% endtrans %}
+            {% for states in profile.region_states %}
+                {% if states == profile.region_states[profile.region_states|length-1] %}
+                    {% trans %}and{% endtrans %} {{ states }}.
+                {% else %}
+                    {{ states }}, 
+                {% endif %}
+            {% endfor %}
+            {% trans %}The region {% endtrans %}
+            {% trans %}has a total of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }}
+            {% trans %}people. It is the number {% endtrans %}{{ profile.gdp_pc_rank }}
+            {% if g.locale == "pt" %}ª{% endif %}
+             {% trans %}region in GDP per capita of Brazil and number {% endtrans %}{{ profile.pop_rank }}
+            {% if g.locale == "pt" %}ª{% endif %} 
+            {% trans %}in population{% endtrans %}.</p>
         {% else %}
-        <p>{{ header.name }} é uma das {{ profile.number_of_states-1 }} unidades federativas do Brasil, localizada na {{ profile.region_name }} do país, sendo o {{ profile.area_rank }}º estado com a maior área territorial e o {{ profile.pop_rank }}º em quantidade de habitantes. Limita-se a {% for neighbors in profile.neighbors %}{% if neighbors == profile.neighbors[profile.neighbors|length-1] %}e {{ neighbors }}{% else %}{{ neighbors }}, {% endif %}{% endfor %}. Seu território é subdividido em {{ profile.number_of_municipalities }} municípios, o {{ profile.municipality_rank }}º dentre os estados brasileiros.</p>
+            <p>{{ header.name }} 
+            {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }} 
+            {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }} 
+            {% trans %}being the {% endtrans %}{{ profile.area_rank }}
+            º 
+            {% trans %}state in territorial area and {% endtrans %}{{ profile.pop_rank }}
+            º 
+            {% trans %}in population. Its territory is limited for {% endtrans %}
+            {% for neighbors in profile.neighbors %}
+                {% if neighbors == profile.neighbors[profile.neighbors|length-1] %}
+                    {% trans %}and{% endtrans %} {{ neighbors }}
+                {% else %}
+                    {{ neighbors }}, 
+                {% endif %}
+            {% endfor %}. 
+            {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}cities{% endtrans %}
+            .</p>
         {% endif %}
 
 
 
     <div class="row">
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Comércio Internacional</h3>
+            <h3>{% trans %}International Trade{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         {% if body.main_product_by_export_value %}
                         <tr>
                             <th>
-                                Principal Produto por Valor Exportado
+                                {% trans %}Main Product by Total Value Exported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_product_by_export_value_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -109,7 +175,7 @@
                         {% if body.main_product_by_import_value %}
                         <tr>
                             <th>
-                                Principal Produto por Valor Importado
+                                {% trans %}Main Product by Total Value Imported{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_product_by_import_value_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -119,7 +185,7 @@
                         {% endif %}
                         <tr>
                             <th>
-                                Total de Exportações
+                                {% trans %}Total of Exports{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong> <span>{{ body.total_exports | magnitude }}</span>
@@ -127,7 +193,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Total de Importações
+                                {% trans %}Total of Imports{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong> <span>{{ body.total_imports | magnitude }}</span>
@@ -137,17 +203,17 @@
                 </table>
             </div>
             <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Salário e Emprego</h3>
+            <h3>{% trans %}Wages and Jobs{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         <tr>
                             <th>
-                                Principal Atividade Econômica
+                                {% trans %}Main Economic Activity{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_industry_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -156,7 +222,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Principal Ocupação
+                                {% trans %}Main Occupation{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.main_occupation_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -165,7 +231,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Salário Médio
+                                {% trans %}Average Wage{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> <span>{{ body.avg_wage | magnitude }}</span>
@@ -173,7 +239,7 @@
                         </tr>
                         <tr>
                             <th>
-                                Total de Empregos
+                                {% trans %}Total of Jobs{% endtrans %}
                             </th>
                             <td>
                                 USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> <span>{{ body.total_jobs | magnitude }}</span>
@@ -183,19 +249,19 @@
                 </table>
             </div>
             <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
 
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Oportunidades Econômicas</h3>
+            <h3>{% trans %}Economic Opportunities{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         <tr>
                         {% if body.less_distance_by_product %}
                             <th>
-                                Produto com Menor Distância
+                                {% trans %}Product with Shortest Distance{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.less_distance_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -206,7 +272,7 @@
                         {% if body.less_distance_by_occupation %}
                         <tr>
                             <th>
-                                Atividade Econômica com Menor Distância
+                                {% trans %}Economic Activity with Shortest Distance{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.less_distance_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -217,7 +283,7 @@
                         {% if body.opportunity_gain_by_product %}
                         <tr>
                             <th>
-                                Produto com Maior Oportunidade
+                                {% trans %}Product with Highest Opportunity Gain{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -228,7 +294,7 @@
                         {% if body.opportunity_gain_by_occupation %}
                         <tr>
                             <th>
-                                Atividade Econômica com Maior Oportunidade
+                                {% trans %}Economic Activity with Highest Opportunity Gain{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.opportunity_gain_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -240,19 +306,19 @@
                 </table>
             </div>
             <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
 
         <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>Educação</h3>
+            <h3>{% trans %}Education{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
                         {% if body.highest_enrolled_by_university %}
                         <tr>
                             <th>
-                                Universidade com mais Matrículas
+                                {% trans %}University with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_university_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -263,7 +329,7 @@
                         {% if body.highest_enrolled_by_major %}
                         <tr>
                             <th>
-                                Curso Superior com mais Matrículas
+                                {% trans %}Major with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_major_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -274,7 +340,7 @@
                         {% if body.highest_enrolled_by_school %}
                         <tr>
                             <th>
-                                Escola com mais Matrículas em Cursos Técnicos
+                                {% trans %}School with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_school_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -285,7 +351,7 @@
                         {% if body.highest_enrolled_by_basic_course %}
                         <tr>
                             <th>
-                                Curso Técnico com mais Matrículas
+                                {% trans %}Basic Course with Highest Number of Enrollments{% endtrans %}
                             </th>
                             <td>
                                 <p class="label">{{ body.highest_enrolled_by_basic_course_name | truncate(length=30, killwords=False, end='...')}}</p>
@@ -297,7 +363,7 @@
                 </table>
             </div>
             <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                mais detalhes
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
     </div>
