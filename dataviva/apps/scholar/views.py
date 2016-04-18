@@ -72,35 +72,37 @@ def show(id):
     return render_template('scholar/show.html', article=article)
 
 
+@mod.route('/admin', methods=['GET'])
+def admin():
+    articles = Article.query.all()
+    return render_template('scholar/admin.html', articles=articles)
+
+
+@mod.route('/admin', methods=['POST'])
+def admin_update():
+    for id, approval_status in request.form.iteritems():
+        article = Article.query.filter_by(id=id).first_or_404()
+        article.approval_status = approval_status == u'true'
+        db.session.commit()
+    message = u"Estudo(s) atualizados com sucesso!"
+    return message
+
+
+@mod.route('/admin/article/<status>/<status_value>', methods=['POST'])
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        article = Article.query.filter_by(id=id).first_or_404()
+        setattr(article, status, status_value == u'true')
+        db.session.commit()
+
+    message = u"Artigo(s) alterada(s) com sucesso!"
+    return message, 200
+
+
 @mod.route('/admin/article/new', methods=['GET'])
 def new():
     form = RegistrationForm()
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
-
-
-@mod.route('/admin/article/<id>/edit', methods=['GET'])
-def edit(id):
-    form = RegistrationForm()
-    article = Article.query.filter_by(id=id).first_or_404()
-    form.title.data = article.title
-    form.theme.data = article.theme
-    form.authors.data = article.authors_str()
-    form.keywords.data = article.keywords_str()
-    form.abstract.data = article.abstract
-
-    files = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isfile(
-        os.path.join(app.config['UPLOAD_FOLDER'], f)) and f not in IGNORED_FILES]
-
-    file_display = []
-
-    for f in files:
-        size = os.path.getsize(os.path.join(app.config['UPLOAD_FOLDER'], f))
-        file_saved = uploadfile(name=f, size=size)
-        file_display.append(file_saved.get_file())
-
-    #return simplejson.dumps({"files": file_display})
-
-    return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
 
 
 @mod.route('/admin/article/new', methods=['POST'])
@@ -161,6 +163,31 @@ def create():
                   Em até 15 dias você receberá um retorno sobre sua publicação no site!'
         flash(message, 'success')
         return redirect(url_for('scholar.index'))
+
+
+@mod.route('/admin/article/<id>/edit', methods=['GET'])
+def edit(id):
+    form = RegistrationForm()
+    article = Article.query.filter_by(id=id).first_or_404()
+    form.title.data = article.title
+    form.theme.data = article.theme
+    form.authors.data = article.authors_str()
+    form.keywords.data = article.keywords_str()
+    form.abstract.data = article.abstract
+
+    files = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isfile(
+        os.path.join(app.config['UPLOAD_FOLDER'], f)) and f not in IGNORED_FILES]
+
+    file_display = []
+
+    for f in files:
+        size = os.path.getsize(os.path.join(app.config['UPLOAD_FOLDER'], f))
+        file_saved = uploadfile(name=f, size=size)
+        file_display.append(file_saved.get_file())
+
+    #return simplejson.dumps({"files": file_display})
+
+    return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
 
 
 @mod.route('/admin/article/<id>/edit', methods=['POST'])
@@ -233,33 +260,6 @@ def admin_delete():
         return u"Artigo(s) excluído(s) com sucesso!", 200
     else:
         return u'Selecione algum artigo para excluí-lo.', 205
-
-
-@mod.route('/admin', methods=['GET'])
-def admin():
-    articles = Article.query.all()
-    return render_template('scholar/admin.html', articles=articles)
-
-
-@mod.route('/admin', methods=['POST'])
-def admin_update():
-    for id, approval_status in request.form.iteritems():
-        article = Article.query.filter_by(id=id).first_or_404()
-        article.approval_status = approval_status == u'true'
-        db.session.commit()
-    message = u"Estudo(s) atualizados com sucesso!"
-    return message
-
-
-@mod.route('/admin/article/<status>/<status_value>', methods=['POST'])
-def admin_activate(status, status_value):
-    for id in request.form.getlist('ids[]'):
-        article = Article.query.filter_by(id=id).first_or_404()
-        setattr(article, status, status_value == u'true')
-        db.session.commit()
-
-    message = u"Artigo(s) alterada(s) com sucesso!"
-    return message, 200
 
 
 @mod.route('/articles/all', methods=['GET'])
