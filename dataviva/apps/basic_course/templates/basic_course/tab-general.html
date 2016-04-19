@@ -8,7 +8,7 @@
                     <div class="widget">
                         <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
                         <div class="number">
-                            R$ <strong class="counter">{{header["course_enrolled"] | max_digits(3) }}</strong><br/>
+                            <strong class="counter">{{header["course_enrolled"] | max_digits(3) }}</strong><br/>
                             <small class="magnitude">{{header["course_enrolled"] | magnitude }}</small>
                         </div>
                     </div>
@@ -17,7 +17,7 @@
                     <div class="widget">
                         <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %}</h2>
                         <div class="number">
-                            R$ <strong class="counter">{{header["course_classes"] | max_digits(3)}}</strong><br/>
+                            <strong class="counter">{{header["course_classes"] | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header["course_classes"] | magnitude }}</small>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="widget">
                         <h2 class="text-left text-uppercase">{% trans %}Average Size of Classes{% endtrans %}</h2>
                         <div class="number">
-                            R$ <strong class="counter">{{ header.course_average_class_size|max_digits(3) }}</strong><br/>
+                            <strong class="counter">{{ header.course_average_class_size|max_digits(3) }}</strong><br/>
                             <small class="magnitude">{% trans %}students{% endtrans %}</small>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
 
     <div class="row">
         <div class="col-xs-12 col-md-10 col-lg-8">
-            <h3>{% trans %}Wages and Jobs{% endtrans %}</h3>
+            <h3>{% trans %}Enrollments{% endtrans %}</h3>
             <div class="table-responsive">
                 <table class="table data-detail">
                     <tbody>
@@ -128,7 +128,7 @@
                             </th>
                             <td>
                                 <p class="label">{{body["school_name"]}}</p>
-                                USD <strong class="counter">{{body["school_enrolled"] | max_digits(3)}}</strong> <span>{{body["school_enrolled"] | magnitude}}</span>
+                                <strong class="counter">{{body["school_enrolled"] | max_digits(3)}}</strong> <span>{{body["school_enrolled"] | magnitude}}</span>
                             </td>
                         </tr>
                         {% if location.id | length < 9 %}
@@ -138,7 +138,7 @@
                             </th>
                             <td>
                                 <p class="label">{{body["city_name"]}}</p>
-                                USD <strong class="counter">{{body["city_enrolled"] | max_digits(3)}}</strong> <span>{{body["city_enrolled"] | magnitude}}</span>
+                                <strong class="counter">{{body["city_enrolled"] | max_digits(3)}}</strong> <span>{{body["city_enrolled"] | magnitude}}</span>
                             </td>
                         </tr>
                         {% endif %}
