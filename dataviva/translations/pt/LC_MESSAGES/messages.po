@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-19 15:05-0300\n"
+"POT-Creation-Date: 2016-04-19 15:37-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -342,6 +342,7 @@ msgstr "Você precisa fazer o login para marcar respostas."
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:3
 #: dataviva/apps/location/templates/location/graphs-education.html:3
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:3
+#: dataviva/apps/news/templates/news/_form.html:86
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:3
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
@@ -1614,6 +1615,56 @@ msgstr "alunos matriculados em todo o país"
 #: dataviva/translations/dictionary.py:532
 msgid "News"
 msgstr "Notícias"
+
+#: dataviva/apps/news/templates/news/_form.html:12
+msgid "Title"
+msgstr "Título"
+
+#: dataviva/apps/news/templates/news/_form.html:18
+msgid "Show in"
+msgstr "Exibir na"
+
+#: dataviva/apps/news/templates/news/_form.html:28
+msgid "Author"
+msgstr "Autor"
+
+#: dataviva/apps/news/templates/news/_form.html:33
+msgid "News Date"
+msgstr "Data da Notícia"
+
+#: dataviva/apps/news/templates/news/_form.html:42
+msgid "Category"
+msgstr "Categoria"
+
+#: dataviva/apps/news/templates/news/_form.html:47
+msgid "Call Image"
+msgstr "Imagem da Chamada"
+
+#: dataviva/apps/news/templates/news/_form.html:57
+msgid "New Image"
+msgstr "Nova Imagem"
+
+#: dataviva/apps/news/templates/news/_form.html:67
+msgid "Complete Edition"
+msgstr "Finalizar edição"
+
+#: dataviva/apps/news/templates/news/_form.html:77
+msgid "Call"
+msgstr "Chamada"
+
+#: dataviva/apps/news/templates/news/_form.html:84
+msgid "Content"
+msgstr "Conteúdo"
+
+#: dataviva/apps/news/templates/news/_form.html:85
+#: dataviva/translations/dictionary.py:453
+msgid "Edit"
+msgstr "Editar"
+
+#: dataviva/apps/news/templates/news/_form.html:94
+#: dataviva/templates/include/footer.html:66
+msgid "Send"
+msgstr "Enviar"
 
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:5
 #: dataviva/translations/dictionary.py:617
@@ -4428,10 +4479,6 @@ msgstr "Nome"
 msgid "Message"
 msgstr "Mensagem"
 
-#: dataviva/templates/include/footer.html:66
-msgid "Send"
-msgstr "Enviar"
-
 #: dataviva/templates/include/header.html:4
 #: dataviva/translations/dictionary.py:531
 msgid "Studies"
@@ -5519,10 +5566,6 @@ msgstr "Seu voto foi enviado."
 #: dataviva/translations/dictionary.py:449
 msgid "Your vote was removed."
 msgstr "Seu voto foi removido."
-
-#: dataviva/translations/dictionary.py:453
-msgid "Edit"
-msgstr "Editar"
 
 #: dataviva/translations/dictionary.py:454
 msgid "Visible"
