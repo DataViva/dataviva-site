@@ -64,17 +64,21 @@ var EconomicActivitiesTable = function () {
 
             $('#economic-activities-table_filter input').removeClass('input-sm');
             $('#economic-activities-table_filter').addClass('pull-right');
+            $('#economic-activities-sections').addClass('active');
 
             $('#economic-activities-sections').click(function() {
                 economicActivities.table.ajax.url("/rais/all/all/show.1/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#economic-activities-divisions').click(function() {
                 economicActivities.table.ajax.url("/rais/all/all/show.3/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#economic-activities-classes').click(function() {
                 economicActivities.table.ajax.url("/rais/all/all/show.6/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });
