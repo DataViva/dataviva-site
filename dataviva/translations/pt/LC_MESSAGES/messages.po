@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-19 12:59-0300\n"
+"POT-Creation-Date: 2016-04-19 13:06-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -417,7 +417,6 @@ msgstr "Geral"
 #: dataviva/apps/university/templates/university/index.html:49
 #: dataviva/apps/university/templates/university/tab-enrollments.html:3
 #: dataviva/apps/university/templates/university/tab-general.html:52
-#, fuzzy
 msgid "Enrollments"
 msgstr "Matrículas"
 
@@ -434,7 +433,6 @@ msgstr "Matrículas"
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:10
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:14
 #: dataviva/translations/dictionary.py:512
-#, fuzzy
 msgid "Main Municipality"
 msgstr "Principal Município"
 
@@ -511,7 +509,6 @@ msgstr "Ano"
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:66
 #: dataviva/apps/university/templates/university/tab-general.html:42
 #: dataviva/translations/dictionary.py:528
-#, fuzzy
 msgid "General Profile"
 msgstr "Perfil Geral"
 
@@ -555,7 +552,6 @@ msgstr "alunos. No total, o país possui "
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:98
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:106
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:114
-#, fuzzy
 msgid "enrolled students in this course/field, with "
 msgstr "alunos matriculados nesse curso, com turmas médias de "
 
@@ -580,7 +576,6 @@ msgid "is in the municipality of "
 msgstr "encontra-se no município de "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:81
-#, fuzzy
 msgid "students. The region has a total of "
 msgstr "alunos. No total, o país possui "
 
@@ -594,22 +589,18 @@ msgid "students. The state has a total of "
 msgstr "alunos. No total, o estado possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:94
-#, fuzzy
 msgid "in the mesoregion "
 msgstr "na mesorregião "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:97
-#, fuzzy
 msgid "students. The mesoregion has a total of "
 msgstr "alunos. No total, a mesoregiāo possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:102
-#, fuzzy
 msgid "in the microregion "
 msgstr "na microrregião "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:105
-#, fuzzy
 msgid "students. The microregion has a total of "
 msgstr "alunos. No total, a microregiāo possui "
 
@@ -628,7 +619,6 @@ msgid "The city has "
 msgstr "No total, o município possui"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:149
-#, fuzzy
 msgid "More detais"
 msgstr "Mais detalhes"
 
@@ -837,7 +827,6 @@ msgid "Rings"
 msgstr "Anéis"
 
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:5
-#, fuzzy
 msgid "Jobs By"
 msgstr "Empregos por"
 
@@ -897,14 +886,12 @@ msgstr "Massa Salarial"
 #: dataviva/apps/industry/templates/industry/tab-general.html:25
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:25
 #: dataviva/translations/dictionary.py:601
-#, fuzzy
 msgid "Total Employment"
 msgstr "Total de Empregos"
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:34
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:34
 #: dataviva/translations/dictionary.py:602
-#, fuzzy
 msgid "Total of Establishments"
 msgstr "Total de Estabelecimentos"
 
@@ -976,7 +963,6 @@ msgid "This region has a total of "
 msgstr "Nesta região, há um total de "
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:107
-#, fuzzy
 msgid "This municipality has a total of "
 msgstr "Neste município, há um total de "
 
@@ -1045,12 +1031,10 @@ msgid "with highest monthly average income"
 msgstr "com maior renda média mensal"
 
 #: dataviva/apps/location/templates/location/graphs-education.html:5
-#, fuzzy
 msgid "Major By"
 msgstr "Curso"
 
 #: dataviva/apps/location/templates/location/graphs-education.html:9
-#, fuzzy
 msgid "Professional Education By"
 msgstr "profissionais na "
 
@@ -1309,7 +1293,6 @@ msgstr "municípios"
 
 #: dataviva/apps/location/templates/location/tab-general.html:167
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:129
-#, fuzzy
 msgid "Main Product by Total Value Exported"
 msgstr "Principal Produto por Valor Total Exportado"
 
@@ -1403,7 +1386,6 @@ msgid "Economic Activity"
 msgstr "Atividade econômica"
 
 #: dataviva/apps/location/templates/location/tab-opportunities.html:24
-#, fuzzy
 msgid "Product "
 msgstr "Produto"
 
@@ -1421,7 +1403,6 @@ msgstr "Principal Produto"
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:11
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:25
-#, fuzzy
 msgid "by Export Value"
 msgstr "por Valor Exportado"
 
@@ -1433,23 +1414,19 @@ msgstr "por Valor Importado"
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:28
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:20
 #: dataviva/translations/dictionary.py:515
-#, fuzzy
 msgid "Main Destination"
 msgstr "Principal Destino"
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:29
-#, fuzzy
 msgid "by Import Value"
 msgstr "por Valor Importado"
 
 #: dataviva/apps/location/templates/location/tab-wages.html:10
 #: dataviva/apps/location/templates/location/tab-wages.html:13
-#, fuzzy
 msgid "By Number of Jobs"
 msgstr "por Empregos"
 
 #: dataviva/apps/location/templates/location/tab-wages.html:13
-#, fuzzy
 msgid "Principal Ocupação"
 msgstr "SubGrupo Principal"
 
@@ -1459,7 +1436,7 @@ msgstr "Massa Salarial"
 
 #: dataviva/apps/location/templates/location/tab-wages.html:47
 msgid "Wage Mass"
-msgstr ""
+msgstr "Massa Salárial"
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:5
 #: dataviva/templates/about.html:78 dataviva/templates/general/index.html:96
@@ -1470,7 +1447,6 @@ msgid "Universities"
 msgstr "Universidades"
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:12
-#, fuzzy
 msgid "Students Situation"
 msgstr "Situação dos Estudantes"
 
@@ -1492,7 +1468,6 @@ msgstr "Turno"
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:26
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:12
-#, fuzzy
 msgid "Students Status"
 msgstr "Situação dos Estudantes"
 
@@ -1522,7 +1497,6 @@ msgid "by Number of Graduates"
 msgstr "por Número de Alunos Concluintes"
 
 #: dataviva/apps/major/templates/major/tab-general.html:16
-#, fuzzy
 msgid "Number of Entering Students"
 msgstr "Número de Ingressantes"
 
@@ -1541,7 +1515,6 @@ msgid "The course of"
 msgstr "O curso/campo de "
 
 #: dataviva/apps/major/templates/major/tab-general.html:46
-#, fuzzy
 msgid "is "
 msgstr "é"
 
@@ -1591,7 +1564,6 @@ msgid "The University with the largest number of students in this course is"
 msgstr "A universidade que possui mais alunos neste curso é "
 
 #: dataviva/apps/major/templates/major/tab-general.html:62
-#, fuzzy
 msgid "students enrolled in the region"
 msgstr "alunos matriculados em todo o país"
 
@@ -1600,7 +1572,6 @@ msgid "the state of"
 msgstr "no estado "
 
 #: dataviva/apps/major/templates/major/tab-general.html:72
-#, fuzzy
 msgid "students enrolled in the state"
 msgstr "alunos matriculados em todo o país"
 
@@ -1609,7 +1580,6 @@ msgid "the mesoregion of"
 msgstr "na mesorregião "
 
 #: dataviva/apps/major/templates/major/tab-general.html:82
-#, fuzzy
 msgid "students enrolled in the mesoregion"
 msgstr "alunos matriculados em todo o país"
 
@@ -1618,7 +1588,6 @@ msgid "the microregion of"
 msgstr "na microrregião "
 
 #: dataviva/apps/major/templates/major/tab-general.html:92
-#, fuzzy
 msgid "students enrolled in the microregion"
 msgstr "alunos matriculados em todo o país"
 
@@ -1627,7 +1596,6 @@ msgid "the municipality of"
 msgstr "no município "
 
 #: dataviva/apps/major/templates/major/tab-general.html:102
-#, fuzzy
 msgid "students enrolled in the municipality"
 msgstr "alunos matriculados em todo o país"
 
@@ -1660,7 +1628,6 @@ msgstr "A ocupação de "
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:86
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:96
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:105
-#, fuzzy
 msgid "occupation employs "
 msgstr "emprega "
 
@@ -1678,7 +1645,6 @@ msgstr ""
 "emprega nessa ocupação é "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:59
-#, fuzzy
 msgid "and the "
 msgstr "e a atividade de "
 
@@ -1695,17 +1661,14 @@ msgid "and the average age of workers is"
 msgstr "e a idade média dos empregados é de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:67
-#, fuzzy
 msgid "professionals in the"
 msgstr "profissionais na "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:68
-#, fuzzy
 msgid "region, being number "
 msgstr "ocupando o "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:70
-#, fuzzy
 msgid " in the region occupation ranking. The average monthly income is "
 msgstr ""
 "lugar no ranking de ocupações da região. A renda mensal média dos "
@@ -1714,7 +1677,6 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:71
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:81
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:91
-#, fuzzy
 msgid " and the average age of workers is "
 msgstr "e a idade média dos empregados é de "
 
@@ -1726,58 +1688,49 @@ msgid "The city that employs the most in this occupation is "
 msgstr "O município que mais emprega nessa ocupação é "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:77
-#, fuzzy
 msgid "professionals in the state of "
 msgstr "profissionais no estado de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:78
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:88
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:98
-#, fuzzy
 msgid "being number "
 msgstr "ocupando o "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:80
-#, fuzzy
 msgid " in the state occupation ranking. The average monthly income is "
 msgstr ""
 "lugar no ranking de ocupações do estado. A renda mensal média dos "
 "trabalhadores dessa ocupação no estado é de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:87
-#, fuzzy
 msgid "professionals in the the mesoregion of "
 msgstr "profissionais no mesoregiāo "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:90
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:100
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:108
-#, fuzzy
 msgid "in its occupation ranking. The average monthly income is "
 msgstr ""
 "lugar em seu ranking de ocupações. A renda mensal média dos trabalhadores"
 " dessa ocupação nesta localidade é de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:97
-#, fuzzy
 msgid "professionals in the micro-region "
 msgstr "profissionais no microregiāo "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:101
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:109
-#, fuzzy
 msgid "and the average age of workers is "
 msgstr "e a idade média dos empregados é de "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:122
 #: dataviva/translations/dictionary.py:605
-#, fuzzy
 msgid "Main employer Municipality"
 msgstr "Principal Município por Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:126
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:136
-#, fuzzy
 msgid "Jobs"
 msgstr "empregos"
 
@@ -1788,7 +1741,6 @@ msgstr "Principal Atividade por Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:152
 #: dataviva/translations/dictionary.py:608
-#, fuzzy
 msgid "Activity with highest monthly average income"
 msgstr "Atividade com maior renda média mensal"
 
@@ -1805,7 +1757,6 @@ msgstr "Principal"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:12
 #: dataviva/translations/dictionary.py:612
-#, fuzzy
 msgid "Employer Municipality"
 msgstr "Município por Empregos"
 
@@ -1816,20 +1767,17 @@ msgstr "Atividade por Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:21
 #: dataviva/translations/dictionary.py:614
-#, fuzzy
 msgid "Municipality with Highest"
 msgstr "Município com Maior"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:22
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:27
 #: dataviva/translations/dictionary.py:615
-#, fuzzy
 msgid "Monthly Average Income"
 msgstr "Renda Média Mensal"
 
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:26
 #: dataviva/translations/dictionary.py:616
-#, fuzzy
 msgid "Activity with Highest"
 msgstr "Atividade com Maior"
 
@@ -1846,7 +1794,6 @@ msgstr "Balança Comercial"
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:11
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:11
 #: dataviva/translations/dictionary.py:526
-#, fuzzy
 msgid "Exports By"
 msgstr "Exportações por"
 
@@ -1866,7 +1813,6 @@ msgstr "Destino"
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:42
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:38
 #: dataviva/translations/dictionary.py:527
-#, fuzzy
 msgid "Imports By"
 msgstr "Importações por"
 
@@ -1890,14 +1836,12 @@ msgstr "Relação Peso Líquido / Valor Total Exportado"
 #: dataviva/apps/product/templates/product/tab-general.html:34
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:36
 #: dataviva/translations/dictionary.py:488
-#, fuzzy
 msgid "Total Value Imported"
 msgstr "Total de Importações"
 
 #: dataviva/apps/product/templates/product/tab-general.html:43
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:46
 #: dataviva/translations/dictionary.py:489
-#, fuzzy
 msgid "Ratio Net Weight / Total Value Imported"
 msgstr "Relação Peso Líquido / Valor Total Importado"
 
@@ -1992,7 +1936,6 @@ msgstr ", representando variação de"
 
 #: dataviva/apps/product/templates/product/tab-general.html:112
 #: dataviva/apps/product/templates/product/tab-general.html:125
-#, fuzzy
 msgid "in five years. The municipality in Brazil which exports more"
 msgstr "em cinco anos. O município no Brasil que mais exporta"
 
@@ -2015,13 +1958,11 @@ msgstr "é"
 #: dataviva/apps/product/templates/product/tab-general.html:191
 #: dataviva/apps/product/templates/product/tab-general.html:208
 #: dataviva/apps/product/templates/product/tab-general.html:223
-#, fuzzy
 msgid "and the one that imports the most is "
 msgstr "e o que mais importa é"
 
 #: dataviva/apps/product/templates/product/tab-general.html:135
 #: dataviva/apps/product/templates/product/tab-general.html:150
-#, fuzzy
 msgid " in imports in the state of"
 msgstr "posição em importações"
 
@@ -2032,7 +1973,6 @@ msgstr "posição em importações"
 #: dataviva/apps/product/templates/product/tab-general.html:200
 #: dataviva/apps/product/templates/product/tab-general.html:215
 #: dataviva/translations/dictionary.py:522
-#, fuzzy
 msgid " and number"
 msgstr " e a "
 
@@ -2042,7 +1982,6 @@ msgstr " e a "
 #: dataviva/apps/product/templates/product/tab-general.html:185
 #: dataviva/apps/product/templates/product/tab-general.html:202
 #: dataviva/apps/product/templates/product/tab-general.html:217
-#, fuzzy
 msgid " in exports. In "
 msgstr " posição em exportações no Brasil. Em "
 
@@ -2053,7 +1992,6 @@ msgstr " posição em exportações no Brasil. Em "
 #: dataviva/apps/product/templates/product/tab-general.html:205
 #: dataviva/apps/product/templates/product/tab-general.html:220
 #: dataviva/translations/dictionary.py:517
-#, fuzzy
 msgid "in five years. The municipality in "
 msgstr "em cinco anos. O município em"
 
@@ -2063,13 +2001,11 @@ msgstr "em cinco anos. O município em"
 #: dataviva/apps/product/templates/product/tab-general.html:189
 #: dataviva/apps/product/templates/product/tab-general.html:206
 #: dataviva/apps/product/templates/product/tab-general.html:221
-#, fuzzy
 msgid " which exports more"
 msgstr "que mais exporta"
 
 #: dataviva/apps/product/templates/product/tab-general.html:167
 #: dataviva/apps/product/templates/product/tab-general.html:182
-#, fuzzy
 msgid " in imports in the mesoregion of"
 msgstr " posição em importações na mesoregiāo"
 
@@ -2088,26 +2024,22 @@ msgstr "em cinco anos."
 #: dataviva/apps/product/templates/product/tab-general.html:260
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:107
 #: dataviva/translations/dictionary.py:508
-#, fuzzy
 msgid "Main Municipality by Total Value Exported"
 msgstr "Principal Município por Valor Total Exportado"
 
 #: dataviva/apps/product/templates/product/tab-general.html:269
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:118
 #: dataviva/translations/dictionary.py:509
-#, fuzzy
 msgid "Main Municipality by Total Value Imported"
 msgstr "Principal Município por Valor Total Importado"
 
 #: dataviva/apps/product/templates/product/tab-general.html:279
 #: dataviva/translations/dictionary.py:510
-#, fuzzy
 msgid "Main Destination by Total Value Exported"
 msgstr "Principal Destino por Valor Total Exportado"
 
 #: dataviva/apps/product/templates/product/tab-general.html:288
 #: dataviva/translations/dictionary.py:511
-#, fuzzy
 msgid "Main Origin by Total Value Exported"
 msgstr "Principal Origem por Valor Total Exportado"
 
@@ -2124,7 +2056,6 @@ msgstr "por Valor Total Exportado"
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:15
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:23
 #: dataviva/translations/dictionary.py:514
-#, fuzzy
 msgid "by Total Value Imported"
 msgstr "por Valor Total Importado"
 
@@ -2140,7 +2071,6 @@ msgid "Trade Partner"
 msgstr "Parceiro Comercial"
 
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:12
-#, fuzzy
 msgid "Basic Course ID"
 msgstr "Cursos Básicos"
 
@@ -2227,7 +2157,6 @@ msgid "Effective Product Diversity"
 msgstr "Diversidade Efetiva de Produtos"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:16
-#, fuzzy
 msgid "Average Monthly"
 msgstr "Renda Mensal Média"
 
@@ -2239,12 +2168,10 @@ msgid "Industry Diversity"
 msgstr "Diversidade de Atividades"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:18
-#, fuzzy
 msgid "Effective Industry"
 msgstr "Diversidade Efetiva de Atividades"
 
 #: dataviva/apps/rankings/templates/rankings/major.html:12
-#, fuzzy
 msgid "Higher Education ID"
 msgstr "Ensino Superior"
 
@@ -2299,7 +2226,6 @@ msgid "WLD ID"
 msgstr "ID WLD"
 
 #: dataviva/apps/rankings/templates/rankings/university.html:12
-#, fuzzy
 msgid "University ID"
 msgstr "Universidade"
 
@@ -2326,7 +2252,6 @@ msgid "in the export destinations of "
 msgstr "em destinos de exportações "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:73
-#, fuzzy
 msgid "The most exported product is "
 msgstr "O produto mais exportado para esse país é "
 
@@ -2355,7 +2280,7 @@ msgstr " em importações e a "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:87
 msgid "there are no exports from Brazil. The total of imports is of"
-msgstr ""
+msgstr "não há exportações no Brasil. O total de importações é de"
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:89
 msgid "number "
@@ -2392,7 +2317,6 @@ msgid "The institution "
 msgstr "A instituição"
 
 #: dataviva/apps/university/templates/university/tab-general.html:44
-#, fuzzy
 msgid " is a"
 msgstr "é um estabelecimento de ensino"
 
@@ -2409,7 +2333,6 @@ msgid "enrolled students and"
 msgstr "estudantes matriculados e"
 
 #: dataviva/apps/university/templates/university/tab-general.html:49
-#, fuzzy
 msgid "graduates"
 msgstr "concluintes"
 
@@ -2426,7 +2349,6 @@ msgid "Main Course by Number of Graduates"
 msgstr "Principal Curso por Número de Alunos Concluintes"
 
 #: dataviva/apps/university/templates/university/tab-general.html:87
-#, fuzzy
 msgid "More Details"
 msgstr "Mais detalhes"
 
@@ -2453,7 +2375,6 @@ msgstr "Classificações"
 
 #: dataviva/templates/about.html:54 dataviva/templates/general/index.html:66
 #: dataviva/translations/dictionary.py:568
-#, fuzzy
 msgid "Brazilian Locations"
 msgstr "Localidades Brasileiras"
 
@@ -3322,13 +3243,11 @@ msgstr "foi publicada/commentada no DataViva."
 
 #: dataviva/templates/about/ask/ask_feedback.html:20
 #: dataviva/translations/dictionary.py:593
-#, fuzzy
 msgid "Check here."
 msgstr "onfira aqui."
 
 #: dataviva/templates/about/ask/ask_feedback.html:22
 #: dataviva/translations/dictionary.py:594
-#, fuzzy
 msgid "Best Regards,"
 msgstr "Atenciosamente,"
 
@@ -4348,7 +4267,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:7
 #: dataviva/templates/include/partners.html:4
 #: dataviva/translations/dictionary.py:573
-#, fuzzy
 msgid "Partners"
 msgstr "Parceiros"
 
@@ -4409,13 +4327,11 @@ msgstr "SOBRE"
 
 #: dataviva/templates/include/header.html:30
 #: dataviva/translations/dictionary.py:537
-#, fuzzy
 msgid "SEARCH"
 msgstr "PESQUISE"
 
 #: dataviva/templates/include/header.html:32
 #: dataviva/translations/dictionary.py:544
-#, fuzzy
 msgid "Basic Features"
 msgstr "Recursos Básicos"
 
@@ -4426,7 +4342,6 @@ msgstr "INICIE UMA PESQUISA"
 
 #: dataviva/templates/include/header.html:34
 #: dataviva/translations/dictionary.py:548
-#, fuzzy
 msgid "VIEW RANKINGS"
 msgstr "VISUALIZE RANKINGS"
 
@@ -4471,13 +4386,11 @@ msgstr "Editar perfil"
 
 #: dataviva/templates/include/header.html:56
 #: dataviva/translations/dictionary.py:534
-#, fuzzy
 msgid "English"
 msgstr "Inglês"
 
 #: dataviva/templates/include/header.html:57
 #: dataviva/translations/dictionary.py:535
-#, fuzzy
 msgid "Portuguese"
 msgstr "Português"
 
@@ -5507,13 +5420,12 @@ msgid "Admin"
 msgstr "Administrador"
 
 #: dataviva/translations/dictionary.py:462
-#, fuzzy
 msgid "Loading"
 msgstr "Incluindo"
 
 #: dataviva/translations/dictionary.py:463
 msgid "Processing"
-msgstr ""
+msgstr "Processando"
 
 #: dataviva/translations/dictionary.py:464
 msgid "Search Results"
@@ -5588,7 +5500,6 @@ msgid " and the one that imports the most is "
 msgstr "e o que mais importa é "
 
 #: dataviva/translations/dictionary.py:502
-#, fuzzy
 msgid "occupies the"
 msgstr "ocupam a"
 
@@ -5601,7 +5512,6 @@ msgid "in this location"
 msgstr "na regiāo. "
 
 #: dataviva/translations/dictionary.py:505
-#, fuzzy
 msgid "In"
 msgstr "Em"
 
@@ -5614,21 +5524,18 @@ msgid "which exports more"
 msgstr "que mais exporta"
 
 #: dataviva/translations/dictionary.py:518
-#, fuzzy
 msgid "in imports in the state of"
 msgstr "posição em importações"
 
 #: dataviva/translations/dictionary.py:519
 msgid " in imports in the mesoregions of"
-msgstr ""
+msgstr " em importações na mesoregiāo de"
 
 #: dataviva/translations/dictionary.py:542
-#, fuzzy
 msgid "Sign2 Up"
 msgstr "Cadastre-se"
 
 #: dataviva/translations/dictionary.py:553
-#, fuzzy
 msgid "Brazils largest platform for social and economic data search."
 msgstr ""
 "A maior plataforma de visualização de dados sociais e econômicos do "
@@ -5636,7 +5543,7 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:556
 msgid "Get started "
-msgstr ""
+msgstr "Inicie uma Pesquisa"
 
 #: dataviva/translations/dictionary.py:610
 msgid "by Number of Jobs"
@@ -5647,7 +5554,6 @@ msgid "jobs"
 msgstr "empregos"
 
 #: dataviva/translations/dictionary.py:622
-#, fuzzy
 msgid "No data available"
 msgstr "Não há Dados Disponíveis"
 
@@ -5692,27 +5598,22 @@ msgstr[0] "Mil"
 msgstr[1] "Milhares"
 
 #: dataviva/utils/jinja_helpers.py:88
-#, fuzzy
 msgid "Thousands"
 msgstr "Mil"
 
 #: dataviva/utils/jinja_helpers.py:88
-#, fuzzy
 msgid "Millions"
 msgstr "Milhão"
 
 #: dataviva/utils/jinja_helpers.py:88
-#, fuzzy
 msgid "Billions"
 msgstr "Milhão"
 
 #: dataviva/utils/jinja_helpers.py:88
-#, fuzzy
 msgid "Trillions"
 msgstr "Trilhão"
 
 #: dataviva/utils/num_format.py:58
-#, fuzzy
 msgctxt "0"
 msgid "th"
 msgstr "com"
@@ -5723,7 +5624,6 @@ msgid "st"
 msgstr ""
 
 #: dataviva/utils/num_format.py:60
-#, fuzzy
 msgctxt "2"
 msgid "nd"
 msgstr "e"
@@ -5734,37 +5634,31 @@ msgid "rd"
 msgstr ""
 
 #: dataviva/utils/num_format.py:62
-#, fuzzy
 msgctxt "4"
 msgid "th"
 msgstr "com"
 
 #: dataviva/utils/num_format.py:63
-#, fuzzy
 msgctxt "5"
 msgid "th"
 msgstr "com"
 
 #: dataviva/utils/num_format.py:64
-#, fuzzy
 msgctxt "6"
 msgid "th"
 msgstr "com"
 
 #: dataviva/utils/num_format.py:65
-#, fuzzy
 msgctxt "7"
 msgid "th"
 msgstr "com"
 
 #: dataviva/utils/num_format.py:66
-#, fuzzy
 msgctxt "8"
 msgid "th"
 msgstr "com"
 
 #: dataviva/utils/num_format.py:67
-#, fuzzy
 msgctxt "9"
 msgid "th"
 msgstr "com"
@@ -5786,475 +5680,4 @@ msgstr "com"
 
 #~ msgid "Your Reply was not sent. Try later, please."
 #~ msgstr "Sua resposta não foi enviada. Tente mais tarde, por favor."
-
-#~ msgid "terms_of_use"
-#~ msgstr "termos_de_uso"
-
-#~ msgid "Top Exporting Municipalities"
-#~ msgstr "Principais Municípios Exportadores"
-
-#~ msgid "Most Complex Products"
-#~ msgstr "Produtos Mais Complexos"
-
-#~ msgid "%(link)s for more information on product complexity."
-#~ msgstr "%(link)s para entender melhor a complexidade de produtos."
-
-#~ msgid "Richest Municipalities"
-#~ msgstr "Municípios Mais Ricos"
-
-#~ msgid "Best Paid Occupations"
-#~ msgstr "Ocupações com Maiores Salários"
-
-#~ msgid "Largest Industries by Employment"
-#~ msgstr "Principais Atividades Econômicas por Empregos"
-
-#~ msgid "Industries by Employment Growth"
-#~ msgstr "Atividades Econômicas pelo Crescimento do Emprego"
-
-#~ msgid "Excluding industries with less than 10,000 employees."
-#~ msgstr "Excluindo atividades com menos de 10 mil empregos."
-
-#~ msgid "Most Popular Courses by Enrollment"
-#~ msgstr "Cursos por Número de Matrículas"
-
-#~ msgid "Cities by Largest University Enrollment"
-#~ msgstr "Cidades por Número de Matrículas"
-
-#~ msgid "Open Visualization in Advanced Builder"
-#~ msgstr "Abrir a Visualização no Construtor Avançado"
-
-#~ msgid "Where are people getting<br>hired in Minas Gerais?"
-#~ msgstr "Quem foi contratado<br>em Minas Gerais?"
-
-#~ msgid "Visualize employment data now."
-#~ msgstr "Visualize dados de emprego agora."
-
-#~ msgid "What are students<br>studying at UFMG?"
-#~ msgstr "O que os alunos<br>estudam na UFMG?"
-
-#~ msgid "Analyze enrollment for every university in Brazil."
-#~ msgstr "Analise matrículas em todas as universidades brasileiras."
-
-#~ msgid "Which occupations<br>make Fruit Juice?"
-#~ msgstr "Quais ocupações trabalham<br>com Suco de Frutas?"
-
-#~ msgid "Examine the common industries for a product."
-#~ msgstr "Examine as atividades econômicas comuns para um produto."
-
-#~ msgid "Where are Physicists<br>paid the highest?"
-#~ msgstr "Onde Físicos têm o<br>salário médio mais alto?"
-
-#~ msgid "Compare wages across locations."
-#~ msgstr "Compare salários entre localidades."
-
-#~ msgid "Minas Gerais, Iron Ore, Leather Tanning, etc."
-#~ msgstr "Minas Gerais, Minério de Ferro, etc."
-
-#~ msgid "Quick<br>Links"
-#~ msgstr "Links<br>Rápidos"
-
-#~ msgid "New"
-#~ msgstr "Novo"
-
-#~ msgid "Exports by:"
-#~ msgstr "Exportações por:"
-
-#~ msgid "Imports by:"
-#~ msgstr "Importações por:"
-
-#~ msgid "Employment By"
-#~ msgstr "Emprego por"
-
-#~ msgid "Wages by"
-#~ msgstr ""
-
-#~ msgid "Economic Opportunities"
-#~ msgstr "Oportunidades Econômicas"
-
-#~ msgid "Education"
-#~ msgstr "Educação"
-
-#~ msgid "University Enrollment by:"
-#~ msgstr "Matrículas na Universidade por:"
-
-#~ msgid "Vocational Enrollment by:"
-#~ msgstr "Matrículas na Educação Profissional por:"
-
-#~ msgid "Basic Education by:"
-#~ msgstr "Educação Básica por:"
-
-#~ msgid "Common Industries by Occupation"
-#~ msgstr "Atividades Comuns por Ocupação"
-
-#~ msgid "Trade with Brazil"
-#~ msgstr "Comércio com o Brasil"
-
-#~ msgid "Average Wage by:"
-#~ msgstr "Salário Médio por:"
-
-#~ msgid "Economic Opportunities:"
-#~ msgstr "Oportunidades Econômicas:"
-
-#~ msgid "Common Products by Trade Partner"
-#~ msgstr "Produtos Comuns por Parceiro Comercial"
-
-#~ msgid "Majors by University"
-#~ msgstr "Cursos de Universidade"
-
-#~ msgid "Enrollment"
-#~ msgstr "Matrículas"
-
-#~ msgid "Common Occupations by Industry"
-#~ msgstr "Ocupações Comuns por Atividade"
-
-#~ msgid "Showing industries and locations that employ the selected occupation."
-#~ msgstr ""
-
-#~ msgid "Showing the majors found in the selected univserity."
-#~ msgstr "Mostrando os cursos encontrados na universidade selecionada."
-
-#~ msgid "an occupation"
-#~ msgstr "uma ocupação"
-
-#~ msgid "an industry"
-#~ msgstr "uma atividade econômica"
-
-#~ msgid "a product"
-#~ msgstr "um produto"
-
-#~ msgid "a location"
-#~ msgstr "um local"
-
-#~ msgid "a country"
-#~ msgstr "um país"
-
-#~ msgid "a university"
-#~ msgstr "uma universidade"
-
-#~ msgid "a major"
-#~ msgstr "um curso"
-
-#~ msgid "a course"
-#~ msgstr "um curso"
-
-#~ msgid "Locations with Similar Product Exports"
-#~ msgstr "Localidades com Exportações Similares"
-
-#~ msgid "Locations with Similar Trade Partners"
-#~ msgstr "Localidades com Parceiros Comerciais Similares"
-
-#~ msgid "Locations with Similar Industries"
-#~ msgstr "Localidades com Atividades Similares"
-
-#~ msgid "Locations with Similar Occupations"
-#~ msgstr "Localidades com Ocupações Similares"
-
-#~ msgid "Similar Industries by Co-location"
-#~ msgstr "Atividades Similares por Co-localização"
-
-#~ msgid "Similar Occupations by Co-location"
-#~ msgstr "Ocupações Similares por Co-localização"
-
-#~ msgid "Similar Products by Co-location"
-#~ msgstr "Produtos Similares por Co-Localização"
-
-#~ msgid "Destinations with Similar Brazilian Origins"
-#~ msgstr "Destinos com Origens Brasileiras Similares"
-
-#~ msgid "Universities with Similar Course Offerings"
-#~ msgstr "Universidades com Cursos Similares"
-
-#~ msgid "Line Chart"
-#~ msgstr "Gráfico de Linha"
-
-#~ msgid "A visualization showing two variables plotted along an X and Y axis."
-#~ msgstr ""
-
-#~ msgid "Employment"
-#~ msgstr "Emprego"
-
-#~ msgid "Wages"
-#~ msgstr "Salários"
-
-#~ msgid "Domestic Trade"
-#~ msgstr "Comércio Doméstico"
-
-#~ msgid "Advanced Visualization Builder"
-#~ msgstr "Construtor de Visualização Avançada"
-
-#~ msgid "Build visualization"
-#~ msgstr "Construir visualização"
-
-#~ msgid "Advanced Builder"
-#~ msgstr "Construtor Avançado"
-
-#~ msgid "Which visualization would you like to build?"
-#~ msgstr "Qual visualização você gostaria de desenvolver?"
-
-#~ msgid "Here are some commonly built examples:"
-#~ msgstr "Aqui estão alguns exemplos comumente construídos:"
-
-#~ msgid "more details"
-#~ msgstr "Mais detalhes"
-
-#~ msgid "Ratio Net Weight / Value Total Imported"
-#~ msgstr "Relação Peso Líquido / Valor Total Importado"
-
-#~ msgid "Main municipality by total value exported"
-#~ msgstr "Principal Município por valor total exportado"
-
-#~ msgid "DataViva Reply"
-#~ msgstr "Resposta DataViva"
-
-#~ msgid "This question has now been updated."
-#~ msgstr "Esta pergunta foi atualizada."
-
-#~ msgid "The item was successfully deleted."
-#~ msgstr "O item foi excluído com sucesso."
-
-#~ msgid "Users"
-#~ msgstr "Usuários"
-
-#~ msgid "Pending"
-#~ msgstr "Pendente"
-
-#~ msgid "Approved"
-#~ msgstr "Aprovado"
-
-#~ msgid "Rejected"
-#~ msgstr "Rejeitado"
-
-#~ msgid "Duplicate"
-#~ msgstr "Duplicado"
-
-#~ msgid "Main Msunicipality by total value imported"
-#~ msgstr "Principal Município por valor total importado"
-
-#~ msgid "Generate a Profile"
-#~ msgstr "Gerar um Perfil"
-
-#~ msgid "Common searches"
-#~ msgstr "Pesquisas comuns"
-
-#~ msgid "Ex"
-#~ msgstr "Ex"
-
-#~ msgid "Prev"
-#~ msgstr "Anterior"
-
-#~ msgid "Random"
-#~ msgstr "Aleatório"
-
-#~ msgid "Show Related Profiles"
-#~ msgstr "Exibir Perfis Relacionados"
-
-#~ msgid "Similar"
-#~ msgstr "Semelhante"
-
-#~ msgid "Basic Resources"
-#~ msgstr "Recursos Básicos"
-
-#~ msgid "Advanced Resources"
-#~ msgstr "Recursos Avançados"
-
-#~ msgid "VISUALIZE RANKINGS"
-#~ msgstr "Visualizações"
-
-#~ msgid "CONSTRUA GRÁFICOS"
-#~ msgstr "MAKE GRAPHS"
-
-#~ msgid "DOWNLOAD DE BANCO DE DADOS"
-#~ msgstr "DATABASE DOWNLOAD"
-
-#~ msgid "Parceiros"
-#~ msgstr ""
-
-#~ msgid "Salário e Emprego"
-#~ msgstr ""
-
-#~ msgid "Activity"
-#~ msgstr ""
-
-#~ msgid "City with highest monthly average income"
-#~ msgstr "Atividade com maior renda média mensal"
-
-#~ msgid "Employer City"
-#~ msgstr "Município por Empregos"
-
-#~ msgid "City with Highest"
-#~ msgstr "Cidade com Maior"
-
-#~ msgid "position in exports in Brazil. In"
-#~ msgstr "posição em exportações no Brasil. Em"
-
-#~ msgid " in imports and number"
-#~ msgstr "posição em importações e a"
-
-#~ msgid " its commercial value was of "
-#~ msgstr " renderam "
-
-#~ msgid ", representing a variation of"
-#~ msgstr " em valor de comércio, representando variação de"
-
-#~ msgid "in five years. The municipality in Brazil which exports more"
-#~ msgstr "em cinco anos. O município no Brasil que mais exporta"
-
-#~ msgid "is"
-#~ msgstr "é"
-
-#~ msgid "and the one that imports the most is "
-#~ msgstr "e o que mais importa é"
-
-#~ msgid "The product "
-#~ msgstr ""
-
-#~ msgid "occupy the"
-#~ msgstr ""
-
-#~ msgid "earned"
-#~ msgstr "renderam"
-
-#~ msgid "in trade value, representing a variation of"
-#~ msgstr " em valor de comércio, representando variação de"
-
-#~ msgid "and which imports more is"
-#~ msgstr "e o que mais importa é"
-
-#~ msgid "Jobs"
-#~ msgstr "Empregos"
-
-#~ msgid "and the average age of workers is"
-#~ msgstr "e a média de idade dos trabalhadores é"
-
-#~ msgid "This question contributes to a better understanding of the topic."
-#~ msgstr "Esta questão contribui para um melhor entendimento do tópico."
-
-#~ msgid "Respond to"
-#~ msgstr "Responder para"
-
-#~ msgid "New Comment"
-#~ msgstr "Novo Comentário"
-
-#~ msgid "Leave a Response"
-#~ msgstr "Deixe uma Resposta"
-
-#~ msgid "comparative advantage"
-#~ msgstr "vantagem comparativa"
-
-#~ msgid "proximity"
-#~ msgstr "proximidade"
-
-#~ msgid "distances"
-#~ msgstr "distâncias"
-
-#~ msgid "Note"
-#~ msgstr "Nota"
-
-#~ msgid "Wages and Employment"
-#~ msgstr "Salários e Emprego"
-
-#~ msgid "Database Query"
-#~ msgstr "Consultas ao Banco de Dados"
-
-#~ msgid "Source"
-#~ msgstr "Curso"
-
-#~ msgid "Time"
-#~ msgstr "Tempo"
-
-#~ msgid "All Years"
-#~ msgstr "Todos os Anos"
-
-#~ msgid "Yearly"
-#~ msgstr "Anual"
-
-#~ msgid "Add Filters"
-#~ msgstr "Adicionar Filtros"
-
-#~ msgid "Output"
-#~ msgstr "Saída"
-
-#~ msgid "Run Query"
-#~ msgstr "Executar Consulta"
-
-#~ msgid "All"
-#~ msgstr "Todos"
-
-#~ msgid "students enrolled in the country."
-#~ msgstr ""
-
-#~ msgid " is number "
-#~ msgstr " ocupa a posição de número "
-
-#~ msgid " in the import origins of "
-#~ msgstr " em importações para "
-
-#~ msgid "and number"
-#~ msgstr "e número"
-
-#~ msgid "in the export destinations of "
-#~ msgstr "em exportações realizadas "
-
-#~ msgid " in the import origins of Brazil and number "
-#~ msgstr " em importações para o Brasil e "
-
-#~ msgid " and the total of imports is "
-#~ msgstr " e seu total de importações é de "
-
-#~ msgid " in the import origins of Brazil and "
-#~ msgstr " em importações para o Brasil e "
-
-#~ msgid "there are no exports from Brazil. The total of imports is of"
-#~ msgstr "não há exportações realizadas pelo Brasil. O total de importações é de"
-
-#~ msgid "Main Product by Total Value Exported"
-#~ msgstr "Principal Origem por Valor Total Exportado"
-
-#~ msgid "Main Product by Total Value Imported"
-#~ msgstr "Principal Município por Valor Total Importado"
-
-#~ msgid "Product with Highest Trade Balance Surplus"
-#~ msgstr "Produto com Maior Saldo da Balança Comercial"
-
-#~ msgid "Product with Lowest Trade Balance Surplus"
-#~ msgstr "Produto com Menor Saldo da Balança Comercial"
-
-#~ msgid "University with Most Enrolled"
-#~ msgstr ""
-
-#~ msgid "Major with Most Enrolled"
-#~ msgstr ""
-
-#~ msgid "School with Most Enrolled"
-#~ msgstr ""
-
-#~ msgid "Basic Course with Most Enrolled"
-#~ msgstr ""
-
-#~ msgid "Main Product by Import Value"
-#~ msgstr "Principal Produto por Valor Exportado"
-
-#~ msgid "Product with Most Opportunity Gain"
-#~ msgstr ""
-
-#~ msgid "Economic Activity with Most Opportunity Gain"
-#~ msgstr ""
-
-#~ msgid "Wage and Jobs"
-#~ msgstr "Salário e Emprego"
-
-#~ msgid "HDI"
-#~ msgstr "IDH"
-
-#~ msgid "By Import Value"
-#~ msgstr ""
-
-#~ msgid "with Most Enrolled"
-#~ msgstr ""
-
-#~ msgid "with Less Distance"
-#~ msgstr "com Menor Distância"
-
-#~ msgid "Issues"
-#~ msgstr "Assuntos"
 
