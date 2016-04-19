@@ -121,7 +121,7 @@
                             </th>
                             <td>
                                 <p class="label">{{ body.occ_with_more_number_jobs_name }}</p>
-                                USD <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3) }}</strong> <span>{{ body.occ_with_more_number_jobs_value | magnitude }}</span>
+                                <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3) }}</strong> <span>{{ body.occ_with_more_number_jobs_value | magnitude }}</span>
                             </td>
                         </tr>
                         {% if location.id|length != 9 %}
@@ -130,7 +130,7 @@
                                 {% trans %}Municipality with highest number of jobs{% endtrans %}
                             <td>
                                 <p class="label">{{ body.municipality_with_more_num_jobs_name }}</p>
-                                USD <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong> <span>{{ body.municipality_with_more_num_jobs_value | magnitude }}</span>
+                                <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong> <span>{{ body.municipality_with_more_num_jobs_value | magnitude }}</span>
                             </td>
                         </tr>
                         {% endif %}
