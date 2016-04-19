@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-19 13:06-0300\n"
+"POT-Creation-Date: 2016-04-19 13:31-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -680,16 +680,20 @@ msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
+#: dataviva/templates/general/browse_categories.html:24
 #: dataviva/templates/include/footer.html:29
 #: dataviva/translations/dictionary.py:581
 msgid "Database Download"
 msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:17
+#: dataviva/templates/general/browse_categories.html:11
+#: dataviva/templates/general/browse_categories.html:29
 msgid "Start a Search"
 msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:18
+#: dataviva/templates/general/browse_categories.html:23
 #: dataviva/templates/include/footer.html:28
 #: dataviva/translations/dictionary.py:582
 msgid "Make Graphs"
@@ -3500,6 +3504,50 @@ msgstr ""
 msgid "The DataViva Team"
 msgstr ""
 
+#: dataviva/templates/general/browse_categories.html:20
+msgid "Another Features"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:22
+#: dataviva/templates/include/footer.html:27
+#: dataviva/translations/dictionary.py:583
+msgid "View Rankings"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:31
+msgid "Select a profile to start"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:36
+#: dataviva/templates/general/index.html:15
+#: dataviva/translations/dictionary.py:559
+msgid "Entrepreneurs"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:37
+msgid "Identify the economic profile and the business opportunities in a region"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:43
+msgid "Development Agents"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:44
+#: dataviva/templates/general/index.html:25
+#: dataviva/translations/dictionary.py:562
+msgid "Assess development policies setting by location"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:50
+msgid "Students and Professionals"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:51
+#: dataviva/templates/general/index.html:33
+#: dataviva/translations/dictionary.py:564
+msgid "Find information about available jobs, income per occupation and courses"
+msgstr ""
+
 #: dataviva/templates/general/error.html:19
 msgid "There was a problem serving the requested page."
 msgstr ""
@@ -3545,11 +3593,6 @@ msgid ""
 "region, average wage by segment, and more… "
 msgstr ""
 
-#: dataviva/templates/general/index.html:15
-#: dataviva/translations/dictionary.py:559
-msgid "Entrepreneurs"
-msgstr ""
-
 #: dataviva/templates/general/index.html:17
 #: dataviva/translations/dictionary.py:560
 msgid "Identify the economic profile and business opportunities of a region"
@@ -3567,11 +3610,6 @@ msgstr ""
 msgid "DEVELOPMENT AGENTS"
 msgstr ""
 
-#: dataviva/templates/general/index.html:25
-#: dataviva/translations/dictionary.py:562
-msgid "Assess development policies setting by location"
-msgstr ""
-
 #: dataviva/templates/general/index.html:29
 msgid ""
 "Average wage of an activity or occupation, cities with best employment "
@@ -3582,11 +3620,6 @@ msgstr ""
 #: dataviva/templates/general/index.html:31
 #: dataviva/translations/dictionary.py:563
 msgid "STUDENTS AND PROFESSIONALS"
-msgstr ""
-
-#: dataviva/templates/general/index.html:33
-#: dataviva/translations/dictionary.py:564
-msgid "Find information about available jobs, income per occupation and courses"
 msgstr ""
 
 #: dataviva/templates/general/index.html:41
@@ -3769,11 +3802,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:18
 #: dataviva/translations/dictionary.py:353
 msgid "Locations"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:27
-#: dataviva/translations/dictionary.py:583
-msgid "View Rankings"
 msgstr ""
 
 #: dataviva/templates/include/footer.html:34

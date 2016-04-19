@@ -8,7 +8,7 @@
     <div class="row bg-white">
         <ol class="breadcrumb">
             <li><a href="{{ url_for('general.home') }}">Home</a></li>
-            <li class="active">Inicie uma pesquisa</li>
+            <li class="active">{% trans %}Start a Search{% endtrans %}</li>
         </ol>
     </div>
 </div>
@@ -17,38 +17,38 @@
 
 <div class="container m-b-lg">
     <nav class="sidebar col-md-3">
-        <h3>Outros Recursos</h3>
+        <h3>{% trans %}Another Features{% endtrans %}</h3>
         <ul class="sub-menu">
-            <li><a href="{{ url_for('rankings.index') }}" title="Visualize rankings">Visualize rankings</a></li>
-            <li><a href="{{ url_for('build_graph.index') }}" title="Construa gráficos">Construa gráficos</a></li>
-            <li><a href="{{ url_for('data.index') }}" title="Download de banco de dados">Download de banco de dados</a></li>
+            <li><a href="{{ url_for('rankings.index') }}" title="Visualize rankings">{% trans %}View Rankings{% endtrans %}</a></li>
+            <li><a href="{{ url_for('build_graph.index') }}" title="Construa gráficos">{% trans %}Make Graphs{% endtrans %}</a></li>
+            <li><a href="{{ url_for('data.index') }}" title="Download de banco de dados">{% trans %}Database Download{% endtrans %}</a></li>
         </ul>
     </nav>
 
     <div class="col-md-9">
-        <h1 class="text-center">Inicie uma pesquisa</h1>
+        <h1 class="text-center">{% trans %}Start a Search{% endtrans %}</h1>
         <section id="profiles" class="profiles bg-blue">
-            <h2 class="text-center">Selecione um perfil para começar:</h2>
+            <h2 class="text-center">{% trans %}Select a profile to start{% endtrans %}:</h2>
             <div class="row">
                 <div class="col-md-4 profile">
                     <a onclick="fire_wizard('entrepreneur')">
                         <i class="pull-left dv-entrepreneur"></i>
-                        <h3>Empreendedores</h3>
-                        <h4>Identifique o perfil econômico e as oportunidades de negócios de uma região</h4>
+                        <h3>{% trans %}Entrepreneurs{% endtrans %}</h3>
+                        <h4>{% trans %}Identify the economic profile and the business opportunities in a region{% endtrans %}</h4>
                     </a>
                 </div>
                 <div class="col-md-4 profile">
                     <a onclick="fire_wizard('development_agents')">
                         <i class="pull-left dv-dev-agents"></i>
-                        <h3>Agentes de Desenvolvimento</h3>
-                        <h4>Avalie a criação de políticas de desenvolvimento de acordo com a localidade</h4>
+                        <h3>{% trans %}Development Agents{% endtrans %}</h3>
+                        <h4>{% trans %}Assess development policies setting by location{% endtrans %}</h4>
                     </a>
                 </div>
                 <div class="col-md-4 profile">
                     <a onclick="fire_wizard('student')">
                         <i class="pull-left dv-students"></i>
-                        <h3>Estudantes e Profissionais</h3>
-                        <h4>Descubra informações sobre empregos disponíveis, renda por ocupação e cursos</h4>
+                        <h3>{% trans %}Students and Professionals{% endtrans %}</h3>
+                        <h4>{% trans %}Find information about available jobs, income per occupation and courses{% endtrans %}</h4>
                     </a>
                 </div>
             </div>
