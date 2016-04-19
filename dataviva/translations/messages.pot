@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-19 13:31-0300\n"
+"POT-Creation-Date: 2016-04-19 15:05-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -776,6 +776,7 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:33
 #: dataviva/apps/rankings/templates/rankings/_base.html:38
+#: dataviva/templates/general/browse_categories.html:78
 #: dataviva/templates/general/index.html:78
 #: dataviva/templates/include/footer.html:21
 #: dataviva/translations/dictionary.py:569
@@ -1398,7 +1399,9 @@ msgid "Wage Mass"
 msgstr ""
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:5
-#: dataviva/templates/about.html:78 dataviva/templates/general/index.html:96
+#: dataviva/templates/about.html:78
+#: dataviva/templates/general/browse_categories.html:102
+#: dataviva/templates/general/index.html:96
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:186
 #: dataviva/translations/dictionary.py:363
@@ -2125,7 +2128,9 @@ msgid "Higher Education ID"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/major.html:13
-#: dataviva/templates/about.html:38 dataviva/templates/general/index.html:102
+#: dataviva/templates/about.html:38
+#: dataviva/templates/general/browse_categories.html:110
+#: dataviva/templates/general/index.html:102
 #: dataviva/templates/include/footer.html:23
 #: dataviva/translations/dictionary.py:294
 msgid "Higher Education"
@@ -2320,7 +2325,9 @@ msgstr ""
 msgid "Classifications"
 msgstr ""
 
-#: dataviva/templates/about.html:54 dataviva/templates/general/index.html:66
+#: dataviva/templates/about.html:54
+#: dataviva/templates/general/browse_categories.html:62
+#: dataviva/templates/general/index.html:66
 #: dataviva/translations/dictionary.py:568
 msgid "Brazilian Locations"
 msgstr ""
@@ -2330,7 +2337,9 @@ msgstr ""
 msgid "Industries"
 msgstr ""
 
-#: dataviva/templates/about.html:62 dataviva/templates/general/index.html:72
+#: dataviva/templates/about.html:62
+#: dataviva/templates/general/browse_categories.html:70
+#: dataviva/templates/general/index.html:72
 #: dataviva/templates/general/select.html:29
 #: dataviva/templates/include/footer.html:20
 #: dataviva/translations/dictionary.py:160
@@ -2338,7 +2347,9 @@ msgstr ""
 msgid "Occupations"
 msgstr ""
 
-#: dataviva/templates/about.html:66 dataviva/templates/general/index.html:84
+#: dataviva/templates/about.html:66
+#: dataviva/templates/general/browse_categories.html:86
+#: dataviva/templates/general/index.html:84
 #: dataviva/templates/include/footer.html:19
 #: dataviva/translations/dictionary.py:357
 msgid "Products"
@@ -2355,7 +2366,9 @@ msgstr ""
 msgid "Majors"
 msgstr ""
 
-#: dataviva/templates/about.html:82 dataviva/templates/include/footer.html:24
+#: dataviva/templates/about.html:82
+#: dataviva/templates/general/browse_categories.html:118
+#: dataviva/templates/include/footer.html:24
 #: dataviva/translations/dictionary.py:369
 msgid "Basic Courses"
 msgstr ""
@@ -3548,6 +3561,66 @@ msgstr ""
 msgid "Find information about available jobs, income per occupation and courses"
 msgstr ""
 
+#: dataviva/templates/general/browse_categories.html:58
+msgid "or search for"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:64
+msgid ""
+"General profile by region, state, mesoregion, microregion or Brazilian "
+"locality. Visualize international trade, economic activity, jobs and "
+"education."
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:72
+msgid ""
+"Regions that most employ by professional activity, related courses, "
+"average wage and employment statistics by year."
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:80
+msgid ""
+"Information on employment rate by region, average wage by type of "
+"occupation, average monthly income and economic opportunities."
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:88
+msgid ""
+"Balance of trade data by product, import origins and export destinations,"
+" rankings by locality, economic activity and related occupations."
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:94
+#: dataviva/templates/general/index.html:90
+#: dataviva/templates/include/footer.html:22
+#: dataviva/translations/dictionary.py:361
+msgid "Trade Partners"
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:96
+msgid ""
+"Countries that import or export products to Brazil, commerce data by type"
+" of product or locality that commercializes it."
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:104
+msgid ""
+"Number of enrollments in each offered course, student situation and "
+"similar university profile."
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:112
+msgid ""
+"University list and localities that offer the Superior Education course "
+"or the selected field of study."
+msgstr ""
+
+#: dataviva/templates/general/browse_categories.html:120
+msgid ""
+"Brazilian schools that offer professional education and Basic Education "
+"enrollment ranking by locality."
+msgstr ""
+
 #: dataviva/templates/general/error.html:19
 msgid "There was a problem serving the requested page."
 msgstr ""
@@ -3691,12 +3764,6 @@ msgid ""
 "Brazil’s top import and export partners, trade data by type of product or"
 " supplier city. Examples: Asia, Africa, Europe, Mexico, Japan, United "
 "States of America, China, The Netherlands, Iran."
-msgstr ""
-
-#: dataviva/templates/general/index.html:90
-#: dataviva/templates/include/footer.html:22
-#: dataviva/translations/dictionary.py:361
-msgid "Trade Partners"
 msgstr ""
 
 #: dataviva/templates/general/index.html:95
