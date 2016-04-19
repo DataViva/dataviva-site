@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            {% block breadcrumb %}{% endblock %}
+        </ol>
+    </div>
+</div>
+
+<div class="container">
+    <nav class="sidebar col-md-3">
+        <h3>{% trans %}Topics{% endtrans %}</h3>
+        <ul class="sub-menu">
+            <li><a href="#" title="Todos"><strong>{% trans %}All{% endtrans %}</strong></a></li>
+            <li><a href="#" title="Visualizações">{% trans %}Visualizations{% endtrans %}</a></li>
+            <li><a href="#" title="Tecnologia da Informação">{% trans %}Information Technology{% endtrans %}</a></li>
+            <li><a href="#" title="Economia">{% trans %}Economy{% endtrans %}</a></li>
+            <li><a href="#" title="Matemática">{% trans %}Mathematics{% endtrans %}</a></li>
+            <li><a href="#" title="Estatística">{% trans %}Statistics{% endtrans %}</a></li>
+            <li><a href="#" title="Design">{% trans %}Design{% endtrans %}</a></li>
+            <li><a href="#" title="Políticas Públicas">{% trans %}Public Policies{% endtrans %}</a></li>
+        </ul>
+    </nav>
+    <section id="news" class="col-md-9">
+        <h1>{% trans %}News{% endtrans %}</h1>
+        {% block news_content %}
+        {% endblock news_content %}
+    </section>
+</div>
+{% endblock content %}
+
+
+{% block js_assets %}
+{% endblock js_assets %}

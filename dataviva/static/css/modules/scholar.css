@@ -1,0 +1,130 @@
+.scholar section {
+  margin-bottom: 4.5rem;
+}
+.scholar .main-content {
+    padding-bottom: 2rem;
+}
+.scholar a {
+  text-decoration: none;
+}
+.scholar h1 {
+    margin: 0px 0px 30px 0px;
+}
+.scholar h2{
+    font-size: 25px;
+    font-weight: 300;
+}
+.scholar h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+.scholar h1, h2, h3, h4{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.1;
+    color: #423434;
+}
+
+.scholar .item h4 {
+  font-size: 20px;
+  margin: 0;
+}
+.scholar .item h4 a {
+  color: #423434;
+}
+.scholar .item h4 a:hover {
+  opacity: 0.8;
+}
+.scholar .item p {
+  color: #9c9c9c;
+  font-size: 13px;
+  margin: 0;
+}
+.scholar .item + .item {
+  margin-top: 2rem;
+}
+.scholar .article h4 {
+  font-size: 25px;
+  font-weight: 300;
+}
+.scholar .article h4,
+.scholar .article h4 a {
+  color: #666;
+}
+.scholar .article-list {
+    margin-top: 10px;
+}
+.scholar .article p {
+  color: #666;
+  font-size: 13px;
+}
+.scholar .article p.data {
+  color: #5a9dc4;
+  text-transform: uppercase;
+}
+.scholar .article h4,
+.scholar .article p {
+  margin: 0 0 10px;
+}
+
+.scholar .article:before {
+  display: none;
+}
+.scholar .article-list nav {
+    text-align: center;
+}
+.scholar .article-list nav .pagination {
+    font-size: 10px;
+    display: inline-block;
+}
+.scholar .checkbox-switch {
+    padding: 0px;
+    border: none;
+}
+
+.scholar .checkbox-switch .switchery{
+    height: 33px;
+}
+
+.scholar .checkbox-switch .switchery > small {
+    height: 33px;
+    width: 33px;
+}
+
+.scholar .form-dataviva .form-inline{
+    margin-bottom: 30px;
+}
+
+.scholar .container .tit-stripe{
+    color: #FFF;
+    background-color: #9eddbf;
+    font-size: 20px;
+    font-weight: 600;
+    height: 40px;
+    line-height: 40px;
+    margin-bottom: 2rem;
+    text-indent: 10px;
+}
+
+.scholar .article-list .item:before {
+    font-family: 'FontAwesome';
+    content: "\f02d";
+    color: #9EDDBF;
+    display: block;
+    float: left;
+    height: 40px;
+    margin: 0 2rem 2rem 0;
+    width: 50px;
+    font-size: 50px;
+}
+
+.scholar .sidebar h3 {
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 0;
+    padding-bottom: 5px;
+}
+

@@ -1,0 +1,52 @@
+{% extends "admin.html" %}
+
+
+{% block breadcrumb %}
+    <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+    <li class="active">Scholar</li>
+{% endblock %}
+
+{% block admin_content %}
+<h1>Estudos</h1>
+
+<div id="message">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+</div>
+
+<table id="scholar-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="column-checkbox">
+                <div class="checkbox checkbox-success">
+                    <input name="postselector" id="check-all" type="checkbox">
+                    <label for="check-all"></label>
+                </div>
+            </th>
+            <th>Título</th>
+            <th>Autor(es)</th>
+            <th>Publication Date</th>
+            <th>Approve</th>
+        </tr>
+    </thead>
+</table>
+
+<a id="admin-new" class="btn btn-success" href="/scholar/admin/article/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
+<button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
+<button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
+<button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
+<button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
+
+{% endblock admin_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/scholar/table.js"></script>
+{% endblock js_assets %}

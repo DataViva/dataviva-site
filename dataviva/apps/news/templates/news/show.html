@@ -1,0 +1,53 @@
+{% extends "news/_base.html" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ url_for('news.index') }}">{% trans %}News{% endtrans %}</a></li>
+    <li class="active">{% trans %}Visualize{% endtrans %}</li>
+{% endblock %}
+
+{% block news_content %}
+<div class="institucional search">
+    <div class="articles">
+        <div class="item publication single">
+            <h4>{{ publication.title }}</h4>
+            <div class="meta">
+                <p class="data">{% trans %}By{% endtrans %} {{ publication.authors_str() }} {{ publication.date() }}</p>
+            </div>
+            <ul class="social">
+                <li>
+                    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+                </li>
+                <li>
+                    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://www.twitter.com" data-lang="pt">{% trans %}Tweet{% endtrans %}</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                </li>
+                <li>
+                    <script src="https://apis.google.com/js/platform.js" async defer></script>
+                    <g:plusone size="medium"></g:plusone>
+                </li>
+            </ul>
+            {{ publication.text_content|safe }}
+        </div>
+        <div class="clearfix"></div>
+        <div class="related">
+            <h4>{% trans %}See also{% endtrans %}</h4>
+            <div class="row">
+                {% for publication in read_more %}
+                <div class="col-xs-15 col-sm-6 col-md-5">
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title }}">
+                        <img src="{{publication.thumb}}" class="img-responsive">
+                    </a>
+                    <p>
+                        <a href="#" title="{{ publication.title }}">{{ publication.title }}</a>
+                    </p>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+        <div class="comments">
+            <h4>{% trans %}Comment{% endtrans %}</h4>
+            <div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-width="100%"></div>
+        </div>
+    </div>
+</div>
+{% endblock news_content %}

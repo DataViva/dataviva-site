@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+	<head>
+		<title>{% trans %}DataViva Answer{% endtrans %}</title>
+	</head>
+	<body>
+		<table border="0" align="center" width="550" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="center" bgcolor="#f2f2f2">
+					<table border="0" width="500" cellpadding="0" cellspacing="0" align="center">
+						<tr>
+							<td bgcolor="#f2f2f2" width="380"></td>
+							<td bgcolor="#f2f2f2" width="120" height="60"><a href="http://www.dataviva.info"><img src="http://dataviva.info/static/img/nav/DataViva.png" width="120" alt="DataViva" style="border:0; display:block"></a></td>
+						</tr>
+						<tr>
+							<td bgcolor="#FFFFFF" colspan="2" style="padding:10px; font-family:'Trebuchet MS'; font-size:18px; color:#000000">
+								{% trans %}Dear Administrator.{% endtrans %}<br/><br/>
+								{% trans %}The question{% endtrans %} "{{ question.question }}" {% trans %}was published/commented on DataViva.{% endtrans %}
+								<br/>
+								<a href="http://dataviva.info/about/question/{{ question.slug }}">{% trans %}Check here.{% endtrans %}</a>
+								<br/><br/>
+								{% trans %}Best Regards,{% endtrans %}<br/><br/>
+								{% trans %}Team{% endtrans %} DataViva
+								<a style="color:#333333; text-decoration: none" href="http://dataviva.info">dataviva.info</a>
+							</td>
+						</tr>
+						<tr>
+							<td bgcolor="#f2f2f2" width="500" height="25" colspan="2">&nbsp;</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			
+		</table>
+	</body>
+</html>

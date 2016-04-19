@@ -1,0 +1,48 @@
+{% extends "blog/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Blog</li>
+{% endblock %}
+
+{% block blog_content %}
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="item post">
+                <div class="thumbnail">
+                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">
+                        <img src="{{post.thumb}}" class="thumbnail img-responsive">
+                    </a>
+                    <span>{{post.subject}}</span>
+                </div>
+                <h4>
+                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{{post.title}}</a>
+                </h4>
+                <p>{{ post.text_call}}</p>
+                <div class="meta">
+                    <p class="read-more"><a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{% trans %}Continue reading{% endtrans %}</a></p>
+                    <p class="data">{% trans %}By{% endtrans %} {{ post.authors_str() }} {{ post.date_str() }}</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        {% endfor %}
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock blog_content %}

@@ -1,0 +1,196 @@
+body {
+  background-color: transparent !important;
+  height: 100%;
+  margin: 0px;
+  overflow: hidden;
+  padding: 0px;
+  position: fixed;
+  width: 100%;
+}
+
+#app {
+  display: block;
+  padding: 5px;
+  position: relative;
+  z-index: 10;
+}
+
+div.loading {
+  background-color: #fafafa;
+}
+
+/****************/
+/* Top Controls */
+/****************/
+
+div#settings {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  z-index: 50;
+}
+
+div#settings > .leon.button.square {
+  font-size: 15px !important;
+  height: 17px;
+  margin: 5px 0px 5px 3px;
+  padding: 4px 3px 3px 3px !important;
+  width: 17px;
+}
+
+.leon.button:hover {
+  background-color: rgb(239,239,239);
+}
+
+div#controls {
+  /*bottom: 0px;*/
+  /*left: 0px;*/
+  display: block;
+  padding: 0 0 5px;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  -webkit-user-select: none;
+  z-index: 20;
+}
+
+div#controls > div {
+  display: inline-block;
+  margin: 0;
+}
+
+div.filter_button {
+  margin: 6px;
+}
+
+div.filter_button > div.leon.button {
+  margin: 0px;
+}
+
+.leon.button > i.fa-list-alt {
+  margin-left: 2px;
+  margin-top: 2px;
+  opacity: 0.5;
+}
+
+div#controls #required_bras {
+  color: #888;
+  display: inline-block;
+  font-size: 12px;
+  margin: 6px;
+  padding: 5px;
+}
+
+div#controls #required_bras:hover {
+  color: black;
+  cursor: pointer;
+}
+
+div#controls #required_bras i {
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
+#settings > #starred > #status_-1 {
+  color: #333;
+}
+
+#settings > #starred > #status_0 {
+  color: #ccc;
+}
+
+#settings > #starred > #status_1 {
+  color: #ffc41c;
+}
+
+.ui_group {
+  display: inline-block;
+  padding: 5px;
+}
+
+.d3plus_tooltip_large .d3plus_tooltip_html {
+  text-align: center;
+}
+
+.d3plus_tooltip_large .d3plus_tooltip_html .title {
+  text-align: center;
+}
+
+.growth-arrow {
+  margin-left: 2px;
+  margin-top: 2px;
+}
+
+.growth-arrow.down {
+  color: #af1f24;
+}
+
+.growth-arrow.up {
+  color: #3daf49;
+}
+
+/*******************/
+/* Bottom Controls */
+/*******************/
+
+div.scrolling_content {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+div.output_list {
+  padding: 10px;
+}
+
+div.scrolling_help {
+  padding: 20px;
+}
+
+/*******************/
+/* Share Buttons   */
+/*******************/
+
+#share_info {
+  padding: 20px;
+  text-align: center;
+}
+
+#share_info input {
+  margin: 5px 0 20px 0;
+  text-align: left;
+  width: 96%;
+}
+
+#share_info a i.fa {
+  margin: 0 20px 0 0;
+}
+
+a.share_button {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 95% 95%;
+  display: inline-block;
+  height: 50px;
+  margin: 5px 10px;
+  width: 50px;
+  -webkit-transition: background-size 0.1s;
+     -moz-transition: background-size 0.1s;
+       -o-transition: background-size 0.1s;
+          transition: background-size 0.1s;
+}
+
+a.share_button:hover {
+  background-size: 100% 100%;
+}
+
+a.share_button#Google {
+  background-image: url("/static/img/icons/login/login_google.png");
+}
+
+a.share_button#Facebook {
+  background-image: url("/static/img/icons/login/login_facebook.png");
+}
+
+a.share_button#Twitter {
+  background-image: url("/static/img/icons/login/login_twitter.png");
+}
