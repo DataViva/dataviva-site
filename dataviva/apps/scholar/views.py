@@ -10,11 +10,12 @@ from datetime import datetime
 
 import os
 import simplejson
+import shutil
 from upload_file import UploadFile
 from werkzeug import secure_filename
 from dataviva import app
 
-app.config['UPLOAD_FOLDER'] = os.getcwd()+'/dataviva/static/data/scholar/'
+app.config['UPLOAD_FOLDER'] = os.getcwd() + '/dataviva/static/data/scholar/'
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
@@ -131,9 +132,11 @@ def create():
             else:
                 article.keywords.append(keyword)
 
-        #if not os.path.exists(directory):
-        #    os.makedirs(directory)
-        #form.csrf_token._value()
+
+        temporary_upload_folders = [folders for folders in os.listdir(app.config['UPLOAD_FOLDER']) if '.' not in folders]
+
+        for temporary_upload_folder in temporary_upload_folders:
+            shutil.rmtree(app.config['UPLOAD_FOLDER'] + temporary_upload_folder)
 
         db.session.add(article)
         db.session.commit()
@@ -218,6 +221,11 @@ def all():
 @mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
 @mod.route('/admin/article/upload', methods=['GET', 'POST'])
 def upload(id=None):
+    upload_folder = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
+
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
+
     if request.method == 'POST':
         file = request.files['file']
 
@@ -231,7 +239,7 @@ def upload(id=None):
 
             else:
                 # save file to disk
-                uploaded_file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                uploaded_file_path = os.path.join(upload_folder, filename)
                 file.save(uploaded_file_path)
 
                 # get file size after saving
@@ -244,19 +252,20 @@ def upload(id=None):
 
     if request.method == 'GET':
         # get all file in ./data directory
-        files = [f for f in os.listdir(app.config['UPLOAD_FOLDER']) if os.path.isfile(
-            os.path.join(app.config['UPLOAD_FOLDER'], f)) and f not in IGNORED_FILES]
+        files = [f for f in os.listdir(upload_folder) if os.path.isfile(
+            os.path.join(upload_folder, f)) and f not in IGNORED_FILES]
 
         file_display = []
 
         for f in files:
-            size = os.path.getsize(os.path.join(app.config['UPLOAD_FOLDER'], f))
+            size = os.path.getsize(os.path.join(upload_folder, f))
             file_saved = UploadFile(name=f, size=size)
             file_display.append(file_saved.get_file())
 
         return simplejson.dumps({"files": file_display})
 
     return redirect(url_for('scholar.index'))
+
 
 @mod.route("/delete/<string:filename>", methods=['DELETE'])
 def delete(filename):
