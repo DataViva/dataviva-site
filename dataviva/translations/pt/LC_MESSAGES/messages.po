@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-19 16:59-0300\n"
+"POT-Creation-Date: 2016-04-19 17:04-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1611,6 +1611,8 @@ msgstr "alunos matriculados em todo o país"
 #: dataviva/apps/news/templates/news/admin.html:4
 #: dataviva/apps/news/templates/news/admin.html:8
 #: dataviva/apps/news/templates/news/edit.html:8
+#: dataviva/apps/news/templates/news/index.html:4
+#: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:4
 #: dataviva/templates/general/index.html:130
 #: dataviva/templates/include/footer.html:8
@@ -1704,6 +1706,14 @@ msgstr "Ativar"
 #, fuzzy
 msgid "Deactivate"
 msgstr "Desativar"
+
+#: dataviva/apps/news/templates/news/new.html:9
+msgid "Publish"
+msgstr "Publicar"
+
+#: dataviva/apps/news/templates/news/new.html:15
+msgid "Publish news"
+msgstr "Publique notícias"
 
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:5
 #: dataviva/translations/dictionary.py:617

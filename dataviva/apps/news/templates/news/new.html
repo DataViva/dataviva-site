@@ -5,14 +5,14 @@
         <div class="row bg-white">
             <ol class="breadcrumb">
                 <li><a href="{{ url_for('general.home') }}">Home</a></li>
-                <li><a href="{{ url_for('news.index') }}">Notícias</a></li>
-                <li class="active">Publicar</li>
+                <li><a href="{{ url_for('news.index') }}">{% trans %}News{% endtrans %}</a></li>
+                <li class="active">{% trans %}Publish{% endtrans %}</li>
             </ol>
         </div>
     </div>
 
     <div class="container m-b-lg">
-        <h1>Publique uma notícia</h1>
+        <h1>{% trans %}Publish news{% endtrans %}</h1>
         {% include "news/_form.html" %}
     </div>
 {% endblock content %}
