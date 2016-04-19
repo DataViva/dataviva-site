@@ -1,6 +1,12 @@
+var dimensionSelectCallback = function(id, event) {
+    $('#'+this).html(dataviva[this.toString()][id].name);
+
+}
+
 $(document).ready(function() {
 
-    dataviva.requireAttrs(['datasets'], function() {
+
+    dataviva.requireAttrs(['datasets', 'bra'], function() {
 
         for (dataset in dataviva.datasets) {
             $('#datasets').append( $('<option value="'+dataset+'">'+dataviva.dictionary[dataset]+'</option>'));
