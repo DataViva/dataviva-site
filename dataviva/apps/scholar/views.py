@@ -132,11 +132,8 @@ def create():
             else:
                 article.keywords.append(keyword)
 
-
-        temporary_upload_folders = [folders for folders in os.listdir(app.config['UPLOAD_FOLDER']) if '.' not in folders]
-
-        for temporary_upload_folder in temporary_upload_folders:
-            shutil.rmtree(app.config['UPLOAD_FOLDER'] + temporary_upload_folder)
+        upload_folder = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
+        shutil.rmtree(upload_folder)
 
         db.session.add(article)
         db.session.commit()
@@ -283,5 +280,3 @@ def delete(filename):
 @mod.route("/data/<string:filename>", methods=['GET'])
 def get_file(filename):
     return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER']), filename=filename)
-
-
