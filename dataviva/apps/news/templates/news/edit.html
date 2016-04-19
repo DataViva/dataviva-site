@@ -5,8 +5,8 @@
         <div class="row bg-white">
             <ol class="breadcrumb">
                 <li><a href="{{ url_for('general.home') }}">Home</a></li>
-                <li><a href="{{ url_for('news.index') }}">Notícias</a></li>
-                <li class="active">Editar</li>
+                <li><a href="{{ url_for('news.index') }}">{% trans %}News{% endtrans %}</a></li>
+                <li class="active">{% trans %}Edit{% endtrans %}</li>
             </ol>
         </div>
     </div>
