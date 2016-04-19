@@ -38,7 +38,7 @@
 
     <div class="container">
         <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-            <noscript><input type="hidden" name="redirect" value="http://blueimp.github.io/jQuery-File-Upload/"></noscript>
+            {{ form.hidden_tag() }}
             <div class="row fileupload-buttonbar">
                 <div class="col-lg-7">
                     <p>
@@ -95,13 +95,6 @@
     <script id="template-download" type="text/x-tmpl">
     {% for (var i=0, file; file=o.files[i]; i++) { %}
         <tr class="template-download fade">
-            <td>
-                <span class="preview">
-                    {% if (file.thumbnailUrl) { %}
-                        <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
-                    {% } %}
-                </span>
-            </td>
             <td>
                 <p class="name">
                     {% if (file.url) { %}
