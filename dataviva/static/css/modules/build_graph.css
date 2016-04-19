@@ -2,3 +2,8 @@
     font-size: 18px;
     font-weight: 300;
 }
+
+.build_graph .sidebar #dimensions .form-group .btn {
+    margin-top: 2px;
+}
+
