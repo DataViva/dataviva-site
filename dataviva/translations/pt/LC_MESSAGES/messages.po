@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-19 13:06-0300\n"
+"POT-Creation-Date: 2016-04-19 15:05-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -719,20 +719,24 @@ msgstr "Selecione"
 
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
+#: dataviva/templates/general/browse_categories.html:24
 #: dataviva/templates/include/footer.html:29
 #: dataviva/translations/dictionary.py:581
 msgid "Database Download"
 msgstr "Download de Dados"
 
 #: dataviva/apps/data/templates/data/index.html:17
+#: dataviva/templates/general/browse_categories.html:11
+#: dataviva/templates/general/browse_categories.html:29
 msgid "Start a Search"
 msgstr "Inicie uma Pesquisa"
 
 #: dataviva/apps/data/templates/data/index.html:18
+#: dataviva/templates/general/browse_categories.html:23
 #: dataviva/templates/include/footer.html:28
 #: dataviva/translations/dictionary.py:582
 msgid "Make Graphs"
-msgstr "Crie seu Gráfico"
+msgstr "Construa Gráficos"
 
 #: dataviva/apps/data/templates/data/index.html:25
 msgid "Database"
@@ -813,6 +817,7 @@ msgstr "Próximo"
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:33
 #: dataviva/apps/rankings/templates/rankings/_base.html:38
+#: dataviva/templates/general/browse_categories.html:78
 #: dataviva/templates/general/index.html:78
 #: dataviva/templates/include/footer.html:21
 #: dataviva/translations/dictionary.py:569
@@ -1439,7 +1444,9 @@ msgid "Wage Mass"
 msgstr "Massa Salárial"
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:5
-#: dataviva/templates/about.html:78 dataviva/templates/general/index.html:96
+#: dataviva/templates/about.html:78
+#: dataviva/templates/general/browse_categories.html:102
+#: dataviva/templates/general/index.html:96
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:186
 #: dataviva/translations/dictionary.py:363
@@ -2176,7 +2183,9 @@ msgid "Higher Education ID"
 msgstr "Ensino Superior"
 
 #: dataviva/apps/rankings/templates/rankings/major.html:13
-#: dataviva/templates/about.html:38 dataviva/templates/general/index.html:102
+#: dataviva/templates/about.html:38
+#: dataviva/templates/general/browse_categories.html:110
+#: dataviva/templates/general/index.html:102
 #: dataviva/templates/include/footer.html:23
 #: dataviva/translations/dictionary.py:294
 msgid "Higher Education"
@@ -2373,7 +2382,9 @@ msgstr "Censo Escolar"
 msgid "Classifications"
 msgstr "Classificações"
 
-#: dataviva/templates/about.html:54 dataviva/templates/general/index.html:66
+#: dataviva/templates/about.html:54
+#: dataviva/templates/general/browse_categories.html:62
+#: dataviva/templates/general/index.html:66
 #: dataviva/translations/dictionary.py:568
 msgid "Brazilian Locations"
 msgstr "Localidades Brasileiras"
@@ -2383,7 +2394,9 @@ msgstr "Localidades Brasileiras"
 msgid "Industries"
 msgstr "Atividades Econômicas"
 
-#: dataviva/templates/about.html:62 dataviva/templates/general/index.html:72
+#: dataviva/templates/about.html:62
+#: dataviva/templates/general/browse_categories.html:70
+#: dataviva/templates/general/index.html:72
 #: dataviva/templates/general/select.html:29
 #: dataviva/templates/include/footer.html:20
 #: dataviva/translations/dictionary.py:160
@@ -2391,7 +2404,9 @@ msgstr "Atividades Econômicas"
 msgid "Occupations"
 msgstr "Ocupações"
 
-#: dataviva/templates/about.html:66 dataviva/templates/general/index.html:84
+#: dataviva/templates/about.html:66
+#: dataviva/templates/general/browse_categories.html:86
+#: dataviva/templates/general/index.html:84
 #: dataviva/templates/include/footer.html:19
 #: dataviva/translations/dictionary.py:357
 msgid "Products"
@@ -2406,9 +2421,11 @@ msgstr "Destinos das Exportações"
 #: dataviva/translations/dictionary.py:176
 #: dataviva/translations/dictionary.py:365
 msgid "Majors"
-msgstr "Cursos"
+msgstr "Cursos Superiores"
 
-#: dataviva/templates/about.html:82 dataviva/templates/include/footer.html:24
+#: dataviva/templates/about.html:82
+#: dataviva/templates/general/browse_categories.html:118
+#: dataviva/templates/include/footer.html:24
 #: dataviva/translations/dictionary.py:369
 msgid "Basic Courses"
 msgstr "Cursos Básicos"
@@ -3944,6 +3961,136 @@ msgstr "Atenciosamente,"
 msgid "The DataViva Team"
 msgstr "Equipe DataViva"
 
+#: dataviva/templates/general/browse_categories.html:20
+msgid "Another Features"
+msgstr "Outros Recursos"
+
+#: dataviva/templates/general/browse_categories.html:22
+#: dataviva/templates/include/footer.html:27
+#: dataviva/translations/dictionary.py:583
+msgid "View Rankings"
+msgstr "Visualize Rankings"
+
+#: dataviva/templates/general/browse_categories.html:31
+msgid "Select a profile to start"
+msgstr "Selecione um perfil para começar"
+
+#: dataviva/templates/general/browse_categories.html:36
+#: dataviva/templates/general/index.html:15
+#: dataviva/translations/dictionary.py:559
+msgid "Entrepreneurs"
+msgstr "Empreendedores"
+
+#: dataviva/templates/general/browse_categories.html:37
+#, fuzzy
+msgid "Identify the economic profile and the business opportunities in a region"
+msgstr ""
+"Identifique o perfil econômico e as oportunidades de negócios de uma "
+"região"
+
+#: dataviva/templates/general/browse_categories.html:43
+msgid "Development Agents"
+msgstr "Agentes de Desenvolvimento"
+
+#: dataviva/templates/general/browse_categories.html:44
+#: dataviva/templates/general/index.html:25
+#: dataviva/translations/dictionary.py:562
+msgid "Assess development policies setting by location"
+msgstr ""
+"Avalie a criação de políticas de desenvolvimento de acordo com a "
+"localidade"
+
+#: dataviva/templates/general/browse_categories.html:50
+msgid "Students and Professionals"
+msgstr "Estudantes e Profissionais"
+
+#: dataviva/templates/general/browse_categories.html:51
+#: dataviva/templates/general/index.html:33
+#: dataviva/translations/dictionary.py:564
+msgid "Find information about available jobs, income per occupation and courses"
+msgstr ""
+"Descubra informações sobre empregos disponíveis, renda por ocupação e "
+"cursos"
+
+#: dataviva/templates/general/browse_categories.html:58
+msgid "or search for"
+msgstr "ou pesquise por"
+
+#: dataviva/templates/general/browse_categories.html:64
+msgid ""
+"General profile by region, state, mesoregion, microregion or Brazilian "
+"locality. Visualize international trade, economic activity, jobs and "
+"education."
+msgstr ""
+"Perfil geral por região, estado, mesorregião, microrregião ou município "
+"brasileiro. Visualize dados de comércio exterior, atividade econômica, "
+"empregos e educação."
+
+#: dataviva/templates/general/browse_categories.html:72
+msgid ""
+"Regions that most employ by professional activity, related courses, "
+"average wage and employment statistics by year."
+msgstr ""
+"Regiões que mais empregam por atividade profissional, cursos "
+"relacionados, salário médio e estatísticas de emprego por ano."
+
+#: dataviva/templates/general/browse_categories.html:80
+msgid ""
+"Information on employment rate by region, average wage by type of "
+"occupation, average monthly income and economic opportunities."
+msgstr ""
+"Informações sobre taxa de empregos por região, salário médio por tipo de "
+"ocupação, renda mensal média e oportunidades econômicas."
+
+#: dataviva/templates/general/browse_categories.html:88
+#, fuzzy
+msgid ""
+"Balance of trade data by product, import origins and export destinations,"
+" rankings by locality, economic activity and related occupations."
+msgstr ""
+"Dados da Balança Comercial por produto, origem das importações e destino "
+"das exportações, ranking por localidade, atividades econômicas e "
+"ocupações relacionadas."
+
+#: dataviva/templates/general/browse_categories.html:94
+#: dataviva/templates/general/index.html:90
+#: dataviva/templates/include/footer.html:22
+#: dataviva/translations/dictionary.py:361
+msgid "Trade Partners"
+msgstr "Parceiros Comerciais"
+
+#: dataviva/templates/general/browse_categories.html:96
+msgid ""
+"Countries that import or export products to Brazil, commerce data by type"
+" of product or locality that commercializes it."
+msgstr ""
+"Nações que importam ou exportam produtos para o Brasil, dados de "
+"comercialização por tipo de produto ou por município comercializador."
+
+#: dataviva/templates/general/browse_categories.html:104
+msgid ""
+"Number of enrollments in each offered course, student situation and "
+"similar university profile."
+msgstr ""
+"Número de matrículas em cada curso ofertado, situação dos estudantes e "
+"perfis semelhantes de universidades."
+
+#: dataviva/templates/general/browse_categories.html:112
+msgid ""
+"University list and localities that offer the Superior Education course "
+"or the selected field of study."
+msgstr ""
+"Lista de universidades e municípios que ofertam o curso de Educação "
+"Superior ou o campo de estudo selecionado."
+
+#: dataviva/templates/general/browse_categories.html:120
+msgid ""
+"Brazilian schools that offer professional education and Basic Education "
+"enrollment ranking by locality."
+msgstr ""
+"Escolas do Brasil que oferecem educação profissional e ranking de "
+"matrículas na Educação Básica por município."
+
 #: dataviva/templates/general/error.html:19
 msgid "There was a problem serving the requested page."
 msgstr "Há um problema com a página que você está tentando acessar."
@@ -3998,11 +4145,6 @@ msgstr ""
 "profissionais graduados por ano em determinado curso por região, produtos"
 " similares por região, salário médio por segmento, e mais..."
 
-#: dataviva/templates/general/index.html:15
-#: dataviva/translations/dictionary.py:559
-msgid "Entrepreneurs"
-msgstr "Empreendedores"
-
 #: dataviva/templates/general/index.html:17
 #: dataviva/translations/dictionary.py:560
 msgid "Identify the economic profile and business opportunities of a region"
@@ -4025,13 +4167,6 @@ msgstr ""
 msgid "DEVELOPMENT AGENTS"
 msgstr "Agentes de Desenvolvimento"
 
-#: dataviva/templates/general/index.html:25
-#: dataviva/translations/dictionary.py:562
-msgid "Assess development policies setting by location"
-msgstr ""
-"Avalie a criação de políticas de desenvolvimento de acordo com a "
-"localidade"
-
 #: dataviva/templates/general/index.html:29
 msgid ""
 "Average wage of an activity or occupation, cities with best employment "
@@ -4046,13 +4181,6 @@ msgstr ""
 #: dataviva/translations/dictionary.py:563
 msgid "STUDENTS AND PROFESSIONALS"
 msgstr "Estudantes e Profissionais"
-
-#: dataviva/templates/general/index.html:33
-#: dataviva/translations/dictionary.py:564
-msgid "Find information about available jobs, income per occupation and courses"
-msgstr ""
-"Descubra informações sobre empregos disponíveis, renda por ocupação e "
-"cursos"
 
 #: dataviva/templates/general/index.html:41
 msgid "Get started"
@@ -4148,12 +4276,6 @@ msgstr ""
 "comercialização por tipo de produto ou por município comercializador. "
 "Exemplos: Ásia, África, Europa, México, Japão, Estados Unidos, China, "
 "Holanda, Irã."
-
-#: dataviva/templates/general/index.html:90
-#: dataviva/templates/include/footer.html:22
-#: dataviva/translations/dictionary.py:361
-msgid "Trade Partners"
-msgstr "Parceiros Comerciais"
 
 #: dataviva/templates/general/index.html:95
 msgid ""
@@ -4278,11 +4400,6 @@ msgstr "Explore"
 #: dataviva/translations/dictionary.py:353
 msgid "Locations"
 msgstr "Localidades"
-
-#: dataviva/templates/include/footer.html:27
-#: dataviva/translations/dictionary.py:583
-msgid "View Rankings"
-msgstr "Visualize Rankings"
 
 #: dataviva/templates/include/footer.html:34
 #: dataviva/translations/dictionary.py:578
