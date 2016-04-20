@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:51-0300\n"
+"POT-Creation-Date: 2016-04-20 15:55-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -367,6 +367,8 @@ msgstr "Notícias"
 #: dataviva/apps/admin/templates/admin/index.html:76
 #: dataviva/apps/users/templates/users/_base.html:8
 #: dataviva/apps/users/templates/users/admin.html:5
+#: dataviva/apps/users/templates/users/admin.html:9
+#: dataviva/apps/users/templates/users/index.html:5
 #: dataviva/templates/admin.html:24
 msgid "Users"
 msgstr "Usuários"

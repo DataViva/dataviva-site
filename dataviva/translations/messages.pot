@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:51-0300\n"
+"POT-Creation-Date: 2016-04-20 15:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -328,6 +328,8 @@ msgstr ""
 #: dataviva/apps/admin/templates/admin/index.html:76
 #: dataviva/apps/users/templates/users/_base.html:8
 #: dataviva/apps/users/templates/users/admin.html:5
+#: dataviva/apps/users/templates/users/admin.html:9
+#: dataviva/apps/users/templates/users/index.html:5
 #: dataviva/templates/admin.html:24
 msgid "Users"
 msgstr ""
