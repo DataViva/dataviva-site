@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:07-0300\n"
+"POT-Creation-Date: 2016-04-20 15:28-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -366,9 +366,8 @@ msgstr "Notícias"
 
 #: dataviva/apps/admin/templates/admin/index.html:76
 #: dataviva/templates/admin.html:24
-#, fuzzy
 msgid "Users"
-msgstr "Usuário"
+msgstr "Usuários"
 
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
 msgid "You need to be logged in to vote."
@@ -651,7 +650,9 @@ msgstr " ocupa o"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:112
 msgid "city in number of enrollments in the "
-msgstr "lugar entre os municípios com maior número de matrículas para o curso/campo de "
+msgstr ""
+"lugar entre os municípios com maior número de matrículas para o "
+"curso/campo de "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:114
 msgid "The city has "
@@ -5995,11 +5996,5 @@ msgstr "com"
 #~ msgstr "em"
 
 #~ msgid "ocupa o"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "lugar entre os municípios com maior "
-#~ "número de matrículas para o curso/campo"
-#~ " de "
 #~ msgstr ""
 
