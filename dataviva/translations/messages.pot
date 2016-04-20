@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 11:29-0300\n"
+"POT-Creation-Date: 2016-04-20 11:59-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -693,6 +693,7 @@ msgid "Preview "
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:73
+#: dataviva/apps/calls/templates/calls/_form.html:21
 #: dataviva/apps/news/templates/news/_form.html:94
 #: dataviva/templates/include/footer.html:66
 msgid "Send"
@@ -785,6 +786,11 @@ msgstr ""
 #: dataviva/apps/data/templates/data/index.html:51
 #: dataviva/translations/dictionary.py:467
 msgid "Select"
+msgstr ""
+
+#: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/translations/dictionary.py:472
+msgid "Back"
 msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:8
@@ -5112,10 +5118,6 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:471
 msgid "Please Wait"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:472
-msgid "Back"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:473

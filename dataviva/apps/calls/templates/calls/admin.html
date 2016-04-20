@@ -9,16 +9,14 @@
 <h1>Calls</h1>
 
 <div id="message">
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            {{ message }}
-        </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+{% if get_flashed_messages(with_categories=true) %}
+{% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        {{ message }}
+    </div>
+{% endfor %}
+{% endif %}
 </div>
 
 <table id="calls-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">

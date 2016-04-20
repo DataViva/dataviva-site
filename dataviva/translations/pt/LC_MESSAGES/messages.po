@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 11:29-0300\n"
+"POT-Creation-Date: 2016-04-20 11:59-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -730,6 +730,7 @@ msgid "Preview "
 msgstr "Visualizar "
 
 #: dataviva/apps/blog/templates/blog/_form.html:73
+#: dataviva/apps/calls/templates/calls/_form.html:21
 #: dataviva/apps/news/templates/news/_form.html:94
 #: dataviva/templates/include/footer.html:66
 msgid "Send"
@@ -827,6 +828,11 @@ msgstr "Comentário"
 #: dataviva/translations/dictionary.py:467
 msgid "Select"
 msgstr "Selecione"
+
+#: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/translations/dictionary.py:472
+msgid "Back"
+msgstr "Voltar"
 
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
@@ -5684,10 +5690,6 @@ msgstr "Carregar Mais Itens"
 #: dataviva/translations/dictionary.py:471
 msgid "Please Wait"
 msgstr "Por favor aguarde"
-
-#: dataviva/translations/dictionary.py:472
-msgid "Back"
-msgstr "Voltar"
 
 #: dataviva/translations/dictionary.py:473
 msgid "Remove this Filter"
