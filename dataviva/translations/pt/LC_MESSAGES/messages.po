@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 11:59-0300\n"
+"POT-Creation-Date: 2016-04-20 12:04-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -674,6 +674,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:11
 #: dataviva/apps/blog/templates/blog/admin.html:31
+#: dataviva/apps/calls/templates/calls/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:12
 #: dataviva/apps/news/templates/news/admin.html:30
 msgid "Title"
@@ -748,6 +749,7 @@ msgid "Date"
 msgstr "Data"
 
 #: dataviva/apps/blog/templates/blog/admin.html:34
+#: dataviva/apps/calls/templates/calls/admin.html:33
 #: dataviva/apps/news/templates/news/admin.html:34
 msgid "Active"
 msgstr "Ativo"
@@ -833,6 +835,16 @@ msgstr "Selecione"
 #: dataviva/translations/dictionary.py:472
 msgid "Back"
 msgstr "Voltar"
+
+#: dataviva/apps/calls/templates/calls/admin.html:5
+#, fuzzy
+msgid "Calls"
+msgstr "Chamada"
+
+#: dataviva/apps/calls/templates/calls/admin.html:32
+#, fuzzy
+msgid "Link"
+msgstr "em"
 
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
