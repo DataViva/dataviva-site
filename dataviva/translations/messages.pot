@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 11:25-0300\n"
+"POT-Creation-Date: 2016-04-20 11:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -679,6 +679,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:64
 #: dataviva/apps/blog/templates/blog/admin.html:40
+#: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
@@ -744,6 +745,15 @@ msgstr ""
 #: dataviva/apps/news/templates/news/index.html:23
 #: dataviva/apps/news/templates/news/show.html:14
 msgid "By"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/new.html:10
+#: dataviva/apps/news/templates/news/new.html:9
+msgid "Publish"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/new.html:16
+msgid "Publish a"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/show.html:5
@@ -1679,10 +1689,6 @@ msgstr ""
 
 #: dataviva/apps/news/templates/news/_form.html:33
 msgid "News Date"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/new.html:9
-msgid "Publish"
 msgstr ""
 
 #: dataviva/apps/news/templates/news/new.html:15

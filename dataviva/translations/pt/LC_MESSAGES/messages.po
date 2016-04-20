@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 11:25-0300\n"
+"POT-Creation-Date: 2016-04-20 11:29-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -716,6 +716,7 @@ msgstr "Conteúdo"
 
 #: dataviva/apps/blog/templates/blog/_form.html:64
 #: dataviva/apps/blog/templates/blog/admin.html:40
+#: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
@@ -785,6 +786,15 @@ msgstr ""
 #, fuzzy
 msgid "By"
 msgstr "por"
+
+#: dataviva/apps/blog/templates/blog/new.html:10
+#: dataviva/apps/news/templates/news/new.html:9
+msgid "Publish"
+msgstr "Publicar"
+
+#: dataviva/apps/blog/templates/blog/new.html:16
+msgid "Publish a"
+msgstr "Publicar um"
 
 #: dataviva/apps/blog/templates/blog/show.html:5
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:3
@@ -1729,10 +1739,6 @@ msgstr "Exibir na"
 #: dataviva/apps/news/templates/news/_form.html:33
 msgid "News Date"
 msgstr "Data da Notícia"
-
-#: dataviva/apps/news/templates/news/new.html:9
-msgid "Publish"
-msgstr "Publicar"
 
 #: dataviva/apps/news/templates/news/new.html:15
 msgid "Publish news"
