@@ -16,8 +16,6 @@ import bz2
 import sys
 import logging
 
-# logging.basicConfig(filename='scripts/data/rais/'+sys.argv[1:][0]+'/rais-data-download.log',level=logging.DEBUG)
-logging.basicConfig(filename='/home/ubuntu/files/rais/'+sys.argv[1:][0]+'/rais-data-download.log',level=logging.DEBUG)
 
 def select_table(conditions):
     s = 'y'
@@ -37,10 +35,9 @@ def select_table(conditions):
     return 'rais_' + s
 
 
-def save(years, locations, industrys, occupations, lang):
+def save(years, locations, industrys, occupations, lang, output_path):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
     table_columns = {}
-    output_path='scripts/data/rais/'+lang
     columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
 
     if lang == 'en':
@@ -74,8 +71,8 @@ def save(years, locations, industrys, occupations, lang):
                     logging.info('Query for file ('+str(datetime.now().hour)+':'+str(datetime.now().minute)+':'+str(datetime.now().second)+'): \n '+name_file+'\n'+query)
                     f = pd.read_sql_query(query, engine)
                     
-                    # new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
-                    new_file_path='/home/ubuntu/files/rais/'+lang+'/'+name_file+'.csv.bz2';
+                    new_file_path = os.path.join(output_path, name_file+".csv.bz2") #pega desda da rais do pc
+                    
                     f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
 
                     logging.info("\nErro:\n"+str(sys.stderr)+"\n-----------------------------------------------\n")
@@ -85,43 +82,34 @@ def save(years, locations, industrys, occupations, lang):
 Condition = namedtuple('Condition', ['condition', 'name'])
 
 
-years = [
-
-    Condition('year=2013', '-2013'),
-    Condition('year=2012', '-2012'),
-    Condition('year=2011', '-2011'),
-    Condition('year=2010', '-2010'),
-    Condition('year=2009', '-2009'),
-    Condition('year=2008', '-2008'),
-    Condition('year=2007', '-2007'),
-    Condition('year=2006', '-2006'),
-    Condition('year=2005', '-2005'),
-    Condition('year=2004', '-2004'),
-    Condition('year=2003', '-2003'),
-    Condition('year=2002', '-2002')]
-
 locations = [
-    Condition('bra_id_len=9', '-municipalities'),
-    Condition('bra_id_len=7', '-microregions'),
-    Condition('bra_id_len=5', '-mesoregions'),
-    Condition('bra_id_len=3', '-states'),
+    Condition(' 1 = 1 ', ''),
     Condition('bra_id_len=1', '-regions'),
-    Condition(' 1 = 1 ', '')]
+    Condition('bra_id_len=3', '-states'),
+    Condition('bra_id_len=5', '-mesoregions'),
+    Condition('bra_id_len=7', '-microregions'),
+    Condition('bra_id_len=9', '-municipalities')]
 
 industrys = [
-    Condition('cnae_id_len=3', '-divisions'),
+    Condition(' 1 = 1 ', ''),
     Condition('cnae_id_len=1', '-sections'),
-    Condition(' 1 = 1 ', '')]
+    Condition('cnae_id_len=3', '-divisions')]
 
 occupations = [
-    Condition('cbo_id_len=4', '-families'),
+    Condition(' 1 = 1 ', ''),
     Condition('cbo_id_len=1', '-main_groups'),
-    Condition(' 1 = 1 ', '')]
+    Condition('cbo_id_len=4', '-families')]
 
 
-if len(sys.argv) != 2 or (sys.argv[1:][0] not in ['pt', 'en']):
-    print "ERROR! use :\npython scripts/data_download/secex_create_files.py en/pt"
+if len(sys.argv) != 4 or (sys.argv[1:][0] not in ['pt', 'en']):
+    print "ERROR! use :\npython scripts/data_download/rais_create_files.py en/pt output_path year"
     exit()
 
-save(years=years, locations=locations, industrys=industrys, occupations=occupations, lang=sys.argv[1:][0])
+output_path = os.path.abspath(sys.argv[2])
+
+logging.basicConfig(filename=os.path.abspath(os.path.join(sys.argv[2],'rais-data-download.log' )),level=logging.DEBUG)
+
+years = [ Condition('year='+str(sys.argv[3]), '-'+str(sys.argv[3])) ]
+
+save(years=years, locations=locations, industrys=industrys, occupations=occupations, lang=sys.argv[1], output_path=output_path)
 
