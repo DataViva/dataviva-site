@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:28-0300\n"
+"POT-Creation-Date: 2016-04-20 15:51-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -326,6 +326,8 @@ msgid "News"
 msgstr ""
 
 #: dataviva/apps/admin/templates/admin/index.html:76
+#: dataviva/apps/users/templates/users/_base.html:8
+#: dataviva/apps/users/templates/users/admin.html:5
 #: dataviva/templates/admin.html:24
 msgid "Users"
 msgstr ""
@@ -771,12 +773,14 @@ msgstr ""
 #: dataviva/apps/blog/templates/blog/admin.html:42
 #: dataviva/apps/calls/templates/calls/admin.html:41
 #: dataviva/apps/news/templates/news/admin.html:42
+#: dataviva/apps/users/templates/users/admin.html:39
 msgid "Activate"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/admin.html:43
 #: dataviva/apps/calls/templates/calls/admin.html:42
 #: dataviva/apps/news/templates/news/admin.html:43
+#: dataviva/apps/users/templates/users/admin.html:40
 msgid "Deactivate"
 msgstr ""
 
@@ -2482,6 +2486,31 @@ msgstr ""
 msgid "More Details"
 msgstr ""
 
+#: dataviva/apps/users/templates/users/admin.html:32
+#: dataviva/apps/users/templates/users/index.html:12
+#: dataviva/templates/include/footer.html:46
+#: dataviva/templates/include/footer.html:48
+#: dataviva/translations/dictionary.py:337
+msgid "Name"
+msgstr ""
+
+#: dataviva/apps/users/templates/users/admin.html:33
+msgid "E-mail"
+msgstr ""
+
+#: dataviva/apps/users/templates/users/index.html:11
+msgid "User ID"
+msgstr ""
+
+#: dataviva/apps/users/templates/users/index.html:13
+#: dataviva/templates/admin/admin_users.html:14
+msgid "Email"
+msgstr ""
+
+#: dataviva/apps/users/templates/users/index.html:14
+msgid "Administrators"
+msgstr ""
+
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4
 #: dataviva/templates/about/ask/index.html:4
 #: dataviva/templates/include/footer.html:40
@@ -3653,10 +3682,6 @@ msgstr ""
 msgid "Nick Name"
 msgstr ""
 
-#: dataviva/templates/admin/admin_users.html:14
-msgid "Email"
-msgstr ""
-
 #: dataviva/templates/admin/admin_users.html:15
 msgid "Role"
 msgstr ""
@@ -4058,12 +4083,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:36
 #: dataviva/translations/dictionary.py:585
 msgid "Virtual Tour"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:46
-#: dataviva/templates/include/footer.html:48
-#: dataviva/translations/dictionary.py:337
-msgid "Name"
 msgstr ""
 
 #: dataviva/templates/include/footer.html:58
