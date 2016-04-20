@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 14:40-0300\n"
+"POT-Creation-Date: 2016-04-20 14:45-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -290,6 +290,44 @@ msgstr ""
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
 msgid "You dont have permission to view this page."
+msgstr ""
+
+#: dataviva/apps/admin/templates/admin/index.html:32
+#: dataviva/apps/calls/templates/calls/admin.html:5
+#: dataviva/apps/calls/templates/calls/edit.html:5
+#: dataviva/apps/calls/templates/calls/new.html:6
+#: dataviva/templates/admin.html:20
+msgid "Calls"
+msgstr ""
+
+#: dataviva/apps/admin/templates/admin/index.html:43
+#: dataviva/templates/admin.html:21
+msgid "Scholar"
+msgstr ""
+
+#: dataviva/apps/admin/templates/admin/index.html:54
+#: dataviva/templates/admin.html:22
+msgid "Start a search"
+msgstr ""
+
+#: dataviva/apps/admin/templates/admin/index.html:65
+#: dataviva/apps/news/templates/news/_base.html:29
+#: dataviva/apps/news/templates/news/admin.html:4
+#: dataviva/apps/news/templates/news/admin.html:8
+#: dataviva/apps/news/templates/news/edit.html:8
+#: dataviva/apps/news/templates/news/index.html:4
+#: dataviva/apps/news/templates/news/new.html:8
+#: dataviva/apps/news/templates/news/show.html:4
+#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:130
+#: dataviva/templates/include/footer.html:8
+#: dataviva/templates/include/header.html:5
+#: dataviva/translations/dictionary.py:532
+msgid "News"
+msgstr ""
+
+#: dataviva/apps/admin/templates/admin/index.html:76
+#: dataviva/templates/admin.html:24
+msgid "Users"
 msgstr ""
 
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
@@ -800,13 +838,6 @@ msgstr ""
 #: dataviva/apps/calls/templates/calls/_form.html:22
 #: dataviva/translations/dictionary.py:472
 msgid "Back"
-msgstr ""
-
-#: dataviva/apps/calls/templates/calls/admin.html:5
-#: dataviva/apps/calls/templates/calls/edit.html:5
-#: dataviva/apps/calls/templates/calls/new.html:6
-#: dataviva/templates/admin.html:20
-msgid "Calls"
 msgstr ""
 
 #: dataviva/apps/calls/templates/calls/edit.html:6
@@ -1702,20 +1733,6 @@ msgstr ""
 
 #: dataviva/apps/major/templates/major/tab-general.html:102
 msgid "students enrolled in the municipality"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/_base.html:29
-#: dataviva/apps/news/templates/news/admin.html:4
-#: dataviva/apps/news/templates/news/admin.html:8
-#: dataviva/apps/news/templates/news/edit.html:8
-#: dataviva/apps/news/templates/news/index.html:4
-#: dataviva/apps/news/templates/news/new.html:8
-#: dataviva/apps/news/templates/news/show.html:4
-#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:130
-#: dataviva/templates/include/footer.html:8
-#: dataviva/templates/include/header.html:5
-#: dataviva/translations/dictionary.py:532
-msgid "News"
 msgstr ""
 
 #: dataviva/apps/news/templates/news/_form.html:18
@@ -2621,18 +2638,6 @@ msgstr ""
 
 #: dataviva/templates/admin.html:17
 msgid "Modules"
-msgstr ""
-
-#: dataviva/templates/admin.html:21
-msgid "Scholar"
-msgstr ""
-
-#: dataviva/templates/admin.html:22
-msgid "Start a search"
-msgstr ""
-
-#: dataviva/templates/admin.html:24
-msgid "Users"
 msgstr ""
 
 #: dataviva/templates/mail.html:26
