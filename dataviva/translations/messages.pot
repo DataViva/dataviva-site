@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 14:31-0300\n"
+"POT-Creation-Date: 2016-04-20 14:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -805,6 +805,7 @@ msgstr ""
 #: dataviva/apps/calls/templates/calls/admin.html:5
 #: dataviva/apps/calls/templates/calls/edit.html:5
 #: dataviva/apps/calls/templates/calls/new.html:6
+#: dataviva/templates/admin.html:20
 msgid "Calls"
 msgstr ""
 
@@ -1710,7 +1711,7 @@ msgstr ""
 #: dataviva/apps/news/templates/news/index.html:4
 #: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:4
-#: dataviva/templates/general/index.html:130
+#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:130
 #: dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:532
@@ -2616,6 +2617,22 @@ msgstr ""
 #: dataviva/templates/about.html:198
 #: dataviva/templates/about/glossary/required.html:1
 msgid "Estimated Employment"
+msgstr ""
+
+#: dataviva/templates/admin.html:17
+msgid "Modules"
+msgstr ""
+
+#: dataviva/templates/admin.html:21
+msgid "Scholar"
+msgstr ""
+
+#: dataviva/templates/admin.html:22
+msgid "Start a search"
+msgstr ""
+
+#: dataviva/templates/admin.html:24
+msgid "Users"
 msgstr ""
 
 #: dataviva/templates/mail.html:26

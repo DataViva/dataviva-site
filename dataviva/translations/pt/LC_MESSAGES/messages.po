@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 14:31-0300\n"
+"POT-Creation-Date: 2016-04-20 14:40-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -846,6 +846,7 @@ msgstr "Voltar"
 #: dataviva/apps/calls/templates/calls/admin.html:5
 #: dataviva/apps/calls/templates/calls/edit.html:5
 #: dataviva/apps/calls/templates/calls/new.html:6
+#: dataviva/templates/admin.html:20
 #, fuzzy
 msgid "Calls"
 msgstr "Chamada"
@@ -1762,7 +1763,7 @@ msgstr "alunos matriculados em todo o país"
 #: dataviva/apps/news/templates/news/index.html:4
 #: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:4
-#: dataviva/templates/general/index.html:130
+#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:130
 #: dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:532
@@ -2679,6 +2680,24 @@ msgstr "Vantagem Comparativa"
 #: dataviva/templates/about/glossary/required.html:1
 msgid "Estimated Employment"
 msgstr "Emprego Estimado"
+
+#: dataviva/templates/admin.html:17
+msgid "Modules"
+msgstr ""
+
+#: dataviva/templates/admin.html:21
+msgid "Scholar"
+msgstr "Estudos"
+
+#: dataviva/templates/admin.html:22
+#, fuzzy
+msgid "Start a search"
+msgstr "Inicie uma Pesquisa"
+
+#: dataviva/templates/admin.html:24
+#, fuzzy
+msgid "Users"
+msgstr "Usuário"
 
 #: dataviva/templates/mail.html:26
 msgid "If you don't want to receive these updates,"
