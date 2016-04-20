@@ -17,3 +17,17 @@ data_base_conection = "mysql://{0}:{1}@{2}/{3}".format(
     get_env_variable("DATAVIVA_DB_NAME", "dataviva"))
 
 engine = create_engine( data_base_conection , echo=False)
+
+
+def get_colums(table, columns_deleted):
+    columns = []
+    column_rows = engine.execute(
+        "SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
+
+    columns_all=[row[0] for row in column_rows]
+
+    for column in columns_all:
+        if column not in columns_deleted:
+            columns.append(column)
+
+    return columns
