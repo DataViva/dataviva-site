@@ -72,7 +72,7 @@ def save(years, locations, industrys, occupations, lang):
                     print "Gerando ... : "+name_file+"\n"
                     
                     logging.info('Query for file ('+str(datetime.now().hour)+':'+str(datetime.now().minute)+':'+str(datetime.now().second)+'): \n '+name_file+'\n'+query)
-                    # f = pd.read_sql_query(query, engine)
+                    f = pd.read_sql_query(query, engine)
                     
                     # new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
                     new_file_path='/home/ubuntu/files/rais/'+lang+'/'+name_file+'.csv.bz2';
