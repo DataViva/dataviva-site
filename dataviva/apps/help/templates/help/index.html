@@ -19,26 +19,23 @@
         <nav class="sidebar col-md-3">
             <ul>
                 <li><a href="#geral" aria-controls="geral" role="tab" data-toggle="tab" title="Todos"><strong>Central de Ajuda</strong></a></li>
+                <li><a href="#primeiros-passos" aria-controls="primeiros-passos" role="tab" data-toggle="tab" title="Primeiros Passos">Primeiros Passos</a></li>
+                <li><a href="#duvidas-frequentes" aria-controls="duvidas-frequentes" role="tab" data-toggle="tab" title="Dúvidas Frequentes">Dúvidas Frequentes</a></li>
+                <li><a href="#fontes-de-dados" aria-controls="fontes-de-dados" role="tab" data-toggle="tab" title="Fontes de Dados">Fontes de Dados</a></li>
+                <li><a href="#classificacoes" aria-controls="classificacoes" role="tab" data-toggle="tab" title="Classificações por Categoria">Classificações por Categoria</a></li>
+                <li><a href="#visualizacoes" aria-controls="visualizacao" role="tab" data-toggle="tab" title="Tipos de Visualização">Tipos de Visualização</a></li>
                 <li><a href="#glossario" aria-controls="glossario" role="tab" data-toggle="tab" title="Glossário">Glossário</a></li>
             </ul>
-            <hr />
-            <h4>Tópicos Recentes</h4>
-            <ul>
-                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
-                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
-                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
-            </ul>
-            <hr />
-            <h5>Assista Vídeo Tutorial</h5>
-
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zZr5Tid3Qw4"></iframe>
-            </div>
         </nav>
         <div class="main-content col-md-9">
             <div class="tab-content">
                 {% include "tab-geral.html" %}
                 {% include "tab-glossario.html" %}
+                {% include "tab-primeiros-passos.html" %}
+                {% include "tab-duvidas-frequentes.html" %}
+                {% include "tab-fontes-de-dados.html" %}
+                {% include "tab-classificacoes.html" %}
+                {% include "tab-visualizacoes.html" %}
             </div>
         </div>
     </div>
