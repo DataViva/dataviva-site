@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 12:04-0300\n"
+"POT-Creation-Date: 2016-04-20 14:27-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -706,6 +706,7 @@ msgid "Complete Edition"
 msgstr "Finalizar edição"
 
 #: dataviva/apps/blog/templates/blog/_form.html:56
+#: dataviva/apps/calls/templates/calls/new.html:7
 #: dataviva/apps/news/templates/news/_form.html:77
 msgid "Call"
 msgstr "Chamada"
@@ -718,6 +719,7 @@ msgstr "Conteúdo"
 #: dataviva/apps/blog/templates/blog/_form.html:64
 #: dataviva/apps/blog/templates/blog/admin.html:40
 #: dataviva/apps/blog/templates/blog/edit.html:10
+#: dataviva/apps/calls/templates/calls/admin.html:39
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
@@ -755,23 +757,27 @@ msgid "Active"
 msgstr "Ativo"
 
 #: dataviva/apps/blog/templates/blog/admin.html:39
+#: dataviva/apps/calls/templates/calls/admin.html:38
 #: dataviva/apps/news/templates/news/admin.html:39
 msgid "New"
 msgstr "Novo"
 
 #: dataviva/apps/blog/templates/blog/admin.html:41
+#: dataviva/apps/calls/templates/calls/admin.html:40
 #: dataviva/apps/news/templates/news/admin.html:41
 #: dataviva/templates/admin/admin_questions.html:48
 msgid "Delete"
 msgstr "Excluir"
 
 #: dataviva/apps/blog/templates/blog/admin.html:42
+#: dataviva/apps/calls/templates/calls/admin.html:41
 #: dataviva/apps/news/templates/news/admin.html:42
 #, fuzzy
 msgid "Activate"
 msgstr "Ativar"
 
 #: dataviva/apps/blog/templates/blog/admin.html:43
+#: dataviva/apps/calls/templates/calls/admin.html:42
 #: dataviva/apps/news/templates/news/admin.html:43
 #, fuzzy
 msgid "Deactivate"
@@ -796,6 +802,7 @@ msgid "Publish"
 msgstr "Publicar"
 
 #: dataviva/apps/blog/templates/blog/new.html:16
+#: dataviva/apps/calls/templates/calls/new.html:7
 msgid "Publish a"
 msgstr "Publicar um"
 
@@ -837,14 +844,27 @@ msgid "Back"
 msgstr "Voltar"
 
 #: dataviva/apps/calls/templates/calls/admin.html:5
+#: dataviva/apps/calls/templates/calls/edit.html:5
+#: dataviva/apps/calls/templates/calls/new.html:6
 #, fuzzy
 msgid "Calls"
 msgstr "Chamada"
 
-#: dataviva/apps/calls/templates/calls/admin.html:32
-#, fuzzy
-msgid "Link"
-msgstr "em"
+#: dataviva/apps/calls/templates/calls/edit.html:6
+msgid "Edit a"
+msgstr "Edite uma"
+
+#: dataviva/apps/calls/templates/calls/edit.html:6
+msgid "call"
+msgstr "chamada"
+
+#: dataviva/apps/calls/templates/calls/new.html:8
+msgid ""
+"This area was specially created for the publication of calls related to "
+"DataViva."
+msgstr ""
+"Esta área foi especialmente criada para a publicação de Chamadas "
+"relacionados ao DataViva."
 
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
@@ -5948,4 +5968,7 @@ msgstr "com"
 
 #~ msgid "Ativo"
 #~ msgstr "Localidade"
+
+#~ msgid "Link"
+#~ msgstr "em"
 
