@@ -3,9 +3,9 @@
 
 {% block calls_content %}
 <div class="institucional">
-    <h2>Chamadas</h2>
-    <h3>Publique uma Chamada</h3>
-    <p>Esta área foi especialmente criada para a publicação de Chamadas relacionados ao DataViva.</p>
+    <h2>{% trans %}Calls{% endtrans %}</h2>
+    <h3>{% trans %}Publish a{% endtrans %} {% trans %}Call{% endtrans %}</h3>
+    <p>{% trans %}This area was specially created for the publication of calls related to DataViva.{% endtrans %}</p>
     {% include "calls/_form.html" %}
 </div>
 {% endblock  calls_content %}

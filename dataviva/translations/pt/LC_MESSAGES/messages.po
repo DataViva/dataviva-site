@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 11:29-0300\n"
+"POT-Creation-Date: 2016-04-20 14:31-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -674,6 +674,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:11
 #: dataviva/apps/blog/templates/blog/admin.html:31
+#: dataviva/apps/calls/templates/calls/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:12
 #: dataviva/apps/news/templates/news/admin.html:30
 msgid "Title"
@@ -705,6 +706,7 @@ msgid "Complete Edition"
 msgstr "Finalizar edição"
 
 #: dataviva/apps/blog/templates/blog/_form.html:56
+#: dataviva/apps/calls/templates/calls/new.html:7
 #: dataviva/apps/news/templates/news/_form.html:77
 msgid "Call"
 msgstr "Chamada"
@@ -717,6 +719,7 @@ msgstr "Conteúdo"
 #: dataviva/apps/blog/templates/blog/_form.html:64
 #: dataviva/apps/blog/templates/blog/admin.html:40
 #: dataviva/apps/blog/templates/blog/edit.html:10
+#: dataviva/apps/calls/templates/calls/admin.html:39
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
@@ -730,6 +733,7 @@ msgid "Preview "
 msgstr "Visualizar "
 
 #: dataviva/apps/blog/templates/blog/_form.html:73
+#: dataviva/apps/calls/templates/calls/_form.html:21
 #: dataviva/apps/news/templates/news/_form.html:94
 #: dataviva/templates/include/footer.html:66
 msgid "Send"
@@ -747,28 +751,33 @@ msgid "Date"
 msgstr "Data"
 
 #: dataviva/apps/blog/templates/blog/admin.html:34
+#: dataviva/apps/calls/templates/calls/admin.html:33
 #: dataviva/apps/news/templates/news/admin.html:34
 msgid "Active"
 msgstr "Ativo"
 
 #: dataviva/apps/blog/templates/blog/admin.html:39
+#: dataviva/apps/calls/templates/calls/admin.html:38
 #: dataviva/apps/news/templates/news/admin.html:39
 msgid "New"
 msgstr "Novo"
 
 #: dataviva/apps/blog/templates/blog/admin.html:41
+#: dataviva/apps/calls/templates/calls/admin.html:40
 #: dataviva/apps/news/templates/news/admin.html:41
 #: dataviva/templates/admin/admin_questions.html:48
 msgid "Delete"
 msgstr "Excluir"
 
 #: dataviva/apps/blog/templates/blog/admin.html:42
+#: dataviva/apps/calls/templates/calls/admin.html:41
 #: dataviva/apps/news/templates/news/admin.html:42
 #, fuzzy
 msgid "Activate"
 msgstr "Ativar"
 
 #: dataviva/apps/blog/templates/blog/admin.html:43
+#: dataviva/apps/calls/templates/calls/admin.html:42
 #: dataviva/apps/news/templates/news/admin.html:43
 #, fuzzy
 msgid "Deactivate"
@@ -793,8 +802,9 @@ msgid "Publish"
 msgstr "Publicar"
 
 #: dataviva/apps/blog/templates/blog/new.html:16
+#: dataviva/apps/calls/templates/calls/new.html:7
 msgid "Publish a"
-msgstr "Publicar um"
+msgstr "Publicar uma"
 
 #: dataviva/apps/blog/templates/blog/show.html:5
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:3
@@ -827,6 +837,34 @@ msgstr "Comentário"
 #: dataviva/translations/dictionary.py:467
 msgid "Select"
 msgstr "Selecione"
+
+#: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/translations/dictionary.py:472
+msgid "Back"
+msgstr "Voltar"
+
+#: dataviva/apps/calls/templates/calls/admin.html:5
+#: dataviva/apps/calls/templates/calls/edit.html:5
+#: dataviva/apps/calls/templates/calls/new.html:6
+#, fuzzy
+msgid "Calls"
+msgstr "Chamada"
+
+#: dataviva/apps/calls/templates/calls/edit.html:6
+msgid "Edit a"
+msgstr "Edite uma"
+
+#: dataviva/apps/calls/templates/calls/edit.html:6
+msgid "call"
+msgstr "chamada"
+
+#: dataviva/apps/calls/templates/calls/new.html:8
+msgid ""
+"This area was specially created for the publication of calls related to "
+"DataViva."
+msgstr ""
+"Esta área foi especialmente criada para a publicação de Chamadas "
+"relacionados ao DataViva."
 
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
@@ -5685,10 +5723,6 @@ msgstr "Carregar Mais Itens"
 msgid "Please Wait"
 msgstr "Por favor aguarde"
 
-#: dataviva/translations/dictionary.py:472
-msgid "Back"
-msgstr "Voltar"
-
 #: dataviva/translations/dictionary.py:473
 msgid "Remove this Filter"
 msgstr "Remover este Filtro"
@@ -5934,4 +5968,7 @@ msgstr "com"
 
 #~ msgid "Ativo"
 #~ msgstr "Localidade"
+
+#~ msgid "Link"
+#~ msgstr "em"
 
