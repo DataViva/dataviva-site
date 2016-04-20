@@ -14,8 +14,9 @@ import shutil
 from upload_file import UploadFile
 from werkzeug import secure_filename
 from dataviva import app
+from dataviva.utils import upload_helper
 
-app.config['UPLOAD_FOLDER'] = os.getcwd() + '/dataviva/static/data/scholar/'
+app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/scholar/')
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
@@ -132,10 +133,25 @@ def create():
             else:
                 article.keywords.append(keyword)
 
-        temporary_upload_folder = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
-        shutil.rmtree(temporary_upload_folder)
-
         db.session.add(article)
+        db.session.flush()
+
+        file_path = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
+
+        file_name = [file for file in os.listdir(file_path)][0]
+
+        upload_helper.upload_s3_file(
+            os.path.join(file_path, file_name),
+            'dataviva',
+            os.path.join('scholar/article/', str(article.id)),
+            {
+                'ContentType': "application/pdf",
+                'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
+            }
+        )
+
+        shutil.rmtree(file_path)
+
         db.session.commit()
 
         message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
@@ -215,13 +231,13 @@ def all():
     return jsonify(articles=articles)
 
 
-@mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
 @mod.route('/admin/article/upload', methods=['GET', 'POST'])
+@mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
 def upload(id=None):
-    temporary_upload_folder = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
+    file_path = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
 
-    if not os.path.exists(temporary_upload_folder):
-        os.makedirs(temporary_upload_folder)
+    if not os.path.exists(file_path):
+        os.makedirs(file_path)
 
     if request.method == 'POST':
         file = request.files['file']
@@ -236,7 +252,7 @@ def upload(id=None):
 
             else:
                 # save file to disk
-                uploaded_file_path = os.path.join(temporary_upload_folder, filename)
+                uploaded_file_path = os.path.join(file_path, filename)
                 file.save(uploaded_file_path)
 
                 # get file size after saving
@@ -249,13 +265,13 @@ def upload(id=None):
 
     if request.method == 'GET':
         # get all file in ./data directory
-        files = [f for f in os.listdir(temporary_upload_folder) if os.path.isfile(
-            os.path.join(temporary_upload_folder, f)) and f not in IGNORED_FILES]
+        files = [f for f in os.listdir(file_path) if os.path.isfile(
+            os.path.join(file_path, f)) and f not in IGNORED_FILES]
 
         file_display = []
 
         for f in files:
-            size = os.path.getsize(os.path.join(temporary_upload_folder, f))
+            size = os.path.getsize(os.path.join(file_path, f))
             file_saved = UploadFile(name=f, size=size)
             file_display.append(file_saved.get_file())
 
