@@ -12,7 +12,10 @@ from dictionary import en
 import pandas as pd
 import os
 import bz2
+import sys
+import logging
 
+logging.basicConfig(filename=os.path.join(sys.argv[1], 'rais-data-download.log'),level=logging.DEBUG)
 
 def select_table(conditions):
     s = 'y'
@@ -37,10 +40,9 @@ def get_colums(table):
     return [row[0] for row in column_rows]
 
 
-def save(years, locations, industrys, occupations):
+def save(years, locations, industrys, occupations, output_path):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
     table_columns = {}
-    output_path='scripts/data/files_rais/'
 
     for year in years:
         conditions[0] = year.condition
@@ -56,7 +58,10 @@ def save(years, locations, industrys, occupations):
                     if table not in table_columns.keys():
                         table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
 
-                    f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
+                    query = 'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions)
+
+                    logging.info(query)
+                    f = pd.read_sql_query(query, engine)
                     
                     new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
                     f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f")
@@ -98,5 +103,4 @@ occupations = [
     Condition('cbo_id_len=1', '-main_groups'),
     Condition('cbo_id_len=4', '-families')]
 
-
-save(years=years, locations=locations, industrys=industrys, occupations=occupations)
+save(years=years, locations=locations, industrys=industrys, occupations=occupations, output_path=sys.argv[1])
