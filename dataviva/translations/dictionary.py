@@ -456,6 +456,8 @@ def dictionary():
         "user": gettext("User"),
         "admin": gettext("Admin"),
         "remove": gettext("Remove"),
+        "deactivate": gettext("Deactivate"),
+        "activate": gettext("activate"),
         "remove_confirmation": gettext("Are you sure to delete this item?"),
 
         # Selector & Search
