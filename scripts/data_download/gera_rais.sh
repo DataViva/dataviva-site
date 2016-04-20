@@ -1,3 +1,4 @@
+# ./gera_rais.sh en/pt output_path 
 
 for year in  {2002..2013}; 
 	do echo $1 $2 $year;
