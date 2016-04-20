@@ -3,7 +3,6 @@ CREATE TABLE scholar_article(
     title varchar (400) NULL,
     theme varchar (250) NULL,
     abstract text NULL,
-    file_path varchar (250) NULL,
     postage_date datetime NULL,
     approval_status TINYINT(1) NULL,
     PRIMARY KEY (id)

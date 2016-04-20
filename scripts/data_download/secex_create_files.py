@@ -68,7 +68,6 @@ def save(years, months, locations, products, trade_partners, lang):
                         new_file_path='/home/ubuntu/files/secex/'+lang+'/'+name_file+'.csv.bz2';
 
                         f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
-                        print name_file
 
 
 Condition = namedtuple('Condition', ['condition', 'name'])

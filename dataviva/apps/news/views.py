@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
+from sqlalchemy import desc
 from models import Publication, AuthorNews
 from dataviva import db
 from forms import RegistrationForm
@@ -30,7 +31,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    publications = Publication.query.filter_by(active=True).all()
+    publications = Publication.query.filter_by(active=True).order_by(desc(Publication.publish_date)).all()
     return render_template('news/index.html', publications=publications)
 
 

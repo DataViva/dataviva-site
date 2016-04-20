@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, make_response, redirect, url_for, flash, jsonify, request
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
+from sqlalchemy import desc
 from models import Article, AuthorScholar, KeyWord
 from dataviva import db
 from forms import RegistrationForm
@@ -30,7 +31,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    articles = Article.query.filter_by(approval_status=True).all()
+    articles = Article.query.filter_by(approval_status=True).order_by(desc(Article.postage_date)).all()
     return render_template('scholar/index.html', articles=articles)
 
 
@@ -68,7 +69,14 @@ def create():
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
-        article.file_path = 'test'
+        form.article.data
+
+        import os
+        file = request.files['article']
+        last_article = Article.query.order_by(desc(Article.postage_date)).first_or_404()
+        filename = str(last_article.id)
+        file.save(os.path.join('/home/fvieira/Desktop', filename+'.pdf'))
+
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.approval_status = 0
 
@@ -104,7 +112,7 @@ def update(id):
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
-        article.file_path = 'test'
+        form.article = 'test'
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.authors = []
         article.keywords = []

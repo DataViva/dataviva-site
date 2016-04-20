@@ -23,6 +23,7 @@ var MajorTable = function () {
             },
         ],
         "deferRender": true,
+        "language": dataviva.datatables.language,
         "scrollY": 500,
         "scrollCollapse": true,
         "scroller": true,
@@ -59,13 +60,16 @@ var MajorTable = function () {
 
             $('#major-table_filter input').removeClass('input-sm');
             $('#major-table_filter').addClass('pull-right');
+            $('#major-fields').addClass('active');
 
             $('#major-fields').click(function() {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#major-majors').click(function() {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });

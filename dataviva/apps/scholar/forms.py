@@ -4,6 +4,7 @@ from wtforms import FileField, TextField, TextAreaField, validators, ValidationE
 
 
 class NumberOfWords(object):
+
     def __init__(self, max, message=None):
         self.max = max
         if not message:
@@ -16,20 +17,41 @@ class NumberOfWords(object):
 
 
 class RegistrationForm(Form):
-    title = TextField('title', [validators.Required(u"Por favor, insira o título do artigo."), validators.Length(max=400)])
-    theme = TextField('theme', [validators.Required(u"Por favor, insira o tema do artigo."), NumberOfWords(max=5)])
-    authors = TextField('authors', [validators.Required(u"Por favor, insira o(s) autor(es) do artigo."), validators.Length(max=100)])
-    keywords = TextField('keywords', [validators.Required(u"Por favor, insira as palavras-chave do artigo."), NumberOfWords(max=3)])
-    abstract = TextAreaField('abstract', [validators.Required(u"Por favor, insira o resumo do artigo."), NumberOfWords(max=250)])
-    article_file = FileField('article_file', [validators.Required(u"Por favor, insira o arquivo do artigo.")])
+    title = TextField('title', validators=[
+        validators.Required(u"Por favor, insira o título do artigo."),
+        validators.Length(max=400)
+    ])
 
+    theme = TextField('theme', validators=[
+      validators.Required(u"Por favor, insira o tema do artigo."),
+      NumberOfWords(max=5)
+    ])
+
+    authors = TextField('authors', validators=[
+        validators.Required(u"Por favor, insira o(s) autor(es) do artigo."),
+        validators.Length(max=100)
+    ])
+
+    keywords = TextField('keywords', validators=[
+        validators.Required(u"Por favor, insira as palavras-chave do artigo."),
+        NumberOfWords(max=3)
+    ])
+
+    abstract = TextAreaField('abstract', validators=[
+        validators.Required(u"Por favor, insira o resumo do artigo."),
+        NumberOfWords(max=250)
+    ])
+
+    article = FileField('article', validators=[
+        validators.Required(u"Por favor, insira o arquivo para o artigo.")
+    ])
 
 '''
 REGRAS FORMULÁRIO:
-    Título - (Máximo 400 caracteres) >>> OK
-    Tema - (Máximo 5 palavras) >>> OK
-    Autor - (Exibir FREITAS, E;) >>> NO
-    Palavras-Chave - (Máximo 3 conjuntos) >>> OK
-    Resumo - (Máximo 250 palavras) >>> OK
-    Formato - (PDF, DOC, DOCX - Tamanho máximo de arquivo: 50MB) >>> Definir Regra
+    Título - (Máximo 400 caracteres)
+    Tema - (Máximo 5 palavras)
+    Autor - (Exibir FREITAS, E;)
+    Palavras-Chave - (Máximo 3 conjuntos)
+    Resumo - (Máximo 250 palavras)
+    Formato - (PDF, DOC, DOCX - Tamanho máximo de arquivo: 50MB)
 '''

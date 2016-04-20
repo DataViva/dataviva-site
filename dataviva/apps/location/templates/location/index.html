@@ -26,7 +26,11 @@
                 {{ location.name() }} <a href="#" title="Trocar" onclick="start_selector('Location');"> (trocar)</a>
             </h1>
         </div>
+        {% if location.id|length <= 3 %}
         <span class="portrait dv-bra-{{location.id}} hidden-xs"></span>
+        {% else %}
+        <span class="portrait dv-bra-{{location.id[0:3]}} hidden-xs"></span>
+        {% endif %}
     </div>
 </section>
 
@@ -39,7 +43,7 @@
                        aria-controls="general"
                        role="tab"
                        data-id="{{ location.id }}"
-                       data-toggle="tab">Geral</a>
+                       data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#trade-partner"
@@ -47,7 +51,7 @@
                        role="tab"
                        graph
                        data-id="{{ location.id }}"
-                       data-toggle="tab">Comércio Internacional</a>
+                       data-toggle="tab">{% trans %}International Trade{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#wages"
@@ -55,7 +59,7 @@
                        role="tab"
                        graph
                        data-id="{{ location.id }}"
-                       data-toggle="tab">Salário e Emprego</a>
+                       data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#opportunities"
@@ -63,7 +67,7 @@
                        role="tab"
                        graph
                        data-id="{{ location.id }}"
-                       data-toggle="tab">Oportunidades Econômicas</a>
+                       data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
                 <li role="presentation">
                     <a href="#education"
@@ -71,7 +75,7 @@
                        role="tab"
                        graph
                        data-id="{{ location.id }}"
-                       data-toggle="tab">Educação</a>
+                       data-toggle="tab">{% trans %}Education{% endtrans %}</a>
                 </li>
 
             </ul>

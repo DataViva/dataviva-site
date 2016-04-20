@@ -1,24 +1,43 @@
-<!-- extend from base layout -->
 {% extends "base.html" %}
 
 {% block content %}
+
 <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="{{ url_for('general.home') }}">Home</a></li>
-        <li class="active"><span>Construa gráficos<span></li>
-    </ol>
-    <div class="row">
-        <div class="sidebar no-padding col-xs-15 col-md-4">
-            <h3>&nbsp;</h3>
-        </div>
-        <div class="main-content col-xs-15 col-md-11">
-            <div class="institucional">
-                <h2>Construa gráficos</h2>
-                <code class="text-center">
-                    <img src="http://placehold.it/1200x300?text=graph-area" class="img-responsive">
-                </code>
-            </div>
-        </div>
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            <li class="active">Construa gráficos</li>
+        </ol>
     </div>
 </div>
+
+<section id="build_graph"  class="container m-b-lg">
+    <nav class="sidebar col-md-3">
+        <ul class="sub-menu">
+            <li>
+                <div class="form-group">
+                    <label for="datasets" class="control-label">Banco de Dados</label>
+                    <select class="form-control" id="datasets" name="datasets">
+                        <option id="dataset-empty-option" value="">{%trans%}Select{%endtrans%}</option>
+                    </select>
+                </div>
+            </li>
+            <li id="dimensions">
+            </li>
+            <li id="views">
+            </li>
+            <li>
+                <a href="#" class="btn btn-primary pull-right">
+                    <i class="fa fa-repeat m-r-sm" aria-hidden="true"></i>
+                    Atualizar Gráfico
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="col-md-9">
+        <h1>Visualize seu Gráfico</h1>
+        {% block build_graph_content %}
+        {% endblock build_graph_content %}
+    </div>
+</section>
 {% endblock content %}

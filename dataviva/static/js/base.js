@@ -1,5 +1,3 @@
-var dataviva = {};
-
 dataviva.load = function(name, url, callBack) {
     var parseAttr = function(data) {
         var attr = {};
@@ -51,6 +49,19 @@ dataviva.requireAttrs = function(attrs, callBack) {
     attrs.forEach(function(attr) {
         dataviva.load(attr, '/attrs/'+attr+'/?lang='+lang, ready);
     });
+}
+
+dataviva.datatables = { 
+    language: {
+        "loading": dataviva.dictionary['loading'] + "...",
+        "emptyTable": dataviva.dictionary['emptyTable'],
+        "info": dataviva.dictionary['infoResults'],
+        "infoEmpty": dataviva.dictionary['infoEmpty'],
+        "infoFiltered": dataviva.dictionary['infoFiltered'],
+        "processing": dataviva.dictionary['processing'] + "...",
+        "search": dataviva.dictionary['dataTableSearch'] + ":",
+        "zeroRecords": dataviva.dictionary['zeroRecords']
+    }
 }
 
 

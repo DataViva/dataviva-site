@@ -25,6 +25,7 @@ var ProductTable = function () {
             },
         ],
         "deferRender": true,
+        "language": dataviva.datatables.language,
         "scrollY": 500,
         "scrollCollapse": true,
         "scroller": true,
@@ -61,14 +62,17 @@ var ProductTable = function () {
 
             $('#product-table_filter input').removeClass('input-sm');
             $('#product-table_filter').addClass('pull-right');
+            $('#product-postions').addClass('active');
 
 
             $('#product-sections').click(function() {
                 product.table.ajax.url("/secex/all-0/all/show.2/all/?order=export_val.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#product-postions').click(function() {
                 product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });

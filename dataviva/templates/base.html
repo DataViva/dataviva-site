@@ -102,12 +102,13 @@
     <script src="/static/js/dataviva-ng/controllers/selector.js"></script>
     <script src="/static/js/dataviva-ng/app.js"></script>
 
+    <script>
+        var dataviva = {};
+        dataviva.dictionary = {{ g.dictionary|safe }};
+    </script>
+
     <!-- Javascript modules -->
     <script src="/static/js/base.js"></script>
-
-    <script>
-      dataviva.dictionary = {{ g.dictionary|safe }};
-    </script>
     {% block js_assets %}
         <script src="/static/js/modules/{{ g.page_type }}.js"></script>
     {% endblock js_assets %}

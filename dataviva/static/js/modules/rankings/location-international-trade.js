@@ -36,6 +36,7 @@ var LocationTradeRanking = function () {
             },
         ],
         "deferRender": true,
+        "language": dataviva.datatables.language,
         "scrollY": 500,
         "scrollCollapse": true,
         "scroller": true,
@@ -78,25 +79,31 @@ var LocationTradeRanking = function () {
 
             $('#location-international-trade-table_filter input').removeClass('input-sm');
             $('#location-international-trade-table_filter').addClass('pull-right');
+            $('#location-international-trade-regions').addClass('active');
 
             $('#location-international-trade-regions').click(function() {
                 locationTradeRanking.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-states').click(function() {
                 locationTradeRanking.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-mesoregions').click(function() {
                 locationTradeRanking.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-microregions').click(function() {
                 locationTradeRanking.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-municipalities').click(function() {
                 locationTradeRanking.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });

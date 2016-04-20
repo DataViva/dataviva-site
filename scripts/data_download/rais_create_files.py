@@ -13,6 +13,9 @@ import pandas as pd
 import os
 import bz2
 import sys
+import logging
+
+# logging.basicConfig(filename=os.path.join(sys.argv[1], 'rais-data-download.log'),level=logging.DEBUG)
 
 def select_table(conditions):
     s = 'y'
@@ -32,7 +35,13 @@ def select_table(conditions):
     return 'rais_' + s
 
 
-def save(years, locations, industrys, occupations, lang):
+
+def get_colums(table):
+    column_rows = engine.execute("SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
+    return [row[0] for row in column_rows]
+
+
+def save(years, locations, industrys, occupations, lang, output_path):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
     table_columns = {}
     output_path='scripts/data/rais/'+lang
@@ -61,11 +70,15 @@ def save(years, locations, industrys, occupations, lang):
                     if table not in table_columns.keys():
                         table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in get_colums(table, columns_deleted)]
 
-                    f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
+                    query = 'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions)
+
+                    print name_file
+                    # logging.info(query)
+                    # f = pd.read_sql_query(query, engine)
                     
                     # new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2")) #pega desda da rais do pc
-                    new_file_path='/home/ubuntu/files/rais/'+lang+'/'+name_file+'.csv.bz2';
-                    f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
+                    # new_file_path='/home/ubuntu/files/rais/'+lang+'/'+name_file+'.csv.bz2';
+                    # f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
 
 
 
@@ -111,3 +124,4 @@ if len(sys.argv) != 2 or (sys.argv[1:][0] not in ['pt', 'en']):
     exit()
 
 save(years=years, locations=locations, industrys=industrys, occupations=occupations, lang=sys.argv[1:][0])
+

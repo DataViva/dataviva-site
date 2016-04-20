@@ -78,6 +78,14 @@
     margin-right: 5px;
 }
 
+.rankings .rankings-control .btn-group button.active {
+    background-color: #A25A6D;
+    border-color: #A25A6D;
+    color: #FFFFFF;
+}
+
+
+
 .rankings .dataTables_wrapper {
     width: 100%;
 }

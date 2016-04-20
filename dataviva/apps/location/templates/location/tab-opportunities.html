@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane" id="opportunities">
-    <h2>Estatísticas de Oportunidades Econômicas</h2>
+    <h2>{% trans %}Economic Opportunities{% endtrans %}</h2>
     <div class="row">
         <div class="col-xs-15 col-sm-15 col-md-12">
             <div class="table-responsive">
@@ -9,23 +9,26 @@
                         <tr>
                             {% if body.less_distance_by_product %}
                                 <th>
-                                    Produto
-                                    <small>com Menor Distância</small>
+                                    {% trans %}Product{% endtrans %}
+                                    <small>{% trans %}with Shortest Distance{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             {% if body.less_distance_by_occupation %}
                                 <th>
-                                    Atividade Econômica <small>com Menor Distância</small>
+                                    {% trans %}Economic Activity{% endtrans %}
+                                    <small>{% trans %}with Shortest Distance{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             {% if body.opportunity_gain_by_product %}
                                 <th>
-                                    Produto <small>com Maior Ganho de Oportunidade</small>
+                                    {% trans %}Product {% endtrans %}
+                                    <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
                                 </th>
                             {% endif %}
                             {% if body.opportunity_gain_by_occupation %}
                                 <th>
-                                    Atividade Econômica <small>com Maior Ganho de Oportunidade</small>
+                                    {% trans %}Economic Activity{% endtrans %}
+                                    <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
                                 </th>
                             {% endif %}
                         </tr>

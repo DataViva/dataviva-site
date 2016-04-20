@@ -1,23 +1,29 @@
 {% extends "scholar/_base.html" %}
 
-{% block scholar_content %}
-<div class="institucional">
-    <h2>Estudos DataViva</h2>
-    <div class="meta">
-        <p>
-            Título: {{ article.title }}<br />
-            Autor(es): {{ article.authors_str() }}<br />
-            Palavras-Chave: {{ article.keywords_str() }}<br />
-            Data de Publicação: {{ article.date_str() }}
-        </p>
-    </div>
-    <p>
-        {{ article.abstract }}
-    </p>
+{% block breadcrumb %}
+    <li><a href="{{ url_for('scholar.index') }}">Estudos</a></li>
+    <li class="active">Visualizar</li>
+{% endblock %}
 
-    <p><a class="btn btn-default btn-lg btn-dataviva blue">Baixar arquivo (PDF)</a></p>
+{% block scholar_content %}
+<div class="institucional search">
+    <div class="articles">
+        <div class="item article single">
+            <h2>Estudos DataViva</h2>
+            <div class="meta">
+                <p>
+                    Título: {{ article.title }}<br />
+                    Autor(es): {{ article.authors_str() }}<br />
+                    Palavras-Chave: {{ article.keywords_str() }}<br />
+                    Data de Publicação: {{ article.date_str() }}
+                </p>
+            </div>
+            <p>
+                {{ article.abstract }}
+            </p>
+            <p><a class="btn btn-success btn-md">Baixar arquivo (PDF)</a></p>
+        </div>
+    </div>
 </div>
 
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ article.id }}/delete">Deletar</a>
-<a class="btn btn-default btn-dataviva pull-right" href="/scholar/article/{{ article.id }}/edit">Editar</a>
 {% endblock scholar_content %}

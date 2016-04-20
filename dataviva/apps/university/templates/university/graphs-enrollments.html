@@ -3,23 +3,23 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Courses{% endtrans %}</h4>
-            <a href="/pt/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" 
+            <a href="/{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" 
                target="graphs-frame-enrollments" 
                class="list-group-item">TreeMap</a>
-            <a href="/pt/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" 
+            <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" 
                target="graphs-frame-enrollments" 
                class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
             <h4>{% trans %}Students Status{% endtrans %}</h4>
-            <a href="/pt/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" 
+            <a href="/{{ g.locale }}/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" 
                target="graphs-frame-enrollments" class="list-group-item">{% trans %}Line{% endtrans %}</a>
             <h4>{% trans %}Shift{% endtrans %}</h4>
-            <a href="/pt/embed/stacked/hedu/all/{{university.id}}/all/time/?y=students&layout=share&order=color" 
+            <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/time/?y=students&layout=share&order=color" 
                target="graphs-frame-enrollments" 
-               sclass="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+               class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/pt/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled"
+        <iframe src="/{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled"
                 name="graphs-frame-enrollments"
                 id="graphs-frame-enrollments"
                 class="embed-responsive-item" >
