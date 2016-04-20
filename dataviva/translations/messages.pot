@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 11:16-0300\n"
+"POT-Creation-Date: 2016-04-20 11:25-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -636,6 +636,7 @@ msgid "Public Policies"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:11
+#: dataviva/apps/blog/templates/blog/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:12
 #: dataviva/apps/news/templates/news/admin.html:30
 msgid "Title"
@@ -677,6 +678,7 @@ msgid "Content"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:64
+#: dataviva/apps/blog/templates/blog/admin.html:40
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
@@ -693,6 +695,43 @@ msgstr ""
 #: dataviva/apps/news/templates/news/_form.html:94
 #: dataviva/templates/include/footer.html:66
 msgid "Send"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/admin.html:32
+#: dataviva/apps/news/templates/news/admin.html:31
+msgid "Author(s)"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/admin.html:33
+#: dataviva/apps/news/templates/news/admin.html:32
+#: dataviva/templates/admin/admin_questions.html:31
+msgid "Date"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/admin.html:34
+#: dataviva/apps/news/templates/news/admin.html:34
+msgid "Active"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/admin.html:39
+#: dataviva/apps/news/templates/news/admin.html:39
+msgid "New"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/admin.html:41
+#: dataviva/apps/news/templates/news/admin.html:41
+#: dataviva/templates/admin/admin_questions.html:48
+msgid "Delete"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/admin.html:42
+#: dataviva/apps/news/templates/news/admin.html:42
+msgid "Activate"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/admin.html:43
+#: dataviva/apps/news/templates/news/admin.html:43
+msgid "Deactivate"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/index.html:22
@@ -1640,36 +1679,6 @@ msgstr ""
 
 #: dataviva/apps/news/templates/news/_form.html:33
 msgid "News Date"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/admin.html:31
-msgid "Author(s)"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/admin.html:32
-#: dataviva/templates/admin/admin_questions.html:31
-msgid "Date"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/admin.html:34
-msgid "Active"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/admin.html:39
-msgid "New"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/admin.html:41
-#: dataviva/templates/admin/admin_questions.html:48
-msgid "Delete"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/admin.html:42
-msgid "Activate"
-msgstr ""
-
-#: dataviva/apps/news/templates/news/admin.html:43
-msgid "Deactivate"
 msgstr ""
 
 #: dataviva/apps/news/templates/news/new.html:9
