@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 14:45-0300\n"
+"POT-Creation-Date: 2016-04-20 15:07-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -451,7 +451,7 @@ msgstr "Geral"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:51
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:121
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:122
 #: dataviva/apps/major/templates/major/index.html:51
 #: dataviva/apps/major/templates/major/tab-enrollments.html:3
 #: dataviva/apps/major/templates/major/tab-general.html:108
@@ -462,7 +462,7 @@ msgid "Enrollments"
 msgstr "Matrículas"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:12
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:137
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:138
 #: dataviva/apps/major/templates/major/tab-enrollments.html:15
 #: dataviva/apps/major/templates/major/tab-enrollments.html:23
 #: dataviva/apps/major/templates/major/tab-enrollments.html:31
@@ -479,8 +479,8 @@ msgstr "Principal Município"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:13
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:18
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:127
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:137
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:128
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:138
 #: dataviva/apps/major/templates/major/tab-enrollments.html:12
 #: dataviva/apps/major/templates/major/tab-enrollments.html:16
 #: dataviva/apps/major/templates/major/tab-general.html:114
@@ -490,7 +490,7 @@ msgid "by Number of Enrolled Students"
 msgstr "por Número de Alunos Matriculados"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:17
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:127
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:128
 msgid "Main School"
 msgstr "Principal Escola"
 
@@ -592,7 +592,7 @@ msgstr "alunos. No total, o país possui "
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:90
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:98
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:106
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:114
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:115
 msgid "enrolled students in this course/field, with "
 msgstr "alunos matriculados nesse curso, com turmas médias de "
 
@@ -601,7 +601,7 @@ msgstr "alunos matriculados nesse curso, com turmas médias de "
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:91
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:99
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:107
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:115
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:116
 msgid "students per class in average"
 msgstr "alunos"
 
@@ -621,7 +621,7 @@ msgid "students. The region has a total of "
 msgstr "alunos. No total, o país possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:86
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:112
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:113
 msgid "in the state of "
 msgstr "no estado "
 
@@ -646,20 +646,18 @@ msgid "students. The microregion has a total of "
 msgstr "alunos. No total, a microregiāo possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:110
-msgid "ocupa o"
-msgstr ""
+msgid " is"
+msgstr " ocupa o"
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:111
-msgid ""
-"lugar entre os municípios com maior número de matrículas para o "
-"curso/campo de "
-msgstr ""
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:112
+msgid "city in number of enrollments in the "
+msgstr "lugar entre os municípios com maior número de matrículas para o curso/campo de "
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:113
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:114
 msgid "The city has "
 msgstr "No total, o município possui"
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:149
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:150
 msgid "More detais"
 msgstr "Mais detalhes"
 
@@ -5995,4 +5993,13 @@ msgstr "com"
 
 #~ msgid "Link"
 #~ msgstr "em"
+
+#~ msgid "ocupa o"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "lugar entre os municípios com maior "
+#~ "número de matrículas para o curso/campo"
+#~ " de "
+#~ msgstr ""
 
