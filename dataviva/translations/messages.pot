@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:55-0300\n"
+"POT-Creation-Date: 2016-04-20 16:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -840,6 +840,7 @@ msgid "Select"
 msgstr ""
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/templates/modal/dataviva.html:103
 #: dataviva/translations/dictionary.py:472
 msgid "Back"
 msgstr ""
@@ -3139,6 +3140,7 @@ msgstr ""
 
 #: dataviva/templates/about/ask/ask.html:10
 #: dataviva/templates/general/index.html:59
+#: dataviva/templates/modal/dataviva.html:13
 #: dataviva/translations/dictionary.py:567
 msgid "What would you like to know?"
 msgstr ""
@@ -4018,6 +4020,7 @@ msgid "Product Exports"
 msgstr ""
 
 #: dataviva/templates/general/select.html:33
+#: dataviva/templates/modal/dataviva.html:69
 #: dataviva/translations/dictionary.py:155
 msgid "Municipalities"
 msgstr ""
@@ -4175,6 +4178,45 @@ msgstr ""
 #: dataviva/templates/include/promoters.html:4
 #: dataviva/translations/dictionary.py:574
 msgid "Promoters"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:6
+msgid "Entrepreneur"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:20
+msgid "Main Searchs"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:38
+msgid "Choose an option or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:61
+msgid "Choose a location or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:65
+#: dataviva/translations/dictionary.py:150
+msgid "Regions"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:66
+#: dataviva/translations/dictionary.py:151
+msgid "States"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:67
+msgid "Mesorregions"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:68
+#: dataviva/translations/dictionary.py:153
+msgid "Microregions"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:104
+msgid "Advance"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:20
@@ -4497,20 +4539,8 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:150
-msgid "Regions"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:151
-msgid "States"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:152
 msgid "Mesoregions"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:153
-msgid "Microregions"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:154

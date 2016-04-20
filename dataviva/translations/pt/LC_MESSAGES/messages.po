@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:55-0300\n"
+"POT-Creation-Date: 2016-04-20 16:29-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -885,6 +885,7 @@ msgid "Select"
 msgstr "Selecione"
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/templates/modal/dataviva.html:103
 #: dataviva/translations/dictionary.py:472
 msgid "Back"
 msgstr "Voltar"
@@ -3426,9 +3427,10 @@ msgstr ""
 
 #: dataviva/templates/about/ask/ask.html:10
 #: dataviva/templates/general/index.html:59
+#: dataviva/templates/modal/dataviva.html:13
 #: dataviva/translations/dictionary.py:567
 msgid "What would you like to know?"
-msgstr "O que você gostaria de conhecer?"
+msgstr "O que você gostaria de descobrir?"
 
 #: dataviva/templates/about/ask/ask.html:12
 msgid "You need to login for this functionality."
@@ -4551,6 +4553,7 @@ msgid "Product Exports"
 msgstr "Produtos Exportados"
 
 #: dataviva/templates/general/select.html:33
+#: dataviva/templates/modal/dataviva.html:69
 #: dataviva/translations/dictionary.py:155
 msgid "Municipalities"
 msgstr "Municípios"
@@ -4714,6 +4717,47 @@ msgstr "Português"
 #: dataviva/translations/dictionary.py:574
 msgid "Promoters"
 msgstr "Realizadores"
+
+#: dataviva/templates/modal/dataviva.html:6
+msgid "Entrepreneur"
+msgstr "Empreendedor"
+
+#: dataviva/templates/modal/dataviva.html:20
+msgid "Main Searchs"
+msgstr "Principais Pesquisas"
+
+#: dataviva/templates/modal/dataviva.html:38
+msgid "Choose an option or type what you are looking for"
+msgstr "Escolha uma opçāo abaixo ou busque pelo nome"
+
+#: dataviva/templates/modal/dataviva.html:61
+#, fuzzy
+msgid "Choose a location or type what you are looking for"
+msgstr "Escolha uma localidade abaixo ou busque pelo nome"
+
+#: dataviva/templates/modal/dataviva.html:65
+#: dataviva/translations/dictionary.py:150
+msgid "Regions"
+msgstr "Regiões"
+
+#: dataviva/templates/modal/dataviva.html:66
+#: dataviva/translations/dictionary.py:151
+msgid "States"
+msgstr "Estados"
+
+#: dataviva/templates/modal/dataviva.html:67
+#, fuzzy
+msgid "Mesorregions"
+msgstr "Mesorregiões"
+
+#: dataviva/templates/modal/dataviva.html:68
+#: dataviva/translations/dictionary.py:153
+msgid "Microregions"
+msgstr "Microrregiões"
+
+#: dataviva/templates/modal/dataviva.html:104
+msgid "Advance"
+msgstr "Avançar"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
@@ -5035,21 +5079,9 @@ msgstr "Continente"
 msgid "Country"
 msgstr "País"
 
-#: dataviva/translations/dictionary.py:150
-msgid "Regions"
-msgstr "Regiões"
-
-#: dataviva/translations/dictionary.py:151
-msgid "States"
-msgstr "Estados"
-
 #: dataviva/translations/dictionary.py:152
 msgid "Mesoregions"
 msgstr "Mesorregiões"
-
-#: dataviva/translations/dictionary.py:153
-msgid "Microregions"
-msgstr "Microrregiões"
 
 #: dataviva/translations/dictionary.py:154
 msgid "Planning Regions"
