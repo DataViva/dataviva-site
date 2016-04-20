@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-19 15:05-0300\n"
+"POT-Creation-Date: 2016-04-19 17:04-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -305,6 +305,7 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:3
 #: dataviva/apps/location/templates/location/graphs-education.html:3
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:3
+#: dataviva/apps/news/templates/news/_form.html:86
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:3
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:3
@@ -1560,12 +1561,109 @@ msgid "students enrolled in the municipality"
 msgstr ""
 
 #: dataviva/apps/news/templates/news/_base.html:29
+#: dataviva/apps/news/templates/news/admin.html:4
+#: dataviva/apps/news/templates/news/admin.html:8
+#: dataviva/apps/news/templates/news/edit.html:8
+#: dataviva/apps/news/templates/news/index.html:4
+#: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:4
 #: dataviva/templates/general/index.html:130
 #: dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:532
 msgid "News"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:12
+#: dataviva/apps/news/templates/news/admin.html:30
+msgid "Title"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:18
+#: dataviva/apps/news/templates/news/admin.html:33
+msgid "Show in"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:28
+msgid "Author"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:33
+msgid "News Date"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:42
+msgid "Category"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:47
+msgid "Call Image"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:57
+msgid "New Image"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:67
+msgid "Complete Edition"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:77
+msgid "Call"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:84
+msgid "Content"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:85
+#: dataviva/apps/news/templates/news/admin.html:40
+#: dataviva/apps/news/templates/news/edit.html:9
+#: dataviva/translations/dictionary.py:453
+msgid "Edit"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/_form.html:94
+#: dataviva/templates/include/footer.html:66
+msgid "Send"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/admin.html:31
+msgid "Author(s)"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/admin.html:32
+#: dataviva/templates/admin/admin_questions.html:31
+msgid "Date"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/admin.html:34
+msgid "Active"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/admin.html:39
+msgid "New"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/admin.html:41
+#: dataviva/templates/admin/admin_questions.html:48
+msgid "Delete"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/admin.html:42
+msgid "Activate"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/admin.html:43
+msgid "Deactivate"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/new.html:9
+msgid "Publish"
+msgstr ""
+
+#: dataviva/apps/news/templates/news/new.html:15
+msgid "Publish news"
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:5
@@ -3394,14 +3492,6 @@ msgstr ""
 msgid "Replies"
 msgstr ""
 
-#: dataviva/templates/admin/admin_questions.html:31
-msgid "Date"
-msgstr ""
-
-#: dataviva/templates/admin/admin_questions.html:48
-msgid "Delete"
-msgstr ""
-
 #: dataviva/templates/admin/admin_questions.html:49
 #: dataviva/translations/dictionary.py:459
 msgid "Are you sure to delete this item?"
@@ -3896,10 +3986,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:60
 #: dataviva/translations/dictionary.py:586
 msgid "Message"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:66
-msgid "Send"
 msgstr ""
 
 #: dataviva/templates/include/header.html:4
@@ -4949,10 +5035,6 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:449
 msgid "Your vote was removed."
-msgstr ""
-
-#: dataviva/translations/dictionary.py:453
-msgid "Edit"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:454
