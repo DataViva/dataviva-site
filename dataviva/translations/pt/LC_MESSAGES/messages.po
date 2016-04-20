@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:07-0300\n"
+"POT-Creation-Date: 2016-04-20 15:55-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -365,10 +365,13 @@ msgid "News"
 msgstr "Notícias"
 
 #: dataviva/apps/admin/templates/admin/index.html:76
+#: dataviva/apps/users/templates/users/_base.html:8
+#: dataviva/apps/users/templates/users/admin.html:5
+#: dataviva/apps/users/templates/users/admin.html:9
+#: dataviva/apps/users/templates/users/index.html:5
 #: dataviva/templates/admin.html:24
-#, fuzzy
 msgid "Users"
-msgstr "Usuário"
+msgstr "Usuários"
 
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
 msgid "You need to be logged in to vote."
@@ -651,7 +654,9 @@ msgstr " ocupa o"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:112
 msgid "city in number of enrollments in the "
-msgstr "lugar entre os municípios com maior número de matrículas para o curso/campo de "
+msgstr ""
+"lugar entre os municípios com maior número de matrículas para o "
+"curso/campo de "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:114
 msgid "The city has "
@@ -811,6 +816,7 @@ msgstr "Excluir"
 #: dataviva/apps/blog/templates/blog/admin.html:42
 #: dataviva/apps/calls/templates/calls/admin.html:41
 #: dataviva/apps/news/templates/news/admin.html:42
+#: dataviva/apps/users/templates/users/admin.html:39
 #, fuzzy
 msgid "Activate"
 msgstr "Ativar"
@@ -818,6 +824,7 @@ msgstr "Ativar"
 #: dataviva/apps/blog/templates/blog/admin.html:43
 #: dataviva/apps/calls/templates/calls/admin.html:42
 #: dataviva/apps/news/templates/news/admin.html:43
+#: dataviva/apps/users/templates/users/admin.html:40
 #, fuzzy
 msgid "Deactivate"
 msgstr "Desativar"
@@ -2546,6 +2553,31 @@ msgstr "Principal Curso por Número de Alunos Concluintes"
 msgid "More Details"
 msgstr "Mais detalhes"
 
+#: dataviva/apps/users/templates/users/admin.html:32
+#: dataviva/apps/users/templates/users/index.html:12
+#: dataviva/templates/include/footer.html:46
+#: dataviva/templates/include/footer.html:48
+#: dataviva/translations/dictionary.py:337
+msgid "Name"
+msgstr "Nome"
+
+#: dataviva/apps/users/templates/users/admin.html:33
+msgid "E-mail"
+msgstr "E-mail"
+
+#: dataviva/apps/users/templates/users/index.html:11
+msgid "User ID"
+msgstr "ID do usuário"
+
+#: dataviva/apps/users/templates/users/index.html:13
+#: dataviva/templates/admin/admin_users.html:14
+msgid "Email"
+msgstr "Email"
+
+#: dataviva/apps/users/templates/users/index.html:14
+msgid "Administrators"
+msgstr "Administradores"
+
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4
 #: dataviva/templates/about/ask/index.html:4
 #: dataviva/templates/include/footer.html:40
@@ -4102,10 +4134,6 @@ msgstr "Remover"
 msgid "Nick Name"
 msgstr "Apelido"
 
-#: dataviva/templates/admin/admin_users.html:14
-msgid "Email"
-msgstr "Email"
-
 #: dataviva/templates/admin/admin_users.html:15
 msgid "Role"
 msgstr "Função"
@@ -4596,12 +4624,6 @@ msgstr "Ajuda"
 #: dataviva/translations/dictionary.py:585
 msgid "Virtual Tour"
 msgstr "Tour Virtual"
-
-#: dataviva/templates/include/footer.html:46
-#: dataviva/templates/include/footer.html:48
-#: dataviva/translations/dictionary.py:337
-msgid "Name"
-msgstr "Nome"
 
 #: dataviva/templates/include/footer.html:58
 #: dataviva/templates/include/footer.html:60
@@ -5995,11 +6017,5 @@ msgstr "com"
 #~ msgstr "em"
 
 #~ msgid "ocupa o"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "lugar entre os municípios com maior "
-#~ "número de matrículas para o curso/campo"
-#~ " de "
 #~ msgstr ""
 
