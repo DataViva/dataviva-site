@@ -2,7 +2,7 @@
 
 {% block breadcrumb %}
     <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-    <li class="active">Usuários</li>
+    <li class="active">{% trans %}Users{% endtrans %}</li>
 {% endblock %}
 
 {% block admin_content %}
