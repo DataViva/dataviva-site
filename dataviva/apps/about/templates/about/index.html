@@ -11,7 +11,7 @@
             <li>
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
-            <li class="active"><span>Sobre</span></li>
+            <li class="active"><span>{% trans %}About{% endtrans %}</span></li>
         </ol>
     </div>
 </div>
@@ -21,19 +21,19 @@
 <section id="history">
     <div class="container">
         <div class="col-md-4">
-            <h3>DataViva é uma plataforma aberta de pesquisa, que permite ao usuário acessar mais de 1 bilhão de visualizações com dados socioeconômicos dos mais de 5 mil municípios brasileiros.</h3>
+            <h3>{% trans %}DataViva is an open search platform that allows users to access more than 1 billion visualizations of socioeconomic data from more than 5 thousand Brazilian cities.{% endtrans %}</h3>
         </div>
         <div class="col-md-8">
-            <h2>O DataViva</h2>
+            <h2>{% trans %}The{% endtrans %} DataViva</h2>
             <div class="embed-responsive embed-responsive-16by9 m-b-md">
                 <iframe class="embed-responsive-item" allowfullscreen="true" src="https://www.youtube.com/embed/vqPoGAhch68" frameborder="0"></iframe>
             </div>
-            <p>Planejamento Colaborativo, diversificação da economia, competitividade e transparência: são esses os objetivos do DataViva, que foi criado para fortalecer a cultura do uso de dados e orientar o desenvolvimento do país. Uma ferramenta de informações e análises, que propõe uma nova forma de pensar a construção do futuro, a partir da transformação de dados em conhecimento e ação.</p>
+            <p>{% trans %}Collaborative planning, economy diversification, competitiveness and transparency: these are the DataViva goals, created to strengthen the culture of data use and guide the development of the country. A tool for information and analysis that proposes a new way of thinking about the construction of the future through the conversion of data into knowledge and action.{% endtrans %}</p>
 
-            <h2>História do Projeto</h2>
-            <p>O DataViva é uma iniciativa do Governo de Minas Gerais e da Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG) que oferece ao usuário uma experiência dinâmica de acesso a um grande conjunto de dados públicos. Totalmente desenvolvido em software livre e aberto ao acesso de todos, o DataViva foi criado com o objetivo de contribuir para a implementação de políticas públicas, investimentos públicos e privados, bem como para a realização de estudos acadêmicos.</p>
-            <p>Elaborado inicialmente para auxiliar a política de desenvolvimento econômico do governo do Estado de Minas Gerais, o projeto surgiu a partir da necessidade de tornar o acesso aos dados sobre a economia brasileira mais fácil e intuitivo. Desenvolvida pelo Governo de Minas Gerais, em parceria com pesquisadores do MIT Media Lab (um dos principais centros de inovação do mundo), a plataforma apresenta uma solução inédita no país, a partir de bases de dados disponibilizadas pelo Ministério do Trabalho e Emprego (MTE), Ministério do Desenvolvimento, Indústria e Comércio Exterior (MDIC) e Ministério da Educação (MEC).</p>
-            <p>Um dos pilares de concepção do DataViva é a tecnologia do BigData, técnica de geração de conhecimento e inteligência a partir do processamento de um grande volume de dados. Baseado em referências internacionais, o projeto disponibiliza, na versão atual, dados nacionais dos últimos dez anos, referentes à economia, educação, indústria, mercado profissional, entre outras categorias, visualizadas por localidade. Ao proporcionar o acesso livre e gratuito a essas informações, o DataViva disponibiliza um conhecimento mais detalhado da economia brasileira, gerando insumos para o planejamento e a tomada de decisão por parte de empresários, estudantes, investidores e profissionais de qualquer setor econômico e a partir de qualquer lugar do mundo.</p>
+            <h2>{% trans %}The project’s history{% endtrans %}</h2>
+            <p>{% trans %}DataViva is an initiative of the Government of the State of Minas Gerais and Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG) – The State of Minas Gerais foundation for research funding and support – that offers its users a dynamic access experience to a large range of public data. Totally developed in free software and with open access to all, DataViva was created to contribute to the implementation of public policies, private and public investments, and to help academic studies.{% endtrans %}</p>
+            <p>{% trans %}Initially designed to assist the economic development policy of the Government of the State of Minas Gerais, the project came from the need to make the access to Brazilian economy data easier and intuitive. Developed in partnership with MIT Media Lab researchers (one of the main innovation centers in the world), the platform offers an unprecedented solution in the country, through the database provided by the Ministério do Trabalho e Emprego (MTE), Ministério do Desenvolvimento, Indústria e Comércio Exterior (MDIC) and Ministério da Educação (MEC) – the Ministries of Employment; Development, Industry and International Trade; and Education, respectively.{% endtrans %}</p>
+            <p>{% trans %}One of the conception pillars of DataViva is the BigData technology, a technique designed to generate knowledge and intelligence from the processing of a large volume of data. Based on international references, the project features, in its current version, national data from the last decade concerning economy, education, industry, labor market, and other categories, viewed by location. Providing open and free access to these information, DataViva offers a more detailed knowledge of the Brazilian economy, generating inputs for the planning and decision making by entrepreneurs, students, investors and professionals of any economic sector and from anywhere in the world.{% endtrans %}</p>
         </div>
     </div>
 </section>

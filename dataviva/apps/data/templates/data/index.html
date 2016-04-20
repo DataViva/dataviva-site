@@ -5,24 +5,24 @@
     <div class="row bg-white">
         <ol class="breadcrumb">
             <li><a href="{{ url_for('general.home') }}">Home</a></li>
-            <li class="active">Download de Banco de Dados</a></li>
+            <li class="active">{% trans %}Database Download{% endtrans %}</a></li>
         </ol>
     </div>
 </div>
 <section id="data">
     <div class="container">
         <nav class="sidebar col-md-3">
-            <h3>Assuntos</h3>
+            <h3>{% trans %}Topics{% endtrans %}</h3>
             <ul class="sub-menu">
-                <li><a href="{{ url_for('general.search') }}" title="Inicie uma pesquisa">Inicie uma pesquisa</a></li>
-                <li><a href="{{ url_for('build_graph.index') }}" title="Construa gráficos">Construa gráficos</a></li>
+                <li><a href="{{ url_for('general.search') }}" title="Inicie uma pesquisa">{% trans %}Start a Search{% endtrans %}</a></li>
+                <li><a href="{{ url_for('build_graph.index') }}" title="Construa gráficos">{% trans %}Make Graphs{% endtrans %}</a></li>
             </ul>
         </nav>
          <div class="col-md-9 m-b-lg data-content">
-            <h1>Download de banco de dados</h1>
+            <h1>{% trans %}Database Download{% endtrans %}</h1>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label for="datasets" class="control-label">Banco de Dados</label>
+                    <label for="datasets" class="control-label">{% trans %}Database{% endtrans %}</label>
                     <select class="form-control" id="datasets" name="datasets">
                         <option id="dataset-empty-option" value="">{%trans%}Select{%endtrans%}</option>
                     </select>
@@ -30,23 +30,23 @@
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label class="control-label" data-toggle="popover" data-placement="right" data-content="Para começar selecione um Banco de Dados">{%trans%}Year{%endtrans%}</label>
+                    <label class="control-label" data-toggle="popover" data-placement="right" data-content="{% trans %}To start select a Database{% endtrans %}">{%trans%}Year{%endtrans%}</label>
                     <select class="form-control" name="year" disabled>
                         <option value="">{%trans%}Select{%endtrans%}</option>
                     </select>
                 </div>
                 <div id="monthly-detail" class="form-group col-md-4">
-                    <label for="detailing" class="control-label">Detalhamento</label>
+                    <label for="detailing" class="control-label">{% trans %}Detailing{% endtrans %}</label>
                     <select class="form-control" id="detailing">
-                        <option value="">Anual</option>
-                        <option value="monthly">Mensal</option>
+                        <option value="">{% trans %}Yearly{% endtrans %}</option>
+                        <option value="monthly">{% trans %}Monthly{% endtrans %}</option>
                     </select>
                 </div>
             </div>
-            <h2>Filtros</h2>
+            <h2>{% trans %}Filters{% endtrans %}</h2>
             <div id="dimensions" class="row">
                 <div class="form-group col-md-4">
-                    <label class="control-label" data-toggle="popover" data-placement="right" data-content="Para começar selecione um Banco de Dados">{%trans%}Location{%endtrans%}</label>
+                    <label class="control-label" data-toggle="popover" data-placement="right" data-content="{% trans %}To start select a Database{% endtrans %}">{%trans%}Location{%endtrans%}</label>
                     <select class="form-control" disabled>
                         <option value="">{%trans%}Select{%endtrans%}</option>
                     </select>
