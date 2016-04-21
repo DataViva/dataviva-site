@@ -1,9 +1,23 @@
 from dataviva import db
-
-
-class HelpQuestions(Db.Model, AutoSerialize):
-    __tablename__ = "help_questions"
-
-    IdHelp_Questions = db.Column(db.Integer, primary_key=True)
-    DsHelp_Questions = db.Column(db.String(400))
-    TxHelp_Questions = db.Column(db.Text(4194304))
+from sqlalchemy import ForeignKey
+​
+​
+class HelpSubjectQuestion(db.Model):
+    __tablename__ = 'help_subject_question'
+    id = db.Column(db.Integer, primary_key=True)
+    description = db.Column(db.String(400))
+    answer = db.Column(db.String(400))
+    subject_id = db.Column(db.Integer, ForeignKey('help_subject.id'))
+​
+    def __repr__(self):
+        return '<SubjectQuestion %r>' % (self.description)
+​
+​
+class HelpSubject(db.Model):
+    __tablename__ = 'help_subject'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    questions = db.relationship("HelpSubjectQuestion", backref='help_subject_question')
+​
+    def __repr__(self):
+        return '<Subject %r>' % (self.name)
