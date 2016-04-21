@@ -40,4 +40,23 @@
         </div>
     </div>
 </section>
+
+
+<h2>exemplo retornando as questoes do banco</h2>
+
+    <ul>
+    {% for subject in subjects %}
+        <li>
+        {{ subject['name_' + g.locale] }}
+            <ul>
+            {% for question in subject.questions %}
+                <li>{{ question['description_' + g.locale] }}
+                <br/>
+                    {{ question['answer_' + g.locale]|safe }}
+                </li>
+            {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
 {% endblock content %}
