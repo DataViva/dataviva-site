@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 15:20-0300\n"
+"POT-Creation-Date: 2016-04-21 15:23-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -495,6 +495,7 @@ msgstr "Visualize"
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:5
 #: dataviva/templates/selectors/basic_course.html:9
+#: dataviva/templates/selectors/major.html:9
 #: dataviva/translations/dictionary.py:180
 #: dataviva/translations/dictionary.py:182
 msgid "Courses"
@@ -5110,6 +5111,7 @@ msgid "Choose an course or type what you are looking for"
 msgstr "Escolha um curso ou busque pelo nome"
 
 #: dataviva/templates/selectors/basic_course.html:6
+#: dataviva/templates/selectors/major.html:6
 #: dataviva/translations/dictionary.py:175
 #: dataviva/translations/dictionary.py:181
 msgid "Fields"
@@ -5158,6 +5160,15 @@ msgstr "Mesorregiões"
 #: dataviva/templates/selectors/location.html:150
 msgid "Search by name or IBGE number:"
 msgstr "Busque pelo nome ou pelo No. IBGE:"
+
+#: dataviva/templates/selectors/major.html:1
+msgid "Choose a course or type what you are looking for"
+msgstr "Escolha um curso ou busque pelo nome"
+
+#: dataviva/templates/selectors/major.html:25
+#: dataviva/templates/selectors/major.html:57
+msgid "Search by name or Course HEDU number:"
+msgstr "Busque pelo nome ou pelo No. Course HEDU:"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
