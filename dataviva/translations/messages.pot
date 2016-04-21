@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 15:43-0300\n"
+"POT-Creation-Date: 2016-04-21 15:45-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4613,6 +4613,7 @@ msgstr ""
 
 #: dataviva/templates/selectors/major.html:25
 #: dataviva/templates/selectors/major.html:56
+#: dataviva/templates/selectors/university.html:15
 msgid "Search by name or Course HEDU number:"
 msgstr ""
 
@@ -4660,6 +4661,10 @@ msgstr ""
 #: dataviva/templates/selectors/trade_partner.html:36
 #: dataviva/templates/selectors/trade_partner.html:68
 msgid "Search by name or WLD number:"
+msgstr ""
+
+#: dataviva/templates/selectors/university.html:1
+msgid "Choose a university or type what you are looking for"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:20
