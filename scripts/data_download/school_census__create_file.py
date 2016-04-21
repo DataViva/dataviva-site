@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 '''
  python scripts/data_download/school_census__create_file.py
- The files will be saved in scripts/data/files_sc
+ The files will be saved in scripts/data/sc
 '''
 from collections import namedtuple
-from engine import engine
-from dictionary import en
+from common import engine, get_colums
+from dictionary import en, pt
 import pandas as pd
 import os
 import bz2
+import sys
 
 
 def select_table(conditions):
@@ -26,39 +27,41 @@ def select_table(conditions):
     return 'sc_' + s
 
 
-def get_colums(table):
-    column_rows = engine.execute(
-        "SELECT COLUMN_NAME FROM information_schema.columns WHERE TABLE_NAME='"+table+"' AND COLUMN_NAME NOT LIKE %s", "%_len")
-    return [row[0] for row in column_rows]
-
-
-def save(years, locations, courses):
+def save(years, locations, courses, lang):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
     table_columns = {}
-    output_path = 'scripts/data/files_sc/'
+    output_path = 'scripts/data/sc/'+lang
+    columns_deleted=['bra_id_len', 'distortion_rate', 'course_sc_id_len']
+
+    if lang == 'en':
+        dic_lang = en
+    else:
+        dic_lang = pt
 
     for year in years:
         conditions[0] = year.condition
         for location in locations:
             conditions[1] = location.condition
             for course in courses:
+
+                if location.condition == ' 1 = 1 ' and course.condition == ' 1 = 1 ':
+                            continue;
+
                 conditions[2] = course.condition
                 table = select_table(conditions)
                 name_file = 'sc' + \
                     str(year.name)+str(location.name)+str(course.name)
 
                 if table not in table_columns.keys():
-                    table_columns[table] = [ i+" as '"+en[i]+"'" for i in get_colums(table)]
+                    table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in get_colums(table,columns_deleted)]
 
-                f = pd.read_sql_query(
-                    'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
+                f = pd.read_sql_query('SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions), engine)
 
-                new_file_path = os.path.abspath(
-                    os.path.join(output_path, name_file+".csv.bz2"))  # pega desda da rais do pc
-
-                 f.to_csv(bz2.BZ2File(new_file_path, 'wb'),
-                         sep=",", index=False, float_format="%.3f")
+                # new_file_path = os.path.abspath(os.path.join(output_path, name_file+".csv.bz2"))  # pega desda da rais do pc
+                new_file_path='/home/ubuntu/files/sc/'+lang+'/'+name_file+'.csv.bz2';
                 
+                f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
+                  
 
 Condition = namedtuple('Condition', ['condition', 'name'])
 
@@ -86,4 +89,9 @@ courses = [
     Condition('course_sc_id_len=5', '-course')]
 
 
-save(years=years, locations=locations, courses=courses)
+
+if len(sys.argv) != 2 or (sys.argv[1:][0] not in ['pt', 'en']):
+    print "ERROR! use :\npython scripts/data_download/secex_create_files.py en/pt"
+    exit()
+
+save(years=years, locations=locations, courses=courses, lang=sys.argv[1:][0])

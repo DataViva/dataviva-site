@@ -8,22 +8,22 @@
 
     {{ form.hidden_tag() }}
     <div class="form-group {{ 'has-error' if form.title.errors else '' }} ">
-        <label class="control-label" for="title">Título</label>
+        <label class="control-label" for="title">{% trans %}Title{% endtrans %}</label>
         {{ messages(form.title) }}
         {{ form.title(class="form-control", maxlength=400)}}
     </div>
     <div class="form-group {{ 'has-error' if form.authors.errors else '' }} ">
-        <label class="control-label" for="authors">Autor</label>
+        <label class="control-label" for="authors">{% trans %}Author{% endtrans %}</label>
         {{ messages(form.authors) }}
         {{ form.authors(class="form-control", maxlength=100)}}
     </div>
     <div class="form-group {{ 'has-error' if form.subject.errors else '' }} ">
-        <label class="control-label" for="subject">Categoria</label>
+        <label class="control-label" for="subject">{% trans %}Category{% endtrans %}</label>
         {{ messages(form.subject) }}
         {{ form.subject(class="form-control")}}
     </div>
     <div class="form-group {{ 'has-error' if form.thumb.errors else '' }} ">
-        <label class="control-label" for="thumb-input">Imagem da Chamada</label>
+        <label class="control-label" for="thumb-input">{% trans %}Call Image{% endtrans %}</label>
         {{ messages(form.thumb) }}
         <div class="thumb">
             <div class="thumb-controls col-md-4">
@@ -33,7 +33,7 @@
                 <div class="thumb-buttons">
                     <label title="Upload image file" for="thumb-input" class="btn btn-primary m-t-sm">
                         <input type="file" accept="image/*" name="file" id="thumb-input" class="hide">
-                        <i class="fa fa-upload m-r-sm"></i>Nova Imagem
+                        <i class="fa fa-upload m-r-sm"></i>{% trans %}New Image{% endtrans %}
                     </label>
                 </div>
                 <div class="crop-buttons">
@@ -43,7 +43,7 @@
                         <button class="btn btn-white" id="thumb-rotateRight" type="button"><i class="fa fa-undo"></i></button>
                         <button class="btn btn-white" id="thumb-rotateLeft" type="button"><i class="fa fa-repeat"></i></button>
                     </div>
-                    <button id="thumb-save" class="btn btn-primary m-t-sm" type="button">Finalizar edição</button>
+                    <button id="thumb-save" class="btn btn-primary m-t-sm" type="button">{% trans %}Complete Edition{% endtrans %}</button>
                 </div>
             </div>
             <div class="thumb-crop col-md-8">
@@ -53,16 +53,16 @@
     </div>
     <div class="clearfix"></div>
     <div class="form-group m-t-sm {{ 'has-error' if form.text_call.errors else '' }}">
-        <label class="control-label" for="text_call">Chamada</label>
+        <label class="control-label" for="text_call">{% trans %}Call{% endtrans %}</label>
         {{ messages(form.text_call) }}
         {{ form.text_call(class="form-control", rows=5, maxlength=500)}}
         <div id="textarea-feedback"></div>
     </div>
 
     <div class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
-        <label class="control-label" for="text_content">Conteúdo</label>
-        <button id="blog-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>Editar</button>
-        <button id="blog-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>Visualizar</button>
+        <label class="control-label" for="text_content">{% trans %}Content{% endtrans %}</label>
+        <button id="blog-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+        <button id="blog-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
         {{ messages(form.text_content) }}
         {{ form.text_content }}
         <div class=" summernote-wrapper">
@@ -70,5 +70,5 @@
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
+    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
 </form>

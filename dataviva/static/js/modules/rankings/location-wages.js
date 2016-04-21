@@ -11,10 +11,17 @@ var LocationWages = function () {
             null,
             null,
             {data: 3},
+            {data: 1},
             {data: 4},
             {data: 5},
+            {data: 9},
+            {data: 10},
+            {data: 7},
+            {data: 8},
             {data: 12},
-            {data: 13}
+            {data: 13},
+            {data: 14},
+            {data: 15}
         ],
         "columnDefs": [
             {
@@ -79,25 +86,32 @@ var LocationWages = function () {
 
             $('#location-wages-table_filter input').removeClass('input-sm');
             $('#location-wages-table_filter').addClass('pull-right');
+            $('#location-wages-regions').addClass('active');
 
             $('#location-wages-regions').click(function() {
                 locationWages.table.ajax.url("/rais/all/show.1/all/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
+
             });
 
             $('#location-wages-states').click(function() {
                 locationWages.table.ajax.url("/rais/all/show.3/all/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-mesoregions').click(function() {
                 locationWages.table.ajax.url("/rais/all/show.5/all/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-microregions').click(function() {
                 locationWages.table.ajax.url("/rais/all/show.7/all/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-municipalities').click(function() {
                 locationWages.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });

@@ -10,9 +10,15 @@ var TradePartnerTable = function () {
             {data: 0},
             {data: 15},
             null,
-            {data: 3},
-            {data: 4},
             {data: 14},
+            {data: 2},
+            {data: 3},
+            {data: 8},
+            {data: 9},
+            {data: 6},
+            {data: 7},
+            {data: 10},
+            {data: 11},
             {data: 12},
             {data: 13}
         ],
@@ -62,13 +68,16 @@ var TradePartnerTable = function () {
 
             $('#trade-partner-table_filter input').removeClass('input-sm');
             $('#trade-partner-table_filter').addClass('pull-right');
+            $('#trade-partner-countries').addClass('active');
 
             $('#trade-partner-continents').click(function() {
                 tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.2/?order=export_val.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#trade-partner-countries').click(function() {
                 tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });

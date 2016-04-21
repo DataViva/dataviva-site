@@ -2,23 +2,21 @@
 
 {% block breadcrumb %}
     <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-    <li class="active">Calls</li>
+    <li class="active">{% trans %}Calls{% endtrans %}</li>
 {% endblock %}
 
 {% block admin_content %}
 <h1>Calls</h1>
 
 <div id="message">
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            {{ message }}
-        </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
+{% if get_flashed_messages(with_categories=true) %}
+{% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        {{ message }}
+    </div>
+{% endfor %}
+{% endif %}
 </div>
 
 <table id="calls-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
@@ -30,18 +28,18 @@
                     <label for="check-all"></label>
                 </div>
             </th>    
-            <th>Title</th>
+            <th>{% trans %}Title{% endtrans %}</th>
             <th>Link</th>
-            <th>Active</th>
+            <th>{% trans %}Active{% endtrans %}</th>
         </tr>
     </thead>
 </table>
 
-<a id="admin-new" class="btn btn-success" href="/calls/admin/call/new"><i class="fa fa-plus m-r-sm"></i>Novo</a>
-<button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>Editar</button>
-<button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>Excluir</button>
-<button id="admin-activate" class="btn btn-success pull-right">Ativar</button>
-<button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">Desativar</button>
+<a id="admin-new" class="btn btn-success" href="/calls/admin/call/new"><i class="fa fa-plus m-r-sm"></i>{% trans %}New{% endtrans %}</a>
+<button id="admin-edit" class="btn btn-primary"><i class="fa fa-pencil-square-o m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+<button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>{% trans %}Delete{% endtrans %}</button>
+<button id="admin-activate" class="btn btn-success pull-right">{% trans %}Activate{% endtrans %}</button>
+<button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">{% trans %}Deactivate{% endtrans %}</button>
 
 
 {% endblock admin_content %}

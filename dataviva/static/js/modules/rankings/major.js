@@ -13,6 +13,13 @@ var MajorTable = function () {
             {data: 0},
             {data: 1},
             {data: 2},
+            {data: 3},
+            {data: 4},
+            {data: 5},
+            {data: 6},
+            {data: 7},
+            {data: 8},
+            {data: 9}
         ],
         "columnDefs": [
             {
@@ -60,13 +67,16 @@ var MajorTable = function () {
 
             $('#major-table_filter input').removeClass('input-sm');
             $('#major-table_filter').addClass('pull-right');
+            $('#major-fields').addClass('active');
 
             $('#major-fields').click(function() {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#major-majors').click(function() {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });
