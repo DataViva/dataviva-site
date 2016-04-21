@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import FileField, TextField, TextAreaField, validators, ValidationError
+from wtforms import TextField, TextAreaField, validators, ValidationError
 
 
 class NumberOfWords(object):
@@ -40,10 +40,6 @@ class RegistrationForm(Form):
     abstract = TextAreaField('abstract', validators=[
         validators.Required(u"Por favor, insira o resumo do artigo."),
         NumberOfWords(max=250)
-    ])
-
-    article = FileField('article', validators=[
-        validators.Required(u"Por favor, insira o arquivo para o artigo.")
     ])
 
 '''
