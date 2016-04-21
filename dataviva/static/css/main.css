@@ -66,6 +66,28 @@ body {
   background-color: #5a9dc4;
 }
 
+
+/* IMAGENS DO NOVO DESIGN */
+
+/* home */
+.bg-buildings {
+  background: url(/static/img/bgs/buildings.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-agricultura {
+  background: url(/static/img/bgs/agricultura.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+
+
 .bg-city-scratched {
   background: url(/static/img/bgs/city_scratched.png) no-repeat center bottom;
   background-size: cover;
