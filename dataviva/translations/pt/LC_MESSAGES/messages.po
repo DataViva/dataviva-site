@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:44-0300\n"
+"POT-Creation-Date: 2016-04-21 14:46-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -382,6 +382,16 @@ msgstr "até 256 caracteres"
 #: dataviva/apps/account/templates/account/edit_profile.html:43
 msgid "Change my password"
 msgstr "Alterar minha Senha"
+
+#: dataviva/apps/account/templates/account/forgot_password.html:18
+msgid "Please inform us your email, so that we can sent you a new password"
+msgstr ""
+"Por favor, informe-nos seu email para que possamos lhe enviar uma nova "
+"senha"
+
+#: dataviva/apps/account/templates/account/forgot_password.html:22
+msgid "Confirm"
+msgstr "Confirmar"
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
 msgid "You dont have permission to view this page."
