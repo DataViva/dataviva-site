@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 16:42-0300\n"
+"POT-Creation-Date: 2016-04-21 16:47-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -403,6 +403,7 @@ msgstr ""
 #: dataviva/apps/admin/templates/admin/index.html:54
 #: dataviva/apps/search/templates/search/admin.html:5
 #: dataviva/apps/search/templates/search/admin.html:9
+#: dataviva/apps/search/templates/search/edit.html:9
 #: dataviva/templates/admin.html:22
 msgid "Start a search"
 msgstr ""
@@ -827,6 +828,7 @@ msgstr ""
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
 #: dataviva/apps/search/templates/search/admin.html:40
+#: dataviva/apps/search/templates/search/edit.html:10
 #: dataviva/translations/dictionary.py:453
 msgid "Edit"
 msgstr ""

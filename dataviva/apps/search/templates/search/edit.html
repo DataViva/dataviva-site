@@ -6,8 +6,8 @@
             <ol class="breadcrumb">
                 <li><a href="{{ url_for('general.home') }}">Home</a></li>
                 <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-                <li><a href="{{ url_for('search.index') }}">Inicie uma Pesquisa</a></li>
-                <li class="active">Editar</li>
+                <li><a href="{{ url_for('search.index') }}">{% trans %}Start a search{% endtrans %}</a></li>
+                <li class="active">{% trans %}Edit{% endtrans %}</li>
             </ol>
         </div>
     </div>
