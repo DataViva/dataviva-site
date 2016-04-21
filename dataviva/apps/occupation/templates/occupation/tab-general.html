@@ -123,7 +123,7 @@
                             </th>
                             <td>
                                 <p class="label">{{body.municipality_with_more_jobs}}</p>
-                                USD <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> <span>{{body.municipality_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
+                                <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> <span>{{body.municipality_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -133,7 +133,7 @@
                             </th>
                             <td>
                                 <p class="label">{{body.activity_with_more_jobs}}</p>
-                                USD <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong> <span>{{body.activity_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
+                                <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong> <span>{{body.activity_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                             </td>
                         </tr>
                         {% if body.is_not_municipality %}
