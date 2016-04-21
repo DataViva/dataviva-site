@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:55-0300\n"
+"POT-Creation-Date: 2016-04-21 15:09-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -494,6 +494,7 @@ msgstr "Visualize"
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:5
+#: dataviva/templates/selectors/basic_course.html:9
 #: dataviva/translations/dictionary.py:180
 #: dataviva/translations/dictionary.py:182
 msgid "Courses"
@@ -5092,11 +5093,31 @@ msgstr "Qual perfil melhor descreve você"
 
 #: dataviva/templates/modal/signup.html:42
 msgid "I want to receive news and tips of the best use of Dataviva"
-msgstr ""
+msgstr "Eu quero receber novidades e dicas sobre o melhor do Dataviva"
 
 #: dataviva/templates/modal/video.html:7
 msgid "Watch the Video"
 msgstr "Assista ao Vídeo"
+
+#: dataviva/templates/selectors/basic_course.html:1
+msgid "Choose an course or type what you are looking for"
+msgstr "Escolha um curso ou busque pelo nome"
+
+#: dataviva/templates/selectors/basic_course.html:6
+#: dataviva/translations/dictionary.py:175
+#: dataviva/translations/dictionary.py:181
+msgid "Fields"
+msgstr "Campos"
+
+#: dataviva/templates/selectors/basic_course.html:25
+#: dataviva/templates/selectors/basic_course.html:56
+msgid "Search by name or by Course SC number:"
+msgstr "Busque pelo nome ou pelo No. Couse SC:"
+
+#: dataviva/templates/selectors/basic_course.html:40
+#: dataviva/templates/selectors/basic_course.html:71
+msgid "Course SC"
+msgstr "SC do Curso"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
@@ -5475,11 +5496,6 @@ msgstr "Continentes"
 #: dataviva/translations/dictionary.py:178
 msgid "Field"
 msgstr "Campo"
-
-#: dataviva/translations/dictionary.py:175
-#: dataviva/translations/dictionary.py:181
-msgid "Fields"
-msgstr "Campos"
 
 #: dataviva/translations/dictionary.py:177
 #: dataviva/translations/dictionary.py:179

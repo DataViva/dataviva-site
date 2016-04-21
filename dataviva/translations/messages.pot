@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:55-0300\n"
+"POT-Creation-Date: 2016-04-21 15:09-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -453,6 +453,7 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:5
+#: dataviva/templates/selectors/basic_course.html:9
 #: dataviva/translations/dictionary.py:180
 #: dataviva/translations/dictionary.py:182
 msgid "Courses"
@@ -4542,6 +4543,26 @@ msgstr ""
 msgid "Watch the Video"
 msgstr ""
 
+#: dataviva/templates/selectors/basic_course.html:1
+msgid "Choose an course or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/basic_course.html:6
+#: dataviva/translations/dictionary.py:175
+#: dataviva/translations/dictionary.py:181
+msgid "Fields"
+msgstr ""
+
+#: dataviva/templates/selectors/basic_course.html:25
+#: dataviva/templates/selectors/basic_course.html:56
+msgid "Search by name or by Course SC number:"
+msgstr ""
+
+#: dataviva/templates/selectors/basic_course.html:40
+#: dataviva/templates/selectors/basic_course.html:71
+msgid "Course SC"
+msgstr ""
+
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
 msgstr ""
@@ -4918,11 +4939,6 @@ msgstr ""
 #: dataviva/translations/dictionary.py:172
 #: dataviva/translations/dictionary.py:178
 msgid "Field"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:175
-#: dataviva/translations/dictionary.py:181
-msgid "Fields"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:177
