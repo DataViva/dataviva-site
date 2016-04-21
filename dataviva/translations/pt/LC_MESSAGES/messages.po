@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 15:27-0300\n"
+"POT-Creation-Date: 2016-04-21 15:30-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -5137,6 +5137,7 @@ msgid "Divisions"
 msgstr "Divisões"
 
 #: dataviva/templates/selectors/industry.html:12
+#: dataviva/templates/selectors/product.html:6
 #: dataviva/translations/dictionary.py:161
 #: dataviva/translations/dictionary.py:165
 msgid "Sections"
@@ -5187,6 +5188,20 @@ msgstr "Grandes Grupos"
 #: dataviva/templates/selectors/occupation.html:56
 msgid "Search by name or CBO number:"
 msgstr "Busque pelo nome ou pelo No. CBO:"
+
+#: dataviva/templates/selectors/product.html:1
+msgid "Choose a product or type what you are looking for"
+msgstr "Escolha um produto ou digite o que procura"
+
+#: dataviva/templates/selectors/product.html:9
+#: dataviva/translations/dictionary.py:167
+msgid "Positions"
+msgstr "Posições"
+
+#: dataviva/templates/selectors/product.html:25
+#: dataviva/templates/selectors/product.html:55
+msgid "Search by name or HS number:"
+msgstr "Busque pelo nome ou pelo No. HS:"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
@@ -5531,10 +5546,6 @@ msgstr "Grupos"
 #: dataviva/translations/dictionary.py:166
 msgid "Chapters"
 msgstr "Capítulos"
-
-#: dataviva/translations/dictionary.py:167
-msgid "Positions"
-msgstr "Posições"
 
 #: dataviva/translations/dictionary.py:168
 msgid "Sub-Positions"
