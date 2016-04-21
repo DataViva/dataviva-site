@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 16:29-0300\n"
+"POT-Creation-Date: 2016-04-21 09:35-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -4690,6 +4690,7 @@ msgid "HELP"
 msgstr "AJUDA"
 
 #: dataviva/templates/include/header.html:49
+#: dataviva/templates/modal/login.html:15
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
@@ -4758,6 +4759,19 @@ msgstr "Microrregiões"
 #: dataviva/templates/modal/dataviva.html:104
 msgid "Advance"
 msgstr "Avançar"
+
+#: dataviva/templates/modal/dataviva.html:106
+#, fuzzy
+msgid "Cancel"
+msgstr "Avançar"
+
+#: dataviva/templates/modal/login.html:7
+msgid "Users Acess"
+msgstr "Acesso de usuários"
+
+#: dataviva/templates/modal/login.html:16
+msgid "Forgot my Password"
+msgstr "Esqueci minha Senha"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
