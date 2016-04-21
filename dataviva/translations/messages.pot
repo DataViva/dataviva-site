@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:49-0300\n"
+"POT-Creation-Date: 2016-04-21 14:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -300,6 +300,7 @@ msgid "New Password"
 msgstr ""
 
 #: dataviva/apps/account/templates/account/change_password.html:49
+#: dataviva/apps/account/templates/account/signup.html:55
 msgid "Confirm Password"
 msgstr ""
 
@@ -330,6 +331,7 @@ msgid "EDIT YOUR PROFILE"
 msgstr ""
 
 #: dataviva/apps/account/templates/account/edit_profile.html:18
+#: dataviva/apps/account/templates/account/signup.html:45
 msgid "Full name"
 msgstr ""
 
@@ -354,6 +356,7 @@ msgid "Confirm"
 msgstr ""
 
 #: dataviva/apps/account/templates/account/signin.html:43
+#: dataviva/apps/account/templates/account/signup.html:50
 msgid "Password"
 msgstr ""
 
@@ -366,7 +369,18 @@ msgid "Sign In"
 msgstr ""
 
 #: dataviva/apps/account/templates/account/signin.html:51
+#: dataviva/apps/account/templates/account/signup.html:62
 msgid "Or sign-up using"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signup.html:40
+#: dataviva/apps/users/templates/users/index.html:13
+#: dataviva/templates/admin/admin_users.html:14
+msgid "Email"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signup.html:59
+msgid "SignUp"
 msgstr ""
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
@@ -2744,11 +2758,6 @@ msgstr ""
 
 #: dataviva/apps/users/templates/users/index.html:11
 msgid "User ID"
-msgstr ""
-
-#: dataviva/apps/users/templates/users/index.html:13
-#: dataviva/templates/admin/admin_users.html:14
-msgid "Email"
 msgstr ""
 
 #: dataviva/apps/users/templates/users/index.html:14

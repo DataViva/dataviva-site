@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:49-0300\n"
+"POT-Creation-Date: 2016-04-21 14:55-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -337,6 +337,7 @@ msgid "New Password"
 msgstr "Nova Senha"
 
 #: dataviva/apps/account/templates/account/change_password.html:49
+#: dataviva/apps/account/templates/account/signup.html:55
 msgid "Confirm Password"
 msgstr "Confirmar Senha"
 
@@ -367,6 +368,7 @@ msgid "EDIT YOUR PROFILE"
 msgstr "Edite o seu perfil"
 
 #: dataviva/apps/account/templates/account/edit_profile.html:18
+#: dataviva/apps/account/templates/account/signup.html:45
 msgid "Full name"
 msgstr "Nome Completo"
 
@@ -393,6 +395,7 @@ msgid "Confirm"
 msgstr "Confirmar"
 
 #: dataviva/apps/account/templates/account/signin.html:43
+#: dataviva/apps/account/templates/account/signup.html:50
 msgid "Password"
 msgstr "Senha"
 
@@ -405,8 +408,19 @@ msgid "Sign In"
 msgstr "Entre"
 
 #: dataviva/apps/account/templates/account/signin.html:51
+#: dataviva/apps/account/templates/account/signup.html:62
 msgid "Or sign-up using"
 msgstr "Ou cadastre-se usando"
+
+#: dataviva/apps/account/templates/account/signup.html:40
+#: dataviva/apps/users/templates/users/index.html:13
+#: dataviva/templates/admin/admin_users.html:14
+msgid "Email"
+msgstr "Email"
+
+#: dataviva/apps/account/templates/account/signup.html:59
+msgid "SignUp"
+msgstr "Cadastre-se"
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
 msgid "You dont have permission to view this page."
@@ -2818,11 +2832,6 @@ msgstr "E-mail"
 #: dataviva/apps/users/templates/users/index.html:11
 msgid "User ID"
 msgstr "ID do usuário"
-
-#: dataviva/apps/users/templates/users/index.html:13
-#: dataviva/templates/admin/admin_users.html:14
-msgid "Email"
-msgstr "Email"
 
 #: dataviva/apps/users/templates/users/index.html:14
 msgid "Administrators"
