@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 16:35-0300\n"
+"POT-Creation-Date: 2016-04-21 16:40-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -276,7 +276,6 @@ msgstr ""
 "bem como para a realização de estudos acadêmicos."
 
 #: dataviva/apps/about/templates/about/index.html:35
-#, fuzzy
 msgid ""
 "Initially designed to assist the economic development policy of the "
 "Government of the State of Minas Gerais, the project came from the need "
@@ -432,7 +431,6 @@ msgstr "Você não tem permissão para ver essa página."
 #: dataviva/apps/calls/templates/calls/edit.html:5
 #: dataviva/apps/calls/templates/calls/new.html:6
 #: dataviva/templates/admin.html:20
-#, fuzzy
 msgid "Calls"
 msgstr "Chamada"
 
@@ -442,8 +440,9 @@ msgid "Scholar"
 msgstr "Estudos"
 
 #: dataviva/apps/admin/templates/admin/index.html:54
+#: dataviva/apps/search/templates/search/admin.html:5
+#: dataviva/apps/search/templates/search/admin.html:9
 #: dataviva/templates/admin.html:22
-#, fuzzy
 msgid "Start a search"
 msgstr "Inicie uma Pesquisa"
 
@@ -868,6 +867,7 @@ msgstr "Conteúdo"
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
+#: dataviva/apps/search/templates/search/admin.html:40
 #: dataviva/translations/dictionary.py:453
 msgid "Edit"
 msgstr "Editar"
@@ -906,12 +906,14 @@ msgstr "Ativo"
 #: dataviva/apps/blog/templates/blog/admin.html:39
 #: dataviva/apps/calls/templates/calls/admin.html:38
 #: dataviva/apps/news/templates/news/admin.html:39
+#: dataviva/apps/search/templates/search/admin.html:39
 msgid "New"
 msgstr "Novo"
 
 #: dataviva/apps/blog/templates/blog/admin.html:41
 #: dataviva/apps/calls/templates/calls/admin.html:40
 #: dataviva/apps/news/templates/news/admin.html:41
+#: dataviva/apps/search/templates/search/admin.html:41
 #: dataviva/templates/admin/admin_questions.html:48
 msgid "Delete"
 msgstr "Excluir"
@@ -920,7 +922,6 @@ msgstr "Excluir"
 #: dataviva/apps/calls/templates/calls/admin.html:41
 #: dataviva/apps/news/templates/news/admin.html:42
 #: dataviva/apps/users/templates/users/admin.html:39
-#, fuzzy
 msgid "Activate"
 msgstr "Ativar"
 
@@ -928,7 +929,6 @@ msgstr "Ativar"
 #: dataviva/apps/calls/templates/calls/admin.html:42
 #: dataviva/apps/news/templates/news/admin.html:43
 #: dataviva/apps/users/templates/users/admin.html:40
-#, fuzzy
 msgid "Deactivate"
 msgstr "Desativar"
 
@@ -941,7 +941,6 @@ msgstr ""
 #: dataviva/apps/blog/templates/blog/show.html:14
 #: dataviva/apps/news/templates/news/index.html:23
 #: dataviva/apps/news/templates/news/show.html:14
-#, fuzzy
 msgid "By"
 msgstr "por"
 
@@ -958,7 +957,6 @@ msgstr "Publicar uma"
 #: dataviva/apps/blog/templates/blog/show.html:5
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:3
 #: dataviva/apps/news/templates/news/show.html:5
-#, fuzzy
 msgid "Visualize"
 msgstr "Visualização"
 
@@ -2437,7 +2435,6 @@ msgid "Classes"
 msgstr "Classes"
 
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:17
-#, fuzzy
 msgid "Nominal Enrollment Growth (1 years)"
 msgstr "Crescimento Nominal das Matrículas (1 ano)"
 
@@ -2603,7 +2600,6 @@ msgid "Effective Export Destination Diversity"
 msgstr "Diversidade Efetiva de Destino das Exportações"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:15
-#, fuzzy
 msgid "Wage"
 msgstr "Nova Imagem"
 
@@ -2612,7 +2608,6 @@ msgid "Average Monthly"
 msgstr "Renda Mensal Média"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:20
-#, fuzzy
 msgid "ANominal Wage Growth (1 year)"
 msgstr "Crescimento Nominal dos Salários (1 ano)"
 
@@ -2680,7 +2675,6 @@ msgstr "Integral"
 
 #: dataviva/apps/rankings/templates/rankings/major.html:21
 #: dataviva/apps/rankings/templates/rankings/university.html:21
-#, fuzzy
 msgid "Age"
 msgstr "Mensagem"
 
@@ -2716,11 +2710,13 @@ msgid "University ID"
 msgstr "Universidade"
 
 #: dataviva/apps/search/templates/search/_form.html:11
+#: dataviva/apps/search/templates/search/admin.html:31
 #: dataviva/templates/site.html:51
 msgid "Profile"
 msgstr "Perfil"
 
 #: dataviva/apps/search/templates/search/_form.html:16
+#: dataviva/apps/search/templates/search/admin.html:32
 #: dataviva/templates/about/ask/index.html:53
 #: dataviva/templates/admin/admin_questions.html:3
 #: dataviva/templates/admin/admin_questions.html:28
@@ -2728,10 +2724,12 @@ msgid "Question"
 msgstr "Pergunta"
 
 #: dataviva/apps/search/templates/search/_form.html:21
+#: dataviva/apps/search/templates/search/admin.html:33
 msgid "Selector(s)"
 msgstr "Seletor(es)"
 
 #: dataviva/apps/search/templates/search/_form.html:26
+#: dataviva/apps/search/templates/search/admin.html:34
 msgid "Answer"
 msgstr "Resposta"
 
@@ -4460,7 +4458,6 @@ msgid "Entrepreneurs"
 msgstr "Empreendedores"
 
 #: dataviva/templates/general/browse_categories.html:37
-#, fuzzy
 msgid "Identify the economic profile and the business opportunities in a region"
 msgstr ""
 "Identifique o perfil econômico e as oportunidades de negócios de uma "
@@ -4523,7 +4520,6 @@ msgstr ""
 "ocupação, renda mensal média e oportunidades econômicas."
 
 #: dataviva/templates/general/browse_categories.html:88
-#, fuzzy
 msgid ""
 "Balance of trade data by product, import origins and export destinations,"
 " rankings by locality, economic activity and related occupations."
@@ -4988,12 +4984,10 @@ msgid "Promoters"
 msgstr "Realizadores"
 
 #: dataviva/templates/modal/dataviva.html:6
-#, fuzzy
 msgid "Entrepreneur"
 msgstr "Empreendedores"
 
 #: dataviva/templates/modal/dataviva.html:20
-#, fuzzy
 msgid "Main Searchs"
 msgstr "Inicie uma Pesquisa"
 
@@ -5034,14 +5028,12 @@ msgstr ""
 #: dataviva/templates/modal/dataviva.html:28
 #: dataviva/templates/modal/dataviva.html:52
 #: dataviva/templates/modal/dataviva.html:85
-#, fuzzy
 msgid "Courses offered in a region"
 msgstr "alunos matriculados em todo o país"
 
 #: dataviva/templates/modal/dataviva.html:29
 #: dataviva/templates/modal/dataviva.html:53
 #: dataviva/templates/modal/dataviva.html:86
-#, fuzzy
 msgid "General economic profile of a region"
 msgstr ""
 "Identifique o perfil econômico e as oportunidades de negócios de uma "
@@ -5063,7 +5055,6 @@ msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:61
 #: dataviva/templates/selectors/location.html:1
-#, fuzzy
 msgid "Choose a location or type what you are looking for"
 msgstr "Escolha uma opção ou digite o que procura"
 
@@ -5080,7 +5071,6 @@ msgid "States"
 msgstr "Estados"
 
 #: dataviva/templates/modal/dataviva.html:67
-#, fuzzy
 msgid "Mesorregions"
 msgstr "Mesorregiões"
 

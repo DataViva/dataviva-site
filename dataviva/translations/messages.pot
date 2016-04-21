@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 16:35-0300\n"
+"POT-Creation-Date: 2016-04-21 16:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -401,6 +401,8 @@ msgid "Scholar"
 msgstr ""
 
 #: dataviva/apps/admin/templates/admin/index.html:54
+#: dataviva/apps/search/templates/search/admin.html:5
+#: dataviva/apps/search/templates/search/admin.html:9
 #: dataviva/templates/admin.html:22
 msgid "Start a search"
 msgstr ""
@@ -824,6 +826,7 @@ msgstr ""
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
+#: dataviva/apps/search/templates/search/admin.html:40
 #: dataviva/translations/dictionary.py:453
 msgid "Edit"
 msgstr ""
@@ -862,12 +865,14 @@ msgstr ""
 #: dataviva/apps/blog/templates/blog/admin.html:39
 #: dataviva/apps/calls/templates/calls/admin.html:38
 #: dataviva/apps/news/templates/news/admin.html:39
+#: dataviva/apps/search/templates/search/admin.html:39
 msgid "New"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/admin.html:41
 #: dataviva/apps/calls/templates/calls/admin.html:40
 #: dataviva/apps/news/templates/news/admin.html:41
+#: dataviva/apps/search/templates/search/admin.html:41
 #: dataviva/templates/admin/admin_questions.html:48
 msgid "Delete"
 msgstr ""
@@ -2644,11 +2649,13 @@ msgid "University ID"
 msgstr ""
 
 #: dataviva/apps/search/templates/search/_form.html:11
+#: dataviva/apps/search/templates/search/admin.html:31
 #: dataviva/templates/site.html:51
 msgid "Profile"
 msgstr ""
 
 #: dataviva/apps/search/templates/search/_form.html:16
+#: dataviva/apps/search/templates/search/admin.html:32
 #: dataviva/templates/about/ask/index.html:53
 #: dataviva/templates/admin/admin_questions.html:3
 #: dataviva/templates/admin/admin_questions.html:28
@@ -2656,10 +2663,12 @@ msgid "Question"
 msgstr ""
 
 #: dataviva/apps/search/templates/search/_form.html:21
+#: dataviva/apps/search/templates/search/admin.html:33
 msgid "Selector(s)"
 msgstr ""
 
 #: dataviva/apps/search/templates/search/_form.html:26
+#: dataviva/apps/search/templates/search/admin.html:34
 msgid "Answer"
 msgstr ""
 
