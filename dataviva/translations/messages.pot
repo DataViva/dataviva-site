@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:55-0300\n"
+"POT-Creation-Date: 2016-04-21 15:45-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -453,6 +453,8 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:5
+#: dataviva/templates/selectors/basic_course.html:9
+#: dataviva/templates/selectors/major.html:9
 #: dataviva/translations/dictionary.py:180
 #: dataviva/translations/dictionary.py:182
 msgid "Courses"
@@ -2351,6 +2353,7 @@ msgid "Enrolled"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:15
+#: dataviva/templates/selectors/industry.html:6
 #: dataviva/translations/dictionary.py:164
 #: dataviva/translations/dictionary.py:310
 msgid "Classes"
@@ -4261,6 +4264,7 @@ msgstr ""
 
 #: dataviva/templates/general/select.html:33
 #: dataviva/templates/modal/dataviva.html:69
+#: dataviva/templates/selectors/location.html:18
 #: dataviva/translations/dictionary.py:155
 msgid "Municipalities"
 msgstr ""
@@ -4270,6 +4274,7 @@ msgid "Geographical locations within Brazil"
 msgstr ""
 
 #: dataviva/templates/general/select.html:38
+#: dataviva/templates/selectors/trade_partner.html:19
 #: dataviva/translations/dictionary.py:170
 msgid "Countries"
 msgstr ""
@@ -4485,15 +4490,18 @@ msgid "Number of establishments of one activity in one region"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:61
+#: dataviva/templates/selectors/location.html:1
 msgid "Choose a location or type what you are looking for"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:65
+#: dataviva/templates/selectors/location.html:6
 #: dataviva/translations/dictionary.py:150
 msgid "Regions"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:66
+#: dataviva/templates/selectors/location.html:9
 #: dataviva/translations/dictionary.py:151
 msgid "States"
 msgstr ""
@@ -4503,6 +4511,7 @@ msgid "Mesorregions"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:68
+#: dataviva/templates/selectors/location.html:15
 #: dataviva/translations/dictionary.py:153
 msgid "Microregions"
 msgstr ""
@@ -4540,6 +4549,122 @@ msgstr ""
 
 #: dataviva/templates/modal/video.html:7
 msgid "Watch the Video"
+msgstr ""
+
+#: dataviva/templates/selectors/basic_course.html:1
+msgid "Choose an course or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/basic_course.html:6
+#: dataviva/templates/selectors/major.html:6
+#: dataviva/translations/dictionary.py:175
+#: dataviva/translations/dictionary.py:181
+msgid "Fields"
+msgstr ""
+
+#: dataviva/templates/selectors/basic_course.html:25
+#: dataviva/templates/selectors/basic_course.html:56
+msgid "Search by name or by Course SC number:"
+msgstr ""
+
+#: dataviva/templates/selectors/basic_course.html:40
+#: dataviva/templates/selectors/basic_course.html:71
+msgid "Course SC"
+msgstr ""
+
+#: dataviva/templates/selectors/industry.html:1
+msgid "Choose an industry or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/industry.html:9
+#: dataviva/translations/dictionary.py:162
+msgid "Divisions"
+msgstr ""
+
+#: dataviva/templates/selectors/industry.html:12
+#: dataviva/templates/selectors/product.html:6
+#: dataviva/translations/dictionary.py:161
+#: dataviva/translations/dictionary.py:165
+msgid "Sections"
+msgstr ""
+
+#: dataviva/templates/selectors/industry.html:28
+#: dataviva/templates/selectors/industry.html:58
+#: dataviva/templates/selectors/industry.html:90
+msgid "Search by name ou by CNAE number"
+msgstr ""
+
+#: dataviva/templates/selectors/location.html:12
+#: dataviva/translations/dictionary.py:152
+msgid "Mesoregions"
+msgstr ""
+
+#: dataviva/templates/selectors/location.html:32
+#: dataviva/templates/selectors/location.html:60
+#: dataviva/templates/selectors/location.html:90
+#: dataviva/templates/selectors/location.html:120
+#: dataviva/templates/selectors/location.html:150
+msgid "Search by name or IBGE number:"
+msgstr ""
+
+#: dataviva/templates/selectors/major.html:1
+msgid "Choose a course or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/major.html:25
+#: dataviva/templates/selectors/major.html:56
+#: dataviva/templates/selectors/university.html:15
+msgid "Search by name or Course HEDU number:"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:1
+msgid "Choose a occupation or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:6
+#: dataviva/translations/dictionary.py:159
+msgid "Families"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:9
+msgid "Big Groups"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:25
+#: dataviva/templates/selectors/occupation.html:56
+msgid "Search by name or CBO number:"
+msgstr ""
+
+#: dataviva/templates/selectors/product.html:1
+msgid "Choose a product or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/product.html:9
+#: dataviva/translations/dictionary.py:167
+msgid "Positions"
+msgstr ""
+
+#: dataviva/templates/selectors/product.html:25
+#: dataviva/templates/selectors/product.html:55
+msgid "Search by name or HS number:"
+msgstr ""
+
+#: dataviva/templates/selectors/trade_partner.html:1
+msgid "Choose a trade partner or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/trade_partner.html:11
+#: dataviva/translations/dictionary.py:169
+msgid "Continents"
+msgstr ""
+
+#: dataviva/templates/selectors/trade_partner.html:36
+#: dataviva/templates/selectors/trade_partner.html:68
+msgid "Search by name or WLD number:"
+msgstr ""
+
+#: dataviva/templates/selectors/university.html:1
+msgid "Choose a university or type what you are looking for"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:20
@@ -4862,10 +4987,6 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:152
-msgid "Mesoregions"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:154
 msgid "Planning Regions"
 msgstr ""
@@ -4882,19 +5003,6 @@ msgstr ""
 msgid "Subgroups"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:159
-msgid "Families"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:161
-#: dataviva/translations/dictionary.py:165
-msgid "Sections"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:162
-msgid "Divisions"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:163
 msgid "Groups"
 msgstr ""
@@ -4903,26 +5011,13 @@ msgstr ""
 msgid "Chapters"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:167
-msgid "Positions"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:168
 msgid "Sub-Positions"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:169
-msgid "Continents"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:172
 #: dataviva/translations/dictionary.py:178
 msgid "Field"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:175
-#: dataviva/translations/dictionary.py:181
-msgid "Fields"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:177
