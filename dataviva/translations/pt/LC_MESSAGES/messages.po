@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 09:58-0300\n"
+"POT-Creation-Date: 2016-04-21 10:02-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -4697,6 +4697,7 @@ msgstr "AJUDA"
 
 #: dataviva/templates/include/header.html:49
 #: dataviva/templates/modal/login.html:15
+#: dataviva/templates/modal/signup.html:49
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
@@ -4795,10 +4796,9 @@ msgstr "Qual perfil melhor descreve você"
 msgid "I want to receive news and tips of the best use of Dataviva"
 msgstr ""
 
-#: dataviva/templates/modal/signup.html:49
-#, fuzzy
-msgid "Sing Up"
-msgstr "na "
+#: dataviva/templates/modal/video.html:7
+msgid "Watch the Video"
+msgstr "Assista ao Vídeo"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
@@ -6094,4 +6094,7 @@ msgstr "com"
 
 #~ msgid "Sign Up Free"
 #~ msgstr "Cadastre-se Gratuitamente"
+
+#~ msgid "Sing Up"
+#~ msgstr "na "
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 09:58-0300\n"
+"POT-Creation-Date: 2016-04-21 10:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4159,6 +4159,7 @@ msgstr ""
 
 #: dataviva/templates/include/header.html:49
 #: dataviva/templates/modal/login.html:15
+#: dataviva/templates/modal/signup.html:49
 msgid "Sign Up"
 msgstr ""
 
@@ -4253,8 +4254,8 @@ msgstr ""
 msgid "I want to receive news and tips of the best use of Dataviva"
 msgstr ""
 
-#: dataviva/templates/modal/signup.html:49
-msgid "Sing Up"
+#: dataviva/templates/modal/video.html:7
+msgid "Watch the Video"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:20
