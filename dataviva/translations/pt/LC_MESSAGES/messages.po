@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 10:02-0300\n"
+"POT-Creation-Date: 2016-04-21 10:06-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -4735,8 +4735,9 @@ msgid "Main Searchs"
 msgstr "Principais Pesquisas"
 
 #: dataviva/templates/modal/dataviva.html:38
+#: dataviva/templates/modal/wizard.html:28
 msgid "Choose an option or type what you are looking for"
-msgstr "Escolha uma opçāo abaixo ou busque pelo nome"
+msgstr "Escolha uma opção ou digite o que procura"
 
 #: dataviva/templates/modal/dataviva.html:61
 #, fuzzy
@@ -4764,11 +4765,13 @@ msgid "Microregions"
 msgstr "Microrregiões"
 
 #: dataviva/templates/modal/dataviva.html:104
+#: dataviva/templates/modal/wizard.html:47
 msgid "Advance"
 msgstr "Avançar"
 
 #: dataviva/templates/modal/dataviva.html:106
 #: dataviva/templates/modal/signup.html:49
+#: dataviva/templates/modal/wizard.html:46
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -6094,7 +6097,4 @@ msgstr "com"
 
 #~ msgid "Sign Up Free"
 #~ msgstr "Cadastre-se Gratuitamente"
-
-#~ msgid "Sing Up"
-#~ msgstr "na "
 
