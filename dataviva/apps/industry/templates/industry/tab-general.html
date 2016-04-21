@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane active" id="general">
-    <div class="jcarousel-wrapper">
+    <!--<div class="jcarousel-wrapper">
         <div class="jcarousel">
             <ul>
                 <li>
@@ -72,7 +72,7 @@
 
         <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
         <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
-    </div>
+    </div>-->
 
     <div class="m-t-sm col-xs-12 year">
         {% trans %}Year{% endtrans %}: {{ header.year }}
@@ -80,31 +80,31 @@
 
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not location %}
-        <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}} 
+        <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}}
         {% trans %}is the{% endtrans %} {{header.ranking}}
-        {% if g.locale == "pt" %}&ordf{% endif %} 
-        {% trans %}in number of employees in Brazil, and these workers are concentrated in the city of{% endtrans %} {{body.municipality_with_more_num_jobs_name }} 
-        {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}} 
+        {% if g.locale == "pt" %}&ordf{% endif %}
+        {% trans %}in number of employees in Brazil, and these workers are concentrated in the city of{% endtrans %} {{body.municipality_with_more_num_jobs_name }}
+        {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}}
         {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
         {% trans %}Brazil has a total of{% endtrans %} {{header.num_establishments_brazil | max_digits(3)}} {{header.num_establishments_brazil | magnitude}}
         {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
     {% else %}
         {% if location.id|length != 9 %}
-            <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}} 
+            <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}}
             {% trans %}is the{% endtrans %} {{header.ranking}}
             {% if g.locale == "pt" %}&ordf{% endif %}
-            {% trans %}in number of employees in {% endtrans %}{{location.preposition('de')}} {{location.name()}}, 
+            {% trans %}in number of employees in {% endtrans %}{{location.preposition('de')}} {{location.name()}},
             {% trans %}and these workers are concentrated in the city of{% endtrans %} {{location.preposition('de')}} {{body.municipality_with_more_num_jobs_name}},
-            {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}} 
+            {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{body.municipality_with_more_num_jobs_value | magnitude}}
             {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
-            {% trans %}This region has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}} 
+            {% trans %}This region has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}}
             {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
         {% else %}
-            <p>{% trans %}The economic activity{% endtrans %} {{industry.name()}} 
+            <p>{% trans %}The economic activity{% endtrans %} {{industry.name()}}
             {% trans %}is the{% endtrans %} {{header.ranking}}
             {% if g.locale == "pt" %}&ordf{% endif %}
             {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
-            {% trans %}This municipality has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}} 
+            {% trans %}This municipality has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{header.num_establishments | magnitude}}
             {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
         {% endif %}
     {% endif %}
