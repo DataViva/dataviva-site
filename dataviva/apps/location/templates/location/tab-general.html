@@ -77,7 +77,7 @@
     <h2 class="m-t-xl">Perfil Geral</h2>
         {% if profile.bra_id|length == 9 %}
             <p>{{ header.name }} 
-            {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities -1 }} 
             {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
             {% trans %} With {% endtrans %}{{ profile.area }} 
             {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
@@ -92,17 +92,17 @@
                 A Microrregião
             {% endif %}
             {{ header.name }} 
-            {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions }} 
+            {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions -1}} 
             {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }}, 
             {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
-            {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities -1 }} 
             {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
             {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
             {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 5 %}
             <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
-            {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions }} 
+            {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}} 
             {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
             {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}
             ª 
@@ -148,7 +148,7 @@
                     {{ neighbors }}, 
                 {% endif %}
             {% endfor %}. 
-            {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities }} 
+            {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities -1 }} 
             {% trans %}cities{% endtrans %}
             .</p>
         {% endif %}
@@ -168,7 +168,7 @@
                             </th>
                             <td>
                                 <p class="label">{{ body.main_product_by_export_value_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
+                                USD<strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
                             </td>
                         </tr>
                         {% endif %}
@@ -242,7 +242,7 @@
                                 {% trans %}Total of Jobs{% endtrans %}
                             </th>
                             <td>
-                                USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> <span>{{ body.total_jobs | magnitude }}</span>
+                                <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> <span>{{ body.total_jobs | magnitude }}</span>
                             </td>
                         </tr>
                     </tbody>
