@@ -47,7 +47,7 @@ def create():
         db.session.add(contact)
         db.session.commit()
         send_mail("Mensagem recebida via página de Contato",
-                  ["vdmoraes94@gmail.com"], message_tpl)
+                  ["contato@dataviva.info"], message_tpl)
         message = u'Sua mensagem foi enviada com sucesso. Em breve retornaremos.'
         flash(message, 'success')
         return redirect(url_for('contact.index'))
