@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 10:06-0300\n"
+"POT-Creation-Date: 2016-04-21 10:28-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -4727,22 +4727,83 @@ msgid "Promoters"
 msgstr "Realizadores"
 
 #: dataviva/templates/modal/dataviva.html:6
+#, fuzzy
 msgid "Entrepreneur"
-msgstr "Empreendedor"
+msgstr "Empreendedores"
 
 #: dataviva/templates/modal/dataviva.html:20
+#, fuzzy
 msgid "Main Searchs"
-msgstr "Principais Pesquisas"
+msgstr "Inicie uma Pesquisa"
+
+#: dataviva/templates/modal/dataviva.html:22
+msgid "Number of establishments of an activity in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:23
+#: dataviva/templates/modal/dataviva.html:47
+#: dataviva/templates/modal/dataviva.html:80
+msgid "Average wage of an activity in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:24
+#: dataviva/templates/modal/dataviva.html:48
+#: dataviva/templates/modal/dataviva.html:81
+msgid "Main trade partner of a product in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:25
+#: dataviva/templates/modal/dataviva.html:49
+#: dataviva/templates/modal/dataviva.html:82
+msgid "Locations that concentrates the jobs in one activity"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:26
+#: dataviva/templates/modal/dataviva.html:50
+#: dataviva/templates/modal/dataviva.html:83
+msgid "Locations that imports more or exports more one specific product"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:27
+#: dataviva/templates/modal/dataviva.html:51
+#: dataviva/templates/modal/dataviva.html:84
+msgid "Similar products to my business, produced in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:28
+#: dataviva/templates/modal/dataviva.html:52
+#: dataviva/templates/modal/dataviva.html:85
+#, fuzzy
+msgid "Courses offered in a region"
+msgstr "alunos matriculados em todo o país"
+
+#: dataviva/templates/modal/dataviva.html:29
+#: dataviva/templates/modal/dataviva.html:53
+#: dataviva/templates/modal/dataviva.html:86
+#, fuzzy
+msgid "General economic profile of a region"
+msgstr ""
+"Identifique o perfil econômico e as oportunidades de negócios de uma "
+"região"
+
+#: dataviva/templates/modal/dataviva.html:30
+msgid "View more options"
+msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:38
 #: dataviva/templates/modal/wizard.html:28
 msgid "Choose an option or type what you are looking for"
 msgstr "Escolha uma opção ou digite o que procura"
 
+#: dataviva/templates/modal/dataviva.html:46
+#: dataviva/templates/modal/dataviva.html:79
+msgid "Number of establishments of one activity in one region"
+msgstr ""
+
 #: dataviva/templates/modal/dataviva.html:61
 #, fuzzy
 msgid "Choose a location or type what you are looking for"
-msgstr "Escolha uma localidade abaixo ou busque pelo nome"
+msgstr "Escolha uma opção ou digite o que procura"
 
 #: dataviva/templates/modal/dataviva.html:65
 #: dataviva/translations/dictionary.py:150
@@ -4763,6 +4824,10 @@ msgstr "Mesorregiões"
 #: dataviva/translations/dictionary.py:153
 msgid "Microregions"
 msgstr "Microrregiões"
+
+#: dataviva/templates/modal/dataviva.html:96
+msgid "Didn't find what I was looking for"
+msgstr "Não encontrei o que estava procurando"
 
 #: dataviva/templates/modal/dataviva.html:104
 #: dataviva/templates/modal/wizard.html:47
@@ -6097,4 +6162,46 @@ msgstr "com"
 
 #~ msgid "Sign Up Free"
 #~ msgstr "Cadastre-se Gratuitamente"
+
+#~ msgid "Entrepreneur"
+#~ msgstr "Empreendedor"
+
+#~ msgid "Main Searchs"
+#~ msgstr "Principais Pesquisas"
+
+#~ msgid "Number of establishments of an activity in a region"
+#~ msgstr "Quantidade de estabelecimentos de uma atividade em uma região"
+
+#~ msgid "Average wage of an activity in a region"
+#~ msgstr "Salário médio de uma atividade ou ocupação em uma região"
+
+#~ msgid "Main trade partner of a product in a region"
+#~ msgstr "Principais parceiros comerciais de um Produto em ume região"
+
+#~ msgid "Locations that concentrates the jobs in one activity"
+#~ msgstr "Localidades que concentram o emprego de uma atividade"
+
+#~ msgid "Locations that imports more or exports more one specific product"
+#~ msgstr "Localidades que mais importam ou exportam um produto específico"
+
+#~ msgid "Similar products to my business, produced in a region"
+#~ msgstr "Produtos similares ao do meu negócio, produzidos em uma região"
+
+#~ msgid "Courses offered in a region"
+#~ msgstr "Cursos oferecidos em uma região"
+
+#~ msgid "General economic profile of a region"
+#~ msgstr "Perfil econômico geral de uma região"
+
+#~ msgid "View more options"
+#~ msgstr "Exibir mais opções"
+
+#~ msgid "Number of establishments of one activity in one region"
+#~ msgstr "Quantidade de estabelecimentos de uma atividade em uma região"
+
+#~ msgid "Choose a location or type what you are looking for"
+#~ msgstr "Escolha uma localidade abaixo ou busque pelo nome"
+
+#~ msgid "Mesorregions"
+#~ msgstr "Mesorregiões"
 
