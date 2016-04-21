@@ -43,7 +43,6 @@ def create():
 
         db.session.add(contact)
         db.session.commit()
-
         message = u'Sua mensagem foi enviada com sucesso. Em breve retornaremos.'
         flash(message, 'success')
         return redirect(url_for('contact.index'))
