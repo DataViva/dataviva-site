@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 11:33-0300\n"
+"POT-Creation-Date: 2016-04-21 14:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -289,6 +289,98 @@ msgstr ""
 
 #: dataviva/apps/account/views.py:362 dataviva/apps/account/views.py:374
 msgid "Preferences updated."
+msgstr ""
+
+#: dataviva/apps/account/templates/account/change_password.html:39
+msgid "Current Password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/change_password.html:44
+msgid "New Password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/change_password.html:49
+#: dataviva/apps/account/templates/account/signup.html:55
+msgid "Confirm Password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/change_password.html:56
+#: dataviva/apps/account/templates/account/edit_profile.html:47
+#: dataviva/templates/modal/dataviva.html:106
+#: dataviva/templates/modal/signup.html:49
+#: dataviva/templates/modal/wizard.html:46
+msgid "Cancel"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/change_password.html:57
+#: dataviva/apps/account/templates/account/edit_profile.html:48
+#: dataviva/templates/admin/admin_questions_edit.html:44
+msgid "Update"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/confirm_pending.html:5
+msgid "Please check you inbox so that you can complete your registration."
+msgstr ""
+
+#: dataviva/apps/account/templates/account/confirm_pending.html:6
+msgid "Resend confirmation email"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:15
+msgid "EDIT YOUR PROFILE"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:18
+#: dataviva/apps/account/templates/account/signup.html:45
+msgid "Full name"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:23
+msgid "gender"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:37
+msgid "up to 256 characters"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:43
+msgid "Change my password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/forgot_password.html:18
+msgid "Please inform us your email, so that we can sent you a new password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/forgot_password.html:22
+msgid "Confirm"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:43
+#: dataviva/apps/account/templates/account/signup.html:50
+msgid "Password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:47
+msgid "Forgot your password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:48
+msgid "Sign In"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:51
+#: dataviva/apps/account/templates/account/signup.html:62
+msgid "Or sign-up using"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signup.html:40
+#: dataviva/apps/users/templates/users/index.html:13
+#: dataviva/templates/admin/admin_users.html:14
+msgid "Email"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signup.html:59
+msgid "SignUp"
 msgstr ""
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
@@ -740,7 +832,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:73
 #: dataviva/apps/calls/templates/calls/_form.html:21
-#: dataviva/apps/contact/templates/contact/index.html:61
+#: dataviva/apps/contact/templates/contact/index.html:72
 #: dataviva/apps/news/templates/news/_form.html:94
 #: dataviva/templates/include/footer.html:66
 msgid "Send"
@@ -863,21 +955,21 @@ msgid ""
 "DataViva."
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:18
-#: dataviva/apps/contact/templates/contact/index.html:26
+#: dataviva/apps/contact/templates/contact/index.html:17
+#: dataviva/apps/contact/templates/contact/index.html:37
 #: dataviva/templates/about/ask/index.html:57
 #: dataviva/templates/include/header.html:7
 #: dataviva/translations/dictionary.py:533
 msgid "Contact"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:27
+#: dataviva/apps/contact/templates/contact/index.html:38
 msgid ""
 "Got any questions or want to send a suggestion? Contact the DataViva team"
 " using the form below:"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:32
+#: dataviva/apps/contact/templates/contact/index.html:43
 #: dataviva/apps/users/templates/users/admin.html:32
 #: dataviva/apps/users/templates/users/index.html:12
 #: dataviva/templates/include/footer.html:46
@@ -887,11 +979,11 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:46
+#: dataviva/apps/contact/templates/contact/index.html:57
 msgid "Subject"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:53
+#: dataviva/apps/contact/templates/contact/index.html:64
 #: dataviva/templates/include/footer.html:58
 #: dataviva/templates/include/footer.html:60
 #: dataviva/translations/dictionary.py:586
@@ -2668,11 +2760,6 @@ msgstr ""
 msgid "User ID"
 msgstr ""
 
-#: dataviva/apps/users/templates/users/index.html:13
-#: dataviva/templates/admin/admin_users.html:14
-msgid "Email"
-msgstr ""
-
 #: dataviva/apps/users/templates/users/index.html:14
 msgid "Administrators"
 msgstr ""
@@ -3802,10 +3889,6 @@ msgstr ""
 msgid "Reply"
 msgstr ""
 
-#: dataviva/templates/admin/admin_questions_edit.html:44
-msgid "Update"
-msgstr ""
-
 #: dataviva/templates/admin/admin_replies.html:29
 msgid "Flags"
 msgstr ""
@@ -4431,12 +4514,6 @@ msgstr ""
 #: dataviva/templates/modal/dataviva.html:104
 #: dataviva/templates/modal/wizard.html:47
 msgid "Advance"
-msgstr ""
-
-#: dataviva/templates/modal/dataviva.html:106
-#: dataviva/templates/modal/signup.html:49
-#: dataviva/templates/modal/wizard.html:46
-msgid "Cancel"
 msgstr ""
 
 #: dataviva/templates/modal/login.html:7
@@ -5537,6 +5614,10 @@ msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
 msgstr[1] ""
+
+#: dataviva/utils/jinja_helpers.py:88
+msgid "Units"
+msgstr ""
 
 #: dataviva/utils/jinja_helpers.py:88
 msgid "Thousands"
