@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 09:35-0300\n"
+"POT-Creation-Date: 2016-04-21 09:58-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2493,6 +2493,7 @@ msgstr ""
 #: dataviva/apps/users/templates/users/index.html:12
 #: dataviva/templates/include/footer.html:46
 #: dataviva/templates/include/footer.html:48
+#: dataviva/templates/modal/signup.html:13
 #: dataviva/translations/dictionary.py:337
 msgid "Name"
 msgstr ""
@@ -3736,6 +3737,7 @@ msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:36
 #: dataviva/templates/general/index.html:15
+#: dataviva/templates/modal/signup.html:29
 #: dataviva/translations/dictionary.py:559
 msgid "Entrepreneurs"
 msgstr ""
@@ -3745,6 +3747,7 @@ msgid "Identify the economic profile and the business opportunities in a region"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:43
+#: dataviva/templates/modal/signup.html:30
 msgid "Development Agents"
 msgstr ""
 
@@ -3755,6 +3758,7 @@ msgid "Assess development policies setting by location"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:50
+#: dataviva/templates/modal/signup.html:31
 msgid "Students and Professionals"
 msgstr ""
 
@@ -3991,6 +3995,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/templates/general/index.html:121
+#: dataviva/templates/modal/signup.html:8
 #: dataviva/translations/dictionary.py:570
 msgid "Sign Up free and make the most of DataViva"
 msgstr ""
@@ -4003,6 +4008,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/templates/general/index.html:123
+#: dataviva/templates/modal/signup.html:7
 #: dataviva/translations/dictionary.py:572
 msgid "Free Sign Up"
 msgstr ""
@@ -4221,6 +4227,7 @@ msgid "Advance"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:106
+#: dataviva/templates/modal/signup.html:49
 msgid "Cancel"
 msgstr ""
 
@@ -4230,6 +4237,24 @@ msgstr ""
 
 #: dataviva/templates/modal/login.html:16
 msgid "Forgot my Password"
+msgstr ""
+
+#: dataviva/templates/modal/signup.html:8
+msgid ""
+"Signing up gives you access to exclusive resources to facilitate your "
+"research."
+msgstr ""
+
+#: dataviva/templates/modal/signup.html:26
+msgid "What profile best describes you"
+msgstr ""
+
+#: dataviva/templates/modal/signup.html:42
+msgid "I want to receive news and tips of the best use of Dataviva"
+msgstr ""
+
+#: dataviva/templates/modal/signup.html:49
+msgid "Sing Up"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:20
