@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 15:30-0300\n"
+"POT-Creation-Date: 2016-04-21 15:43-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -4815,6 +4815,7 @@ msgid "Geographical locations within Brazil"
 msgstr "Localizações geográficas no Brasil"
 
 #: dataviva/templates/general/select.html:38
+#: dataviva/templates/selectors/trade_partner.html:19
 #: dataviva/translations/dictionary.py:170
 msgid "Countries"
 msgstr "Países"
@@ -5203,6 +5204,20 @@ msgstr "Posições"
 msgid "Search by name or HS number:"
 msgstr "Busque pelo nome ou pelo No. HS:"
 
+#: dataviva/templates/selectors/trade_partner.html:1
+msgid "Choose a trade partner or type what you are looking for"
+msgstr "Escolha um parceiro comercial ou busque pelo nome"
+
+#: dataviva/templates/selectors/trade_partner.html:11
+#: dataviva/translations/dictionary.py:169
+msgid "Continents"
+msgstr "Continentes"
+
+#: dataviva/templates/selectors/trade_partner.html:36
+#: dataviva/templates/selectors/trade_partner.html:68
+msgid "Search by name or WLD number:"
+msgstr "Busque pelo nome ou pelo No. WLD:"
+
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
 msgstr "Resolução Temporal"
@@ -5550,10 +5565,6 @@ msgstr "Capítulos"
 #: dataviva/translations/dictionary.py:168
 msgid "Sub-Positions"
 msgstr "Sub-Posições"
-
-#: dataviva/translations/dictionary.py:169
-msgid "Continents"
-msgstr "Continentes"
 
 #: dataviva/translations/dictionary.py:172
 #: dataviva/translations/dictionary.py:178
