@@ -2,6 +2,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Please check you inbox so that you can complete your registration.</h1>
-    <a class="btn btn-link" href="/account/resend_confirmation/{{user.email}}">Resend confirmation email</a>
+    <h1>{% trans %}Please check you inbox so that you can complete your registration.{% endtrans %}</h1>
+    <a class="btn btn-link" href="/account/resend_confirmation/{{user.email}}">{% trans %}Resend confirmation email{% endtrans %}</a>
 {% endblock content %}

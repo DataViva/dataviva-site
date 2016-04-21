@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:36-0300\n"
+"POT-Creation-Date: 2016-04-21 14:38-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -313,6 +313,14 @@ msgstr ""
 #: dataviva/apps/account/templates/account/change_password.html:57
 #: dataviva/templates/admin/admin_questions_edit.html:44
 msgid "Update"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/confirm_pending.html:5
+msgid "Please check you inbox so that you can complete your registration."
+msgstr ""
+
+#: dataviva/apps/account/templates/account/confirm_pending.html:6
+msgid "Resend confirmation email"
 msgstr ""
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
