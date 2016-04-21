@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 16:47-0300\n"
+"POT-Creation-Date: 2016-04-21 16:49-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -443,6 +443,7 @@ msgstr "Estudos"
 #: dataviva/apps/search/templates/search/admin.html:5
 #: dataviva/apps/search/templates/search/admin.html:9
 #: dataviva/apps/search/templates/search/edit.html:9
+#: dataviva/apps/search/templates/search/new.html:9
 #: dataviva/templates/admin.html:22
 msgid "Start a search"
 msgstr "Inicie uma Pesquisa"
@@ -2734,6 +2735,11 @@ msgstr "Seletor(es)"
 #: dataviva/apps/search/templates/search/admin.html:34
 msgid "Answer"
 msgstr "Resposta"
+
+#: dataviva/apps/search/templates/search/new.html:10
+#, fuzzy
+msgid "Create"
+msgstr "Dispersão"
 
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:58
 msgid "Trade with Brazil"
