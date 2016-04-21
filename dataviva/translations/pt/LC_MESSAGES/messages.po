@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 15:09-0300\n"
+"POT-Creation-Date: 2016-04-21 15:15-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -2419,6 +2419,7 @@ msgid "Enrolled"
 msgstr "Matrículados"
 
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:15
+#: dataviva/templates/selectors/industry.html:6
 #: dataviva/translations/dictionary.py:164
 #: dataviva/translations/dictionary.py:310
 msgid "Classes"
@@ -5119,6 +5120,27 @@ msgstr "Busque pelo nome ou pelo No. Couse SC:"
 msgid "Course SC"
 msgstr "SC do Curso"
 
+#: dataviva/templates/selectors/industry.html:1
+msgid "Choose an industry or type what you are looking for"
+msgstr "Escolha um setor industrial ou busque pelo nome"
+
+#: dataviva/templates/selectors/industry.html:9
+#: dataviva/translations/dictionary.py:162
+msgid "Divisions"
+msgstr "Divisões"
+
+#: dataviva/templates/selectors/industry.html:12
+#: dataviva/translations/dictionary.py:161
+#: dataviva/translations/dictionary.py:165
+msgid "Sections"
+msgstr "Seções"
+
+#: dataviva/templates/selectors/industry.html:28
+#: dataviva/templates/selectors/industry.html:58
+#: dataviva/templates/selectors/industry.html:90
+msgid "Search by name ou by CNAE number"
+msgstr "Busque pelo nome ou pelo No. CNAE"
+
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
 msgstr "Resolução Temporal"
@@ -5462,15 +5484,6 @@ msgstr "SubGrupos"
 #: dataviva/translations/dictionary.py:159
 msgid "Families"
 msgstr "Famílias"
-
-#: dataviva/translations/dictionary.py:161
-#: dataviva/translations/dictionary.py:165
-msgid "Sections"
-msgstr "Seções"
-
-#: dataviva/translations/dictionary.py:162
-msgid "Divisions"
-msgstr "Divisões"
 
 #: dataviva/translations/dictionary.py:163
 msgid "Groups"
