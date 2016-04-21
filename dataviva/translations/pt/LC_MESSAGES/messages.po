@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 15:15-0300\n"
+"POT-Creation-Date: 2016-04-21 15:20-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -4804,6 +4804,7 @@ msgstr "Produtos Exportados"
 
 #: dataviva/templates/general/select.html:33
 #: dataviva/templates/modal/dataviva.html:69
+#: dataviva/templates/selectors/location.html:18
 #: dataviva/translations/dictionary.py:155
 msgid "Municipalities"
 msgstr "Municípios"
@@ -5039,16 +5040,19 @@ msgid "Number of establishments of one activity in one region"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:61
+#: dataviva/templates/selectors/location.html:1
 #, fuzzy
 msgid "Choose a location or type what you are looking for"
 msgstr "Escolha uma opção ou digite o que procura"
 
 #: dataviva/templates/modal/dataviva.html:65
+#: dataviva/templates/selectors/location.html:6
 #: dataviva/translations/dictionary.py:150
 msgid "Regions"
 msgstr "Regiões"
 
 #: dataviva/templates/modal/dataviva.html:66
+#: dataviva/templates/selectors/location.html:9
 #: dataviva/translations/dictionary.py:151
 msgid "States"
 msgstr "Estados"
@@ -5059,6 +5063,7 @@ msgid "Mesorregions"
 msgstr "Mesorregiões"
 
 #: dataviva/templates/modal/dataviva.html:68
+#: dataviva/templates/selectors/location.html:15
 #: dataviva/translations/dictionary.py:153
 msgid "Microregions"
 msgstr "Microrregiões"
@@ -5140,6 +5145,19 @@ msgstr "Seções"
 #: dataviva/templates/selectors/industry.html:90
 msgid "Search by name ou by CNAE number"
 msgstr "Busque pelo nome ou pelo No. CNAE"
+
+#: dataviva/templates/selectors/location.html:12
+#: dataviva/translations/dictionary.py:152
+msgid "Mesoregions"
+msgstr "Mesorregiões"
+
+#: dataviva/templates/selectors/location.html:32
+#: dataviva/templates/selectors/location.html:60
+#: dataviva/templates/selectors/location.html:90
+#: dataviva/templates/selectors/location.html:120
+#: dataviva/templates/selectors/location.html:150
+msgid "Search by name or IBGE number:"
+msgstr "Busque pelo nome ou pelo No. IBGE:"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
@@ -5460,10 +5478,6 @@ msgstr "Continente"
 #: dataviva/translations/dictionary.py:149
 msgid "Country"
 msgstr "País"
-
-#: dataviva/translations/dictionary.py:152
-msgid "Mesoregions"
-msgstr "Mesorregiões"
 
 #: dataviva/translations/dictionary.py:154
 msgid "Planning Regions"
@@ -6399,7 +6413,7 @@ msgstr "com"
 #~ msgstr "Quantidade de estabelecimentos de uma atividade em uma região"
 
 #~ msgid "Choose a location or type what you are looking for"
-#~ msgstr "Escolha uma localidade abaixo ou busque pelo nome"
+#~ msgstr "Escolha uma localidade ou busque pelo nome"
 
 #~ msgid "Mesorregions"
 #~ msgstr "Mesorregiões"
