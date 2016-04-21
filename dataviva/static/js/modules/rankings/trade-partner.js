@@ -79,6 +79,9 @@ var TradePartnerTable = function () {
                 tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

@@ -71,6 +71,9 @@ var BasicCourseTable = function () {
             $('#basic-course-courses').click(function() {
                 basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load();
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

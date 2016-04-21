@@ -58,6 +58,8 @@ var MajorTable = function () {
                     select.append( $('<option value="'+d+'">'+d+'</option>') );
                 } );
 
+            var lastYear = years[years.length - 1];
+
             select.on( 'change', function () {
                majorTable.table
                     .column( 0 )
@@ -78,6 +80,9 @@ var MajorTable = function () {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

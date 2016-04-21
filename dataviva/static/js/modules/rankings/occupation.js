@@ -81,6 +81,9 @@ var OccupationTable = function () {
                 occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

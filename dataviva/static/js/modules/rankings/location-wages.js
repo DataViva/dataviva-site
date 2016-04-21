@@ -112,6 +112,9 @@ var LocationWages = function () {
                 locationWages.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

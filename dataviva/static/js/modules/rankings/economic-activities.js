@@ -87,6 +87,9 @@ var EconomicActivitiesTable = function () {
                 economicActivities.table.ajax.url("/rais/all/all/show.6/all/?order=num_jobs.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

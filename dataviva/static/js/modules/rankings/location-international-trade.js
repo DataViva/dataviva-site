@@ -112,6 +112,9 @@ var LocationTradeRanking = function () {
                 locationTradeRanking.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };
