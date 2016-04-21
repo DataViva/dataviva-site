@@ -62,6 +62,9 @@ var universityTable = function () {
 
             $('#university-table_filter input').removeClass('input-sm');
             $('#university-table_filter').addClass('pull-right');
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };
