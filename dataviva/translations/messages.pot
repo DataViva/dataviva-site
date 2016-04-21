@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 15:23-0300\n"
+"POT-Creation-Date: 2016-04-21 15:27-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4610,8 +4610,26 @@ msgid "Choose a course or type what you are looking for"
 msgstr ""
 
 #: dataviva/templates/selectors/major.html:25
-#: dataviva/templates/selectors/major.html:57
+#: dataviva/templates/selectors/major.html:56
 msgid "Search by name or Course HEDU number:"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:1
+msgid "Choose a occupation or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:6
+#: dataviva/translations/dictionary.py:159
+msgid "Families"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:9
+msgid "Big Groups"
+msgstr ""
+
+#: dataviva/templates/selectors/occupation.html:25
+#: dataviva/templates/selectors/occupation.html:56
+msgid "Search by name or CBO number:"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:20
@@ -4948,10 +4966,6 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:158
 msgid "Subgroups"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:159
-msgid "Families"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:163
