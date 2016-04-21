@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash
+from flask import Blueprint, render_template, g, redirect, url_for, flash, render_template
 from dataviva.apps.general.views import get_locale
 from dataviva.utils.send_mail import send_mail
 from forms import RegistrationForm
@@ -42,15 +42,12 @@ def create():
         contact.message = form.message.data
         contact.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        message = 'Mensagem recebida de ' + contact.name + '.\n\n' + \
-                  'E-mail: ' + contact.email + '\n\n' + \
-                  'Assunto: ' + contact.subject + '\n\n' + \
-                  'Mensagem: ' + contact.message + '\n\n'
+        message_tpl = render_template('contact/message_template.html', contact=contact)
 
         db.session.add(contact)
         db.session.commit()
         send_mail("Mensagem recebida via página de Contato",
-                  ["vdmoraes94@gmail.com"], message)
+                  ["vdmoraes94@gmail.com"], message_tpl)
         message = u'Sua mensagem foi enviada com sucesso. Em breve retornaremos.'
         flash(message, 'success')
         return redirect(url_for('contact.index'))

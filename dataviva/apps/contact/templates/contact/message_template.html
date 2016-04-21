@@ -1,0 +1,8 @@
+{% extends "mail.html" %}
+{% block mail_body %}
+<h3 class='title'>O Dataviva recebeu uma nova mensagem!</h3>
+<h4>Nome: {{ contact.name }}
+<h4>E-mail: {{ contact.email }}</h4>
+<h4>Assunto: {{ contact.subject }}</h4>
+<p align='justify'>{{ contact.message }}</p>
+{% endblock %}
