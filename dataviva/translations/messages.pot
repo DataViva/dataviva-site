@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:46-0300\n"
+"POT-Creation-Date: 2016-04-21 14:49-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -351,6 +351,22 @@ msgstr ""
 
 #: dataviva/apps/account/templates/account/forgot_password.html:22
 msgid "Confirm"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:43
+msgid "Password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:47
+msgid "Forgot your password"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:48
+msgid "Sign In"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/signin.html:51
+msgid "Or sign-up using"
 msgstr ""
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
