@@ -3,7 +3,7 @@ var MajorTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/hedu/all/all/all/show.2/?order=enrolled.desc",
+        "sAjaxSource": "/hedu/all/all/all/show.6/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
@@ -67,7 +67,7 @@ var MajorTable = function () {
 
             $('#major-table_filter input').removeClass('input-sm');
             $('#major-table_filter').addClass('pull-right');
-            $('#major-fields').addClass('active');
+            $('#major-majors').addClass('active');
 
             $('#major-fields').click(function() {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
