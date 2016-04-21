@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:38-0300\n"
+"POT-Creation-Date: 2016-04-21 14:44-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -341,6 +341,7 @@ msgid "Confirm Password"
 msgstr "Confirmar Senha"
 
 #: dataviva/apps/account/templates/account/change_password.html:56
+#: dataviva/apps/account/templates/account/edit_profile.html:47
 #: dataviva/templates/modal/dataviva.html:106
 #: dataviva/templates/modal/signup.html:49
 #: dataviva/templates/modal/wizard.html:46
@@ -348,6 +349,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: dataviva/apps/account/templates/account/change_password.html:57
+#: dataviva/apps/account/templates/account/edit_profile.html:48
 #: dataviva/templates/admin/admin_questions_edit.html:44
 msgid "Update"
 msgstr "Atualizar"
@@ -359,6 +361,27 @@ msgstr "Por favor, verifique seu email para completar o cadastro."
 #: dataviva/apps/account/templates/account/confirm_pending.html:6
 msgid "Resend confirmation email"
 msgstr "Reenviar email de confirmaçāo"
+
+#: dataviva/apps/account/templates/account/edit_profile.html:15
+msgid "EDIT YOUR PROFILE"
+msgstr "Edite o seu perfil"
+
+#: dataviva/apps/account/templates/account/edit_profile.html:18
+msgid "Full name"
+msgstr "Nome Completo"
+
+#: dataviva/apps/account/templates/account/edit_profile.html:23
+#, fuzzy
+msgid "gender"
+msgstr "gênero"
+
+#: dataviva/apps/account/templates/account/edit_profile.html:37
+msgid "up to 256 characters"
+msgstr "até 256 caracteres"
+
+#: dataviva/apps/account/templates/account/edit_profile.html:43
+msgid "Change my password"
+msgstr "Alterar minha Senha"
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
 msgid "You dont have permission to view this page."

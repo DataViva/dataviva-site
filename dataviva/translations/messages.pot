@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-21 14:38-0300\n"
+"POT-Creation-Date: 2016-04-21 14:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -304,6 +304,7 @@ msgid "Confirm Password"
 msgstr ""
 
 #: dataviva/apps/account/templates/account/change_password.html:56
+#: dataviva/apps/account/templates/account/edit_profile.html:47
 #: dataviva/templates/modal/dataviva.html:106
 #: dataviva/templates/modal/signup.html:49
 #: dataviva/templates/modal/wizard.html:46
@@ -311,6 +312,7 @@ msgid "Cancel"
 msgstr ""
 
 #: dataviva/apps/account/templates/account/change_password.html:57
+#: dataviva/apps/account/templates/account/edit_profile.html:48
 #: dataviva/templates/admin/admin_questions_edit.html:44
 msgid "Update"
 msgstr ""
@@ -321,6 +323,26 @@ msgstr ""
 
 #: dataviva/apps/account/templates/account/confirm_pending.html:6
 msgid "Resend confirmation email"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:15
+msgid "EDIT YOUR PROFILE"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:18
+msgid "Full name"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:23
+msgid "gender"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:37
+msgid "up to 256 characters"
+msgstr ""
+
+#: dataviva/apps/account/templates/account/edit_profile.html:43
+msgid "Change my password"
 msgstr ""
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
