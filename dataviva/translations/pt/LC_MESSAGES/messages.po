@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:55-0300\n"
+"POT-Creation-Date: 2016-04-21 10:28-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -885,6 +885,7 @@ msgid "Select"
 msgstr "Selecione"
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/templates/modal/dataviva.html:103
 #: dataviva/translations/dictionary.py:472
 msgid "Back"
 msgstr "Voltar"
@@ -2557,6 +2558,7 @@ msgstr "Mais detalhes"
 #: dataviva/apps/users/templates/users/index.html:12
 #: dataviva/templates/include/footer.html:46
 #: dataviva/templates/include/footer.html:48
+#: dataviva/templates/modal/signup.html:13
 #: dataviva/translations/dictionary.py:337
 msgid "Name"
 msgstr "Nome"
@@ -3426,9 +3428,10 @@ msgstr ""
 
 #: dataviva/templates/about/ask/ask.html:10
 #: dataviva/templates/general/index.html:59
+#: dataviva/templates/modal/dataviva.html:13
 #: dataviva/translations/dictionary.py:567
 msgid "What would you like to know?"
-msgstr "O que você gostaria de conhecer?"
+msgstr "O que você gostaria de descobrir?"
 
 #: dataviva/templates/about/ask/ask.html:12
 msgid "You need to login for this functionality."
@@ -4186,6 +4189,7 @@ msgstr "Selecione um perfil para começar"
 
 #: dataviva/templates/general/browse_categories.html:36
 #: dataviva/templates/general/index.html:15
+#: dataviva/templates/modal/signup.html:29
 #: dataviva/translations/dictionary.py:559
 msgid "Entrepreneurs"
 msgstr "Empreendedores"
@@ -4198,6 +4202,7 @@ msgstr ""
 "região"
 
 #: dataviva/templates/general/browse_categories.html:43
+#: dataviva/templates/modal/signup.html:30
 msgid "Development Agents"
 msgstr "Agentes de Desenvolvimento"
 
@@ -4210,6 +4215,7 @@ msgstr ""
 "localidade"
 
 #: dataviva/templates/general/browse_categories.html:50
+#: dataviva/templates/modal/signup.html:31
 msgid "Students and Professionals"
 msgstr "Estudantes e Profissionais"
 
@@ -4519,6 +4525,7 @@ msgstr ""
 "Agropecuária."
 
 #: dataviva/templates/general/index.html:121
+#: dataviva/templates/modal/signup.html:8
 #: dataviva/translations/dictionary.py:570
 msgid "Sign Up free and make the most of DataViva"
 msgstr "Cadastre-se gratuitamente e aproveite o DataViva ao máximo"
@@ -4534,6 +4541,7 @@ msgstr ""
 "pesquisa."
 
 #: dataviva/templates/general/index.html:123
+#: dataviva/templates/modal/signup.html:7
 #: dataviva/translations/dictionary.py:572
 msgid "Free Sign Up"
 msgstr "Cadastrar Gratuitamente"
@@ -4551,6 +4559,7 @@ msgid "Product Exports"
 msgstr "Produtos Exportados"
 
 #: dataviva/templates/general/select.html:33
+#: dataviva/templates/modal/dataviva.html:69
 #: dataviva/translations/dictionary.py:155
 msgid "Municipalities"
 msgstr "Municípios"
@@ -4687,6 +4696,8 @@ msgid "HELP"
 msgstr "AJUDA"
 
 #: dataviva/templates/include/header.html:49
+#: dataviva/templates/modal/login.html:15
+#: dataviva/templates/modal/signup.html:49
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
@@ -4714,6 +4725,148 @@ msgstr "Português"
 #: dataviva/translations/dictionary.py:574
 msgid "Promoters"
 msgstr "Realizadores"
+
+#: dataviva/templates/modal/dataviva.html:6
+#, fuzzy
+msgid "Entrepreneur"
+msgstr "Empreendedores"
+
+#: dataviva/templates/modal/dataviva.html:20
+#, fuzzy
+msgid "Main Searchs"
+msgstr "Inicie uma Pesquisa"
+
+#: dataviva/templates/modal/dataviva.html:22
+msgid "Number of establishments of an activity in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:23
+#: dataviva/templates/modal/dataviva.html:47
+#: dataviva/templates/modal/dataviva.html:80
+msgid "Average wage of an activity in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:24
+#: dataviva/templates/modal/dataviva.html:48
+#: dataviva/templates/modal/dataviva.html:81
+msgid "Main trade partner of a product in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:25
+#: dataviva/templates/modal/dataviva.html:49
+#: dataviva/templates/modal/dataviva.html:82
+msgid "Locations that concentrates the jobs in one activity"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:26
+#: dataviva/templates/modal/dataviva.html:50
+#: dataviva/templates/modal/dataviva.html:83
+msgid "Locations that imports more or exports more one specific product"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:27
+#: dataviva/templates/modal/dataviva.html:51
+#: dataviva/templates/modal/dataviva.html:84
+msgid "Similar products to my business, produced in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:28
+#: dataviva/templates/modal/dataviva.html:52
+#: dataviva/templates/modal/dataviva.html:85
+#, fuzzy
+msgid "Courses offered in a region"
+msgstr "alunos matriculados em todo o país"
+
+#: dataviva/templates/modal/dataviva.html:29
+#: dataviva/templates/modal/dataviva.html:53
+#: dataviva/templates/modal/dataviva.html:86
+#, fuzzy
+msgid "General economic profile of a region"
+msgstr ""
+"Identifique o perfil econômico e as oportunidades de negócios de uma "
+"região"
+
+#: dataviva/templates/modal/dataviva.html:30
+msgid "View more options"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:38
+#: dataviva/templates/modal/wizard.html:28
+msgid "Choose an option or type what you are looking for"
+msgstr "Escolha uma opção ou digite o que procura"
+
+#: dataviva/templates/modal/dataviva.html:46
+#: dataviva/templates/modal/dataviva.html:79
+msgid "Number of establishments of one activity in one region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:61
+#, fuzzy
+msgid "Choose a location or type what you are looking for"
+msgstr "Escolha uma opção ou digite o que procura"
+
+#: dataviva/templates/modal/dataviva.html:65
+#: dataviva/translations/dictionary.py:150
+msgid "Regions"
+msgstr "Regiões"
+
+#: dataviva/templates/modal/dataviva.html:66
+#: dataviva/translations/dictionary.py:151
+msgid "States"
+msgstr "Estados"
+
+#: dataviva/templates/modal/dataviva.html:67
+#, fuzzy
+msgid "Mesorregions"
+msgstr "Mesorregiões"
+
+#: dataviva/templates/modal/dataviva.html:68
+#: dataviva/translations/dictionary.py:153
+msgid "Microregions"
+msgstr "Microrregiões"
+
+#: dataviva/templates/modal/dataviva.html:96
+msgid "Didn't find what I was looking for"
+msgstr "Não encontrei o que estava procurando"
+
+#: dataviva/templates/modal/dataviva.html:104
+#: dataviva/templates/modal/wizard.html:47
+msgid "Advance"
+msgstr "Avançar"
+
+#: dataviva/templates/modal/dataviva.html:106
+#: dataviva/templates/modal/signup.html:49
+#: dataviva/templates/modal/wizard.html:46
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: dataviva/templates/modal/login.html:7
+msgid "Users Acess"
+msgstr "Acesso de usuários"
+
+#: dataviva/templates/modal/login.html:16
+msgid "Forgot my Password"
+msgstr "Esqueci minha Senha"
+
+#: dataviva/templates/modal/signup.html:8
+msgid ""
+"Signing up gives you access to exclusive resources to facilitate your "
+"research."
+msgstr ""
+"Ao fazer cadastro você terá acesso a recursos exclusivos para facilitar "
+"sua pesquisa"
+
+#: dataviva/templates/modal/signup.html:26
+msgid "What profile best describes you"
+msgstr "Qual perfil melhor descreve você"
+
+#: dataviva/templates/modal/signup.html:42
+msgid "I want to receive news and tips of the best use of Dataviva"
+msgstr ""
+
+#: dataviva/templates/modal/video.html:7
+msgid "Watch the Video"
+msgstr "Assista ao Vídeo"
 
 #: dataviva/translations/dictionary.py:20
 msgid "Time Resolution"
@@ -5035,21 +5188,9 @@ msgstr "Continente"
 msgid "Country"
 msgstr "País"
 
-#: dataviva/translations/dictionary.py:150
-msgid "Regions"
-msgstr "Regiões"
-
-#: dataviva/translations/dictionary.py:151
-msgid "States"
-msgstr "Estados"
-
 #: dataviva/translations/dictionary.py:152
 msgid "Mesoregions"
 msgstr "Mesorregiões"
-
-#: dataviva/translations/dictionary.py:153
-msgid "Microregions"
-msgstr "Microrregiões"
 
 #: dataviva/translations/dictionary.py:154
 msgid "Planning Regions"
@@ -6018,4 +6159,49 @@ msgstr "com"
 
 #~ msgid "ocupa o"
 #~ msgstr ""
+
+#~ msgid "Sign Up Free"
+#~ msgstr "Cadastre-se Gratuitamente"
+
+#~ msgid "Entrepreneur"
+#~ msgstr "Empreendedor"
+
+#~ msgid "Main Searchs"
+#~ msgstr "Principais Pesquisas"
+
+#~ msgid "Number of establishments of an activity in a region"
+#~ msgstr "Quantidade de estabelecimentos de uma atividade em uma região"
+
+#~ msgid "Average wage of an activity in a region"
+#~ msgstr "Salário médio de uma atividade ou ocupação em uma região"
+
+#~ msgid "Main trade partner of a product in a region"
+#~ msgstr "Principais parceiros comerciais de um Produto em ume região"
+
+#~ msgid "Locations that concentrates the jobs in one activity"
+#~ msgstr "Localidades que concentram o emprego de uma atividade"
+
+#~ msgid "Locations that imports more or exports more one specific product"
+#~ msgstr "Localidades que mais importam ou exportam um produto específico"
+
+#~ msgid "Similar products to my business, produced in a region"
+#~ msgstr "Produtos similares ao do meu negócio, produzidos em uma região"
+
+#~ msgid "Courses offered in a region"
+#~ msgstr "Cursos oferecidos em uma região"
+
+#~ msgid "General economic profile of a region"
+#~ msgstr "Perfil econômico geral de uma região"
+
+#~ msgid "View more options"
+#~ msgstr "Exibir mais opções"
+
+#~ msgid "Number of establishments of one activity in one region"
+#~ msgstr "Quantidade de estabelecimentos de uma atividade em uma região"
+
+#~ msgid "Choose a location or type what you are looking for"
+#~ msgstr "Escolha uma localidade abaixo ou busque pelo nome"
+
+#~ msgid "Mesorregions"
+#~ msgstr "Mesorregiões"
 

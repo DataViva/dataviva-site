@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-20 15:55-0300\n"
+"POT-Creation-Date: 2016-04-21 10:28-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -840,6 +840,7 @@ msgid "Select"
 msgstr ""
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/templates/modal/dataviva.html:103
 #: dataviva/translations/dictionary.py:472
 msgid "Back"
 msgstr ""
@@ -2492,6 +2493,7 @@ msgstr ""
 #: dataviva/apps/users/templates/users/index.html:12
 #: dataviva/templates/include/footer.html:46
 #: dataviva/templates/include/footer.html:48
+#: dataviva/templates/modal/signup.html:13
 #: dataviva/translations/dictionary.py:337
 msgid "Name"
 msgstr ""
@@ -3139,6 +3141,7 @@ msgstr ""
 
 #: dataviva/templates/about/ask/ask.html:10
 #: dataviva/templates/general/index.html:59
+#: dataviva/templates/modal/dataviva.html:13
 #: dataviva/translations/dictionary.py:567
 msgid "What would you like to know?"
 msgstr ""
@@ -3734,6 +3737,7 @@ msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:36
 #: dataviva/templates/general/index.html:15
+#: dataviva/templates/modal/signup.html:29
 #: dataviva/translations/dictionary.py:559
 msgid "Entrepreneurs"
 msgstr ""
@@ -3743,6 +3747,7 @@ msgid "Identify the economic profile and the business opportunities in a region"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:43
+#: dataviva/templates/modal/signup.html:30
 msgid "Development Agents"
 msgstr ""
 
@@ -3753,6 +3758,7 @@ msgid "Assess development policies setting by location"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:50
+#: dataviva/templates/modal/signup.html:31
 msgid "Students and Professionals"
 msgstr ""
 
@@ -3989,6 +3995,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/templates/general/index.html:121
+#: dataviva/templates/modal/signup.html:8
 #: dataviva/translations/dictionary.py:570
 msgid "Sign Up free and make the most of DataViva"
 msgstr ""
@@ -4001,6 +4008,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/templates/general/index.html:123
+#: dataviva/templates/modal/signup.html:7
 #: dataviva/translations/dictionary.py:572
 msgid "Free Sign Up"
 msgstr ""
@@ -4018,6 +4026,7 @@ msgid "Product Exports"
 msgstr ""
 
 #: dataviva/templates/general/select.html:33
+#: dataviva/templates/modal/dataviva.html:69
 #: dataviva/translations/dictionary.py:155
 msgid "Municipalities"
 msgstr ""
@@ -4149,6 +4158,8 @@ msgid "HELP"
 msgstr ""
 
 #: dataviva/templates/include/header.html:49
+#: dataviva/templates/modal/login.html:15
+#: dataviva/templates/modal/signup.html:49
 msgid "Sign Up"
 msgstr ""
 
@@ -4175,6 +4186,138 @@ msgstr ""
 #: dataviva/templates/include/promoters.html:4
 #: dataviva/translations/dictionary.py:574
 msgid "Promoters"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:6
+msgid "Entrepreneur"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:20
+msgid "Main Searchs"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:22
+msgid "Number of establishments of an activity in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:23
+#: dataviva/templates/modal/dataviva.html:47
+#: dataviva/templates/modal/dataviva.html:80
+msgid "Average wage of an activity in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:24
+#: dataviva/templates/modal/dataviva.html:48
+#: dataviva/templates/modal/dataviva.html:81
+msgid "Main trade partner of a product in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:25
+#: dataviva/templates/modal/dataviva.html:49
+#: dataviva/templates/modal/dataviva.html:82
+msgid "Locations that concentrates the jobs in one activity"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:26
+#: dataviva/templates/modal/dataviva.html:50
+#: dataviva/templates/modal/dataviva.html:83
+msgid "Locations that imports more or exports more one specific product"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:27
+#: dataviva/templates/modal/dataviva.html:51
+#: dataviva/templates/modal/dataviva.html:84
+msgid "Similar products to my business, produced in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:28
+#: dataviva/templates/modal/dataviva.html:52
+#: dataviva/templates/modal/dataviva.html:85
+msgid "Courses offered in a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:29
+#: dataviva/templates/modal/dataviva.html:53
+#: dataviva/templates/modal/dataviva.html:86
+msgid "General economic profile of a region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:30
+msgid "View more options"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:38
+#: dataviva/templates/modal/wizard.html:28
+msgid "Choose an option or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:46
+#: dataviva/templates/modal/dataviva.html:79
+msgid "Number of establishments of one activity in one region"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:61
+msgid "Choose a location or type what you are looking for"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:65
+#: dataviva/translations/dictionary.py:150
+msgid "Regions"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:66
+#: dataviva/translations/dictionary.py:151
+msgid "States"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:67
+msgid "Mesorregions"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:68
+#: dataviva/translations/dictionary.py:153
+msgid "Microregions"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:96
+msgid "Didn't find what I was looking for"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:104
+#: dataviva/templates/modal/wizard.html:47
+msgid "Advance"
+msgstr ""
+
+#: dataviva/templates/modal/dataviva.html:106
+#: dataviva/templates/modal/signup.html:49
+#: dataviva/templates/modal/wizard.html:46
+msgid "Cancel"
+msgstr ""
+
+#: dataviva/templates/modal/login.html:7
+msgid "Users Acess"
+msgstr ""
+
+#: dataviva/templates/modal/login.html:16
+msgid "Forgot my Password"
+msgstr ""
+
+#: dataviva/templates/modal/signup.html:8
+msgid ""
+"Signing up gives you access to exclusive resources to facilitate your "
+"research."
+msgstr ""
+
+#: dataviva/templates/modal/signup.html:26
+msgid "What profile best describes you"
+msgstr ""
+
+#: dataviva/templates/modal/signup.html:42
+msgid "I want to receive news and tips of the best use of Dataviva"
+msgstr ""
+
+#: dataviva/templates/modal/video.html:7
+msgid "Watch the Video"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:20
@@ -4497,20 +4640,8 @@ msgstr ""
 msgid "Country"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:150
-msgid "Regions"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:151
-msgid "States"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:152
 msgid "Mesoregions"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:153
-msgid "Microregions"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:154
