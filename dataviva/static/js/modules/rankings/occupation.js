@@ -65,10 +65,12 @@ var OccupationTable = function () {
 
             $('#occupation-groups').click(function() {
                 occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#occupation-families').click(function() {
                 occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
+                $(this).addClass('active').siblings().removeClass('active');
             });
         }
     });

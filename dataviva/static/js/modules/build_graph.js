@@ -1,12 +1,12 @@
 var dimensionSelectCallback = function(id, event) {
     $('#'+this).html(dataviva[this.toString()][id].name);
-
+    $('#modal-selector').modal('hide');
 }
 
 $(document).ready(function() {
 
 
-    dataviva.requireAttrs(['datasets', 'bra'], function() {
+    dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'hs', 'wld', 'course_hedu', 'course_sc', 'university'], function() {
 
         for (dataset in dataviva.datasets) {
             $('#datasets').append( $('<option value="'+dataset+'">'+dataviva.dictionary[dataset]+'</option>'));
@@ -17,19 +17,17 @@ $(document).ready(function() {
 
             $('#dimensions').empty();
             dataviva.datasets[this.value].dimensions.forEach(function(dimension) {
-
                 var div = $("<div></div>").addClass("form-group"),
                     label = $("<label></label>").attr("for", dimension.id).addClass("control-label"),
-                    select = $("<select></select>").attr("id", dimension.id).addClass("form-control");
+                    deactivate_button = $("<button></button>").attr("for", dimension.id).addClass("btn btn-xs btn-white pull-right")
+                                            .html(dataviva.dictionary['deactivate']),
+                    selector_button = $("<button></button>").attr("id", dimension.id).addClass("btn btn-block btn-outline btn-white")
+                                            .attr("onclick", "start_selector('"+dimension.name+"', dimensionSelectCallback);")
+                                            .html(dataviva.dictionary['select']);
 
                 label.html(dataviva.dictionary[dimension.id]);
 
-                $('#dimensions').append(div.append(label).append(select));
-
-                select.append($('<option value="all">'+dataviva.dictionary['all']+'</option>'));
-                dimension.depths.forEach(function(depth) {
-                    select.append($('<option value="'+depth.value+'">'+dataviva.dictionary[depth.id]+'</option>'));
-                });
+                $('#dimensions').append(div.append(label).append(deactivate_button).append(selector_button));
             });
         });
     });
