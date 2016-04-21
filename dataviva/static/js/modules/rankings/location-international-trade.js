@@ -3,7 +3,7 @@ var LocationTradeRanking = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/secex/all-0/show.1/all/all/?order=eci.desc",
+        "sAjaxSource": "/secex/all-0/show.9/all/all/?order=eci.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
@@ -86,7 +86,7 @@ var LocationTradeRanking = function () {
 
             $('#location-international-trade-table_filter input').removeClass('input-sm');
             $('#location-international-trade-table_filter').addClass('pull-right');
-            $('#location-international-trade-regions').addClass('active');
+            $('#location-international-trade-municipalities').addClass('active');
 
             $('#location-international-trade-regions').click(function() {
                 locationTradeRanking.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
