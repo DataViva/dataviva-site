@@ -40,28 +40,28 @@
 						<form method="post" action="{{ action }}" class="form-horizontal">
 						{{ form.hidden_tag() }}
 							<div class="form-group">
-								<label for="footer-nome" class="col-xs-15 col-sm-5 col-md-3 control-label">{% trans %}Name{% endtrans %}</label>
+								<label for="footer-nome" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Name{% endtrans %}</label>
 								<div class="col-xs-15 col-sm-10 col-md-11">
 									{{ form.name(class="form-control")}}
     								{{ messages(form.name) }}
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="footer-email" class="col-xs-15 col-sm-5 col-md-3 control-label">E-mail</label>
+								<label for="footer-email" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">E-mail</label>
 								<div class="col-xs-15 col-sm-10 col-md-11">
 									{{ form.email(class="form-control")}}
     								{{ messages(form.email) }}
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="footer-subject" class="col-xs-15 col-sm-5 col-md-3 control-label">{% trans %}Subject{% endtrans %}</label>
+								<label for="footer-subject" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Subject{% endtrans %}</label>
 								<div class="col-xs-15 col-sm-10 col-md-11">
 									{{ form.subject(class="form-control")}}
     								{{ messages(form.subject) }}
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="footer-message" class="col-xs-15 col-sm-5 col-md-3 control-label">{% trans %}Message{% endtrans %}</label>
+								<label for="footer-message" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Message{% endtrans %}</label>
 								<div class="col-xs-15 col-sm-10 col-md-11">
 									{{ form.message(class="form-control", rows=5)}}
     								{{ messages(form.message) }}
