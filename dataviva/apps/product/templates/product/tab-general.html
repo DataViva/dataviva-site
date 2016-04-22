@@ -8,7 +8,7 @@
             {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {% trans %}is{%endtrans%} {{ body.municipality_name_export }} 
@@ -21,7 +21,7 @@
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }} 
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {% trans %}is{%endtrans%} {{ body.municipality_name_export }} 
@@ -37,7 +37,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -52,7 +52,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -69,7 +69,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -84,7 +84,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -101,7 +101,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -116,7 +116,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -132,7 +132,7 @@
             {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }}
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years.{%endtrans%}
         {% endif %}
@@ -143,7 +143,7 @@
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }} 
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }}
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years.{% endtrans %}</p>
         {% endif %}
