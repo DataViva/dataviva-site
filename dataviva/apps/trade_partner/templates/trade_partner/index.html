@@ -28,7 +28,23 @@
         <div class="container">
 
             <span class="portrait dv-wld-{{ trade_partner.id[0:2] }} hidden-xs"></span>
-            <h1>{{ trade_partner.name() }} <a href="#" title="Trocar" onclick="start_selector('TradePartner');"> (trocar)</a></h1>
+            <h1>
+                {{ trade_partner.name() }} 
+                {% if not location.id %}
+                {% trans %}in Brazil{% endtrans %}
+                {% else %}
+                {{location.preposition('em')}} {{location.name()}}
+                {% endif %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    trocar <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="select_attr('wld');">{% trans %}Country{% endtrans %}</a></li>
+                    <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+                  </ul>
+                </div>
+            </h1>
             <span class="clearfix"></span>
 
             <div class="indices">
