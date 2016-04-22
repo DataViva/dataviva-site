@@ -115,7 +115,13 @@
           <span>{{ body.total_imports | magnitude }}</span>
         </dd>
       </dl>
-      <a href="#comercio-internacional" aria-controls="comercio-internacional" role="tab" data-toggle="tab" class="pull-right btn btn-primary m-r-lg">
+      <a href="#trade-partner" 
+                    aria-controls="trade-partner" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ location.id }}">
         {% trans %}More details{% endtrans %}
       </a>
     </div><!--/.col-->
@@ -146,7 +152,13 @@
           <span>{{ body.total_jobs | magnitude }}</span>
         </dd>
       </dl>
-      <a href="#salario-emprego" aria-controls="salario-emprego" role="tab" data-toggle="tab" class="pull-right btn btn-primary m-r-lg">
+      <a href="#wages" 
+                    aria-controls="wages" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ location.id }}">
         {% trans %}More details{% endtrans %}
       </a>
     </div>
@@ -189,7 +201,13 @@
         </dd>
         {% endif %}
       </dl>
-      <a href="#oportunidade-economica" aria-controls="oportunidade-economica" role="tab" data-toggle="tab" class="pull-right btn btn-primary m-r-lg">
+      <a href="#opportunities" 
+                    aria-controls="opportunities" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ location.id }}">
           {% trans %}More details{% endtrans %}
       </a>
     </div>
@@ -230,7 +248,13 @@
         </dd>
         {% endif %}
       </dl>
-      <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab" class="pull-right btn btn-primary m-r-lg">
+      <a href="#education" 
+                    aria-controls="education" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ location.id }}">
           {% trans %}More details{% endtrans %}
       </a>
     </div>
