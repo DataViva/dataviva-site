@@ -89,25 +89,39 @@
 
 
 /* MODAIS */
-.modal-body .selector_header_icon, .modal-body .selector_title_div {
-    float: left;
-}
-
-.modal-body .selector_title_div .selector_description + .breadcrumb {
-    display: none;
-}
-
 .modal-body .selector .selector_header {
     padding: 0 0 20px 0;
+    position: relative;
 }
+.modal-body .selector .selector_header #header_select_div {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.modal-body .selector_header .selector_header_icon, .modal-body .selector_header .selector_title_div {
+    height: 60px;
+    margin: 0;
+}
+.modal-body .selector_header .selector_header_icon {
+    float: left;
+    margin: 6px 0 0 !important;
+}
+
+.modal-body .selector_header .selector_title_div {
+    background: #eee;
+    display: block;
+    margin: -15px -15px 20px;
+    padding: 15px 80px;
+}
+
 .modal-body .selector .selector_body {
     padding: 0;
 }
 .modal-body .selector .selector_body .search_result:nth-child(4n+1) {
-    background: #e1eee6;
+    background: #eee;
 }
-.modal-body .selector .selector_body .search_result .d3plus_button_label[style] {
-    width: auto !important;
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_node[style] {
     color: #333 !important;
     background-color: #fff !important;
     border-color: #ccc !important;
@@ -116,13 +130,30 @@
     font-weight: normal !important;;
     line-height: 1.42857143 !important;;
 }
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_button_element.d3plus_button_label[style] {
+    width: auto !important;
+}
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_drop_list[style] {
+    width: auto !important;
+}
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_drop_list .d3plus_node[style] {
+    border-radius: 0 !important;
+}
+.proximity_toggles .d3plus_title[style] {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
 
-
-
-
-
-
-
+.modal-body .selector .selector_header .selector_depth {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.modal-body .selector .selector_header .selector_depth #leon_selector_depth_toggle {
+    padding-left: 0;
+}
+.selector_header .breadcrumb{
+    padding: 0;
+    background: transparent;
+}
 
 
 
