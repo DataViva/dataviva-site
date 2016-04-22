@@ -371,13 +371,18 @@ function Selector() {
               .attr("value",s)
               .attr("name","selector_sort")
               .attr("onclick","populate_list(selected,this.value)");
+
             if (s == sorting) input.attr("checked","checked");
             sort_toggles.append("label")
               .attr("for","selector_sort_"+s)
               .html(dataviva.format.text(s));
           });
 
+
           sorter = leon("$selector_sort").color(dataviva.color);
+
+          $('#leon_selector_sort .leon.radio.group').children().attr('class', 'btn btn-default')
+          $('#leon_selector_sort .leon.radio.group').attr('class', 'btn-group');
         }
 
         header_select_div = sort_toggles.append("div").attr("id","header_select_div");
@@ -603,10 +608,8 @@ function Selector() {
         searcher.color(header_color);
 
 
-
         //  AJUSETES DE LAYOUT
         $("#"+name+"_search").attr('class', 'form-control');
-
 
         if (type !== "file") {
           depth_select.html("");
@@ -632,6 +635,9 @@ function Selector() {
             });
 
             leon("$selector_depth_toggle").color(header_color);
+
+            $('#leon_selector_depth_toggle .leon.radio.group').children().attr('class', 'btn btn-default')
+            $('#leon_selector_depth_toggle .leon.radio.group').attr('class', 'btn-group');
           }
 
         }

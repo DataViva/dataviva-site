@@ -106,8 +106,23 @@
 .modal-body .selector .selector_body .search_result:nth-child(4n+1) {
     background: #e1eee6;
 }
-
-.modal-body .selector .selector_body .search_result {
-    padding: 10px;
+.modal-body .selector .selector_body .search_result .d3plus_button_label[style] {
+    width: auto !important;
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;;
+    font-weight: normal !important;;
+    line-height: 1.42857143 !important;;
 }
+
+
+
+
+
+
+
+
+
 
