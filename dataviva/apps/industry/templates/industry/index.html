@@ -65,7 +65,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %}</h2>
                             <div class="number">
-                                R$ <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_establishments | magnitude }}</small>
                             </div>
                         </div>
