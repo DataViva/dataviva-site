@@ -23,7 +23,23 @@
         <div class="container">
 
             <span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
-            <h1>{{ major.name() }} <a href="#" title="Trocar" onclick="start_selector('Major');"> (trocar)</a></h1>
+            <h1>
+                {{ major.name() }} 
+                {% if not location.id %}
+                {% trans %}in Brazil{% endtrans %}
+                {% else %}
+                {{location.preposition('em')}} {{location.name()}}
+                {% endif %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    trocar <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="select_attr('course-hedu');">{% trans %}Major{% endtrans %}</a></li>
+                    <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+                  </ul>
+                </div>
+            </h1>
             <span class="clearfix"></span>
 
             <div class="indices">
@@ -32,7 +48,7 @@
                       <div class="widget">
                           <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
                           <div class="number">
-                              R$ <strong class="counter">{{header.enrolled | max_digits(3)}}</strong><br/>
+                              <strong class="counter">{{header.enrolled | max_digits(3)}}</strong><br/>
                               <small class="magnitude">{{header.enrolled | magnitude}}</small>
                           </div>
                       </div>
@@ -41,7 +57,7 @@
                       <div class="widget">
                         <h2 class="text-left text-uppercase">{% trans %}Number of Entrants{% endtrans %}</h2>
                         <div class="number">
-                            R$ <strong class="counter">{{header.entrants | max_digits(3)}}</strong><br/>
+                            <strong class="counter">{{header.entrants | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.entrants | magnitude}}</small>
                         </div>
                       </div>
