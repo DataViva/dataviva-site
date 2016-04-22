@@ -33,7 +33,7 @@
                     <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
                     <div class="number">
                         <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
-                        <small class="magnitude">{{ header.enrolled | magnitude }}</small>
+                        <small class="magnitude">{{ header.enrolled | magnitude }} {% trans %}students{% endtrans %}</small>
                     </div>
                 </div>
               </div>
@@ -43,17 +43,17 @@
                     <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students {% endtrans %}</h2>
                     <div class="number">
                         <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
-                        <small class="magnitude">{{ header.entrants | magnitude }}</small>
+                        <small class="magnitude">{{ header.entrants | magnitude }} {% trans %}students{% endtrans %}</small>
                     </div>
                 </div>
               </div>
 
               <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="widget">
-                    <h2 class="text-left text-uppercase">{% trans %}Number of Graduates {% endtrans %}</h2>
+                    <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
                     <div class="number">
                         <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
-                        <small class="magnitude">{{ header.graduates | magnitude }}</small>
+                        <small class="magnitude">{{ header.graduates | magnitude }} {% trans %}students{% endtrans %}</small>
                     </div>
                 </div>
               </div>
