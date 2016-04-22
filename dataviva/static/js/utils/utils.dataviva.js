@@ -306,7 +306,7 @@ dataviva.ui.loading = function(parent) {
 
   var self = this
 
-  this.div = $(parent).attr("class","loading");
+  this.div = d3.select(parent).classed('loading',true);
 
   this.icon = self.div.append("i")
     .attr("class","fa fa-certificate");
@@ -314,7 +314,7 @@ dataviva.ui.loading = function(parent) {
   this.words = self.div.append("div")
     .attr("class","text");
 
-  this.timing = parseFloat(self.div.style("transition-duration"),10)*1000;
+  this.timing = parseFloat(self.div.style("transition-duration"),10)*1000
 
   this.show = function(callback) {
 
@@ -335,11 +335,13 @@ dataviva.ui.loading = function(parent) {
 
   this.hide = function() {
 
-    self.div.style("opacity",0)
+
+    this.icon.style("opacity",0);
+    this.words.style("opacity",0);
 
     setTimeout(function(){
-      self.div.style("display","none")
-    },self.timing);
+      self.div.classed('loading',false);
+    },self.timing)
 
     return self
 
