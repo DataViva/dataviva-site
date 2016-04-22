@@ -766,3 +766,69 @@ table.data-blue thead th small {
   font-size: 13px;
   font-weight: 400;
 }
+
+
+/* LOADING */
+div.loading {
+  -webkit-transition: opacity 0.6s;
+     -moz-transition: opacity 0.6s;
+          transition: opacity 0.6s;
+  z-index: 10000;
+  position: relative;
+  text-align: center;
+}
+
+div.loading > i {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #af1f24;
+  font-size: 60px;
+  opacity: 0.1;
+  -webkit-animation: spin 2s infinite linear, pulsate 6s infinite linear;
+    animation: spin 2s infinite linear, pulsate 6s infinite linear;
+}
+
+@-webkit-keyframes pulsate {
+  0% { color: #af1f24; }
+  16% { color: #e0902d; }
+  32% { color: #3daf49; }
+  48% { color: #1abbee; }
+  64% { color: #742777; }
+  80% { color: #d67ab0; }
+  96% { color: #af1f24; }
+  100% { color: #af1f24; }
+}
+
+@-moz-keyframes pulsate {
+  0% { color: #af1f24; }
+  16% { color: #e0902d; }
+  32% { color: #3daf49; }
+  48% { color: #1abbee; }
+  64% { color: #742777; }
+  80% { color: #d67ab0; }
+  96% { color: #af1f24; }
+  100% { color: #af1f24; }
+}
+
+@keyframes pulsate {
+  0% { color: #af1f24; }
+  16% { color: #e0902d; }
+  32% { color: #3daf49; }
+  48% { color: #1abbee; }
+  64% { color: #742777; }
+  80% { color: #d67ab0; }
+  96% { color: #af1f24; }
+  100% { color: #af1f24; }
+}
+
+div.loading > .text {
+  color: #888;
+  font-size: 16px;
+  margin-top: -11px;
+  position: absolute;
+  text-align: center;
+  text-shadow: 0px 0px 6px #efefef;
+  top: 50%;
+  width: 100%;
+}
