@@ -2,15 +2,7 @@
 
     <h2 class="m-t-xl">Perfil Geral</h2>
         {% if profile.bra_id|length == 9 %}
-<<<<<<< HEAD
-            <p>{{ header.name }}
-            {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities }}
-            {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
-            {% trans %} With {% endtrans %}{{ profile.area }}
-            {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }}
-            {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}.
-            {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
-=======
+
             <p>{{ header.name }} 
             {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities -1 }} 
             {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
@@ -18,7 +10,6 @@
             {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
             {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. 
             {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }}, 
->>>>>>> 66f931f71dc478cfa9c31100b73f4bca56cec7d4
             {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}
             º
             {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
@@ -27,15 +18,7 @@
             {% if g.locale == "pt" %}
                 A Microrregião
             {% endif %}
-<<<<<<< HEAD
-            {{ header.name }}
-            {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions }}
-            {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }},
-            {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
-            {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities }}
-            {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }}
-            {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010)
-=======
+
             {{ header.name }} 
             {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions -1}} 
             {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }}, 
@@ -43,18 +26,13 @@
             {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities -1 }} 
             {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
             {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
->>>>>>> 66f931f71dc478cfa9c31100b73f4bca56cec7d4
             {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 5 %}
             <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
-<<<<<<< HEAD
-            {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions }}
-            {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
-=======
+
             {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}} 
             {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
->>>>>>> 66f931f71dc478cfa9c31100b73f4bca56cec7d4
             {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}
             ª
             {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }}
@@ -98,13 +76,8 @@
                 {% else %}
                     {{ neighbors }},
                 {% endif %}
-<<<<<<< HEAD
-            {% endfor %}.
-            {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities }}
-=======
             {% endfor %}. 
             {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities -1 }} 
->>>>>>> 66f931f71dc478cfa9c31100b73f4bca56cec7d4
             {% trans %}cities{% endtrans %}
             .</p>
         {% endif %}
@@ -172,10 +145,8 @@
       </a>
     </div>
 
-    </div>
-    <div class="row">
-<<<<<<< HEAD
-
+  </div>
+  <div class="row">
     <div class="dl-box col-xs-12 col-md-6">
       <h3>{% trans %}Economic Opportunities{% endtrans %}</h3>
       <dl class="dl-horizontal">
@@ -248,218 +219,6 @@
       <a href="#educacao" aria-controls="educacao" role="tab" data-toggle="tab" class="pull-right btn btn-primary m-r-lg">
           {% trans %}More details{% endtrans %}
       </a>
-=======
-        <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>{% trans %}International Trade{% endtrans %}</h3>
-            <div class="table-responsive">
-                <table class="table data-detail">
-                    <tbody>
-                        {% if body.main_product_by_export_value %}
-                        <tr>
-                            <th>
-                                {% trans %}Main Product by Total Value Exported{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.main_product_by_export_value_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                USD<strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_export_value | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        {% if body.main_product_by_import_value %}
-                        <tr>
-                            <th>
-                                {% trans %}Main Product by Total Value Imported{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.main_product_by_import_value_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_product_by_import_value | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        <tr>
-                            <th>
-                                {% trans %}Total of Exports{% endtrans %}
-                            </th>
-                            <td>
-                                USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong> <span>{{ body.total_exports | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Total of Imports{% endtrans %}
-                            </th>
-                            <td>
-                                USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong> <span>{{ body.total_imports | magnitude }}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <a href="#trade-partner" aria-controls="trade-partner" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                {% trans %}More details{% endtrans %}
-            </a>
-        </div>
-        <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>{% trans %}Wages and Jobs{% endtrans %}</h3>
-            <div class="table-responsive">
-                <table class="table data-detail">
-                    <tbody>
-                        <tr>
-                            <th>
-                                {% trans %}Main Economic Activity{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.main_industry_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong> <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Main Occupation{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.main_occupation_by_num_jobs_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong> <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Average Wage{% endtrans %}
-                            </th>
-                            <td>
-                                USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> <span>{{ body.avg_wage | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Total of Jobs{% endtrans %}
-                            </th>
-                            <td>
-                                <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> <span>{{ body.total_jobs | magnitude }}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <a href="#wages" aria-controls="wages" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                {% trans %}More details{% endtrans %}
-            </a>
-        </div>
-
-        <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>{% trans %}Economic Opportunities{% endtrans %}</h3>
-            <div class="table-responsive">
-                <table class="table data-detail">
-                    <tbody>
-                        <tr>
-                        {% if body.less_distance_by_product %}
-                            <th>
-                                {% trans %}Product with Shortest Distance{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.less_distance_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong> <span>{{ body.less_distance_by_product | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        {% if body.less_distance_by_occupation %}
-                        <tr>
-                            <th>
-                                {% trans %}Economic Activity with Shortest Distance{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.less_distance_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong> <span>{{ body.less_distance_by_occupation | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        {% if body.opportunity_gain_by_product %}
-                        <tr>
-                            <th>
-                                {% trans %}Product with Highest Opportunity Gain{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.opportunity_gain_by_product_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_product | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        {% if body.opportunity_gain_by_occupation %}
-                        <tr>
-                            <th>
-                                {% trans %}Economic Activity with Highest Opportunity Gain{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.opportunity_gain_by_occupation_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong> <span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-            <a href="#opportunities" aria-controls="opportunities" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                {% trans %}More details{% endtrans %}
-            </a>
-        </div>
-
-        <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>{% trans %}Education{% endtrans %}</h3>
-            <div class="table-responsive">
-                <table class="table data-detail">
-                    <tbody>
-                        {% if body.highest_enrolled_by_university %}
-                        <tr>
-                            <th>
-                                {% trans %}University with Highest Number of Enrollments{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.highest_enrolled_by_university_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        {% if body.highest_enrolled_by_major %}
-                        <tr>
-                            <th>
-                                {% trans %}Major with Highest Number of Enrollments{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.highest_enrolled_by_major_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        {% if body.highest_enrolled_by_school %}
-                        <tr>
-                            <th>
-                                {% trans %}School with Highest Number of Enrollments{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.highest_enrolled_by_school_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        {% if body.highest_enrolled_by_basic_course %}
-                        <tr>
-                            <th>
-                                {% trans %}Basic Course with Highest Number of Enrollments{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.highest_enrolled_by_basic_course_name | truncate(length=30, killwords=False, end='...')}}</p>
-                                <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong> <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-            <a href="#education" aria-controls="education" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                {% trans %}More details{% endtrans %}
-            </a>
-        </div>
->>>>>>> 66f931f71dc478cfa9c31100b73f4bca56cec7d4
     </div>
 
   </div><!--/.row-->
