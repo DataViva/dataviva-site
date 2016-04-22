@@ -1,75 +1,70 @@
 <div role="tabpanel" class="tab-pane" id="opportunities">
-    <h2>{% trans %}Economic Opportunities{% endtrans %}</h2>
+
+    <h2>{% trans %}Wages and Jobs{% endtrans %}</h2>
+
     <div class="row">
-        <div class="col-xs-15 col-sm-15 col-md-12">
-            <div class="table-responsive">
-                <table class="table data-blue">
-                    <thead>
-                        <tr>
-                            {% if body.less_distance_by_product %}
-                                <th>
-                                    {% trans %}Product{% endtrans %}
-                                    <small>{% trans %}with Shortest Distance{% endtrans %}</small>
-                                </th>
-                            {% endif %}
-                            {% if body.less_distance_by_occupation %}
-                                <th>
-                                    {% trans %}Economic Activity{% endtrans %}
-                                    <small>{% trans %}with Shortest Distance{% endtrans %}</small>
-                                </th>
-                            {% endif %}
-                            {% if body.opportunity_gain_by_product %}
-                                <th>
-                                    {% trans %}Product {% endtrans %}
-                                    <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
-                                </th>
-                            {% endif %}
-                            {% if body.opportunity_gain_by_occupation %}
-                                <th>
-                                    {% trans %}Economic Activity{% endtrans %}
-                                    <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
-                                </th>
-                            {% endif %}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% if body.less_distance_by_product %}
-                                <td>
-                                    <p class="label">{{ body.less_distance_by_product_name }}</p>
-                                    <div class="number">
-                                        USD <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
-                                    </div>
-                                </td>
-                            {% endif %}
-                            {% if body.less_distance_by_occupation %}
-                                <td>
-                                    <p class="label">{{ body.less_distance_by_occupation_name }}</p>
-                                    <div class="number">
-                                        USD <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
-                                    </div>
-                                </td>
-                            {% endif %}
-                            {% if body.opportunity_gain_by_product %}
-                                <td>
-                                    <p class="label">{{ body.opportunity_gain_by_product_name }}</p>
-                                    <div class="number">
-                                        USD <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_product | magnitude }}</span>
-                                    </div>
-                                </td>
-                            {% endif %}
-                            {% if body.opportunity_gain_by_occupation %}
-                                <td>
-                                    <p class="label">{{ body.opportunity_gain_by_occupation_name }}</p>
-                                    <div class="number">
-                                        USD <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
-                                    </div>
-                                </td>
-                            {% endif %}
-                        </tr>
-                    </tbody>
-                </table>
+        {% if body.less_distance_by_product %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="blue-box title">
+                {% trans %}Product{% endtrans %}
+                <small>{% trans %}with Shortest Distance{% endtrans %}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.less_distance_by_product_name }}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
+                </div>
             </div>
         </div>
-    </div>
+        {% endif %}
+
+
+        {% if body.less_distance_by_occupation %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="blue-box title">
+                {% trans %}Economic Activity{% endtrans %}
+                <small>{% trans %}with Shortest Distance{% endtrans %}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.less_distance_by_occupation_name }}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if body.opportunity_gain_by_product %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="blue-box title">
+                {% trans %}Product{% endtrans %}
+                <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.opportunity_gain_by_product_name }}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_product | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        {% if body.opportunity_gain_by_occupation %}
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="blue-box title">
+                {% trans %}Economic Activity{% endtrans %}
+                <small>{% trans %}with Highest Opportunity Gain{% endtrans %}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.opportunity_gain_by_occupation_name }}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+    </div><!--/.row-->
+
 </div>

@@ -31,7 +31,16 @@
             {% endif %}
 
             <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
-                {{ location.name() }} <a href="#" title="Trocar" onclick="start_selector('Location');"> (trocar)</a>
+                {{ location.name() }} 
+               <div class="btn-group">
+              <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   {% trans %}change{% endtrans %} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                   <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+              </ul>
+            </div>
+
             </h1>
 
             <span class="clearfix"></span>
