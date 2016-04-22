@@ -85,5 +85,5 @@ def jinja_magnitude(number):
     if not number: 
         return 0
     integer = str(int(number))
-    orders_of_magnitude = [gettext('Units'), gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
+    orders_of_magnitude = ['', gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
     return orders_of_magnitude[len(integer[::3]) - 1]
