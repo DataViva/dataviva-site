@@ -24,7 +24,19 @@
       <div class="container">
 
         <span class="portrait dv-university-{{ university.school_type_id.lower() }} hidden-xs"></span>
-        <h1>{{ university.name() }} <a href="#" title="Trocar" onclick="start_selector('University');"> (trocar)</a></h1>
+
+        <h1>
+          {{ university.name() }} 
+            <div class="btn-group">
+              <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   {% trans %}change{% endtrans %} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                   <li><a href="#" onclick="select_attr('University');">{% trans %}Sector{% endtrans %}</a></li>
+              </ul>
+            </div>
+        </h1>
+        
         <span class="clearfix"></span>
         <div class="indices">
            <div class="row">
