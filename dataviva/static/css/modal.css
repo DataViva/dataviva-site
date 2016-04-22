@@ -89,8 +89,6 @@
 
 
 /* MODAIS */
-
-
 .modal-body .selector_header_icon, .modal-body .selector_title_div {
     float: left;
 }
@@ -99,6 +97,17 @@
     display: none;
 }
 
+.modal-body .selector .selector_header {
+    padding: 0 0 20px 0;
+}
+.modal-body .selector .selector_body {
+    padding: 0;
+}
+.modal-body .selector .selector_body .search_result:nth-child(4n+1) {
+    background: #e1eee6;
+}
 
-
+.modal-body .selector .selector_body .search_result {
+    padding: 10px;
+}
 
