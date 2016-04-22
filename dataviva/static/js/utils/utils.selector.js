@@ -427,6 +427,7 @@ function Selector() {
 
         }
 
+        $('#leon_header_select').attr('class','btn btn-primary');
         select_value(data[initial_value]);
 
       };
@@ -680,26 +681,6 @@ function Selector() {
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result");
-              // .on(d3plus.client.pointer.click,function(){
-              //   if (v.id.length < depths[depths.length-1]) {
-              //     if (type == "bra" && v.id.substr(0,2) == "4mg") {
-              //       if (v.id.length == 2) {
-              //         var depth = 7
-              //       }
-              //       else {
-              //         var depth = 8
-              //       }
-              //     }
-              //     else {
-              //       var depth = depths[depths.indexOf(v.id.length)+1]
-              //     }
-              //     select_value(v,depth);
-              //   }
-              //   else {
-                      // selector_load.text(dataviva.format.text("wait")).show()
-              //     callback(data[v.id],name);
-              //   }
-              // })
 
             var search_icon = false;
             if (v.icon && (v.icon != selected.icon || search_term !== "")) {
@@ -864,7 +845,7 @@ function Selector() {
           }
 
         });
-
+        $('#modal-selector-content .selector .selector_body .search_result .search_buttons .leon.button.medium').attr('class', 'btn btn-primary');
       };
 
       var close = null,
