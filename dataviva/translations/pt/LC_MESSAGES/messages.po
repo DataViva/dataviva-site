@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-22 17:40-0300\n"
+"POT-Creation-Date: 2016-04-22 18:13-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -166,6 +166,7 @@ msgid "Top Campuses"
 msgstr "Principais Campi"
 
 #: dataviva/api/stats/profile_helper.py:254
+#: dataviva/apps/basic_course/templates/basic_course/index.html:43
 #: dataviva/apps/data/templates/data/index.html:49
 #: dataviva/apps/industry/templates/industry/index.html:45
 #: dataviva/apps/major/templates/major/index.html:39
@@ -214,7 +215,7 @@ msgid "Top Municipality by Enrollment"
 msgstr "Principal Município por Matrículas"
 
 #: dataviva/api/stats/profile_helper.py:303
-#: dataviva/apps/basic_course/templates/basic_course/index.html:75
+#: dataviva/apps/basic_course/templates/basic_course/index.html:90
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:16
 #: dataviva/translations/dictionary.py:312
 msgid "Average Age"
@@ -553,29 +554,55 @@ msgstr "Mapa"
 msgid "Stacked"
 msgstr "Evolução"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:38
+#: dataviva/apps/basic_course/templates/basic_course/index.html:33
+#: dataviva/apps/industry/templates/industry/index.html:35
+#: dataviva/apps/major/templates/major/index.html:29
+#: dataviva/apps/occupation/templates/occupation/index.html:35
+#: dataviva/apps/product/templates/product/index.html:33
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:34
+msgid "in Brazil"
+msgstr "no Brasil"
+
+#: dataviva/apps/basic_course/templates/basic_course/index.html:39
+#: dataviva/apps/industry/templates/industry/index.html:41
+#: dataviva/apps/occupation/templates/occupation/index.html:41
+#: dataviva/apps/product/templates/product/index.html:39
+#: dataviva/apps/university/templates/university/index.html:32
+msgid "change"
+msgstr "trocar"
+
+#: dataviva/apps/basic_course/templates/basic_course/index.html:42
+#: dataviva/apps/location/templates/location/tab-education.html:22
+#: dataviva/apps/rankings/templates/rankings/_base.html:62
+#: dataviva/apps/rankings/templates/rankings/basic-course.html:13
+#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
+#: dataviva/translations/dictionary.py:368
+msgid "Basic Course"
+msgstr "Curso Básico"
+
+#: dataviva/apps/basic_course/templates/basic_course/index.html:53
 #: dataviva/apps/major/templates/major/index.html:49
 #: dataviva/apps/university/templates/university/index.html:45
 msgid "Number of Enrollments"
 msgstr "Número de Matrículas"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:47
+#: dataviva/apps/basic_course/templates/basic_course/index.html:62
 msgid "Number of Classes"
 msgstr "Número de Turmas"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:56
+#: dataviva/apps/basic_course/templates/basic_course/index.html:71
 msgid "Number of Schools"
 msgstr "Número de Escolas"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:65
+#: dataviva/apps/basic_course/templates/basic_course/index.html:80
 msgid "Average Size of Classes"
 msgstr "Tamanho Médio das Turmas"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:78
+#: dataviva/apps/basic_course/templates/basic_course/index.html:93
 msgid "years"
 msgstr "anos"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:87
+#: dataviva/apps/basic_course/templates/basic_course/index.html:102
 #: dataviva/apps/data/templates/data/index.html:33
 #: dataviva/apps/industry/templates/industry/index.html:123
 #: dataviva/apps/location/templates/location/index.html:107
@@ -597,7 +624,7 @@ msgstr "anos"
 msgid "Year"
 msgstr "Ano"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:106
+#: dataviva/apps/basic_course/templates/basic_course/index.html:121
 #: dataviva/apps/industry/templates/industry/index.html:142
 #: dataviva/apps/location/templates/location/index.html:123
 #: dataviva/apps/major/templates/major/index.html:97
@@ -609,7 +636,7 @@ msgstr "Ano"
 msgid "General"
 msgstr "Geral"
 
-#: dataviva/apps/basic_course/templates/basic_course/index.html:115
+#: dataviva/apps/basic_course/templates/basic_course/index.html:130
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
 #: dataviva/apps/major/templates/major/index.html:106
 #: dataviva/apps/university/templates/university/index.html:102
@@ -618,7 +645,7 @@ msgstr "Geral"
 msgid "Enrollments"
 msgstr "Matrículas"
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:12
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:10
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
 #: dataviva/apps/major/templates/major/tab-enrollments.html:21
 #: dataviva/apps/major/templates/major/tab-enrollments.html:48
@@ -634,8 +661,8 @@ msgstr "Matrículas"
 msgid "Main Municipality"
 msgstr "Principal Município"
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:13
-#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:18
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:11
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:24
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:60
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
 #: dataviva/apps/major/templates/major/tab-enrollments.html:9
@@ -646,7 +673,7 @@ msgstr "Principal Município"
 msgid "by Number of Enrolled Students"
 msgstr "por Número de Alunos Matriculados"
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:17
+#: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:23
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:60
 msgid "Main School"
 msgstr "Principal Escola"
@@ -1208,21 +1235,6 @@ msgstr "Distribuição"
 msgid "Bar Chart"
 msgstr "Barras"
 
-#: dataviva/apps/industry/templates/industry/index.html:35
-#: dataviva/apps/major/templates/major/index.html:29
-#: dataviva/apps/occupation/templates/occupation/index.html:35
-#: dataviva/apps/product/templates/product/index.html:33
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:34
-msgid "in Brazil"
-msgstr "no Brasil"
-
-#: dataviva/apps/industry/templates/industry/index.html:41
-#: dataviva/apps/occupation/templates/occupation/index.html:41
-#: dataviva/apps/product/templates/product/index.html:39
-#: dataviva/apps/university/templates/university/index.html:32
-msgid "change"
-msgstr "trocar"
-
 #: dataviva/apps/industry/templates/industry/index.html:44
 #: dataviva/apps/location/templates/location/graphs-wages.html:6
 #: dataviva/apps/location/templates/location/graphs-wages.html:31
@@ -1445,8 +1457,14 @@ msgid "Activities Space"
 msgstr "Espaço de Atividades"
 
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:8
-#, fuzzy
-msgid "Trade Balance By"
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:8
+#: dataviva/apps/product/templates/product/index.html:53
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:8
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:54
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:70
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:83
+#: dataviva/translations/dictionary.py:282
+msgid "Trade Balance"
 msgstr "Balança Comercial"
 
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:11
@@ -1459,6 +1477,7 @@ msgstr "Exportações por"
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:12
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:37
 #: dataviva/apps/location/templates/location/tab-opportunities.html:11
+#: dataviva/apps/product/templates/product/index.html:42
 #: dataviva/apps/rankings/templates/rankings/_base.html:50
 #: dataviva/apps/rankings/templates/rankings/product.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:12
@@ -1554,14 +1573,6 @@ msgstr "Curso"
 #: dataviva/translations/dictionary.py:366
 msgid "School"
 msgstr "Escola"
-
-#: dataviva/apps/location/templates/location/tab-education.html:22
-#: dataviva/apps/rankings/templates/rankings/_base.html:62
-#: dataviva/apps/rankings/templates/rankings/basic-course.html:13
-#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
-#: dataviva/translations/dictionary.py:368
-msgid "Basic Course"
-msgstr "Curso Básico"
 
 #: dataviva/apps/location/templates/location/tab-general.html:7
 msgid "is one of the "
@@ -2189,16 +2200,6 @@ msgstr "Renda Média Mensal"
 msgid "Activity with Highest"
 msgstr "Atividade com Maior"
 
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:8
-#: dataviva/apps/product/templates/product/index.html:53
-#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:8
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:54
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:70
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:83
-#: dataviva/translations/dictionary.py:282
-msgid "Trade Balance"
-msgstr "Balança Comercial"
-
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:20
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:51
 #: dataviva/templates/about.html:102 dataviva/templates/site.html:74
@@ -2212,13 +2213,6 @@ msgstr "Mapa"
 #: dataviva/translations/dictionary.py:527
 msgid "Imports By"
 msgstr "Importações por"
-
-#: dataviva/apps/product/templates/product/index.html:42
-#: dataviva/apps/university/templates/university/index.html:35
-#: dataviva/translations/dictionary.py:329
-#: dataviva/translations/dictionary.py:331
-msgid "Sector"
-msgstr "Setor"
 
 #: dataviva/apps/product/templates/product/index.html:62
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:63
@@ -2865,6 +2859,12 @@ msgstr "Produto com Menor"
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:12
 msgid "Students Status"
 msgstr "Situação dos Estudantes"
+
+#: dataviva/apps/university/templates/university/index.html:35
+#: dataviva/translations/dictionary.py:329
+#: dataviva/translations/dictionary.py:331
+msgid "Sector"
+msgstr "Setor"
 
 #: dataviva/apps/university/templates/university/index.html:48
 #: dataviva/apps/university/templates/university/index.html:58
@@ -6559,4 +6559,7 @@ msgstr "com"
 
 #~ msgid "Number of Graduates "
 #~ msgstr "Número de Concluintes"
+
+#~ msgid "Trade Balance By"
+#~ msgstr "Balança Comercial"
 
