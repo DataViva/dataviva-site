@@ -2,7 +2,7 @@
     <h2 class="m-t-xl">Perfil Geral</h2>
     {% if not location.id %}
         <p>{% trans %}The {% endtrans %}{{occupation.name()}}
-         {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+         {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
          {% trans %}professionals, being number {% endtrans %}{{header.ranking}}
          {% if language == "pt" %}&ordm{% endif %} 
          {% trans %}in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is {% endtrans %}{{body.municipality_with_more_jobs}} 
@@ -14,7 +14,7 @@
         {% if location.id|length == 1 %}
             {% if language == "pt" %}&ordm{% endif %} 
             <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
-            {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
             {% trans %}professionals in the{%endtrans%} {{location.name()}}
             {% trans %}region, being number {% endtrans %}{{header.ranking}}
             {% trans %} in the region occupation ranking. The average monthly income is {% endtrans %}{{header.average_monthly_income}} 
@@ -23,7 +23,7 @@
         
         {% elif location.id|length == 3 %}
             <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
-            {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
             {% trans %}professionals in the state of {%endtrans%}{{location.name()}}
             {% trans %}being number {% endtrans %}{{header.ranking}}
             {% if language == "pt" %}&ordm{% endif %} 
@@ -33,7 +33,7 @@
         
         {% elif location.id|length == 5 %}
             <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
-            {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
             {% trans %}professionals in the the mesoregion of {%endtrans%}{{location.preposition('de')}} {{location.name()}}, 
             {% trans %}being number {% endtrans %}{{header.ranking}}
             {% if language == "pt" %}&ordm{% endif %} 
@@ -43,7 +43,7 @@
         
         {% elif location.id|length == 7 %}
             <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
-            {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
             {% trans %}professionals in the micro-region {% endtrans %}{{location.preposition('de')}} {{location.name()}}, 
             {% trans %}being number {% endtrans %}{{header.ranking}}
             {% if language == "pt" %}&ordm{% endif %} 
@@ -52,7 +52,7 @@
             {% trans %}The city that employs the most in this occupation is {% endtrans %}{{location.article()}} {{body.municipality_with_biggest_wage_avg}}.</p>
         {% else %}
             <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
-            {% trans %}occupation employs {% endtrans %}{{header.total_employment}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
             {% trans %}professionals, being number {% endtrans %}{{header.ranking}}
             {% if language == "pt" %}&ordm{% endif %} 
             {% trans %}in its occupation ranking. The average monthly income is {% endtrans %}{{header.average_monthly_income}} 
