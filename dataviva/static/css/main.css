@@ -768,6 +768,52 @@ table.data-blue thead th small {
 }
 
 
+/* BLUE BOX */
+.blue-box {
+  background: #5a9dc4;
+  color: #FFF;
+  vertical-align: middle;
+  padding: 10px 8px 8px;
+  margin-bottom: 2px;
+    height: 100px;
+}
+.blue-box .label {
+  font-size: 14px;
+  padding: 0;
+  text-transform: uppercase;
+  white-space: inherit;
+  display: block;
+  text-align: left;
+  height: 23px;
+}
+.blue-box .number {
+  font-size: 18px;
+}
+.blue-box .number span {
+  font-weight: 700;
+}
+.blue-box .number strong {
+  font-size: 35px;
+  line-height: 35px;
+  padding-right: 3px;
+}
+.blue-box.title {
+  font-size: 18px;
+  line-height: 18px;
+  vertical-align: middle;
+    margin-top: 15px;
+  height: 50px;
+  padding: 8px;
+}
+.blue-box.title label{
+    height: auto;
+}
+.blue-box.title small {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+}
+
 /* PAGE LOADER */
 .loading {
     position: relative;
