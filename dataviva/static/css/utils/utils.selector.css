@@ -92,7 +92,7 @@
 
 .selector .search_result {
   display: block;
-  padding: 6px;
+  padding: 10px;
   position: relative;
 }
 
@@ -141,8 +141,8 @@
 
 .selector div.search_text > div.search_title {
   display: inline;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 1.1em;
   width: 370px;
 }
 
@@ -162,7 +162,8 @@
 }
 
 .selector div.search_text > div.search_data {
-  color: #333;
+  color: #999;
+  font-size: 13px;
 }
 
 .selector .search_result > div.search_buttons {
