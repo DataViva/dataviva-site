@@ -11,8 +11,7 @@
     {% else %}
         {% if header.bra_id|length == 1 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{{ location.preposition("de") }} {{ header.location_name }}.
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }}
@@ -21,8 +20,7 @@
 
         {% elif header.bra_id|length == 3 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the state of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
              {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
@@ -31,8 +29,7 @@
 
         {% elif header.bra_id|length == 5 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the mesoregion of{% endtrans %} {{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
              {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
@@ -41,8 +38,7 @@
 
         {% elif header.bra_id|length == 7 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the microregion of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
              {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
@@ -51,8 +47,7 @@
 
         {% else %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the municipality of{% endtrans %} {{ location.preposition("de") }}{{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }}{{ body.university_with_more_enrolled }}, 
              {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
