@@ -1,12 +1,12 @@
-<h2>Escolha um produto da lista abaixo ou busque pelo nome</h2>
+<h2>{% trans %}Choose a product or type what you are looking for{% endtrans %}</h2>
 <form action="" class="form-dataviva form-inline filter">
     
     <div class="btn-group nav nav-tabs" role="tablist">
        <a class="btn btn-default" href="#sections" aria-controls="sections" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.sections)">
-        Secões
+        {% trans %}Sections{% endtrans %}
         </a>
         <a class="btn btn-default" href="#positions" aria-controls="positions" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.positions)">
-        Posicões
+        {% trans %}Positions{% endtrans %}
         </a>
     </div>
     
@@ -22,7 +22,7 @@
                     ng-model="selector_model.sections.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. HS" />
+                    placeholder="{% trans %}Search by name or HS number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -52,7 +52,7 @@
                            ng-model="selector_model.positions.filter_string"
                            ng-trim="true"
                            autocomplete="false"
-                           placeholder="Busque pelo nome ou pelo No. HS" />
+                           placeholder="{% trans %}Search by name or HS number:{% endtrans %}" />
                 </div>
             </div>
             

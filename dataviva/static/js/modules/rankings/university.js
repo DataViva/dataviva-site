@@ -13,6 +13,13 @@ var universityTable = function () {
             {data: 0},
             {data: 1},
             {data: 2},
+            {data: 3},
+            {data: 4},
+            {data: 5},
+            {data: 6},
+            {data: 7},
+            {data: 8},
+            {data: 9}
         ],
         "columnDefs": [
             {
@@ -55,6 +62,9 @@ var universityTable = function () {
 
             $('#university-table_filter input').removeClass('input-sm');
             $('#university-table_filter').addClass('pull-right');
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

@@ -25,9 +25,15 @@
     background: none;
 }
 
-.help .faq .panel-group .panel-default .panel-heading {
+/*.help .faq .panel-group .panel-default .panel-heading {
     border: none;
     background: none;
+}*/
+
+.help .panel-group .panel-default .panel-heading {
+    border: none;
+    background: none;
+    background-color: #fff;
 }
 
 .help .faq .panel-group .panel-default a {
@@ -36,6 +42,10 @@
     font-weight: 500;
     line-height: 1.1;
     font-size: 14px;
+}
+
+.help .panel-default {
+    border: none;
 }
 
 .help .faq .panel-group .panel-default .panel-body {

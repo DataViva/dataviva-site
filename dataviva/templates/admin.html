@@ -14,14 +14,14 @@
 <section id="admin">
     <div class="container">
         <nav class="sidebar col-md-2">
-            <h3>Módulos</h3>
+            <h3>{% trans %}Modules{% endtrans %}</h3>
             <ul>
                 <li><a href="{{ url_for('blog.admin') }}" title="Blog">Blog</a></li>
-                <li><a href="{{ url_for('calls.admin') }}" title="Chamadas">Chamadas</a></li>
-                <li><a href="{{ url_for('scholar.admin') }}" title="Estudos">Estudos</a></li>
-                <li><a href="{{ url_for('search.admin') }}" title="Inicie uma Pesquisa">Inicie uma Pesquisa</a></li>
-                <li><a href="{{ url_for('news.admin') }}" title="Notícias">Notícias</a></li>
-                <li><a href="{{ url_for('users.admin') }}" title="Usuários">Usuários</a></li>
+                <li><a href="{{ url_for('calls.admin') }}" title="Chamadas">{% trans %}Calls{% endtrans %}</a></li>
+                <li><a href="{{ url_for('scholar.admin') }}" title="Estudos">{% trans %}Scholar{% endtrans %}</a></li>
+                <li><a href="{{ url_for('search.admin') }}" title="Inicie uma Pesquisa">{% trans %}Start a search{% endtrans %}</a></li>
+                <li><a href="{{ url_for('news.admin') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
+                <li><a href="{{ url_for('users.admin') }}" title="Usuários">{% trans %}Users{% endtrans %}</a></li>
             </ul>
         </nav>
         <div id="admin-content" class="col-md-10">

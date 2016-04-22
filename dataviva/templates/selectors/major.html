@@ -1,12 +1,12 @@
-<h2>Escolha um curso da lista abaixo ou busque pelo nome</h2>
+<h2>{% trans %}Choose a course or type what you are looking for{% endtrans %}</h2>
 <form action="" class="form-dataviva form-inline filter">
     
     <div class="btn-group nav nav-tabs" role="tablist">
         <a href="#fields" aria-controls="fields" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.fields)">
-        Campos
+        {% trans %}Fields{% endtrans %}
         </a>
         <a href="#courses" aria-controls="courses" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.courses)">
-        Cursos
+        {% trans %}Courses{% endtrans %}
         </a>
     </div>
     
@@ -22,7 +22,7 @@
                     ng-model="selector_model.fields.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. Course HEDU" />
+                    placeholder="{% trans %}Search by name or Course HEDU number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -53,7 +53,7 @@
                     ng-model="selector_model.courses.filter_string"
                     ng-trim="true"
                     autocomplete="false" 
-                    placeholder="Busque pelo nome ou pelo No. Course HEDU"/>
+                    placeholder="{% trans %}Search by name or Course HEDU number:{% endtrans %}"/>
                 </div>
             </div>
             

@@ -1,69 +1,4 @@
 <div role="tabpanel" class="tab-pane active" id="general">
-    {% if header.course_age %}
-    <div class="jcarousel-wrapper">
-    {% endif %}
-        <div class="jcarousel">
-            <ul>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
-                        <div class="number">
-                            <strong class="counter">{{header["course_enrolled"] | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{header["course_enrolled"] | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %}</h2>
-                        <div class="number">
-                            <strong class="counter">{{header["course_classes"] | max_digits(3)}}</strong><br/>
-                            <small class="magnitude">{{header["course_classes"] | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Schools{% endtrans %}</h2>
-                        <div class="number">
-                            <strong class="counter">{{header["school_count"] | max_digits(3)}}</strong><br/>
-                            <small class="magnitude">{{header["school_count"] | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Average Size of Classes{% endtrans %}</h2>
-                        <div class="number">
-                            <strong class="counter">{{ header.course_average_class_size|max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{% trans %}students{% endtrans %}</small>
-                        </div>
-                    </div>
-                </li>
-                {% if header.course_age %}
-                    <li>
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Average Age{% endtrans %}</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.course_age|max_digits(3) }}</strong><br/>
-                                <small class="magnitude">{% trans %}years{% endtrans %}</small>
-                            </div>
-                        </div>
-                    </li>
-                {% endif %}
-            </ul>
-        </div>
-
-        <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
-        <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
-    {% if header.course_age %}
-    </div>
-    {% endif %}
-
-    <div class="m-t-sm col-xs-12 year">
-        {% trans %}Year{% endtrans %}: {{ header.year }}
-    </div>
-
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
         {% if not location.id %}
             <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{basic_course.name()}} 
@@ -77,76 +12,75 @@
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{ basic_course.name() }} 
                 {% trans %}in {% endtrans %}{{ location.name() }} 
                 {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
-                {% trans %}with{% endtrans %}{{ header.location_enrolled| max_digits(3) }} {{ header.location_enrolled | magnitude }} 
-                {% trans %}students. The region has a total of {% endtrans %}{{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                {% trans %}with{% endtrans %}{{ header.location_enrolled| max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                {% trans %}students. The region has a total of {% endtrans %}{{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
                 {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
                 {% trans %}students per class in average{% endtrans %}.</p>
             {% elif location.id|length == 3 %}
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{ basic_course.name() }}
                  {% trans %}in the state of {% endtrans %}{{location.preposition('de')}} {{ location.name() }} 
                  {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
-                 {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
-                 {% trans %}students. The state has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                 {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                 {% trans %}students. The state has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
                  {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
                  {% trans %}students per class in average{% endtrans %}.</p>
             {% elif location.id|length == 5 %}
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %} {{ basic_course.name() }} 
                 {% trans %}in the mesoregion {% endtrans %} {{ location.name() }} 
                 {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
-                {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
-                {% trans %}students. The mesoregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                {% trans %}students. The mesoregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
                 {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
                 {% trans %}students per class in average{% endtrans %}.</p>
             {% elif location.id|length == 7 %}
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %} {{ basic_course.name() }} 
                 {% trans %}in the microregion {% endtrans %} {{ location.name() }} 
                 {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
-                {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ header.location_enrolled | magnitude }} 
-                {% trans %}students. The microregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                {% trans %}students. The microregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
                 {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
                 {% trans %}students per class in average{% endtrans %}.</p>
             {% else %}
-                <p>{{ location.name() }} 
-                {% trans %}ocupa o{% endtrans %} {{ header.rank }}º 
-                {% trans %}lugar entre os municípios com maior número de matrículas para o curso/campo de {% endtrans %} {{ basic_course.name() }} 
+                <p>{{ location.name() }}
+                {% trans %} is{% endtrans %} {{ header.rank }}
+                {% if g.locale == "pt" %}º{% endif %} 
+                {% trans %}city in number of enrollments in the {% endtrans %}{{basic_course.preposition('em')}} {{ basic_course.name() }} 
                 {% trans %}in the state of {% endtrans %} {{location.preposition('de')}} {{ header.state_name }}. 
-                {% trans %}The city has {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ header.course_enrolled | magnitude }} 
+                {% trans %}The city has {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
                 {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
                 {% trans %}students per class in average{% endtrans %}.</p>
             {% endif %}
         {% endif %}
 
-    <div class="row">
-        <div class="col-xs-12 col-md-10 col-lg-8">
-            <h3>{% trans %}Enrollments{% endtrans %}</h3>
-            <div class="table-responsive">
-                <table class="table data-detail">
-                    <tbody>
-                       <tr>
-                            <th>
-                                {% trans %}Main School{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{body["school_name"]}}</p>
-                                <strong class="counter">{{body["school_enrolled"] | max_digits(3)}}</strong> <span>{{body["school_enrolled"] | magnitude}}</span>
-                            </td>
-                        </tr>
-                        {% if location.id | length < 9 %}
-                        <tr>
-                            <th>
-                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{body["city_name"]}}</p>
-                                <strong class="counter">{{body["city_enrolled"] | max_digits(3)}}</strong> <span>{{body["city_enrolled"] | magnitude}}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                    </tbody>
-                </table>
-            </div>
-            <a href="#wages" aria-controls="wages" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                {% trans %}More detais{% endtrans %}
+        <div class="row">
+
+        <div class="dl-box col-xs-12 col-md-6">
+            <h3>{% trans %}International Trade{% endtrans %}</h3>
+            <dl class="dl-horizontal">
+                    <dt>{% trans %}Main School{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.school_name }}</small>
+                        <strong class="counter">{{body.school_enrolled | max_digits(3) }}</strong> 
+                        <span>{{body.school_enrolled | magnitude}}</span>
+                    </dd>
+                    {% if location.id | length < 9 %}
+                    <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.city_name }}</small>
+                        <strong class="counter">{{body.city_enrolled | max_digits(3)}}</strong>
+                        <span>{{body.city_enrolled | magnitude}}</span>
+                    </dd>
+                    {% endif %}
+            </dl>
+            <a href="#enrollments" 
+                    aria-controls="enrollments" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ basic_course.id }}"
+                    data-location="{{ location.id }}">
+                {% trans %}More details{% endtrans %}
             </a>
         </div>
     </div>

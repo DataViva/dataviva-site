@@ -3,18 +3,26 @@ var OccupationTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/rais/all/all/all/show.1/?order=num_jobs.desc",
+        "sAjaxSource": "/rais/all/all/all/show.4/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
             {data: 0},
             {data: 11},
             null,
-            {data: 1},
             {data: 3},
+            {data: 1},
+            {data: 4},
             {data: 5},
+            {data: 6},
+            {data: 9},
+            {data: 10},
+            {data: 7},
+            {data: 8},
             {data: 12},
-            {data: 13}
+            {data: 13},
+            {data: 14},
+            {data: 15},
         ],
         "columnDefs": [
             {
@@ -62,6 +70,7 @@ var OccupationTable = function () {
 
             $('#occupation-table_filter input').removeClass('input-sm');
             $('#occupation-table_filter').addClass('pull-right');
+            $('#occupation-families').addClass('active');
 
             $('#occupation-groups').click(function() {
                 occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
@@ -72,6 +81,9 @@ var OccupationTable = function () {
                 occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

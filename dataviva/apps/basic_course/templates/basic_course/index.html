@@ -13,51 +13,133 @@
             <li {{ 'class="active"' if not location else '' }}>
                 <a href="#" title="Trocar" onclick="start_selector('Basic Course');"> {{ basic_course.name() }}</a>
             </li>
+            {% if location %}
+                <li class="active">
+                    <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> {{ location.name() }}</a>
+                </li>
+            {% endif %}
         </ol>
     </div>
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header">
-    <div class="container">
-        <div class="name bg-dots" data-stellar-background-ratio="0.2">
-            <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
-                {{ basic_course.name() }} <a href="#" title="Trocar" onclick="start_selector('Basic Course');"> (trocar)</a>
+<section id="header" class="header bg-basic-course-{{ basic_course.id[0:2] }}">
+        <div class="summary-box">
+        <div class="container">
+
+            <span class="portrait dv-course-sc-{{ basic_course.id[0:2] }} hidden-xs"></span>
+            <h1>{{ basic_course.name() }}
+            {% if not location.id %}
+              {% trans %}in Brazil{% endtrans %}
+            {% else %}
+              {{location.preposition('em')}} {{location.name()}}
+            {% endif %}
+              <div class="btn-group">
+                <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {% trans %}change{% endtrans %} <span class="caret"></span>
+              </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#" onclick="select_attr('course_sc');">{% trans %}Basic Course{% endtrans %}</a></li>
+                  <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+                </ul>
+              </div>
             </h1>
+            <span class="clearfix"></span>
+
+            <div class="indices">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                          <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
+                          <div class="number">
+                              <strong class="counter">{{header.course_enrolled | max_digits(3)}}</strong><br/>
+                              <small class="magnitude">{{header.course_enrolled | magnitude}}</small>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %}</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.course_classes | max_digits(3)}}</strong><br/>
+                            <small class="magnitude">{{header.course_classes | magnitude}}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Schools{% endtrans %}</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.school_count | max_digits(3)}}</strong><br/>
+                            <small class="magnitude">{{header.school_count | magnitude}}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                        <h2 class="text-left text-uppercase">{% trans %}Average Size of Classes{% endtrans %}</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.course_average_class_size | max_digits(3)}}</strong><br/>
+                            <small class="magnitude">{{header.course_average_class_size | magnitude}}</small>
+                        </div>
+                      </div>
+                    </div>
+                    {% if header.course_age %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                        <h2 class="text-left text-uppercase">{% trans %}Average Age{% endtrans %}</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.course_age | max_digits(3)}}</strong><br/>
+                            <small class="magnitude">{% trans %}years{% endtrans %}</small>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>       
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="year">{% trans %}Year{% endtrans %}: {{ header.course_year }}</div>
+                  </div>
+                </div>
+            </div>
         </div>
-        <span class="portrait dv-course-sc-{{ basic_course.id[0:2] }} hidden-xs"></span>
-    </div>
 </section>
 
 <section id="profile" class="profile">
-    <div class="container">
-        <nav class="col-sm-5 col-md-4 col-lg-3">
-            <ul class="nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#general"
-                       aria-controls="general"
-                       role="tab"
-                       data-id="{{ basic_course.id }}"
-                       data-location="{{ location.id }}"
-                       data-toggle="tab">{% trans %}General{% endtrans %}</a>
-                </li>
-                <li role="presentation">
-                    <a href="#enrollments"
-                       aria-controls="enrollments"
-                       role="tab"
-                       graph
-                       data-id="{{ basic_course.id }}"
-                       data-location="{{ location.id }}"
-                       data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
-                </li>
-            </ul>
-        </nav>
 
-        <div class="tab-content col-sm-7 col-md-8 col-lg-9">
+  <nav class="col-xs-12">
+
+    <div class="container">
+          <ul class="nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                  <a href="#general"
+                     aria-controls="general"
+                     role="tab"
+                     data-id="{{ basic_course.id }}"
+                     data-location="{{ location.id }}"
+                     data-toggle="tab">{% trans %}General{% endtrans %}</a>
+              </li>
+              <li role="presentation">
+                  <a href="#enrollments"
+                     aria-controls="enrollments"
+                     role="tab"
+                     graph
+                     data-id="{{ basic_course.id }}"
+                     data-location="{{ location.id }}"
+                     data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
+              </li>
+          </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tab-content col-xs-12">
             {% include "basic_course/tab-general.html" %}
             {% include "basic_course/tab-enrollments.html" %}
         </div>
     </div>
+
 </section>
 
 <section id="graphs" class="graphs bg-gray">

@@ -3,18 +3,25 @@ var EconomicActivitiesTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/rais/all/all/show.1/all/?order=num_jobs.desc",
+        "sAjaxSource": "/rais/all/all/show.6/all/?order=num_jobs.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
             {data: 10},
             {data: 11},
             null,
-            {data: 0},
             {data: 2},
+            {data: 0},
+            {data: 3},
             {data: 4},
+            {data: 8},
+            {data: 9},
+            {data: 6},
+            {data: 7},
             {data: 12},
-            {data: 13}
+            {data: 13},
+            {data: 14},
+            {data: 15}
         ],
         "columnDefs": [
             {
@@ -64,7 +71,7 @@ var EconomicActivitiesTable = function () {
 
             $('#economic-activities-table_filter input').removeClass('input-sm');
             $('#economic-activities-table_filter').addClass('pull-right');
-            $('#economic-activities-sections').addClass('active');
+            $('#economic-activities-classes').addClass('active');
 
             $('#economic-activities-sections').click(function() {
                 economicActivities.table.ajax.url("/rais/all/all/show.1/all/?order=num_jobs.desc").load();
@@ -80,6 +87,9 @@ var EconomicActivitiesTable = function () {
                 economicActivities.table.ajax.url("/rais/all/all/show.6/all/?order=num_jobs.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

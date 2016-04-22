@@ -1,63 +1,68 @@
 <div role="tabpanel" class="tab-pane" id="trade-partner">
+
     <h2>{%trans%}International Trade{%endtrans%}</h2>
+
     <div class="row">
-        <div class="col-xs-15 col-sm-15 col-md-12">
-            <div class="table-responsive">
-                <table class="table data-blue">
-                    <thead>
-                        <tr>
-                            {% if (location.id|length) != 9 %}
-                            <th>
-                                {%trans%}Main Municipality{%endtrans%}
-                                <small>{%trans%}by Total Value Exported{%endtrans%}</small>
-                            </th>
-                            <th>
-                                {%trans%}Main Municipality{%endtrans%}
-                                <small>{%trans%}by Total Value Imported{%endtrans%}</small>
-                            </th>
-                            {% endif %}
-                            <th>
-                                {%trans%}Main Destination{%endtrans%}
-                                <small>{%trans%}by Total Value Exported{%endtrans%}</small>
-                            </th>
-                            <th>
-                                {%trans%}Main Origin{%endtrans%}
-                                <small>{%trans%}by Total Value Imported{%endtrans%}</small>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            {% if (location.id|length) != 9 %}
-                            <td>
-                                <p class="label">{{ body.municipality_name_export }}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong><span>{{ body.municipality_export_value | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{{ body.municipality_name_import}}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong><span>{{ body.municipality_import_value | magnitude }}</span>
-                                </div>
-                            </td>
-                            {% endif %}
-                            <td>
-                                <p class="label">{{ body.destination_name_export }}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.destination_export_value | max_digits(3) }}</strong><span>{{ body.destination_export_value | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{{ body.origin_name_import }}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.origin_import_value | max_digits(3) }}</strong><span>{{ body.origin_import_value | magnitude }}</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+    {% if (location.id|length) != 9 %}
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+                {%trans%}Main Municipality{%endtrans%}
+                <small>{%trans%}by Total Value Exported{%endtrans%}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.municipality_name_export }}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong><span>{{ body.municipality_export_value | magnitude }}</span>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+                {%trans%}Main Municipality{%endtrans%}
+                <small>{%trans%}by Total Value Imported{%endtrans%}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.municipality_name_import}}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong><span>{{ body.municipality_import_value | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+                {%trans%}Main Destination{%endtrans%}
+                <small>{%trans%}by Total Value Exported{%endtrans%}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.destination_name_export }}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.destination_export_value | max_digits(3) }}</strong><span>{{ body.destination_export_value | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+                {%trans%}Main Origin{%endtrans%}
+                <small>{%trans%}by Total Value Imported{%endtrans%}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.origin_name_import }}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.origin_import_value | max_digits(3) }}</strong><span>{{ body.origin_import_value | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+    </div><!--/.row-->
 </div>
+
+
+
+            
+
+
+
+

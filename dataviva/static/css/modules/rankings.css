@@ -1,3 +1,29 @@
+
+
+.rankings #rankings .navbar.navbar-default {
+    background-color: #f8f8f8;
+    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #e7e7e7;
+    margin: 20px 0;
+}
+
+.rankings #rankings .navbar .nav > li {
+    padding: 0;
+}
+.rankings #rankings .navbar .nav > li > a {
+    color: #666;
+    border-right: none !important;
+    padding: 15px 20px;
+    margin: 0;
+}
+.rankings #rankings .navbar .nav > li > a:hover {
+    color: #000;
+}
+
+.rankings .rankings-wrapper {
+    padding-bottom: 30px;
+}
+
 .rankings .nav-rankings {
     margin-top: 50px;
 }

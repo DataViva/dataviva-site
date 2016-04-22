@@ -1,103 +1,4 @@
 <div role="tabpanel" class="tab-pane active" id="general">
-    <div class="jcarousel-wrapper">
-        <div class="jcarousel">
-            <ul>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{%trans%}Trade Balance{%endtrans%}</h2>
-                        <div class="number">
-                            R$ <strong class="counter">{{ header.trade_balance | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.trade_balance | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{%trans%}Total Value Exported{%endtrans%}</h2>
-                        <div class="number">
-                            R$ <strong class="counter">{{ header.export_value | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.export_value | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{%trans%}Ratio Net Weight / Total Value Exported{%endtrans%}</h2>
-                        <div class="number">
-                            <strong class="counter">{{ header.export_net_weight | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">kg / USD</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{%trans%}Total Value Imported{%endtrans%}</h2>
-                        <div class="number">
-                            R$ <strong class="counter">{{ header.import_value | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.import_value | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{%trans%}Ratio Net Weight / Total Value Imported{%endtrans%}</h2>
-                        <div class="number">
-                            <strong class="counter">{{ header.import_net_weight | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">kg / USD</small>
-                        </div>
-                    </div>
-                </li>
-                {% if (product.id|length) == 6 %}
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{%trans%}Product Complexity{%endtrans%}</h2>
-                        <div class="number">
-                            <strong class="counter">{{ header.pci | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.pci | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                    {% if location %}
-                    <li>
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{%trans%}International RCA{%endtrans%}</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.rca_wld | max_digits(3) }}</strong><br/>
-                                <small class="magnitude">{{ header.rca_wld | magnitude }}</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{%trans%}International Distance{%endtrans%}</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.distance_wld | max_digits(3) }}</strong><br/>
-                                <small class="magnitude">{{ header.distance_wld | magnitude }}</small>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{%trans%}International Opportunity Gain{%endtrans%}</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.opportunity_gain_wld | max_digits(3) }}</strong><br/>
-                                <small class="magnitude">{{ header.opportunity_gain_wld | magnitude }}</small>
-                            </div>
-                        </div>
-                    </li>
-                    {% endif %}
-                {% endif %}
-            </ul>
-        </div>
-
-        <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
-        <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
-    </div>
-
-    <div class="m-t-sm col-xs-12 year">
-        {%trans%}Year{%endtrans%}: {{ header.year }}
-    </div>
-
     <h2 class="m-t-xl">{%trans%}General Profile{%endtrans%}</h2>
     {% if not location %}
         {% if (product.id|length) == 6 %}
@@ -107,7 +8,7 @@
             {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {% trans %}is{%endtrans%} {{ body.municipality_name_export }} 
@@ -120,7 +21,7 @@
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }} 
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
             {% trans %}is{%endtrans%} {{ body.municipality_name_export }} 
@@ -136,7 +37,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -151,7 +52,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -168,7 +69,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -183,7 +84,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -200,7 +101,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -215,7 +116,7 @@
             {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
@@ -231,9 +132,9 @@
             {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
-            {% trans %}in five years.{%endtrans%} {{ product.article() }} {{ product.name() }} 
+            {% trans %}in five years.{%endtrans%}
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -242,59 +143,44 @@
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }} 
             {% if language == "pt" %}&ordm{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ header.export_value | magnitude }} 
+            {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years.{% endtrans %}</p>
         {% endif %}
     {% endif %}
 
     <div class="row">
+
         <div class="col-xs-12 col-md-6 col-lg-6">
             <h3>{%trans%}International Trade{%endtrans%}</h3>
-            <div class="table-responsive">
-                <table class="table data-detail">
-                    <tbody>
-                        {% if (location.id|length) != 9 %}
-                        <tr>
-                            <th>
-                                {%trans%}Main Municipality by Total Value Exported{%endtrans%}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.municipality_name_import}}</p>
-                                USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong> <span>{{ body.municipality_export_value | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {%trans%}Main Municipality by Total Value Imported{%endtrans%}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.municipality_name_import}}</p>
-                                USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong> <span>{{ body.municipality_import_value | magnitude }}</span>
-                            </td>
-                        </tr>
-                        {% endif %}
-                        <tr>
-                            <th>
-                                {%trans%}Main Destination by Total Value Exported{%endtrans%}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.destination_name_export }}</p>
-                                USD <strong class="counter">{{ body.destination_export_value | max_digits(3) }}</strong> <span>{{ body.destination_export_value | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {%trans%}Main Origin by Total Value Exported{%endtrans%}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.origin_name_import }}</p>
-                                USD <strong class="counter">{{ body.origin_import_value | max_digits(3) }}</strong> <span>{{ body.origin_import_value | magnitude }}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <dl class="dl-horizontal">
+                {% if (location.id|length) != 9 %}
+                    <dt>{%trans%}Main Municipality by Total Value Exported{%endtrans%}</dt>
+                    <dd>
+                        <small>{{ body.municipality_name_import}}</small>
+                        USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong>
+                        <span>{{ body.municipality_export_value | magnitude }}</span>
+                    </dd>
+                    <dt>{%trans%}Main Municipality by Total Value Imported{%endtrans%}</dt>
+                    <dd>
+                        <small>{{ body.municipality_name_import}}</small>
+                        USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong>
+                        <span>{{ body.municipality_import_value | magnitude }}</span>
+                    </dd>
+                {% endif %}
+                    <dt>{%trans%}Main Destination by Total Value Exported{%endtrans%}</dt>
+                    <dd>
+                        <small>{{ body.destination_name_export }}</small>
+                        USD <strong class="counter">{{ body.destination_export_value | max_digits(3) }}</strong>
+                        <span>{{ body.destination_export_value | magnitude }}</span>
+                    </dd>
+                    <dt>{%trans%}Main Origin by Total Value Exported{%endtrans%}</dt>
+                    <dd>
+                        <small>{{ body.origin_name_import }}</small>
+                        USD <strong class="counter">{{ body.origin_import_value | max_digits(3) }}</strong> 
+                        <span>{{ body.origin_import_value | magnitude }}</span>
+                    </dd>
+            </dl>
             <a href="#trade-partner" aria-controls="trade-partner" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
                 {%trans%}More details{%endtrans%}
             </a>

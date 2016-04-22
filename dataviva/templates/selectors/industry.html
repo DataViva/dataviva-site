@@ -1,15 +1,15 @@
-<h2>Escolha um setor industrial da lista abaixo ou busque pelo nome</h2>
+<h2>{% trans %}Choose an industry or type what you are looking for{% endtrans %}</h2>
 <form action="" class="form-dataviva form-inline filter">
     
     <div class="btn-group nav nav-tabs" role="tablist">
         <a href="#classes" aria-controls="classes" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.classes)">
-        Classes
+        {% trans %}Classes{% endtrans %}
         </a>
         <a href="#divisions" aria-controls="divisions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.divisions)">
-        Divisões
+        {% trans %}Divisions{% endtrans %}
         </a>
         <a href="#sections" aria-controls="sections" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.sections)">
-        Secões
+        {% trans %}Sections{% endtrans %}
         </a>
     </div>
     
@@ -25,7 +25,7 @@
                     ng-model="selector_model.classes.filter_string"
                     ng-trim="true"
                     autocomplete="false" 
-                    placeholder="Busque pelo nome ou pelo No. CNAE"/>
+                    placeholder="{% trans %}Search by name ou by CNAE number{% endtrans %}:"/>
                 </div>
             </div>
             <div class="selector-list">
@@ -55,7 +55,7 @@
                     ng-model="selector_model.divisions.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. CNAE" />
+                    placeholder="{% trans %}Search by name ou by CNAE number{% endtrans %}:" />
                 </div>
             </div>
             
@@ -87,7 +87,7 @@
                     ng-model="selector_model.sections.filter_string"
                     ng-trim="true"
                     autocomplete="false" 
-                    placeholder="Busque pelo nome ou pelo No. CNAE"/>
+                    placeholder="{% trans %}Search by name ou by CNAE number{% endtrans %}:"/>
             </div>
             <div class="selector-list">
                 <div class="loading" ng-show="selector_model.loading"></div>

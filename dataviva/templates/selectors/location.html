@@ -1,21 +1,21 @@
-<h2>Escolha um localidade da lista abaixo ou busque pelo nome</h2>
+<h2>{% trans %}Choose a location or type what you are looking for{% endtrans %}</h2>
 <form action="" class="form-dataviva form-inline filter">
 
     <div class="btn-group nav nav-tabs" role="tablist">
         <a class="btn btn-default" href="#regions" aria-controls="regions" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.regions)">
-            Regiões
+            {% trans %}Regions{% endtrans %}
         </a>
         <a class="btn btn-default" href="#states" aria-controls="states" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.states)">
-            Estados
+            {% trans %}States{% endtrans %}
         </a>
         <a class="btn btn-default" href="#mesoregions" aria-controls="mesoregions" role="tab" data-toggle="tab"  ng-click="selector_model.load_depth_entries(selector_model.mesoregions)">
-            Mesorregiões
+            {% trans %}Mesoregions{% endtrans %}
         </a>
         <a class="btn btn-default" href="#mircroregions" aria-controls="mircroregions" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.mircroregions)">
-            Microregiões
+            {% trans %}Microregions{% endtrans %}
         </a>
         <a class="btn btn-default" href="#municipalities" aria-controls="municipalities" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.municipalities)">
-            Municípios
+            {% trans %}Municipalities{% endtrans %}
         </a>
     </div>
     <div class="tab-content">
@@ -29,7 +29,7 @@
                     ng-model="selector_model.regions.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. IBGE" />
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -57,7 +57,7 @@
                     ng-model="selector_model.states.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. IBGE" />
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -87,7 +87,7 @@
                     ng-model="selector_model.mesoregions.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. IBGE" />
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -117,7 +117,7 @@
                     ng-model="selector_model.mircroregions.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. IBGE" />
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -147,7 +147,7 @@
                     ng-model="selector_model.municipalities.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. IBGE" />
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">

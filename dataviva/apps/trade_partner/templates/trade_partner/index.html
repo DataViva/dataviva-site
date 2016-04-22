@@ -23,54 +23,133 @@
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header">
-    <div class="container">
-        <div class="name bg-dots" data-stellar-background-ratio="0.2">
-            <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
-                {{ trade_partner.name() }} <a href="#" title="Trocar" onclick="start_selector('TradePartner');"> (trocar)</a>
+<section id="header" class="header bg-trade-partner-{{trade_partner.id[0:2]}}">
+    <div class="summary-box">
+        <div class="container">
+
+            <span class="portrait dv-wld-{{ trade_partner.id[0:2] }} hidden-xs"></span>
+            <h1>
+                {{ trade_partner.name() }} 
+                {% if not location.id %}
+                {% trans %}in Brazil{% endtrans %}
+                {% else %}
+                {{location.preposition('em')}} {{location.name()}}
+                {% endif %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    trocar <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="select_attr('wld');">{% trans %}Country{% endtrans %}</a></li>
+                    <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+                  </ul>
+                </div>
             </h1>
+            <span class="clearfix"></span>
+
+            <div class="indices">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Trade Balance{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.trade_balance | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.trade_balance | magnitude  }}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Total Value Exported{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.total_exported | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.total_exported | magnitude }}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    {% if header.unity_weight_export_price %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Average Price Exported{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.unity_weight_export_price | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">USD / kg</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    {% endif %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Total Value Imported{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.total_imported | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.total_imported | magnitude }}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    {% if header.unity_weight_import_price %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Average Price Imported{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.unity_weight_import_price | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">USD / kg</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    {% endif %}
+                </div><!--/.row-->
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="year">{% trans %}Year{% endtrans %}: {{ header.year }}</div>
+                </div>
+            </div>
         </div>
-        <span class="portrait dv-wld-{{ header.continent_id }} hidden-xs"></span>
     </div>
 </section>
 
-
-
 <section id="profile" class="profile">
-    <div class="container">
-        <nav class="col-sm-5 col-md-4 col-lg-3">
-            <ul class="nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#general"
-                       aria-controls="general"
-                       role="tab"
-                       data-id="{{ trade_partner.id }}"
-                       data-location="{{ location.id }}"
-                       data-toggle="tab">{%trans%}General{%endtrans%}</a>
-                </li>
-                <li role="presentation">
-                    <a href="#international-trade"
-                       aria-controls="international-trade"
-                       role="tab"
-                       graph
-                       data-id="{{ trade_partner.id }}"
-                       data-location="{{ location.id }}"
-                       data-toggle="tab">{% trans %}Trade with Brazil{% endtrans %}</a>
-                </li>
-            </ul>
-        </nav>
 
-        <div class="tab-content col-sm-7 col-md-8 col-lg-9">
-                {% include "trade_partner/tab-general.html" %}
-                {% include "trade_partner/tab-international-trade.html" %}
+    <nav class="col-xs-12">
+
+        <div class="container">
+            <ul class="nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a  href="#general"
+                    aria-controls="general"
+                    role="tab"
+                    data-id="{{ trade_partner.id }}"
+                    data-location="{{ location.id }}"
+                    data-toggle="tab">{% trans %}General{% endtrans %}</a>
+            </li>
+            <li role="presentation">
+                <a  href="#international-trade"
+                    aria-controls="international-trade"
+                    role="tab"
+                    graph
+                    data-id="{{ trade_partner.id }}"
+                    data-location="{{ location.id }}"
+                    data-toggle="tab">{% trans %}Trade with Brazil{% endtrans %}</a>
+            </li>
+            </ul>
         </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="tab-content col-xs-12">
+            {% include "trade_partner/tab-general.html" %}
+            {% include "trade_partner/tab-international-trade.html" %}
+        </div>
+
     </div>
 </section>
 
 <section id="graphs" class="graphs bg-gray">
 </section>
 
-
-
+s
 {% endblock content %}
 

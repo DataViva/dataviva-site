@@ -46,7 +46,6 @@ body {
 }
 /*BODY END*/
 
-/* BACKGROUNDS */
 .bg-green {
   background-color: #9EDDBF;
 }
@@ -65,455 +64,6 @@ body {
 .bg-blue {
   background-color: #5a9dc4;
 }
-
-.bg-city-scratched {
-  background: url(/static/img/bgs/city_scratched.png) no-repeat center bottom;
-  background-size: cover;
-}
-
-/* begin backgrounds location */
-
-.bg-1ac_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1ac_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1ac_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1ac_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2al_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2al_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2al_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2al_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1ap_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1ap_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1ap_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1ap_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1am_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1am_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1am_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1am_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2ba_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2ba_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2ba_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2ba_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2ce_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2ce_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2ce_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2ce_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3df_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3df_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3df_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3df_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4es_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4es_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4es_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4es_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3go_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3go_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3go_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3go_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2ma_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2ma_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2ma_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2ma_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3mt_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3mt_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3mt_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3mt_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3ms_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3ms_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-3ms_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/3ms_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4mg_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4mg_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4mg_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4mg_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1pa_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1pa_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1pa_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1pa_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2pb_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2pb_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2pb_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2pb_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-5pr_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/5pr_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-5pr_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/5pr_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2pe_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2pe_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2pe_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2pe_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2pi_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2pi_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2pi_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2pi_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4rj_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4rj_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4rj_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4rj_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2rn_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2rn_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2rn_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2rn_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-5rs_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/5rs_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-5rs_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/5rs_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1ro_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1ro_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1ro_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1ro_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1rr_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1rr_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1rr_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1rr_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-5sc_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/5sc_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-5sc_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/5sc_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4sp_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4sp_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-4sp_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/4sp_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2se_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2se_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-2se_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/2se_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1to_1 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1to_1.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-.bg-1to_2 {
-  background: url(https://dataviva.s3.amazonaws.com/img/1to_2.jpg) no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
-
-/*end backgrounds location*/
-
-
-
-.bg-dots {
-    background-image: url('/static/img/bgs/dots.png');
-}
-
-/* BACKGROUNDS */
 
 .font-bold {
   font-weight: 600;
@@ -1216,3 +766,114 @@ table.data-blue thead th small {
   font-size: 13px;
   font-weight: 400;
 }
+
+/* BLUE BOX */
+.blue-box {
+  background: #5a9dc4;
+  color: #FFF;
+  vertical-align: middle;
+  padding: 10px 8px 8px;
+  margin-bottom: 2px;
+    height: 120px;
+}
+.blue-box .label {
+  font-size: 14px;
+  padding: 0;
+  text-transform: uppercase;
+  white-space: inherit;
+  display: block;
+  text-align: left;
+  height: 23px;
+}
+.blue-box .number {
+  font-size: 18px;
+}
+.blue-box .number span {
+  font-weight: 700;
+}
+.blue-box .number strong {
+  font-size: 35px;
+  line-height: 35px;
+  padding-right: 3px;
+}
+.blue-box.title {
+  font-size: 18px;
+  line-height: 18px;
+  vertical-align: middle;
+    margin-top: 15px;
+  height: 50px;
+  padding: 8px;
+}
+.blue-box.title label{
+    height: auto;
+}
+.blue-box.title small {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+/* PAGE LOADER */
+.loading {
+    position: relative;
+}
+.page-loader {
+    display: none;
+}
+
+.loading .page-loader {
+    background: rgba(255, 255, 255, 0.8);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    z-index: 999;
+    text-align: center;
+    display: block;
+}
+.loading .page-loader .loader-icon,
+.loading .page-loader .text {
+     position: absolute;
+     -webkit-transform: translateX(-50%) translatey(-50%);
+     -moz-transform: translateX(-50%) translatey(-50%);
+     transform: translateX(-50%) translatey(-50%);
+}
+
+/* ANIMACAO DO LOADER */
+@keyframes loading {
+ 0% {
+ opacity: .5
+ }
+ 50%{
+ opacity: 1
+ }
+ 100% {
+ opacity: .5
+ }
+}
+.loading .page-loader .loader-icon {
+     background-size: 100px 100px;
+     background-position: center center;
+     background-repeat: no-repeat;
+     display: block;
+     text-indent: -99999px;
+     width: 200px;
+     height: 200px;
+     top: 50%;
+     left: 50%;
+     animation: loading 1.5s ease-in-out infinite;
+}
+.loading .page-loader .text {
+    top: calc(50% + 80px);
+}
+
+
+/* MODAIS */
+.modal-body {
+    min-height: 200px;
+}
+
+
+
+

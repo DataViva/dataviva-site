@@ -18,29 +18,48 @@
     <div class="container">
         <nav class="sidebar col-md-3">
             <ul>
-                <li><a href="#geral" aria-controls="geral" role="tab" data-toggle="tab" title="Todos"><strong>Central de Ajuda</strong></a></li>
-                <li><a href="#glossario" aria-controls="glossario" role="tab" data-toggle="tab" title="Glossário">Glossário</a></li>
+                {% for subject in subjects %}
+                    <li>
+                        <a href="#tab{{subject.id}}" aria-controls="geral" role="tab" data-toggle="tab" title="{{subject['name_' + g.locale]}}" aria-expanded="false">
+                            {% if loop.first %} <strong> {% endif %}
+                                {{subject['name_' + g.locale]}}
+                            {% if loop.first %} </strong> {% endif %}
+                        </a>
+                    </li>
+                {% endfor %}
             </ul>
-            <hr />
-            <h4>Tópicos Recentes</h4>
-            <ul>
-                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
-                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
-                <li><a href="#" title="Tópico"><strong>Tópico</strong></a></li>
-            </ul>
-            <hr />
-            <h5>Assista Vídeo Tutorial</h5>
-
-            <div class="embed-responsive embed-responsive-16by9">
-              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zZr5Tid3Qw4"></iframe>
-            </div>
         </nav>
         <div class="main-content col-md-9">
             <div class="tab-content">
-                {% include "tab-geral.html" %}
-                {% include "tab-glossario.html" %}
+                {% for subject in subjects %}
+                    <div role="tabpanel" class="tab-pane" id="tab{{subject.id}}">
+                        <div class="col-xs-12">
+                            <h2>{{subject['name_' + g.locale]}}</h2>
+                            <div class="panel-group" id="accordion-{{subject.id}}" role="tablist" aria-multiselectable="true">
+                                {% for question in subject.questions %}
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="question{{question.id}}">
+                                            <h2>
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion-{{subject.id}}" href="#answer{{question.id}}" aria-expanded="false" aria-controls="answer{{question.id}}">
+                                                    {{question['description_' + g.locale]}}
+                                                </a>
+                                            </h2>
+                                        </div>
+
+                                        <div id="answer{{question.id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question{{question.id}}">
+                                            <div class="panel-body">
+                                                {{question['answer_' + g.locale]|safe}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
 </section>
-{% endblock content %}
+
+{% endblock %}

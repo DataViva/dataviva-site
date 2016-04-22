@@ -13,30 +13,32 @@
     <!-- Bootstrap core CSS -->
 
     <!-- CSS Libs -->
-    <link href="/static/css/libs/bootstrap.css" rel="stylesheet">
-    <link href="/static/css/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <link href="/static/css/libs/animate.css" rel="stylesheet">
-    <link href="/static/css/libs/font-dataviva/font-dataviva.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/bootstrap.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/css/font-awesome.min.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/animate.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-dataviva/font-dataviva.css" type="text/css">
 
     <!-- CSS Plugins -->
-    <link href="/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet">
-    <link href="/static/css/plugins/cropper/cropper.min.css" rel="stylesheet">
-    <link href="/static/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-    <link href="/static/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
-    <link href="/static/css/plugins/summernote/summernote.css" rel="stylesheet">
-    <link href="/static/css/plugins/switchery/switchery.css" rel="stylesheet">
-    <link href="/static/css/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="/static/css/plugins/datatables/responsive/responsive.bootstrap.css" rel="stylesheet">
-    <link href="/static/css/plugins/datatables/scroller/scroller.bootstrap.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/cropper/cropper.min.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/datapicker/datepicker3.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/jasny/jasny-bootstrap.min.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/summernote/summernote.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/switchery/switchery.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/datatables/dataTables.bootstrap.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/datatables/responsive/responsive.bootstrap.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/plugins/datatables/scroller/scroller.bootstrap.css" type="text/css">
 
     <!-- Dataviva custom styles -->
-    <link href="/static/css/main.css" rel="stylesheet">
-    <link href="/static/css/btn.css" rel="stylesheet">
-    <link href="/static/css/input.css" rel="stylesheet">
-    <link href="/static/css/modal.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/main.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/bgs.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/btn.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/input.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/modal.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/utils/utils.selector.css" />
 
     <!-- Custom styles for this module -->
-    <link href="/static/css/modules/{{ g.page_type }}.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/modules/{{ g.page_type }}.css" type="text/css">
 </head>
 <body class="{{ g.page_type }}" data-ng-app="dataviva">
     {% include "include/header.html" %}
@@ -58,8 +60,16 @@
     <!-- Javascript Libs -->
     <script src="/static/js/libs/jquery-2.1.1.js"></script>
     <script src="/static/js/libs/bootstrap.min.js"></script>
+    <script src="/static/js/libs/ios-orientationchange-fix.js"></script>
     <script src="/static/js/libs/localforage.js"></script>
     <script src="/static/js/libs/object.watch.js"></script>
+    <script src="/static/js/libs/modernizr.custom.js"></script>
+    <script src="/static/js/libs/d3.min.js"></script>
+    <script src="/static/js/libs/d3plus{% if g.production %}.min{% endif %}.js"></script>
+    <script src="/static/js/libs/leon.js"></script>
+    <script src="/static/js/libs/moment.min.js"></script>
+    <script>moment.lang("{{g.locale}}")</script>
+
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 
@@ -101,10 +111,23 @@
     <script src="/static/js/dataviva-ng/controllers/wizard.js"></script>
     <script src="/static/js/dataviva-ng/controllers/selector.js"></script>
     <script src="/static/js/dataviva-ng/app.js"></script>
+    <script src="/static/js/utils/utils.selector.js"></script>
+    <script src="/static/js/utils/utils.dataviva.js"></script>
+    <script src="/static/js/utils/utils.general.js"></script>
+
+    <script>var redirect = false</script>
+
+    <!--[if lt IE 9]>
+      <script>redirect = true</script>
+    <![endif]-->
 
     <script>
-        var dataviva = {};
-        dataviva.dictionary = {{ g.dictionary|safe }};
+      if(redirect) window.location = "/upgrade/"
+      dataviva.language = "{{ g.locale }}";
+      dataviva.dictionary = {{ g.dictionary|safe }};
+      dataviva.attr_version = {{ g.attr_version|safe }};
+      dataviva.color = "{{ g.color }}";
+      dataviva.page = "{{ g.page_type }}";
     </script>
 
     <!-- Javascript modules -->

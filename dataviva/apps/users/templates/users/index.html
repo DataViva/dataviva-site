@@ -2,16 +2,16 @@
 
 {% block index_content %}
 <div class="institucional search">
-    <h2>Usuários</h2>
+    <h2>{% trans %}Users{% endtrans %}</h2>
         
     <div class="meta">
         <table id="usersTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <th>User ID<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Name<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Email<i class="fa fa-fw fa-sort"></i></th>
-                    <th>Administradores <input name="select_all" value="1" id="select-all" type="checkbox"/> </th>
+                    <th>{% trans %}User ID{% endtrans %}<i class="fa fa-fw fa-sort"></i></th>
+                    <th>{% trans %}Name{% endtrans %}<i class="fa fa-fw fa-sort"></i></th>
+                    <th>{% trans %}Email{% endtrans %}<i class="fa fa-fw fa-sort"></i></th>
+                    <th>{% trans %}Administrators{% endtrans %}<input name="select_all" value="1" id="select-all" type="checkbox"/> </th>
                 </tr>
             </thead>
         </table>

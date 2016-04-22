@@ -3,7 +3,7 @@ var BasicCourseTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/sc/all/all/all/show.2/?order=enrolled.desc",
+        "sAjaxSource": "/sc/all/all/all/show.5/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
@@ -13,6 +13,8 @@ var BasicCourseTable = function () {
             {data: 3},
             {data: 2},
             {data: 1},
+            {data: 4},
+            {data: 5}
         ],
         "columnDefs": [
             {
@@ -60,6 +62,7 @@ var BasicCourseTable = function () {
 
             $('#basic-course-table_filter input').removeClass('input-sm');
             $('#basic-course-table_filter').addClass('pull-right');
+            $('#basic-course-courses').addClass('active');
 
             $('#basic-course-fields').click(function() {
                 basicCourseTable.table.ajax.url("/sc/all/all/all/show.2/?order=enrolled.desc").load();
@@ -68,6 +71,9 @@ var BasicCourseTable = function () {
             $('#basic-course-courses').click(function() {
                 basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load();
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

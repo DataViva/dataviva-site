@@ -37,29 +37,29 @@
 		<form class="form-dataviva mt-lg" method="post" action="/en/account/signup" style="margin-top: 24px;">
 			<ul id="regular-signup" class="col-md-6 pull-left" style="list-style: none;">
 				<p>
-					<label for="email">Email</label>
+					<label for="email">{% trans %}Email{% endtrans %}</label>
 					{{ form.email(class="form-control")}}
 					{{ messages(form.email) }}
 				</p>
 				<p>
-					<label for="fullname">Full name</label>
+					<label for="fullname">{% trans %}Full name{% endtrans %}</label>
 					{{ form.fullname(class="form-control")}}
 					{{ messages(form.fullname) }}
 				</p>
 				<p>
-					<label for="password">Password</label>
+					<label for="password">{% trans %}Password{% endtrans %}</label>
 					{{ form.password(class="form-control")}}
 					{{ messages(form.password) }}
 				</p>
 				<p>
-					<label for="confirm">Confirm Password</label>
+					<label for="confirm">{% trans %}Confirm Password{% endtrans %}</label>
 					{{ form.confirm(class="form-control")}}
 					{{ messages(form.confirm) }}
 				</p>
-				<button type="submit" class="btn btn-success pull-right">SignUp!</button>
+				<button type="submit" class="btn btn-success pull-right">{% trans %}SignUp{% endtrans %}!</button>
 			</ul>
 			<ul id="social-signup" class="col-md-6 pull-left" style="list-style: none;">
-				<p>Or sign-up using:</p>
+				<p>{% trans %}Or sign-up using{% endtrans %}:</p>
 				<li><a href="" class="btn btn-google"> <i class="fa fa-google"></i> Google</a></li>
 				<li><a href="" class="btn btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a></li>
 				<li><a href="" class="btn btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a></li>

@@ -1,4 +1,4 @@
-<h2>Escolha um parceiro comercial da lista abaixo ou busque pelo nome</h2>
+<h2>{% trans %}Choose a trade partner or type what you are looking for{% endtrans %}</h2>
 <form action="" class="form-dataviva form-inline filter">
 
     <div class="btn-group nav nav-tabs" role="tablist">
@@ -8,7 +8,7 @@
            data-toggle="tab"
            class="btn btn-default"
            ng-click="selector_model.load_depth_entries(selector_model.continents)">
-        Continentes
+        {% trans %}Continents{% endtrans %}
         </a>
         <a href="#countries"
            aria-controls="countries"
@@ -16,7 +16,7 @@
            data-toggle="tab"
            class="btn btn-default"
            ng-click="selector_model.load_depth_entries(selector_model.countries)">
-        Países
+        {% trans %}Countries{% endtrans %}
         </a>
     </div>
 
@@ -33,7 +33,7 @@
                         ng-model="selector_model.continents.filter_string"
                         ng-trim="true"
                         autocomplete="false"
-                        placeholder="Busque pelo nome ou pelo No. WLD" />
+                        placeholder="{% trans %}Search by name or WLD number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -65,7 +65,7 @@
                         ng-model="selector_model.countries.filter_string"
                         ng-trim="true"
                         autocomplete="false"
-                        placeholder="Busque pelo nome ou pelo No. WLD" />
+                        placeholder="{% trans %}Search by name or WLD number:{% endtrans %}" />
                 </div>
             </div>
 

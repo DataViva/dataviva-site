@@ -7,13 +7,13 @@
                 <li><a href="{{ url_for('general.home') }}">Home</a></li>
                 <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
                 <li><a href="{{ url_for('blog.index') }}">Blog</a></li>
-                <li class="active">Publicar</li>
+                <li class="active">{% trans %}Publish{% endtrans %}</li>
             </ol>
         </div>
     </div>
 
     <div class="container m-b-lg">
-        <h1>Publique um post</h1>
+        <h1>{% trans %}Publish a{% endtrans %} post</h1>
         {% include "blog/_form.html" %}
     </div>
 {% endblock content %}

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<section id="welcome" class="welcome bg-city-scratched">
+<section id="welcome" class="welcome bg-buildings">
     <div class="container">
         <div class="col-xs-12 col-sm-6 wow fadeInLeft">
             <h2 class="m-b-md">{% trans %}Brazil's largest platform for social and economic data search.{% endtrans %}<br/>{% trans %}Totally open and free.{% endtrans %}</h2>
@@ -62,49 +62,49 @@
 
         <div class="row database-icons wow fadeInDown">
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Location');" data-toggle="popover" data-placement="top" data-content="{% trans %}General profile by region, state, mesoregion, micro-region or city. Check its international trade, economic activity, employment and education data. Examples: Southeast, Mato Grosso, Recife, Metropolitan Region of Porto Alegre.{% endtrans %}">
+                <a href="#" onclick="select_attr('bra');" data-toggle="popover" data-placement="top" data-content="{% trans %}General profile by region, state, mesoregion, micro-region or city. Check its international trade, economic activity, employment and education data. Examples: Southeast, Mato Grosso, Recife, Metropolitan Region of Porto Alegre.{% endtrans %}">
                     <p>{% trans %}Brazilian Locations{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-bra"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Occupation');" data-toggle="popover" data-placement="top" data-content="{% trans %}Regions with best employment rates by professional activity, related courses, average wage and job statistics per year. Examples: Medium level technicians, Industry workers, Receptionists, Clinicians.{% endtrans %}">
+                <a href="#" onclick="select_attr('cbo');" data-toggle="popover" data-placement="top" data-content="{% trans %}Regions with best employment rates by professional activity, related courses, average wage and job statistics per year. Examples: Medium level technicians, Industry workers, Receptionists, Clinicians.{% endtrans %}">
                     <p>{% trans %}Occupations{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-occupation"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Industry');" data-toggle="popover" data-placement="top" data-content="{% trans %}Information on employment rate by region, average wage by occupation, average monthly income and economic opportunities. Examples: Businesses, Domestic Service, Education, Restaurants, Call Center, Religious Organizations.{% endtrans %}">
+                <a href="#" onclick="select_attr('cnae');" data-toggle="popover" data-placement="top" data-content="{% trans %}Information on employment rate by region, average wage by occupation, average monthly income and economic opportunities. Examples: Businesses, Domestic Service, Education, Restaurants, Call Center, Religious Organizations.{% endtrans %}">
                     <p>{% trans %}Economic Activities{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-industry"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('Product');" data-toggle="popover" data-placement="top" data-content="{% trans %}Trade Balance data by product, import origin and export destination, ranking by location, economic activities and related occupations. Examples: Food, Art and Antiques, Iron Ore, Coffee, Auto Parts.{% endtrans %}">
+                <a href="#" onclick="select_attr('hs');" data-toggle="popover" data-placement="top" data-content="{% trans %}Trade Balance data by product, import origin and export destination, ranking by location, economic activities and related occupations. Examples: Food, Art and Antiques, Iron Ore, Coffee, Auto Parts.{% endtrans %}">
                     <p>{% trans %}Products{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-product"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('TradePartner');" data-toggle="popover" data-placement="top" data-content="{% trans %}Brazil’s top import and export partners, trade data by type of product or supplier city. Examples: Asia, Africa, Europe, Mexico, Japan, United States of America, China, The Netherlands, Iran.{% endtrans %}">
+                <a href="#" onclick="select_attr('wld');" data-toggle="popover" data-placement="top" data-content="{% trans %}Brazil’s top import and export partners, trade data by type of product or supplier city. Examples: Asia, Africa, Europe, Mexico, Japan, United States of America, China, The Netherlands, Iran.{% endtrans %}">
                     <p>{% trans %}Trade Partners{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-trade-partner"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('University');" data-toggle="popover" data-placement="top" data-content="{% trans %}Number of enrollments in each offered course, student status and similar university profiles. Examples: Universidade de São Paulo, Universidade Federal de Minas Gerais, PUC Goiás.{% endtrans %}">
+                <a href="#" onclick="select_attr('university');" data-toggle="popover" data-placement="top" data-content="{% trans %}Number of enrollments in each offered course, student status and similar university profiles. Examples: Universidade de São Paulo, Universidade Federal de Minas Gerais, PUC Goiás.{% endtrans %}">
                     <p>{% trans %}Universities{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-university"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2 col-sm-offset-2 col-md-offset-0 col-lg-offset-4">
-                <a href="#" onclick="start_selector('Major');" data-toggle="popover" data-placement="top" data-content="{% trans %}List of universities and cities that offer post-secondary courses or the selected field of study. Examples: Education, Health Sciences, Law, Production Engineering, Physiotherapy.{% endtrans %}">
+                <a href="#" onclick="select_attr('course_hedu');" data-toggle="popover" data-placement="top" data-content="{% trans %}List of universities and cities that offer post-secondary courses or the selected field of study. Examples: Education, Health Sciences, Law, Production Engineering, Physiotherapy.{% endtrans %}">
                     <p>{% trans %}Higher Education{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-major"></i></button>
                 </a>
             </div>
             <div class="m-b-lg col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <a href="#" onclick="start_selector('BasicCourse');" data-toggle="popover" data-placement="top" data-content="{% trans %}Brazilian schools that offer professional education and enrollment ranking by city. Examples: Elementary School, High School, Nursing Technician, Agriculture and Livestock Technician.{% endtrans %}">
+                <a href="#" onclick="select_attr('course_sc');" data-toggle="popover" data-placement="top" data-content="{% trans %}Brazilian schools that offer professional education and enrollment ranking by city. Examples: Elementary School, High School, Nursing Technician, Agriculture and Livestock Technician.{% endtrans %}">
                     <p>{% trans %}Basic Course{% endtrans %}</p>
                     <button class="btn btn-white btn-circle" type="button"><i class="dv-basic-course"></i></button>
                 </a>

@@ -23,54 +23,151 @@
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header">
-    <div class="container">
-        <div class="name bg-dots" data-stellar-background-ratio="0.2">
-            <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
-                {{ industry.name() }} <a href="#" title="Trocar" onclick="start_selector('Industry');"> (trocar)</a>
+<section id="header" class="header bg-industry-{{industry.id[0]}}">
+
+    <div class="summary-box">
+        <div class="container">
+
+            <span class="portrait dv-cnae-{{ industry.id[0] }} hidden-xs"></span>
+            <h1>
+              {{ industry.name() }} 
+              {% if not location.id %}
+                {% trans %}in Brazil{% endtrans %}
+              {% else %}
+                {{location.preposition('em')}} {{location.name()}}
+              {% endif %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% trans %}change{% endtrans %} <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="select_attr('cnae');">{% trans %}Industry{% endtrans %}</a></li>
+                    <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+                  </ul>
+                </div>
             </h1>
+            <span class="clearfix"></span>
+
+            <div class="indices">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Average Monthly Income{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.average_monthly_income | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.average_monthly_income | magnitude  }}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Payroll{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.salary_mass | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.salary_mass | magnitude }}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Total Employment{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.num_jobs | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.num_jobs | magnitude }}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.num_establishments | magnitude }}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    {% if location and industry.id | length == 6%}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Domestic RCA{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.rca | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.rca | magnitude}}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Distance{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.distance | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.num_establishments | magnitude }} {{"de" }} KM</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Opportunity Gain{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.opportunity_gain | max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.opportunity_gain | magnitude}}</small>
+                            </div>
+                        </div>
+                    </div><!--/.col-->
+                    {% endif %}
+                </div><!--/.row-->
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="year">{% trans %}Year{% endtrans %}: {{ header.year }}</div>
+                </div>
+            </div>
         </div>
-        <span class="portrait dv-cnae-{{ industry.id[0] }} hidden-xs"></span>
     </div>
 </section>
 
 
 <section id="profile" class="profile">
-    <div class="container">
-        <nav class="col-sm-5 col-md-4 col-lg-3">
-            <ul class="nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a  href="#general"
-                        aria-controls="general"
-                        role="tab"
-                        data-id="{{ industry.id }}"
-                        data-location="{{ location.id }}"
-                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
-                </li>
-                <li role="presentation">
-                    <a  href="#wages"
-                        aria-controls="wages"
-                        role="tab"
-                        graph
-                        data-id="{{ industry.id }}"
-                        data-location="{{ location.id }}"
-                        data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
-                </li>
-                {% if (industry.id|length) == 6 %}
-                <li role="presentation">
-                    <a  href="#opportunities"
-                        aria-controls="opportunities"
-                        role="tab"
-                        graph
-                        data-id="{{ industry.id }}"
-                        data-location="{{ location.id }}"
-                        data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
-                </li>
-                {% endif %}
-            </ul>
-        </nav>
 
-        <div class="tab-content col-sm-7 col-md-8 col-lg-9">
+    <nav class="">
+        <div class="container">
+            <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active">
+                <a  href="#general"
+                    aria-controls="general"
+                    role="tab"
+                    data-id="{{ industry.id }}"
+                    data-location="{{ location.id }}"
+                    data-toggle="tab">{% trans %}General{% endtrans %}</a>
+            </li>
+            <li role="presentation">
+                <a  href="#wages"
+                    aria-controls="wages"
+                    role="tab"
+                    graph
+                    data-id="{{ industry.id }}"
+                    data-location="{{ location.id }}"
+                    data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
+            </li>
+            {% if (industry.id|length) == 6 %}
+            <li role="presentation">
+                <a  href="#opportunities"
+                    aria-controls="opportunities"
+                    role="tab"
+                    graph
+                    data-id="{{ industry.id }}"
+                    data-location="{{ location.id }}"
+                    data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
+            </li>
+            {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="tab-content">
             {% include "industry/tab-general.html" %}
             {% include "industry/tab-wages.html" %}
             {% if (industry.id|length) == 6 %}

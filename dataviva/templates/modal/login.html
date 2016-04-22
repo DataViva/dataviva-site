@@ -4,7 +4,7 @@
             <div class="modal-body">
                 <div class="loginmodal-container">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h1>Acesso de usuários</h1>
+                    <h1>{% trans %}Users Acess{% endtrans %}</h1>
                     <div class="clearfix"><!--//--></div>
                     <form>
                         <input type="text" name="user" placeholder="Usuário">
@@ -12,7 +12,8 @@
                         <input type="submit" name="login"  class="btn btn-default btn-dataviva" value="Entrar">
                     </form>
                     <div class="login-help">
-                        <a href="#">Cadastre-se</a> - <a href="#">Esqueci a senha</a>
+                        <a href="#">{% trans %}Sign Up{% endtrans %}</a> - 
+                        <a href="#">{% trans %}Forgot my Password{% endtrans %}</a>
                     </div>
                 </div>
             </div>

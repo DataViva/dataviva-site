@@ -12,6 +12,15 @@ window.showGraph = function(category, tab, location) {
     $('#graphs #graphs-' + tab).show();
 }
 
+$('a[class="pull-right btn btn-primary btn-xs m-r-lg"]').click(function() {
+    var link = $(this).attr('href');
+    $('li[role="presentation"] a[href="'+link+'"]').closest('li').addClass('active').siblings().removeClass('active');
+});
+
+$('a[href="#general"]').click(function() {
+    $('#graphs').children().hide();
+});
+
 $(document).ready(function () {
     $(function() {
         var jcarousel = $('.jcarousel');

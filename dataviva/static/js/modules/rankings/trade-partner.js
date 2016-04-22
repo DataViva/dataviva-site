@@ -10,9 +10,15 @@ var TradePartnerTable = function () {
             {data: 0},
             {data: 15},
             null,
-            {data: 3},
-            {data: 4},
             {data: 14},
+            {data: 2},
+            {data: 3},
+            {data: 8},
+            {data: 9},
+            {data: 6},
+            {data: 7},
+            {data: 10},
+            {data: 11},
             {data: 12},
             {data: 13}
         ],
@@ -73,6 +79,9 @@ var TradePartnerTable = function () {
                 tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };

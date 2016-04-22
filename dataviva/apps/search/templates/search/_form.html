@@ -8,25 +8,25 @@
 
     {{ form.hidden_tag() }}
     <div class="form-group {{ 'has-error' if form.profile.errors else '' }} ">
-        <label class="control-label" for="profile">Perfil</label>
+        <label class="control-label" for="profile">{% trans %}Profile{% endtrans %}</label>
         {{ messages(form.profile) }}
         {{ form.profile(class="form-control")}}
     </div>
     <div class="form-group {{ 'has-error' if form.description.errors else '' }} ">
-        <label class="control-label" for="description">Pergunta</label>
+        <label class="control-label" for="description">{% trans %}Question{% endtrans %}</label>
         {{ messages(form.description) }}
         {{ form.description(class="form-control", maxlength=400)}}
     </div>
     <div class="form-group {{ 'has-error' if form.selector.errors else '' }} ">
-        <label class="control-label" for="selector">Seletor(es)</label>
+        <label class="control-label" for="selector">{% trans %}Selector(s){% endtrans %}</label>
         {{ messages(form.selector) }}
         {{ form.selector(class="form-control", maxlength=100)}}
     </div>
     <div class="form-group {{ 'has-error' if form.answer.errors else '' }} ">
-        <label class="control-label" for="answer">Resposta</label>
+        <label class="control-label" for="answer">{% trans %}Answer{% endtrans %}</label>
         {{ messages(form.answer) }}
         {{ form.answer(class="form-control")}}
     </div>
 
-    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
+    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
 </form>

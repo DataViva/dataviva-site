@@ -371,13 +371,18 @@ function Selector() {
               .attr("value",s)
               .attr("name","selector_sort")
               .attr("onclick","populate_list(selected,this.value)");
+
             if (s == sorting) input.attr("checked","checked");
             sort_toggles.append("label")
               .attr("for","selector_sort_"+s)
               .html(dataviva.format.text(s));
           });
 
+
           sorter = leon("$selector_sort").color(dataviva.color);
+
+          $('#leon_selector_sort .leon.radio.group').children().attr('class', 'btn btn-default')
+          $('#leon_selector_sort .leon.radio.group').attr('class', 'btn-group');
         }
 
         header_select_div = sort_toggles.append("div").attr("id","header_select_div");
@@ -394,10 +399,11 @@ function Selector() {
         search = header.append("input")
           .attr("type","text")
           .attr("id",name+"_search")
-          .attr("class","leon text")
+          .attr("class","form-control")
           .attr("placeholder",dataviva.format.text("search"));
 
         searcher = leon("#"+name+"_search").color(dataviva.color).size("medium");
+
 
         search.node().oninput = function() { populate_list(selected); };
 
@@ -407,8 +413,7 @@ function Selector() {
         }
 
         body = container.append("div")
-          .attr("class","selector_body")
-          .style("height","auto");
+          .attr("class","selector_body");
 
         selector_load.hide();
 
@@ -422,6 +427,7 @@ function Selector() {
 
         }
 
+        $('#leon_header_select').attr('class','btn btn-primary');
         select_value(data[initial_value]);
 
       };
@@ -602,6 +608,10 @@ function Selector() {
         }
         searcher.color(header_color);
 
+
+        //  AJUSETES DE LAYOUT
+        $("#"+name+"_search").attr('class', 'form-control');
+
         if (type !== "file") {
           depth_select.html("");
           var depth_toggles = get_depths(x);
@@ -626,6 +636,9 @@ function Selector() {
             });
 
             leon("$selector_depth_toggle").color(header_color);
+
+            $('#leon_selector_depth_toggle .leon.radio.group').children().attr('class', 'btn btn-default')
+            $('#leon_selector_depth_toggle .leon.radio.group').attr('class', 'btn-group');
           }
 
         }
@@ -637,14 +650,11 @@ function Selector() {
 
         if (hw > 0) title.style("max-width",hw+"px");
 
-        // Set height, now that the header is completely updated
-        set_height();
-
       };
 
       add_results = function() {
 
-        var amount = parseFloat(body.style("height"), 10)/40;
+        var amount = 20;
 
         var results = [];
         for (var i = 0; i < amount; i++) {
@@ -671,26 +681,6 @@ function Selector() {
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result");
-              // .on(d3plus.client.pointer.click,function(){
-              //   if (v.id.length < depths[depths.length-1]) {
-              //     if (type == "bra" && v.id.substr(0,2) == "4mg") {
-              //       if (v.id.length == 2) {
-              //         var depth = 7
-              //       }
-              //       else {
-              //         var depth = 8
-              //       }
-              //     }
-              //     else {
-              //       var depth = depths[depths.indexOf(v.id.length)+1]
-              //     }
-              //     select_value(v,depth);
-              //   }
-              //   else {
-                      // selector_load.text(dataviva.format.text("wait")).show()
-              //     callback(data[v.id],name);
-              //   }
-              // })
 
             var search_icon = false;
             if (v.icon && (v.icon != selected.icon || search_term !== "")) {
@@ -855,29 +845,7 @@ function Selector() {
           }
 
         });
-
-      };
-
-      set_height = function() {
-        // Set height for selector_body, based off of the title height
-        var parent = container.node().parentNode,
-            display = d3.select(parent).style("display");
-
-        if (display == "none") {
-          parent.style.visibility = "hidden";
-          parent.style.display = "block";
-        }
-        var max_height = container.node().offsetHeight;
-
-        max_height -= body.node().offsetTop;
-        max_height -= parseFloat(body.style("padding-top"),10);
-        max_height -= parseFloat(body.style("padding-bottom"),10);
-        max_height = Math.floor(max_height);
-        if (display == "none") {
-          parent.style.visibility = "visible";
-          parent.style.display = "none";
-        }
-        body.style("height",max_height+"px");
+        $('#modal-selector-content .selector .selector_body .search_result .search_buttons .leon.button.medium').attr('class', 'btn btn-primary');
       };
 
       var close = null,
@@ -1020,3 +988,9 @@ function Selector() {
 
   return util;
 }
+
+
+
+
+
+

@@ -109,5 +109,7 @@ def index(cnae_id):
 
     industry_service_num_establishments = Industry(cnae_id=industry.id)
     header['num_establishments_brazil'] = industry_service_num_establishments.num_establishments()
+    header['year'] = industry_service_num_establishments.get_year()
+
 
     return render_template('industry/index.html', header=header, body=body, industry=industry, location=location)

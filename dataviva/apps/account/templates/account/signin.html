@@ -40,15 +40,15 @@
 					{{ messages(form.email) }}
 				</p>				
 				<p>
-					<label for="password">Password</label>
+					<label for="password">{% trans %}Password{% endtrans %}</label>
 					{{ form.password(class="form-control")}}
 					{{ messages(form.password) }}
 				</p>
-				<p><a href="/account/forgot_password">Forgot your password?</a></p>
-				<button type="submit" class="btn btn-success pull-right">Sign In!</button>
+				<p><a href="/account/forgot_password">{% trans %}Forgot your password{% endtrans %}?</a></p>
+				<button type="submit" class="btn btn-success pull-right">{% trans %}Sign In{% endtrans %}!</button>
 			</ul>
 			<ul id="social-signup" class="col-md-6 pull-left" style="list-style: none;">
-				<p>Or sign-up using:</p>
+				<p>{% trans %}Or sign-up using{% endtrans %}:</p>
 				<li><a href="/en/account/social_auth/google" class="btn btn-google"> <i class="fa fa-google"></i> Google</a></li>
 				<li><a href="" class="btn btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a></li>
 				<li><a href="" class="btn btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a></li>

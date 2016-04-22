@@ -12,26 +12,79 @@
             </li>
             <li {{ 'class="active"' if not location else '' }}>
                 <a href="#" title="Trocar" onclick="start_selector('University');"> {{ university.name() }}</a>
-            </li>
+            </li>  
         </ol>
     </div>
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header">
-    <div class="container">
-        <div class="name bg-dots" data-stellar-background-ratio="0.2">
-            <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
-                {{ university.name() }} <a href="#" title="Trocar" onclick="start_selector('University');"> (trocar)</a>
-            </h1>
-        </div>
+<section id="header" class="header bg-university-{{university.school_type_id.lower()}}">
+
+  <div class="summary-box">
+      <div class="container">
+
         <span class="portrait dv-university-{{ university.school_type_id.lower() }} hidden-xs"></span>
-    </div>
+
+        <h1>
+          {{ university.name() }} 
+            <div class="btn-group">
+              <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   {% trans %}change{% endtrans %} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                   <li><a href="#" onclick="select_attr('university');">{% trans %}University{% endtrans %}</a></li>
+              </ul>
+            </div>
+        </h1>
+        
+        <span class="clearfix"></span>
+        <div class="indices">
+           <div class="row">
+              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="widget">
+                    <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
+                    <div class="number">
+                        <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
+                        <small class="magnitude">{{ header.enrolled | magnitude }} {% trans %}students{% endtrans %}</small>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="widget">
+                    <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students {% endtrans %}</h2>
+                    <div class="number">
+                        <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
+                        <small class="magnitude">{{ header.entrants | magnitude }} {% trans %}students{% endtrans %}</small>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="widget">
+                    <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
+                    <div class="number">
+                        <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
+                        <small class="magnitude">{{ header.graduates | magnitude }} {% trans %}students{% endtrans %}</small>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="year">{% trans %}Year{% endtrans %}: {{ header.year }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
 </section>
 
 <section id="profile" class="profile">
+
+  <nav class="col-xs-12">
+
     <div class="container">
-        <nav class="col-sm-5 col-md-4 col-lg-3">
             <ul class="nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#general"q
@@ -49,16 +102,21 @@
                        data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
                 </li>
             </ul>
-        </nav>
+      </div>
+    </nav>
 
-        <div class="tab-content col-sm-7 col-md-8 col-lg-9">
+    <div class="container">
+        <div class="tab-content col-xs-12">
             {% include "university/tab-general.html" %}
             {% include "university/tab-enrollments.html" %}
         </div>
     </div>
+
 </section>
 
 <section id="graphs" class="graphs bg-gray">
 </section>
 {% endblock content %}
+
+
 
