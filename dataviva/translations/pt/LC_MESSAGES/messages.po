@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-22 17:45-0400\n"
+"POT-Creation-Date: 2016-04-22 18:52-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -302,8 +302,8 @@ msgstr ""
 "parceria com pesquisadores do MIT Media Lab (um dos principais centros de"
 " inovação do mundo), a plataforma apresenta uma solução inédita no país, "
 "a partir de bases de dados disponibilizadas pelo Ministério do Trabalho e"
-" Emprego (MTE), Ministério do Desenvolvimento, Indústria e Comércio "
-"Exterior (MDIC) e Ministério da Educação (MEC)."
+" Previdência Social (MTPS), Ministério do Desenvolvimento, Indústria e "
+"Comércio Exterior (MDIC) e Ministério da Educação (MEC)."
 
 #: dataviva/apps/about/templates/about/index.html:36
 msgid ""
@@ -1550,6 +1550,7 @@ msgstr "Educaçāo"
 #: dataviva/apps/location/templates/location/tab-education.html:9
 #: dataviva/apps/rankings/templates/rankings/_base.html:56
 #: dataviva/apps/rankings/templates/rankings/university.html:13
+#: dataviva/apps/university/templates/university/index.html:35
 #: dataviva/templates/site.html:66 dataviva/translations/dictionary.py:183
 #: dataviva/translations/dictionary.py:184
 #: dataviva/translations/dictionary.py:362
@@ -2869,12 +2870,6 @@ msgstr "Produto com Menor"
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:12
 msgid "Students Status"
 msgstr "Situação dos Estudantes"
-
-#: dataviva/apps/university/templates/university/index.html:35
-#: dataviva/translations/dictionary.py:329
-#: dataviva/translations/dictionary.py:331
-msgid "Sector"
-msgstr "Setor"
 
 #: dataviva/apps/university/templates/university/index.html:48
 #: dataviva/apps/university/templates/university/index.html:58
@@ -5914,6 +5909,11 @@ msgstr "Brasil"
 msgid "BRA ID"
 msgstr "ID BRA"
 
+#: dataviva/translations/dictionary.py:329
+#: dataviva/translations/dictionary.py:331
+msgid "Sector"
+msgstr "Setor"
+
 #: dataviva/translations/dictionary.py:332
 #: dataviva/translations/dictionary.py:335
 #: dataviva/translations/dictionary.py:345
@@ -6575,4 +6575,7 @@ msgstr "com"
 
 #~ msgid "Product "
 #~ msgstr "Produto"
+
+#~ msgid " in Brazil "
+#~ msgstr "no Brasil"
 

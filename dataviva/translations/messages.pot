@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-22 17:45-0400\n"
+"POT-Creation-Date: 2016-04-22 18:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1496,6 +1496,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-education.html:9
 #: dataviva/apps/rankings/templates/rankings/_base.html:56
 #: dataviva/apps/rankings/templates/rankings/university.html:13
+#: dataviva/apps/university/templates/university/index.html:35
 #: dataviva/templates/site.html:66 dataviva/translations/dictionary.py:183
 #: dataviva/translations/dictionary.py:184
 #: dataviva/translations/dictionary.py:362
@@ -2800,12 +2801,6 @@ msgstr ""
 
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:12
 msgid "Students Status"
-msgstr ""
-
-#: dataviva/apps/university/templates/university/index.html:35
-#: dataviva/translations/dictionary.py:329
-#: dataviva/translations/dictionary.py:331
-msgid "Sector"
 msgstr ""
 
 #: dataviva/apps/university/templates/university/index.html:48
@@ -5344,6 +5339,11 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:328
 msgid "BRA ID"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:329
+#: dataviva/translations/dictionary.py:331
+msgid "Sector"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:332
