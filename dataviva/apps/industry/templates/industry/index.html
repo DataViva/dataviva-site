@@ -29,7 +29,18 @@
         <div class="container">
 
             <span class="portrait dv-cnae-{{ industry.id[0] }} hidden-xs"></span>
-            <h1>{{ industry.name() }} <a href="#" title="Trocar" onclick="start_selector('Industry');"> (trocar)</a></h1>
+            <h1>
+                {{ industry.name() }} in Brazil
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    trocar <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="start_selector('Industry');">Setor</a></li>
+                    <li><a href="#">Localidade</a></li>
+                  </ul>
+                </div>
+            </h1>
             <span class="clearfix"></span>
 
             <div class="indices">
@@ -65,7 +76,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %}</h2>
                             <div class="number">
-                                R$ <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_establishments | magnitude }}</small>
                             </div>
                         </div>

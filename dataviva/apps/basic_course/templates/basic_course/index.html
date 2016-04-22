@@ -13,12 +13,17 @@
             <li {{ 'class="active"' if not location else '' }}>
                 <a href="#" title="Trocar" onclick="start_selector('Basic Course');"> {{ basic_course.name() }}</a>
             </li>
+            {% if location %}
+                <li class="active">
+                    <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> {{ location.name() }}</a>
+                </li>
+            {% endif %}
         </ol>
     </div>
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header bg-basic-course-{{ basic_course.id[0] }}">
+<section id="header" class="header bg-basic-course-{{ basic_course.id[0:2] }}">
         <div class="summary-box">
         <div class="container">
 
