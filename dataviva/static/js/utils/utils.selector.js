@@ -371,13 +371,18 @@ function Selector() {
               .attr("value",s)
               .attr("name","selector_sort")
               .attr("onclick","populate_list(selected,this.value)");
+
             if (s == sorting) input.attr("checked","checked");
             sort_toggles.append("label")
               .attr("for","selector_sort_"+s)
               .html(dataviva.format.text(s));
           });
 
+
           sorter = leon("$selector_sort").color(dataviva.color);
+
+          $('#leon_selector_sort .leon.radio.group').children().attr('class', 'btn btn-default')
+          $('#leon_selector_sort .leon.radio.group').attr('class', 'btn-group');
         }
 
         header_select_div = sort_toggles.append("div").attr("id","header_select_div");
@@ -421,6 +426,7 @@ function Selector() {
 
         }
 
+        $('#leon_header_select').attr('class','btn btn-primary');
         select_value(data[initial_value]);
 
       };
@@ -601,6 +607,7 @@ function Selector() {
         }
         searcher.color(header_color);
 
+        $("#"+name+"_search").attr('class', 'form-control');
         if (type !== "file") {
           depth_select.html("");
           var depth_toggles = get_depths(x);
@@ -625,6 +632,9 @@ function Selector() {
             });
 
             leon("$selector_depth_toggle").color(header_color);
+
+            $('#leon_selector_depth_toggle .leon.radio.group').children().attr('class', 'btn btn-default')
+            $('#leon_selector_depth_toggle .leon.radio.group').attr('class', 'btn-group');
           }
 
         }
@@ -667,26 +677,6 @@ function Selector() {
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result");
-              // .on(d3plus.client.pointer.click,function(){
-              //   if (v.id.length < depths[depths.length-1]) {
-              //     if (type == "bra" && v.id.substr(0,2) == "4mg") {
-              //       if (v.id.length == 2) {
-              //         var depth = 7
-              //       }
-              //       else {
-              //         var depth = 8
-              //       }
-              //     }
-              //     else {
-              //       var depth = depths[depths.indexOf(v.id.length)+1]
-              //     }
-              //     select_value(v,depth);
-              //   }
-              //   else {
-                      // selector_load.text(dataviva.format.text("wait")).show()
-              //     callback(data[v.id],name);
-              //   }
-              // })
 
             var search_icon = false;
             if (v.icon && (v.icon != selected.icon || search_term !== "")) {
@@ -851,7 +841,7 @@ function Selector() {
           }
 
         });
-
+        $('#modal-selector-content .selector .selector_body .search_result .search_buttons .leon.button.medium').attr('class', 'btn btn-primary');
       };
 
       var close = null,
