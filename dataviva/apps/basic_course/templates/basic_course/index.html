@@ -32,7 +32,7 @@
                       <div class="widget">
                           <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
                           <div class="number">
-                              R$ <strong class="counter">{{header.course_enrolled | max_digits(3)}}</strong><br/>
+                              <strong class="counter">{{header.course_enrolled | max_digits(3)}}</strong><br/>
                               <small class="magnitude">{{header.course_enrolled | magnitude}}</small>
                           </div>
                       </div>
@@ -41,7 +41,7 @@
                       <div class="widget">
                         <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %}</h2>
                         <div class="number">
-                            R$ <strong class="counter">{{header.course_classes | max_digits(3)}}</strong><br/>
+                            <strong class="counter">{{header.course_classes | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.course_classes | magnitude}}</small>
                         </div>
                       </div>
