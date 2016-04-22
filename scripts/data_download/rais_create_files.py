@@ -69,14 +69,14 @@ def save(years, locations, industrys, occupations, lang, output_path):
                     print "Gerando ... : "+name_file
                     
                     logging.info('Query for file ('+str(datetime.now().hour)+':'+str(datetime.now().minute)+':'+str(datetime.now().second)+'): \n '+name_file+'\n'+query)
-                    f = pd.read_sql_query(query, engine)
+                    # f = pd.read_sql_query(query, engine)
                     
                     new_file_path = os.path.join(output_path, name_file+".csv.bz2") #pega desda da rais do pc
                     
-                    f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
+                    # f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
 
                     logging.info("\nErro:\n"+str(sys.stderr)+"\n-----------------------------------------------\n")
-
+                    import pdb; pdb.set_trace()
 
 
 Condition = namedtuple('Condition', ['condition', 'name'])
@@ -114,3 +114,25 @@ years = [ Condition('year='+str(sys.argv[3]), '-'+str(sys.argv[3])) ]
 
 save(years=years, locations=locations, industrys=industrys, occupations=occupations, lang=sys.argv[1], output_path=output_path)
 
+
+''' querys rais faltantes
+
+# rais-2003-microregions-classes-families
+SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',cbo_id as 'CBO ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',required as 'Estimated Employees',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)' 
+FROM rais_ybio WHERE year=2013 and bra_id_len=7 and cnae_id_len=6 and cbo_id_len=4
+
+#rais-2013-municipalities-classes
+SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',rca as 'Domestic RCA',distance as 'Distance',opp_gain as 'Opportunity Gain',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)' 
+FROM rais_ybi WHERE year=2013 and bra_id_len=9 and cnae_id_len=6 and  1 = 1
+
+#rais-2013-municipalities-classes-main_groups
+SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',cbo_id as 'CBO ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',required as 'Estimated Employees',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)' 
+FROM rais_ybio WHERE year=2013 and bra_id_len=9 and cnae_id_len=6 and cbo_id_len=1
+
+#rais-2013-municipalities-classes-families
+SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',cbo_id as 'CBO ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',required as 'Estimated Employees',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)' 
+FROM rais_ybio WHERE year=2013 and bra_id_len=9 and cnae_id_len=6 and cbo_id_len=4
+
+#
+
+'''
