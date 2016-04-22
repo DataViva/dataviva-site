@@ -302,17 +302,25 @@ dataviva.ui.tooltip = function(id, obj, align, parent) {
   }
 }
 
+// <div class="page-loader">
+//    <div class="loader"></div>
+//    <span>Carregando...</span>
+// </div>
+
+
 dataviva.ui.loading = function(parent) {
 
   var self = this
 
-  this.div = d3.select(parent).append("div")
-    .attr("class","loading")
+  d3.select(parent).classed('loading',true);
 
-  this.icon = self.div.append("i")
-    .attr("class","fa fa-certificate")
+  this.div = d3.select(parent).insert("div", ":first-child")
+    .attr("class","page-loader")
 
-  this.words = self.div.append("div")
+  this.icon = self.div.append("div")
+    .attr("class","loader-icon")
+
+  this.words = self.div.append("span")
     .attr("class","text")
 
   this.timing = parseFloat(self.div.style("transition-duration"),10)*1000
@@ -326,6 +334,7 @@ dataviva.ui.loading = function(parent) {
       self.div.style("opacity",1)
 
       if (callback) {
+        d3.select(parent).classed('loading', true);
         setTimeout(callback,self.timing)
       }
 
@@ -339,6 +348,7 @@ dataviva.ui.loading = function(parent) {
     self.div.style("opacity",0)
 
     setTimeout(function(){
+      d3.select(parent).classed('loading', false);
       self.div.style("display","none")
     },self.timing)
 
@@ -592,8 +602,8 @@ dataviva.popover.create = function(params) {
     .attr("class","popover")
     .style("width",w_px+"px")
     .style("height",h_px+"px")
-    .style("margin-left",-w_px/2+"px")
-    .style("margin-top",-h_px/2+"px")
+    .style("margin-left",w_px/2+"px")
+    .style("margin-top",h_px/2+"px")
 
   if (close) {
     body.append("div")

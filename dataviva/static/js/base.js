@@ -51,7 +51,7 @@ dataviva.requireAttrs = function(attrs, callBack) {
     });
 }
 
-dataviva.datatables = { 
+dataviva.datatables = {
     language: {
         "loading": dataviva.dictionary['loading'] + "...",
         "emptyTable": dataviva.dictionary['emptyTable'],
@@ -167,6 +167,41 @@ function cropInput(crop, input, callback) {
     }
 }
 
+// Create Filter Selector
+dataviva.popover.create({
+  "id": "filter_popover",
+  "width": 600,
+  "height": "80%",
+  "close": true
+})
+
+dataviva.getAttrUrl = function(attr) {
+  if (attr == "bra") return 'location';
+  else if (attr == "cbo") return 'occupation';
+  else if (attr == "cnae") return 'industry';
+  else if (attr == "hs") return 'product';
+  else if (attr == "wld") return 'trade_partner';
+  else if (attr == "university") return 'university';
+  else if (attr == "course_hedu") return 'major';
+  else if (attr == "course_sc") return 'basic_course';
+  else return '';
+}
+
+var selector = Selector()
+  .callback(function(d){
+    window.location = "/" + lang + "/" + dataviva.getAttrUrl(selector.type()) + "/" + d.id;
+  });
+
+function select_attr(id) {
+  d3.select("#modal-selector-content").call(selector.type(id));
+  $('#modal-selector').modal('show');
+}
+
+d3.selectAll(".profile_simple").on("click", function(){
+  // stop from bubbling up so selector isn't triggered
+  d3.event.stopPropagation();
+})
+
 $(document).ready(function () {
     new WOW().init();
     $("[data-toggle=popover]").popover({ trigger: "hover" });
@@ -203,6 +238,5 @@ $(document).ready(function () {
             window.location.href = path.join('/') + window.location.search + window.location.hash;
         }
     });
-
 });
 

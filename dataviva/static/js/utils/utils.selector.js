@@ -407,8 +407,7 @@ function Selector() {
         }
 
         body = container.append("div")
-          .attr("class","selector_body")
-          .style("height","auto");
+          .attr("class","selector_body");
 
         selector_load.hide();
 
@@ -637,14 +636,11 @@ function Selector() {
 
         if (hw > 0) title.style("max-width",hw+"px");
 
-        // Set height, now that the header is completely updated
-        set_height();
-
       };
 
       add_results = function() {
 
-        var amount = parseFloat(body.style("height"), 10)/40;
+        var amount = 20;
 
         var results = [];
         for (var i = 0; i < amount; i++) {
@@ -856,28 +852,6 @@ function Selector() {
 
         });
 
-      };
-
-      set_height = function() {
-        // Set height for selector_body, based off of the title height
-        var parent = container.node().parentNode,
-            display = d3.select(parent).style("display");
-
-        if (display == "none") {
-          parent.style.visibility = "hidden";
-          parent.style.display = "block";
-        }
-        var max_height = container.node().offsetHeight;
-
-        max_height -= body.node().offsetTop;
-        max_height -= parseFloat(body.style("padding-top"),10);
-        max_height -= parseFloat(body.style("padding-bottom"),10);
-        max_height = Math.floor(max_height);
-        if (display == "none") {
-          parent.style.visibility = "visible";
-          parent.style.display = "none";
-        }
-        body.style("height",max_height+"px");
       };
 
       var close = null,
