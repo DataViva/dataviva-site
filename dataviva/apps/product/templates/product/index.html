@@ -28,9 +28,9 @@
     <div class="container">
 
         <span class="portrait dv-hs-{{ product.id[0:2] }} hidden-xs"></span>
-        <h1>{{ product.name() }}
+        <h1>{{ product.name() }} 
         {% if not location.id %}
-          {% trans %} in Brazil {% endtrans %}
+          {% trans %}in Brazil{% endtrans %}
         {% else %}
           {{location.preposition('em')}} {{location.name()}}
         {% endif %} 
