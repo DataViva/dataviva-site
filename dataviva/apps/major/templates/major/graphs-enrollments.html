@@ -3,7 +3,6 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Universities{% endtrans %}</h4>
-<<<<<<< HEAD
             <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/university/?color=color&depth=university_5&size=enrolled" target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
             <h4>{% trans %}Municipality{% endtrans %}</h4>
             <a href="/{{ g.locale }}/embed/geo_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=enrolled" target="graphs-frame-enrollments" class="list-group-item">{% trans %}Map{% endtrans %}</a>
@@ -13,23 +12,6 @@
             <a href="/{{ g.locale }}/embed/line/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/type/?y=students&scale=linear&controls=true&year=2009_2013" target="graphs-frame-enrollments" class="list-group-item">{% trans %}Line{% endtrans %}</a>
             <h4>{% trans %}Shift{% endtrans %}</h4>
             <a href="/{{ g.locale }}/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/time/?y=students&layout=share&order=color&controls=true&year=2009_2013" target="graphs-frame-enrollments" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-=======
-            <a href="/pt/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/university/?color=color&depth=university_5&size=enrolled" 
-            target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
-            <h4>{% trans %}Municipality{% endtrans %}</h4>
-            <a href="/pt/embed/geo_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=enrolled" 
-            target="graphs-frame-enrollments" class="list-group-item">{% trans %}Map{% endtrans %}</a>
-            <a href="/pt/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?y=enrolled&layout=value&order=color" 
-            target="graphs-frame-enrollments" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-            <a href="/pt/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=color&depth=bra_3&size=enrolled" 
-            target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
-            <h4>{% trans %}Students Status{% endtrans %}</h4>
-            <a href="/pt/embed/line/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/type/?y=students&scale=linear&controls=true&year=2009_2013" 
-            target="graphs-frame-enrollments" class="list-group-item">{% trans %}Line{% endtrans %}</a>
-            <h4>{% trans %}Shift{% endtrans %}</h4>
-            <a href="/pt/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/time/?y=students&layout=share&order=color&controls=true&year=2009_2013" 
-            target="graphs-frame-enrollments" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
->>>>>>> 404c2697d74821733a8a76dfa3fa91c39801b546
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
