@@ -57,7 +57,7 @@
                             <h2 class="text-left text-uppercase">{% trans %}Average Price Exported{% endtrans %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.unity_weight_export_price | max_digits(3) }}</strong><br/>
-                                <small class="magnitude">{{ header.unity_weight_export_price | magnitude }}</small>
+                                <small class="magnitude">USD / kg</small>
                             </div>
                         </div>
                     </div><!--/.col-->
@@ -77,7 +77,7 @@
                             <h2 class="text-left text-uppercase">{% trans %}Average Price Imported{% endtrans %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.unity_weight_import_price | max_digits(3) }}</strong><br/>
-                                <small class="magnitude">{{ header.unity_weight_import_price | magnitude }}</small>
+                                <small class="magnitude">USD / kg</small>
                             </div>
                         </div>
                     </div><!--/.col-->
@@ -134,7 +134,6 @@
 <section id="graphs" class="graphs bg-gray">
 </section>
 
-
-
+s
 {% endblock content %}
 
