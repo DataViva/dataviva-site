@@ -3,7 +3,7 @@ var MajorTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/hedu/all/all/all/show.2/?order=enrolled.desc",
+        "sAjaxSource": "/hedu/all/all/all/show.6/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
@@ -58,6 +58,8 @@ var MajorTable = function () {
                     select.append( $('<option value="'+d+'">'+d+'</option>') );
                 } );
 
+            var lastYear = years[years.length - 1];
+
             select.on( 'change', function () {
                majorTable.table
                     .column( 0 )
@@ -67,7 +69,7 @@ var MajorTable = function () {
 
             $('#major-table_filter input').removeClass('input-sm');
             $('#major-table_filter').addClass('pull-right');
-            $('#major-fields').addClass('active');
+            $('#major-majors').addClass('active');
 
             $('#major-fields').click(function() {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
@@ -78,6 +80,9 @@ var MajorTable = function () {
                 majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
                 $(this).addClass('active').siblings().removeClass('active');
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
         }
     });
 };
