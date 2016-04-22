@@ -306,16 +306,15 @@ dataviva.ui.loading = function(parent) {
 
   var self = this
 
-  this.div = d3.select(parent).append("div")
-    .attr("class","loading")
+  this.div = $(parent).attr("class","loading");
 
   this.icon = self.div.append("i")
-    .attr("class","fa fa-certificate")
+    .attr("class","fa fa-certificate");
 
   this.words = self.div.append("div")
-    .attr("class","text")
+    .attr("class","text");
 
-  this.timing = parseFloat(self.div.style("transition-duration"),10)*1000
+  this.timing = parseFloat(self.div.style("transition-duration"),10)*1000;
 
   this.show = function(callback) {
 
@@ -329,7 +328,7 @@ dataviva.ui.loading = function(parent) {
         setTimeout(callback,self.timing)
       }
 
-    },5)
+    },5);
 
     return self
   }
@@ -340,7 +339,7 @@ dataviva.ui.loading = function(parent) {
 
     setTimeout(function(){
       self.div.style("display","none")
-    },self.timing)
+    },self.timing);
 
     return self
 
@@ -592,8 +591,8 @@ dataviva.popover.create = function(params) {
     .attr("class","popover")
     .style("width",w_px+"px")
     .style("height",h_px+"px")
-    .style("margin-left",-w_px/2+"px")
-    .style("margin-top",-h_px/2+"px")
+    .style("margin-left",w_px/2+"px")
+    .style("margin-top",h_px/2+"px")
 
   if (close) {
     body.append("div")
