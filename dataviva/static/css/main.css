@@ -772,6 +772,7 @@ table.data-blue thead th small {
 .loading {
     position: relative;
 }
+.page-loader { display: none;}
 .loading .page-loader {
      background: rgba(255, 255, 255, 0.8);
      width: 100%;
@@ -781,6 +782,7 @@ table.data-blue thead th small {
      position: absolute;
      z-index: 999;
      text-align: center;
+     display: block;
 }
 .loading .page-loader .loader, .category .page-loader span{
      position: absolute;
