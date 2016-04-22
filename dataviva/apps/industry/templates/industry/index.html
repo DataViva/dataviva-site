@@ -114,10 +114,9 @@
 
 <section id="profile" class="profile">
 
-    <nav class="col-xs-12">
-
+    <nav class="">
         <div class="container">
-            <ul class="nav-tabs" role="tablist">
+            <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active">
                 <a  href="#general"
                     aria-controls="general"
@@ -152,14 +151,13 @@
 
 
     <div class="container">
-        <div class="tab-content col-xs-12">
+        <div class="tab-content">
             {% include "industry/tab-general.html" %}
             {% include "industry/tab-wages.html" %}
             {% if (industry.id|length) == 6 %}
                 {% include "industry/tab-opportunities.html" %}
             {% endif %}
         </div>
-
     </div>
 </section>
 
