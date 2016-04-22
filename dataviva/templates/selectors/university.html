@@ -1,4 +1,4 @@
-<h2>Escolha uma universidade da lista abaixo ou busque pelo nome</h2>
+<h2>{% trans %}Choose a university or type what you are looking for{% endtrans %}</h2>
 <form action="" class="form-dataviva form-inline filter">
 </form>
     <div class="tab-content">
@@ -12,7 +12,7 @@
                         ng-model="selector_model.universities.filter_string"
                         ng-trim="true"
                         autocomplete="false" 
-                        placeholder="Busque pelo nome ou pelo No. Course Hedu"/>
+                        placeholder="{% trans %}Search by name or Course HEDU number:{% endtrans %}"/>
                     </div>
                 </div>
                 

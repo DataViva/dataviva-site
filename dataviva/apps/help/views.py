@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
 from dataviva.apps.general.views import get_locale
+from models import HelpSubject
 
 
 mod = Blueprint('help', __name__,
@@ -25,4 +26,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-    return render_template('index.html')
+
+    subjects = HelpSubject.query.all()
+
+    return render_template('index.html', subjects=subjects)

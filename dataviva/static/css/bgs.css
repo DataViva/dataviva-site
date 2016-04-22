@@ -1,0 +1,923 @@
+
+
+/* home */
+.bg-buildings {
+  background: url(/static/img/bgs/buildings.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-agricultura {
+  background: url(/static/img/bgs/agricultura.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-dots {
+    background-image: url(/static/img/bgs/dots.png);
+}
+
+
+.bg-city-scratched {
+  background: url(/static/img/bgs/city_scratched.png) no-repeat center bottom;
+  background-size: cover;
+}
+
+/* begin backgrounds location */
+
+
+.bg-1ac_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1ac_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1ac_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1ac_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2al_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2al_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2al_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2al_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1ap_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1ap_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1ap_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1ap_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1am_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1am_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1am_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1am_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2ba_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2ba_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2ba_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2ba_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2ce_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2ce_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2ce_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2ce_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3df_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3df_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3df_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3df_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4es_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4es_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4es_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4es_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3go_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3go_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3go_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3go_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2ma_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2ma_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2ma_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2ma_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3mt_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3mt_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3mt_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3mt_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3ms_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3ms_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-3ms_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/3ms_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4mg_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4mg_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4mg_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4mg_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1pa_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1pa_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1pa_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1pa_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2pb_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2pb_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2pb_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2pb_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-5pr_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/5pr_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-5pr_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/5pr_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2pe_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2pe_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2pe_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2pe_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2pi_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2pi_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2pi_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2pi_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4rj_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4rj_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4rj_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4rj_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2rn_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2rn_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2rn_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2rn_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-5rs_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/5rs_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-5rs_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/5rs_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1ro_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1ro_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1ro_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1ro_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1rr_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1rr_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1rr_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1rr_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-5sc_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/5sc_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-5sc_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/5sc_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4sp_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4sp_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-4sp_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/4sp_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2se_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2se_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-2se_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/2se_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1to_1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1to_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.bg-1to_2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/1to_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+/*** INDUSTRY **/
+
+.bg-industry-a {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_a.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-b {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_b.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-c {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_c.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-d {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_d.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-e {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_e.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-f {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_f.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-g {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_g.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-h {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_h.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-i {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_i.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-j {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_j.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-k {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_k.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-l {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_l.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-m {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_m.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-n {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_n.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-o {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_o.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-p {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_p.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-q {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_q.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-r {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_r.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-s {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_s.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-t {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_t.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-u {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_u.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.bg-industry-x {
+  background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_x.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+/** OCCUPATION **/
+
+.bg-occupation-1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-3 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_3.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-4 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_4.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-5 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_5.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-6 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_6.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-7 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_7.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-8 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.bg-occupation-9 {
+  background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_9.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+/*** PRODUCT ***/
+
+.bg-product-1 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_1.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-2 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-3 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_3.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-4 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_4.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-5 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_5.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-6 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_6.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-7 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_7.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-8 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_8.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-9 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_9.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-10 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_10.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-11 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_11.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-12 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_12.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-13 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_13.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-14 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_14.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-15 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_15.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-16 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_16.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-17 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_17.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-18 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_18.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-19 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_19.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-20 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_20.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-21 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_21.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+.bg-product-22 {
+  background: url(https://dataviva.s3.amazonaws.com/img/product/product_22.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+} 
+
+
+
