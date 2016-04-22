@@ -3,7 +3,9 @@
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not location %}
         <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}}
-        {% trans %}is the{% endtrans %} {{header.ranking}}
+        {% trans %}is the{% endtrans %} 
+        {% if g.locale == "en" %}number {% endif %}
+        {{header.ranking}}
         {% if g.locale == "pt" %}&ordf{% endif %}
         {% trans %}in number of employees in Brazil, and these workers are concentrated in the city of{% endtrans %} {{body.municipality_with_more_num_jobs_name }}
         {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{(body.municipality_with_more_num_jobs_value | magnitude).lower()}}
@@ -13,7 +15,9 @@
     {% else %}
         {% if location.id|length != 9 %}
             <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}}
-            {% trans %}is the{% endtrans %} {{header.ranking}}
+            {% trans %}is the{% endtrans %} 
+            {% if g.locale == "en" %}number {% endif %}
+            {{header.ranking}}
             {% if g.locale == "pt" %}&ordf{% endif %}
             {% trans %}in number of employees in {% endtrans %}{{location.preposition('de')}} {{location.name()}},
             {% trans %}and these workers are concentrated in the city of{% endtrans %} {{location.preposition('de')}} {{body.municipality_with_more_num_jobs_name}},
@@ -23,7 +27,9 @@
             {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
         {% else %}
             <p>{% trans %}The economic activity{% endtrans %} {{industry.name()}}
-            {% trans %}is the{% endtrans %} {{header.ranking}}
+            {% trans %}is the{% endtrans %} 
+            {% if g.locale == "en" %}number {% endif %}
+            {{header.ranking}}
             {% if g.locale == "pt" %}&ordf{% endif %}
             {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
             {% trans %}This municipality has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{(header.num_establishments | magnitude).lower()}}
