@@ -867,3 +867,13 @@ table.data-blue thead th small {
 .loading .page-loader .text {
     top: calc(50% + 80px);
 }
+
+
+/* MODAIS */
+.modal-body {
+    min-height: 200px;
+}
+
+
+
+

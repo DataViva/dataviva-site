@@ -12,6 +12,9 @@
     font-weight: 500;
 }
 
+.modal.dataviva .modal-body {
+    min-height: 200px;
+}
 .modal.dataviva .modal-body h2 {
     font-size:20px;
     margin:1rem 0;
@@ -80,3 +83,22 @@
   border-radius: 50%;
   background-color: #337ab7;
 }
+
+
+
+
+
+/* MODAIS */
+
+
+.modal-body .selector_header_icon, .modal-body .selector_title_div {
+    float: left;
+}
+
+.modal-body .selector_title_div .selector_description + .breadcrumb {
+    display: none;
+}
+
+
+
+

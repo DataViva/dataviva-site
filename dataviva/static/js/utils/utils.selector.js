@@ -394,10 +394,11 @@ function Selector() {
         search = header.append("input")
           .attr("type","text")
           .attr("id",name+"_search")
-          .attr("class","leon text")
+          .attr("class","form-control")
           .attr("placeholder",dataviva.format.text("search"));
 
         searcher = leon("#"+name+"_search").color(dataviva.color).size("medium");
+
 
         search.node().oninput = function() { populate_list(selected); };
 
@@ -600,6 +601,12 @@ function Selector() {
           sorter.color(header_color);
         }
         searcher.color(header_color);
+
+
+
+        //  AJUSETES DE LAYOUT
+        $("#"+name+"_search").attr('class', 'form-control');
+
 
         if (type !== "file") {
           depth_select.html("");
@@ -994,3 +1001,9 @@ function Selector() {
 
   return util;
 }
+
+
+
+
+
+
