@@ -132,6 +132,7 @@
 }
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_button_element.d3plus_button_label[style] {
     width: auto !important;
+    padding: 6px 24px 6px 12px !important;
 }
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_drop_list[style] {
     width: auto !important;
@@ -154,6 +155,28 @@
     padding: 0;
     background: transparent;
 }
+.selector .search_result > div.search_withins {
+    color: #999999 !important;
+    font-size: 12px !important;
+    margin-top: 5px;
+}
+.selector div.search_buttons > div.proximity_toggles {
+    float: left;
+}
+.modal-body .selector_body .search_buttons .btn-primary[style] {
+    background-color: #a25a6d !important;
+    border-color: #a25a6d !important;
+    color: #ffffff !important;
+    margin-bottom: 0 !important;
+}
+
+.modal-body .selector .btn.btn-default[style] {
+    border-color: #e7eaec !important;
+}
+
+
+
+
 
 
 
