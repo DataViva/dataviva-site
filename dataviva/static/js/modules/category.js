@@ -17,6 +17,10 @@ $('a[class="pull-right btn btn-primary btn-xs m-r-lg"]').click(function() {
     $('li[role="presentation"] a[href="'+link+'"]').closest('li').addClass('active').siblings().removeClass('active');
 });
 
+$('a[href="#general"]').click(function() {
+    $('#graphs').children().hide();
+});
+
 $(document).ready(function () {
     $(function() {
         var jcarousel = $('.jcarousel');
