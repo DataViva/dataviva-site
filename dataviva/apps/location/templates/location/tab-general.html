@@ -7,8 +7,8 @@
             {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities -1 }} 
             {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
             {% trans %} With {% endtrans %}{{ profile.area }} 
-            {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
-            {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ header.gdp_per_capita|magnitude }}. 
+            {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }} 
+            {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}. 
             {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }}, 
             {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}
             º
@@ -24,8 +24,8 @@
             {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }}, 
             {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
             {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities -1 }} 
-            {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }} 
-            {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010) 
+            {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }} 
+            {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} (2010) 
             {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 5 %}
@@ -35,8 +35,8 @@
             {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
             {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}
             ª
-            {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }}
-            {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ header.gdp|magnitude }} (2010)
+            {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
+            {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} (2010)
             {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
             </p>
         {% elif profile.bra_id|length == 1 %}
@@ -55,7 +55,7 @@
                 {% endif %}
             {% endfor %}
             {% trans %}The region {% endtrans %}
-            {% trans %}has a total of {% endtrans %}{{ header.population|max_digits(3) }} {{ header.population|magnitude }}
+            {% trans %}has a total of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
             {% trans %}people. It is the number {% endtrans %}{{ profile.gdp_pc_rank }}
             {% if g.locale == "pt" %}ª{% endif %}
              {% trans %}region in GDP per capita of Brazil and number {% endtrans %}{{ profile.pop_rank }}
