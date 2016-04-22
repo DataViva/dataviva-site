@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-22 17:21-0300\n"
+"POT-Creation-Date: 2016-04-22 17:40-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,6 +168,7 @@ msgstr ""
 #: dataviva/api/stats/profile_helper.py:254
 #: dataviva/apps/data/templates/data/index.html:49
 #: dataviva/apps/industry/templates/industry/index.html:45
+#: dataviva/apps/major/templates/major/index.html:39
 #: dataviva/apps/occupation/templates/occupation/index.html:45
 #: dataviva/apps/product/templates/product/index.html:43
 #: dataviva/apps/rankings/templates/rankings/_base.html:24
@@ -514,7 +515,7 @@ msgid "Stacked"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:38
-#: dataviva/apps/major/templates/major/index.html:33
+#: dataviva/apps/major/templates/major/index.html:49
 #: dataviva/apps/university/templates/university/index.html:45
 msgid "Number of Enrollments"
 msgstr ""
@@ -539,7 +540,7 @@ msgstr ""
 #: dataviva/apps/data/templates/data/index.html:33
 #: dataviva/apps/industry/templates/industry/index.html:123
 #: dataviva/apps/location/templates/location/index.html:107
-#: dataviva/apps/major/templates/major/index.html:62
+#: dataviva/apps/major/templates/major/index.html:78
 #: dataviva/apps/occupation/templates/occupation/index.html:93
 #: dataviva/apps/product/templates/product/index.html:140
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:11
@@ -560,7 +561,7 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/index.html:106
 #: dataviva/apps/industry/templates/industry/index.html:142
 #: dataviva/apps/location/templates/location/index.html:123
-#: dataviva/apps/major/templates/major/index.html:81
+#: dataviva/apps/major/templates/major/index.html:97
 #: dataviva/apps/occupation/templates/occupation/index.html:114
 #: dataviva/apps/product/templates/product/index.html:159
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:125
@@ -571,8 +572,7 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:115
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
-#: dataviva/apps/major/templates/major/index.html:90
-#: dataviva/apps/major/templates/major/tab-enrollments.html:3
+#: dataviva/apps/major/templates/major/index.html:106
 #: dataviva/apps/university/templates/university/index.html:102
 #: dataviva/apps/university/templates/university/tab-enrollments.html:3
 #: dataviva/apps/university/templates/university/tab-general.html:14
@@ -581,9 +581,9 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:12
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
-#: dataviva/apps/major/templates/major/tab-enrollments.html:15
-#: dataviva/apps/major/templates/major/tab-enrollments.html:23
-#: dataviva/apps/major/templates/major/tab-enrollments.html:31
+#: dataviva/apps/major/templates/major/tab-enrollments.html:21
+#: dataviva/apps/major/templates/major/tab-enrollments.html:48
+#: dataviva/apps/major/templates/major/tab-enrollments.html:74
 #: dataviva/apps/major/templates/major/tab-general.html:75
 #: dataviva/apps/major/templates/major/tab-general.html:87
 #: dataviva/apps/major/templates/major/tab-general.html:99
@@ -599,8 +599,8 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:18
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:60
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
-#: dataviva/apps/major/templates/major/tab-enrollments.html:12
-#: dataviva/apps/major/templates/major/tab-enrollments.html:16
+#: dataviva/apps/major/templates/major/tab-enrollments.html:9
+#: dataviva/apps/major/templates/major/tab-enrollments.html:22
 #: dataviva/apps/major/templates/major/tab-general.html:69
 #: dataviva/apps/major/templates/major/tab-general.html:75
 #: dataviva/apps/university/templates/university/tab-enrollments.html:10
@@ -639,8 +639,8 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:23
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:31
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:39
-#: dataviva/apps/industry/templates/industry/tab-general.html:9
-#: dataviva/apps/industry/templates/industry/tab-general.html:20
+#: dataviva/apps/industry/templates/industry/tab-general.html:11
+#: dataviva/apps/industry/templates/industry/tab-general.html:24
 #: dataviva/apps/major/templates/major/tab-general.html:7
 #: dataviva/apps/major/templates/major/tab-general.html:18
 #: dataviva/apps/major/templates/major/tab-general.html:28
@@ -730,6 +730,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/index.html:131
 #: dataviva/apps/location/templates/location/tab-general.html:89
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:2
+#: dataviva/apps/major/templates/major/tab-enrollments.html:3
 #: dataviva/apps/major/templates/major/tab-general.html:67
 #: dataviva/apps/product/templates/product/index.html:168
 #: dataviva/apps/product/templates/product/tab-general.html:155
@@ -742,7 +743,7 @@ msgid "International Trade"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:83
-#: dataviva/apps/industry/templates/industry/tab-general.html:70
+#: dataviva/apps/industry/templates/industry/tab-general.html:76
 #: dataviva/apps/location/templates/location/tab-general.html:125
 #: dataviva/apps/location/templates/location/tab-general.html:162
 #: dataviva/apps/location/templates/location/tab-general.html:211
@@ -1161,6 +1162,7 @@ msgid "Bar Chart"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:35
+#: dataviva/apps/major/templates/major/index.html:29
 #: dataviva/apps/occupation/templates/occupation/index.html:35
 #: dataviva/apps/product/templates/product/index.html:33
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:34
@@ -1222,7 +1224,7 @@ msgid "Opportunity Gain"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:151
-#: dataviva/apps/industry/templates/industry/tab-general.html:36
+#: dataviva/apps/industry/templates/industry/tab-general.html:42
 #: dataviva/apps/industry/templates/industry/tab-wages.html:3
 #: dataviva/apps/location/templates/location/index.html:139
 #: dataviva/apps/location/templates/location/tab-general.html:130
@@ -1250,70 +1252,70 @@ msgid "Economic Opportunities"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:5
-#: dataviva/apps/industry/templates/industry/tab-general.html:15
-#: dataviva/apps/industry/templates/industry/tab-general.html:25
+#: dataviva/apps/industry/templates/industry/tab-general.html:17
+#: dataviva/apps/industry/templates/industry/tab-general.html:29
 msgid "The economic activity"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:6
-#: dataviva/apps/industry/templates/industry/tab-general.html:16
-#: dataviva/apps/industry/templates/industry/tab-general.html:26
+#: dataviva/apps/industry/templates/industry/tab-general.html:18
+#: dataviva/apps/industry/templates/industry/tab-general.html:30
 msgid "is the"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:8
+#: dataviva/apps/industry/templates/industry/tab-general.html:10
 msgid ""
 "in number of employees in Brazil, and these workers are concentrated in "
 "the city of"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:10
-#: dataviva/apps/industry/templates/industry/tab-general.html:21
-#: dataviva/apps/industry/templates/industry/tab-general.html:28
+#: dataviva/apps/industry/templates/industry/tab-general.html:12
+#: dataviva/apps/industry/templates/industry/tab-general.html:25
+#: dataviva/apps/industry/templates/industry/tab-general.html:34
 msgid ""
 "employed people. The occupation with the highest number of employed "
 "people in this activity is"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:11
+#: dataviva/apps/industry/templates/industry/tab-general.html:13
 msgid "Brazil has a total of"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:12
-#: dataviva/apps/industry/templates/industry/tab-general.html:23
-#: dataviva/apps/industry/templates/industry/tab-general.html:30
+#: dataviva/apps/industry/templates/industry/tab-general.html:14
+#: dataviva/apps/industry/templates/industry/tab-general.html:27
+#: dataviva/apps/industry/templates/industry/tab-general.html:36
 msgid "establishments that works with"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:18
+#: dataviva/apps/industry/templates/industry/tab-general.html:22
 msgid "in number of employees in "
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:19
+#: dataviva/apps/industry/templates/industry/tab-general.html:23
 msgid "and these workers are concentrated in the city of"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:22
+#: dataviva/apps/industry/templates/industry/tab-general.html:26
 msgid "This region has a total of "
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:29
+#: dataviva/apps/industry/templates/industry/tab-general.html:35
 msgid "This municipality has a total of "
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:38
+#: dataviva/apps/industry/templates/industry/tab-general.html:44
 msgid "Occupation with highest number of jobs"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:45
+#: dataviva/apps/industry/templates/industry/tab-general.html:51
 msgid "Municipality with highest number of jobs"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:52
+#: dataviva/apps/industry/templates/industry/tab-general.html:58
 msgid "Occupation with highest monthly average income"
 msgstr ""
 
-#: dataviva/apps/industry/templates/industry/tab-general.html:59
+#: dataviva/apps/industry/templates/industry/tab-general.html:65
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:83
 #: dataviva/translations/dictionary.py:607
 msgid "Municipality with highest monthly average income"
@@ -1484,6 +1486,7 @@ msgid "with Highest Number of Enrollments"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-education.html:14
+#: dataviva/apps/major/templates/major/index.html:38
 #: dataviva/apps/rankings/templates/rankings/_base.html:59
 #: dataviva/templates/site.html:67 dataviva/translations/dictionary.py:171
 #: dataviva/translations/dictionary.py:173
@@ -1813,34 +1816,34 @@ msgstr ""
 msgid "Shift"
 msgstr ""
 
-#: dataviva/apps/major/templates/major/index.html:42
+#: dataviva/apps/major/templates/major/index.html:58
 msgid "Number of Entrants"
 msgstr ""
 
-#: dataviva/apps/major/templates/major/index.html:51
+#: dataviva/apps/major/templates/major/index.html:67
 #: dataviva/apps/university/templates/university/index.html:65
 msgid "Number of Graduates"
 msgstr ""
 
-#: dataviva/apps/major/templates/major/tab-enrollments.html:11
-#: dataviva/apps/major/templates/major/tab-enrollments.html:19
-#: dataviva/apps/major/templates/major/tab-enrollments.html:27
+#: dataviva/apps/major/templates/major/tab-enrollments.html:8
+#: dataviva/apps/major/templates/major/tab-enrollments.html:34
+#: dataviva/apps/major/templates/major/tab-enrollments.html:61
 #: dataviva/apps/major/templates/major/tab-general.html:69
 #: dataviva/apps/major/templates/major/tab-general.html:81
 #: dataviva/apps/major/templates/major/tab-general.html:93
 msgid "Main University"
 msgstr ""
 
-#: dataviva/apps/major/templates/major/tab-enrollments.html:20
-#: dataviva/apps/major/templates/major/tab-enrollments.html:24
+#: dataviva/apps/major/templates/major/tab-enrollments.html:35
+#: dataviva/apps/major/templates/major/tab-enrollments.html:49
 #: dataviva/apps/major/templates/major/tab-general.html:81
 #: dataviva/apps/major/templates/major/tab-general.html:87
 #: dataviva/apps/university/templates/university/tab-enrollments.html:23
 msgid "by Number of Entering Students"
 msgstr ""
 
-#: dataviva/apps/major/templates/major/tab-enrollments.html:28
-#: dataviva/apps/major/templates/major/tab-enrollments.html:32
+#: dataviva/apps/major/templates/major/tab-enrollments.html:62
+#: dataviva/apps/major/templates/major/tab-enrollments.html:75
 #: dataviva/apps/major/templates/major/tab-general.html:93
 #: dataviva/apps/major/templates/major/tab-general.html:99
 #: dataviva/apps/university/templates/university/tab-enrollments.html:37
