@@ -897,7 +897,7 @@ function Selector() {
         .append("div")
           .attr("class","selector")
 
-      var selector_load = new dataviva.ui.loading(container.node())
+      var selector_load = new dataviva.ui.loading(container.node().parentNode)
       selector_load.color("#ffffff")
 
       if (type != "file") {
