@@ -332,9 +332,9 @@ dataviva.ui.loading = function(parent) {
     setTimeout(function(){
 
       self.div.style("opacity",1)
+      d3.select(parent).classed('loading', true);
 
       if (callback) {
-        d3.select(parent).classed('loading', true);
         setTimeout(callback,self.timing)
       }
 
@@ -346,9 +346,9 @@ dataviva.ui.loading = function(parent) {
   this.hide = function() {
 
     self.div.style("opacity",0)
+    d3.select(parent).classed('loading', false);
 
     setTimeout(function(){
-      d3.select(parent).classed('loading', false);
       self.div.style("display","none")
     },self.timing)
 
