@@ -272,6 +272,11 @@ footer label,
 footer li {
   color: #FFF;
 }
+footer li span.link {
+  color: #FFF;
+  text-decoration: none;
+  cursor: pointer;
+}
 footer a:focus,
 footer a:hover {
   text-decoration: none;
