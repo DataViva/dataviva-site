@@ -836,6 +836,7 @@ table.data-blue thead th small {
     z-index: 999;
     text-align: center;
     display: block;
+    border-radius: 0px 0px 4px 4px;
 }
 .loading .page-loader .loader-icon,
 .loading .page-loader .text {
