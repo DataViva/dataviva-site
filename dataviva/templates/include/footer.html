@@ -15,14 +15,14 @@
             <li>
                 <ul>
                     <li><a href="{{ url_for('general.search') }}" title="{% trans %}Search{% endtrans %}">{% trans %}Search{% endtrans %}</a></li>
-                    <li><span onclick="select_attr('bra');" title="{% trans %}Locations{% endtrans %}">{% trans %}Locations{% endtrans %}</span></li>
-                    <li><span onclick="select_attr('cbo');" title="{% trans %}Occupations{% endtrans %}">{% trans %}Occupations{% endtrans %}</span></li>
-                    <li><span onclick="select_attr('cnae');" title="{% trans %}Economic Activities{% endtrans %}">{% trans %}Economic Activities{% endtrans %}</span></li>
-                    <li><span onclick="select_attr('hs');" title="{% trans %}Products{% endtrans %}">{% trans %}Products{% endtrans %}</span></li>
-                    <li><span onclick="select_attr('wld');" title="{% trans %}Trade Partners{% endtrans %}">{% trans %}Trade Partners{% endtrans %}</span></li>
-                    <li><span onclick="select_attr('university');" title="{% trans %}Universities{% endtrans %}">{% trans %}Universities{% endtrans %}</span></li>
-                    <li><span onclick="select_attr('course_hedu');" title="{% trans %}Higher Education{% endtrans %}">{% trans %}Higher Education{% endtrans %}</span></li>
-                    <li><span onclick="select_attr('course_sc');" title="{% trans %}Basic Courses{% endtrans %}">{% trans %}Basic Courses{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('bra');" title="{% trans %}Locations{% endtrans %}">{% trans %}Locations{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('cbo');" title="{% trans %}Occupations{% endtrans %}">{% trans %}Occupations{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('cnae');" title="{% trans %}Economic Activities{% endtrans %}">{% trans %}Economic Activities{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('hs');" title="{% trans %}Products{% endtrans %}">{% trans %}Products{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('wld');" title="{% trans %}Trade Partners{% endtrans %}">{% trans %}Trade Partners{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('university');" title="{% trans %}Universities{% endtrans %}">{% trans %}Universities{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('course_hedu');" title="{% trans %}Higher Education{% endtrans %}">{% trans %}Higher Education{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('course_sc');" title="{% trans %}Basic Courses{% endtrans %}">{% trans %}Basic Courses{% endtrans %}</span></li>
                 </ul>
             </li>
             <li><a href="{{ url_for('rankings.index') }}" title="Visualize Rankings">{% trans %}View Rankings{% endtrans %}</a></li>
