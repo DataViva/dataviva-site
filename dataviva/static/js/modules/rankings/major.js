@@ -1,6 +1,6 @@
 var MajorTable = function () {
     this.tableId = '#major-table';
-
+//dataviva.format.number(d.wage_avg, {"key": "wage_avg"})
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/hedu/all/all/all/show.6/?order=enrolled.desc",
@@ -57,8 +57,6 @@ var MajorTable = function () {
                 .each( function ( d ) {
                     select.append( $('<option value="'+d+'">'+d+'</option>') );
                 } );
-
-            var lastYear = years[years.length - 1];
 
             select.on( 'change', function () {
                majorTable.table
