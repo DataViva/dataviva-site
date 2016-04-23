@@ -44,6 +44,7 @@
 .selector div.selector_toggles {
   display: inline-block;
   float: right;
+  margin-bottom: 10px;
 }
 
 .selector div.selector_toggles > div.leon.button {
