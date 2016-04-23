@@ -55,6 +55,7 @@ function Selector() {
 
   function util(selection) {
 
+    d3.select(selection.node().parentNode).select('.modal-header .modal-title').html(dataviva.dictionary[name+'_plural'])
     selection.each(function(data) {
 
       get_article = function(x) {
@@ -530,6 +531,7 @@ function Selector() {
         header_color = "#333333";
         if (typeof x === "string") {
           header_select_div.style("display","none");
+
           icon.style("display","none");
           title.text(dataviva.format.text("search_results"));
         }
@@ -549,6 +551,8 @@ function Selector() {
 
           if (type !== "file" && (x.id !== "all" || type === "bra")) {
             header_select_div.style("display","inline-block");
+            title_div.style("display","block");
+            icon.style("display","inline-block");
             header_select.leons.header_select.node.onclick = function(){
               selector_load.text(dataviva.format.text("wait")).show();
               callback(data[x.id],name);
@@ -556,6 +560,8 @@ function Selector() {
             header_select.color(x.color);
           }
           else {
+            title_div.style("display","none");
+            icon.style("display","none");
             header_select_div.style("display","none");
           }
 
@@ -988,9 +994,3 @@ function Selector() {
 
   return util;
 }
-
-
-
-
-
-
