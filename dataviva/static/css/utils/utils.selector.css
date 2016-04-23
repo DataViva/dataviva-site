@@ -131,11 +131,15 @@
   background-repeat: no-repeat;
   background-size: 100%;
   display: inline-block;
-  height: 34px;
+  height: 50px;
   margin-right: 6px;
-  width: 34px;
+  width: 50px;
 }
 
+.selector .search_result > i.search_icon {
+  margin-right: 6px;
+  font-size: 60px;
+}
 .selector .search_result > div.search_text {
   display: inline-block;
 }

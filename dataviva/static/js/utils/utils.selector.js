@@ -615,7 +615,7 @@ function Selector() {
         searcher.color(header_color);
 
 
-        //  AJUSETES DE LAYOUT
+        //  AJUSTES DE LAYOUT
         $("#"+name+"_search").attr('class', 'form-control');
 
         if (type !== "file") {
@@ -689,13 +689,27 @@ function Selector() {
               .attr("class","search_result");
 
             var search_icon = false;
-            if (v.icon && (v.icon != selected.icon || search_term !== "")) {
-              search_icon = item.append("div")
-                .attr("class","search_icon")
-                .style("background-image","url("+v.icon+")");
-              if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && v.id.length != 5)) {
-                search_icon.style("background-color",v.color);
-              }
+
+            icon_class_number_len = {
+                "cbo": 1,
+                "cnae": 1,
+                "university": 1,
+                "wld": 2,
+                "hs": 2,
+                "course_hedu": 2,
+                "course_sc": 2,
+                "bra": 3
+            }
+            if ((type == "bra" && v.id.length !== 1) || (type == "wld" && v.id.length == 5)) {
+                search_icon = item.append("div").attr("class","search_icon").style("background-image","url("+v.icon+")");
+            } else {
+                search_icon = item.append("i").attr(
+                    "class","search_icon dv-" +
+                    type.replace("_", "-") + "-" + v.id.slice(0, icon_class_number_len[type]));
+                if (search_icon.node().offsetWidth > 70) {
+                    search_icon.style("font-size", search_icon.node().offsetWidth / 2.6 + 'px');
+                }
+                search_icon.style("color",v.color);
             }
 
             var title = v.name.toTitleCase().truncate(65);
