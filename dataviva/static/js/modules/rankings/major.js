@@ -1,4 +1,4 @@
-var header = {
+var headers = {
     0: "enrolled",
     1: "graduates",
     2: "entrants",
@@ -30,42 +30,42 @@ var MajorTable = function () {
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[0], {"key": header[0]});
+                    return dataviva.format.number(row[0], {"key": headers[0]});
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[1], {"key": header[1]});
+                    return dataviva.format.number(row[1], {"key": headers[1]});
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[2], {"key": header[2]});
+                    return dataviva.format.number(row[2], {"key": headers[2]});
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[3], {"key": header[3]});
+                    return dataviva.format.number(row[3], {"key": headers[3]});
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[4], {"key": header[4]});
+                    return dataviva.format.number(row[4], {"key": headers[4]});
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[5], {"key": header[5]});
+                    return dataviva.format.number(row[5], {"key": headers[5]});
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[6], {"key": header[6]});
+                    return dataviva.format.number(row[6], {"key": headers[6]});
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[7], {"key": header[7]});
+                    return dataviva.format.number(row[7], {"key": headers[7]});
                 }
             }
         ],
