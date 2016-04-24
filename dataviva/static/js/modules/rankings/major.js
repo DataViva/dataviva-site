@@ -1,33 +1,73 @@
+var header = {
+    0: "enrolled",
+    1: "graduates",
+    2: "entrants",
+    3: "morning",
+    4: "afternoon",
+    5: "night",
+    6: "full_time",
+    7: "age",
+    8: "graduates_growth",
+    9: "enrolled_growth",
+    10: "year",
+    11: "course_hedu_id"
+};
+
 var MajorTable = function () {
     this.tableId = '#major-table';
 //dataviva.format.number(d.wage_avg, {"key": "wage_avg"})
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/hedu/all/all/all/show.6/?order=enrolled.desc",
-        "sAjaxDataProp": "data",
         "order": [],
         "columns": [
             {data: 10},
             {data: 11},
-            null,
-            {data: 0},
-            {data: 1},
-            {data: 2},
-            {data: 3},
-            {data: 4},
-            {data: 5},
-            {data: 6},
-            {data: 7},
-            {data: 8},
-            {data: 9}
-        ],
-        "columnDefs": [
             {
-                "targets": 2,
-                "render": function (data, type, row, meta){
-                    return dataviva.course_hedu[row[11]].name
+                render: function (data, type, row, meta){
+                    return dataviva.course_hedu[row[11]].name.toTitleCase().truncate(35);
                 }
             },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[0], {"key": header[0]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[1], {"key": header[1]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[2], {"key": header[2]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[3], {"key": header[3]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[4], {"key": header[4]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[5], {"key": header[5]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[6], {"key": header[6]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[7], {"key": header[7]});
+                }
+            }
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,
@@ -82,12 +122,14 @@ var MajorTable = function () {
 
             var lastYear = $('#year-selector option').last().val();
             $('#year-selector').val(lastYear);
+            majorTable.table
+                    .column(0)
+                    .search(lastYear)
+                    .draw();
         }
     });
 };
 
-$(document).ready(function() {
-    dataviva.requireAttrs(['course_hedu'], function() {
-        window.majorTable = new MajorTable();
-    });
+dataviva.requireAttrs(['course_hedu'], function() {
+    window.majorTable = new MajorTable();
 });
