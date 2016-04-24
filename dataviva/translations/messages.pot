@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-23 09:59-0300\n"
+"POT-Creation-Date: 2016-04-24 12:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -218,6 +218,7 @@ msgstr ""
 #: dataviva/api/stats/profile_helper.py:303
 #: dataviva/apps/basic_course/templates/basic_course/index.html:90
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:16
+#: dataviva/apps/rankings/templates/rankings/major.html:21
 #: dataviva/translations/dictionary.py:312
 msgid "Average Age"
 msgstr ""
@@ -2614,7 +2615,7 @@ msgid "Effective Industry Diversity"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/major.html:12
-msgid "Higher Education ID"
+msgid "Major ID"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/major.html:13
@@ -2662,23 +2663,6 @@ msgstr ""
 msgid "Full Time"
 msgstr ""
 
-#: dataviva/apps/rankings/templates/rankings/major.html:21
-#: dataviva/apps/rankings/templates/rankings/university.html:21
-msgid "Age"
-msgstr ""
-
-#: dataviva/apps/rankings/templates/rankings/major.html:22
-#: dataviva/apps/rankings/templates/rankings/university.html:22
-#: dataviva/translations/dictionary.py:256
-msgid "Nominal Graduation Growth (1 year)"
-msgstr ""
-
-#: dataviva/apps/rankings/templates/rankings/major.html:23
-#: dataviva/apps/rankings/templates/rankings/university.html:23
-#: dataviva/translations/dictionary.py:254
-msgid "Nominal Enrollment Growth (1 year)"
-msgstr ""
-
 #: dataviva/apps/rankings/templates/rankings/occupation.html:12
 #: dataviva/translations/dictionary.py:330
 msgid "CBO ID"
@@ -2696,6 +2680,20 @@ msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/university.html:12
 msgid "University ID"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/university.html:21
+msgid "Age"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/university.html:22
+#: dataviva/translations/dictionary.py:256
+msgid "Nominal Graduation Growth (1 year)"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/university.html:23
+#: dataviva/translations/dictionary.py:254
+msgid "Nominal Enrollment Growth (1 year)"
 msgstr ""
 
 #: dataviva/apps/search/templates/search/_form.html:11
