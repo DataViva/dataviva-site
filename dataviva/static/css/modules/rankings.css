@@ -113,3 +113,10 @@
 .rankings .dataTables_wrapper .dataTables_filter {
     display: inline;
 }
+
+.rankings .dataTables_wrapper .growth-arrow.up {
+    color: green;
+}
+.rankings .dataTables_wrapper .growth-arrow.down {
+    color: red;
+}
