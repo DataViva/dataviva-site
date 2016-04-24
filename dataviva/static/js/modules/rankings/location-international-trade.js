@@ -45,6 +45,7 @@ var LocationTradeRanking = function () {
         "deferRender": true,
         "language": dataviva.datatables.language,
         "scrollY": 500,
+        "scrollX": true,
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
@@ -119,8 +120,6 @@ var LocationTradeRanking = function () {
     });
 };
 
-$(document).ready(function() {
-    dataviva.requireAttrs(['bra'], function() {
-        window.locationTradeRanking = new LocationTradeRanking();
-    });
+dataviva.requireAttrs(['bra'], function() {
+    window.locationTradeRanking = new LocationTradeRanking();
 });
