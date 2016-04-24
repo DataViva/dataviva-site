@@ -75,6 +75,10 @@ var BasicCourseTable = function () {
 
             var lastYear = $('#year-selector option').last().val();
             $('#year-selector').val(lastYear);
+            basicCourseTable.table
+                    .column( 0 )
+                    .search(lastYear)
+                    .draw();
         }
     });
 };

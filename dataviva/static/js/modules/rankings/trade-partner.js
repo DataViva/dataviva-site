@@ -83,6 +83,10 @@ var TradePartnerTable = function () {
 
             var lastYear = $('#year-selector option').last().val();
             $('#year-selector').val(lastYear);
+            tradePartnerTable.table
+                    .column( 0 )
+                    .search(lastYear)
+                    .draw();
         }
     });
 };

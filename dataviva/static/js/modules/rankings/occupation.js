@@ -85,6 +85,10 @@ var OccupationTable = function () {
 
             var lastYear = $('#year-selector option').last().val();
             $('#year-selector').val(lastYear);
+            occupationTable.table
+                    .column( 0 )
+                    .search(lastYear)
+                    .draw();
         }
     });
 };

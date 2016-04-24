@@ -116,6 +116,10 @@ var LocationWages = function () {
 
             var lastYear = $('#year-selector option').last().val();
             $('#year-selector').val(lastYear);
+            locationWages.table
+                    .column( 0 )
+                    .search(lastYear)
+                    .draw();
         }
     });
 };

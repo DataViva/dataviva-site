@@ -66,6 +66,10 @@ var universityTable = function () {
 
             var lastYear = $('#year-selector option').last().val();
             $('#year-selector').val(lastYear);
+            universityTable.table
+                    .column( 0 )
+                    .search(lastYear)
+                    .draw();
         }
     });
 };
