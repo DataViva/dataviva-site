@@ -32,6 +32,7 @@ var MajorTable = function () {
         "deferRender": true,
         "language": dataviva.datatables.language,
         "scrollY": 500,
+        "scrollX": true,
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {

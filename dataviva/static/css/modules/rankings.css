@@ -111,23 +111,6 @@
 }
 
 
-.rankings .dataTables_wrapper {
-    width: 100%;
-}
 .rankings .dataTables_wrapper .dataTables_filter {
     display: inline;
 }
-.rankings .dataTables_scroll .dataTables_scrollHead[style] {
-  overflow:hidden !important;
-}
-.rankings .dataTables_scroll .dataTables_scrollBody[style] {
-  overflow:hidden !important;
-}
-.rankings .dataTables_scroll[style] {
-  overflow:auto;
-}
-
-
-
-
-
