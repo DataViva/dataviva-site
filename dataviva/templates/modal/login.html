@@ -1,15 +1,21 @@
 <div class="modal fade dataviva" tabindex="-1" role="dialog" id="dataviva-login" data-show="true">
-    <div class="modal-dialog modal-clear">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+
             <div class="modal-body">
                 <div class="loginmodal-container">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h1>{% trans %}Users Acess{% endtrans %}</h1>
-                    <div class="clearfix"><!--//--></div>
+                    <h4>{% trans %}Users Acess{% endtrans %}</h4>
                     <form>
-                        <input type="text" name="user" placeholder="{% trans %}User{% endtrans %}">
-                        <input type="password" name="pass" placeholder="{% trans %}Password{% endtrans %}">
-                        <input type="submit" name="login"  class="btn btn-default btn-dataviva" value="Entrar">
+                          <div class="form-group">
+                            <input type="text" name="user" placeholder="{% trans %}User{% endtrans %}" class="form-control input-lg" />
+                          </div>
+                          <div class="form-group">
+                            <input type="password" name="pass" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
+                          </div>
+                        <input type="submit" name="login" class="btn btn-primary btn-block btn-lg" value="Entrar">
                     </form>
                     <div class="login-help">
                         <a href="#">{% trans %}Sign Up{% endtrans %}</a> -
@@ -20,3 +26,6 @@
         </div>
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+
