@@ -18,6 +18,9 @@ var headers = {
     16: "hs_id"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var ProductTable = function () {
     this.tableId = '#product-table';
 
@@ -153,6 +156,9 @@ var ProductTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

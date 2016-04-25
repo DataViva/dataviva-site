@@ -19,6 +19,9 @@ var headers = {
     17: "gini"
  }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var EconomicActivitiesTable = function () {
     this.tableId = '#economic-activities-table';
 
@@ -160,6 +163,9 @@ var EconomicActivitiesTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

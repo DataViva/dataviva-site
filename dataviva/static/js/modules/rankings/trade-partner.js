@@ -17,6 +17,9 @@ var headers = {
     15: "wld_id"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var TradePartnerTable = function () {
     this.tableId = '#trade-partner-table';
 
@@ -154,6 +157,9 @@ var TradePartnerTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

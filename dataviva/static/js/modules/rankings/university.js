@@ -13,6 +13,9 @@ var headers = {
     11: "university_id"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var universityTable = function () {
     this.tableId = '#university-table';
 
@@ -121,6 +124,9 @@ var universityTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

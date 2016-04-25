@@ -19,6 +19,9 @@ var headers = {
     17: "gini"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var LocationWages = function () {
     this.tableId = '#location-wages-table';
 
@@ -183,6 +186,9 @@ var LocationWages = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

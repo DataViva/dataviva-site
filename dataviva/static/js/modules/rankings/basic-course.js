@@ -8,6 +8,9 @@ var headers = {
     6: "course_sc_id"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var BasicCourseTable = function () {
     this.tableId = '#basic-course-table';
 
@@ -105,6 +108,9 @@ var BasicCourseTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };
