@@ -118,7 +118,7 @@
     padding: 0;
 }
 .modal-body .selector .selector_body .search_result:nth-child(4n+1) {
-    background: #eee;
+    background: #F3F6F3;
 }
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_node[style] {
     color: #333 !important;

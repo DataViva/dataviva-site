@@ -105,6 +105,16 @@
     margin-right: 5px;
 }
 
+
+@media (max-width: 767px) {
+    .rankings .rankings-control .year-selector {
+        margin-top: 10px;
+    }
+    .rankings #rankings .navbar .nav > li > a {
+        padding: 6px 20px;
+    }
+}
+
 .rankings .rankings-control .btn-group {
     margin-right: 5px;
 }
