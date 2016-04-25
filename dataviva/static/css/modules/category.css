@@ -1,56 +1,65 @@
-.category .header .name {
-  height: 90px;
+
+.category .header {
+  height: 420px;
+  position: relative;
 }
-@media (max-width: 767px) {
-  .category .header .name {
-    height: 200px;
-    margin-bottom: 10px;
-  }
+.category .header .summary-box{
+  background: #FFFFFF;
+  background: rgba(255,255,255,.8);
+  padding: 30px 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: 15%;
 }
-.category .header h1 {
+
+.category .header .summary-box .portrait {
+  color: #9EDDBF;
+  font-size: 40px;
+  text-align: center;
+  transition: 0.4s;
+  margin: 0 10px 0 0;
+  float: left;
+}
+
+.category .header .summary-box h1 {
   display: inline-block;
-  background: #FFF;
-  color: #5a9dc4;
+  color: #666666;
   font-weight: 400;
-  height: 52px;
-  line-height: 52px;
-  margin-top: 29px;
+  margin: 3px;
+  float: left;
 }
-@media (max-width: 767px) {
-  .category .header h1 {
-    margin-left: 20px;
-    margin-top: 130px;
-  }
+
+.category .header .summary-box .indices {
+    margin: 10px -10px 15px;
 }
+
+.category .header .summary-box .year {
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
 .category .header h1 a {
   color: #5a9dc4;
   font-size: 12px;
   font-weight: 600;
 }
-.category .portrait {
-  background: white;
-  color: #9EDDBF;
-  font-size: 130px;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-color: #F2F5F3;
-  transition: 0.4s;
-  position: relative;
-  top: -50px;
-  padding: 10px;
-  margin-left: 60px;
-}
+
+
+
+
+
 .category .nav-tabs {
   list-style-type: none;
   list-style: none;
   margin: 0;
   padding: 0;
   border: none;
+  height: auto;
+  overflow: auto;
 }
 .category .nav-tabs li {
   background: rgba(229, 241, 233, 0.37);
-  float: none;
   margin: 0px;
   font-size: 13px;
   font-weight: 300;
@@ -77,14 +86,33 @@
   line-height: 40px;
   padding: 0 2rem;
 }
-.category .profile .tab-content {
-  margin-top: -130px;
+.category .profile > nav {
+  background: rgba(229, 241, 233, 0.37);
 }
+
 @media (max-width: 767px) {
+  .category .nav-tabs {
+    margin: 0 -15px;
+  }
+  .category .nav-tabs li {
+    display: block;
+    float: none;
+  }
+  .category .header .summary-box{
+    padding: 20px 0;
+  }
   .category .profile .tab-content {
     margin-top: 0px;
   }
 }
+
+
+
+  .category .tab-content, .category .graphs > div:first-child {
+    padding: 40px 0;
+  }
+
+
 /* WIDGETS */
 .category .widget {
   font-size: 10px;
@@ -98,7 +126,7 @@
   height: 10px;
 }
 .category .widget .number {
-  color: #5a9dc4;
+  color: #666666;
   font-size: 18px;
   font-weight: 300;
   margin-top: -5px;
@@ -172,6 +200,44 @@
     right: 0px;
   }
 }
+
+/* DESCRIPTION LISTS */
+.category .dl-box {
+  min-height: 360px;
+  position: relative;
+}
+.category .dl-box .btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+.category dl dt{
+  font-weight: normal;
+  white-space: normal;
+}
+.category dl dd{
+  font-size: 18px;
+  line-height: 1.1em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.category dl dd small{
+  display: block;
+  text-transform: uppercase;
+  font-size: .65em;
+  margin-bottom: .1em;
+}
+
+
+@media (max-width: 767px) {
+  .category dl dd span{
+    display: inline;
+  }
+  .category .dl-box {
+    min-height: 0;
+  }
+}
+
 .category .table.data-detail {
   margin-bottom: 0px;
 }
@@ -208,8 +274,10 @@
   text-align: right;
 }
 .category .profile h3 {
-  margin: 20px 20px 0px 20px;
   height: 30px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #7bccd0;
+  margin: 20px 0 20px
 }
 .category .table-responsive {
   height: 280px;
@@ -217,10 +285,6 @@
 
 .category .graphs {
   margin-top: 40px;
-}
-.category .graphs .container {
-  width: 90%;
-  padding: 20px;
 }
 .category .graphs .embed-responsive {
   max-height: 900px;

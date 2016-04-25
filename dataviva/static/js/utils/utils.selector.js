@@ -55,6 +55,7 @@ function Selector() {
 
   function util(selection) {
 
+    d3.select(selection.node().parentNode).select('.modal-header .modal-title').html(dataviva.dictionary[name+'_plural'])
     selection.each(function(data) {
 
       get_article = function(x) {
@@ -371,13 +372,18 @@ function Selector() {
               .attr("value",s)
               .attr("name","selector_sort")
               .attr("onclick","populate_list(selected,this.value)");
+
             if (s == sorting) input.attr("checked","checked");
             sort_toggles.append("label")
               .attr("for","selector_sort_"+s)
               .html(dataviva.format.text(s));
           });
 
+
           sorter = leon("$selector_sort").color(dataviva.color);
+
+          $('#leon_selector_sort .leon.radio.group').children().attr('class', 'btn btn-default')
+          $('#leon_selector_sort .leon.radio.group').attr('class', 'btn-group');
         }
 
         header_select_div = sort_toggles.append("div").attr("id","header_select_div");
@@ -394,10 +400,11 @@ function Selector() {
         search = header.append("input")
           .attr("type","text")
           .attr("id",name+"_search")
-          .attr("class","leon text")
+          .attr("class","form-control")
           .attr("placeholder",dataviva.format.text("search"));
 
         searcher = leon("#"+name+"_search").color(dataviva.color).size("medium");
+
 
         search.node().oninput = function() { populate_list(selected); };
 
@@ -407,8 +414,7 @@ function Selector() {
         }
 
         body = container.append("div")
-          .attr("class","selector_body")
-          .style("height","auto");
+          .attr("class","selector_body");
 
         selector_load.hide();
 
@@ -422,6 +428,7 @@ function Selector() {
 
         }
 
+        $('#leon_header_select').attr('class','btn btn-primary');
         select_value(data[initial_value]);
 
       };
@@ -524,6 +531,7 @@ function Selector() {
         header_color = "#333333";
         if (typeof x === "string") {
           header_select_div.style("display","none");
+
           icon.style("display","none");
           title.text(dataviva.format.text("search_results"));
         }
@@ -543,6 +551,8 @@ function Selector() {
 
           if (type !== "file" && (x.id !== "all" || type === "bra")) {
             header_select_div.style("display","inline-block");
+            title_div.style("display","block");
+            icon.style("display","inline-block");
             header_select.leons.header_select.node.onclick = function(){
               selector_load.text(dataviva.format.text("wait")).show();
               callback(data[x.id],name);
@@ -550,6 +560,8 @@ function Selector() {
             header_select.color(x.color);
           }
           else {
+            title_div.style("display","none");
+            icon.style("display","none");
             header_select_div.style("display","none");
           }
 
@@ -602,6 +614,10 @@ function Selector() {
         }
         searcher.color(header_color);
 
+
+        //  AJUSTES DE LAYOUT
+        $("#"+name+"_search").attr('class', 'form-control');
+
         if (type !== "file") {
           depth_select.html("");
           var depth_toggles = get_depths(x);
@@ -626,6 +642,9 @@ function Selector() {
             });
 
             leon("$selector_depth_toggle").color(header_color);
+
+            $('#leon_selector_depth_toggle .leon.radio.group').children().attr('class', 'btn btn-default')
+            $('#leon_selector_depth_toggle .leon.radio.group').attr('class', 'btn-group');
           }
 
         }
@@ -637,14 +656,11 @@ function Selector() {
 
         if (hw > 0) title.style("max-width",hw+"px");
 
-        // Set height, now that the header is completely updated
-        set_height();
-
       };
 
       add_results = function() {
 
-        var amount = parseFloat(body.style("height"), 10)/40;
+        var amount = 20;
 
         var results = [];
         for (var i = 0; i < amount; i++) {
@@ -671,35 +687,29 @@ function Selector() {
             var item = body.append("div")
               .attr("id","result_"+v.id)
               .attr("class","search_result");
-              // .on(d3plus.client.pointer.click,function(){
-              //   if (v.id.length < depths[depths.length-1]) {
-              //     if (type == "bra" && v.id.substr(0,2) == "4mg") {
-              //       if (v.id.length == 2) {
-              //         var depth = 7
-              //       }
-              //       else {
-              //         var depth = 8
-              //       }
-              //     }
-              //     else {
-              //       var depth = depths[depths.indexOf(v.id.length)+1]
-              //     }
-              //     select_value(v,depth);
-              //   }
-              //   else {
-                      // selector_load.text(dataviva.format.text("wait")).show()
-              //     callback(data[v.id],name);
-              //   }
-              // })
 
             var search_icon = false;
-            if (v.icon && (v.icon != selected.icon || search_term !== "")) {
-              search_icon = item.append("div")
-                .attr("class","search_icon")
-                .style("background-image","url("+v.icon+")");
-              if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && v.id.length != 5)) {
-                search_icon.style("background-color",v.color);
-              }
+
+            icon_class_number_len = {
+                "cbo": 1,
+                "cnae": 1,
+                "university": 1,
+                "wld": 2,
+                "hs": 2,
+                "course_hedu": 2,
+                "course_sc": 2,
+                "bra": 3
+            }
+            if ((type == "bra" && v.id.length !== 1) || (type == "wld" && v.id.length == 5)) {
+                search_icon = item.append("div").attr("class","search_icon").style("background-image","url("+v.icon+")");
+            } else {
+                search_icon = item.append("div").attr("class","icon-box").append("i").attr(
+                    "class","search_icon dv-" +
+                    type.replace("_", "-") + "-" + v.id.slice(0, icon_class_number_len[type]));
+                if (search_icon.node().offsetWidth > 50) {
+                    search_icon.style("font-size", search_icon.node().offsetWidth / 3 + 'px');
+                }
+                search_icon.style("color",v.color);
             }
 
             var title = v.name.toTitleCase().truncate(65);
@@ -855,29 +865,7 @@ function Selector() {
           }
 
         });
-
-      };
-
-      set_height = function() {
-        // Set height for selector_body, based off of the title height
-        var parent = container.node().parentNode,
-            display = d3.select(parent).style("display");
-
-        if (display == "none") {
-          parent.style.visibility = "hidden";
-          parent.style.display = "block";
-        }
-        var max_height = container.node().offsetHeight;
-
-        max_height -= body.node().offsetTop;
-        max_height -= parseFloat(body.style("padding-top"),10);
-        max_height -= parseFloat(body.style("padding-bottom"),10);
-        max_height = Math.floor(max_height);
-        if (display == "none") {
-          parent.style.visibility = "visible";
-          parent.style.display = "none";
-        }
-        body.style("height",max_height+"px");
+        $('#modal-selector-content .selector .selector_body .search_result .search_buttons .leon.button.medium').attr('class', 'btn btn-primary');
       };
 
       var close = null,
@@ -929,7 +917,7 @@ function Selector() {
         .append("div")
           .attr("class","selector")
 
-      var selector_load = new dataviva.ui.loading(container.node())
+      var selector_load = new dataviva.ui.loading(container.node().parentNode)
       selector_load.color("#ffffff")
 
       if (type != "file") {

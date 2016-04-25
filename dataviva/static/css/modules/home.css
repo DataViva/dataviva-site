@@ -15,15 +15,45 @@
   margin: 15px auto 0;
   border-bottom: 2px solid #9EDDBF;
 }
+
 /* WELCOME SECTION BEGIN */
+.home .welcome {
+    color: #FFFFFF;
+    position: relative;
+}
+.home .welcome .popover {
+    color: #666;
+}
+.home .welcome:after {
+    content: " ";
+
+    /* BLACK background option */
+    background: rgba(0,0,0, 0.45);
+
+    /* RED background option*/
+    background: rgba(128, 56, 75, 0.55);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.home .welcome h2 {
+  text-shadow: 1px 2px 0 #000000;
+}
 .home .welcome h3 {
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 2px;
 }
+.home .welcome h2 + p, .home .welcome h3 + p{
+    color: rgba(255,255,255,.8);
+}
 .home .welcome .btn {
   font-size: 16px;
   font-weight: 300;
+  color: #FFFFFF;
 }
 .home .welcome ul {
   list-style: none;
@@ -32,16 +62,24 @@
 }
 .home .welcome ul li {
   margin-bottom: 25px;
-  border-bottom: 1px solid #8ccfe3;
+  border-bottom: 1px solid rgba(255,255,255,.3);
 }
 .home .welcome ul li a {
   cursor: pointer;
   text-decoration: none;
   color: inherit;
 }
+.home .welcome ul li a, .home .welcome ul li a h3 + p {
+    transition: color .2s linear;
+}
+.home .welcome a {
+    color: #9EDDBF;
+}
 .home .welcome ul li a:focus,
-.home .welcome ul li a:hover {
-  color: #5a9dc4;
+.home .welcome ul li a:hover,
+.home .welcome ul li a:focus h3 + p,
+.home .welcome ul li a:hover h3 + p {
+  color: #9EDDBF;
 }
 /* WELCOME SECTION END */
 /* WELCOME DATABASES BEGIN */

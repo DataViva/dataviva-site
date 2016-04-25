@@ -8,7 +8,7 @@
 			<div class="modal-body clearfix">
 				<div class="institucional search" ng-show="!selector_model">
 					<h2>{$ wizard.title $}</h2>
-					<form class="form-inline filter">
+					<form class="filter">
 
 
                         <div class="form-group search">
@@ -24,8 +24,9 @@
                             </div>
                         </div>
 
+
 						<div class="selector-list">
-							<h4>Escolha uma opção ou digite o que procura</h4>
+							<h4>{% trans %}Choose an option or type what you are looking for{% endtrans %}</h4>
 							<div class="list-group list-stripped">
 								<div class="selector-list-item"
 								     data-ng-repeat="question in wizard.questions|filter:wizard.filter_string"
@@ -43,8 +44,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-primary pull-left" data-dismiss="modal" aria-label="Close">Cancelar</button>
-				<button class="btn btn-primary" ng-click="submit()">Avançar</button>
+				<button class="btn btn-primary pull-left" data-dismiss="modal" aria-label="Close">{% trans %}Cancel{% endtrans %}</button>
+				<button class="btn btn-primary" ng-click="submit()">{% trans %}Advance{% endtrans %}</button>
 			</div>
 		</div>
 	</div>

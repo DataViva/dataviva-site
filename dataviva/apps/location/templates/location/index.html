@@ -19,25 +19,111 @@
 <!-- BREADCRUMB -->
 
 <!-- Criar classes css para os backgrunds doas localidades -->
-<section id="header" class="header">
-    <div class="container">
-        <div class="{{header.bg_class_image}}" data-stellar-background-ratio="0.2">
+<section id="header" class="header {{header.bg_class_image}}">
+
+    <div class="summary-box">
+        <div class="container">
+
+            {% if location.id|length <= 3 %}
+            <span class="portrait dv-bra-{{location.id}} hidden-xs"></span>
+            {% else %}
+            <span class="portrait dv-bra-{{location.id[0:3]}} hidden-xs"></span>
+            {% endif %}
+
             <h1 class="col-xs-offset-0 col-sm-offset-4 col-md-offset-3 p-w-xs">
-                {{ location.name() }} <a href="#" title="Trocar" onclick="start_selector('Location');"> (trocar)</a>
+                {{ location.name() }} 
+               <div class="btn-group">
+              <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   {% trans %}change{% endtrans %} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                   <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+              </ul>
+            </div>
+
             </h1>
+
+            <span class="clearfix"></span>
+
+            <div class="indices">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.gdp|max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.gdp|magnitude }}</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if header.life_expectation %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.life_expectation|max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.life_expectation|magnitude }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if header.population %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}Total Population{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.population|max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.population|magnitude }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %}</h2>
+                            <div class="number">
+                                R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.gdp_per_capita|magnitude }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% if header.hdi %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.hdi|magnitude }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if header.eci %}
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                        <div class="widget">
+                            <h2 class="text-left text-uppercase">{% trans %}ECI{% endtrans %}</h2>
+                            <div class="number">
+                                <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
+                                <small class="magnitude">{{ header.eci|magnitude }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div><!--/.row-->
+            </div><!--/.indices-->
+
+            <div class="row"><div class="col-xs-12">{% trans %}Year{% endtrans %}: {{ header.year }}</div></div>
+
         </div>
-        {% if location.id|length <= 3 %}
-        <span class="portrait dv-bra-{{location.id}} hidden-xs"></span>
-        {% else %}
-        <span class="portrait dv-bra-{{location.id[0:3]}} hidden-xs"></span>
-        {% endif %}
     </div>
+
 </section>
 
 <section id="profile" class="profile">
-    <div class="container">
-        <nav class="col-sm-5 col-md-4 col-lg-3">
-            <ul class="nav-tabs" role="tablist">
+    <nav>
+        <div class="container">
+            <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
                     <a href="#general"
                        aria-controls="general"
@@ -79,9 +165,11 @@
                 </li>
 
             </ul>
-        </nav>
+        </div>
+    </nav>
 
-        <div class="tab-content col-sm-7 col-md-8 col-lg-9">
+    <div class="container">
+        <div class="tab-content">
           {% include "location/tab-general.html" %}
           {% include "location/tab-trade-partner.html" %}
           {% include "location/tab-wages.html" %}

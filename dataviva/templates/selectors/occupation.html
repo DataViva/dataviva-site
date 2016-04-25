@@ -1,12 +1,12 @@
-<h2>Escolha uma ocupacão da lista abaixo ou busque pelo nome</h2>
+<h2>{% trans %}Choose a occupation or type what you are looking for{% endtrans %}</h2>
 <form action="" class="form-dataviva form-inline filter">
 
     <div class="btn-group nav nav-tabs" role="tablist">
         <a class="btn btn-default" href="#families" aria-controls="families" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.families)">
-            Famílias
+            {% trans %}Families{% endtrans %}
         </a>
         <a class="btn btn-default" href="#groups" aria-controls="groups" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.groups)">
-            Grandes Grupos
+            {% trans %}Big Groups{% endtrans %}
         </a>
     </div>
 
@@ -22,7 +22,7 @@
                     ng-model="selector_model.families.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. CBO" />
+                    placeholder="{% trans %}Search by name or CBO number:{% endtrans %}" />
                 </div>
             </div>
             <div class="selector-list">
@@ -53,7 +53,7 @@
                     ng-model="selector_model.groups.filter_string"
                     ng-trim="true"
                     autocomplete="false"
-                    placeholder="Busque pelo nome ou pelo No. CBO" />
+                    placeholder="{% trans %}Search by name or CBO number:{% endtrans %}" />
                 </div>
             </div>
 

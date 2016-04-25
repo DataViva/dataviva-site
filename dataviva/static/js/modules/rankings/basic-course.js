@@ -1,30 +1,62 @@
+var headers = {
+    0: "year",
+    1: "age",
+    2: "classes",
+    3: "enrolled",
+    4: "enrolled_growth",
+    5: "enrolled_growth_5",
+    6: "course_sc_id"
+}
+
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var BasicCourseTable = function () {
     this.tableId = '#basic-course-table';
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/sc/all/all/all/show.2/?order=enrolled.desc",
+        "sAjaxSource": "/sc/all/all/all/show.5/?order=enrolled.desc",
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
             {data: 0},
             {data: 6},
-            null,
-            {data: 3},
-            {data: 2},
-            {data: 1},
-        ],
-        "columnDefs": [
             {
-                "targets": 2,
-                "render": function (data, type, row, meta){
-                    return dataviva.course_sc[row[6]].name
+                render: function (data, type, row, meta){
+                    return dataviva.course_sc[row[6]].name.truncate(35);
                 }
             },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[3], {"key": headers[3]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[2], {"key": headers[2]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[1], {"key": headers[1]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[4], {"key": headers[4]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[5], {"key": headers[5]});
+                }
+            }
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,
         "scrollY": 500,
+        "scrollX": true,
         "scrollCollapse": true,
         "scroller": true,
         initComplete: function () {
@@ -60,14 +92,27 @@ var BasicCourseTable = function () {
 
             $('#basic-course-table_filter input').removeClass('input-sm');
             $('#basic-course-table_filter').addClass('pull-right');
+            $('#basic-course-courses').addClass('active');
 
             $('#basic-course-fields').click(function() {
-                basicCourseTable.table.ajax.url("/sc/all/all/all/show.2/?order=enrolled.desc").load();
+                loadingRankings.show();
+                basicCourseTable.table.ajax.url("/sc/all/all/all/show.2/?order=enrolled.desc").load(loadingRankings.hide);
             });
 
             $('#basic-course-courses').click(function() {
-                basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load();
+                loadingRankings.show();
+                basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load(loadingRankings.hide);
             });
+
+            var lastYear = $('#year-selector option').last().val();
+            $('#year-selector').val(lastYear);
+            basicCourseTable.table
+                    .column( 0 )
+                    .search(lastYear)
+                    .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

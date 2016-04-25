@@ -1,49 +1,52 @@
 <div role="tabpanel" class="tab-pane" id="enrollments">
-    <p>{{ body.profile }}</p>
+
     <h2>{% trans %}Enrollments{% endtrans %}</h2>
+
     <div class="row">
-        <div class="col-xs-15 col-sm-15 col-md-12">
-            <div class="table-responsive">
-                <table class="table data-blue">
-                    <thead>
-                        <tr>
-                            <th>
-                                {% trans %}Main Course{% endtrans %}
-                                <small>{% trans %}by Number of Enrolled Students{% endtrans %}</small>
-                            </th>
-                            <th>
-                                {% trans %}Main Course{% endtrans %}
-                                <small>{% trans %}by Number of Entering Students{% endtrans %}</small>
-                            </th>
-                            <th>
-                                {% trans %}Main Course{% endtrans %}
-                                <small>{% trans %}by Number of Graduates{% endtrans %}</small>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <p class="label">{{ body.major_with_more_enrollments }}</p>
-                                <div class="number">
-                                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_enrollment_number_by_major | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{{ body.major_with_more_entrants}}</p>
-                                <div class="number">
-                                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_major | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{{ body.major_with_more_graduates }}</p>
-                                <div class="number">
-                                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_major | magnitude }}</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+            <div class="blue-box title">
+                {% trans %}Main Course{% endtrans %}
+                <small>{% trans %}by Number of Enrolled Students{% endtrans %}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.major_with_more_enrollments }}</p>
+                <div class="number">
+                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_enrollment_number_by_major | magnitude }}</span>
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+            <div class="blue-box title">
+                {% trans %}Main Course{% endtrans %}
+                <small>{% trans %}by Number of Entering Students{% endtrans %}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.major_with_more_entrants }}</p>
+                <div class="number">
+                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_major | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+            <div class="blue-box title">
+                {% trans %}Main Course{% endtrans %}
+                <small>{% trans %}by Number of Graduates{% endtrans %}</small>
+            </div>
+            <div class="blue-box">
+                <p class="label">{{ body.major_with_more_graduates }}</p>
+                <div class="number">
+                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_major | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div><!--/.row-->
+
+</div>
+

@@ -18,6 +18,11 @@
 
 .partners .partnership h4{
     font-size: 20px;
-    color: #a25a6d;
+    color: #fff;
     font-weight: 500;
+}
+
+p {
+	text-align: justify;
+    font-size: 15px;
 }

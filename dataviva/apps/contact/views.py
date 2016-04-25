@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash
+from flask import Blueprint, g, redirect, url_for, flash, render_template, request
 from dataviva.apps.general.views import get_locale
-from forms import RegistrationForm
+from dataviva.utils.send_mail import send_mail
+from forms import ContactForm
 from models import Form
 from dataviva import db
 from datetime import datetime
@@ -24,13 +25,13 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    form = RegistrationForm()
+    form = ContactForm()
     return render_template('contact/index.html', form=form, action=url_for('contact.create'))
 
 
 @mod.route('/', methods=['POST'])
 def create():
-    form = RegistrationForm()
+    form = ContactForm()
     if form.validate() is False:
         return render_template('contact/index.html', form=form)
     else:
@@ -41,9 +42,14 @@ def create():
         contact.message = form.message.data
         contact.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
+        message_tpl = render_template(
+            'contact/message_template.html', contact=contact)
+
         db.session.add(contact)
         db.session.commit()
-
+        send_mail("Mensagem recebida via página de Contato",
+                  ["contato@dataviva.info"], message_tpl)
         message = u'Sua mensagem foi enviada com sucesso. Em breve retornaremos.'
         flash(message, 'success')
-        return redirect(url_for('contact.index'))
+
+        return redirect(request.referrer)

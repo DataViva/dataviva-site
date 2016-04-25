@@ -14,14 +14,15 @@
             <li><h3>{% trans %}Explore{%endtrans%}</h3></li>
             <li>
                 <ul>
-                    <li><a href="#" title="Pesquisa">{% trans %}Search{% endtrans %}</a></li>
-                    <li><a href="#" title="Localidades">{% trans %}Locations{% endtrans %}</a></li>
-                    <li><a href="#" title="Produtos">{% trans %}Products{% endtrans %}</a></li>
-                    <li><a href="#" title="Ocupações">{% trans %}Occupations{% endtrans %}</a></li>
-                    <li><a href="#" title="Atividades econômicas">{% trans %}Economic Activities{% endtrans %}</a></li>
-                    <li><a href="#" title="Parceiros comerciais">{% trans %}Trade Partners{% endtrans %}</a></li>
-                    <li><a href="#" title="Cursos do Ensino Superior">{% trans %}Higher Education{% endtrans %}</a></li>
-                    <li><a href="#" title="Cursos básicos">{% trans %}Basic Courses{% endtrans %}</a></li>
+                    <li><a href="{{ url_for('general.search') }}" title="{% trans %}Search{% endtrans %}">{% trans %}Search{% endtrans %}</a></li>
+                    <li><span class="link" onclick="select_attr('bra');" title="{% trans %}Locations{% endtrans %}">{% trans %}Locations{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('cbo');" title="{% trans %}Occupations{% endtrans %}">{% trans %}Occupations{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('cnae');" title="{% trans %}Economic Activities{% endtrans %}">{% trans %}Economic Activities{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('hs');" title="{% trans %}Products{% endtrans %}">{% trans %}Products{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('wld');" title="{% trans %}Trade Partners{% endtrans %}">{% trans %}Trade Partners{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('university');" title="{% trans %}Universities{% endtrans %}">{% trans %}Universities{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('course_hedu');" title="{% trans %}Higher Education{% endtrans %}">{% trans %}Higher Education{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('course_sc');" title="{% trans %}Basic Courses{% endtrans %}">{% trans %}Basic Courses{% endtrans %}</span></li>
                 </ul>
             </li>
             <li><a href="{{ url_for('rankings.index') }}" title="Visualize Rankings">{% trans %}View Rankings{% endtrans %}</a></li>
@@ -40,24 +41,24 @@
     <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
     <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
         <h3>{%trans%}Contact Us{%endtrans%}</h3>
-        <form class="form-horizontal">
-
+        <form method="post" action="{{ url_for('contact.create') }}" class="form-horizontal">
+            {{ g.contact_form.hidden_tag() }}
             <div class="form-group">
-                <label for="footer-name" class="col-sm-3 control-label">{% trans %}Name{% endtrans %}</label>
+                <label for="name" class="col-sm-3 control-label">{% trans %}Name{% endtrans %}</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="footer-name" placeholder="{% trans %}Name{% endtrans %}">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{% trans %}Name{% endtrans %}">
                 </div>
             </div>
             <div class="form-group">
-                <label for="footer-email" class="col-sm-3 control-label">Email</label>
+                <label for="email" class="col-sm-3 control-label">Email</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="footer-email" placeholder="E-mail">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="E-mail">
                 </div>
             </div>
             <div class="form-group">
-                <label for="footer-message" class="col-sm-3 control-label">{% trans %}Message{% endtrans %}</label>
+                <label for="message" class="col-sm-3 control-label">{% trans %}Message{% endtrans %}</label>
                 <div class="col-sm-9">
-                    <textarea type="text" class="form-control" id="footer-message" placeholder="{% trans %}Message{% endtrans %}"></textarea>
+                    <textarea type="text" class="form-control" id="message" name="message" placeholder="{% trans %}Message{% endtrans %}"></textarea>
                 </div>
             </div>
 

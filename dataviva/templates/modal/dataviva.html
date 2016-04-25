@@ -3,31 +3,31 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Empreendedor</h4>
+                <h4 class="modal-title">{% trans %}Entrepreneur{% endtrans %}</h4>
             </div>
             <div class="modal-body">
                 <div id="carousel-modal" class="carousel slide" data-interval="false">
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
                             <div class="institucional search">
-                                <h2>O que você gostaria de descobrir?</h2>
+                                <h2>{% trans %}What would you like to know?{% endtrans %}</h2>
                                 <form action="" class="form-dataviva form-inline filter">
                                     <div class="form-group">
                                         <i class="fa fa-search"></i>
                                         <input id="field-search" type="text" class="busca form-control" />
                                     </div>
                                     <div class="search-items">
-                                        <h4>Principais Pesquisas</h4>
+                                        <h4>{% trans %}Main Searchs{% endtrans %}</h4>
                                         <div class="list-group list-stripped">
-                                            <a href="#" class="list-group-item">Quantidade de estabelecimentos de uma atividade em uma região</a>
-                                            <a href="#" class="list-group-item">Salário médio de uma atividade ou ocupação em uma região</a>
-                                            <a href="#" class="list-group-item">Principais parceiros comerciais de um Produto em ume região</a>
-                                            <a href="#" class="list-group-item">Localidades que concentram o emprego de uma atividade</a>
-                                            <a href="#" class="list-group-item">Localidades que mais importam ou exportam um produto específico</a>
-                                            <a href="#" class="list-group-item">Produtos similares ao do meu negócio, produzidos em uma região</a>
-                                            <a href="#" class="list-group-item">Cursos oferecidos em ume região</a>
-                                            <a href="#" class="list-group-item">Perfil econômico geral de uma região</a>
-                                            <a href="#" class="list-group-item more">Exibir mais opções <i class="fa fa-caret-down"></i></a>
+                                            <a href="#" class="list-group-item">{% trans %}Number of establishments of an activity in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Average wage of an activity in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Main trade partner of a product in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Locations that concentrates the jobs in one activity{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Locations that imports more or exports more one specific product{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Similar products to my business, produced in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Courses offered in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}General economic profile of a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item more">{% trans %}View more options{% endtrans %} <i class="fa fa-caret-down"></i></a>
                                         </div>
                                     </div>
                                 </form>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="item">
                             <div class="institucional search">
-                                <h2>Escolha um produto da lista abaixo ou busque pelo nome</h2>
+                                <h2>{% trans %}Choose an option or type what you are looking for{% endtrans %}</h2>
                                 <form action="" class="form-dataviva form-inline filter">
                                     <div class="form-group">
                                         <i class="fa fa-search"></i>
@@ -43,14 +43,14 @@
                                     </div>
                                     <div class="search-items">
                                         <div class="list-group list-stripped">
-                                            <a href="#" class="list-group-item">Quantidade de estabelecimentos de uma atividade em uma região</a>
-                                            <a href="#" class="list-group-item">Salário médio de uma atividade ou ocupação em uma região</a>
-                                            <a href="#" class="list-group-item">Principais parceiros comerciais de um Produto em ume região</a>
-                                            <a href="#" class="list-group-item">Localidades que concentram o emprego de uma atividade</a>
-                                            <a href="#" class="list-group-item">Localidades que mais importam ou exportam um produto específico</a>
-                                            <a href="#" class="list-group-item">Produtos similares ao do meu negócio, produzidos em uma região</a>
-                                            <a href="#" class="list-group-item">Cursos oferecidos em ume região</a>
-                                            <a href="#" class="list-group-item">Perfil econômico geral de uma região</a>
+                                            <a href="#" class="list-group-item">{% trans %}Number of establishments of one activity in one region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Average wage of an activity in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Main trade partner of a product in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Locations that concentrates the jobs in one activity{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Locations that imports more or exports more one specific product{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Similar products to my business, produced in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Courses offered in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}General economic profile of a region{% endtrans %}</a>
                                         </div>
                                     </div>
                                 </form>
@@ -58,15 +58,15 @@
                         </div>
                         <div class="item">
                             <div class="institucional search">
-                                <h2>Escolha um localidade da lista abaixo ou busque pelo nome</h2>
+                                <h2>{% trans %}Choose a location or type what you are looking for{% endtrans %}</h2>
                                 <form action="" class="form-dataviva form-inline filter">
                                     <div class="form-group">
                                         <div class="btn-group" role="group" aria-label="...">
-                                            <button type="button" class="btn btn-default">Regiões</button>
-                                            <button type="button" class="btn btn-default">Estados</button>
-                                            <button type="button" class="btn btn-default">Mesorregiões</button>
-                                            <button type="button" class="btn btn-default">Microregiões</button>
-                                            <button type="button" class="btn btn-default">Municípios</button>
+                                            <button type="button" class="btn btn-default">{% trans %}Regions{% endtrans %}</button>
+                                            <button type="button" class="btn btn-default">{% trans %}States{% endtrans %}</button>
+                                            <button type="button" class="btn btn-default">{% trans %}Mesorregions{% endtrans %}</button>
+                                            <button type="button" class="btn btn-default">{% trans %}Microregions{% endtrans %}</button>
+                                            <button type="button" class="btn btn-default">{% trans %}Municipalities{% endtrans %}</button>
                                         </div>
                                     </div>
                                     <hr />
@@ -76,14 +76,14 @@
                                     </div>
                                     <div class="search-items">
                                         <div class="list-group list-stripped">
-                                            <a href="#" class="list-group-item">Quantidade de estabelecimentos de uma atividade em uma região</a>
-                                            <a href="#" class="list-group-item">Salário médio de uma atividade ou ocupação em uma região</a>
-                                            <a href="#" class="list-group-item">Principais parceiros comerciais de um Produto em ume região</a>
-                                            <a href="#" class="list-group-item">Localidades que concentram o emprego de uma atividade</a>
-                                            <a href="#" class="list-group-item">Localidades que mais importam ou exportam um produto específico</a>
-                                            <a href="#" class="list-group-item">Produtos similares ao do meu negócio, produzidos em uma região</a>
-                                            <a href="#" class="list-group-item">Cursos oferecidos em ume região</a>
-                                            <a href="#" class="list-group-item">Perfil econômico geral de uma região</a>
+                                            <a href="#" class="list-group-item">{% trans %}Number of establishments of one activity in one region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Average wage of an activity in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Main trade partner of a product in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Locations that concentrates the jobs in one activity{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Locations that imports more or exports more one specific product{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Similar products to my business, produced in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}Courses offered in a region{% endtrans %}</a>
+                                            <a href="#" class="list-group-item">{% trans %}General economic profile of a region{% endtrans %}</a>
                                         </div>
                                     </div>
                                 </form>
@@ -93,17 +93,17 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <p><a href="09-pesquisa-avancada.html?open-modal=modal-dataviva-localidade">Não encontrei o que procuro</a></p>
+                <p><a href="09-pesquisa-avancada.html?open-modal=modal-dataviva-localidade">{% trans %}Didn't find what I was looking for{% endtrans %}</a></p>
                 <ol class="carousel-indicators">
                     <li data-target="#carousel-modal" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-modal" data-slide-to="1"></li>
                     <li data-target="#carousel-modal" data-slide-to="2"></li>
                 </ol>
                 <p>
-                    <a class="btn btn-lg btn-dataviva pull-left" href="#carousel-modal" role="button" data-slide="prev">Voltar</a>
-                    <a class="btn btn-lg btn-dataviva" href="#carousel-modal" role="button" data-slide="next">Avançar</a>
+                    <a class="btn btn-lg btn-dataviva pull-left" href="#carousel-modal" role="button" data-slide="prev">{% trans %}Back{% endtrans %}</a>
+                    <a class="btn btn-lg btn-dataviva" href="#carousel-modal" role="button" data-slide="next">{% trans %}Advance{% endtrans %}</a>
                 </p>
-                <p><a href="#carousel-modal" role="button" data-dismiss="modal" aria-label="Close" class="pull-left">Cancelar</a></p>
+                <p><a href="#carousel-modal" role="button" data-dismiss="modal" aria-label="Close" class="pull-left">{% trans %}Cancel{% endtrans %}</a></p>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->

@@ -5,10 +5,10 @@
             <h4 class="m-n">
                 <a href="/{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?scale=linear&depth=direction&time=month&y=val_usd"
                    class="list-group-item" target="graphs-frame-trade-partner">
-                    {% trans %}Trade Balance By{% endtrans %}
+                    {% trans %}Trade Balance{% endtrans %}
                 </a>
             </h4>
-            <h4>{% trans %}Exports By</h4>
+            <h4>{% trans %}Exports By{% endtrans %}</h4>
             <a href="#exports-products" class="list-group-item" data-toggle="collapse" data-parent="#exports-products">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="exports-products">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/hs/?color=color&depth=hs_6&size=export_val"
@@ -33,7 +33,7 @@
                </a>
             </div>
 
-            <h4>{% trans %}Importações por</h4>
+            <h4>{% trans %}Importy By{% endtrans %}</h4>
             <a href="#imports-products" class="list-group-item" data-toggle="collapse" data-parent="#imports-products">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="imports-products">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/hs/?color=color&depth=hs_6&size=import_val"

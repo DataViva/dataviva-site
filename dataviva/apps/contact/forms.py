@@ -15,8 +15,8 @@ class NumberOfWords(object):
             raise ValidationError(self.message)
 
 
-class RegistrationForm(Form):
+class ContactForm(Form):
     name = TextField('name', [validators.Required(u"Por favor, insira o seu nome."), validators.Length(max=100)])
     email = TextField('email', [validators.Required(u"Por favor, insira o seu e-mail."), NumberOfWords(max=1)])
-    subject = TextField('subject', [validators.Required(u"Por favor, insira o assunto."), validators.Length(max=200)])
+    subject = TextField('subject', [validators.Length(max=200)])
     message = TextAreaField('message', [validators.Required(u"Por favor, insira a mensagem."), NumberOfWords(max=250)])

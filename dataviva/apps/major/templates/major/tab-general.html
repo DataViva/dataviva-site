@@ -1,174 +1,113 @@
 <div role="tabpanel" class="tab-pane active" id="general">
-   <div class="jcarousel-wrapper">
-        <div class="jcarousel">
-            <ul>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
-                        <div class="number">
-                            <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.enrolled | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students{% endtrans %}</h2>
-                        <div class="number">
-                            <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.entrants | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
-                        <div class="number">
-                            <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
-                            <small class="magnitude">{{ header.graduates | magnitude }}</small>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-
-        <a href="#" class="fa fa-angle-left jcarousel-control-prev"></a>
-        <a href="#" class="fa fa-angle-right jcarousel-control-next"></a>
-    </div>
-
-    <div class="m-t-sm col-xs-12 year">
-        {% trans %}Year{% endtrans %}: {{ header.year }}
-    </div>
-
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not header.bra_id %}
         <p>{% trans %}The course of{% endtrans %} {{ header.name }} 
-        {% trans %}is {% endtrans %}{{ header.rank }}
-        {% if g.locale == "pt" %}&ordm{% endif %}
+        {% trans %}is {% endtrans %} {{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
         {% trans %} in number of enrollments in Brazil. The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
-        {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
-        {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+        {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
+        {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
         {% trans %}students enrolled in the country{% endtrans %}.</p>
 
     {% else %}
         {% if header.bra_id|length == 1 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{{ location.preposition("de") }} {{ header.location_name }}.
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
-            {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }}
-            {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+            {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }}
+            {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
             {% trans %}students enrolled in the region{% endtrans %}.</p>
 
         {% elif header.bra_id|length == 3 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the state of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
-             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
-             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
              {% trans %}students enrolled in the state{% endtrans %}</p>
 
         {% elif header.bra_id|length == 5 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the mesoregion of{% endtrans %} {{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
-             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
-             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
              {% trans %}students enrolled in the mesoregion{% endtrans %}.</p>
 
         {% elif header.bra_id|length == 7 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the microregion of{% endtrans %} {{ location.preposition("de") }} {{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
-             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
-             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
              {% trans %}students enrolled in the microregion{% endtrans %}.</p>
 
         {% else %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}
-             {% trans %} is {% endtrans %}{{ header.rank }}
-             {% if g.locale == "pt" %}&ordm{% endif %}
+             {% trans %} is {% endtrans %}{{ header.rank }}{% if g.locale == "pt" %}&ordm{% endif %}
              {% trans %} in number of enrollments in {% endtrans %}{% trans %}the municipality of{% endtrans %} {{ location.preposition("de") }}{{ header.location_name }}. 
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }}{{ body.university_with_more_enrolled }}, 
-             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ body.highest_enrolled_number_by_university | magnitude }} 
-             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ header.enrolled | magnitude }} 
+             {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
+             {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
              {% trans %}students enrolled in the municipality{% endtrans %}.</p>
 
         {% endif %}
     {% endif %}
-    <div class="row">
-        <div class="col-xs-12 col-md-6 col-lg-6">
-            <h3>{% trans %}Enrollments{% endtrans %}</h3>
-            <div class="table-responsive">
-                <table class="table data-detail">
-                    <tbody>
-                        <tr>
-                            <th>
-                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.university_with_more_enrolled }}</p>
-                                <strong class="counter">{{ body.highest_enrolled_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_enrolled_number_by_university | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.municipality_with_more_enrolled }}</p>
-                                <strong class="counter">{{ body.highest_enrolled_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_enrolled_number_by_municipality | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.university_with_more_entrants }}</p>
-                                <strong class="counter">{{ body.highest_entrant_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_university | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.municipality_with_more_entrants }}</p>
-                                <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Main University{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.university_with_more_graduates }}</p>
-                                <strong class="counter">{{ body.highest_graduate_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_university | magnitude }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th>
-                                {% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}
-                            </th>
-                            <td>
-                                <p class="label">{{ body.municipality_with_more_graduates }}</p>
-                                <strong class="counter">{{ body.highest_graduate_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_municipality | magnitude }}</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
-                <a href="#enrollments" aria-controls="enrollments" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                    {% trans %}More details{% endtrans %}
-                </a>
-            </div>
+        <div class="row">
+
+        <div class="dl-box col-xs-12 col-md-6">
+            <h3>{% trans %}International Trade{% endtrans %}</h3>
+            <dl class="dl-horizontal">
+                    <dt>{% trans %}Main University{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.university_with_more_enrolled }}</small>
+                        <strong class="counter">{{body.highest_enrolled_number_by_university | max_digits(3) }}</strong> 
+                        <span>{{body.highest_enrolled_number_by_university | magnitude}}</span>
+                    </dd>
+                    <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.municipality_with_more_enrolled }}</small>
+                        <strong class="counter">{{body.highest_enrolled_number_by_municipality | max_digits(3)}}</strong>
+                        <span>{{body.highest_enrolled_number_by_municipality | magnitude}}</span>
+                    </dd>
+                    <dt>{% trans %}Main University{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.university_with_more_entrants }}</small>
+                        <strong class="counter">{{body.highest_entrant_number_by_university | max_digits(3)}}</strong> 
+                        <span>{{body.highest_entrant_number_by_university | magnitude}}</span>
+                    </dd>
+                    <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.municipality_with_more_entrants }}</small>
+                        <strong class="counter">{{body.highest_entrant_number_by_municipality | max_digits(3)}}</strong>
+                        <span>{{body.highest_entrant_number_by_municipality | magnitude}}</span>
+                    </dd>
+                    <dt>{% trans %}Main University{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.university_with_more_graduates }}</small>
+                        <strong class="counter">{{body.highest_graduate_number_by_university | max_digits(3)}}</strong>
+                        <span>{{body.highest_graduate_number_by_university | magnitude}}</span>
+                    </dd>
+                    <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.municipality_with_more_graduates }}</small>
+                        <strong class="counter">{{body.highest_graduate_number_by_municipality | max_digits(3)}}</strong>
+                        <span>{{body.highest_graduate_number_by_municipality | magnitude}}</span>
+                    </dd>
+            </dl>
+            <a href="#enrollments" 
+                    aria-controls="enrollments" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ major.id }}"
+                    data-location="{{ location.id }}">
+                {% trans %}More details{% endtrans %}
+            </a>
         </div>
     </div>
+</div>
