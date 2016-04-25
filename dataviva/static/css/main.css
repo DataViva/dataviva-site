@@ -917,3 +917,54 @@ table.data-blue thead th small {
   padding: 20px 50px;
 }
 
+
+
+
+/*  SIGNIN SIGUNP LOGIN FORGOT PASS */
+
+.btn-google:hover,
+.btn-facebook:hover,
+.btn-twitter:hover {
+  color: white;
+}
+.btn-google,
+.btn-facebook,
+.btn-twitter {
+  display: block;
+  color: rgba(255,255,255,.9);
+  margin-bottom: 15px;
+}
+.btn-google{ background-color: #DD4B39; }
+.btn-google:hover{ background-color: #B80005; }
+.btn-facebook{ background-color: #3B5998; }
+.btn-facebook:hover{ background-color: #22407F; }
+.btn-twitter{ background-color: #55ACEE; }
+.btn-twitter:hover{ background-color: #3C93D5; }
+
+h1 {
+  padding: 20px 45px 0;
+}
+.signin-box {
+  padding: 20px 60px 40px;
+  margin-bottom: 40px;
+}
+.signin-box:first-child {
+  border-right: 1px solid #eee;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    padding: 0;
+  }
+  .signin-box:first-child {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  .signin-box {
+    padding: 20px 15px 20px;
+    margin-bottom: 10px;
+  }
+}
+
+
+
