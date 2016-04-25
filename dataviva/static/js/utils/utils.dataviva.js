@@ -103,19 +103,19 @@ dataviva.format.text = function(text, opts) {
 }
 
 dataviva.format.affixes = {
-  "val_usd": ["$"," USD"],
-  "export_val": ["$"," USD"],
-  "import_val": ["$"," USD"],
+  "val_usd": ["USD ",""],
+  "export_val": ["USD ",""],
+  "import_val": ["USD ",""],
   "export_kg": [""," kg"],
   "import_kg": [""," kg"],
-  "export_val_kg": ["$"," USD"],
-  "import_val_kg": ["$"," USD"],
-  "purchase_value": ["$"," BRL"],
-  "transfer_value": ["$"," BRL"],
-  "wage": ["$"," BRL"],
-  "wage_avg": ["$"," BRL"],
-  "wage_month": ["$"," BRL"],
-  "wage_avg_bra": ["$"," BRL"]
+  "export_val_kg": ["USD ",""],
+  "import_val_kg": ["USD ",""],
+  "purchase_value": ["R$ ",""],
+  "transfer_value": ["R$ ",""],
+  "wage": ["R$ ",""],
+  "wage_avg": ["R$ ",""],
+  "wage_month": ["R$ ",""],
+  "wage_avg_bra": ["R$ ",""]
 };
 
 for (var a in dataviva.format.affixes) {
