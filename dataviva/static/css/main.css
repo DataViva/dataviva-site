@@ -968,3 +968,33 @@ h1.login-title {
 
 
 
+/*  RANKINGS   */
+.text-up {
+  color: #3c763d;
+}
+.text-down {
+  color: #a94442;
+}
+.text-up, .text-down {
+  text-align: right;
+  display: block;
+}
+
+.rankings-content .dataTable {
+  border-radius: 0;
+}
+.rankings-content .dataTable thead tr th{
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+

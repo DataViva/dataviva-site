@@ -12,7 +12,12 @@
 </div>
 
 <section id="build_graph"  class="container m-b-lg">
-    <nav class="sidebar col-md-3">
+
+    <h1>Visualize seu Gráfico</h1>
+    <p>Selecione parâmetros para construir seu gráfico.</p>
+    <br />
+
+    <nav class="sidebar well col-xs-12 col-md-3" style="margin-top: 0">
         <ul class="sub-menu">
             <li>
                 <div class="form-group">
@@ -27,15 +32,14 @@
             <li id="views">
             </li>
             <li>
-                <a href="#" class="btn btn-primary pull-right">
+                <a href="#" class="btn btn-primary btn-block">
                     <i class="fa fa-repeat m-r-sm" aria-hidden="true"></i>
                     Atualizar Gráfico
                 </a>
             </li>
         </ul>
     </nav>
-    <div class="col-md-9">
-        <h1>Visualize seu Gráfico</h1>
+    <div class="col-xs-12 col-md-9">
         {% block build_graph_content %}
         {% endblock build_graph_content %}
     </div>
