@@ -142,12 +142,14 @@ var TradePartnerTable = function () {
             $('#trade-partner-countries').addClass('active');
 
             $('#trade-partner-continents').click(function() {
-                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.2/?order=export_val.desc").load();
+                loadingRankings.show();
+                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.2/?order=export_val.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#trade-partner-countries').click(function() {
-                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load();
+                loadingRankings.show();
+                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 

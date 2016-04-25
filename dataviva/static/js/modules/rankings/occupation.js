@@ -146,12 +146,14 @@ var OccupationTable = function () {
             $('#occupation-families').addClass('active');
 
             $('#occupation-groups').click(function() {
-                occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#occupation-families').click(function() {
-                occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 

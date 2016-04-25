@@ -114,12 +114,14 @@ var MajorTable = function () {
             $('#major-majors').addClass('active');
 
             $('#major-fields').click(function() {
-                majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
+                loadingRankings.show();
+                majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#major-majors').click(function() {
-                majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
+                loadingRankings.show();
+                majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
