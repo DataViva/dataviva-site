@@ -3,7 +3,7 @@
         <h3>{%trans%}Preview{%endtrans%}:</h3>
         <div class="list-group panel">
             <h4 class="m-n">
-                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?"
+                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?time=year"
                    class="list-group-item" target="graphs-frame-trade-partner">
                     {%trans%}Trade Balance{%endtrans%}
                 </a>
@@ -73,7 +73,7 @@
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?&time=year"
+        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?time=year"
                 name="graphs-frame-trade-partner"
                 id="graphs-frame-trade-partner"
                 class="embed-responsive-item" >
