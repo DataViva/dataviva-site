@@ -144,3 +144,6 @@
 .rankings .dataTables_scrollBody .dataTable td.table-number {
     text-align: right;
 }
+.rankings .navbar-nav > li > .dropdown-menu {
+    margin-top: -6px;
+}
