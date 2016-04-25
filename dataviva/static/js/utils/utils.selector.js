@@ -703,11 +703,11 @@ function Selector() {
             if ((type == "bra" && v.id.length !== 1) || (type == "wld" && v.id.length == 5)) {
                 search_icon = item.append("div").attr("class","search_icon").style("background-image","url("+v.icon+")");
             } else {
-                search_icon = item.append("i").attr(
+                search_icon = item.append("div").attr("class","icon-box").append("i").attr(
                     "class","search_icon dv-" +
                     type.replace("_", "-") + "-" + v.id.slice(0, icon_class_number_len[type]));
-                if (search_icon.node().offsetWidth > 70) {
-                    search_icon.style("font-size", search_icon.node().offsetWidth / 2.6 + 'px');
+                if (search_icon.node().offsetWidth > 50) {
+                    search_icon.style("font-size", search_icon.node().offsetWidth / 3 + 'px');
                 }
                 search_icon.style("color",v.color);
             }
