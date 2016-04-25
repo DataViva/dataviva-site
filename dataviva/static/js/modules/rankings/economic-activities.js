@@ -1,3 +1,24 @@
+var headers = {
+    0: "wage",
+    1: "num_emp",
+    2: "num_jobs",
+    3: "num_est",
+    4: "wage_avg",
+    5: "age_avg",
+    6: "wage_growth",
+    7: "wage_growth_5",
+    8: "num_emp_growth",
+    9: "num_emp_growth_5",
+    10: "year",
+    11: "cnae_id",
+    12: "cbo_diversity",
+    13: "cbo_diversity_eff",
+    14: "bra_diversity",
+    15: "bra_diversity_eff",
+    16: "hist",
+    17: "gini"
+ }
+
 var EconomicActivitiesTable = function () {
     this.tableId = '#economic-activities-table';
 
@@ -9,27 +30,71 @@ var EconomicActivitiesTable = function () {
         "columns": [
             {data: 10},
             {data: 11},
-            null,
-            {data: 2},
-            {data: 0},
-            {data: 3},
-            {data: 4},
-            {data: 8},
-            {data: 9},
-            {data: 6},
-            {data: 7},
-            {data: 12},
-            {data: 13},
-            {data: 14},
-            {data: 15}
-        ],
-        "columnDefs": [
             {
-                "targets": 2,
-                "render": function (data, type, row, meta){
+                render: function (data, type, row, meta){
                     return dataviva.cnae[row[11]].name
                 }
             },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[2], {"key": headers[2]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[0], {"key": headers[0]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[3], {"key": headers[3]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[4], {"key": headers[4]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[8], {"key": headers[8]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[9], {"key": headers[9]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[6], {"key": headers[6]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[7], {"key": headers[7]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[12], {"key": headers[12]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[13], {"key": headers[13]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[14], {"key": headers[14]});
+                }
+            },
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.format.number(row[15], {"key": headers[15]});
+                }
+            }
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,
