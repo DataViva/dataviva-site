@@ -19,6 +19,9 @@ var headers = {
     17: "gini"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var LocationWages = function () {
     this.tableId = '#location-wages-table';
 
@@ -153,27 +156,32 @@ var LocationWages = function () {
             $('#location-wages-municipalities').addClass('active');
 
             $('#location-wages-regions').click(function() {
-                locationWages.table.ajax.url("/rais/all/show.1/all/all/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                locationWages.table.ajax.url("/rais/all/show.1/all/all/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-states').click(function() {
-                locationWages.table.ajax.url("/rais/all/show.3/all/all/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                locationWages.table.ajax.url("/rais/all/show.3/all/all/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-mesoregions').click(function() {
-                locationWages.table.ajax.url("/rais/all/show.5/all/all/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                locationWages.table.ajax.url("/rais/all/show.5/all/all/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-microregions').click(function() {
-                locationWages.table.ajax.url("/rais/all/show.7/all/all/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                locationWages.table.ajax.url("/rais/all/show.7/all/all/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-municipalities').click(function() {
-                locationWages.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                locationWages.table.ajax.url("/rais/all/show.9/all/all/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -183,12 +191,13 @@ var LocationWages = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };
 
-$(document).ready(function() {
-    dataviva.requireAttrs(['bra'], function() {
-        window.locationWages = new LocationWages();
-    });
+dataviva.requireAttrs(['bra'], function() {
+    window.locationWages = new LocationWages(loadingRankings.hide);
 });

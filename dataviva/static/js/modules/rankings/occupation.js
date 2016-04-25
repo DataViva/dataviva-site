@@ -19,6 +19,9 @@ var headers = {
     17: "gini"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var OccupationTable = function () {
     this.tableId = '#occupation-table';
 
@@ -143,12 +146,14 @@ var OccupationTable = function () {
             $('#occupation-families').addClass('active');
 
             $('#occupation-groups').click(function() {
-                occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                occupationTable.table.ajax.url("/rais/all/all/all/show.1/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#occupation-families').click(function() {
-                occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load();
+                loadingRankings.show();
+                occupationTable.table.ajax.url("/rais/all/all/all/show.4/?order=num_jobs.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -158,6 +163,9 @@ var OccupationTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

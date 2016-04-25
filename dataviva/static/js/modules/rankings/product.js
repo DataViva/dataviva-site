@@ -18,6 +18,9 @@ var headers = {
     16: "hs_id"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var ProductTable = function () {
     this.tableId = '#product-table';
 
@@ -138,12 +141,14 @@ var ProductTable = function () {
 
 
             $('#product-sections').click(function() {
-                product.table.ajax.url("/secex/all-0/all/show.2/all/?order=export_val.desc").load();
+                loadingRankings.show();
+                product.table.ajax.url("/secex/all-0/all/show.2/all/?order=export_val.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#product-postions').click(function() {
-                product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load();
+                loadingRankings.show();
+                product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -153,6 +158,9 @@ var ProductTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

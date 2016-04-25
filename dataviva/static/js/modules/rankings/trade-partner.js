@@ -17,6 +17,9 @@ var headers = {
     15: "wld_id"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var TradePartnerTable = function () {
     this.tableId = '#trade-partner-table';
 
@@ -139,12 +142,14 @@ var TradePartnerTable = function () {
             $('#trade-partner-countries').addClass('active');
 
             $('#trade-partner-continents').click(function() {
-                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.2/?order=export_val.desc").load();
+                loadingRankings.show();
+                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.2/?order=export_val.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#trade-partner-countries').click(function() {
-                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load();
+                loadingRankings.show();
+                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -154,6 +159,9 @@ var TradePartnerTable = function () {
                     .column( 0 )
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

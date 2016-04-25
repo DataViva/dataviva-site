@@ -13,9 +13,12 @@ var headers = {
     11: "course_hedu_id"
 };
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var MajorTable = function () {
     this.tableId = '#major-table';
-//dataviva.format.number(d.wage_avg, {"key": "wage_avg"})
+
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/hedu/all/all/all/show.6/?order=enrolled.desc",
@@ -111,12 +114,14 @@ var MajorTable = function () {
             $('#major-majors').addClass('active');
 
             $('#major-fields').click(function() {
-                majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load();
+                loadingRankings.show();
+                majorTable.table.ajax.url("/hedu/all/all/all/show.2/?order=enrolled.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#major-majors').click(function() {
-                majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load();
+                loadingRankings.show();
+                majorTable.table.ajax.url("/hedu/all/all/all/show.6/?order=enrolled.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -126,6 +131,9 @@ var MajorTable = function () {
                     .column(0)
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };
