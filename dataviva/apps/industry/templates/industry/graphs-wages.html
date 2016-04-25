@@ -7,7 +7,7 @@
                 <div class="collapse" id="jobs-occupation">
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&controls=true&size=num_jobs&year=2013" 
                     target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-                    <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=num_jobs&controls=true&year=2002_2013" 
+                    <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?sort=asc&layout=value&controls=true&year=2002_2013&y=num_jobs&order=color" 
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
                 </div>
                 <a href="#jobs-municipality" class="list-group-item" data-toggle="collapse" data-parent="#jobs-occupation">{% trans %}Municipality{% endtrans %}</a>
