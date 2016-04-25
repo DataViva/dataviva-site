@@ -16,7 +16,7 @@
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Map{% endtrans %}</a>
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs" 
                     target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-                    <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=num_jobs&layout=value&sort=asc" 
+                    <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?sort=asc&layout=value&controls=true&year=2002_2013&y=num_jobs&order=color" 
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
                 </div>
             <h4>{% trans %}Wages By{% endtrans %}</h4>
