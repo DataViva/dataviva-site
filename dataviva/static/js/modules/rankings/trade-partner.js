@@ -26,19 +26,6 @@ var TradePartnerTable = function () {
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/secex/all-0/all/all/show.5/?order=export_val.desc",
-
-        "fnServerData": function ( sSource, aoData, fnCallback ) {
-            aoData.push( { "name": "data_type", "value": "json" } );
-            $.ajax({
-                "dataType": 'json',
-                "type": "GET",
-                "url": sSource,
-                "data": aoData,
-                "success": fnCallback
-            });
-        },
-
-
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
