@@ -3,11 +3,12 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Economic Opportunities{% endtrans %}</h4>
-            <a href="/pt/embed/network/rais/{{ location.id if location else 'all' }}/all/all/cnae/?color=color&size=wage&spotlight=true" target="graphs-frame-opportunities" class="list-group-item">{% trans %}Network{% endtrans %}</a>
+            <a href="/{{g.locale}}/embed/rings/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cbo/?color=color&controls=true&year=2013" 
+            target="graphs-frame-opportunities" class="list-group-item">{% trans %}Rings{% endtrans %}</a>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/pt/embed/network/rais/{{ location.id if location else 'all' }}/all/all/cnae/?color=color&size=wage&spotlight=true"
+        <iframe src="/{{g.locale}}/embed/rings/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cbo/?color=color&controls=true&year=2013"
                 name="graphs-frame-opportunities"
                 id="graphs-frame-opportunities"
                 class="embed-responsive-item" >

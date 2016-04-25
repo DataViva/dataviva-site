@@ -122,7 +122,7 @@
                      data-location="{{ location.id }}"
                      data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
               </li>
-              {% if location.id %}
+              {% if occupation.id|length == 4 %}
               <li role="presentation">
                   <a href="#opportunities"
                      aria-controls="opportunities"
