@@ -3,8 +3,8 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Jobs By{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs" target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-            <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=num_jobs" target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+            <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&controls=true&size=num_jobs&year=2013" target="graphs-frame-wages" class="list-group-item">TreeMap</a>
+            <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=num_jobs&controls=true&year=2002_2013" target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
             <h4>{% trans %}Wages By{% endtrans %}</h4>
             <a href="/{{ g.locale }}/embed/geo_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=num_jobs" target="graphs-frame-wages" class="list-group-item">{% trans %}Map{% endtrans %}</a>
             <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs" target="graphs-frame-wages" class="list-group-item">TreeMap</a>
