@@ -17,6 +17,9 @@ var headers = {
     15: "bra_id"
 }
 
+var loadingRankings = dataviva.ui.loading('.rankings .rankings-wrapper');
+loadingRankings.text(dataviva.dictionary['loading'] + "...");
+
 var LocationTradeRanking = function () {
     this.tableId = '#location-international-trade-table';
 
@@ -147,27 +150,32 @@ var LocationTradeRanking = function () {
             $('#location-international-trade-municipalities').addClass('active');
 
             $('#location-international-trade-regions').click(function() {
-                locationTradeRanking.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load();
+                loadingRankings.show();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.1/all/all/?order=eci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-states').click(function() {
-                locationTradeRanking.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load();
+                loadingRankings.show();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.3/all/all/?order=eci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-mesoregions').click(function() {
-                locationTradeRanking.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load();
+                loadingRankings.show();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.5/all/all/?order=eci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-microregions').click(function() {
-                locationTradeRanking.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load();
+                loadingRankings.show();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.7/all/all/?order=eci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-international-trade-municipalities').click(function() {
-                locationTradeRanking.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load();
+                loadingRankings.show();
+                locationTradeRanking.table.ajax.url("/secex/all-0/show.9/all/all/?order=eci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -177,6 +185,9 @@ var LocationTradeRanking = function () {
                     .column(0)
                     .search(lastYear)
                     .draw();
+
+            loadingRankings.hide();
+            $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
 };

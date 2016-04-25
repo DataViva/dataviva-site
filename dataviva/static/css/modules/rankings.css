@@ -22,6 +22,11 @@
 
 .rankings .rankings-wrapper {
     padding-bottom: 30px;
+    min-height: 500px;
+}
+
+.rankings .rankings-wrapper .rankings-content {
+    display: none;
 }
 
 .rankings .nav-rankings {
@@ -119,4 +124,7 @@
 }
 .rankings .dataTables_wrapper .growth-arrow.down {
     color: red;
+}
+.rankings .load {
+    min-height: 500px;
 }
