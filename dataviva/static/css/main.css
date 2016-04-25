@@ -941,7 +941,7 @@ table.data-blue thead th small {
 .btn-twitter{ background-color: #55ACEE; }
 .btn-twitter:hover{ background-color: #3C93D5; }
 
-h1 {
+h1.login-title {
   padding: 20px 45px 0;
 }
 .signin-box {
@@ -953,7 +953,7 @@ h1 {
 }
 
 @media (max-width: 767px) {
-  h1 {
+  h1.login-title {
     padding: 0;
   }
   .signin-box:first-child {
