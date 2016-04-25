@@ -47,7 +47,7 @@
               </div>
             {% endif %}
 
-            <h4>{% trans %}Importy By{% endtrans %}</h4>
+            <h4>{% trans %}Imports By{% endtrans %}</h4>
             <a href="#imports-products" class="list-group-item" data-toggle="collapse" data-parent="#imports-products">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="imports-products">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/hs/?color=color&depth=hs_6&size=import_val"
@@ -66,7 +66,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/hs/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/wld/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
                     {% trans %}Stacked{% endtrans %}
                </a>
