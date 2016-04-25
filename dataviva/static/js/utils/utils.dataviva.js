@@ -189,8 +189,7 @@ dataviva.format.number = function(value, opts) {
         else symbol = "Milh\u00f5es"
       }
       else if (symbol == "k") {
-        if (digit < 2) symbol = "Milhares"
-        else symbol = "Mil"
+        symbol = "Mil"
       }
       symbol = " "+symbol
     }

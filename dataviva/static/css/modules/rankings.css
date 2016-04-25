@@ -138,3 +138,9 @@
 .rankings .load {
     min-height: 500px;
 }
+.rankings .dataTables_scrollHeadInner .dataTable th {
+    text-align: center;
+}
+.rankings .dataTables_scrollBody .dataTable td.table-number {
+    text-align: right;
+}

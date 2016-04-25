@@ -26,6 +26,19 @@ var TradePartnerTable = function () {
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
         "sAjaxSource": "/secex/all-0/all/all/show.5/?order=export_val.desc",
+
+        "fnServerData": function ( sSource, aoData, fnCallback ) {
+            aoData.push( { "name": "data_type", "value": "json" } );
+            $.ajax({
+                "dataType": 'json',
+                "type": "GET",
+                "url": sSource,
+                "data": aoData,
+                "success": fnCallback
+            });
+        },
+
+
         "sAjaxDataProp": "data",
         "order": [],
         "columns": [
@@ -38,67 +51,64 @@ var TradePartnerTable = function () {
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[14], {"key": headers[14]});
-                }
+                    return dataviva.format.number(row[3], {"key": headers[3]});
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[2], {"key": headers[2]});
-                }
-            },
-            {
-                render: function (data, type, row, meta){
-                    return dataviva.format.number(row[3], {"key": headers[3]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[8], {"key": headers[8]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[9], {"key": headers[9]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[6], {"key": headers[6]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[7], {"key": headers[7]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[10], {"key": headers[10]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[11], {"key": headers[11]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[12], {"key": headers[12]});
-                }
+                },
+                className: "table-number"
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[13], {"key": headers[13]});
-                }
+                },
+                className: "table-number"
             }
-        ],
-        "columnDefs": [
-            {
-                "targets": 2,
-                "render": function (data, type, row, meta){
-                    return dataviva.wld[row[15]].name.truncate(35);
-                }
-            },
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,
@@ -167,6 +177,9 @@ var TradePartnerTable = function () {
 };
 
 $(document).ready(function() {
+    $.ajaxSetup({
+       cache: true
+    });
     dataviva.requireAttrs(['wld'], function() {
         window.tradePartnerTable = new TradePartnerTable();
     });
