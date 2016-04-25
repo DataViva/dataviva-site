@@ -20,14 +20,14 @@
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
                 </div>
             <h4>{% trans %}Wages By{% endtrans %}</h4>
-                <a href="#wages-occupation" class="list-group-item" data-toggle="collapse" data-parent="#jobs-occupation">{% trans %}Occupation{% endtrans %}</a>
+                <a href="#wages-occupation" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Occupation{% endtrans %}</a>
                 <div class="collapse" id="wages-occupation">
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&year=2013&controls=true&size=wage" 
                     target="graphs-frame-wages" class="list-group-item">TreeMap</a>
                     <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=wage&controls=true&year=2002_2013" 
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
                 </div>
-                <a href="#wages-municipality" class="list-group-item" data-toggle="collapse" data-parent="#jobs-occupation">{% trans %}Municipality{% endtrans %}</a>
+                <a href="#wages-municipality" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Municipality{% endtrans %}</a>
                 <div class="collapse" id="wages-municipality">
                     <a href="/{{ g.locale }}/embed/geo_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=wage&controls=true&year=2013" 
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Map{% endtrans %}</a>
@@ -36,13 +36,9 @@
                     <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=wage&sort=asc&layout=value&controls=true&year=2002_2013&order=color" 
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
                 </div>
+                <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" 
+                class="list-group-item" data-parent="#wages-occupation" target="graphs-frame-wages">{% trans %}Distribution{% endtrans %}</a>
 
-            <h4 class="m-n">
-               <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/"
-                  class="list-group-item" target="graphs-frame-wages">
-                   {% trans %}Distribution{% endtrans %}
-               </a>
-           </h4>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
