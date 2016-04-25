@@ -27,7 +27,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/wld/?sort=asc&layout=value&color=color&time=year&y=export_val&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/wld/?sort=asc&layout=value&color=color&time=year&y=export_val&order=color" 
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
                     {% trans %}Stacked{% endtrans %}
                </a>
@@ -62,15 +62,29 @@
 
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{% trans %}Origin{% endtrans %}</a>
             <div class="collapse" id="imports-origin">
-                <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=import_val"
+                <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/wld?depth=wld_5&controls=true&size=import_val"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/bra/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/hs/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
+
+            {% if location.id | length != 9 %}
+              <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="imports-municipality">
+                  <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=import_val"
+                     target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/bra/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
+                     target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                 </a>
+              </div>
+            {% endif %}
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
