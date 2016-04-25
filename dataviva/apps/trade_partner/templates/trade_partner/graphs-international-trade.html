@@ -3,7 +3,7 @@
         <h3>{%trans%}Preview{%endtrans%}:</h3>
     <div class="list-group panel">
             <h4 class="m-n">
-                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=month&depth=direction&y=val_usd"
+                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction&y=val_usd"
                    class="list-group-item" target="graphs-frame-international-trade">
                     {% trans %}Trade Balance{% endtrans %}
                 </a>
@@ -65,7 +65,7 @@
     </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{trade_partner.id}}/balance/?y=val_usd&depth=direction&scale=linear&controls=true&time=month&year=2000-1_2014-12"
+        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{trade_partner.id}}/balance/?y=val_usd&depth=direction&scale=linear&controls=true&time=year&year=2000-1_2014-12"
                 name="graphs-frame-international-trade"
                 id="graphs-frame-international-trade"
                 class="embed-responsive-item" >
