@@ -21,7 +21,7 @@ var BasicCourseTable = function () {
             {data: 6},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.course_sc[row[6]].name
+                    return dataviva.course_sc[row[6]].name.truncate(35);
                 }
             },
             {

@@ -31,7 +31,7 @@ var ProductTable = function () {
             {data: 16},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.hs[row[16]].name
+                    return dataviva.hs[row[16]].name.truncate(35);
                 }
             },
             {

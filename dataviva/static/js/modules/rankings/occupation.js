@@ -32,7 +32,7 @@ var OccupationTable = function () {
             {data: 11},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.cbo[row[11]].name
+                    return dataviva.cbo[row[11]].name.truncate(35);
                 }
             },
             {

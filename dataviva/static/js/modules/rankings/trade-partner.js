@@ -30,7 +30,7 @@ var TradePartnerTable = function () {
             {data: 15},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.wld[row[15]].name
+                    return dataviva.wld[row[15]].name.truncate(35);
                 }
             },
             {
@@ -93,7 +93,7 @@ var TradePartnerTable = function () {
             {
                 "targets": 2,
                 "render": function (data, type, row, meta){
-                    return dataviva.wld[row[15]].name
+                    return dataviva.wld[row[15]].name.truncate(35);
                 }
             },
         ],

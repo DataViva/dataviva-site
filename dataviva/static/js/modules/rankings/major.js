@@ -25,7 +25,7 @@ var MajorTable = function () {
             {data: 11},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.course_hedu[row[11]].name.toTitleCase().truncate(35);
+                    return dataviva.course_hedu[row[11]].name.truncate(35);
                 }
             },
             {

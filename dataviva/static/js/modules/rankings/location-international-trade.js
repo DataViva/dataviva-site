@@ -39,7 +39,7 @@ var LocationTradeRanking = function () {
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.bra[row[15]].name.toTitleCase().truncate(35);
+                    return dataviva.bra[row[15]].name.truncate(35);
                 }
             },
             {

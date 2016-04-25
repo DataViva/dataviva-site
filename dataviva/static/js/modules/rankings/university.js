@@ -26,7 +26,7 @@ var universityTable = function () {
             {data: 11},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.university[row[11]].name
+                    return dataviva.university[row[11]].name.truncate(35);
                 }
             },
             {

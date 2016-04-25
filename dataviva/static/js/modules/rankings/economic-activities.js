@@ -32,7 +32,7 @@ var EconomicActivitiesTable = function () {
             {data: 11},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.cnae[row[11]].name
+                    return dataviva.cnae[row[11]].name.truncate(35);
                 }
             },
             {
