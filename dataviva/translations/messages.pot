@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-26 11:51-0300\n"
+"POT-Creation-Date: 2016-04-26 13:40-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -182,6 +182,7 @@ msgid "Location"
 msgstr ""
 
 #: dataviva/api/stats/profile_helper.py:255
+#: dataviva/apps/location/templates/location/graphs-education.html:50
 msgid "Administrative Dependency"
 msgstr ""
 
@@ -1227,6 +1228,8 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:30
 #: dataviva/apps/industry/templates/industry/tab-wages.html:24
 #: dataviva/apps/industry/templates/industry/tab-wages.html:54
+#: dataviva/apps/location/templates/location/graphs-education.html:23
+#: dataviva/apps/location/templates/location/graphs-education.html:67
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:37
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:76
 #: dataviva/apps/location/templates/location/graphs-wages.html:31
@@ -1408,15 +1411,44 @@ msgid "with highest monthly average income"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-education.html:5
-msgid "Major By"
+msgid "Higher Education By"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/graphs-education.html:9
+#: dataviva/apps/location/templates/location/graphs-education.html:6
+#: dataviva/apps/location/templates/location/tab-education.html:9
+#: dataviva/apps/rankings/templates/rankings/_base.html:56
+#: dataviva/apps/rankings/templates/rankings/university.html:13
+#: dataviva/apps/university/templates/university/index.html:35
+#: dataviva/templates/site.html:66 dataviva/translations/dictionary.py:183
+#: dataviva/translations/dictionary.py:184
+#: dataviva/translations/dictionary.py:362
+msgid "University"
+msgstr ""
+
+#: dataviva/apps/location/templates/location/graphs-education.html:14
+#: dataviva/apps/location/templates/location/graphs-education.html:41
+#: dataviva/translations/dictionary.py:177
+#: dataviva/translations/dictionary.py:179
+msgid "Course"
+msgstr ""
+
+#: dataviva/apps/location/templates/location/graphs-education.html:32
 msgid "Professional Education By"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/graphs-education.html:13
+#: dataviva/apps/location/templates/location/graphs-education.html:33
+#: dataviva/apps/location/templates/location/tab-education.html:39
+#: dataviva/translations/dictionary.py:187
+#: dataviva/translations/dictionary.py:366
+msgid "School"
+msgstr ""
+
+#: dataviva/apps/location/templates/location/graphs-education.html:49
 msgid "Basic Education By"
+msgstr ""
+
+#: dataviva/apps/location/templates/location/graphs-education.html:58
+msgid "Education Level"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:5
@@ -1498,6 +1530,7 @@ msgid "Employment By"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-wages.html:44
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:32
 msgid "Wage by"
 msgstr ""
 
@@ -1531,16 +1564,6 @@ msgstr ""
 msgid "Education"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/tab-education.html:9
-#: dataviva/apps/rankings/templates/rankings/_base.html:56
-#: dataviva/apps/rankings/templates/rankings/university.html:13
-#: dataviva/apps/university/templates/university/index.html:35
-#: dataviva/templates/site.html:66 dataviva/translations/dictionary.py:183
-#: dataviva/translations/dictionary.py:184
-#: dataviva/translations/dictionary.py:362
-msgid "University"
-msgstr ""
-
 #: dataviva/apps/location/templates/location/tab-education.html:10
 #: dataviva/apps/location/templates/location/tab-education.html:25
 #: dataviva/apps/location/templates/location/tab-education.html:40
@@ -1555,12 +1578,6 @@ msgstr ""
 #: dataviva/translations/dictionary.py:173
 #: dataviva/translations/dictionary.py:364
 msgid "Major"
-msgstr ""
-
-#: dataviva/apps/location/templates/location/tab-education.html:39
-#: dataviva/translations/dictionary.py:187
-#: dataviva/translations/dictionary.py:366
-msgid "School"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:7
@@ -5131,11 +5148,6 @@ msgstr ""
 #: dataviva/translations/dictionary.py:172
 #: dataviva/translations/dictionary.py:178
 msgid "Field"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:177
-#: dataviva/translations/dictionary.py:179
-msgid "Course"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:188
