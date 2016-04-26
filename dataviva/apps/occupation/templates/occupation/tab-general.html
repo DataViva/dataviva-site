@@ -7,7 +7,7 @@
          {% trans %}in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is {% endtrans %}{{body.municipality_with_more_jobs}} 
          {% trans %}and the {% endtrans %}{{body.activity_with_more_jobs}} 
          {% trans %} activity is the one that employs more {% endtrans %}{{occupation.name()}}. 
-         {% trans %} The average monthly income is {% endtrans %}R${{header.average_monthly_income}} 
+         {% trans %} The average monthly income is {% endtrans %}R${{header.average_monthly_income | max_digits(3)}} {{ header.average_monthly_income | magnitude }} 
          {% trans %}and the average age of workers is{%endtrans%} {{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
     {% else %}
         {% if location.id|length == 1 %}
@@ -77,14 +77,14 @@
                     <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_biggest_wage_avg }}</small>
-                        USD <strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong> 
+                        R$ <strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong> 
                         <span>{{body.municipality_with_biggest_wage_avg_value | magnitude}}</span>
                     </dd>
                 {% endif %}
                     <dt>{% trans %}Activity with highest monthly average income{% endtrans %}</dt>
                     <dd>
                         <small>{{body.activity_with_biggest_wage_avg }}</small>
-                        USD <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong>
+                        R$ <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong>
                         <span>{{body.activity_with_biggest_wage_avg_value | magnitude}}</span>
                     </dd>
             </dl>
