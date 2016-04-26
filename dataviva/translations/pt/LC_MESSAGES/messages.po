@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-26 13:40-0400\n"
+"POT-Creation-Date: 2016-04-26 14:21-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -530,7 +530,6 @@ msgid "Preview"
 msgstr "Visualize"
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
 #: dataviva/templates/selectors/basic_course.html:9
 #: dataviva/templates/selectors/major.html:9
 #: dataviva/translations/dictionary.py:180
@@ -580,8 +579,8 @@ msgstr "Mapa"
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:31
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:47
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:58
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:11
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:18
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:13
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:24
 #: dataviva/templates/about.html:98 dataviva/templates/site.html:73
 #: dataviva/templates/about/apps/stacked.html:1
 #: dataviva/translations/dictionary.py:16
@@ -674,8 +673,7 @@ msgstr "Geral"
 #: dataviva/apps/basic_course/templates/basic_course/index.html:130
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
 #: dataviva/apps/major/templates/major/index.html:106
-#: dataviva/apps/university/templates/university/index.html:102
-#: dataviva/apps/university/templates/university/tab-enrollments.html:3
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/tab-general.html:14
 msgid "Enrollments"
 msgstr "Matrículas"
@@ -1486,7 +1484,7 @@ msgstr "Curso"
 
 #: dataviva/apps/location/templates/location/graphs-education.html:32
 msgid "Professional Education By"
-msgstr "Educação Professional por"
+msgstr "Educação Profissional por"
 
 #: dataviva/apps/location/templates/location/graphs-education.html:33
 #: dataviva/apps/location/templates/location/tab-education.html:39
@@ -1628,6 +1626,9 @@ msgstr "com Maior Número de Matrículas"
 #: dataviva/apps/location/templates/location/tab-education.html:24
 #: dataviva/apps/major/templates/major/index.html:38
 #: dataviva/apps/rankings/templates/rankings/_base.html:59
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:6
+#: dataviva/apps/university/templates/university/index.html:102
+#: dataviva/apps/university/templates/university/tab-enrollments.html:3
 #: dataviva/templates/site.html:67 dataviva/translations/dictionary.py:171
 #: dataviva/translations/dictionary.py:173
 #: dataviva/translations/dictionary.py:364
@@ -1938,14 +1939,14 @@ msgstr "Situação dos Estudantes"
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:12
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:35
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:66
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:14
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:18
 #: dataviva/templates/about.html:126 dataviva/templates/site.html:76
 #: dataviva/templates/about/apps/line.html:1
 msgid "Line"
 msgstr "Linha"
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:13
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:15
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:20
 msgid "Shift"
 msgstr "Turno"
 
@@ -2910,7 +2911,7 @@ msgstr "Produto com Maior"
 msgid "Product with Lowest"
 msgstr "Produto com Menor"
 
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:12
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:15
 msgid "Students Status"
 msgstr "Situação dos Estudantes"
 
