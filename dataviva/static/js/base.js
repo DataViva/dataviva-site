@@ -60,7 +60,9 @@ dataviva.datatables = {
         "infoFiltered": dataviva.dictionary['infoFiltered'],
         "processing": dataviva.dictionary['processing'] + "...",
         "search": dataviva.dictionary['dataTableSearch'] + ":",
-        "zeroRecords": dataviva.dictionary['zeroRecords']
+        "zeroRecords": dataviva.dictionary['zeroRecords'],
+        "decimal": dataviva.language == "pt" ? "," : ".",
+        "thousands": dataviva.language == "pt" ? "." : ","
     }
 }
 
