@@ -21,8 +21,11 @@ var universityTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/hedu/all/all/show/all/?order=enrolled.desc",
-        "sAjaxDataProp": "data",
+        "ajax": {
+            "url": "/hedu/all/all/show/all/?order=enrolled.desc",
+            "dataSrc": "data",
+            "cache": true,
+        },
         "order": [],
         "columns": [
             {data: 10},
@@ -35,52 +38,72 @@ var universityTable = function () {
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[0], {"key": headers[0]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[1], {"key": headers[1]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[2], {"key": headers[2]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[3], {"key": headers[3]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[4], {"key": headers[4]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[5], {"key": headers[5]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[6], {"key": headers[6]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[7], {"key": headers[7]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[8], {"key": headers[8]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[9], {"key": headers[9]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             }
         ],
         "deferRender": true,
@@ -131,8 +154,6 @@ var universityTable = function () {
     });
 };
 
-$(document).ready(function() {
     dataviva.requireAttrs(['university'], function() {
         window.universityTable = new universityTable();
     });
-});
