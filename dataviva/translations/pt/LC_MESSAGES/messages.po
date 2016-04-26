@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-26 05:26-0300\n"
+"POT-Creation-Date: 2016-04-26 11:21-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1291,7 +1291,6 @@ msgid "Municipality"
 msgstr "Município"
 
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:22
-#: dataviva/apps/location/templates/location/graphs-wages.html:44
 msgid "Wages By"
 msgstr "Salários por"
 
@@ -1550,6 +1549,12 @@ msgstr "Origem"
 #, fuzzy
 msgid "Employment By"
 msgstr "Emprego por"
+
+#: dataviva/apps/location/templates/location/graphs-wages.html:44
+#: dataviva/apps/location/templates/location/tab-wages.html:47
+#: dataviva/apps/location/templates/location/tab-wages.html:93
+msgid "Salary Mass"
+msgstr "Massa Salarial"
 
 #: dataviva/apps/location/templates/location/index.html:52
 msgid "GDP"
@@ -1888,11 +1893,6 @@ msgstr "por Empregos"
 #: dataviva/apps/location/templates/location/tab-wages.html:87
 msgid "Principal Ocupação"
 msgstr "SubGrupo Principal"
-
-#: dataviva/apps/location/templates/location/tab-wages.html:47
-#: dataviva/apps/location/templates/location/tab-wages.html:93
-msgid "Salary Mass"
-msgstr "Massa Salarial"
 
 #: dataviva/apps/location/templates/location/tab-wages.html:50
 #: dataviva/apps/location/templates/location/tab-wages.html:121
