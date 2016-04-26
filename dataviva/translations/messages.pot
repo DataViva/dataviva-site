@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-26 11:21-0300\n"
+"POT-Creation-Date: 2016-04-26 11:51-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1498,9 +1498,7 @@ msgid "Employment By"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-wages.html:44
-#: dataviva/apps/location/templates/location/tab-wages.html:47
-#: dataviva/apps/location/templates/location/tab-wages.html:93
-msgid "Salary Mass"
+msgid "Wage by"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/index.html:52
@@ -1839,6 +1837,11 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-wages.html:22
 #: dataviva/apps/location/templates/location/tab-wages.html:87
 msgid "Principal Ocupação"
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-wages.html:47
+#: dataviva/apps/location/templates/location/tab-wages.html:93
+msgid "Salary Mass"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-wages.html:50
