@@ -110,11 +110,13 @@ var BasicCourseTable = function () {
             $('#basic-course-fields').click(function() {
                 loadingRankings.show();
                 basicCourseTable.table.ajax.url("/sc/all/all/all/show.2/?order=enrolled.desc").load(loadingRankings.hide);
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#basic-course-courses').click(function() {
                 loadingRankings.show();
                 basicCourseTable.table.ajax.url("/sc/all/all/all/show.5/?order=enrolled.desc").load(loadingRankings.hide);
+                $(this).addClass('active').siblings().removeClass('active');
             });
 
             var lastYear = $('#year-selector option').last().val();
