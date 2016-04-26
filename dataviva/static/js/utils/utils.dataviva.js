@@ -223,7 +223,9 @@ dataviva.format.number = function(value, opts) {
   else if (growth) {
     return_value += "%";
     var arrow = negative ? "down" : "up";
-    return_value = "<span class='text-"+arrow+"'>" + return_value + "&nbsp;<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" + "</span>";
+    return_value = "<span class='text-"+arrow+"'>" + (negative ? "-" : "") +
+                        return_value + "&nbsp;<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" +
+                    "</span>";
   }
 
   return_value = String(return_value)
