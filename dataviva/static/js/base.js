@@ -189,13 +189,25 @@ dataviva.getAttrUrl = function(attr) {
   else return '';
 }
 
-var selector = Selector()
+var selectorSearchCallback = Selector()
   .callback(function(d){
-    window.location = "/" + lang + "/" + dataviva.getAttrUrl(selector.type()) + "/" + d.id;
+    window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id=" 
+    + d.id ;
   });
 
+var selectorHrefCallback = Selector()
+    .callback(function(d){
+        window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id + 
+        window.location.search;
+    })
+
 function select_attr(id) {
-  d3.select("#modal-selector-content").call(selector.type(id));
+  d3.select("#modal-selector-content").call(selectorHrefCallback.type(id));
+  $('#modal-selector').modal('show');
+}
+
+function select_attr_search(id) {
+  d3.select("#modal-selector-content").call(selectorSearchCallback.type(id));
   $('#modal-selector').modal('show');
 }
 
