@@ -12,8 +12,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_industry_by_num_jobs_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
-                    {% trans %}Jobs{% endtrans %}
+                    <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_industry_by_num_jobs | magnitude }} {% trans %}Jobs{% endtrans %}</span>
                 </div>
             </div>
         </div>
@@ -26,7 +25,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_occupation_by_num_jobs_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
+                    <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_occupation_by_num_jobs | magnitude }} {% trans %}Occupations{% endtrans %}</span>
                 </div>
             </div>
         </div>
