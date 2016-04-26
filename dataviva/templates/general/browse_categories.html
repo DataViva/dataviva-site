@@ -57,7 +57,7 @@
         <section id="search" class="search-options">
             <h2 class="text-center">... {% trans %}or search for{% endtrans %}:</h2>
             <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="start_selector('Location')">
+                <a onclick="select_attr('bra');">
                     <i class="btn btn-white btn-circle dv-bra"></i>
                     <h3 class="pull-left">{% trans %}Brazilian Locations{% endtrans %}</h3>
                     <div class="clearfix"></div>
@@ -65,7 +65,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="start_selector('Occupation')">
+                <a onclick="select_attr('cbo');">
                     <i class="btn btn-white btn-circle dv-occupation"></i>
                     <h3 class="pull-left">{% trans %}Occupations{% endtrans %}</h3>
                     <div class="clearfix"></div>
@@ -73,7 +73,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="start_selector('Industry')">
+                <a onclick="select_attr('cnae');">
                     <i class="btn btn-white btn-circle dv-industry"></i>
                     <h3 class="pull-left">{% trans %}Economic Activities{% endtrans %}</h3>
                     <div class="clearfix"></div>
@@ -81,7 +81,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="start_selector('Product')">
+                <a onclick="select_attr('hs');">
                     <i class="btn btn-white btn-circle dv-product"></i>
                     <h3 class="pull-left">{% trans %}Products{% endtrans %}</h3>
                     <div class="clearfix"></div>
@@ -89,7 +89,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="start_selector('TradePartner')">
+                <a onclick="select_attr('wld');">
                     <i class="btn btn-white btn-circle dv-trade-partner"></i>
                     <h3 class="pull-left">{% trans %}Trade Partners{% endtrans %}</h3>
                     <div class="clearfix"></div>
@@ -97,7 +97,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="start_selector('University')">
+                <a onclick="select_attr('university');">
                     <i class="btn btn-white btn-circle dv-university"></i>
                     <h3 class="pull-left">{% trans %}Universities{% endtrans %}</h3>
                     <div class="clearfix"></div>
@@ -105,7 +105,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4 search-option col-lg-offset-2">
-                <a onclick="start_selector('Major')">
+                <a onclick="select_attr('course_hedu');">
                     <i class="btn btn-white btn-circle dv-major"></i>
                     <h3 class="pull-left">{% trans %}Higher Education{% endtrans %}</h3>
                     <div class="clearfix"></div>
@@ -113,7 +113,7 @@
                 </a>
             </div>
             <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="start_selector('BasicCourse')">
+                <a onclick="select_attr('course_sc');">
                     <i class="btn btn-white btn-circle dv-basic-course"></i>
                     <h3 class="pull-left">{% trans %}Basic Courses{% endtrans %}</h3>
                     <div class="clearfix"></div>
