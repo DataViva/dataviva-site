@@ -42,13 +42,6 @@ var ProductTable = function () {
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[14], {"key": headers[14]});
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta){
                     return dataviva.format.number(row[15], {"key": headers[15]});
                 },
                 className: "table-number",
@@ -171,12 +164,14 @@ var ProductTable = function () {
                 loadingRankings.show();
                 product.table.ajax.url("/secex/all-0/all/show.2/all/?order=export_val.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
+                product.table.column( 3 ).visible(false);
             });
 
             $('#product-postions').click(function() {
                 loadingRankings.show();
                 product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
+                product.table.column( 3 ).visible(true);
             });
 
             var lastYear = $('#year-selector option').last().val();
