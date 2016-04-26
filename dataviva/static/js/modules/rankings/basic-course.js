@@ -16,8 +16,11 @@ var BasicCourseTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/sc/all/all/all/show.5/?order=enrolled.desc",
-        "sAjaxDataProp": "data",
+        "ajax": {
+            "url": "/sc/all/all/all/show.5/?order=enrolled.desc",
+            "dataSrc": "data",
+            "cache": true,
+        },
         "order": [],
         "columns": [
             {data: 0},
@@ -30,27 +33,37 @@ var BasicCourseTable = function () {
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[3], {"key": headers[3]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[2], {"key": headers[2]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[1], {"key": headers[1]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[4], {"key": headers[4]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[5], {"key": headers[5]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             }
         ],
         "deferRender": true,
@@ -117,8 +130,7 @@ var BasicCourseTable = function () {
     });
 };
 
-$(document).ready(function() {
-    dataviva.requireAttrs(['course_sc'], function() {
-        window.basicCourseTable = new BasicCourseTable();
-    });
+dataviva.requireAttrs(['course_sc'], function() {
+    window.basicCourseTable = new BasicCourseTable();
 });
+    
