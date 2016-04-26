@@ -128,6 +128,7 @@
           <small>{{ body.main_industry_by_num_jobs_name}}</small>
           <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong> 
           <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
+          {% trans %}Jobs{% endtrans %}
         </dd>
         <dt>{% trans %}Main Occupation{% endtrans %}</dt>
         <dd>

@@ -2217,7 +2217,7 @@ msgstr "Principal Município por Empregos"
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:67
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:74
 msgid "Jobs"
-msgstr "empregos"
+msgstr "Empregos"
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:70
 #: dataviva/translations/dictionary.py:606
