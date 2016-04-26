@@ -1549,7 +1549,7 @@ msgstr "Origem"
 #: dataviva/apps/location/templates/location/graphs-wages.html:5
 #, fuzzy
 msgid "Employment By"
-msgstr "Estatísticas de Emprego"
+msgstr "Emprego por"
 
 #: dataviva/apps/location/templates/location/index.html:52
 msgid "GDP"
