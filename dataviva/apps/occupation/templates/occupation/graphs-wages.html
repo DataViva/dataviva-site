@@ -29,7 +29,7 @@
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
-            <h4>Salário por </h4>
+            <h4>{% trans %}Wage by{% endtrans %} </h4>
             <a href="#wages-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#wages-opportunities">{% trans %}Economic Activities{% endtrans %}</a>
             <div class="collapse" id="wages-opportunities">
                 <a href="/{{g.locale}}/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?color=color&depth=cnae_6&size=wage"
