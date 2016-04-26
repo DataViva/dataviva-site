@@ -135,15 +135,16 @@
           <small>{{ body.main_occupation_by_num_jobs_name}}</small>
           <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong> 
           <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
+          {% trans %}Occupations{% endtrans %}
         </dd>
         <dt>{% trans %}Average Wage{% endtrans %}</dt>
         <dd>
-          USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> 
+          R$ <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> 
           <span>{{ body.avg_wage | magnitude }}</span>
         </dd>
         <dt>{% trans %}Total of Jobs{% endtrans %}</dt>
         <dd>
-          USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> 
+          R$ <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> 
           <span>{{ body.total_jobs | magnitude }}</span>
         </dd>
       </dl>
