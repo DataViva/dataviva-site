@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-26 05:26-0300\n"
+"POT-Creation-Date: 2016-04-26 11:51-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1291,7 +1291,6 @@ msgid "Municipality"
 msgstr "Município"
 
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:22
-#: dataviva/apps/location/templates/location/graphs-wages.html:44
 msgid "Wages By"
 msgstr "Salários por"
 
@@ -1547,9 +1546,13 @@ msgid "Origin"
 msgstr "Origem"
 
 #: dataviva/apps/location/templates/location/graphs-wages.html:5
-#, fuzzy
 msgid "Employment By"
-msgstr "Estatísticas de Emprego"
+msgstr "Emprego por"
+
+#: dataviva/apps/location/templates/location/graphs-wages.html:44
+#, fuzzy
+msgid "Wage by"
+msgstr "Salário por"
 
 #: dataviva/apps/location/templates/location/index.html:52
 msgid "GDP"
@@ -1897,7 +1900,7 @@ msgstr "Massa Salarial"
 #: dataviva/apps/location/templates/location/tab-wages.html:50
 #: dataviva/apps/location/templates/location/tab-wages.html:121
 msgid "Wage Mass"
-msgstr "Massa Salárial"
+msgstr "Massa Salarial"
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:5
 #: dataviva/templates/about.html:78
@@ -6597,9 +6600,9 @@ msgstr "com"
 #~ msgid "Importy By"
 #~ msgstr "Importações por"
 
-#~ msgid "Salary Mass By"
-#~ msgstr "Massa Salarial"
-
 #~ msgid "Trade with Brazil"
 #~ msgstr "Comércio com o Brasil"
+
+#~ msgid "Salary Mass By"
+#~ msgstr "Massa Salarial por"
 
