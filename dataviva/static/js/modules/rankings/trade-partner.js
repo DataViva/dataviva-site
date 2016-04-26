@@ -176,9 +176,6 @@ var TradePartnerTable = function () {
     });
 };
 
-$(document).ready(function() {
-    dataviva.requireAttrs(['wld'], function() {
-        window.tradePartnerTable = new TradePartnerTable();
-    });
+dataviva.requireAttrs(['wld'], function() {
+    window.tradePartnerTable = new TradePartnerTable();
 });
-
