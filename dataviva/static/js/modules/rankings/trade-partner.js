@@ -25,8 +25,11 @@ var TradePartnerTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/secex/all-0/all/all/show.5/?order=export_val.desc",
-        "sAjaxDataProp": "data",
+        "ajax": {
+            "url": "/secex/all-0/all/all/show.5/?order=export_val.desc",
+            "dataSrc": "data",
+            "cache": true,
+        },
         "order": [],
         "columns": [
             {data: 0},
@@ -146,7 +149,7 @@ var TradePartnerTable = function () {
 
             $('#trade-partner-countries').click(function() {
                 loadingRankings.show();
-                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load(loadingRankings.hide);
+                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=export_val.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -164,9 +167,6 @@ var TradePartnerTable = function () {
 };
 
 $(document).ready(function() {
-    $.ajaxSetup({
-       cache: true
-    });
     dataviva.requireAttrs(['wld'], function() {
         window.tradePartnerTable = new TradePartnerTable();
     });
