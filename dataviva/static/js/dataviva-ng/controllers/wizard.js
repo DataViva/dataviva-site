@@ -38,6 +38,7 @@
                     window.location = url;
                 } else {
                     $scope.wizard.load_selector($scope.wizard.selected_question.selectors[$scope.wizard.step - 1], $scope);
+                    $('#modal-wizard').modal('hide');
                 }
 
             };

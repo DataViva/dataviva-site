@@ -189,6 +189,18 @@ dataviva.getAttrUrl = function(attr) {
   else return '';
 }
 
+dataviva.getUrlAttr = function(attr) {
+  if (attr == "Location") return 'bra';
+  else if (attr == "Occupation") return 'cbo';
+  else if (attr == "Industry") return 'cnae';
+  else if (attr == "Product") return 'hs';
+  else if (attr == "Trade_partner") return 'wld';
+  else if (attr == "University") return 'university';
+  else if (attr == "Major") return 'course_hedu';
+  else if (attr == "Basic_course") return 'course_sc';
+  else return '';
+}
+
 var selectorSearchCallback = Selector()
   .callback(function(d){
     window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id=" 
@@ -199,7 +211,7 @@ var selectorHrefCallback = Selector()
     .callback(function(d){
         window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id + 
         window.location.search;
-    })
+    });
 
 function select_attr(id) {
   d3.select("#modal-selector-content").call(selectorHrefCallback.type(id));
