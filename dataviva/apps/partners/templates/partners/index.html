@@ -5,19 +5,21 @@
 <section id="partnership" class="partnership bg-dark-green">
     <div class="container">
         <div class="col-md-6">
-            <h2>Atue em conjunto conosco com o objetivo de fortalecer a cultura do uso de dados para o desenvolvimento socioeconômico do Brasil.</h2>
+            <h2>{% trans %}Help us strengthen the culture of data usage leading to the socioeconomic development of Brazil.{% endtrans %}</h2>
         </div>
         <div class="col-md-6">
-            <h4>Confira os temas de interesse para parcerias no âmbito do projeto DataViva:</h4>
-            <p>a) Suporte à formulação, implementação e avaliação de políticas públicas;</p>
-            <p>b) Desenvolvimento econômico;</p>
-            <p>c) Ciência, tecnologia e inovação;</p>
-            <p>d) Transparência pública e controle da Administração Pública;</p>
-            <p>e) Big Data, armazenamento, tratamento e visualização de bases de dados.</p>
-            <p>f) Diversificação da economia de Minas Gerais e outras regiões do Brasil;</p>
-            <p>g) Complexidade econômica de Minas Gerais e de outras regiões do Brasil;</p>
-            <p>h) Redução da desigualdade socioeconômica do Estado de Minas Gerais e de outras regiões do Brasil.</p>
-            <a class="btn btn-w-m btn-primary" href=" {{url_for('partners.be_a_partner')}} ">Seja um Parceiro</a>
+
+
+            <h4>{% trans %}Check out the partnership interest themes for the DataViva Project:{% endtrans %}</h4>
+            <p>{% trans %}a) Support to public policies development, implementation and evaluation;{% endtrans %}</p>
+            <p>{% trans %}b) Economic development;{% endtrans %}</p>
+            <p>{% trans %}c) Science, technology and innovation;{% endtrans %}</p>
+            <p>{% trans %}d) Public transparency and Public Administration control;{% endtrans %}</p>
+            <p>{% trans %}e) Big Data and database storage, treatment and visualization;{% endtrans %}</p>
+            <p>{% trans %}f) Economic diversification of Minas Gerais state and other Brazilian regions;{% endtrans %}</p>
+            <p>{% trans %}g) Economic complexity of Minas Gerais state and other Brazilian regions;{% endtrans %}</p>
+            <p>{% trans %}h) Reduction of socioeconomic inequality in the state of Minas Gerais and other Brazilian regions.{% endtrans %}</p>
+            <a class="btn btn-w-m btn-primary" href=" {{url_for('partners.be_a_partner')}} ">{% trans %}Be a Partner{% endtrans %}</a>
         </div>
     </div>
 </section>
