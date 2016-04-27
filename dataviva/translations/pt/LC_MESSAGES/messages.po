@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-27 14:25-0300\n"
+"POT-Creation-Date: 2016-04-27 14:36-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -530,14 +530,24 @@ msgid "Preview"
 msgstr "Visualize"
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
-#: dataviva/templates/selectors/basic_course.html:9
-#: dataviva/templates/selectors/major.html:9
-#: dataviva/translations/dictionary.py:180
-#: dataviva/translations/dictionary.py:182
-msgid "Courses"
-msgstr "Cursos"
+#: dataviva/apps/location/templates/location/graphs-education.html:14
+#: dataviva/apps/location/templates/location/graphs-education.html:41
+#: dataviva/translations/dictionary.py:177
+#: dataviva/translations/dictionary.py:179
+msgid "Course"
+msgstr "Curso"
 
-#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:7
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:6
+#: dataviva/apps/basic_course/templates/basic_course/index.html:42
+#: dataviva/apps/location/templates/location/tab-education.html:54
+#: dataviva/apps/rankings/templates/rankings/_base.html:62
+#: dataviva/apps/rankings/templates/rankings/basic-course.html:13
+#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
+#: dataviva/translations/dictionary.py:368
+msgid "Basic Course"
+msgstr "Curso Básico"
+
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:10
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:16
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:33
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:12
@@ -548,7 +558,7 @@ msgstr "Cursos"
 msgid "Map"
 msgstr "Mapa"
 
-#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:9
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:14
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:11
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:20
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:28
@@ -604,15 +614,6 @@ msgstr "no Brasil"
 #: dataviva/apps/university/templates/university/index.html:32
 msgid "change"
 msgstr "trocar"
-
-#: dataviva/apps/basic_course/templates/basic_course/index.html:42
-#: dataviva/apps/location/templates/location/tab-education.html:54
-#: dataviva/apps/rankings/templates/rankings/_base.html:62
-#: dataviva/apps/rankings/templates/rankings/basic-course.html:13
-#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
-#: dataviva/translations/dictionary.py:368
-msgid "Basic Course"
-msgstr "Curso Básico"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:53
 #: dataviva/apps/major/templates/major/index.html:54
@@ -672,7 +673,6 @@ msgstr "Geral"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:130
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
-#: dataviva/apps/major/templates/major/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/tab-general.html:14
 msgid "Enrollments"
@@ -1260,7 +1260,6 @@ msgstr "Ocupação"
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:78
 #: dataviva/apps/location/templates/location/graphs-wages.html:31
 #: dataviva/apps/location/templates/location/graphs-wages.html:70
-#: dataviva/apps/major/templates/major/graphs-enrollments.html:10
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:17
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:44
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:14
@@ -1453,13 +1452,6 @@ msgstr "Ensino Superior por"
 #: dataviva/translations/dictionary.py:362
 msgid "University"
 msgstr "Universidade"
-
-#: dataviva/apps/location/templates/location/graphs-education.html:14
-#: dataviva/apps/location/templates/location/graphs-education.html:41
-#: dataviva/translations/dictionary.py:177
-#: dataviva/translations/dictionary.py:179
-msgid "Course"
-msgstr "Curso"
 
 #: dataviva/apps/location/templates/location/graphs-education.html:32
 msgid "Professional Education By"
@@ -1934,6 +1926,11 @@ msgstr "Massa Salarial"
 msgid "Principal Ocupação"
 msgstr "SubGrupo Principal"
 
+#: dataviva/apps/major/templates/major/graphs-enrollments.html:5
+#, fuzzy
+msgid "Enrollments By"
+msgstr "Matrículas"
+
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:6
 #: dataviva/templates/about.html:78
 #: dataviva/templates/general/browse_categories.html:102
@@ -1944,6 +1941,14 @@ msgstr "SubGrupo Principal"
 #: dataviva/translations/dictionary.py:363
 msgid "Universities"
 msgstr "Universidades"
+
+#: dataviva/apps/major/templates/major/graphs-enrollments.html:10
+#: dataviva/templates/general/select.html:33
+#: dataviva/templates/modal/dataviva.html:69
+#: dataviva/templates/selectors/location.html:18
+#: dataviva/translations/dictionary.py:155
+msgid "Municipalities"
+msgstr "Municípios"
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:16
 msgid "Students Situation"
@@ -2275,6 +2280,40 @@ msgstr "Atividade com Maior"
 #: dataviva/apps/partners/templates/partners/index.html:22
 msgid "Be a Partner"
 msgstr "Seja um Parceiro"
+
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:13
+msgid ""
+"The partnerships in the DataViva project are formalized through specific "
+"instruments through a Public Calling procedure, under the article 23 of "
+"the Brazilian Federal Law number 13.019, of July 31st 2014. See below the"
+" current open public callings and the ones already finalized until now. "
+"If you have any suggestion of partnership that is not included in the "
+"opened Callings,"
+msgstr ""
+"As parcerias no âmbito do Projeto DataViva são formalizadas por meio de "
+"instrumento específico e mediante procedimento de Chamamento Público, nos"
+" termos do art. 23 da Lei nº 13.019, de 31 de julho de 2014. Veja abaixo "
+"os chamamentos em aberto e aqueles realizados até o momento. Caso tenha "
+"alguma sugestão de objeto de parceria que não esteja contemplada nos "
+"chamamentos abertos,"
+
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:13
+msgid "please contact us."
+msgstr "entre em contato conosco."
+
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:14
+msgid ""
+"Also read, in its entirety, the Resolution number 92 of the Curator "
+"Council of FAPEMIG that establishes the guidelines and rules for the "
+"formalization of voluntary partnerships between FAPEMIG and public "
+"institutions, civil society organizations and everyone else under private"
+" right with common goals, in the DataViva project."
+msgstr ""
+"Leia também, na íntegra, a Deliberação nº 92 do Conselho Curador da "
+"FAPEMIG que institui as diretrizes e normas para a formalização de "
+"parcerias voluntárias entre a FAPEMIG e entidades públicas, organizações "
+"da sociedade civil e demais pessoas de direito privado com objetivos "
+"comuns, no âmbito do projeto DataViva."
 
 #: dataviva/apps/partners/templates/partners/index.html:8
 msgid ""
@@ -4993,13 +5032,6 @@ msgstr "Qual classificação você gostaria de pesquisar?"
 msgid "Product Exports"
 msgstr "Produtos Exportados"
 
-#: dataviva/templates/general/select.html:33
-#: dataviva/templates/modal/dataviva.html:69
-#: dataviva/templates/selectors/location.html:18
-#: dataviva/translations/dictionary.py:155
-msgid "Municipalities"
-msgstr "Municípios"
-
 #: dataviva/templates/general/select.html:34
 msgid "Geographical locations within Brazil"
 msgstr "Localizações geográficas no Brasil"
@@ -5295,6 +5327,13 @@ msgstr "Escolha um curso ou busque pelo nome"
 #: dataviva/translations/dictionary.py:181
 msgid "Fields"
 msgstr "Campos"
+
+#: dataviva/templates/selectors/basic_course.html:9
+#: dataviva/templates/selectors/major.html:9
+#: dataviva/translations/dictionary.py:180
+#: dataviva/translations/dictionary.py:182
+msgid "Courses"
+msgstr "Cursos"
 
 #: dataviva/templates/selectors/basic_course.html:25
 #: dataviva/templates/selectors/basic_course.html:56
