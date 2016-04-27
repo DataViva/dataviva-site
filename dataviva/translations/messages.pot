@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-27 14:12-0300\n"
+"POT-Creation-Date: 2016-04-27 14:25-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,6 +424,7 @@ msgstr ""
 #: dataviva/apps/calls/templates/calls/admin.html:5
 #: dataviva/apps/calls/templates/calls/edit.html:5
 #: dataviva/apps/calls/templates/calls/new.html:6
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:16
 #: dataviva/templates/admin.html:20
 msgid "Calls"
 msgstr ""
@@ -2203,6 +2204,12 @@ msgstr ""
 msgid "Activity with Highest"
 msgstr ""
 
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:7
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:12
+#: dataviva/apps/partners/templates/partners/index.html:22
+msgid "Be a Partner"
+msgstr ""
+
 #: dataviva/apps/partners/templates/partners/index.html:8
 msgid ""
 "Help us strengthen the culture of data usage leading to the socioeconomic"
@@ -2247,10 +2254,6 @@ msgstr ""
 msgid ""
 "h) Reduction of socioeconomic inequality in the state of Minas Gerais and"
 " other Brazilian regions."
-msgstr ""
-
-#: dataviva/apps/partners/templates/partners/index.html:22
-msgid "Be a Partner"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:22

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-27 14:12-0300\n"
+"POT-Creation-Date: 2016-04-27 14:25-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -464,6 +464,7 @@ msgstr "Você não tem permissão para ver essa página."
 #: dataviva/apps/calls/templates/calls/admin.html:5
 #: dataviva/apps/calls/templates/calls/edit.html:5
 #: dataviva/apps/calls/templates/calls/new.html:6
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:16
 #: dataviva/templates/admin.html:20
 msgid "Calls"
 msgstr "Chamada"
@@ -2269,6 +2270,12 @@ msgstr "Renda Média Mensal"
 msgid "Activity with Highest"
 msgstr "Atividade com Maior"
 
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:7
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:12
+#: dataviva/apps/partners/templates/partners/index.html:22
+msgid "Be a Partner"
+msgstr "Seja um Parceiro"
+
 #: dataviva/apps/partners/templates/partners/index.html:8
 msgid ""
 "Help us strengthen the culture of data usage leading to the socioeconomic"
@@ -2320,10 +2327,6 @@ msgid ""
 msgstr ""
 "h) Redução da desigualdade socioeconômica do Estado de Minas Gerais e de "
 "outras regiões do Brasil."
-
-#: dataviva/apps/partners/templates/partners/index.html:22
-msgid "Be a Partner"
-msgstr "Seja um Parceiro"
 
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:22
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:53
