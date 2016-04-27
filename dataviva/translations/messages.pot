@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-27 14:36-0300\n"
+"POT-Creation-Date: 2016-04-27 14:50-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -633,7 +633,6 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:130
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
 #: dataviva/apps/university/templates/university/tab-general.html:14
 msgid "Enrollments"
 msgstr ""
@@ -1558,7 +1557,6 @@ msgstr ""
 #: dataviva/apps/major/templates/major/index.html:111
 #: dataviva/apps/major/templates/major/tab-enrollments.html:3
 #: dataviva/apps/rankings/templates/rankings/_base.html:59
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:6
 #: dataviva/apps/university/templates/university/index.html:102
 #: dataviva/apps/university/templates/university/tab-enrollments.html:3
 #: dataviva/templates/site.html:67 dataviva/translations/dictionary.py:171
@@ -1873,6 +1871,7 @@ msgid "Principal Ocupação"
 msgstr ""
 
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:5
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
 msgid "Enrollments By"
 msgstr ""
 
@@ -2922,6 +2921,14 @@ msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:82
 msgid "Product with Lowest"
+msgstr ""
+
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:6
+#: dataviva/templates/selectors/basic_course.html:9
+#: dataviva/templates/selectors/major.html:9
+#: dataviva/translations/dictionary.py:180
+#: dataviva/translations/dictionary.py:182
+msgid "Courses"
 msgstr ""
 
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:15
@@ -4765,13 +4772,6 @@ msgstr ""
 #: dataviva/translations/dictionary.py:175
 #: dataviva/translations/dictionary.py:181
 msgid "Fields"
-msgstr ""
-
-#: dataviva/templates/selectors/basic_course.html:9
-#: dataviva/templates/selectors/major.html:9
-#: dataviva/translations/dictionary.py:180
-#: dataviva/translations/dictionary.py:182
-msgid "Courses"
 msgstr ""
 
 #: dataviva/templates/selectors/basic_course.html:25
