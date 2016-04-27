@@ -5,7 +5,7 @@
             <h4>{% trans %}Trade Balance{% endtrans %}</h4>
             <a href="#trade-balance-partner" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-partner">{% trans %}Trade Partner{% endtrans %}</a>
             <div class="collapse" id="trade-balance-partner">
-                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction&y=val_usd"
+                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction"
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#trade-balance-partner">
                     {% trans %}Line{% endtrans %}
                 </a>
@@ -67,7 +67,7 @@
     </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{trade_partner.id}}/balance/?y=val_usd&depth=direction&scale=linear&controls=true&time=year&year=2000-1_2014-12"
+        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction"
                 name="graphs-frame-international-trade"
                 id="graphs-frame-international-trade"
                 class="embed-responsive-item" >
