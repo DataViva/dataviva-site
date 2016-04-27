@@ -1,13 +1,15 @@
 <div id="graphs-international-trade" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
         <h3>{%trans%}Preview{%endtrans%}:</h3>
-    <div class="list-group panel">
-            <h4 class="m-n">
+        <div class="list-group panel">
+            <h4>{% trans %}Trade Balance{% endtrans %}</h4>
+            <a href="#trade-balance-partner" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-partner">{% trans %}Trade Partner{% endtrans %}</a>
+            <div class="collapse" id="trade-balance-partner">
                 <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction&y=val_usd"
-                   class="list-group-item" target="graphs-frame-international-trade">
-                    {% trans %}Trade Balance{% endtrans %}
+                   target="graphs-frame-international-trade" class="list-group-item" data-parent="#trade-balance-partner">
+                    {% trans %}Line{% endtrans %}
                 </a>
-            </h4>
+            </div>
             <h4>{% trans %}Exports By{% endtrans %}</h4>
             <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="exports-municipality">
