@@ -141,7 +141,7 @@
         <div class="tab-content col-xs-12">
             {% include "occupation/tab-general.html" %}
             {% include "occupation/tab-wages.html" %}
-            {% if location.id %}
+            {% if occupation.id | length == 4 %}
                 {% include "occupation/tab-opportunities.html" %}
             {% endif %}
         </div>
