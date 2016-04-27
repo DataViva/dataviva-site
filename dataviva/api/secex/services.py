@@ -385,6 +385,14 @@ class ProductMunicipalities(Product):
         else:
             return secex.bra.name()
 
+    def municipality_with_more_exports_state(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.bra.id[1:3]
+
     def municipality_with_more_imports(self):
         try:
             secex = self.__secex_sorted_by_imports__()[0]
@@ -392,6 +400,14 @@ class ProductMunicipalities(Product):
             return None
         else:
             return secex.bra.name()
+
+    def municipality_with_more_imports_state(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.bra.id[1:3]
 
 
 class ProductLocations(Product):
