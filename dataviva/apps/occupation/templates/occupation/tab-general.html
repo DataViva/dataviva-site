@@ -4,7 +4,7 @@
         <p>{% trans %}The {% endtrans %}{{occupation.name()}}
          {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
          {% trans %}professionals, being number {% endtrans %}{{header.ranking}}{% if language == "pt" %}&ordm{% endif %} 
-         {% trans %}in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is {% endtrans %}{{body.municipality_with_more_jobs}} 
+         {% trans %}in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is {% endtrans %}{{body.municipality_with_more_jobs}}/{{body.municipality_with_more_jobs_state.upper()}}
          {% trans %}and the {% endtrans %}{{body.activity_with_more_jobs}} 
          {% trans %} activity is the one that employs more {% endtrans %}{{occupation.name()}}. 
          {% trans %} The average monthly income is {% endtrans %}R${{header.average_monthly_income | max_digits(3)}} {{ header.average_monthly_income | magnitude }} 
@@ -62,7 +62,7 @@
                 {% if body.is_not_municipality %}
                     <dt>{% trans %}Main employer Municipality{% endtrans %}</dt>
                     <dd>
-                        <small>{{body.municipality_with_more_jobs }}</small>
+                        <small>{{body.municipality_with_more_jobs }}/{{body.municipality_with_more_jobs_state.upper()}}</small>
                         <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> 
                         <span>{{body.municipality_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                     </dd>
@@ -76,7 +76,7 @@
                 {% if body.is_not_municipality %}
                     <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
                     <dd>
-                        <small>{{body.municipality_with_biggest_wage_avg }}</small>
+                        <small>{{body.municipality_with_biggest_wage_avg }}/{{body.municipality_with_biggest_wage_avg_state.upper()}}</small>
                         R$ <strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong> 
                         <span>{{body.municipality_with_biggest_wage_avg_value | magnitude}}</span>
                     </dd>

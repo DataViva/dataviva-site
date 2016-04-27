@@ -11,7 +11,7 @@
                 <small>{% trans %}Employer Municipality{% endtrans %}</small>
             </div>
             <div class="blue-box">
-                <p class="label">{{ body.municipality_with_more_jobs }}</p>
+                <p class="label">{{body.municipality_with_more_jobs}}/{{body.municipality_with_more_jobs_state.upper()}}</p>
                 <div class="number">
                     <strong class="counter">{{ body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_jobs_value | magnitude }}</span>
                 </div>
@@ -52,7 +52,7 @@
                     <small>{% trans %}Monthly Average Income{% endtrans %}</small>
             </div>
             <div class="blue-box">               
-                <p class="label">{{ body.municipality_with_biggest_wage_avg }}</p>
+                <p class="label">{{body.municipality_with_biggest_wage_avg}}/{{body.municipality_with_biggest_wage_avg_state.upper()}}</p>
                 <div class="number">
                     R$ <strong class="counter">{{ body.municipality_with_biggest_wage_avg_value | max_digits(3) }}</strong><span>{{ body.municipality_with_biggest_wage_avg_value | magnitude }}</span>
                 </div>

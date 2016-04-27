@@ -274,9 +274,17 @@ class OccupationMunicipalities(Occupation):
         rais = self.__rais_sorted_by_num_jobs__()[0]
         return rais.bra.name()
 
+    def municipality_with_more_jobs_state(self):
+        rais = self.__rais_sorted_by_num_jobs__()[0]
+        return rais.bra.id[1:3]
+
     def municipality_with_biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.bra.name()
+
+    def municipality_with_biggest_wage_average_state(self):
+        rais = self.__rais_sorted_by_wage_average__()[0]
+        return rais.bra.id[1:3]
 
 
 class OccupationActivities(Occupation):
