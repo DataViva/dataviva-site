@@ -10,9 +10,9 @@
                 <small>{% trans %}by Export Value{% endtrans %}</small>
             </div>
             <div class="blue-box">
-                <p class="label">{{ body.main_product_by_import_value_name }}</p>
+                <p class="label">{{ body.main_product_by_export_value_name }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong><span>{{ body.main_product_by_import_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong><span>{{ body.main_product_by_export_value | magnitude }}</span>
                 </div>
             </div>
         </div>

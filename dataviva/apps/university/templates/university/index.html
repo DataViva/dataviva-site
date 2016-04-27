@@ -11,7 +11,7 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" onclick="start_selector('University');"> {{ university.name() }}</a>
+                <a href="#" title="Trocar" onclick="select_attr('university');"> {{ university.name() }}</a>
             </li>  
         </ol>
     </div>
@@ -99,7 +99,7 @@
                        role="tab"
                        graph
                        data-id="{{ university.id }}"
-                       data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
+                       data-toggle="tab">{% trans %}Major{% endtrans %}</a>
                 </li>
             </ul>
       </div>
