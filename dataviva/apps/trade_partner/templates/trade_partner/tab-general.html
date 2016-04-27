@@ -40,7 +40,7 @@
                             {% trans %}Main Municipality by Total Value Exported{% endtrans %}
                         </dt>
                         <dd>
-                            <small>{{body.municipality_with_more_exports}}</small>
+                            <small>{{body.municipality_with_more_exports}}/{{body.municipality_with_more_exports_state.upper()}}</small>
                             USD<strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
                         </dd>
                     {% endif %}
@@ -49,7 +49,7 @@
                             {% trans %}Main Municipality by Total Value Imported{% endtrans %}
                         </dt>
                         <dd>
-                            <small>{{body.municipality_with_more_imports}}</small>
+                            <small>{{body.municipality_with_more_imports}}/{{body.municipality_with_more_imports_state.upper()}}</small>
                             USD<strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
                         </dd>
                     {% endif %}

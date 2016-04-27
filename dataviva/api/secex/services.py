@@ -150,7 +150,7 @@ class TradePartnerMunicipalities(TradePartner):
         if bra_id is not None:
             self.secex_query = Ymbw.query.join(Wld).join(Bra).filter(
                 Ymbw.wld_id == self.wld_id,
-                Ymbw.bra_id.like(self.bra_id+'%'),
+                Ymbw.bra_id.like(self.bra_id + '%'),
                 Ymbw.month == 0,
                 Ymbw.year == self.max_year_query,
                 func.length(Ymbw.bra_id) == 9)
@@ -165,9 +165,17 @@ class TradePartnerMunicipalities(TradePartner):
         secex = self.__secex_sorted_by_imports__()[0]
         return secex.bra.name()
 
+    def municipality_with_more_imports_state(self):
+        secex = self.__secex_sorted_by_imports__()[0]
+        return secex.bra.id[1:3]
+
     def municipality_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
         return secex.bra.name()
+
+    def municipality_with_more_exports_state(self):
+        secex = self.__secex_sorted_by_exports__()[0]
+        return secex.bra.id[1:3]
 
 
 class TradePartnerProducts(TradePartner):
