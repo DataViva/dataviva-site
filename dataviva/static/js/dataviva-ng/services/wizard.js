@@ -42,18 +42,21 @@
                 };
 
                 self.load_selector = function(current_step, scope) {
-                    //self.step_type = "selector";
-                    scope.selector_model = new Selectors[current_step](function(id) {
-                        self.selector_choices.push(id);
-                    });
 
-                    $templateRequest(scope.selector_model.templateUrl).then(function(html){
-                        var template = angular.element(html);
-                        $(".wiz-selector-area").empty();
-                        $(".wiz-selector-area").append(template);
-                        $compile(template)(scope);
-                        $timeout(function(){$('.nav-tabs li a')[0].click()}, 500);
-                    });
+                    var selectorProfile = Selector()
+                            .callback(function(d){
+                                self.selector_choices.push(d.id);
+                                $('#modal-selector').modal('hide');
+                                scope.submit();
+                            });
+
+                    function select_attr_profile(id) {
+                          d3.select("#modal-selector-content").call(selectorProfile.type(id));
+                          $('#modal-selector').modal('show');
+                    }
+
+                    select_attr_profile(dataviva.getUrlAttr(current_step));
+
                 };
             };
     }]);
