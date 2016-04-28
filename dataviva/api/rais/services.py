@@ -10,11 +10,16 @@ class Industry:
         self._rais = None
         self._rais_sorted_by_num_jobs = None
         self._rais_sorted_by_wage_average = None
-        self.yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
-        self.rais_query = Yi.query.join(Cnae).filter(
-                Yi.cnae_id == self.cnae_id,
-                Yi.year == self.yi_max_year
-                )
+
+        if cnae_id is None:
+            self.yi_max_year = db.session.query(func.max(Yi.year))
+            self.rais_query = Yi.query.join(Cnae).filter(
+                    Yi.year == self.yi_max_year)
+        else:
+            self.yi_max_year = db.session.query(func.max(Yi.year)).filter_by(cnae_id=cnae_id)
+            self.rais_query = Yi.query.join(Cnae).filter(
+                    Yi.cnae_id == self.cnae_id,
+                    Yi.year == self.yi_max_year)
 
     def __rais__(self):
         if not self._rais:
@@ -65,17 +70,47 @@ class Industry:
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.wage_avg
 
+    def main_industry_by_num_jobs(self):
+        try:
+            rais = self.__rais_sorted_by_num_jobs__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.num_jobs
+
+    def main_industry_by_num_jobs_name(self):
+        try:
+            rais = self.__rais_sorted_by_num_jobs__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.cnae.name()
+
+    def avg_wage(self):
+        return sum([industry.wage_avg for industry in self.__rais__() if industry.wage_avg])
+
+    def total_jobs(self):
+        return sum([industry.num_jobs for industry in self.__rais__() if industry.num_jobs])
+
 
 class Occupation:
     def __init__(self, occupation_id):
         self.occupation_id = occupation_id
         self._rais = None
+        self._rais_sorted_by_num_jobs = None
+        self._rais_sorted_by_wage_average = None
 
-        self.max_year_query = db.session.query(func.max(Yo.year)).filter(
-            Yo.cbo_id == occupation_id)
-        self.rais_query = Yo.query.filter(
-            Yo.cbo_id == self.occupation_id,
-            Yo.year == self.max_year_query)
+        if occupation_id is None:
+            self.max_year_query = db.session.query(func.max(Yo.year))
+            self.rais_query = Yo.query.filter(
+                Yo.year == self.max_year_query)
+
+        else:
+            self.max_year_query = db.session.query(func.max(Yo.year)).filter(
+                Yo.cbo_id == occupation_id)
+            self.rais_query = Yo.query.filter(
+                Yo.cbo_id == self.occupation_id,
+                Yo.year == self.max_year_query)
 
     def __rais__(self):
         if not self._rais:
@@ -135,6 +170,22 @@ class Occupation:
     def biggest_wage_average(self):
         rais = self.__rais_sorted_by_wage_average__()[0]
         return rais.wage_avg
+
+    def main_occupation_by_num_jobs(self):
+        try:
+            rais = self.__rais_sorted_by_num_jobs__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.num_jobs
+
+    def main_occupation_by_num_jobs_name(self):
+        try:
+            rais = self.__rais_sorted_by_num_jobs__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.cbo.name()
 
 
 class IndustryByLocation(Industry):
