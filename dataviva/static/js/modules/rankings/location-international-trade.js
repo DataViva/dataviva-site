@@ -45,12 +45,8 @@ var LocationTradeRanking = function () {
             },
             {
                 render: function (data, type, row, meta){
-                   if(row[15].length != 9  || row[15].slice(1,3) == 'xx'){
-                        return dataviva.bra[row[15]].name.truncate(35);
-                    }else{
-                        return dataviva.bra[row[15]].name.truncate(35)+"/"+row[15].slice(1,3).toUpperCase();
-                    }
-
+                    var abbreviation = dataviva.bra[row[15]].abbreviation;
+                    return dataviva.bra[row[15]].name.truncate(35) + (abbreviation ? " - " + abbreviation : "");
                 }
             },
             {

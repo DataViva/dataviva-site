@@ -281,8 +281,11 @@ def attrs(attr="bra", Attr_id=None, depth=None):
             #         a["plr"] = plr
             if order:
                 a["rank"] = int(i+offset+1)
-            if attr == "bra" and "id_ibge" not in a:
-                a["id_ibge"] = False
+            if attr == "bra":
+                if "id_ibge" not in a:
+                    a["id_ibge"] = False
+                if "abbreviation" not in a:
+                    a["abbreviation"] = False
             attrs.append(fix_name(a, lang))
 
         ret["data"] = attrs
