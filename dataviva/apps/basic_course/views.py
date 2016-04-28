@@ -98,6 +98,7 @@ def index(course_sc_id):
         'school_name': school_service.school_name(),
         'school_enrolled': school_service.school_enrolled(),
         'city_name': city_service.city_name(),
+        'city_state': city_service.city_state(),
         'city_enrolled': city_service.city_enrolled(),
     }
 

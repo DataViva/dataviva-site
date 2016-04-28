@@ -189,8 +189,7 @@ dataviva.format.number = function(value, opts) {
         else symbol = "Milh\u00f5es"
       }
       else if (symbol == "k") {
-        if (digit < 2) symbol = "Milhares"
-        else symbol = "Mil"
+        symbol = "Mil"
       }
       symbol = " "+symbol
     }
@@ -224,7 +223,9 @@ dataviva.format.number = function(value, opts) {
   else if (growth) {
     return_value += "%";
     var arrow = negative ? "down" : "up";
-    return_value = "<span class='"+arrow+"'>" + return_value + "<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" + "</span>";
+    return_value = "<span class='text-"+arrow+"'>" + (negative ? "-" : "") +
+                        return_value + "&nbsp;<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" +
+                    "</span>";
   }
 
   return_value = String(return_value)

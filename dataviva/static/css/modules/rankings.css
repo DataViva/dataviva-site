@@ -105,6 +105,16 @@
     margin-right: 5px;
 }
 
+
+@media (max-width: 767px) {
+    .rankings .rankings-control .year-selector {
+        margin-top: 10px;
+    }
+    .rankings #rankings .navbar .nav > li > a {
+        padding: 6px 20px;
+    }
+}
+
 .rankings .rankings-control .btn-group {
     margin-right: 5px;
 }
@@ -127,4 +137,25 @@
 }
 .rankings .load {
     min-height: 500px;
+}
+.rankings .dataTables_scrollHeadInner .dataTable th {
+    text-align: center;
+    vertical-align: middle;
+}
+.rankings .dataTables_scrollBody .dataTable td.table-number {
+    text-align: right;
+}
+.rankings .navbar-nav > li > .dropdown-menu {
+    margin-top: -6px;
+}
+
+
+.rankings table.dataTable thead .sorting:after,
+.rankings table.dataTable thead .sorting_asc:after,
+.rankings table.dataTable thead .sorting_desc:after,
+.rankings table.dataTable thead .sorting_asc_disabled:after,
+.rankings table.dataTable thead .sorting_desc_disabled:after {
+    top: 50%;
+    transform: translateY(-50%);
+    height: 25px;
 }

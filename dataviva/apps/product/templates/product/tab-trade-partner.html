@@ -11,7 +11,7 @@
                 <small>{%trans%}by Total Value Exported{%endtrans%}</small>
             </div>
             <div class="blue-box">
-                <p class="label">{{ body.municipality_name_export }}</p>
+                <p class="label">{{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }}</p>
                 <div class="number">
                     USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong><span>{{ body.municipality_export_value | magnitude }}</span>
                 </div>
@@ -23,7 +23,7 @@
                 <small>{%trans%}by Total Value Imported{%endtrans%}</small>
             </div>
             <div class="blue-box">
-                <p class="label">{{ body.municipality_name_import}}</p>
+                <p class="label">{{ body.municipality_name_import}}/{{ body.municipality_state_import.upper() }}</p>
                 <div class="number">
                     USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong><span>{{ body.municipality_import_value | magnitude }}</span>
                 </div>

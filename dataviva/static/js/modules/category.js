@@ -17,10 +17,6 @@ $('a[class="pull-right btn btn-primary btn-xs m-r-lg"]').click(function() {
     $('li[role="presentation"] a[href="'+link+'"]').closest('li').addClass('active').siblings().removeClass('active');
 });
 
-$('a[href="#general"]').click(function() {
-    $('#graphs').children().hide();
-});
-
 $(document).ready(function () {
     $(function() {
         var jcarousel = $('.jcarousel');
@@ -66,6 +62,7 @@ $(document).ready(function () {
         }
     });
 
+
     if(document.location.hash) {
         var tab = document.location.hash.substring(1),
             category = document.location.pathname.split('/')[3],
@@ -85,4 +82,11 @@ $(document).ready(function () {
             showGraph(category, tab, location);
         }
     });
+});
+
+
+$('.category .nav-graph .list-group-item').click(function() {
+    $(this).addClass('active').siblings().removeClass('active');
+    $(this).children().removeClass('active');
+    $(this).siblings().children().removeClass('active');
 });

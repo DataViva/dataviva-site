@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane" id="enrollments">
 
-    <h2>{% trans %}International Trade{% endtrans %}</h2>
+    <h2>{% trans %}Major{% endtrans %}</h2>
 
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-3">
@@ -22,7 +22,7 @@
             <small>{% trans %}by Number of Enrolled Students{% endtrans %}</small>    
             </div>
             <div class="blue-box">
-                <p class="label">{{body.municipality_with_more_enrolled}}</p>
+                <p class="label">{{body.municipality_with_more_enrolled}}/{{body.municipality_with_more_enrolled_state.upper()}}</p>
                 <div class="number">
                     <strong class="counter">{{ body.highest_enrolled_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_enrolled_number_by_municipality | magnitude }}</span>
                 </div>
@@ -49,7 +49,7 @@
              <small>{% trans %}by Number of Entering Students{% endtrans %}</small>   
             </div>
             <div class="blue-box">
-                <p class="label">{{body.municipality_with_more_entrants}}</p>
+                <p class="label">{{body.municipality_with_more_entrants}}/{{body.municipality_with_more_entrants_state.upper()}}</p>
                 <div class="number">
                     <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
                 </div>
@@ -75,7 +75,7 @@
             <small>{% trans %}by Number of Graduates{% endtrans %}</small>  
             </div>
             <div class="blue-box">
-                <p class="label">{{body.municipality_with_more_graduates}}</p>
+                <p class="label">{{body.municipality_with_more_graduates}}/{{body.municipality_with_more_graduates_state.upper()}}</p>
                 <div class="number">
                     <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
                 </div>

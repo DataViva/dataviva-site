@@ -25,8 +25,11 @@ var TradePartnerTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/secex/all-0/all/all/show.5/?order=export_val.desc",
-        "sAjaxDataProp": "data",
+        "ajax": {
+            "url": "/secex/all-0/all/all/show.5/?order=export_val.desc",
+            "dataSrc": "data",
+            "cache": true,
+        },
         "order": [],
         "columns": [
             {data: 0},
@@ -38,67 +41,74 @@ var TradePartnerTable = function () {
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[14], {"key": headers[14]});
-                }
+                    return dataviva.format.number(row[3], {"key": headers[3]});
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[2], {"key": headers[2]});
-                }
-            },
-            {
-                render: function (data, type, row, meta){
-                    return dataviva.format.number(row[3], {"key": headers[3]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[8], {"key": headers[8]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[9], {"key": headers[9]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[6], {"key": headers[6]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[7], {"key": headers[7]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[10], {"key": headers[10]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[11], {"key": headers[11]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[12], {"key": headers[12]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[13], {"key": headers[13]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             }
-        ],
-        "columnDefs": [
-            {
-                "targets": 2,
-                "render": function (data, type, row, meta){
-                    return dataviva.wld[row[15]].name.truncate(35);
-                }
-            },
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,
@@ -149,7 +159,7 @@ var TradePartnerTable = function () {
 
             $('#trade-partner-countries').click(function() {
                 loadingRankings.show();
-                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=eci.desc").load(loadingRankings.hide);
+                tradePartnerTable.table.ajax.url("/secex/all-0/all/all/show.5/?order=export_val.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -166,9 +176,6 @@ var TradePartnerTable = function () {
     });
 };
 
-$(document).ready(function() {
-    dataviva.requireAttrs(['wld'], function() {
-        window.tradePartnerTable = new TradePartnerTable();
-    });
+dataviva.requireAttrs(['wld'], function() {
+    window.tradePartnerTable = new TradePartnerTable();
 });
-

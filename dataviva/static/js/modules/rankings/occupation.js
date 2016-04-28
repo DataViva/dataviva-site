@@ -27,8 +27,11 @@ var OccupationTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/rais/all/all/all/show.4/?order=num_jobs.desc",
-        "sAjaxDataProp": "data",
+        "ajax": {
+            "url": "/rais/all/all/all/show.4/?order=num_jobs.desc",
+            "dataSrc": "data",
+            "cache": true,
+        },
         "order": [],
         "columns": [
             {data: 0},
@@ -41,67 +44,93 @@ var OccupationTable = function () {
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[3], {"key": headers[3]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[1], {"key": headers[1]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[4], {"key": headers[4]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[5], {"key": headers[5]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[6], {"key": headers[6]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[9], {"key": headers[9]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[10], {"key": headers[10]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[7], {"key": headers[7]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[8], {"key": headers[8]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[12], {"key": headers[12]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[13], {"key": headers[13]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[14], {"key": headers[14]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[15], {"key": headers[15]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
         ],
         "deferRender": true,

@@ -2,20 +2,27 @@
     <nav class="nav-graph col-xs-12 col-md-3" >
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
-            <h4>{% trans %}Courses{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" 
-               target="graphs-frame-enrollments" 
-               class="list-group-item">TreeMap</a>
-            <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" 
-               target="graphs-frame-enrollments" 
-               class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-            <h4>{% trans %}Students Status{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" 
-               target="graphs-frame-enrollments" class="list-group-item">{% trans %}Line{% endtrans %}</a>
-            <h4>{% trans %}Shift{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/time/?y=students&layout=share&order=color" 
-               target="graphs-frame-enrollments" 
-               class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+            <h4>{% trans %}Enrollments By{% endtrans %}</h4>
+                <a href="#category-major" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Courses{% endtrans %}</a>
+                <div class="collapse" id="category-major">
+                    <a href="/{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" 
+                       target="graphs-frame-enrollments" 
+                       class="list-group-item">TreeMap</a>
+                    <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" 
+                       target="graphs-frame-enrollments" 
+                       class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                </div>
+                <a href="#category-status" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Students Status{% endtrans %}</a>
+                <div class="collapse" id="category-status">
+                    <a href="/{{ g.locale }}/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" 
+                       target="graphs-frame-enrollments" class="list-group-item">{% trans %}Line{% endtrans %}</a>
+                </div>
+                <a href="#category-shift" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Shift{% endtrans %}</a>
+                <div class="collapse" id="category-shift">
+                    <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/time/?y=students&layout=share&order=color" 
+                       target="graphs-frame-enrollments" 
+                       class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                </div>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">

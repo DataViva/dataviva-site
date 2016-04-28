@@ -11,7 +11,7 @@
                 <small>{% trans %}Employer Municipality{% endtrans %}</small>
             </div>
             <div class="blue-box">
-                <p class="label">{{ body.municipality_with_more_jobs }}</p>
+                <p class="label">{{body.municipality_with_more_jobs}}/{{body.municipality_with_more_jobs_state.upper()}}</p>
                 <div class="number">
                     <strong class="counter">{{ body.municipality_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_jobs_value | magnitude }}</span>
                 </div>
@@ -30,20 +30,7 @@
                     <strong class="counter">{{ body.activity_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.activity_with_more_jobs_value | magnitude }}</span>
                 </div>
             </div>
-        </div>
-
-        <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="blue-box title">
-                {% trans %}Main{% endtrans %}
-                <small>{% trans %}Employer Activity{% endtrans %}</small>
-            </div>
-            <div class="blue-box">
-                <p class="label">{{ body.activity_with_more_jobs }}</p>
-                <div class="number">
-                    <strong class="counter">{{ body.activity_with_more_jobs_value | max_digits(3) }}</strong><span>{{ body.activity_with_more_jobs_value | magnitude }}</span>
-                </div>
-            </div>
-        </div>                            
+        </div>                         
          
         {% if body.is_not_municipality %}
         <div class="col-xs-12 col-sm-6 col-md-3">
@@ -52,9 +39,9 @@
                     <small>{% trans %}Monthly Average Income{% endtrans %}</small>
             </div>
             <div class="blue-box">               
-                <p class="label">{{ body.municipality_with_biggest_wage_avg }}</p>
+                <p class="label">{{body.municipality_with_biggest_wage_avg}}/{{body.municipality_with_biggest_wage_avg_state.upper()}}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.municipality_with_biggest_wage_avg_value | max_digits(3) }}</strong><span>{{ body.municipality_with_biggest_wage_avg_value | magnitude }}</span>
+                    R$ <strong class="counter">{{ body.municipality_with_biggest_wage_avg_value | max_digits(3) }}</strong><span>{{ body.municipality_with_biggest_wage_avg_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -68,7 +55,7 @@
             <div class="blue-box">     
                 <p class="label">{{ body.activity_with_biggest_wage_avg }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.activity_with_biggest_wage_avg_value | max_digits(3) }}</strong><span>{{ body.activity_with_biggest_wage_avg_value | magnitude }}</span>
+                    R$ <strong class="counter">{{ body.activity_with_biggest_wage_avg_value | max_digits(3) }}</strong><span>{{ body.activity_with_biggest_wage_avg_value | magnitude }}</span>
                 </div>
             </div>
                            

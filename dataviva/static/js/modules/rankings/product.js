@@ -26,8 +26,11 @@ var ProductTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"rankings-control">frtip',
-        "sAjaxSource": "/secex/all-0/all/show.6/all/?order=pci.desc",
-        "sAjaxDataProp": "data",
+        "ajax": {
+            "url": "/secex/all-0/all/show.6/all/?order=pci.desc",
+            "dataSrc": "data",
+            "cache": true,
+        },
         "order": [],
         "columns": [
             {data: 0},
@@ -39,63 +42,80 @@ var ProductTable = function () {
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row[14], {"key": headers[14]});
-                }
-            },
-            {
-                render: function (data, type, row, meta){
                     return dataviva.format.number(row[15], {"key": headers[15]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[3], {"key": headers[3]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[2], {"key": headers[2]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[8], {"key": headers[8]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[9], {"key": headers[9]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[6], {"key": headers[6]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[7], {"key": headers[7]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[10], {"key": headers[10]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[11], {"key": headers[11]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[12], {"key": headers[12]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row[13], {"key": headers[13]});
-                }
+                },
+                className: "table-number",
+                type: 'num-dataviva'
             }
         ],
         "deferRender": true,
@@ -144,12 +164,14 @@ var ProductTable = function () {
                 loadingRankings.show();
                 product.table.ajax.url("/secex/all-0/all/show.2/all/?order=export_val.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
+                product.table.column( 3 ).visible(false);
             });
 
             $('#product-postions').click(function() {
                 loadingRankings.show();
                 product.table.ajax.url("/secex/all-0/all/show.6/all/?order=pci.desc").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
+                product.table.column( 3 ).visible(true);
             });
 
             var lastYear = $('#year-selector option').last().val();

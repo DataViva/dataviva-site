@@ -1,13 +1,15 @@
 <div id="graphs-international-trade" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
         <h3>{%trans%}Preview{%endtrans%}:</h3>
-    <div class="list-group panel">
-            <h4 class="m-n">
-                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=month&depth=direction&y=val_usd"
-                   class="list-group-item" target="graphs-frame-international-trade">
-                    {% trans %}Trade Balance{% endtrans %}
+        <div class="list-group panel">
+            <h4>{% trans %}Trade Balance{% endtrans %}</h4>
+            <a href="#trade-balance-partner" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-partner">{% trans %}Trade Partner{% endtrans %}</a>
+            <div class="collapse" id="trade-balance-partner">
+                <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction"
+                   target="graphs-frame-international-trade" class="list-group-item" data-parent="#trade-balance-partner">
+                    {% trans %}Line{% endtrans %}
                 </a>
-            </h4>
+            </div>
             <h4>{% trans %}Exports By{% endtrans %}</h4>
             <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="exports-municipality">
@@ -26,7 +28,7 @@
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#exports-destination">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?sort=asc&layout=value&color=color&year=2002-1_2013-1&controls=true&time=year&y=export_val&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?sort=asc&layout=value&color=color&controls=true&time=year&y=export_val&order=color"
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#exports-destination">
                     {% trans %}Stacked{% endtrans %}
                </a>
@@ -53,7 +55,7 @@
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#imports-origin">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?sort=asc&layout=value&color=color&year=2002-1_2013-1&controls=true&time=year&y=import_val&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?sort=asc&layout=value&color=color&controls=true&time=year&y=import_val&order=color"
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#imports-origin">
                     {% trans %}Stacked{% endtrans %}
                </a>
@@ -65,7 +67,7 @@
     </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{trade_partner.id}}/balance/?y=val_usd&depth=direction&scale=linear&controls=true&time=month&year=2000-1_2014-12"
+        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction"
                 name="graphs-frame-international-trade"
                 id="graphs-frame-international-trade"
                 class="embed-responsive-item" >
