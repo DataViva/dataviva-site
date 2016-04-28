@@ -64,6 +64,10 @@ def jinja_split(s, char):
     return s.split(char)
 
 def max_digits(number, digits):
+    numok=number
+    if type(numok) == float :
+        number=Decimal(number)
+
     if type(number) == Decimal:
         if number > 1000:
              number = int(number)
@@ -79,6 +83,7 @@ def max_digits(number, digits):
         num = int(''.join(map(str, str_n)))
         number = float(number)/num
     number_str = str(number)
+
     return number_str[0:digits+1]
 
 def jinja_magnitude(number):
