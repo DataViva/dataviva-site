@@ -1,9 +1,17 @@
 <div id="graphs-oportunities" class="container">
+    <nav class="nav-graph col-xs-12 col-md-3" >
+        <h3>{% trans %}Preview{% endtrans %}:</h3>
+        <div class="list-group panel">
+            <h4>{% trans %}Economic Activities{% endtrans %}</h4>
+            <a href="/{{ g.locale }}/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
+                target="graphs-frame-oportunities" class="list-group-item">{% trans %}Rings{% endtrans %}</a>
+        </div>
+    </nav>
     <div class="embed-responsive embed-responsive-16by9">
         <iframe src="/{{ g.locale }}/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
             name="graphs-frame-oportunities"
             id="graphs-frame-oportunities"
-            class="embed-responsive-item" >
+            class="embed-responsive-item">
         </iframe>
     </div>
 </div>
