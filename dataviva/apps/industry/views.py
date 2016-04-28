@@ -61,8 +61,12 @@ def index(cnae_id):
             body[
                 'municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
             body[
+                'municipality_with_more_num_jobs_state'] = industry_municipality_service.municipality_with_more_jobs_state()
+            body[
                 'municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
             body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
+            body['municipality_with_more_wage_avg_state'] = industry_municipality_service.municipality_with_biggest_wage_average_state()
+
 
     else:
         industry_service = Industry(cnae_id=industry.id)
@@ -72,6 +76,8 @@ def index(cnae_id):
         body[
             'municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
         body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
+        body['municipality_with_more_num_jobs_state'] = industry_municipality_service.municipality_with_more_jobs_state()
+        body['municipality_with_more_wage_avg_state'] = industry_municipality_service.municipality_with_biggest_wage_average_state()
 
     body['occ_with_more_wage_avg_name'] = industry_occupation_service.occupation_with_biggest_wage_average()
     body['occ_with_more_wage_avg_value'] = industry_occupation_service.biggest_wage_average()

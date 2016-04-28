@@ -107,8 +107,10 @@ def index(wld_id):
 
     body = {
         'municipality_with_more_exports': municipalities_service.municipality_with_more_exports(),
+        'municipality_with_more_exports_state': municipalities_service.municipality_with_more_exports_state(),
         'highest_export_value': municipalities_service.highest_export_value(),
         'municipality_with_more_imports': municipalities_service.municipality_with_more_imports(),
+        'municipality_with_more_imports_state': municipalities_service.municipality_with_more_imports_state(),
         'highest_import_value': municipalities_service.highest_import_value(),
 
         'product_with_more_imports': products_service.product_with_more_imports(),

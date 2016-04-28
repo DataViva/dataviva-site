@@ -35,57 +35,57 @@
         <div class="dl-box col-xs-12 col-md-10 col-lg-8">
             <h3>{% trans %}International Trade{% endtrans %}</h3>
             <dl class="dl-horizontal">
-                {% if body.highest_export_value %}
-                    <dt>
-                        {% trans %}Main Municipality by Total Value Exported{% endtrans %}
-                    </dt>
-                    <dd>
-                        <small>{{body.municipality_with_more_exports}}</small>
-                        USD <strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
-                    </dd>
-                {% endif %}
-                {% if body.highest_import_value %}
-                    <dt>
-                        {% trans %}Main Municipality by Total Value Imported{% endtrans %}
-                    </dt>
-                    <dd>
-                        <small>{{body.municipality_with_more_imports}}</small>
-                        USD <strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
-                    </dd>
-                {% endif %}
-                {% if body.product_with_highest_export_value %}
-                    <dt>
-                        {% trans %}Main Product by Total Value Exported{% endtrans %}
-                    </dt>
-                    <dd>
-                        <small>{{body.product_with_more_exports}}</small>
-                        USD <strong class="counter">{{body.product_with_highest_export_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
-                    </dd>
-                {% endif %}
-                {% if body.product_with_highest_import_value %}
-                    <dt>
-                        {% trans %}Main Product by Total Value Imported{% endtrans %}
-                    </dt>
-                    <dd>
-                        <small>{{body.product_with_more_imports}}</small>
-                        USD <strong class="counter">{{body.product_with_highest_import_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
-                    </dd>
-                {% endif %}
-                    <dt>
-                        {% trans %}Product with Highest Trade Balance Surplus{% endtrans %}
-                    </dt>
-                    <dd>
-                        <small>{{body.product_with_highest_balance}}</small>
-                        USD <strong class="counter">{{body.highest_balance | max_digits(3) }}</strong> <span>{{body.highest_balance | magnitude }}</span>
-                    </dd>
-                    <dt>
-                        {% trans %}Product with Lowest Trade Balance Surplus{% endtrans %}
-                    </dt>
-                    <dd>
-                        <small>{{body.product_with_lowest_balance}}</small>
-                        USD <strong class="counter">{{body.lowest_balance | max_digits(3) }}</strong> <span>{{body.lowest_balance | magnitude }}</span>
-                    </dd>
-            </dl>
+                    {% if body.highest_export_value %}
+                        <dt>
+                            {% trans %}Main Municipality by Total Value Exported{% endtrans %}
+                        </dt>
+                        <dd>
+                            <small>{{body.municipality_with_more_exports}}/{{body.municipality_with_more_exports_state.upper()}}</small>
+                            USD<strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
+                        </dd>
+                    {% endif %}
+                    {% if body.highest_import_value %}
+                        <dt>
+                            {% trans %}Main Municipality by Total Value Imported{% endtrans %}
+                        </dt>
+                        <dd>
+                            <small>{{body.municipality_with_more_imports}}/{{body.municipality_with_more_imports_state.upper()}}</small>
+                            USD<strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
+                        </dd>
+                    {% endif %}
+                    {% if body.product_with_highest_export_value %}
+                        <dt>
+                            {% trans %}Main Product by Total Value Exported{% endtrans %}
+                        </dt>
+                        <dd>
+                            <small>{{body.product_with_more_exports}}</small>
+                            USD<strong class="counter">{{body.product_with_highest_export_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
+                        </dd>
+                    {% endif %}
+                    {% if body.product_with_highest_import_value %}
+                        <dt>
+                            {% trans %}Main Product by Total Value Imported{% endtrans %}
+                        </dt>
+                        <dd>
+                            <small>{{body.product_with_more_imports}}</small>
+                            USD<strong class="counter">{{body.product_with_highest_import_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
+                        </dd>
+                    {% endif %}
+                        <dt>
+                            {% trans %}Product with Highest Trade Balance Surplus{% endtrans %}
+                        </dt>
+                        <dd>
+                            <small>{{body.product_with_highest_balance}}</small>
+                            USD<strong class="counter">{{body.highest_balance | max_digits(3) }}</strong> <span>{{body.highest_balance | magnitude }}</span>
+                        </dd>
+                        <dt>
+                            {% trans %}Product with Lowest Trade Balance Surplus{% endtrans %}
+                        </dt>
+                        <dd>
+                            <small>{{body.product_with_lowest_balance}}</small>
+                            USD<strong class="counter">{{body.lowest_balance | max_digits(3) }}</strong> <span>{{body.lowest_balance | magnitude }}</span>
+                        </dd>
+                    </dl>
             <a href="#international-trade" 
                 aria-controls="international-trade" 
                 role="tab"        

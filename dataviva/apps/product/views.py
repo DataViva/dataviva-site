@@ -82,9 +82,13 @@ def index(product_id):
             body[
                 'municipality_name_export'] = municipalities_service.municipality_with_more_exports()
             body[
+                'municipality_state_export'] = municipalities_service.municipality_with_more_exports_state()
+            body[
                 'municipality_export_value'] = municipalities_service.highest_export_value()
             body[
                 'municipality_name_import'] = municipalities_service.municipality_with_more_imports()
+            body[
+                'municipality_state_import'] = municipalities_service.municipality_with_more_imports_state()
             body[
                 'municipality_import_value'] = municipalities_service.highest_import_value()
 
@@ -94,9 +98,13 @@ def index(product_id):
         body[
             'municipality_name_export'] = municipalities_service.municipality_with_more_exports()
         body[
+            'municipality_state_export'] = municipalities_service.municipality_with_more_exports_state()
+        body[
             'municipality_export_value'] = municipalities_service.highest_export_value()
         body[
             'municipality_name_import'] = municipalities_service.municipality_with_more_imports()
+        body[
+            'municipality_state_import'] = municipalities_service.municipality_with_more_imports_state()
         body[
             'municipality_import_value'] = municipalities_service.highest_import_value()
         body[

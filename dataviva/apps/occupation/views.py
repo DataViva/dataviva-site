@@ -89,9 +89,14 @@ def index(occupation_id):
             'municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
 
         body[
+            'municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
+
+        body[
             'municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
         body[
             'municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.biggest_wage_average()
+        body[
+            'municipality_with_biggest_wage_avg_state'] = occupation_municipalities_service.municipality_with_biggest_wage_average_state()
 
     body[
         'activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
