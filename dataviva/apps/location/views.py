@@ -51,23 +51,31 @@ def all():
             'eci': 'http://atlas.media.mit.edu/en/profile/country/bra/'
     }
 
-    from dataviva.api.secex.services import All
-    product_service = All()
+    from dataviva.api.secex.services import Product
+    product_service = Product(product_id=None)
+
+    from dataviva.api.rais.services import Industry
+    industry_service = Industry(cnae_id=None)
+
+    from dataviva.api.rais.services import Occupation
+    occupation_service = Occupation(occupation_id=None)
 
     body = {
         'highest_export_value': product_service.highest_export_value(),
         'highest_export_value_name': product_service.highest_export_value_name(),
         'highest_import_value': product_service.highest_import_value(),
-        'highest_import_value_name': product_service.highest_import_value(),
-        'total_exports': product_service.total_exports(),
-        'total_imports': product_service.total_imports(),
+        'highest_import_value_name': product_service.highest_import_value_name(),
+        'all_imported': product_service.all_imported(),
+        'all_exported': product_service.all_exported(),
+
+        'main_industry_by_num_jobs': industry_service.main_industry_by_num_jobs(),
+        'main_industry_by_num_jobs_name': industry_service.main_industry_by_num_jobs_name(),
+        'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
+        'main_occupation_by_num_jobs_name': occupation_service.main_occupation_by_num_jobs_name(),
+        'avg_wage': industry_service.avg_wage(),
+        'total_jobs': industry_service.total_jobs()
+
     }
-#        'main_industry_by_num_jobs': location_industry_service.main_industry_by_num_jobs(),
-#        'main_industry_by_num_jobs_name': location_industry_service.main_industry_by_num_jobs_name(),
-#        'main_occupation_by_num_jobs': location_occupation_service.main_occupation_by_num_jobs(),
-#        'main_occupation_by_num_jobs_name': location_occupation_service.main_occupation_by_num_jobs_name(),
-#        'avg_wage': location_jobs_service.avg_wage(),
-#        'total_jobs': location_jobs_service.total_jobs(),
 #
 #        'highest_enrolled_by_university': location_university_service.highest_enrolled_by_university(),
 #        'highest_enrolled_by_university_name': location_university_service.highest_enrolled_by_university_name(),

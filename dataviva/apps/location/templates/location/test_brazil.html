@@ -3,17 +3,28 @@
 <head>
 </head>
 <body>
+	<h3>Indicadores Header:</h3>
+	<p>
+		GDP: {{header.gdp}}</br>
+		POP: {{header.population}}</br>
+		GDP_per_capta: {{header.gdp_per_capta}}</br>
+		ECI: {{header.eci}}</br>
+	</p>
 
-Indicadores Header:
-GDP: {{header.gdp}}</br>
-POP: {{header.population}}</br>
-GDP_per_capta: {{header.gdp_per_capta}}</br>
-ECI: {{header.eci}}</br>
+	<h3>International Trade:</h3>
+	<p>
+	Main Product by Total Value Exported: {{body.highest_export_value_name}} {{body.highest_export_value}}</br>
+	Main Product by Total Value Imported: {{body.highest_import_value_name}} {{body.highest_import_value}}</br>
+	Total of Imports: {{body.all_imported}}</br>
+	Total of Exports: {{body.all_exported}}</br>
+	</p>
 
-Principal Produto por Valor Total Exportado: {{body.highest_export_value_name}} {{body.highest_export_value}}</br>
-Principal Produto por Valor Total Importado: {{body.highest_import_value_name}} {{body.highest_import_value}}</br>
-Total de Exportações: {{body.total_exports}}</br>
-Total de Importações: {{body.total_imports}}</br>
-
+	<h3>Wages and Jobs:</h3>
+	<p>
+	Main Economic Activity: {{body.main_industry_by_num_jobs_name}} {{body.main_industry_by_num_jobs}}</br>
+	Main Occupation: {{body.main_occupation_by_num_jobs_name}} {{body.main_occupation_by_num_jobs}}</br>
+	Avarage Wage: {{body.avg_wage}}</br>
+	Total of Jobs: {{body.total_jobs}}</br>
+	</p>
 </body>
 </html>
