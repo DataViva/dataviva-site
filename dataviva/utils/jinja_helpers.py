@@ -64,8 +64,8 @@ def jinja_split(s, char):
     return s.split(char)
 
 def max_digits(number, digits):
-    numok=number
-    if type(numok) == float :
+
+    if type(number) == float :
         number=Decimal(number)
 
     if type(number) == Decimal:
