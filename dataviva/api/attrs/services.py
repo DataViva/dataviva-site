@@ -29,10 +29,8 @@ class All:
         return self._attrs_list_ybs
 
     def gdp(self):
-        attrs = self.__attrs_list_ybs__()
-        attr = next((attr for attr in attrs if attr.stat_id == 'gdp'),
-                    None)
-        return attr.stat_val
+        gdp = self.__attrs_list_ybs__()[0]
+        return gdp
 
     def __attrs_list_yb__(self):
         if not self._attrs_list_yb:
@@ -41,7 +39,7 @@ class All:
         return self._attrs_list_yb
 
     def population(self):
-        population = self.__attrs_list_yb__()[0][0]
+        population = self.__attrs_list_yb__()[0]
         return population
 
     def gdp_per_capta(self):
