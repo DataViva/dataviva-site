@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-04-28 12:30-0300\n"
+"POT-Creation-Date: 2016-04-28 14:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,7 +424,7 @@ msgstr ""
 #: dataviva/apps/calls/templates/calls/admin.html:5
 #: dataviva/apps/calls/templates/calls/edit.html:5
 #: dataviva/apps/calls/templates/calls/new.html:6
-#: dataviva/apps/partners/templates/partners/be-a-partner.html:16
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:18
 #: dataviva/templates/admin.html:20
 msgid "Calls"
 msgstr ""
@@ -493,7 +493,9 @@ msgid "Preview"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:5
-msgid "Enrollment by"
+#: dataviva/apps/major/templates/major/graphs-enrollments.html:5
+#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
+msgid "Enrollments By"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:6
@@ -657,7 +659,7 @@ msgid "Enrollments"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:10
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:68
 #: dataviva/apps/major/templates/major/tab-enrollments.html:21
 #: dataviva/apps/major/templates/major/tab-enrollments.html:48
 #: dataviva/apps/major/templates/major/tab-enrollments.html:74
@@ -674,8 +676,8 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:11
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:24
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:60
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:61
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:68
 #: dataviva/apps/major/templates/major/tab-enrollments.html:9
 #: dataviva/apps/major/templates/major/tab-enrollments.html:22
 #: dataviva/apps/major/templates/major/tab-general.html:64
@@ -685,7 +687,7 @@ msgid "by Number of Enrolled Students"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:23
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:60
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:61
 msgid "Main School"
 msgstr ""
 
@@ -700,10 +702,10 @@ msgid "General Profile"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:4
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:12
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:20
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:28
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:36
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:13
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:21
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:29
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:37
 msgid "The highest number of enrollments in the "
 msgstr ""
 
@@ -712,10 +714,9 @@ msgid "course/field of study in Brazil is in the municipality of "
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:6
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:15
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:23
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:31
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:39
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:16
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:32
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:40
 #: dataviva/apps/industry/templates/industry/tab-general.html:10
 #: dataviva/apps/industry/templates/industry/tab-general.html:22
 #: dataviva/apps/major/templates/major/tab-general.html:7
@@ -734,76 +735,83 @@ msgid "students. The country has a total of"
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:8
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:17
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:25
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:33
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:41
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:50
-msgid "enrolled students in this course/field, with "
-msgstr ""
-
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:9
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:18
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:26
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:34
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:42
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:51
+msgid "enrolled students in this course/field, with "
+msgstr ""
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:10
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:19
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:27
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:35
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:43
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:52
 msgid "students per class in average"
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:13
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:14
 msgid "in "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:14
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:22
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:30
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:38
-msgid "is in the municipality of "
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:15
+msgid "is in the state of "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:16
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:17
 msgid "students. The region has a total of "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:21
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:48
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:22
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:49
 msgid "in the state of "
 msgstr ""
 
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:23
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:31
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:39
+msgid "is in the municipality of "
+msgstr ""
+
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:24
+msgid "with "
+msgstr ""
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:25
 msgid "students. The state has a total of "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:29
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:30
 msgid "in the mesoregion "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:32
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:33
 msgid "students. The mesoregion has a total of "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:37
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:38
 msgid "in the microregion "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:40
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:41
 msgid "students. The microregion has a total of "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:45
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:46
 msgid " is"
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:47
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:48
 msgid "city in number of enrollments in the "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:49
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:50
 msgid "The city has "
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:58
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:59
 #: dataviva/apps/location/templates/location/index.html:140
 #: dataviva/apps/location/templates/location/tab-general.html:83
 #: dataviva/apps/major/templates/major/tab-general.html:62
@@ -818,7 +826,7 @@ msgstr ""
 msgid "International Trade"
 msgstr ""
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:83
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:84
 #: dataviva/apps/industry/templates/industry/tab-general.html:73
 #: dataviva/apps/location/templates/location/tab-general.html:119
 #: dataviva/apps/location/templates/location/tab-general.html:158
@@ -1110,20 +1118,20 @@ msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
-#: dataviva/templates/general/browse_categories.html:24
+#: dataviva/templates/general/browse_categories.html:25
 #: dataviva/templates/include/footer.html:30
 #: dataviva/translations/dictionary.py:581
 msgid "Database Download"
 msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:17
-#: dataviva/templates/general/browse_categories.html:11
-#: dataviva/templates/general/browse_categories.html:29
+#: dataviva/templates/general/browse_categories.html:12
+#: dataviva/templates/general/browse_categories.html:30
 msgid "Start a Search"
 msgstr ""
 
 #: dataviva/apps/data/templates/data/index.html:18
-#: dataviva/templates/general/browse_categories.html:23
+#: dataviva/templates/general/browse_categories.html:24
 #: dataviva/templates/include/footer.html:29
 #: dataviva/translations/dictionary.py:582
 msgid "Make Graphs"
@@ -1206,7 +1214,7 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:33
 #: dataviva/apps/rankings/templates/rankings/_base.html:47
-#: dataviva/templates/general/browse_categories.html:78
+#: dataviva/templates/general/browse_categories.html:79
 #: dataviva/templates/general/index.html:78
 #: dataviva/templates/include/footer.html:20
 #: dataviva/translations/dictionary.py:569
@@ -1784,7 +1792,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-general.html:138
 #: dataviva/apps/location/templates/location/tab-wages.html:28
 #: dataviva/templates/about.html:62
-#: dataviva/templates/general/browse_categories.html:70
+#: dataviva/templates/general/browse_categories.html:71
 #: dataviva/templates/general/index.html:72
 #: dataviva/templates/general/select.html:29
 #: dataviva/templates/include/footer.html:19
@@ -1904,14 +1912,9 @@ msgstr ""
 msgid "Principal Ocupação"
 msgstr ""
 
-#: dataviva/apps/major/templates/major/graphs-enrollments.html:5
-#: dataviva/apps/university/templates/university/graphs-enrollments.html:5
-msgid "Enrollments By"
-msgstr ""
-
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:6
 #: dataviva/templates/about.html:78
-#: dataviva/templates/general/browse_categories.html:102
+#: dataviva/templates/general/browse_categories.html:103
 #: dataviva/templates/general/index.html:96
 #: dataviva/templates/include/footer.html:23
 #: dataviva/translations/dictionary.py:185
@@ -2252,12 +2255,19 @@ msgid "please contact us."
 msgstr ""
 
 #: dataviva/apps/partners/templates/partners/be-a-partner.html:14
+msgid "Also read, in its entirety, the "
+msgstr ""
+
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:15
+msgid "Resolution number 92 of the Curator Council of FAPEMIG"
+msgstr ""
+
+#: dataviva/apps/partners/templates/partners/be-a-partner.html:16
 msgid ""
-"Also read, in its entirety, the Resolution number 92 of the Curator "
-"Council of FAPEMIG that establishes the guidelines and rules for the "
-"formalization of voluntary partnerships between FAPEMIG and public "
-"institutions, civil society organizations and everyone else under private"
-" right with common goals, in the DataViva project."
+"that establishes the guidelines and rules for the formalization of "
+"voluntary partnerships between FAPEMIG and public institutions, civil "
+"society organizations and everyone else under private right with common "
+"goals, in the DataViva project."
 msgstr ""
 
 #: dataviva/apps/partners/templates/partners/index.html:8
@@ -2771,7 +2781,7 @@ msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/major.html:13
 #: dataviva/templates/about.html:38
-#: dataviva/templates/general/browse_categories.html:110
+#: dataviva/templates/general/browse_categories.html:111
 #: dataviva/templates/general/index.html:102
 #: dataviva/templates/include/footer.html:24
 #: dataviva/translations/dictionary.py:294
@@ -3053,7 +3063,7 @@ msgid "Classifications"
 msgstr ""
 
 #: dataviva/templates/about.html:54
-#: dataviva/templates/general/browse_categories.html:62
+#: dataviva/templates/general/browse_categories.html:63
 #: dataviva/templates/general/index.html:66
 #: dataviva/translations/dictionary.py:568
 msgid "Brazilian Locations"
@@ -3065,7 +3075,7 @@ msgid "Industries"
 msgstr ""
 
 #: dataviva/templates/about.html:66
-#: dataviva/templates/general/browse_categories.html:86
+#: dataviva/templates/general/browse_categories.html:87
 #: dataviva/templates/general/index.html:84
 #: dataviva/templates/include/footer.html:21
 #: dataviva/translations/dictionary.py:357
@@ -3084,7 +3094,7 @@ msgid "Majors"
 msgstr ""
 
 #: dataviva/templates/about.html:82
-#: dataviva/templates/general/browse_categories.html:118
+#: dataviva/templates/general/browse_categories.html:119
 #: dataviva/templates/include/footer.html:25
 #: dataviva/translations/dictionary.py:369
 msgid "Basic Courses"
@@ -4196,108 +4206,108 @@ msgstr ""
 msgid "The DataViva Team"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:20
+#: dataviva/templates/general/browse_categories.html:21
 msgid "Another Features"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:22
+#: dataviva/templates/general/browse_categories.html:23
 #: dataviva/templates/include/footer.html:28
 #: dataviva/translations/dictionary.py:583
 msgid "View Rankings"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:31
+#: dataviva/templates/general/browse_categories.html:32
 msgid "Select a profile to start"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:36
+#: dataviva/templates/general/browse_categories.html:37
 #: dataviva/templates/general/index.html:15
 #: dataviva/templates/modal/signup.html:28
 #: dataviva/translations/dictionary.py:559
 msgid "Entrepreneurs"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:37
+#: dataviva/templates/general/browse_categories.html:38
 msgid "Identify the economic profile and the business opportunities in a region"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:43
+#: dataviva/templates/general/browse_categories.html:44
 #: dataviva/templates/modal/signup.html:29
 msgid "Development Agents"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:44
+#: dataviva/templates/general/browse_categories.html:45
 #: dataviva/templates/general/index.html:25
 #: dataviva/translations/dictionary.py:562
 msgid "Assess development policies setting by location"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:50
+#: dataviva/templates/general/browse_categories.html:51
 #: dataviva/templates/modal/signup.html:30
 msgid "Students and Professionals"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:51
+#: dataviva/templates/general/browse_categories.html:52
 #: dataviva/templates/general/index.html:33
 #: dataviva/translations/dictionary.py:564
 msgid "Find information about available jobs, income per occupation and courses"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:58
+#: dataviva/templates/general/browse_categories.html:59
 msgid "or search for"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:64
+#: dataviva/templates/general/browse_categories.html:65
 msgid ""
 "General profile by region, state, mesoregion, microregion or Brazilian "
 "locality. Visualize international trade, economic activity, jobs and "
 "education."
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:72
+#: dataviva/templates/general/browse_categories.html:73
 msgid ""
 "Regions that most employ by professional activity, related courses, "
 "average wage and employment statistics by year."
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:80
+#: dataviva/templates/general/browse_categories.html:81
 msgid ""
 "Information on employment rate by region, average wage by type of "
 "occupation, average monthly income and economic opportunities."
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:88
+#: dataviva/templates/general/browse_categories.html:89
 msgid ""
 "Balance of trade data by product, import origins and export destinations,"
 " rankings by locality, economic activity and related occupations."
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:94
+#: dataviva/templates/general/browse_categories.html:95
 #: dataviva/templates/general/index.html:90
 #: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:361
 msgid "Trade Partners"
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:96
+#: dataviva/templates/general/browse_categories.html:97
 msgid ""
 "Countries that import or export products to Brazil, commerce data by type"
 " of product or locality that commercializes it."
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:104
+#: dataviva/templates/general/browse_categories.html:105
 msgid ""
 "Number of enrollments in each offered course, student situation and "
 "similar university profile."
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:112
+#: dataviva/templates/general/browse_categories.html:113
 msgid ""
 "University list and localities that offer the Superior Education course "
 "or the selected field of study."
 msgstr ""
 
-#: dataviva/templates/general/browse_categories.html:120
+#: dataviva/templates/general/browse_categories.html:121
 msgid ""
 "Brazilian schools that offer professional education and Basic Education "
 "enrollment ranking by locality."
