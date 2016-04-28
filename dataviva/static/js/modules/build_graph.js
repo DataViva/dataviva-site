@@ -10,7 +10,7 @@ function select_dimension_graph(id) {
 }
 
 function deactivate_dimension_graph(id) {
-  $('#'+id).html('Select');
+  $(id).siblings("button").html('Select');
 }
 
 dataviva.requireAttrs(['datasets'], function() {
@@ -28,7 +28,7 @@ dataviva.requireAttrs(['datasets'], function() {
                 label = $("<label></label>").attr("for", dimension.id).addClass("control-label"),
                 deactivate_button = $("<button></button>").attr("for", dimension.id).addClass("btn btn-xs btn-white pull-right")
                                         .html(dataviva.dictionary['deactivate'])
-                                        .attr("onclick", "deactivate_dimension_graph(id)"),
+                                        .attr("onclick", "deactivate_dimension_graph(this)"),
                 selector_button = $("<button></button>").attr("id", dimension.id).addClass("btn btn-block btn-outline btn-white")
                                         .attr("onclick", "select_dimension_graph(id);")
                                         .html(dataviva.dictionary['select']);
@@ -38,4 +38,8 @@ dataviva.requireAttrs(['datasets'], function() {
             $('#dimensions').append(div.append(label).append(deactivate_button).append(selector_button));
         });
     });
+
+    /*$('#dimensions').on('change', function() {
+        console.log('mudou');
+    });*/
 });
