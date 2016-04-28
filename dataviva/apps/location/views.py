@@ -39,6 +39,46 @@ def graphs(bra_id, tab):
     return render_template('location/graphs-'+tab+'.html', location=location)
 
 
+@mod.route('/all')
+def all():
+    from dataviva.api.attrs.services import All
+    location_service_brazil = All()
+    
+    header = {
+            'gdp': location_service_brazil.gdp(),
+            'population': location_service_brazil.population(),
+            'gdp_per_capta': location_service_brazil.gdp_per_capta(),
+            'eci': 'http://atlas.media.mit.edu/en/profile/country/bra/'
+    }
+
+#    body = {
+#        'main_product_by_export_value': location_body_service.main_product_by_export_value(),
+#        'main_product_by_export_value_name': location_body_service.main_product_by_export_value_name(),
+#        'main_product_by_import_value': location_body_service.main_product_by_import_value(),
+#        'main_product_by_import_value_name': location_body_service.main_product_by_import_value_name(),
+#        'total_exports': location_body_service.total_exports(),
+#        'total_imports': location_body_service.total_imports(),
+#
+#        'main_industry_by_num_jobs': location_industry_service.main_industry_by_num_jobs(),
+#        'main_industry_by_num_jobs_name': location_industry_service.main_industry_by_num_jobs_name(),
+#        'main_occupation_by_num_jobs': location_occupation_service.main_occupation_by_num_jobs(),
+#        'main_occupation_by_num_jobs_name': location_occupation_service.main_occupation_by_num_jobs_name(),
+#        'avg_wage': location_jobs_service.avg_wage(),
+#        'total_jobs': location_jobs_service.total_jobs(),
+#
+#        'highest_enrolled_by_university': location_university_service.highest_enrolled_by_university(),
+#        'highest_enrolled_by_university_name': location_university_service.highest_enrolled_by_university_name(),
+#        'highest_enrolled_by_school': location_school_service.highest_enrolled_by_school(),
+#        'highest_enrolled_by_school_name': location_school_service.highest_enrolled_by_school_name(),
+#        'highest_enrolled_by_major': location_major_service.highest_enrolled_by_major(),
+#        'highest_enrolled_by_major_name': location_major_service.highest_enrolled_by_major_name(),
+#        'highest_enrolled_by_basic_course': location_basic_course_service.highest_enrolled_by_basic_course(),
+#        'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name()
+#    }
+
+    return render_template('location/test_brazil.html', header=header)
+    #return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
+
 @mod.route('/<bra_id>')
 def index(bra_id):
 

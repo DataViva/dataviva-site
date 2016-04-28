@@ -11,11 +11,11 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" onclick="start_selector('Basic Course');"> {{ basic_course.name() }}</a>
+                <a href="#" title="Trocar" onclick="select_attr('course_sc');"> {{ basic_course.name() }}</a>
             </li>
             {% if location %}
                 <li class="active">
-                    <a href="#" title="Trocar" onclick="start_selector('Location', selectorCallback);"> {{ location.name() }}</a>
+                    <a href="#" title="Trocar" onclick="select_attr_search('bra');"> {{ location.name() }}</a>
                 </li>
             {% endif %}
         </ol>
@@ -40,7 +40,7 @@
               </button>
                 <ul class="dropdown-menu">
                   <li><a href="#" onclick="select_attr('course_sc');">{% trans %}Basic Course{% endtrans %}</a></li>
-                  <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
+                  <li><a href="#" onclick="select_attr_search('bra');">{% trans %}Location{% endtrans %}</a></li>
                 </ul>
               </div>
             </h1>
@@ -127,7 +127,7 @@
                      graph
                      data-id="{{ basic_course.id }}"
                      data-location="{{ location.id }}"
-                     data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
+                     data-toggle="tab">{% trans %}Basic Course{% endtrans %}</a>
               </li>
           </ul>
         </div>
