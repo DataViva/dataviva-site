@@ -223,12 +223,21 @@ class Product:
         self._secex_sorted_by_exports = None
         self._secex_sorted_by_imports = None
         self.product_id = product_id
-        self.max_year_query = db.session.query(
-            func.max(Ymp.year)).filter_by(hs_id=product_id)
-        self.secex_query = Ymp.query.join(Hs).filter(
-            Ymp.hs_id == self.product_id,
-            Ymp.month == 0,
-            Ymp.year == self.max_year_query)
+
+        if product_id is None:
+            self.max_year_query = db.session.query(
+                func.max(Ymp.year))
+            self.secex_query = Ymp.query.join(Hs).filter(
+                    Ymp.month == 0,
+                    Ymp.year == self.max_year_query)
+        else:
+            self.max_year_query = db.session.query(
+                func.max(Ymp.year)).filter_by(hs_id=product_id)
+            self.secex_query = Ymp.query.join(Hs).filter(
+                Ymp.hs_id == self.product_id,
+                Ymp.month == 0,
+                Ymp.year == self.max_year_query)
+        
 
     def __secex__(self):
         if not self._secex:
@@ -311,6 +320,22 @@ class Product:
         else:
             return secex.export_val
 
+    def highest_import_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_imports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name_pt
+
+    def highest_export_value_name(self):
+        try:
+            secex = self.__secex_sorted_by_exports__()[0]
+        except IndexError:
+            return None
+        else:
+            return secex.hs.name_pt
+
     def product_complexity(self):
         product_complexity = self.__secex__()
         return product_complexity.pci
@@ -318,6 +343,12 @@ class Product:
     def export_value_growth_in_five_years(self):
         export_value_growth_in_five_years = self.__secex__()
         return export_value_growth_in_five_years.export_val_growth_5
+
+    def all_imported(self):
+        return sum([product.import_val for product in self.__secex__() if product.import_val])
+
+    def all_exported(self):
+        return sum([product.export_val for product in self.__secex__() if product.export_val])
 
 
 class ProductTradePartners(Product):
