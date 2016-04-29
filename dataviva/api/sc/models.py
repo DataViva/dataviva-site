@@ -30,7 +30,7 @@ class Ys(Sc):
     school_id = db.Column(db.String(8), db.ForeignKey(School.id), primary_key=True)
 
     def __repr__(self):
-        return '<Ys %d.%s.%s>' % (self.year, self.school_id)
+        return '<Ys %d.%s>' % (self.year, self.school_id)
 
 class Ybs(Sc):
 
@@ -64,7 +64,7 @@ class Yc_sc(Sc):
     course_sc_id_len = db.Column(db.Integer(1))
 
     def __repr__(self):
-        return '<Ybc %d.%s.%s>' % (self.year, self.course_sc_id)
+        return '<Ybc %d.%s>' % (self.year, self.course_sc_id)
 
 class Ysc(Sc):
 
@@ -76,7 +76,7 @@ class Ysc(Sc):
     course_sc_id_len = db.Column(db.Integer(1))
 
     def __repr__(self):
-        return '<Ysc %d.%s.%s>' % (self.year, self.school_id)
+        return '<Ysc %d.%s>' % (self.year, self.school_id)
 
 class Ybsc(Sc):
 
