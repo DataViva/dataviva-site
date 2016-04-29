@@ -109,10 +109,3 @@ FROM rais_ybio WHERE year=2013 and bra_id_len=9 and cnae_id_len=6 and cbo_id_len
 #
 
 ''' 
-"1 = rais-2003-microregions-classes-families\n 2 = rais-2013-municipalities-classes\n 3 = rais-2013-municipalities-classes-main_groups\n 4 = rais-2013-municipalities-classes-families\n"
-
-
-
-
-
-
