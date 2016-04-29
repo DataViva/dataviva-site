@@ -167,7 +167,7 @@ class TradePartnerMunicipalities(TradePartner):
 
     def municipality_with_more_imports_state(self):
         secex = self.__secex_sorted_by_imports__()[0]
-        return secex.bra.id[1:3]
+        return secex.bra.abbreviation
 
     def municipality_with_more_exports(self):
         secex = self.__secex_sorted_by_exports__()[0]
@@ -175,7 +175,7 @@ class TradePartnerMunicipalities(TradePartner):
 
     def municipality_with_more_exports_state(self):
         secex = self.__secex_sorted_by_exports__()[0]
-        return secex.bra.id[1:3]
+        return secex.bra.abbreviation
 
 
 class TradePartnerProducts(TradePartner):
@@ -433,7 +433,7 @@ class ProductMunicipalities(Product):
         except IndexError:
             return None
         else:
-            return secex.bra.id[1:3]
+            return secex.bra.abbreviation
 
     def municipality_with_more_imports(self):
         try:
@@ -449,7 +449,7 @@ class ProductMunicipalities(Product):
         except IndexError:
             return None
         else:
-            return secex.bra.id[1:3]
+            return secex.bra.abbreviation
 
 
 class ProductLocations(Product):

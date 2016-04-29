@@ -11,7 +11,7 @@
                 <small>{% trans %}by Number of Enrolled Students{% endtrans %}</small>
             </div>
             <div class="blue-box">
-                <p class="label">{{ body.city_name }}//{{ body.city_state.upper() }}</p>
+                <p class="label">{{ body.city_name }} - {{ body.city_state.upper() }}</p>
                 <div class="number">
                     <strong class="counter">{{body.city_enrolled | max_digits(3)}}</strong><span> {{body.city_enrolled | magnitude}}</span>
                 </div>
