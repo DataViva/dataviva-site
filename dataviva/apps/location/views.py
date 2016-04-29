@@ -48,7 +48,7 @@ def all():
             'gdp': location_service_brazil.gdp(),
             'population': location_service_brazil.population(),
             'gdp_per_capta': location_service_brazil.gdp_per_capta(),
-            'eci': 'http://atlas.media.mit.edu/en/profile/country/bra/'
+            'eci': ''
     }
 
     from dataviva.api.secex.services import Product
@@ -82,6 +82,7 @@ def all():
         'highest_import_value_name': product_service.highest_import_value_name(),
         'all_imported': product_service.all_imported(),
         'all_exported': product_service.all_exported(),
+        'all_trade_balance': product_service.all_trade_balance(),
 
         'main_industry_by_num_jobs': industry_service.main_industry_by_num_jobs(),
         'main_industry_by_num_jobs_name': industry_service.main_industry_by_num_jobs_name(),

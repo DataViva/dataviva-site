@@ -350,6 +350,9 @@ class Product:
     def all_exported(self):
         return sum([product.export_val for product in self.__secex__() if product.export_val])
 
+    def all_trade_balance(self):
+        return self.all_exported() - self.all_imported()
+
 
 class ProductTradePartners(Product):
 
