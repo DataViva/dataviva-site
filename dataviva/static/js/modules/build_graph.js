@@ -12,17 +12,7 @@ function select_dimension_graph(id) {
 
 function deactivate_dimension_graph(id) {
   $(id).siblings("button").html('Select');
-  $(id).siblings("input").val("").trigger('change');
-
-}
-
-var viewParameters = {};
-
-var update_views = function() {
-  viewParameters = {};
-  $('#dimensions input').each(function(){
-    viewParameters[this.name] = this.value;
-  })
+  $(id).siblings("input").val("all").trigger('change');
 }
 
 
@@ -34,10 +24,11 @@ dataviva.requireAttrs(['datasets'], function() {
 
     $('#datasets').on('change', function() {
         $('#datasets #dataset-empty-option').remove();
+        var dataset = this.value;
 
         $('#dimensions').empty();
-        dataviva.datasets[this.value].dimensions.forEach(function(dimension) {
-            var div = $("<div></div>").addClass("form-group"),
+        dataviva.datasets[dataset].dimensions.forEach(function(dimension, index) {
+                var div = $("<div></div>").addClass("form-group"),
                 label = $("<label></label>").attr("for", dimension.id).addClass("control-label"),
                 deactivate_button = $("<button></button>").attr("for", dimension.id).addClass("btn btn-xs btn-white pull-right")
                                         .html(dataviva.dictionary['deactivate'])
@@ -46,22 +37,43 @@ dataviva.requireAttrs(['datasets'], function() {
                                         .attr("onclick", "select_dimension_graph(id);")
                                         .html(dataviva.dictionary['select']);
 
-                filter = $("<input></input>").attr("type", "hidden").attr("name", dimension.id);
+                filter = $("<input></input>").attr("type", "hidden").attr("name", dimension.id).attr("id", 'filter'+index).val('all');
 
-            label.html(dataviva.dictionary[dimension.id]);
+                label.html(dataviva.dictionary[dimension.id]);
+            
+                filter.change(function() {
+                  $.ajax({
+                        method: "GET",
+                        url: "/" + lang + "/build_graph/views/" + dataset +"/" +
+                            $('#dimensions #filter0').val() + "/" +
+                            ($('#dimensions #filter1').val() == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" + 
+                            ($('#dimensions #filter2').val() == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
+                        data: {
+                                filter1: $('#dimensions #filter1').val(),
+                                filter2: $('#dimensions #filter2').val() 
+                            },
+                        success: function (builds) {
+                            for (i in builds) {
+                                console.log(builds[i]);
+                            }
+                        }
+                    });
+                });
 
-            $('#dimensions').append(div.append(label).append(deactivate_button).append(selector_button).append(filter));
-        
-            filter.change(function() {
-              update_views();
-            });
+                if (dimension.name == 'School') { 
+                    div.append(filter)
+                } else {
+                    div.append(filter).append(label).append(deactivate_button).append(selector_button)
+                }
 
+                $('#dimensions').append(div);
         });
     });
-
-
-
 });
+
+
+
+
 
 
 

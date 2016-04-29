@@ -43,11 +43,17 @@ majors = Dimension('course_hedu', 'Major', [
     Depth('course_hedu_6', 'majors')
 ])
 
-universities = Dimension('university', 'University', [])
+universities = Dimension('university', 'University', [
+    Depth('show', 'university')
+])
+
+schools = Dimension('school', 'School', [
+    Depth('show', 'school')
+])
 
 attrs_datasets = [
     DataSet('rais', [locations, industries, occupations], [str(year) for year in range(2002, 2014)]),
     DataSet('secex', [locations, products, trade_partners], [str(year) for year in range(2002, 2015)]),
-    DataSet('hedu', [locations, majors, universities], [str(year) for year in range(2009, 2014)]),
-    DataSet('sc', [locations, courses], [str(year) for year in range(2007, 2015)])
+    DataSet('hedu', [locations, universities, majors], [str(year) for year in range(2009, 2014)]),
+    DataSet('sc', [locations, schools, courses], [str(year) for year in range(2007, 2015)])
 ]
