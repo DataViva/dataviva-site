@@ -1,0 +1,30 @@
+.admin #admin {
+    min-width: 440px;
+}
+
+.admin .admin-main {
+    text-align: center;
+    min-width: 440px;
+}
+
+.admin .admin-main img {
+    display: inline-block;
+    height: 100px;
+}
+
+.admin .admin-main .btn {
+    font-size: 30px;
+    min-width: 300px;
+    min-height: 130px;
+    margin-bottom: 15px;
+}
+
+.admin .admin-main .btn .admin-icon{
+    margin-top: 15px;
+}
+
+@media (max-width: 991px) {
+  .admin .admin-main .btn {
+    margin: 15px;
+  }
+}

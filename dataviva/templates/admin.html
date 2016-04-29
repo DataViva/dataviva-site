@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            {% block breadcrumb %}{% endblock %}
+        </ol>
+    </div>
+</div>
+
+<section id="admin">
+    <div class="container">
+        <nav class="sidebar col-md-2">
+            <h3>{% trans %}Modules{% endtrans %}</h3>
+            <ul>
+                <li><a href="{{ url_for('blog.admin') }}" title="Blog">Blog</a></li>
+                <li><a href="{{ url_for('calls.admin') }}" title="Chamadas">{% trans %}Calls{% endtrans %}</a></li>
+                <li><a href="{{ url_for('scholar.admin') }}" title="Estudos">{% trans %}Scholar{% endtrans %}</a></li>
+                <li><a href="{{ url_for('search.admin') }}" title="Inicie uma Pesquisa">{% trans %}Start a search{% endtrans %}</a></li>
+                <li><a href="{{ url_for('news.admin') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
+                <li><a href="{{ url_for('users.admin') }}" title="Usuários">{% trans %}Users{% endtrans %}</a></li>
+            </ul>
+        </nav>
+        <div id="admin-content" class="col-md-10">
+            {% block admin_content %}
+            {% endblock admin_content %}
+        </div>
+    </div>
+</section>
+
+{% endblock content %}
+
+{% block footer %}
+{% endblock footer %}

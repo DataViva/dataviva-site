@@ -1,0 +1,122 @@
+<!-- extend from site layout -->
+{% extends "site.html" %}
+
+{% block title %}: {{ user.fullname }}{% endblock %}
+
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.account.css" />
+
+{% endblock %}
+
+{% block body %}
+
+  <div class="grid5col4 lightbox">
+
+    <div id="user_header">
+
+      <div id="user_pic" style="background-image: url('{{ user.avatar(100) }}')" alt="{{ user.fullname }} icon"></div>
+      <h1>{{ user.fullname }}</h1>
+      {% trans %}Activity sorted by date{% endtrans %}
+
+      <div id="activity_sorter">
+        <input type="radio" onclick="show(this.value)" name="activity" id="all" value="all" checked>
+        <label for="all">{% trans %}All{% endtrans %}</label>
+        <input type="radio" onclick="show(this.value)" name="activity" id="starred" value="starred">
+        <label for="starred">{% trans %}Starred Visualizations{% endtrans %}</label>
+        <input type="radio" onclick="show(this.value)" name="activity" id="questions" value="questions">
+        <label for="questions">{% trans %}Questions{% endtrans %}</label>
+        <input type="radio" onclick="show(this.value)" name="activity" id="replies" value="replies">
+        <label for="replies">{% trans %}Comments{% endtrans %}</label>
+        {% if g.user.is_authenticated and user.nickname == g.user.nickname %}
+          <input type="radio" onclick="show(this.value)" name="activity" id="preferences" value="preferences">
+          <label for="preferences">{% trans %}Preferences{% endtrans %}</label>
+        {% endif %}
+      </div>
+
+    </div>
+
+    <div id="activity_list">
+      {% for a in activity %}
+        {% if a.app_name %}
+          {% set text = a.app_name %}
+          {% set app = a.app_id.split("/")[0] %}
+          {% set type = "starred "+app %}
+          {% set prefix = "Saved on " %}
+          {% set url = "{{g.locale}}/apps/builder/"+a.app_id %}
+        {% elif a.parent_id %}
+          {% set text = a.body %}
+          {% set type = "replies" %}
+          {% set prefix = "Replied on " %}
+          {% set url = "{{g.locale}}/about/question/"+a.slug() %}
+        {% elif a.question %}
+          {% set text = a.question %}
+          {% set type = "questions" %}
+          {% set prefix = "Asked on " %}
+          {% set url = "{{g.locale}}/about/question/"+a.slug %}
+        {% endif %}
+        {% if text %}
+          <a href="{{url}}" class="decision icon {{type}}">
+            {{text|strip_html}}
+            <br>
+            <div class="timestamp">{{prefix}}{{a.timestamp}}</div>
+          </a>
+        {% endif %}
+      {% endfor %}
+
+      {% if g.user.is_authenticated and user.nickname == g.user.nickname %}
+          <div id="active_preferences" class="preferences">
+            <input onclick="update_email_preference()" type="checkbox" id="receive_email"
+            {% if user.agree_mailer %} checked="checked"{% endif %} name="receive_email" value="1">
+            <label for="receive_email">{% trans %}I agree to receive emails from dataviva.info.{% endtrans %}</label>
+          </div>
+        {% endif %}
+    </div>
+
+  </div>
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+
+    leon("$activity")
+
+    {% if g.user.is_authenticated and user.nickname == g.user.nickname %}
+
+      leon("#receive_email")
+
+    	function update_email_preference(){
+    		location.href = '/account/preferences/change_email_preference';
+    	}
+
+    {% endif %}
+
+    function show(category) {
+      if (category == "all") {
+        d3.selectAll("#activity_list > a").style("display","block")
+        d3.selectAll("#active_preferences").style("display","none")
+      }
+      else {
+        d3.selectAll("#activity_list > a").style("display","none")
+        if(category == "preferences") {
+        	d3.selectAll("#active_preferences").style("display","block")
+        } else {
+        	d3.selectAll("#active_preferences").style("display","none")
+			d3.selectAll("#activity_list > a."+category).style("display","block")
+        }
+      }
+    }
+
+    var min_height = function() {
+      var h = window.innerHeight - 117 - 139;
+      d3.select("#activity_list").style("min-height", h+"px");
+    };
+
+    min_height();
+    dataviva.resize = min_height;
+
+  </script>
+
+{% endblock %}

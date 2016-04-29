@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('general.home') }}">Home</a></li>
+        <li class="active"><span>Contato<span></li>
+    </ol>
+    <div class="row">
+        <div class="sidebar no-padding col-xs-15 col-md-4">
+            <h3>&nbsp;</h3>
+        </div>
+        <div class="main-content col-xs-15 col-md-11">
+            <div class="institucional">
+                <h2>Contato</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex diam, bibendum vel mauris ut, tempus consequat enim. Integer accumsan orci non interdum congue. Praesent hendrerit neque lectus, at lacinia diam hendrerit ac. Duis congue quam eu erat ullamcorper ornare. Aenean sem mauris, luctus non volutpat et, ultrices in nisi. </p>
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label for="footer-nome" class="col-xs-15 col-sm-5 col-md-3 control-label">Nome</label>
+                            <div class="col-xs-15 col-sm-10 col-md-11">
+                                <input type="text" class="form-control" id="footer-nome" placeholder="Nome">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="footer-email" class="col-xs-15 col-sm-5 col-md-3 control-label">Email</label>
+                            <div class="col-xs-15 col-sm-10 col-md-11">
+                                <input type="email" class="form-control" id="footer-email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="footer-txt" class="col-xs-15 col-sm-5 col-md-3 control-label">Mensagem</label>
+                            <div class="col-xs-15 col-sm-10 col-md-11">
+                                <textarea class="form-control" rows="3" id="footer-txt" placeholder="Mensagem"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-5 col-md-offset-3 col-xs-15 col-sm-10 col-md-11">
+                                <button type="submit" class="btn btn-default btn-dataviva">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!--form-->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

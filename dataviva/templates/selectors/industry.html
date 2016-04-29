@@ -1,0 +1,110 @@
+<h2>{% trans %}Choose an industry or type what you are looking for{% endtrans %}</h2>
+<form action="" class="form-dataviva form-inline filter">
+    
+    <div class="btn-group nav nav-tabs" role="tablist">
+        <a href="#classes" aria-controls="classes" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.classes)">
+        {% trans %}Classes{% endtrans %}
+        </a>
+        <a href="#divisions" aria-controls="divisions" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.divisions)">
+        {% trans %}Divisions{% endtrans %}
+        </a>
+        <a href="#sections" aria-controls="sections" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.sections)">
+        {% trans %}Sections{% endtrans %}
+        </a>
+    </div>
+    
+    <div class="tab-content">
+        <!-- TAB: classes -->
+        <div role="tabpanel" class="tab-pane active" id="classes">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="classes_filter"
+                    class="form-control"
+                    ng-model="selector_model.classes.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" 
+                    placeholder="{% trans %}Search by name ou by CNAE number{% endtrans %}:"/>
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="ind in selector_model.classes.entries|filter:selector_model.classes.filter_string" 
+                     class="selector-list-item" 
+                     ng-class="{'selected': ind.id == selector_model.selected_entry }"
+                     ng-click="selector_model.select(ind.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-cnae-{$ ind.id $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ ind.name $}
+                        <div class="pull-right">CNAE: {$ ind.id $}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TAB: divisions -->
+        <div role="tabpanel" class="tab-pane" id="divisions">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="divisions_filter"
+                    class="form-control"
+                    ng-model="selector_model.divisions.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name ou by CNAE number{% endtrans %}:" />
+                </div>
+            </div>
+            
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="ind in selector_model.divisions.entries | filter:selector_model.divisions.filter_string"
+                     ng-class="{'selected': ind.id == selector_model.selected_entry }"
+                     class="selector-list-item"
+                     ng-click="selector_model.select(ind.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-cnae-{$ ind.id.substring(0,1) $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ ind.name $}
+                        <div class="pull-right">CNAE: {$ ind.id $}</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+        <!-- TAB: sections -->
+        <div role="tabpanel" class="tab-pane" id="sections">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="sections_filter"
+                    class="form-control"
+                    ng-model="selector_model.sections.filter_string"
+                    ng-trim="true"
+                    autocomplete="false" 
+                    placeholder="{% trans %}Search by name ou by CNAE number{% endtrans %}:"/>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="ind in selector_model.sections.entries | filter:selector_model.sections.filter_string"
+                     ng-class="{'selected': ind.id == selector_model.selected_entry }"
+                     class="selector-list-item"
+                     ng-click="selector_model.select(ind.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-cnae-{$ ind.id.substring(0,1) $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ ind.name $}
+                        <div class="pull-right">CNAE: {$ ind.id $}</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</form>

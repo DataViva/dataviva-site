@@ -1,0 +1,20 @@
+<div id="graphs-oportunities" class="container">
+    <nav class="nav-graph col-xs-12 col-md-3" >
+        <h3>{% trans %}Visualize{% endtrans %}:</h3>
+        <div class="list-group panel">
+            <h4>{% trans %}Product Space{% endtrans %}</h4>
+            <a href="/{{ g.locale }}/embed/network/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&spotlight=true&size=export_val" target="graphs-frame-oportunities" class="list-group-item">{% trans %}Network{% endtrans %}</a>
+            <a href="/{{ g.locale }}/embed/scatter/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&controls=true&depth=hs_2&year=2014&y=pci&x=distance&size=export_val" target="graphs-frame-oportunities" class="list-group-item">{% trans %}Scatter{% endtrans %}</a>
+            <h4>{% trans %}Activities Space{% endtrans %}</h4>
+            <a href="/{{ g.locale }}/embed/network/rais/{{location.id}}/all/all/cnae/?color=color&size=wage&spotlight=true" target="graphs-frame-oportunities" class="list-group-item">{% trans %}Network{% endtrans %}</a>
+            <a href="/{{ g.locale }}/embed/scatter/rais/{{location.id}}/all/all/cnae/?color=color&controls=true&depth=cnae_1&y=cbo_diversity_eff&x=distance&size=num_jobs" target="graphs-frame-oportunities" class="list-group-item">{% trans %}Scatter{% endtrans %}</a>
+        </div>
+    </nav>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="/{{ g.locale }}/embed/network/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&spotlight=true&size=export_val"
+                name="graphs-frame-oportunities"
+                id="graphs-frame-oportunities"
+                class="embed-responsive-item" >
+        </iframe>
+    </div>
+</div>

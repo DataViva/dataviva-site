@@ -1,0 +1,52 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% macro messages(input) -%}
+    {% for message in input.errors %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+{%- endmacro %}
+
+{% block content %}
+	<div class="container">
+		<form class="form-dataviva mt-lg" method="post" action="/en/account/edit_profile" style="margin-top: 24px;">
+			<h1 class="text-center">{% trans %}EDIT YOUR PROFILE{% endtrans %}</h1>
+			<ul id="regular-signup" class="col-md-8 col-md-offset-2" style="list-style: none;">
+				<p>
+					<label for="fullname">{% trans %}Full name{% endtrans %}</label>
+					{{ form.fullname(class="form-control")}}
+					{{ messages(form.fullname) }}
+				</p>
+				<p>
+					<label for="fullname">{% trans %}gender{% endtrans %}</label>
+					{{ form.gender(class="form-control")}}
+					{{ messages(form.gender) }}
+				</p>
+				<p>
+					<label for="fullname">website</label>
+					{{ form.website(class="form-control")}}
+					{{ messages(form.website) }}
+					<small class="text-muted">ex: http://mywebsite.com</small>
+				</p>
+				<p>
+					<label for="fullname">bio</label>
+					{{ form.bio(class="form-control")}}
+					{{ messages(form.bio) }}
+					<small class="text-muted">{% trans %}up to 256 characters{% endtrans %}</small>
+				</p>
+
+				<hr/>
+
+				<p>
+					 <a href="/account/change_password"><i class="fa fa-lock"></i> {% trans %}Change my password{% endtrans %}</a>
+				</p>
+				
+				<hr/>
+				<a onclick="history.back()" class="btn btn-link">{% trans %}Cancel{% endtrans %}</a>
+				<button type="submit" class="btn btn-success pull-right">{% trans %}Update{% endtrans %}</button>
+			</ul>
+		</form>
+	</div>
+{% endblock content %}

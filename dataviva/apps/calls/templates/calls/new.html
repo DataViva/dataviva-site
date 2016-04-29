@@ -1,0 +1,11 @@
+<!-- extend from base layout -->
+{% extends "calls/_base.html" %}
+
+{% block calls_content %}
+<div class="institucional">
+    <h2>{% trans %}Calls{% endtrans %}</h2>
+    <h3>{% trans %}Publish a{% endtrans %} {% trans %}Call{% endtrans %}</h3>
+    <p>{% trans %}This area was specially created for the publication of calls related to DataViva.{% endtrans %}</p>
+    {% include "calls/_form.html" %}
+</div>
+{% endblock  calls_content %}

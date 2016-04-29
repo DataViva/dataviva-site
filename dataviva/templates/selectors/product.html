@@ -1,0 +1,77 @@
+<h2>{% trans %}Choose a product or type what you are looking for{% endtrans %}</h2>
+<form action="" class="form-dataviva form-inline filter">
+    
+    <div class="btn-group nav nav-tabs" role="tablist">
+       <a class="btn btn-default" href="#sections" aria-controls="sections" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.sections)">
+        {% trans %}Sections{% endtrans %}
+        </a>
+        <a class="btn btn-default" href="#positions" aria-controls="positions" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.positions)">
+        {% trans %}Positions{% endtrans %}
+        </a>
+    </div>
+    
+    <div class="tab-content">
+        <!-- TAB: sections -->
+        <div role="tabpanel" class="tab-pane active" id="sections">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="sections_filter"
+                    class="form-control"
+                    ng-model="selector_model.sections.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or HS number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="prd in selector_model.sections.entries|filter:selector_model.sections.filter_string" 
+                     class="selector-list-item" 
+                     ng-class="{'selected': prd.id == selector_model.selected_entry }"
+                     ng-click="selector_model.select(prd.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-hs-{$ prd.id $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ prd.name $}
+                        <div class="pull-right">HS: {$ prd.id $}</div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+        <!-- TAB: positions -->
+        <div role="tabpanel" class="tab-pane" id="positions">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                           name="positions_filter"
+                           class="form-control"
+                           ng-model="selector_model.positions.filter_string"
+                           ng-trim="true"
+                           autocomplete="false"
+                           placeholder="{% trans %}Search by name or HS number:{% endtrans %}" />
+                </div>
+            </div>
+            
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="prd in selector_model.positions.entries | filter:selector_model.positions.filter_string"
+                     ng-class="{'selected': prd.id == selector_model.selected_entry }"
+                     class="selector-list-item"
+                     ng-click="selector_model.select(prd.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-hs-{$ prd.id.substring(0,2) $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ prd.name $}
+                        <div class="pull-right">HS: {$ prd.id $}</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</form>

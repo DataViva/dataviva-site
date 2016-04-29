@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            <li class="active">Construa gráficos</li>
+        </ol>
+    </div>
+</div>
+
+<section id="build_graph"  class="container m-b-lg">
+
+    <h1>Visualize seu Gráfico</h1>
+    <p>Selecione parâmetros para construir seu gráfico.</p>
+    <br />
+
+    <nav class="sidebar well col-xs-12 col-md-3" style="margin-top: 0">
+        <ul class="sub-menu">
+            <li>
+                <div class="form-group">
+                    <label for="datasets" class="control-label">Banco de Dados</label>
+                    <select class="form-control" id="datasets" name="datasets">
+                        <option id="dataset-empty-option" value="">{%trans%}Select{%endtrans%}</option>
+                    </select>
+                </div>
+            </li>
+            <li id="dimensions">
+            </li>
+            <li id="views">
+            </li>
+            <li>
+                <a href="#" class="btn btn-primary btn-block">
+                    <i class="fa fa-repeat m-r-sm" aria-hidden="true"></i>
+                    Atualizar Gráfico
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <div class="col-xs-12 col-md-9">
+        {% block build_graph_content %}
+        {% endblock build_graph_content %}
+    </div>
+</section>
+{% endblock content %}

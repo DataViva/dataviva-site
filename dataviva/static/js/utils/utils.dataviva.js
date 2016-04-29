@@ -103,19 +103,19 @@ dataviva.format.text = function(text, opts) {
 }
 
 dataviva.format.affixes = {
-  "val_usd": ["$"," USD"],
-  "export_val": ["$"," USD"],
-  "import_val": ["$"," USD"],
+  "val_usd": ["USD ",""],
+  "export_val": ["USD ",""],
+  "import_val": ["USD ",""],
   "export_kg": [""," kg"],
   "import_kg": [""," kg"],
-  "export_val_kg": ["$"," USD"],
-  "import_val_kg": ["$"," USD"],
-  "purchase_value": ["$"," BRL"],
-  "transfer_value": ["$"," BRL"],
-  "wage": ["$"," BRL"],
-  "wage_avg": ["$"," BRL"],
-  "wage_month": ["$"," BRL"],
-  "wage_avg_bra": ["$"," BRL"]
+  "export_val_kg": ["USD ",""],
+  "import_val_kg": ["USD ",""],
+  "purchase_value": ["R$ ",""],
+  "transfer_value": ["R$ ",""],
+  "wage": ["R$ ",""],
+  "wage_avg": ["R$ ",""],
+  "wage_month": ["R$ ",""],
+  "wage_avg_bra": ["R$ ",""]
 };
 
 for (var a in dataviva.format.affixes) {
@@ -189,8 +189,7 @@ dataviva.format.number = function(value, opts) {
         else symbol = "Milh\u00f5es"
       }
       else if (symbol == "k") {
-        if (digit < 2) symbol = "Milhares"
-        else symbol = "Mil"
+        symbol = "Mil"
       }
       symbol = " "+symbol
     }
@@ -224,7 +223,9 @@ dataviva.format.number = function(value, opts) {
   else if (growth) {
     return_value += "%";
     var arrow = negative ? "down" : "up";
-    return_value = return_value + "<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>";
+    return_value = "<span class='text-"+arrow+"'>" + (negative ? "-" : "") +
+                        return_value + "&nbsp;<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" +
+                    "</span>";
   }
 
   return_value = String(return_value)
@@ -302,17 +303,25 @@ dataviva.ui.tooltip = function(id, obj, align, parent) {
   }
 }
 
+// <div class="page-loader">
+//    <div class="loader"></div>
+//    <span>Carregando...</span>
+// </div>
+
+
 dataviva.ui.loading = function(parent) {
 
   var self = this
 
-  this.div = d3.select(parent).append("div")
-    .attr("class","loading")
+  d3.select(parent).classed('loading',true);
 
-  this.icon = self.div.append("i")
-    .attr("class","fa fa-certificate")
+  this.div = d3.select(parent).insert("div", ":first-child")
+    .attr("class","page-loader")
 
-  this.words = self.div.append("div")
+  this.icon = self.div.append("div")
+    .attr("class","loader-icon")
+
+  this.words = self.div.append("span")
     .attr("class","text")
 
   this.timing = parseFloat(self.div.style("transition-duration"),10)*1000
@@ -324,6 +333,7 @@ dataviva.ui.loading = function(parent) {
     setTimeout(function(){
 
       self.div.style("opacity",1)
+      d3.select(parent).classed('loading', true);
 
       if (callback) {
         setTimeout(callback,self.timing)
@@ -337,6 +347,7 @@ dataviva.ui.loading = function(parent) {
   this.hide = function() {
 
     self.div.style("opacity",0)
+    d3.select(parent).classed('loading', false);
 
     setTimeout(function(){
       self.div.style("display","none")
@@ -592,8 +603,8 @@ dataviva.popover.create = function(params) {
     .attr("class","popover")
     .style("width",w_px+"px")
     .style("height",h_px+"px")
-    .style("margin-left",-w_px/2+"px")
-    .style("margin-top",-h_px/2+"px")
+    .style("margin-left",w_px/2+"px")
+    .style("margin-top",h_px/2+"px")
 
   if (close) {
     body.append("div")

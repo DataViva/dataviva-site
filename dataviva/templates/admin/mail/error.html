@@ -1,0 +1,37 @@
+{% extends "mail.html" %}
+
+{% block mail_body %}
+
+  <center>
+    <b>{{ error }}</b>
+    <br>
+    <table width="550px" border="0" cellpadding="5" cellspacing="0" style="font-size: 12px; margin:0px auto; text-align:left;">
+      <tbody>
+        {% for error_key, error_val in request_info.iteritems() %}
+          {% if error_val != "" %}
+            <tr>
+              <th style="border-bottom: 1px solid #ccc; vertical-align: top;" width="100px">{{ error_key }}</th>
+              <td style="border-bottom: 1px solid #ccc; vertical-align: top;">{{ error_val }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+    <br>
+    <b>Headers</b>
+    <br>
+    <table width="550px" border="0" cellpadding="5" cellspacing="0" style="font-size: 12px; margin:0px auto; text-align:left; table-layout: fixed; word-wrap: break-word;">
+      <tbody>
+        {% for header in headers %}
+          {% if header[1] != "" %}
+            <tr>
+              <th style="border-bottom: 1px solid #ccc; vertical-align: top;" width="100px">{{ header[0] }}</th>
+              <td style="border-bottom: 1px solid #ccc; vertical-align: top;">{{ header[1] }}</td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </center>
+
+{% endblock %}

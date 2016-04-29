@@ -1,0 +1,10 @@
+<!-- extend from about base layout -->
+{% extends "about.html" %}
+
+{% block title %}: {% trans %}About the Data{% endtrans %}{% endblock %}
+
+{% block about_content %}
+
+{% include "about/data/"+data+".html" %}
+
+{% endblock %}

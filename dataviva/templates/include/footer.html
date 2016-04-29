@@ -1,0 +1,73 @@
+<footer class="bg-dark-green">
+    <div class="container">
+    <div class="col-sm-3 col-md-2 col-sm-offset-2 col-md-offset-1 col-lg-offset-0">
+        <ul>
+            <li><h3>{% trans %}About{% endtrans %}</h3></li>
+            <li><a href="{{ url_for('about.index') }}" title="O Dataviva">{% trans %}The{% endtrans %} Dataviva</a></li>
+            <li><a href="{{ url_for('partners.index') }}" title="Parcerias">{% trans %}Partners{% endtrans %}</a></li>
+            <li><a href="{{ url_for('news.index') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
+            <li><a href="{{ url_for('blog.index') }}" title="Blog">Blog</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-3 col-md-2">
+        <ul>
+            <li><h3>{% trans %}Explore{%endtrans%}</h3></li>
+            <li>
+                <ul>
+                    <li><a href="{{ url_for('general.search') }}" title="{% trans %}Search{% endtrans %}">{% trans %}Search{% endtrans %}</a></li>
+                    <li><span class="link" onclick="select_attr('bra');" title="{% trans %}Locations{% endtrans %}">{% trans %}Locations{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('cbo');" title="{% trans %}Occupations{% endtrans %}">{% trans %}Occupations{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('cnae');" title="{% trans %}Economic Activities{% endtrans %}">{% trans %}Economic Activities{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('hs');" title="{% trans %}Products{% endtrans %}">{% trans %}Products{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('wld');" title="{% trans %}Trade Partners{% endtrans %}">{% trans %}Trade Partners{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('university');" title="{% trans %}Universities{% endtrans %}">{% trans %}Universities{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('course_hedu');" title="{% trans %}Higher Education{% endtrans %}">{% trans %}Higher Education{% endtrans %}</span></li>
+                    <li><span class="link" onclick="select_attr('course_sc');" title="{% trans %}Basic Courses{% endtrans %}">{% trans %}Basic Courses{% endtrans %}</span></li>
+                </ul>
+            </li>
+            <li><a href="{{ url_for('rankings.index') }}" title="Visualize Rankings">{% trans %}View Rankings{% endtrans %}</a></li>
+            <li><a href="{{ url_for('build_graph.index') }}" title="Crie seu gráfico">{% trans %}Make Graphs{% endtrans %}</a></li>
+            <li><a href="{{ url_for('data.index') }}" title="Download de dados">{% trans %}Database Download{% endtrans %}</a></li>
+        </ul>
+    </div>
+    <div class="col-sm-3 col-md-2">
+        <ul>
+            <li><h3>{% trans %}Support{% endtrans %}</h3></li>
+            <li><a href="{{ url_for('help.index') }}" title="Ajuda">{% trans %}Help{% endtrans %}</a></li>
+            <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">{% trans %}Virtual Tour{% endtrans %}</a></li>
+            <li><a class="visible-sm btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a></li>
+        </ul>
+    </div>
+    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
+    <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
+        <h3>{%trans%}Contact Us{%endtrans%}</h3>
+        <form method="post" action="{{ url_for('contact.create') }}" class="form-horizontal">
+            {{ g.contact_form.hidden_tag() }}
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">{% trans %}Name{% endtrans %}</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="name" name="name" placeholder="{% trans %}Name{% endtrans %}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="E-mail">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="message" class="col-sm-3 control-label">{% trans %}Message{% endtrans %}</label>
+                <div class="col-sm-9">
+                    <textarea type="text" class="form-control" id="message" name="message" placeholder="{% trans %}Message{% endtrans %}"></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-offset-5 col-md-offset-3 col-xs-15 col-sm-10 col-md-11">
+                    <button type="submit" class="btn btn-white">{% trans %}Send{% endtrans %}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</footer>

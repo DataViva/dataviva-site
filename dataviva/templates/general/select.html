@@ -1,0 +1,42 @@
+{% extends "site.html" %}
+
+{% block title %}: {% trans %}Choose a Classification{% endtrans %}{% endblock %}
+
+{% block head %}
+
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.data.css" />
+
+{% endblock %}
+
+{% block body %}
+
+  <div class="darkbox">
+    <h1>{% trans %}Which classification would you like to browse?{% endtrans %}</h1>
+  </div>
+  <br>
+  <a href="{{ url_for('data.classifications', attr='hs') }}" class="decision icon square hs">
+    <h1>HS</h1>
+    {% trans %}Product Exports{% endtrans %}
+  </a>
+
+  <a href="{{ url_for('data.classifications', attr='cnae') }}" class="decision icon square cnae">
+    <h1>CNAE</h1>
+    {% trans %}Industries{% endtrans %}
+  </a>
+
+  <a href="{{ url_for('data.classifications', attr='cbo') }}" class="decision icon square cbo">
+    <h1>CBO</h1>
+    {% trans %}Occupations{% endtrans %}
+  </a>
+  <br>
+  <a href="{{ url_for('data.classifications', attr='bra') }}" class="decision icon square bra">
+    <h1>{% trans %}Municipalities{% endtrans %}</h1>
+    {% trans %}Geographical locations within Brazil{% endtrans %}
+  </a>
+
+  <a href="{{ url_for('data.classifications', attr='wld') }}" class="decision icon square wld">
+    <h1>{% trans %}Countries{% endtrans %}</h1>
+    {% trans %}Export Destinations{% endtrans %}
+  </a>
+
+{% endblock %}

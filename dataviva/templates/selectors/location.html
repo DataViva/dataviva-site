@@ -1,0 +1,169 @@
+<h2>{% trans %}Choose a location or type what you are looking for{% endtrans %}</h2>
+<form action="" class="form-dataviva form-inline filter">
+
+    <div class="btn-group nav nav-tabs" role="tablist">
+        <a class="btn btn-default" href="#regions" aria-controls="regions" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.regions)">
+            {% trans %}Regions{% endtrans %}
+        </a>
+        <a class="btn btn-default" href="#states" aria-controls="states" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.states)">
+            {% trans %}States{% endtrans %}
+        </a>
+        <a class="btn btn-default" href="#mesoregions" aria-controls="mesoregions" role="tab" data-toggle="tab"  ng-click="selector_model.load_depth_entries(selector_model.mesoregions)">
+            {% trans %}Mesoregions{% endtrans %}
+        </a>
+        <a class="btn btn-default" href="#mircroregions" aria-controls="mircroregions" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.mircroregions)">
+            {% trans %}Microregions{% endtrans %}
+        </a>
+        <a class="btn btn-default" href="#municipalities" aria-controls="municipalities" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.municipalities)">
+            {% trans %}Municipalities{% endtrans %}
+        </a>
+    </div>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="regions">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="regions_filter"
+                    class="form-control"
+                    ng-model="selector_model.regions.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="loc in selector_model.regions.entries|filter:selector_model.regions.filter_string"
+                    class="selector-list-item"
+                    ng-if="loc.id != '0'"
+                    ng-class="{'selected': loc.id == selector_model.selected_entry }"
+                    ng-click="selector_model.select(loc.id, $event)">
+                    <div class="item-title">
+                        {$ loc.name $}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- TAB: STATES -->
+        <div role="tabpanel" class="tab-pane" id="states">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="states_filter"
+                    class="form-control"
+                    ng-model="selector_model.states.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="loc in selector_model.states.entries | filter:selector_model.states.filter_string"
+                    class="selector-list-item"
+                    ng-if="loc.id_ibge"
+                    ng-class="{'selected': loc.id == selector_model.selected_entry }"
+                    ng-click="selector_model.select(loc.id, $event)" >
+                    <img src="{$ loc.icon $}" class="selector-img"/>
+                    <div class="item-title">
+                        {$ loc.name $}
+                        <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- TAB: MESOREGIONS -->
+        <div role="tabpanel" class="tab-pane" id="mesoregions">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="mesoregions_filter"
+                    class="form-control"
+                    ng-model="selector_model.mesoregions.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="loc in selector_model.mesoregions.entries | filter:selector_model.mesoregions.filter_string"
+                    class="selector-list-item"
+                    ng-if="loc.id_ibge"
+                    ng-class="{'selected': loc.id == selector_model.selected_entry }"
+                    ng-click="selector_model.select(loc.id, $event)" >
+                    <img src="{$ loc.icon $}" class="selector-img"/>
+                    <div class="item-title">
+                        {$ loc.name $}
+                        <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- TAB: MIRCROREGIONS -->
+        <div role="tabpanel" class="tab-pane" id="mircroregions">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="mircroregions_filter"
+                    class="form-control"
+                    ng-model="selector_model.mircroregions.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="loc in selector_model.mircroregions.entries | filter:selector_model.mircroregions.filter_string"
+                    class="selector-list-item"
+                    ng-if="loc.id_ibge"
+                    ng-class="{'selected': loc.id == selector_model.selected_entry }"
+                    ng-click="selector_model.select(loc.id, $event)" >
+                    <img src="{$ loc.icon $}" class="selector-img"/>
+                    <div class="item-title">
+                        {$ loc.name $}
+                        <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- TAB: MUNICIPALITIES -->
+        <div role="tabpanel" class="tab-pane" id="municipalities">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="municipalities_filter"
+                    class="form-control"
+                    ng-model="selector_model.municipalities.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or IBGE number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="loc in selector_model.municipalities.entries | filter:selector_model.municipalities.filter_string"
+                    class="selector-list-item"
+                    ng-if="loc.id_ibge"
+                    ng-class="{'selected': loc.id == selector_model.selected_entry }"
+                    ng-click="selector_model.select(loc.id, $event)" >
+                    <img src="{$ loc.icon $}" class="selector-img"/>
+                    <div class="item-title">
+                        {$ loc.name $}
+                        <div class="pull-right">IBGE: {$ loc.id_ibge $}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

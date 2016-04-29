@@ -1,0 +1,172 @@
+.calls section {
+  margin-bottom: 4.5rem;
+}
+.calls .main-content {
+    padding-bottom: 2rem;
+}
+.calls a {
+  text-decoration: none;
+}
+.calls h1 {
+    margin: 0px 0px 30px 0px;
+}
+.calls textarea {
+    resize: none;
+}
+.calls .publication .thumbnail {
+  border: none;
+  float: left;
+  margin-right: 20px;
+  padding: 0;
+  position: relative;
+}
+
+.calls .thumbnail {
+    height: 227px;
+    width: 350px;
+}
+
+.calls .publication .thumbnail span {
+  background: #5a9dc4;
+  bottom: 0;
+  color: #FFF;
+  font-size: 13px;
+  font-weight: 300;
+  height: 33px;
+  line-height: 33px;
+  padding: 0 10px;
+  position: absolute;
+  right: 0;
+  text-transform: uppercase;
+}
+.calls .related h4 {
+  color: #666;
+  font-size: 25px;
+  font-weight: 300;
+}
+.calls .related p {
+  font-size: 14px;
+  font-weight: 300;
+}
+.calls .related p,
+.calls .related p a {
+  color: #666;
+}
+.calls .single big {
+  color: #5a9dc4;
+}
+.calls .single blockquote {
+  border: none;
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 600;
+  padding-bottom: 0;
+}
+.calls .single p {
+  color: #666;
+  font-size: 14px;
+}
+.calls .social {
+  margin-bottom: 2rem;
+  padding: 0;
+}
+.calls .social li {
+  display: inline-block;
+  height: 20px;
+  margin-right: 5px;
+  overflow: hidden;
+}
+
+.calls .comments h4 {
+  color: #666;
+  font-size: 25px;
+  font-weight: 300;
+}
+.calls .item h4 {
+  font-size: 20px;
+  margin: 0;
+}
+.calls .item h4 a {
+  color: #423434;
+}
+.calls .item h4 a:hover {
+  opacity: 0.8;
+}
+.calls .item p {
+  color: #9c9c9c;
+  font-size: 13px;
+  margin: 0;
+}
+.calls .item + .item {
+  margin-top: 2rem;
+}
+.calls .publication h4 {
+  font-size: 25px;
+  font-weight: 300;
+}
+.calls .publication h4,
+.calls .publication h4 a {
+  color: #666;
+}
+.calls .publication p {
+  color: #666;
+  font-size: 13px;
+}
+.calls .publication p.data {
+  color: #5a9dc4;
+  text-transform: uppercase;
+}
+.calls .publication h4,
+.calls .publication p {
+  margin: 0 0 10px;
+}
+
+.calls .publication:before {
+  display: none;
+}
+.calls .publication-list nav {
+    text-align: center;
+}
+.calls .publication-list nav .pagination {
+    font-size: 10px;
+    display: inline-block;
+}
+
+
+.calls .thumb .thumb-controls img {
+    width: 350px;
+    height: 227px;
+}
+.calls .thumb .thumb-controls .crop-preview {
+    overflow: hidden;
+    text-align: center;
+    display: none;
+    width: 350px;
+    height: 227px;
+}
+.calls .thumb .thumb-controls .crop-buttons {
+    display: none;
+}
+.calls .thumb .thumb-controls .thumb-buttons,
+.calls .thumb .thumb-controls .crop-buttons {
+    text-align: center;
+}
+.calls .thumb .thumb-controls label {
+    display: inline-block;
+}
+.calls .thumb .thumb-crop {
+    max-height: 550px;
+}
+.calls .checkbox-switch {
+    padding: 0px;
+    border: none;
+}
+
+.calls .checkbox-switch .switchery{
+    height: 33px;
+}
+
+.calls .checkbox-switch .switchery > small {
+    height: 33px;
+    width: 33px;
+}

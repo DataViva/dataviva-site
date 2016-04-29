@@ -1,0 +1,48 @@
+{% extends "news/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">{% trans %}News{% endtrans %}</li>
+{% endblock %}
+
+{% block news_content %}
+    <div class="publication-list">
+        {% for publication in publications %}
+            <div class="item publication">
+                <div class="thumbnail">
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">
+                        <img src="{{publication.thumb}}" class="thumbnail img-responsive">
+                    </a>
+                    <span>{{publication.subject}}</span>
+                </div>
+                <h4>
+                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">{{publication.title}}</a>
+                </h4>
+                <p>{{ publication.text_call}}</p>
+                <div class="meta">
+                    <p class="read-more"><a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">{% trans %}Continue reading{% endtrans %}</a></p>
+                    <p class="data">{% trans %}By{% endtrans %} {{ publication.authors_str() }} {{ publication.date() }}</p>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        {% endfor %}
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock news_content %}

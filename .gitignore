@@ -3,9 +3,14 @@
 .project
 .pydevproject
 *.prefs
+*.sublime-project
+*.sublime-workspace
+.swp
 db
 dataviva/static/json/coords/*.json
 dataviva/static/json/networks/*.json
+dataviva/static/uploads/*/*
 .htpasswd
 dump.rdb
 *.log
+scripts/data

@@ -1,0 +1,78 @@
+<h2>{% trans %}Choose an course or type what you are looking for{% endtrans %}</h2>
+<form action="" class="form-dataviva form-inline filter">
+    
+    <div class="btn-group nav nav-tabs" role="tablist">
+        <a href="#fields" aria-controls="fields" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.fields)">
+        {% trans %}Fields{% endtrans %}
+        </a>
+        <a href="#courses" aria-controls="courses" role="tab" data-toggle="tab" class="btn btn-default" ng-click="selector_model.load_depth_entries(selector_model.courses)">
+        {% trans %}Courses{% endtrans %}
+        </a>
+    </div>
+    
+    <div class="search-items tab-content">
+        <!-- TAB: fields -->
+        <div role="tabpanel" class="tab-pane active" id="fields">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                        name="fields_filter"
+                        class="form-control"
+                        ng-model="selector_model.fields.filter_string"
+                        ng-trim="true"
+                        autocomplete="false"
+                        placeholder="{% trans %}Search by name or by Course SC number:{% endtrans %}" />
+                </div>
+            </div>
+
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="prd in selector_model.fields.entries|filter:selector_model.fields.filter_string" 
+                    class="selector-list-item" 
+                    ng-class="{'selected': prd.id == selector_model.selected_entry }"
+                    ng-click="selector_model.select(prd.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-course-sc-{$ prd.id $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ prd.name $}
+                        <div class="pull-right">{% trans %}Course SC{% endtrans %}: {$ prd.id $}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TAB: courses -->
+        <div role="tabpanel" class="tab-pane" id="courses">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                        name="courses_filter"
+                        class="form-control"
+                        ng-model="selector_model.courses.filter_string"
+                        ng-trim="true"
+                        autocomplete="false"
+                        placeholder="{% trans %}Search by name or by Course SC number:{% endtrans %}" />
+                </div>
+            </div>
+            
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="prd in selector_model.courses.entries | filter:selector_model.courses.filter_string"
+                     ng-class="{'selected': prd.id == selector_model.selected_entry }"
+                     class="selector-list-item"
+                     ng-click="selector_model.select(prd.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-course-sc-{$ prd.id.substring(0,2) $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ prd.name $}
+                        <div class="pull-right">{% trans %}Course SC{% endtrans %}: {$ prd.id $}</div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</form>

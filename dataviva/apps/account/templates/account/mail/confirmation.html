@@ -1,0 +1,6 @@
+{% extends "mail.html" %}
+
+{% block mail_body %}
+	<h1 class="title">Please click the link bellow to complete your registration</h1>	
+	<a href="{{ confirmation_url }}">{{ confirmation_url }}</a>
+{% endblock %}

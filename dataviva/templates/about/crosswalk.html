@@ -1,0 +1,69 @@
+<!-- extend from site layout -->
+{% extends "about.html" %}
+
+{% block title %}: {% trans %}Crosswalk{% endtrans %}{% endblock %}
+
+{% block about_content %}
+
+    <h1>{{ title }}</h1>
+    <a href="/static/crosswalks/{{ filename }}"><i class="fa fa-save" style="margin-top:1px;margin-right:5px;"></i>{% trans %}Download{% endtrans %}</a><br>
+    <input id="crosswalkSearch" type="text" onkeyup="searchTable(this)" placeholder="{% trans %}Search{% endtrans %}"/>
+    <hr/>
+
+    <table id="crosswalk" class="data">
+
+      <thead>
+        <tr>
+          <th colspan=2>{{ col1 }}</th>
+          <th>{{ col2 }}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for key in crosswalk %}
+          <tr>
+            <td>
+              <img src="{{ key.icon() }}" width=20 style="background-color: {{ key.color }};">
+            </td>
+            <td>
+              <a href="{{ key.url() }}">{{ key.name() }} ({{ key.id }})</a>
+            </td>
+            <td>
+              <ul>
+                {% for value in crosswalk[key] %}
+                  <li><a href="{{ value.url() }}">{{ value.name() }} ({{ value.id }})</a></li>
+                {% endfor %}
+               </ul>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+
+    </table>
+
+
+{% endblock %}
+
+{% block js %}
+
+  <script>
+
+    leon("#crosswalkSearch").color(dataviva.color).size("large");
+
+    var originalData = d3.selectAll("tbody tr");
+
+    var searchTable = function(input) {
+      originalData.style("display", "table-row"); // reset row visibility
+      var toFind = input.value.toLowerCase();
+
+      var rowFilter = function() {
+        var me = this.innerText.toLowerCase();
+        return me.indexOf(toFind) < 0;
+      };
+
+      d3.selectAll("tbody tr").filter(rowFilter).style("display", "none");
+    }
+
+  </script>
+
+{% endblock %}

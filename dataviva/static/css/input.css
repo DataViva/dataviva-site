@@ -1,0 +1,102 @@
+/* INPUTS */
+.inline {
+  display: inline-block !important;
+}
+.input-s-sm {
+  width: 120px;
+}
+.input-s {
+  width: 200px;
+}
+.input-s-lg {
+  width: 250px;
+}
+.i-checks {
+  padding-left: 0;
+}
+.form-control,
+.single-line {
+  background-color: #FFFFFF;
+  background-image: none;
+  border: 1px solid #e5e6e7;
+  border-radius: 5px;
+  color: inherit;
+  display: block;
+  padding: 6px 12px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  width: 100%;
+  font-size: 14px;
+}
+.form-control:focus,
+.single-line:focus {
+  border-color: #A25A6D !important;
+}
+.has-success .form-control {
+  border-color: #1AB394;
+}
+.has-warning .form-control {
+  border-color: #f8ac59;
+}
+.has-success .control-label {
+  color: #1AB394;
+}
+.has-warning .control-label {
+  color: #f8ac59;
+}
+.has-error .note-editor {
+  border-color: #A94442 !important;
+}
+.has-error .error {
+  color: #A94436;
+}
+.has-error .control-label {
+  color: #676a6c;
+}
+.input-group-addon {
+  background-color: #fff;
+  border: 1px solid #E5E6E7;
+  border-radius: 5px;
+  color: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  padding: 6px 12px;
+  text-align: center;
+}
+.spinner-buttons.input-group-btn .btn-xs {
+  line-height: 1.13;
+}
+.spinner-buttons.input-group-btn {
+  width: 20%;
+}
+.noUi-connect {
+  background: none repeat scroll 0 0 #A25A6D;
+  box-shadow: none;
+}
+.slider_red .noUi-connect {
+  background: none repeat scroll 0 0 #ed5565;
+  box-shadow: none;
+}
+.checkbox input[type="checkbox"]:focus + label::before,
+.radio input[type="radio"]:focus + label::before {
+  outline: 0px !important;
+  -webkit-appearance: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+.checkbox input[type="checkbox"],
+.checkbox input[type="radio"] {
+    cursor: pointer;
+}
+
+.form-horizontal .form-group {
+    margin: 0px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 767px) {
+  .form-horizontal .form-group {
+    margin-bottom: 20px;
+  }
+}

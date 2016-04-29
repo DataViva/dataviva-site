@@ -1,0 +1,181 @@
+.modal.dataviva .modal-header {
+    background: #9eddbf;
+    border-radius: 4px 4px 0px 0px;
+}
+.modal.dataviva .modal-header,
+.modal.dataviva .modal-header button {
+    color: #FFF;
+    opacity: 1;
+}
+.modal.dataviva .modal-header h4 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.modal.dataviva .modal-body {
+    min-height: 300px;
+}
+.modal.dataviva .modal-body h2 {
+    font-size:20px;
+    margin:1rem 0;
+}
+.modal.dataviva .nav-tabs {
+    border: 0px;
+    margin: 10px 0px;
+}
+
+.modal.dataviva .form-group.search input,
+.modal.dataviva .form-group.search input:focus {
+    min-width: 310px;
+    border: 1px solid #e5e6e7 !important;
+    border-left: 0px !important;
+    padding-left: 10px;
+}
+.modal.dataviva .form-group.search .input-group-addon {
+    color:#9eddbf;
+    border-right: 0px;
+    padding-right: 0px;
+}
+
+.modal.dataviva .selector-list {
+  max-height: 300px;
+  overflow-y: scroll;
+  margin-top: 12px;
+}
+
+.modal.dataviva .selector-list-item {
+    padding: 0px 15px;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 60px;
+}
+.modal.dataviva .selector-list-item:hover {
+    background-color: #5a9dc4 !important;
+    color: #FFF;
+    cursor: pointer;
+}
+.modal.dataviva .selector-list .selector-list-item:nth-child(odd){
+  background-color: #e1eee6;
+}
+
+.selector-list .selected, .list-group .selected {
+  background-color: #337ab7 !important;
+  color: white;
+}
+
+.selector-list .selector-list-item .item-title {
+  display: inline;
+}
+
+.selector-list .selector-list-item .selector-img {
+  height: 50px;
+  display: inline;
+}
+
+.selector-list .selector-list-item .selector-icon {
+    display: inline-block;
+    width: 35px;
+    text-align: center;
+    font-size: 20px;
+}
+.selector-list img.symbol {
+  border-radius: 50%;
+  background-color: #337ab7;
+}
+
+
+
+
+
+/* MODAIS */
+.modal-body .selector .selector_header {
+    padding: 0 0 20px 0;
+    position: relative;
+}
+.modal-body .selector .selector_header #header_select_div {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.modal-body .selector_header .selector_header_icon, .modal-body .selector_header .selector_title_div {
+    height: 60px;
+    margin: 0;
+}
+.modal-body .selector_header .selector_header_icon {
+    float: left;
+    margin: 6px 0 0 !important;
+}
+
+.modal-body .selector_header .selector_title_div {
+    background: #eee;
+    display: block;
+    margin: -15px -15px 20px;
+    padding: 15px 80px;
+}
+
+.modal-body .selector .selector_body {
+    padding: 0;
+}
+.modal-body .selector .selector_body .search_result:nth-child(4n+1) {
+    background: #F3F6F3;
+}
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_node[style] {
+    color: #333 !important;
+    background-color: #fff !important;
+    border-color: #ccc !important;
+    border-radius: 4px !important;
+    font-size: 14px !important;;
+    font-weight: normal !important;;
+    line-height: 1.42857143 !important;;
+}
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_button_element.d3plus_button_label[style] {
+    width: auto !important;
+    padding: 6px 24px 6px 12px !important;
+}
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_drop_list[style] {
+    width: auto !important;
+}
+.modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_drop_list .d3plus_node[style] {
+    border-radius: 0 !important;
+}
+.proximity_toggles .d3plus_title[style] {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+.modal-body .selector .selector_header .selector_depth {
+    text-align: left;
+    margin-bottom: 10px;
+}
+.modal-body .selector .selector_header .selector_depth #leon_selector_depth_toggle {
+    padding-left: 0;
+}
+.selector_header .breadcrumb{
+    padding: 0;
+    background: transparent;
+}
+.selector .search_result > div.search_withins {
+    color: #999999 !important;
+    font-size: 12px !important;
+    margin-top: 5px;
+}
+.selector div.search_buttons > div.proximity_toggles {
+    float: left;
+}
+.modal-body .selector_body .search_buttons .btn-primary[style] {
+    background-color: #a25a6d !important;
+    border-color: #a25a6d !important;
+    color: #ffffff !important;
+    margin-bottom: 0 !important;
+}
+
+.modal-body .selector .btn.btn-default[style] {
+    border-color: #e7eaec !important;
+}
+
+
+
+
+
+
+

@@ -1,0 +1,79 @@
+<h2>{% trans %}Choose a occupation or type what you are looking for{% endtrans %}</h2>
+<form action="" class="form-dataviva form-inline filter">
+
+    <div class="btn-group nav nav-tabs" role="tablist">
+        <a class="btn btn-default" href="#families" aria-controls="families" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.families)">
+            {% trans %}Families{% endtrans %}
+        </a>
+        <a class="btn btn-default" href="#groups" aria-controls="groups" role="tab" data-toggle="tab" ng-click="selector_model.load_depth_entries(selector_model.groups)">
+            {% trans %}Big Groups{% endtrans %}
+        </a>
+    </div>
+
+    <div class="tab-content">
+        <!-- TAB: families -->
+        <div role="tabpanel" class="tab-pane active" id="families">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="families_filter"
+                    class="form-control"
+                    ng-model="selector_model.families.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or CBO number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="occ in selector_model.families.entries|filter:selector_model.families.filter_string"
+                     class="selector-list-item"
+                     ng-if="occ.id != '0'"
+                     ng-class="{'selected': occ.id == selector_model.selected_entry }"
+                     ng-click="selector_model.select(occ.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-cbo-{$ occ.id $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ occ.name $}
+                        <div class="pull-right">CBO: {$ occ.id $}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- TAB: groups -->
+        <div role="tabpanel" class="tab-pane" id="groups">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input type="text"
+                    name="groups_filter"
+                    class="form-control"
+                    ng-model="selector_model.groups.filter_string"
+                    ng-trim="true"
+                    autocomplete="false"
+                    placeholder="{% trans %}Search by name or CBO number:{% endtrans %}" />
+                </div>
+            </div>
+
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="occ in selector_model.groups.entries | filter:selector_model.groups.filter_string"
+                     class="selector-list-item"
+                     ng-if="occ.id[0] != '0'"
+                     ng-class="{'selected': occ.id == selector_model.selected_entry }"
+                     ng-click="selector_model.select(occ.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-cbo-{$ occ.id.substring(0,1) $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ occ.name $}
+                        <div class="pull-right">CBO: {$ occ.id $}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

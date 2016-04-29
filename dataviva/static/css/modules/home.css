@@ -1,0 +1,174 @@
+.home section {
+  padding: 4.5rem 0;
+}
+.home h2 {
+  font-size: 35px;
+}
+.home h2 + .tagline {
+  font-size: 12px;
+  margin: 0 auto;
+  max-width: 85rem;
+}
+.home .navy-line {
+  width: 60px;
+  height: 1px;
+  margin: 15px auto 0;
+  border-bottom: 2px solid #9EDDBF;
+}
+
+/* WELCOME SECTION BEGIN */
+.home .welcome {
+    color: #FFFFFF;
+    position: relative;
+}
+.home .welcome .popover {
+    color: #666;
+}
+.home .welcome:after {
+    content: " ";
+
+    /* RED background option*/
+    background: rgba(128, 56, 75, 0.55);
+    /* BLACK background option */
+    background: rgba(0,0,0, 0.45);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.home .welcome h2 {
+  text-shadow: 1px 2px 0 #000000;
+}
+.home .welcome h3 {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+.home .welcome h2 + p, .home .welcome h3 + p{
+    color: rgba(255,255,255,.8);
+}
+.home .welcome .btn {
+  font-size: 16px;
+  font-weight: 300;
+  color: #FFFFFF;
+}
+.home .welcome ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.home .welcome ul li {
+  margin-bottom: 25px;
+  border-bottom: 1px solid rgba(255,255,255,.3);
+}
+.home .welcome ul li a {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+.home .welcome ul li a, .home .welcome ul li a h3 + p {
+    transition: color .2s linear;
+}
+.home .welcome a {
+    color: #9EDDBF;
+}
+.home .welcome ul li a:focus,
+.home .welcome ul li a:hover,
+.home .welcome ul li a:focus h3 + p,
+.home .welcome ul li a:hover h3 + p {
+  color: #9EDDBF;
+}
+/* WELCOME SECTION END */
+/* WELCOME DATABASES BEGIN */
+.home .databases a:not(.btn) {
+  cursor: pointer;
+  text-decoration: none;
+}
+.home .databases .inner {
+  background-color: #F2F6F4;
+}
+.home .databases h3 {
+  font-size: 24px;
+  font-weight: 300;
+}
+@media (max-width: 767px) {
+  .home .databases .database-icons {
+    margin: auto 15%;
+  }
+}
+@media (max-width: 640px) {
+  .home .databases .database-icons {
+    margin: 0px;
+  }
+}
+.home .databases .database-icons button {
+  color: #9EDDBF;
+  font-size: 80px;
+  border-radius: 50%;
+  padding: 0px;
+  width: 100px;
+  height: 100px;
+  border: none;
+  transition: 0.4s;
+}
+.home .databases .database-icons button .dv-occupation {
+  position: relative;
+  top: -4px;
+}
+.home .databases .database-icons button .dv-industry {
+  position: relative;
+  top: -5px;
+  font-size: 75px;
+}
+.home .databases .database-icons button .dv-product {
+  position: relative;
+  top: -4px;
+  font-size: 80px;
+}
+.home .databases .database-icons button .dv-trade-partner {
+  position: relative;
+  top: -10px;
+  font-size: 55px;
+}
+.home .databases .database-icons button .dv-university {
+  position: relative;
+  top: -10px;
+  left: -1px;
+  font-size: 65px;
+}
+.home .databases .database-icons button .dv-major {
+  position: relative;
+  top: -10px;
+  left: -1px;
+  font-size: 65px;
+}
+.home .databases .database-icons button .dv-basic-course {
+  position: relative;
+  top: -12px;
+  left: 4px;
+  font-size: 62px;
+}
+.home .databases .popover {
+  font-size: 12px;
+  margin: 0 -10px;
+  padding: 15px;
+}
+.home .databases a p {
+  margin: 0;
+}
+/* WELCOME DATABASES END */
+/* SIGN UP BEGIN */
+.home .signup .btn {
+  font-size: 17px;
+  font-weight: 300;
+}
+/* SIGN UP END */
+/* NEWS BEGIN */
+.home .news .img-responsive {
+  margin: 0 auto;
+  height: 227px;
+  width: 350px;
+}
+/* NEWS END */

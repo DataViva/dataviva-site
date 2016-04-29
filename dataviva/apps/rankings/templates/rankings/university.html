@@ -1,0 +1,31 @@
+{% extends "rankings/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Rankings</li>
+{% endblock %}
+
+{% block rankings_content %}
+<table id="university-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}Year{% endtrans %}</th>
+            <th>{% trans %}University ID{% endtrans %}</th>
+            <th>{% trans %}University{% endtrans %}</th>
+            <th>{% trans %}Enrolled{% endtrans %}</th>
+            <th>{% trans %}Graduates{% endtrans %}</th>
+            <th>{% trans %}Entrants{% endtrans %}</th>
+            <th>{% trans %}Morning{% endtrans %}</th>
+            <th>{% trans %}Afternoon{% endtrans %}</th>
+            <th>{% trans %}Night{% endtrans %}</th>
+            <th>{% trans %}Full Time{% endtrans %}</th>
+            <th>{% trans %}Age{% endtrans %}</th>
+            <th>{% trans %}Nominal Graduation Growth (1 year){% endtrans %}</th>
+            <th>{% trans %}Nominal Enrollment Growth (1 year){% endtrans %}</th>
+        </tr>
+    </thead>
+</table>
+{% endblock rankings_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/university.js"></script>
+{% endblock js_assets %}

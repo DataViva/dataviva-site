@@ -1,0 +1,122 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ url_for('general.home') }}">Home</a>
+            </li>
+            <li {{ 'class="active"' if not location else '' }}>
+                <a href="#" title="Trocar" onclick="select_attr('university');"> {{ university.name() }}</a>
+            </li>  
+        </ol>
+    </div>
+</div>
+<!-- BREADCRUMB -->
+
+<section id="header" class="header bg-university-{{university.school_type_id.lower()}}">
+
+  <div class="summary-box">
+      <div class="container">
+
+        <span class="portrait dv-university-{{ university.school_type_id.lower() }} hidden-xs"></span>
+
+        <h1>
+          {{ university.name() }} 
+            <div class="btn-group">
+              <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   {% trans %}change{% endtrans %} <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu">
+                   <li><a href="#" onclick="select_attr('university');">{% trans %}University{% endtrans %}</a></li>
+              </ul>
+            </div>
+        </h1>
+        
+        <span class="clearfix"></span>
+        <div class="indices">
+           <div class="row">
+              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="widget">
+                    <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
+                    <div class="number">
+                        <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
+                        <small class="magnitude">{{ header.enrolled | magnitude }} {% trans %}students{% endtrans %}</small>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="widget">
+                    <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students {% endtrans %}</h2>
+                    <div class="number">
+                        <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
+                        <small class="magnitude">{{ header.entrants | magnitude }} {% trans %}students{% endtrans %}</small>
+                    </div>
+                </div>
+              </div>
+
+              <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                <div class="widget">
+                    <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
+                    <div class="number">
+                        <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
+                        <small class="magnitude">{{ header.graduates | magnitude }} {% trans %}students{% endtrans %}</small>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <div class="year">{% trans %}Year{% endtrans %}: {{ header.year }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+
+<section id="profile" class="profile">
+
+  <nav class="col-xs-12">
+
+    <div class="container">
+            <ul class="nav-tabs" role="tablist">
+                <li role="presentation" class="active">
+                    <a href="#general"q
+                       aria-controls="general"
+                       role="tab"
+                       data-university="{{ university.id }}"
+                       data-toggle="tab">{% trans %}General{% endtrans %}</a>
+                </li>
+                <li role="presentation">
+                    <a href="#enrollments"
+                       aria-controls="enrollments"
+                       role="tab"
+                       graph
+                       data-id="{{ university.id }}"
+                       data-toggle="tab">{% trans %}Major{% endtrans %}</a>
+                </li>
+            </ul>
+      </div>
+    </nav>
+
+    <div class="container">
+        <div class="tab-content col-xs-12">
+            {% include "university/tab-general.html" %}
+            {% include "university/tab-enrollments.html" %}
+        </div>
+    </div>
+
+</section>
+
+<section id="graphs" class="graphs bg-gray">
+</section>
+{% endblock content %}
+
+
+

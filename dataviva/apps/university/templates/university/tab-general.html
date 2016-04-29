@@ -1,0 +1,47 @@
+<div role="tabpanel" class="tab-pane active" id="general">
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
+
+    <p>{% trans %}The institution {% endtrans %} {{ university.name() }} 
+    {% trans %} is a{% endtrans %} {{ header.type }}, 
+    {% trans %}educational establishment. Its main course is{% endtrans %} {{ body.major_with_more_enrollments }}, 
+    {% trans %}with{% endtrans %} {{ body.highest_enrollment_number_by_major }} 
+    {% trans %}students. The University has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
+    {% trans %}enrolled students and{%endtrans%} {{ header.graduates | max_digits(3) }} {{ (header.graduates | magnitude).lower() }} 
+    {% trans %}graduates{% endtrans %}.</p>
+
+    <div class="row">
+        <div class="dl-box col-xs-12 col-md-6">
+            <h3>{% trans %}Enrollments{% endtrans %}</h3>
+            <dl class="dl-horizontal">
+                <dt>{% trans %}Main Course by Number of Enrolled Students{% endtrans %}</dt>
+                <dd>
+                    <small>{{ body.major_with_more_enrollments }}</small>
+                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3) }}</strong>
+                    <span>{{ body.highest_enrollment_number_by_major | magnitude }} {% trans %}students{% endtrans %}</span>
+                </dd>
+                <dt>{% trans %}Main Course by Number of Entering Students{% endtrans %}</dt>
+                <dd>
+                    <small>{{ body.major_with_more_entrants }}</small>
+                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3) }}</strong>
+                    <span>{{ body.highest_entrant_number_by_major | magnitude}} {% trans %}students{% endtrans %}</span>
+                </dd>
+                <dt>{% trans %}Main Course by Number of Graduates{% endtrans %}</dt>
+                <dd>                
+                    <small>{{ body.major_with_more_graduates }}</small>
+                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3) }}</strong>
+                    <span>{{ body.highest_graduate_number_by_major | magnitude }} {% trans %}students{% endtrans %}</span>
+
+                </dd>
+            </dl>
+            <a href="#enrollments" 
+                    aria-controls="enrollments" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ university.id }}">
+                {% trans %}More details{% endtrans %}</a>
+
+            </div>
+        </div>
+    </div>

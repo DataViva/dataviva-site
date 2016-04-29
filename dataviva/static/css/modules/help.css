@@ -1,0 +1,64 @@
+.help .form-group.search input,
+.help .form-group.search input:focus {
+    min-width: 310px;
+    border: 1px solid #e5e6e7 !important;
+    border-left: 0px !important;
+    padding-left: 10px;
+}
+.help .form-group.search .input-group-addon {
+    color:#9eddbf;
+    border-right: 0px;
+    padding-right: 0px;
+}
+
+.help h2 {
+    border-bottom: 4px solid #9eddbf;
+    color: inherit;
+    font-size: 20px;
+    font-weight: 300;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+}
+
+.help .faq .panel-group .panel {
+    border: none;
+    background: none;
+}
+
+/*.help .faq .panel-group .panel-default .panel-heading {
+    border: none;
+    background: none;
+}*/
+
+.help .panel-group .panel-default .panel-heading {
+    border: none;
+    background: none;
+    background-color: #fff;
+}
+
+.help .faq .panel-group .panel-default a {
+    text-decoration: none;
+    color: #5a9dc4;
+    font-weight: 500;
+    line-height: 1.1;
+    font-size: 14px;
+}
+
+.help .panel-default {
+    border: none;
+}
+
+.help .faq .panel-group .panel-default .panel-body {
+    font-size: 13px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.help .faq .panel-group .panel-default .panel-heading {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.help #home a {
+    color: #333;
+}

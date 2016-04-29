@@ -1,0 +1,92 @@
+<h2>{% trans %}Choose a trade partner or type what you are looking for{% endtrans %}</h2>
+<form action="" class="form-dataviva form-inline filter">
+
+    <div class="btn-group nav nav-tabs" role="tablist">
+        <a href="#continents"
+           aria-controls="continents"
+           role="tab"
+           data-toggle="tab"
+           class="btn btn-default"
+           ng-click="selector_model.load_depth_entries(selector_model.continents)">
+        {% trans %}Continents{% endtrans %}
+        </a>
+        <a href="#countries"
+           aria-controls="countries"
+           role="tab"
+           data-toggle="tab"
+           class="btn btn-default"
+           ng-click="selector_model.load_depth_entries(selector_model.countries)">
+        {% trans %}Countries{% endtrans %}
+        </a>
+    </div>
+
+    <div class="tab-content">
+        <!-- TAB: continents -->
+        <div role="tabpanel" class="tab-pane active" id="continents">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input
+                        type="text"
+                        name="continents_filter"
+                        class="form-control"
+                        ng-model="selector_model.continents.filter_string"
+                        ng-trim="true"
+                        autocomplete="false"
+                        placeholder="{% trans %}Search by name or WLD number:{% endtrans %}" />
+                </div>
+            </div>
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="ptn in selector_model.continents.entries|filter:selector_model.continents.filter_string"
+                     class="selector-list-item"
+                     ng-class="{'selected': ptn.id == selector_model.selected_entry }"
+                     ng-click="selector_model.select(ptn.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-wld-{$ ptn.id $}"></i>
+                    </div>
+                    <div class="item-title">
+                        {$ ptn.name $}
+                        <div class="pull-right">WLD: {$ ptn.id $}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: countries -->
+        <div role="tabpanel" class="tab-pane" id="countries">
+            <div class="form-group search">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                    <input
+                        type="text"
+                        name="countries_filter"
+                        class="form-control"
+                        ng-model="selector_model.countries.filter_string"
+                        ng-trim="true"
+                        autocomplete="false"
+                        placeholder="{% trans %}Search by name or WLD number:{% endtrans %}" />
+                </div>
+            </div>
+
+            <div class="selector-list">
+                <div class="loading" ng-show="selector_model.loading"></div>
+                <div ng-repeat="ptn in selector_model.countries.entries | filter:selector_model.countries.filter_string"
+                     ng-class="{'selected': ptn.id == selector_model.selected_entry }"
+                     class="selector-list-item"
+                     ng-click="selector_model.select(ptn.id, $event)">
+                    <div class="selector-icon">
+                        <i class="dv-wld-{$ ptn.id.substring(0,2) $}"></i>
+                    </div>
+                    <div class="item-title">
+
+                        {$ ptn.name $}
+                        <div class="pull-right">WLD: {$ ptn.id $}</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>

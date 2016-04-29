@@ -1,0 +1,46 @@
+{% extends "admin.html" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+    <li class="active">{% trans %}Users{% endtrans %}</li>
+{% endblock %}
+
+{% block admin_content %}
+<h1>{% trans %}Users{% endtrans %}</h1>
+
+<div id="message">
+{% if get_flashed_messages(with_categories=true) %}
+{% for category, message in get_flashed_messages(with_categories=true) %}
+    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        {{ message }}
+    </div>
+{% endfor %}
+{% endif %}
+</div>
+
+<table id="users-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th class="column-checkbox">
+                <div class="checkbox checkbox-success">
+                    <input name="postselector" type="checkbox">
+                    <label for="check-all"></label>
+                </div>
+            </th>
+            <th>ID</th>
+            <th>{% trans %}Name{% endtrans %}</th>
+            <th>{% trans %}E-mail{% endtrans %}</th>
+            <th>Admin</th>
+        </tr>
+    </thead>
+</table>
+
+<button id="admin-activate" class="btn btn-success pull-right">{% trans %}Activate{% endtrans %}</button>
+<button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">{% trans %}Deactivate{% endtrans %}</button>
+
+{% endblock admin_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/users/table.js"></script>
+{% endblock js_assets %}

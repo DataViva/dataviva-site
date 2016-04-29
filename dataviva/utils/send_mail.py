@@ -3,10 +3,12 @@
     title="Hello"
     message="Invite friends: {0}".format(name)
 '''
-def send_mail(title, recipients, message):   
-    from dataviva import mail
-    from flask.ext.mail import Message
-    msg = Message(title,sender="datavivaweb@gmail.com",recipients=recipients)
+from dataviva import mail
+from flask.ext.mail import Message
+
+
+def send_mail(title, recipients, message):
+    msg = Message(title, sender="dataviva", recipients=recipients)
     msg.body = message
     msg.html = msg.body
     mail.send(msg)

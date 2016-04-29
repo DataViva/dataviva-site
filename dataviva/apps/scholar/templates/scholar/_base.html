@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('general.home') }}">Home</a></li>
+        {% block breadcrumb %}{% endblock %}
+    </ol>
+</div>
+
+<section id="scholar">
+    <div class="container">
+        <nav class="sidebar col-md-3">
+            <a href="{{ url_for('scholar.new') }}" class="btn btn-success btn-lg">Publique um estudo</a>
+            <h3>Temas</h3>
+            <ul class="sub-menu">
+                <li><a href="#" title="Todos"><strong>Todos</strong></a></li>
+                <li><a href="#" title="Visualizações">Visualizações</a></li>
+                <li><a href="#" title="Tecnologia da Informação">Tecnologia da Informação</a></li>
+                <li><a href="#" title="Economia">Economia</a></li>
+                <li><a href="#" title="Matemática">Matemática</a></li>
+                <li><a href="#" title="Estatística">Estatística</a></li>
+                <li><a href="#" title="Design">Design</a></li>
+                <li><a href="#" title="Políticas Públicas">Políticas Públicas</a></li>
+            </ul>
+        </nav>
+
+        <div class="scholar-content col-md-9">
+                {% block scholar_content %}
+                {% endblock scholar_content %}
+        </div>
+
+    </div>
+</section>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/scholar/jquery.ui.widget.js"></script>
+    <script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+    <script src="http://blueimp.github.io/JavaScript-Canvas-to-Blob/js/canvas-to-blob.min.js"></script>
+    <script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="/static/js/modules/scholar/jquery.iframe-transport.js"></script>
+    <script src="/static/js/modules/scholar/jquery.fileupload.js"></script>
+    <script src="/static/js/modules/scholar/jquery.fileupload-process.js"></script>
+    <script src="/static/js/modules/scholar/jquery.fileupload-validate.js"></script>
+    <script src="/static/js/modules/scholar/jquery.fileupload-ui.js"></script>
+    <script src="/static/js/modules/scholar/form.js"></script>
+{% endblock js_assets %}

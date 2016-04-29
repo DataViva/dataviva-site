@@ -1,0 +1,36 @@
+<h2>{% trans %}Choose a university or type what you are looking for{% endtrans %}</h2>
+<form action="" class="form-dataviva form-inline filter">
+</form>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="universities">
+                <div class="form-group search">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                        <input type="text"
+                        name="universities_filter"
+                        class="form-control"
+                        ng-model="selector_model.universities.filter_string"
+                        ng-trim="true"
+                        autocomplete="false" 
+                        placeholder="{% trans %}Search by name or Course HEDU number:{% endtrans %}"/>
+                    </div>
+                </div>
+                
+                <div class="selector-list">
+                    <div class="loading" ng-show="selector_model.loading"></div>
+                    <div ng-repeat="un in selector_model.universities.entries | filter:selector_model.universities.filter_string"
+                        class="selector-list-item"
+                        ng-if="un.id != '0'"
+                        ng-class="{'selected': un.id == selector_model.selected_entry }"
+                        ng-click="selector_model.select(un.id, $event)">
+                        <div class="selector-icon">
+                            <i class="dv-course-hedu-{$ un.id $}"></i></div>
+                        <div class="item-title">
+                            {$ un.name $}
+                            <div class="pull-right">Course Hedu: {$ un.id $}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>

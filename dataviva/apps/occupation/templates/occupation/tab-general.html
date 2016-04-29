@@ -1,0 +1,96 @@
+<div role="tabpanel" class="tab-pane active" id="general">
+    <h2 class="m-t-xl">Perfil Geral</h2>
+    {% if not location.id %}
+        <p>{% trans %}The {% endtrans %}{{occupation.name()}}
+         {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
+         {% trans %}professionals, being number {% endtrans %}{{header.ranking}}{% if language == "pt" %}&ordm{% endif %} 
+         {% trans %}in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is {% endtrans %}{{body.municipality_with_more_jobs}} - {{body.municipality_with_more_jobs_state.upper()}}
+         {% trans %}and the {% endtrans %}{{body.activity_with_more_jobs}} 
+         {% trans %} activity is the one that employs more {% endtrans %}{{occupation.name()}}. 
+         {% trans %} The average monthly income is {% endtrans %}R${{header.average_monthly_income | max_digits(3)}} {{ header.average_monthly_income | magnitude }} 
+         {% trans %}and the average age of workers is{%endtrans%} {{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
+    {% else %}
+        {% if location.id|length == 1 %}
+            <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
+            {% trans %}professionals in the{%endtrans%} {{location.name()}}
+            {% trans %}region, being number {% endtrans %}{{header.ranking}}{% if language == "pt" %}&ordm{% endif %} 
+            {% trans %} in the region occupation ranking. The average monthly income is {% endtrans %}R${{header.average_monthly_income}} 
+            {% trans %} and the average age of workers is {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}). 
+            {% trans %}The city that employs the most in this occupation is {% endtrans %}{{location.article()}} {{body.municipality_with_biggest_wage_avg}}.</p>
+        
+        {% elif location.id|length == 3 %}
+            <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
+            {% trans %}professionals in the state of {%endtrans%}{{location.name()}}
+            {% trans %}being number {% endtrans %}{{header.ranking}}{% if language == "pt" %}&ordm{% endif %} 
+            {% trans %} in the state occupation ranking. The average monthly income is {% endtrans %}R${{header.average_monthly_income}} 
+            {% trans %} and the average age of workers is {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}). 
+            {% trans %}The city that employs the most in this occupation is {% endtrans %}{{location.article()}} {{body.municipality_with_biggest_wage_avg}}.</p>
+        
+        {% elif location.id|length == 5 %}
+            <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
+            {% trans %}professionals in the the mesoregion of {%endtrans%}{{location.preposition('de')}} {{location.name()}}, 
+            {% trans %}being number {% endtrans %}{{header.ranking}}{% if language == "pt" %}&ordm{% endif %} 
+            {% trans %}in its occupation ranking. The average monthly income is {% endtrans %}R${{header.average_monthly_income}} 
+            {% trans %} and the average age of workers is {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}). 
+            {% trans %}The city that employs the most in this occupation is {% endtrans %}{{location.article()}} {{body.municipality_with_biggest_wage_avg}}.</p>
+        
+        {% elif location.id|length == 7 %}
+            <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
+            {% trans %}professionals in the micro-region {% endtrans %}{{location.preposition('de')}} {{location.name()}}, 
+            {% trans %}being number {% endtrans %}{{header.ranking}}{% if language == "pt" %}&ordm{% endif %} 
+            {% trans %}in its occupation ranking. The average monthly income is {% endtrans %}R${{header.average_monthly_income}} 
+            {% trans %}and the average age of workers is {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}). 
+            {% trans %}The city that employs the most in this occupation is {% endtrans %}{{location.article()}} {{body.municipality_with_biggest_wage_avg}}.</p>
+        {% else %}
+            <p>{% trans %}The {% endtrans %}{{occupation.name()}} 
+            {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}
+            {% trans %}professionals, being number {% endtrans %}{{header.ranking}}{% if language == "pt" %}&ordm{% endif %} 
+            {% trans %}in its occupation ranking. The average monthly income is {% endtrans %}R${{header.average_monthly_income}} 
+            {% trans %}and the average age of workers is {% endtrans %}{{header.age_avg | max_digits(3)}} ({{header.year}}).</p>
+        {% endif %}
+    {% endif %}
+
+    <div class="row">
+
+        <div class="dl-box col-xs-12 col-md-6">
+            <h3>{% trans %}Wages and Jobs{% endtrans %}</h3>
+            <dl class="dl-horizontal">
+                {% if body.is_not_municipality %}
+                    <dt>{% trans %}Main employer Municipality{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.municipality_with_more_jobs }} - {{body.municipality_with_more_jobs_state.upper()}}</small>
+                        <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> 
+                        <span>{{body.municipality_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
+                    </dd>
+                {% endif %}
+                    <dt>{% trans %}Main employer activity{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.activity_with_more_jobs }}</small>
+                        <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong>
+                        <span>{{body.activity_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
+                    </dd>
+                {% if body.is_not_municipality %}
+                    <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.municipality_with_biggest_wage_avg }} - {{body.municipality_with_biggest_wage_avg_state.upper()}}</small>
+                        R$ <strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong> 
+                        <span>{{body.municipality_with_biggest_wage_avg_value | magnitude}}</span>
+                    </dd>
+                {% endif %}
+                    <dt>{% trans %}Activity with highest monthly average income{% endtrans %}</dt>
+                    <dd>
+                        <small>{{body.activity_with_biggest_wage_avg }}</small>
+                        R$ <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong>
+                        <span>{{body.activity_with_biggest_wage_avg_value | magnitude}}</span>
+                    </dd>
+            </dl>
+            <a href="#wages" aria-controls="wages" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
+                {% trans %}More details{% endtrans %}
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,4 @@
-div.selector {
+.selector div.selector {
   color: #333;
   font-size: 12px;
   line-height: 16px;
@@ -9,13 +9,13 @@ div.selector {
 }
 
 /* Header Div */
-div.selector_header {
+.selector div.selector_header {
   display: block;
   min-height: 26px;
   padding: 12px;
 }
 
-div.selector_header > div.selector_header_icon {
+.selector div.selector_header > div.selector_header_icon {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -25,77 +25,85 @@ div.selector_header > div.selector_header_icon {
   width: 50px;
 }
 
-div.selector_title_div {
+.selector div.selector_title_div {
   display: inline-block;
   margin: 6px 0px 6px 12px;
 }
 
-div.selector_title {
-  display: inline-block;
+.selector div.selector_title {
   font-size: 18px;
   line-height: 20px;
+  margin-top: -5px;
 }
 
-div.selector_depth {
+.selector div.selector_depth {
   margin-bottom: 6px;
   text-align: center;
 }
 
-div.selector_toggles {
+.selector div.selector_toggles {
   display: inline-block;
   float: right;
+  margin-bottom: 10px;
 }
 
-div.selector_toggles > div.leon.button {
+.selector div.selector_toggles #leon_selector_sort .leon.label{
+  float: none
+}
+.btn-group > .btn:last-child {
+  border-radius: 4px;
+}
+.selector div.selector_toggles > div.leon.button {
   max-width: 150px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-div.selector_header > .leon.text {
+.selector div.selector_header > .leon.text {
   display: block;
   margin: 0px !important;
 }
 
-div.selector_header input {
+.selector div.selector_header input {
   -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
           box-sizing: border-box;
   width: 100%;
 }
 
-div.selector_title_div > div.breadcrumb {
+.selector div.selector_title_div > div.breadcrumb {
   margin: 3px 0 0;
 }
 
-.site_crumb {
+.selector .site_crumb {
   color: #888;
 }
 
-.site_crumb i {
+.selector .site_crumb i {
   float: left;
   margin: 2px 3px 0 0;
 }
 
 /* Body Div */
 
-div.selector_body {
+.selector div.selector_body {
   overflow-y: auto;
   padding: 0px 12px 12px 12px;
+  height: 300px;
 }
 
-div.selector_body > div.d3plus_tooltip_data_seperator {
+.selector div.selector_body > div.d3plus_tooltip_data_seperator {
   margin: 0px;
 }
 
-.search_result {
+.selector .search_result {
   display: block;
-  padding: 6px;
+  padding: 10px;
   position: relative;
 }
 
-.search_header {
+.selector .search_header {
   color: #444;
   display: block;
   font-size: 18px;
@@ -104,7 +112,7 @@ div.selector_body > div.d3plus_tooltip_data_seperator {
   text-align: center;
 }
 
-.search_error {
+.selector .search_error {
   color: #888;
   display: block;
   font-size: 14px;
@@ -113,91 +121,118 @@ div.selector_body > div.d3plus_tooltip_data_seperator {
   text-align: center;
 }
 
-div#result_4mg {
+.selector div#result_4mg {
   background-color: #eee;
 }
 
-.search_result:after {
+.selector .search_result:after {
    content: " ";
    display: block;
    height: 0;
    clear: both;
 }
 
-.search_result > div.search_icon {
+.selector .search_result > div.search_icon {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
   display: inline-block;
-  height: 34px;
-  margin-right: 6px;
-  width: 34px;
+  height: 50px;
+  margin-right: 10px;
+  width: 50px;
+  float: left;
 }
 
-.search_result > div.search_text {
+.selector .search_result{
+  position: relative;
+}
+.selector .search_result:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+.selector .search_result > div.search_text{
+  display: inline-block;
+}
+.selector .search_result > .icon-box + .search_text, .selector .search_result > div.icon-box {
+  display: inline-block;
+  float: left;
+}
+.selector .search_result > .icon-box + .search_text + .search_buttons {
+  position: absolute;
+  top: 50%;
+  margin: -18px 0;
+  right: 20px;
+}
+.selector .search_result > div.icon-box {
+  box-sizing: border-box;
+  font-size: 25px;
+  height: 60px;
+  margin-right: 10px;
+  padding: 10px;
+  text-align: center;
+  width: 60px;
+}
+.selector .search_result > div.icon-box > .search_icon{
+  font-size: 30px;
+  line-height: 1.3em;
+}
+.selector .search_result > div.search_buttons {
+  float: right;
+  text-align: right;
   display: inline-block;
 }
 
-div.search_text > div.search_title {
+.selector div.search_text > div.search_title {
   display: inline;
-  font-size: 14px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 1.1em;
   width: 370px;
 }
 
-/*div.search_result:hover {
-  cursor: pointer;
-}
-
-div.search_result:hover div.search_title {
-  text-decoration: underline;
-}*/
-
-div.search_text > div.search_sub {
+.selector div.search_text > div.search_sub {
   color: #888;
   display: inline;
   line-height: 18px;
   margin-left: 6px;
 }
 
-div.search_text > div.search_data {
-  color: #333;
+.selector div.search_text > div.search_data {
+  color: #999;
+  font-size: 13px;
 }
 
-.search_result > div.search_buttons {
-  display: inline-block;
-  float: right;
-  text-align: right;
-}
 
 div.selector_toggles > div,
-div.search_buttons > div {
+.selector div.search_buttons > div {
   display: inline-block;
   margin: 0px 0px 6px 6px;
 }
 
-.selector_depth_links > a {
+.selector .selector_depth_links > a {
   color: #444;
   display: inline-block;
   margin-left: 5px;
   text-decoration: underline;
 }
 
-.selector_depth_links > a:hover {
+.selector .selector_depth_links > a:hover {
   color: #888;
   /*text-decoration: none;*/
 }
 
-div.search_buttons > div.proximity_toggles {
+.selector div.search_buttons > div.proximity_toggles {
   display: inline-block;
 }
 
-.search_result > div.search_withins {
+.selector .search_result > div.search_withins {
   color: #333;
   font-size: 10px;
 }
 
-div.selector_close {
+.selector div.selector_close {
   background-color: #fff;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
@@ -214,7 +249,7 @@ div.selector_close {
   z-index: 10001;
 }
 
-div.selector_close:hover {
+.selector div.selector_close:hover {
   cursor: pointer;
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);

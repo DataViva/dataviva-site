@@ -1,0 +1,48 @@
+{% extends "scholar/_base.html" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ url_for('scholar.index') }}"><span>Estudos</span></a></li>
+    <li class="active"><span>Publique um estudo<span></li>
+{% endblock %}
+
+{% block scholar_content %}
+    <h2>Estudos sobre o DataViva</h2>
+    <h3>Bem vindo a área de estudos do DataViva.</h3>
+    <p>Aqui você encontra publicações acadêmicas e estudos que envolvem o DataViva</p>
+    <div class="tit-stripe">
+        Publicações mais recentes
+    </div>
+    <div class="article-list">
+        {% for article in articles %}
+        <div class="item">
+            <h4>
+                <a href="{{url_for('scholar.show', id=article.id)}}" title="{{ article.title }}">{{ article.title }}</a>
+            </h4>
+            <p>
+                Autor(es): {{ article.authors_str() }}<br />
+                Palavras-Chave: {{ article.keywords_str() }}<br />
+                Data de Publicação: {{ article.date_str() }}
+            </p>
+        </div>
+        {% endfor %}
+        <nav>
+            <ul class="pagination">
+                <li>
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li>
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{% endblock scholar_content %}

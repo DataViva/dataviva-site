@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row bg-white">
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('general.home') }}">Home</a></li>
+                <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
+                <li><a href="{{ url_for('blog.index') }}">Blog</a></li>
+                <li class="active">{% trans %}Publish{% endtrans %}</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container m-b-lg">
+        <h1>{% trans %}Publish a{% endtrans %} post</h1>
+        {% include "blog/_form.html" %}
+    </div>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/blog/table.js"></script>
+{% endblock js_assets %}

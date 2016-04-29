@@ -1,0 +1,26 @@
+{% extends "rankings/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Rankings</li>
+{% endblock %}
+
+{% block rankings_content %}
+<table id="basic-course-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}Year{% endtrans %}</th>
+            <th>{% trans %}Basic Course ID{% endtrans %}</th>
+            <th>{% trans %}Basic Course{% endtrans %}</th>
+            <th>{% trans %}Enrolled{% endtrans %}</th>
+            <th>{% trans %}Classes{% endtrans %}</th>
+            <th>{% trans %}Average Age{% endtrans %}</th>
+            <th>{% trans %}Nominal Enrollment Growth (1 years){% endtrans %}</th>
+            <th>{% trans %}Nominal Enrollment Growth (5 years){% endtrans %}</th>
+        </tr>
+    </thead>
+</table>
+{% endblock rankings_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/basic-course.js"></script>
+{% endblock js_assets %}

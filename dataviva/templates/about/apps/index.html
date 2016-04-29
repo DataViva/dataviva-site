@@ -1,0 +1,30 @@
+<!-- extend from about base layout -->
+{% extends "about.html" %}
+
+{% block title %}: {% trans %}About the Visualizations{% endtrans %}{% endblock %}
+
+{% block about_content %}
+
+{% if app == "about" %}
+
+  <h1>{% trans %}About the Visualizations{% endtrans %}</h1>
+
+  <p>{% trans %}The platform consists of eleven core visualizations, each of which allows different ways of visualizing the data available. Some visualizations are descriptive, that is, show data aggregated at various levels in a simple and comparative way. Others are prescriptive, using calculations that allow an analytic visualization of the data, facilitating the process of decision making and based on theories such as the Product Space.{% endtrans %}</p>
+
+  <p>{% trans %}Each one of these sections explains the objectives and how to interpret the eleven visualizations of DataViva.{% endtrans %}</p>
+
+  <p>{% trans %}The options at the top left of each visualization allow the user to quickly switch to another visualization, change the view presented and modify the filters available in each visualization (location, data aggregation, color pattern, etc). Each filter creates a different view, using different variables and allows the user to interpret and analyze different aspects of Brazilian economic reality.{% endtrans %}</p>
+
+  <p>{% trans %}The views are created from four databases, one on exports and another on occupations and industries in Brazil. It is possible to cross the main variables of each database, building different views. For example, you can view the products exported by a state, or export destinations of the state (change output), or exports destiny of only one product or product section selected (depth filter), with a color code showing those which presented growth or decline in the last five years (color filter).{% endtrans %}</p>
+
+
+
+{% else %}
+
+  {% include "about/apps/"+app+".html" %}
+
+  <a class="decision icon {{app}}" href="/apps/builder/{{app}}/">{% trans %}View the Visualization{% endtrans %}</a>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,84 @@
+<div id="graphs-education" class="container">
+    <nav class="nav-graph col-xs-12 col-md-3" >
+    <h3>{% trans %}Preview{% endtrans %}:</h3>
+        <div class="list-group panel">
+            <h4>{% trans %}Higher Education By{% endtrans %}</h4>
+            <a href="#education-university" class="list-group-item" data-toggle="collapse" data-parent="#education-university">{% trans %}University{% endtrans %}</a>
+            <div class="collapse" id="education-university">
+                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/university/?color=color&depth=university_5&size=enrolled"
+                   target="graphs-frame-education" class="list-group-item" data-parent="#education-university">
+                    TreeMap
+                </a>
+            </div>
+
+            <a href="#education-course" class="list-group-item" data-toggle="collapse" data-parent="#education-course">{% trans %}Course{% endtrans %}</a>
+            <div class="collapse" id="education-course"> 
+                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled"
+                   target="graphs-frame-education" class="list-group-item" data-parent="#education-course">
+                    TreeMap
+                </a>
+            </div>
+
+            {% if location.id | length != 9 %}
+              <a href="#education-municipality" class="list-group-item" data-toggle="collapse" data-parent="#education-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="education-municipality">
+                  <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=enrolled"
+                     target="graphs-frame-education" class="list-group-item" data-parent="#education-municipality">
+                      TreeMap
+                  </a>
+              </div>
+            {% endif %}
+
+            <h4>{% trans %}Professional Education By{% endtrans %}</h4>
+            <a href="#professional-education-school" class="list-group-item" data-toggle="collapse" data-parent="#professional-education-school">{% trans %}School{% endtrans %}</a>
+            <div class="collapse" id="professional-education-school">
+                <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/school/?color=color&depth=school_type_id&size=enrolled"
+                   target="graphs-frame-education" class="list-group-item" data-parent="#professional-education-school">
+                    TreeMap
+                </a>
+            </div>
+
+            <a href="#professional-education-course" class="list-group-item" data-toggle="collapse" data-parent="#professional-education-course">{% trans %}Course{% endtrans %}</a>
+            <div class="collapse" id="professional-education-course">
+                <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/course_sc/?color=color&depth=course_sc_5&size=enrolled"
+                   target="graphs-frame-education" class="list-group-item" data-parent="#professional-education-course">
+                    TreeMap
+                </a>
+            </div>
+
+            <h4>{% trans %}Basic Education By{% endtrans %}</h4>
+            <a href="#basic-education-administrative-dependencie" class="list-group-item" data-toggle="collapse" data-parent="#basic-education-administrative-dependencie">{% trans %}Administrative Dependency{% endtrans %}</a>
+            <div class="collapse" id="basic-education-administrative-dependencie">
+                <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/adm/?color=color&depth=school_type_id&size=enrolled"
+                   target="graphs-frame-education" class="list-group-item" data-parent="#basic-education-administrative-dependencie">
+                    TreeMap
+                </a>
+            </div>
+
+            <a href="#basic-education-level" class="list-group-item" data-toggle="collapse" data-parent="#basic-education-level">{% trans %}Education Level{% endtrans %}</a>
+            <div class="collapse" id="basic-education-level">
+                <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/basic/?color=color&depth=course_sc_5&size=enrolled"
+                   target="graphs-frame-education" class="list-group-item" data-parent="#basic-education-level">
+                    TreeMap
+                </a>
+            </div>
+
+            {% if location.id | length != 9 %}
+              <a href="#basic-education-municipality" class="list-group-item" data-toggle="collapse" data-parent="#basic-education-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="basic-education-municipality">
+                  <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=enrolled"
+                     target="graphs-frame-education" class="list-group-item" data-parent="#basic-education-municipality">
+                      TreeMap
+                  </a>
+              </div>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/university/?color=color&depth=university_5&size=enrolled"
+                name="graphs-frame-education"
+                id="graphs-frame-education"
+                class="embed-responsive-item" >
+        </iframe>
+    </div>
+</div>

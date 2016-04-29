@@ -1,0 +1,133 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ url_for('general.home') }}">Home</a>
+            </li>
+            <li {{ 'class="active"' if not location else '' }}>
+                <a href="#" title="Trocar" onclick="select_attr('course_hedu');"> {{ major.name() }}</a>
+            </li>
+            {% if location %}
+                <li class="active">
+                    <a href="#" title="Trocar" onclick="select_attr_search('bra');"> {{ location.name() }}</a>
+                </li>
+            {% endif %}
+        </ol>
+    </div>
+</div>
+<!-- BREADCRUMB -->
+
+<section id="header" class="header bg-major-{{ major.id[0:2] }}">
+        <div class="summary-box">
+        <div class="container">
+
+            <span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
+            <h1>
+                {{ major.name() }} 
+                {% if not location.id %}
+                {% trans %}in Brazil{% endtrans %}
+                {% else %}
+                {% if location.id | length <= 3 %}
+                    {{location.preposition('em')}} {{location.name()}}
+                  {% else %}
+                    {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}
+                  {% endif %}
+                {% endif %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    trocar <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="select_attr('course_hedu');">{% trans %}Major{% endtrans %}</a></li>
+                    <li><a href="#" onclick="select_attr_search('bra');;">{% trans %}Location{% endtrans %}</a></li>
+                  </ul>
+                </div>
+            </h1>
+            <span class="clearfix"></span>
+
+            <div class="indices">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                          <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
+                          <div class="number">
+                              <strong class="counter">{{header.enrolled | max_digits(3)}}</strong><br/>
+                              <small class="magnitude">{{header.enrolled | magnitude}}</small>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Entrants{% endtrans %}</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.entrants | max_digits(3)}}</strong><br/>
+                            <small class="magnitude">{{header.entrants | magnitude}}</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
+                      <div class="widget">
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
+                        <div class="number">
+                            <strong class="counter">{{header.graduates | max_digits(3)}}</strong><br/>
+                            <small class="magnitude">{{header.graduates | magnitude}}</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>       
+                <div class="row">
+                  <div class="col-xs-12">
+                    <div class="year">{% trans %}Year{% endtrans %}: {{ header.year }}</div>
+                  </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<section id="profile" class="profile">
+
+  <nav class="col-xs-12">
+
+    <div class="container">
+          <ul class="nav-tabs" role="tablist">
+              <li role="presentation" class="active">
+                  <a href="#general"
+                     aria-controls="general"
+                     role="tab"
+                     data-id="{{ major.id }}"
+                     data-location="{{ location.id }}"
+                     data-toggle="tab">{% trans %}General{% endtrans %}</a>
+              </li>
+              <li role="presentation">
+                  <a href="#enrollments"
+                     aria-controls="enrollments"
+                     role="tab"
+                     graph
+                     data-id="{{ major.id }}"
+                     data-location="{{ location.id }}"
+                     data-toggle="tab">{% trans %}Major{% endtrans %}</a>
+              </li>
+          </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tab-content col-xs-12">
+            {% include "major/tab-general.html" %}
+            {% include "major/tab-enrollments.html" %}
+        </div>
+    </div>
+
+</section>
+
+<section id="graphs" class="graphs bg-gray">
+</section>
+{% endblock content %}
+

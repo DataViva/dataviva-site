@@ -1,5 +1,5 @@
 from flask import Response, request
-from dataviva.attrs.models import Bra
+from dataviva.api.attrs.models import Bra
 
 def add_ibge_id(header, data):
     bras = Bra.query.all()

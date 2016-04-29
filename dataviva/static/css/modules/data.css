@@ -1,0 +1,18 @@
+.data .data-content {
+    border: 1px solid #d0e1eb;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.data .data-content .form-group .control-label{
+    font-size: 18px;
+    font-weight: 300;
+}
+
+.data .popover {
+    margin-left: 25px;
+}
+
+.data #monthly-detail {
+    display: none;
+}

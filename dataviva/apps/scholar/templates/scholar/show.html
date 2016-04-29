@@ -1,0 +1,29 @@
+{% extends "scholar/_base.html" %}
+
+{% block breadcrumb %}
+    <li><a href="{{ url_for('scholar.index') }}">Estudos</a></li>
+    <li class="active">Visualizar</li>
+{% endblock %}
+
+{% block scholar_content %}
+<div class="institucional search">
+    <div class="articles">
+        <div class="item article single">
+            <h2>Estudos DataViva</h2>
+            <div class="meta">
+                <p>
+                    Título: {{ article.title }}<br />
+                    Autor(es): {{ article.authors_str() }}<br />
+                    Palavras-Chave: {{ article.keywords_str() }}<br />
+                    Data de Publicação: {{ article.date_str() }}
+                </p>
+            </div>
+            <p>
+                {{ article.abstract }}
+            </p>
+            <p><a class="btn btn-success btn-md">Baixar arquivo (PDF)</a></p>
+        </div>
+    </div>
+</div>
+
+{% endblock scholar_content %}

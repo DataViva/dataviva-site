@@ -1,0 +1,23 @@
+{% macro messages(input) -%}
+    {% for message in input.errors %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+{%- endmacro %}
+
+<form method="post" action="{{ action }}" class="form-dataviva">
+    {{ form.hidden_tag() }}
+    <p>
+        <label for="title">Título</label>
+        {{ form.title(class="form-control")}}
+        {{ messages(form.title) }}
+    </p>
+    <p>
+        <label for="link">Link</label>
+        {{ form.link(class="form-control")}}
+        {{ messages(form.link) }}
+    </p>
+    <button type="submit" class="btn btn-w-m btn-primary">{% trans %}Send{% endtrans %}</button>
+    <a class="btn btn-w-m btn-primary" href="/calls">{% trans %}Back{% endtrans %}</a>
+</form>

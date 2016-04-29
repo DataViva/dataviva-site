@@ -1,0 +1,52 @@
+<div class="modal fade dataviva" tabindex="-1" role="dialog" id="modal-wizard" data-show="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content" id="wizcont" data-ng-controller="WizardController">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title">{$ wizard.session_title $}</h4>
+			</div>
+			<div class="modal-body clearfix">
+				<div class="institucional search" ng-show="!selector_model">
+					<h2>{$ wizard.title $}</h2>
+					<form class="filter">
+
+
+                        <div class="form-group search">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input type="text"
+                                id="field-search"
+                                name="questions_filter"
+                                class="form-control"
+                                ng-model="wizard.filter_string"
+                                ng-trim="true"
+                                autocomplete="false"/>
+                            </div>
+                        </div>
+
+
+						<div class="selector-list">
+							<h4>{% trans %}Choose an option or type what you are looking for{% endtrans %}</h4>
+							<div class="list-group list-stripped">
+								<div class="selector-list-item"
+								     data-ng-repeat="question in wizard.questions|filter:wizard.filter_string"
+								     data-ng-click="wizard.select(question)"
+								     data-ng-class="{'selected': question == wizard.selected_question }">
+                                    <div class="item-title">
+                                        {$ question.title $}
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="wiz-selector-area" ng-show="selector_model">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="btn btn-primary pull-left" data-dismiss="modal" aria-label="Close">{% trans %}Cancel{% endtrans %}</button>
+				<button class="btn btn-primary" ng-click="submit()">{% trans %}Advance{% endtrans %}</button>
+			</div>
+		</div>
+	</div>
+</div>

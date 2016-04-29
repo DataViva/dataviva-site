@@ -1,0 +1,31 @@
+{% extends "rankings/_base.html" %}
+
+{% block breadcrumb %}
+    <li class="active">Rankings</li>
+{% endblock %}
+
+{% block rankings_content %}
+<table id="trade-partner-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <th>{% trans %}Year{% endtrans %}</th>
+            <th>{% trans %}WLD ID{% endtrans %}</th>
+            <th>{% trans %}Trade Partner{% endtrans %}</th>
+            <th>{% trans %}Exports{% endtrans %}</th>
+            <th>{% trans %}Imports{% endtrans %}</th>
+            <th>{% trans %}Nominal Export Growth (1 year){% endtrans %}</th>
+            <th>{% trans %}Nominal Export Growth (5 year){% endtrans %}</th>
+            <th>{% trans %}Nominal Import Growth (1 year){% endtrans %}</th>
+            <th>{% trans %}Nominal Import Growth (5 year){% endtrans %}</th>
+            <th>{% trans %}Location Diversity{% endtrans %}</th>
+            <th>{% trans %}Effective Location Diversity{% endtrans %}</th>
+            <th>{% trans %}Product Diversity{% endtrans %}</th>
+            <th>{% trans %}Effective Product Diversity{% endtrans %}</th>
+        </tr>
+    </thead>
+</table>
+{% endblock rankings_content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/rankings/trade-partner.js"></script>
+{% endblock js_assets %}8

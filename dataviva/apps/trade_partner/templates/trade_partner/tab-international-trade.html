@@ -1,0 +1,96 @@
+<div role="tabpanel" class="tab-pane" id="international-trade">
+
+    <h2>{% trans %}International Trade{% endtrans %}</h2>
+
+    <div class="row">
+        {% if body.highest_export_value %}
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+            {% trans %}Main Municipality{% endtrans %}
+            <small>{% trans %}by Total Value Exported{% endtrans %}</small>   
+            </div>
+            <div class="blue-box">
+                <p class="label">{{body.municipality_with_more_exports}} - {{body.municipality_with_more_exports_state.upper()}}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.highest_export_value | max_digits(3) }}</strong><span>{{ body.highest_export_value | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if body.highest_export_value %}
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+            {% trans %}Main Municipality{% endtrans %}
+            <small>{% trans %}by Total Value Imported{% endtrans %}</small>    
+            </div>
+            <div class="blue-box">
+                <p class="label">{{body.municipality_with_more_imports}} - {{body.municipality_with_more_imports_state.upper()}}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.highest_import_value | max_digits(3) }}</strong><span>{{ body.highest_import_value | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if body.product_with_highest_export_value %}
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+             {% trans %}Main Product{% endtrans %}
+            <small>{% trans %}by Total Value Exported{% endtrans %}</small>   
+            </div>
+            <div class="blue-box">
+                <p class="label">{{body.product_with_more_exports}}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.product_with_highest_export_value | max_digits(3) }}</strong><span>{{ body.product_with_highest_export_value | magnitude  }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+        {% if body.product_with_highest_import_value %}    
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+            {% trans %}Main Product{% endtrans %}
+            <small>{% trans %}by Total Value Imported{% endtrans %}</small>    
+            </div>
+            <div class="blue-box">
+                <p class="label">{{body.product_with_more_imports}}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.product_with_highest_import_value | max_digits(3) }}</strong><span>{{ body.product_with_highest_import_value | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+             {% trans %}Product with Highest{% endtrans %}
+            <small>{% trans %}Trade Balance{% endtrans %}</small>   
+            </div>
+            <div class="blue-box">
+                <p class="label">{{body.product_with_highest_balance}}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.highest_balance | max_digits(3) }}</strong><span>{{ body.highest_balance | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-3">
+            <div class="blue-box title">
+            {% trans %}Product with Lowest{% endtrans %}
+            <small>{% trans %}Trade Balance{% endtrans %}</small>    
+            </div>
+            <div class="blue-box">
+                <p class="label">{{body.product_with_lowest_balance}}</p>
+                <div class="number">
+                    USD <strong class="counter">{{ body.lowest_balance | max_digits(3) }}</strong><span>{{ body.lowest_balance | magnitude }}</span>
+                </div>
+            </div>
+        </div>
+
+
+    </div><!--/.row-->
+
+</div>

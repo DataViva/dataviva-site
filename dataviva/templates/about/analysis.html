@@ -1,0 +1,21 @@
+<!-- extend from about base layout -->
+{% extends "about.html" %}
+
+{% block title %}: {% trans %}Analysis{% endtrans %}{% endblock %}
+
+{% block about_content %}
+
+<h1>{% trans %}Crosswalk tables{% endtrans %}</h1>
+
+<p>{% trans %}Below are the tables to convert nomenclature used in DataViva{% endtrans %}</p>
+
+
+<a class="decision icon csv" href="/static/xls/HS-ISIC_{{ g.locale }}.xls" target="_blank">
+  HS {% trans %}to{% endtrans %} ISIC {% trans %}Crosswalk{% endtrans %}
+</a>
+
+<a class="decision icon csv" href="/static/xls/CNAE-ISIC.xls" target="_blank">
+  CNAE {% trans %}to{% endtrans %} ISIC {% trans %}Crosswalk{% endtrans %}
+</a>
+
+{% endblock %}

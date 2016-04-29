@@ -1,0 +1,17 @@
+<!-- extend from about base layout -->
+{% extends "about.html" %}
+
+{% block title %}: {% trans %}Testimonial{% endtrans %}{% endblock %}
+
+{% block about_content %}
+
+<h1>{% trans %}Testimonial{% endtrans %}</h1>
+
+<iframe class="youtube" src="https://www.youtube.com/embed/1qy-j_w6jZs?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen width="525" height="295"></iframe>
+
+<br><br>
+<h1>{% trans %}Learn how DataViva was Created{% endtrans %}</h1>
+
+<iframe class="youtube" src="https://www.youtube.com/embed/XZKFhNpsYS4?modestbranding=1&rel=0&showinfo=0&autohide=1{% if g.locale == 'en' %}&hl=en&cc_lang_pref=en&cc_load_policy=1{% endif %}" frameborder="0" allowfullscreen width="525" height="295"></iframe>
+
+{% endblock %}

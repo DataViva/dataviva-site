@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask.ext.babel import gettext, ngettext
 
+
 def dictionary():
 
     return {
@@ -385,6 +386,7 @@ def dictionary():
         "svg_desc": gettext("A vector-based file that can be resized without worrying about pixel resolution."),
 
         # App Builder
+        "all": gettext("All"),
         "basics": gettext("Basic Values"),
         "growth": gettext("Growth"),
         "calculations": gettext("Strategic Indicators"),
@@ -457,7 +459,8 @@ def dictionary():
         "remove_confirmation": gettext("Are you sure to delete this item?"),
 
         # Selector & Search
-        "search": gettext("Search"),
+        "loading": gettext("Loading"),
+        "processing": gettext("Processing"),
         "search_results": gettext("Search Results"),
         "search_empty": gettext("No Matches"),
         "other": gettext("Other"),
@@ -472,9 +475,157 @@ def dictionary():
         "No municipalities within that distance.": gettext("No municipalities within that distance."),
         "Including": gettext("Including"),
         "in": gettext("in"),
-        "no_items": gettext("No Data Available")
+        "no_items": gettext("No Data Available"),
 
+
+        # product profile
+        "General": gettext("General"),
+        "International Trade": gettext("International Trade"),
+        "Economic Opportunities": gettext("Economic Opportunities"),
+        "More details": gettext("More details"),
+        "Total Value Exported": gettext("Total Value Exported"),
+        "Ratio Net Weight / Total Value Exported": gettext("Ratio Net Weight / Total Value Exported"),
+        "Total Value Imported": gettext("Total Value Imported"),
+        "Ratio Net Weight / Total Value Imported": gettext("Ratio Net Weight / Total Value Imported"),
+        "Product Complexity": gettext("Product Complexity"),
+        "International RCA": gettext("International RCA"),
+        "International Distance": gettext("International Distance"),
+        "International Opportunity Gain": gettext("International Opportunity Gain"),
+        "The_product": gettext("The products of the position of "),
+        "are_number": gettext("are number "),
+        " in imports and number": gettext(" in imports and number "),
+        " in exports in Brazil. In ": gettext(" in exports in Brazil. In "),
+        "its commercial value was of ": gettext("its commercial value was of "),
+        ", representing a variation of ": gettext(", representing a variation of "),
+        "in five years. The Brazilian state that most exports": gettext("in five years. The Brazilian state that most exports"),
+        " and the one that imports the most is ": gettext(" and the one that imports the most is "),
+        "occupies the": gettext("occupies the"),
+        "position in exports": gettext("position in exports"),
+        "in this location": gettext("in this location"),
+        "In": gettext("In"),
+        "in five years. The municipality": gettext("in five years. The municipality"),
+        "which exports more": gettext("which exports more"),
+        "Main Municipality by total value exported": gettext("Main Municipality by Total Value Exported"),
+        "Main Municipality by total value imported": gettext("Main Municipality by Total Value Imported"),
+        "Main Destination by total value exported": gettext("Main Destination by Total Value Exported"),
+        "Main Origin by total value exported": gettext("Main Origin by Total Value Exported"),
+        "Main Municipality": gettext("Main Municipality"),
+        "by Total Value Exported": gettext("by Total Value Exported"),
+        "by Total Value Imported": gettext("by Total Value Imported"),
+        "Main Destination": gettext("Main Destination"),
+        "Main Origin": gettext("Main Origin"),
+        "municipality_in": gettext("in five years. The municipality in "),
+        "product_state": gettext("in imports in the state of"),
+        "mesoregions_in": gettext(" in imports in the mesoregions of"),
+        "microregions_in": gettext(" in imports in the microregion of"),
+        "five_years": gettext("in five years."),
+        "and_number": gettext(" and number"),
+
+        # all
+        "preview": gettext("Preview"),
+        "exports_by": gettext("Exports By"),
+        "imports_by": gettext("Imports By"),
+        "general_profile": gettext("General Profile"),
+
+        # header
+        "studies": gettext("Studies"),
+        "news": gettext("News"),
+        "contact": gettext("Contact"),
+        "english": gettext("English"),
+        "portuguese": gettext("Portuguese"),
+        "about": gettext("ABOUT"),
+        "search": gettext("SEARCH"),
+        "star_search": gettext("START A SEARCH"),
+        "partners": gettext("PARTNERS"),
+        "help": gettext("HELP"),
+        "login": gettext("Login"),
+        "singup": gettext("Sign2 Up"),
+        "or": gettext("or"),
+        "basic_features": gettext("Basic Features"),
+        "advanced_features": gettext("Advanced Features"),
+        "edit_profile": gettext("Edit profile"),
+        "welcome": gettext("Welcome"),
+        "view_rankings": gettext("VIEW RANKINGS"),
+        "make_graphs": gettext("MAKE GRAPHS"),
+        "DATABASE_download": gettext("DATABASE DOWNLOAD"),
+
+        # home
+        "largest_plataform": gettext("Brazils largest platform for social and economic data search."),
+        "totaly_open_and_free": gettext("Totally open and free."),
+        "description": gettext("DataViva is a research tool that provides official data about exportation, economic activity, locality, education and occupation in Brazil. It consists of 11 apps that combined enable more than 1 billion visualizations."),
+        "get_started": gettext("Get started "),
+        "watch_videos": gettext("Watch the site video"),
+        "testemonials": gettext("watch the testimonials"),
+        "entrepreneurs": gettext("Entrepreneurs"),
+        "entrepreneurs_text": gettext("Identify the economic profile and business opportunities of a region"),
+        "development_agents": gettext("DEVELOPMENT AGENTS"),
+        "developments_agents_text": gettext("Assess development policies setting by location"),
+        "STUDENTS_AND_PROFESSIONALS": gettext("STUDENTS AND PROFESSIONALS"),
+        "students_and_professionals": gettext("Find information about available jobs, income per occupation and courses"),
+        "explore_our_database": gettext("Explore our database"),
+        "explore_our_database_text": gettext(u"DataViva gathers data from several sources: Employment and Income (RAIS), Brazilian International Trade (SECEX/MDCI), Basic and Technical Education (Censo Escolar), Post-Secondary Education (Censo da Educação Superior) and UN Comtrade International Trade."),
+        "what_would_you_like_to_know": gettext("What would you like to know?"),
+        "brasilian_locations": gettext("Brazilian Locations"),
+        "econimic_activities": gettext("Economic Activities"),
+        "sing_up_free_and": gettext("Sign Up free and make the most of DataViva"),
+        "save_graphs": gettext("Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."),
+        "free_sing_up": gettext("Free Sign Up"),
+        "partners": gettext("Partners"),
+        "promoters": gettext("Promoters"),
+
+        # footer
+        "about_min": gettext("About"),
+        "support": gettext("Support"),
+        "contact_us": gettext("Contact Us"),
+        "the": gettext("The"),
+        "database_download": gettext("Database Download"),
+        "make_grohs": gettext("Make Graphs"),
+        "view_rankings_min": gettext("View Rankings"),
+        "help": gettext("Help"),
+        "virtual_tour": gettext("Virtual Tour"),
+        "message": gettext("Message"),
+
+        # about
+        "dataviva_answer": gettext("DataViva Answer"),
+        "dear_admin": gettext("Dear Administrator."),
+        "the_question": gettext("The question"),
+        "was_publish/comented": gettext("was published/commented on DataViva."),
+        "check_here": gettext("Check here."),
+        "best_regards": gettext("Best Regards,"),
+        "team": gettext("Team"),
+
+        # product
+        "wages_and_jobs": gettext("Wages and Jobs"),
+        "avg_month_income": gettext("Average Monthly Income"),
+        "payroll": gettext("Payroll"),
+        "total_employment": gettext("Total Employment"),
+        "total_establishment": gettext("Total of Establishments"),
+
+        # occupation
+        "main_employer_Municipality": gettext("Main employer Municipality"),
+        "main_employer_activiy": gettext("Main employer activity"),
+        "Municipality_highest_avg_income": gettext("Municipality with highest monthly average income"),
+        "activity_highest_avg_income": gettext("Activity with highest monthly average income"),
+        "related_profiles": gettext("Show Related Occupations"),
+        "by_jobs": gettext("by Number of Jobs"),
+        "main": gettext("Main"),
+        "employer_Municipality": gettext("Employer Municipality"),
+        "employer_activiy": gettext("Employer Activity"),
+        "Municipality_highest": gettext("Municipality with Highest"),
+        "monthly_average_income": gettext("Monthly Average Income"),
+        "activity": gettext("Activity with Highest"),
+        "jobs_by": gettext("Jobs by"),
+        "jobs": gettext("jobs"),
+
+        # data table
+        "dataTableSearch": gettext("Search"),
+        "emptyTable": gettext("No data available"),
+        "infoResults": gettext("Showing _START_ to _END_ of _TOTAL_ results"),
+        "infoEmpty": gettext("No data to show"),
+        "infoFiltered": gettext(" (filtering _MAX_ results)"),
+        "zeroRecords": gettext("No records found"),
     }
+
 
 def plurals(key=None, n=1):
 

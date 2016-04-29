@@ -1,0 +1,9 @@
+{% extends "calls/_base.html" %}
+
+{% block calls_content %}
+<div class="institucional">
+    <h2>{% trans %}Calls{% endtrans %}</h2>
+    <h3>{% trans %}Edit a{% endtrans %} {% trans %}call{% endtrans %}</h3>
+    {% include "calls/_form.html" %}
+</div>
+{% endblock calls_content %}
