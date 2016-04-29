@@ -17,7 +17,8 @@ import sys
 import logging
 
 if len(sys.argv) != 5 or (sys.argv[1:][0] not in ['pt', 'en']):
-    print "ERROR! use :\npython scripts/data_download/rais_create_files.py en/pt output_path year num_select(1,2,3,4)"
+    print "ERROR! use :\npython scripts/data_download/rais_create_files.py en/pt output_path year 1/2/3/4"
+    print " 1 = rais-2003-microregions-classes-families\n 2 = rais-2013-municipalities-classes\n 3 = rais-2013-municipalities-classes-main_groups\n 4 = rais-2013-municipalities-classes-families\n"
     exit()
 
 select_1 = ["SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',cbo_id as 'CBO ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',required as 'Estimated Employees',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)'  FROM rais_ybio WHERE year=" + str(sys.argv[3]) + " and bra_id_len=7 and cnae_id_len=6 and cbo_id_len=4 ", "rais-" + str(sys.argv[3]) + "-microregions-classes-families" ]
@@ -107,4 +108,4 @@ FROM rais_ybio WHERE year=2013 and bra_id_len=9 and cnae_id_len=6 and cbo_id_len
 
 #
 
-'''
+''' 
