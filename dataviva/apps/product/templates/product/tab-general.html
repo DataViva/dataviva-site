@@ -9,8 +9,8 @@
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -20,8 +20,8 @@
             {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }} 
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in Brazil which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.</p>
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.</p>
         {% endif %}
 
     {% elif (location.id|length) == 3 %}
@@ -35,8 +35,8 @@
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -48,8 +48,8 @@
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
         {% endif %}
 
     {% elif (location.id|length) == 5 %}
@@ -63,8 +63,8 @@
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -76,8 +76,8 @@
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
         {% endif %}
 
     {% elif (location.id|length) == 7 %}
@@ -91,8 +91,8 @@
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
@@ -104,8 +104,8 @@
             {% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
             {% trans %}in five years. The municipality in {%endtrans%} {{location.name()}}
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }}/{{ body.municipality_state_export.upper() }} 
-            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }}/{{ body.municipality_state_import.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}and the one that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
         {% endif %}
 
     {% else %}
@@ -137,13 +137,13 @@
                 {% if (location.id|length) != 9 %}
                     <dt>{%trans%}Main Municipality by Total Value Exported{%endtrans%}</dt>
                     <dd>
-                        <small>{{ body.municipality_name_export}}/{{ body.municipality_state_export.upper() }}</small>
+                        <small>{{ body.municipality_name_export}} - {{ body.municipality_state_export.upper() }}</small>
                         USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong>
                         <span>{{ body.municipality_export_value | magnitude }}</span>
                     </dd>
                     <dt>{%trans%}Main Municipality by Total Value Imported{%endtrans%}</dt>
                     <dd>
-                        <small>{{ body.municipality_name_import}}/{{ body.municipality_state_import.upper() }}</small>
+                        <small>{{ body.municipality_name_import}} - {{ body.municipality_state_import.upper() }}</small>
                         USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong>
                         <span>{{ body.municipality_import_value | magnitude }}</span>
                     </dd>
