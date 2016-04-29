@@ -69,14 +69,13 @@ def save(years, locations, industrys, occupations, lang, output_path):
                     print "Gerando ... : "+name_file
                     
                     logging.info('Query for file ('+str(datetime.now().hour)+':'+str(datetime.now().minute)+':'+str(datetime.now().second)+'): \n '+name_file+'\n'+query)
-                    # f = pd.read_sql_query(query, engine)
+                    f = pd.read_sql_query(query, engine)
                     
                     new_file_path = os.path.join(output_path, name_file+".csv.bz2") #pega desda da rais do pc
                     
-                    # f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
+                    f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
 
                     logging.info("\nErro:\n"+str(sys.stderr)+"\n-----------------------------------------------\n")
-                    import pdb; pdb.set_trace()
 
 
 Condition = namedtuple('Condition', ['condition', 'name'])
