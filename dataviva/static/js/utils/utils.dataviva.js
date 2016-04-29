@@ -103,19 +103,19 @@ dataviva.format.text = function(text, opts) {
 }
 
 dataviva.format.affixes = {
-  "val_usd": ["$"," USD"],
-  "export_val": ["$"," USD"],
-  "import_val": ["$"," USD"],
+  "val_usd": ["USD ",""],
+  "export_val": ["USD ",""],
+  "import_val": ["USD ",""],
   "export_kg": [""," kg"],
   "import_kg": [""," kg"],
-  "export_val_kg": ["$"," USD"],
-  "import_val_kg": ["$"," USD"],
-  "purchase_value": ["$"," BRL"],
-  "transfer_value": ["$"," BRL"],
-  "wage": ["$"," BRL"],
-  "wage_avg": ["$"," BRL"],
-  "wage_month": ["$"," BRL"],
-  "wage_avg_bra": ["$"," BRL"]
+  "export_val_kg": ["USD ",""],
+  "import_val_kg": ["USD ",""],
+  "purchase_value": ["R$ ",""],
+  "transfer_value": ["R$ ",""],
+  "wage": ["R$ ",""],
+  "wage_avg": ["R$ ",""],
+  "wage_month": ["R$ ",""],
+  "wage_avg_bra": ["R$ ",""]
 };
 
 for (var a in dataviva.format.affixes) {
@@ -189,8 +189,7 @@ dataviva.format.number = function(value, opts) {
         else symbol = "Milh\u00f5es"
       }
       else if (symbol == "k") {
-        if (digit < 2) symbol = "Milhares"
-        else symbol = "Mil"
+        symbol = "Mil"
       }
       symbol = " "+symbol
     }
@@ -224,7 +223,9 @@ dataviva.format.number = function(value, opts) {
   else if (growth) {
     return_value += "%";
     var arrow = negative ? "down" : "up";
-    return_value = return_value + "<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>";
+    return_value = "<span class='text-"+arrow+"'>" + (negative ? "-" : "") +
+                        return_value + "&nbsp;<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" +
+                    "</span>";
   }
 
   return_value = String(return_value)
@@ -332,9 +333,9 @@ dataviva.ui.loading = function(parent) {
     setTimeout(function(){
 
       self.div.style("opacity",1)
+      d3.select(parent).classed('loading', true);
 
       if (callback) {
-        d3.select(parent).classed('loading', true);
         setTimeout(callback,self.timing)
       }
 
@@ -346,9 +347,9 @@ dataviva.ui.loading = function(parent) {
   this.hide = function() {
 
     self.div.style("opacity",0)
+    d3.select(parent).classed('loading', false);
 
     setTimeout(function(){
-      d3.select(parent).classed('loading', false);
       self.div.style("display","none")
     },self.timing)
 

@@ -83,14 +83,17 @@ def index(course_hedu_id):
         'university_with_more_enrolled': universities_service.university_with_more_enrolled(),
         'highest_enrolled_number_by_university': universities_service.highest_enrolled_number(),
         'municipality_with_more_enrolled': municipalities_service.municipality_with_more_enrolled(),
+        'municipality_with_more_enrolled_state': municipalities_service.municipality_with_more_enrolled_state(),
         'highest_enrolled_number_by_municipality': municipalities_service.highest_enrolled_number(),
         'university_with_more_entrants': universities_service.university_with_more_entrants(),
         'highest_entrant_number_by_university': universities_service.highest_entrants_number(),
         'municipality_with_more_entrants': municipalities_service.municipality_with_more_entrants(),
+        'municipality_with_more_entrants_state': municipalities_service.municipality_with_more_entrants_state(),
         'highest_entrant_number_by_municipality': municipalities_service.highest_entrants_number(),
         'university_with_more_graduates': universities_service.university_with_more_graduates(),
         'highest_graduate_number_by_university': universities_service.highest_graduates_number(),
         'municipality_with_more_graduates': municipalities_service.municipality_with_more_graduates(),
+        'municipality_with_more_graduates_state': municipalities_service.municipality_with_more_graduates_state(),
         'highest_graduate_number_by_municipality': municipalities_service.highest_graduates_number()
     }
 

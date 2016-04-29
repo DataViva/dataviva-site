@@ -5,9 +5,8 @@
         <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}}
         {% trans %}is the{% endtrans %} 
         {% if g.locale == "en" %}number {% endif %}
-        {{header.ranking}}
-        {% if g.locale == "pt" %}&ordf{% endif %}
-        {% trans %}in number of employees in Brazil, and these workers are concentrated in the city of{% endtrans %} {{body.municipality_with_more_num_jobs_name }}
+        {{header.ranking}}{% if g.locale == "pt" %}&ordf{% endif %}
+        {% trans %}in number of employees in Brazil, and these workers are concentrated in the city of{% endtrans %} {{body.municipality_with_more_num_jobs_name }}/{{body.municipality_with_more_num_jobs_state.upper()}}
         {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{(body.municipality_with_more_num_jobs_value | magnitude).lower()}}
         {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
         {% trans %}Brazil has a total of{% endtrans %} {{header.num_establishments_brazil | max_digits(3)}} {{(header.num_establishments_brazil | magnitude).lower()}}
@@ -17,10 +16,9 @@
             <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}}
             {% trans %}is the{% endtrans %} 
             {% if g.locale == "en" %}number {% endif %}
-            {{header.ranking}}
-            {% if g.locale == "pt" %}&ordf{% endif %}
+            {{header.ranking}}{% if g.locale == "pt" %}&ordf{% endif %}
             {% trans %}in number of employees in {% endtrans %}{{location.preposition('de')}} {{location.name()}},
-            {% trans %}and these workers are concentrated in the city of{% endtrans %} {{location.preposition('de')}} {{body.municipality_with_more_num_jobs_name}},
+            {% trans %}and these workers are concentrated in the city of{% endtrans %} {{location.preposition('de')}} {{body.municipality_with_more_num_jobs_name}}/{{body.municipality_with_more_num_jobs_state.upper()}}
             {% trans %}with{% endtrans %} {{body.municipality_with_more_num_jobs_value | max_digits(3)}} {{(body.municipality_with_more_num_jobs_value | magnitude).lower()}}
             {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
             {% trans %}This region has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{(header.num_establishments | magnitude).lower()}}
@@ -29,8 +27,7 @@
             <p>{% trans %}The economic activity{% endtrans %} {{industry.name()}}
             {% trans %}is the{% endtrans %} 
             {% if g.locale == "en" %}number {% endif %}
-            {{header.ranking}}
-            {% if g.locale == "pt" %}&ordf{% endif %}
+            {{header.ranking}}{% if g.locale == "pt" %}&ordf{% endif %}
             {% trans %}employed people. The occupation with the highest number of employed people in this activity is{% endtrans %} {{body.occ_with_more_number_jobs_name}}.
             {% trans %}This municipality has a total of {% endtrans %}{{header.num_establishments | max_digits(3)}} {{(header.num_establishments | magnitude).lower()}}
             {% trans %}establishments that works with{% endtrans %} {{industry.name()}}.</p>
@@ -45,27 +42,27 @@
                 <dd>
                     <small>{{ body.occ_with_more_number_jobs_name }}</small>
                     <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3) }}</strong> 
-                    <span>{{ body.occ_with_more_number_jobs_value | magnitude }}</span>
+                    <span>{{ body.occ_with_more_number_jobs_value | magnitude }} empregos</span>
                 </dd>
                 {% if location.id|length != 9 %}
                     <dt>{% trans %}Municipality with highest number of jobs{% endtrans %}</dt>
                     <dd>    
-                        <small>{{ body.municipality_with_more_num_jobs_name }}</small>
+                        <small>{{ body.municipality_with_more_num_jobs_name }}/{{body.municipality_with_more_num_jobs_state.upper()}}</small>
                         <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong> 
-                        <span>{{ body.municipality_with_more_num_jobs_value | magnitude }}</span>
+                        <span>{{ body.municipality_with_more_num_jobs_value | magnitude }} empregos</span>
                     </dd>
                 {% endif %}
                 <dt>{% trans %}Occupation with highest monthly average income{% endtrans %}</dt>
                 <dd>
                     <small>{{ body.occ_with_more_wage_avg_name }}</small>
-                    USD <strong class="counter">{{ body.occ_with_more_wage_avg_value | max_digits(3) }}</strong>
+                    R$ <strong class="counter">{{ body.occ_with_more_wage_avg_value | max_digits(3) }}</strong>
                     <span>{{ body.occ_with_more_wage_avg_value | magnitude }}</span>
                 </dd>
                 {% if location.id|length != 9 %}
                 <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
                 <dd>
-                    <small>{{ body.municipality_with_more_wage_avg_name }}</small>
-                    USD <strong class="counter">{{ body.municipality_with_more_wage_avg_value | max_digits(3) }}</strong>
+                    <small>{{ body.municipality_with_more_wage_avg_name }}/{{ body.municipality_with_more_wage_avg_state }}</small>
+                    R$ <strong class="counter">{{ body.municipality_with_more_wage_avg_value | max_digits(3) }}</strong>
                     <span>{{ body.municipality_with_more_wage_avg_value | magnitude }}</span>
                 </dd>
                 {% endif %}

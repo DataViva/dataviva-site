@@ -31,9 +31,9 @@
 }
 
 .selector div.selector_title {
-  display: inline-block;
   font-size: 18px;
   line-height: 20px;
+  margin-top: -5px;
 }
 
 .selector div.selector_depth {
@@ -44,8 +44,15 @@
 .selector div.selector_toggles {
   display: inline-block;
   float: right;
+  margin-bottom: 10px;
 }
 
+.selector div.selector_toggles #leon_selector_sort .leon.label{
+  float: none
+}
+.btn-group > .btn:last-child {
+  border-radius: 4px;
+}
 .selector div.selector_toggles > div.leon.button {
   max-width: 150px;
   overflow: hidden;
@@ -130,12 +137,51 @@
   background-repeat: no-repeat;
   background-size: 100%;
   display: inline-block;
-  height: 34px;
-  margin-right: 6px;
-  width: 34px;
+  height: 50px;
+  margin-right: 10px;
+  width: 50px;
+  float: left;
 }
 
-.selector .search_result > div.search_text {
+.selector .search_result{
+  position: relative;
+}
+.selector .search_result:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+.selector .search_result > div.search_text{
+  display: inline-block;
+}
+.selector .search_result > .icon-box + .search_text, .selector .search_result > div.icon-box {
+  display: inline-block;
+  float: left;
+}
+.selector .search_result > .icon-box + .search_text + .search_buttons {
+  position: absolute;
+  top: 50%;
+  margin: -18px 0;
+  right: 20px;
+}
+.selector .search_result > div.icon-box {
+  box-sizing: border-box;
+  font-size: 25px;
+  height: 60px;
+  margin-right: 10px;
+  padding: 10px;
+  text-align: center;
+  width: 60px;
+}
+.selector .search_result > div.icon-box > .search_icon{
+  font-size: 30px;
+  line-height: 1.3em;
+}
+.selector .search_result > div.search_buttons {
+  float: right;
+  text-align: right;
   display: inline-block;
 }
 
@@ -145,14 +191,6 @@
   line-height: 1.1em;
   width: 370px;
 }
-
-.selector /*div.search_result:hover {
-  cursor: pointer;
-}
-
-.selector div.search_result:hover div.search_title {
-  text-decoration: underline;
-}*/
 
 .selector div.search_text > div.search_sub {
   color: #888;
@@ -166,11 +204,6 @@
   font-size: 13px;
 }
 
-.selector .search_result > div.search_buttons {
-  display: inline-block;
-  float: right;
-  text-align: right;
-}
 
 div.selector_toggles > div,
 .selector div.search_buttons > div {

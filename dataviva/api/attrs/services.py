@@ -3,6 +3,50 @@ from dataviva import db
 from sqlalchemy import func
 
 
+class All:
+    def __init__(self):
+        self._attrs_list_ybs = None
+        self._attrs_list_yb = None
+
+        self.max_year_query_ybs = db.session.query(
+            func.max(Ybs.year))
+
+        self.attrs_query_ybs = db.session.query(func.sum(Ybs.stat_val).label("stat_val"), Ybs.stat_id).filter(
+            func.length(Ybs.bra_id) == 1,
+            Ybs.year == self.max_year_query_ybs).group_by(Ybs.stat_id)
+
+        self.max_year_query_yb = db.session.query(
+            func.max(Yb.year))
+
+        self.attrs_query_yb = db.session.query(func.sum(Yb.population).label("population")).filter(
+            func.length(Yb.bra_id) == 1,
+            Yb.year == self.max_year_query_yb)
+
+    def __attrs_list_ybs__(self):
+        if not self._attrs_list_ybs:
+            attrs_data_ybs = self.attrs_query_ybs.first()
+            self._attrs_list_ybs = attrs_data_ybs
+        return self._attrs_list_ybs
+
+    def gdp(self):
+        gdp = self.__attrs_list_ybs__()[0]
+        return gdp
+
+    def __attrs_list_yb__(self):
+        if not self._attrs_list_yb:
+            attrs_data_yb = self.attrs_query_yb.first()
+            self._attrs_list_yb = attrs_data_yb
+        return self._attrs_list_yb
+
+    def population(self):
+        population = self.__attrs_list_yb__()[0]
+        return population
+
+    def gdp_per_capta(self):
+        gdp_per_capta = self.gdp() / float(self.population())
+        return gdp_per_capta
+
+
 class Location:
 
     def __init__(self, bra_id):

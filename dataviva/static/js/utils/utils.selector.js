@@ -55,6 +55,7 @@ function Selector() {
 
   function util(selection) {
 
+    d3.select(selection.node().parentNode).select('.modal-header .modal-title').html(dataviva.dictionary[name+'_plural'])
     selection.each(function(data) {
 
       get_article = function(x) {
@@ -530,6 +531,7 @@ function Selector() {
         header_color = "#333333";
         if (typeof x === "string") {
           header_select_div.style("display","none");
+
           icon.style("display","none");
           title.text(dataviva.format.text("search_results"));
         }
@@ -549,6 +551,8 @@ function Selector() {
 
           if (type !== "file" && (x.id !== "all" || type === "bra")) {
             header_select_div.style("display","inline-block");
+            title_div.style("display","block");
+            icon.style("display","inline-block");
             header_select.leons.header_select.node.onclick = function(){
               selector_load.text(dataviva.format.text("wait")).show();
               callback(data[x.id],name);
@@ -556,6 +560,8 @@ function Selector() {
             header_select.color(x.color);
           }
           else {
+            title_div.style("display","none");
+            icon.style("display","none");
             header_select_div.style("display","none");
           }
 
@@ -609,7 +615,7 @@ function Selector() {
         searcher.color(header_color);
 
 
-        //  AJUSETES DE LAYOUT
+        //  AJUSTES DE LAYOUT
         $("#"+name+"_search").attr('class', 'form-control');
 
         if (type !== "file") {
@@ -683,16 +689,32 @@ function Selector() {
               .attr("class","search_result");
 
             var search_icon = false;
-            if (v.icon && (v.icon != selected.icon || search_term !== "")) {
-              search_icon = item.append("div")
-                .attr("class","search_icon")
-                .style("background-image","url("+v.icon+")");
-              if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && v.id.length != 5)) {
-                search_icon.style("background-color",v.color);
-              }
-            }
 
-            var title = v.name.toTitleCase().truncate(65);
+            icon_class_number_len = {
+                "cbo": 1,
+                "cnae": 1,
+                "university": 1,
+                "wld": 2,
+                "hs": 2,
+                "course_hedu": 2,
+                "course_sc": 2,
+                "bra": 3
+            }
+            if ((type == "bra" && v.id.length !== 1) || (type == "wld" && v.id.length == 5)) {
+                search_icon = item.append("div").attr("class","search_icon").style("background-image","url("+v.icon+")");
+            } else {
+                search_icon = item.append("div").attr("class","icon-box").append("i").attr(
+                    "class","search_icon dv-" +
+                    type.replace("_", "-") + "-" + v.id.slice(0, icon_class_number_len[type]));
+                if (search_icon.node().offsetWidth > 50) {
+                    search_icon.style("font-size", search_icon.node().offsetWidth / 3 + 'px');
+                }
+                search_icon.style("color",v.color);
+            }
+            
+            var abbreviation = v.abbreviation;
+            var title = v.name.toTitleCase().truncate(65) + (abbreviation ? " - " + abbreviation : "");
+
             if (search.length >= 3) {
               title = title.replace(search,"<b>"+search+"</b>");
               title = title.replace(search.toTitleCase(),"<b>"+search.toTitleCase()+"</b>");
@@ -705,7 +727,7 @@ function Selector() {
               .attr("class","search_title")
               .style("color",d3plus.color.legible(v.color))
               .html(title);
-
+            
             if (type != "file" && searching) {
 
               if(type == "bra" && v.id.length > 3) {
@@ -897,7 +919,7 @@ function Selector() {
         .append("div")
           .attr("class","selector")
 
-      var selector_load = new dataviva.ui.loading(container.node())
+      var selector_load = new dataviva.ui.loading(container.node().parentNode)
       selector_load.color("#ffffff")
 
       if (type != "file") {
@@ -988,9 +1010,3 @@ function Selector() {
 
   return util;
 }
-
-
-
-
-
-

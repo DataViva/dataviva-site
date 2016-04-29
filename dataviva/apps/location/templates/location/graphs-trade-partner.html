@@ -2,12 +2,14 @@
     <nav class="nav-graph col-xs-12 col-md-3" >
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
-            <h4 class="m-n">
-                <a href="/{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?scale=linear&depth=direction&time=month&y=val_usd"
-                   class="list-group-item" target="graphs-frame-trade-partner">
-                    {% trans %}Trade Balance{% endtrans %}
+            <h4>{% trans %}Trade Balance{% endtrans %}</h4>
+            <a href="#trade-balance-location" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-location">{% trans %}Location{% endtrans %}</a>
+            <div class="collapse" id="trade-balance-location">
+                <a href="/{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?time=year"
+                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#trade-balance-location">
+                    {% trans %}Line{% endtrans %}
                 </a>
-            </h4>
+            </div>
             <h4>{% trans %}Exports By{% endtrans %}</h4>
             <a href="#exports-products" class="list-group-item" data-toggle="collapse" data-parent="#exports-products">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="exports-products">
@@ -23,17 +25,31 @@
 
             <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">{% trans %}Destination{% endtrans %}</a>
             <div class="collapse" id="exports-destination">
-                <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=export_val"
+                <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/wld?depth=wld_5&controls=true&size=export_val"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/bra/?sort=asc&layout=value&color=color&time=year&y=export_val&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/wld/?sort=asc&layout=value&color=color&time=year&y=export_val&order=color" 
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
 
-            <h4>{% trans %}Importy By{% endtrans %}</h4>
+            {% if location.id | length != 9 %}
+              <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="exports-municipality">
+                  <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra?depth=bra_9&controls=true&size=export_val"
+                     target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/bra/?sort=asc&layout=value&color=color&time=year&y=export_val&order=color"
+                     target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                 </a>
+              </div>
+            {% endif %}
+
+            <h4>{% trans %}Imports By{% endtrans %}</h4>
             <a href="#imports-products" class="list-group-item" data-toggle="collapse" data-parent="#imports-products">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="imports-products">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/hs/?color=color&depth=hs_6&size=import_val"
@@ -48,19 +64,33 @@
 
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{% trans %}Origin{% endtrans %}</a>
             <div class="collapse" id="imports-origin">
-                <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=import_val"
+                <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/wld?depth=wld_5&controls=true&size=import_val"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/bra/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
+                <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/wld/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
+
+            {% if location.id | length != 9 %}
+              <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="imports-municipality">
+                  <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=import_val"
+                     target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/bra/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
+                     target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                 </a>
+              </div>
+            {% endif %}
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/hs/?color=color&depth=hs_6&size=export_val"
+        <iframe src="/{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?time=year"
                 name="graphs-frame-trade-partner"
                 id="graphs-frame-trade-partner"
                 class="embed-responsive-item" >

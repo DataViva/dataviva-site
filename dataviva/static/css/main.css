@@ -272,6 +272,11 @@ footer label,
 footer li {
   color: #FFF;
 }
+footer li span.link {
+  color: #FFF;
+  text-decoration: none;
+  cursor: pointer;
+}
 footer a:focus,
 footer a:hover {
   text-decoration: none;
@@ -831,6 +836,7 @@ table.data-blue thead th small {
     z-index: 999;
     text-align: center;
     display: block;
+    border-radius: 0px 0px 4px 4px;
 }
 .loading .page-loader .loader-icon,
 .loading .page-loader .text {
@@ -873,6 +879,121 @@ table.data-blue thead th small {
 .modal-body {
     min-height: 200px;
 }
+
+
+/* MODAL DE LOGIN */
+#dataviva-login .modal-header, #dataviva-signup .modal-header{
+  padding: 5px 10px
+}
+#dataviva-login .login-help {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+}
+#dataviva-login h4, #dataviva-signup h4 {
+  font-size: 29px;
+  font-weight: 300;
+  line-height: 1.2em;
+  margin: 0 0 15px;
+}
+
+/* MODAL DE SIGNUP */
+#dataviva-signup .intro{
+  background: rgba(0,0,0,.03);
+  border-bottom: 1px solid #eeeeee;
+  margin: -15px -15px 10px;
+  padding: 17px 65px 10px;
+}
+#dataviva-signup .intro p{
+  color: #999;
+}
+#dataviva-signup .form{
+  padding: 10px 50px;
+}
+#dataviva-signup .modal-footer{
+  background: rgba(0,0,0,.03);
+  margin: 0 -15px -15px;
+  border-radius: 0 0 4px 4px;
+  padding: 20px 50px;
+}
+
+
+
+
+/*  SIGNIN SIGUNP LOGIN FORGOT PASS */
+
+.btn-google:hover,
+.btn-facebook:hover,
+.btn-twitter:hover {
+  color: white;
+}
+.btn-google,
+.btn-facebook,
+.btn-twitter {
+  display: block;
+  color: rgba(255,255,255,.9);
+  margin-bottom: 15px;
+}
+.btn-google{ background-color: #DD4B39; }
+.btn-google:hover{ background-color: #B80005; }
+.btn-facebook{ background-color: #3B5998; }
+.btn-facebook:hover{ background-color: #22407F; }
+.btn-twitter{ background-color: #55ACEE; }
+.btn-twitter:hover{ background-color: #3C93D5; }
+
+h1.login-title {
+  padding: 20px 45px 0;
+}
+.signin-box {
+  padding: 20px 60px 40px;
+  margin-bottom: 40px;
+}
+.signin-box:first-child {
+  border-right: 1px solid #eee;
+}
+
+@media (max-width: 767px) {
+  h1.login-title {
+    padding: 0;
+  }
+  .signin-box:first-child {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+  }
+  .signin-box {
+    padding: 20px 15px 20px;
+    margin-bottom: 10px;
+  }
+}
+
+
+
+/*  RANKINGS   */
+.text-up {
+  color: #3c763d;
+}
+.text-down {
+  color: #a94442;
+}
+.text-up, .text-down {
+  text-align: right;
+  display: block;
+}
+
+.rankings-content .dataTable {
+  border-radius: 0;
+}
+.rankings-content .dataTable thead tr th{
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+
+
+
+
+
+
 
 
 

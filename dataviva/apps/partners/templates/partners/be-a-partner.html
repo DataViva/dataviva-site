@@ -4,16 +4,18 @@
 <div class="container">
     <ol class="breadcrumb">
         <li><a href="01-index.html">Home</a></li>
-        <li class="active"><span>Seja Parceiro</span></li>
+        <li class="active"><span>{% trans %}Be a Partner{% endtrans %}</span></li>
     </ol>
     <div class="row">
         <div class="container">
             <div class="institucional">
-                <h2>Seja Parceiro</h2>
-                <p>As parcerias no âmbito do Projeto DataViva são formalizadas por meio de instrumento específico e mediante procedimento de Chamamento Público, nos termos do art. 23 da Lei nº 13.019, de 31 de julho de 2014. Veja abaixo os chamamentos em aberto e aqueles realizados até o momento. Caso tenha alguma sugestão de objeto de parceria que não esteja contemplada nos chamamentos abertos, <a href="{{url_for('contact.index')}}">entre em contato conosco.</a></p>
-                <p> Leia também, na íntegra, a Deliberação nº 92 do Conselho Curador da FAPEMIG que institui as diretrizes e normas para a formalização de parcerias voluntárias entre a FAPEMIG e entidades públicas, organizações da sociedade civil e demais pessoas de direito privado com objetivos comuns, no âmbito do projeto DataViva.</p>
+                <h2>{% trans %}Be a Partner{% endtrans %}</h2>
+                <p>{% trans %}The partnerships in the DataViva project are formalized through specific instruments through a Public Calling procedure, under the article 23 of the Brazilian Federal Law number 13.019, of July 31st 2014. See below the current open public callings and the ones already finalized until now. If you have any suggestion of partnership that is not included in the opened Callings,{% endtrans %} <a href="{{url_for('contact.index')}}">{% trans %}please contact us.{% endtrans %}</a></p>
+                <p>{% trans %}Also read, in its entirety, the {% endtrans %}
+                <a href="http://www.fapemig.br/pt-br/visualizar/ler/39/92-de-01-12-15-parcerias-dataviva" target="_blank">{% trans %}Resolution number 92 of the Curator Council of FAPEMIG{% endtrans %}</a>
+                {% trans %}that establishes the guidelines and rules for the formalization of voluntary partnerships between FAPEMIG and public institutions, civil society organizations and everyone else under private right with common goals, in the DataViva project.{% endtrans %} </p>
 
-                <h2> Chamadas</h2>
+                <h2>{% trans %}Calls{% endtrans %}</h2>
 
                 {% for call in calls %}
                     <p><a href={{call.link}} target="_blank">{{call.title}}</a></p>

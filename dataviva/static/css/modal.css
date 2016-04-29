@@ -13,12 +13,11 @@
 }
 
 .modal.dataviva .modal-body {
-    min-height: 200px;
+    min-height: 300px;
 }
 .modal.dataviva .modal-body h2 {
     font-size:20px;
     margin:1rem 0;
-    min-height: 500px;
 }
 .modal.dataviva .nav-tabs {
     border: 0px;
@@ -119,7 +118,7 @@
     padding: 0;
 }
 .modal-body .selector .selector_body .search_result:nth-child(4n+1) {
-    background: #eee;
+    background: #F3F6F3;
 }
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_node[style] {
     color: #333 !important;

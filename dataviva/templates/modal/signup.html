@@ -1,52 +1,46 @@
 <div class="modal fade dataviva" tabindex="-1" role="dialog" id="dataviva-signup" data-show="true">
     <div class="modal-dialog">
         <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
             <div class="modal-body">
                 <div class="body-container">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h1>{% trans %}Free Sign Up{% endtrans %}</h1>
-                    <p>{% trans %}Sign Up free and make the most of DataViva{% endtrans %}. {% trans %}Signing up gives you access to exclusive resources to facilitate your research.{% endtrans %}.</p>
-                    <div class="clearfix"><!--//--></div>
-                    <form class="row">
-                        <div class="col-xs-12 col-sm-8">
-                            <div class="form-group">
-                                <label class="control-label" for="Nome">{% trans %}Name{% endtrans %}</label>
-                                <div>
-                                    <input id="Nome" name="Nome" type="text" placeholder="Nome" class="form-control" required="">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="email">Email</label>
-                                <div>
-                                    <input id="email" name="email" type="text" placeholder="E-mail" class="form-control" required="">
+                    <div class="intro">
+                        <h4>{% trans %}Free Sign Up{% endtrans %}</h4>
+                        <p>{% trans %}Sign Up free and make the most of DataViva{% endtrans %}. {% trans %}Signing up gives you access to exclusive resources to facilitate your research.{% endtrans %}.</p>
+                    </div>
+                    <form class="form">
+                        <div class="form-group">
+                            <label class="control-label" for="Nome">{% trans %}Name{% endtrans %}</label>
+                            <input id="Nome" name="Nome" type="text" placeholder="{% trans %}Name{% endtrans %}" class="form-control" required="">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="email">E-mail</label>
+                            <div>
+                                <input id="email" name="email" type="text" placeholder="E-mail" class="form-control" required="">
 
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label" for="perfil">{% trans %}What profile best describes you{% endtrans %}?</label>
-                                <div>
-                                    <select id="perfil" name="perfil" class="form-control">
-                                        <option value="1">{% trans %}Entrepreneurs{% endtrans %}</option>
-                                        <option value="2">{% trans %}Development Agents{% endtrans %}</option>
-                                        <option value="">{% trans %}Students and Professionals{% endtrans %}</option>
-                                    </select>
-                                </div>
                             </div>
                         </div>
-                        <div class="col-xs-12">
-                            <div class="form-group">
-                                <label class="control-label" for=""></label>
-                                <div>
-                                    <label class="checkbox-inline" for="-0">
-                                        <input type="checkbox" name="" id="-0" value="1">
-                                        <small>{% trans %}I want to receive news and tips of the best use of Dataviva{% endtrans %}</small>
-                                    </label>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label class="control-label" for="perfil">{% trans %}What profile best describes you{% endtrans %}?</label>
+                                <select id="perfil" name="perfil" class="form-control">
+                                    <option value="1">{% trans %}Entrepreneurs{% endtrans %}</option>
+                                    <option value="2">{% trans %}Development Agents{% endtrans %}</option>
+                                    <option value="">{% trans %}Students and Professionals{% endtrans %}</option>
+                                </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for=""></label>
+                            <label class="checkbox-inline" for="-0">
+                                <input type="checkbox" name="" id="-0" value="1">
+                                <small>{% trans %}I want to receive news and tips of the best use of Dataviva{% endtrans %}</small>
+                            </label>
                         </div>
                     </form>
                     <div class="modal-footer">
-                        <a href="#" data-dismiss="modal" aria-label="Close">{% trans %}Cancel{% endtrans %}</a>&nbsp;&nbsp;<a href="#" class="btn btn-dataviva">{% trans %}Sign Up{% endtrans %}</a>
+                        <a href="#" data-dismiss="modal" aria-label="Close" class="btn btn-default">{% trans %}Cancel{% endtrans %}</a>
+                        <a href="#" class="btn btn-primary">{% trans %}Sign Up{% endtrans %}</a>
                     </div>
                 </div>
             </div>

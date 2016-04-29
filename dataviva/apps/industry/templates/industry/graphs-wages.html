@@ -3,18 +3,48 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Jobs By{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs" target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-            <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=num_jobs" target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                <a href="#jobs-occupation" class="list-group-item" data-toggle="collapse" data-parent="#jobs-occupation">{% trans %}Occupation{% endtrans %}</a>
+                <div class="collapse" id="jobs-occupation">
+                    <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs" 
+                    target="graphs-frame-wages" class="list-group-item">TreeMap</a>
+                    <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?sort=asc&layout=value&y=num_jobs&order=color" 
+                    target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                </div>
+                <a href="#jobs-municipality" class="list-group-item" data-toggle="collapse" data-parent="#jobs-occupation">{% trans %}Municipality{% endtrans %}</a>
+                <div class="collapse" id="jobs-municipality">
+                    <a href="/{{ g.locale }}/embed/geo_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=num_jobs" 
+                    target="graphs-frame-wages" class="list-group-item">{% trans %}Map{% endtrans %}</a>
+                    <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs" 
+                    target="graphs-frame-wages" class="list-group-item">TreeMap</a>
+                    <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?sort=asc&layout=value&y=num_jobs&order=color" 
+                    target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                </div>
             <h4>{% trans %}Wages By{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/geo_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=num_jobs" target="graphs-frame-wages" class="list-group-item">{% trans %}Map{% endtrans %}</a>
-            <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs" target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-            <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=num_jobs&layout=value&sort=asc" target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-            <h4>{% trans %}Distribution{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" target="graphs-frame-wages" class="list-group-item">{% trans %}Bar Chart{% endtrans %}</a>
+                <a href="#wages-occupation" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Occupation{% endtrans %}</a>
+                <div class="collapse" id="wages-occupation">
+                    <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=wage" 
+                    target="graphs-frame-wages" class="list-group-item">TreeMap</a>
+                    <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=wage" 
+                    target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                </div>
+                <a href="#wages-municipality" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Municipality{% endtrans %}</a>
+                <div class="collapse" id="wages-municipality">
+                    <a href="/{{ g.locale }}/embed/geo_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=wage" 
+                    target="graphs-frame-wages" class="list-group-item">{% trans %}Map{% endtrans %}</a>
+                    <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=wage" 
+                    target="graphs-frame-wages" class="list-group-item">TreeMap</a>
+                    <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=wage&sort=asc&layout=value&order=color" 
+                    target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                </div>
+                <a href="#wages-distribution" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Distribution{% endtrans %}</a>
+                <div class="collapse" id="wages-distribution">
+                    <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" 
+                    target="graphs-frame-wages" class="list-group-item">{% trans %}Bar Chart{% endtrans %}</a>
+                </div>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs"
+        <iframe src="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&controls=true&size=num_jobs"
                 name="graphs-frame-wages"
                 id="graphs-frame-wages"
                 class="embed-responsive-item" >

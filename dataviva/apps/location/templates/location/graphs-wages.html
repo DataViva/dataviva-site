@@ -27,7 +27,21 @@
                </a>
             </div>
 
-            <h4>{% trans %}Salary Mass By{% endtrans %}</h4>
+            {% if location.id | length != 9 %}
+              <a href="#jobs-municipality" class="list-group-item" data-toggle="collapse" data-parent="#jobs-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="jobs-municipality">
+                  <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=num_jobs&controls=true"
+                     target="graphs-frame-wages" class="list-group-item" data-parent="#jobs-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/bra/?sort=asc&layout=value&controls=true&y=num_jobs&order=color"
+                     target="graphs-frame-wages" class="list-group-item" data-parent="#jobs-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                 </a>
+              </div>
+            {% endif %}
+
+            <h4>{% trans %}Wage by{% endtrans %}</h4>
             <a href="#wage-industry" class="list-group-item" data-toggle="collapse" data-parent="#wage-industry">{% trans %}Industry{% endtrans %} </a>
             <div class="collapse" id="wage-industry">
                 <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/cnae/?color=color&depth=cnae_6&size=wage"
@@ -51,6 +65,20 @@
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
+
+            {% if location.id | length != 9 %}
+              <a href="#wages-municipality" class="list-group-item" data-toggle="collapse" data-parent="#wages-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="wages-municipality">
+                  <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=wage&controls=true"
+                     target="graphs-frame-wages" class="list-group-item" data-parent="#wages-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/bra/?y=wage&sort=asc&layout=value&order=color&controls=true"
+                     target="graphs-frame-wages" class="list-group-item" data-parent="#wages-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                 </a>
+              </div>
+            {% endif %}
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">

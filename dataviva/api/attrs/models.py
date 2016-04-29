@@ -231,6 +231,7 @@ class Bra(db.Model, AutoSerialize, BasicAttr):
     __tablename__ = 'attrs_bra'
     id = db.Column(db.String(10), primary_key=True)
     id_ibge = db.Column(db.Integer(7))
+    abbreviation = db.Column(db.String(2))
 
     distance = 0
 

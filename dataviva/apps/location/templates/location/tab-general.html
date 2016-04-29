@@ -10,8 +10,7 @@
             {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }} 
             {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}. 
             {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }}, 
-            {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}
-            º
+            {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}º
             {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
         {% elif profile.bra_id|length == 7 %}
             <p>
@@ -33,8 +32,7 @@
 
             {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}} 
             {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
-            {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}
-            ª
+            {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}ª
             {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
             {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} (2010)
             {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
@@ -56,19 +54,15 @@
             {% endfor %}
             {% trans %}The region {% endtrans %}
             {% trans %}has a total of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-            {% trans %}people. It is the number {% endtrans %}{{ profile.gdp_pc_rank }}
-            {% if g.locale == "pt" %}ª{% endif %}
-             {% trans %}region in GDP per capita of Brazil and number {% endtrans %}{{ profile.pop_rank }}
-            {% if g.locale == "pt" %}ª{% endif %}
+            {% trans %}people. It is the number {% endtrans %}{{ profile.gdp_pc_rank }}{% if g.locale == "pt" %}ª{% endif %}
+            {% trans %}region in GDP per capita of Brazil and number {% endtrans %}{{ profile.pop_rank }}{% if g.locale == "pt" %}ª{% endif %}
             {% trans %}in population{% endtrans %}.</p>
         {% else %}
             <p>{{ header.name }}
             {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }}
             {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }}
-            {% trans %}being the {% endtrans %}{{ profile.area_rank }}
-            º
-            {% trans %}state in territorial area and {% endtrans %}{{ profile.pop_rank }}
-            º
+            {% trans %}being the {% endtrans %}{{ profile.area_rank }}º
+            {% trans %}state in territorial area and {% endtrans %}{{ profile.pop_rank }}º
             {% trans %}in population. Its territory is limited for {% endtrans %}
             {% for neighbors in profile.neighbors %}
                 {% if neighbors == profile.neighbors[profile.neighbors|length-1] %}
@@ -134,21 +128,23 @@
           <small>{{ body.main_industry_by_num_jobs_name}}</small>
           <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong> 
           <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
+          {% trans %}Jobs{% endtrans %}
         </dd>
         <dt>{% trans %}Main Occupation{% endtrans %}</dt>
         <dd>
           <small>{{ body.main_occupation_by_num_jobs_name}}</small>
           <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong> 
           <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
+          {% trans %}Occupations{% endtrans %}
         </dd>
         <dt>{% trans %}Average Wage{% endtrans %}</dt>
         <dd>
-          USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> 
+          R$ <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong> 
           <span>{{ body.avg_wage | magnitude }}</span>
         </dd>
         <dt>{% trans %}Total of Jobs{% endtrans %}</dt>
         <dd>
-          USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> 
+          R$ <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong> 
           <span>{{ body.total_jobs | magnitude }}</span>
         </dd>
       </dl>
