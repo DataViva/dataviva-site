@@ -42,9 +42,9 @@ class All:
         population = self.__attrs_list_yb__()[0]
         return population
 
-    def gdp_per_capta(self):
-        gdp_per_capta = self.gdp() / float(self.population())
-        return gdp_per_capta
+    def gdp_per_capita(self):
+        gdp_per_capita = self.gdp() / float(self.population())
+        return gdp_per_capita
 
 
 class Location:
