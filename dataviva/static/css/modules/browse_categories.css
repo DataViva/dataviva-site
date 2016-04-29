@@ -1,3 +1,8 @@
-h4 {
+.col-md-9 .agent-text {
 	text-align: justify;
+	font-size: 10px;
+}
+
+.col-md-9 .agent-profile {
+	padding-left: 0px;
 }
