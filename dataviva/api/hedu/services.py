@@ -300,7 +300,7 @@ class MajorMunicipalities(Major):
 
     def municipality_with_more_enrolled_state(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
-        return hedu.bra.id[1:3]
+        return hedu.bra.abbreviation
 
     def municipality_with_more_entrants(self):
         hedu = self.__hedu_sorted_by_entrants__()[0]
@@ -308,7 +308,7 @@ class MajorMunicipalities(Major):
 
     def municipality_with_more_entrants_state(self):
         hedu = self.__hedu_sorted_by_entrants__()[0]
-        return hedu.bra.id[1:3]
+        return hedu.bra.abbreviation
 
     def municipality_with_more_graduates(self):
         hedu = self.__hedu_sorted_by_graduates__()[0]
@@ -316,7 +316,7 @@ class MajorMunicipalities(Major):
 
     def municipality_with_more_graduates_state(self):
         hedu = self.__hedu_sorted_by_graduates__()[0]
-        return hedu.bra.id[1:3]
+        return hedu.bra.abbreviation
 
 
 class LocationUniversity:

@@ -150,7 +150,7 @@ class Basic_course_city(Basic_course):
 
     def city_state(self):
         city_state = self.__city_sorted_by_enrollment__()[0]
-        return city_state.bra.id[1:3]
+        return city_state.bra.abbreviation
 
     def city_enrolled(self):
         city_enrolled = self.__city_sorted_by_enrollment__()[0]
