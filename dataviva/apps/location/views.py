@@ -60,6 +60,21 @@ def all():
     from dataviva.api.rais.services import Occupation
     occupation_service = Occupation(occupation_id=None)
 
+    from dataviva.api.hedu.services import University
+    university_service = University(university_id=None)
+
+    from dataviva.api.sc.services import Basic_course
+    basic_course_service = Basic_course(course_sc_id=None)
+
+    from dataviva.api.hedu.services import Major
+    major_service = Major(course_hedu_id=None, bra_id=None)
+
+    from dataviva.api.sc.services import Basic_course
+    basic_course_service = Basic_course(course_sc_id=None)
+
+    from dataviva.api.sc.services import Basic_course_school
+    basic_course_school_service = Basic_course_school(course_sc_id=None)
+
     body = {
         'highest_export_value': product_service.highest_export_value(),
         'highest_export_value_name': product_service.highest_export_value_name(),
@@ -73,19 +88,17 @@ def all():
         'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
         'main_occupation_by_num_jobs_name': occupation_service.main_occupation_by_num_jobs_name(),
         'avg_wage': industry_service.avg_wage(),
-        'total_jobs': industry_service.total_jobs()
+        'total_jobs': industry_service.total_jobs(),
 
+        'highest_enrolled_by_university': university_service.highest_enrolled_by_university(),
+        'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),
+        'highest_enrolled_by_major': major_service.highest_enrolled_by_major(),
+        'highest_enrolled_by_major_name': major_service.highest_enrolled_by_major_name(),
+        #'highest_enrolled_by_school': basic_course_school_service.highest_enrolled_by_school(),
+        #'highest_enrolled_by_school_name': basic_course_school_service.highest_enrolled_by_school_name(),
+        #'highest_enrolled_by_basic_course': basic_course_service.highest_enrolled_by_basic_course(),
+        #'highest_enrolled_by_basic_course_name': basic_course_service.highest_enrolled_by_basic_course_name()
     }
-#
-#        'highest_enrolled_by_university': location_university_service.highest_enrolled_by_university(),
-#        'highest_enrolled_by_university_name': location_university_service.highest_enrolled_by_university_name(),
-#        'highest_enrolled_by_school': location_school_service.highest_enrolled_by_school(),
-#        'highest_enrolled_by_school_name': location_school_service.highest_enrolled_by_school_name(),
-#        'highest_enrolled_by_major': location_major_service.highest_enrolled_by_major(),
-#        'highest_enrolled_by_major_name': location_major_service.highest_enrolled_by_major_name(),
-#        'highest_enrolled_by_basic_course': location_basic_course_service.highest_enrolled_by_basic_course(),
-#        'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name()
-#    }
 
     return render_template('location/test_brazil.html', header=header, body=body)
     #return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
