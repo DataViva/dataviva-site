@@ -69,11 +69,11 @@ def all():
     from dataviva.api.hedu.services import Major
     major_service = Major(course_hedu_id=None, bra_id=None)
 
-    from dataviva.api.sc.services import Basic_course
-    basic_course_service = Basic_course(course_sc_id=None)
+    from dataviva.api.sc.services import AllScholar
+    scholar_service = AllScholar()
 
-    from dataviva.api.sc.services import Basic_course_school
-    basic_course_school_service = Basic_course_school(course_sc_id=None)
+    from dataviva.api.sc.services import AllBasicCourse
+    basic_course_service = AllBasicCourse()
 
     body = {
         'highest_export_value': product_service.highest_export_value(),
@@ -95,10 +95,10 @@ def all():
         'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),
         'highest_enrolled_by_major': major_service.highest_enrolled_by_major(),
         'highest_enrolled_by_major_name': major_service.highest_enrolled_by_major_name(),
-        #'highest_enrolled_by_school': basic_course_school_service.highest_enrolled_by_school(),
-        #'highest_enrolled_by_school_name': basic_course_school_service.highest_enrolled_by_school_name(),
-        #'highest_enrolled_by_basic_course': basic_course_service.highest_enrolled_by_basic_course(),
-        #'highest_enrolled_by_basic_course_name': basic_course_service.highest_enrolled_by_basic_course_name()
+        'highest_enrolled_by_school': scholar_service.highest_enrolled_by_school(),
+        'highest_enrolled_by_school_name': scholar_service.highest_enrolled_by_school_name(),
+        'highest_enrolled_by_basic_course': basic_course_service.highest_enrolled_by_basic_course(),
+        'highest_enrolled_by_basic_course_name': basic_course_service.highest_enrolled_by_basic_course_name()
     }
 
     return render_template('location/test_brazil.html', header=header, body=body)
