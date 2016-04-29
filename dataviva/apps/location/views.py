@@ -9,6 +9,16 @@ from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
     LocationJobs, LocationDistance, LocationOppGain
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
 from dataviva.api.sc.services import LocationSchool, LocationBasicCourse
+from dataviva.api.attrs.services import All
+from dataviva.api.secex.services import Product
+from dataviva.api.rais.services import Industry
+from dataviva.api.rais.services import Occupation
+from dataviva.api.hedu.services import University
+from dataviva.api.sc.services import Basic_course
+from dataviva.api.hedu.services import Major
+from dataviva.api.sc.services import AllScholar
+from dataviva.api.sc.services import AllBasicCourse
+from dataviva.api.attrs.models import Wld
 from sqlalchemy import desc, func
 from random import randint
 
@@ -41,47 +51,34 @@ def graphs(bra_id, tab):
 
 @mod.route('/all')
 def all():
-    from dataviva.api.attrs.services import All
     location_service_brazil = All()
-    
-    header = {
-            'gdp': location_service_brazil.gdp(),
-            'population': location_service_brazil.population(),
-            'gdp_per_capta': location_service_brazil.gdp_per_capta(),
-            'eci': ''
-    }
-
-    from dataviva.api.secex.services import Product
     product_service = Product(product_id=None)
-
-    from dataviva.api.rais.services import Industry
     industry_service = Industry(cnae_id=None)
-
-    from dataviva.api.rais.services import Occupation
     occupation_service = Occupation(occupation_id=None)
-
-    from dataviva.api.hedu.services import University
     university_service = University(university_id=None)
-
-    from dataviva.api.sc.services import Basic_course
     basic_course_service = Basic_course(course_sc_id=None)
-
-    from dataviva.api.hedu.services import Major
     major_service = Major(course_hedu_id=None, bra_id=None)
-
-    from dataviva.api.sc.services import AllScholar
     scholar_service = AllScholar()
-
-    from dataviva.api.sc.services import AllBasicCourse
     basic_course_service = AllBasicCourse()
 
+    location = Wld.query.filter_by(id='sabra').first_or_404()
+    
+    header = {
+            'location': 'all',
+            'gdp': location_service_brazil.gdp(),
+            'population': location_service_brazil.population(),
+            'gdp_per_capita': location_service_brazil.gdp_per_capita(),
+            'eci': 0.151,
+            'year': 2014
+    }
+
     body = {
-        'highest_export_value': product_service.highest_export_value(),
-        'highest_export_value_name': product_service.highest_export_value_name(),
-        'highest_import_value': product_service.highest_import_value(),
-        'highest_import_value_name': product_service.highest_import_value_name(),
-        'all_imported': product_service.all_imported(),
-        'all_exported': product_service.all_exported(),
+        'main_product_by_export_value': product_service.highest_export_value(),
+        'main_product_by_export_value_name': product_service.highest_export_value_name(),
+        'main_product_by_import_value': product_service.highest_import_value(),
+        'main_product_by_import_value_name': product_service.highest_import_value_name(),
+        'total_imports': product_service.all_imported(),
+        'total_exports': product_service.all_exported(),
         'all_trade_balance': product_service.all_trade_balance(),
 
         'main_industry_by_num_jobs': industry_service.main_industry_by_num_jobs(),
@@ -101,8 +98,9 @@ def all():
         'highest_enrolled_by_basic_course_name': basic_course_service.highest_enrolled_by_basic_course_name()
     }
 
-    return render_template('location/test_brazil.html', header=header, body=body)
-    #return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
+    profile = {}
+
+    return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
 
 @mod.route('/<bra_id>')
 def index(bra_id):
