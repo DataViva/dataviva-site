@@ -10,7 +10,7 @@
             <small>{% trans %}by Total Value Exported{% endtrans %}</small>   
             </div>
             <div class="blue-box">
-                <p class="label">{{body.municipality_with_more_exports}}/{{body.municipality_with_more_exports_state.upper()}}</p>
+                <p class="label">{{body.municipality_with_more_exports}} - {{body.municipality_with_more_exports_state.upper()}}</p>
                 <div class="number">
                     USD <strong class="counter">{{ body.highest_export_value | max_digits(3) }}</strong><span>{{ body.highest_export_value | magnitude }}</span>
                 </div>
@@ -25,7 +25,7 @@
             <small>{% trans %}by Total Value Imported{% endtrans %}</small>    
             </div>
             <div class="blue-box">
-                <p class="label">{{body.municipality_with_more_imports}}/{{body.municipality_with_more_imports_state.upper()}}</p>
+                <p class="label">{{body.municipality_with_more_imports}} - {{body.municipality_with_more_imports_state.upper()}}</p>
                 <div class="number">
                     USD <strong class="counter">{{ body.highest_import_value | max_digits(3) }}</strong><span>{{ body.highest_import_value | magnitude }}</span>
                 </div>

@@ -11,7 +11,7 @@
         
         {% else %}
           {% if profile.bra_id|length == 9 %}
-              <p>{{ header.name }} 
+              <p>{{ header.name }} - {{ location.abbreviation }}
               {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities -1 }} 
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
               {% trans %} With {% endtrans %}{{ profile.area }} 
@@ -26,7 +26,7 @@
                   A Microrregião
               {% endif %}
 
-              {{ header.name }} 
+              {{ header.name }} - {{ location.abbreviation }}
               {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions -1}} 
               {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }}, 
               {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}. 
@@ -36,6 +36,7 @@
               {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
               </p>
           {% elif profile.bra_id|length == 5 %}
+              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }} - {{ location.abbreviation }}
               <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
 
               {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}} 
