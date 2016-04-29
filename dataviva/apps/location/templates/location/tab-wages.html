@@ -42,6 +42,7 @@
             </div>
         </div>
 
+        {% if header.location != 'all' %}
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="blue-box title">
                 {% trans %}Salary Mass{% endtrans %}
@@ -53,6 +54,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
   
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="blue-box title">
@@ -65,75 +67,5 @@
                 </div>
             </div>
         </div>      
-
-
     </div><!--/.row-->
-
 </div>
-
-
-<!-- <div role="tabpanel" class="tab-pane" id="wages">
-    <h2>{% trans %}Wages and Jobs{% endtrans %}</h2>
-    <div class="row">
-        <div class="col-xs-15 col-sm-15 col-md-12">
-            <div class="table-responsive">
-                <table class="table data-blue">
-                    <thead>
-                        <tr>
-                            <th>
-                                {% trans %}Main Economic Activity{% endtrans %}<small>{% trans %}By Number of Jobs{% endtrans %}</small>
-                            </th>
-                            <th>
-                                {% trans %}Principal Ocupação{% endtrans %}<small>{% trans %}By Number of Jobs{% endtrans %}</small>
-                            </th>
-                            <th>
-                                {% trans %}Average Wage{% endtrans %}
-                            </th>
-                            <th>
-                                {% trans %}Salary Mass{% endtrans %}
-                            </th>
-                            <th>
-                                {% trans %}Total of Jobs{% endtrans %}
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <p class="label">{{ body.main_industry_by_num_jobs_name }}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{{ body.main_occupation_by_num_jobs_name }}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{% trans %}Average Wage{% endtrans %}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong><span>{{ body.avg_wage | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{% trans %}Wage Mass{% endtrans %}l</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.wage | max_digits(3) }}</strong><span>{{ body.wage | magnitude }}</span>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="label">{% trans %}Total of Jobs{% endtrans %}</p>
-                                <div class="number">
-                                    USD <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong><span>{{ body.total_jobs | magnitude }}</span>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-</div>
--->
