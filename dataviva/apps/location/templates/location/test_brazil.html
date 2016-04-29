@@ -5,7 +5,7 @@
 <body>
 	<h3>Indicadores Header:</h3>
 	<p>
-		GDP: {{header.gdp}}</br>
+		GDP: {{body.total_jobs}}</br>
 		POP: {{header.population}}</br>
 		GDP_per_capta: {{header.gdp_per_capta}}</br>
 		ECI: {{header.eci}}</br>
@@ -37,7 +37,7 @@
 
 	<h3>Text:</h3>
 	<p>
-	O Brasil é a 7ª maior economia mundial e 56ª economia mais complexa de acordo com o Índice de Complexidade Econômico (ICE). Em 2015, o Brasil exportou US$ XXXX e importou US$ XXXX, resultando em um saldo comercial (positivo ou negativo) de US$ XXXX. Em 2014, o Brasil tinha XXXX empregados formais. O PIB do Brasil em 2010 foi de XXXX e seu PIB per capita foi de XXXX.
+	O Brasil é a 7ª maior economia mundial e 56ª economia mais complexa de acordo com o Índice de Complexidade Econômico (ICE). Em 2015, o Brasil exportou US$ {{body.all_exported}} e importou US$ {{body.all_imported}}, resultando em um saldo comercial (positivo ou negativo) de US$ {{body.all_trade_balance}}. Em 2014, o Brasil tinha {{body.total_jobs}} empregados formais. O PIB do Brasil em 2010 foi de {{body.total_jobs}} e seu PIB per capita foi de {{header.gdp_per_capta}}.
 	</p>
 </body>
 </html>
