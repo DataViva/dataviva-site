@@ -20,15 +20,13 @@
             <ul>
                 <li>
                     <a href="index" aria-controls="geral" role="tab" data-toggle="tab" id="help-center">
-                        Central de Ajuda
+                        <strong>Central de Ajuda</strong>
                     </a>
                 </li>
                 {% for subject in subjects %}
                     <li>
                         <a href="#tab{{subject.id}}" aria-controls="geral" role="tab" data-toggle="tab" title="{{subject['name_' + g.locale]}}" aria-expanded="false">
-                            {% if loop.first %} <strong> {% endif %}
-                                {{subject['name_' + g.locale]}}
-                            {% if loop.first %} </strong> {% endif %}
+                            {{subject['name_' + g.locale]}}
                         </a>
                     </li>
                 {% endfor %}
