@@ -18,6 +18,11 @@
     <div class="container">
         <nav class="sidebar col-md-3">
             <ul>
+                <li>
+                    <a href="index" aria-controls="geral" role="tab" data-toggle="tab" id="help-center">
+                        Central de Ajuda
+                    </a>
+                </li>
                 {% for subject in subjects %}
                     <li>
                         <a href="#tab{{subject.id}}" aria-controls="geral" role="tab" data-toggle="tab" title="{{subject['name_' + g.locale]}}" aria-expanded="false">
@@ -31,7 +36,20 @@
         </nav>
         <div class="main-content col-md-9">
             <div class="tab-content">
-                {% for subject in subjects %}
+                    <div role="tabpanel" class="tab-pane active" id="home">
+                    {% for subject in subjects %}
+                        <div class="col-md-6">
+                        <div class="panel-heading" role="tab" id="subject{{subject.id}}">
+                            <h2>
+                                <a role="tab" href="#tab{{subject.id}}" aria-controls="geral" data-toggle="tab">
+                                    {{subject['name_' + g.locale]}}
+                                </a>
+                            </h2>
+                        </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+                    {% for subject in subjects %}
                     <div role="tabpanel" class="tab-pane" id="tab{{subject.id}}">
                         <div class="col-xs-12">
                             <h2>{{subject['name_' + g.locale]}}</h2>
