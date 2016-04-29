@@ -144,6 +144,7 @@ class School(db.Model, AutoSerialize, ExpandedAttr):
     school_type_pt = db.Column(db.String(32))
     is_vocational = db.Column(db.Integer)
 
+    ys = db.relationship("Ys", backref = 'school', lazy = 'dynamic')
     ysc = db.relationship("Ysc", backref = 'school', lazy = 'dynamic')
     ybsc = db.relationship("Ybsc", backref = 'school', lazy = 'dynamic')
 
