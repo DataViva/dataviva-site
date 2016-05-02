@@ -21,6 +21,7 @@ from dataviva.api.sc.services import AllBasicCourse
 from dataviva.api.attrs.models import Wld
 from sqlalchemy import desc, func
 from random import randint
+from decimal import *
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
@@ -152,7 +153,8 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
-            'bg_class_image': background_image
+            'bg_class_image': background_image,
+            'year': eci.year
         }
     else:
         header = {
@@ -162,7 +164,8 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
-            'bg_class_image': background_image
+            'bg_class_image': background_image,
+            'year': eci.year
         }
 
     if eci is not None:
@@ -211,7 +214,7 @@ def index(bra_id):
             'state_name': location_service.location_name(3),
             'mesoregion_name': location_service.location_name(5),
             'gdp_rank': location_gdp_rankings_service.gdp_rank(),
-            'area': location_service.area()
+            'area': Decimal(location_service.area())
         }
     elif len(bra_id) == 7:
         profile = {

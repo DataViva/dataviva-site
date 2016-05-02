@@ -19,7 +19,7 @@
               <p>{{ header.name }} - {{ location.abbreviation }}
               {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities -1 }}
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
-              {% trans %} With {% endtrans %}{{ profile.area }}
+              {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
               {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
@@ -42,7 +42,6 @@
               </p>
           {% elif profile.bra_id|length == 5 %}
               <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }} - {{ location.abbreviation }}
-              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
 
               {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}}
               {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
