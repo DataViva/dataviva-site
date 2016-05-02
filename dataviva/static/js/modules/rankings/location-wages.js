@@ -47,7 +47,8 @@ var LocationWages = function () {
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.bra[row[11]].name.truncate(35);
+                    var abbreviation = dataviva.bra[row[11]].abbreviation;
+                    return dataviva.bra[row[11]].name.truncate(35) + (abbreviation ? " - " + abbreviation : "");
                 }
             },
             {

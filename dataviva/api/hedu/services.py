@@ -11,13 +11,17 @@ class University:
         self._hedu_sorted_by_enrolled = None
         self._hedu_sorted_by_entrants = None
         self._hedu_sorted_by_graduates = None
-
         self.university_id = university_id
-        self.max_year_query = db.session.query(
-            func.max(Yu.year)).filter_by(university_id=university_id)
-        self.hedu_query = Yu.query.filter(
-            Yu.university_id == self.university_id,
-            Yu.year == self.max_year_query)
+
+        if university_id is None:
+            self.max_year_query = db.session.query(func.max(Yu.year))
+            self.hedu_query = Yu.query.filter(Yu.year == self.max_year_query)
+        else:
+            self.max_year_query = db.session.query(
+                func.max(Yu.year)).filter_by(university_id=university_id)
+            self.hedu_query = Yu.query.filter(
+                Yu.university_id == self.university_id,
+                Yu.year == self.max_year_query)
 
     def __hedu__(self):
         if not self._hedu:
@@ -85,6 +89,22 @@ class University:
         hedu = self.__hedu_sorted_by_graduates__()[0]
         return hedu.graduates
 
+    def highest_enrolled_by_university(self):
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.enrolled
+        else:
+            return None
+
+    def highest_enrolled_by_university_name(self):
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.university.name()
+        else:
+            return None
+
 
 class UniversityMajors(University):
 
@@ -113,7 +133,6 @@ class Major:
 
     def __init__(self, course_hedu_id, bra_id):
         self._hedu = None
-
         self._hedu_sorted_by_enrolled = None
         self._hedu_sorted_by_entrants = None
         self._hedu_sorted_by_graduates = None
@@ -122,18 +141,22 @@ class Major:
         self.course_hedu_id = course_hedu_id
         self.bra_id = bra_id
 
-        self.max_year_query = db.session.query(
-            func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
-
-        if bra_id != '':
-            self.hedu_query = Ybc_hedu.query.filter(
-                Ybc_hedu.course_hedu_id == self.course_hedu_id,
-                Ybc_hedu.bra_id == self.bra_id,
-                Ybc_hedu.year == self.max_year_query)
+        if course_hedu_id is None and bra_id is None:
+           self.max_year_query = db.session.query(func.max(Yc_hedu.year))
+           self.hedu_query = Ybc_hedu.query.filter(Ybc_hedu.year == self.max_year_query)
         else:
-            self.hedu_query = Yc_hedu.query.filter(
-                Yc_hedu.course_hedu_id == self.course_hedu_id,
-                Yc_hedu.year == self.max_year_query)
+            self.max_year_query = db.session.query(
+                func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
+
+            if bra_id != '':
+                self.hedu_query = Ybc_hedu.query.filter(
+                    Ybc_hedu.course_hedu_id == self.course_hedu_id,
+                    Ybc_hedu.bra_id == self.bra_id,
+                    Ybc_hedu.year == self.max_year_query)
+            else:
+                self.hedu_query = Yc_hedu.query.filter(
+                    Yc_hedu.course_hedu_id == self.course_hedu_id,
+                    Yc_hedu.year == self.max_year_query)
 
     def __hedu__(self):
         if not self._hedu:
@@ -202,6 +225,22 @@ class Major:
     def location_name(self):
         return Bra.query.filter(Bra.id == self.bra_id).first().name()
 
+    def highest_enrolled_by_major(self):
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.enrolled
+        else:
+            return None
+
+    def highest_enrolled_by_major_name(self):
+        hedu_list = self.__hedu_sorted_by_enrolled__()
+        if len(hedu_list) != 0:
+            hedu = hedu_list[0]
+            return hedu.course_hedu.name()
+        else:
+            return None
+
 
 class MajorUniversities(Major):
 
@@ -261,7 +300,7 @@ class MajorMunicipalities(Major):
 
     def municipality_with_more_enrolled_state(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
-        return hedu.bra.id[1:3]
+        return hedu.bra.abbreviation
 
     def municipality_with_more_entrants(self):
         hedu = self.__hedu_sorted_by_entrants__()[0]
@@ -269,7 +308,7 @@ class MajorMunicipalities(Major):
 
     def municipality_with_more_entrants_state(self):
         hedu = self.__hedu_sorted_by_entrants__()[0]
-        return hedu.bra.id[1:3]
+        return hedu.bra.abbreviation
 
     def municipality_with_more_graduates(self):
         hedu = self.__hedu_sorted_by_graduates__()[0]
@@ -277,7 +316,7 @@ class MajorMunicipalities(Major):
 
     def municipality_with_more_graduates_state(self):
         hedu = self.__hedu_sorted_by_graduates__()[0]
-        return hedu.bra.id[1:3]
+        return hedu.bra.abbreviation
 
 
 class LocationUniversity:

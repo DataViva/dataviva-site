@@ -9,6 +9,16 @@ from dataviva.api.rais.services import LocationIndustry, LocationOccupation, \
     LocationJobs, LocationDistance, LocationOppGain
 from dataviva.api.hedu.services import LocationUniversity, LocationMajor
 from dataviva.api.sc.services import LocationSchool, LocationBasicCourse
+from dataviva.api.attrs.services import All
+from dataviva.api.secex.services import Product
+from dataviva.api.rais.services import Industry
+from dataviva.api.rais.services import Occupation
+from dataviva.api.hedu.services import University
+from dataviva.api.sc.services import Basic_course
+from dataviva.api.hedu.services import Major
+from dataviva.api.sc.services import AllScholar
+from dataviva.api.sc.services import AllBasicCourse
+from dataviva.api.attrs.models import Wld
 from sqlalchemy import desc, func
 from random import randint
 
@@ -41,43 +51,56 @@ def graphs(bra_id, tab):
 
 @mod.route('/all')
 def all():
-    from dataviva.api.attrs.services import All
     location_service_brazil = All()
+    product_service = Product(product_id=None)
+    industry_service = Industry(cnae_id=None)
+    occupation_service = Occupation(occupation_id=None)
+    university_service = University(university_id=None)
+    basic_course_service = Basic_course(course_sc_id=None)
+    major_service = Major(course_hedu_id=None, bra_id=None)
+    scholar_service = AllScholar()
+    basic_course_service = AllBasicCourse()
+
+    location = Wld.query.filter_by(id='sabra').first_or_404()
     
     header = {
+            'location': 'all',
             'gdp': location_service_brazil.gdp(),
             'population': location_service_brazil.population(),
-            'gdp_per_capta': location_service_brazil.gdp_per_capta(),
-            'eci': 'http://atlas.media.mit.edu/en/profile/country/bra/'
+            'gdp_per_capita': location_service_brazil.gdp_per_capita(),
+            'eci': 0.151,
+            'year': 2014
     }
 
-#    body = {
-#        'main_product_by_export_value': location_body_service.main_product_by_export_value(),
-#        'main_product_by_export_value_name': location_body_service.main_product_by_export_value_name(),
-#        'main_product_by_import_value': location_body_service.main_product_by_import_value(),
-#        'main_product_by_import_value_name': location_body_service.main_product_by_import_value_name(),
-#        'total_exports': location_body_service.total_exports(),
-#        'total_imports': location_body_service.total_imports(),
-#
-#        'main_industry_by_num_jobs': location_industry_service.main_industry_by_num_jobs(),
-#        'main_industry_by_num_jobs_name': location_industry_service.main_industry_by_num_jobs_name(),
-#        'main_occupation_by_num_jobs': location_occupation_service.main_occupation_by_num_jobs(),
-#        'main_occupation_by_num_jobs_name': location_occupation_service.main_occupation_by_num_jobs_name(),
-#        'avg_wage': location_jobs_service.avg_wage(),
-#        'total_jobs': location_jobs_service.total_jobs(),
-#
-#        'highest_enrolled_by_university': location_university_service.highest_enrolled_by_university(),
-#        'highest_enrolled_by_university_name': location_university_service.highest_enrolled_by_university_name(),
-#        'highest_enrolled_by_school': location_school_service.highest_enrolled_by_school(),
-#        'highest_enrolled_by_school_name': location_school_service.highest_enrolled_by_school_name(),
-#        'highest_enrolled_by_major': location_major_service.highest_enrolled_by_major(),
-#        'highest_enrolled_by_major_name': location_major_service.highest_enrolled_by_major_name(),
-#        'highest_enrolled_by_basic_course': location_basic_course_service.highest_enrolled_by_basic_course(),
-#        'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name()
-#    }
+    body = {
+        'main_product_by_export_value': product_service.highest_export_value(),
+        'main_product_by_export_value_name': product_service.highest_export_value_name(),
+        'main_product_by_import_value': product_service.highest_import_value(),
+        'main_product_by_import_value_name': product_service.highest_import_value_name(),
+        'total_imports': product_service.all_imported(),
+        'total_exports': product_service.all_exported(),
+        'all_trade_balance': product_service.all_trade_balance(),
 
-    return render_template('location/test_brazil.html', header=header)
-    #return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
+        'main_industry_by_num_jobs': industry_service.main_industry_by_num_jobs(),
+        'main_industry_by_num_jobs_name': industry_service.main_industry_by_num_jobs_name(),
+        'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
+        'main_occupation_by_num_jobs_name': occupation_service.main_occupation_by_num_jobs_name(),
+        'avg_wage': industry_service.avg_wage(),
+        'total_jobs': industry_service.total_jobs(),
+
+        'highest_enrolled_by_university': university_service.highest_enrolled_by_university(),
+        'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),
+        'highest_enrolled_by_major': major_service.highest_enrolled_by_major(),
+        'highest_enrolled_by_major_name': major_service.highest_enrolled_by_major_name(),
+        'highest_enrolled_by_school': scholar_service.highest_enrolled_by_school(),
+        'highest_enrolled_by_school_name': scholar_service.highest_enrolled_by_school_name(),
+        'highest_enrolled_by_basic_course': basic_course_service.highest_enrolled_by_basic_course(),
+        'highest_enrolled_by_basic_course_name': basic_course_service.highest_enrolled_by_basic_course_name()
+    }
+
+    profile = {}
+
+    return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
 
 @mod.route('/<bra_id>')
 def index(bra_id):

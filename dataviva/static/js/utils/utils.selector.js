@@ -711,8 +711,10 @@ function Selector() {
                 }
                 search_icon.style("color",v.color);
             }
+            
+            var abbreviation = v.abbreviation;
+            var title = v.name.toTitleCase().truncate(65) + (abbreviation ? " - " + abbreviation : "");
 
-            var title = v.name.toTitleCase().truncate(65);
             if (search.length >= 3) {
               title = title.replace(search,"<b>"+search+"</b>");
               title = title.replace(search.toTitleCase(),"<b>"+search.toTitleCase()+"</b>");
@@ -725,7 +727,7 @@ function Selector() {
               .attr("class","search_title")
               .style("color",d3plus.color.legible(v.color))
               .html(title);
-
+            
             if (type != "file" && searching) {
 
               if(type == "bra" && v.id.length > 3) {

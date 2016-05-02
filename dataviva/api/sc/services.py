@@ -1,9 +1,41 @@
 # -*- coding: utf-8 -*-
-from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc
+from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc, Ys
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva import db
-from sqlalchemy import func, not_
+from sqlalchemy import desc, func, not_
 
+
+class AllBasicCourse:
+    def __init__(self):
+        self.max_year_subquery = None
+        self.scholar_query = None
+        
+        self.max_year_subquery = db.session.query(func.max(Yc_sc.year))
+        self.scholar_query = Yc_sc.query.order_by(Yc_sc.enrolled.desc()).filter(Yc_sc.year == self.max_year_subquery)
+
+    def highest_enrolled_by_basic_course(self):
+        return self.scholar_query.first_or_404().enrolled
+
+    def highest_enrolled_by_basic_course_name(self):
+        bc = self.scholar_query.first_or_404()
+        return bc.course_sc.name() 
+
+
+class AllScholar:
+    def __init__(self):
+        self.max_year_subquery = None
+        self.scholar_query = None
+        
+        self.max_year_subquery = db.session.query(func.max(Ys.year))
+        self.scholar_query = Ys.query.order_by(Ys.enrolled.desc()).filter(Ys.year == self.max_year_subquery)
+
+    def highest_enrolled_by_school(self):
+        return self.scholar_query.first_or_404().enrolled
+
+    def highest_enrolled_by_school_name(self):
+        sc = self.scholar_query.first_or_404()
+        return sc.school.name() 
+         
 
 class Basic_course:
     def __init__(self, course_sc_id):
@@ -150,7 +182,7 @@ class Basic_course_city(Basic_course):
 
     def city_state(self):
         city_state = self.__city_sorted_by_enrollment__()[0]
-        return city_state.bra.id[1:3]
+        return city_state.bra.abbreviation
 
     def city_enrolled(self):
         city_enrolled = self.__city_sorted_by_enrollment__()[0]

@@ -33,9 +33,14 @@
 
                 </dd>
             </dl>
-            <a href="#enrollments" aria-controls="enrollments" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
-                {% trans %}More Details{% endtrans %}
-            </a>
+            <a href="#enrollments" 
+                    aria-controls="enrollments" 
+                    role="tab"        
+                    data-toggle="tab" 
+                    class="pull-right btn btn-primary btn-xs m-r-lg" 
+                    graph
+                    data-id="{{ university.id }}">
+                {% trans %}More details{% endtrans %}</a>
 
             </div>
         </div>

@@ -144,6 +144,7 @@ class School(db.Model, AutoSerialize, ExpandedAttr):
     school_type_pt = db.Column(db.String(32))
     is_vocational = db.Column(db.Integer)
 
+    ys = db.relationship("Ys", backref = 'school', lazy = 'dynamic')
     ysc = db.relationship("Ysc", backref = 'school', lazy = 'dynamic')
     ybsc = db.relationship("Ybsc", backref = 'school', lazy = 'dynamic')
 
@@ -231,6 +232,7 @@ class Bra(db.Model, AutoSerialize, BasicAttr):
     __tablename__ = 'attrs_bra'
     id = db.Column(db.String(10), primary_key=True)
     id_ibge = db.Column(db.Integer(7))
+    abbreviation = db.Column(db.String(2))
 
     distance = 0
 

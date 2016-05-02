@@ -76,9 +76,7 @@
   color: #FFF;
   margin: 0;
 }
-.category .nav-tabs li:nth-child(odd) {
-  background: #dfe7e2;
-}
+
 .category .nav-tabs li a {
   border-radius: 0;
   display: block;

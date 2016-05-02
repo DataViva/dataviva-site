@@ -32,8 +32,12 @@
         {% if not location.id %}
           {% trans %}in Brazil{% endtrans %}
         {% else %}
-          {{location.preposition('em')}} {{location.name()}}
-        {% endif %} 
+          {% if location.id | length <= 3 %}
+            {{location.preposition('em')}} {{location.name()}}
+          {% else %}
+            {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}
+          {% endif %}
+        {% endif %}
           <div class="btn-group">
               <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               {% trans %}change{% endtrans %} <span class="caret"></span>
