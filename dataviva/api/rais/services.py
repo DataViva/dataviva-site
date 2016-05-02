@@ -92,6 +92,9 @@ class Industry:
     def total_jobs(self):
         return sum([industry.num_jobs for industry in self.__rais__() if industry.num_jobs])
 
+    def all_salary_mass(self):
+        return sum([industry.wage for industry in self.__rais__() if industry.wage])
+
 
 class Occupation:
     def __init__(self, occupation_id):

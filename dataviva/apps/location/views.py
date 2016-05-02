@@ -86,7 +86,9 @@ def all():
         'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
         'main_occupation_by_num_jobs_name': occupation_service.main_occupation_by_num_jobs_name(),
         'avg_wage': industry_service.avg_wage(),
+        'wage': industry_service.all_salary_mass(),
         'total_jobs': industry_service.total_jobs(),
+
 
         'highest_enrolled_by_university': university_service.highest_enrolled_by_university(),
         'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),
