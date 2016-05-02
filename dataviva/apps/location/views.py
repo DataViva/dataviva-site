@@ -45,7 +45,11 @@ def add_language_code(endpoint, values):
 
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
-    location = Bra.query.filter_by(id=bra_id).first()
+    if bra_id == 'all':
+        location = Wld.query.filter_by(id='sabra').first()
+        location.id = 'all'
+    else:
+        location = Bra.query.filter_by(id=bra_id).first()
     return render_template('location/graphs-'+tab+'.html', location=location)
 
 
@@ -62,9 +66,9 @@ def all():
     basic_course_service = AllBasicCourse()
 
     location = Wld.query.filter_by(id='sabra').first_or_404()
+    location.id = 'all'
     
     header = {
-            'location': 'all',
             'gdp': location_service_brazil.gdp(),
             'population': location_service_brazil.population(),
             'gdp_per_capita': location_service_brazil.gdp_per_capita(),
