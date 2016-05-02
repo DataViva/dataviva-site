@@ -6,7 +6,7 @@ from models import SearchProfile
 
 class RegistrationForm(Form):
 
-    profile = SelectField('profile', coerce=int, choices=[(profile.id, profile.name) for profile in SearchProfile.query.order_by('name')], validators=[
+    profile = SelectField('profile', coerce=int, choices=[(profile.id, profile.name_pt) for profile in SearchProfile.query.order_by('name_pt')], validators=[
         validators.Required(u"Por favor, selecione o profile.")])
 
     description = TextField('description', validators=[
