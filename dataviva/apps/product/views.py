@@ -73,6 +73,7 @@ def index(product_id):
         body[
             'export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
+
         if len(product.id) == 6:
             header['rca_wld'] = product_service.rca_wld()
             header['distance_wld'] = product_service.distance_wld()
@@ -115,8 +116,7 @@ def index(product_id):
             'origin_name_import'] = trade_partners_service.origin_with_more_imports()
         body[
             'origin_import_value'] = trade_partners_service.highest_import_value()
-        body[
-            'export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
+        body['export_value_growth_in_five_years'] = product_service.export_value_growth_in_five_years()
 
     header['year'] = product_service.year()
     header['trade_balance'] = product_service.trade_balance()
