@@ -36,7 +36,6 @@
               </p>
           {% elif profile.bra_id|length == 5 %}
               <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }} - {{ location.abbreviation }}
-              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
 
               {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}}
               {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
