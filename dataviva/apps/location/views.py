@@ -46,7 +46,11 @@ def add_language_code(endpoint, values):
 
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
-    location = Bra.query.filter_by(id=bra_id).first()
+    if bra_id == 'all':
+        location = Wld.query.filter_by(id='sabra').first()
+        location.id = 'all'
+    else:
+        location = Bra.query.filter_by(id=bra_id).first()
     return render_template('location/graphs-'+tab+'.html', location=location)
 
 
@@ -63,14 +67,15 @@ def all():
     basic_course_service = AllBasicCourse()
 
     location = Wld.query.filter_by(id='sabra').first_or_404()
+    location.id = 'all'
     
     header = {
-            'location': 'all',
+            'bg_class_image': 'bg-all',
             'gdp': location_service_brazil.gdp(),
             'population': location_service_brazil.population(),
             'gdp_per_capita': location_service_brazil.gdp_per_capita(),
             'eci': 0.151,
-            'year': 2014
+            'year': ''
     }
 
     body = {
@@ -87,7 +92,9 @@ def all():
         'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
         'main_occupation_by_num_jobs_name': occupation_service.main_occupation_by_num_jobs_name(),
         'avg_wage': industry_service.avg_wage(),
+        'wage': industry_service.all_salary_mass(),
         'total_jobs': industry_service.total_jobs(),
+
 
         'highest_enrolled_by_university': university_service.highest_enrolled_by_university(),
         'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),

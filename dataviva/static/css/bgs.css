@@ -37,6 +37,14 @@
 
 /* begin backgrounds location */
 
+.bg-all {
+  background: url(https://dataviva.s3.amazonaws.com/img/all.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 
 .bg-1ac_1 {
   background: url(https://dataviva.s3.amazonaws.com/img/1ac_1.jpg) no-repeat center center fixed;
