@@ -146,7 +146,8 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
-            'bg_class_image': background_image
+            'bg_class_image': background_image,
+            'year': eci.year
         }
     else:
         header = {
@@ -156,7 +157,8 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
-            'bg_class_image': background_image
+            'bg_class_image': background_image,
+            'year': eci.year
         }
 
     if eci is not None:
