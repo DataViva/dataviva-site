@@ -4,11 +4,12 @@ from sqlalchemy import ForeignKey
 from dataviva.utils.title_case import title_case
 
 
-search_question_selector = db.Table(
-    'search_question_selector',
-    db.Column('question_id', db.Integer, ForeignKey('search_question.id')),
-    db.Column('selector_id', db.Integer, ForeignKey('search_selector.id'))
-)
+class SearchQuestionSelector(db.Model):
+    __tablename__ = 'search_question_selector'
+    question_id = db.Column(db.Integer, ForeignKey('search_question.id'), primary_key=True)
+    selector_id = db.Column(db.Integer, ForeignKey('search_selector.id'), primary_key=True)
+    order = db.Column(db.Integer)
+    selector = db.relationship("SearchSelector")
 
 
 class SearchQuestion(db.Model):
@@ -17,7 +18,7 @@ class SearchQuestion(db.Model):
     description_pt = db.Column(db.String(400))
     description_en = db.Column(db.String(400))
     answer = db.Column(db.String(400))
-    selectors = db.relationship("SearchSelector", secondary=search_question_selector, backref="selector")
+    selectors = db.relationship("SearchQuestionSelector")
     profile_id = db.Column(db.Integer, ForeignKey('search_profile.id'))
 
     def description(self):
