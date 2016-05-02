@@ -21,6 +21,7 @@ from dataviva.api.sc.services import AllBasicCourse
 from dataviva.api.attrs.models import Wld
 from sqlalchemy import desc, func
 from random import randint
+from decimal import *
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
@@ -204,7 +205,7 @@ def index(bra_id):
             'state_name': location_service.location_name(3),
             'mesoregion_name': location_service.location_name(5),
             'gdp_rank': location_gdp_rankings_service.gdp_rank(),
-            'area': location_service.area()
+            'area': Decimal(location_service.area())
         }
     elif len(bra_id) == 7:
         profile = {
