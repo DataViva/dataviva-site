@@ -1,3 +1,8 @@
+DROP TABLE search_question_selector;
+DROP TABLE search_selector;
+DROP TABLE search_question;
+DROP TABLE search_profile;
+
 CREATE TABLE search_profile(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     name_pt varchar (50) NULL,
@@ -23,13 +28,17 @@ CREATE TABLE search_selector(
 );
 
 CREATE TABLE search_question_selector(
-    id int UNSIGNED NOT NULL AUTO_INCREMENT,
     question_id int UNSIGNED NOT NULL,
     selector_id varchar(50) NOT NULL,
-    PRIMARY KEY (id),
+    `order` int NOT NULL,
+    PRIMARY KEY (`question_id`, `selector_id`),
     FOREIGN KEY (question_id) REFERENCES search_question(id),
     FOREIGN KEY (selector_id) REFERENCES search_selector(id)
 );
+
+INSERT INTO search_profile (name_en, name_pt) VALUES ('Entrepreneurs', 'Empreendedores');
+INSERT INTO search_profile (name_en, name_pt) VALUES ('Development Agents', 'Agentes de Desenvolvimento');
+INSERT INTO search_profile (name_en, name_pt) VALUES ('Students and Professionals', 'Estudantes e Profissionais');
 
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('bra', 'Locations', 'Localidades');
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('cbo', 'Occupations', 'Ocupações');
@@ -40,40 +49,55 @@ INSERT INTO search_selector (id, name_pt, name_en) VALUES ('university', 'Univer
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('course_hedu', 'Major', 'Ensino Superior');
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('course_sc', 'Basic course', 'Curso Básico');
 
-INSERT INTO search_profile (name_en, name_pt) VALUES ('Entrepreneurs', 'Empreendedores');
-INSERT INTO search_profile (name_en, name_pt) VALUES ('Development Agents', 'Agentes de Desenvolvimento');
-INSERT INTO search_profile (name_en, name_pt) VALUES ('Students and Professionals', 'Estudantes e Profissionais');
-
 INSERT INTO search_question (profile_id, description_pt, description_en, answer) VALUES
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Qual o número de estabelecimentos na Atividade X, na Localidade Y?', 'How many establishments in activity X are there in location Y?',
+'Qual o número de estabelecimentos na Atividade X, na Localidade Y?',
+'How many establishments in activity X are there in location Y?',
 '/industry/%s?bra_id=%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Qual o salário médio da Atividade X, na Localidade Y?', 'What is the average wage of activity X in location Y?',
+'Qual o salário médio da Atividade X, na Localidade Y?',
+'What is the average wage of activity X in location Y?',
 '/industry/%s?bra_id=%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Qual o salário médio da Ocupação Z, na Atividade X, na Localidade Y?', 'What is the average wage of occupation Z in activity X in location Y?',
+'Qual o salário médio da Ocupação Z, na Atividade X, na Localidade Y?',
+'What is the average wage of occupation Z in activity X in location Y?',
 '/occupation/%s?cnae_id=%s?bra_id=%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais os principais parceiros comerciais de um Produto P na Localidade Y?', 'Which are the main business partners of product P in location Y?',
+'Quais os principais parceiros comerciais de um Produto P na Localidade Y?',
+'Which are the main business partners of product P in location Y?',
 '/product/%s?bra_id=%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais localidades concentram o emprego na Atividade X?', 'Which places concentrate jobs in activity X?',
+'Quais localidades concentram o emprego na Atividade X?',
+'Which places concentrate jobs in activity X?',
 '/industry/%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais as localidades que mais importam o Produto P?', 'Which places are the top importers of product P?',
+'Quais as localidades que mais importam o Produto P?',
+'Which places are the top importers of product P?',
 '/product/%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais as localidades que mais exportam o Produto P?', 'Which places are the top exporters of product P?',
+'Quais as localidades que mais exportam o Produto P?',
+'Which places are the top exporters of product P?',
 '/product/%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais os produtos mais próximos da estrutura produtiva da Localidade Y?', 'Which products are closer to the productive structure of location y?',
+'Quais os produtos mais próximos da estrutura produtiva da Localidade Y?',
+'Which products are closer to the productive structure of location y?',
 '/location/%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais os cursos de nível superior oferecidos na Localidade Y?', 'Which post-secondary courses are offered in location Y?',
+'Quais os cursos de nível superior oferecidos na Localidade Y?',
+'Which post-secondary courses are offered in location Y?',
 '/location/%s'),
+
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais os cursos de nível técnico oferecidos na Localida de Y?', 'Which technical courses are offered in location Y?',
+'Quais os cursos de nível técnico oferecidos na Localida de Y?',
+'Which technical courses are offered in location Y?',
 '/location/%s');
 
 INSERT INTO search_question (profile_id, description_pt, description_en, answer) VALUES
@@ -147,3 +171,119 @@ INSERT INTO search_question (profile_id, description_pt, description_en, answer)
 'Quais as principais atividades econômicas de uma Localidade Y?',
 'Which are the main products exported by location Y?',
 '/location/%s');
+
+INSERT INTO search_question_selector (question_id, selector_id, `order`) VALUES
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Qual o número de estabelecimentos na Atividade X, na Localidade Y?'),
+'cnae', 0),
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Qual o número de estabelecimentos na Atividade X, na Localidade Y?'),
+'bra', 1),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Qual o salário médio da Atividade X, na Localidade Y?'),
+'cnae', 0),
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Qual o salário médio da Atividade X, na Localidade Y?'),
+'bra', 1),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Qual o salário médio da Ocupação Z, na Atividade X, na Localidade Y?'),
+'cbo', 0),
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Qual o salário médio da Ocupação Z, na Atividade X, na Localidade Y?'),
+'cnae', 1),
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Qual o salário médio da Ocupação Z, na Atividade X, na Localidade Y?'),
+'bra', 2),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais os principais parceiros comerciais de um Produto P na Localidade Y?'),
+'hs', 0),
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais os principais parceiros comerciais de um Produto P na Localidade Y?'),
+'bra', 1),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais localidades concentram o emprego na Atividade X?'),
+'cnae', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais as localidades que mais importam o Produto P?'),
+'hs', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais as localidades que mais exportam o Produto P?'),
+'hs', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais os produtos mais próximos da estrutura produtiva da Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais os cursos de nível superior oferecidos na Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
+   AND description_pt = 'Quais os cursos de nível técnico oferecidos na Localida de Y?'),
+'bra', 0);
+
+
+INSERT INTO search_question_selector (question_id, selector_id, `order`) VALUES
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Development Agents')
+   AND description_pt = 'Qual a rede de produtos da Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Development Agents')
+   AND description_pt = 'Quais os produtos mais próximos da estrutura produtiva da Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Development Agents')
+   AND description_pt = 'Quais os produtos de maior complexidade exportados por uma Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Development Agents')
+   AND description_pt = 'Quais os produtos de maior complexidade importados por uma Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Development Agents')
+   AND description_pt = 'Qual a rede de atividades da Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Development Agents')
+   AND description_pt = 'Quais as atividades mais próximas da estrutura produtiva da Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Development Agents')
+   AND description_pt = 'Quais localidades concentram o emprego na Atividade X?'),
+'cnae', 0);
+
+
+INSERT INTO search_question_selector (question_id, selector_id, `order`) VALUES
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Quais os cursos de nível superior oferecidos na Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Quais os cursos de nível técnico oferecidos na Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Qual o salário médio da Ocupação Z na Localidade Y?'),
+'cbo', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Em quais localidades paga-se o maior salário médio da Ocupação Z?'),
+'cbo', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Em quais localidades cresce o número de empregados da Ocupação Z?'),
+'cbo', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Quais os principais produtos exportados pela Localidade Y?'),
+'bra', 0),
+
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Quais as principais atividades econômicas de uma Localidade Y?'),
+'bra', 0);
