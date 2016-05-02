@@ -79,11 +79,11 @@
               {% trans %}in population. Its territory is limited for {% endtrans %}
               {% for neighbors in profile.neighbors %}
                   {% if neighbors == profile.neighbors[profile.neighbors|length-1] %}
-                      {% trans %}and{% endtrans %} {{ neighbors }}
+                      {% trans %}and{% endtrans %} {{ neighbors }}.
                   {% else %}
                       {{ neighbors }},
                   {% endif %}
-              {% endfor %}.
+              {% endfor %}
               {% trans %}Its territory is subdivided in {% endtrans %}{{ profile.number_of_municipalities -1 }}
               {% trans %}cities{% endtrans %}
               .</p>
