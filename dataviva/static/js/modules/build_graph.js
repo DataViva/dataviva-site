@@ -42,22 +42,60 @@ dataviva.requireAttrs(['datasets'], function() {
                 label.html(dataviva.dictionary[dimension.id]);
             
                 filter.change(function() {
-                  $.ajax({
-                        method: "GET",
-                        url: "/" + lang + "/build_graph/views/" + dataset +"/" +
-                            $('#dimensions #filter0').val() + "/" +
-                            ($('#dimensions #filter1').val() == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" + 
-                            ($('#dimensions #filter2').val() == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
-                        data: {
-                                filter1: $('#dimensions #filter1').val(),
-                                filter2: $('#dimensions #filter2').val() 
-                            },
-                        success: function (builds) {
-                            for (i in builds) {
-                                console.log(builds[i]);
+                      $.ajax({
+                            method: "GET",
+                            url: "/" + lang + "/build_graph/views/" + dataset +"/" +
+                                $('#dimensions #filter0').val() + "/" +
+                                ($('#dimensions #filter1').val() == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" + 
+                                ($('#dimensions #filter2').val() == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
+                            data: {
+                                    filter1: $('#dimensions #filter1').val(),
+                                    filter2: $('#dimensions #filter2').val() 
+                                },
+                            success: function (builds) {
+                                
+                                console.log(builds)
+                                //('#titles').empty()
+                                if(builds.builds.length > 0){
+                                    //console.log(builds);
+                                    builds.builds.sort(function(build1, build2){
+                                            return ((build1["title"] < build2["title"]) ? -1 : 
+                                                ((build1["title"] > build2["title"]) ? 1 : 0));
+                                    })                        
+                                    titles = {};
+                                    result = [];
+                                    for (var i = 0; i< builds.builds.length ; i++) {
+                                        if(builds.builds[i].title != null){
+                                            title = builds.builds[i].title.replace(/\s\(.*\)/g, '');
+                                            if(! (title in titles)){
+                                                titles[title] = 1;
+                                                result.push(title);
+                                            }else{
+                                                titles[title]+=1;
+                                            }
+                                        }
+                                    }
+                                    $('#titles').empty()
+                                    var div = $("<div></div>").addClass("form-group").attr("id", "titles");
+                                    select = $("<select></select>").addClass("form-control").attr("id", 'titles'),
+                                    label = $("<label></label>").attr("for", "titles").addClass("control-label"),
+                                    label.html("Options");
+
+
+                                    for(var i = 0; i<result.length ; i++){
+                                        option = $('<option value="'+i+'">'+result[i]+'</option>')
+                                        select.append(option);
+                                    }
+
+                                    div.append(label).append(select);
+
+                                    $('#dimensions').append(div);
+                            
+                                //select.chenge()
                             }
                         }
                     });
+
                 });
 
                 if (dimension.name == 'School') { 
