@@ -203,22 +203,22 @@ dataviva.getUrlAttr = function(attr) {
 
 var selectorSearchCallback = Selector()
   .callback(function(d){
-    window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id=" 
+    window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id="
     + d.id ;
   });
 
 var selectorHrefCallback = Selector()
     .callback(function(d){
-        window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id + 
+        window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id +
         window.location.search;
     });
 
-function select_attr(id) {
+var select_attr = function(id) {
   d3.select("#modal-selector-content").call(selectorHrefCallback.type(id));
   $('#modal-selector').modal('show');
 }
 
-function select_attr_search(id) {
+var select_attr_search = function(id) {
   d3.select("#modal-selector-content").call(selectorSearchCallback.type(id));
   $('#modal-selector').modal('show');
 }
@@ -264,5 +264,45 @@ $(document).ready(function () {
             window.location.href = path.join('/') + window.location.search + window.location.hash;
         }
     });
+
+    $('a[data-search]').click(function() {
+        search($(this).data('search'));
+    });
 });
 
+
+var search = function(profile) {
+    $('#modal-search .modal-body').empty();
+    $('#modal-search .chosen-options .question').empty();
+    $('#modal-search #search-advance').prop("disabled", true);
+    var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
+    search_load.text(dataviva.dictionary['loading']);
+
+    $('#modal-search').modal('show');
+
+    $.ajax({
+      method: "GET",
+      url: "/" + lang + "/search/profile/" + profile,
+      success: function (response) {
+        search_load.hide();
+
+        $('#modal-search .modal-title').html(response.profile);
+        $('#modal-search .modal-body').html(response.template);
+
+        for (i in response.questions) {
+
+            var question = $("<div></div>").addClass("selector-list-item");
+            question.append("<div></div>").addClass("item-title").html(response.questions[i].question);
+
+            question.click(function() {
+                $('#modal-search .chosen-options .question').html($(this).html());
+                $('#modal-search #search-advance').prop("disabled", false);
+                $(this).siblings('.selected')   .toggleClass('selected');
+                $(this).toggleClass('selected');
+            });
+
+            $('#modal-search .selector-list .list-group').append(question);
+        }
+      }
+    })
+}
