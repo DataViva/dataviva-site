@@ -5,7 +5,8 @@
           {{body.total_exports|max_digits(3)}} {{(body.total_exports|magnitude).lower()}} 
           {% if g.locale == "en" %}USD {% endif %}{% trans %}and imported{% endtrans %} 
           {{body.total_imports|max_digits(3)}} {{(body.total_imports|magnitude).lower()}}, {% if g.locale == "en" %}USD {% endif %}{% trans %}resulting in a{% endtrans %} 
-          {{'positive' if body.all_trade_balance >= 0 else 'negative'}}
+          {% if g.locale == "en" %}{{'positive' if body.all_trade_balance >= 0 else 'negative'}}{% else %}
+          {{'positivo' if body.all_trade_balance >= 0 else 'negativo'}}{% endif %}
           {% trans %}commercial rate of{% endtrans %}
           {{body.all_trade_balance|max_digits(3)}} {{(body.all_trade_balance|magnitude).lower()}}{% if g.locale == "en" %} USD{% endif %}. {% trans %}In 2014 Brasil had{% endtrans %} 
           {{body.total_jobs|max_digits(3)}} {{(body.total_jobs|magnitude).lower()}} 
