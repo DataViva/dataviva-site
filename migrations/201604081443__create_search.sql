@@ -4,7 +4,7 @@ DROP TABLE search_question;
 DROP TABLE search_profile;
 
 CREATE TABLE search_profile(
-    id int UNSIGNED NOT NULL AUTO_INCREMENT,
+    id varchar(50) NOT NULL,
     name_pt varchar (50) NULL,
     name_en varchar (50) NULL,
     PRIMARY KEY (id)
@@ -15,7 +15,7 @@ CREATE TABLE search_question(
     description_pt varchar (400) NULL,
     description_en varchar (400) NULL,
     answer varchar (400) NULL,
-    profile_id int UNSIGNED NOT NULL,
+    profile_id varchar(50) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (profile_id) REFERENCES search_profile(id)
 );
@@ -36,9 +36,9 @@ CREATE TABLE search_question_selector(
     FOREIGN KEY (selector_id) REFERENCES search_selector(id)
 );
 
-INSERT INTO search_profile (name_en, name_pt) VALUES ('Entrepreneurs', 'Empreendedores');
-INSERT INTO search_profile (name_en, name_pt) VALUES ('Development Agents', 'Agentes de Desenvolvimento');
-INSERT INTO search_profile (name_en, name_pt) VALUES ('Students and Professionals', 'Estudantes e Profissionais');
+INSERT INTO search_profile (id, name_en, name_pt) VALUES ('entrepreneurs', 'Entrepreneurs', 'Empreendedores');
+INSERT INTO search_profile (id, name_en, name_pt) VALUES ('development_agents', 'Development Agents', 'Agentes de Desenvolvimento');
+INSERT INTO search_profile (id, name_en, name_pt) VALUES ('students', 'Students and Professionals', 'Estudantes e Profissionais');
 
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('bra', 'Locations', 'Localidades');
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('cbo', 'Occupations', 'Ocupações');
