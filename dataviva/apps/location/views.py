@@ -69,6 +69,7 @@ def all():
     location.id = 'all'
     
     header = {
+            'bg_class_image': 'bg-all',
             'gdp': location_service_brazil.gdp(),
             'population': location_service_brazil.population(),
             'gdp_per_capita': location_service_brazil.gdp_per_capita(),
