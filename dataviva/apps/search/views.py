@@ -37,7 +37,14 @@ def all_questions():
     result = SearchQuestion.query.all()
     questions = []
     for row in result:
-        questions += [(row.id, SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name, row.description, row.selectors_str(), row.answer)]
+        questions += [(
+            row.id,
+            SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name,
+            row.description,
+            row.selectors_str(),
+            row.answer
+        )]
+
     return jsonify(questions=questions)
 
 

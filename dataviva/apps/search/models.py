@@ -1,5 +1,7 @@
 from dataviva import db
+from flask import g
 from sqlalchemy import ForeignKey
+from dataviva.utils.title_case import title_case
 
 
 search_question_selector = db.Table(
@@ -12,14 +14,15 @@ search_question_selector = db.Table(
 class SearchQuestion(db.Model):
     __tablename__ = 'search_question'
     id = db.Column(db.Integer, primary_key=True)
-    description = db.Column(db.String(400))
+    description_pt = db.Column(db.String(400))
+    description_en = db.Column(db.String(400))
     answer = db.Column(db.String(400))
     selectors = db.relationship("SearchSelector", secondary=search_question_selector, backref="selector")
     profile_id = db.Column(db.Integer, ForeignKey('search_profile.id'))
 
-    def selectors_str(self):
-        selector_names = [selector.name for selector in self.selectors]
-        return ', '.join(selector_names)
+    def description(self):
+        lang = getattr(g, "locale", "en")
+        return title_case(getattr(self, "description_" + lang))
 
     def __repr__(self):
         return '<SearchQuestion %r>' % (self.description)
@@ -28,11 +31,13 @@ class SearchQuestion(db.Model):
 class SearchProfile(db.Model):
     __tablename__ = 'search_profile'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name_pt = db.Column(db.String(50))
+    name_en = db.Column(db.String(50))
     questions = db.relationship("SearchQuestion", backref='search_question')
 
-    def __init__(self, name=None):
-        self.name = name
+    def name(self):
+        lang = getattr(g, "locale", "en")
+        return title_case(getattr(self, "name_" + lang))
 
     def __repr__(self):
         return '<SearchProfile %r>' % (self.name)
@@ -41,10 +46,12 @@ class SearchProfile(db.Model):
 class SearchSelector(db.Model):
     __tablename__ = 'search_selector'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name_pt = db.Column(db.String(50))
+    name_en = db.Column(db.String(50))
 
-    def __init__(self, name=None):
-        self.name = name
+    def name(self):
+        lang = getattr(g, "locale", "en")
+        return title_case(getattr(self, "name_" + lang))
 
     def __repr__(self):
         return '<SearchSelector %r>' % (self.name)
