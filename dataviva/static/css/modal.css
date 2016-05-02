@@ -173,7 +173,9 @@
     border-color: #e7eaec !important;
 }
 
-
+.modal-footer .chosen-options {
+    text-align: center;
+}
 
 
 
