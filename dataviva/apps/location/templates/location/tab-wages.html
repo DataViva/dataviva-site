@@ -42,7 +42,6 @@
             </div>
         </div>
 
-        {% if header.location != 'all' %}
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="blue-box title">
                 {% trans %}Salary Mass{% endtrans %}
@@ -50,11 +49,10 @@
             <div class="blue-box">
                 <p class="label">{% trans %}Wage Mass{% endtrans %}</p>
                 <div class="number">
-                    R$<strong class="counter">{{ body.wage | max_digits(3) }}</strong><span>{{ body.wage | magnitude }}</span>
+                    R$ <strong class="counter">{{ body.wage | max_digits(3) }}</strong><span>{{ body.wage | magnitude }}</span>
                 </div>
             </div>
         </div>
-        {% endif %}
   
         <div class="col-xs-12 col-sm-6 col-md-4">
             <div class="blue-box title">

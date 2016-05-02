@@ -21,6 +21,7 @@ from dataviva.api.sc.services import AllBasicCourse
 from dataviva.api.attrs.models import Wld
 from sqlalchemy import desc, func
 from random import randint
+from decimal import *
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
@@ -45,7 +46,11 @@ def add_language_code(endpoint, values):
 
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
-    location = Bra.query.filter_by(id=bra_id).first()
+    if bra_id == 'all':
+        location = Wld.query.filter_by(id='sabra').first()
+        location.id = 'all'
+    else:
+        location = Bra.query.filter_by(id=bra_id).first()
     return render_template('location/graphs-'+tab+'.html', location=location)
 
 
@@ -62,14 +67,15 @@ def all():
     basic_course_service = AllBasicCourse()
 
     location = Wld.query.filter_by(id='sabra').first_or_404()
+    location.id = 'all'
     
     header = {
-            'location': 'all',
+            'bg_class_image': 'bg-all',
             'gdp': location_service_brazil.gdp(),
             'population': location_service_brazil.population(),
             'gdp_per_capita': location_service_brazil.gdp_per_capita(),
             'eci': 0.151,
-            'year': 2014
+            'year': ''
     }
 
     body = {
@@ -86,7 +92,9 @@ def all():
         'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
         'main_occupation_by_num_jobs_name': occupation_service.main_occupation_by_num_jobs_name(),
         'avg_wage': industry_service.avg_wage(),
+        'wage': industry_service.all_salary_mass(),
         'total_jobs': industry_service.total_jobs(),
+
 
         'highest_enrolled_by_university': university_service.highest_enrolled_by_university(),
         'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),
@@ -145,7 +153,8 @@ def index(bra_id):
             'gdp': location_service.gdp(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
-            'bg_class_image': background_image
+            'bg_class_image': background_image,
+            'year': eci.year
         }
     else:
         header = {
@@ -155,7 +164,8 @@ def index(bra_id):
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
-            'bg_class_image': background_image
+            'bg_class_image': background_image,
+            'year': eci.year
         }
 
     if eci is not None:
@@ -204,7 +214,7 @@ def index(bra_id):
             'state_name': location_service.location_name(3),
             'mesoregion_name': location_service.location_name(5),
             'gdp_rank': location_gdp_rankings_service.gdp_rank(),
-            'area': location_service.area()
+            'area': Decimal(location_service.area())
         }
     elif len(bra_id) == 7:
         profile = {

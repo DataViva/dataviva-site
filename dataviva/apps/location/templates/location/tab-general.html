@@ -1,19 +1,25 @@
 <div role="tabpanel" class="tab-pane active" id="general">
     <h2>{% trans %}General Profile{% endtrans %}</h2>
-        {% if header.location == 'all' %}
-
-        Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported {{body.total_exports|max_digits(3)}} {{(body.total_exports|magnitude).lower()}} USD and imported {{body.total_imports|max_digits(3)}} {{(body.total_imports|magnitude).lower()}} USD, resulting in a {{'positive' if body.all_trade_balance >= 0 else 'negative'}} commercial rate of {{body.all_trade_balance|max_digits(3)}} {{(body.all_trade_balance|magnitude).lower()}} USD. In 2014 Brasil had {{body.total_jobs|max_digits(3)}} {{(body.total_jobs|magnitude).lower()}} formal employees. The Brazilian GDP in 2010 was of {{header.gdp|max_digits(3)}} {{(header.gdp|magnitude).lower()}} USD and its GDP per capita was of {{header.gdp_per_capita|max_digits(3)}} {{(header.gdp_per_capita|magnitude).lower()}} USD.
-
-        <p></p>
-
-        O Brasil é a 7ª maior economia mundial e 56ª economia mais complexa de acordo com o Índice de Complexidade Econômico (ICE). Em 2015, o Brasil exportou US$ {{body.total_exports|max_digits(3)}} {{(body.total_exports|magnitude).lower()}} e importou US$ {{body.total_imports|max_digits(3)}} {{(body.total_imports|magnitude).lower()}}, resultando em um saldo comercial {{'positivo' if body.all_trade_balance >= 0 else 'negativo'}} de US$ {{body.all_trade_balance|max_digits(3)}} {{(body.all_trade_balance|magnitude).lower()}}. Em 2014, o Brasil tinha {{body.total_jobs|max_digits(3)}} {{(body.total_jobs|magnitude).lower()}} empregados formais. O PIB do Brasil em 2010 foi de {{header.gdp|max_digits(3)}} {{(header.gdp|magnitude).lower()}} e seu PIB per capita foi de {{header.gdp_per_capita|max_digits(3)}} {{(header.gdp_per_capita|magnitude).lower()}}.
+        {% if location.id == 'all' %}
+          {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %} 
+          {{body.total_exports|max_digits(3)}} {{(body.total_exports|magnitude).lower()}} 
+          {% if g.locale == "en" %}USD {% endif %}{% trans %}and imported{% endtrans %} 
+          {{body.total_imports|max_digits(3)}} {{(body.total_imports|magnitude).lower()}}, {% if g.locale == "en" %}USD {% endif %}{% trans %}resulting in a{% endtrans %} 
+          {{'positive' if body.all_trade_balance >= 0 else 'negative'}}
+          {% trans %}commercial rate of{% endtrans %}
+          {{body.all_trade_balance|max_digits(3)}} {{(body.all_trade_balance|magnitude).lower()}}{% if g.locale == "en" %} USD{% endif %}. {% trans %}In 2014 Brasil had{% endtrans %} 
+          {{body.total_jobs|max_digits(3)}} {{(body.total_jobs|magnitude).lower()}} 
+          {% trans %}formal employees. The Brazilian GDP in 2010 was of{% endtrans %} 
+          {{header.gdp|max_digits(3)}} {{(header.gdp|magnitude).lower()}} 
+          {% if g.locale == "en" %}USD {% endif %}{% trans %}and its GDP per capita was of{% endtrans %} 
+          {{header.gdp_per_capita|max_digits(3)}} {{(header.gdp_per_capita|magnitude).lower()}}{% if g.locale == "en" %} USD{% endif %}.
 
         {% else %}
           {% if profile.bra_id|length == 9 %}
               <p>{{ header.name }} - {{ location.abbreviation }}
               {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities -1 }}
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
-              {% trans %} With {% endtrans %}{{ profile.area }}
+              {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
               {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
@@ -36,7 +42,6 @@
               </p>
           {% elif profile.bra_id|length == 5 %}
               <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }} - {{ location.abbreviation }}
-              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
 
               {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}}
               {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
@@ -169,7 +174,7 @@
   </div>
 
   <div class="row">
-    {% if header.location != 'all' %}
+    {% if location.id != 'all' %}
     <div class="dl-box col-xs-12 col-md-6">
       <h3>{% trans %}Economic Opportunities{% endtrans %}</h3>
       <dl class="dl-horizontal">
