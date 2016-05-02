@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-02 17:02-0300\n"
+"POT-Creation-Date: 2016-05-02 16:10-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1670,32 +1670,34 @@ msgid ""
 "according to the Economic Complexity Index (ECI). In 2015, Brasil has "
 "exported"
 msgstr ""
+"O Brasil é a 7ª maior economia mundial e 56ª economia mais complexa de "
+"acordo com o Índice de Complexidade Econômica (ICE). Em 2015, o Brasil "
+"exportou US$"
 
 #: dataviva/apps/location/templates/location/tab-general.html:6
-#, fuzzy
 msgid "and imported"
-msgstr "Saiba mais"
+msgstr "e importou US$"
 
 #: dataviva/apps/location/templates/location/tab-general.html:7
 msgid "resulting in a"
-msgstr ""
+msgstr "resultando em um saldo comercial"
 
 #: dataviva/apps/location/templates/location/tab-general.html:9
 #, fuzzy
 msgid "commercial rate of"
-msgstr "renderam"
+msgstr "de US$"
 
 #: dataviva/apps/location/templates/location/tab-general.html:10
 msgid "In 2014 Brasil had"
-msgstr ""
+msgstr "Em 2014, o Brasil tinha"
 
 #: dataviva/apps/location/templates/location/tab-general.html:12
 msgid "formal employees. The Brazilian GDP in 2010 was of"
-msgstr ""
+msgstr "empregados formais. O PIB do Brasil em 2010 foi de"
 
 #: dataviva/apps/location/templates/location/tab-general.html:14
 msgid "and its GDP per capita was of"
-msgstr ""
+msgstr "e seu PIB per capita foi de"
 
 #: dataviva/apps/location/templates/location/tab-general.html:20
 msgid "is one of the "
@@ -6557,9 +6559,8 @@ msgid "No records found"
 msgstr "Nenhum registro encontrado"
 
 #: dataviva/translations/dictionary.py:629
-#, fuzzy
 msgid "Titles"
-msgstr "Título"
+msgstr "Títulos"
 
 #: dataviva/translations/dictionary.py:638
 msgid "Trillion"
