@@ -624,6 +624,9 @@ def dictionary():
         "infoEmpty": gettext("No data to show"),
         "infoFiltered": gettext(" (filtering _MAX_ results)"),
         "zeroRecords": gettext("No records found"),
+
+        # build graphs
+        "titles": gettext("Titles")
     }
 
 

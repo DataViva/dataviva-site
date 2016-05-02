@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-02 13:50-0400\n"
+"POT-Creation-Date: 2016-05-02 14:42-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -5934,25 +5934,29 @@ msgstr ""
 msgid "No records found"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:635
+#: dataviva/translations/dictionary.py:629
+msgid "Titles"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:638
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:636
+#: dataviva/translations/dictionary.py:639
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:637
+#: dataviva/translations/dictionary.py:640
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:638
+#: dataviva/translations/dictionary.py:641
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
