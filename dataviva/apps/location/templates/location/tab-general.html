@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane active" id="general">
     <h2>{% trans %}General Profile{% endtrans %}</h2>
-        {% if header.location == 'all' %}
+        {% if location.id == 'all' %}
 
         Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported {{body.total_exports|max_digits(3)}} {{(body.total_exports|magnitude).lower()}} USD and imported {{body.total_imports|max_digits(3)}} {{(body.total_imports|magnitude).lower()}} USD, resulting in a {{'positive' if body.all_trade_balance >= 0 else 'negative'}} commercial rate of {{body.all_trade_balance|max_digits(3)}} {{(body.all_trade_balance|magnitude).lower()}} USD. In 2014 Brasil had {{body.total_jobs|max_digits(3)}} {{(body.total_jobs|magnitude).lower()}} formal employees. The Brazilian GDP in 2010 was of {{header.gdp|max_digits(3)}} {{(header.gdp|magnitude).lower()}} USD and its GDP per capita was of {{header.gdp_per_capita|max_digits(3)}} {{(header.gdp_per_capita|magnitude).lower()}} USD.
 
@@ -169,7 +169,7 @@
   </div>
 
   <div class="row">
-    {% if header.location != 'all' %}
+    {% if location.id != 'all' %}
     <div class="dl-box col-xs-12 col-md-6">
       <h3>{% trans %}Economic Opportunities{% endtrans %}</h3>
       <dl class="dl-horizontal">
