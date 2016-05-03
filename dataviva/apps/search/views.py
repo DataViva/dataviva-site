@@ -29,7 +29,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    return redirect(url_for('admin.index'))
+    return redirect(url_for('search.admin'))
 
 
 @mod.route('/question/all', methods=['GET'])
@@ -112,9 +112,9 @@ def edit(id):
     form = RegistrationForm()
     question = SearchQuestion.query.filter_by(id=id).first_or_404()
     form.profile.data = question.profile_id
-    form.description.data = question.description
+    form.description.data = question.description()
     form.answer.data = question.answer
-    form.selector.data = question.selectors_str()
+    #form.selector.data = question.selectors_str()
     return render_template('search/edit.html', form=form, action=url_for('search.update', id=id))
 
 
