@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-03 09:38-0400\n"
+"POT-Creation-Date: 2016-05-03 10:02-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -539,9 +539,9 @@ msgstr "Visualize"
 msgid "Enrollments By"
 msgstr "Matrículas por"
 
-#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:6
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:13
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:30
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:7
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:14
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:33
 #: dataviva/apps/industry/templates/industry/tab-wages.html:24
 #: dataviva/apps/industry/templates/industry/tab-wages.html:54
 #: dataviva/apps/location/templates/location/graphs-education.html:23
@@ -560,9 +560,9 @@ msgstr "Matrículas por"
 msgid "Municipality"
 msgstr "Município"
 
-#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:10
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:16
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:33
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:11
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:17
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:36
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:12
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:25
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:52
@@ -571,11 +571,11 @@ msgstr "Município"
 msgid "Map"
 msgstr "Mapa"
 
-#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:14
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:15
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:11
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:20
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:28
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:37
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:21
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:30
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:40
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:22
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:34
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:47
@@ -609,6 +609,14 @@ msgstr "Mapa"
 #: dataviva/translations/dictionary.py:16
 msgid "Stacked"
 msgstr "Evolução"
+
+#: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:23
+#: dataviva/apps/location/templates/location/graphs-education.html:33
+#: dataviva/apps/location/templates/location/tab-education.html:39
+#: dataviva/translations/dictionary.py:187
+#: dataviva/translations/dictionary.py:366
+msgid "School"
+msgstr "Escola"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:33
 #: dataviva/apps/industry/templates/industry/index.html:35
@@ -1290,7 +1298,7 @@ msgid "Jobs By"
 msgstr "Empregos por"
 
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:6
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:23
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:25
 #: dataviva/apps/industry/templates/industry/tab-wages.html:9
 #: dataviva/apps/industry/templates/industry/tab-wages.html:39
 #: dataviva/apps/location/templates/location/graphs-wages.html:18
@@ -1303,15 +1311,15 @@ msgstr "Empregos por"
 msgid "Occupation"
 msgstr "Ocupação"
 
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:22
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:24
 msgid "Wages By"
 msgstr "Salários por"
 
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:39
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:43
 msgid "Distribution"
 msgstr "Distribuição"
 
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:42
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:46
 #: dataviva/templates/about.html:134 dataviva/templates/site.html:82
 #: dataviva/templates/about/apps/bar.html:1
 msgid "Bar Chart"
@@ -1502,13 +1510,6 @@ msgstr "Curso"
 #: dataviva/apps/location/templates/location/graphs-education.html:32
 msgid "Professional Education By"
 msgstr "Educação Profissional por"
-
-#: dataviva/apps/location/templates/location/graphs-education.html:33
-#: dataviva/apps/location/templates/location/tab-education.html:39
-#: dataviva/translations/dictionary.py:187
-#: dataviva/translations/dictionary.py:366
-msgid "School"
-msgstr "Escola"
 
 #: dataviva/apps/location/templates/location/graphs-education.html:49
 msgid "Basic Education By"
@@ -2022,9 +2023,8 @@ msgid "Shift"
 msgstr "Turno"
 
 #: dataviva/apps/major/templates/major/index.html:67
-#, fuzzy
 msgid "Number of Entrants"
-msgstr "Número de Concluintes"
+msgstr "Número de Ingressantes"
 
 #: dataviva/apps/major/templates/major/index.html:76
 #: dataviva/apps/university/templates/university/index.html:65
