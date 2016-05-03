@@ -21,15 +21,8 @@ if len(sys.argv) != 5 or (sys.argv[1:][0] not in ['pt', 'en']):
     print " 1 = rais-2003-microregions-classes-families\n 2 = rais-2013-municipalities-classes\n 3 = rais-2013-municipalities-classes-main_groups\n 4 = rais-2013-municipalities-classes-families\n"
     exit()
 
-select_1 = ["SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',cbo_id as 'CBO ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',required as 'Estimated Employees',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)'  FROM rais_ybio WHERE year=" + str(sys.argv[3]) + " and bra_id_len=7 and cnae_id_len=6 and cbo_id_len=4 ", "rais-" + str(sys.argv[3]) + "-microregions-classes-families" ]
 
-select_2 = ["SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',rca as 'Domestic RCA',distance as 'Distance',opp_gain as 'Opportunity Gain',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)' FROM rais_ybi WHERE year=" + str(sys.argv[3]) + " and bra_id_len=9 and cnae_id_len=6 and  1 = 1", "rais-" + str(sys.argv[3]) + "-municipalities-classes" ]
-
-select_3 = [ "SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',cbo_id as 'CBO ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',required as 'Estimated Employees',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)' FROM rais_ybio WHERE year=" + str(sys.argv[3]) + " and bra_id_len=9 and cnae_id_len=6 and cbo_id_len=1", "rais-" + str(sys.argv[3]) + "-municipalities-classes-main_groups" ]
-
-select_4 = [ "SELECT year as 'Year',bra_id as 'BRA ID',cnae_id as 'CNAE ID',cbo_id as 'CBO ID',wage as 'Total Monthly Wages',num_jobs as 'Total Jobs',num_est as 'Total Establishments',wage_avg as 'Average Monthly Wage',age_avg as 'Average age',required as 'Estimated Employees',wage_growth as 'Nominal Wage Growth (1 year)',wage_growth_5 as 'Nominal Wage Growth (5 year)',num_emp_growth as 'Nominal Employee Growth (1 year)',num_emp_growth_5 as 'Nominal Employee Growth (5 year)' FROM rais_ybio WHERE year=" + str(sys.argv[3]) + " and bra_id_len=9 and cnae_id_len=6 and cbo_id_len=4", "rais-" + str(sys.argv[3]) + "-municipalities-classes-families" ]
-
-def save(years, lang, output_path, select):
+def save(years, lang, output_path, select, year):
     conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
     table_columns = {}
     columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
@@ -39,14 +32,26 @@ def save(years, lang, output_path, select):
     else:
         dic_lang = pt
 
+
     if select != 2:
-        table = 'rais_ybi'
-    else:
         table = 'rais_ybio'
-    
+    else:
+        table = 'rais_ybi'
+
 
     if table not in table_columns.keys():
         table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in get_colums(table, columns_deleted)]
+
+
+
+    select_1 = ["SELECT " + ",".join(table_columns[table])+" FROM rais_ybio WHERE year=" + year + " and bra_id_len=7 and cnae_id_len=6 and cbo_id_len=4 ", "rais-" + year + "-microregions-classes-families" ]
+
+    select_2 = ["SELECT " + ",".join(table_columns[table])+" FROM rais_ybi WHERE year=" + year + " and bra_id_len=9 and cnae_id_len=6 and  1 = 1", "rais-" + year + "-municipalities-classes" ]
+
+    select_3 = ["SELECT " + ",".join(table_columns[table])+" FROM rais_ybio WHERE year=" + year + " and bra_id_len=9 and cnae_id_len=6 and cbo_id_len=1", "rais-" + year + "-municipalities-classes-main_groups" ]
+
+    select_4 = ["SELECT " + ",".join(table_columns[table])+" FROM rais_ybio WHERE year=" + year + " and bra_id_len=9 and cnae_id_len=6 and cbo_id_len=4", "rais-" + year + "-municipalities-classes-families" ]
+
 
     query=[]    
     if select == str(1): 
@@ -60,6 +65,7 @@ def save(years, lang, output_path, select):
 
     if select == str(4):
         query = select_4
+
 
     name_file = query[1]
     print "Gerando ... : "+name_file
@@ -85,7 +91,7 @@ logging.basicConfig(filename=os.path.abspath(os.path.join(sys.argv[2],'rais-data
 years = [ Condition('year='+str(sys.argv[3]), '-'+str(sys.argv[3])) ]
 
 
-save(years=years, lang=sys.argv[1], output_path=output_path, select=sys.argv[4])
+save(years=years, lang=sys.argv[1], output_path=output_path, select=sys.argv[4], year=str(sys.argv[3]))
 
 
 ''' querys rais faltantes
