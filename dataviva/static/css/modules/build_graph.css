@@ -9,6 +9,16 @@
     font-weight: lighter;
     text-align: left;
 }
+.build_graph .sidebar .btn-outline:hover, .build_graph .sidebar .btn-outline:active {
+    border-color: #965566;
+    color: #965566;
+}
 .build_graph .sidebar #dimensions .form-group .btn {
     margin-top: 2px;
+}
+.build_graph .dropdown-menu > li > a .fa {
+  color: #666666;
+}
+.build_graph .dropdown-select {
+    margin-bottom: 10px;
 }
