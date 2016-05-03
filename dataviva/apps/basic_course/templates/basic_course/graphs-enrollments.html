@@ -3,6 +3,7 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{%trans%}Enrollments By{%endtrans%}</h4>
+            {% if location.id | length != 9 %}
             <a href="#enrollments-basic-course" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-basic-course">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="enrollments-basic-course">
                 <a href="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled"
@@ -15,6 +16,14 @@
                </a>
                 <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled"
                    target="graphs-frame-enrollments" class="list-group-item" data-parent="#enrollments-basic-course">
+                    TreeMap
+                </a>
+            </div>
+            {% endif %}
+            <a href="#enrollments-school" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-school">{%trans%}School{%endtrans%}</a>
+            <div class="collapse" id="enrollments-school">
+                <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/school/?color=color&depth=school_8&size=enrolled"
+                   target="graphs-frame-enrollments" class="list-group-item" data-parent="#enrollments-school">
                     TreeMap
                 </a>
             </div>

@@ -84,7 +84,10 @@ def max_digits(number, digits):
         number = float(number)/num
     number_str = str(number)
 
-    return number_str[0:digits+1]
+    if len(number_str) > 3 and number_str[digits] == '.':
+        return number_str[0:digits]
+    else:
+        return number_str[0:digits+1]
 
 def jinja_magnitude(number):
     if not number: 
