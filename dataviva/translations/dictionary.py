@@ -628,7 +628,7 @@ def dictionary():
         "zeroRecords": gettext("No records found"),
 
         # build graphs
-        "titles": gettext("Titles")
+        "views": gettext("Views")
     }
 
 
