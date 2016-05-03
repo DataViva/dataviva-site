@@ -62,12 +62,13 @@ def views(dataset, bra, filter1, filter2):
             build.set_filter2(request.args.get('filter2'))
 
         title = re.sub(r'\s\(.*\)', r'', build.title())
+
         if title not in views:
             views[title] = {}
-        else:
-            views[title][build.app.type] = {
-                'url': build.url(),
-                'name': build.app.name()
-            }
+
+        views[title][build.app.type] = {
+            'url': build.url(),
+            'name': build.app.name()
+        }
 
     return jsonify(views=views)
