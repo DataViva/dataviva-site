@@ -186,7 +186,7 @@ dataviva.getAttrUrl = function(attr) {
   else if (attr == "university") return 'university';
   else if (attr == "course_hedu") return 'major';
   else if (attr == "course_sc") return 'basic_course';
-  else return '';
+  else return attr;
 }
 
 dataviva.getUrlAttr = function(attr) {
@@ -198,27 +198,27 @@ dataviva.getUrlAttr = function(attr) {
   else if (attr == "University") return 'university';
   else if (attr == "Major") return 'course_hedu';
   else if (attr == "Basic_course") return 'course_sc';
-  else return '';
+  else return attr;
 }
 
 var selectorSearchCallback = Selector()
   .callback(function(d){
-    window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id=" 
+    window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id="
     + d.id ;
   });
 
 var selectorHrefCallback = Selector()
     .callback(function(d){
-        window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id + 
+        window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id +
         window.location.search;
     });
 
-function select_attr(id) {
+var select_attr = function(id) {
   d3.select("#modal-selector-content").call(selectorHrefCallback.type(id));
   $('#modal-selector').modal('show');
 }
 
-function select_attr_search(id) {
+var select_attr_search = function(id) {
   d3.select("#modal-selector-content").call(selectorSearchCallback.type(id));
   $('#modal-selector').modal('show');
 }
@@ -264,5 +264,87 @@ $(document).ready(function () {
             window.location.href = path.join('/') + window.location.search + window.location.hash;
         }
     });
+
+    $('a[data-search]').click(function() {
+        search($(this).data('search'));
+    });
 });
 
+
+var search = function(profile) {
+
+    // Reset modal and set loading
+    $('#modal-search .modal-body').empty();
+    $('#modal-search .chosen-options .question').empty();
+    $('#modal-search #chosen-options').val('');
+    $('#modal-search #search-advance').prop("disabled", true);
+    var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
+    search_load.text(dataviva.dictionary['loading']);
+
+    $('#modal-search').modal('show');
+
+    $.ajax({
+      method: "GET",
+      url: "/" + lang + "/search/profile/" + profile,
+      success: function (response) {
+        search_load.hide();
+
+        var questions = response.questions;
+        // Set modal template
+        $('#modal-search .modal-title').html(response.profile);
+        $('#modal-search .modal-body').html(response.template);
+
+        var chosenOptions = $('#modal-search .chosen-options');
+
+        $('#modal-search #search-advance').click(function() {
+            var id = chosenOptions.find('#question-id').val();
+            var awnser = questions[id].awnser;
+
+            chosenOptions.find('input:not(#question-id)').each(function() {
+                if (this.value == "") {
+                    $('#modal-search .modal-body').empty();
+                    d3.select("#modal-search-content").call(selectorHrefCallback.type(this.id));
+                    return false;
+                }
+            });
+        });
+
+        for (id in questions) {
+
+            var question = questions[id],
+                selectors = questions[id].selectors,
+                div = $('<div></div>').addClass('selector-list-item');
+
+            // Append questions
+            div.append('<div></div>')
+                    .addClass('item-title')
+                    .html(question.description)
+                    .data('id', id)
+                    .data('selectors', selectors.join(','));
+
+            // Choose Question
+            div.click(function() {
+                $('#modal-search #search-advance').prop('disabled', false);
+                $(this).siblings('.selected').toggleClass('selected');
+                $(this).toggleClass('selected');
+
+                chosenOptions.find('.question').html($(this).html());
+                chosenOptions.find('#question-id').val($(this).data('id'));
+                chosenOptions.find('input:not(#question-id)').remove()
+
+                var selectors = $(this).data('selectors').split(',')
+
+                for (var i = 0; i < selectors.length; i++) {
+                    var selector = selectors[i];
+                        selectorInput = $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('id', selector);
+                        chosenOptions.append(selectorInput);
+                }
+            });
+
+            $('#modal-search .selector-list .list-group').append(div);
+        }
+      }
+    });
+}

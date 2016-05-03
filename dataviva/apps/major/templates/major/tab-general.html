@@ -25,7 +25,7 @@
              {% trans %}The University with the largest number of students in this course is{% endtrans %} {{ major.article() }} {{ body.university_with_more_enrolled }}, 
              {% trans %}with{% endtrans %} {{ body.highest_enrolled_number_by_university | max_digits(3) }} {{ (body.highest_enrolled_number_by_university | magnitude).lower() }} 
              {% trans %}enrolled students. The course has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
-             {% trans %}students enrolled in the state{% endtrans %}</p>
+             {% trans %}students enrolled in the state{% endtrans %}.</p>
 
         {% elif header.bra_id|length == 5 %}
             <p>{% trans %}The course of{% endtrans %} {{ header.name }}

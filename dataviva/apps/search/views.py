@@ -36,16 +36,39 @@ def index():
 def all_questions():
     result = SearchQuestion.query.all()
     questions = []
+
     for row in result:
         questions += [(
             row.id,
-            SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name,
-            row.description,
-            row.selectors_str(),
+            SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name(),
+            row.description(),
+            'a',
             row.answer
         )]
 
     return jsonify(questions=questions)
+
+
+@mod.route('/profile/<id>', methods=['GET'])
+def profile_questions(id):
+    profile = SearchProfile.query.filter_by(id=id).first_or_404().name()
+
+    questions = {}
+    questions_query = SearchQuestion.query.filter_by(profile_id=id)
+    for row in questions_query.all():
+
+        selectors = sorted(row.selectors, key=lambda x: x.order, reverse=False)
+
+        questions[row.id] = {
+            'description': row.description(),
+            'selectors': [rl.selector.id for rl in selectors],
+            'answer': row.answer
+        }
+
+    return jsonify(
+        questions=questions,
+        profile=profile,
+        template=render_template('search/modal.html'))
 
 
 @mod.route('/admin', methods=['GET'])

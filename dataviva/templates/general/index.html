@@ -11,7 +11,7 @@
         <div class="m-t-lg col-xs-12 col-sm-6 wow fadeInRight">
             <ul>
                 <li data-toggle="popover" data-placement="top" data-content="{% trans %}Number of establishments per economic activity, percentage of graduated professionals per year in a given course by region, similar products by region, average wage by segment, and more… {% endtrans %}">
-                    <a onclick="fire_wizard('entrepreneur')">
+                    <a data-search="entrepreneurs">
                         <h3 class="text-uppercase">{% trans %}Entrepreneurs{% endtrans %}</h3>
                         <p>
                             {% trans %}Identify the economic profile and business opportunities of a region{% endtrans %}
@@ -19,7 +19,7 @@
                     </a>
                 </li>
                 <li data-toggle="popover" data-placement="top" data-content="{% trans %}Main business partners of a product by region, states that lead importation of a specific product, economic activity by locality, employment and income by segment, and more…{% endtrans %}">
-                    <a onclick="fire_wizard('development_agents')">
+                    <a data-search="development_agents">
                         <h3 class="text-uppercase">{%trans%}Development Agents{%endtrans%}</h3>
                         <p>
                             {% trans %}Assess development policies setting by location{% endtrans %}
@@ -27,7 +27,7 @@
                     </a>
                 </li>
                 <li data-toggle="popover" data-placement="top" data-content="{% trans %}Average wage of an activity or occupation, cities with best employment rates in an activity, courses offered by region, number of students enrolled in each university and more…{% endtrans %}">
-                    <a onclick="fire_wizard('student')">
+                    <a data-search="students">
                         <h3 class="text-uppercase">{% trans %}Students and Professionals{% endtrans %}</h3>
                         <p>
                             {% trans %}Find information about available jobs, income per occupation and courses{% endtrans %}
