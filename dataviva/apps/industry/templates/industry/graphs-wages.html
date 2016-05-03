@@ -40,11 +40,13 @@
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
                 </div>
                 {% endif %}
+                {% if not location.id %}
                 <a href="#wages-distribution" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Distribution{% endtrans %}</a>
                 <div class="collapse" id="wages-distribution">
                     <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" 
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Bar Chart{% endtrans %}</a>
                 </div>
+                {% endif %}
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
