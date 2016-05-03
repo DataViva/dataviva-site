@@ -52,46 +52,43 @@ dataviva.requireAttrs(['datasets'], function() {
                                     filter1: $('#dimensions #filter1').val(),
                                     filter2: $('#dimensions #filter2').val() 
                                 },
-                            success: function (builds) {
-                                
-                                console.log(builds)
+                            success: function (result) {
                                 //('#titles').empty()
-                                if(builds.builds.length > 0){
-                                    //console.log(builds);
-                                    builds.builds.sort(function(build1, build2){
-                                            return ((build1["title"] < build2["title"]) ? -1 : 
-                                                ((build1["title"] > build2["title"]) ? 1 : 0));
-                                    })                        
-                                    titles = {};
-                                    result = [];
-                                    for (var i = 0; i< builds.builds.length ; i++) {
-                                        if(builds.builds[i].title != null){
-                                            title = builds.builds[i].title.replace(/\s\(.*\)/g, '');
-                                            if(! (title in titles)){
-                                                titles[title] = 1;
-                                                result.push(title);
-                                            }else{
-                                                titles[title]+=1;
-                                            }
-                                        }
-                                    }
-                                    $('#titles').empty()
-                                    var div = $("<div></div>").addClass("form-group").attr("id", "titles");
-                                    select = $("<select></select>").addClass("form-control").attr("id", 'titles'),
-                                    label = $("<label></label>").attr("for", "titles").addClass("control-label"),
-                                    label.html("Options");
 
+                                window.buildGraphViews = result.views;
 
-                                    for(var i = 0; i<result.length ; i++){
-                                        option = $('<option value="'+i+'">'+result[i]+'</option>')
+                                if(result.views){
+                                    
+                                    $('#views').empty()
+
+                                    var div = $("<div></div>").addClass("form-group");
+                                        select = $("<select></select>").addClass("form-control"),
+                                        label = $("<label></label>").attr("for", "titles").addClass("control-label"),
+                                        
+                                    label.html(dataviva.dictionary["views"]);
+
+                                    for(view in result.views){
+                                        option = $('<option value="'+view+'">'+view+'</option>')
                                         select.append(option);
                                     }
 
+                                    select.on('change', function() {
+                                        $('#graphs').empty()
+
+                                        for (graph in buildGraphViews[this.value]) {
+                                            var name = buildGraphViews[this.value][graph].name,
+                                                url = buildGraphViews[this.value][graph].url
+                                            graphButton = $('<a></a>').addClass('btn btn-primary')
+                                                            .attr('href', "/" + dataviva.language + '/embed/' + url)
+                                                            .attr('target', "graphs-frame-build-graphs")
+                                                            .html(name);
+                                            $('#graphs').append(graphButton);
+                                        }
+                                    });
+
                                     div.append(label).append(select);
 
-                                    $('#dimensions').append(div);
-                            
-                                //select.chenge()
+                                    $('#views').append(div);
                             }
                         }
                     });
