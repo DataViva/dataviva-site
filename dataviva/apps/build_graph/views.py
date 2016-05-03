@@ -41,10 +41,11 @@ def views(dataset, bra, filter1, filter2):
     build_query = Build.query.filter(
         Build.dataset == dataset,
         Build.filter1 == parse_filter(filter1),
-        Build.filter2 == parse_filter(filter1))
+        Build.filter2 == parse_filter(filter2))
 
     if bra != 'all':
         build_query.filter(not_(Build.bra.like('all')))
+
 
     build_list = []
     for build in build_query.all():
