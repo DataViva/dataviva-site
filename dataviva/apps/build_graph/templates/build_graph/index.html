@@ -28,8 +28,15 @@
                 </div>
             </li>
             <li id="dimensions">
+                <div class="form-group">
+                    <label for="bra" class="control-label">Location</label>
+                    <button class="btn btn-xs btn-white pull-right" type="button">Deactivate</button>
+                    <button id="bra" class="btn btn-block btn-outline btn-white" onclick="start_selector('Location', dimensionSelectCallback);" type="button">Select</button>
+                </div>
             </li>
             <li id="views">
+            </li>
+            <li id="graphs">
             </li>
             <li>
                 <a href="#" class="btn btn-primary btn-block">
@@ -39,9 +46,13 @@
             </li>
         </ul>
     </nav>
-    <div class="col-xs-12 col-md-9">
-        {% block build_graph_content %}
-        {% endblock build_graph_content %}
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="/{{g.locale}}/embed/tree_map/secex/all/all/all/hs/?controls=true&year=2014&size=export_val&depth=hs_6&color=color" 
+                target="frame-build-graphs"
+                name="graphs-frame-build-graphs"
+                id="graphs-frame-build-graphs"
+                class="embed-responsive-item">
+        </iframe>
     </div>
 </section>
 {% endblock content %}

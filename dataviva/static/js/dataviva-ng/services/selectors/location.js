@@ -84,6 +84,10 @@
                 };
 
                 self.load_depth_entries(self.regions);
+
+                self.toString = function() {
+                    return 'bra';
+                }
             };
 
             return Location;
