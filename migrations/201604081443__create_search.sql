@@ -271,6 +271,9 @@ INSERT INTO search_question_selector (question_id, selector_id, `order`) VALUES
 ((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
    AND description_pt = 'Qual o salário médio da Ocupação Z na Localidade Y?'),
 'cbo', 0),
+((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
+   AND description_pt = 'Qual o salário médio da Ocupação Z na Localidade Y?'),
+'bra', 0),
 
 ((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
    AND description_pt = 'Em quais localidades paga-se o maior salário médio da Ocupação Z?'),
