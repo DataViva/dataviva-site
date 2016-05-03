@@ -5,7 +5,7 @@ from models import HelpSubject
 
 
 mod = Blueprint('help', __name__,
-                template_folder='templates/help',
+                template_folder='templates',
                 url_prefix='/<lang_code>/help')
 
 
@@ -26,7 +26,11 @@ def add_language_code(endpoint, values):
 
 @mod.route('/')
 def index():
-
     subjects = HelpSubject.query.all()
+    return render_template('help/index.html', subjects=subjects)
 
-    return render_template('index.html', subjects=subjects)
+
+@mod.route('/admin', methods=['GET'])
+def admin():
+    subjects = HelpSubject.query.all()
+    return render_template('help/admin.html', subjects=subjects)
