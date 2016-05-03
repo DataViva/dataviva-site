@@ -241,3 +241,19 @@ if not DEBUG:
 @mod.route('contact/')
 def contact():
     return render_template("general/contact.html")
+
+
+@mod.route('/error/')
+def error():
+        g.page_type = "error"
+
+        sabrina = {}
+        sabrina["outfit"] = "lab"
+        sabrina["face"] = "scared"
+        sabrina["hat"] = None
+
+        error = "500"
+        error_code = int(error)
+
+        return render_template('general/error.html',
+            error = error, sabrina = sabrina), error_code
