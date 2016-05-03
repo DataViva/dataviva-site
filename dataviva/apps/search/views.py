@@ -53,19 +53,22 @@ def all_questions():
 def profile_questions(id):
     profile = SearchProfile.query.filter_by(id=id).first_or_404().name()
 
-    questions = []
+    questions = {}
     questions_query = SearchQuestion.query.filter_by(profile_id=id)
     for row in questions_query.all():
 
         selectors = sorted(row.selectors, key=lambda x: x.order, reverse=False)
 
-        questions += [{
-            'question': row.description(),
+        questions[row.id] = {
+            'description': row.description(),
             'selectors': [rl.selector.id for rl in selectors],
             'answer': row.answer
-        }]
+        }
 
-    return jsonify(questions=questions, profile=profile, template=render_template('search/modal.html'))
+    return jsonify(
+        questions=questions,
+        profile=profile,
+        template=render_template('search/modal.html'))
 
 
 @mod.route('/admin', methods=['GET'])
