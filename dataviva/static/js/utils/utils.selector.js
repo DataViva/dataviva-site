@@ -711,7 +711,7 @@ function Selector() {
                 }
                 search_icon.style("color",v.color);
             }
-            
+
             var abbreviation = v.abbreviation;
             var title = v.name.toTitleCase().truncate(65) + (abbreviation ? " - " + abbreviation : "");
 
@@ -727,7 +727,7 @@ function Selector() {
               .attr("class","search_title")
               .style("color",d3plus.color.legible(v.color))
               .html(title);
-            
+
             if (type != "file" && searching) {
 
               if(type == "bra" && v.id.length > 3) {
@@ -867,7 +867,7 @@ function Selector() {
           }
 
         });
-        $('#modal-selector-content .selector .selector_body .search_result .search_buttons .leon.button.medium').attr('class', 'btn btn-primary');
+        $('.selector .selector_body .search_result .search_buttons .leon.button.medium').attr('class', 'btn btn-primary');
       };
 
       var close = null,

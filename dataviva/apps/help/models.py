@@ -1,5 +1,7 @@
 from dataviva import db
+from flask import g
 from sqlalchemy import ForeignKey
+from dataviva.utils.title_case import title_case
 
 
 class HelpSubjectQuestion(db.Model):
@@ -11,8 +13,16 @@ class HelpSubjectQuestion(db.Model):
     answer_en = db.Column(db.Text(4194304))
     subject_id = db.Column(db.Integer, ForeignKey('help_subject.id'))
 
+    def description(self):
+        lang = getattr(g, "locale", "en")
+        return getattr(self, "description_" + lang)
+
+    def answer(self):
+        lang = getattr(g, "locale", "en")
+        return getattr(self, "answer_" + lang)
+
     def __repr__(self):
-        return '<SubjectQuestion %r>' % (self.description)
+        return '<SubjectQuestion %r>' % (self.description())
 
 
 class HelpSubject(db.Model):
@@ -22,5 +32,9 @@ class HelpSubject(db.Model):
     name_pt = db.Column(db.String(50))
     questions = db.relationship("HelpSubjectQuestion", backref='help_subject_question')
 
+    def name(self):
+        lang = getattr(g, "locale", "en")
+        return title_case(getattr(self, "name_" + lang))
+
     def __repr__(self):
-        return '<Subject %r>' % (self.name)
+        return '<Subject %r>' % (self.name())

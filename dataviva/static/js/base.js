@@ -201,11 +201,6 @@ dataviva.getUrlAttr = function(attr) {
   else return attr;
 }
 
-var selectorSearchCallback = Selector()
-  .callback(function(d){
-    window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id="
-    + d.id ;
-  });
 
 var selectorHrefCallback = Selector()
     .callback(function(d){
@@ -218,9 +213,94 @@ var select_attr = function(id) {
   $('#modal-selector').modal('show');
 }
 
+var selectorSearchCallback = Selector()
+  .callback(function(d){
+    window.location = window.location.pathname + "?" + selectorSearchCallback.type() + "_id="
+    + d.id ;
+  });
+
 var select_attr_search = function(id) {
   d3.select("#modal-selector-content").call(selectorSearchCallback.type(id));
   $('#modal-selector').modal('show');
+}
+
+var profileSearchSelectorCallback = Selector()
+    .callback(function(d){
+        $('#modal-search .chosen-options #' + profileSearchSelectorCallback.type()).val(d.id);
+
+        $('#modal-search-content .page-loader').remove();
+    });
+
+var profile_search_selector = function(id) {
+    $('#modal-search .modal-body').empty();
+    d3.select("#modal-search-content").call(profileSearchSelectorCallback.type(id));
+    $('#modal-search').modal('show');
+}
+
+var search = function(profile) {
+
+    // Reset modal and set loading
+    $('#modal-search .modal-body').empty();
+    $('#modal-search .chosen-options .question').empty();
+    $('#modal-search #chosen-options').val('');
+    $('#modal-search #search-advance').prop("disabled", true);
+    var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
+    search_load.text(dataviva.dictionary['loading']);
+
+    $('#modal-search').modal('show');
+
+    $.ajax({
+      method: "GET",
+      url: "/" + lang + "/search/profile/" + profile,
+      success: function (response) {
+        search_load.hide();
+
+        var questions = response.questions;
+        // Set modal template
+        $('#modal-search .modal-title').html(response.profile);
+        $('#modal-search .modal-body').html(response.template);
+
+        for (id in questions) {
+
+            var question = questions[id],
+                selectors = questions[id].selectors,
+                div = $('<div></div>').addClass('selector-list-item');
+
+            // Append questions
+            div.append('<div></div>')
+                    .addClass('item-title')
+                    .html(question.description)
+                    .attr('id', 'question'+id)
+                    .data('answer', question.answer)
+                    .data('selectors', selectors.join(','));
+
+            // Choose Question
+            div.click(function() {
+                $('#modal-search #search-advance').prop('disabled', false);
+                $(this).siblings('.selected').toggleClass('selected');
+                $(this).toggleClass('selected');
+
+                var chosenOptions = $('#modal-search .chosen-options');
+
+                chosenOptions.find('.question').html($(this).html());
+                chosenOptions.find('#answer').val($(this).data('answer'));
+                chosenOptions.find('input:not(#answer)').remove()
+
+                var selectors = $(this).data('selectors').split(',')
+
+                for (var i = 0; i < selectors.length; i++) {
+                    var selector = selectors[i];
+                        selectorInput = $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('id', selector);
+                        chosenOptions.append(selectorInput);
+                }
+            });
+
+            $('#modal-search .selector-list .list-group').append(div);
+        }
+      }
+    });
 }
 
 d3.selectAll(".profile_simple").on("click", function(){
@@ -279,91 +359,20 @@ $(document).ready(function () {
 
     $('#modal-search #search-advance').click(function() {
         var chosenOptions = $('#modal-search .chosen-options'),
-            id = chosenOptions.find('#question-id').val(),
-            question = $('#question'+id),
-            answer = question.data('answer'),
-            selectors = question.data('selectors').split(','),
-            selected = chosenOptions.find('input:not(#question-id)')
+            answer = chosenOptions.find('#answer').val(),
+            selectors = chosenOptions.find('input:not(#answer)')
+                        .map(function(){return this.id;}).get();
+            selected = chosenOptions.find('input:not(#answer)')
                         .map(function(){return $(this).val();}).get();
 
-        console.log(question);
-        console.log(answer);
-        console.log(selectors);
-        console.log(selected);
             selectors.every(function(selector, step) {
                 if (selected[step] == "") {
-                    console.log('CHAMAR ' + selectors[step]);
+                    profile_search_selector(selectors[step]);
                     return false;
+                } else if(step == selectors.length -1) {
+                    console.log(answer);
                 }
-                else return true;
+                return true;
             });
     });
 });
-
-
-var search = function(profile) {
-
-    // Reset modal and set loading
-    $('#modal-search .modal-body').empty();
-    $('#modal-search .chosen-options .question').empty();
-    $('#modal-search #chosen-options').val('');
-    $('#modal-search #search-advance').prop("disabled", true);
-    var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
-    search_load.text(dataviva.dictionary['loading']);
-
-    $('#modal-search').modal('show');
-
-    $.ajax({
-      method: "GET",
-      url: "/" + lang + "/search/profile/" + profile,
-      success: function (response) {
-        search_load.hide();
-
-        var questions = response.questions;
-        // Set modal template
-        $('#modal-search .modal-title').html(response.profile);
-        $('#modal-search .modal-body').html(response.template);
-
-        for (id in questions) {
-
-            var question = questions[id],
-                selectors = questions[id].selectors,
-                div = $('<div></div>').addClass('selector-list-item');
-
-            // Append questions
-            div.append('<div></div>')
-                    .addClass('item-title')
-                    .html(question.description)
-                    .attr('id', 'question'+id)
-                    .data('id', id)
-                    .data('answer', question.answer)
-                    .data('selectors', selectors.join(','));
-
-            // Choose Question
-            div.click(function() {
-                $('#modal-search #search-advance').prop('disabled', false);
-                $(this).siblings('.selected').toggleClass('selected');
-                $(this).toggleClass('selected');
-
-                var chosenOptions = $('#modal-search .chosen-options');
-
-                chosenOptions.find('.question').html($(this).html());
-                chosenOptions.find('#question-id').val($(this).data('id'));
-                chosenOptions.find('input:not(#question-id)').remove()
-
-                var selectors = $(this).data('selectors').split(',')
-
-                for (var i = 0; i < selectors.length; i++) {
-                    var selector = selectors[i];
-                        selectorInput = $('<input>')
-                            .attr('type', 'hidden')
-                            .attr('id', selector);
-                        chosenOptions.append(selectorInput);
-                }
-            });
-
-            $('#modal-search .selector-list .list-group').append(div);
-        }
-      }
-    });
-}

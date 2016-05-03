@@ -1,42 +1,75 @@
-{% extends "site.html" %}
+<!-- extend from base layout -->
+{% extends "base.html" %}
 
-{% block title %}: {{ error }}{% endblock %}
+{% block content %}
 
-{% block head %}
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.sabrina.css" />
 
-{% endblock %}
-
-{% block body %}
-
   <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
 
-  <h1>
-    {% if error == "403" %}
-      {% trans %}You dont have permission to view this page.{% endtrans %}
-    {% elif error == "500" %}
-      {% trans %}There was a problem serving the requested page.{% endtrans %}
-    {% elif error == "413" %}
-      {% trans %}Oh no! Your request is too large to be processed.{% endtrans %}
-    {% else %}
-      {% trans %}Oh no! The page you've requested does not exist.{% endtrans %}
-    {% endif %}
-  </h1>
-	<div id="extra_error">
-    {% if error == "500" %}
-      	{% trans %}Our technical team already received a message{% endtrans %}
-      	<br>
-    		{% trans %}informing this error and will fix it as soon as possible.{% endtrans %}
-    {% endif %}
-  </div>
-  <div class="computer">
-    <img src="/static/img/bgs/error.png" width="650px">
-    <div id="error_code">{{ error }}</div>
-  </div>
-{% endblock %}
+  <div id="error-page">
+    <div class="container">
 
-{% block js %}
+      <div class="row">
+        <div class="col-xs-12 col-md-7">
+          <h1>
+            {% if error == "403" %}
+              {% trans %}You dont have permission to view this page.{% endtrans %}
+            {% elif error == "500" %}
+              {% trans %}There was a problem serving the requested page.{% endtrans %}
+            {% elif error == "413" %}
+              {% trans %}Oh no! Your request is too large to be processed.{% endtrans %}
+            {% else %}
+              {% trans %}Oh no! The page you've requested does not exist.{% endtrans %}
+            {% endif %}
+          </h1>
+
+          <p id="extra_error">
+            {% if error == "500" %}
+                {% trans %}Our technical team already received a message{% endtrans %}
+                <br>
+                {% trans %}informing this error and will fix it as soon as possible.{% endtrans %}
+            {% endif %}
+          </p>
+          
+          {% if error == "404" %}
+          <p>Aqui estão algumas sugestões que podem te ajudar a encontrar o que procura:
+            <ul class="">
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Iniciar pesquisa</a></li>
+              <li><a href="#">Ranking</a></li>
+              <li><a href="#">Ajuda</a></li>
+              <li><a href="#">Contato</a></li>
+            </ul>
+          </p>
+          {% endif %}
+          
+          {% if error == "500" %}
+          <p>Aqui estão algumas sugestões de outras pesquisas, baseado no que você procurou:
+            <ul class="">
+              <li><a href="#">Ocupações para Minas Gerais</a></li>
+              <li><a href="#">Atividade econômicas para Minas Gerais</a></li>
+              <li><a href="#">Cursos em Minas Gerais</a></li>
+            </ul>
+          </p>
+          {% endif %}
+          
+        </div>
+        <div class="col-xs-12 col-md-5">
+          <div class="computer">
+            <img src="/static/img/bgs/error.png" class="img-responsive">
+            <div id="error_code">{{ error }}</div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
 
   <script>
 
@@ -55,4 +88,9 @@
 
   </script>
 
-{% endblock %}
+
+
+
+
+
+{% endblock content %}

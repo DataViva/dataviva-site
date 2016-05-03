@@ -152,7 +152,7 @@ def index(bra_id):
             'name': location_service.name(),
             'gdp': location_service.gdp(),
             'population': location_service.population(),
-            'gdp_per_capita': location_service.gdp_per_capita(),
+            'gdp_per_capita': location_service.gdp() / location_service.population(),
             'bg_class_image': background_image,
             'year': eci.year
         }
