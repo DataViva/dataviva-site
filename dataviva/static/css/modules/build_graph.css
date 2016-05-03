@@ -2,3 +2,10 @@
     font-size: 18px;
     font-weight: 300;
 }
+.build_graph .sidebar .btn-outline {
+    background: #fff none repeat scroll 0 0;
+    border-color: #eee;
+    color: #666;
+    font-weight: lighter;
+    text-align: left;
+}
