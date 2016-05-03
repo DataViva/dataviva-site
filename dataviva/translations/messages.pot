@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-03 10:32-0400\n"
+"POT-Creation-Date: 2016-05-03 16:02-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -468,6 +468,12 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
+#: dataviva/apps/admin/templates/admin/index.html:87
+#: dataviva/templates/admin.html:25 dataviva/templates/include/footer.html:36
+#: dataviva/translations/dictionary.py:584
+msgid "Help"
+msgstr ""
+
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
 msgid "You need to be logged in to vote."
 msgstr ""
@@ -916,6 +922,7 @@ msgid "Author"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:21
+#: dataviva/apps/help/templates/help/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:42
 msgid "Category"
 msgstr ""
@@ -950,6 +957,7 @@ msgstr ""
 #: dataviva/apps/blog/templates/blog/admin.html:40
 #: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/calls/templates/calls/admin.html:39
+#: dataviva/apps/help/templates/help/admin.html:39
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
@@ -992,6 +1000,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/admin.html:39
 #: dataviva/apps/calls/templates/calls/admin.html:38
+#: dataviva/apps/help/templates/help/admin.html:38
 #: dataviva/apps/news/templates/news/admin.html:39
 #: dataviva/apps/search/templates/search/admin.html:39
 msgid "New"
@@ -999,6 +1008,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/admin.html:41
 #: dataviva/apps/calls/templates/calls/admin.html:40
+#: dataviva/apps/help/templates/help/admin.html:40
 #: dataviva/apps/news/templates/news/admin.html:41
 #: dataviva/apps/search/templates/search/admin.html:41
 #: dataviva/templates/admin/admin_questions.html:48
@@ -1221,6 +1231,19 @@ msgstr ""
 
 #: dataviva/apps/embed/templates/embed/info.html:29
 msgid "Next"
+msgstr ""
+
+#: dataviva/apps/help/templates/help/admin.html:32
+#: dataviva/apps/search/templates/search/_form.html:16
+#: dataviva/apps/search/templates/search/admin.html:32
+#: dataviva/templates/about/ask/index.html:53
+#: dataviva/templates/admin/admin_questions.html:3
+#: dataviva/templates/admin/admin_questions.html:28
+msgid "Question"
+msgstr ""
+
+#: dataviva/apps/help/templates/help/admin.html:33
+msgid "Anwser"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:5
@@ -2902,14 +2925,6 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: dataviva/apps/search/templates/search/_form.html:16
-#: dataviva/apps/search/templates/search/admin.html:32
-#: dataviva/templates/about/ask/index.html:53
-#: dataviva/templates/admin/admin_questions.html:3
-#: dataviva/templates/admin/admin_questions.html:28
-msgid "Question"
-msgstr ""
-
 #: dataviva/apps/search/templates/search/_form.html:21
 #: dataviva/apps/search/templates/search/admin.html:33
 msgid "Selector(s)"
@@ -2968,7 +2983,6 @@ msgid " in the import origins of Brazil and number "
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:16
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
 msgid ""
 " in the export destinations of Brazil by trade value. The most exported "
 "product from Brazil to this continent is "
@@ -2984,6 +2998,12 @@ msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:25
 msgid "number "
+msgstr ""
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
+msgid ""
+" in the export destinations of Brazil by trade value. The most exported "
+"product from Brazil to this country is "
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:75
@@ -4599,11 +4619,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:35
 #: dataviva/translations/dictionary.py:578
 msgid "Support"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:36
-#: dataviva/translations/dictionary.py:584
-msgid "Help"
 msgstr ""
 
 #: dataviva/templates/include/footer.html:37
