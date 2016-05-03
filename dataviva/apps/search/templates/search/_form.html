@@ -27,16 +27,10 @@
         {{ messages(form.selector) }}
         {{ form.selector(class="form-control", maxlength=100)}}
     </div>
-
-    <div class="form-group {{ 'has-error' if form.answer.errors else '' }}">
-        <label class="control-label" for="answer">{% trans %}Content{% endtrans %}</label>
-        <button id="search-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-        <button id="search-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+    <div class="form-group {{ 'has-error' if form.answer.errors else '' }} ">
+        <label class="control-label" for="answer">{% trans %}Answer{% endtrans %}</label>
         {{ messages(form.answer) }}
-        {{ form.answer }}
-        <div class=" summernote-wrapper">
-            <div id="text-content-editor" class="summernote"></div>
-        </div>
+        {{ form.answer(class="form-control")}}
     </div>
 
     <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>

@@ -112,7 +112,8 @@ def edit(id):
     form = RegistrationForm()
     question = SearchQuestion.query.filter_by(id=id).first_or_404()
     form.profile.data = question.profile_id
-    form.description.data = question.description()
+    form.description_en.data = question.description_en
+    form.description_pt.data = question.description_pt
     form.answer.data = question.answer
     #form.selector.data = question.selectors_str()
     return render_template('search/edit.html', form=form, action=url_for('search.update', id=id))

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, SelectField, HiddenField, validators
+from wtforms import TextField, SelectField, validators
 from models import SearchProfile
 
 
@@ -24,7 +24,8 @@ class RegistrationForm(Form):
         validators.Length(max=100)
     ])
 
-    answer = HiddenField('answer', validators=[
-        validators.Required(u"Por favor, insira a resposta da pesquisa.")
+    answer = TextField('answer', validators=[
+        validators.Required(u"Por favor, insira a resposta da pesquisa."),
+        validators.Length(max=400)
     ])
 
