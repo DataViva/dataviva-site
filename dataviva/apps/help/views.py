@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, jsonify
 from dataviva.apps.general.views import get_locale
 from models import HelpSubject
 
@@ -34,3 +34,15 @@ def index():
 def admin():
     subjects = HelpSubject.query.all()
     return render_template('help/admin.html', subjects=subjects)
+
+
+@mod.route('/subject/all', methods=['GET'])
+def all_posts():
+    result = HelpSubject.query.all()
+    subjects = []
+    questions = []
+    answers = []
+    for row in result:
+        for question in row.questions:
+            subjects += [(row.id, row.name(), question.description(), question.answer())]
+    return jsonify(subjects=subjects)
