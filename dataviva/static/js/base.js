@@ -268,6 +268,36 @@ $(document).ready(function () {
     $('a[data-search]').click(function() {
         search($(this).data('search'));
     });
+
+
+    $("#modal-selector").on('hidden.bs.modal', function () {
+      $(this).find('.modal-body').empty();
+    })
+    $("#modal-search").on('hidden.bs.modal', function () {
+      $(this).find('.modal-body').empty();
+    })
+
+    $('#modal-search #search-advance').click(function() {
+        var chosenOptions = $('#modal-search .chosen-options'),
+            id = chosenOptions.find('#question-id').val(),
+            question = $('#question'+id),
+            answer = question.data('answer'),
+            selectors = question.data('selectors').split(','),
+            selected = chosenOptions.find('input:not(#question-id)')
+                        .map(function(){return $(this).val();}).get();
+
+        console.log(question);
+        console.log(answer);
+        console.log(selectors);
+        console.log(selected);
+            selectors.every(function(selector, step) {
+                if (selected[step] == "") {
+                    console.log('CHAMAR ' + selectors[step]);
+                    return false;
+                }
+                else return true;
+            });
+    });
 });
 
 
@@ -294,21 +324,6 @@ var search = function(profile) {
         $('#modal-search .modal-title').html(response.profile);
         $('#modal-search .modal-body').html(response.template);
 
-        var chosenOptions = $('#modal-search .chosen-options');
-
-        $('#modal-search #search-advance').click(function() {
-            var id = chosenOptions.find('#question-id').val();
-            var awnser = questions[id].awnser;
-
-            chosenOptions.find('input:not(#question-id)').each(function() {
-                if (this.value == "") {
-                    $('#modal-search .modal-body').empty();
-                    d3.select("#modal-search-content").call(selectorHrefCallback.type(this.id));
-                    return false;
-                }
-            });
-        });
-
         for (id in questions) {
 
             var question = questions[id],
@@ -319,7 +334,9 @@ var search = function(profile) {
             div.append('<div></div>')
                     .addClass('item-title')
                     .html(question.description)
+                    .attr('id', 'question'+id)
                     .data('id', id)
+                    .data('answer', question.answer)
                     .data('selectors', selectors.join(','));
 
             // Choose Question
@@ -327,6 +344,8 @@ var search = function(profile) {
                 $('#modal-search #search-advance').prop('disabled', false);
                 $(this).siblings('.selected').toggleClass('selected');
                 $(this).toggleClass('selected');
+
+                var chosenOptions = $('#modal-search .chosen-options');
 
                 chosenOptions.find('.question').html($(this).html());
                 chosenOptions.find('#question-id').val($(this).data('id'));
