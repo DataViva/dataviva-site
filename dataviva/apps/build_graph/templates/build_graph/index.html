@@ -36,6 +36,8 @@
             </li>
             <li id="views">
             </li>
+            <li id="graphs">
+            </li>
             <li>
                 <a href="#" class="btn btn-primary btn-block">
                     <i class="fa fa-repeat m-r-sm" aria-hidden="true"></i>
@@ -44,9 +46,13 @@
             </li>
         </ul>
     </nav>
-    <div class="col-xs-12 col-md-9">
-        {% block build_graph_content %}
-        {% endblock build_graph_content %}
+    <div class="embed-responsive embed-responsive-16by9">
+        <iframe src="/{{g.locale}}/embed/tree_map/secex/all/all/all/hs/?controls=true&year=2014&size=export_val&depth=hs_6&color=color" 
+                target="frame-build-graphs"
+                name="graphs-frame-build-graphs"
+                id="graphs-frame-build-graphs"
+                class="embed-responsive-item">
+        </iframe>
     </div>
 </section>
 {% endblock content %}
