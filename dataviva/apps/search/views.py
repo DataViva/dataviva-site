@@ -92,7 +92,8 @@ def create():
         question = SearchQuestion()
         profile_id = form.profile.data
         question.profile_id = profile_id
-        question.description = form.description.data
+        question.description_en = form.description_en.data
+        question.description_pt = form.description_pt.data
         question.answer = form.answer.data
 
         selector_input_list = form.selector.data.split(',')
@@ -115,7 +116,7 @@ def edit(id):
     form.description_en.data = question.description_en
     form.description_pt.data = question.description_pt
     form.answer.data = question.answer
-    #form.selector.data = question.selectors_str()
+    form.selector.data = question.selectors_str()
     return render_template('search/edit.html', form=form, action=url_for('search.update', id=id))
 
 
@@ -129,7 +130,8 @@ def update(id):
         question = SearchQuestion.query.filter_by(id=id).first_or_404()
         profile_id = form.profile.data
         question.profile_id = profile_id
-        question.description = form.description.data
+        question.description_en = form.description_en.data
+        question.description_pt = form.description_pt.data
         question.answer = form.answer.data
         question.selectors = []
 
