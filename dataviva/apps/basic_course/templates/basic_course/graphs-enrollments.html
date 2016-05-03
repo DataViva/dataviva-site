@@ -30,10 +30,18 @@
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
+        {% if location.id | length != 9 %}
         <iframe src="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled" target="frame-tab-enrollments"
                 name="graphs-frame-enrollments"
                 id="graphs-frame-enrollments"
                 class="embed-responsive-item">
         </iframe>
+        {% else %}
+        <iframe src="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/school/?color=color&depth=school_8&size=enrolled" target="frame-tab-enrollments"
+                name="graphs-frame-enrollments"
+                id="graphs-frame-enrollments"
+                class="embed-responsive-item">
+        </iframe>
+        {% endif %}
     </div>
 </div>
