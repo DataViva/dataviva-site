@@ -12,10 +12,15 @@
         {{ messages(form.profile) }}
         {{ form.profile(class="form-control")}}
     </div>
-    <div class="form-group {{ 'has-error' if form.description.errors else '' }} ">
-        <label class="control-label" for="description">{% trans %}Question{% endtrans %}</label>
-        {{ messages(form.description) }}
-        {{ form.description(class="form-control", maxlength=400)}}
+    <div class="form-group {{ 'has-error' if form.description_en.errors else '' }} ">
+        <label class="control-label" for="description_en">{% trans %}Question{% endtrans %} (EN)</label>
+        {{ messages(form.description_en) }}
+        {{ form.description_en(class="form-control", maxlength=400)}}
+    </div>
+    <div class="form-group {{ 'has-error' if form.description_pt.errors else '' }} ">
+        <label class="control-label" for="description_pt">{% trans %}Question{% endtrans %} (PT)</label>
+        {{ messages(form.description_pt) }}
+        {{ form.description_pt(class="form-control", maxlength=400)}}
     </div>
     <div class="form-group {{ 'has-error' if form.selector.errors else '' }} ">
         <label class="control-label" for="selector">{% trans %}Selector(s){% endtrans %}</label>

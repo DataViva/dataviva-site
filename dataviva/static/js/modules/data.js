@@ -45,19 +45,20 @@ $(document).ready(function() {
 
             $('#dimensions').empty();
             dataviva.datasets[this.value].dimensions.forEach(function(dimension) {
+                if (dimension.depths.length > 0){ 
+                    var div = $("<div></div>").addClass("form-group col-md-4"),
+                        label = $("<label></label>").attr("for", dimension.id).addClass("control-label"),
+                        select = $("<select></select>").attr("id", dimension.id).addClass("form-control");
 
-                var div = $("<div></div>").addClass("form-group col-md-4"),
-                    label = $("<label></label>").attr("for", dimension.id).addClass("control-label"),
-                    select = $("<select></select>").attr("id", dimension.id).addClass("form-control");
+                    label.html(dataviva.dictionary[dimension.id + '_plural']);
 
-                label.html(dataviva.dictionary[dimension.id + '_plural']);
+                    $('#dimensions').append(div.append(label).append(select));
 
-                $('#dimensions').append(div.append(label).append(select));
-
-                select.append($('<option value="all">'+dataviva.dictionary['all']+'</option>'));
-                dimension.depths.forEach(function(depth) {
-                    select.append($('<option value="'+depth.value+'">'+dataviva.dictionary[depth.id]+'</option>'));
-                });
+                    select.append($('<option value="all">'+dataviva.dictionary['all']+'</option>'));
+                    dimension.depths.forEach(function(depth) {
+                        select.append($('<option value="'+depth.value+'">'+dataviva.dictionary[depth.id]+'</option>'));
+                    });
+                }
             });
             $("#download").prop('disabled', false);
         });

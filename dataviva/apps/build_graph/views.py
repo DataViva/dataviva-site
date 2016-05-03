@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, jsonify
+import re
+from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.embed.models import Build
+from sqlalchemy import not_
+
 
 mod = Blueprint('build_graph', __name__,
                 template_folder='templates',
@@ -28,11 +31,44 @@ def index():
     return render_template('build_graph/index.html')
 
 
-@mod.route('/views/<dataset>/<filter1>/<filter2>')
-def views(dataset, filter1, filter2):
-    builds = Build.query.filter_by(
-        dataset=dataset,
-        filter1=filter1,
-        filter2=filter2).all()
+def parse_filter(filter):
+    if filter != 'all':
+        return '<%s>' % filter
+    else:
+        return filter
 
-    return jsonify(builds)
+
+@mod.route('/views/<dataset>/<bra>/<filter1>/<filter2>')
+def views(dataset, bra, filter1, filter2):
+    '''/views/secex/hs/wld'''
+
+    build_query = Build.query.filter(
+        Build.dataset == dataset,
+        Build.filter1 == parse_filter(filter1),
+        Build.filter2 == parse_filter(filter2))
+
+    if bra != 'all':
+        build_query.filter(not_(Build.bra.like('all')))
+
+    views = {}
+    for build in build_query.all():
+        if bra:
+            build.set_bra(bra)
+
+        if filter1 != 'all':
+            build.set_filter1(request.args.get('filter1'))
+
+        if filter2 != 'all':
+            build.set_filter2(request.args.get('filter2'))
+
+        title = re.sub(r'\s\(.*\)', r'', build.title())
+
+        if title not in views:
+            views[title] = {}
+
+        views[title][build.app.type] = {
+            'url': build.url(),
+            'name': build.app.name()
+        }
+
+    return jsonify(views=views)

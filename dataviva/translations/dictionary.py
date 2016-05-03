@@ -456,6 +456,8 @@ def dictionary():
         "user": gettext("User"),
         "admin": gettext("Admin"),
         "remove": gettext("Remove"),
+        "deactivate": gettext("Deactivate"),
+        "activate": gettext("activate"),
         "remove_confirmation": gettext("Are you sure to delete this item?"),
 
         # Selector & Search
@@ -626,7 +628,7 @@ def dictionary():
         "zeroRecords": gettext("No records found"),
 
         # build graphs
-        "titles": gettext("Titles")
+        "views": gettext("Views")
     }
 
 

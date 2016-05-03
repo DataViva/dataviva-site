@@ -1,7 +1,7 @@
 <div role="tabpanel" class="tab-pane active" id="general">
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if header.bra_id %}
-        <p>{{ trade_partner.article() | capitalize }} {{ header.name }} 
+        <p>{% if g.locale == 'pt' %}{{ trade_partner.article() | capitalize }}{% endif %} {{ header.name }} 
         {% trans %} is number {% endtrans %}{{ header.import_rank }}
         {% trans %} in the import origins of {% endtrans %}{{ location.article() }} {{ header.location_name }} 
         {% trans %}and number{% endtrans %} {{ header.export_rank }}
@@ -10,13 +10,13 @@
         {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ (header.total_imported | magnitude).lower() }}.</p>
     {% else %}
         {% if header.wld_id|length == 2 %}
-            <p>{{ trade_partner.article() | capitalize }} {{ header.name }}
+            <p>{% if g.locale == 'pt' %}{{ trade_partner.article() | capitalize }}{% endif %} {{ header.name }}
             {% trans %} is number {% endtrans %}{{ header.import_rank }}
             {% trans %} in the import origins of Brazil and number {% endtrans %}{{ header.export_rank }}
             {% trans %} in the export destinations of Brazil by trade value. The most exported product from Brazil to this continent is {% endtrans %}{{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ (body.product_with_highest_export_value | magnitude).lower() }}) 
             {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ (header.total_imported | magnitude).lower() }}.</p>
         {% else %}
-            <p>{{ trade_partner.article() | capitalize }} {{ header.name }} 
+            <p>{% if g.locale == 'pt' %}{{ trade_partner.article() | capitalize }}{% endif %} {{ header.name }} 
             {% trans %} is number {% endtrans %}{{ header.import_rank }}
             {% trans %} in the import origins of Brazil and {% endtrans %} 
             {% if header.total_exported == 0 %} 
@@ -24,7 +24,7 @@
             {% else %}
                 {% trans %}number {% endtrans %}
                 {{ header.export_rank }}
-                {% trans %} in the export destinations of Brazil by trade value. The most exported product from Brazil to this continent is {% endtrans %}{{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ (body.product_with_highest_export_value | magnitude).lower() }}) 
+                {% trans %} in the export destinations of Brazil by trade value. The most exported product from Brazil to this country is {% endtrans %}{{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ (body.product_with_highest_export_value | magnitude).lower() }}) 
                 {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ (header.total_imported | magnitude).lower() }} ({{ header.year }}).
             {% endif %}</p>
         {% endif %}

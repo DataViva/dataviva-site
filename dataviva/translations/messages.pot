@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-03 10:32-0400\n"
+"POT-Creation-Date: 2016-05-03 16:17-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -169,7 +169,7 @@ msgstr ""
 #: dataviva/apps/data/templates/data/index.html:49
 #: dataviva/apps/industry/templates/industry/index.html:49
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:6
-#: dataviva/apps/location/templates/location/index.html:45
+#: dataviva/apps/location/templates/location/index.html:51
 #: dataviva/apps/major/templates/major/index.html:48
 #: dataviva/apps/occupation/templates/occupation/index.html:49
 #: dataviva/apps/product/templates/product/index.html:47
@@ -417,7 +417,7 @@ msgstr ""
 msgid "SignUp"
 msgstr ""
 
-#: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:17
+#: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:18
 msgid "You dont have permission to view this page."
 msgstr ""
 
@@ -466,6 +466,12 @@ msgstr ""
 #: dataviva/apps/users/templates/users/index.html:5
 #: dataviva/templates/admin.html:24
 msgid "Users"
+msgstr ""
+
+#: dataviva/apps/admin/templates/admin/index.html:87
+#: dataviva/templates/admin.html:25 dataviva/templates/include/footer.html:36
+#: dataviva/translations/dictionary.py:584
+msgid "Help"
 msgstr ""
 
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
@@ -589,7 +595,7 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:43
 #: dataviva/apps/industry/templates/industry/index.html:45
-#: dataviva/apps/location/templates/location/index.html:42
+#: dataviva/apps/location/templates/location/index.html:48
 #: dataviva/apps/occupation/templates/occupation/index.html:45
 #: dataviva/apps/product/templates/product/index.html:43
 #: dataviva/apps/university/templates/university/index.html:32
@@ -631,7 +637,7 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/index.html:106
 #: dataviva/apps/data/templates/data/index.html:33
 #: dataviva/apps/industry/templates/industry/index.html:127
-#: dataviva/apps/location/templates/location/index.html:125
+#: dataviva/apps/location/templates/location/index.html:131
 #: dataviva/apps/major/templates/major/index.html:87
 #: dataviva/apps/occupation/templates/occupation/index.html:97
 #: dataviva/apps/product/templates/product/index.html:144
@@ -652,7 +658,7 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:125
 #: dataviva/apps/industry/templates/industry/index.html:146
-#: dataviva/apps/location/templates/location/index.html:141
+#: dataviva/apps/location/templates/location/index.html:147
 #: dataviva/apps/major/templates/major/index.html:106
 #: dataviva/apps/occupation/templates/occupation/index.html:118
 #: dataviva/apps/product/templates/product/index.html:163
@@ -822,7 +828,7 @@ msgid "The city has "
 msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:59
-#: dataviva/apps/location/templates/location/index.html:149
+#: dataviva/apps/location/templates/location/index.html:155
 #: dataviva/apps/location/templates/location/tab-general.html:97
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:3
 #: dataviva/apps/major/templates/major/tab-general.html:62
@@ -916,6 +922,7 @@ msgid "Author"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:21
+#: dataviva/apps/help/templates/help/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:42
 msgid "Category"
 msgstr ""
@@ -950,6 +957,7 @@ msgstr ""
 #: dataviva/apps/blog/templates/blog/admin.html:40
 #: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/calls/templates/calls/admin.html:39
+#: dataviva/apps/help/templates/help/admin.html:39
 #: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
@@ -992,6 +1000,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/admin.html:39
 #: dataviva/apps/calls/templates/calls/admin.html:38
+#: dataviva/apps/help/templates/help/admin.html:38
 #: dataviva/apps/news/templates/news/admin.html:39
 #: dataviva/apps/search/templates/search/admin.html:39
 msgid "New"
@@ -999,6 +1008,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/admin.html:41
 #: dataviva/apps/calls/templates/calls/admin.html:40
+#: dataviva/apps/help/templates/help/admin.html:40
 #: dataviva/apps/news/templates/news/admin.html:41
 #: dataviva/apps/search/templates/search/admin.html:41
 #: dataviva/templates/admin/admin_questions.html:48
@@ -1223,6 +1233,19 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
+#: dataviva/apps/help/templates/help/admin.html:32
+#: dataviva/apps/search/templates/search/_form.html:16
+#: dataviva/apps/search/templates/search/admin.html:32
+#: dataviva/templates/about/ask/index.html:53
+#: dataviva/templates/admin/admin_questions.html:3
+#: dataviva/templates/admin/admin_questions.html:28
+msgid "Question"
+msgstr ""
+
+#: dataviva/apps/help/templates/help/admin.html:33
+msgid "Anwser"
+msgstr ""
+
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:35
@@ -1325,7 +1348,7 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/index.html:155
 #: dataviva/apps/industry/templates/industry/tab-general.html:39
 #: dataviva/apps/industry/templates/industry/tab-wages.html:3
-#: dataviva/apps/location/templates/location/index.html:157
+#: dataviva/apps/location/templates/location/index.html:163
 #: dataviva/apps/location/templates/location/tab-general.html:138
 #: dataviva/apps/location/templates/location/tab-wages.html:3
 #: dataviva/apps/occupation/templates/occupation/index.html:127
@@ -1338,7 +1361,7 @@ msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:165
 #: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
-#: dataviva/apps/location/templates/location/index.html:165
+#: dataviva/apps/location/templates/location/index.html:171
 #: dataviva/apps/location/templates/location/tab-general.html:180
 #: dataviva/apps/location/templates/location/tab-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
@@ -1561,31 +1584,31 @@ msgstr ""
 msgid "Wage by"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:57
+#: dataviva/apps/location/templates/location/index.html:63
 msgid "GDP"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:68
+#: dataviva/apps/location/templates/location/index.html:74
 msgid "Life Expectancy"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:80
+#: dataviva/apps/location/templates/location/index.html:86
 msgid "Total Population"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:91
+#: dataviva/apps/location/templates/location/index.html:97
 msgid "GDP per capita"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:102
+#: dataviva/apps/location/templates/location/index.html:108
 msgid "MHDI"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:114
+#: dataviva/apps/location/templates/location/index.html:120
 msgid "ECI"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:173
+#: dataviva/apps/location/templates/location/index.html:179
 #: dataviva/apps/location/templates/location/tab-education.html:3
 #: dataviva/apps/location/templates/location/tab-general.html:228
 msgid "Education"
@@ -2902,14 +2925,6 @@ msgstr ""
 msgid "Profile"
 msgstr ""
 
-#: dataviva/apps/search/templates/search/_form.html:16
-#: dataviva/apps/search/templates/search/admin.html:32
-#: dataviva/templates/about/ask/index.html:53
-#: dataviva/templates/admin/admin_questions.html:3
-#: dataviva/templates/admin/admin_questions.html:28
-msgid "Question"
-msgstr ""
-
 #: dataviva/apps/search/templates/search/_form.html:21
 #: dataviva/apps/search/templates/search/admin.html:33
 msgid "Selector(s)"
@@ -2968,7 +2983,6 @@ msgid " in the import origins of Brazil and number "
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:16
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
 msgid ""
 " in the export destinations of Brazil by trade value. The most exported "
 "product from Brazil to this continent is "
@@ -2984,6 +2998,12 @@ msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:25
 msgid "number "
+msgstr ""
+
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
+msgid ""
+" in the export destinations of Brazil by trade value. The most exported "
+"product from Brazil to this country is "
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:75
@@ -4358,23 +4378,23 @@ msgid ""
 "enrollment ranking by locality."
 msgstr ""
 
-#: dataviva/templates/general/error.html:19
+#: dataviva/templates/general/error.html:20
 msgid "There was a problem serving the requested page."
 msgstr ""
 
-#: dataviva/templates/general/error.html:21
+#: dataviva/templates/general/error.html:22
 msgid "Oh no! Your request is too large to be processed."
 msgstr ""
 
-#: dataviva/templates/general/error.html:23
+#: dataviva/templates/general/error.html:24
 msgid "Oh no! The page you've requested does not exist."
 msgstr ""
 
-#: dataviva/templates/general/error.html:28
+#: dataviva/templates/general/error.html:30
 msgid "Our technical team already received a message"
 msgstr ""
 
-#: dataviva/templates/general/error.html:30
+#: dataviva/templates/general/error.html:32
 msgid "informing this error and will fix it as soon as possible."
 msgstr ""
 
@@ -4599,11 +4619,6 @@ msgstr ""
 #: dataviva/templates/include/footer.html:35
 #: dataviva/translations/dictionary.py:578
 msgid "Support"
-msgstr ""
-
-#: dataviva/templates/include/footer.html:36
-#: dataviva/translations/dictionary.py:584
-msgid "Help"
 msgstr ""
 
 #: dataviva/templates/include/footer.html:37

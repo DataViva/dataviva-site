@@ -9,3 +9,6 @@
     font-weight: lighter;
     text-align: left;
 }
+.build_graph .sidebar #dimensions .form-group .btn {
+    margin-top: 2px;
+}
