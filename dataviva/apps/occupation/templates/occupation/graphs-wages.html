@@ -14,6 +14,7 @@
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
+            {% if location.id | length != 9 %}
             <a href="#jobs-municipalities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-municipalities">{% trans %}Municipality{% endtrans %}</a>
             <div class="collapse" id="jobs-municipalities">
                 <a href="/{{g.locale}}/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?color=color&depth=bra_9&size=num_jobs"
@@ -29,6 +30,7 @@
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
+            {% endif %}
             <h4>{% trans %}Wage by{% endtrans %} </h4>
             <a href="#wages-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#wages-opportunities">{% trans %}Economic Activities{% endtrans %}</a>
             <div class="collapse" id="wages-opportunities">
@@ -41,6 +43,7 @@
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
+            {% if location.id | length != 9 %}
             <a href="#wages-municipalities" class="list-group-item" data-toggle="collapse" data-parent="#wages-municipalities">{% trans %}Municipality{% endtrans %}</a>
             <div class="collapse" id="wages-municipalities">
                 <a href="/{{g.locale}}/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?color=color&depth=bra_9&size=wage"
@@ -56,6 +59,7 @@
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
+            {% endif %}
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">

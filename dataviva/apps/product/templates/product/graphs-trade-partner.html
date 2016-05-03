@@ -11,6 +11,7 @@
                 </a>
             </div>
             <h4>{%trans%}Exports By{%endtrans%}</h4>
+            {% if location.id | length != 9 %}
             <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="exports-municipality">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=export_val"
@@ -26,6 +27,7 @@
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
+            {% endif %}
             <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">{%trans%}Destination{%endtrans%}</a>
             <div class="collapse" id="exports-destination">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?size=export_val&depth=wld_5"
@@ -42,6 +44,7 @@
                 </a>
             </div>
             <h4>{%trans%}Imports By{%endtrans%}</h4>
+            {% if location.id | length != 9 %}
             <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="imports-municipality">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=import_val&depth=bra_9&color=color"
@@ -57,6 +60,7 @@
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
+            {% endif %}
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{%trans%}Origin{%endtrans%}</a>
             <div class="collapse" id="imports-origin">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?size=import_val&depth=wld_5"
