@@ -186,7 +186,7 @@ dataviva.getAttrUrl = function(attr) {
   else if (attr == "university") return 'university';
   else if (attr == "course_hedu") return 'major';
   else if (attr == "course_sc") return 'basic_course';
-  else return '';
+  else return attr;
 }
 
 dataviva.getUrlAttr = function(attr) {
@@ -198,7 +198,7 @@ dataviva.getUrlAttr = function(attr) {
   else if (attr == "University") return 'university';
   else if (attr == "Major") return 'course_hedu';
   else if (attr == "Basic_course") return 'course_sc';
-  else return '';
+  else return attr;
 }
 
 var selectorSearchCallback = Selector()
@@ -272,8 +272,11 @@ $(document).ready(function () {
 
 
 var search = function(profile) {
+
+    // Reset modal and set loading
     $('#modal-search .modal-body').empty();
     $('#modal-search .chosen-options .question').empty();
+    $('#modal-search #chosen-options').val('');
     $('#modal-search #search-advance').prop("disabled", true);
     var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
     search_load.text(dataviva.dictionary['loading']);
@@ -286,23 +289,62 @@ var search = function(profile) {
       success: function (response) {
         search_load.hide();
 
+        var questions = response.questions;
+        // Set modal template
         $('#modal-search .modal-title').html(response.profile);
         $('#modal-search .modal-body').html(response.template);
 
-        for (i in response.questions) {
+        var chosenOptions = $('#modal-search .chosen-options');
 
-            var question = $("<div></div>").addClass("selector-list-item");
-            question.append("<div></div>").addClass("item-title").html(response.questions[i].question);
+        $('#modal-search #search-advance').click(function() {
+            var id = chosenOptions.find('#question-id').val();
+            var awnser = questions[id].awnser;
 
-            question.click(function() {
-                $('#modal-search .chosen-options .question').html($(this).html());
-                $('#modal-search #search-advance').prop("disabled", false);
-                $(this).siblings('.selected')   .toggleClass('selected');
+            chosenOptions.find('input:not(#question-id)').each(function() {
+                if (this.value == "") {
+                    $('#modal-search .modal-body').empty();
+                    d3.select("#modal-search-content").call(selectorHrefCallback.type(this.id));
+                    return false;
+                }
+            });
+        });
+
+        for (id in questions) {
+
+            var question = questions[id],
+                selectors = questions[id].selectors,
+                div = $('<div></div>').addClass('selector-list-item');
+
+            // Append questions
+            div.append('<div></div>')
+                    .addClass('item-title')
+                    .html(question.description)
+                    .data('id', id)
+                    .data('selectors', selectors.join(','));
+
+            // Choose Question
+            div.click(function() {
+                $('#modal-search #search-advance').prop('disabled', false);
+                $(this).siblings('.selected').toggleClass('selected');
                 $(this).toggleClass('selected');
+
+                chosenOptions.find('.question').html($(this).html());
+                chosenOptions.find('#question-id').val($(this).data('id'));
+                chosenOptions.find('input:not(#question-id)').remove()
+
+                var selectors = $(this).data('selectors').split(',')
+
+                for (var i = 0; i < selectors.length; i++) {
+                    var selector = selectors[i];
+                        selectorInput = $('<input>')
+                            .attr('type', 'hidden')
+                            .attr('id', selector);
+                        chosenOptions.append(selectorInput);
+                }
             });
 
-            $('#modal-search .selector-list .list-group').append(question);
+            $('#modal-search .selector-list .list-group').append(div);
         }
       }
-    })
+    });
 }
