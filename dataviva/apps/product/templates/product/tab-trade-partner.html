@@ -5,6 +5,7 @@
     <div class="row">
 
     {% if (location.id|length) != 9 %}
+        {% if body.municipality_export_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
                 {%trans%}Main Municipality{%endtrans%}
@@ -17,6 +18,8 @@
                 </div>
             </div>
         </div>
+        {% endif %}
+        {% if body.municipality_import_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
                 {%trans%}Main Municipality{%endtrans%}
@@ -29,8 +32,10 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     {% endif %}
 
+        {% if body.destination_export_value and header.export_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
                 {%trans%}Main Destination{%endtrans%}
@@ -43,7 +48,9 @@
                 </div>
             </div>
         </div>
+        {% endif %}
 
+        {% if body.origin_import_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
                 {%trans%}Main Origin{%endtrans%}
@@ -56,6 +63,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
     </div><!--/.row-->
 </div>
 
