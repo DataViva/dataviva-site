@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g
+from dataviva import db
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
     LocationGdpPerCapitaRankings, LocationPopRankings, LocationAreaRankings, LocationMunicipalityRankings, Bra
@@ -68,7 +69,7 @@ def all():
 
     location = Wld.query.filter_by(id='sabra').first_or_404()
     location.id = 'all'
-    
+
     header = {
             'bg_class_image': 'bg-all',
             'gdp': location_service_brazil.gdp(),
@@ -140,7 +141,13 @@ def index(bra_id):
     location_basic_course_service = LocationBasicCourse(bra_id=bra_id)
 
     ''' Query básica para SECEX'''
-    eci = Ymb.query.filter_by(bra_id=bra_id, month=0) \
+    max_year_query = db.session.query(
+                func.max(Ymb.year)).filter_by(bra_id=bra_id, month=12)
+
+    eci = Ymb.query.filter(
+                Ymb.bra_id == bra_id,
+                Ymb.month == 0,
+                Ymb.year == max_year_query) \
         .order_by(desc(Ymb.year)).limit(1).first()
 
     ''' Background Image'''
