@@ -917,8 +917,18 @@ table.data-blue thead th small {
   padding: 20px 50px;
 }
 
-
-
+/* MODAL DE PERGUNTAS */
+.question-header {
+  text-align: center;
+  margin-bottom: 0;
+}
+.question-header h4{
+  font-size: 16px;
+  line-height: 1.45em
+}
+.question-header .current-question {
+  margin: 20px 0 0;
+}
 
 /*  SIGNIN SIGUNP LOGIN FORGOT PASS */
 
@@ -1058,10 +1068,24 @@ h1.login-title {
 
 
 
+/* TOGGLE BUTTON */
+.btn-toggle .fa-check-square-o { display: none; }
+.btn-toggle .fa-square-o { display: inline; }
+
+.btn-toggle.selected .fa-check-square-o { display: inline; }
+.btn-toggle.selected .fa-square-o { display: none; }
 
 
-
-
+.btn-toggle.selected {
+  background-color: #A25A6D;
+  border-color: #A25A6D;
+  color: #FFFFFF;
+}
+.btn-toggle.selected:hover {
+  background-color: #905262;
+  border-color: #905262;
+  color: #FFFFFF;
+}
 
 
 

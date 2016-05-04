@@ -294,7 +294,7 @@ class Product:
     def unity_weight_export_price(self):
         export_val = self.__secex__().export_val
         export_kg = self.__secex__().export_kg
-        return export_val if not export_val else export_kg / export_val
+        return export_val if not export_val else export_val / export_kg
 
     def total_imported(self):
         return self.__secex__().import_val
@@ -302,7 +302,7 @@ class Product:
     def unity_weight_import_price(self):
         import_val = self.__secex__().import_val
         import_kg = self.__secex__().import_kg
-        return import_val if not import_val else import_kg / import_val
+        return import_val if not import_val else import_val / import_kg
 
     def highest_import_value(self):
         try:

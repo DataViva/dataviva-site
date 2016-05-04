@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %} {% if location.id == 'all' %}({{header.year_ybs}}){% else %}({{header.year}}) {% endif %}</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.gdp|max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.gdp|magnitude }}</small>
@@ -71,7 +71,7 @@
                     {% if header.life_expectation %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %} ({{header.year}})</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.life_expectation|max_digits(3) }}</strong><br/>
                                 <small class="magnitude">Anos</small>
@@ -83,7 +83,7 @@
                     {% if header.population %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total Population{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Total Population{% endtrans %} {% if location.id == 'all' %}({{header.year_yb}}){% else %}({{header.year}}) {% endif %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.population|max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.population|magnitude }}</small>
@@ -94,7 +94,7 @@
 
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %} {% if location.id == 'all' %}({{header.year_ybs}}){% else %}({{header.year}}) {% endif %}</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.gdp_per_capita|magnitude }}</small>
@@ -105,7 +105,7 @@
                     {% if header.hdi %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %} ({{header.year}})</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.hdi|max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.hdi|magnitude }}</small>
@@ -117,7 +117,7 @@
                     {% if header.eci %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}ECI{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}ECI{% endtrans %} {% if location.id == 'all' %}(2014){% else %}({{header.year}}) {% endif %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.eci|magnitude }}</small>
@@ -127,9 +127,6 @@
                     {% endif %}
                 </div><!--/.row-->
             </div><!--/.indices-->
-
-            <div class="row"><div class="col-xs-12">{% trans %}Year{% endtrans %}: {{ header.year }}</div></div>
-
         </div>
     </div>
 
