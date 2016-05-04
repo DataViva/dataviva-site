@@ -3,10 +3,11 @@
     {% if not location %}
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
-            {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
-            {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
+            {% trans %} its commercial value was of {%endtrans%} R$ 
+            {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
             {% else %}
                 0
@@ -55,9 +56,9 @@
     {% elif (location.id|length) == 3 %}
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports in the state of{%endtrans%} {{location.name()}}
-            {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
@@ -74,7 +75,7 @@
             {% endif %}
 
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }}.
             {% endif %}
             {% if body.municipality_import_value %}
                 {% trans %}and the municipality that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
@@ -82,9 +83,9 @@
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports in the state of{%endtrans%} {{location.preposition('de')}} {{location.name()}}
-            {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
@@ -111,9 +112,9 @@
     {% elif (location.id|length) == 5 %}
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports in the mesoregion of{%endtrans%} {{location.name()}}
-            {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
@@ -138,9 +139,9 @@
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports in the mesoregion of{%endtrans%} {{location.name()}}
-            {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
@@ -170,9 +171,9 @@
     {% elif (location.id|length) == 7 %}
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports in the microregion of{%endtrans%} {{location.name()}}
-            {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
@@ -196,9 +197,9 @@
         {% endif %}
         {% if (product.id|length) == 2 %}
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports in the microregion of{%endtrans%} {{location.name()}}
-            {% trans %} and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
@@ -223,8 +224,8 @@
     {% else %}
         {% if (product.id|length) == 6 %}
             <p>{% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
-            {% trans %}are number {%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
-            {% trans %} in imports and number{%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
+            {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }},
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
@@ -240,8 +241,6 @@
                 {% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}.
             {% endif %}
             {% endif %}
-
-
             </p>
 
         {% endif %}

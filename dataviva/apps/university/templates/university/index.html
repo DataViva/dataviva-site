@@ -45,7 +45,7 @@
                     <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %} ({{header.year}})</h2>
                     <div class="number">
                         <strong class="counter">{{ header.enrolled | max_digits(3) }}</strong><br/>
-                        <small class="magnitude">{{ header.enrolled | magnitude }} {% trans %}students{% endtrans %}</small>
+                        <small class="magnitude">{{ (header.enrolled | magnitude).lower() }} {% trans %}students{% endtrans %}</small>
                     </div>
                 </div>
               </div>
@@ -55,7 +55,7 @@
                     <h2 class="text-left text-uppercase">{% trans %}Number of Entering Students {% endtrans %} ({{header.year}})</h2>
                     <div class="number">
                         <strong class="counter">{{ header.entrants | max_digits(3) }}</strong><br/>
-                        <small class="magnitude">{{ header.entrants | magnitude }} {% trans %}students{% endtrans %}</small>
+                        <small class="magnitude">{{ (header.entrants | magnitude).lower() }} {% trans %}students{% endtrans %}</small>
                     </div>
                 </div>
               </div>
@@ -65,7 +65,7 @@
                     <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %} ({{header.year}})</h2>
                     <div class="number">
                         <strong class="counter">{{ header.graduates | max_digits(3) }}</strong><br/>
-                        <small class="magnitude">{{ header.graduates | magnitude }} {% trans %}students{% endtrans %}</small>
+                        <small class="magnitude">{{ (header.graduates | magnitude).lower() }} {% trans %}students{% endtrans %}</small>
                     </div>
                 </div>
               </div>
