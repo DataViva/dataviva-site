@@ -1,7 +1,15 @@
 var select = $("<select></select>").attr("id", 'search-selector').addClass("search-selector form-control");
 
-	var search = 'teste';
-	select.append($('<option value="">'+search+'</option>'));
+	$.ajax({
+            method: "POST",
+            url: "/search/selector/all",
+            success: function (search) {
+            	search.selectors.forEach(function(entry) {
+					select.append($('<option value="">'+entry[0]+'</option>'));
+				});
+            }
+        });
+	
 	$('#search-form').append(select);
 
 $(document).ready(function(){
