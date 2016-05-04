@@ -273,6 +273,7 @@ class LocationBasicCourse(LocationSchool):
                             func.sum(Ybsc.enrolled).label("enrolled"),
                             Course_sc).join(Course_sc).filter(
                             Ybsc.bra_id == self.bra_id,
+                            func.length(Ybsc.course_sc_id) == 5,
                             not_(Ybsc.course_sc_id.like('xx%')),
                             Ybsc.year == self.max_year_query).group_by(Ybsc.course_sc_id)
 
