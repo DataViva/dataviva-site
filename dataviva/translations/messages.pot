@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-04 19:18-0300\n"
+"POT-Creation-Date: 2016-05-04 18:55-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -316,7 +316,7 @@ msgstr ""
 #: dataviva/apps/account/templates/account/change_password.html:56
 #: dataviva/apps/account/templates/account/edit_profile.html:47
 #: dataviva/templates/modal/dataviva.html:106
-#: dataviva/templates/modal/search.html:28
+#: dataviva/templates/modal/search.html:31
 #: dataviva/templates/modal/signup.html:42
 #: dataviva/templates/modal/wizard.html:47
 msgid "Cancel"
@@ -635,7 +635,7 @@ msgstr ""
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:120
 #: dataviva/apps/industry/templates/industry/index.html:140
-#: dataviva/apps/location/templates/location/index.html:144
+#: dataviva/apps/location/templates/location/index.html:149
 #: dataviva/apps/major/templates/major/index.html:101
 #: dataviva/apps/occupation/templates/occupation/index.html:113
 #: dataviva/apps/product/templates/product/index.html:176
@@ -1060,7 +1060,7 @@ msgstr ""
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
 #: dataviva/templates/modal/dataviva.html:103
-#: dataviva/templates/modal/search.html:29
+#: dataviva/templates/modal/search.html:32
 #: dataviva/translations/dictionary.py:474
 msgid "Back"
 msgstr ""
@@ -1175,7 +1175,7 @@ msgstr ""
 msgid "Filters"
 msgstr ""
 
-#: dataviva/apps/embed/views.py:220
+#: dataviva/apps/embed/views.py:225
 msgid "You need to be logged in to star visualizations."
 msgstr ""
 
@@ -1339,7 +1339,7 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/index.html:149
 #: dataviva/apps/industry/templates/industry/tab-general.html:39
 #: dataviva/apps/industry/templates/industry/tab-wages.html:3
-#: dataviva/apps/location/templates/location/index.html:160
+#: dataviva/apps/location/templates/location/index.html:165
 #: dataviva/apps/location/templates/location/tab-general.html:138
 #: dataviva/apps/location/templates/location/tab-wages.html:3
 #: dataviva/apps/occupation/templates/occupation/index.html:122
@@ -1352,7 +1352,7 @@ msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:159
 #: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
-#: dataviva/apps/location/templates/location/index.html:168
+#: dataviva/apps/location/templates/location/index.html:173
 #: dataviva/apps/location/templates/location/tab-general.html:180
 #: dataviva/apps/location/templates/location/tab-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
@@ -1575,31 +1575,31 @@ msgstr ""
 msgid "Wage by"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:63
+#: dataviva/apps/location/templates/location/index.html:65
 msgid "GDP"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:74
+#: dataviva/apps/location/templates/location/index.html:77
 msgid "Life Expectancy"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:86
+#: dataviva/apps/location/templates/location/index.html:89
 msgid "Total Population"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:97
+#: dataviva/apps/location/templates/location/index.html:101
 msgid "GDP per capita"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:108
+#: dataviva/apps/location/templates/location/index.html:113
 msgid "MHDI"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:120
+#: dataviva/apps/location/templates/location/index.html:125
 msgid "ECI"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:152
+#: dataviva/apps/location/templates/location/index.html:157
 #: dataviva/apps/location/templates/location/tab-general.html:97
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:3
 #: dataviva/apps/product/templates/product/index.html:185
@@ -1613,7 +1613,7 @@ msgstr ""
 msgid "International Trade"
 msgstr ""
 
-#: dataviva/apps/location/templates/location/index.html:176
+#: dataviva/apps/location/templates/location/index.html:181
 #: dataviva/apps/location/templates/location/tab-education.html:3
 #: dataviva/apps/location/templates/location/tab-general.html:228
 msgid "Education"
@@ -2449,8 +2449,6 @@ msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:8
 #: dataviva/apps/product/templates/product/tab-general.html:34
-#: dataviva/apps/product/templates/product/tab-general.html:229
-#: dataviva/apps/product/templates/product/tab-general.html:251
 #: dataviva/translations/dictionary.py:499
 msgid " in exports in Brazil. In "
 msgstr ""
@@ -2578,6 +2576,11 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:201
 #: dataviva/translations/dictionary.py:522
 msgid " in imports in the microregion of"
+msgstr ""
+
+#: dataviva/apps/product/templates/product/tab-general.html:229
+#: dataviva/apps/product/templates/product/tab-general.html:251
+msgid " in exports in this municipality. In "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/tab-general.html:239
@@ -4802,7 +4805,7 @@ msgid "Didn't find what I was looking for"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:104
-#: dataviva/templates/modal/search.html:30
+#: dataviva/templates/modal/search.html:33
 #: dataviva/templates/modal/wizard.html:48
 msgid "Advance"
 msgstr ""
