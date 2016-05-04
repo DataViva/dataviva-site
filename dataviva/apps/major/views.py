@@ -43,7 +43,8 @@ def index(course_hedu_id):
         rank_query = Ybc_hedu.query.filter(
             Ybc_hedu.year == max_year_query,
             Ybc_hedu.bra_id == bra_id,
-            func.length(Ybc_hedu.course_hedu_id) == 6).order_by(Ybc_hedu.course_hedu_id.desc())
+            func.length(Ybc_hedu.course_hedu_id) == len(course_hedu_id))\
+            .order_by(Ybc_hedu.enrolled.desc())
     else:
         major_service = Major(course_hedu_id, '')
         universities_service = MajorUniversities(course_hedu_id, '')
@@ -51,7 +52,8 @@ def index(course_hedu_id):
 
         rank_query = Yc_hedu.query.filter(
             Yc_hedu.year == max_year_query,
-            func.length(Yc_hedu.course_hedu_id) == 6).order_by(Yc_hedu.course_hedu_id.desc())
+            func.length(Yc_hedu.course_hedu_id) == len(course_hedu_id))\
+            .order_by(Yc_hedu.enrolled.desc())
 
     rank = rank_query.all()
 
@@ -99,7 +101,7 @@ def index(course_hedu_id):
 
     for index, maj in enumerate(rank):
         if rank[index].course_hedu_id == course_hedu_id:
-            header['rank'] = index
+            header['rank'] = index + 1
             break
 
     location = Bra.query.filter(Bra.id == bra_id).first()
