@@ -226,7 +226,7 @@
             <p>{% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
-            {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }},
+            {% trans %} in exports in this municipality. In {%endtrans%} {{ header.year }},
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
             {% else %}
@@ -248,7 +248,7 @@
             <p>{{ product.article() | capitalize }} {{ product.name() }} 
             {% trans %}are number {%endtrans%} {{ header.import_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
             {% trans %} in imports and number{%endtrans%} {{ header.export_value_ranking }}{% if language == "pt" %}&ordf{% endif %}
-            {% trans %} in exports in Brazil. In {%endtrans%} {{ header.year }}, 
+            {% trans %} in exports in this municipality. In {%endtrans%} {{ header.year }}, 
             {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}
             {% else %}
