@@ -59,6 +59,5 @@ def index(university_id):
         'highest_graduate_number_by_major': majors_service.highest_graduates_number(),
         'year': majors_service.year(),
     }
-    import pdb; pdb.set_trace()
 
     return render_template('university/index.html', university=university, header=header, body=body)
