@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-04 18:28-0300\n"
+"POT-Creation-Date: 2016-05-04 18:43-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -747,7 +747,8 @@ msgstr "Perfil Geral"
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:21
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:29
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:37
-msgid "The highest number of enrollments in the "
+#, fuzzy
+msgid "The highest number of enrollments in "
 msgstr "O maior número de matrículas para o curso/campo de "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:5
@@ -812,7 +813,6 @@ msgid "students. The region has a total of "
 msgstr "alunos. No total, a região possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:22
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:49
 msgid "in the state of "
 msgstr "no estado "
 
@@ -843,14 +843,20 @@ msgid "students. The microregion has a total of "
 msgstr "alunos. No total, a microregiāo possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:46
-msgid " is"
+msgid " is the number"
 msgstr " ocupa o"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:48
-msgid "city in number of enrollments in the "
+#, fuzzy
+msgid "city in number of enrollments "
 msgstr ""
 "lugar entre os municípios com maior número de matrículas para o "
 "curso/campo de "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:49
+#, fuzzy
+msgid "in the state "
+msgstr "está no estado "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:50
 msgid "The city has "
