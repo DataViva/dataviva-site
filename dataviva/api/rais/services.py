@@ -1,7 +1,7 @@
 from dataviva.api.attrs.models import Cnae, Cbo, Bra
 from dataviva.api.rais.models import Yi, Yo, Ybo, Ybi, Yio, Ybio, Yb_rais
 from dataviva import db
-from sqlalchemy import func, desc
+from sqlalchemy import func, desc, not_
 
 
 class Industry:
@@ -225,6 +225,7 @@ class IndustryOccupation(Industry):
                 Yio.cbo_id == Cbo.id,
                 Yio.cnae_id == self.cnae_id,
                 Yio.cbo_id_len == 4,
+                not_(Yio.cbo_id.like("x%")),
                 Yio.year == self.max_year
                 )
 
@@ -236,6 +237,7 @@ class IndustryOccupation(Industry):
                 Ybio.cnae_id == self.cnae_id,
                 Ybio.cbo_id_len == 4,
                 Ybio.bra_id == self.bra_id,
+                not_(Ybio.cbo_id.like("x%")),
                 Ybio.year == self.max_year
             )
 
