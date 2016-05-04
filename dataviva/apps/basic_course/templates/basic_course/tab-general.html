@@ -2,9 +2,9 @@
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
         {% if not location.id %}
             <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{basic_course.name()}} 
-            {% trans %}course/field of study in Brazil is in the municipality of {% endtrans %}{{body["city_name"]}} - {{body.city_state.upper()}}, 
-            {% trans %}with{% endtrans %} {{body["city_enrolled"] | max_digits(3) }} {{body["city_enrolled"] | magnitude }} 
-            {% trans %}students. The country has a total of{% endtrans %}{{header["course_enrolled"] | max_digits(3)}} {{header["course_enrolled"] | magnitude }} 
+            {% trans %}course/field of study in Brazil is in the municipality of {% endtrans %}{{body.city_name }} - {{body.city_state.upper()}}, 
+            {% trans %}with{% endtrans %} {{ body.city_enrolled | max_digits(3) }} {{ (body.city_enrolled | magnitude).lower() }} 
+            {% trans %}students. The country has a total of{% endtrans %}{{ header.course_enrolled | max_digits(3)}} {{ (header.course_enrolled | magnitude).lower() }} 
             {% trans %}enrolled students in this course/field, with {% endtrans %}{{header["course_average_class_size"] | max_digits(3)}} {{header["course_average_class_size"] | magnitude}} 
  
             {% trans %}students per class in average{% endtrans %}.</p>
@@ -12,8 +12,8 @@
             {% if location.id|length == 1 %}
                 <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{ basic_course.name() }} 
                 {% trans %}in {% endtrans %}{{ location.name() }} 
-                {% trans %}is in the state of {% endtrans %}{{ header.location_rank }}, 
-                {% trans %}with{% endtrans %}{{ header.location_enrolled| max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                {% trans %}is in the state of {% endtrans %}{{ location.preposition("de") }} {{ header.location_rank }}, 
+                {% trans %}with {% endtrans %} {{ header.location_enrolled| max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
                 {% trans %}students. The region has a total of {% endtrans %}{{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
                 {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
                 {% trans %}students per class in average{% endtrans %}.</p>
@@ -62,14 +62,14 @@
                     <dd>
                         <small>{{body.school_name }}</small>
                         <strong class="counter">{{body.school_enrolled | max_digits(3) }}</strong> 
-                        <span>{{body.school_enrolled | magnitude}}</span>
+                        <span>{{ (body.school_enrolled | magnitude).lower() }}</span>
                     </dd>
                     {% if location.id | length < 9 %}
                     <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
                     <dd>
                         <small>{{body.city_name }} - {{body.city_state.upper()}}</small>
                         <strong class="counter">{{body.city_enrolled | max_digits(3)}}</strong>
-                        <span>{{body.city_enrolled | magnitude}}</span>
+                        <span>{{ (body.city_enrolled | magnitude).lower() }}</span>
                     </dd>
                     {% endif %}
             </dl>
