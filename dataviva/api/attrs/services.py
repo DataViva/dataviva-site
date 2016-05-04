@@ -46,6 +46,14 @@ class All:
         gdp_per_capita = self.gdp() / float(self.population())
         return gdp_per_capita
 
+    def year_yb(self):
+        year_yb = self.max_year_query_yb.first()[0]
+        return year_yb
+
+    def year_ybs(self):
+        year_ybs = self.max_year_query_ybs.first()[0]
+        return year_ybs
+
 
 class Location:
 
