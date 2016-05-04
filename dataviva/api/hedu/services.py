@@ -75,7 +75,7 @@ class University:
         return self.__hedu__().university.desc_pt
 
     def year(self):
-        return self.__hedu__().year
+        return self.max_year_query.first()[0]
 
     def highest_enrolled_number(self):
         hedu = self.__hedu_sorted_by_enrolled__()[0]
