@@ -127,32 +127,51 @@ def index(product_id):
     header['import_net_weight'] = product_service.unity_weight_import_price()
 
     # Get rankings vars, code should be refactored
-    from dataviva.api.secex.models import Ymp
+    from dataviva.api.secex.models import Ymp, Ymbp
     from dataviva import db
     from sqlalchemy.sql.expression import func, desc
 
-    max_year_query = db.session.query(
-        func.max(Ymp.year)).filter(Ymp.hs_id == product.id)
+    if location:
+        max_year_query = db.session.query(
+        func.max(Ymbp.year)).filter(Ymbp.hs_id == product.id, Ymbp.month == 12)
 
-    secex_query = Ymp.query.filter(
-        Ymp.year == max_year_query,
-        Ymp.hs_id_len == len(product.id),
-        Ymp.month == 0).order_by(Ymp.export_val.desc())
-    secex = secex_query.all()
+        secex_query_export = Ymbp.query.filter(
+            Ymbp.year == max_year_query,
+            Ymbp.hs_id_len == len(product.id),
+            Ymbp.bra_id == location_id,
+            Ymbp.month == 0).order_by(Ymbp.export_val.desc())
+        secex_export = secex_query_export.all()
 
-    for ranking, product_ranking in enumerate(secex):
-        if secex[ranking].hs_id == product_id:
+        secex_query_import = Ymbp.query.filter(
+            Ymbp.year == max_year_query,
+            Ymbp.hs_id_len == len(product_id),
+            Ymbp.bra_id == location_id,
+            Ymbp.month == 0).order_by(Ymbp.import_val.desc())
+        secex_import = secex_query_import.all()
+
+    else:
+        max_year_query = db.session.query(
+            func.max(Ymp.year)).filter(Ymp.hs_id == product.id, Ymp.month == 12)
+
+        secex_query_export = Ymp.query.filter(
+            Ymp.year == max_year_query,
+            Ymp.hs_id_len == len(product.id),
+            Ymp.month == 0).order_by(Ymp.export_val.desc())
+        secex_export = secex_query_export.all()
+
+        secex_query_import = Ymp.query.filter(
+            Ymp.year == max_year_query,
+            Ymp.hs_id_len == len(product_id),
+            Ymp.month == 0).order_by(Ymp.import_val.desc())
+        secex_import = secex_query_import.all()
+
+    for ranking, product_ranking in enumerate(secex_export):
+        if secex_export[ranking].hs_id == product_id:
             header['export_value_ranking'] = ranking + 1
             break
 
-    secex_query = Ymp.query.filter(
-        Ymp.year == max_year_query,
-        Ymp.hs_id_len == len(product_id),
-        Ymp.month == 0).order_by(Ymp.import_val.desc())
-    secex = secex_query.all()
-
-    for ranking, product_ranking in enumerate(secex):
-        if secex[ranking].hs_id == product_id:
+    for ranking, product_ranking in enumerate(secex_import):
+        if secex_import[ranking].hs_id == product_id:
             header['import_value_ranking'] = ranking + 1
             break
 
