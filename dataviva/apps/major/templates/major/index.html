@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                          <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
+                          <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %} ({{ header.year }})</h2>
                           <div class="number">
                               <strong class="counter">{{header.enrolled | max_digits(3)}}</strong><br/>
                               <small class="magnitude">{{header.enrolled | magnitude}}</small>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Entrants{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Entrants{% endtrans %} ({{ header.year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.entrants | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.entrants | magnitude}}</small>
@@ -73,18 +73,13 @@
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Graduates{% endtrans %} ({{ header.year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.graduates | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.graduates | magnitude}}</small>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>       
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="year">{% trans %}Year{% endtrans %}: {{ header.year }}</div>
                   </div>
                 </div>
             </div>
