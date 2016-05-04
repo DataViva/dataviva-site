@@ -278,7 +278,7 @@ class Product:
         return product.name()
 
     def year(self):
-        return self.__secex__().year
+        return self.max_year_query.first()[0]
 
     def location_name(self):
         return "Brasil"

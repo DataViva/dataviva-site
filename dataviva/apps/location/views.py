@@ -80,6 +80,7 @@ def all():
     }
 
     body = {
+        'product_year': product_service.year(),
         'main_product_by_export_value': product_service.highest_export_value(),
         'main_product_by_export_value_name': product_service.highest_export_value_name(),
         'main_product_by_import_value': product_service.highest_import_value(),
@@ -88,6 +89,7 @@ def all():
         'total_exports': product_service.all_exported(),
         'all_trade_balance': product_service.all_trade_balance(),
 
+        'industry_year': industry_service.get_year(),
         'main_industry_by_num_jobs': industry_service.main_industry_by_num_jobs(),
         'main_industry_by_num_jobs_name': industry_service.main_industry_by_num_jobs_name(),
         'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
@@ -96,7 +98,7 @@ def all():
         'wage': industry_service.all_salary_mass(),
         'total_jobs': industry_service.total_jobs(),
 
-
+        'university_year': university_service.year(),
         'highest_enrolled_by_university': university_service.highest_enrolled_by_university(),
         'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),
         'highest_enrolled_by_major': major_service.highest_enrolled_by_major(),
@@ -171,6 +173,7 @@ def index(bra_id):
 
     if eci is not None:
         header['eci'] = eci.eci
+        header['eci_year'] = eci.year
 
     body = {
         'main_product_by_export_value': location_body_service.main_product_by_export_value(),

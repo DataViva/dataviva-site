@@ -48,7 +48,7 @@ class Industry:
         return base_industry.name()
 
     def get_year(self):
-        return self.__rais__().year
+        return self.yi_max_year.first()[0]
 
     def average_monthly_income(self):
         return self.__rais__().wage_avg
