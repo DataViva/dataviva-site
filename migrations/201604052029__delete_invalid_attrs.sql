@@ -1,0 +1,1 @@
+delete from attrs_bra where id = '4mg080304';

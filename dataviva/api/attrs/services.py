@@ -63,7 +63,7 @@ class Location:
         self._ybs_sorted_by_ranking = None
         self.bra_id = bra_id
         if len(bra_id) != 9 and len(bra_id) != 3:
-            like_cond = bra_id[:len(bra_id)]+'%'
+            like_cond = bra_id[:len(bra_id)] + '%'
             self.max_year_query = db.session.query(
                 func.max(Ybs.year)).filter(Ybs.bra_id.like(like_cond))
             self.attrs_query = db.session.query(func.sum(Ybs.stat_val).label("stat_val"), Ybs.stat_id).filter(
@@ -145,9 +145,11 @@ class Location:
                 Bra.id.like(self.bra_id[:5] + '%'),
                 func.length(Bra.id) == bra_length)
         else:
+
             bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
                 Bra.id.like(self.bra_id[:3] + '%'),
                 func.length(Bra.id) == bra_length)
+
         bra = bra_query.first()
         return bra.total
 
@@ -158,7 +160,7 @@ class Location:
 
     def number_of_municipalities(self):
         bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
-            Bra.id.like(self.bra_id[:7]+'%'),
+            Bra.id.like(self.bra_id[:7] + '%'),
             func.length(Bra.id) == 9)
         bra = bra_query.one()
         return bra.total
@@ -168,7 +170,7 @@ class Location:
         return bs_query.stat_val
 
     def states_in_a_region(self):
-        bra_query = Bra.query.filter(Bra.id.like(self.bra_id+'%'),
+        bra_query = Bra.query.filter(Bra.id.like(self.bra_id + '%'),
                                      func.length(Bra.id) == 3)
         bra = bra_query.all()
         states = []
@@ -196,7 +198,7 @@ class LocationGdpRankings(Location):
         self.stat_id = stat_id
         self.attrs_query = Ybs.query.filter(
             Ybs.stat_id == self.stat_id,
-            Ybs.bra_id.like(self.bra_id[:3]+'%'),
+            Ybs.bra_id.like(self.bra_id[:3] + '%'),
             Ybs.year == self.max_year_query,
             func.length(Ybs.bra_id) == len(self.bra_id))
 
@@ -267,6 +269,6 @@ class LocationMunicipalityRankings(Location):
         for r in mun:
             if r.state == self.bra_id:
                 if r.state == '3df':
-                    return mun_position-1
+                    return mun_position - 1
                 return mun_position
             mun_position += 1
