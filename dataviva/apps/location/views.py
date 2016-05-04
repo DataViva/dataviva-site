@@ -129,7 +129,7 @@ def index(bra_id):
     location_area_rankings_service = LocationAreaRankings(bra_id=bra_id)
     location_municipality_rankings_service = LocationMunicipalityRankings(bra_id=bra_id)
     location_wld_service = LocationWld(bra_id=bra_id)
-    location_body_service = LocationBodyService(bra_id=bra_id)
+    location_secex_service = LocationBodyService(bra_id=bra_id)
     location_industry_service = LocationIndustry(bra_id=bra_id)
     location_occupation_service = LocationOccupation(bra_id=bra_id)
     location_jobs_service = LocationJobs(bra_id=bra_id)
@@ -183,16 +183,22 @@ def index(bra_id):
         header['eci_year'] = eci.year
 
     body = {
-        'main_product_by_export_value': location_body_service.main_product_by_export_value(),
-        'main_product_by_export_value_name': location_body_service.main_product_by_export_value_name(),
-        'main_product_by_import_value': location_body_service.main_product_by_import_value(),
-        'main_product_by_import_value_name': location_body_service.main_product_by_import_value_name(),
-        'total_exports': location_body_service.total_exports(),
-        'total_imports': location_body_service.total_imports(),
+        'product_year': location_secex_service.year(),
+        'main_product_by_export_value': location_secex_service.main_product_by_export_value(),
+        'main_product_by_export_value_name': location_secex_service.main_product_by_export_value_name(),
+        'main_product_by_import_value': location_secex_service.main_product_by_import_value(),
+        'main_product_by_import_value_name': location_secex_service.main_product_by_import_value_name(),
+        'total_exports': location_secex_service.total_exports(),
+        'total_imports': location_secex_service.total_imports(),
+        'less_distance_by_product': location_secex_service.less_distance_by_product(),
+        'less_distance_by_product_name': location_secex_service.less_distance_by_product_name(),
+        'opportunity_gain_by_product': location_secex_service.opportunity_gain_by_product(),
+        'opportunity_gain_by_product_name': location_secex_service.opportunity_gain_by_product_name(),
         'main_destination_by_export_value': location_wld_service.main_destination_by_export_value(),
         'main_destination_by_export_value_name': location_wld_service.main_destination_by_export_value_name(),
         'main_destination_by_import_value': location_wld_service.main_destination_by_import_value(),
         'main_destination_by_import_value_name': location_wld_service.main_destination_by_import_value_name(),
+
         'main_industry_by_num_jobs': location_industry_service.main_industry_by_num_jobs(),
         'main_industry_by_num_jobs_name': location_industry_service.main_industry_by_num_jobs_name(),
         'main_occupation_by_num_jobs': location_occupation_service.main_occupation_by_num_jobs(),
@@ -200,14 +206,12 @@ def index(bra_id):
         'avg_wage': location_jobs_service.avg_wage(),
         'wage': location_jobs_service.wage(),
         'total_jobs': location_jobs_service.total_jobs(),
+
         'less_distance_by_occupation': location_distance_service.less_distance_by_occupation(),
         'less_distance_by_occupation_name': location_distance_service.less_distance_by_occupation_name(),
         'opportunity_gain_by_occupation': location_opp_gain_service.opportunity_gain_by_occupation(),
         'opportunity_gain_by_occupation_name': location_opp_gain_service.opportunity_gain_by_occupation_name(),
-        'less_distance_by_product': location_body_service.less_distance_by_product(),
-        'less_distance_by_product_name': location_body_service.less_distance_by_product_name(),
-        'opportunity_gain_by_product': location_body_service.opportunity_gain_by_product(),
-        'opportunity_gain_by_product_name': location_body_service.opportunity_gain_by_product_name(),
+
         'highest_enrolled_by_university': location_university_service.highest_enrolled_by_university(),
         'highest_enrolled_by_university_name': location_university_service.highest_enrolled_by_university_name(),
         'highest_enrolled_by_school': location_school_service.highest_enrolled_by_school(),
