@@ -56,7 +56,9 @@ def index(university_id):
         'major_with_more_entrants': majors_service.major_with_more_entrants(),
         'highest_entrant_number_by_major': majors_service.highest_entrants_number(),
         'major_with_more_graduates': majors_service.major_with_more_graduates(),
-        'highest_graduate_number_by_major': majors_service.highest_graduates_number()
+        'highest_graduate_number_by_major': majors_service.highest_graduates_number(),
+        'year': majors_service.year(),
     }
+    import pdb; pdb.set_trace()
 
     return render_template('university/index.html', university=university, header=header, body=body)

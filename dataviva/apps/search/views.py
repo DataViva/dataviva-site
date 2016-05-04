@@ -32,6 +32,17 @@ def index():
     return redirect(url_for('search.admin'))
 
 
+@mod.route('/selector/all', methods=['GET'])
+def all_selectors():
+    result = SearchSelector.query.all()
+    selectors = []
+
+    for row in result:
+        selectors += [(row.id, row.name())]
+
+    return jsonify(selectors=selectors)
+
+
 @mod.route('/question/all', methods=['GET'])
 def all_questions():
     result = SearchQuestion.query.all()
