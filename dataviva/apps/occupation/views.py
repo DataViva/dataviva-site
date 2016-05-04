@@ -6,7 +6,7 @@ from dataviva.api.rais.services import OccupationByLocation
 from dataviva.api.rais.services import OccupationMunicipalities
 from dataviva.api.rais.services import OccupationActivities
 
-from dataviva.api.rais.models import Yo
+from dataviva.api.rais.models import Yo, Ybo
 from dataviva.api.attrs.models import Cbo, Bra
 from dataviva import db
 from sqlalchemy import func
@@ -98,15 +98,27 @@ def index(occupation_id):
     body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
 
-    # query relativa a posicao do ranking
-    max_year_query = db.session.query(func.max(Yo.year)).filter(
-        Yo.cbo_id == occupation_id)
-    
-    rais_query = Yo.query.filter(
-        Yo.cbo_id_len == len(occupation_id),
-        Yo.year == max_year_query)\
-        .order_by(Yo.num_jobs.desc())
-    
+    if location:
+        max_year_query = db.session.query(func.max(Ybo.year)).filter(
+            Ybo.cbo_id == occupation_id,
+            Ybo.bra_id == bra_id)
+
+        rais_query = Ybo.query.filter(
+            Ybo.cbo_id_len == len(occupation_id),
+            Ybo.bra_id == bra_id,
+            Ybo.year == max_year_query)\
+            .order_by(Ybo.num_jobs.desc())
+
+    else: 
+        # query relativa a posicao do ranking
+        max_year_query = db.session.query(func.max(Yo.year)).filter(
+            Yo.cbo_id == occupation_id)
+        
+        rais_query = Yo.query.filter(
+            Yo.cbo_id_len == len(occupation_id),
+            Yo.year == max_year_query)\
+            .order_by(Yo.num_jobs.desc())
+        
     rais = rais_query.all()
     for index, occ in enumerate(rais):
         if rais[index].cbo_id == occupation_id:
