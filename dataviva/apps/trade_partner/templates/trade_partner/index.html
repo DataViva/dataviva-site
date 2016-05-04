@@ -55,7 +55,7 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Trade Balance{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Trade Balance{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.trade_balance | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.trade_balance | magnitude  }}</small>
@@ -64,7 +64,7 @@
                     </div><!--/.col-->
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total Value Exported{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Total Value Exported{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.total_exported | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.total_exported | magnitude }}</small>
@@ -74,7 +74,7 @@
                     {% if header.unity_weight_export_price %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Average Price Exported{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Average Price Exported{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.unity_weight_export_price | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">USD / kg</small>
@@ -84,7 +84,7 @@
                     {% endif %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total Value Imported{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Total Value Imported{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.total_imported | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.total_imported | magnitude }}</small>
@@ -94,7 +94,7 @@
                     {% if header.unity_weight_import_price %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Average Price Imported{% endtrans %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Average Price Imported{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.unity_weight_import_price | max_digits(3) }}</strong><br/>
                                 <small class="magnitude">USD / kg</small>
@@ -103,12 +103,6 @@
                     </div><!--/.col-->
                     {% endif %}
                 </div><!--/.row-->
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="year">{% trans %}Year{% endtrans %}: {{ header.year }}</div>
-                </div>
             </div>
         </div>
     </div>

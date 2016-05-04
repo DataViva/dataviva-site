@@ -54,7 +54,7 @@
                 <div class="row">
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                          <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %}</h2>
+                          <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %} ({{ header.course_year }})</h2>
                           <div class="number">
                               <strong class="counter">{{header.course_enrolled | max_digits(3)}}</strong><br/>
                               <small class="magnitude">{{header.course_enrolled | magnitude}}</small>
@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.course_classes | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.course_classes | magnitude}}</small>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Number of Schools{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Number of Schools{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.school_count | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.school_count | magnitude}}</small>
@@ -81,7 +81,7 @@
                     </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Average Size of Classes{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Average Size of Classes{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.course_average_class_size | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{{header.course_average_class_size | magnitude}}</small>
@@ -91,7 +91,7 @@
                     {% if header.course_age %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                       <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Average Age{% endtrans %}</h2>
+                        <h2 class="text-left text-uppercase">{% trans %}Average Age{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.course_age | max_digits(3)}}</strong><br/>
                             <small class="magnitude">{% trans %}years{% endtrans %}</small>
@@ -99,11 +99,6 @@
                       </div>
                     </div>
                     {% endif %}
-                  </div>
-                </div>       
-                <div class="row">
-                  <div class="col-xs-12">
-                    <div class="year">{% trans %}Year{% endtrans %}: {{ header.course_year }}</div>
                   </div>
                 </div>
             </div>
