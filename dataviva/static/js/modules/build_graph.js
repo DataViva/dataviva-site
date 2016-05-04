@@ -16,6 +16,18 @@ function deactivate_dimension_graph(id) {
 }
 
 
+$('.dropdown-select').on( 'click', '.dropdown-menu li a', function() { 
+   var target = $(this).html();
+
+   //Adds active class to selected item
+   $(this).parents('.dropdown-menu').find('li').removeClass('active');
+   $(this).parent('li').addClass('active');
+
+   //Displays selected text on dropdown-toggle button
+   $(this).parents('.dropdown-select').find('.dropdown-toggle').html(target);
+});
+
+
 dataviva.requireAttrs(['datasets'], function() {
 
     for (dataset in dataviva.datasets) {
@@ -30,7 +42,7 @@ dataviva.requireAttrs(['datasets'], function() {
         dataviva.datasets[dataset].dimensions.forEach(function(dimension, index) {
                 var div = $("<div></div>").addClass("form-group"),
                 label = $("<label></label>").attr("for", dimension.id).addClass("control-label"),
-                deactivate_button = $("<button></button>").attr("for", dimension.id).addClass("btn btn-xs btn-white pull-right")
+                deactivate_button = $("<button></button>").attr("for", dimension.id).addClass("btn btn-xs btn-link pull-right")
                                         .html(dataviva.dictionary['deactivate'])
                                         .attr("onclick", "deactivate_dimension_graph(this)"),
                 selector_button = $("<button></button>").attr("id", dimension.id).addClass("btn btn-block btn-outline btn-primary")
