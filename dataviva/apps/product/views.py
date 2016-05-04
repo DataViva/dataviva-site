@@ -93,6 +93,7 @@ def index(product_id):
             body[
                 'municipality_import_value'] = municipalities_service.highest_import_value()
 
+
     else:
         product_service = ProductService(product_id=product.id)
 
