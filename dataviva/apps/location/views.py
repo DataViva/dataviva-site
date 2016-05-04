@@ -171,6 +171,7 @@ def index(bra_id):
 
     if eci is not None:
         header['eci'] = eci.eci
+        header['eci_year'] = eci.year
 
     body = {
         'main_product_by_export_value': location_body_service.main_product_by_export_value(),

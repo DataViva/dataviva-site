@@ -117,7 +117,7 @@
                     {% if header.eci %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}ECI{% endtrans %} {% if location.id == 'all' %}(2014){% else %}({{header.year}}) {% endif %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}ECI{% endtrans %} {% if location.id == 'all' %}(2014){% else %}({{header.eci_year}}) {% endif %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.eci|max_digits(3) }}</strong><br/>
                                 <small class="magnitude">{{ header.eci|magnitude }}</small>
