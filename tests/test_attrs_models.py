@@ -1,8 +1,11 @@
 from dataviva.api.attrs.models import Bra
 from test_base import BaseTestCase
-
+from flask import g
 
 class AttrModelTests(BaseTestCase):
+
+    def setUp(self):
+        g.locale = 'pt'
 
     def test_minas_gerais_preposition_em_should_be_em(self):
         minas_gerais = Bra.query.filter_by(id='4mg').first()
