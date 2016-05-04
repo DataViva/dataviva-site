@@ -4,6 +4,7 @@ from sqlalchemy import func
 
 
 class All:
+
     def __init__(self):
         self._attrs_list_ybs = None
         self._attrs_list_yb = None
@@ -141,11 +142,11 @@ class Location:
                 func.length(Bra.id) == bra_length)
         elif bra_length == 7:
             bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
-                Bra.id.like(self.bra_id[:5]+'%'),
+                Bra.id.like(self.bra_id[:5] + '%'),
                 func.length(Bra.id) == bra_length)
         else:
             bra_query = db.session.query(func.count(Bra.id).label("total")).filter(
-                Bra.id.like(self.bra_id[:3]+'%'),
+                Bra.id.like(self.bra_id[:3] + '%'),
                 func.length(Bra.id) == bra_length)
         bra = bra_query.first()
         return bra.total
