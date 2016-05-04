@@ -46,6 +46,14 @@ class All:
         gdp_per_capita = self.gdp() / float(self.population())
         return gdp_per_capita
 
+    def year_yb(self):
+        year_yb = self.max_year_query_yb.first()[0]
+        return year_yb
+
+    def year_ybs(self):
+        year_ybs = self.max_year_query_ybs.first()[0]
+        return year_ybs
+
 
 class Location:
 
@@ -123,6 +131,9 @@ class Location:
     def name(self):
         bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
         return bra_query.name()
+
+    def year(self):
+        return self.max_year_query.first()[0]
 
     def number_of_locations(self, bra_length):
         if bra_length == 1 or bra_length == 3:
