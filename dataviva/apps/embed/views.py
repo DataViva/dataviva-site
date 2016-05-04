@@ -101,7 +101,7 @@ def is_xhr():
 
 @mod.route("/")
 @mod.route("/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/")
-@view_cache.cached(key_prefix=api_cache_key("apps:embed"), unless=is_xhr)
+#@view_cache.cached(key_prefix=api_cache_key("apps:embed"), unless=is_xhr)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
     prefix = "apps:embed:xhr:"
@@ -184,6 +184,11 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         if starred == 0 and cached_q is None:
             cached_query(cache_id, ret.data)
     else:
+
+        year_range_dict = __year_range__.copy()
+
+        if current_build.app.type == 'network':
+            year_range_dict["secex"] = ["2000-1", "2015-12"]
 
         year_range = json.dumps(__year_range__)
 
@@ -270,7 +275,7 @@ def get_builds(bra_attr, dataset, profile1, filter1, profile2, filter2, kwargs):
 
 @mod.route('/recommend/', methods=['GET', 'POST'])
 @mod.route('/recommend/<app_name>/<dataset>/<bra_id>/<filter1>/<filter2>/<output>/', methods=['GET', 'POST'])
-@view_cache.cached(key_prefix=api_cache_key("apps:recommend"))
+#@view_cache.cached(key_prefix=api_cache_key("apps:recommend"))
 def recommend(app_name=None, dataset=None, bra_id="4mg", filter1=None, filter2=None, output=None):
 
     recommended = {}

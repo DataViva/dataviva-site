@@ -50,11 +50,13 @@ def index(wld_id):
         products_service = TradePartnerProducts(wld_id, bra_id)
 
         export_rank_query = Ymbw.query.join(Wld).filter(
+            Ymbw.wld_id_len == len(wld_id),
             Ymbw.bra_id == bra_id,
             Ymbw.month == 0,
             Ymbw.year == max_year_query).order_by(Ymbw.export_val.desc())
 
         import_rank_query = Ymbw.query.join(Wld).filter(
+            Ymbw.wld_id_len == len(wld_id),
             Ymbw.bra_id == bra_id,
             Ymbw.month == 0,
             Ymbw.year == max_year_query).order_by(Ymbw.import_val.desc())
@@ -64,10 +66,12 @@ def index(wld_id):
         products_service = TradePartnerProducts(wld_id, None)
 
         export_rank_query = Ymw.query.join(Wld).filter(
+            Ymw.wld_id_len == len(wld_id),
             Ymw.month == 0,
             Ymw.year == max_year_query).order_by(Ymw.export_val.desc())
 
         import_rank_query = Ymw.query.join(Wld).filter(
+            Ymw.wld_id_len == len(wld_id),
             Ymw.month == 0,
             Ymw.year == max_year_query).order_by(Ymw.import_val.desc())
 
@@ -125,12 +129,12 @@ def index(wld_id):
 
     for index, trp in enumerate(export_rank):
         if export_rank[index].wld_id == wld_id:
-            header['export_rank'] = index
+            header['export_rank'] = index + 1
             break
 
     for index, trp in enumerate(import_rank):
         if import_rank[index].wld_id == wld_id:
-            header['import_rank'] = index
+            header['import_rank'] = index + 1
             break
 
     return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)

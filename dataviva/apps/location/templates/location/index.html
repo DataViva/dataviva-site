@@ -58,6 +58,8 @@
 
             <div class="indices">
                 <div class="row">
+
+                    {% if header.gdp %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %} {% if location.id == 'all' %}({{header.year_ybs}}){% else %}({{header.year}}) {% endif %}</h2>
@@ -67,6 +69,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
 
                     {% if header.life_expectation %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -92,6 +95,7 @@
                     </div>
                     {% endif %}
 
+                    {% if header.gdp_per_capita %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %} {% if location.id == 'all' %}({{header.year_ybs}}){% else %}({{header.year}}) {% endif %}</h2>
@@ -101,6 +105,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
 
                     {% if header.hdi %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">

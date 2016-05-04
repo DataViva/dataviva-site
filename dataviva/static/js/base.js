@@ -241,7 +241,7 @@ var search = function(profile) {
 
     // Reset modal and set loading
     $('#modal-search .modal-body').empty();
-    $('#modal-search .chosen-options .question').empty();
+    //$('#modal-search .chosen-options .question').empty();
     $('#modal-search #chosen-options').val('');
     $('#modal-search #search-advance').prop("disabled", true);
     var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
@@ -257,7 +257,7 @@ var search = function(profile) {
 
         var questions = response.questions;
         // Set modal template
-        $('#modal-search .modal-title').html(response.profile);
+        $('#modal-search .modal-search-title').html(response.profile);
         $('#modal-search .modal-body').html(response.template);
 
         for (id in questions) {
@@ -374,5 +374,10 @@ $(document).ready(function () {
                 }
                 return true;
             });
+    });
+
+    $('.btn-toggle').click( function() {
+        $(this).toggleClass('selected');
+        return false
     });
 });
