@@ -101,9 +101,12 @@ def index(occupation_id):
     # query relativa a posicao do ranking
     max_year_query = db.session.query(func.max(Yo.year)).filter(
         Yo.cbo_id == occupation_id)
+    
     rais_query = Yo.query.filter(
+        Yo.cbo_id_len == len(occupation_id),
         Yo.year == max_year_query)\
         .order_by(Yo.num_jobs.desc())
+    
     rais = rais_query.all()
     for index, occ in enumerate(rais):
         if rais[index].cbo_id == occupation_id:

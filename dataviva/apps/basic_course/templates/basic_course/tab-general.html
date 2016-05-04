@@ -1,12 +1,11 @@
 <div role="tabpanel" class="tab-pane active" id="general">
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
         {% if not location.id %}
-            <p>{% trans %}The highest number of enrollments in {% endtrans %}{{basic_course.name()}} 
-            {% trans %}course/field of study in Brazil is in the municipality of {% endtrans %}{{body.city_name }} - {{body.city_state.upper()}}, 
-            {% trans %}with{% endtrans %} {{ body.city_enrolled | max_digits(3) }} {{ (body.city_enrolled | magnitude).lower() }} 
-            {% trans %}students. The country has a total of{% endtrans %}{{ header.course_enrolled | max_digits(3)}} {{ (header.course_enrolled | magnitude).lower() }} 
+            <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{basic_course.name()}} 
+            {% trans %}course/field of study in Brazil is in the municipality of {% endtrans %}{{body["city_name"]}} - {{body.city_state.upper()}}, 
+            {% trans %}with{% endtrans %} {{body["city_enrolled"] | max_digits(3) }} {{body["city_enrolled"] | magnitude }} 
+            {% trans %}students. The country has a total of{% endtrans %} {{header["course_enrolled"] | max_digits(3)}} {{header["course_enrolled"] | magnitude }} 
             {% trans %}enrolled students in this course/field, with {% endtrans %}{{header["course_average_class_size"] | max_digits(3)}} {{header["course_average_class_size"] | magnitude}} 
- 
             {% trans %}students per class in average{% endtrans %}.</p>
         {% else %}
             {% if location.id|length == 1 %}
