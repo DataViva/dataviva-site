@@ -17,14 +17,14 @@
 
         {% else %}
           {% if profile.bra_id|length == 9 %}
-              <p>{{ header.name }} - {{ location.abbreviation }}
+              <p>{{ header.name }}
               {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities}}
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
               {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
-              {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}º
+              {% trans %}mesoregion, it is the{% endtrans %} {{ profile.gdp_rank }}º
               {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
           {% elif profile.bra_id|length == 7 %}
               <p>
@@ -32,23 +32,23 @@
                   A Microrregião
               {% endif %}
 
-              {{ header.name }} - {{ location.abbreviation }}
+              {{ header.name }}
               {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions}}
               {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }},
               {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities -1 }}
               {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-              {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} (2010)
+              {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} ({{header.year}})
               {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
               </p>
           {% elif profile.bra_id|length == 5 %}
-              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }} - {{ location.abbreviation }}
+              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
 
               {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions}}
               {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}ª
               {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-              {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} (2010)
+              {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} ({{header.year}})
               {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
               </p>
           {% elif profile.bra_id|length == 1 %}
@@ -94,7 +94,7 @@
   <div class="row">
 
     <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}International Trade{% endtrans %} {% if location.id == 'all' %}({{body.product_year}}){% else %}({{header.year}}) {% endif %}</h3>
+      <h3>{% trans %}International Trade{% endtrans %} ({{body.product_year}})</h3>
       <dl class="dl-horizontal">
         {% if body.main_product_by_export_value %}
         <dt>{% trans %}Main Product by Total Value Exported{% endtrans %}</dt>
