@@ -134,7 +134,6 @@ def index(product_id):
     if location:
         max_year_query = db.session.query(
         func.max(Ymbp.year)).filter(Ymbp.hs_id == product.id, Ymbp.month == 12)
-        import pdb; pdb.set_trace()
 
         secex_query_export = Ymbp.query.filter(
             Ymbp.year == max_year_query,
