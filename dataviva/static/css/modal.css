@@ -215,9 +215,14 @@
 }
 
 /* MODAL DE PERGUNTAS */
+.modal .modal-search-title {
+  margin: 0;
+  line-height: 1.42857143;
+}
 .modal .question-header {
   text-align: center;
   margin-bottom: 0;
+  display: none;
 }
 .modal .question-header h4{
   font-size: 16px;
