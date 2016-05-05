@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request,abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Occupation
 from dataviva.api.rais.services import OccupationByLocation
@@ -73,8 +73,7 @@ def index(occupation_id):
     occupation_activities_service = OccupationActivities(
         occupation_id=occupation_id, bra_id=bra_id)
 
-    header[
-        'average_monthly_income'] = occupation_service.average_monthly_income()
+    header['average_monthly_income'] = occupation_service.average_monthly_income()
     header['salary_mass'] = occupation_service.salary_mass()
     header['total_employment'] = occupation_service.total_employment()
     header['total_establishments'] = occupation_service.total_establishments()
@@ -97,23 +96,27 @@ def index(occupation_id):
 
     body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
+    body['year'] = occupation_activities_service.year()
+    
+
+    rais_max_year = db.session.query(func.max(Yo.year)).first()[0]
+
 
     if location:
-        max_year_query = db.session.query(func.max(Ybo.year)).filter(
+        max_year_query_location = db.session.query(func.max(Ybo.year)).filter(
             Ybo.cbo_id == occupation_id,
             Ybo.bra_id == bra_id)
 
         rais_query = Ybo.query.filter(
             Ybo.cbo_id_len == len(occupation_id),
             Ybo.bra_id == bra_id,
-            Ybo.year == max_year_query)\
+            Ybo.year == max_year_query_location)\
             .order_by(Ybo.num_jobs.desc())
 
     else: 
-        # query relativa a posicao do ranking
         max_year_query = db.session.query(func.max(Yo.year)).filter(
-            Yo.cbo_id == occupation_id)
-        
+        Yo.cbo_id == occupation_id)
+
         rais_query = Yo.query.filter(
             Yo.cbo_id_len == len(occupation_id),
             Yo.year == max_year_query)\
@@ -125,4 +128,8 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
-    return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language)
+
+    if header['total_employment'] == None or rais_max_year != header['year']:
+        abort(404)
+    else :
+        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language)
