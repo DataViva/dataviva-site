@@ -100,6 +100,7 @@ def index(course_hedu_id):
         'highest_graduate_number_by_municipality': municipalities_service.highest_graduates_number()
     }
 
+
     for index, maj in enumerate(rank):
         if rank[index].course_hedu_id == course_hedu_id:
             header['rank'] = index + 1
