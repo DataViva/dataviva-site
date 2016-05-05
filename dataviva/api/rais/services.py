@@ -122,8 +122,8 @@ class Occupation:
         return self._rais
 
     def year(self):
-        rais = self.__rais__()
-        return rais.year
+        year = self.max_year_query.first()[0]
+        return year
 
     def occupation_name(self):
         occupation = self.__rais__().cbo
