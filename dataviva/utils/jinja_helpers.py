@@ -89,6 +89,18 @@ def max_digits(number, digits, monetary=None):
     else:
         return number_str[0:digits+1]
 
+def ordinal(number):
+    if number == 1:
+        return "st"
+    elif number == 2:
+        return "nd"
+    elif number == 3:
+        return "rd"
+    elif number in range(4, 10) or number == 0:
+        return "th"
+    elif number > 9:
+        return ordinal(int(str(number)[-1]))
+
 def jinja_magnitude(number):
     if not number: 
         return 0
