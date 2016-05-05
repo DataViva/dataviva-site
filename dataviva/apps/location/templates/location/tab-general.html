@@ -1,30 +1,30 @@
 <div role="tabpanel" class="tab-pane active" id="general">
     <h2>{% trans %}General Profile{% endtrans %}</h2>
         {% if location.id == 'all' %}
-          {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %} 
-          {{body.total_exports|max_digits(3)}} {{(body.total_exports|magnitude).lower()}} 
-          {% if g.locale == "en" %}USD {% endif %}{% trans %}and imported{% endtrans %} 
-          {{body.total_imports|max_digits(3)}} {{(body.total_imports|magnitude).lower()}}, {% if g.locale == "en" %}USD {% endif %}{% trans %}resulting in a{% endtrans %} 
+          {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %}
+          {{body.total_exports|max_digits(3)}} {{(body.total_exports|magnitude).lower()}}
+          {% if g.locale == "en" %}USD {% endif %}{% trans %}and imported{% endtrans %}
+          {{body.total_imports|max_digits(3)}} {{(body.total_imports|magnitude).lower()}}, {% if g.locale == "en" %}USD {% endif %}{% trans %}resulting in a{% endtrans %}
           {% if g.locale == "en" %}{{'positive' if body.all_trade_balance >= 0 else 'negative'}}{% else %}
           {{'positivo' if body.all_trade_balance >= 0 else 'negativo'}}{% endif %}
           {% trans %}commercial rate of{% endtrans %}
-          {{body.all_trade_balance|max_digits(3)}} {{(body.all_trade_balance|magnitude).lower()}}{% if g.locale == "en" %} USD{% endif %}. {% trans %}In 2014 Brasil had{% endtrans %} 
-          {{body.total_jobs|max_digits(3)}} {{(body.total_jobs|magnitude).lower()}} 
-          {% trans %}formal employees. The Brazilian GDP in 2010 was of{% endtrans %} 
-          {{header.gdp|max_digits(3)}} {{(header.gdp|magnitude).lower()}} 
-          {% if g.locale == "en" %}USD {% endif %}{% trans %}and its GDP per capita was of{% endtrans %} 
+          {{body.all_trade_balance|max_digits(3)}} {{(body.all_trade_balance|magnitude).lower()}}{% if g.locale == "en" %} USD{% endif %}. {% trans %}In 2014 Brasil had{% endtrans %}
+          {{body.total_jobs|max_digits(3)}} {{(body.total_jobs|magnitude).lower()}}
+          {% trans %}formal employees. The Brazilian GDP in 2010 was of{% endtrans %}
+          {{header.gdp|max_digits(3)}} {{(header.gdp|magnitude).lower()}}
+          {% if g.locale == "en" %}USD {% endif %}{% trans %}and its GDP per capita was of{% endtrans %}
           {{header.gdp_per_capita|max_digits(3)}} {{(header.gdp_per_capita|magnitude).lower()}}{% if g.locale == "en" %} USD{% endif %}.
 
         {% else %}
           {% if profile.bra_id|length == 9 %}
-              <p>{{ header.name }} - {{ location.abbreviation }}
-              {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities -1 }}
+              <p>{{ header.name }}
+              {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities}}
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
               {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
-              {% trans %}mesoregion, it is the{% endtrans %}{{ profile.gdp_rank }}º
+              {% trans %}mesoregion, it is the{% endtrans %} {{ profile.gdp_rank }}º
               {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
           {% elif profile.bra_id|length == 7 %}
               <p>
@@ -32,23 +32,23 @@
                   A Microrregião
               {% endif %}
 
-              {{ header.name }} - {{ location.abbreviation }}
-              {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions -1}}
+              {{ header.name }}
+              {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions}}
               {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }},
               {% trans %}mesoregion, located in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %}It comprehends {% endtrans %}{{ profile.number_of_municipalities -1 }}
               {% trans %}cities and has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-              {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} (2010)
+              {% trans %}people. Its GDP is {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} ({{header.year}})
               {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
               </p>
           {% elif profile.bra_id|length == 5 %}
-              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }} - {{ location.abbreviation }}
+              <p>{% trans %}The mesoregion {% endtrans %}{{ header.name }}
 
-              {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions -1}}
+              {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions}}
               {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}ª
               {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-              {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} (2010)
+              {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} ({{header.year}})
               {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
               </p>
           {% elif profile.bra_id|length == 1 %}
@@ -94,7 +94,7 @@
   <div class="row">
 
     <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}International Trade{% endtrans %} {% if location.id == 'all' %}({{body.product_year}}){% else %}({{header.year}}) {% endif %}</h3>
+      <h3>{% trans %}International Trade{% endtrans %} ({{body.product_year}})</h3>
       <dl class="dl-horizontal">
         {% if body.main_product_by_export_value %}
         <dt>{% trans %}Main Product by Total Value Exported{% endtrans %}</dt>
@@ -135,7 +135,7 @@
     </div><!--/.col-->
 
     <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}Wages and Jobs{% endtrans %} {% if location.id == 'all' %}({{body.industry_year}}){% else %}({{header.year}}) {% endif %}</h3>
+      <h3>{% trans %}Wages and Jobs{% endtrans %} ({{body.industry_year}})</h3>
       <dl class="dl-horizontal">
         <dt>{% trans %}Main Economic Activity{% endtrans %}</dt>
         <dd>
@@ -177,7 +177,7 @@
   <div class="row">
     {% if location.id != 'all' %}
     <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}Economic Opportunities{% endtrans %} ({{header.year}})</h3>
+      <h3>{% trans %}Economic Opportunities{% endtrans %} ({{body.industry_year}})</h3>
       <dl class="dl-horizontal">
         {% if body.less_distance_by_product %}
         <dt>{% trans %}Product with Shortest Distance{% endtrans %}</dt>
@@ -225,7 +225,7 @@
     {% endif %}
 
     <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}Education{% endtrans %} {% if location.id == 'all' %}({{body.university_year}}){% else %}({{header.year}}) {% endif %}</h3>
+      <h3>{% trans %}Education{% endtrans %} ({{body.university_year}})</h3>
       <dl class="dl-horizontal">
       {% if body.highest_enrolled_by_university %}
         <dt>{% trans %}University with Highest Number of Enrollments{% endtrans %}</dt>

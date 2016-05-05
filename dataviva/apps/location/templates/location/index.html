@@ -11,7 +11,7 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" onclick="start_selector('Location');"> {{ location.name() }}</a>
+                <a href="#" title="Trocar" onclick="select_attr('bra');"> {{ location.name() }}</a>
             </li>
         </ol>
     </div>
@@ -42,16 +42,7 @@
             {% else %}
                 {{ location.name() }} - {{ location.abbreviation }}
             {% endif %}
-
-               <div class="btn-group">
-              <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                   {% trans %}change{% endtrans %} <span class="caret"></span>
-              </button>
-              <ul class="dropdown-menu">
-                   <li><a href="#" onclick="select_attr('bra');">{% trans %}Location{% endtrans %}</a></li>
-              </ul>
-            </div>
-
+                   <small class="btn btn-link btn-xs" onclick="select_attr('bra');">{% trans %}change{% endtrans %} </small>
             </h1>
 
             <span class="clearfix"></span>

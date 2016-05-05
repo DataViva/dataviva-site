@@ -429,6 +429,9 @@ class LocationIndustry:
             self._rais_sorted_by_opp_gain.sort(key=lambda rais: rais.opp_gain, reverse=True)
         return self._rais_sorted_by_opp_gain
 
+    def year(self):
+        return self.max_year_query.first()[0]
+
     def main_industry_by_num_jobs(self):
         try:
             rais = self.__rais_sorted_by_num_jobs__()[0]

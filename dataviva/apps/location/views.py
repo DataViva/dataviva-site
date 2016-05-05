@@ -52,7 +52,7 @@ def graphs(bra_id, tab):
         location.id = 'all'
     else:
         location = Bra.query.filter_by(id=bra_id).first()
-    return render_template('location/graphs-'+tab+'.html', location=location)
+    return render_template('location/graphs-' + tab + '.html', location=location)
 
 
 @mod.route('/all')
@@ -71,13 +71,13 @@ def all():
     location.id = 'all'
 
     header = {
-            'bg_class_image': 'bg-all',
-            'gdp': location_service_brazil.gdp(),
-            'population': location_service_brazil.population(),
-            'gdp_per_capita': location_service_brazil.gdp_per_capita(),
-            'eci': 0.151,
-            'year_yb': location_service_brazil.year_yb(),
-            'year_ybs': location_service_brazil.year_ybs()
+        'bg_class_image': 'bg-all',
+        'gdp': location_service_brazil.gdp(),
+        'population': location_service_brazil.population(),
+        'gdp_per_capita': location_service_brazil.gdp_per_capita(),
+        'eci': 0.151,
+        'year_yb': location_service_brazil.year_yb(),
+        'year_ybs': location_service_brazil.year_ybs()
     }
 
     body = {
@@ -114,6 +114,7 @@ def all():
 
     return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
 
+
 @mod.route('/<bra_id>')
 def index(bra_id):
 
@@ -129,7 +130,7 @@ def index(bra_id):
     location_area_rankings_service = LocationAreaRankings(bra_id=bra_id)
     location_municipality_rankings_service = LocationMunicipalityRankings(bra_id=bra_id)
     location_wld_service = LocationWld(bra_id=bra_id)
-    location_body_service = LocationBodyService(bra_id=bra_id)
+    location_secex_service = LocationBodyService(bra_id=bra_id)
     location_industry_service = LocationIndustry(bra_id=bra_id)
     location_occupation_service = LocationOccupation(bra_id=bra_id)
     location_jobs_service = LocationJobs(bra_id=bra_id)
@@ -142,20 +143,20 @@ def index(bra_id):
 
     ''' Query básica para SECEX'''
     max_year_query = db.session.query(
-                func.max(Ymb.year)).filter_by(bra_id=bra_id, month=12)
+        func.max(Ymb.year)).filter_by(bra_id=bra_id, month=12)
 
     eci = Ymb.query.filter(
-                Ymb.bra_id == bra_id,
-                Ymb.month == 0,
-                Ymb.year == max_year_query) \
+        Ymb.bra_id == bra_id,
+        Ymb.month == 0,
+        Ymb.year == max_year_query) \
         .order_by(desc(Ymb.year)).limit(1).first()
 
     ''' Background Image'''
     if len(bra_id) == 1:
-        countys = Bra.query.filter(Bra.id.like(bra_id+'%'), func.length(Bra.id) == 3).all()
-        background_image = "bg-"+str(countys[randint(0, len(countys)-1)].id)+"_"+str(randint(1, 2))
+        countys = Bra.query.filter(Bra.id.like(bra_id + '%'), func.length(Bra.id) == 3).all()
+        background_image = "bg-" + str(countys[randint(0, len(countys) - 1)].id) + "_" + str(randint(1, 2))
     else:
-        background_image = "bg-"+location.id[:3]+"_"+str(randint(1, 2))
+        background_image = "bg-" + location.id[:3] + "_" + str(randint(1, 2))
 
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
@@ -183,16 +184,23 @@ def index(bra_id):
         header['eci_year'] = eci.year
 
     body = {
-        'main_product_by_export_value': location_body_service.main_product_by_export_value(),
-        'main_product_by_export_value_name': location_body_service.main_product_by_export_value_name(),
-        'main_product_by_import_value': location_body_service.main_product_by_import_value(),
-        'main_product_by_import_value_name': location_body_service.main_product_by_import_value_name(),
-        'total_exports': location_body_service.total_exports(),
-        'total_imports': location_body_service.total_imports(),
+        'product_year': location_secex_service.year(),
+        'main_product_by_export_value': location_secex_service.main_product_by_export_value(),
+        'main_product_by_export_value_name': location_secex_service.main_product_by_export_value_name(),
+        'main_product_by_import_value': location_secex_service.main_product_by_import_value(),
+        'main_product_by_import_value_name': location_secex_service.main_product_by_import_value_name(),
+        'total_exports': location_secex_service.total_exports(),
+        'total_imports': location_secex_service.total_imports(),
+        'less_distance_by_product': location_secex_service.less_distance_by_product(),
+        'less_distance_by_product_name': location_secex_service.less_distance_by_product_name(),
+        'opportunity_gain_by_product': location_secex_service.opportunity_gain_by_product(),
+        'opportunity_gain_by_product_name': location_secex_service.opportunity_gain_by_product_name(),
         'main_destination_by_export_value': location_wld_service.main_destination_by_export_value(),
         'main_destination_by_export_value_name': location_wld_service.main_destination_by_export_value_name(),
         'main_destination_by_import_value': location_wld_service.main_destination_by_import_value(),
         'main_destination_by_import_value_name': location_wld_service.main_destination_by_import_value_name(),
+
+        'industry_year': location_industry_service.year(),
         'main_industry_by_num_jobs': location_industry_service.main_industry_by_num_jobs(),
         'main_industry_by_num_jobs_name': location_industry_service.main_industry_by_num_jobs_name(),
         'main_occupation_by_num_jobs': location_occupation_service.main_occupation_by_num_jobs(),
@@ -200,14 +208,13 @@ def index(bra_id):
         'avg_wage': location_jobs_service.avg_wage(),
         'wage': location_jobs_service.wage(),
         'total_jobs': location_jobs_service.total_jobs(),
+
         'less_distance_by_occupation': location_distance_service.less_distance_by_occupation(),
         'less_distance_by_occupation_name': location_distance_service.less_distance_by_occupation_name(),
         'opportunity_gain_by_occupation': location_opp_gain_service.opportunity_gain_by_occupation(),
         'opportunity_gain_by_occupation_name': location_opp_gain_service.opportunity_gain_by_occupation_name(),
-        'less_distance_by_product': location_body_service.less_distance_by_product(),
-        'less_distance_by_product_name': location_body_service.less_distance_by_product_name(),
-        'opportunity_gain_by_product': location_body_service.opportunity_gain_by_product(),
-        'opportunity_gain_by_product_name': location_body_service.opportunity_gain_by_product_name(),
+
+        'university_year': location_university_service.year(),
         'highest_enrolled_by_university': location_university_service.highest_enrolled_by_university(),
         'highest_enrolled_by_university_name': location_university_service.highest_enrolled_by_university_name(),
         'highest_enrolled_by_school': location_school_service.highest_enrolled_by_school(),

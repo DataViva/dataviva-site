@@ -237,7 +237,7 @@ class Product:
                 Ymp.hs_id == self.product_id,
                 Ymp.month == 0,
                 Ymp.year == self.max_year_query)
-        
+
 
     def __secex__(self):
         if not self._secex:
@@ -547,6 +547,9 @@ class Location:
                 key=lambda secex: secex.opp_gain_wld, reverse=True)
             self._secex_sorted_by_opp_gain = not_nulls_list
         return self._secex_sorted_by_opp_gain
+
+    def year(self):
+        return self.max_year_query.first()[0]
 
     def main_product_by_export_value(self):
         try:

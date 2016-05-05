@@ -105,16 +105,16 @@
 
 
 
-  .category .tab-content, .category .graphs > div:first-child {
+.category .tab-content, .category .graphs > div:first-child {
     padding: 40px 0;
-  }
+}
 
 
 /* WIDGETS */
 .category .widget {
   font-size: 10px;
   font-weight: 400;
-  border-bottom: 3px solid rgba(190, 230, 205, 0.37);
+  border-bottom: 3px solid #5A9DC4;
   margin: 0px 10px;
 }
 .category .widget h2 {

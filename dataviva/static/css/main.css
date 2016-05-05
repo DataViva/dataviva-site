@@ -96,11 +96,13 @@ body {
 .breadcrumb > li a {
   color: #5A9DC4;
 }
-.breadcrumb > li a:hover {
-  color: #9EDDBF;
+.breadcrumb > li a:hover,
+.breadcrumb > li a:focus {
+  color: #23527c;
+  text-decoration: none;
 }
 .breadcrumb > .active {
-  color: #9EDDBF;
+  color: #5A9DC4;
 }
 .breadcrumb > li + li:before {
   content: ">\00a0";
@@ -874,64 +876,7 @@ table.data-blue thead th small {
     top: calc(50% + 80px);
 }
 
-
-/* MODAIS */
-.modal-body {
-    min-height: 200px;
-}
-
-
-/* MODAL DE LOGIN */
-#dataviva-login .modal-header, #dataviva-signup .modal-header{
-  padding: 5px 10px
-}
-#dataviva-login .login-help {
-  display: block;
-  margin-top: 20px;
-  text-align: center;
-}
-#dataviva-login h4, #dataviva-signup h4 {
-  font-size: 29px;
-  font-weight: 300;
-  line-height: 1.2em;
-  margin: 0 0 15px;
-}
-
-/* MODAL DE SIGNUP */
-#dataviva-signup .intro{
-  background: rgba(0,0,0,.03);
-  border-bottom: 1px solid #eeeeee;
-  margin: -15px -15px 10px;
-  padding: 17px 65px 10px;
-}
-#dataviva-signup .intro p{
-  color: #999;
-}
-#dataviva-signup .form{
-  padding: 10px 50px;
-}
-#dataviva-signup .modal-footer{
-  background: rgba(0,0,0,.03);
-  margin: 0 -15px -15px;
-  border-radius: 0 0 4px 4px;
-  padding: 20px 50px;
-}
-
-/* MODAL DE PERGUNTAS */
-.question-header {
-  text-align: center;
-  margin-bottom: 0;
-}
-.question-header h4{
-  font-size: 16px;
-  line-height: 1.45em
-}
-.question-header .current-question {
-  margin: 20px 0 0;
-}
-
 /*  SIGNIN SIGUNP LOGIN FORGOT PASS */
-
 .btn-google:hover,
 .btn-facebook:hover,
 .btn-twitter:hover {
@@ -975,76 +920,6 @@ h1.login-title {
     margin-bottom: 10px;
   }
 }
-
-
-
-/*  RANKINGS   */
-.text-up {
-  color: #3c763d;
-}
-.text-down {
-  color: #a94442;
-}
-.text-up, .text-down {
-  text-align: right;
-  display: block;
-}
-
-.rankings-content .dataTable {
-  border-radius: 0;
-}
-.rankings-content .dataTable thead tr th{
-  background: #eee;
-  border-bottom: 1px solid #ddd;
-}
-
-
-
-
-/* TELA DE ERRO */
-#error-page {
-  padding-top: 50px;
-  min-height: 500px;
-}
-#error-page h1{
-  color: #7BCCD0;
-  font-weight: bold;
-  font-size: 34px;
-}
-#error-page #extra_error {
-  font-size: 18px;
-  margin: 15px 0 40px;
-  font-weight: lighter;
-  line-height: 1.25;
-  color: #999999;
-}
-#error-page .computer {
-  position: relative;
-}
-#error-page .computer #error_code {
-  font-family: monospace;
-  position: absolute;
-  top: 50%;
-  left: 36%;
-  color: rgba(255,255,255,.8);
-  font-size: 18px;
-}
-
-@media (max-width: 767px) {
-  #error-page {
-    padding-top: 20px;
-    min-height: none;
-  }
-  #error-page h1{
-    font-size: 28px;
-  }
-  #error-page #extra_error {
-    font-size: 16px;
-  }
-
-}
-
-
 
 /*credito de foto*/
 .photo-credit {

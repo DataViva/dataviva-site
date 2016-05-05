@@ -1,0 +1,42 @@
+/* TELA DE ERRO */
+#error-page {
+  padding-top: 50px;
+  min-height: 500px;
+}
+#error-page h1{
+  color: #7BCCD0;
+  font-weight: bold;
+  font-size: 34px;
+}
+#error-page #extra_error {
+  font-size: 18px;
+  margin: 15px 0 40px;
+  font-weight: lighter;
+  line-height: 1.25;
+  color: #999999;
+}
+#error-page .computer {
+  position: relative;
+}
+#error-page .computer #error_code {
+  font-family: monospace;
+  position: absolute;
+  top: 50%;
+  left: 36%;
+  color: rgba(255,255,255,.8);
+  font-size: 18px;
+}
+
+@media (max-width: 767px) {
+  #error-page {
+    padding-top: 20px;
+    min-height: none;
+  }
+  #error-page h1{
+    font-size: 28px;
+  }
+  #error-page #extra_error {
+    font-size: 16px;
+  }
+
+}

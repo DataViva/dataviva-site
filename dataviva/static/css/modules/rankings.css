@@ -1,4 +1,23 @@
 
+/*  RANKINGS   */
+.rankings .text-up {
+  color: #3c763d;
+}
+.rankings .text-down {
+  color: #a94442;
+}
+.rankings .text-up, .text-down {
+  text-align: right;
+  display: block;
+}
+
+.rankings .rankings-content .dataTable {
+  border-radius: 0;
+}
+.rankings .rankings-content .dataTable thead tr th{
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
 
 .rankings #rankings .navbar.navbar-default {
     background-color: #f8f8f8;

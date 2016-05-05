@@ -57,7 +57,7 @@
                           <h2 class="text-left text-uppercase">{% trans %}Number of Enrollments{% endtrans %} ({{ header.course_year }})</h2>
                           <div class="number">
                               <strong class="counter">{{header.course_enrolled | max_digits(3)}}</strong><br/>
-                              <small class="magnitude">{{(header.course_enrolled | magnitude).lower()}}</small>
+                              <small class="magnitude">{{header.course_enrolled | magnitude}}</small>
                           </div>
                       </div>
                     </div>
@@ -66,7 +66,7 @@
                         <h2 class="text-left text-uppercase">{% trans %}Number of Classes{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.course_classes | max_digits(3)}}</strong><br/>
-                            <small class="magnitude">{{(header.course_classes | magnitude).lower()}}</small>
+                            <small class="magnitude">{{header.course_classes | magnitude}}</small>
                         </div>
                       </div>
                     </div>
@@ -75,7 +75,7 @@
                         <h2 class="text-left text-uppercase">{% trans %}Number of Schools{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.school_count | max_digits(3)}}</strong><br/>
-                            <small class="magnitude">{{(header.school_count | magnitude).lower()}}</small>
+                            <small class="magnitude">{{header.school_count | magnitude}}</small>
                         </div>
                       </div>
                     </div>
@@ -84,7 +84,7 @@
                         <h2 class="text-left text-uppercase">{% trans %}Average Size of Classes{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.course_average_class_size | max_digits(3)}}</strong><br/>
-                            <small class="magnitude">{{(header.course_average_class_size | magnitude).lower()}}</small>
+                            <small class="magnitude">{{header.course_average_class_size | magnitude}}</small>
                         </div>
                       </div>
                     </div>
@@ -94,7 +94,7 @@
                         <h2 class="text-left text-uppercase">{% trans %}Average Age{% endtrans %} ({{ header.course_year }})</h2>
                         <div class="number">
                             <strong class="counter">{{header.course_age | max_digits(3)}}</strong><br/>
-                            <small class="magnitude">{% trans %}years{% endtrans %}</small>
+                            <small class="magnitude">{% trans %}Years{% endtrans %}</small>
                         </div>
                       </div>
                     </div>

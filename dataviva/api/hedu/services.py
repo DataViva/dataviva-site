@@ -60,7 +60,7 @@ class University:
         return self.__hedu__().university.name()
 
     def university_type(self):
-        return self.__hedu__().university.school_type_pt
+        return self.__hedu__().university.school_type()
 
     def enrolled(self):
         return self.__hedu__().enrolled
@@ -349,6 +349,9 @@ class LocationUniversity:
             self._hedu_sorted_by_enrolled.sort(
                 key=lambda hedu: hedu.enrolled, reverse=True)
         return self._hedu_sorted_by_enrolled
+
+    def year(self):
+        return self.max_year_query.first()[0]
 
     def highest_enrolled_by_university(self):
         hedu_list = self.__hedu_sorted_by_enrolled__()

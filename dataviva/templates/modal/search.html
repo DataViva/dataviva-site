@@ -2,9 +2,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-                </button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-search-title"></h4>
             </div>
 
@@ -12,30 +10,23 @@
 
                 <div class="chosen-options">
                     <h4 class="question">
-                    Qual o número de estabelecimentos na Atividade Econômica <span class="">Transporte Rodoviário Coletivo de Passageiros Municipal </span>, na Localidade <span class="">Nossa Senhora da Conceição Aparecida - SE</span>?<a href="#">[trocar pergunta]</a></small>
-
-
 
                     </h4>
 
                     <input type="hidden" id="answer"/>
                 </div>
 
-                <p class="current-question">2 - Selecione a localidade e clique em avançar:</p>
+                <p class="current-question">{% trans %}Select your question and click advance{% endtrans %}</p>
             </div>
 
             <div class="modal-body clearfix" id="modal-search-content">
             </div>
 
             <div class="modal-footer">
-                <button class="btn btn-default pull-left" data-dismiss="modal" aria-label="Close">{% trans %}Cancel{% endtrans %}</button>
+                <button class="btn btn-lg btn-default pull-left" data-dismiss="modal" aria-label="Close">{% trans %}Cancel{% endtrans %}</button>
                 <button id="search-back" class="btn btn-lg btn-default">{% trans %}Back{% endtrans %}</button>
                 <button id="search-advance" class="btn btn-lg btn-primary">{% trans %}Advance{% endtrans %}</button>
-                <a href="#" class="btn btn-default btn-toggle btn-lg selected"><i class="fa fa-square-o"></i><i class="fa fa-check-square-o"></i> selecione</a>
             </div>
          </div>
      </div>
 </div>
-label label-default
-
-

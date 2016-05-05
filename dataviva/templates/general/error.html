@@ -6,8 +6,6 @@
 
   <link type="text/css" rel="stylesheet" media="all" href="/static/css/styles.sabrina.css" />
 
-  <div id="sabrina" class="{{sabrina.outfit}} {{sabrina.face}} {{sabrina.hat}}"></div>
-
   <div id="error-page">
     <div class="container">
 
@@ -32,7 +30,7 @@
                 {% trans %}informing this error and will fix it as soon as possible.{% endtrans %}
             {% endif %}
           </p>
-          
+
           {% if error == "404" %}
           <p>Aqui estão algumas sugestões que podem te ajudar a encontrar o que procura:
             <ul class="">
@@ -44,7 +42,7 @@
             </ul>
           </p>
           {% endif %}
-          
+
           {% if error == "500" %}
           <p>Aqui estão algumas sugestões de outras pesquisas, baseado no que você procurou:
             <ul class="">
@@ -54,7 +52,7 @@
             </ul>
           </p>
           {% endif %}
-          
+
         </div>
         <div class="col-xs-12 col-md-5">
           <div class="computer">
