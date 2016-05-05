@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.sc.services import Basic_course, Basic_course_by_location, Basic_course_school, \
     Basic_course_school_by_location, Basic_course_city, Basic_course_city_by_location, Basic_course_by_state
 from dataviva.api.attrs.models import Bra, Course_sc
-from dataviva.api.sc.models import Ybc_sc
+from dataviva.api.sc.models import Ybc_sc, Yc_sc
 from dataviva import db
 from sqlalchemy import func
 
@@ -109,10 +109,9 @@ def index(course_sc_id):
                 header['rank'] = index + 1
                 break
 
-    return render_template(
-        'basic_course/index.html',
-        header=header,
-        body=body,
-        body_class='perfil-estado',
-        location=location,
-        basic_course=basic_course)
+    sc_max_year = db.session.query(func.max(Yc_sc.year)).first()[0]
+
+    if header['course_enrolled'] is None or sc_max_year != header['course_year']:
+        abort(404)
+    else:
+        return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, basic_course=basic_course)

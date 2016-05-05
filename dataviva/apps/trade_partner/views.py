@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import TradePartner, \
     TradePartnerMunicipalities, TradePartnerProducts
@@ -136,5 +136,12 @@ def index(wld_id):
         if import_rank[index].wld_id == wld_id:
             header['import_rank'] = index + 1
             break
+    secex_max_year = db.session.query(func.max(Ymw.year)).filter(
+        Ymw.month == 12).first()[0]
 
-    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
+    if body['highest_export_value'] is None and body['highest_import_value'] is None:
+        abort(404)
+    if secex_max_year != header['year']:
+        abort(404)
+    else:
+        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)

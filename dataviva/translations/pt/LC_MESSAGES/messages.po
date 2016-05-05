@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 19:05-0300\n"
+"POT-Creation-Date: 2016-05-05 19:40-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1124,6 +1124,10 @@ msgstr ""
 "Esta área foi especialmente criada para a publicação de Chamadas "
 "relacionados ao DataViva."
 
+#: dataviva/apps/contact/views.py:53 dataviva/translations/dictionary.py:643
+msgid "Your message has been sent successfully. We will soon get back to you."
+msgstr "Sua mensagem foi enviada com sucesso. Em breve retornaremos."
+
 #: dataviva/apps/contact/templates/contact/index.html:17
 #: dataviva/apps/contact/templates/contact/index.html:37
 #: dataviva/templates/about/ask/index.html:57
@@ -1474,6 +1478,17 @@ msgstr "Neste município, há um total de "
 #: dataviva/apps/industry/templates/industry/tab-general.html:41
 msgid "Occupation with highest number of jobs"
 msgstr "Ocupação com maior número de empregos"
+
+#: dataviva/apps/industry/templates/industry/tab-general.html:45
+#: dataviva/apps/industry/templates/industry/tab-general.html:52
+#: dataviva/apps/industry/templates/industry/tab-wages.html:15
+#: dataviva/apps/industry/templates/industry/tab-wages.html:30
+#: dataviva/apps/location/templates/location/tab-general.html:145
+#: dataviva/apps/location/templates/location/tab-wages.html:15
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:67
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
+msgid "Jobs"
+msgstr "Empregos"
 
 #: dataviva/apps/industry/templates/industry/tab-general.html:48
 msgid "Municipality with highest number of jobs"
@@ -1896,13 +1911,6 @@ msgstr "Total de Importações"
 #: dataviva/apps/location/templates/location/tab-wages.html:9
 msgid "Main Economic Activity"
 msgstr "Principal atividade econômica"
-
-#: dataviva/apps/location/templates/location/tab-general.html:145
-#: dataviva/apps/location/templates/location/tab-wages.html:15
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:67
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
-msgid "Jobs"
-msgstr "Empregos"
 
 #: dataviva/apps/location/templates/location/tab-general.html:147
 #: dataviva/apps/location/templates/location/tab-wages.html:22
@@ -6640,25 +6648,25 @@ msgstr "Nenhum registro encontrado"
 msgid "Views"
 msgstr "Visualize"
 
-#: dataviva/translations/dictionary.py:650
+#: dataviva/translations/dictionary.py:652
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:651
+#: dataviva/translations/dictionary.py:653
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:652
+#: dataviva/translations/dictionary.py:654
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:653
+#: dataviva/translations/dictionary.py:655
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
@@ -6898,4 +6906,7 @@ msgstr "com"
 
 #~ msgid " is the"
 #~ msgstr "é a"
+
+#~ msgid " Jobs"
+#~ msgstr "empregos"
 

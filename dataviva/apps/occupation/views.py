@@ -40,10 +40,8 @@ def add_language_code(endpoint, values):
 
 @mod.route('/<occupation_id>')
 def index(occupation_id):
-
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
 
-    # Use Example /occupation/2122 OR /occupation/2122?bra_id=4mg
     bra_id = request.args.get('bra_id')
     location = Bra.query.filter_by(id=bra_id).first()
     language = g.locale
@@ -84,23 +82,18 @@ def index(occupation_id):
 
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
         body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
-
         body['municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
-
         body['municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
         body['municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.biggest_wage_average()
         body['municipality_with_biggest_wage_avg_state'] = occupation_municipalities_service.municipality_with_biggest_wage_average_state()
 
     body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
     body['activity_with_more_jobs_value'] = occupation_activities_service.highest_number_of_jobs()
-
     body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
     body['year'] = occupation_activities_service.year()
     
-
     rais_max_year = db.session.query(func.max(Yo.year)).first()[0]
-
 
     if location:
         max_year_query_location = db.session.query(func.max(Ybo.year)).filter(
@@ -112,7 +105,6 @@ def index(occupation_id):
             Ybo.bra_id == bra_id,
             Ybo.year == max_year_query_location)\
             .order_by(Ybo.num_jobs.desc())
-
     else: 
         max_year_query = db.session.query(func.max(Yo.year)).filter(
         Yo.cbo_id == occupation_id)
@@ -127,7 +119,6 @@ def index(occupation_id):
         if rais[index].cbo_id == occupation_id:
             header['ranking'] = index + 1
             break
-
 
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)

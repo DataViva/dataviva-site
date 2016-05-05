@@ -63,12 +63,20 @@ class Industry:
         return self.__rais__().num_est
 
     def highest_number_of_jobs(self):
-        rais = self.__rais_sorted_by_num_jobs__()[0]
-        return rais.num_jobs
+        try:
+            rais = self.__rais_sorted_by_num_jobs__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.num_jobs
 
     def biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.wage_avg
+        try:
+            rais = self.__rais_sorted_by_wage_average__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.wage_avg
 
     def main_industry_by_num_jobs(self):
         try:
@@ -202,6 +210,8 @@ class IndustryByLocation(Industry):
                 Ybi.bra_id == self.bra_id,
                 Ybi.year == self.ybi_max_year
                 )
+    def get_year(self):
+        return self.ybi_max_year.first()[0]
 
     def rca(self):
         return self.__rais__().rca
@@ -242,12 +252,20 @@ class IndustryOccupation(Industry):
             )
 
     def occupation_with_more_jobs(self):
-        rais = self.__rais_sorted_by_num_jobs__()[0]
-        return rais.cbo.name()
+        try:
+            rais = self.__rais_sorted_by_num_jobs__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.cbo.name()
 
     def occupation_with_biggest_wage_average(self):
-        rais = self.__rais_sorted_by_wage_average__()[0]
-        return rais.cbo.name()
+        try:
+            rais = self.__rais_sorted_by_wage_average__()[0]
+        except IndexError:
+            return None
+        else:
+            return rais.cbo.name()
 
 
 class IndustryMunicipality(Industry):
