@@ -1,3 +1,5 @@
+#coding: utf-8
+
 from dataviva.utils.jinja_helpers import max_digits
 from flask import g
 from test_base import BaseTestCase
