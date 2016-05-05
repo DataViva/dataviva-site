@@ -116,7 +116,12 @@ def all():
 
     profile = {}
 
-    return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
+    if body['total_exports'] is None and body['total_imports'] is None and body['total_jobs'] is None and \
+            body['highest_enrolled_by_university'] is None and body['highest_enrolled_by_basic_course'] is None and \
+            body['highest_enrolled_by_major'] is None:
+            abort(404)
+    else:
+        return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
 
 
 @mod.route('/<bra_id>')
