@@ -292,3 +292,6 @@ class LocationBasicCourse(LocationSchool):
             return sc.name()
         else:
             return None
+
+    def year(self):
+        return self.max_year_query.first()[0]
