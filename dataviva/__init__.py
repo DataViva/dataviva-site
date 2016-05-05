@@ -10,7 +10,7 @@ from flask.ext.cache import Cache
 from flask.ext.mail import Mail
 
 from utils.jinja_helpers import jinja_formatter, jinja_momentjs, jinja_split, \
-    jinja_strip_html, max_digits, jinja_magnitude
+    jinja_strip_html, max_digits, jinja_magnitude, ordinal
 
 from utils.redis import RedisSessionInterface
 from dataviva.api.stats.util import get_or_set_years
@@ -39,6 +39,7 @@ app.jinja_env.filters['strip_html'] = jinja_strip_html
 app.jinja_env.filters['split'] = jinja_split
 app.jinja_env.filters['max_digits'] = max_digits
 app.jinja_env.filters['magnitude'] = jinja_magnitude
+app.jinja_env.filters['ordinal'] = ordinal
 
 
 def get_env_variable(var_name, default=-1):
