@@ -23,6 +23,10 @@ from dataviva.api.attrs.models import Wld
 from sqlalchemy import desc, func
 from random import randint
 from decimal import *
+import sys
+
+reload(sys)  
+sys.setdefaultencoding('utf8')
 
 mod = Blueprint('location', __name__,
                 template_folder='templates',
