@@ -34,9 +34,9 @@
                 {% trans %}in Brazil{% endtrans %}
                 {% else %}
                     {% if location.id | length <= 3 %}
-                        {{location.preposition('em')}} {{location.name()}}
+                        {% trans %}and{% endtrans %} {{location.name()}}
                     {% else %}
-                        {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}
+                        {% trans %}and{% endtrans %} {{location.name()}} - {{ location.abbreviation }}
                     {% endif %}
                 {% endif %}
                 <div class="btn-group">
