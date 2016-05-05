@@ -34,10 +34,7 @@ def graphs(university_id, tab):
 @mod.route('/<university_id>')
 def index(university_id):
 
-    # Usage example /university/00575
-
-    university = UniversityModel.query.filter_by(
-        id=university_id).first_or_404()
+    university = UniversityModel.query.filter_by(id=university_id).first_or_404()
 
     university_service = University(university.id)
     majors_service = UniversityMajors(university.id)
