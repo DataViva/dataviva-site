@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 10:07-0400\n"
+"POT-Creation-Date: 2016-05-05 10:26-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -2144,8 +2144,8 @@ msgid "students enrolled in the region"
 msgstr "alunos matriculados em toda a região"
 
 #: dataviva/apps/major/templates/major/tab-general.html:24
-msgid "the state of"
-msgstr "no estado "
+msgid "the state"
+msgstr "no estado"
 
 #: dataviva/apps/major/templates/major/tab-general.html:28
 msgid "students enrolled in the state"
@@ -2160,8 +2160,9 @@ msgid "students enrolled in the mesoregion"
 msgstr "alunos matriculados em toda a mesorregião"
 
 #: dataviva/apps/major/templates/major/tab-general.html:42
-msgid "the microregion of"
-msgstr "na microrregião "
+#, fuzzy
+msgid "the microregion"
+msgstr "na microrregião"
 
 #: dataviva/apps/major/templates/major/tab-general.html:46
 msgid "students enrolled in the microregion"
