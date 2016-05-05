@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 15:34-0400\n"
+"POT-Creation-Date: 2016-05-05 16:08-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1123,6 +1123,10 @@ msgid ""
 msgstr ""
 "Esta área foi especialmente criada para a publicação de Chamadas "
 "relacionados ao DataViva."
+
+#: dataviva/apps/contact/views.py:52 dataviva/translations/dictionary.py:643
+msgid "Your message has been sent successfully. We will soon get back to you."
+msgstr "Sua mensagem foi enviada com sucesso. Em breve retornaremos."
 
 #: dataviva/apps/contact/templates/contact/index.html:17
 #: dataviva/apps/contact/templates/contact/index.html:37
@@ -6646,43 +6650,43 @@ msgstr "Nenhum registro encontrado"
 msgid "Views"
 msgstr "Visualize"
 
-#: dataviva/translations/dictionary.py:650
+#: dataviva/translations/dictionary.py:652
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:651
+#: dataviva/translations/dictionary.py:653
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:652
+#: dataviva/translations/dictionary.py:654
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:653
+#: dataviva/translations/dictionary.py:655
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
 msgstr[1] "Milhares"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Thousands"
 msgstr "Mil"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Millions"
 msgstr "Milhões"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Billions"
 msgstr "Bilhões"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Trillions"
 msgstr "Trilhões"
 
