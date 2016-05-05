@@ -484,7 +484,7 @@ def dictionary():
         "select_search_cbo": gettext("Select the Occupation and click advance"),
         "select_search_cnae": gettext("Select the Industry and click advance"),
         "select_search_hs": gettext("Select the Product and click advance"),
-        "select_search_wld": gettext("Select the Trade and click advance"),
+        "select_search_wld": gettext("Select the Trade Partner and click advance"),
         "select_search_university": gettext("Select the University and click advance"),
         "select_search_course_hedu": gettext("Select the Major Course and click advance"),
         "select_search_course_sc": gettext("Select the Basic Course and click advance"),
