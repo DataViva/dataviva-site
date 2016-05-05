@@ -391,7 +391,7 @@ class LocationIndustry:
         self._rais_sorted_by_distance = None
         self._rais_sorted_by_opp_gain = None
         self.max_year_query = db.session.query(func.max(Ybi.year)).filter(
-            bra_id == self.bra_id, Ybi.year == 12)
+            bra_id == self.bra_id)
         self.rais_query = Ybi.query.join(Cnae).filter(
                 Ybi.bra_id == self.bra_id,
                 Ybi.cnae_id_len == 6,
