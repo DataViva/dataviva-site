@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 13:05-0400\n"
+"POT-Creation-Date: 2016-05-05 13:30-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -3041,6 +3041,10 @@ msgstr "Escolha uma opção ou digite o que procura"
 #: dataviva/apps/search/templates/search/new.html:10
 msgid "Create"
 msgstr "Criar"
+
+#: dataviva/apps/trade_partner/views.py:109
+msgid "bra_9"
+msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:47
 #: dataviva/translations/dictionary.py:149
@@ -6882,5 +6886,8 @@ msgstr "com"
 #~ msgstr " ocupa o"
 
 #~ msgid "city in number of enrollments in the "
+#~ msgstr ""
+
+#~ msgid "bra_"
 #~ msgstr ""
 
