@@ -24,7 +24,7 @@
               {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
-              {% trans %}mesoregion, it is the{% endtrans %} {{ profile.gdp_rank }}º
+              {% trans %}mesoregion, it is the{% endtrans %} {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}
               {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
           {% elif profile.bra_id|length == 7 %}
               <p>
@@ -46,7 +46,7 @@
 
               {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions}}
               {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
-              {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}ª
+              {% trans %}It is the {% endtrans %}{{ profile.eci_rank }}{% if g.locale == "pt" %}{{ profile.eci_rank | ordinal('f') }}{% else %}{{ profile.eci_rank | ordinal }}{% endif %}
               {% trans %}Brazilian meso-region in complexity index and has the population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people. Its GDP is R$ {% endtrans %}{{ header.gdp|max_digits(3) }} {{ (header.gdp|magnitude).lower() }} ({{header.year}})
               {% trans %}and its main product for export value is {% endtrans %}{{ body.main_product_by_export_value_name }}.
@@ -68,15 +68,15 @@
               {% endfor %}
               {% trans %}The region {% endtrans %}
               {% trans %}has a total of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-              {% trans %}people. It is the number {% endtrans %}{{ profile.gdp_pc_rank }}{% if g.locale == "pt" %}ª{% endif %}
-              {% trans %}region in GDP per capita of Brazil and number {% endtrans %}{{ profile.pop_rank }}{% if g.locale == "pt" %}ª{% endif %}
+              {% trans %}people. It is the number {% endtrans %}{{ profile.gdp_pc_rank }}{% if g.locale == "pt" %}{{ profile.gdp_pc_rank | ordinal('f') }}{% endif %}
+              {% trans %}region in GDP per capita of Brazil and number {% endtrans %}{{ profile.pop_rank }}{% if g.locale == "pt" %}{{ profile.pop_rank | ordinal('f') }}{% endif %}
               {% trans %}in population{% endtrans %}.</p>
           {% else %}
               <p>{{ header.name }}
               {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }}
               {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }}
-              {% trans %}being the {% endtrans %}{{ profile.area_rank }}º
-              {% trans %}state in territorial area and {% endtrans %}{{ profile.pop_rank }}º
+              {% trans %}being the {% endtrans %}{{ profile.area_rank }}{{ profile.area_rank | ordinal }}
+              {% trans %}state in territorial area and {% endtrans %}{{ profile.pop_rank }}{{ profile.pop_rank | ordinal }}
               {% trans %}in population. Its territory is limited for {% endtrans %}
               {% for neighbors in profile.neighbors %}
                   {% if neighbors == profile.neighbors[profile.neighbors|length-1] %}
