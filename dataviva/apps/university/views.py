@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.hedu.services import University, UniversityMajors
 from dataviva.api.attrs.models import University as UniversityModel
+from dataviva.api.hedu.models import Yu
+from dataviva import db
+from sqlalchemy.sql.expression import func
 
 mod = Blueprint('university', __name__,
                 template_folder='templates',
@@ -57,4 +60,9 @@ def index(university_id):
         'year': majors_service.year(),
     }
 
-    return render_template('university/index.html', university=university, header=header, body=body)
+    hedu_max_year = db.session.query(func.max(Yu.year)).first()[0]
+
+    if header['enrolled'] is None or hedu_max_year != body['year']:
+        abort(404)
+    else:
+        return render_template('university/index.html', university=university, header=header, body=body)
