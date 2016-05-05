@@ -66,7 +66,6 @@ class Rca(object):
 class Rca_wld(object):
     rca_wld = db.Column(db.Float())
 
-
 class Eci(object):
     eci = db.Column(db.Float())
 

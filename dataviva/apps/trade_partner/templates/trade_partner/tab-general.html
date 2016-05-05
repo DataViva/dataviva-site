@@ -5,7 +5,7 @@
         {% trans %} is number {% endtrans %}{{ header.import_rank }}
         {% trans %} in the import origins of {% endtrans %}{{ location.article() }} {{ header.location_name }} 
         {% trans %}and number{% endtrans %} {{ header.export_rank }}
-        {% trans %}in the export destinations of {% endtrans %}{{ location.preposition("em") }} {{ header.location_type }}. 
+        {% trans %}in the export destinations of {% endtrans %}{% if g.locale == 'pt' %}{% if ((location.id | length == 3) or (location.id | length == 9)) %}no{% else %}na{% endif %}{% endif %} {{ header.location_type }}. 
         {% trans %}The most exported product is {% endtrans %} {{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ body.product_with_highest_export_value | magnitude }}) 
         {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ (header.total_imported | magnitude).lower() }}.</p>
     {% else %}
@@ -30,11 +30,11 @@
         {% endif %}
     {% endif %}
 
-
     <div class="row">
         <div class="dl-box col-xs-12 col-md-10 col-lg-8">
             <h3>{% trans %}International Trade{% endtrans %} ({{ header.year }})</h3>
             <dl class="dl-horizontal">
+                {% if location.id | length != 9 %}
                     {% if body.highest_export_value %}
                         <dt>
                             {% trans %}Main Municipality by Total Value Exported{% endtrans %}
@@ -53,6 +53,7 @@
                             USD <strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
                         </dd>
                     {% endif %}
+                {% endif %}
                     {% if body.product_with_highest_export_value %}
                         <dt>
                             {% trans %}Main Product by Total Value Exported{% endtrans %}
