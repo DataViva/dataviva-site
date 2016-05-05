@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-04 19:00-0400\n"
+"POT-Creation-Date: 2016-05-05 09:41-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -169,7 +169,6 @@ msgstr "Principais Campi"
 #: dataviva/apps/data/templates/data/index.html:49
 #: dataviva/apps/industry/templates/industry/index.html:49
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:6
-#: dataviva/apps/location/templates/location/index.html:51
 #: dataviva/apps/major/templates/major/index.html:48
 #: dataviva/apps/occupation/templates/occupation/index.html:49
 #: dataviva/apps/product/templates/product/index.html:47
@@ -635,7 +634,7 @@ msgstr "no Brasil"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:43
 #: dataviva/apps/industry/templates/industry/index.html:45
-#: dataviva/apps/location/templates/location/index.html:48
+#: dataviva/apps/location/templates/location/index.html:45
 #: dataviva/apps/occupation/templates/occupation/index.html:45
 #: dataviva/apps/product/templates/product/index.html:43
 #: dataviva/apps/university/templates/university/index.html:32
@@ -670,12 +669,12 @@ msgid "Average Size of Classes"
 msgstr "Tamanho Médio das Turmas"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:97
-msgid "years"
-msgstr "anos"
+msgid "Years"
+msgstr "Anos"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:120
 #: dataviva/apps/industry/templates/industry/index.html:140
-#: dataviva/apps/location/templates/location/index.html:149
+#: dataviva/apps/location/templates/location/index.html:140
 #: dataviva/apps/major/templates/major/index.html:101
 #: dataviva/apps/occupation/templates/occupation/index.html:113
 #: dataviva/apps/product/templates/product/index.html:176
@@ -836,7 +835,7 @@ msgstr "na mesorregião "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:32
 msgid "students. The mesoregion has a total of "
-msgstr "alunos. No total, a mesoregiāo possui "
+msgstr "alunos. No total, a mesorregiāo possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:37
 msgid "in the microregion "
@@ -844,7 +843,7 @@ msgstr "na microrregião "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:40
 msgid "students. The microregion has a total of "
-msgstr "alunos. No total, a microregiāo possui "
+msgstr "alunos. No total, a microrregiāo possui "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:45
 msgid " is the number"
@@ -1391,7 +1390,7 @@ msgstr "Ganho de Oportunidade"
 #: dataviva/apps/industry/templates/industry/index.html:149
 #: dataviva/apps/industry/templates/industry/tab-general.html:39
 #: dataviva/apps/industry/templates/industry/tab-wages.html:3
-#: dataviva/apps/location/templates/location/index.html:165
+#: dataviva/apps/location/templates/location/index.html:156
 #: dataviva/apps/location/templates/location/tab-general.html:138
 #: dataviva/apps/location/templates/location/tab-wages.html:3
 #: dataviva/apps/occupation/templates/occupation/index.html:122
@@ -1404,7 +1403,7 @@ msgstr "Salário e Emprego"
 
 #: dataviva/apps/industry/templates/industry/index.html:159
 #: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
-#: dataviva/apps/location/templates/location/index.html:173
+#: dataviva/apps/location/templates/location/index.html:164
 #: dataviva/apps/location/templates/location/tab-general.html:180
 #: dataviva/apps/location/templates/location/tab-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
@@ -1633,31 +1632,31 @@ msgstr "Emprego por"
 msgid "Wage by"
 msgstr "Salário por"
 
-#: dataviva/apps/location/templates/location/index.html:65
+#: dataviva/apps/location/templates/location/index.html:56
 msgid "GDP"
 msgstr "PIB"
 
-#: dataviva/apps/location/templates/location/index.html:77
+#: dataviva/apps/location/templates/location/index.html:68
 msgid "Life Expectancy"
 msgstr "Expectativa de Vida"
 
-#: dataviva/apps/location/templates/location/index.html:89
+#: dataviva/apps/location/templates/location/index.html:80
 msgid "Total Population"
 msgstr "População Total"
 
-#: dataviva/apps/location/templates/location/index.html:101
+#: dataviva/apps/location/templates/location/index.html:92
 msgid "GDP per capita"
 msgstr "PIB per capita"
 
-#: dataviva/apps/location/templates/location/index.html:113
+#: dataviva/apps/location/templates/location/index.html:104
 msgid "MHDI"
 msgstr "IDHM"
 
-#: dataviva/apps/location/templates/location/index.html:125
+#: dataviva/apps/location/templates/location/index.html:116
 msgid "ECI"
 msgstr "ECI"
 
-#: dataviva/apps/location/templates/location/index.html:157
+#: dataviva/apps/location/templates/location/index.html:148
 #: dataviva/apps/location/templates/location/tab-general.html:97
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:3
 #: dataviva/apps/product/templates/product/index.html:185
@@ -1671,7 +1670,7 @@ msgstr "ECI"
 msgid "International Trade"
 msgstr "Comércio Internacional"
 
-#: dataviva/apps/location/templates/location/index.html:181
+#: dataviva/apps/location/templates/location/index.html:172
 #: dataviva/apps/location/templates/location/tab-education.html:3
 #: dataviva/apps/location/templates/location/tab-general.html:228
 msgid "Education"
@@ -2287,7 +2286,7 @@ msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:34
 msgid "professionals in the the mesoregion of "
-msgstr "profissionais no mesoregiāo "
+msgstr "profissionais no mesorregiāo "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:36
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:45
@@ -2662,13 +2661,13 @@ msgstr "que mais exporta"
 #: dataviva/apps/product/templates/product/tab-general.html:116
 #: dataviva/apps/product/templates/product/tab-general.html:143
 msgid " in imports in the mesoregion of"
-msgstr " posição em importações na mesoregiāo"
+msgstr " posição em importações na mesorregiāo"
 
 #: dataviva/apps/product/templates/product/tab-general.html:175
 #: dataviva/apps/product/templates/product/tab-general.html:201
 #: dataviva/translations/dictionary.py:522
 msgid " in imports in the microregion of"
-msgstr " posição em importações na microregiāo"
+msgstr " posição em importações na microrregiāo"
 
 #: dataviva/apps/product/templates/product/tab-general.html:229
 #: dataviva/apps/product/templates/product/tab-general.html:251
@@ -6551,7 +6550,7 @@ msgstr "posição em importações"
 
 #: dataviva/translations/dictionary.py:521
 msgid " in imports in the mesoregions of"
-msgstr " em importações na mesoregiāo de"
+msgstr " em importações na mesorregiāo de"
 
 #: dataviva/translations/dictionary.py:544
 msgid "Sign2 Up"
