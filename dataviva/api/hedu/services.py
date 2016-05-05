@@ -350,6 +350,9 @@ class LocationUniversity:
                 key=lambda hedu: hedu.enrolled, reverse=True)
         return self._hedu_sorted_by_enrolled
 
+    def year(self):
+        return self.max_year_query.first()[0]
+
     def highest_enrolled_by_university(self):
         hedu_list = self.__hedu_sorted_by_enrolled__()
         if len(hedu_list) != 0:
