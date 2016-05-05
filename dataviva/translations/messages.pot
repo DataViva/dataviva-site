@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 11:37-0300\n"
+"POT-Creation-Date: 2016-05-05 10:58-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -680,7 +680,7 @@ msgstr ""
 #: dataviva/apps/major/templates/major/tab-enrollments.html:22
 #: dataviva/apps/major/templates/major/tab-general.html:64
 #: dataviva/apps/major/templates/major/tab-general.html:70
-#: dataviva/apps/university/templates/university/tab-enrollments.html:10
+#: dataviva/apps/university/templates/university/tab-enrollments.html:9
 msgid "by Number of Enrolled Students"
 msgstr ""
 
@@ -2007,7 +2007,7 @@ msgstr ""
 #: dataviva/apps/major/templates/major/tab-enrollments.html:49
 #: dataviva/apps/major/templates/major/tab-general.html:76
 #: dataviva/apps/major/templates/major/tab-general.html:82
-#: dataviva/apps/university/templates/university/tab-enrollments.html:23
+#: dataviva/apps/university/templates/university/tab-enrollments.html:22
 msgid "by Number of Entering Students"
 msgstr ""
 
@@ -2015,7 +2015,7 @@ msgstr ""
 #: dataviva/apps/major/templates/major/tab-enrollments.html:75
 #: dataviva/apps/major/templates/major/tab-general.html:88
 #: dataviva/apps/major/templates/major/tab-general.html:94
-#: dataviva/apps/university/templates/university/tab-enrollments.html:37
+#: dataviva/apps/university/templates/university/tab-enrollments.html:35
 msgid "by Number of Graduates"
 msgstr ""
 
@@ -3043,17 +3043,16 @@ msgstr ""
 #: dataviva/apps/university/templates/university/tab-general.html:20
 #: dataviva/apps/university/templates/university/tab-general.html:26
 #: dataviva/apps/university/templates/university/tab-general.html:32
-#: dataviva/utils/num_format.py:42
-msgid "students"
+msgid "Students"
 msgstr ""
 
 #: dataviva/apps/university/templates/university/index.html:55
 msgid "Number of Entering Students "
 msgstr ""
 
-#: dataviva/apps/university/templates/university/tab-enrollments.html:9
-#: dataviva/apps/university/templates/university/tab-enrollments.html:22
-#: dataviva/apps/university/templates/university/tab-enrollments.html:36
+#: dataviva/apps/university/templates/university/tab-enrollments.html:8
+#: dataviva/apps/university/templates/university/tab-enrollments.html:21
+#: dataviva/apps/university/templates/university/tab-enrollments.html:34
 msgid "Main Course"
 msgstr ""
 
@@ -6060,6 +6059,10 @@ msgstr ""
 
 #: dataviva/utils/jinja_helpers.py:96
 msgid "Trillions"
+msgstr ""
+
+#: dataviva/utils/num_format.py:42
+msgid "students"
 msgstr ""
 
 #: dataviva/utils/num_format.py:58
