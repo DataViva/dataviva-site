@@ -8,6 +8,7 @@ window.showGraph = function(category, tab, location) {
             }
         });
     }
+    $('#graphs').show();
     $("#graphs").children().hide();
     $('#graphs #graphs-' + tab).show();
 }
@@ -80,6 +81,8 @@ $(document).ready(function () {
                 tab = $(this).attr('aria-controls');
 
             showGraph(category, tab, location);
+        } else {
+            $('#graphs').hide();
         }
     });
 });
