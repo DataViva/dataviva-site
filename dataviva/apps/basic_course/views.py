@@ -57,13 +57,13 @@ def index(course_sc_id):
 
         rank_query = Ybc_sc.query.filter(
             Ybc_sc.year == max_year_query,
-            Ybc_sc.course_sc_id == len(course_sc_id),
             Ybc_sc.course_sc_id == course_sc_id,
             Ybc_sc.bra_id.like(bra_id[:3] + '%'),
             Ybc_sc.bra_id_len == 9).order_by(Ybc_sc.enrolled.desc())
 
         rank = rank_query.all()
         location = Bra.query.filter_by(id=bra_id).first()
+
     else:
         bra_id = ''
         sc_service = Basic_course(course_sc_id=course_sc_id)
@@ -103,8 +103,8 @@ def index(course_sc_id):
         'city_enrolled': city_service.city_enrolled(),
     }
 
-    if bra_id and len(bra_id) == 9:
-        for index, maj in enumerate(rank):
+    if len(bra_id) == 9:
+        for index, basic_course_ranking in enumerate(rank):
             if rank[index].bra_id == bra_id:
                 header['rank'] = index + 1
                 break
