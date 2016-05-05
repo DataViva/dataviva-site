@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 14:20-0400\n"
+"POT-Creation-Date: 2016-05-05 15:34-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1475,6 +1475,17 @@ msgstr "Neste município, há um total de "
 msgid "Occupation with highest number of jobs"
 msgstr "Ocupação com maior número de empregos"
 
+#: dataviva/apps/industry/templates/industry/tab-general.html:45
+#: dataviva/apps/industry/templates/industry/tab-general.html:52
+#: dataviva/apps/industry/templates/industry/tab-wages.html:15
+#: dataviva/apps/industry/templates/industry/tab-wages.html:30
+#: dataviva/apps/location/templates/location/tab-general.html:145
+#: dataviva/apps/location/templates/location/tab-wages.html:15
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:67
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
+msgid "Jobs"
+msgstr "Empregos"
+
 #: dataviva/apps/industry/templates/industry/tab-general.html:48
 msgid "Municipality with highest number of jobs"
 msgstr "Município com maior número de empregos"
@@ -1896,13 +1907,6 @@ msgstr "Total de Importações"
 #: dataviva/apps/location/templates/location/tab-wages.html:9
 msgid "Main Economic Activity"
 msgstr "Principal atividade econômica"
-
-#: dataviva/apps/location/templates/location/tab-general.html:145
-#: dataviva/apps/location/templates/location/tab-wages.html:15
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:67
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
-msgid "Jobs"
-msgstr "Empregos"
 
 #: dataviva/apps/location/templates/location/tab-general.html:147
 #: dataviva/apps/location/templates/location/tab-wages.html:22
@@ -6891,4 +6895,7 @@ msgstr "com"
 
 #~ msgid "bra_9"
 #~ msgstr ""
+
+#~ msgid " Jobs"
+#~ msgstr "empregos"
 
