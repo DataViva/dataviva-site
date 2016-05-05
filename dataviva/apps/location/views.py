@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, abort
 from dataviva import db
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
@@ -203,6 +203,7 @@ def index(bra_id):
         'main_destination_by_export_value_name': location_wld_service.main_destination_by_export_value_name(),
         'main_destination_by_import_value': location_wld_service.main_destination_by_import_value(),
         'main_destination_by_import_value_name': location_wld_service.main_destination_by_import_value_name(),
+        'secex_year': location_secex_service.year(),
 
         'industry_year': location_industry_service.year(),
         'main_industry_by_num_jobs': location_industry_service.main_industry_by_num_jobs(),
@@ -212,6 +213,7 @@ def index(bra_id):
         'avg_wage': location_jobs_service.avg_wage(),
         'wage': location_jobs_service.wage(),
         'total_jobs': location_jobs_service.total_jobs(),
+        'rais_year': location_jobs_service.year(),
 
         'less_distance_by_occupation': location_distance_service.less_distance_by_occupation(),
         'less_distance_by_occupation_name': location_distance_service.less_distance_by_occupation_name(),
@@ -225,8 +227,10 @@ def index(bra_id):
         'highest_enrolled_by_school_name': location_school_service.highest_enrolled_by_school_name(),
         'highest_enrolled_by_major': location_major_service.highest_enrolled_by_major(),
         'highest_enrolled_by_major_name': location_major_service.highest_enrolled_by_major_name(),
+        'major_year': location_major_service.year(),
         'highest_enrolled_by_basic_course': location_basic_course_service.highest_enrolled_by_basic_course(),
-        'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name()
+        'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name(),
+        'basic_course_year': location_basic_course_service.year()
     }
 
     if len(bra_id) == 9:
@@ -272,5 +276,10 @@ def index(bra_id):
             'municipality_rank': location_municipality_rankings_service.municipality_rank()
         }
 
-    return render_template('location/index.html',
-                           header=header, body=body, profile=profile, location=location)
+    if body['total_exports'] is None and body['total_imports'] is None and body['total_jobs'] is None and \
+            body['highest_enrolled_by_university'] is None and body['highest_enrolled_by_basic_course'] is None and \
+            body['highest_enrolled_by_major'] is None:
+            abort(404)
+    else:
+        return render_template('location/index.html',
+                            header=header, body=body, profile=profile, location=location)
