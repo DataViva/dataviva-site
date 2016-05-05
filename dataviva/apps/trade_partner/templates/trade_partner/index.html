@@ -62,6 +62,7 @@
                             </div>
                         </div>
                     </div><!--/.col-->
+                    {% if header.total_exported %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total Value Exported{% endtrans %} ({{ header.year }})</h2>
@@ -71,6 +72,7 @@
                             </div>
                         </div>
                     </div><!--/.col-->
+                    {% endif %}
                     {% if header.unity_weight_export_price %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
@@ -82,6 +84,7 @@
                         </div>
                     </div><!--/.col-->
                     {% endif %}
+                    {% if header.total_imported %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total Value Imported{% endtrans %} ({{ header.year }})</h2>
@@ -91,6 +94,7 @@
                             </div>
                         </div>
                     </div><!--/.col-->
+                    {% endif %}
                     {% if header.unity_weight_import_price %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
