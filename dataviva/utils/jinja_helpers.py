@@ -111,7 +111,7 @@ def ordinal(number, gender='m'):
 
 def jinja_magnitude(number):
     if not number: 
-        return 0
+        return ''
     integer = str(int(number))
     orders_of_magnitude = ['', gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
     return orders_of_magnitude[len(integer[::3]) - 1]
