@@ -876,13 +876,6 @@ table.data-blue thead th small {
     top: calc(50% + 80px);
 }
 
-
-/* MODAIS */
-.modal-body {
-    min-height: 200px;
-}
-
-
 /* MODAL DE LOGIN */
 #dataviva-login .modal-header, #dataviva-signup .modal-header{
   padding: 5px 10px
@@ -919,21 +912,7 @@ table.data-blue thead th small {
   padding: 20px 50px;
 }
 
-/* MODAL DE PERGUNTAS */
-.question-header {
-  text-align: center;
-  margin-bottom: 0;
-}
-.question-header h4{
-  font-size: 16px;
-  line-height: 1.45em
-}
-.question-header .current-question {
-  margin: 20px 0 0;
-}
-
 /*  SIGNIN SIGUNP LOGIN FORGOT PASS */
-
 .btn-google:hover,
 .btn-facebook:hover,
 .btn-twitter:hover {
