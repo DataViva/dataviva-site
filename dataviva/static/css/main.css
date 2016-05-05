@@ -96,11 +96,13 @@ body {
 .breadcrumb > li a {
   color: #5A9DC4;
 }
-.breadcrumb > li a:hover {
-  color: #9EDDBF;
+.breadcrumb > li a:hover,
+.breadcrumb > li a:focus {
+  color: #23527c;
+  text-decoration: none;
 }
 .breadcrumb > .active {
-  color: #9EDDBF;
+  color: #5A9DC4;
 }
 .breadcrumb > li + li:before {
   content: ">\00a0";
