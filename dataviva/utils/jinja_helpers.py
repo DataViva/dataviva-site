@@ -63,7 +63,7 @@ def jinja_strip_html(s):
 def jinja_split(s, char):
     return s.split(char)
 
-def max_digits(number, digits):
+def max_digits(number, digits, monetary=None):
 
     if type(number) == float :
         number=Decimal(number)
