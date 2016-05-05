@@ -3,6 +3,7 @@
     <h2>{% trans %}International Trade{% endtrans %} ({{ header.year }})</h2>
 
     <div class="row">
+    {% if location.id | length != 9 %}
         {% if body.highest_export_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
@@ -32,6 +33,7 @@
             </div>
         </div>
         {% endif %}
+    {% endif %}
 
         {% if body.product_with_highest_export_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
