@@ -12,7 +12,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.occ_with_more_number_jobs_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3) }}</strong><span>{{ body.occ_with_more_number_jobs_value | magnitude }} empregos</span>
+                    <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3) }}</strong><span>{{ body.occ_with_more_number_jobs_value | magnitude }} {% trans %}Jobs{% endtrans %}</span>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.municipality_with_more_num_jobs_name }} - {{body.municipality_with_more_num_jobs_state.upper()}}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_num_jobs_value | magnitude }} empregos</span>
+                    <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong><span>{{ body.municipality_with_more_num_jobs_value | magnitude }} {% trans %}Jobs{% endtrans %}</span>
                 </div>
             </div>
         </div>

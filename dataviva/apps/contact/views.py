@@ -6,6 +6,7 @@ from forms import ContactForm
 from models import Form
 from dataviva import db
 from datetime import datetime
+from flask.ext.babel import gettext
 
 
 mod = Blueprint('contact', __name__,
@@ -49,7 +50,7 @@ def create():
         db.session.commit()
         send_mail("Mensagem recebida via página de Contato",
                   ["contato@dataviva.info"], message_tpl)
-        message = u'Sua mensagem foi enviada com sucesso. Em breve retornaremos.'
+        message = gettext("Your message has been sent successfully. We will soon get back to you.")
         flash(message, 'success')
 
         return redirect(request.referrer)
