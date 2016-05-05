@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry, IndustryOccupation, IndustryMunicipality, IndustryByLocation
 from dataviva.api.attrs.models import Cnae, Bra
@@ -110,12 +110,16 @@ def index(cnae_id):
 
     for index, rais in enumerate(list_rais):
         if rais.cnae_id == cnae_id:
-            header['ranking'] = index+1
+            header['ranking'] = index + 1
             break
 
     industry_service_num_establishments = Industry(cnae_id=industry.id)
     header['num_establishments_brazil'] = industry_service_num_establishments.num_establishments()
-    header['year'] = industry_service_num_establishments.get_year()
+    header['year'] = industry_service.get_year()
 
+    rais_max_year = db.session.query(func.max(Yi.year)).first()[0]
 
-    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location)
+    if header['num_jobs'] is None or rais_max_year != header['year']:
+        abort(404)
+    else:
+        return render_template('industry/index.html', header=header, body=body, industry=industry, location=location)
