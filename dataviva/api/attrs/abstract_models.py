@@ -52,3 +52,8 @@ class ExpandedAttr(BasicAttr):
     desc_pt = db.Column(db.Text())
     keywords_en = db.Column(db.String(100))
     keywords_pt = db.Column(db.String(100))
+
+
+class ImageAttr():
+    img_link = db.Column(db.String(500))
+    img_author = db.Column(db.String(200))

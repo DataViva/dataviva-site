@@ -9,7 +9,7 @@ from decimal import *
 
 from flask import g
 from dataviva.api.stats.util import parse_year
-from dataviva.api.attrs.abstract_models import BasicAttr, ExpandedAttr
+from dataviva.api.attrs.abstract_models import BasicAttr, ExpandedAttr, ImageAttr
 
 
 class Search(db.Model):
@@ -34,7 +34,7 @@ class Search(db.Model):
         return "<SearchAttr {} {}>".format(self.id, self.kind)
 
 
-class Cnae(db.Model, AutoSerialize, ExpandedAttr):
+class Cnae(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_cnae'
     id = db.Column(db.String(8), primary_key=True)
@@ -54,7 +54,7 @@ class Cnae(db.Model, AutoSerialize, ExpandedAttr):
         return '<Cnae %r>' % (self.name_en)
 
 
-class Cbo(db.Model, AutoSerialize, ExpandedAttr):
+class Cbo(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_cbo'
     id = db.Column(db.String(6), primary_key=True)
@@ -74,7 +74,7 @@ class Cbo(db.Model, AutoSerialize, ExpandedAttr):
         return '<Cbo %r>' % (self.name_en)
 
 
-class Hs(db.Model, AutoSerialize, ExpandedAttr):
+class Hs(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_hs'
     id = db.Column(db.String(8), primary_key=True)
@@ -94,7 +94,7 @@ class Hs(db.Model, AutoSerialize, ExpandedAttr):
         return '<Hs %r>' % (self.name_en)
 
 
-class Course_hedu(db.Model, AutoSerialize, ExpandedAttr):
+class Course_hedu(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_course_hedu'
     id = db.Column(db.String(8), primary_key=True)
@@ -114,7 +114,7 @@ class Course_hedu(db.Model, AutoSerialize, ExpandedAttr):
         return '<Course_hedu %r>' % (self.name_en)
 
 
-class Course_sc(db.Model, AutoSerialize, ExpandedAttr):
+class Course_sc(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_course_sc'
     id = db.Column(db.String(8), primary_key=True)
@@ -134,7 +134,7 @@ class Course_sc(db.Model, AutoSerialize, ExpandedAttr):
         return '<Course_sc %r>' % (self.name_en)
 
 
-class School(db.Model, AutoSerialize, ExpandedAttr):
+class School(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_school'
     id = db.Column(db.String(8), primary_key=True)
@@ -158,7 +158,7 @@ class School(db.Model, AutoSerialize, ExpandedAttr):
         return '<School %r>' % (self.name_en)
 
 
-class University(db.Model, AutoSerialize, ExpandedAttr):
+class University(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_university'
     id = db.Column(db.String(8), primary_key=True)
@@ -192,7 +192,7 @@ class University(db.Model, AutoSerialize, ExpandedAttr):
 ############################################################
 
 
-class Wld(db.Model, AutoSerialize, BasicAttr):
+class Wld(db.Model, AutoSerialize, BasicAttr, ImageAttr):
 
     __tablename__ = 'attrs_wld'
     id = db.Column(db.String(5), primary_key=True)
@@ -227,7 +227,7 @@ bra_pr = db.Table('attrs_bra_pr',
 )
 
 
-class Bra(db.Model, AutoSerialize, BasicAttr):
+class Bra(db.Model, AutoSerialize, BasicAttr, ImageAttr):
 
     __tablename__ = 'attrs_bra'
     id = db.Column(db.String(10), primary_key=True)
