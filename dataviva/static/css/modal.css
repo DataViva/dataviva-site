@@ -222,14 +222,18 @@
 .modal .question-header {
   text-align: center;
   margin-bottom: 0;
-  display: none;
 }
 .modal .question-header h4{
   font-size: 16px;
-  line-height: 1.45em
+  line-height: 1.45em;
+  margin: 0 0 20px 0;
 }
 .modal .question-header .current-question {
-  margin: 20px 0 0;
+  display: none;
+}
+.modal .question-header .chosen-options .question .question-option {
+  font-weight: bold;
+  font-size: 17px;
 }
 
 
