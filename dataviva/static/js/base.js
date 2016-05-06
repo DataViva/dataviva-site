@@ -224,46 +224,64 @@ var select_attr_search = function(id) {
   $('#modal-selector').modal('show');
 }
 
+var drawProfileQuestionHeader = function() {
+    var formattedChosenQuestion = chosenQuestion;
+    $('#modal-search .chosen-options input').each(function(index, selector){
+        if (selector.value != "") {
+            var re = new RegExp(dataviva.dictionary[selector.id]+'\\s\\w', 'g'),
+                questionOption = '<span class="question-option">'+dataviva[selector.id][selector.value].name+'</span>';
+            formattedChosenQuestion = formattedChosenQuestion.replace(re, dataviva.dictionary[selector.id].toLowerCase()+' '+questionOption)
+        }
+    });
+
+    var actualStep = $('#modal-search #actual-step').val();
+
+    if ($.inArray(actualStep, ['entrepreneurs', 'development_agents', 'students']) > -1){
+        $('#modal-search .current-question').html(dataviva.dictionary['select_search_question']);
+    } else {
+        $('#modal-search .current-question').html(dataviva.dictionary['select_search_'+actualStep]);
+    }
+
+    $('#modal-search .chosen-options #question').html(formattedChosenQuestion);
+}
+
 var profileSearchSelectorCallback = Selector()
     .callback(function(d){
         $('#modal-search-content .page-loader').remove();
         $('#modal-search .chosen-options #' + profileSearchSelectorCallback.type()).val(d.id);
-
-
-        var formattedSearchQuestion = searchQuestion;
-        $('#modal-search .chosen-options').find('input:not(#answer)').each(function(index, selector){
-            if (selector.value != "") {
-                var re = new RegExp(dataviva.dictionary[selector.id]+'\\s\\w', 'g'),
-                    questionOption = '<span class="question-option">'+dataviva[selector.id][selector.value].name+'</span>';
-                formattedSearchQuestion = formattedSearchQuestion.replace(re, dataviva.dictionary[selector.id].toLowerCase()+' '+questionOption)
-            }
-        });
-        $('#modal-search .chosen-options .question')
-            .html(formattedSearchQuestion);
+        drawProfileQuestionHeader();
     });
 
 var profile_search_selector = function(id) {
     $('#modal-search .modal-body').empty();
-    d3.select("#modal-search-content").call(profileSearchSelectorCallback.type(id));
+
+    drawProfileQuestionHeader();
+    if ($.inArray(id, ['bra', 'cbo', 'cnae', 'hs', 'wld', 'university', 'course_hedu', 'course_sc' ]) > -1){
+        d3.select("#modal-search-content").call(profileSearchSelectorCallback.type(id));
+    } else {
+        search(id);
+    }
+
     $('#modal-search').modal('show');
 }
-
 
 var search = function(profile) {
 
     // Reset modal and set loading
-    $('#modal-search .select-question').show();
-    $('#modal-search .current-question').hide();
+    $('#modal-search .current-question').html(dataviva.dictionary['select_search_question']);
     $('#modal-search .modal-body').empty();
-    $('#modal-search .chosen-options .question').empty();
+    $('#modal-search .chosen-options #question').empty();
     $('#modal-search #profile').val(profile);
+    $('#modal-search #actual-step').val(profile);
+    $('#modal-search #answer').val('');
 
     $('#modal-search #search-advance').prop("disabled", true);
+    $('#modal-search #search-back').hide();
+
     var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
     search_load.text(dataviva.dictionary['loading']);
 
     $('#modal-search').modal('show');
-
 
     dataviva.requireAttrs(['bra', 'cbo', 'cnae', 'hs'], function() {
         $.ajax({
@@ -297,23 +315,20 @@ var search = function(profile) {
                     $(this).siblings('.selected').toggleClass('selected');
                     $(this).toggleClass('selected');
 
-                    var chosenOptions = $('#modal-search .chosen-options');
+                    window.chosenQuestion = $(this).html();
 
-                    chosenOptions.find('.question').html($(this).html());
+                    $('#modal-search .chosen-options #question').html($(this).html());
+                    $('#modal-search .chosen-options input').remove()
+                    $('#modal-search #answer').val($(this).data('answer'));
 
-                    window.searchQuestion = $(this).html();
-
-                    chosenOptions.find('#answer').val($(this).data('answer'));
-                    chosenOptions.find('input:not(#answer)').remove()
-
-                    var selectors = $(this).data('selectors').split(',')
+                    var selectors = $(this).data('selectors').split(',');
 
                     for (var i = 0; i < selectors.length; i++) {
                         var selector = selectors[i];
                             selectorInput = $('<input>')
                                 .attr('type', 'hidden')
                                 .attr('id', selector);
-                            chosenOptions.append(selectorInput);
+                            $('#modal-search .chosen-options').append(selectorInput);
                     }
                 });
 
@@ -371,7 +386,6 @@ $(document).ready(function () {
         search($(this).data('search'));
     });
 
-
     $("#modal-selector").on('hidden.bs.modal', function () {
       $(this).find('.modal-body').empty();
     })
@@ -380,41 +394,33 @@ $(document).ready(function () {
     })
 
     $('#modal-search #search-advance').click(function() {
-        var chosenOptions = $('#modal-search .chosen-options'),
-            answer = chosenOptions.find('#answer').val(),
-            selectors = chosenOptions.find('input:not(#answer)')
-                        .map(function(){return this.id;}).get(),
-            selectedOptions = chosenOptions.find('input:not(#answer)')
-                        .map(function(){return $(this).val();}).get();
+        var answer = $('#modal-search #answer').val();
+        $('#modal-search #search-back').show();
 
-            selectors.every(function(selector, step) {
-                if (selectedOptions[step] == "") {
-                    $('#modal-search .current-question').html(dataviva.dictionary['select_search_'+selector])
-                    $('#modal-search .chosen-options input:not(#answer)').data('actual', false);
-                    $('#modal-search .chosen-options #'+selector).data('actual', true);
-                    profile_search_selector(selectors[step]);
-                    return false;
-                } else if(step == selectors.length -1) {
-                    window.location = '/' + lang + answer.format.apply(
-                        answer, $('#modal-search .chosen-options input:not(#answer)')
-                        .map(function(){return this.value;}).get());
-                }
-                return true;
-            });
-        $('#modal-search .select-question').hide();
-        $('#modal-search .current-question').show();
+        $('#modal-search .chosen-options input').each(function(index, el) {
+            if (this.value == "") {
+                $('#modal-search #actual-step').val(this.id);
+                profile_search_selector(this.id);
+                return false;
+            }
+        });
+
+        if ($.inArray("", $('#modal-search .chosen-options input').map(function(){return this.value;}).get()) == -1) {
+            window.location = '/' + lang + answer.format.apply(
+                answer,
+                $('#modal-search .chosen-options input').map(function(){return this.value;}).get()
+            );
+        }
     });
 
     $('#modal-search #search-back').click(function() {
-        var actualInput = $('#modal-search .chosen-options input').filter(function(i, el){
-                return $(this).data('actual');
-            });
-
-        actualInput.data('actual', false);
-        actualInput.prev().data('actual', true);
+        var actualStep = $('#modal-search #actual-step');
+        var actualInput = $('#modal-search .chosen-options #'+actualStep.val());
 
         var previousSelector = actualInput.prev().get(0).id;
         if ($.inArray(previousSelector, ['bra', 'cbo', 'cnae', 'hs', 'wld', 'university', 'course_hedu', 'course_sc' ]) > -1){
+            actualInput.val('');
+            actualStep.val(previousSelector);
             profile_search_selector(previousSelector);
         } else {
             search($('#modal-search #profile').val());
