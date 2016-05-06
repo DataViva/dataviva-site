@@ -56,6 +56,7 @@ def index(course_hedu_id):
             .order_by(Yc_hedu.enrolled.desc())
 
     rank = rank_query.all()
+    hedu_max_year = db.session.query(func.max(Yc_hedu.year)).first()[0]
 
     if not bra_id:
         header = {
@@ -99,6 +100,7 @@ def index(course_hedu_id):
         'highest_graduate_number_by_municipality': municipalities_service.highest_graduates_number()
     }
 
+
     for index, maj in enumerate(rank):
         if rank[index].course_hedu_id == course_hedu_id:
             header['rank'] = index + 1
@@ -108,7 +110,10 @@ def index(course_hedu_id):
 
     major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
 
-    return render_template('major/index.html', header=header, body=body, location=location, major=major)
+    if header['enrolled'] is None or hedu_max_year != header['year']:
+        abort(404)
+    else:
+        return render_template('major/index.html', header=header, body=body, location=location, major=major)
 
 
 @mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])

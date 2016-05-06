@@ -1,7 +1,7 @@
 from dataviva.api.hedu.models import Ybu, Ybc_hedu, Yu, Yuc, Yc_hedu, Ybuc
 from dataviva.api.attrs.models import University as uni, Course_hedu, Bra
 from dataviva import db
-from sqlalchemy.sql.expression import func, desc
+from sqlalchemy.sql.expression import func, desc, not_
 
 
 class University:
@@ -60,7 +60,7 @@ class University:
         return self.__hedu__().university.name()
 
     def university_type(self):
-        return self.__hedu__().university.school_type_pt
+        return self.__hedu__().university.school_type()
 
     def enrolled(self):
         return self.__hedu__().enrolled
@@ -286,12 +286,14 @@ class MajorMunicipalities(Major):
             self.hedu_query = Ybc_hedu.query.filter(
                 Ybc_hedu.course_hedu_id == self.course_hedu_id,
                 Ybc_hedu.year == self.max_year_query,
+                not_(Ybc_hedu.bra_id.like('0xx%')),
                 func.length(Ybc_hedu.bra_id) == 9)
         else:
             self.hedu_query = Ybc_hedu.query.filter(
                 Ybc_hedu.course_hedu_id == self.course_hedu_id,
                 Ybc_hedu.year == self.max_year_query,
                 Ybc_hedu.bra_id.like(self.bra_id+'%'),
+                not_(Ybc_hedu.bra_id.like('0xx%')),
                 func.length(Ybc_hedu.bra_id) == 9)
 
     def municipality_with_more_enrolled(self):

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import TradePartner, \
     TradePartnerMunicipalities, TradePartnerProducts
@@ -7,6 +7,7 @@ from dataviva.api.secex.models import Ymw, Ymbw
 from dataviva.api.attrs.models import Wld, Bra
 from dataviva import db
 from sqlalchemy.sql.expression import func
+from dataviva.translations.dictionary import dictionary
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
@@ -89,9 +90,9 @@ def index(wld_id):
             'total_imported': trade_partner_service.total_imported(),
             'unity_weight_import_price': trade_partner_service.unity_weight_import_price(),
             'wld_id': wld_id,
-            'bra_id': bra_id,
-
+            'bra_id': bra_id
         }
+
     else:
         header = {
             'continent_id': wld_id[0:2],
@@ -105,8 +106,7 @@ def index(wld_id):
             'wld_id': wld_id,
             'bra_id': bra_id,
             'location_name': trade_partner_service.location_name(),
-            'location_type': trade_partner_service.location_type()
-
+            'location_type': dictionary()['bra_'+str(len(bra_id))]
         }
 
     body = {
@@ -124,17 +124,24 @@ def index(wld_id):
         'product_with_highest_balance': products_service.product_with_highest_balance(),
         'highest_balance': products_service.highest_balance(),
         'product_with_lowest_balance': products_service.product_with_lowest_balance(),
-        'lowest_balance': products_service.lowest_balance(),
+        'lowest_balance': products_service.lowest_balance()
     }
 
-    for index, trp in enumerate(export_rank):
+    for index, trade_partner_ranking in enumerate(export_rank):
         if export_rank[index].wld_id == wld_id:
             header['export_rank'] = index + 1
             break
 
-    for index, trp in enumerate(import_rank):
+    for index, trade_partner_ranking in enumerate(import_rank):
         if import_rank[index].wld_id == wld_id:
             header['import_rank'] = index + 1
             break
+    secex_max_year = db.session.query(func.max(Ymw.year)).filter(
+        Ymw.month == 12).first()[0]
 
-    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
+    if body['highest_export_value'] is None and body['highest_import_value'] is None:
+        abort(404)
+    if secex_max_year != header['year']:
+        abort(404)
+    else:
+        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)

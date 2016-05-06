@@ -1,9 +1,11 @@
+# -​*- coding: utf-8 -*​-
 from re import sub
 from jinja2 import Markup
 from dataviva.translations.dictionary import dictionary
 from dataviva.utils.num_format import num_format
 from dataviva.utils.title_case import title_case
 from decimal import *
+from flask import g
 import locale
 from flask.ext.babel import gettext
 
@@ -63,7 +65,7 @@ def jinja_strip_html(s):
 def jinja_split(s, char):
     return s.split(char)
 
-def max_digits(number, digits):
+def max_digits(number, digits, monetary=None):
 
     if type(number) == float :
         number=Decimal(number)
@@ -89,9 +91,27 @@ def max_digits(number, digits):
     else:
         return number_str[0:digits+1]
 
+def ordinal(number, gender='m'):
+    if g.locale == 'en':
+        if number == 1:
+            return "st"
+        elif number == 2:
+            return "nd"
+        elif number == 3:
+            return "rd"
+        elif number in range(4, 10) or number == 0:
+            return "th"
+        else:
+            return ordinal(int(str(number)[-1]))
+    else:
+        if gender == 'm':
+            return "º"
+        else:
+            return "ª"
+
 def jinja_magnitude(number):
     if not number: 
-        return 0
+        return ''
     integer = str(int(number))
     orders_of_magnitude = ['', gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
     return orders_of_magnitude[len(integer[::3]) - 1]

@@ -67,20 +67,6 @@ class TradePartner:
     def location_name(self):
         return Bra.query.filter(Bra.id == self.bra_id).first().name()
 
-    def location_type(self):
-        length = len(self.bra_id)
-
-        if length == 1:
-            return 'regiao'
-        elif length == 3:
-            return 'estado'
-        elif length == 5:
-            return 'mesorregiao'
-        elif length == 7:
-            return 'microrregiao'
-        else:
-            return 'municipio'
-
     def year(self):
         return self.__secex__().year
 

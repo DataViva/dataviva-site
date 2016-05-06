@@ -2,7 +2,7 @@
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
 
     <p>{% trans %}The institution {% endtrans %} {{ university.name() }} 
-    {% trans %} is a{% endtrans %} {{ header.type }}, 
+    {% trans %} is a{% endtrans %} {{ header.type }}
     {% trans %}educational establishment. Its main course is{% endtrans %} {{ body.major_with_more_enrollments }}, 
     {% trans %}with{% endtrans %} {{ body.highest_enrollment_number_by_major }} 
     {% trans %}students. The University has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
@@ -17,19 +17,19 @@
                 <dd>
                     <small>{{ body.major_with_more_enrollments }}</small>
                     <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3) }}</strong>
-                    <span>{{ body.highest_enrollment_number_by_major | magnitude }} {% trans %}students{% endtrans %}</span>
+                    <span>{{ body.highest_enrollment_number_by_major | magnitude }} {% trans %}Students{% endtrans %}</span>
                 </dd>
                 <dt>{% trans %}Main Course by Number of Entering Students{% endtrans %}</dt>
                 <dd>
                     <small>{{ body.major_with_more_entrants }}</small>
                     <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3) }}</strong>
-                    <span>{{ body.highest_entrant_number_by_major | magnitude}} {% trans %}students{% endtrans %}</span>
+                    <span>{{ body.highest_entrant_number_by_major | magnitude}} {% trans %}Students{% endtrans %}</span>
                 </dd>
                 <dt>{% trans %}Main Course by Number of Graduates{% endtrans %}</dt>
                 <dd>                
                     <small>{{ body.major_with_more_graduates }}</small>
                     <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3) }}</strong>
-                    <span>{{ body.highest_graduate_number_by_major | magnitude }} {% trans %}students{% endtrans %}</span>
+                    <span>{{ body.highest_graduate_number_by_major | magnitude }} {% trans %}Students{% endtrans %}</span>
 
                 </dd>
             </dl>
@@ -40,8 +40,7 @@
                     class="pull-right btn btn-primary btn-xs m-r-lg" 
                     graph
                     data-id="{{ university.id }}">
-                {% trans %}More details{% endtrans %}</a>
-
+                    {% trans %}More details{% endtrans %}</a>
             </div>
         </div>
     </div>

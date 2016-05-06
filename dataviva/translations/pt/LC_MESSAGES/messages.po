@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 11:37-0300\n"
+"POT-Creation-Date: 2016-05-05 19:40-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -686,7 +686,7 @@ msgstr "Geral"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:129
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:58
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:57
 #: dataviva/apps/major/templates/major/index.html:110
 #: dataviva/apps/major/templates/major/tab-enrollments.html:3
 #: dataviva/apps/major/templates/major/tab-general.html:62
@@ -697,7 +697,7 @@ msgid "Enrollments"
 msgstr "Matrículas"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:10
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:66
 #: dataviva/apps/major/templates/major/tab-enrollments.html:21
 #: dataviva/apps/major/templates/major/tab-enrollments.html:48
 #: dataviva/apps/major/templates/major/tab-enrollments.html:74
@@ -706,26 +706,26 @@ msgstr "Matrículas"
 #: dataviva/apps/major/templates/major/tab-general.html:94
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:11
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:25
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:9
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:24
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:10
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:25
 #: dataviva/translations/dictionary.py:523
 msgid "Main Municipality"
 msgstr "Principal Município"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:11
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:24
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:60
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:67
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:59
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:66
 #: dataviva/apps/major/templates/major/tab-enrollments.html:9
 #: dataviva/apps/major/templates/major/tab-enrollments.html:22
 #: dataviva/apps/major/templates/major/tab-general.html:64
 #: dataviva/apps/major/templates/major/tab-general.html:70
-#: dataviva/apps/university/templates/university/tab-enrollments.html:10
+#: dataviva/apps/university/templates/university/tab-enrollments.html:9
 msgid "by Number of Enrolled Students"
 msgstr "por Número de Alunos Matriculados"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:23
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:60
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:59
 msgid "Main School"
 msgstr "Principal Escola"
 
@@ -775,7 +775,7 @@ msgstr "alunos. No total, o país possui"
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:25
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:33
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:41
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:50
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:49
 msgid "enrolled students in this course/field, with "
 msgstr "alunos matriculados nesse curso, com turmas médias de "
 
@@ -784,7 +784,7 @@ msgstr "alunos matriculados nesse curso, com turmas médias de "
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:26
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:34
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:42
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:51
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:50
 msgid "students per class in average"
 msgstr "alunos"
 
@@ -849,20 +849,19 @@ msgstr "alunos. No total, a microrregiāo possui "
 msgid " is the number"
 msgstr " ocupa o"
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:47
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:46
 msgid "city in number of enrollments "
-msgstr "cidade em numero de matrículas"
+msgstr "lugar em número de matrículas "
+
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:47
+msgid "in the state "
+msgstr "no estado "
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:48
-#, fuzzy
-msgid "in the state "
-msgstr "está no estado "
-
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:49
 msgid "The city has "
 msgstr "No total, o município possui"
 
-#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:83
+#: dataviva/apps/basic_course/templates/basic_course/tab-general.html:82
 #: dataviva/apps/industry/templates/industry/tab-general.html:73
 #: dataviva/apps/location/templates/location/tab-general.html:133
 #: dataviva/apps/location/templates/location/tab-general.html:172
@@ -870,8 +869,8 @@ msgstr "No total, o município possui"
 #: dataviva/apps/location/templates/location/tab-general.html:270
 #: dataviva/apps/major/templates/major/tab-general.html:109
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:92
-#: dataviva/apps/product/templates/product/tab-general.html:311
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:97
+#: dataviva/apps/product/templates/product/tab-general.html:197
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:98
 #: dataviva/apps/university/templates/university/tab-general.html:43
 #: dataviva/translations/dictionary.py:496
 msgid "More details"
@@ -1124,6 +1123,10 @@ msgid ""
 msgstr ""
 "Esta área foi especialmente criada para a publicação de Chamadas "
 "relacionados ao DataViva."
+
+#: dataviva/apps/contact/views.py:53 dataviva/translations/dictionary.py:643
+msgid "Your message has been sent successfully. We will soon get back to you."
+msgstr "Sua mensagem foi enviada com sucesso. Em breve retornaremos."
 
 #: dataviva/apps/contact/templates/contact/index.html:17
 #: dataviva/apps/contact/templates/contact/index.html:37
@@ -1476,6 +1479,17 @@ msgstr "Neste município, há um total de "
 msgid "Occupation with highest number of jobs"
 msgstr "Ocupação com maior número de empregos"
 
+#: dataviva/apps/industry/templates/industry/tab-general.html:45
+#: dataviva/apps/industry/templates/industry/tab-general.html:52
+#: dataviva/apps/industry/templates/industry/tab-wages.html:15
+#: dataviva/apps/industry/templates/industry/tab-wages.html:30
+#: dataviva/apps/location/templates/location/tab-general.html:145
+#: dataviva/apps/location/templates/location/tab-wages.html:15
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:67
+#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
+msgid "Jobs"
+msgstr "Empregos"
+
 #: dataviva/apps/industry/templates/industry/tab-general.html:48
 msgid "Municipality with highest number of jobs"
 msgstr "Município com maior número de empregos"
@@ -1563,8 +1577,8 @@ msgstr "Espaço de Atividades"
 #: dataviva/apps/product/templates/product/index.html:58
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:5
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:58
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:70
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:83
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:72
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:85
 #: dataviva/translations/dictionary.py:282
 msgid "Trade Balance"
 msgstr "Balança Comercial"
@@ -1660,11 +1674,11 @@ msgstr "ECI"
 #: dataviva/apps/location/templates/location/tab-general.html:97
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:3
 #: dataviva/apps/product/templates/product/index.html:185
-#: dataviva/apps/product/templates/product/tab-general.html:273
+#: dataviva/apps/product/templates/product/tab-general.html:159
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:3
 #: dataviva/apps/rankings/templates/rankings/_base.html:31
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:132
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:36
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:35
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:3
 #: dataviva/translations/dictionary.py:494
 msgid "International Trade"
@@ -1820,6 +1834,8 @@ msgstr "divisões regionais brasileiras, composta pelos estados "
 
 #: dataviva/apps/location/templates/location/tab-general.html:64
 #: dataviva/apps/location/templates/location/tab-general.html:83
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:37
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:39
 #: dataviva/translations/dictionary.py:406
 #: dataviva/translations/dictionary.py:411 dataviva/utils/title_format.py:12
 msgid "and"
@@ -1870,12 +1886,12 @@ msgid "cities"
 msgstr "municípios"
 
 #: dataviva/apps/location/templates/location/tab-general.html:100
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:58
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:59
 msgid "Main Product by Total Value Exported"
 msgstr "Principal Produto por Valor Total Exportado"
 
 #: dataviva/apps/location/templates/location/tab-general.html:108
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:67
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:68
 msgid "Main Product by Total Value Imported"
 msgstr "Principal Produto por Valor Total Importado"
 
@@ -1895,13 +1911,6 @@ msgstr "Total de Importações"
 #: dataviva/apps/location/templates/location/tab-wages.html:9
 msgid "Main Economic Activity"
 msgstr "Principal atividade econômica"
-
-#: dataviva/apps/location/templates/location/tab-general.html:145
-#: dataviva/apps/location/templates/location/tab-wages.html:15
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:67
-#: dataviva/apps/occupation/templates/occupation/tab-general.html:74
-msgid "Jobs"
-msgstr "Empregos"
 
 #: dataviva/apps/location/templates/location/tab-general.html:147
 #: dataviva/apps/location/templates/location/tab-wages.html:22
@@ -1981,8 +1990,8 @@ msgstr "com Maior Ganho de Oportunidade"
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:9
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:24
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:39
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:55
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:41
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:57
 msgid "Main Product"
 msgstr "Principal Produto"
 
@@ -2069,7 +2078,7 @@ msgstr "Principal Universidade"
 #: dataviva/apps/major/templates/major/tab-enrollments.html:49
 #: dataviva/apps/major/templates/major/tab-general.html:76
 #: dataviva/apps/major/templates/major/tab-general.html:82
-#: dataviva/apps/university/templates/university/tab-enrollments.html:23
+#: dataviva/apps/university/templates/university/tab-enrollments.html:22
 msgid "by Number of Entering Students"
 msgstr "por Número de Alunos Ingressantes"
 
@@ -2077,7 +2086,7 @@ msgstr "por Número de Alunos Ingressantes"
 #: dataviva/apps/major/templates/major/tab-enrollments.html:75
 #: dataviva/apps/major/templates/major/tab-general.html:88
 #: dataviva/apps/major/templates/major/tab-general.html:94
-#: dataviva/apps/university/templates/university/tab-enrollments.html:37
+#: dataviva/apps/university/templates/university/tab-enrollments.html:35
 msgid "by Number of Graduates"
 msgstr "por Número de Alunos Concluintes"
 
@@ -2091,8 +2100,9 @@ msgid "The course of"
 msgstr "O curso/campo de "
 
 #: dataviva/apps/major/templates/major/tab-general.html:5
-msgid "is "
-msgstr "é"
+#, fuzzy
+msgid "is the "
+msgstr "é o"
 
 #: dataviva/apps/major/templates/major/tab-general.html:6
 msgid ""
@@ -2120,8 +2130,9 @@ msgstr "alunos matriculados em todo o país"
 #: dataviva/apps/major/templates/major/tab-general.html:32
 #: dataviva/apps/major/templates/major/tab-general.html:41
 #: dataviva/apps/major/templates/major/tab-general.html:50
-msgid " is "
-msgstr " é o "
+#, fuzzy
+msgid " is the "
+msgstr "é o "
 
 #: dataviva/apps/major/templates/major/tab-general.html:15
 #: dataviva/apps/major/templates/major/tab-general.html:24
@@ -2508,214 +2519,210 @@ msgid "International Opportunity Gain"
 msgstr "Ganho de Oportunidade Internacional"
 
 #: dataviva/apps/product/templates/product/tab-general.html:5
-#: dataviva/apps/product/templates/product/tab-general.html:58
-#: dataviva/apps/product/templates/product/tab-general.html:114
-#: dataviva/apps/product/templates/product/tab-general.html:173
-#: dataviva/apps/product/templates/product/tab-general.html:226
+#: dataviva/apps/product/templates/product/tab-general.html:41
+#: dataviva/apps/product/templates/product/tab-general.html:80
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:136
 #: dataviva/translations/dictionary.py:505
 msgid "The products of the position of "
 msgstr "Os produtos da posiçāo de "
 
 #: dataviva/apps/product/templates/product/tab-general.html:6
-#: dataviva/apps/product/templates/product/tab-general.html:32
-#: dataviva/apps/product/templates/product/tab-general.html:59
-#: dataviva/apps/product/templates/product/tab-general.html:86
-#: dataviva/apps/product/templates/product/tab-general.html:115
-#: dataviva/apps/product/templates/product/tab-general.html:142
-#: dataviva/apps/product/templates/product/tab-general.html:174
-#: dataviva/apps/product/templates/product/tab-general.html:200
-#: dataviva/apps/product/templates/product/tab-general.html:227
-#: dataviva/apps/product/templates/product/tab-general.html:249
+#: dataviva/apps/product/templates/product/tab-general.html:25
+#: dataviva/apps/product/templates/product/tab-general.html:42
+#: dataviva/apps/product/templates/product/tab-general.html:61
+#: dataviva/apps/product/templates/product/tab-general.html:81
+#: dataviva/apps/product/templates/product/tab-general.html:98
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:125
+#: dataviva/apps/product/templates/product/tab-general.html:137
+#: dataviva/apps/product/templates/product/tab-general.html:146
 #: dataviva/translations/dictionary.py:506
 msgid "are number "
 msgstr "ocupam a "
 
 #: dataviva/apps/product/templates/product/tab-general.html:7
-#: dataviva/apps/product/templates/product/tab-general.html:33
-#: dataviva/apps/product/templates/product/tab-general.html:228
-#: dataviva/apps/product/templates/product/tab-general.html:250
+#: dataviva/apps/product/templates/product/tab-general.html:26
+#: dataviva/apps/product/templates/product/tab-general.html:138
+#: dataviva/apps/product/templates/product/tab-general.html:147
 msgid " in imports and number"
 msgstr " posição em importações e a "
 
 #: dataviva/apps/product/templates/product/tab-general.html:8
-#: dataviva/apps/product/templates/product/tab-general.html:34
+#: dataviva/apps/product/templates/product/tab-general.html:26
 #: dataviva/translations/dictionary.py:508
 msgid " in exports in Brazil. In "
 msgstr " posição em exportações no Brasil. Em "
 
 #: dataviva/apps/product/templates/product/tab-general.html:9
-#: dataviva/apps/product/templates/product/tab-general.html:35
-#: dataviva/apps/product/templates/product/tab-general.html:63
-#: dataviva/apps/product/templates/product/tab-general.html:90
-#: dataviva/apps/product/templates/product/tab-general.html:119
-#: dataviva/apps/product/templates/product/tab-general.html:146
-#: dataviva/apps/product/templates/product/tab-general.html:178
-#: dataviva/apps/product/templates/product/tab-general.html:204
-#: dataviva/apps/product/templates/product/tab-general.html:230
-#: dataviva/apps/product/templates/product/tab-general.html:237
-#: dataviva/apps/product/templates/product/tab-general.html:241
-#: dataviva/apps/product/templates/product/tab-general.html:252
-#: dataviva/apps/product/templates/product/tab-general.html:259
-#: dataviva/apps/product/templates/product/tab-general.html:263
+#: dataviva/apps/product/templates/product/tab-general.html:26
+#: dataviva/apps/product/templates/product/tab-general.html:46
+#: dataviva/apps/product/templates/product/tab-general.html:64
+#: dataviva/apps/product/templates/product/tab-general.html:85
+#: dataviva/apps/product/templates/product/tab-general.html:102
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:129
+#: dataviva/apps/product/templates/product/tab-general.html:140
+#: dataviva/apps/product/templates/product/tab-general.html:148
 msgid " its commercial value was of "
 msgstr " renderam "
 
-#: dataviva/apps/product/templates/product/tab-general.html:18
-#: dataviva/apps/product/templates/product/tab-general.html:43
-#: dataviva/apps/product/templates/product/tab-general.html:71
-#: dataviva/apps/product/templates/product/tab-general.html:98
-#: dataviva/apps/product/templates/product/tab-general.html:127
-#: dataviva/apps/product/templates/product/tab-general.html:154
-#: dataviva/apps/product/templates/product/tab-general.html:185
-#: dataviva/apps/product/templates/product/tab-general.html:211
-#: dataviva/apps/product/templates/product/tab-general.html:238
-#: dataviva/apps/product/templates/product/tab-general.html:260
+#: dataviva/apps/product/templates/product/tab-general.html:11
+#: dataviva/apps/product/templates/product/tab-general.html:26
+#: dataviva/apps/product/templates/product/tab-general.html:46
+#: dataviva/apps/product/templates/product/tab-general.html:64
+#: dataviva/apps/product/templates/product/tab-general.html:85
+#: dataviva/apps/product/templates/product/tab-general.html:103
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:130
+#: dataviva/apps/product/templates/product/tab-general.html:140
+#: dataviva/apps/product/templates/product/tab-general.html:148
 msgid ", representing a variation of"
 msgstr ", representando variação de"
 
-#: dataviva/apps/product/templates/product/tab-general.html:19
-#: dataviva/apps/product/templates/product/tab-general.html:44
+#: dataviva/apps/product/templates/product/tab-general.html:12
+#: dataviva/apps/product/templates/product/tab-general.html:27
 msgid "in five years. The municipality in Brazil which exports more"
 msgstr "em cinco anos. O município no Brasil que mais exporta"
 
-#: dataviva/apps/product/templates/product/tab-general.html:21
-#: dataviva/apps/product/templates/product/tab-general.html:46
+#: dataviva/apps/product/templates/product/tab-general.html:14
+#: dataviva/apps/product/templates/product/tab-general.html:29
 #, fuzzy
 msgid ". The municipality in Brazil which exports more"
 msgstr "em cinco anos. O município no Brasil que mais exporta"
 
-#: dataviva/apps/product/templates/product/tab-general.html:25
-#: dataviva/apps/product/templates/product/tab-general.html:50
-#: dataviva/apps/product/templates/product/tab-general.html:78
-#: dataviva/apps/product/templates/product/tab-general.html:104
-#: dataviva/apps/product/templates/product/tab-general.html:133
-#: dataviva/apps/product/templates/product/tab-general.html:161
-#: dataviva/apps/product/templates/product/tab-general.html:192
-#: dataviva/apps/product/templates/product/tab-general.html:217
+#: dataviva/apps/product/templates/product/tab-general.html:18
+#: dataviva/apps/product/templates/product/tab-general.html:33
+#: dataviva/apps/product/templates/product/tab-general.html:53
+#: dataviva/apps/product/templates/product/tab-general.html:70
+#: dataviva/apps/product/templates/product/tab-general.html:89
+#: dataviva/apps/product/templates/product/tab-general.html:109
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:131
 msgid "is"
 msgstr "é"
 
-#: dataviva/apps/product/templates/product/tab-general.html:27
-#: dataviva/apps/product/templates/product/tab-general.html:52
-#: dataviva/apps/product/templates/product/tab-general.html:81
-#: dataviva/apps/product/templates/product/tab-general.html:108
-#: dataviva/apps/product/templates/product/tab-general.html:137
-#: dataviva/apps/product/templates/product/tab-general.html:167
-#: dataviva/apps/product/templates/product/tab-general.html:195
-#: dataviva/apps/product/templates/product/tab-general.html:220
+#: dataviva/apps/product/templates/product/tab-general.html:20
+#: dataviva/apps/product/templates/product/tab-general.html:35
+#: dataviva/apps/product/templates/product/tab-general.html:56
+#: dataviva/apps/product/templates/product/tab-general.html:74
+#: dataviva/apps/product/templates/product/tab-general.html:93
+#: dataviva/apps/product/templates/product/tab-general.html:115
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:131
 #, fuzzy
 msgid "and the municipality that imports the most is "
 msgstr "e o município que mais importa é "
 
-#: dataviva/apps/product/templates/product/tab-general.html:60
-#: dataviva/apps/product/templates/product/tab-general.html:87
+#: dataviva/apps/product/templates/product/tab-general.html:43
+#: dataviva/apps/product/templates/product/tab-general.html:62
 msgid " in imports in the state of"
 msgstr "posição em importações no estado"
 
-#: dataviva/apps/product/templates/product/tab-general.html:61
-#: dataviva/apps/product/templates/product/tab-general.html:88
-#: dataviva/apps/product/templates/product/tab-general.html:117
-#: dataviva/apps/product/templates/product/tab-general.html:144
-#: dataviva/apps/product/templates/product/tab-general.html:176
-#: dataviva/apps/product/templates/product/tab-general.html:202
+#: dataviva/apps/product/templates/product/tab-general.html:44
+#: dataviva/apps/product/templates/product/tab-general.html:63
+#: dataviva/apps/product/templates/product/tab-general.html:83
+#: dataviva/apps/product/templates/product/tab-general.html:100
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:127
 #: dataviva/translations/dictionary.py:533
 msgid " and number"
 msgstr " e a "
 
-#: dataviva/apps/product/templates/product/tab-general.html:62
-#: dataviva/apps/product/templates/product/tab-general.html:89
-#: dataviva/apps/product/templates/product/tab-general.html:118
-#: dataviva/apps/product/templates/product/tab-general.html:145
-#: dataviva/apps/product/templates/product/tab-general.html:177
-#: dataviva/apps/product/templates/product/tab-general.html:203
+#: dataviva/apps/product/templates/product/tab-general.html:45
+#: dataviva/apps/product/templates/product/tab-general.html:64
+#: dataviva/apps/product/templates/product/tab-general.html:84
+#: dataviva/apps/product/templates/product/tab-general.html:101
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:128
 msgid " in exports. In "
 msgstr " posição em exportações. Em "
 
-#: dataviva/apps/product/templates/product/tab-general.html:72
-#: dataviva/apps/product/templates/product/tab-general.html:99
-#: dataviva/apps/product/templates/product/tab-general.html:128
-#: dataviva/apps/product/templates/product/tab-general.html:155
-#: dataviva/apps/product/templates/product/tab-general.html:186
-#: dataviva/apps/product/templates/product/tab-general.html:212
+#: dataviva/apps/product/templates/product/tab-general.html:47
+#: dataviva/apps/product/templates/product/tab-general.html:65
+#: dataviva/apps/product/templates/product/tab-general.html:85
+#: dataviva/apps/product/templates/product/tab-general.html:103
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:131
 #: dataviva/translations/dictionary.py:528
 msgid "in five years. The municipality in "
 msgstr "em cinco anos. O município em"
 
-#: dataviva/apps/product/templates/product/tab-general.html:74
-#: dataviva/apps/product/templates/product/tab-general.html:101
-#: dataviva/apps/product/templates/product/tab-general.html:130
-#: dataviva/apps/product/templates/product/tab-general.html:157
-#: dataviva/apps/product/templates/product/tab-general.html:188
-#: dataviva/apps/product/templates/product/tab-general.html:214
+#: dataviva/apps/product/templates/product/tab-general.html:49
+#: dataviva/apps/product/templates/product/tab-general.html:67
+#: dataviva/apps/product/templates/product/tab-general.html:86
+#: dataviva/apps/product/templates/product/tab-general.html:105
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:131
 #, fuzzy
 msgid ". The municipality in "
 msgstr ". O município em"
 
-#: dataviva/apps/product/templates/product/tab-general.html:77
-#: dataviva/apps/product/templates/product/tab-general.html:103
-#: dataviva/apps/product/templates/product/tab-general.html:132
-#: dataviva/apps/product/templates/product/tab-general.html:160
-#: dataviva/apps/product/templates/product/tab-general.html:191
-#: dataviva/apps/product/templates/product/tab-general.html:216
+#: dataviva/apps/product/templates/product/tab-general.html:52
+#: dataviva/apps/product/templates/product/tab-general.html:69
+#: dataviva/apps/product/templates/product/tab-general.html:88
+#: dataviva/apps/product/templates/product/tab-general.html:108
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:131
 msgid " which exports more"
 msgstr "que mais exporta"
 
-#: dataviva/apps/product/templates/product/tab-general.html:116
-#: dataviva/apps/product/templates/product/tab-general.html:143
+#: dataviva/apps/product/templates/product/tab-general.html:82
+#: dataviva/apps/product/templates/product/tab-general.html:99
 msgid " in imports in the mesoregion of"
 msgstr " posição em importações na mesorregiāo"
 
-#: dataviva/apps/product/templates/product/tab-general.html:175
-#: dataviva/apps/product/templates/product/tab-general.html:201
+#: dataviva/apps/product/templates/product/tab-general.html:121
+#: dataviva/apps/product/templates/product/tab-general.html:126
 #: dataviva/translations/dictionary.py:531
 msgid " in imports in the microregion of"
 msgstr " posição em importações na microrregiāo"
 
-#: dataviva/apps/product/templates/product/tab-general.html:229
-#: dataviva/apps/product/templates/product/tab-general.html:251
+#: dataviva/apps/product/templates/product/tab-general.html:139
+#: dataviva/apps/product/templates/product/tab-general.html:148
 #, fuzzy
 msgid " in exports in this municipality. In "
 msgstr " em exportações neste município. Em "
 
-#: dataviva/apps/product/templates/product/tab-general.html:239
-#: dataviva/apps/product/templates/product/tab-general.html:261
+#: dataviva/apps/product/templates/product/tab-general.html:140
+#: dataviva/apps/product/templates/product/tab-general.html:148
 #: dataviva/translations/dictionary.py:532
 msgid "in five years."
 msgstr "em cinco anos."
 
-#: dataviva/apps/product/templates/product/tab-general.html:277
+#: dataviva/apps/product/templates/product/tab-general.html:163
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:40
 #: dataviva/translations/dictionary.py:519
 msgid "Main Municipality by Total Value Exported"
 msgstr "Principal Município por Valor Total Exportado"
 
-#: dataviva/apps/product/templates/product/tab-general.html:285
+#: dataviva/apps/product/templates/product/tab-general.html:171
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:49
 #: dataviva/translations/dictionary.py:520
 msgid "Main Municipality by Total Value Imported"
 msgstr "Principal Município por Valor Total Importado"
 
-#: dataviva/apps/product/templates/product/tab-general.html:294
+#: dataviva/apps/product/templates/product/tab-general.html:180
 #: dataviva/translations/dictionary.py:521
 msgid "Main Destination by Total Value Exported"
 msgstr "Principal Destino por Valor Total Exportado"
 
-#: dataviva/apps/product/templates/product/tab-general.html:302
+#: dataviva/apps/product/templates/product/tab-general.html:188
 msgid "Main Origin by Total Value Imported"
 msgstr "Principal Origem por Valor Total Importado"
 
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:12
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:42
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:10
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:40
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:11
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:42
 #: dataviva/translations/dictionary.py:524
 msgid "by Total Value Exported"
 msgstr "por Valor Total Exportado"
 
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:26
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:57
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:25
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:56
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:26
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:58
 #: dataviva/translations/dictionary.py:525
 msgid "by Total Value Imported"
 msgstr "por Valor Total Importado"
@@ -3109,19 +3116,19 @@ msgstr ""
 "  em exportações realizadas pelo Brasil. O produto mais exportado do "
 "Brasil para esse país é "
 
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:75
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:76
 msgid "Product with Highest Trade Balance Surplus"
 msgstr "Produto com Maior Saldo da Balança Comercial"
 
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:82
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:83
 msgid "Product with Lowest Trade Balance Surplus"
 msgstr "Produto com Menor Saldo da Balança Comercial"
 
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:69
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:71
 msgid "Product with Highest"
 msgstr "Produto com Maior"
 
-#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:82
+#: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:84
 msgid "Product with Lowest"
 msgstr "Produto com Menor"
 
@@ -3143,17 +3150,16 @@ msgstr "Situação dos Estudantes"
 #: dataviva/apps/university/templates/university/tab-general.html:20
 #: dataviva/apps/university/templates/university/tab-general.html:26
 #: dataviva/apps/university/templates/university/tab-general.html:32
-#: dataviva/utils/num_format.py:42
-msgid "students"
-msgstr "alunos"
+msgid "Students"
+msgstr "Alunos"
 
 #: dataviva/apps/university/templates/university/index.html:55
 msgid "Number of Entering Students "
 msgstr "Número de Ingressantes"
 
-#: dataviva/apps/university/templates/university/tab-enrollments.html:9
-#: dataviva/apps/university/templates/university/tab-enrollments.html:22
-#: dataviva/apps/university/templates/university/tab-enrollments.html:36
+#: dataviva/apps/university/templates/university/tab-enrollments.html:8
+#: dataviva/apps/university/templates/university/tab-enrollments.html:21
+#: dataviva/apps/university/templates/university/tab-enrollments.html:34
 msgid "Main Course"
 msgstr "Principal Curso"
 
@@ -6642,45 +6648,49 @@ msgstr "Nenhum registro encontrado"
 msgid "Views"
 msgstr "Visualize"
 
-#: dataviva/translations/dictionary.py:650
+#: dataviva/translations/dictionary.py:652
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:651
+#: dataviva/translations/dictionary.py:653
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:652
+#: dataviva/translations/dictionary.py:654
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:653
+#: dataviva/translations/dictionary.py:655
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
 msgstr[1] "Milhares"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Thousands"
 msgstr "Mil"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Millions"
 msgstr "Milhões"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Billions"
 msgstr "Bilhões"
 
-#: dataviva/utils/jinja_helpers.py:96
+#: dataviva/utils/jinja_helpers.py:116
 msgid "Trillions"
 msgstr "Trilhões"
+
+#: dataviva/utils/num_format.py:42
+msgid "students"
+msgstr "alunos"
 
 #: dataviva/utils/num_format.py:58
 msgctxt "0"
@@ -6881,4 +6891,22 @@ msgstr "com"
 
 #~ msgid "city in number of enrollments in the "
 #~ msgstr ""
+
+#~ msgid "bra_"
+#~ msgstr ""
+
+#~ msgid "bra_9"
+#~ msgstr ""
+
+#~ msgid " is "
+#~ msgstr " é o "
+
+#~ msgid " is the "
+#~ msgstr "é o "
+
+#~ msgid " is the"
+#~ msgstr "é a"
+
+#~ msgid " Jobs"
+#~ msgstr "empregos"
 

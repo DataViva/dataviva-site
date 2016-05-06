@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.sc.services import Basic_course, Basic_course_by_location, Basic_course_school, \
     Basic_course_school_by_location, Basic_course_city, Basic_course_city_by_location, Basic_course_by_state
 from dataviva.api.attrs.models import Bra, Course_sc
-from dataviva.api.sc.models import Ybc_sc
+from dataviva.api.sc.models import Ybc_sc, Yc_sc
 from dataviva import db
 from sqlalchemy import func
 
@@ -57,13 +57,13 @@ def index(course_sc_id):
 
         rank_query = Ybc_sc.query.filter(
             Ybc_sc.year == max_year_query,
-            Ybc_sc.course_sc_id == len(course_sc_id),
             Ybc_sc.course_sc_id == course_sc_id,
             Ybc_sc.bra_id.like(bra_id[:3] + '%'),
             Ybc_sc.bra_id_len == 9).order_by(Ybc_sc.enrolled.desc())
 
         rank = rank_query.all()
         location = Bra.query.filter_by(id=bra_id).first()
+
     else:
         bra_id = ''
         sc_service = Basic_course(course_sc_id=course_sc_id)
@@ -103,16 +103,15 @@ def index(course_sc_id):
         'city_enrolled': city_service.city_enrolled(),
     }
 
-    if bra_id and len(bra_id) == 9:
-        for index, maj in enumerate(rank):
+    if len(bra_id) == 9:
+        for index, basic_course_ranking in enumerate(rank):
             if rank[index].bra_id == bra_id:
                 header['rank'] = index + 1
                 break
 
-    return render_template(
-        'basic_course/index.html',
-        header=header,
-        body=body,
-        body_class='perfil-estado',
-        location=location,
-        basic_course=basic_course)
+    sc_max_year = db.session.query(func.max(Yc_sc.year)).first()[0]
+
+    if header['course_enrolled'] is None or sc_max_year != header['course_year']:
+        abort(404)
+    else:
+        return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, basic_course=basic_course)

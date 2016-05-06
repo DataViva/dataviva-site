@@ -637,8 +637,10 @@ def dictionary():
         "zeroRecords": gettext("No records found"),
 
         # build graphs
-        "views": gettext("Views")
+        "views": gettext("Views"),
 
+        #contact
+        "contact_message": gettext("Your message has been sent successfully. We will soon get back to you.")
     }
 
 

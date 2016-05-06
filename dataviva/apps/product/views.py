@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import Product as ProductService
 from dataviva.api.secex.services import ProductTradePartners as ProductTradePartnersService
@@ -175,4 +175,12 @@ def index(product_id):
             header['import_value_ranking'] = ranking + 1
             break
 
-    return render_template('product/index.html', header=header, body=body, product=product, location=location, language=language)
+    secex_max_year = db.session.query(func.max(Ymp.year)).filter(
+        Ymp.month == 12).first()[0]
+
+    if header['export_value'] is None and header['import_value'] is None:
+        abort(404)
+    if secex_max_year != header['year']:
+        abort(404)
+    else:
+        return render_template('product/index.html', header=header, body=body, product=product, location=location, language=language)
