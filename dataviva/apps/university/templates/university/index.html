@@ -12,17 +12,18 @@
             </li>
             <li {{ 'class="active"' if not location else '' }}>
                 <a href="#" title="Trocar" onclick="select_attr('university');"> {{ university.name() }}</a>
-            </li>  
+            </li>
         </ol>
     </div>
 </div>
 <!-- BREADCRUMB -->
 
 <section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/university/university_{{ university.id if university.img_link else 'all' }}.jpg) no-repeat center center fixed">
-    
+
     <div class="photo-credit">
       <div class="container">
-        <a href="#" target="blank"><i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ university.img_author if university.img_link else 'Kezn Teh' }}</a>
+        <a href="{{ university.img_link if university.img_link else 'https://flic.kr/p/hkjFNJ' }}" target="blank">
+        <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ university.img_author if university.img_link else 'Kezn Teh' }}</a>
       </div>
     </div>
   <div class="summary-box">
@@ -31,7 +32,7 @@
         <span class="portrait dv-university-{{ university.school_type_id.lower() }} hidden-xs"></span>
 
         <h1>
-          {{ university.name() }} 
+          {{ university.name() }}
             <div class="btn-group">
               <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                    {% trans %}change{% endtrans %} <span class="caret"></span>
@@ -41,7 +42,7 @@
               </ul>
             </div>
         </h1>
-        
+
         <span class="clearfix"></span>
         <div class="indices">
            <div class="row">
