@@ -23,7 +23,14 @@
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header bg-major-{{ major.id[0:2] }}">
+<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/major/major_{{ major.id if major.img_link else 'all' }}.jpg) no-repeat center center fixed">
+
+  <div class="photo-credit">
+    <div class="container">
+      <a href="#" target="blank"><i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ major.img_author if major.img_link else 'Rodolphe' }}</a>
+    </div>
+  </div>
+
         <div class="summary-box">
         <div class="container">
 

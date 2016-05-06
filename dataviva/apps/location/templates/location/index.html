@@ -19,11 +19,11 @@
 <!-- BREADCRUMB -->
 
 <!-- Criar classes css para os backgrunds das localidades -->
-<section id="header" class="header {{header.bg_class_image}}">
-
+<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/{{ location.id if location.img_link else 'all' }}.jpg) no-repeat center center fixed">
+ 
     <div class="photo-credit">
       <div class="container">
-        <a href="#" target="blank"><i class="fa fa-camera"></i> foto por Luciano Alves</a>
+        <a href="#" target="blank"><i class="fa fa-camera"></i>{% trans %}picture by{% endtrans %} {{ location.img_author if location.img_link else 'Luciano Alves'}}</a>
       </div>
     </div>
 
