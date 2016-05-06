@@ -54,6 +54,18 @@ String.prototype.truncate = function(n) {
   return  tooLong ? string + '...' : string;
 };
 
+if (!String.prototype.format) {
+  String.prototype.format = function() {
+    var args = arguments;
+    return this.replace(/{(\d+)}/g, function(match, number) {
+      return typeof args[number] != 'undefined'
+        ? args[number]
+        : match
+      ;
+    });
+  };
+}
+
 Array.prototype.objectIndex = function(key,value) {
   for(var i = 0, len = this.length; i < len; i++) {
       if (this[i][key] === value) return i;
