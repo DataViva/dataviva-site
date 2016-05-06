@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-06 16:03-0300\n"
+"POT-Creation-Date: 2016-05-06 16:54-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -170,8 +170,8 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/index.html:49
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:6
 #: dataviva/apps/major/templates/major/index.html:48
-#: dataviva/apps/occupation/templates/occupation/index.html:49
-#: dataviva/apps/product/templates/product/index.html:47
+#: dataviva/apps/occupation/templates/occupation/index.html:56
+#: dataviva/apps/product/templates/product/index.html:54
 #: dataviva/apps/rankings/templates/rankings/_base.html:24
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:13
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:13
@@ -586,8 +586,8 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/index.html:33
 #: dataviva/apps/industry/templates/industry/index.html:35
 #: dataviva/apps/major/templates/major/index.html:34
-#: dataviva/apps/occupation/templates/occupation/index.html:35
-#: dataviva/apps/product/templates/product/index.html:33
+#: dataviva/apps/occupation/templates/occupation/index.html:42
+#: dataviva/apps/product/templates/product/index.html:40
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:34
 msgid "in Brazil"
 msgstr ""
@@ -595,8 +595,8 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/index.html:43
 #: dataviva/apps/industry/templates/industry/index.html:45
 #: dataviva/apps/location/templates/location/index.html:45
-#: dataviva/apps/occupation/templates/occupation/index.html:45
-#: dataviva/apps/product/templates/product/index.html:43
+#: dataviva/apps/occupation/templates/occupation/index.html:52
+#: dataviva/apps/product/templates/product/index.html:50
 #: dataviva/apps/university/templates/university/index.html:32
 msgid "change"
 msgstr ""
@@ -636,8 +636,8 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/index.html:140
 #: dataviva/apps/location/templates/location/index.html:140
 #: dataviva/apps/major/templates/major/index.html:101
-#: dataviva/apps/occupation/templates/occupation/index.html:113
-#: dataviva/apps/product/templates/product/index.html:176
+#: dataviva/apps/occupation/templates/occupation/index.html:120
+#: dataviva/apps/product/templates/product/index.html:183
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:127
 #: dataviva/apps/university/templates/university/index.html:89
 #: dataviva/translations/dictionary.py:493
@@ -1273,7 +1273,7 @@ msgstr ""
 #: dataviva/apps/industry/templates/industry/tab-wages.html:39
 #: dataviva/apps/location/templates/location/graphs-wages.html:18
 #: dataviva/apps/location/templates/location/graphs-wages.html:57
-#: dataviva/apps/occupation/templates/occupation/index.html:48
+#: dataviva/apps/occupation/templates/occupation/index.html:55
 #: dataviva/apps/rankings/templates/rankings/_base.html:44
 #: dataviva/apps/rankings/templates/rankings/occupation.html:13
 #: dataviva/templates/site.html:65 dataviva/translations/dictionary.py:139
@@ -1304,25 +1304,25 @@ msgid "Industry"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:59
-#: dataviva/apps/occupation/templates/occupation/index.html:59
+#: dataviva/apps/occupation/templates/occupation/index.html:66
 #: dataviva/translations/dictionary.py:610
 msgid "Average Monthly Income"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:68
-#: dataviva/apps/occupation/templates/occupation/index.html:68
+#: dataviva/apps/occupation/templates/occupation/index.html:75
 #: dataviva/translations/dictionary.py:611
 msgid "Payroll"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:77
-#: dataviva/apps/occupation/templates/occupation/index.html:77
+#: dataviva/apps/occupation/templates/occupation/index.html:84
 #: dataviva/translations/dictionary.py:612
 msgid "Total Employment"
 msgstr ""
 
 #: dataviva/apps/industry/templates/industry/index.html:86
-#: dataviva/apps/occupation/templates/occupation/index.html:86
+#: dataviva/apps/occupation/templates/occupation/index.html:93
 #: dataviva/translations/dictionary.py:613
 msgid "Total of Establishments"
 msgstr ""
@@ -1348,7 +1348,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/index.html:156
 #: dataviva/apps/location/templates/location/tab-general.html:138
 #: dataviva/apps/location/templates/location/tab-wages.html:3
-#: dataviva/apps/occupation/templates/occupation/index.html:122
+#: dataviva/apps/occupation/templates/occupation/index.html:129
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:60
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:3
 #: dataviva/apps/rankings/templates/rankings/_base.html:38
@@ -1362,10 +1362,10 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-general.html:180
 #: dataviva/apps/location/templates/location/tab-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
-#: dataviva/apps/occupation/templates/occupation/index.html:132
+#: dataviva/apps/occupation/templates/occupation/index.html:139
 #: dataviva/apps/occupation/templates/occupation/tab-opportunities.html:2
 #: dataviva/apps/product/templates/product/graphs-opportunities.html:5
-#: dataviva/apps/product/templates/product/index.html:195
+#: dataviva/apps/product/templates/product/index.html:202
 #: dataviva/apps/product/templates/product/tab-opportunities.html:2
 #: dataviva/translations/dictionary.py:495
 msgid "Economic Opportunities"
@@ -1522,7 +1522,7 @@ msgstr ""
 
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:5
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:5
-#: dataviva/apps/product/templates/product/index.html:58
+#: dataviva/apps/product/templates/product/index.html:65
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:5
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:58
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:72
@@ -1555,7 +1555,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-opportunities.html:9
 #: dataviva/apps/location/templates/location/tab-opportunities.html:39
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:6
-#: dataviva/apps/product/templates/product/index.html:46
+#: dataviva/apps/product/templates/product/index.html:53
 #: dataviva/apps/rankings/templates/rankings/_base.html:50
 #: dataviva/apps/rankings/templates/rankings/product.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:14
@@ -1619,7 +1619,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/index.html:148
 #: dataviva/apps/location/templates/location/tab-general.html:97
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:3
-#: dataviva/apps/product/templates/product/index.html:185
+#: dataviva/apps/product/templates/product/index.html:192
 #: dataviva/apps/product/templates/product/tab-general.html:159
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:3
 #: dataviva/apps/rankings/templates/rankings/_base.html:31
@@ -2142,6 +2142,10 @@ msgstr ""
 msgid "Jobs by"
 msgstr ""
 
+#: dataviva/apps/occupation/templates/occupation/index.html:31
+msgid "picture by"
+msgstr ""
+
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:4
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:14
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:23
@@ -2382,48 +2386,48 @@ msgstr ""
 msgid "Geo Map"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:69
+#: dataviva/apps/product/templates/product/index.html:76
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:68
 #: dataviva/translations/dictionary.py:497
 msgid "Total Value Exported"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:80
+#: dataviva/apps/product/templates/product/index.html:87
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:79
 msgid "Average Price Exported"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:91
+#: dataviva/apps/product/templates/product/index.html:98
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:90
 #: dataviva/translations/dictionary.py:499
 msgid "Total Value Imported"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:102
+#: dataviva/apps/product/templates/product/index.html:109
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:101
 msgid "Average Price Imported"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:114
+#: dataviva/apps/product/templates/product/index.html:121
 #: dataviva/apps/rankings/templates/rankings/product.html:14
 #: dataviva/translations/dictionary.py:193
 #: dataviva/translations/dictionary.py:501
 msgid "Product Complexity"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:126
+#: dataviva/apps/product/templates/product/index.html:133
 #: dataviva/translations/dictionary.py:238
 #: dataviva/translations/dictionary.py:502
 msgid "International RCA"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:137
+#: dataviva/apps/product/templates/product/index.html:144
 #: dataviva/translations/dictionary.py:223
 #: dataviva/translations/dictionary.py:503
 msgid "International Distance"
 msgstr ""
 
-#: dataviva/apps/product/templates/product/index.html:148
+#: dataviva/apps/product/templates/product/index.html:155
 #: dataviva/translations/dictionary.py:242
 #: dataviva/translations/dictionary.py:504
 msgid "International Opportunity Gain"
