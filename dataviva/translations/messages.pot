@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-05 19:40-0300\n"
+"POT-Creation-Date: 2016-05-06 13:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -315,7 +315,7 @@ msgstr ""
 #: dataviva/apps/account/templates/account/change_password.html:56
 #: dataviva/apps/account/templates/account/edit_profile.html:47
 #: dataviva/templates/modal/dataviva.html:106
-#: dataviva/templates/modal/search.html:26
+#: dataviva/templates/modal/search.html:28
 #: dataviva/templates/modal/signup.html:42
 #: dataviva/templates/modal/wizard.html:47
 msgid "Cancel"
@@ -638,7 +638,7 @@ msgstr ""
 #: dataviva/apps/major/templates/major/index.html:101
 #: dataviva/apps/occupation/templates/occupation/index.html:113
 #: dataviva/apps/product/templates/product/index.html:176
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:123
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:127
 #: dataviva/apps/university/templates/university/index.html:89
 #: dataviva/translations/dictionary.py:493
 msgid "General"
@@ -1022,8 +1022,7 @@ msgid "Publish"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/new.html:16
-#: dataviva/apps/calls/templates/calls/new.html:7
-msgid "Publish a"
+msgid "Publish a "
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/show.html:5
@@ -1059,7 +1058,7 @@ msgstr ""
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
 #: dataviva/templates/modal/dataviva.html:103
-#: dataviva/templates/modal/search.html:27
+#: dataviva/templates/modal/search.html:29
 #: dataviva/translations/dictionary.py:474
 msgid "Back"
 msgstr ""
@@ -1070,6 +1069,10 @@ msgstr ""
 
 #: dataviva/apps/calls/templates/calls/edit.html:6
 msgid "call"
+msgstr ""
+
+#: dataviva/apps/calls/templates/calls/new.html:7
+msgid "Publish a"
 msgstr ""
 
 #: dataviva/apps/calls/templates/calls/new.html:8
@@ -1620,7 +1623,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:159
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:3
 #: dataviva/apps/rankings/templates/rankings/_base.html:31
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:132
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:136
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:35
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:3
 #: dataviva/translations/dictionary.py:494
@@ -2380,24 +2383,24 @@ msgid "Geo Map"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:69
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:67
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:68
 #: dataviva/translations/dictionary.py:497
 msgid "Total Value Exported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:80
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:77
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:79
 msgid "Average Price Exported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:91
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:87
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:90
 #: dataviva/translations/dictionary.py:499
 msgid "Total Value Imported"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:102
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:97
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:101
 msgid "Average Price Imported"
 msgstr ""
 
@@ -4809,7 +4812,7 @@ msgid "Didn't find what I was looking for"
 msgstr ""
 
 #: dataviva/templates/modal/dataviva.html:104
-#: dataviva/templates/modal/search.html:28
+#: dataviva/templates/modal/search.html:30
 #: dataviva/templates/modal/wizard.html:48
 msgid "Advance"
 msgstr ""
@@ -4820,11 +4823,6 @@ msgstr ""
 
 #: dataviva/templates/modal/login.html:22
 msgid "Forgot my Password"
-msgstr ""
-
-#: dataviva/templates/modal/search.html:19
-#: dataviva/translations/dictionary.py:482
-msgid "Select your question and click advance"
 msgstr ""
 
 #: dataviva/templates/modal/signup.html:11
@@ -5881,6 +5879,10 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:479
 msgid "in"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:482
+msgid "Select your question and click advance"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:483
