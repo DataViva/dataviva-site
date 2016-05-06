@@ -24,7 +24,14 @@
 <!-- BREADCRUMB -->
 
 
-<section id="header" class="header bg-occupation-{{occupation.id[0]}}">
+<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_{{ occupation.id if occupation.img_link else 'all' }}.jpg) no-repeat center center fixed">
+    
+    <div class="photo-credit">
+      <div class="container">
+        <a href="#" target="blank"><i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ occupation.img_author if occupation.img_link else 'Christyam de Lima' }}</a>
+      </div>
+    </div>
+
     <div class="summary-box">
         <div class="container">
 
