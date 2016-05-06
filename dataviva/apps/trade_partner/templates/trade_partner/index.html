@@ -23,11 +23,12 @@
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/trade_partner/trade_partner_{{ trade_partner.id if trade_partner.img_link else 'all' }}.jpg) no-repeat center center fixed">
+<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/trade_partner/trade_partner_{{ trade_partner.id if trade_partner.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
 
   <div class="photo-credit">
     <div class="container">
-      <a href="#" target="blank"><i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ trade_partner.img_author if trade_partner.img_link else 'MarcelaPalma' }}</a>
+      <a href="{{ trade_partner.img_link if trade_partner.img_link else 'https://flic.kr/p/jDw5wp' }}" target="blank">
+      <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ trade_partner.img_author if trade_partner.img_link else 'Marcela Palma' }}</a>
     </div>
   </div>
 
