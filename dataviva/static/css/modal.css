@@ -228,9 +228,7 @@
   line-height: 1.45em;
   margin: 0 0 20px 0;
 }
-.modal .question-header .current-question {
-  display: none;
-}
+
 .modal .question-header .chosen-options .question .question-option {
   font-weight: bold;
   font-size: 17px;
