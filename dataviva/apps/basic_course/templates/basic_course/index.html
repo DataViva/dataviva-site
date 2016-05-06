@@ -23,11 +23,12 @@
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/basic_course/basic_course_{{ basic_course.id if basic_course.img_link else 'all' }}.jpg) no-repeat center center fixed">
+<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/basic-course/basic_course_{{ basic_course.id if basic_course.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
 
   <div class="photo-credit">
     <div class="container">
-      <a href="#" target="blank"><i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ basic_course.img_author if basic_course.img_link else 'Portal PBH' }}</a>
+      <a href="{{ basic_course.img_link if basic_course.img_link else 'https://flic.kr/p/9pzhGJ' }}" target="blank">
+      <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ basic_course.img_author if basic_course.img_link else 'Portal PBH' }}</a>
     </div>
   </div>
 

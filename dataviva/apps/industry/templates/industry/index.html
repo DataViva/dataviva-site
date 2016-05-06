@@ -23,11 +23,12 @@
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg) no-repeat center center fixed">
+<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
 
   <div class="photo-credit">
     <div class="container">
-      <a href="#" target="blank"><i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ industry.img_author if industry.img_link else 'Rodrigo W. Blum' }}</a>
+    <a href="{{ industry.img_link if industry.img_link else 'https://flic.kr/p/i8e8Y7' }}" target="blank">
+    <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ industry.img_author if industry.img_link else 'Rodrigo W. Blum' }}</a>
     </div>
   </div>
 
