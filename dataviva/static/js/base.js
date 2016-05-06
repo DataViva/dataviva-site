@@ -256,7 +256,8 @@ var search = function(profile) {
     $('#modal-search .current-question').hide();
     $('#modal-search .modal-body').empty();
     $('#modal-search .chosen-options .question').empty();
-    $('#modal-search #chosen-options').val('');
+    $('#modal-search #profile').val(profile);
+
     $('#modal-search #search-advance').prop("disabled", true);
     var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
     search_load.text(dataviva.dictionary['loading']);
@@ -389,16 +390,35 @@ $(document).ready(function () {
             selectors.every(function(selector, step) {
                 if (selectedOptions[step] == "") {
                     $('#modal-search .current-question').html(dataviva.dictionary['select_search_'+selector])
+                    $('#modal-search .chosen-options input:not(#answer)').data('actual', false);
+                    $('#modal-search .chosen-options #'+selector).data('actual', true);
                     profile_search_selector(selectors[step]);
                     return false;
                 } else if(step == selectors.length -1) {
-                    console.log(answer);
+                    window.location = '/' + lang + answer.format.apply(
+                        answer, $('#modal-search .chosen-options input:not(#answer)')
+                        .map(function(){return this.value;}).get());
                 }
                 return true;
             });
         $('#modal-search .select-question').hide();
         $('#modal-search .current-question').show();
+    });
 
+    $('#modal-search #search-back').click(function() {
+        var actualInput = $('#modal-search .chosen-options input').filter(function(i, el){
+                return $(this).data('actual');
+            });
+
+        actualInput.data('actual', false);
+        actualInput.prev().data('actual', true);
+
+        var previousSelector = actualInput.prev().get(0).id;
+        if ($.inArray(previousSelector, ['bra', 'cbo', 'cnae', 'hs', 'wld', 'university', 'course_hedu', 'course_sc' ]) > -1){
+            profile_search_selector(previousSelector);
+        } else {
+            search($('#modal-search #profile').val());
+        }
     });
 
     $('.btn-toggle').click( function() {
