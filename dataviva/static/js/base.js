@@ -236,10 +236,11 @@ var drawProfileQuestionHeader = function() {
 
     var actualStep = $('#modal-search #actual-step').val();
 
+    $('#current-question').removeAttr('class').attr('class', '');
     if ($.inArray(actualStep, ['entrepreneurs', 'development_agents', 'students']) > -1){
-        $('#modal-search .current-question').html(dataviva.dictionary['select_search_question']);
+        $('#modal-search #current-question').html(dataviva.dictionary['select_search_question']);
     } else {
-        $('#modal-search .current-question').html(dataviva.dictionary['select_search_'+actualStep]);
+        $('#modal-search #current-question').html(dataviva.dictionary['select_search_'+actualStep]);
     }
 
     $('#modal-search .chosen-options #question').html(formattedChosenQuestion);
@@ -254,7 +255,7 @@ var profileSearchSelectorCallback = Selector()
 
 var profile_search_selector = function(id) {
     $('#modal-search .modal-body').empty();
-
+    $('#modal-search #actual-step').val(id);
     drawProfileQuestionHeader();
     if ($.inArray(id, ['bra', 'cbo', 'cnae', 'hs', 'wld', 'university', 'course_hedu', 'course_sc' ]) > -1){
         d3.select("#modal-search-content").call(profileSearchSelectorCallback.type(id));
@@ -268,7 +269,7 @@ var profile_search_selector = function(id) {
 var search = function(profile) {
 
     // Reset modal and set loading
-    $('#modal-search .current-question').html(dataviva.dictionary['select_search_question']);
+    $('#modal-search #current-question').html(dataviva.dictionary['select_search_question']);
     $('#modal-search .modal-body').empty();
     $('#modal-search .chosen-options #question').empty();
     $('#modal-search #profile').val(profile);
@@ -399,8 +400,12 @@ $(document).ready(function () {
 
         $('#modal-search .chosen-options input').each(function(index, el) {
             if (this.value == "") {
-                $('#modal-search #actual-step').val(this.id);
                 profile_search_selector(this.id);
+
+                if (this.id == $('#modal-search #actual-step').val()) {
+                    $('#current-question').addClass('animated');
+                    $('#current-question').addClass('tada');
+                }
                 return false;
             }
         });
@@ -432,4 +437,3 @@ $(document).ready(function () {
         return false
     });
 });
-
