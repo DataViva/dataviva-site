@@ -236,7 +236,6 @@ var drawProfileQuestionHeader = function() {
 
     var actualStep = $('#modal-search #actual-step').val();
 
-    $('#current-question').removeAttr('class').attr('class', '');
     if ($.inArray(actualStep, ['entrepreneurs', 'development_agents', 'students']) > -1){
         $('#modal-search #current-question').html(dataviva.dictionary['select_search_question']);
     } else {
@@ -397,18 +396,18 @@ $(document).ready(function () {
     $('#modal-search #search-advance').click(function() {
         var answer = $('#modal-search #answer').val();
         $('#modal-search #search-back').show();
-
-        $('#modal-search .chosen-options input').each(function(index, el) {
-            if (this.value == "") {
-                profile_search_selector(this.id);
-
-                if (this.id == $('#modal-search #actual-step').val()) {
-                    $('#current-question').addClass('animated');
-                    $('#current-question').addClass('tada');
+        if ($('#modal-search .chosen-options #'+$('#modal-search #actual-step').val()).val() == '') {
+            $('#current-question').addClass('animated');
+            $('#current-question').addClass('tada');
+            setTimeout(function(){$('#current-question').removeAttr('class').attr('class', '');}, 1000);
+        } else {
+            $('#modal-search .chosen-options input').each(function(index, el) {
+                if (this.value == "") {
+                    profile_search_selector(this.id);
+                    return false;
                 }
-                return false;
-            }
-        });
+            });
+        }
 
         if ($.inArray("", $('#modal-search .chosen-options input').map(function(){return this.value;}).get()) == -1) {
             window.location = '/' + lang + answer.format.apply(
