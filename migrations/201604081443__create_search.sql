@@ -1,6 +1,3 @@
-DROP TABLE search_question_selector;
-DROP TABLE search_selector;
-DROP TABLE search_question;
 DROP TABLE search_profile;
 
 CREATE TABLE search_profile(
@@ -9,6 +6,14 @@ CREATE TABLE search_profile(
     name_en varchar (50) NULL,
     PRIMARY KEY (id)
 );
+
+INSERT INTO search_profile (id, name_en, name_pt) VALUES ('entrepreneurs', 'Entrepreneurs', 'Empreendedores');
+INSERT INTO search_profile (id, name_en, name_pt) VALUES ('development_agents', 'Development Agents', 'Agentes de Desenvolvimento');
+INSERT INTO search_profile (id, name_en, name_pt) VALUES ('students', 'Students and Professionals', 'Estudantes e Profissionais');
+
+DROP TABLE search_question_selector;
+DROP TABLE search_selector;
+DROP TABLE search_question;
 
 CREATE TABLE search_question(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -35,10 +40,6 @@ CREATE TABLE search_question_selector(
     FOREIGN KEY (question_id) REFERENCES search_question(id),
     FOREIGN KEY (selector_id) REFERENCES search_selector(id)
 );
-
-INSERT INTO search_profile (id, name_en, name_pt) VALUES ('entrepreneurs', 'Entrepreneurs', 'Empreendedores');
-INSERT INTO search_profile (id, name_en, name_pt) VALUES ('development_agents', 'Development Agents', 'Agentes de Desenvolvimento');
-INSERT INTO search_profile (id, name_en, name_pt) VALUES ('students', 'Students and Professionals', 'Estudantes e Profissionais');
 
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('bra', 'Locations', 'Localidades');
 INSERT INTO search_selector (id, name_pt, name_en) VALUES ('cbo', 'Occupations', 'Ocupações');
@@ -96,7 +97,7 @@ INSERT INTO search_question (profile_id, description_pt, description_en, answer)
 '/location/%s'),
 
 ((SELECT id FROM search_profile where name_en = 'Entrepreneurs'),
-'Quais os cursos de nível técnico oferecidos na Localida de Y?',
+'Quais os cursos de nível técnico oferecidos na Localidade Y?',
 'Which technical courses are offered in Location Y?',
 '/location/%s');
 
@@ -225,7 +226,7 @@ INSERT INTO search_question_selector (question_id, selector_id, `order`) VALUES
 'bra', 0),
 
 ((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Entrepreneurs')
-   AND description_pt = 'Quais os cursos de nível técnico oferecidos na Localida de Y?'),
+   AND description_pt = 'Quais os cursos de nível técnico oferecidos na Localidade Y?'),
 'bra', 0);
 
 
@@ -273,7 +274,7 @@ INSERT INTO search_question_selector (question_id, selector_id, `order`) VALUES
 'cbo', 0),
 ((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
    AND description_pt = 'Qual o salário médio da Ocupação Z na Localidade Y?'),
-'bra', 0),
+'bra', 1),
 
 ((SELECT id FROM search_question WHERE profile_id = (SELECT id FROM search_profile where name_en = 'Students and Professionals')
    AND description_pt = 'Em quais localidades paga-se o maior salário médio da Ocupação Z?'),
