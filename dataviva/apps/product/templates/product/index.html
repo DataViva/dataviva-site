@@ -27,7 +27,7 @@
 
   <div class="photo-credit">
     <div class="container">
-      <a href="#" target="blank"><i class="fa fa-camera"></i> foto por {{ product.img_author if product.img_link else 'all' }}</a>
+      <a href="#" target="blank"><i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ product.img_author if product.img_link else 'Jeremy Brooks' }}</a>
     </div>
   </div>
 
