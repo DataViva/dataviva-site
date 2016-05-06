@@ -264,7 +264,7 @@ var search = function(profile) {
     $('#modal-search').modal('show');
 
 
-    dataviva.requireAttrs(['bra', 'cbo', 'cnae'], function() {
+    dataviva.requireAttrs(['bra', 'cbo', 'cnae', 'hs'], function() {
         $.ajax({
           method: "GET",
           url: "/" + lang + "/search/profile/" + profile,
