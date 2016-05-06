@@ -226,9 +226,20 @@ var select_attr_search = function(id) {
 
 var profileSearchSelectorCallback = Selector()
     .callback(function(d){
+        $('#modal-search-content .page-loader').remove();
         $('#modal-search .chosen-options #' + profileSearchSelectorCallback.type()).val(d.id);
 
-        $('#modal-search-content .page-loader').remove();
+
+        var formattedSearchQuestion = searchQuestion;
+        $('#modal-search .chosen-options').find('input:not(#answer)').each(function(index, selector){
+            if (selector.value != "") {
+                var re = new RegExp(dataviva.dictionary[selector.id]+'\\s\\w', 'g'),
+                    questionOption = '<span class="question-option">'+dataviva[selector.id][selector.value].name+'</span>';
+                formattedSearchQuestion = formattedSearchQuestion.replace(re, dataviva.dictionary[selector.id].toLowerCase()+' '+questionOption)
+            }
+        });
+        $('#modal-search .chosen-options .question')
+            .html(formattedSearchQuestion);
     });
 
 var profile_search_selector = function(id) {
@@ -237,11 +248,14 @@ var profile_search_selector = function(id) {
     $('#modal-search').modal('show');
 }
 
+
 var search = function(profile) {
 
     // Reset modal and set loading
+    $('#modal-search .select-question').show();
+    $('#modal-search .current-question').hide();
     $('#modal-search .modal-body').empty();
-    //$('#modal-search .chosen-options .question').empty();
+    $('#modal-search .chosen-options .question').empty();
     $('#modal-search #chosen-options').val('');
     $('#modal-search #search-advance').prop("disabled", true);
     var search_load = new dataviva.ui.loading($('#modal-search .modal-body').get(0));
@@ -249,59 +263,66 @@ var search = function(profile) {
 
     $('#modal-search').modal('show');
 
-    $.ajax({
-      method: "GET",
-      url: "/" + lang + "/search/profile/" + profile,
-      success: function (response) {
-        search_load.hide();
 
-        var questions = response.questions;
-        // Set modal template
-        $('#modal-search .modal-search-title').html(response.profile);
-        $('#modal-search .modal-body').html(response.template);
+    dataviva.requireAttrs(['bra', 'cbo', 'cnae'], function() {
+        $.ajax({
+          method: "GET",
+          url: "/" + lang + "/search/profile/" + profile,
+          success: function (response) {
+            search_load.hide();
 
-        for (id in questions) {
+            var questions = response.questions;
+            // Set modal template
+            $('#modal-search .modal-search-title').html(response.profile);
+            $('#modal-search .modal-body').html(response.template);
 
-            var question = questions[id],
-                selectors = questions[id].selectors,
-                div = $('<div></div>').addClass('selector-list-item');
+            for (id in questions) {
 
-            // Append questions
-            div.append('<div></div>')
-                    .addClass('item-title')
-                    .html(question.description)
-                    .attr('id', 'question'+id)
-                    .data('answer', question.answer)
-                    .data('selectors', selectors.join(','));
+                var question = questions[id],
+                    selectors = questions[id].selectors,
+                    div = $('<div></div>').addClass('selector-list-item');
 
-            // Choose Question
-            div.click(function() {
-                $('#modal-search #search-advance').prop('disabled', false);
-                $(this).siblings('.selected').toggleClass('selected');
-                $(this).toggleClass('selected');
+                // Append questions
+                div.append('<div></div>')
+                        .addClass('item-title')
+                        .html(question.description)
+                        .attr('id', 'question'+id)
+                        .data('answer', question.answer)
+                        .data('selectors', selectors.join(','));
 
-                var chosenOptions = $('#modal-search .chosen-options');
+                // Choose Question
+                div.click(function() {
+                    $('#modal-search #search-advance').prop('disabled', false);
+                    $(this).siblings('.selected').toggleClass('selected');
+                    $(this).toggleClass('selected');
 
-                chosenOptions.find('.question').html($(this).html());
-                chosenOptions.find('#answer').val($(this).data('answer'));
-                chosenOptions.find('input:not(#answer)').remove()
+                    var chosenOptions = $('#modal-search .chosen-options');
 
-                var selectors = $(this).data('selectors').split(',')
+                    chosenOptions.find('.question').html($(this).html());
 
-                for (var i = 0; i < selectors.length; i++) {
-                    var selector = selectors[i];
-                        selectorInput = $('<input>')
-                            .attr('type', 'hidden')
-                            .attr('id', selector);
-                        chosenOptions.append(selectorInput);
-                }
-            });
+                    window.searchQuestion = $(this).html();
 
-            $('#modal-search .selector-list .list-group').append(div);
-        }
-      }
+                    chosenOptions.find('#answer').val($(this).data('answer'));
+                    chosenOptions.find('input:not(#answer)').remove()
+
+                    var selectors = $(this).data('selectors').split(',')
+
+                    for (var i = 0; i < selectors.length; i++) {
+                        var selector = selectors[i];
+                            selectorInput = $('<input>')
+                                .attr('type', 'hidden')
+                                .attr('id', selector);
+                            chosenOptions.append(selectorInput);
+                    }
+                });
+
+                $('#modal-search .selector-list .list-group').append(div);
+            }
+          }
+        });
     });
 }
+
 
 d3.selectAll(".profile_simple").on("click", function(){
   // stop from bubbling up so selector isn't triggered
@@ -361,12 +382,13 @@ $(document).ready(function () {
         var chosenOptions = $('#modal-search .chosen-options'),
             answer = chosenOptions.find('#answer').val(),
             selectors = chosenOptions.find('input:not(#answer)')
-                        .map(function(){return this.id;}).get();
-            selected = chosenOptions.find('input:not(#answer)')
+                        .map(function(){return this.id;}).get(),
+            selectedOptions = chosenOptions.find('input:not(#answer)')
                         .map(function(){return $(this).val();}).get();
 
             selectors.every(function(selector, step) {
-                if (selected[step] == "") {
+                if (selectedOptions[step] == "") {
+                    $('#modal-search .current-question').html(dataviva.dictionary['select_search_'+selector])
                     profile_search_selector(selectors[step]);
                     return false;
                 } else if(step == selectors.length -1) {
@@ -374,6 +396,9 @@ $(document).ready(function () {
                 }
                 return true;
             });
+        $('#modal-search .select-question').hide();
+        $('#modal-search .current-question').show();
+
     });
 
     $('.btn-toggle').click( function() {
@@ -381,3 +406,4 @@ $(document).ready(function () {
         return false
     });
 });
+
