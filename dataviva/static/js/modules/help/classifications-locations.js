@@ -40,7 +40,11 @@ var LocationsTable = function () {
                     }
                 },
             },
-            {"data": "name"},
+            {
+                render: function (data, type, row, meta){
+                    return dataviva.bra[row.id].name;
+                }
+            },
             {
                 render: function (data, type, row, meta){
                     return dataviva.format.number(row.population, {"key": headers[11]});
@@ -51,6 +55,7 @@ var LocationsTable = function () {
             {"data": "color"}
         ],
         "deferRender": true,
+        "language": dataviva.datatables.language,
         "scrollY": 500,
         "scrollX": true,
         "scrollCollapse": true,
