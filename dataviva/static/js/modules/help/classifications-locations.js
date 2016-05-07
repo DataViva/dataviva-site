@@ -23,7 +23,7 @@ var LocationsTable = function () {
     this.table = $(this.tableId).DataTable({
         "dom": '<"classifications-control">frtip',
         "ajax": {
-            "url": "/attrs/bra?depth=3",
+            "url": "/attrs/bra/?depth=3",
             "dataSrc": "data",
             "cache": true,
         },
@@ -83,31 +83,31 @@ var LocationsTable = function () {
 
             $('#location-wages-regions').click(function() {
                 loadingRankings.show();
-                locations.table.ajax.url("/attrs/bra?depth=1").load(loadingRankings.hide);
+                locations.table.ajax.url("/attrs/bra/?depth=1").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-states').click(function() {
                 loadingRankings.show();
-                locations.table.ajax.url("/attrs/bra?depth=3").load(loadingRankings.hide);
+                locations.table.ajax.url("/attrs/bra/?depth=3").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-mesoregions').click(function() {
                 loadingRankings.show();
-                locations.table.ajax.url("/attrs/bra?depth=5").load(loadingRankings.hide);
+                locations.table.ajax.url("/attrs/bra/?depth=5").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-microregions').click(function() {
                 loadingRankings.show();
-                locations.table.ajax.url("/attrs/bra?depth=7").load(loadingRankings.hide);
+                locations.table.ajax.url("/attrs/bra/?depth=7").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
             $('#location-wages-municipalities').click(function() {
                 loadingRankings.show();
-                locations.table.ajax.url("/attrs/bra?depth=9").load(loadingRankings.hide);
+                locations.table.ajax.url("/attrs/bra/?depth=9").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
