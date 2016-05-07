@@ -16,9 +16,20 @@
 .build_graph .sidebar #dimensions .form-group .btn {
     margin-top: 2px;
 }
-.build_graph .dropdown-menu > li > a .fa {
-  color: #666666;
-}
 .build_graph .dropdown-select {
     margin-bottom: 10px;
 }
+.build_graph .dropdown-menu .graph-link {
+    width: 242px;
+    height: 30px;
+    font-size: 18px;
+}
+
+@media (max-width: 1199px) {
+    .build_graph .dropdown-menu .graph-link {
+        width: 242px;
+        height: 30px;
+        font-size: 18px;
+    }
+}
+
