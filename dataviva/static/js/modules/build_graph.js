@@ -52,6 +52,30 @@ var BuildGraph = (function () {
         });
     }
 
+    function selectView() {
+        BuildGraph.view = this.value;
+    }
+
+    function setViews(views) {
+        $('#views').empty()
+
+        var div = $('<div></div>').addClass('form-group');
+            select = $('<select></select>').addClass('form-control'),
+            label = $('<label></label>').attr('for', 'titles').addClass('control-label'),
+
+        label.html(dataviva.dictionary['views']);
+
+        for(id in views){
+            option = $('<option value="'+id+'">'+views[id].name+'</option>')
+            select.append(option);
+        }
+
+        select.change(selectView);
+
+        div.append(label).append(select);
+        $('#views').append(div);
+    }
+
     function setDimensions(dimensions) {
         $('#dimensions').empty();
         dimensions.forEach(function(dimension, index) {
@@ -76,28 +100,6 @@ var BuildGraph = (function () {
 
             $('#dimensions').append(div);
         });
-    }
-
-    function setViews(views) {
-        $('#views').empty()
-
-        var div = $('<div></div>').addClass('form-group');
-            select = $('<select></select>').addClass('form-control'),
-            label = $('<label></label>').attr('for', 'titles').addClass('control-label'),
-
-        label.html(dataviva.dictionary['views']);
-
-        for(id in views){
-            option = $('<option value="'+id+'">'+views[id].name+'</option>')
-            select.append(option);
-        }
-
-        select.change(function() {
-            BuildGraph.view = this.value;
-        });
-
-        div.append(label).append(select);
-        $('#views').append(div);
     }
 
     function setGraphs(graphs) {
