@@ -1,18 +1,23 @@
 var selectorGraphs = Selector()
     .callback(function(d){
-        $('#'+selectorGraphs.type()).html(d.name);
-        $('#dimensions input[name='+selectorGraphs.type()+']').val(d.id).trigger('change');
+        if ($('#'+selectorGraphs.type()).siblings('input').val() != d.id) {
+            $('#'+selectorGraphs.type()).html(d.name);
+            $('#dimensions input[name='+selectorGraphs.type()+']').val(d.id).trigger('change');
+        }
+
         $('#modal-selector').modal('hide');
     });
 
 function select_dimension(id) {
-  d3.select("#modal-selector-content").call(selectorGraphs.type(id));
-  $('#modal-selector').modal('show');
+    d3.select("#modal-selector-content").call(selectorGraphs.type(id));
+    $('#modal-selector').modal('show');
 }
 
 function clean_selection(id) {
-  $(id).siblings('button').html('Select');
-  $(id).siblings('input').val('all').trigger('change');
+    if ($(id).siblings('input').val() != 'all') {
+        $(id).html(dataviva.dictionary['select']);
+        $(id).siblings('input').val('all').trigger('change');
+    }
 }
 
 var BuildGraph = (function () {
@@ -38,10 +43,10 @@ var BuildGraph = (function () {
                 },
             success: function (result) {
                 setViews(result.views);
-                if (BuildGraph.view && $.inArray(BuildGraph.view.id, Object.keys(result.views)) > -1) {
-                    $('#views select').val(BuildGraph.view.id);
+                if ($.inArray(BuildGraph.view, Object.keys(result.views)) > -1) {
+                    $('#views select').val(BuildGraph.view);
                 } else {
-                    BuildGraph.view = result.views[$('#views select').val()];
+                    BuildGraph.view = result.views[$('#views select').val()].id;
                 }
             }
         });
@@ -54,7 +59,7 @@ var BuildGraph = (function () {
                 label = $('<label></label>').attr('for', dimension.id).addClass('control-label'),
                 cleaner = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
                                         .html(dataviva.dictionary['clean_selection'])
-                                        .attr('onclick', 'clean_selection(this)'),
+                                        .attr('onclick', 'clean_selection('+dimension.id+')'),
                 selector = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
                                         .html(dataviva.dictionary['select'])
                                         .attr('onclick', 'select_dimension(id);'),
@@ -86,6 +91,10 @@ var BuildGraph = (function () {
             option = $('<option value="'+id+'">'+views[id].name+'</option>')
             select.append(option);
         }
+
+        select.change(function() {
+            BuildGraph.view = this.value;
+        });
 
         div.append(label).append(select);
         $('#views').append(div);
