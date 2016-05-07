@@ -37,7 +37,7 @@ def before_request():
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
     g.dictionary = json.dumps(dictionary())
-    g.attr_version = 14
+    g.attr_version = 15
     g.production = False if DEBUG else True
     g.contact_form = ContactForm()
 

@@ -1,3 +1,11 @@
+localforage.getItem("version", function(error, version){
+  if (error || version !== dataviva.attr_version) {
+    localforage.clear(function(){
+      localforage.setItem("version", dataviva.attr_version);
+    })
+  }
+});
+
 dataviva.load = function(name, url, callBack) {
     var parseAttr = function(data) {
         var attr = {};
