@@ -25,12 +25,12 @@ occupations = Dimension('cbo', 'Occupation', [
 
 products = Dimension('hs', 'Product', [
     Depth('hs_2', 'sections'),
-    Depth('hs_6', 'position')
+    Depth('hs_6', 'position'),
 ])
 
 trade_partners = Dimension('wld', 'TradePartner', [
     Depth('wld_2', 'continents'),
-    Depth('wld_5', 'countries')
+    Depth('wld_5', 'countries'),
 ])
 
 courses = Dimension('course_sc', 'BasicCourse', [
@@ -40,15 +40,15 @@ courses = Dimension('course_sc', 'BasicCourse', [
 
 majors = Dimension('course_hedu', 'Major', [
     Depth('course_hedu_2', 'field'),
-    Depth('course_hedu_6', 'majors')
+    Depth('course_hedu_6', 'majors'),
 ])
 
 universities = Dimension('university', 'University', [
-    Depth('show', 'university')
+    Depth('show', 'university'),
 ])
 
 schools = Dimension('school', 'School', [
-    Depth('show', 'school')
+    Depth('show', 'school'),
 ])
 
 attrs_datasets = [
