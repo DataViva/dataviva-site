@@ -33,7 +33,7 @@
 .dv-graph-compare:before {
     content: "\e902";
 }
-.dv-graph-geo-map:before {
+.dv-graph-geo_map:before {
     content: "\e903";
 }
 .dv-graph-line:before {
@@ -54,7 +54,7 @@
 .dv-graph-stacked:before {
     content: "\e909";
 }
-.dv-graph-tree-map:before {
+.dv-graph-tree_map:before {
     content: "\e90a";
 }
 .dv-bra-1:before {
