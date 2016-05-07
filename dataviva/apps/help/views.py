@@ -46,3 +46,7 @@ def all_posts():
         for question in row.questions:
             subjects += [(row.id, row.name(), question.description(), question.answer())]
     return jsonify(subjects=subjects)
+
+@mod.route('/tab-brazilian-locations')
+def brazilian_locations():
+    return render_template('help/tab-brazilian-locations.html')
