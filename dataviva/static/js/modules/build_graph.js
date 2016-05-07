@@ -5,9 +5,14 @@ var selectorGraphs = Selector()
         $('#modal-selector').modal('hide');
     });
 
-function select_dimension_graph(id) {
+function select_dimension(id) {
   d3.select("#modal-selector-content").call(selectorGraphs.type(id));
   $('#modal-selector').modal('show');
+}
+
+function clean_selection(id) {
+  $(id).siblings('button').html('Select');
+  $(id).siblings('input').val('all').trigger('change');
 }
 
 var buildGraph = (function () {
@@ -20,17 +25,17 @@ var buildGraph = (function () {
 
     var views, dataset;
 
-    function buildDimensions(dataset) {
+    function setDimensions(dimensions) {
         $('#dimensions').empty();
-        dataviva.datasets[dataset].dimensions.forEach(function(dimension, index) {
+        dimensions.forEach(function(dimension, index) {
             var div = $('<div></div>').addClass('form-group'),
             label = $('<label></label>').attr('for', dimension.id).addClass('control-label'),
             deactivate_button = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
                                     .html(dataviva.dictionary['deactivate'])
-                                    .attr('onclick', 'deactivate_dimension_graph(this)'),
+                                    .attr('onclick', 'clean_selection(this)'),
             selector_button = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
                                     .html(dataviva.dictionary['select'])
-                                    .attr('onclick', 'select_dimension_graph(id);');
+                                    .attr('onclick', 'select_dimension(id);');
 
             filter = $('<input></input>').attr('type', 'hidden').attr('name', dimension.id).attr('id', 'filter'+index).val('all');
 
@@ -46,7 +51,7 @@ var buildGraph = (function () {
         });
     }
 
-    function buildViews(views) {
+    function setViews(views) {
         $('#views').empty()
 
         var div = $('<div></div>').addClass('form-group');
@@ -64,7 +69,7 @@ var buildGraph = (function () {
         $('#views').append(div);
     }
 
-    function buildGraphs(graphs) {
+    function setGraphs(graphs) {
         $('#graphs').empty()
 
         var div = $('<div></div>').attr('class', 'dropdown dropdown-select');
@@ -109,14 +114,14 @@ var buildGraph = (function () {
                     filter2: $('#dimensions #filter2').val()
                 },
             success: function (result) {
-                console.log(result.views);
+                setViews(result.views);
             }
         });
     }
 
     function changeDataSet() {
         buildGraph.dataset = this.value;
-        buildDimensions(this.value);
+        setDimensions(dataviva.datasets[this.value].dimensions);
         updateViews();
     }
 
@@ -129,10 +134,6 @@ var buildGraph = (function () {
     }
 })();
 
-function deactivate_dimension_graph(id) {
-  $(id).siblings('button').html('Select');
-  $(id).siblings('input').val('all').trigger('change');
-}
 
 $(document).ready(function () {
     dataviva.requireAttrs(['datasets'], function() {
