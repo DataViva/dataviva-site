@@ -24,12 +24,13 @@ var BuildGraph = (function () {
 
     return {
         dataset: dataset,
-        selectedView: selectedView,
         views: views,
+        selectedView: selectedView,
+        selectedGraph: selectedGraph,
         init: init
     }
 
-    var selectedView, dataset;
+    var selectedGraph, selectedView, dataset, views;
 
     function updateViews() {
         $.ajax({
@@ -44,18 +45,72 @@ var BuildGraph = (function () {
                 },
             success: function (result) {
                 setViews(result.views);
+
                 if ($.inArray(BuildGraph.selectedView, Object.keys(result.views)) > -1) {
                     $('#views select').val(BuildGraph.selectedView);
                 } else {
                     BuildGraph.selectedView = result.views[$('#views select').val()].id;
                 }
+
+                setGraphs(result.views[BuildGraph.selectedView].graphs);
             }
         });
     }
+    function selectGraph(graphLink) {
+        BuildGraph.selectedGraph = $(graphLink).attr('id');
 
-    function selectView() {
-        BuildGraph.selectedView = this.value;
-        setGraphs(BuildGraph.views[this.value].graphs);
+        var graphName = $(graphLink).html();
+
+        //Adds active class to selected item
+        $(graphLink).parents('.dropdown-menu').find('li').removeClass('active');
+        $(graphLink).parent('li').addClass('active');
+
+        //Displays selected text on dropdown-toggle button
+        $('#selected-graph').data('graph', $(graphLink).attr('id'));
+        $('#selected-graph').html(graphName);
+
+        $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graphLink).data('url')+'"></iframe>');
+    }
+
+    function setGraphs(graphs) {
+        $('#graphs').empty()
+
+        var div = $('<div></div>').attr('class', 'dropdown dropdown-select form-group');
+            graphButton = $('<button data-toggle="dropdown" aria-expanded="true"></button>')
+                            .attr('id', 'selected-graph')
+                            .attr('class', 'btn btn-outline btn-block dropdown-toggle'),
+            dropDownMenu = $('<ul role="menu" aria-labelledby="selected-graph"></ul>')
+                            .attr('class', 'dropdown-menu'),
+            label = $('<label></label>').attr('for', 'selected-graph').addClass('control-label');
+
+        label.html(dataviva.dictionary['graphs']);
+
+        for(id in graphs){
+            var graphLink = $('<a></a>')
+                            .attr('id', id)
+                            .attr('class', 'graph-link')
+                            .data('url', "/" + dataviva.language + '/embed/' + graphs[id].url)
+                            .html('<i class="dv-graph-'+id+' m-r-sm"></i>' + graphs[id].name);
+
+            var graphOption = $('<li role="presentation"></li>').append(graphLink);
+
+            dropDownMenu.append(graphOption);
+        }
+
+        div.on( 'click', '.dropdown-menu li a', function(argument) {
+           selectGraph(this);
+        });
+
+        div.append(label).append(graphButton).append(dropDownMenu);
+
+        $('#graphs').append(div);
+
+        if ($.inArray(BuildGraph.selectedGraph, Object.keys(graphs)) > -1) {
+            selectGraph($('#'+BuildGraph.selectedGraph));
+        } else {
+            BuildGraph.selectedGraph = $('#selected-graph').data('graph');
+            selectGraph($('#selected-graph').siblings('.dropdown-menu').find('li a').first());
+        }
     }
 
     function setViews(views) {
@@ -73,7 +128,10 @@ var BuildGraph = (function () {
             select.append(option);
         }
 
-        select.change(selectView);
+        select.change(function() {
+            BuildGraph.selectedView = this.value;
+            setGraphs(BuildGraph.views[this.value].graphs);
+        });
 
         div.append(label).append(select);
         $('#views').append(div);
@@ -105,46 +163,8 @@ var BuildGraph = (function () {
         });
     }
 
-    function setGraphs(graphs) {
-        $('#graphs').empty()
-
-        var div = $('<div></div>').attr('class', 'dropdown dropdown-select form-group');
-            graphButton = $('<button data-toggle="dropdown" aria-expanded="true"></button>')
-                            .attr('id', 'graph-button')
-                            .attr('class', 'btn btn-outline btn-block dropdown-toggle'),
-            dropDownMenu = $('<ul role="menu" aria-labelledby="graph-button"></ul>')
-                            .attr('class', 'dropdown-menu'),
-            label = $('<label></label>').attr('for', 'graph-button').addClass('control-label');
-
-        label.html(dataviva.dictionary['graphs']);
-
-        for(id in graphs){
-            var graphLink = $('<a></a>')
-                            .attr('href', "/" + dataviva.language + '/embed/' + graphs[id].url)
-                            .attr('target', "graphs-frame-build-graphs")
-                            .html('<i class="dv-graph-'+id+' m-r-sm"></i>' + graphs[id].name);
-
-            var graphOption = $('<li role="presentation"></li>').append(graphLink);
-
-            dropDownMenu.append(graphOption);
-        }
-
-        div.on( 'click', '.dropdown-menu li a', function() {
-           var target = $(this).html();
-
-           //Adds active class to selected item
-           $(this).parents('.dropdown-menu').find('li').removeClass('active');
-           $(this).parent('li').addClass('active');
-
-           //Displays selected text on dropdown-toggle button
-           $(this).parents('.dropdown-select').find('.dropdown-toggle').html(target);
-        });
-
-        div.append(label).append(graphButton).append(dropDownMenu);
-        $('#graphs').append(div);
-    }
-
     function changeDataSet() {
+        $('#datasets #dataset-empty-option').remove();
         BuildGraph.dataset = this.value;
         setDimensions(dataviva.datasets[this.value].dimensions);
         updateViews();
