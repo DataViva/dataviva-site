@@ -513,7 +513,7 @@
 .dv-students:before {
     content: "\e9a2";
 }
-.dv-basic_course:before {
+.dv-basic-course:before {
     content: "\e9a3";
 }
 .dv-bra:before {
@@ -534,7 +534,7 @@
 .dv-trade-partner:before {
     content: "\e9a9";
 }
-.dv-univercity:before {
+.dv-university:before {
     content: "\e9aa";
 }
 
