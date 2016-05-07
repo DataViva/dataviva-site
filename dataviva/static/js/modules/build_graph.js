@@ -24,11 +24,12 @@ var BuildGraph = (function () {
 
     return {
         dataset: dataset,
-        view: view,
+        selectedView: selectedView,
+        views: views,
         init: init
     }
 
-    var view, dataset;
+    var selectedView, dataset;
 
     function updateViews() {
         $.ajax({
@@ -43,20 +44,22 @@ var BuildGraph = (function () {
                 },
             success: function (result) {
                 setViews(result.views);
-                if ($.inArray(BuildGraph.view, Object.keys(result.views)) > -1) {
-                    $('#views select').val(BuildGraph.view);
+                if ($.inArray(BuildGraph.selectedView, Object.keys(result.views)) > -1) {
+                    $('#views select').val(BuildGraph.selectedView);
                 } else {
-                    BuildGraph.view = result.views[$('#views select').val()].id;
+                    BuildGraph.selectedView = result.views[$('#views select').val()].id;
                 }
             }
         });
     }
 
     function selectView() {
-        BuildGraph.view = this.value;
+        BuildGraph.selectedView = this.value;
+        console.log(BuildGraph.views[this.value]);
     }
 
     function setViews(views) {
+        BuildGraph.views = views;
         $('#views').empty()
 
         var div = $('<div></div>').addClass('form-group');
