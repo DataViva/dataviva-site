@@ -1,8 +1,8 @@
 var headers = {
-    0: "article",
+    0: "article_pt",
     1: "color",
     2: "desc",
-    3: "export_val",
+    3: "enrolled",
     4: "gender",
     5: "icon",
     6: "id",
@@ -11,38 +11,38 @@ var headers = {
     9: "keywords",
     10: "name",
     11: "plural_pt",
-    12: "url"
+    12: "url",
 }
 
 var loadingRankings = dataviva.ui.loading('.classifications .classifications-wrapper');
 loadingRankings.text(dataviva.dictionary['loading'] + "...");
 
-var ProductsTable = function () {
-    this.tableId = '#products-table';
+var BasicCoursesTable = function () {
+    this.tableId = '#basic-courses-table';
 
     this.table = $(this.tableId).DataTable({
         "dom": '<"classifications-control">frtip',
         "ajax": {
-            "url": "/attrs/hs/?depth=2",
+            "url": "/attrs/course_sc/?depth=2",
             "dataSrc": "data",
             "cache": true,
         },
         "order": [],
         "columns": [
-            {"data": "id"},
-            {
+        {"data": "id"},
+        {
                 render: function (data, type, row, meta){
-                    return dataviva.hs[row.id].name;
+                    return dataviva.course_sc[row.id].name;
                 }
             },
             {
                 render: function (data, type, row, meta){
-                    return dataviva.format.number(row.export_val, {"key": headers[3]});
+                    return dataviva.format.number(row.enrolled, {"key": headers[3]});
                 },
                 className: "table-number",
                 type: 'num-dataviva'
             },
-            {"data": "color"},
+        {"data": "color"},
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,
@@ -53,28 +53,27 @@ var ProductsTable = function () {
         initComplete: function () {
             var buttons = $("<div></div>").addClass("btn-group");
 
-            var hs_2 = dataviva.dictionary['hs_2'],
-                hs_6 = dataviva.dictionary['hs_6'];
+            var course_sc_2 = dataviva.dictionary['course_sc_2'],
+                course_sc_5 = dataviva.dictionary['course_sc_5'];
 
-            buttons.append($("<button>"+hs_2+"</button>").attr("id", 'products-sections').addClass("btn btn-white"));
-            buttons.append($("<button>"+hs_6+"</button>").attr("id", 'products-postions').addClass("btn btn-white"));
+            buttons.append($("<button>"+course_sc_2+"</button>").attr("id", 'basic-courses-fields').addClass("btn btn-white"));
+            buttons.append($("<button>"+course_sc_5+"</button>").attr("id", 'basic-courses-courses').addClass("btn btn-white"));
 
             $('.classifications-content .classifications-control').append(buttons);
 
-            $('#products-table_filter input').removeClass('input-sm');
-            $('#products-table_filter').addClass('pull-right');
-            $('#products-sections').addClass('active');
+            $('#basic-courses-table_filter input').removeClass('input-sm');
+            $('#basic-courses-table_filter').addClass('pull-right');
+            $('#basic-courses-fields').addClass('active');
 
-
-            $('#products-sections').click(function() {
+            $('#basic-courses-fields').click(function() {
                 loadingRankings.show();
-                products.table.ajax.url("/attrs/hs/?depth=2").load(loadingRankings.hide);
+                basicCourses.table.ajax.url("/attrs/course_sc/?depth=2").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
-            $('#products-postions').click(function() {
+            $('#basic-courses-courses').click(function() {
                 loadingRankings.show();
-                products.table.ajax.url("/attrs/hs/?depth=6").load(loadingRankings.hide);
+                basicCourses.table.ajax.url("/attrs/course_sc/?depth=5").load(loadingRankings.hide);
                 $(this).addClass('active').siblings().removeClass('active');
             });
 
@@ -84,6 +83,7 @@ var ProductsTable = function () {
     });
 };
 
-dataviva.requireAttrs(['hs'], function() {
-    window.products = new ProductsTable(loadingRankings.hide);
+dataviva.requireAttrs(['course_sc'], function() {
+    window.basicCourses = new BasicCoursesTable(loadingRankings.hide);
 });
+    

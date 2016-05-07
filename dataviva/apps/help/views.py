@@ -56,3 +56,8 @@ def brazilian_locations():
 @mod.route('/tab-products')
 def products():
     return render_template('help/tab-products.html')
+
+
+@mod.route('/tab-basic-courses')
+def basic_courses():
+    return render_template('help/tab-basic-courses.html')
