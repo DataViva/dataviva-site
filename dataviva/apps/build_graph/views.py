@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.embed.models import Build
 from sqlalchemy import not_
+import hashlib
 
 
 mod = Blueprint('build_graph', __name__,
@@ -63,10 +64,16 @@ def views(dataset, bra, filter1, filter2):
 
         title = re.sub(r'\s\(.*\)', r'', build.title())
 
-        if title not in views:
-            views[title] = {}
+        id = hashlib.md5(title).digest().encode("base64")[0:10]
 
-        views[title][build.app.type] = {
+        if id not in views:
+            views[id] = {
+                'id': id,
+                'name': title,
+                'graphs': {},
+            }
+
+        views[id]['graphs'][build.app.type] = {
             'url': build.url(),
             'name': build.app.name()
         }
