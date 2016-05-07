@@ -64,7 +64,7 @@ def views(dataset, bra, filter1, filter2):
 
         title = re.sub(r'\s\(.*\)', r'', build.title())
 
-        id = hashlib.md5(title).digest().encode("base64")[0:10]
+        id = hashlib.md5(build.slug2_en).digest().encode("base64")[0:10]
 
         if id not in views:
             views[id] = {
