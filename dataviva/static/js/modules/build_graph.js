@@ -55,7 +55,7 @@ var BuildGraph = (function () {
 
     function selectView() {
         BuildGraph.selectedView = this.value;
-        console.log(BuildGraph.views[this.value]);
+        setGraphs(BuildGraph.views[this.value].graphs);
     }
 
     function setViews(views) {
@@ -69,7 +69,7 @@ var BuildGraph = (function () {
         label.html(dataviva.dictionary['views']);
 
         for(id in views){
-            option = $('<option value="'+id+'">'+views[id].name+'</option>')
+            var option = $('<option value="'+id+'">'+views[id].name+'</option>');
             select.append(option);
         }
 
@@ -108,7 +108,7 @@ var BuildGraph = (function () {
     function setGraphs(graphs) {
         $('#graphs').empty()
 
-        var div = $('<div></div>').attr('class', 'dropdown dropdown-select');
+        var div = $('<div></div>').attr('class', 'dropdown dropdown-select form-group');
             graphButton = $('<button data-toggle="dropdown" aria-expanded="true"></button>')
                             .attr('id', 'graph-button')
                             .attr('class', 'btn btn-outline btn-block dropdown-toggle'),
@@ -118,9 +118,15 @@ var BuildGraph = (function () {
 
         label.html(dataviva.dictionary['graphs']);
 
-        for(graph in graphs){
-            option = $('<option value="'+graph+'">'+graph+'</option>')
-            select.append(option);
+        for(id in graphs){
+            var graphLink = $('<a></a>')
+                            .attr('href', "/" + dataviva.language + '/embed/' + graphs[id].url)
+                            .attr('target', "graphs-frame-build-graphs")
+                            .html('<i class="dv-graph-'+id+' m-r-sm"></i>' + graphs[id].name);
+
+            var graphOption = $('<li role="presentation"></li>').append(graphLink);
+
+            dropDownMenu.append(graphOption);
         }
 
         div.on( 'click', '.dropdown-menu li a', function() {
@@ -134,7 +140,7 @@ var BuildGraph = (function () {
            $(this).parents('.dropdown-select').find('.dropdown-toggle').html(target);
         });
 
-        div.append(label).append(select);
+        div.append(label).append(graphButton).append(dropDownMenu);
         $('#graphs').append(div);
     }
 
