@@ -24,37 +24,37 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.dv-app-bar:before {
+.dv-graph-bar:before {
     content: "\e900";
 }
-.dv-app-box:before {
+.dv-graph-box:before {
     content: "\e901";
 }
-.dv-app-compare:before {
+.dv-graph-compare:before {
     content: "\e902";
 }
-.dv-app-geo-map:before {
+.dv-graph-geo-map:before {
     content: "\e903";
 }
-.dv-app-line:before {
+.dv-graph-line:before {
     content: "\e904";
 }
-.dv-app-network:before {
+.dv-graph-network:before {
     content: "\e905";
 }
-.dv-app-occugrid:before {
+.dv-graph-occugrid:before {
     content: "\e906";
 }
-.dv-app-rings:before {
+.dv-graph-rings:before {
     content: "\e907";
 }
-.dv-app-scatter:before {
+.dv-graph-scatter:before {
     content: "\e908";
 }
-.dv-app-stacked:before {
+.dv-graph-stacked:before {
     content: "\e909";
 }
-.dv-app-tree-map:before {
+.dv-graph-tree-map:before {
     content: "\e90a";
 }
 .dv-bra-1:before {
