@@ -638,6 +638,7 @@ def dictionary():
 
         # build graphs
         "views": gettext("Views"),
+        "clean_selection": gettext("Clean selection"),
 
         #contact
         "contact_message": gettext("Your message has been sent successfully. We will soon get back to you.")
