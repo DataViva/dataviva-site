@@ -202,32 +202,6 @@ if not DEBUG:
 
         headers = list(request.headers)
 
-        # allowed = True
-        # requester = request.headers.get("from")
-        # if requester:
-        #   if "googlebot" in requester:
-        #     allowed = False
-        #
-        # if "fancybox" in request.url:
-        #   allowed = False
-        #
-        # if allowed and error_code != 404:
-        #     admins = User.query.filter(User.role == 1).filter(User.email != "").filter(User.agree_mailer == 1).all()
-        #     emails = [str(getattr(a,"email")) for a in admins]
-        #
-        #     if len(emails) > 0:
-        #         subject = "DataViva Error: "+error
-        #
-        #         if e == "413":
-        #             request_info["URL"] = ''
-        #             error_text = "413: Request entity too large"
-        #         else:
-        #             error_text = str(e)
-        #
-        #         send_mail(subject, emails,
-        #             render_template('admin/mail/error.html', title=subject,
-        #             error=error_text, request_info=request_info, headers=headers))
-
         g.page_type = "error"
 
         sabrina = {}

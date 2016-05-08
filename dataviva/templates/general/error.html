@@ -30,11 +30,11 @@
           {% if error == "404" %}
           <p>Aqui estão algumas sugestões que podem te ajudar a encontrar o que procura:
             <ul class="">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Iniciar pesquisa</a></li>
-              <li><a href="#">Ranking</a></li>
-              <li><a href="#">Ajuda</a></li>
-              <li><a href="#">Contato</a></li>
+              <li><a href="{{ url_for('general.home') }}">Home</a></li>
+              <li><a href="{{ url_for('general.search') }}">Iniciar pesquisa</a></li>
+              <li><a href="{{ url_for('rankings.index') }}">Ranking</a></li>
+              <li><a href="{{ url_for('help.index') }}">Ajuda</a></li>
+              <li><a href="{{ url_for('general.contact') }}">Contato</a></li>
             </ul>
           </p>
           {% endif %}
