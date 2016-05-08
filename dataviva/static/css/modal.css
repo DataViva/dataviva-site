@@ -11,8 +11,9 @@
     font-size: 18px;
     font-weight: 500;
 }
-
-.modal.dataviva .modal-body {
+#modal-search .modal-body,
+#modal-selector .modal-body,
+#dataviva-signup .modal-body {
     min-height: 400px;
 }
 .modal.dataviva .modal-body h2 {
