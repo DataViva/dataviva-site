@@ -434,8 +434,11 @@ $(document).ready(function () {
     });
 
     $('.embed-video-link').click(function() {
-        $('#modal-dataviva-video .video-wrapper').html('<iframe class"embed-responsive-item" src="' + this.href +
-                                                       '" frameborder="0" allowfullscreen></iframe>');
+        $('#modal-dataviva-video .video-wrapper').html(
+            '<embed style="position: absolute; top: 0; left: 0;" width="100%" height="100%" ' +
+            'frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen allowfullscreen="true" ' +
+            'allowscriptaccess="always" quality="high" bgcolor="#000000" name="my-video" ' +
+            'src="'+this.href+'?enablejsapi=1&version=3&playerapiid=ytplayer" type="application/x-shockwave-flash">');
 
         $('#modal-dataviva-video').modal('show');
         return false; // cancel the event

@@ -229,6 +229,10 @@
   margin: 0 0 20px 0;
 }
 
+.modal .modal-content{
+    min-width: 625px;
+}
+
 .modal .question-header .chosen-options .question .question-option {
   font-weight: bold;
   font-size: 17px;
