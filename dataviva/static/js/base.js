@@ -430,6 +430,13 @@ $(document).ready(function () {
         }
     });
 
+    $('.embed-video-link').click(function() {
+        $('#modal-dataviva-video .video-wrapper').html('<iframe width="560" height="315" src="' + this.href +
+                                                       '" frameborder="0" allowfullscreen></iframe>');
+        $('#modal-dataviva-video').modal('show');
+        return false; // cancel the event
+    });
+
     $('.btn-toggle').click( function() {
         $(this).toggleClass('selected');
         return false
