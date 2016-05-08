@@ -361,29 +361,31 @@ function Selector() {
 
         if (sorts.length > 1) {
 
-          sort_toggles.append("legend")
-            .attr("id","selector_sort")
+          sort_toggles.append("div")
             .html(dataviva.format.text("sort"));
 
+          var sorter_button_wrapper = sort_toggles.append("div")
+                .attr("id","selector_sort")
+                .attr('class', 'btn-group');
+
           sorts.forEach(function(s){
-            var input = sort_toggles.append("input")
-              .attr("type","radio")
+            var sorter_button = sorter_button_wrapper.append("button")
               .attr("id","selector_sort_"+s)
               .attr("value",s)
+              .attr("class", "btn btn-default")
               .attr("name","selector_sort")
-              .attr("onclick","populate_list(selected,this.value)");
-
-            if (s == sorting) input.attr("checked","checked");
-            sort_toggles.append("label")
-              .attr("for","selector_sort_"+s)
+              .attr("onclick","populate_list(selected,this.value)")
               .html(dataviva.format.text(s));
+
+            if (s == sorting) sorter_button.classed("active", 1);
+
+
+            sorter_button.on("click", function() {
+              d3.select(this).classed("active", !d3.select(this).classed("active"));
+              $(this).siblings().removeClass('active');
+            });
+
           });
-
-
-          sorter = leon("$selector_sort").color(dataviva.color);
-
-          $('#leon_selector_sort .leon.radio.group').children().attr('class', 'btn btn-default')
-          $('#leon_selector_sort .leon.radio.group').attr('class', 'btn-group');
         }
 
         header_select_div = sort_toggles.append("div").attr("id","header_select_div");
@@ -395,7 +397,7 @@ function Selector() {
 
         header_select = leon("#header_select");
 
-        depth_select = header.append("div").attr("class", "selector_depth");
+        depth_select = header.append("div").attr("class", "selector_depth btn-group");
 
         search = header.append("input")
           .attr("type","text")
@@ -609,11 +611,6 @@ function Selector() {
           close.style("background-color", header_color);
         }
 
-        if (sorter) {
-          sorter.color(header_color);
-        }
-        searcher.color(header_color);
-
 
         //  AJUSTES DE LAYOUT
         $("#"+name+"_search").attr('class', 'form-control');
@@ -629,22 +626,19 @@ function Selector() {
             //   .html(dataviva.dictionary.showing);
 
             depth_toggles.forEach(function(d){
-              var input = depth_select.append("input")
-                .attr("type","radio")
+              var depth_button = depth_select.append("button")
                 .attr("id","selector_depth_"+d)
                 .attr("value",d)
+                .attr("class", "btn btn-default")
                 .attr("name","selector_depth_toggle")
-                .attr("onclick","select_value(selected,this.value)");
-              if (d == current_depth) input.attr("checked","checked");
-              depth_select.append("label")
-                .attr("for","selector_depth_"+d)
+                .attr("onclick","select_value(selected,this.value)")
                 .html(dataviva.dictionary[type+"_"+d+"_plural"]);
+
+
+              if (d == current_depth) depth_button.classed("active", 1);
             });
 
-            leon("$selector_depth_toggle").color(header_color);
-
-            $('#leon_selector_depth_toggle .leon.radio.group').children().attr('class', 'btn btn-default')
-            $('#leon_selector_depth_toggle .leon.radio.group').attr('class', 'btn-group');
+            $('#selector_depth').attr('class', 'btn-group');
           }
 
         }
