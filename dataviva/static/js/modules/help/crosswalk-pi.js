@@ -11,8 +11,8 @@ var ProductsIndustryTable = function () {
 
     this.table = $(this.tableId).DataTable({
         "ajax": {
-            "url": "/help/crosswalk-pi/all",
-            "dataSrc": "product_industry",
+            "url": "/help/crosswalk/pi",
+            "dataSrc": "data",
             "cache": true,
         },
         "order": [],
@@ -28,7 +28,7 @@ var ProductsIndustryTable = function () {
                         return dataviva.cnae[row[1]].name + ' (' + row[1] + ')';
                     }
                     else{
-                        return 'deu pau'
+                        return '-';
                     }
 
                 }
