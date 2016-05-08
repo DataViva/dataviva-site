@@ -391,6 +391,9 @@ $(document).ready(function () {
     $("#modal-search").on('hidden.bs.modal', function () {
       $(this).find('.modal-body').empty();
     })
+    $("#modal-dataviva-video").on('hidden.bs.modal', function () {
+      $(this).find('.video-wrapper').empty();
+    })
 
     $('#modal-search #search-advance').click(function() {
         var answer = $('#modal-search #answer').val();
@@ -431,8 +434,9 @@ $(document).ready(function () {
     });
 
     $('.embed-video-link').click(function() {
-        $('#modal-dataviva-video .video-wrapper').html('<iframe width="560" height="315" src="' + this.href +
+        $('#modal-dataviva-video .video-wrapper').html('<iframe class"embed-responsive-item" src="' + this.href +
                                                        '" frameborder="0" allowfullscreen></iframe>');
+
         $('#modal-dataviva-video').modal('show');
         return false; // cancel the event
     });

@@ -13,7 +13,7 @@
 }
 
 .modal.dataviva .modal-body {
-    min-height: 200px;
+    min-height: 400px;
 }
 .modal.dataviva .modal-body h2 {
     font-size:20px;
@@ -234,4 +234,7 @@
   font-size: 17px;
 }
 
+#modal-dataviva-video .modal-container.modal-video h1 {
+    margin-top: 0px;
+}
 
