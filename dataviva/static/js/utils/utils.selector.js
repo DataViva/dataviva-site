@@ -703,9 +703,16 @@ function Selector() {
             if ((type == "bra" && v.id.length !== 1) || (type == "wld" && v.id.length == 5)) {
                 search_icon = item.append("div").attr("class","search_icon").style("background-image","url("+v.icon+")");
             } else {
+
+
+                if (type == "university") {
+                    var fontId = v.school_type_id.toLowerCase();
+                } else {
+                    var fontId = v.id.slice(0, icon_class_number_len[type]);
+                }
+
                 search_icon = item.append("div").attr("class","icon-box").append("i").attr(
-                    "class","search_icon dv-" +
-                    type.replace("_", "-") + "-" + v.id.slice(0, icon_class_number_len[type]));
+                    "class","search_icon dv-" + type.replace("_", "-") + "-" + fontId);
                 if (search_icon.node().offsetWidth > 50) {
                     search_icon.style("font-size", search_icon.node().offsetWidth / 3 + 'px');
                 }
