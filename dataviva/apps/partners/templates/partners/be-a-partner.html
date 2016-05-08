@@ -3,7 +3,7 @@
 {% block content %}
 <div class="container">
     <ol class="breadcrumb">
-        <li><a href="01-index.html">Home</a></li>
+        <li><a href="{{ url_for('general.home') }}">Home</a></li>
         <li class="active"><span>{% trans %}Be a Partner{% endtrans %}</span></li>
     </ol>
     <div class="row">
@@ -19,7 +19,7 @@
 
                 {% for call in calls %}
                     <p><a href={{call.link}} target="_blank">{{call.title}}</a></p>
-                {%endfor%}    
+                {%endfor%}
             </div>
         {% include "include/partners.html" %}
         </div>
@@ -27,6 +27,6 @@
 </div>
 {% endblock content %}
 <p>
-    Título : Edital 1 <br /> 
+    Título : Edital 1 <br />
 
 </p>
