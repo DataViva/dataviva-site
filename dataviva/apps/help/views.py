@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g, jsonify
 from dataviva.apps.general.views import get_locale
 from models import HelpSubject
+from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 
 
 mod = Blueprint('help', __name__,
@@ -61,3 +62,17 @@ def products():
 @mod.route('/tab-basic-courses')
 def basic_courses():
     return render_template('help/tab-basic-courses.html')
+
+
+@mod.route('/crosswalk-pi/all')
+def all_crosswalk_pi():
+    result = Crosswalk_pi.query.all()
+    product_industry = []
+    for row in result:
+        product_industry += [(row.hs_id, row.cnae_id)]
+    return jsonify(product_industry=product_industry)
+
+
+@mod.route('/tab-crosswalk-pi')
+def crosswalk_pi():
+    return render_template('help/tab-crosswalk-pi.html')
