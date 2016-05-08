@@ -4,10 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="Description" content="{% block description %}{% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %} {% trans %}through more than 100 million interactive visualizations.{% endtrans %}{% endblock %}">
 
-    <title>DataViva</title>
+    <!-- Facebook Properties -->
+    <meta property="og:image" content="http://www.dataviva.info/static/img/facebook.jpg" />
+
+    <title>
+      DataViva {% block title %}{% endblock %}
+    </title>
 
     <link rel='shortcut icon' href='/static/img/favicon.ico' type='image/x-icon' />
     <!-- Bootstrap core CSS -->
@@ -45,6 +49,25 @@
 
     <!-- Custom styles for this module -->
     <link rel="stylesheet" type="text/css" href="/static/css/modules/{{ g.page_type }}.css" type="text/css">
+
+
+    <!-- Javascript Libs -->
+    <script type="text/javascript" src="/static/js/libs/jquery-2.1.1.js"></script>
+    <script type="text/javascript" src="/static/js/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/libs/ios-orientationchange-fix.js"></script>
+    <script type="text/javascript" src="/static/js/libs/localforage.js"></script>
+    <script type="text/javascript" src="/static/js/libs/object.watch.js"></script>
+    <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
+    <script type="text/javascript" src="/static/js/libs/d3.min.js"></script>
+    <script type="text/javascript" src="/static/js/libs/d3plus{% if g.production %}.min{% endif %}.js"></script>
+    <script type="text/javascript" src="/static/js/libs/leon.js"></script>
+    <script type="text/javascript" src="/static/js/libs/moment.min.js"></script>
+    <script>moment.lang("{{g.locale}}")</script>
+
+    <script>var redirect = false</script>
+    <!--[if lt IE 9]>
+      <script>redirect = true</script>
+    <![endif]-->
 </head>
 <body class="{{ g.page_type }}" data-ng-app="dataviva">
     {% include "include/header.html" %}
@@ -62,21 +85,6 @@
     {% block footer %}
         {% include "include/footer.html" %}
     {% endblock footer %}
-
-
-    <!-- Javascript Libs -->
-    <script type="text/javascript" src="/static/js/libs/jquery-2.1.1.js"></script>
-    <script type="text/javascript" src="/static/js/libs/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/static/js/libs/ios-orientationchange-fix.js"></script>
-    <script type="text/javascript" src="/static/js/libs/localforage.js"></script>
-    <script type="text/javascript" src="/static/js/libs/object.watch.js"></script>
-    <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
-    <script type="text/javascript" src="/static/js/libs/d3.min.js"></script>
-    <script type="text/javascript" src="/static/js/libs/d3plus{% if g.production %}.min{% endif %}.js"></script>
-    <script type="text/javascript" src="/static/js/libs/leon.js"></script>
-    <script type="text/javascript" src="/static/js/libs/moment.min.js"></script>
-    <script>moment.lang("{{g.locale}}")</script>
-
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
 
@@ -111,12 +119,6 @@
     <script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
     <script type="text/javascript" src="/static/js/utils/utils.general.js"></script>
 
-    <script>var redirect = false</script>
-
-    <!--[if lt IE 9]>
-      <script>redirect = true</script>
-    <![endif]-->
-
     <script>
       if(redirect) window.location = "/upgrade/"
       dataviva.language = "{{ g.locale }}";
@@ -132,5 +134,63 @@
         <script type="text/javascript" src="/static/js/modules/{{ g.page_type }}.js"></script>
     {% endblock js_assets %}
 
+    <script type="text/javascript">
+
+      if (!window.location.origin) {
+        window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+      }
+
+      dataviva.color = "{{ g.color }}";
+      dataviva.page = "{{ g.page_type }}";
+
+      d3.selectAll(".alt_tooltip")
+        .on(d3plus.client.pointer.over,function(){
+          dataviva.ui.tooltip("alt_tooltip",this)
+        })
+        .on(d3plus.client.pointer.out,function(){
+          dataviva.ui.tooltip("alt_tooltip",false)
+        })
+
+      function login() {
+        var width = 600,
+            height = 400,
+            left = window.screenX+(window.innerWidth/2)-(width/2),
+            top = window.screenY+(window.innerHeight/2)-(height/2)
+        window.open('/account/login/','','width='+width+',height='+height+',\
+                                        left='+left+',top='+top+',\
+                                        scrollbars=no,resizable=no,\
+                                        location=no,menubar=no,toolbar=no')
+      }
+
+    </script>
+
+    <!-- Google Analytics! -->
+    <script>
+
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-42576717-1', 'auto');
+      ga('send', 'pageview');
+
+      if ("{{g.page_type}}" !== "home") dataviva.ui.background();
+
+      if (dataviva.resize) {
+        var bg_resize = window.onresize
+        window.onresize = function() {
+          if (dataviva.resize_snap) dataviva.resize()
+          else {
+            if(this.resizeTO) clearTimeout(this.resizeTO);
+            this.resizeTO = setTimeout(function() {
+              dataviva.resize()
+            },500)
+          }
+          if (bg_resize) bg_resize()
+        }
+      }
+
+    </script>
 </body>
 </html>
