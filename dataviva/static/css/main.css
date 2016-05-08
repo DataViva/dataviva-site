@@ -941,23 +941,21 @@ h1.login-title {
   display: inline-block;
 }
 
-
-
 /* TOGGLE BUTTON */
 .btn-toggle .fa-check-square-o { display: none; }
 .btn-toggle .fa-square-o { display: inline; }
 
-.btn-toggle.selected .fa-check-square-o { display: inline; }
-.btn-toggle.selected .fa-square-o { display: none; }
-
-
-.btn-toggle.selected {
-  background-color: #A25A6D;
-  border-color: #A25A6D;
-  color: #FFFFFF;
+.btn-toggle.active .fa-check-square-o,
+.btn-toggle:active .fa-check-square-o,
+.btn-toggle:focus .fa-check-square-o {
+    display: inline;
+    margin-right: 5px;
+    background-color: #905262;
+    border-color: #905262;
+    color: #FFFFFF;
 }
-.btn-toggle.selected:hover {
-  background-color: #905262;
-  border-color: #905262;
-  color: #FFFFFF;
+
+.btn-toggle:active .fa-square-o {
+    display: none;
 }
+

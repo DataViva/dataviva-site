@@ -439,10 +439,5 @@ $(document).ready(function () {
         $('#modal-dataviva-video').modal('show');
         return false; // cancel the event
     });
-
-    $('.btn-toggle').click( function() {
-        $(this).toggleClass('selected');
-        return false
-    });
 });
 

@@ -818,10 +818,11 @@ function Selector() {
 
             if ((!limit || v.id.length >= limit)) {
 
-              var b = buttons.append("input")
+              var b = buttons.append("button")
                 .attr("type","button")
+                .attr("class","m-l-xs btn btn-primary btn-outline btn-toggle")
                 .attr("id","select"+v.id)
-                .attr("value",dataviva.format.text("select"))
+                .html("<i class='fa fa-check-square-o'></i>"+ dataviva.format.text("select"))
                 .node().onclick = function(){
 
               		val = d3.select("#distance"+v.id);
@@ -831,12 +832,13 @@ function Selector() {
               			update_distance(val.property("value"),v.id);
               		}
 
-        					selector_load.text(dataviva.format.text("wait")).show();
+        			selector_load.text(dataviva.format.text("wait")).show();
       				  	callback(data[v.id],name);
 
+                    $('.modal .selector_body .btn-toggle').removeClass('active');
+                    $(this).toggleClass('active');
                 };
 
-              leon("#select"+v.id).color(v.color);
 
             }
 
@@ -864,11 +866,8 @@ function Selector() {
             }
             width -= buttons.node().offsetWidth;
             text.style("max-width",width+"px");
-
           }
-
         });
-        $('.selector .selector_body .search_result .search_buttons .leon.button.medium').attr('class', 'btn btn-primary');
       };
 
       var close = null,
