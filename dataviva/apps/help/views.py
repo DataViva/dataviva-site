@@ -75,6 +75,11 @@ def occupations():
     return render_template('help/tab-occupations.html')
 
 
+@mod.route('/tab-trade-partners')
+def trade_partners():
+    return render_template('help/tab-trade-partners.html')
+
+
 @mod.route('/crosswalk/pi')
 @mod.route('/crosswalk/ip')
 @mod.route('/crosswalk/oc')
