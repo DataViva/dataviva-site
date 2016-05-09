@@ -205,14 +205,13 @@
 #dataviva-signup .intro p{
   color: #999;
 }
-#dataviva-signup .form{
+#dataviva-signup .body-container{
   padding: 10px 50px;
 }
 #dataviva-signup .modal-footer{
   background: rgba(0,0,0,.03);
   margin: 0 -15px -15px;
   border-radius: 0 0 4px 4px;
-  padding: 20px 50px;
 }
 
 /* MODAL DE PERGUNTAS */
