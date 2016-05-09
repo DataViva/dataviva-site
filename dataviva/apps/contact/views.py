@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, g, url_for, render_template
+from flask import Blueprint, g, url_for, render_template, Response
 from dataviva.apps.general.views import get_locale
 from dataviva.utils.send_mail import send_mail
 from forms import ContactForm
@@ -34,7 +34,7 @@ def index():
 def create():
     form = ContactForm()
     if form.validate() is False:
-        return render_template('contact/index.html', form=form)
+        return Response(status=400, mimetype='application/json')
     else:
         contact = Form()
         contact.name = form.name.data
@@ -51,6 +51,7 @@ def create():
         send_mail("Mensagem recebida via página de Contato",
                   ["contato@dataviva.info"], message_tpl)
 
-        message = gettext("Your message has been sent successfully. We will soon get back to you.")
+        message = gettext(
+            "Your message has been sent successfully. We will soon get back to you.")
 
-        return message
+        return Response(message, status=200, mimetype='application/json')
