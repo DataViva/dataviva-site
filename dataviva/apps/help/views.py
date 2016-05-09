@@ -65,14 +65,15 @@ def basic_courses():
     return render_template('help/tab-basic-courses.html')
 
 
-@mod.route('/tab-industrys')
-def industrys():
-    return render_template('help/tab-industrys.html')
+@mod.route('/tab-industries')
+def industries():
+    return render_template('help/tab-industries.html')
 
 
 @mod.route('/tab-occupations')
 def occupations():
     return render_template('help/tab-occupations.html')
+
 
 @mod.route('/crosswalk/pi')
 @mod.route('/crosswalk/ip')
