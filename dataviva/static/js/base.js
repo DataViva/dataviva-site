@@ -452,16 +452,12 @@ $(document).ready(function () {
           AjaxForms.Contact();
         },
 
-        // Form submit function
-        SignUp: function() {
-          var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
-
-          // Checking form input when focus and keypress event
-          $('#modal-signup-form input[type="text"], #modal-signup-form input[type="email"], #modal-signup-form select').on('focus keypress', function() {
-            var $input = $(this);
+        removeWarnings: function(input) {
+            var $input = $(input);
 
             if ($input.hasClass('error')) {
                 $input.closest('.form-group').removeClass('has-error');
+                $input.siblings().remove('label.error');
                 $input.removeClass('error');
             }
 
@@ -469,17 +465,30 @@ $(document).ready(function () {
                 $input.closest('.form-group').removeClass('has-success');
                 $input.removeClass('success');
             }
-          });
+        },
+
+        // Form submit function
+        SignUp: function() {
+          var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+
+          // Checking form input when focus and keypress event
+          $('#modal-signup-form input[type="text"], #modal-signup-form input[type="email"], #modal-signup-form input[type="checkbox"], #modal-signup-form input[type="password"], #modal-signup-form select')
+                .on('focus keypress', function() {
+                    AjaxForms.removeWarnings(this);
+                });
 
 
           // Signup form when submit button clicked
           $('#modal-signup-form').submit(function() {
-            var $form   = $(this);
-            var submitData  = $form.serialize();
-            var $fullname   = $form.find('input[name="fullname"]');
-            var $email      = $form.find('input[name="email"]');
-            var $submit     = $form.find('input[name="submit"]');
-            var status      = true;
+            var $form         = $(this);
+            var submitData    = $form.serialize();
+            var $fullname     = $form.find('input[name="fullname"]');
+            var $email        = $form.find('input[name="email"]');
+            var $submit       = $form.find('input[name="submit"]');
+            var $password     = $form.find('input[name="password"]');
+            var $confirm      = $form.find('input[name="confirm"]');
+            var $agree_mailer = $form.find('input[name="agree_mailer"]');
+            var status        = true;
 
             if ($fullname.val() === '') {
                 $fullname.closest('.form-group').addClass('has-error');
@@ -504,9 +513,6 @@ $(document).ready(function () {
                 dataType: 'html',
                 success: function(response) {
                     $('#dataviva-signup').modal('hide');
-                    $fullname.prop('disabled', false);
-                    $email.prop('disabled', false);
-                    $submit.prop('disabled', false);
                     swal({
                         title: dataviva.dictionary['thank_you'] + '!',
                         text: response.message,
@@ -514,8 +520,20 @@ $(document).ready(function () {
                     });
                 },
                 error: function(response) {
-                    console.log(response);
+                    var errors = $.parseJSON(response.responseText);
+                    for (var field in errors) {
+                        AjaxForms.removeWarnings($form.find('#'+field));
+                        $form.find('#'+field).addClass('error');
+                        $form.find('#'+field).closest('.form-group').addClass('has-error');
+
+                        var error = $('<label></label>').attr('class', 'm-l-md error').html(errors[field]);
+                        $form.find('#'+field).siblings('.control-label').after(error);
+                    }
                 }
+              }).always(function() {
+                    $fullname.prop('disabled', false);
+                    $email.prop('disabled', false);
+                    $submit.prop('disabled', false);
               });
             }
 
@@ -529,20 +547,13 @@ $(document).ready(function () {
         Contact: function() {
           var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
 
+
+
             // Checking form input when focus and keypress event
-            $('#contact-form input[type="text"], #contact-form input[type="email"], #contact-form textarea, #contact-form select').on('focus keypress', function() {
-                var $input = $(this);
-
-                if ($input.hasClass('error')) {
-                    $input.closest('.form-group').removeClass('has-error');
-                    $input.removeClass('error');
-                }
-
-                if ($input.hasClass('success')) {
-                    $input.closest('.form-group').removeClass('has-success');
-                    $input.removeClass('success');
-                }
-            });
+            $('#contact-form input[type="text"], #contact-form input[type="email"], #contact-form textarea, #contact-form select')
+                .on('focus keypress', function() {
+                    AjaxForms.removeWarnings(this);
+                });
 
 
             // Signup form when submit button clicked
@@ -593,11 +604,15 @@ $(document).ready(function () {
                             $submit.prop('disabled', false);
                         },
                         error: function(response) {
-                            swal({
-                                title: dataviva.dictionary['thank_you'] + '!',
-                                text: response.message,
-                                type: "error"
-                            });
+                            var errors = $.parseJSON(response.responseText);
+                            for (var field in errors) {
+                                AjaxForms.removeWarnings($form.find('#'+field));
+                                $form.find('#'+field).addClass('error');
+                                $form.find('#'+field).closest('.form-group').addClass('has-error');
+
+                                var error = $('<label></label>').attr('class', 'm-l-md error').html(errors[field]);
+                                $form.find('#'+field).siblings('.control-label').after(error);
+                            }
                         }
                     });
                 }
