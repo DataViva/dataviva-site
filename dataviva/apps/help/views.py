@@ -98,3 +98,18 @@ def crosswalk():
 @mod.route('/tab-crosswalk-pi')
 def crosswalk_pi():
     return render_template('help/tab-crosswalk-pi.html')
+
+
+@mod.route('/tab-crosswalk-ip')
+def crosswalk_ip():
+    return render_template('help/tab-crosswalk-ip.html')
+
+
+@mod.route('/tab-crosswalk-oc')
+def crosswalk_oc():
+    return render_template('help/tab-crosswalk-oc.html')
+
+
+@mod.route('/tab-crosswalk-co')
+def crosswalk_co():
+    return render_template('help/tab-crosswalk-co.html')
