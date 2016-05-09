@@ -62,7 +62,7 @@ def check_status():
 
 
 def send_confirmation(user):
-    confirmation_url = "http://localhost:5000/en/account/confirm/%s" % user.confirmation_code
+    confirmation_url = "http://localhost:5000/"+g.locale+"/account/confirm/%s" % user.confirmation_code
     confirmation_tpl = render_template('account/mail/confirmation.html',
                                        user=user.serialize(),
                                        confirmation_url=confirmation_url)
@@ -104,8 +104,6 @@ def create_user():
     send_confirmation(user)
 
     return redirect('/account/confirm_pending/%s' % user.email)
-
-
 
 
 @mod.route('/social_auth/<provider>', methods=["GET"])
@@ -312,13 +310,13 @@ def login():
             return google.authorize(callback=callback)
         elif provider == "twitter":
             callback = url_for('account.twitter_authorized',
-                next=request.args.get('next') or request.referrer or None,
-                _external=True)
+                               next=request.args.get('next') or request.referrer or None,
+                               _external=True)
             return twitter.authorize(callback=callback)
         elif provider == "facebook":
             callback = url_for('account.facebook_authorized',
-                next=request.args.get('next') or request.referrer or None,
-                _external=True)
+                               next=request.args.get('next') or request.referrer or None,
+                               _external=True)
             return facebook.authorize(callback=callback)
 
     return render_template(
@@ -331,30 +329,31 @@ def user(nickname):
     activity = None
 
     stars = Starred.query.filter_by(user=user) \
-                .order_by("timestamp desc").all()
+        .order_by("timestamp desc").all()
 
     questions = Question.query.filter_by(user=user) \
-                .order_by("timestamp desc").all()
+        .order_by("timestamp desc").all()
 
     replies = Reply.query.filter_by(user=user) \
-                .order_by("timestamp desc").all()
+        .order_by("timestamp desc").all()
 
     activity = stars + questions + replies
     activity.sort(key=lambda a: a.timestamp, reverse=True)
 
     return render_template("account/index.html",
-        user = user,
-        activity = activity)
+                           user=user,
+                           activity=activity)
 
 
 def update_email_preferences(id, nickname, agree):
     user = User.query.filter_by(nickname=nickname).first_or_404()
-    if user.id == int(id) and int(agree) in [0,1]:
+    if user.id == int(id) and int(agree) in [0, 1]:
         user.agree_mailer = agree
         db.session.add(user)
         db.session.commit()
 
     return user
+
 
 @mod.route('/remove_email/<id>/<nickname>')
 def remove_email_list(id, nickname):
@@ -362,9 +361,10 @@ def remove_email_list(id, nickname):
     flash(gettext("Preferences updated."))
     return redirect('/')
 
+
 @mod.route('/preferences/change_email_preference')
 def preferences():
-    if g.user.is_authenticated :
+    if g.user.is_authenticated:
         if g.user.agree_mailer == 1:
             agree = 0
         else:
@@ -372,7 +372,7 @@ def preferences():
 
         user = update_email_preferences(g.user.id, g.user.nickname, agree)
         flash(gettext("Preferences updated."))
-        return redirect('/account/' + user.nickname )
+        return redirect('/account/' + user.nickname)
     else:
         return redirect('/')
 
@@ -382,20 +382,20 @@ def after_login(**user_fields):
     import re
 
     if request.method == "POST":
-        user_fields = {k:v for k,v in request.form.items() if v is not None}
+        user_fields = {k: v for k, v in request.form.items() if v is not None}
     else:
-        user_fields = {k:v for k,v in user_fields.items() if v is not None}
+        user_fields = {k: v for k, v in user_fields.items() if v is not None}
 
     print(request.host)
 
     if "google_id" in user_fields:
-        user = User.query.filter_by(google_id = user_fields["google_id"]).first()
+        user = User.query.filter_by(google_id=user_fields["google_id"]).first()
     elif "twitter_id" in user_fields:
-        user = User.query.filter_by(twitter_id = user_fields["twitter_id"]).first()
+        user = User.query.filter_by(twitter_id=user_fields["twitter_id"]).first()
     elif "facebook_id" in user_fields:
-        user = User.query.filter_by(facebook_id = user_fields["facebook_id"]).first()
-    elif None is not re.match(r'^(localhost|127.0.0.1)', request.host ):
-        user = User(id = 1)
+        user = User.query.filter_by(facebook_id=user_fields["facebook_id"]).first()
+    elif None is not re.match(r'^(localhost|127.0.0.1)', request.host):
+        user = User(id=1)
 
     if user is None:
 
@@ -413,7 +413,7 @@ def after_login(**user_fields):
     if 'remember_me' in session:
         remember_me = session['remember_me']
         session.pop('remember_me', None)
-    login_user(user, remember = remember_me)
+    login_user(user, remember=remember_me)
 
     return render_template('account/complete_login.html')
 
@@ -422,6 +422,8 @@ def after_login(**user_fields):
     Here are the specific methods for logging in users with their
     twitter accounts.
 """
+
+
 @twitter.tokengetter
 def get_twitter_token():
     """This is used by the API to look for the auth token and secret
@@ -432,6 +434,7 @@ def get_twitter_token():
     session instead.
     """
     return session.get('twitter_token')
+
 
 @mod.route('/twoauth-authorized/')
 @twitter.authorized_handler
@@ -456,7 +459,7 @@ def twitter_authorized(resp):
     )
     session['twitter_user'] = resp['screen_name']
 
-    response = twitter.get('users/show.json?screen_name='+resp["screen_name"]).data
+    response = twitter.get('users/show.json?screen_name=' + resp["screen_name"]).data
 
     fullname = response["name"] if "name" in response else None
     nickname = response["screen_name"] if "screen_name" in response else None
@@ -465,8 +468,8 @@ def twitter_authorized(resp):
     image = response["profile_image_url"] if "profile_image_url" in response else None
     id = response["id"] if "id" in response else None
 
-    return after_login(twitter_id=id, fullname=fullname, nickname=nickname, language=language, country=country, image=image)
-
+    return after_login(
+        twitter_id=id, fullname=fullname, nickname=nickname, language=language, country=country, image=image)
 
 
 """
@@ -474,6 +477,8 @@ def twitter_authorized(resp):
     Here are the specific methods for logging in users with their
     facebook accounts.
 """
+
+
 @mod.route('/fblogin/authorized/')
 @facebook.authorized_handler
 def facebook_authorized(resp):
@@ -505,13 +510,15 @@ def get_facebook_oauth_token():
     Here are the specific methods for logging in users with their
     google accounts.
 """
+
+
 @mod.route('/google_authorized/')
 @google.authorized_handler
 def google_authorized(resp):
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
 
-    req = Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
+    req = Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + access_token)
     try:
         res = urlopen(req)
     except URLError, e:
