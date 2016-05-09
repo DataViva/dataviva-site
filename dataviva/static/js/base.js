@@ -461,10 +461,13 @@ $(document).ready(function () {
             var $input = $(this);
 
             if ($input.hasClass('error')) {
-              $input.val('').removeClass('error');
+                $input.closest('.form-group').removeClass('has-error');
+                $input.removeClass('error');
             }
+
             if ($input.hasClass('success')) {
-              $input.val('').removeClass('success');
+                $input.closest('.form-group').removeClass('has-success');
+                $input.removeClass('success');
             }
           });
 
@@ -473,35 +476,45 @@ $(document).ready(function () {
           $('#modal-signup-form').submit(function() {
             var $form   = $(this);
             var submitData  = $form.serialize();
-            var $name   = $form.find('input[name="lead[name]"]');
-            var $email    = $form.find('input[name="lead[email]"]');
-            var $submit   = $form.find('input[name="submit"]');
-            var status    = true;
+            var $fullname   = $form.find('input[name="fullname"]');
+            var $email      = $form.find('input[name="email"]');
+            var $submit     = $form.find('input[name="submit"]');
+            var status      = true;
+
+            if ($fullname.val() === '') {
+                $fullname.closest('.form-group').addClass('has-error');
+                $fullname.addClass('error');
+                status = false;
+            }
             if ($email.val() === '' || pattern.test($email.val()) === false) {
-              $email.addClass('error');
-              status = false;
+                $email.closest('.form-group').addClass('has-error');
+                $email.addClass('error');
+                status = false;
             }
 
             if (status) {
-              $name.attr('disabled', 'disabled');
+              $fullname.attr('disabled', 'disabled');
               $email.attr('disabled', 'disabled');
               $submit.attr('disabled', 'disabled');
 
               $.ajax({
                 type: 'POST',
-                url: '/leads',
+                url: '/' + dataviva.language + '/account/signup',
                 data: submitData,
                 dataType: 'html',
-                success: function(msg) {
-                  var msg_split = msg.split('|');
-                  $name.removeAttr('disabled');
-                  $email.removeAttr('disabled');
-
-                  swal({
-                      title: "Good job!",
-                      text: "You clicked the button!",
-                      type: "success"
-                  });
+                success: function(response) {
+                    $('#dataviva-signup').modal('hide');
+                    $fullname.prop('disabled', false);
+                    $email.prop('disabled', false);
+                    $submit.prop('disabled', false);
+                    swal({
+                        title: dataviva.dictionary['thank_you'] + '!',
+                        text: response.message,
+                        type: "success"
+                    });
+                },
+                error: function(response) {
+                    console.log(response);
                 }
               });
             }
@@ -568,11 +581,22 @@ $(document).ready(function () {
                         url: '/' + dataviva.language + '/contact/',
                         data: submitData,
                         dataType: 'html',
-                        success: function(msg) {
+                        success: function(response) {
                             swal({
                                 title: dataviva.dictionary['thank_you'] + '!',
-                                text: msg,
+                                text: response.message,
                                 type: "success"
+                            });
+                            $name.prop('disabled', false);
+                            $email.prop('disabled', false);
+                            $message.prop('disabled', false);
+                            $submit.prop('disabled', false);
+                        },
+                        error: function(response) {
+                            swal({
+                                title: dataviva.dictionary['thank_you'] + '!',
+                                text: response.message,
+                                type: "error"
                             });
                         }
                     });
