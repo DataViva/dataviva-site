@@ -100,7 +100,7 @@ def create_user():
 
     user_srl = user.serialize()
     welcome_tpl = render_template('account/mail/welcome.html', user=user_srl)
-    send_mail("Welcome to datavivaiva!", [user.email], welcome_tpl)
+    send_mail("Welcome to dataviva!", [user.email], welcome_tpl)
     send_confirmation(user)
 
     return redirect('/account/confirm_pending/%s' % user.email)
@@ -507,7 +507,7 @@ def get_facebook_oauth_token():
 """
 @mod.route('/google_authorized/')
 @google.authorized_handler
-def google_authorized(resp):    
+def google_authorized(resp):
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
 

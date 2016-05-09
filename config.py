@@ -100,8 +100,8 @@ MAIL_PORT = 587
 MAIL_USE_TLS = False
 MAIL_USE_SSL = False
 MAIL_SERVER = 'smtp.sendgrid.net'
-MAIL_USERNAME = 'wartog'
-MAIL_PASSWORD = 'asdasd123'
+MAIL_USERNAME = 'dataviva-smtp'
+MAIL_PASSWORD = 'Fapemig2015'
 
 
 '''

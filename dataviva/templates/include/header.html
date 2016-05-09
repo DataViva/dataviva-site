@@ -46,7 +46,7 @@
                     {% if not g.user.is_authenticated %}
                     <a data-toggle="modal" data-target="#dataviva-login">{% trans %}Login{% endtrans %}</a>
                     {% trans %}or{% endtrans %}
-                    <button class="btn btn-primary m-l m-r">{% trans %}Sign Up{% endtrans %}</button>
+                    <button class="btn btn-primary m-l m-r" data-toggle="modal" data-target="#dataviva-signup">{% trans %}Sign Up{% endtrans %}</button>
                     {% else %}
                         <p>{% trans %}Welcome{% endtrans %}, <b>{{ g.user.firstname }}</b>! | <a href="/account/edit_profile">{% trans %}Edit profile{% endtrans %}</a></p> | <a href="/account/logout">Logout</a></p>
                     {% endif %}
