@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, jsonify
+from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
 from models import HelpSubject
+from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
+from urlparse import urlparse
 
 
 mod = Blueprint('help', __name__,
@@ -61,3 +63,53 @@ def products():
 @mod.route('/tab-basic-courses')
 def basic_courses():
     return render_template('help/tab-basic-courses.html')
+
+
+@mod.route('/crosswalk/pi')
+@mod.route('/crosswalk/ip')
+@mod.route('/crosswalk/oc')
+@mod.route('/crosswalk/co')
+def crosswalk():
+    url = urlparse(request.url)
+    crosswalk_table = url.path.split('/')[-1]
+
+    data = []
+
+    if crosswalk_table == 'pi' or crosswalk_table == 'ip':
+        result = Crosswalk_pi.query.all()
+        if crosswalk_table == 'pi':
+            for row in result:
+                data += [(row.hs_id, row.cnae_id)]
+        else:
+            for row in result:
+                data += [(row.cnae_id, row.hs_id)]
+    else:
+        result = Crosswalk_oc.query.all()
+        if crosswalk_table == 'oc':
+            for row in result:
+                data += [(row.cbo_id, row.course_hedu_id)]
+        else:
+            for row in result:
+                data += [(row.course_hedu_id, row.cbo_id)]
+
+    return jsonify(data=data)
+
+
+@mod.route('/tab-crosswalk-pi')
+def crosswalk_pi():
+    return render_template('help/tab-crosswalk-pi.html')
+
+
+@mod.route('/tab-crosswalk-ip')
+def crosswalk_ip():
+    return render_template('help/tab-crosswalk-ip.html')
+
+
+@mod.route('/tab-crosswalk-oc')
+def crosswalk_oc():
+    return render_template('help/tab-crosswalk-oc.html')
+
+
+@mod.route('/tab-crosswalk-co')
+def crosswalk_co():
+    return render_template('help/tab-crosswalk-co.html')
