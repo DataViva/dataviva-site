@@ -5,44 +5,50 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div class="modal-body">
-                <div class="body-container">
-                    <div class="intro">
-                        <h4>{% trans %}Free Sign Up{% endtrans %}</h4>
-                        <p>{% trans %}Sign Up free and make the most of DataViva{% endtrans %}. {% trans %}Signing up gives you access to exclusive resources to facilitate your research.{% endtrans %}.</p>
-                    </div>
-                    <form id="modal-signup-form" class="form">
+                <div class="intro">
+                    <h4>{% trans %}Free Sign Up{% endtrans %}</h4>
+                    <p>{% trans %}Sign Up free and make the most of DataViva{% endtrans %}. {% trans %}Signing up gives you access to exclusive resources to facilitate your research.{% endtrans %}.</p>
+                </div>
+                <form id="modal-signup-form" class="form">
+                    <div class="body-container">
+                        {{ g.signup_form.hidden_tag() }}
                         <div class="form-group">
                             <label class="control-label" for="Nome">{% trans %}Name{% endtrans %}</label>
-                            <input id="Nome" name="Nome" type="text" placeholder="{% trans %}Name{% endtrans %}" class="form-control" required="">
+                            <input id="fullname" name="fullname" type="text" placeholder="{% trans %}Name{% endtrans %}" class="form-control">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="email">E-mail</label>
-                            <div>
-                                <input id="email" name="email" type="text" placeholder="E-mail" class="form-control" required="">
-
-                            </div>
+                            <input id="email" name="email" type="email" placeholder="E-mail" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="password">{% trans %}Password{% endtrans %}</label>
+                            <input class="form-control" id="password" name="password" type="password" value="">
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="confirm">{% trans %}Confirm password{% endtrans %}</label>
+                            <input class="form-control" id="confirm" name="confirm" type="password" value="">
                         </div>
                         <div class="form-group">
                             <label class="control-label" for="perfil">{% trans %}What profile best describes you{% endtrans %}?</label>
-                                <select id="perfil" name="perfil" class="form-control">
-                                    <option value="1">{% trans %}Entrepreneurs{% endtrans %}</option>
-                                    <option value="2">{% trans %}Development Agents{% endtrans %}</option>
-                                    <option value="">{% trans %}Students and Professionals{% endtrans %}</option>
-                                </select>
+                            <select id="perfil" name="perfil" class="form-control">
+                                <option value="entrepreneurs">{% trans %}Entrepreneurs{% endtrans %}</option>
+                                <option value="development_agents">{% trans %}Development Agents{% endtrans %}</option>
+                                <option value="students">{% trans %}Students and Professionals{% endtrans %}</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for=""></label>
-                            <label class="checkbox-inline" for="-0">
-                                <input type="checkbox" name="" id="-0" value="1">
-                                <small>{% trans %}I want to receive news and tips of the best use of Dataviva{% endtrans %}</small>
-                            </label>
+                            <div class="checkbox checkbox-success checkbox-inline">
+                                <input name="agree_mailer" id="agree_mailer" type="checkbox">
+                                <label for="agree_mailer"><small>{% trans %}I want to receive news and tips of the best use of Dataviva{% endtrans %}</small></label>
+                            </div>
+
                         </div>
-                    </form>
+                    </div>
                     <div class="modal-footer">
                         <a href="#" data-dismiss="modal" aria-label="Close" class="btn btn-default">{% trans %}Cancel{% endtrans %}</a>
-                        <a href="#" data-dismiss="modal" aria-label="Close" class="btn btn-primary">{% trans %}Sign Up{% endtrans %}</a>
+                        <button type="submit" name="submit" class="btn btn-primary">{% trans %}Sign Up{% endtrans %}</button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div><!-- /.modal-dialog -->
