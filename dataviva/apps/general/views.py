@@ -14,6 +14,7 @@ from dataviva.apps.general.models import Short
 from dataviva.apps.account.models import User
 from dataviva.apps.news.models import Publication
 from dataviva.apps.contact.forms import ContactForm
+from dataviva.apps.account.forms import SignupForm
 
 from dataviva.api.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
 from dataviva.translations.dictionary import dictionary
@@ -40,6 +41,7 @@ def before_request():
     g.attr_version = 15
     g.production = False if DEBUG else True
     g.contact_form = ContactForm()
+    g.signup_form = SignupForm()
 
     if request.endpoint != 'static':
         url = urlparse(request.url)
@@ -130,6 +132,7 @@ def home():
         news = [publications.pop(randrange(len(publications))) for _ in range(3)]
     else:
         news = publications
+
     return render_template("general/index.html", news=news)
 
 
