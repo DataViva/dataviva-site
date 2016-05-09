@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-07 13:33-0300\n"
+"POT-Creation-Date: 2016-05-09 08:41-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -416,7 +416,7 @@ msgstr ""
 msgid "SignUp"
 msgstr ""
 
-#: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:16
+#: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:12
 msgid "You dont have permission to view this page."
 msgstr ""
 
@@ -451,7 +451,7 @@ msgstr ""
 #: dataviva/apps/news/templates/news/index.html:4
 #: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:4
-#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:130
+#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:127
 #: dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:543
@@ -616,7 +616,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-education.html:54
 #: dataviva/apps/rankings/templates/rankings/_base.html:62
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:13
-#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:108
+#: dataviva/templates/site.html:68 dataviva/templates/general/index.html:105
 #: dataviva/translations/dictionary.py:368
 msgid "Basic Course"
 msgstr ""
@@ -658,6 +658,7 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/index.html:137
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:57
+#: dataviva/apps/help/templates/help/tab-basic-courses.html:10
 #: dataviva/apps/major/templates/major/index.html:118
 #: dataviva/apps/major/templates/major/tab-enrollments.html:3
 #: dataviva/apps/major/templates/major/tab-general.html:62
@@ -1052,13 +1053,6 @@ msgstr ""
 msgid "See also"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/show.html:48
-#: dataviva/apps/news/templates/news/show.html:48
-#: dataviva/templates/about/ask/index.html:55
-#: dataviva/templates/about/ask/index.html:182
-msgid "Comment"
-msgstr ""
-
 #: dataviva/apps/build_graph/templates/build_graph/index.html:26
 #: dataviva/apps/data/templates/data/index.html:27
 #: dataviva/apps/data/templates/data/index.html:35
@@ -1111,6 +1105,9 @@ msgid ""
 msgstr ""
 
 #: dataviva/apps/contact/templates/contact/index.html:43
+#: dataviva/apps/help/templates/help/tab-basic-courses.html:9
+#: dataviva/apps/help/templates/help/tab-brazilian-locations.html:10
+#: dataviva/apps/help/templates/help/tab-products.html:9
 #: dataviva/apps/users/templates/users/admin.html:32
 #: dataviva/apps/users/templates/users/index.html:12
 #: dataviva/templates/include/footer.html:47
@@ -1198,6 +1195,7 @@ msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
 #: dataviva/apps/embed/templates/embed/embed.html:2931
+#: dataviva/templates/base.html:7
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
 " economy"
@@ -1205,6 +1203,7 @@ msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
 #: dataviva/apps/embed/templates/embed/embed.html:2933
+#: dataviva/templates/base.html:7
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
@@ -1254,12 +1253,50 @@ msgstr ""
 msgid "Anwser"
 msgstr ""
 
+#: dataviva/apps/help/templates/help/tab-basic-courses.html:8
+#: dataviva/apps/help/templates/help/tab-brazilian-locations.html:8
+#: dataviva/apps/help/templates/help/tab-products.html:8
+#: dataviva/translations/dictionary.py:332
+#: dataviva/translations/dictionary.py:335
+#: dataviva/translations/dictionary.py:345
+#: dataviva/translations/dictionary.py:346
+#: dataviva/translations/dictionary.py:347
+#: dataviva/translations/dictionary.py:348
+#: dataviva/translations/dictionary.py:349
+msgid "ID"
+msgstr ""
+
+#: dataviva/apps/help/templates/help/tab-basic-courses.html:11
+#: dataviva/apps/help/templates/help/tab-brazilian-locations.html:12
+#: dataviva/apps/help/templates/help/tab-products.html:11
+#: dataviva/translations/dictionary.py:86
+msgid "Color"
+msgstr ""
+
+#: dataviva/apps/help/templates/help/tab-brazilian-locations.html:9
+msgid "ID IBGE"
+msgstr ""
+
+#: dataviva/apps/help/templates/help/tab-brazilian-locations.html:11
+#: dataviva/translations/dictionary.py:340
+msgid "Population"
+msgstr ""
+
+#: dataviva/apps/help/templates/help/tab-products.html:10
+#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:15
+#: dataviva/apps/rankings/templates/rankings/product.html:15
+#: dataviva/apps/rankings/templates/rankings/trade-partner.html:14
+#: dataviva/translations/dictionary.py:274
+#: dataviva/translations/dictionary.py:284
+msgid "Exports"
+msgstr ""
+
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:35
 #: dataviva/apps/rankings/templates/rankings/_base.html:47
 #: dataviva/templates/general/browse_categories.html:79
-#: dataviva/templates/general/index.html:78
+#: dataviva/templates/general/index.html:75
 #: dataviva/templates/include/footer.html:20
 #: dataviva/translations/dictionary.py:580
 msgid "Economic Activities"
@@ -1874,7 +1911,7 @@ msgstr ""
 #: dataviva/apps/location/templates/location/tab-wages.html:28
 #: dataviva/templates/about.html:62
 #: dataviva/templates/general/browse_categories.html:71
-#: dataviva/templates/general/index.html:72
+#: dataviva/templates/general/index.html:69
 #: dataviva/templates/general/select.html:29
 #: dataviva/templates/include/footer.html:19
 #: dataviva/translations/dictionary.py:160
@@ -1984,7 +2021,7 @@ msgstr ""
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:6
 #: dataviva/templates/about.html:78
 #: dataviva/templates/general/browse_categories.html:103
-#: dataviva/templates/general/index.html:96
+#: dataviva/templates/general/index.html:93
 #: dataviva/templates/include/footer.html:23
 #: dataviva/translations/dictionary.py:185
 #: dataviva/translations/dictionary.py:186
@@ -2773,14 +2810,6 @@ msgstr ""
 msgid "Imports"
 msgstr ""
 
-#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:15
-#: dataviva/apps/rankings/templates/rankings/product.html:15
-#: dataviva/apps/rankings/templates/rankings/trade-partner.html:14
-#: dataviva/translations/dictionary.py:274
-#: dataviva/translations/dictionary.py:284
-msgid "Exports"
-msgstr ""
-
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:17
 #: dataviva/apps/rankings/templates/rankings/product.html:17
 #: dataviva/apps/rankings/templates/rankings/trade-partner.html:16
@@ -2867,7 +2896,7 @@ msgstr ""
 #: dataviva/apps/rankings/templates/rankings/major.html:13
 #: dataviva/templates/about.html:38
 #: dataviva/templates/general/browse_categories.html:111
-#: dataviva/templates/general/index.html:102
+#: dataviva/templates/general/index.html:99
 #: dataviva/templates/include/footer.html:24
 #: dataviva/translations/dictionary.py:294
 msgid "Higher Education"
@@ -3147,7 +3176,7 @@ msgstr ""
 
 #: dataviva/templates/about.html:54
 #: dataviva/templates/general/browse_categories.html:63
-#: dataviva/templates/general/index.html:66
+#: dataviva/templates/general/index.html:63
 #: dataviva/translations/dictionary.py:579
 msgid "Brazilian Locations"
 msgstr ""
@@ -3159,7 +3188,7 @@ msgstr ""
 
 #: dataviva/templates/about.html:66
 #: dataviva/templates/general/browse_categories.html:87
-#: dataviva/templates/general/index.html:84
+#: dataviva/templates/general/index.html:81
 #: dataviva/templates/include/footer.html:21
 #: dataviva/translations/dictionary.py:357
 msgid "Products"
@@ -3728,7 +3757,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/templates/about/ask/ask.html:10
-#: dataviva/templates/general/index.html:59
+#: dataviva/templates/general/index.html:56
 #: dataviva/templates/modal/dataviva.html:13
 #: dataviva/translations/dictionary.py:578
 msgid "What would you like to know?"
@@ -3854,6 +3883,11 @@ msgstr ""
 #: dataviva/templates/about/ask/index.html:45
 #: dataviva/translations/dictionary.py:442
 msgid "Most Recent"
+msgstr ""
+
+#: dataviva/templates/about/ask/index.html:55
+#: dataviva/templates/about/ask/index.html:182
+msgid "Comment"
 msgstr ""
 
 #: dataviva/templates/about/ask/index.html:183
@@ -4304,7 +4338,7 @@ msgid "Select a profile to start"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:37
-#: dataviva/templates/general/index.html:15
+#: dataviva/templates/general/index.html:19
 #: dataviva/templates/modal/signup.html:28
 #: dataviva/translations/dictionary.py:570
 msgid "Entrepreneurs"
@@ -4315,27 +4349,27 @@ msgid "Identify the economic profile and the business opportunities in a region"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:44
-#: dataviva/templates/general/index.html:23
+#: dataviva/templates/general/index.html:28
 #: dataviva/templates/modal/signup.html:29
 #: dataviva/translations/dictionary.py:572
 msgid "Development Agents"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:45
-#: dataviva/templates/general/index.html:25
+#: dataviva/templates/general/index.html:30
 #: dataviva/translations/dictionary.py:573
 msgid "Assess development policies setting by location"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:51
-#: dataviva/templates/general/index.html:31
+#: dataviva/templates/general/index.html:37
 #: dataviva/templates/modal/signup.html:30
 #: dataviva/translations/dictionary.py:574
 msgid "Students and Professionals"
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:52
-#: dataviva/templates/general/index.html:33
+#: dataviva/templates/general/index.html:39
 #: dataviva/translations/dictionary.py:575
 msgid "Find information about available jobs, income per occupation and courses"
 msgstr ""
@@ -4370,7 +4404,7 @@ msgid ""
 msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:95
-#: dataviva/templates/general/index.html:90
+#: dataviva/templates/general/index.html:87
 #: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:361
 msgid "Trade Partners"
@@ -4400,23 +4434,23 @@ msgid ""
 "enrollment ranking by locality."
 msgstr ""
 
-#: dataviva/templates/general/error.html:18
+#: dataviva/templates/general/error.html:14
 msgid "There was a problem serving the requested page."
 msgstr ""
 
-#: dataviva/templates/general/error.html:20
+#: dataviva/templates/general/error.html:16
 msgid "Oh no! Your request is too large to be processed."
 msgstr ""
 
-#: dataviva/templates/general/error.html:22
+#: dataviva/templates/general/error.html:18
 msgid "Oh no! The page you've requested does not exist."
 msgstr ""
 
-#: dataviva/templates/general/error.html:28
+#: dataviva/templates/general/error.html:24
 msgid "Our technical team already received a message"
 msgstr ""
 
-#: dataviva/templates/general/error.html:30
+#: dataviva/templates/general/error.html:26
 msgid "informing this error and will fix it as soon as possible."
 msgstr ""
 
@@ -4438,58 +4472,53 @@ msgid ""
 "visualizations."
 msgstr ""
 
+#: dataviva/templates/general/index.html:11
+msgid "Get started"
+msgstr ""
+
 #: dataviva/templates/general/index.html:13
+#: dataviva/translations/dictionary.py:568
+msgid "Watch the site video"
+msgstr ""
+
+#: dataviva/templates/general/index.html:17
 msgid ""
 "Number of establishments per economic activity, percentage of graduated "
 "professionals per year in a given course by region, similar products by "
 "region, average wage by segment, and more… "
 msgstr ""
 
-#: dataviva/templates/general/index.html:17
+#: dataviva/templates/general/index.html:21
 #: dataviva/translations/dictionary.py:571
 msgid "Identify the economic profile and business opportunities of a region"
 msgstr ""
 
-#: dataviva/templates/general/index.html:21
+#: dataviva/templates/general/index.html:24
+#: dataviva/templates/general/index.html:33
+#: dataviva/templates/general/index.html:42
+msgid "Watch the testimonials"
+msgstr ""
+
+#: dataviva/templates/general/index.html:26
 msgid ""
 "Main business partners of a product by region, states that lead "
 "importation of a specific product, economic activity by locality, "
 "employment and income by segment, and more…"
 msgstr ""
 
-#: dataviva/templates/general/index.html:29
+#: dataviva/templates/general/index.html:35
 msgid ""
 "Average wage of an activity or occupation, cities with best employment "
 "rates in an activity, courses offered by region, number of students "
 "enrolled in each university and more…"
 msgstr ""
 
-#: dataviva/templates/general/index.html:41
-msgid "Get started"
-msgstr ""
-
-#: dataviva/templates/general/index.html:44
-#: dataviva/translations/dictionary.py:568
-msgid "Watch the site video"
-msgstr ""
-
-#: dataviva/templates/general/index.html:45
-#: dataviva/templates/include/header.html:48
-#: dataviva/translations/dictionary.py:554
-msgid "or"
-msgstr ""
-
-#: dataviva/templates/general/index.html:46
-#: dataviva/translations/dictionary.py:569
-msgid "watch the testimonials"
-msgstr ""
-
-#: dataviva/templates/general/index.html:56
+#: dataviva/templates/general/index.html:53
 #: dataviva/translations/dictionary.py:576
 msgid "Explore our database"
 msgstr ""
 
-#: dataviva/templates/general/index.html:57
+#: dataviva/templates/general/index.html:54
 #: dataviva/translations/dictionary.py:577
 msgid ""
 "DataViva gathers data from several sources: Employment and Income (RAIS),"
@@ -4498,7 +4527,7 @@ msgid ""
 "Superior) and UN Comtrade International Trade."
 msgstr ""
 
-#: dataviva/templates/general/index.html:65
+#: dataviva/templates/general/index.html:62
 msgid ""
 "General profile by region, state, mesoregion, micro-region or city. Check"
 " its international trade, economic activity, employment and education "
@@ -4506,14 +4535,14 @@ msgid ""
 "Porto Alegre."
 msgstr ""
 
-#: dataviva/templates/general/index.html:71
+#: dataviva/templates/general/index.html:68
 msgid ""
 "Regions with best employment rates by professional activity, related "
 "courses, average wage and job statistics per year. Examples: Medium level"
 " technicians, Industry workers, Receptionists, Clinicians."
 msgstr ""
 
-#: dataviva/templates/general/index.html:77
+#: dataviva/templates/general/index.html:74
 msgid ""
 "Information on employment rate by region, average wage by occupation, "
 "average monthly income and economic opportunities. Examples: Businesses, "
@@ -4521,55 +4550,55 @@ msgid ""
 "Organizations."
 msgstr ""
 
-#: dataviva/templates/general/index.html:83
+#: dataviva/templates/general/index.html:80
 msgid ""
 "Trade Balance data by product, import origin and export destination, "
 "ranking by location, economic activities and related occupations. "
 "Examples: Food, Art and Antiques, Iron Ore, Coffee, Auto Parts."
 msgstr ""
 
-#: dataviva/templates/general/index.html:89
+#: dataviva/templates/general/index.html:86
 msgid ""
 "Brazil’s top import and export partners, trade data by type of product or"
 " supplier city. Examples: Asia, Africa, Europe, Mexico, Japan, United "
 "States of America, China, The Netherlands, Iran."
 msgstr ""
 
-#: dataviva/templates/general/index.html:95
+#: dataviva/templates/general/index.html:92
 msgid ""
 "Number of enrollments in each offered course, student status and similar "
 "university profiles. Examples: Universidade de São Paulo, Universidade "
 "Federal de Minas Gerais, PUC Goiás."
 msgstr ""
 
-#: dataviva/templates/general/index.html:101
+#: dataviva/templates/general/index.html:98
 msgid ""
 "List of universities and cities that offer post-secondary courses or the "
 "selected field of study. Examples: Education, Health Sciences, Law, "
 "Production Engineering, Physiotherapy."
 msgstr ""
 
-#: dataviva/templates/general/index.html:107
+#: dataviva/templates/general/index.html:104
 msgid ""
 "Brazilian schools that offer professional education and enrollment "
 "ranking by city. Examples: Elementary School, High School, Nursing "
 "Technician, Agriculture and Livestock Technician."
 msgstr ""
 
-#: dataviva/templates/general/index.html:121
+#: dataviva/templates/general/index.html:118
 #: dataviva/templates/modal/signup.html:11
 #: dataviva/translations/dictionary.py:581
 msgid "Sign Up free and make the most of DataViva"
 msgstr ""
 
-#: dataviva/templates/general/index.html:122
+#: dataviva/templates/general/index.html:119
 #: dataviva/translations/dictionary.py:582
 msgid ""
 "Save the graphs you need and get our free content in your e-mail. Signing"
 " up gives you access to exclusive resources to facilitate your research."
 msgstr ""
 
-#: dataviva/templates/general/index.html:123
+#: dataviva/templates/general/index.html:120
 #: dataviva/templates/modal/signup.html:10
 #: dataviva/translations/dictionary.py:583
 msgid "Free Sign Up"
@@ -4701,6 +4730,11 @@ msgstr ""
 #: dataviva/templates/include/header.html:42
 #: dataviva/translations/dictionary.py:551
 msgid "HELP"
+msgstr ""
+
+#: dataviva/templates/include/header.html:48
+#: dataviva/translations/dictionary.py:554
+msgid "or"
 msgstr ""
 
 #: dataviva/templates/include/header.html:51
@@ -5124,10 +5158,6 @@ msgstr ""
 msgid "Changes the variable used to size the circles."
 msgstr ""
 
-#: dataviva/translations/dictionary.py:86
-msgid "Color"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:87
 msgid "Changes the variable used to color the rectangles."
 msgstr ""
@@ -5546,26 +5576,12 @@ msgstr ""
 msgid "Sector"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:332
-#: dataviva/translations/dictionary.py:335
-#: dataviva/translations/dictionary.py:345
-#: dataviva/translations/dictionary.py:346
-#: dataviva/translations/dictionary.py:347
-#: dataviva/translations/dictionary.py:348
-#: dataviva/translations/dictionary.py:349
-msgid "ID"
-msgstr ""
-
 #: dataviva/translations/dictionary.py:338
 msgid "Name (English)"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:339
 msgid "Name (Portuguese)"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:340
-msgid "Population"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:341
@@ -6002,6 +6018,10 @@ msgstr ""
 
 #: dataviva/translations/dictionary.py:567
 msgid "Get started "
+msgstr ""
+
+#: dataviva/translations/dictionary.py:569
+msgid "watch the testimonials"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:620
