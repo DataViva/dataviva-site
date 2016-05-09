@@ -12,6 +12,7 @@ class SignupForm(Form):
                                                         'confirm',
                                                         message='Passwords must match')])
     confirm = PasswordField('confirm', validators=[validators.Required()])
+    agree_mailer = BooleanField('agree_mailer')
 
 
 class SigninForm(Form):
