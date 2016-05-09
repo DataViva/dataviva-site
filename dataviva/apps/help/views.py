@@ -80,6 +80,16 @@ def trade_partners():
     return render_template('help/tab-trade-partners.html')
 
 
+@mod.route('/tab-universities')
+def universities():
+    return render_template('help/tab-universities.html')
+
+
+@mod.route('/tab-majors')
+def majors():
+    return render_template('help/tab-majors.html') 
+
+
 @mod.route('/crosswalk/pi')
 @mod.route('/crosswalk/ip')
 @mod.route('/crosswalk/oc')
