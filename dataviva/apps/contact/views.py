@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, g, redirect, url_for, flash, render_template, request
+from flask import Blueprint, g, url_for, render_template
 from dataviva.apps.general.views import get_locale
 from dataviva.utils.send_mail import send_mail
 from forms import ContactForm
@@ -33,6 +33,7 @@ def index():
 @mod.route('/', methods=['POST'])
 def create():
     form = ContactForm()
+    import pdb; pdb.set_trace()
     if form.validate() is False:
         return render_template('contact/index.html', form=form)
     else:
@@ -49,8 +50,8 @@ def create():
         db.session.add(contact)
         db.session.commit()
         send_mail("Mensagem recebida via página de Contato",
-                  ["contato@dataviva.info"], message_tpl)
-        message = gettext("Your message has been sent successfully. We will soon get back to you.")
-        flash(message, 'success')
+                  ["diogo@lundberg.com.br"], message_tpl)
 
-        return redirect(request.referrer)
+        message = gettext("Your message has been sent successfully. We will soon get back to you.")
+
+        return message

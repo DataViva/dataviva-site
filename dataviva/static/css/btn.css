@@ -529,3 +529,34 @@ button.dim:active:before {
 .checkbox-success input[type="radio"]:checked + label::after {
   color: #fff;
 }
+
+
+.sweet-alert .confirm {
+  background-color: #A25A6D !important;
+  border-color: #A25A6D !important;
+  color: #FFFFFF !important;
+}
+
+.sweet-alert .confirm.active.focus,
+.sweet-alert .confirm.active:focus,
+.sweet-alert .confirm.active:hover,
+.sweet-alert .confirm:active.focus,
+.sweet-alert .confirm:active:focus,
+.sweet-alert .confirm:active:hover {
+  color: #fff !important;
+  background-color: #905262 !important;
+  border-color: #824A58 !important;
+}
+
+.sweet-alert .confirm:hover,
+.sweet-alert .confirm:focus,
+.sweet-alert .confirm:active,
+.sweet-alert .confirm.active,
+.sweet-alert .confirm:active:focus,
+.sweet-alert .confirm:active:hover,
+.sweet-alert .confirm.active:hover,
+.sweet-alert .confirm.active:focus {
+  background-color: #905262 !important;
+  border-color: #905262 !important;
+  color: #FFFFFF !important;
+}

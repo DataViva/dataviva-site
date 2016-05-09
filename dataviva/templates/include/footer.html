@@ -41,7 +41,7 @@
     <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
     <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
         <h3>{%trans%}Contact Us{%endtrans%}</h3>
-        <form method="post" action="{{ url_for('contact.create') }}" class="form-horizontal">
+        <form method="post" id="contact-form" action="{{ url_for('contact.create') }}" class="form-horizontal">
             {{ g.contact_form.hidden_tag() }}
             <div class="form-group">
                 <label for="name" class="col-sm-3 control-label">{% trans %}Name{% endtrans %}</label>

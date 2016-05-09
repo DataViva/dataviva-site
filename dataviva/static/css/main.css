@@ -272,7 +272,7 @@ footer {
 footer a,
 footer label,
 footer li {
-  color: #FFF;
+  color: #FFF !important;
 }
 footer li span.link {
   color: #FFF;

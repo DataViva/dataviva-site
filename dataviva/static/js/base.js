@@ -439,5 +439,157 @@ $(document).ready(function () {
         $('#modal-dataviva-video').modal('show');
         return false; // cancel the event
     });
+
+    (function($) {
+
+      'use strict';
+
+      var AjaxForms = {
+
+        // Initialization the functions
+        init: function() {
+          AjaxForms.SignUp();
+          AjaxForms.Contact();
+        },
+
+        // Form submit function
+        SignUp: function() {
+          var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+
+          // Checking form input when focus and keypress event
+          $('#modal-signup-form input[type="text"], #modal-signup-form input[type="email"], #modal-signup-form select').on('focus keypress', function() {
+            var $input = $(this);
+
+            if ($input.hasClass('error')) {
+              $input.val('').removeClass('error');
+            }
+            if ($input.hasClass('success')) {
+              $input.val('').removeClass('success');
+            }
+          });
+
+
+          // Signup form when submit button clicked
+          $('#modal-signup-form').submit(function() {
+            var $form   = $(this);
+            var submitData  = $form.serialize();
+            var $name   = $form.find('input[name="lead[name]"]');
+            var $email    = $form.find('input[name="lead[email]"]');
+            var $submit   = $form.find('input[name="submit"]');
+            var status    = true;
+            if ($email.val() === '' || pattern.test($email.val()) === false) {
+              $email.addClass('error');
+              status = false;
+            }
+
+            if (status) {
+              $name.attr('disabled', 'disabled');
+              $email.attr('disabled', 'disabled');
+              $submit.attr('disabled', 'disabled');
+
+              $.ajax({
+                type: 'POST',
+                url: '/leads',
+                data: submitData,
+                dataType: 'html',
+                success: function(msg) {
+                  var msg_split = msg.split('|');
+                  $name.removeAttr('disabled');
+                  $email.removeAttr('disabled');
+
+                  swal({
+                      title: "Good job!",
+                      text: "You clicked the button!",
+                      type: "success"
+                  });
+                }
+              });
+            }
+
+            status = true;
+
+            return false;
+          });
+        },
+
+        // Form submit function
+        Contact: function() {
+          var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+
+            // Checking form input when focus and keypress event
+            $('#contact-form input[type="text"], #contact-form input[type="email"], #contact-form textarea, #contact-form select').on('focus keypress', function() {
+                var $input = $(this);
+
+                if ($input.hasClass('error')) {
+                    $input.closest('.form-group').removeClass('has-error');
+                    $input.removeClass('error');
+                }
+
+                if ($input.hasClass('success')) {
+                    $input.closest('.form-group').removeClass('has-success');
+                    $input.removeClass('success');
+                }
+            });
+
+
+            // Signup form when submit button clicked
+            $('#contact-form').submit(function() {
+                var $form       = $(this);
+                var submitData  = $form.serialize();
+                var $name       = $form.find('input[name="name"]');
+                var $email      = $form.find('input[name="email"]');
+                var $message    = $form.find('textarea[name="message"]');
+                var $submit     = $form.find('input[name="submit"]');
+                var status      = true;
+                if ($name.val() === '') {
+                    $name.closest('.form-group').addClass('has-error');
+                    $name.addClass('error');
+                    status = false;
+                }
+                if ($email.val() === '' || pattern.test($email.val()) === false) {
+                    $email.closest('.form-group').addClass('has-error');
+                    $email.addClass('error');
+                    status = false;
+                }
+                if ($message.val() === '') {
+                    $message.closest('.form-group').addClass('has-error');
+                    $message.addClass('error');
+                    status = false;
+                }
+
+                if (status) {
+                    $name.attr('disabled', 'disabled');
+                    $email.attr('disabled', 'disabled');
+                    $message.attr('disabled', 'disabled');
+                    $submit.attr('disabled', 'disabled');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/' + dataviva.language + '/contact/',
+                        data: submitData,
+                        dataType: 'html',
+                        success: function(msg) {
+                            swal({
+                                title: dataviva.dictionary['thank_you'] + '!',
+                                text: msg,
+                                type: "success"
+                            });
+                        }
+                    });
+                }
+
+                status = true;
+
+                return false;
+            });
+        }
+      };
+
+      // Run the main function
+      $(function() {
+        AjaxForms.init();
+      });
+
+    })(window.jQuery);
 });
 
