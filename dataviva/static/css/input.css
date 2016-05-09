@@ -100,3 +100,22 @@
     margin-bottom: 20px;
   }
 }
+
+.has-error input.error::-webkit-input-placeholder {
+   color:    #333333;
+}
+
+.has-error input.error:-moz-placeholder,
+.has-error input.error::-moz-placeholder { /* Internet Explorer 10-11 */
+   color:    #333333;
+}
+
+.has-error input.error:-ms-input-placeholder{
+    color:    #333333;
+}
+
+.has-error input.error {
+    background: rgba(100, 26, 24, 0.1);
+}
+
+
