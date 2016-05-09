@@ -121,7 +121,9 @@
     </div>
 </section>
 
-<section id="news" class="news bg-white">
+{% include "include/promoters.html" %}
+
+<section id="news" class="news bg-greeny">
     <div class="container text-center">
         <div class="navy-line wow fadeInDown"></div>
         <h2 class="m-b-lg wow fadeInDown">{%trans%}News{%endtrans%}</h2>
@@ -139,5 +141,7 @@
         </div>
     </div>
 </section>
+
+
 {% endblock content %}
 
