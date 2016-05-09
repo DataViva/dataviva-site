@@ -31,7 +31,11 @@ var LocationsTable = function () {
         },
         "order": [],
         "columns": [
-            {"data": "id"},
+            {
+                render: function (data, type, row, meta){
+                    return row.id.toUpperCase()
+                    }
+            },
             {
                 render: function (data, type, row, meta){
                     
