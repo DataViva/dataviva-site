@@ -1,0 +1,19 @@
+{% extends "help/index.html" %}
+
+{% block classifications_table %}
+
+    <table id="crosswalk-oc-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>{% trans %}Occupation{% endtrans %}</th>
+                <th>{% trans %}Course{% endtrans %}</th>
+            </tr>
+        </thead>
+    </table>
+
+{% endblock classifications_table %}
+
+{% block js_assets %}
+        <script src="/static/js/modules/help/crosswalk-oc.js"></script>
+{% endblock js_assets %}
+
