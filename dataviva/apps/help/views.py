@@ -65,14 +65,30 @@ def basic_courses():
     return render_template('help/tab-basic-courses.html')
 
 
-@mod.route('/tab-industrys')
-def industrys():
-    return render_template('help/tab-industrys.html')
+@mod.route('/tab-industries')
+def industries():
+    return render_template('help/tab-industries.html')
 
 
 @mod.route('/tab-occupations')
 def occupations():
     return render_template('help/tab-occupations.html')
+
+
+@mod.route('/tab-trade-partners')
+def trade_partners():
+    return render_template('help/tab-trade-partners.html')
+
+
+@mod.route('/tab-universities')
+def universities():
+    return render_template('help/tab-universities.html')
+
+
+@mod.route('/tab-majors')
+def majors():
+    return render_template('help/tab-majors.html') 
+
 
 @mod.route('/crosswalk/pi')
 @mod.route('/crosswalk/ip')
