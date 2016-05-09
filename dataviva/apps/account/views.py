@@ -9,7 +9,7 @@ from dataviva.utils.encode import sha512
 from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from flask import Blueprint, request, render_template, flash, g, session, \
-    redirect, url_for, jsonify, abort, current_app
+    redirect, url_for, jsonify, abort, current_app, Response, make_response
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, logout_user, current_user, \
     login_required, LoginManager
@@ -78,34 +78,32 @@ def signup():
 @mod.route('/signup', methods=["POST"])
 def create_user():
     form = SignupForm()
+    if form.validate() is False:
+        return make_response(jsonify(form.errors), 400)
+    else:
+        try:
+            confirmation_code = _gen_confirmation_code(form.email.data)
+            user = User(
+                fullname=form.fullname.data,
+                email=form.email.data,
+                password=sha512(form.password.data),
+                confirmation_code=confirmation_code,
+                agree_mailer=form.agree_mailer.data
+            )
+            db.session.add(user)
+            db.session.commit()
+            flash("Check your inbox at %s" % user.email, "success")
+        except:
+            abort(500, "Sorry, an unexpected error has occured. Please try again.")
 
-    # if form.validate() is False:
-    #     return render_template('account/signup.html', form=form)
+        user_srl = user.serialize()
+        welcome_tpl = render_template('account/mail/welcome.html', user=user_srl)
+        send_mail("Welcome to dataviva!", [user.email], welcome_tpl)
+        send_confirmation(user)
 
-    try:
-        confirmation_code = _gen_confirmation_code(form.email.data)
-        user = User(
-            fullname=form.fullname.data,
-            email=form.email.data,
-            password=sha512(form.password.data),
-            confirmation_code=confirmation_code
-        )
-        db.session.add(user)
-        db.session.commit()
-        flash("Check your inbox at %s" % user.email, "success")
-    except:
-        flash("Sorry, an unexpected error has occured. Please try again.", "danger")
+        return Response('confirm_pending', status=200, mimetype='application/json')
 
-        return render_template('account/signup.html', form=form)
-
-    user_srl = user.serialize()
-    welcome_tpl = render_template('account/mail/welcome.html', user=user_srl)
-    send_mail("Welcome to dataviva!", [user.email], welcome_tpl)
-    send_confirmation(user)
-
-    return redirect('/account/confirm_pending/%s' % user.email)
-
-
+#    return redirect('/account/confirm_pending/%s' % user.email)
 
 
 @mod.route('/social_auth/<provider>', methods=["GET"])
@@ -168,7 +166,8 @@ def confirm(code):
         user.confirmed = True
         db.session.commit()
         login_user(user, remember=True)
-        flash("Lest us know more about you. Please complete your profile.", "info")
+        flash(
+            "Lest us know more about you. Please complete your profile.", "info")
     except IndexError:
         abort(404, 'User not found')
 
@@ -268,9 +267,11 @@ def reset_password():
                                    user=user.serialize(),
                                    new_pwd=pwd)
         send_mail("Forgot Password", [user.email], email_tp)
-        flash("A new password has been sent to you! Please check you inbox!", "success")
+        flash(
+            "A new password has been sent to you! Please check you inbox!", "success")
     except Exception as e:
-        flash("We couldnt find any user with the informed email address", "danger")
+        flash(
+            "We couldnt find any user with the informed email address", "danger")
 
         return render_template("account/forgot_password.html", form=form)
 
@@ -312,13 +313,15 @@ def login():
             return google.authorize(callback=callback)
         elif provider == "twitter":
             callback = url_for('account.twitter_authorized',
-                next=request.args.get('next') or request.referrer or None,
-                _external=True)
+                               next=request.args.get(
+                                   'next') or request.referrer or None,
+                               _external=True)
             return twitter.authorize(callback=callback)
         elif provider == "facebook":
             callback = url_for('account.facebook_authorized',
-                next=request.args.get('next') or request.referrer or None,
-                _external=True)
+                               next=request.args.get(
+                                   'next') or request.referrer or None,
+                               _external=True)
             return facebook.authorize(callback=callback)
 
     return render_template(
@@ -331,30 +334,31 @@ def user(nickname):
     activity = None
 
     stars = Starred.query.filter_by(user=user) \
-                .order_by("timestamp desc").all()
+        .order_by("timestamp desc").all()
 
     questions = Question.query.filter_by(user=user) \
-                .order_by("timestamp desc").all()
+        .order_by("timestamp desc").all()
 
     replies = Reply.query.filter_by(user=user) \
-                .order_by("timestamp desc").all()
+        .order_by("timestamp desc").all()
 
     activity = stars + questions + replies
     activity.sort(key=lambda a: a.timestamp, reverse=True)
 
     return render_template("account/index.html",
-        user = user,
-        activity = activity)
+                           user=user,
+                           activity=activity)
 
 
 def update_email_preferences(id, nickname, agree):
     user = User.query.filter_by(nickname=nickname).first_or_404()
-    if user.id == int(id) and int(agree) in [0,1]:
+    if user.id == int(id) and int(agree) in [0, 1]:
         user.agree_mailer = agree
         db.session.add(user)
         db.session.commit()
 
     return user
+
 
 @mod.route('/remove_email/<id>/<nickname>')
 def remove_email_list(id, nickname):
@@ -362,9 +366,10 @@ def remove_email_list(id, nickname):
     flash(gettext("Preferences updated."))
     return redirect('/')
 
+
 @mod.route('/preferences/change_email_preference')
 def preferences():
-    if g.user.is_authenticated :
+    if g.user.is_authenticated:
         if g.user.agree_mailer == 1:
             agree = 0
         else:
@@ -372,7 +377,7 @@ def preferences():
 
         user = update_email_preferences(g.user.id, g.user.nickname, agree)
         flash(gettext("Preferences updated."))
-        return redirect('/account/' + user.nickname )
+        return redirect('/account/' + user.nickname)
     else:
         return redirect('/')
 
@@ -382,24 +387,27 @@ def after_login(**user_fields):
     import re
 
     if request.method == "POST":
-        user_fields = {k:v for k,v in request.form.items() if v is not None}
+        user_fields = {k: v for k, v in request.form.items() if v is not None}
     else:
-        user_fields = {k:v for k,v in user_fields.items() if v is not None}
+        user_fields = {k: v for k, v in user_fields.items() if v is not None}
 
     print(request.host)
 
     if "google_id" in user_fields:
-        user = User.query.filter_by(google_id = user_fields["google_id"]).first()
+        user = User.query.filter_by(google_id=user_fields["google_id"]).first()
     elif "twitter_id" in user_fields:
-        user = User.query.filter_by(twitter_id = user_fields["twitter_id"]).first()
+        user = User.query.filter_by(
+            twitter_id=user_fields["twitter_id"]).first()
     elif "facebook_id" in user_fields:
-        user = User.query.filter_by(facebook_id = user_fields["facebook_id"]).first()
-    elif None is not re.match(r'^(localhost|127.0.0.1)', request.host ):
-        user = User(id = 1)
+        user = User.query.filter_by(
+            facebook_id=user_fields["facebook_id"]).first()
+    elif None is not re.match(r'^(localhost|127.0.0.1)', request.host):
+        user = User(id=1)
 
     if user is None:
 
-        nickname = user_fields["nickname"] if "nickname" in user_fields else None
+        nickname = user_fields[
+            "nickname"] if "nickname" in user_fields else None
         if nickname is None or nickname == "":
             nickname = user_fields["email"].split('@')[0]
         nickname = User.make_unique_nickname(nickname)
@@ -413,7 +421,7 @@ def after_login(**user_fields):
     if 'remember_me' in session:
         remember_me = session['remember_me']
         session.pop('remember_me', None)
-    login_user(user, remember = remember_me)
+    login_user(user, remember=remember_me)
 
     return render_template('account/complete_login.html')
 
@@ -422,6 +430,8 @@ def after_login(**user_fields):
     Here are the specific methods for logging in users with their
     twitter accounts.
 """
+
+
 @twitter.tokengetter
 def get_twitter_token():
     """This is used by the API to look for the auth token and secret
@@ -432,6 +442,7 @@ def get_twitter_token():
     session instead.
     """
     return session.get('twitter_token')
+
 
 @mod.route('/twoauth-authorized/')
 @twitter.authorized_handler
@@ -456,17 +467,18 @@ def twitter_authorized(resp):
     )
     session['twitter_user'] = resp['screen_name']
 
-    response = twitter.get('users/show.json?screen_name='+resp["screen_name"]).data
+    response = twitter.get(
+        'users/show.json?screen_name='+resp["screen_name"]).data
 
     fullname = response["name"] if "name" in response else None
     nickname = response["screen_name"] if "screen_name" in response else None
     language = response["lang"] if "lang" in response else None
     country = response["location"] if "location" in response else None
-    image = response["profile_image_url"] if "profile_image_url" in response else None
+    image = response[
+        "profile_image_url"] if "profile_image_url" in response else None
     id = response["id"] if "id" in response else None
 
     return after_login(twitter_id=id, fullname=fullname, nickname=nickname, language=language, country=country, image=image)
-
 
 
 """
@@ -474,6 +486,8 @@ def twitter_authorized(resp):
     Here are the specific methods for logging in users with their
     facebook accounts.
 """
+
+
 @mod.route('/fblogin/authorized/')
 @facebook.authorized_handler
 def facebook_authorized(resp):
@@ -483,13 +497,15 @@ def facebook_authorized(resp):
             request.args['error_description']
         )
     session['facebook_token'] = (resp['access_token'], '')
-    response = facebook.get('/me/?fields=picture,username,name,id,location,locale,email').data
+    response = facebook.get(
+        '/me/?fields=picture,username,name,id,location,locale,email').data
 
     email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None
     language = response["locale"] if "locale" in response else None
     country = response["location"]["name"] if "location" in response else None
-    image = response["picture"]["data"]["url"] if "picture" in response else None
+    image = response["picture"]["data"][
+        "url"] if "picture" in response else None
     id = response["id"] if "id" in response else None
 
     return after_login(facebook_id=id, fullname=fullname, email=email, language=language, country=country, image=image)
@@ -505,13 +521,16 @@ def get_facebook_oauth_token():
     Here are the specific methods for logging in users with their
     google accounts.
 """
+
+
 @mod.route('/google_authorized/')
 @google.authorized_handler
 def google_authorized(resp):
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
 
-    req = Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
+    req = Request(
+        'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
     try:
         res = urlopen(req)
     except URLError, e:
