@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from io import BytesIO
+import time
 from StringIO import StringIO
 from datetime import datetime
 from collections import defaultdict
@@ -418,21 +420,20 @@ def download():
                                            mimetype=mimetype,
                                            headers={"Content-Disposition": content_disposition}))
 
-    with open(os.path.join(basedir, "dataviva/static/downloads/"+title_safe+"."+format), "wb") as fo:
+    with open(os.path.join(basedir, "dataviva/static/downloads/" + title_safe + "." + format), "wb") as fo:
         fo.write(response_data)
 
     zf = zipfile.ZipFile(os.path.join(
-        basedir, "dataviva/static/downloads/"+filenameDownload+".zip"), mode='w')
+        basedir, "dataviva/static/downloads/" + filenameDownload + ".zip"), mode='w')
     try:
         zf.write(os.path.join(basedir, "dataviva/static/downloads/" +
-                              title_safe+"."+format), title_safe+"."+format)
+                              title_safe + "." + format), title_safe + "." + format)
     finally:
         zf.close()
 
-    os.remove(
-        os.path.join(basedir, "dataviva/static/downloads/"+title_safe+"."+format))
+    os.remove(os.path.join(basedir, "dataviva/static/downloads/" + title_safe + "." + format))
 
-    return "/static/downloads/"+filenameDownload+".zip"
+    return "/static/downloads/" + filenameDownload + ".zip"
 
 
 @mod.route('/info/<app_name>/')
