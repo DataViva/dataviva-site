@@ -642,7 +642,8 @@ def dictionary():
         "clean_selection": gettext("Clean selection"),
 
         #contact
-        "contact_message": gettext("Your message has been sent successfully. We will soon get back to you.")
+        "contact_message": gettext("Your message has been sent successfully. We will soon get back to you."),
+        "thank_you": gettext("Thank you")
     }
 
 
