@@ -1,0 +1,20 @@
+{% extends "help/index.html" %}
+
+{% block classifications_table %}
+
+    <table id="universities-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>{% trans %}ID{% endtrans %}</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Enrolled{% endtrans %}</th>
+                <th>{% trans %}Color{% endtrans %}</th>
+            </tr>
+        </thead>
+    </table>
+
+{% endblock classifications_table %}
+
+{% block js_assets %}
+        <script src="/static/js/modules/help/classifications-universities.js"></script>
+{% endblock js_assets %}
