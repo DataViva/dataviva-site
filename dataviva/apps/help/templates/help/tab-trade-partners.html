@@ -1,0 +1,21 @@
+{% extends "help/index.html" %}
+
+{% block classifications_table %}
+
+    <table id="tradePartners-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>{% trans %}ID{% endtrans %}</th>
+                <th>{% trans %}MDIC ID{% endtrans %}</th>
+                <th>{% trans %}Name{% endtrans %}</th>
+                <th>{% trans %}Exports{% endtrans %}</th>
+                <th>{% trans %}Color{% endtrans %}</th>
+            </tr>
+        </thead>
+    </table>
+
+{% endblock classifications_table %}
+
+{% block js_assets %}
+        <script src="/static/js/modules/help/classifications-trade-partners.js"></script>
+{% endblock js_assets %}

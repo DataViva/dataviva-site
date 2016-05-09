@@ -73,7 +73,7 @@ var LocationsTable = function () {
 
             $('#industry-table_filter input').removeClass('input-sm');
             $('#industry-table_filter').addClass('pull-right');
-            $('#industry-states').addClass('active');
+            $('#industry-section').addClass('active');
 
             $('#industry-section').click(function() {
                 loadingRankings.show();
