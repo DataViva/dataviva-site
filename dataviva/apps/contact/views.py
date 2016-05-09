@@ -33,7 +33,6 @@ def index():
 @mod.route('/', methods=['POST'])
 def create():
     form = ContactForm()
-    import pdb; pdb.set_trace()
     if form.validate() is False:
         return render_template('contact/index.html', form=form)
     else:
@@ -50,7 +49,7 @@ def create():
         db.session.add(contact)
         db.session.commit()
         send_mail("Mensagem recebida via página de Contato",
-                  ["diogo@lundberg.com.br"], message_tpl)
+                  ["contato@dataviva.info"], message_tpl)
 
         message = gettext("Your message has been sent successfully. We will soon get back to you.")
 
