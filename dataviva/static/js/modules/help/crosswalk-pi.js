@@ -6,7 +6,7 @@ var headers = {
 var loadingRankings = dataviva.ui.loading('.classifications .classifications-wrapper');
 loadingRankings.text(dataviva.dictionary['loading'] + "...");
 
-var ProductsIndustryTable = function () {
+var ProductIndustryTable = function () {
     this.tableId = '#crosswalk-pi-table';
 
     this.table = $(this.tableId).DataTable({
@@ -30,7 +30,6 @@ var ProductsIndustryTable = function () {
                     else{
                         return '-';
                     }
-
                 }
             }
         ],
@@ -48,5 +47,5 @@ var ProductsIndustryTable = function () {
 };
 
 dataviva.requireAttrs(['hs', 'cnae'], function() {
-    window.productIndustry = new ProductsIndustryTable(loadingRankings.hide);
+    window.productIndustry = new ProductIndustryTable(loadingRankings.hide);
 });
