@@ -9,8 +9,8 @@ class RegistrationForm(Form):
         validators.Length(max=400)
     ])
 
-    authors = TextField('authors', validators=[
-        validators.Required(u"Por favor, insira o(s) autor(es) do post."),
+    author = TextField('author', validators=[
+        validators.Required(u"Por favor, insira o autor do post."),
         validators.Length(max=100)
     ])
 
