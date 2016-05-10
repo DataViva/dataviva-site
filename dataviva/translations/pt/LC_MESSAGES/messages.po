@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-10 11:21-0300\n"
+"POT-Creation-Date: 2016-05-10 15:11-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -659,7 +659,6 @@ msgstr "foto por"
 #: dataviva/apps/major/templates/major/index.html:42
 #: dataviva/apps/occupation/templates/occupation/index.html:43
 #: dataviva/apps/product/templates/product/index.html:41
-#: dataviva/apps/trade_partner/templates/trade_partner/index.html:42
 msgid "in Brazil"
 msgstr "no Brasil"
 
@@ -1952,6 +1951,7 @@ msgstr "divisões regionais brasileiras, composta pelos estados "
 
 #: dataviva/apps/location/templates/location/tab-general.html:64
 #: dataviva/apps/location/templates/location/tab-general.html:83
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:42
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:45
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:47
 #: dataviva/translations/dictionary.py:406
@@ -3145,6 +3145,11 @@ msgstr "Escolha uma opção ou digite o que procura"
 #: dataviva/apps/search/templates/search/new.html:10
 msgid "Create"
 msgstr "Criar"
+
+#: dataviva/apps/trade_partner/templates/trade_partner/index.html:42
+#: dataviva/translations/dictionary.py:327
+msgid "Brazil"
+msgstr "Brasil"
 
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:55
 #: dataviva/translations/dictionary.py:149
@@ -6208,10 +6213,6 @@ msgstr "Valor de Transferência"
 #: dataviva/translations/dictionary.py:324
 msgid "Transfer"
 msgstr "Valor de Transferência"
-
-#: dataviva/translations/dictionary.py:327
-msgid "Brazil"
-msgstr "Brasil"
 
 #: dataviva/translations/dictionary.py:328
 msgid "BRA ID"
