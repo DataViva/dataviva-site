@@ -14,7 +14,7 @@
             {% if location.id | length != 9 %}
             <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="exports-municipality">
-                <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=export_val"
+                <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=export_val&depth=bra_9&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
                     TreeMap
                 </a>
