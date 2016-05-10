@@ -11,7 +11,7 @@
         <div class="item post single">
             <h4>{{ post.title }}</h4>
             <div class="meta">
-                <p class="data">{% trans %}By{% endtrans %} {{ post.authors_str() }} {{ post.date_str() }}</p>
+                <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
             </div>
             <ul class="social">
                 <li>

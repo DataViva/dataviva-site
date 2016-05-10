@@ -1,7 +1,7 @@
 CREATE TABLE news_publication(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
-    subject varchar (100) NULL,
+    author varchar (100) NULL,
     text_call varchar (500) NULL,
     text_content longtext NULL,
     thumb longtext NULL,
@@ -12,7 +12,7 @@ CREATE TABLE news_publication(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE news_author(
+CREATE TABLE news_subject(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     name varchar (50) NULL,
     publication_id int UNSIGNED NULL,

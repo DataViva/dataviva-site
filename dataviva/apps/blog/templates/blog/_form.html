@@ -12,10 +12,10 @@
         {{ messages(form.title) }}
         {{ form.title(class="form-control", maxlength=400)}}
     </div>
-    <div class="form-group {{ 'has-error' if form.authors.errors else '' }} ">
-        <label class="control-label" for="authors">{% trans %}Author{% endtrans %}</label>
-        {{ messages(form.authors) }}
-        {{ form.authors(class="form-control", maxlength=100)}}
+    <div class="form-group {{ 'has-error' if form.author.errors else '' }} ">
+        <label class="control-label" for="author">{% trans %}Author{% endtrans %}</label>
+        {{ messages(form.author) }}
+        {{ form.author(class="form-control", maxlength=100)}}
     </div>
     <div class="form-group {{ 'has-error' if form.subject.errors else '' }} ">
         <label class="control-label" for="subject">{% trans %}Category{% endtrans %}</label>
