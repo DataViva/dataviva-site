@@ -1,7 +1,7 @@
 CREATE TABLE blog_post(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
-    subject varchar (100) NULL,
+    author varchar (100) NULL,
     text_call varchar (500) NULL,
     text_content longtext NULL,
     thumb longtext NULL,
@@ -11,7 +11,7 @@ CREATE TABLE blog_post(
     PRIMARY KEY (id)
 );
 
-CREATE TABLE blog_author(
+CREATE TABLE blog_subject(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     name varchar (50) NULL,
     post_id int UNSIGNED NULL,
