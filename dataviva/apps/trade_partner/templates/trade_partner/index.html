@@ -39,7 +39,7 @@
             <h1>
                 {{ trade_partner.name() }} 
                 {% if not location.id %}
-                {% trans %}in Brazil{% endtrans %}
+                {% trans %}and{% endtrans %} {% trans %}Brazil{% endtrans %}
                 {% else %}
                     {% if location.id | length <= 3 %}
                         {% trans %}and{% endtrans %} {{location.name()}}
