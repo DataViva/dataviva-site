@@ -33,7 +33,7 @@
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#exports-destination">
                     {% trans %}Stacked{% endtrans %}
                </a>
-                <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=export_val&controls=true&year=2013"
+                <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=export_val&controls=true"
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#exports-destination">
                     {% trans %}Map{% endtrans %}
                 </a>
@@ -54,7 +54,7 @@
             {% if location.id | length != 9 %}
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{% trans %}Municipality{% endtrans %}</a>
             <div class="collapse" id="imports-origin">
-                <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=color&depth=bra_9&year=2014&controls=true&size=import_val"
+                <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=color&depth=bra_9&controls=true&size=import_val"
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#imports-origin">
                     TreeMap
                 </a>
@@ -62,7 +62,7 @@
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#imports-origin">
                     {% trans %}Stacked{% endtrans %}
                </a>
-                <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=import_val&controls=true&year=2013"
+                <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=import_val&controls=true"
                    target="graphs-frame-international-trade" class="list-group-item" data-parent="#imports-origin">
                     {% trans %}Map{% endtrans %}
                 </a>
