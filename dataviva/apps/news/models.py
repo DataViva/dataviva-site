@@ -27,7 +27,7 @@ class Publication(db.Model):
 
 
 class PublicationSubject(db.Model):
-    __tablename__ = 'news_author'
+    __tablename__ = 'news_subject'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     publication_id = db.Column(db.Integer, ForeignKey('news_publication.id'))
