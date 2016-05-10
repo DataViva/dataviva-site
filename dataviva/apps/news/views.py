@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, redirect, url_for, flash, jsoni
 from dataviva.apps.general.views import get_locale
 
 from sqlalchemy import desc
-from models import Publication, AuthorNews
+from models import Publication, PublicationSubject
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -51,7 +51,7 @@ def all():
     result = Publication.query.all()
     publications = []
     for row in result:
-        publications += [(row.id, row.title, row.authors_str(),
+        publications += [(row.id, row.title, row.author,
                           row.last_modification.strftime('%d/%m/%Y'), row.show_home, row.active)]
     return jsonify(publications=publications)
 
@@ -101,7 +101,7 @@ def create():
     else:
         publication = Publication()
         publication.title = form.title.data
-        publication.subject = form.subject.data
+        publication.subject.append(PublicationSubject(form.subject.data))
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -109,10 +109,7 @@ def create():
         publication.show_home = form.show_home.data
         publication.thumb = form.thumb.data
         publication.active = 0
-
-        author_input_list = form.authors.data.split(',')
-        for author_input in author_input_list:
-            publication.authors.append(AuthorNews(author_input))
+        publication.author = form.author.data
 
         db.session.add(publication)
         db.session.commit()
@@ -127,8 +124,8 @@ def edit(id):
     form = RegistrationForm()
     publication = Publication.query.filter_by(id=id).first_or_404()
     form.title.data = publication.title
-    form.authors.data = publication.authors_str()
-    form.subject.data = publication.subject
+    form.author.data = publication.author
+    form.subject.data = publication.subject[0].name
     form.text_content.data = publication.text_content
     form.publish_date.data = publication.publish_date
     form.text_call.data = publication.text_call
@@ -146,17 +143,13 @@ def update(id):
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
         publication.title = form.title.data
-        publication.subject = form.subject.data
+        publication.subject.append(PublicationSubject(form.subject.data))
         publication.text_content = form.text_content.data
         publication.thumb = form.thumb.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
-        publication.authors = []
-
-        author_input_list = form.authors.data.split(',')
-        for author_input in author_input_list:
-            publication.authors.append(AuthorNews(author_input))
+        publication.author = form.author.data
 
         db.session.commit()
 
