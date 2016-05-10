@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, redirect, url_for, flash, jsoni
 from dataviva.apps.general.views import get_locale
 
 from sqlalchemy import desc
-from models import Post, AuthorBlog
+from models import Post, PostSubject
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -35,6 +35,12 @@ def index():
     return render_template('blog/index.html', posts=posts)
 
 
+@mod.route('/<subject>', methods=['GET'])
+def index_subject(subject):
+    posts = Post.query.filter_by(active=True, subject=subject).order_by(desc(Post.postage_date)).all()
+    return render_template('blog/index.html', posts=posts)
+
+
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
     post = Post.query.filter_by(id=id).first_or_404()
@@ -51,7 +57,7 @@ def all_posts():
     result = Post.query.all()
     posts = []
     for row in result:
-        posts += [(row.id, row.title, row.authors_str(),
+        posts += [(row.id, row.title, row.author,
                    row.postage_date.strftime('%d/%m/%Y'), row.active)]
     return jsonify(posts=posts)
 
@@ -101,16 +107,13 @@ def create():
     else:
         post = Post()
         post.title = form.title.data
-        post.subject = form.subject.data
+        post.subject.append(PostSubject(form.subject.data))
+        post.author = form.author.data
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.thumb = form.thumb.data
         post.active = 0
-
-        author_input_list = form.authors.data.split(',')
-        for author_input in author_input_list:
-            post.authors.append(AuthorBlog(author_input))
 
         db.session.add(post)
         db.session.commit()
@@ -125,7 +128,7 @@ def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
     form.title.data = post.title
-    form.authors.data = post.authors_str()
+    form.authors.data = post.author
     form.subject.data = post.subject
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
@@ -143,14 +146,10 @@ def update(id):
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
         post.subject = form.subject.data
+        post.author = form.author.data
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.thumb = form.thumb.data
-        post.authors = []
-
-        author_input_list = form.authors.data.split(',')
-        for author_input in author_input_list:
-            post.authors.append(AuthorBlog(author_input))
 
         db.session.commit()
 
