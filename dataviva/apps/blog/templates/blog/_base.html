@@ -16,8 +16,8 @@
         <h3>{% trans %}Topics{% endtrans %}</h3>
         <ul class="sub-menu">
             <li><a href="{{ url_for('blog.index') }}" title="Todos"><strong>{% trans %}All{% endtrans %}</strong></a></li>
-            {% for post in posts %}
-                <li><a href="/blog/index/{{post.subject.id}}" title="{{post.subject_str()}}">{{post.subject_str()}}</a></li>
+            {% for subject in subjects %}
+                <li><a href="/blog/{{subject.id}}" title="{{subject.name}}">{{subject.name}}</a></li>
             {% endfor %}
         </ul>
     </nav>
