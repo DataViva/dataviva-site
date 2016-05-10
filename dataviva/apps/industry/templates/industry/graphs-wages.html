@@ -26,7 +26,7 @@
                 <div class="collapse" id="wages-occupation">
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=wage" 
                     target="graphs-frame-wages" class="list-group-item">TreeMap</a>
-                    <a href="/{{ g.locale }}/embed/line/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=wage" 
+                    <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=wage" 
                     target="graphs-frame-wages" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
                 </div>
                 {% if location.id | length != 9 %}
