@@ -32,13 +32,21 @@ def add_language_code(endpoint, values):
 @mod.route('/', methods=['GET'])
 def index():
     posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
-    return render_template('blog/index.html', posts=posts)
+    subjects = PostSubject.query.join(Post).filter(
+        Post.subject_id == PostSubject.id,
+        Post.active == True
+    ).order_by(desc(PostSubject.name)).all()
+    return render_template('blog/index.html', posts=posts, subjects=subjects)
 
 
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
-    posts = Post.query.filter_by(active=True, subject=subject).order_by(desc(Post.postage_date)).all()
-    return render_template('blog/index.html', posts=posts)
+    posts = Post.query.filter_by(active=True, subject_id=subject).order_by(desc(Post.postage_date)).all()
+    subjects = PostSubject.query.join(Post).filter(
+        Post.subject_id == PostSubject.id,
+        Post.active == True
+    ).order_by(desc(PostSubject.name)).all()
+    return render_template('blog/index.html', posts=posts, subjects=subjects)
 
 
 @mod.route('/post/<id>', methods=['GET'])
@@ -107,7 +115,17 @@ def create():
     else:
         post = Post()
         post.title = form.title.data
-        post.subject.append(PostSubject(form.subject.data))
+        subject_query = PostSubject.query.filter_by(name=form.subject.data)
+
+        if (subject_query.first()):
+            post.subject_id = subject_query.first().id
+        else:
+            subject = PostSubject()
+            subject.name = form.subject.data
+            db.session.add(subject)
+            db.session.commit()
+            post.subject_id = subject.id
+
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
@@ -128,8 +146,9 @@ def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
     form.title.data = post.title
-    form.authors.data = post.author
-    form.subject.data = post.subject
+    subject_query = PostSubject.query.filter_by(id=post.subject_id)
+    form.subject.data = subject_query.first().name
+    form.author.data = post.author
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
     form.thumb.data = post.thumb
@@ -145,7 +164,17 @@ def update(id):
     else:
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
-        post.subject = form.subject.data
+        subject_query = PostSubject.query.filter_by(name=form.subject.data)
+
+        if (subject_query.first()):
+            post.subject_id = subject_query.first().id
+        else:
+            subject = PostSubject()
+            subject.name = form.subject.data
+            db.session.add(subject)
+            db.session.commit()
+            post.subject_id = subject.id
+
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
