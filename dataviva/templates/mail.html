@@ -1,36 +1,15 @@
 <!doctype html>
 <html>
-  <head>
+<head>
     <title>{% if title %}{{ title }}{% else %}DataViva{% endif %}</title>
-  </head>
-
-  <body style="margin:0px;padding:0px;">
-
-    <table border="0" cellpadding="0" cellspacing="0" style="margin:0px auto;">
-      <tr>
-        <td background="http://dataviva.info/static/img/bgs/city_small.jpg" style="background-color:#c6ebff; padding:60px; margin:0px;">
-
-          <table border="0" width="550" cellpadding="0" cellspacing="0" align="center">
-            <tr>
-              <td style="background-color:rgba(255,255,255,0.9);padding:30px;font-family:'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size:16px; font-weight: lighter;color:#333">
-
-                <a href="http://www.dataviva.info" style="display:block;margin-bottom:20px;text-align:center;">
-                  <img src="http://dataviva.info/static/img/nav/DataViva.png" width="120" alt="DataViva" style="border:0;">
-                </a>
-
-                {% block mail_body %}
-                {% endblock %}
-
-                {% if user %}
-                  <br/><br/>
-                  <span style="font-size:12px;color:#888;text-align:center;display:block;">{% trans %}If you don't want to receive these updates,{% endtrans %} <a href="http://dataviva.info/account/remove_email/{{ user.id }}/{{ user.nickname }}">{% trans %}click here.{% endtrans %}</a></span>
-                {% endif %}
-              </td>
-            </tr>
-          </table>
-
-        </td>
-      </tr>
-    </table>
-  </body>
+</head>
+<body>
+<div><span class="sg-image" data-imagelibrary="%7B%22width%22%3A%22350%22%2C%22height%22%3A%22104%22%2C%22alignment%22%3A%22center%22%2C%22src%22%3A%22http%3A//dataviva.info/static/img/nav/DataViva.png%22%2C%22alt_text%22%3A%22%22%2C%22link%22%3A%22%22%2C%22classes%22%3A%7B%22sg-image%22%3A1%7D%7D" style="float: none; display: block; text-align: center;"><img height="104" src="http://dataviva.info/static/img/nav/DataViva.png" style="width: 350px; height: 104px;" width="350" /></span>
+<div style="color: rgb(120, 119, 120); font-family: Ubuntu, sans-serif; font-size: 14px; line-height: 21px; margin-left: 20px; margin-right: 20px; background-color: rgb(255, 255, 255);">
+<h1 style="margin-top: 0px; margin-bottom: 0px; font-weight: normal; color: rgb(86, 86, 86); font-size: 36px; line-height: 43px; text-align: center;">&nbsp;</h1>
+    {% block mail_body %}
+    {% endblock %}
+</div>
+</div>
+</body>
 </html>

@@ -97,8 +97,6 @@ def create_user():
             abort(500, "Sorry, an unexpected error has occured. Please try again.")
 
         user_srl = user.serialize()
-        welcome_tpl = render_template('account/mail/welcome.html', user=user_srl)
-        send_mail("Welcome to dataviva!", [user.email], welcome_tpl)
         send_confirmation(user)
 
         return Response('confirm_pending', status=200, mimetype='application/json')

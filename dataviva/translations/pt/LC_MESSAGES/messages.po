@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-09 12:33-0300\n"
+"POT-Creation-Date: 2016-05-10 11:21-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -332,7 +332,7 @@ msgstr ""
 "profissionais de qualquer setor econômico e a partir de qualquer lugar do"
 " mundo."
 
-#: dataviva/apps/account/views.py:362 dataviva/apps/account/views.py:374
+#: dataviva/apps/account/views.py:364 dataviva/apps/account/views.py:377
 msgid "Preferences updated."
 msgstr "Preferências atualizadas."
 
@@ -353,7 +353,7 @@ msgstr "Confirmar Senha"
 #: dataviva/apps/account/templates/account/edit_profile.html:47
 #: dataviva/templates/modal/dataviva.html:106
 #: dataviva/templates/modal/search.html:28
-#: dataviva/templates/modal/signup.html:42
+#: dataviva/templates/modal/signup.html:48
 #: dataviva/templates/modal/wizard.html:47
 msgid "Cancel"
 msgstr "Cancelar"
@@ -418,6 +418,7 @@ msgstr ""
 #: dataviva/apps/account/templates/account/signin.html:26
 #: dataviva/apps/account/templates/account/signup.html:31
 #: dataviva/templates/modal/login.html:16
+#: dataviva/templates/modal/signup.html:24
 msgid "Password"
 msgstr "Senha"
 
@@ -438,7 +439,7 @@ msgstr "Ou cadastre-se usando"
 #: dataviva/apps/account/templates/account/signup.html:15
 #: dataviva/templates/include/header.html:49
 #: dataviva/templates/modal/login.html:21
-#: dataviva/templates/modal/signup.html:43
+#: dataviva/templates/modal/signup.html:49
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
@@ -455,6 +456,25 @@ msgstr "Email"
 #: dataviva/apps/account/templates/account/signup.html:40
 msgid "SignUp"
 msgstr "Cadastre-se"
+
+#: dataviva/apps/account/templates/account/mail/confirmation.html:7
+#: dataviva/templates/include/header.html:51
+#: dataviva/translations/dictionary.py:558
+msgid "Welcome"
+msgstr "Seja bem vindo"
+
+#: dataviva/apps/account/templates/account/mail/confirmation.html:12
+msgid "Hi there, thank you for signing up to DataViva."
+msgstr "Olá, obrigado por se cadastrar no DataViva."
+
+#: dataviva/apps/account/templates/account/mail/confirmation.html:16
+#, fuzzy
+msgid "Please click the link bellow to complete your registration"
+msgstr "Por favor, verifique seu email para completar o cadastro."
+
+#: dataviva/apps/account/templates/account/mail/confirmation.html:31
+msgid "VERIFY E-MAIL"
+msgstr "VERIFICAR E-MAIL"
 
 #: dataviva/apps/admin/views.py:20 dataviva/templates/general/error.html:12
 msgid "You dont have permission to view this page."
@@ -491,7 +511,7 @@ msgstr "Inicie uma Pesquisa"
 #: dataviva/apps/news/templates/news/index.html:4
 #: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:4
-#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:127
+#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:129
 #: dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:543
@@ -698,7 +718,6 @@ msgstr "Geral"
 #: dataviva/apps/basic_course/templates/basic_course/index.html:137
 #: dataviva/apps/basic_course/templates/basic_course/tab-enrollments.html:3
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:57
-#: dataviva/apps/help/templates/help/tab-basic-courses.html:10
 #: dataviva/apps/major/templates/major/index.html:118
 #: dataviva/apps/major/templates/major/tab-enrollments.html:3
 #: dataviva/apps/major/templates/major/tab-general.html:62
@@ -1132,7 +1151,7 @@ msgstr ""
 "Esta área foi especialmente criada para a publicação de Chamadas "
 "relacionados ao DataViva."
 
-#: dataviva/apps/contact/views.py:55 dataviva/translations/dictionary.py:645
+#: dataviva/apps/contact/views.py:54 dataviva/translations/dictionary.py:645
 msgid "Your message has been sent successfully. We will soon get back to you."
 msgstr "Sua mensagem foi enviada com sucesso. Em breve retornaremos."
 
@@ -1155,13 +1174,18 @@ msgstr ""
 #: dataviva/apps/contact/templates/contact/index.html:43
 #: dataviva/apps/help/templates/help/tab-basic-courses.html:9
 #: dataviva/apps/help/templates/help/tab-brazilian-locations.html:10
+#: dataviva/apps/help/templates/help/tab-industries.html:10
+#: dataviva/apps/help/templates/help/tab-majors.html:9
+#: dataviva/apps/help/templates/help/tab-occupations.html:9
 #: dataviva/apps/help/templates/help/tab-products.html:9
+#: dataviva/apps/help/templates/help/tab-trade-partners.html:10
+#: dataviva/apps/help/templates/help/tab-universities.html:9
 #: dataviva/apps/users/templates/users/admin.html:32
 #: dataviva/apps/users/templates/users/index.html:12
 #: dataviva/templates/include/footer.html:47
 #: dataviva/templates/include/footer.html:49
-#: dataviva/templates/modal/signup.html:15
 #: dataviva/templates/modal/signup.html:16
+#: dataviva/templates/modal/signup.html:17
 #: dataviva/translations/dictionary.py:337
 msgid "Name"
 msgstr "Nome"
@@ -1306,7 +1330,12 @@ msgstr "Valor de Transferência"
 
 #: dataviva/apps/help/templates/help/tab-basic-courses.html:8
 #: dataviva/apps/help/templates/help/tab-brazilian-locations.html:8
+#: dataviva/apps/help/templates/help/tab-industries.html:9
+#: dataviva/apps/help/templates/help/tab-majors.html:8
+#: dataviva/apps/help/templates/help/tab-occupations.html:8
 #: dataviva/apps/help/templates/help/tab-products.html:8
+#: dataviva/apps/help/templates/help/tab-trade-partners.html:8
+#: dataviva/apps/help/templates/help/tab-universities.html:8
 #: dataviva/translations/dictionary.py:332
 #: dataviva/translations/dictionary.py:335
 #: dataviva/translations/dictionary.py:345
@@ -1317,9 +1346,24 @@ msgstr "Valor de Transferência"
 msgid "ID"
 msgstr "ID"
 
+#: dataviva/apps/help/templates/help/tab-basic-courses.html:10
+#: dataviva/apps/help/templates/help/tab-majors.html:10
+#: dataviva/apps/help/templates/help/tab-universities.html:10
+#: dataviva/apps/rankings/templates/rankings/basic-course.html:14
+#: dataviva/apps/rankings/templates/rankings/major.html:14
+#: dataviva/apps/rankings/templates/rankings/university.html:14
+#: dataviva/translations/dictionary.py:296
+msgid "Enrolled"
+msgstr "Matrículados"
+
 #: dataviva/apps/help/templates/help/tab-basic-courses.html:11
 #: dataviva/apps/help/templates/help/tab-brazilian-locations.html:12
+#: dataviva/apps/help/templates/help/tab-industries.html:12
+#: dataviva/apps/help/templates/help/tab-majors.html:11
+#: dataviva/apps/help/templates/help/tab-occupations.html:11
 #: dataviva/apps/help/templates/help/tab-products.html:11
+#: dataviva/apps/help/templates/help/tab-trade-partners.html:12
+#: dataviva/apps/help/templates/help/tab-universities.html:11
 #: dataviva/translations/dictionary.py:86
 msgid "Color"
 msgstr "Cor"
@@ -1384,7 +1428,17 @@ msgstr "Atividade Econômica"
 msgid "Product"
 msgstr "Produto"
 
+#: dataviva/apps/help/templates/help/tab-industries.html:11
+#: dataviva/apps/help/templates/help/tab-occupations.html:10
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:14
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:14
+#: dataviva/apps/rankings/templates/rankings/occupation.html:14
+#: dataviva/translations/dictionary.py:261
+msgid "Total Jobs"
+msgstr "Total de Empregos"
+
 #: dataviva/apps/help/templates/help/tab-products.html:10
+#: dataviva/apps/help/templates/help/tab-trade-partners.html:11
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:15
 #: dataviva/apps/rankings/templates/rankings/product.html:15
 #: dataviva/apps/rankings/templates/rankings/trade-partner.html:14
@@ -1392,6 +1446,11 @@ msgstr "Produto"
 #: dataviva/translations/dictionary.py:284
 msgid "Exports"
 msgstr "Exportações"
+
+#: dataviva/apps/help/templates/help/tab-trade-partners.html:9
+#: dataviva/translations/dictionary.py:343
+msgid "MDIC ID"
+msgstr "ID MDIC"
 
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
@@ -2802,13 +2861,6 @@ msgstr "Parceiro Comercial"
 msgid "Basic Course ID"
 msgstr "Cursos Básicos"
 
-#: dataviva/apps/rankings/templates/rankings/basic-course.html:14
-#: dataviva/apps/rankings/templates/rankings/major.html:14
-#: dataviva/apps/rankings/templates/rankings/university.html:14
-#: dataviva/translations/dictionary.py:296
-msgid "Enrolled"
-msgstr "Matrículados"
-
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:15
 #: dataviva/templates/selectors/industry.html:6
 #: dataviva/translations/dictionary.py:164
@@ -2829,13 +2881,6 @@ msgstr "Crescimento Nominal das Matrículas (5 anos)"
 #: dataviva/translations/dictionary.py:336
 msgid "CNAE ID"
 msgstr "ID CNAE"
-
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:14
-#: dataviva/apps/rankings/templates/rankings/location-wages.html:14
-#: dataviva/apps/rankings/templates/rankings/occupation.html:14
-#: dataviva/translations/dictionary.py:261
-msgid "Total Jobs"
-msgstr "Total de Empregos"
 
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:15
 #: dataviva/apps/rankings/templates/rankings/occupation.html:15
@@ -3407,14 +3452,6 @@ msgstr "Emprego Estimado"
 #: dataviva/templates/admin.html:17
 msgid "Modules"
 msgstr "Módulos"
-
-#: dataviva/templates/mail.html:26
-msgid "If you don't want to receive these updates,"
-msgstr "Se você não deseja mais receber atualizações,"
-
-#: dataviva/templates/mail.html:26
-msgid "click here."
-msgstr "clique aqui."
 
 #: dataviva/templates/site.html:18
 msgid "What would you like to learn more about?"
@@ -4835,7 +4872,7 @@ msgstr "Selecione um perfil para começar"
 
 #: dataviva/templates/general/browse_categories.html:37
 #: dataviva/templates/general/index.html:19
-#: dataviva/templates/modal/signup.html:28
+#: dataviva/templates/modal/signup.html:34
 #: dataviva/translations/dictionary.py:570
 msgid "Entrepreneurs"
 msgstr "Empreendedores"
@@ -4848,7 +4885,7 @@ msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:44
 #: dataviva/templates/general/index.html:28
-#: dataviva/templates/modal/signup.html:29
+#: dataviva/templates/modal/signup.html:35
 #: dataviva/translations/dictionary.py:572
 msgid "Development Agents"
 msgstr "Agentes de Desenvolvimento"
@@ -4863,7 +4900,7 @@ msgstr ""
 
 #: dataviva/templates/general/browse_categories.html:51
 #: dataviva/templates/general/index.html:37
-#: dataviva/templates/modal/signup.html:30
+#: dataviva/templates/modal/signup.html:36
 #: dataviva/translations/dictionary.py:574
 msgid "Students and Professionals"
 msgstr "Estudantes e Profissionais"
@@ -5158,7 +5195,7 @@ msgstr ""
 "Agropecuária."
 
 #: dataviva/templates/general/index.html:118
-#: dataviva/templates/modal/signup.html:11
+#: dataviva/templates/modal/signup.html:10
 #: dataviva/translations/dictionary.py:581
 msgid "Sign Up free and make the most of DataViva"
 msgstr "Cadastre-se gratuitamente e aproveite o DataViva ao máximo"
@@ -5174,7 +5211,7 @@ msgstr ""
 "pesquisa."
 
 #: dataviva/templates/general/index.html:120
-#: dataviva/templates/modal/signup.html:10
+#: dataviva/templates/modal/signup.html:9
 #: dataviva/translations/dictionary.py:583
 msgid "Free Sign Up"
 msgstr "Cadastrar Gratuitamente"
@@ -5318,11 +5355,6 @@ msgid "or"
 msgstr "ou"
 
 #: dataviva/templates/include/header.html:51
-#: dataviva/translations/dictionary.py:558
-msgid "Welcome"
-msgstr "Seja bem vindo"
-
-#: dataviva/templates/include/header.html:51
 #: dataviva/translations/dictionary.py:557
 msgid "Edit profile"
 msgstr "Editar perfil"
@@ -5452,7 +5484,7 @@ msgstr "Acesso de usuários"
 msgid "Forgot my Password"
 msgstr "Esqueci minha Senha"
 
-#: dataviva/templates/modal/signup.html:11
+#: dataviva/templates/modal/signup.html:10
 msgid ""
 "Signing up gives you access to exclusive resources to facilitate your "
 "research."
@@ -5460,11 +5492,16 @@ msgstr ""
 "Ao fazer cadastro você terá acesso a recursos exclusivos para facilitar "
 "sua pesquisa"
 
-#: dataviva/templates/modal/signup.html:26
+#: dataviva/templates/modal/signup.html:28
+#, fuzzy
+msgid "Confirm password"
+msgstr "Confirmar Senha"
+
+#: dataviva/templates/modal/signup.html:32
 msgid "What profile best describes you"
 msgstr "Qual perfil melhor descreve você"
 
-#: dataviva/templates/modal/signup.html:37
+#: dataviva/templates/modal/signup.html:42
 msgid "I want to receive news and tips of the best use of Dataviva"
 msgstr "Eu quero receber novidades e dicas sobre o melhor do Dataviva"
 
@@ -6196,10 +6233,6 @@ msgstr "Nome (Português)"
 #: dataviva/translations/dictionary.py:341
 msgid "Top"
 msgstr "Principal"
-
-#: dataviva/translations/dictionary.py:343
-msgid "MDIC ID"
-msgstr "ID MDIC"
 
 #: dataviva/translations/dictionary.py:370
 msgid "Sending Location"
@@ -6962,4 +6995,13 @@ msgstr "com"
 
 #~ msgid " Jobs"
 #~ msgstr "empregos"
+
+#~ msgid "If you don't want to receive these updates,"
+#~ msgstr "Se você não deseja mais receber atualizações,"
+
+#~ msgid "click here."
+#~ msgstr "clique aqui."
+
+#~ msgid "Welcome!"
+#~ msgstr "Seja bem vindo!"
 
