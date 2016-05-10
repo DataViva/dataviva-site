@@ -24,12 +24,12 @@
     </div>
 
     <div class="row">
-        <div class="form-group col-md-7 {{ 'has-error' if form.authors.errors else '' }}">
+        <div class="form-group col-md-7 {{ 'has-error' if form.author.errors else '' }}">
             <label class="control-label" for="authors">{% trans %}Author{% endtrans %}</label>
-            {{ messages(form.authors) }}
-            {{ form.authors(class="form-control", maxlength=100)}}
+            {{ messages(form.author) }}
+            {{ form.author(class="form-control", maxlength=100)}}
         </div>
-        <div class="form-group col-md-5 {{ 'has-error' if form.authors.errors else '' }}">
+        <div class="form-group col-md-5 {{ 'has-error' if form.publish_date.errors else '' }}">
             <label class="control-label">{% trans %}News Date{% endtrans %}</label>
             {{ messages(form.publish_date) }}
             <div id="publish-date" class="input-group date">

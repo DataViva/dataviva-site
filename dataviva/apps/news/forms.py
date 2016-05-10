@@ -11,8 +11,8 @@ class RegistrationForm(Form):
 
     show_home = BooleanField('show_home')
 
-    authors = TextField('authors', validators=[
-        validators.Required(u"Por favor, insira o(s) autor(es) da notícia."),
+    author = TextField('author', validators=[
+        validators.Required(u"Por favor, insira o autor da notícia."),
         validators.Length(max=100)
     ])
 
