@@ -236,8 +236,14 @@ var drawProfileQuestionHeader = function() {
     var formattedChosenQuestion = chosenQuestion;
     $('#modal-search .chosen-options input').each(function(index, selector){
         if (selector.value != "") {
-            var re = new RegExp(dataviva.dictionary[selector.id]+'\\s\\w', 'g'),
-                questionOption = '<span class="question-option">'+dataviva[selector.id][selector.value].name+'</span>';
+            var re = new RegExp(dataviva.dictionary[selector.id]+'\\s\\w', 'g');
+
+            if (selector.value == 'all') {
+                var questionOption = '<span class="question-option">'+dataviva.dictionary['brazil']+'</span>';
+            } else {
+                var questionOption = '<span class="question-option">'+dataviva[selector.id][selector.value].name+'</span>';
+            }
+
             formattedChosenQuestion = formattedChosenQuestion.replace(re, dataviva.dictionary[selector.id].toLowerCase()+' '+questionOption)
         }
     });
