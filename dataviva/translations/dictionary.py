@@ -648,6 +648,7 @@ def dictionary():
         #signup
         "email_already_exists": gettext("That e-mail is already registered."),
         "check_your_inbox": gettext("Please check your inbox at"),
+        "invalid_password": gettext("Invalid email or password"),
 
         #errors
         "500": gettext("Sorry, an unexpected error has occured. Please try again"),

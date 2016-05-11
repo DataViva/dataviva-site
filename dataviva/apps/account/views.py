@@ -132,11 +132,8 @@ def signin():
             redir = request.args.get("next", "/")
             return redirect(redir)
         except:
-            flash("Invalid email or password.", "danger")
-            return render_template(
-                'account/signin.html',
-                form=form,
-            )
+            return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
+
     else:
         next = request.args.get("next", "")
 

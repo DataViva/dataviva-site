@@ -455,6 +455,7 @@ $(document).ready(function () {
         // Initialization the functions
         init: function() {
           AjaxForms.SignUp();
+          AjaxForms.SignIn();
           AjaxForms.Contact();
         },
 
@@ -473,7 +474,7 @@ $(document).ready(function () {
             }
         },
 
-        // Form submit function
+        // SignUp Form
         SignUp: function() {
           var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
 
@@ -559,7 +560,7 @@ $(document).ready(function () {
           });
         },
 
-        // Form submit function
+        // Contact Form
         Contact: function() {
           var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
 
@@ -637,6 +638,80 @@ $(document).ready(function () {
 
                 return false;
             });
+        },
+
+        // SignIn Form
+        SignIn: function() {
+          var pattern = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+
+          // Checking form input when focus and keypress event
+          $('#dataviva-login-form input[type="text"], #dataviva-login-form input[type="email"], #dataviva-login-form input[type="checkbox"], #dataviva-login-form input[type="password"], #dataviva-login-form select')
+                .on('focus keypress', function() {
+                    AjaxForms.removeWarnings(this);
+                });
+
+
+          // Signup form when submit button clicked
+          $('#dataviva-login-form').submit(function() {
+            var $form         = $(this);
+            var submitData    = $form.serialize();
+            var $email        = $form.find('input[name="email"]');
+            var $password     = $form.find('input[name="password"]');
+            var $submit       = $form.find('input[name="submit"]');
+            var status        = true;
+
+            if ($email.val() === '' || pattern.test($email.val()) === false) {
+                $email.closest('.form-group').addClass('has-error');
+                $email.addClass('error');
+                status = false;
+            }
+
+            if (status) {
+              $password.attr('disabled', 'disabled');
+              $email.attr('disabled', 'disabled');
+              $submit.attr('disabled', 'disabled');
+
+              $.ajax({
+                type: 'POST',
+                url: '/' + dataviva.language + '/account/signin',
+                data: submitData,
+                dataType: 'html',
+                success: function(response) {
+                    $('#dataviva-signup').modal('hide');
+                    location.reload();
+                },
+                error: function(response) {
+                    var IS_JSON = true;
+                        try {
+                            var errors = $.parseJSON(response.responseText);
+                            for (var field in errors) {
+                                AjaxForms.removeWarnings($form.find('#'+field));
+                                $form.find('#'+field).addClass('error');
+                                $form.find('#'+field).closest('.form-group').addClass('has-error');
+
+                                var error = $('<label></label>').attr('class', 'm-l-md error').html(errors[field]);
+                                $form.find('#'+field).siblings('.control-label').after(error);
+                            }
+                        }
+                        catch(err) {
+                            swal({
+                                title: 'Oops!',
+                                text: response.responseText,
+                                type: "error"
+                            });
+                        }
+                }
+              }).always(function() {
+                    $password.attr('disabled', 'disabled');
+                    $email.prop('disabled', false);
+                    $submit.prop('disabled', false);
+              });
+            }
+
+            status = true;
+
+            return false;
+          });
         }
       };
 
