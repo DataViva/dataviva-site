@@ -40,6 +40,5 @@ def pull_lang_code(endpoint, values):
 
 
 @mod.route('/')
-@login_required
 def index():
     return render_template('admin/index.html')
