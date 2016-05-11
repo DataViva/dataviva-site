@@ -43,12 +43,12 @@ def index():
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
     publications = Publication.query.filter_by(
-        active=True, subject_id=subject).order_by(desc(Publication.postage_date)).all()
+        active=True, subject_id=subject).order_by(desc(Publication.publish_date)).all()
     subjects = PublicationSubject.query.join(Publication).filter(
         Publication.subject_id == PublicationSubject.id,
         Publication.active
     ).order_by(desc(PublicationSubject.name)).all()
-    return render_template('blog/index.html', publications=publications, subjects=subjects)
+    return render_template('news/index.html', publications=publications, subjects=subjects)
 
 
 @mod.route('/publication/<id>', methods=['GET'])
