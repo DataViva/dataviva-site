@@ -128,3 +128,6 @@
     padding-bottom: 5px;
 }
 
+.scholar .fileinput-button input {
+    display: none;
+}
