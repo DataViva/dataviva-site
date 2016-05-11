@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-11 10:38-0300\n"
+"POT-Creation-Date: 2016-05-11 10:42-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -366,7 +366,7 @@ msgstr "Atualizar"
 
 #: dataviva/apps/account/templates/account/confirm_pending.html:5
 msgid "Please check you inbox so that you can complete your registration."
-msgstr "Por favor, verifique seu email para completar o cadastro."
+msgstr "Por favor verifique seu email para completar o cadastro."
 
 #: dataviva/apps/account/templates/account/confirm_pending.html:6
 msgid "Resend confirmation email"
@@ -6710,7 +6710,7 @@ msgstr "Este e-mail já está cadastrado."
 
 #: dataviva/translations/dictionary.py:650
 #, fuzzy
-msgid "Please, check your inbox at"
+msgid "Please check your inbox at"
 msgstr "Por favor verifique sua caixa de entrada em"
 
 #: dataviva/translations/dictionary.py:653
