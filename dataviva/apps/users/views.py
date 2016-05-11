@@ -3,6 +3,8 @@ from flask import Blueprint, render_template, g, redirect, url_for, jsonify, req
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.account.models import User
 from flask.ext.login import login_required
+from dataviva.apps.admin.views import required_roles
+
 from dataviva import db
 
 
@@ -28,6 +30,7 @@ def users():
 
 @mod.route('/admin', methods=['GET'])
 @login_required
+@required_roles(1)
 def admin():
     users = User.query.all()
     return render_template('users/admin.html', users=users)
@@ -44,6 +47,7 @@ def all():
 
 @mod.route('/admin/delete', methods=['POST'])
 @login_required
+@required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
     if ids:
@@ -59,6 +63,7 @@ def admin_delete():
 
 @mod.route('/admin/users/<status>/<status_value>', methods=['POST'])
 @login_required
+@required_roles(1)
 def admin_activate(status, status_value):
     for id in request.form.getlist('ids[]'):
         users = User.query.filter_by(id=id).first_or_404()
