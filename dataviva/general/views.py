@@ -28,33 +28,26 @@ from config import ACCOUNTS, DEBUG
 # ---------------------------
 @app.before_request
 def before_request():
-    url = urlparse(request.url)
-    url_path = url.path.split('/')
-
-    g.locale = get_locale(lang=url_path[1])
-
-    if url_path[1] not in data_api:
-        if request.endpoint != 'static' and g.locale not in url_path:
-            if url.query:
-                new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc, g.locale, url.path, url.query)
-            else:
-                new_url= "{}://{}/{}{}".format(url.scheme, url.netloc, g.locale, url.path)
-            return redirect(new_url)
-
+    g.user = current_user
     g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
     g.color = "#af1f24"
-    g.page_type = mod.name
     g.dictionary = json.dumps(dictionary())
-    g.attr_version = 14
+    g.attr_version = 15
     g.production = False if DEBUG else True
 
-    # Check if the user is logged in, if so give the global object
-    # a reference to the user from DB
-    g.user = current_user
-    if g.user.is_authenticated() and request.endpoint != 'static':
-        g.user.last_seen = datetime.utcnow()
-        db.session.add(g.user)
-        db.session.commit()
+    if request.endpoint != 'static':
+        url = urlparse(request.url)
+        url_path = url.path.split('/')
+
+        g.locale = get_locale(lang=url_path[1])
+
+        if url_path[1] not in ['attrs', 'hedu', 'rais', 'sc', 'secex', 'stats']:
+            if g.locale not in url_path:
+                if url.query:
+                    new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc, g.locale, url.path, url.query)
+                else:
+                    new_url= "{}://{}/{}{}".format(url.scheme, url.netloc, g.locale, url.path)
+                return redirect(new_url)
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
