@@ -62,7 +62,7 @@ def check_status():
 
 
 def send_confirmation(user):
-    confirmation_url = "http://localhost:5000/en/account/confirm/%s" % user.confirmation_code
+    confirmation_url = "http://dataviva.info/en/account/confirm/%s" % user.confirmation_code
     confirmation_tpl = render_template('account/mail/confirmation.html',
                                        user=user.serialize(),
                                        confirmation_url=confirmation_url)
