@@ -6,6 +6,7 @@
     <meta property="og:url" content="{{ url_for('blog.show', id=post.id, _external=True, _scheme='http') }}" />
     <meta property="og:title" content="{{ post.title }}" />
     <meta property="og:description" content="{{post.text_call}}" />
+    <meta property="og:type" content="article" />
 {% endblock %}
 
 {% block breadcrumb %}
