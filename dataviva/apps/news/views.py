@@ -31,16 +31,34 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    publications = Publication.query.filter_by(active=True).order_by(desc(Publication.publish_date)).all()
-    return render_template('news/index.html', publications=publications)
+    publications = Publication.query.filter_by(
+        active=True).order_by(desc(Publication.publish_date)).all()
+    subjects = PublicationSubject.query.join(Publication).filter(
+        Publication.subject_id == PublicationSubject.id,
+        Publication.active
+    ).order_by(desc(PublicationSubject.name)).all()
+    return render_template('news/index.html', publications=publications, subjects=subjects)
+
+
+@mod.route('/<subject>', methods=['GET'])
+def index_subject(subject):
+    publications = Publication.query.filter_by(
+        active=True, subject_id=subject).order_by(desc(Publication.postage_date)).all()
+    subjects = PublicationSubject.query.join(Publication).filter(
+        Publication.subject_id == PublicationSubject.id,
+        Publication.active
+    ).order_by(desc(PublicationSubject.name)).all()
+    return render_template('blog/index.html', publications=publications, subjects=subjects)
 
 
 @mod.route('/publication/<id>', methods=['GET'])
 def show(id):
     publication = Publication.query.filter_by(id=id).first_or_404()
-    publications = Publication.query.filter(Publication.id != id, Publication.active).all()
+    publications = Publication.query.filter(
+        Publication.id != id, Publication.active).all()
     if len(publications) > 3:
-        read_more = [publications.pop(randrange(len(publications))) for _ in range(3)]
+        read_more = [
+            publications.pop(randrange(len(publications))) for _ in range(3)]
     else:
         read_more = publications
     return render_template('news/show.html', publication=publication, id=id, read_more=read_more)
@@ -101,10 +119,22 @@ def create():
     else:
         publication = Publication()
         publication.title = form.title.data
-        publication.subject.append(PublicationSubject(form.subject.data))
+        subject_query = PublicationSubject.query.filter_by(
+            name=form.subject.data)
+
+        if (subject_query.first()):
+            publication.subject_id = subject_query.first().id
+        else:
+            subject = PublicationSubject()
+            subject.name = form.subject.data
+            db.session.add(subject)
+            db.session.commit()
+            publication.subject_id = subject.id
+
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
-        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime(
+            '%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.thumb = form.thumb.data
@@ -125,7 +155,7 @@ def edit(id):
     publication = Publication.query.filter_by(id=id).first_or_404()
     form.title.data = publication.title
     form.author.data = publication.author
-    form.subject.data = publication.subject[0].name
+    form.subject.data = publication.subject.name if publication.subject else ''
     form.text_content.data = publication.text_content
     form.publish_date.data = publication.publish_date
     form.text_call.data = publication.text_call
@@ -143,10 +173,22 @@ def update(id):
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
         publication.title = form.title.data
-        publication.subject.append(PublicationSubject(form.subject.data))
+        subject_query = PublicationSubject.query.filter_by(
+            name=form.subject.data)
+
+        if (subject_query.first()):
+            publication.subject_id = subject_query.first().id
+        else:
+            subject = PublicationSubject()
+            subject.name = form.subject.data
+            db.session.add(subject)
+            db.session.commit()
+            publication.subject_id = subject.id
+
         publication.text_content = form.text_content.data
         publication.thumb = form.thumb.data
-        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime(
+            '%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.author = form.author.data

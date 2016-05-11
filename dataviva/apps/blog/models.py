@@ -15,9 +15,6 @@ class Post(db.Model):
     subject_id = db.Column(db.Integer, ForeignKey('blog_subject.id'))
     subject = db.relationship('PostSubject', backref='blog_post', lazy='eager')
 
-    def subject_str(self):
-        return self.subject.name
-
     def date_str(self):
         return self.postage_date.strftime('%d/%m/%Y')
 

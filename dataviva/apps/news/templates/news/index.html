@@ -12,7 +12,7 @@
                     <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">
                         <img src="{{publication.thumb}}" class="thumbnail img-responsive">
                     </a>
-                    <span>{{publication.subject_str()}}</span>
+                    <span>{{publication.subject.name}}</span>
                 </div>
                 <h4>
                     <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">{{publication.title}}</a>
@@ -25,24 +25,5 @@
             </div>
             <div class="clearfix"></div>
         {% endfor %}
-        <nav>
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
     </div>
 {% endblock news_content %}

@@ -1,3 +1,9 @@
+CREATE TABLE news_subject(
+    id int UNSIGNED NOT NULL AUTO_INCREMENT,
+    name varchar (50) NULL,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE news_publication(
     id int UNSIGNED NOT NULL AUTO_INCREMENT,
     title varchar (400) NULL,
@@ -9,13 +15,7 @@ CREATE TABLE news_publication(
     last_modification datetime NULL,
     active TINYINT(1) NULL,
     show_home TINYINT(1) NULL,
-    PRIMARY KEY (id)
-);
-
-CREATE TABLE news_subject(
-    id int UNSIGNED NOT NULL AUTO_INCREMENT,
-    name varchar (50) NULL,
-    publication_id int UNSIGNED NULL,
+    subject_id int UNSIGNED NULL,
     PRIMARY KEY (id),
-    FOREIGN KEY (publication_id) REFERENCES news_publication(id)
+    FOREIGN KEY (subject_id) REFERENCES news_subject(id)
 );

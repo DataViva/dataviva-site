@@ -34,7 +34,7 @@ def index():
     posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
     subjects = PostSubject.query.join(Post).filter(
         Post.subject_id == PostSubject.id,
-        Post.active == True
+        Post.active
     ).order_by(desc(PostSubject.name)).all()
     return render_template('blog/index.html', posts=posts, subjects=subjects)
 
@@ -44,7 +44,7 @@ def index_subject(subject):
     posts = Post.query.filter_by(active=True, subject_id=subject).order_by(desc(Post.postage_date)).all()
     subjects = PostSubject.query.join(Post).filter(
         Post.subject_id == PostSubject.id,
-        Post.active == True
+        Post.active
     ).order_by(desc(PostSubject.name)).all()
     return render_template('blog/index.html', posts=posts, subjects=subjects)
 

@@ -14,10 +14,8 @@ class Publication(db.Model):
     publish_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
     show_home = db.Column(db.Boolean)
+    subject_id = db.Column(db.Integer, ForeignKey('news_subject.id'))
     subject = db.relationship('PublicationSubject', backref='news_publication', lazy='eager')
-
-    def subject_str(self):
-        return self.subject[0].name
 
     def date(self):
         return self.publish_date.strftime('%d/%m/%Y')
@@ -30,7 +28,6 @@ class PublicationSubject(db.Model):
     __tablename__ = 'news_subject'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    publication_id = db.Column(db.Integer, ForeignKey('news_publication.id'))
 
     def __init__(self, name=None):
         self.name = name
