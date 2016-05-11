@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, g
 from flask.ext.babel import gettext
 from dataviva.apps.general.views import get_locale
+from flask.ext.login import login_required
 from functools import wraps
 
 mod = Blueprint('admin', __name__,
@@ -39,5 +40,6 @@ def pull_lang_code(endpoint, values):
 
 
 @mod.route('/')
+@login_required
 def index():
     return render_template('admin/index.html')
