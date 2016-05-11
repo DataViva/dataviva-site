@@ -52,7 +52,7 @@ def get_env_variable(var_name, default=-1):
         raise Exception(error_msg)
 
 
-cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "dv2015:")
+cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "dv2016:")
 cache_timeout = get_env_variable("DATAVIVA_REDIS_TIMEOUT", 60000000)
 
 view_cache = Cache(app, config={
