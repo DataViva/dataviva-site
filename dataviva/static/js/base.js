@@ -521,20 +521,30 @@ $(document).ready(function () {
                     $('#dataviva-signup').modal('hide');
                     swal({
                         title: dataviva.dictionary['thank_you'] + '!',
-                        text: response.message,
+                        text: response,
                         type: "success"
                     });
                 },
                 error: function(response) {
-                    var errors = $.parseJSON(response.responseText);
-                    for (var field in errors) {
-                        AjaxForms.removeWarnings($form.find('#'+field));
-                        $form.find('#'+field).addClass('error');
-                        $form.find('#'+field).closest('.form-group').addClass('has-error');
+                    var IS_JSON = true;
+                        try {
+                            var errors = $.parseJSON(response.responseText);
+                            for (var field in errors) {
+                                AjaxForms.removeWarnings($form.find('#'+field));
+                                $form.find('#'+field).addClass('error');
+                                $form.find('#'+field).closest('.form-group').addClass('has-error');
 
-                        var error = $('<label></label>').attr('class', 'm-l-md error').html(errors[field]);
-                        $form.find('#'+field).siblings('.control-label').after(error);
-                    }
+                                var error = $('<label></label>').attr('class', 'm-l-md error').html(errors[field]);
+                                $form.find('#'+field).siblings('.control-label').after(error);
+                            }
+                        }
+                        catch(err) {
+                            swal({
+                                title: 'Oops!',
+                                text: response.responseText,
+                                type: "error"
+                            });
+                        }
                 }
               }).always(function() {
                     $fullname.prop('disabled', false);

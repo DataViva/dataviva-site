@@ -643,7 +643,14 @@ def dictionary():
 
         #contact
         "contact_message": gettext("Your message has been sent successfully. We will soon get back to you."),
-        "thank_you": gettext("Thank you")
+        "thank_you": gettext("Thank you"),
+
+        #signup
+        "email_already_exists": gettext("That e-mail is already registered."),
+        "check_your_inbox": gettext("Please, check your inbox at"),
+
+        #errors
+        "500": gettext("Sorry, an unexpected error has occured. Please try again"),
     }
 
 

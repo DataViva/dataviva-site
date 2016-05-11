@@ -8,6 +8,7 @@ from dataviva.utils.exist_or_404 import exist_or_404
 from dataviva.utils.encode import sha512
 from dataviva.utils.send_mail import send_mail
 from datetime import datetime
+from dataviva.translations.dictionary import dictionary
 from flask import Blueprint, request, render_template, flash, g, session, \
     redirect, url_for, jsonify, abort, current_app, Response, make_response
 from flask.ext.babel import gettext
@@ -62,7 +63,7 @@ def check_status():
 
 
 def send_confirmation(user):
-    confirmation_url = "http://dataviva.info/en/account/confirm/%s" % user.confirmation_code
+    confirmation_url = "http://dataviva.info/%s/account/confirm/%s" % (g.locale, user.confirmation_code)
     confirmation_tpl = render_template('account/mail/confirmation.html',
                                        user=user.serialize(),
                                        confirmation_url=confirmation_url)
@@ -81,6 +82,9 @@ def create_user():
     if form.validate() is False:
         return make_response(jsonify(form.errors), 400)
     else:
+        if (User.query.filter_by(email=form.email.data).count() > 0):
+            return Response(dictionary()["email_already_exists"], status=400, mimetype='application/json')
+
         try:
             confirmation_code = _gen_confirmation_code(form.email.data)
             user = User(
@@ -92,16 +96,15 @@ def create_user():
             )
             db.session.add(user)
             db.session.commit()
-            flash("Check your inbox at %s" % user.email, "success")
         except:
-            abort(500, "Sorry, an unexpected error has occured. Please try again.")
+            abort(500, dictionary()["500"])
 
         user_srl = user.serialize()
         send_confirmation(user)
 
-        return Response('confirm_pending', status=200, mimetype='application/json')
+        message = dictionary()["check_your_inbox"] + ' ' + user.email
 
-#    return redirect('/account/confirm_pending/%s' % user.email)
+        return Response(message, status=200, mimetype='application/json')
 
 
 @mod.route('/social_auth/<provider>', methods=["GET"])
