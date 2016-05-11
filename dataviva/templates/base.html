@@ -7,10 +7,12 @@
     <meta name="Description" content="{% block description %}{% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %} {% trans %}through more than 100 million interactive visualizations.{% endtrans %}{% endblock %}">
 
     <!-- Facebook Properties -->
-    <meta property="og:image" content="http://dataviva.info/static/img/sharing.jpg" />
-    <meta property="og:url" content="http://dataviva.info/pt/" />
-    <meta property="og:title" content="DataViva" />
-    <meta property="og:description" content="{% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %} {% trans %}through more than 100 million interactive visualizations.{% endtrans %}" />
+    {% block facebook_metadata %}
+        <meta property="og:image" content="http://dataviva.info/static/img/sharing.jpg" />
+        <meta property="og:url" content="http://dataviva.info/pt/" />
+        <meta property="og:title" content="DataViva" />
+        <meta property="og:description" content="{% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %} {% trans %}through more than 100 million interactive visualizations.{% endtrans %}" />
+    {% endblock %}
 
     <title>
       DataViva {% block title %}{% endblock %}
