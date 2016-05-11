@@ -71,14 +71,12 @@ def all_posts():
 
 
 @mod.route('/admin', methods=['GET'])
-@login_required
 def admin():
     posts = Post.query.all()
     return render_template('blog/admin.html', posts=posts)
 
 
 @mod.route('/admin/post/<status>/<status_value>', methods=['POST'])
-@login_required
 def admin_activate(status, status_value):
     for id in request.form.getlist('ids[]'):
         post = Post.query.filter_by(id=id).first_or_404()
@@ -90,7 +88,6 @@ def admin_activate(status, status_value):
 
 
 @mod.route('/admin/delete', methods=['POST'])
-@login_required
 def admin_delete():
     ids = request.form.getlist('ids[]')
     if ids:
@@ -105,14 +102,12 @@ def admin_delete():
 
 
 @mod.route('/admin/post/new', methods=['GET'])
-@login_required
 def new():
     form = RegistrationForm()
     return render_template('blog/new.html', form=form, action=url_for('blog.create'))
 
 
 @mod.route('/admin/post/new', methods=['POST'])
-@login_required
 def create():
     form = RegistrationForm()
     if form.validate() is False:
@@ -147,7 +142,6 @@ def create():
 
 
 @mod.route('/admin/post/<id>/edit', methods=['GET'])
-@login_required
 def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
@@ -162,7 +156,6 @@ def edit(id):
 
 
 @mod.route('/admin/post/<id>/edit', methods=['POST'])
-@login_required
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
