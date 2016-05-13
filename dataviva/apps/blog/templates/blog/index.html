@@ -19,7 +19,7 @@
                 </h4>
                 <p>{{ post.text_call }}</p>
                 <div class="meta">
-                    <p class="read-more"><a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{% trans %}Continue reading{% endtrans %}</a></p>
+                    <p><a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{% trans %}Continue reading{% endtrans %}</a></p>
                     <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
                 </div>
             </div>
