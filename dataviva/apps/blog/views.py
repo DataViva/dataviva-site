@@ -47,7 +47,7 @@ def index_subject(subject):
         Post.subject_id == PostSubject.id,
         Post.active
     ).order_by(desc(PostSubject.name)).all()
-    return render_template('blog/index.html', posts=posts, subjects=subjects)
+    return render_template('blog/index.html', posts=posts, subjects=subjects, active_subject=long(subject))
 
 
 @mod.route('/post/<id>', methods=['GET'])
