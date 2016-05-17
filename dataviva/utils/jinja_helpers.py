@@ -66,6 +66,7 @@ def jinja_split(s, char):
     return s.split(char)
 
 def max_digits(number, digits, monetary=None):
+    separator = '.' if g.locale =='en' else ',';
 
     if type(number) == float :
         number=Decimal(number)
@@ -86,7 +87,10 @@ def max_digits(number, digits, monetary=None):
         number = float(number)/num
     number_str = str(number)
 
-    if len(number_str) > 3 and number_str[digits] == '.':
+    number_str = number_str.replace('.', separator)
+
+
+    if len(number_str) > 3 and number_str[digits] == separator:
         return number_str[0:digits]
     else:
         return number_str[0:digits+1]
