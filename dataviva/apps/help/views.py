@@ -42,8 +42,6 @@ def admin():
 def all_posts():
     result = HelpSubject.query.all()
     subjects = []
-    questions = []
-    answers = []
     for row in result:
         for question in row.questions:
             subjects += [(row.id, row.name(), question.description(), question.answer())]
@@ -87,7 +85,7 @@ def universities():
 
 @mod.route('/tab-majors')
 def majors():
-    return render_template('help/tab-majors.html') 
+    return render_template('help/tab-majors.html')
 
 
 @mod.route('/crosswalk/pi')
