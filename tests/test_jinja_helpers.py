@@ -11,8 +11,8 @@ class MaxDigitsPTTests(BaseTestCase):
     def setUp(self):
         g.locale = 'pt'
 
-    # def test_max_digits_3_for_1_is_1(self):
-    #     assert '1,00' == max_digits(1, 3, True)
+    def test_max_digits_3_for_1_is_1(self):
+         assert '1,00' == max_digits(1, 3, True)
 
     # def test_max_digits_3_for_10_is_10(self):
     #     assert '10,0' == max_digits(10, 3, True)
