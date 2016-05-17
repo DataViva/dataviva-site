@@ -30,6 +30,11 @@
                         </a>
                     </li>
                 {% endfor %}
+                    <li>
+                        <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab" title="Crosswalk" aria-expanded="false">
+                            Crosswalk
+                        </a>
+                    </li>
             </ul>
         </nav>
         <div class="main-content col-md-9">
@@ -46,6 +51,15 @@
                         </div>
                         </div>
                     {% endfor %}
+                        <div class="col-md-6">
+                        <div class="panel-heading" role="tab" id="crosswalk">
+                            <h2>
+                                <a role="tab" href="#tab-crosswalk" aria-controls="geral" data-toggle="tab">
+                                    Crosswalk
+                                </a>
+                            </h2>
+                        </div>
+                        </div>
                     </div>
                     {% for subject in subjects %}
                     <div role="tabpanel" class="tab-pane" id="tab{{subject.id}}">
@@ -72,20 +86,16 @@
                             </div>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
+                    {% endfor %}
 
-    <div class="container classifications">
-        <div class="classifications-wrapper">
-            <div class="classifications-content">
-                {% block classifications_table %}
-                {% endblock classifications_table %}
+                    {% include "help/tab-crosswalk.html"%}
             </div>
         </div>
     </div>
-    
 </section>
 
 {% endblock %}
+
+{% block js_assets %}
+        <script src="/static/js/modules/help/crosswalks.js"></script>
+{% endblock js_assets %}
