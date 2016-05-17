@@ -67,14 +67,12 @@ def jinja_split(s, char):
 
 def max_digits(number, digits, monetary=None):
     separator = '.' if g.locale =='en' else ',';
-
-    if type(number) == float :
-        number=Decimal(number)
+    old_number = number
 
     if type(number) == Decimal:
         if number > 1000:
              number = int(number)
-    if number > 1000:
+    if number >= 1000:
         str_n = [1]
         for i in range(len(str(number)), 0, -3):
             if i > 3:
@@ -84,15 +82,31 @@ def max_digits(number, digits, monetary=None):
             else:
                 break
         num = int(''.join(map(str, str_n)))
-        number = float(number)/num
-    number_str = str(number)
+        number = (float(number)/num)*10
+    else:
+        if number < 10 and number >= 1:
+            number = number * 10
+
+    if number < 1:
+        if len(str(number)) > digits+1 and int(str(number)[digits+1]) >= 5:
+            number = round(number, 2)
+        number_str = str(number)
+        number_str = number_str.replace('.', separator)
+        return number_str[0:digits+1]
+
+    number_str = str(float(number))
 
     number_str = number_str.replace('.', separator)
 
+    if old_number < 10 or old_number >= 1000:
+        number_list = list(number_str)
+        comma, digit = number_list.index(','), number_list.index(',')-1
+        number_list[digit], number_list[comma] = number_list[comma], number_list[digit]
+        number_str = ''.join(number_list)
 
     if len(number_str) > 3 and number_str[digits] == separator:
         return number_str[0:digits]
-    else:
+    else:  
         return number_str[0:digits+1]
 
 def ordinal(number, gender='m'):
