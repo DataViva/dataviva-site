@@ -170,3 +170,7 @@
     height: 33px;
     width: 33px;
 }
+ 
+.news .sidebar ul li a.active {
+    font-weight: bold;
+}
