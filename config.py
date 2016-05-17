@@ -82,26 +82,15 @@ FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
 AWS_ACCESS_KEY = get_env_variable('DATAVIVA_OAUTH_AWS_ID')
 AWS_SECRET_KEY = get_env_variable('DATAVIVA_OAUTH_AWS_SECRET')
 
-
 '''
     Mail credentials to send automatic emails to users
 '''
 MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER", 'smtp.gmail.com')
-MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT", 465)
+MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT", 587)
 MAIL_USE_TLS = get_env_variable("DATAVIVA_MAIL_USE_TLS", False)
-MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL", True)
-MAIL_USERNAME = get_env_variable(
-    "DATAVIVA_MAIL_USERNAME", 'contato@dataviva.info')
+MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL", False)
+MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME", 'contato@dataviva.info')
 MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
-
-
-# TEMP
-MAIL_PORT = 587
-MAIL_USE_TLS = False
-MAIL_USE_SSL = False
-MAIL_SERVER = 'smtp.sendgrid.net'
-MAIL_USERNAME = 'dataviva-smtp'
-MAIL_PASSWORD = 'Fapemig2015'
 
 
 '''
