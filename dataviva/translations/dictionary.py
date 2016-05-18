@@ -640,6 +640,7 @@ def dictionary():
         "views": gettext("Views"),
         "graphs": gettext("Graphs"),
         "clean_selection": gettext("Clean selection"),
+        "compare_with": gettext("Compare with"),
 
         #contact
         "contact_message": gettext("Your message has been sent successfully. We will soon get back to you."),

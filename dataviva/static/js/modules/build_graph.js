@@ -13,6 +13,22 @@ function select_dimension(id) {
     $('#modal-selector').modal('show');
 }
 
+var selectorCompare = Selector()
+    .callback(function(d){
+        if ($('#compare_with').siblings('input').val() != d.id) {
+            $('#compare_with').html(d.name);
+            $('#compare-location input[name=compare_with]').val(d.id).trigger('change');
+        }
+
+        $('#modal-selector').modal('hide');
+    });
+
+function select_compare() {
+    d3.select("#modal-selector-content").call(selectorCompare.type('bra'));
+    $('#modal-selector').modal('show');
+}
+
+
 function clean_selection(id) {
     if ($(id).siblings('input').val() != 'all') {
         $(id).html(dataviva.dictionary['select']);
@@ -69,7 +85,35 @@ var BuildGraph = (function () {
         $('#selected-graph').data('graph', $(graphLink).attr('id'));
         $('#selected-graph').html(graphName);
 
-        $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graphLink).data('url')+'"></iframe>');
+        if (BuildGraph.selectedGraph == 'compare' && !BuildGraph.compare) {
+            setCompare();
+        } else {
+            $('#compare-location').empty();
+            delete BuildGraph.compare;
+            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graphLink).data('url')+'"></iframe>');
+        }
+    }
+
+    function setCompare(){
+        BuildGraph.compare = $('#compare-location input[name=compare_with]').val();
+
+
+        var div = $('<div></div>').addClass('form-group'),
+            label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
+            cleaner = $('<button></button>').attr('for', 'compare_with').addClass('btn btn-xs btn-link pull-right')
+                                    .html(dataviva.dictionary['clean_selection'])
+                                    .attr('onclick', 'clean_selection('+'compare_with'+')'),
+            selector = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
+                                    .html(dataviva.dictionary['select'])
+                                    .attr('onclick', 'select_compare();'),
+            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare_filter').val('all');
+
+        label.html(dataviva.dictionary['compare_with']);
+        filter.change(updateViews);
+
+        div.append(filter).append(label).append(selector).append(cleaner);
+
+        $('#compare-location').append(div);
     }
 
     function setGraphs(graphs) {
@@ -156,7 +200,7 @@ var BuildGraph = (function () {
             if (dimension.name == 'School') {
                 div.append(filter);
             } else {
-                div.append(filter).append(label).append(cleaner).append(selector);
+                div.append(filter).append(label).append(selector).append(cleaner);
             }
 
             $('#dimensions').append(div);
