@@ -205,13 +205,16 @@ window.showCrosswalkCO = function() {
 
 $(document).ready(function () {
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        dataviva.requireAttrs(['hs', 'cnae'], function() {
-        });
-        dataviva.requireAttrs(['cbo', 'course_hedu'], function() {
-        });
-        showCrosswalkPI();
-        showCrosswalkIP();
-        showCrosswalkOC();
-        showCrosswalkCO();
+        if (this.href.split('#')[1] === "tab-crosswalk"){
+            if(!window.productIndustry && !window.IndustryProduct
+               && !window.courseOccupation && !window.occupationCourse){
+                dataviva.requireAttrs(['hs', 'cnae'], function() {});
+                dataviva.requireAttrs(['cbo', 'course_hedu'], function() {});
+                showCrosswalkPI();
+                showCrosswalkIP();
+                showCrosswalkOC();
+                showCrosswalkCO();
+            }
+        }
     });
 });
