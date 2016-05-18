@@ -66,8 +66,10 @@ def jinja_split(s, char):
     return s.split(char)
 
 def max_digits(number, digits, monetary=None):
-    separator = '.' if g.locale =='en' else ',';
     old_number = number
+    
+    if type(number) == float:
+        number = Decimal(number)
 
     if type(number) == Decimal:
         if number > 1000:
@@ -76,9 +78,7 @@ def max_digits(number, digits, monetary=None):
         str_n = [1]
         for i in range(len(str(number)), 0, -3):
             if i > 3:
-                str_n.append(0)
-                str_n.append(0)
-                str_n.append(0)
+                str_n+="000"
             else:
                 break
         num = int(''.join(map(str, str_n)))
@@ -88,23 +88,22 @@ def max_digits(number, digits, monetary=None):
             number = number * 10
 
     if number < 1:
+        digits = digits if number > 0.00 else digits+1
+        
         if len(str(number)) > digits+1 and int(str(number)[digits+1]) >= 5:
             number = round(number, 2)
         number_str = str(number)
-        number_str = number_str.replace('.', separator)
         return number_str[0:digits+1]
 
     number_str = str(float(number))
 
-    number_str = number_str.replace('.', separator)
-
     if old_number < 10 or old_number >= 1000:
         number_list = list(number_str)
-        comma, digit = number_list.index(','), number_list.index(',')-1
+        comma, digit  =  number_list.index('.'), number_list.index('.')-1 
         number_list[digit], number_list[comma] = number_list[comma], number_list[digit]
         number_str = ''.join(number_list)
 
-    if len(number_str) > 3 and number_str[digits] == separator:
+    if len(number_str) > 3 and number_str[digits] == '.':
         return number_str[0:digits]
     else:  
         return number_str[0:digits+1]
