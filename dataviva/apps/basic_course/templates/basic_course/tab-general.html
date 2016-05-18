@@ -59,14 +59,14 @@
                     <dt>{% trans %}Main School{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
                     <dd>
                         <small>{{body.school_name }}</small>
-                        <strong class="counter">{{body.school_enrolled | max_digits(3) }}</strong> 
+                        <strong class="counter">{{body.school_enrolled | max_digits(3, True) }}</strong> 
                         <span>{{ (body.school_enrolled | magnitude).lower() }}</span>
                     </dd>
                     {% if location.id | length < 9 %}
                     <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
                     <dd>
                         <small>{{body.city_name }} - {{body.city_state.upper()}}</small>
-                        <strong class="counter">{{body.city_enrolled | max_digits(3)}}</strong>
+                        <strong class="counter">{{body.city_enrolled | max_digits(3, True)}}</strong>
                         <span>{{ (body.city_enrolled | magnitude).lower() }}</span>
                     </dd>
                     {% endif %}
