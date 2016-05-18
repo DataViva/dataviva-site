@@ -63,172 +63,29 @@
     color: #333;
 }
 
-/* HELP CLASSIFICATIONS DATATABLES */ 
+/* HELP CROSSWALK DATATABLES */
 
-.help .classifications .text-up {
-  color: #3c763d;
-}
-.help .classifications .text-down {
-  color: #a94442;
-}
-.help .classifications .text-up, .text-down {
-  text-align: right;
-  display: block;
-}
-
-.help .classifications .classifications-content .dataTable {
-  border-radius: 0;
-}
-.help .classifications .classifications-content .dataTable thead tr th{
-  background: #eee;
-  border-bottom: 1px solid #ddd;
-}
-
-.help .classifications #classifications .navbar.navbar-default {
-    background-color: #f8f8f8;
-    border-top: 1px solid #e7e7e7;
-    border-bottom: 1px solid #e7e7e7;
-    margin: 20px 0;
-}
-
-.help .classifications #classifications .navbar .nav > li {
-    padding: 0;
-}
-.help .classifications #classifications .navbar .nav > li > a {
-    color: #666;
-    border-right: none !important;
-    padding: 15px 20px;
-    margin: 0;
-}
-.help .classifications #classifications .navbar .nav > li > a:hover {
-    color: #000;
-}
-
-.help .classifications .classifications-wrapper {
+.help .crosswalk-pi-wrapper {
     padding-bottom: 30px;
     min-height: 300px;
 }
 
-.help .classifications .classifications-wrapper .classifications-content {
+.help .crosswalk-pi-wrapper .crosswalk-pi-content {
     display: none;
 }
 
-.help .classifications .nav-classifications {
-    margin-top: 50px;
-}
-
-.help .classifications .nav-classifications .list-group .list-group-item {
-    background-color: #f5f5f5;
-    color: #337AB7;
-    font-size: 16px;
-    font-weight: 100;
-    border: none;
-    margin: 0px;
-    padding: 0px;
-}
-.help .classifications .nav-classifications .list-group .list-group-item:focus,
-.help .classifications .nav-classifications .list-group .list-group-item:active {
-}
-.help .classifications .nav-classifications .list-group .list-group-item:nth-child(odd) {
-    background-color: #DFE7E2;
-}
-.help .classifications .nav-classifications .list-group-item a {
-    text-decoration: none;
-    padding-left: 2rem;
-    line-height: 40px;
-    display: block;
-}
-.help .classifications .nav-classifications .list-group-item.active,
-.help .classifications .nav-classifications .list-group-item.active a,
-.help .classifications .nav-classifications .list-group-item a:active,
-.help .classifications .nav-classifications .list-group-item a:focus {
-    background-color: #5A9DC4;
-    color: #FFF;
-}
-.help .classifications .list-group-item:first-child {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-}
-
-.help .classifications .list-group-item:last-child {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-.help .classifications .nav-classifications .list-group-item .list-subgroup {
-    background-color: #FFF;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:first-child {
-    padding-top: 15px;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:last-child {
-    padding-bottom: 15px;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a {
-    font-size: 13px;
-    font-weight: 300;
-    display: block;
-    line-height: 25px;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a.active,
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:active,
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:focus {
-    font-weight: bold;
-    background-color: #FFF;
-    color: #337AB7;
-}
-
-.help .classifications .classifications-control {
-    display: inline-block;
-    margin-bottom: 10px
-}
-
-@media (max-width: 767px) {
-    .help .classifications #classifications .navbar .nav > li > a {
-        padding: 6px 20px;
-    }
-}
-
-.help .classifications .classifications-control .btn-group {
-    margin-right: 5px;
-}
-
-.help .classifications .classifications-control .btn-group button.active {
-    background-color: #A25A6D;
-    border-color: #A25A6D;
-    color: #FFFFFF;
-}
-
-.help .classifications .dataTables_wrapper .dataTables_filter {
+.help .dataTables_wrapper .dataTables_filter {
     display: inline;
 }
 
-.help .classifications .dataTables_wrapper .growth-arrow.up {
-    color: green;
-}
-.help .classifications .dataTables_wrapper .growth-arrow.down {
-    color: red;
-}
-.help .classifications .load {
-    min-height: 500px;
-}
-.help .classifications .dataTables_scrollHeadInner .dataTable th {
-    text-align: center;
-    vertical-align: middle;
-}
-.help .classifications .dataTables_scrollBody .dataTable td.table-number {
-    text-align: right;
-}
-.help .classifications .navbar-nav > li > .dropdown-menu {
-    margin-top: -6px;
+.help .crosswalk-pi-wrapper .crosswalk-pi-content {
+    display: none;
 }
 
-.help .classifications table.dataTable thead .sorting:after,
-.help .classifications table.dataTable thead .sorting_asc:after,
-.help .classifications table.dataTable thead .sorting_desc:after,
-.help .classifications table.dataTable thead .sorting_asc_disabled:after,
-.help .classifications table.dataTable thead .sorting_desc_disabled:after {
-    top: 50%;
-    transform: translateY(-50%);
-    height: 25px;
+.help .crosswalk-pi-content .dataTable {
+  border-radius: 0;
+}
+.help .crosswalk-pi-content .dataTable thead tr th{
+  background: #eee;
+  border-bottom: 1px solid #ddd;
 }
