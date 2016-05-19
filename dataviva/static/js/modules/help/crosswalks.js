@@ -20,13 +20,13 @@ window.showCrosswalkPI = function() {
             "columns": [
                 {
                     render: function (data, type, row, meta){
-                        return dataviva.hs[row[0]].name + ' (' + row[0] + ')';
+                        return dataviva.hs[row[0]].name.truncate(40) + ' (' + row[0] + ')';
                     }
                 },
                 {
                     render: function (data, type, row, meta){
                         if (dataviva.cnae[row[1]]){
-                            return dataviva.cnae[row[1]].name + ' (' + row[1] + ')';
+                            return dataviva.cnae[row[1]].name.truncate(40) + ' (' + row[1] + ')';
                         }
                         else{
                             return '-';
