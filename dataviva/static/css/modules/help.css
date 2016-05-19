@@ -89,3 +89,78 @@
   background: #eee;
   border-bottom: 1px solid #ddd;
 }
+
+.help .crosswalk-ip-wrapper {
+    padding-bottom: 30px;
+    min-height: 300px;
+}
+
+.help .crosswalk-ip-wrapper .crosswalk-ip-content {
+    display: none;
+}
+
+.help .dataTables_wrapper .dataTables_filter {
+    display: inline;
+}
+
+.help .crosswalk-ip-wrapper .crosswalk-ip-content {
+    display: none;
+}
+
+.help .crosswalk-ip-content .dataTable {
+  border-radius: 0;
+}
+.help .crosswalk-ip-content .dataTable thead tr th{
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+.help .crosswalk-oc-wrapper {
+    padding-bottom: 30px;
+    min-height: 300px;
+}
+
+.help .crosswalk-oc-wrapper .crosswalk-oc-content {
+    display: none;
+}
+
+.help .dataTables_wrapper .dataTables_filter {
+    display: inline;
+}
+
+.help .crosswalk-oc-wrapper .crosswalk-oc-content {
+    display: none;
+}
+
+.help .crosswalk-oc-content .dataTable {
+  border-radius: 0;
+}
+.help .crosswalk-oc-content .dataTable thead tr th{
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+.help .crosswalk-co-wrapper {
+    padding-bottom: 30px;
+    min-height: 300px;
+}
+
+.help .crosswalk-co-wrapper .crosswalk-co-content {
+    display: none;
+}
+
+.help .dataTables_wrapper .dataTables_filter {
+    display: inline;
+}
+
+.help .crosswalk-co-wrapper .crosswalk-co-content {
+    display: none;
+}
+
+.help .crosswalk-co-content .dataTable {
+  border-radius: 0;
+}
+.help .crosswalk-co-content .dataTable thead tr th{
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
