@@ -208,12 +208,14 @@ $(document).ready(function () {
         if (this.href.split('#')[1] === "tab-crosswalk"){
             if(!window.productIndustry && !window.IndustryProduct
                && !window.courseOccupation && !window.occupationCourse){
-                dataviva.requireAttrs(['hs', 'cnae'], function() {});
-                dataviva.requireAttrs(['cbo', 'course_hedu'], function() {});
-                showCrosswalkPI();
-                showCrosswalkIP();
-                showCrosswalkOC();
-                showCrosswalkCO();
+                dataviva.requireAttrs(['hs', 'cnae'], function() {
+                    showCrosswalkPI();
+                    showCrosswalkIP();
+                });
+                dataviva.requireAttrs(['cbo', 'course_hedu'], function() {
+                    showCrosswalkOC();
+                    showCrosswalkCO();
+                });
             }
         }
     });
