@@ -48,46 +48,6 @@ def all_posts():
     return jsonify(subjects=subjects)
 
 
-@mod.route('/tab-brazilian-locations')
-def brazilian_locations():
-    return render_template('help/tab-brazilian-locations.html')
-
-
-@mod.route('/tab-products')
-def products():
-    return render_template('help/tab-products.html')
-
-
-@mod.route('/tab-basic-courses')
-def basic_courses():
-    return render_template('help/tab-basic-courses.html')
-
-
-@mod.route('/tab-industries')
-def industries():
-    return render_template('help/tab-industries.html')
-
-
-@mod.route('/tab-occupations')
-def occupations():
-    return render_template('help/tab-occupations.html')
-
-
-@mod.route('/tab-trade-partners')
-def trade_partners():
-    return render_template('help/tab-trade-partners.html')
-
-
-@mod.route('/tab-universities')
-def universities():
-    return render_template('help/tab-universities.html')
-
-
-@mod.route('/tab-majors')
-def majors():
-    return render_template('help/tab-majors.html')
-
-
 @mod.route('/crosswalk/pi')
 @mod.route('/crosswalk/ip')
 @mod.route('/crosswalk/oc')
@@ -116,23 +76,3 @@ def crosswalk():
                 data += [(row.course_hedu_id, row.cbo_id)]
 
     return jsonify(data=data)
-
-
-@mod.route('/tab-crosswalk-pi')
-def crosswalk_pi():
-    return render_template('help/tab-crosswalk-pi.html')
-
-
-@mod.route('/tab-crosswalk-ip')
-def crosswalk_ip():
-    return render_template('help/tab-crosswalk-ip.html')
-
-
-@mod.route('/tab-crosswalk-oc')
-def crosswalk_oc():
-    return render_template('help/tab-crosswalk-oc.html')
-
-
-@mod.route('/tab-crosswalk-co')
-def crosswalk_co():
-    return render_template('help/tab-crosswalk-co.html')
