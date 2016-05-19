@@ -35,6 +35,11 @@
                             Crosswalk
                         </a>
                     </li>
+                    <li>
+                        <a href="#tab-classifications" aria-controls="geral" role="tab" data-toggle="tab" title="Classifications" aria-expanded="false">
+                            Classifications
+                        </a>
+                    </li>
             </ul>
         </nav>
         <div class="main-content col-md-9">
@@ -60,6 +65,16 @@
                             </h2>
                         </div>
                         </div>
+                        <div class="col-md-6">
+                        <div class="panel-heading" role="tab" id="classifications">
+                            <h2>
+                                <a role="tab" href="#tab-classifications" aria-controls="geral" data-toggle="tab">
+                                    Classifications
+                                </a>
+                            </h2>
+                        </div>
+                        </div>
+
                     </div>
                     {% for subject in subjects %}
                     <div role="tabpanel" class="tab-pane" id="tab{{subject.id}}">
@@ -87,8 +102,8 @@
                         </div>
                     </div>
                     {% endfor %}
-
                     {% include "help/tab-crosswalk.html"%}
+                    {% include "help/tab-classifications.html"%}
             </div>
         </div>
     </div>
@@ -98,4 +113,5 @@
 
 {% block js_assets %}
         <script src="/static/js/modules/help/crosswalks.js"></script>
+        <script src="/static/js/modules/help/classifications.js"></script>
 {% endblock js_assets %}
