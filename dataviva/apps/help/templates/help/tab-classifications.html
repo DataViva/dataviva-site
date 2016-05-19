@@ -1,0 +1,67 @@
+<div role="tabpanel" class="tab-pane" id="tab-classifications">
+    <div class="col-xs-12">
+        <h2>Classifications</h2>
+        <div class="panel-group" id="accordion-classifications" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="question-classifications-locations">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-locations" href="#answer-classifications-locations" aria-expanded="false" aria-controls="answer-classifications-locations">
+                            Brazilian Locations
+                        </a>
+                    </h2>
+                </div>
+
+                <div id="answer-classifications-locations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-locations">
+                    <div class="panel-body">
+                        <div class="classifications-locations">
+                            <div class="classifications-locations-wrapper">
+                                <div class="classifications-locations-content">
+                                    <table id="locations-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}ID IBGE{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Population{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading" role="tab" id="question-classifications-industries">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-industries" href="#answer-classifications-industries" aria-expanded="false" aria-controls="answer-classifications-industries">
+                            Industries
+                        </a>
+                    </h2>
+                </div>
+
+                <div id="answer-classifications-industries" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-industries">
+                    <div class="panel-body">
+                        <div class="classifications-industries">
+                            <div class="classifications-industries-wrapper">
+                                <div class="classifications-industries-content">
+                                    <table id="industries-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Total Jobs{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
