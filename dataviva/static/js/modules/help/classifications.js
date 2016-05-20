@@ -167,7 +167,7 @@ window.showIndustries = function() {
                 },
                 {
                     render: function (data, type, row, meta){
-                        return dataviva.cnae[row.id].name;
+                        return dataviva.cnae[row.id].name.truncate(65);
                     }
                 },
                 {
@@ -254,7 +254,7 @@ window.showOccupations = function() {
         this.table = $(this.tableId).DataTable({
             "dom": '<"classifications-occupations-control">frtip',
             "ajax": {
-                "url": "/attrs/cbo/?depth=4",
+                "url": "/attrs/cbo/?depth=1",
                 "dataSrc": "data",
                 "cache": true,
             },
@@ -294,7 +294,7 @@ window.showOccupations = function() {
 
                 $('#occupations-table_filter input').removeClass('input-sm');
                 $('#occupations-table_filter').addClass('pull-right');
-                $('#occupations-families').addClass('active');
+                $('#occupations-groups').addClass('active');
 
                 $('#occupations-groups').click(function() {
                     loadingOccupations.show();
@@ -543,7 +543,7 @@ window.showMajors = function() {
                 {data: "id"},
                 {
                     render: function (data, type, row, meta){
-                    return dataviva.course_hedu[row.id].name;
+                    return dataviva.course_hedu[row.id].name.truncate(65);
                     }
                 },
                 {
@@ -631,7 +631,7 @@ window.showUniversities = function() {
                 {"data": "id"},
                 {
                     render: function (data, type, row, meta){
-                        return dataviva.university[row.id].name;
+                        return dataviva.university[row.id].name.truncate(65);
                     }
                 },
                 {
@@ -677,6 +677,7 @@ window.showBasicCourses = function() {
         11: "plural_pt",
         12: "url",
     }
+
 
     var loadingBasicCourses = dataviva.ui.loading('.classifications-basic-courses .classifications-basic-courses-wrapper');
     loadingBasicCourses.text(dataviva.dictionary['loading'] + "...");
