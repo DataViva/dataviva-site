@@ -63,7 +63,7 @@ window.showLocations = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 var buttons = $("<div></div>").addClass("btn-group");
@@ -183,7 +183,7 @@ window.showIndustries = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 var buttons = $("<div></div>").addClass("btn-group");
@@ -279,7 +279,7 @@ window.showOccupations = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 var buttons = $("<div></div>").addClass("btn-group");
@@ -367,7 +367,7 @@ window.showProducts = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 var buttons = $("<div></div>").addClass("btn-group");
@@ -473,7 +473,7 @@ window.showTradePartners = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 var buttons = $("<div></div>").addClass("btn-group");
@@ -559,7 +559,7 @@ window.showMajors = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 var buttons = $("<div></div>").addClass("btn-group");
@@ -647,7 +647,7 @@ window.showUniversities = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 $('#universities-table_filter input').removeClass('input-sm');
@@ -713,7 +713,7 @@ window.showBasicCourses = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 var buttons = $("<div></div>").addClass("btn-group");
