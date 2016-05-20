@@ -203,20 +203,43 @@ window.showCrosswalkCO = function() {
     window.courseOccupation = new CourseOccupationTable(loadingCrosswalkCO.hide());
 };
 
-$(document).ready(function () {
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        if (this.href.split('#')[1] === "tab-crosswalk"){
-            if(!window.productIndustry && !window.IndustryProduct
-               && !window.courseOccupation && !window.occupationCourse){
-                dataviva.requireAttrs(['hs', 'cnae'], function() {
-                    showCrosswalkPI();
-                    showCrosswalkIP();
-                });
-                dataviva.requireAttrs(['cbo', 'course_hedu'], function() {
-                    showCrosswalkOC();
-                    showCrosswalkCO();
-                });
-            }
-        }
-    });
+
+
+$('#question-crosswalk-pi').on('click', function(){
+    if(!window.productIndustry){
+        showCrosswalkPI()
+    }
 });
+
+
+$('#question-crosswalk-ip').on('click', function(){
+    if(!window.IndustryProduct){
+        showCrosswalkIP()
+    }
+});
+
+
+$('#question-crosswalk-oc').on('click', function(){
+    if(!window.occupationCourse){
+        showCrosswalkOC()
+    }
+});
+
+
+$('#question-crosswalk-co').on('click', function(){
+    if(!window.courseOccupation){
+        showCrosswalkCO();
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
