@@ -10,7 +10,6 @@
                         </a>
                     </h2>
                 </div>
-
                 <div id="answer-classifications-locations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-locations">
                     <div class="panel-body">
                         <div class="classifications-locations">
@@ -40,7 +39,6 @@
                         </a>
                     </h2>
                 </div>
-
                 <div id="answer-classifications-industries" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-industries">
                     <div class="panel-body">
                         <div class="classifications-industries">
@@ -61,6 +59,176 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="panel-heading" role="tab" id="question-classifications-occupations">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-occupations" href="#answer-classifications-occupations" aria-expanded="false" aria-controls="answer-classifications-occupations">
+                            Occupations
+                        </a>
+                    </h2>
+                </div>
+                <div id="answer-classifications-occupations" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-occupations">
+                    <div class="panel-body">
+                        <div class="classifications-occupations">
+                            <div class="classifications-occupations-wrapper">
+                                <div class="classifications-occupations-content">
+                                    <table id="occupations-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Total Jobs{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading" role="tab" id="question-classifications-products">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-products" href="#answer-classifications-products" aria-expanded="false" aria-controls="answer-classifications-products">
+                            Products
+                        </a>
+                    </h2>
+                </div>
+                <div id="answer-classifications-products" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-products">
+                    <div class="panel-body">
+                        <div class="classifications-products">
+                            <div class="classifications-products-wrapper">
+                                <div class="classifications-products-content">
+                                    <table id="products-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Exports{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading" role="tab" id="question-classifications-trade-partners">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-trade-partners" href="#answer-classifications-trade-partners" aria-expanded="false" aria-controls="answer-classifications-trade-partners">
+                            Trade-Partners
+                        </a>
+                    </h2>
+                </div>
+                <div id="answer-classifications-trade-partners" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-trade-partners">
+                    <div class="panel-body">
+                        <div class="classifications-trade-partners">
+                            <div class="classifications-trade-partners-wrapper">
+                                <div class="classifications-trade-partners-content">
+                                    <table id="trade-partners-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}MDIC ID{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Exports{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading" role="tab" id="question-classifications-majors">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-majors" href="#answer-classifications-majors" aria-expanded="false" aria-controls="answer-classifications-majors">
+                            Majors
+                        </a>
+                    </h2>
+                </div>
+                <div id="answer-classifications-majors" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-majors">
+                    <div class="panel-body">
+                        <div class="classifications-majors">
+                            <div class="classifications-majors-wrapper">
+                                <div class="classifications-majors-content">
+                                    <table id="majors-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Enrolled{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading" role="tab" id="question-classifications-universities">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-universities" href="#answer-classifications-universities" aria-expanded="false" aria-controls="answer-classifications-universities">
+                            Universities
+                        </a>
+                    </h2>
+                </div>
+                <div id="answer-classifications-universities" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-universities">
+                    <div class="panel-body">
+                        <div class="classifications-universities">
+                            <div class="classifications-universities-wrapper">
+                                <div class="classifications-universities-content">
+                                    <table id="universities-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Enrolled{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-heading" role="tab" id="question-classifications-basic-courses">
+                    <h2>
+                        <a role="button" data-toggle="collapse" data-parent="#accordion-classifications-basic-courses" href="#answer-classifications-basic-courses" aria-expanded="false" aria-controls="answer-classifications-basic-courses">
+                            Basic Courses
+                        </a>
+                    </h2>
+                </div>
+                <div id="answer-classifications-basic-courses" class="panel-collapse collapse" role="tabpanel" aria-labelledby="question-classifications-basic-courses">
+                    <div class="panel-body">
+                        <div class="classifications-basic-courses">
+                            <div class="classifications-basic-courses-wrapper">
+                                <div class="classifications-basic-courses-content">
+                                    <table id="basic-courses-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans %}ID{% endtrans %}</th>
+                                                <th>{% trans %}Name{% endtrans %}</th>
+                                                <th>{% trans %}Enrolled{% endtrans %}</th>
+                                                <th>{% trans %}Color{% endtrans %}</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
