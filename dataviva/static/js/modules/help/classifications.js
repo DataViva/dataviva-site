@@ -753,33 +753,63 @@ window.showBasicCourses = function() {
 $(document).ready(function () {
     $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
         if (this.href.split('#')[1] === "tab-classifications"){
-            if(!window.locations && !window.industries && !window.occupations && !window.products
-               && !window.tradePartners && !window.Majors && !window.universities && !window.basicCourses){
-                dataviva.requireAttrs(['bra'], function() {
-                    showLocations();
-                });
-                dataviva.requireAttrs(['cnae'], function() {
-                    showIndustries();
-                });
-                dataviva.requireAttrs(['cbo'], function() {
-                    showOccupations();
-                });
-                dataviva.requireAttrs(['hs'], function() {
-                    showProducts();
-                });
-                dataviva.requireAttrs(['wld'], function() {
-                    showTradePartners();
-                });
-                dataviva.requireAttrs(['course_hedu'], function() {
-                    showMajors();
-                });
-                dataviva.requireAttrs(['university'], function() {
-                    showUniversities();
-                });
-                dataviva.requireAttrs(['course_sc'], function() {
-                    showBasicCourses();
-                });
-            }
+            dataviva.requireAttrs(['bra'], function() {});
+            dataviva.requireAttrs(['cnae'], function() {});
+            dataviva.requireAttrs(['cbo'], function() {});
+            dataviva.requireAttrs(['hs'], function() {});
+            dataviva.requireAttrs(['wld'], function() {});
+            dataviva.requireAttrs(['course_hedu'], function() {});
+            dataviva.requireAttrs(['university'], function() {});
+            dataviva.requireAttrs(['course_sc'], function() {});
         }
     });
 });
+
+$('#question-classifications-locations').on('click', function(){
+    if(!window.locations){
+        showLocations();
+    }
+});
+
+$('#question-classifications-industries').on('click', function(){
+    if(!window.industries){
+        showIndustries();
+    }
+});
+
+$('#question-classifications-occupations').on('click', function(){
+    if(!window.occupations){
+        showOccupations();
+    }
+});
+
+$('#question-classifications-products').on('click', function(){
+    if(!window.products){
+        showProducts();
+    }
+});
+
+$('#question-classifications-trade-partners').on('click', function(){
+    if(!window.tradePartners){
+        showTradePartners();
+    }
+});
+
+$('#question-classifications-majors').on('click', function(){
+    if(!window.majors){
+        showMajors();
+    }
+});
+
+$('#question-classifications-universities').on('click', function(){
+    if(!window.universities){
+        showUniversities();
+    }
+});
+
+$('#question-classifications-basic-courses').on('click', function(){
+    if(!window.basicCourses){
+        showBasicCourses();
+    }
+});
+
