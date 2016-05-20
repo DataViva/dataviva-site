@@ -750,20 +750,6 @@ window.showBasicCourses = function() {
     window.basicCourses = new BasicCoursesTable(loadingBasicCourses.hide());
 };
 
-$(document).ready(function () {
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        if (this.href.split('#')[1] === "tab-classifications"){
-            dataviva.requireAttrs(['bra'], function() {});
-            dataviva.requireAttrs(['cnae'], function() {});
-            dataviva.requireAttrs(['cbo'], function() {});
-            dataviva.requireAttrs(['hs'], function() {});
-            dataviva.requireAttrs(['wld'], function() {});
-            dataviva.requireAttrs(['course_hedu'], function() {});
-            dataviva.requireAttrs(['university'], function() {});
-            dataviva.requireAttrs(['course_sc'], function() {});
-        }
-    });
-});
 
 $('#question-classifications-locations').on('click', function(){
     if(!window.locations){
