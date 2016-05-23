@@ -66,6 +66,7 @@ window.showLocations = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingLocations.show();
                 var buttons = $("<div></div>").addClass("btn-group");
 
                 var bra_1 = dataviva.dictionary['bra_1'],
@@ -116,8 +117,8 @@ window.showLocations = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                loadingLocations.hide();
                 $('.classifications-locations .classifications-locations-wrapper .classifications-locations-content').show();
+                loadingLocations.hide();
             }
         });
     };
@@ -186,6 +187,7 @@ window.showIndustries = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingIndustries.show();
                 var buttons = $("<div></div>").addClass("btn-group");
 
                 var cnae_1 = dataviva.dictionary['cnae_1'],
@@ -220,8 +222,8 @@ window.showIndustries = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                loadingIndustries.hide();
                 $('.classifications-industries .classifications-industries-wrapper .classifications-industries-content').show();
+                loadingIndustries.hide();
             }
         });
     };
@@ -282,6 +284,7 @@ window.showOccupations = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingOccupations.show();
                 var buttons = $("<div></div>").addClass("btn-group");
 
                 var cbo_1 = dataviva.dictionary['cbo_1'],
@@ -308,8 +311,8 @@ window.showOccupations = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                loadingOccupations.hide();
                 $('.classifications-occupations .classifications-occupations-wrapper .classifications-occupations-content').show();
+                loadingOccupations.hide();
             }
         });
     };
@@ -370,6 +373,7 @@ window.showProducts = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingProducts.show();
                 var buttons = $("<div></div>").addClass("btn-group");
 
                 var hs_2 = dataviva.dictionary['hs_2'],
@@ -397,8 +401,8 @@ window.showProducts = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                loadingProducts.hide();
                 $('.classifications-products .classifications-products-wrapper .classifications-products-content').show();
+                loadingProducts.hide();
             }
         });
     };
@@ -476,6 +480,7 @@ window.showTradePartners = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingTradePartners.show();
                 var buttons = $("<div></div>").addClass("btn-group");
 
                 var wld_2 = dataviva.dictionary['wld_2'],
@@ -502,8 +507,8 @@ window.showTradePartners = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                loadingTradePartners.hide();
                 $('.classifications-trade-partners .classifications-trade-partners-wrapper .classifications-trade-partners-content').show();
+                loadingTradePartners.hide();
             }
         });
     };
@@ -562,6 +567,7 @@ window.showMajors = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingMajors.show();
                 var buttons = $("<div></div>").addClass("btn-group");
 
                 var course_hedu_2 = dataviva.dictionary['course_hedu_2'],
@@ -588,8 +594,8 @@ window.showMajors = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                loadingMajors.hide();
                 $('.classifications-majors .classifications-majors-wrapper .classifications-majors-content').show();
+                loadingMajors.hide();
             }
         });
     };
@@ -650,15 +656,15 @@ window.showUniversities = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingUniversities.show();
                 $('#universities-table_filter input').removeClass('input-sm');
                 $('#universities-table_filter').addClass('pull-right');
-
-                loadingUniversities.hide();
                 $('.classifications-universities .classifications-universities-wrapper .classifications-universities-content').show();
+                loadingUniversities.hide();
             }
         });
     };
-    window.universities = new universitiesTable(loadingUniversities.hide());
+    window.universities = new universitiesTable();
 };
 
 window.showBasicCourses = function() {
@@ -677,7 +683,6 @@ window.showBasicCourses = function() {
         11: "plural_pt",
         12: "url",
     }
-
 
     var loadingBasicCourses = dataviva.ui.loading('.classifications-basic-courses .classifications-basic-courses-wrapper');
     loadingBasicCourses.text(dataviva.dictionary['loading'] + "...");
@@ -716,6 +721,7 @@ window.showBasicCourses = function() {
             "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
+                loadingBasicCourses.show();
                 var buttons = $("<div></div>").addClass("btn-group");
 
                 var course_sc_2 = dataviva.dictionary['course_sc_2'],
@@ -742,14 +748,13 @@ window.showBasicCourses = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                loadingBasicCourses.hide();
                 $('.classifications-basic-courses .classifications-basic-courses-wrapper .classifications-basic-courses-content').show();
+                loadingBasicCourses.hide();
             }
         });
     };
-    window.basicCourses = new BasicCoursesTable(loadingBasicCourses.hide());
+    window.basicCourses = new BasicCoursesTable();
 };
-
 
 $('#question-classifications-locations').on('click', function(){
     if(!window.locations){
