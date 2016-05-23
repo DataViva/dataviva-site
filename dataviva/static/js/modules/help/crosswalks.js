@@ -41,8 +41,9 @@ window.showCrosswalkPI = function() {
             "scrollCollapse": false,
             "scroller": true,
             initComplete: function () {
-                loadingCrosswalkPI.hide();
+                loadingCrosswalkPI.show();
                 $('.crosswalk-pi .crosswalk-pi-wrapper .crosswalk-pi-content').show();
+                loadingCrosswalkPI.hide();
             }
         });
     };
@@ -93,8 +94,9 @@ window.showCrosswalkIP = function() {
             "scrollCollapse": false,
             "scroller": true,
             initComplete: function () {
-                loadingCrosswalkIP.hide();
+                loadingCrosswalkIP.show();
                 $('.crosswalk-ip .crosswalk-ip-wrapper .crosswalk-ip-content').show();
+                loadingCrosswalkIP.hide();
             }
         });
     };
@@ -144,8 +146,9 @@ window.showCrosswalkOC = function() {
             "scrollCollapse": false,
             "scroller": true,
             initComplete: function () {
-                loadingCrosswalkOC.hide();
+                loadingCrosswalkOC.show();
                 $('.crosswalk-oc .crosswalk-oc-wrapper .crosswalk-oc-content').show();
+                loadingCrosswalkOC.hide();
             }
         });
     };
@@ -195,15 +198,14 @@ window.showCrosswalkCO = function() {
             "scrollCollapse": false,
             "scroller": true,
             initComplete: function () {
-                loadingCrosswalkCO.hide();
+                loadingCrosswalkCO.show();
                 $('.crosswalk-co .crosswalk-co-wrapper .crosswalk-co-content').show();
+                loadingCrosswalkCO.hide();
             }
         });
     };
     window.courseOccupation = new CourseOccupationTable(loadingCrosswalkCO.hide());
 };
-
-
 
 $('#question-crosswalk-pi').on('click', function(){
     if(!window.productIndustry){
@@ -211,13 +213,11 @@ $('#question-crosswalk-pi').on('click', function(){
     }
 });
 
-
 $('#question-crosswalk-ip').on('click', function(){
     if(!window.IndustryProduct){
         showCrosswalkIP()
     }
 });
-
 
 $('#question-crosswalk-oc').on('click', function(){
     if(!window.occupationCourse){
@@ -225,21 +225,8 @@ $('#question-crosswalk-oc').on('click', function(){
     }
 });
 
-
 $('#question-crosswalk-co').on('click', function(){
     if(!window.courseOccupation){
         showCrosswalkCO();
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
