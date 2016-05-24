@@ -25,12 +25,12 @@ window.showCrosswalkPI = function() {
                 },
                 {
                     render: function (data, type, row, meta){
-                        if (dataviva.cnae[row[1]]){
-                            return dataviva.cnae[row[1]].name.truncate(40) + ' (' + row[1] + ')';
+                        result = '';
+                        for(i=0; i<row[1].length; i++){
+                            if(dataviva.cnae[ row[1][i] ])
+                                result += (i != 0 ? '</br>' : '') + dataviva.cnae[row[1][i]].name.truncate(40) + ' (' + row[1][i] + ')';
                         }
-                        else{
-                            return '-';
-                        }
+                        return result != '' ? result : "-";
                     }
                 }
             ],
@@ -76,14 +76,19 @@ window.showCrosswalkIP = function() {
                             return dataviva.cnae[row[0]].name + ' (' + row[0] + ')';
                         }
                         else{
-                            return '-';
+                            return row[0];
                         }
 
                     }
                 },
                 {
                     render: function (data, type, row, meta){
-                        return dataviva.hs[row[1]].name + ' (' + row[1] + ')';
+                        result = '';
+                        for(i=0; i<row[1].length; i++){
+                            if(dataviva.hs[ row[1][i] ])
+                                result += (i != 0 ? '</br>' : '') + dataviva.hs[row[1][i]].name.truncate(40) + ' (' + row[1][i] + ')';
+                        }
+                        return result != '' ? result : "-";
                     }
                 }
             ],
@@ -130,12 +135,12 @@ window.showCrosswalkOC = function() {
                 },
                 {
                     render: function (data, type, row, meta){
-                        if (dataviva.course_hedu[row[1]]){
-                            return dataviva.course_hedu[row[1]].name + ' (' + row[1] + ')';
+                        result = '';
+                        for(i=0; i<row[1].length; i++){
+                            if(dataviva.course_hedu[ row[1][i] ])
+                                result += (i != 0 ? '</br>' : '') + dataviva.course_hedu[row[1][i]].name.truncate(40) + ' (' + row[1][i] + ')';
                         }
-                        else{
-                            return '-';
-                        }
+                        return result != '' ? result : "-";
                     }
                 }
             ],
@@ -181,13 +186,18 @@ window.showCrosswalkCO = function() {
                             return dataviva.course_hedu[row[0]].name + ' (' + row[0] + ')';
                         }
                         else{
-                            return '-';
+                            return row[0];
                         }
                     }
                 },
                 {
                     render: function (data, type, row, meta){
-                            return dataviva.cbo[row[1]].name + ' (' + row[1] + ')';
+                        result = '';
+                        for(i=0; i<row[1].length; i++){
+                            if(dataviva.cbo[ row[1][i] ])
+                                result += (i != 0 ? '</br>' : '') + dataviva.cbo[row[1][i]].name.truncate(40) + ' (' + row[1][i] + ')';
+                        }
+                        return result != '' ? result : "-";
                     }
                 },
             ],
