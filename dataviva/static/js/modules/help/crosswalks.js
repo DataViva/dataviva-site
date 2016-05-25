@@ -38,7 +38,7 @@ window.showCrosswalkPI = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 loadingCrosswalkPI.show();
@@ -73,10 +73,10 @@ window.showCrosswalkIP = function() {
                 {
                     render: function (data, type, row, meta){
                         if (dataviva.cnae[row[0]]){
-                            return dataviva.cnae[row[0]].name + ' (' + row[0] + ')';
+                            return dataviva.cnae[row[0]].name.truncate(40) + ' (' + row[0] + ')';
                         }
                         else{
-                            return row[0];
+                            return '-';
                         }
 
                     }
@@ -84,10 +84,10 @@ window.showCrosswalkIP = function() {
                 {
                     render: function (data, type, row, meta){
                         result = '';
-                        for(i=0; i<row[1].length; i++){
-                            if(dataviva.hs[ row[1][i] ])
-                                result += (i != 0 ? '</br>' : '') + dataviva.hs[row[1][i]].name.truncate(40) + ' (' + row[1][i] + ')';
-                        }
+                        $.each(row[1], function(i, value) {
+                            if(dataviva.hs[ value ])
+                                result += (i != 0 ? '</br>' : '') + dataviva.hs[value].name.truncate(40) + ' (' + value + ')';
+                        });
                         return result != '' ? result : "-";
                     }
                 }
@@ -96,7 +96,7 @@ window.showCrosswalkIP = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 loadingCrosswalkIP.show();
@@ -130,16 +130,19 @@ window.showCrosswalkOC = function() {
             "columns": [
                 {
                     render: function (data, type, row, meta){
-                            return dataviva.cbo[row[0]].name + ' (' + row[0] + ')';
+                            return dataviva.cbo[row[0]].name.truncate(40) + ' (' + row[0] + ')';
                     }
                 },
                 {
                     render: function (data, type, row, meta){
                         result = '';
-                        for(i=0; i<row[1].length; i++){
-                            if(dataviva.course_hedu[ row[1][i] ])
-                                result += (i != 0 ? '</br>' : '') + dataviva.course_hedu[row[1][i]].name.truncate(40) + ' (' + row[1][i] + ')';
-                        }
+                        $.each(row[1], function(i, value) {
+                            if(dataviva.course_hedu[ value ])
+                                result += (i != 0 ? '</br>' : '') + dataviva.course_hedu[value].name.truncate(40) + ' (' + value + ')';
+                            else
+                                result += (i != 0 ? '</br>' : '') + dataviva.course_sc[value.substr(1,5)].name.truncate(40) + ' (' + value.substr(1,5) + ')';
+                        });
+
                         return result != '' ? result : "-";
                     }
                 }
@@ -148,7 +151,7 @@ window.showCrosswalkOC = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 loadingCrosswalkOC.show();
@@ -176,14 +179,17 @@ window.showCrosswalkCO = function() {
             "ajax": {
                 "url": "/help/crosswalk/co",
                 "dataSrc": "data",
-                "cache": true,
+                "cache": true
             },
             "order": [],
             "columns": [
                 {
                     render: function (data, type, row, meta){
-                        if (dataviva.course_hedu[row[0]]){
-                            return dataviva.course_hedu[row[0]].name + ' (' + row[0] + ')';
+                        if(row[0].match(/^[0-9]+$/)){
+                           return dataviva.course_sc[row[0].substr(1,5)].name.truncate(40) + ' (' + row[0].substr(1,5) + ')'; 
+                        }
+                        else if (dataviva.course_hedu[row[0]]){
+                            return dataviva.course_hedu[row[0]].name.truncate(40) + ' (' + row[0] + ')';
                         }
                         else{
                             return row[0];
@@ -205,14 +211,14 @@ window.showCrosswalkCO = function() {
             "language": dataviva.datatables.language,
             "scrollY": 500,
             "scrollX": true,
-            "scrollCollapse": false,
+            "scrollCollapse": true,
             "scroller": true,
             initComplete: function () {
                 loadingCrosswalkCO.show();
                 $('.crosswalk-co .crosswalk-co-wrapper .crosswalk-co-content').show();
                 loadingCrosswalkCO.hide();
             }
-        });
+        });     
     };
     window.courseOccupation = new CourseOccupationTable(loadingCrosswalkCO.hide());
 };
