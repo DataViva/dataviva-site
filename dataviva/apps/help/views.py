@@ -83,7 +83,7 @@ def crosswalk():
         crossings = [data[row_index][1]]
         
         if row_index == len(data)-1:
-            aggregated_data += [( category, crossings)];
+            aggregated_data += [(category, crossings)];
             break;
             
         while category == data[row_index+1][0]:
@@ -93,6 +93,7 @@ def crosswalk():
             if row_index == len(data)-1: 
                 break;
 
-        aggregated_data += [( category, crossings)];
+        aggregated_data += [(category, crossings)];
         row_index += 1
+        
     return jsonify(data=aggregated_data)
