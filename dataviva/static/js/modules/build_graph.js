@@ -18,8 +18,9 @@ var selectorCompare = Selector()
         if ($('#compare_with').siblings('input').val() != d.id) {
             $('#compare_with').html(d.name);
             $('#compare-location input[name=compare_with]').val(d.id).trigger('change');
+            BuildGraph.compare = d.id;
         }
-
+        BuildGraph.setCompare();
         $('#modal-selector').modal('hide');
     });
 
@@ -43,16 +44,51 @@ var BuildGraph = (function () {
         views: views,
         selectedView: selectedView,
         selectedGraph: selectedGraph,
+        setCompare: setCompare,
         init: init
     }
 
     var selectedGraph, selectedView, dataset, views;
 
+    function changeDataSet() {
+        $('#datasets #dataset-empty-option').remove();
+        BuildGraph.dataset = this.value;
+        setDimensions(dataviva.datasets[this.value].dimensions);
+        updateViews();
+    }
+
+    function setDimensions(dimensions) {
+        $('#dimensions').empty();
+        dimensions.forEach(function(dimension, index) {
+            var div = $('<div></div>').addClass('form-group'),
+                label = $('<label></label>').attr('for', dimension.id).addClass('control-label'),
+                cleaner = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
+                                        .html(dataviva.dictionary['clean_selection'])
+                                        .attr('onclick', 'clean_selection('+dimension.id+')'),
+                selector = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
+                                        .html(dataviva.dictionary['select'])
+                                        .attr('onclick', 'select_dimension(id);'),
+                filter = $('<input></input>').attr('type', 'hidden').attr('name', dimension.id).attr('id', 'filter'+index).val('all');
+
+            label.html(dataviva.dictionary[dimension.id]);
+            filter.change(updateViews);
+
+            if (dimension.name == 'School') {
+                div.append(filter);
+            } else {
+                div.append(filter).append(label).append(selector).append(cleaner);
+            }
+
+            $('#dimensions').append(div);
+        });
+    }
+
     function updateViews() {
         $.ajax({
             method: "GET",
             url: "/" + dataviva.language + "/build_graph/views/" + BuildGraph.dataset +"/" +
-                $('#dimensions #filter0').val() + "/" +
+                $('#dimensions #filter0').val() +
+                ($('#compare-location input[name=compare_with]').val() ? '_' + $('#compare-location input[name=compare_with]').val() : '') + "/" +
                 ($('#dimensions #filter1').val() == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" +
                 ($('#dimensions #filter2').val() == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
             data: {
@@ -61,59 +97,41 @@ var BuildGraph = (function () {
                 },
             success: function (result) {
                 setViews(result.views);
-
-                if ($.inArray(BuildGraph.selectedView, Object.keys(result.views)) > -1) {
-                    $('#views select').val(BuildGraph.selectedView);
-                } else {
-                    BuildGraph.selectedView = result.views[$('#views select').val()].id;
-                }
-
-                setGraphs(result.views[BuildGraph.selectedView].graphs);
             }
         });
     }
-    function selectGraph(graphLink) {
-        BuildGraph.selectedGraph = $(graphLink).attr('id');
 
-        var graphName = $(graphLink).html();
+    function setViews(views) {
+        BuildGraph.views = views;
+        $('#views').empty()
 
-        //Adds active class to selected item
-        $(graphLink).parents('.dropdown-menu').find('li').removeClass('active');
-        $(graphLink).parent('li').addClass('active');
+        var div = $('<div></div>').addClass('form-group');
+            select = $('<select></select>').addClass('form-control'),
+            label = $('<label></label>').attr('for', 'titles').addClass('control-label'),
 
-        //Displays selected text on dropdown-toggle button
-        $('#selected-graph').data('graph', $(graphLink).attr('id'));
-        $('#selected-graph').html(graphName);
+        label.html(dataviva.dictionary['views']);
 
-        if (BuildGraph.selectedGraph == 'compare' && !BuildGraph.compare) {
-            setCompare();
-        } else {
-            $('#compare-location').empty();
-            delete BuildGraph.compare;
-            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graphLink).data('url')+'"></iframe>');
+        for(id in views){
+            var option = $('<option value="'+id+'">'+views[id].name+'</option>');
+            select.append(option);
         }
-    }
 
-    function setCompare(){
-        BuildGraph.compare = $('#compare-location input[name=compare_with]').val();
+        select.change(function() {
+            BuildGraph.selectedView = this.value;
+            setGraphs(BuildGraph.views[this.value].graphs);
+        });
 
+        div.append(label).append(select);
+        $('#views').append(div);
 
-        var div = $('<div></div>').addClass('form-group'),
-            label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
-            cleaner = $('<button></button>').attr('for', 'compare_with').addClass('btn btn-xs btn-link pull-right')
-                                    .html(dataviva.dictionary['clean_selection'])
-                                    .attr('onclick', 'clean_selection('+'compare_with'+')'),
-            selector = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
-                                    .html(dataviva.dictionary['select'])
-                                    .attr('onclick', 'select_compare();'),
-            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare_filter').val('all');
+        // Try to keep the selected view, else keep whatever comes selected
+        if ($.inArray(BuildGraph.selectedView, Object.keys(views)) > -1) {
+            $('#views select').val(BuildGraph.selectedView);
+        } else {
+            BuildGraph.selectedView = views[$('#views select').val()].id;
+        }
 
-        label.html(dataviva.dictionary['compare_with']);
-        filter.change(updateViews);
-
-        div.append(filter).append(label).append(selector).append(cleaner);
-
-        $('#compare-location').append(div);
+        setGraphs(views[BuildGraph.selectedView].graphs);
     }
 
     function setGraphs(graphs) {
@@ -149,6 +167,7 @@ var BuildGraph = (function () {
 
         $('#graphs').append(div);
 
+        // Try to keep the selected graph, else select the first graph
         if ($.inArray(BuildGraph.selectedGraph, Object.keys(graphs)) > -1) {
             selectGraph($('#'+BuildGraph.selectedGraph));
         } else {
@@ -157,61 +176,51 @@ var BuildGraph = (function () {
         }
     }
 
-    function setViews(views) {
-        BuildGraph.views = views;
-        $('#views').empty()
+    function selectGraph(graph) {
+        BuildGraph.selectedGraph = $(graph).attr('id');
 
-        var div = $('<div></div>').addClass('form-group');
-            select = $('<select></select>').addClass('form-control'),
-            label = $('<label></label>').attr('for', 'titles').addClass('control-label'),
+        var graphName = $(graph).html();
 
-        label.html(dataviva.dictionary['views']);
+        //Adds active class to selected item
+        $(graph).parents('.dropdown-menu').find('li').removeClass('active');
+        $(graph).parent('li').addClass('active');
 
-        for(id in views){
-            var option = $('<option value="'+id+'">'+views[id].name+'</option>');
-            select.append(option);
+        //Displays selected text on dropdown-toggle button
+        $('#selected-graph').data('graph', $(graph).attr('id'));
+        $('#selected-graph').html(graphName);
+
+        if (BuildGraph.selectedGraph == 'compare') {
+            setCompare();
+        } else {
+            $('#compare-location').empty();
+            delete BuildGraph.compare;
+            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graph).data('url')+'"></iframe>');
         }
-
-        select.change(function() {
-            BuildGraph.selectedView = this.value;
-            setGraphs(BuildGraph.views[this.value].graphs);
-        });
-
-        div.append(label).append(select);
-        $('#views').append(div);
     }
 
-    function setDimensions(dimensions) {
-        $('#dimensions').empty();
-        dimensions.forEach(function(dimension, index) {
-            var div = $('<div></div>').addClass('form-group'),
-                label = $('<label></label>').attr('for', dimension.id).addClass('control-label'),
-                cleaner = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
-                                        .html(dataviva.dictionary['clean_selection'])
-                                        .attr('onclick', 'clean_selection('+dimension.id+')'),
-                selector = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
-                                        .html(dataviva.dictionary['select'])
-                                        .attr('onclick', 'select_dimension(id);'),
-                filter = $('<input></input>').attr('type', 'hidden').attr('name', dimension.id).attr('id', 'filter'+index).val('all');
+    function setCompare(){
+        if (BuildGraph.compare) {
+            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$('#compare').data('url')+'"></iframe>');
+        } else {
+            $('#compare-location').empty();
 
-            label.html(dataviva.dictionary[dimension.id]);
+            var div = $('<div></div>').addClass('form-group'),
+                label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
+                cleaner = $('<button></button>').attr('for', 'compare_with').addClass('btn btn-xs btn-link pull-right')
+                                        .html(dataviva.dictionary['clean_selection'])
+                                        .attr('onclick', 'clean_selection('+'compare_with'+')'),
+                selector = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
+                                        .html(dataviva.dictionary['select'])
+                                        .attr('onclick', 'select_compare();'),
+                filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare_filter').val('all');
+
+            label.html(dataviva.dictionary['compare_with']);
             filter.change(updateViews);
 
-            if (dimension.name == 'School') {
-                div.append(filter);
-            } else {
-                div.append(filter).append(label).append(selector).append(cleaner);
-            }
+            div.append(filter).append(label).append(selector).append(cleaner);
 
-            $('#dimensions').append(div);
-        });
-    }
-
-    function changeDataSet() {
-        $('#datasets #dataset-empty-option').remove();
-        BuildGraph.dataset = this.value;
-        setDimensions(dataviva.datasets[this.value].dimensions);
-        updateViews();
+            $('#compare-location').append(div);
+        }
     }
 
     function init() {
