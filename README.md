@@ -1,4 +1,4 @@
-#DataViva [![Build Status](https://snap-ci.com/DataViva/dataviva-site/branch/release/3.0/build_image)](https://snap-ci.com/DataViva/dataviva-site/branch/master)
+#DataViva [![Build Status](https://snap-ci.com/DataViva/dataviva-site/branch/master/build_image)](https://snap-ci.com/DataViva/dataviva-site/branch/master)
 
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
