@@ -163,7 +163,7 @@
                     <dt>{%trans%}Main Municipality by Total Value Exported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.municipality_name_export}} - {{ body.municipality_state_export.upper() }}</small>
-                        USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong>
+                        USD <strong class="counter">{{ body.municipality_export_value | max_digits(3, True) }}</strong>
                         <span>{{ body.municipality_export_value | magnitude }}</span>
                     </dd>
                     {% endif %}
@@ -171,7 +171,7 @@
                     <dt>{%trans%}Main Municipality by Total Value Imported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.municipality_name_import}} - {{ body.municipality_state_import.upper() }}</small>
-                        USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong>
+                        USD <strong class="counter">{{ body.municipality_import_value | max_digits(3, True) }}</strong>
                         <span>{{ body.municipality_import_value | magnitude }}</span>
                     </dd>
                     {% endif %}
@@ -180,7 +180,7 @@
                     <dt>{%trans%}Main Destination by Total Value Exported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.destination_name_export }}</small>
-                        USD <strong class="counter">{{ body.destination_export_value | max_digits(3) }}</strong>
+                        USD <strong class="counter">{{ body.destination_export_value | max_digits(3, True) }}</strong>
                         <span>{{ body.destination_export_value | magnitude }}</span>
                     </dd>
                     {% endif %}
@@ -188,7 +188,7 @@
                     <dt>{%trans%}Main Origin by Total Value Imported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.origin_name_import }}</small>
-                        USD <strong class="counter">{{ body.origin_import_value | max_digits(3) }}</strong> 
+                        USD <strong class="counter">{{ body.origin_import_value | max_digits(3, True) }}</strong> 
                         <span>{{ body.origin_import_value | magnitude }}</span>
                     </dd>
                     {% endif %}

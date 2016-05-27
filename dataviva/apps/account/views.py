@@ -97,7 +97,7 @@ def create_user():
             db.session.add(user)
             db.session.commit()
         except:
-            abort(500, dictionary()["500"])
+            return Response(dictionary()["Sorry, an unexpected error has occured. Please try again"], status=500, mimetype='application/json')
 
         user_srl = user.serialize()
         send_confirmation(user)

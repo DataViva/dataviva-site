@@ -64,37 +64,37 @@
                     <dt>{% trans %}Main University{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
                     <dd>
                         <small>{{body.university_with_more_enrolled }}</small>
-                        <strong class="counter">{{body.highest_enrolled_number_by_university | max_digits(3) }}</strong> 
+                        <strong class="counter">{{body.highest_enrolled_number_by_university | max_digits(3, True) }}</strong> 
                         <span>{{body.highest_enrolled_number_by_university | magnitude}}</span>
                     </dd>
                     <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_more_enrolled }} - {{body.municipality_with_more_enrolled_state.upper()}}</small>
-                        <strong class="counter">{{body.highest_enrolled_number_by_municipality | max_digits(3)}}</strong>
+                        <strong class="counter">{{body.highest_enrolled_number_by_municipality | max_digits(3, True)}}</strong>
                         <span>{{body.highest_enrolled_number_by_municipality | magnitude}}</span>
                     </dd>
                     <dt>{% trans %}Main University{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}</dt>
                     <dd>
                         <small>{{body.university_with_more_entrants }}</small>
-                        <strong class="counter">{{body.highest_entrant_number_by_university | max_digits(3)}}</strong> 
+                        <strong class="counter">{{body.highest_entrant_number_by_university | max_digits(3, True)}}</strong> 
                         <span>{{body.highest_entrant_number_by_university | magnitude}}</span>
                     </dd>
                     <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Entering Students{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_more_entrants }} - {{body.municipality_with_more_entrants_state.upper()}}</small>
-                        <strong class="counter">{{body.highest_entrant_number_by_municipality | max_digits(3)}}</strong>
+                        <strong class="counter">{{body.highest_entrant_number_by_municipality | max_digits(3, True)}}</strong>
                         <span>{{body.highest_entrant_number_by_municipality | magnitude}}</span>
                     </dd>
                     <dt>{% trans %}Main University{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}</dt>
                     <dd>
                         <small>{{body.university_with_more_graduates }}</small>
-                        <strong class="counter">{{body.highest_graduate_number_by_university | max_digits(3)}}</strong>
+                        <strong class="counter">{{body.highest_graduate_number_by_university | max_digits(3, True)}}</strong>
                         <span>{{body.highest_graduate_number_by_university | magnitude}}</span>
                     </dd>
                     <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Graduates{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_more_graduates }} - {{body.municipality_with_more_graduates_state.upper()}}</small>
-                        <strong class="counter">{{body.highest_graduate_number_by_municipality | max_digits(3)}}</strong>
+                        <strong class="counter">{{body.highest_graduate_number_by_municipality | max_digits(3, True)}}</strong>
                         <span>{{body.highest_graduate_number_by_municipality | magnitude}}</span>
                     </dd>
             </dl>
