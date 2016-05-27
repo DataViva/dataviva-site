@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-11 13:10-0300\n"
+"POT-Creation-Date: 2016-05-16 14:29-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2028,10 +2028,15 @@ msgid "by Imported Value"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:63
-#: dataviva/apps/location/templates/location/tab-trade-partner.html:79
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:41
 #: dataviva/translations/dictionary.py:526
 msgid "Main Destination"
+msgstr ""
+
+#: dataviva/apps/location/templates/location/tab-trade-partner.html:79
+#: dataviva/apps/product/templates/product/tab-trade-partner.html:56
+#: dataviva/translations/dictionary.py:527
+msgid "Main Origin"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:80
@@ -2713,11 +2718,6 @@ msgstr ""
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-international-trade.html:58
 #: dataviva/translations/dictionary.py:525
 msgid "by Total Value Imported"
-msgstr ""
-
-#: dataviva/apps/product/templates/product/tab-trade-partner.html:56
-#: dataviva/translations/dictionary.py:527
-msgid "Main Origin"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/_base.html:53
