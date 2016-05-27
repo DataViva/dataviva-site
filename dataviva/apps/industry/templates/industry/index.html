@@ -65,7 +65,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Average Monthly Income{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                R$ <strong class="counter">{{ header.average_monthly_income | max_digits(3) }}</strong><br/>
+                                R$ <strong class="counter">{{ header.average_monthly_income | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.average_monthly_income | magnitude  }}</small>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Payroll{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                R$ <strong class="counter">{{ header.salary_mass | max_digits(3) }}</strong><br/>
+                                R$ <strong class="counter">{{ header.salary_mass | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.salary_mass | magnitude }}</small>
                             </div>
                         </div>
@@ -83,7 +83,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total Employment{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.num_jobs | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.num_jobs | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_jobs | magnitude }}</small>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.num_establishments | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_establishments | magnitude }}</small>
                             </div>
                         </div>
@@ -102,7 +102,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Domestic RCA{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.rca | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.rca | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.rca | magnitude}}</small>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Distance{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.distance | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.distance | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_establishments | magnitude }} {{"de" }} KM</small>
                             </div>
                         </div>
@@ -120,7 +120,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Opportunity Gain{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.opportunity_gain | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.opportunity_gain | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.opportunity_gain | magnitude}}</small>
                             </div>
                         </div>

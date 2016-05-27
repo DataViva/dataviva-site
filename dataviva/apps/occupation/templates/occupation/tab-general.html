@@ -63,28 +63,28 @@
                     <dt>{% trans %}Main employer Municipality{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_more_jobs }} - {{body.municipality_with_more_jobs_state.upper()}}</small>
-                        <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3) }}</strong> 
+                        <strong class="counter">{{body.municipality_with_more_jobs_value | max_digits(3, True) }}</strong> 
                         <span>{{body.municipality_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                     </dd>
                 {% endif %}
                     <dt>{% trans %}Main employer activity{% endtrans %}</dt>
                     <dd>
                         <small>{{body.activity_with_more_jobs }}</small>
-                        <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3)}}</strong>
+                        <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3, True)}}</strong>
                         <span>{{body.activity_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                     </dd>
                 {% if body.is_not_municipality %}
                     <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_biggest_wage_avg }} - {{body.municipality_with_biggest_wage_avg_state.upper()}}</small>
-                        R$ <strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3)}}</strong> 
+                        R$ <strong class="counter">{{body.municipality_with_biggest_wage_avg_value | max_digits(3, True)}}</strong> 
                         <span>{{body.municipality_with_biggest_wage_avg_value | magnitude}}</span>
                     </dd>
                 {% endif %}
                     <dt>{% trans %}Activity with highest monthly average income{% endtrans %}</dt>
                     <dd>
                         <small>{{body.activity_with_biggest_wage_avg }}</small>
-                        R$ <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3)}}</strong>
+                        R$ <strong class="counter">{{body.activity_with_biggest_wage_avg_value | max_digits(3, True)}}</strong>
                         <span>{{body.activity_with_biggest_wage_avg_value | magnitude}}</span>
                     </dd>
             </dl>
