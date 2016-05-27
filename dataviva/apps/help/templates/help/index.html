@@ -20,16 +20,17 @@
             <ul>
                 <li>
                     <a href="index" aria-controls="geral" role="tab" data-toggle="tab" id="help-center">
-                        <strong>Central de Ajuda</strong>
+                        <h3>Central de Ajuda</h3>
                     </a>
-                </li>
-                {% for subject in subjects %}
+                
+                    {% for subject in subjects %}
                     <li>
                         <a href="#tab{{subject.id}}" aria-controls="geral" role="tab" data-toggle="tab" title="{{subject['name_' + g.locale]}}" aria-expanded="false">
                             {{subject['name_' + g.locale]}}
                         </a>
-                    </li>
-                {% endfor %}
+                    
+                    {% endfor %}
+                </li>
             </ul>
         </nav>
         <div class="main-content col-md-9">
