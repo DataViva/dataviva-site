@@ -9,6 +9,7 @@ from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
+import base64
 
 mod = Blueprint('news', __name__,
                 template_folder='templates',
@@ -144,11 +145,16 @@ def create():
 
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
-        publication.last_modification = datetime.now().strftime(
-            '%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.thumb = form.thumb.data
+
+        image_data = base64.b64decode(publication.thumb.split(',')[1])
+        file_name = 'imagem.png'
+        with open(file_name, 'wb') as f:
+            f.write(image_data)
+
         publication.active = 0
         publication.author = form.author.data
 
@@ -200,8 +206,7 @@ def update(id):
 
         publication.text_content = form.text_content.data
         publication.thumb = form.thumb.data
-        publication.last_modification = datetime.now().strftime(
-            '%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.author = form.author.data
