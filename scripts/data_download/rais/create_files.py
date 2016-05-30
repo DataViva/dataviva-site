@@ -63,7 +63,7 @@ def save(year, locations, industrys, occupations, lang, output_path):
 
                 table = select_table(conditions)
                 name_file = 'rais'+str(year.name)+str(location.name)+str(industry.name)+str(occupation.name)
-                new_file_path = os.path.join(output_path, name_file+".csv.bz2") #pega desda da rais do pc
+                new_file_path = os.path.join(output_path, name_file+".csv.bz2")
                 
                 if table not in table_columns.keys():
                     table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in common.get_colums(table, columns_deleted)]
@@ -102,7 +102,7 @@ occupations = [
 
 
 if len(sys.argv) != 4 or (sys.argv[1:][0] not in ['pt', 'en']):
-    print "ERROR! use :\npython scripts/data_download/rais_create_files.py en/pt output_path year"
+    print "ERROR! use :\npython scripts/data_download/rais/create_files.py en/pt output_path year"
     exit()
 
 output_path = os.path.abspath(sys.argv[2])
