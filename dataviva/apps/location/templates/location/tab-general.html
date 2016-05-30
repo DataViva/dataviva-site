@@ -100,7 +100,7 @@
         <dt>{% trans %}Main Product by Total Value Exported{% endtrans %}</dt>
         <dd>
           <small>{{ body.main_product_by_export_value_name }}</small>
-          USD <strong>{{ body.main_product_by_export_value | max_digits(3) }}</strong>
+          USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3, True) }}</strong>
           <span>{{ body.main_product_by_export_value | magnitude }}</span>
         </dd>
         {% endif %}
@@ -108,18 +108,18 @@
         <dt>{% trans %}Main Product by Total Value Imported{% endtrans %}</dt>
         <dd>
           <small>{{ body.main_product_by_import_value_name}}</small>
-          USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong>
+          USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3, True) }}</strong>
           <span>{{ body.main_product_by_import_value | magnitude }}</span>
         </dd>
         {% endif %}
         <dt>{% trans %}Total of Exports{% endtrans %}</dt>
         <dd>
-          USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong>
+          USD <strong class="counter">{{ body.total_exports | max_digits(3, True) }}</strong>
           <span>{{ body.total_exports | magnitude }}</span>
         </dd>
         <dt>{% trans %}Total of Imports{% endtrans %}</dt>
         <dd>
-          USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong>
+          USD <strong class="counter">{{ body.total_imports | max_digits(3, True) }}</strong>
           <span>{{ body.total_imports | magnitude }}</span>
         </dd>
       </dl>
@@ -140,25 +140,25 @@
         <dt>{% trans %}Main Economic Activity{% endtrans %}</dt>
         <dd>
           <small>{{ body.main_industry_by_num_jobs_name}}</small>
-          <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong>
+          <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3, True) }}</strong>
           <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
           {% trans %}Jobs{% endtrans %}
         </dd>
         <dt>{% trans %}Main Occupation{% endtrans %}</dt>
         <dd>
           <small>{{ body.main_occupation_by_num_jobs_name}}</small>
-          <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong>
+          <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3, True) }}</strong>
           <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
           {% trans %}Occupations{% endtrans %}
         </dd>
         <dt>{% trans %}Average Wage{% endtrans %}</dt>
         <dd>
-          R$ <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong>
+          R$ <strong class="counter">{{ body.avg_wage | max_digits(3, True) }}</strong>
           <span>{{ body.avg_wage | magnitude }}</span>
         </dd>
         <dt>{% trans %}Total of Jobs{% endtrans %}</dt>
         <dd>
-          R$ <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong>
+          R$ <strong class="counter">{{ body.total_jobs | max_digits(3, True) }}</strong>
           <span>{{ body.total_jobs | magnitude }}</span>
         </dd>
       </dl>
@@ -183,7 +183,7 @@
         <dt>{% trans %}Product with Shortest Distance{% endtrans %}</dt>
         <dd>
           <small>{{ body.less_distance_by_product_name}}</small>
-          <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong>
+          <strong class="counter">{{ body.less_distance_by_product | max_digits(3, True) }}</strong>
           <span>{{ body.less_distance_by_product | magnitude }}</span>
         </dd>
         {% endif %}
@@ -191,7 +191,7 @@
         <dt>{% trans %}Economic Activity with Shortest Distance{% endtrans %}</dt>
         <dd>
           <small>{{ body.less_distance_by_occupation_name}}</small>
-          <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong>
+          <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3, True) }}</strong>
           <span>{{ body.less_distance_by_occupation | magnitude }}</span>
         </dd>
         {% endif %}
@@ -199,7 +199,7 @@
         <dt>{% trans %}Product with Highest Opportunity Gain{% endtrans %}</dt>
         <dd>
           <small>{{ body.opportunity_gain_by_product_name}}</small>
-          <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong>
+          <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3, True) }}</strong>
           <span>{{ body.opportunity_gain_by_product | magnitude }}</span>
         </dd>
         {% endif %}
@@ -207,7 +207,7 @@
         <dt>{% trans %}Economic Activity with Highest Opportunity Gain{% endtrans %}</dt>
         <dd>
           <small>{{ body.opportunity_gain_by_occupation_name}}</small>
-          <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong>
+          <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3, True) }}</strong>
           <span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
         </dd>
         {% endif %}
@@ -231,7 +231,7 @@
         <dt>{% trans %}University with Highest Number of Enrollments{% endtrans %}</dt>
         <dd>
           <small>{{ body.highest_enrolled_by_university_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong>
+          <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3, True)}}</strong>
           <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
         </dd>
         {% endif %}
@@ -239,7 +239,7 @@
         <dt>{% trans %}Major with Highest Number of Enrollments{% endtrans %}</dt>
         <dd>
           <small>{{ body.highest_enrolled_by_major_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong>
+          <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3, True)}}</strong>
           <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
         </dd>
         {% endif %}
@@ -247,7 +247,7 @@
         <dt>{% trans %}School with Highest Number of Enrollments{% endtrans %}</dt>
         <dd>
           <small>{{ body.highest_enrolled_by_school_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong>
+          <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3, True)}}</strong>
           <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
         </dd>
         {% endif %}
@@ -255,7 +255,7 @@
         <dt>{% trans %}Basic Course with Highest Number of Enrollments{% endtrans %}</dt>
         <dd>
           <small>{{ body.highest_enrolled_by_basic_course_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong>
+          <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3, True)}}</strong>
           <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
         </dd>
         {% endif %}

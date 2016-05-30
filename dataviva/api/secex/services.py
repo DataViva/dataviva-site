@@ -331,10 +331,17 @@ class Product:
         return export_value_growth_in_five_years.export_val_growth_5
 
     def all_imported(self):
-        return sum([product.import_val for product in self.__secex__() if product.import_val])
+        total_imported = db.session.query(func.sum(Ymb.import_val)).filter_by(year=self.max_year_query,
+            month = 0,
+            bra_id_len = 1).one()
+        return float(total_imported[0])
+
 
     def all_exported(self):
-        return sum([product.export_val for product in self.__secex__() if product.export_val])
+        total_exported = db.session.query(func.sum(Ymb.export_val)).filter_by(year = self.max_year_query,
+            month = 0,
+            bra_id_len = 1).one()
+        return float(total_exported[0])
 
     def all_trade_balance(self):
         return self.all_exported() - self.all_imported()

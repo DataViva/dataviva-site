@@ -49,7 +49,7 @@ def index_subject(subject):
         Publication.subject_id == PublicationSubject.id,
         Publication.active
     ).order_by(desc(PublicationSubject.name)).all()
-    return render_template('news/index.html', publications=publications, subjects=subjects)
+    return render_template('news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
 
 
 @mod.route('/publication/<id>', methods=['GET'])

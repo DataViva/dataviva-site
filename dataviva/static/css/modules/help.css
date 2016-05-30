@@ -232,3 +232,12 @@
     transform: translateY(-50%);
     height: 25px;
 }
+
+.help .sidebar ul li a.active {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.help .sidebar ul li a:hover{
+    text-decoration: none;
+}

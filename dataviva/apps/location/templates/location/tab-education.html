@@ -12,7 +12,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.highest_enrolled_by_university_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_university | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_university | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.highest_enrolled_by_major_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_major | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_major | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.highest_enrolled_by_school_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_school | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_school | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.highest_enrolled_by_basic_course_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3)}}</strong><span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
                 </div>
             </div>
         </div>

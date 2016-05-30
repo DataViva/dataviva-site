@@ -4,7 +4,7 @@
     <p>{% trans %}The institution {% endtrans %} {{ university.name() }} 
     {% trans %} is a{% endtrans %} {{ header.type }}
     {% trans %}educational establishment. Its main course is{% endtrans %} {{ body.major_with_more_enrollments }}, 
-    {% trans %}with{% endtrans %} {{ body.highest_enrollment_number_by_major }} 
+    {% trans %}with{% endtrans %} {{ body.highest_enrollment_number_by_major | max_digits(3)}} {{ body.highest_enrollment_number_by_major | magnitude()}} 
     {% trans %}students. The University has a total of{% endtrans %} {{ header.enrolled | max_digits(3) }} {{ (header.enrolled | magnitude).lower() }} 
     {% trans %}enrolled students and{%endtrans%} {{ header.graduates | max_digits(3) }} {{ (header.graduates | magnitude).lower() }} 
     {% trans %}graduates{% endtrans %}.</p>
@@ -16,19 +16,19 @@
                 <dt>{% trans %}Main Course by Number of Enrolled Students{% endtrans %}</dt>
                 <dd>
                     <small>{{ body.major_with_more_enrollments }}</small>
-                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3) }}</strong>
+                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3, True) }}</strong>
                     <span>{{ body.highest_enrollment_number_by_major | magnitude }} {% trans %}Students{% endtrans %}</span>
                 </dd>
                 <dt>{% trans %}Main Course by Number of Entering Students{% endtrans %}</dt>
                 <dd>
                     <small>{{ body.major_with_more_entrants }}</small>
-                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3) }}</strong>
+                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3, True) }}</strong>
                     <span>{{ body.highest_entrant_number_by_major | magnitude}} {% trans %}Students{% endtrans %}</span>
                 </dd>
                 <dt>{% trans %}Main Course by Number of Graduates{% endtrans %}</dt>
                 <dd>                
                     <small>{{ body.major_with_more_graduates }}</small>
-                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3) }}</strong>
+                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3, True) }}</strong>
                     <span>{{ body.highest_graduate_number_by_major | magnitude }} {% trans %}Students{% endtrans %}</span>
 
                 </dd>
