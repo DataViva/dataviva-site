@@ -17,7 +17,7 @@
         <ul class="sub-menu">
             <li><a href="{{ url_for('blog.index') }}" title="Todos" class="{{'active' if not active_subject else ''}}">{% trans %}All{% endtrans %}</a></li>
             {% for subject in subjects %}
-                <li><a href="/blog/{{subject.id}}" title="{{subject.name}}" class="{{'active' if subject.id == active_subject else ''}}">{{subject.name}}</a></li>
+                <li><a href="{{ url_for('blog.index') }}{{subject.id}}" title="{{subject.name}}" class="{{'active' if subject.id == active_subject else ''}}">{{subject.name}}</a></li>
             {% endfor %}
         </ul>
     </nav>
