@@ -9,7 +9,11 @@ from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
+from dataviva import app
+from dataviva.utils import upload_helper
 import base64
+import shutil
+import os
 
 mod = Blueprint('news', __name__,
                 template_folder='templates',
@@ -131,8 +135,7 @@ def create():
     else:
         publication = Publication()
         publication.title = form.title.data
-        subject_query = PublicationSubject.query.filter_by(
-            name=form.subject.data)
+        subject_query = PublicationSubject.query.filter_by(name=form.subject.data)
 
         if (subject_query.first()):
             publication.subject_id = subject_query.first().id
@@ -148,17 +151,39 @@ def create():
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
-        publication.thumb = form.thumb.data
+        publication.active = 0
+        publication.author = form.author.data
+        #Needs to remove publication.thumb to database and models
 
-        image_data = base64.b64decode(publication.thumb.split(',')[1])
+        db.session.add(publication)
+        db.session.flush()
+
+        import pdb; pdb.set_trace()
+
+        app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/news/')
+
+        file_path = app.config['UPLOAD_FOLDER'] + str(publication.id)
+
+        if not os.path.exists(file_path):
+            os.makedirs(file_path)
+
+        image_data = base64.b64decode(form.thumb.data.split(',')[1])
         file_name = 'imagem.png'
         with open(file_name, 'wb') as f:
             f.write(image_data)
 
-        publication.active = 0
-        publication.author = form.author.data
+        upload_helper.upload_s3_file(
+            file_path,
+            'dataviva',
+            os.path.join('news/publication/', str(publication.id)),
+            {
+                'ContentType': "application/png",
+                'ContentDisposition': 'attachment; filename=dataviva-publication-' + str(publication.id) + '.png'
+            }
+        )
 
-        db.session.add(publication)
+        shutil.rmtree(file_path)
+
         db.session.commit()
 
         message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
