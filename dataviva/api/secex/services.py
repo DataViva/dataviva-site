@@ -344,7 +344,6 @@ class Product:
         return float(total_exported[0])
 
     def all_trade_balance(self):
-        import pdb; pdb.set_trace()
         return self.all_exported() - self.all_imported()
 
 
