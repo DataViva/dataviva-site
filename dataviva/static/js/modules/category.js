@@ -5,6 +5,9 @@ window.showGraph = function(category, tab, location) {
             url: category+"/graphs/"+tab+(location !== null ? "?bra_id="+location : ""),
             success: function (graphs) {
                 $('#graphs').append(graphs);
+                $(graphs).find('a').click(function() {
+                    window.history.pushState("", "", window.location+$(graphs).find('a')[0].href.split('/'+lang)[1]);
+                })
             }
         });
     }
