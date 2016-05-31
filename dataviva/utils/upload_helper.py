@@ -6,27 +6,29 @@ from boto3.s3.transfer import S3Transfer
 from config import AWS_ACCESS_KEY, AWS_SECRET_KEY, S3_BUCKET, UPLOAD_FOLDER
 
 
-def delete_s3_file(file_id):
-    client = boto3.client(
+def s3_client():
+    return boto3.client(
         's3',
         aws_access_key_id=AWS_ACCESS_KEY,
         aws_secret_access_key=AWS_SECRET_KEY
     )
 
-    return client.delete_object(
+
+def delete_s3_file(file_id):
+    return s3_client().delete_object(
         Bucket=S3_BUCKET,
         Key=file_id
     )
 
 
-def upload_s3_file(file_path, file_id, extra_args={'ContentType': "html/text"}):
-    client = boto3.client(
-        's3',
-        aws_access_key_id=AWS_ACCESS_KEY,
-        aws_secret_access_key=AWS_SECRET_KEY
-    )
+def delete_s3_folder(folder_id):
+    client = s3_client()
+    objects = [{'Key': c['Key']} for c in client.list_objects(Bucket=S3_BUCKET, Prefix=folder_id)['Contents']]
+    return client.delete_objects(Bucket=S3_BUCKET, Delete={'Objects': objects})
 
-    transfer = S3Transfer(client)
+
+def upload_s3_file(file_path, file_id, extra_args={'ContentType': "html/text"}):
+    transfer = S3Transfer(s3_client())
     transfer.upload_file(file_path, S3_BUCKET, file_id, extra_args=extra_args)
 
     return 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + file_id
