@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder
 import os
 
 mod = Blueprint('news', __name__,
@@ -108,6 +108,7 @@ def admin_delete():
     if ids:
         publications = Publication.query.filter(Publication.id.in_(ids)).all()
         for publication in publications:
+            delete_s3_folder(os.path.join(mod.name, str(publication.id)))
             db.session.delete(publication)
 
         db.session.commit()
@@ -157,7 +158,7 @@ def create():
         db.session.flush()
 
         if len(form.thumb.data.split(',')) > 1:
-            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
