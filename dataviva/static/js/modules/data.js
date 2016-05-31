@@ -1,4 +1,6 @@
 var data = {}
+var count = 0;
+$('#message').hide();
 data.downloadLink = function() {
     dataSelection = []
     dataSelection.push($('#datasets').val());
@@ -15,7 +17,7 @@ data.downloadLink = function() {
 
 
 $(document).ready(function() {
-
+    $("#download").prop('disabled', true);
     $("#download").on('click', function() {
         window.open(data.downloadLink());
     });
@@ -26,8 +28,9 @@ $(document).ready(function() {
         }
 
         $('#datasets').on('change', function() {
+            $("#download").prop('disabled', true);
             $('#datasets #dataset-empty-option').remove();
-
+            $('#message').show();
             if(this.value == 'secex') {
                 $('#monthly-detail').show();
                 $('#monthly-detail select').prop('disabled', false);
@@ -60,7 +63,20 @@ $(document).ready(function() {
                     });
                 }
             });
-            $("#download").prop('disabled', false);
+
+            $('#dimensions select').on('change', function (e) { 
+                if ($(this).val() != "all") {
+                    $("#download").prop('disabled', false);
+                } 
+
+                $('#dimensions select').each( function() {
+                    if ($(this).val() == "all") count += 1;
+                    if (count == $('#dimensions select').length) {
+                        $("#download").prop('disabled', true);
+                    }
+                });
+                count = 0;
+            });
         });
     });
 });
