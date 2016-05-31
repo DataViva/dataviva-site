@@ -10,9 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils import upload_helper
-import base64
-import shutil
+from dataviva.utils.upload_helper import save_b64_image
 import os
 
 mod = Blueprint('news', __name__,
@@ -123,24 +121,6 @@ def admin_delete():
 def new():
     form = RegistrationForm()
     return render_template('news/new.html', form=form, action=url_for('news.create'))
-
-
-def save_b64_image(b64, upload_folder, name):
-    if not os.path.exists(upload_folder):
-        os.makedirs(upload_folder)
-
-    file_path = os.path.join(upload_folder, name)
-    image_data = base64.b64decode(b64)
-    with open(file_path, 'wb') as f:
-        f.write(image_data)
-
-    thumb_url = upload_helper.upload_s3_file(
-        file_path, os.path.join('news/publication/', name), {'ContentType': "image/png"}
-    )
-
-    shutil.rmtree(upload_folder)
-
-    return thumb_url
 
 
 @mod.route('/admin/publication/new', methods=['POST'])
