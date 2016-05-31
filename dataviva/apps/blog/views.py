@@ -204,7 +204,7 @@ def update(id):
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
         if len(form.thumb.data.split(',')) > 1:
-            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(post.id))
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
             post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
