@@ -62,14 +62,8 @@ def save(year, locations, majors, lang, output_path):
             if table not in table_columns.keys():
                     table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in common.get_colums(table, columns_deleted)]
 
-            query = 'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions)
-            logging.info('Query for file ('+str(datetime.now().hour)+':'+str(datetime.now().minute)+':'+str(datetime.now().second)+'): \n '+name_file+'\n'+query)
-
-            print "Gerando ... " + new_file_path 
-            f = pd.read_sql_query(query, common.engine)     
-            f.to_csv(bz2.BZ2File(new_file_path, 'wb'), sep=",", index=False, float_format="%.3f", encoding='utf-8')
-
-            logging.info("\nError:\n"+str(sys.stderr)+"\n-----------------------------------------------\n")
+            common.download(table_columns=table_columns, table=table, conditions=conditions, name_file=name_file, new_file_path=new_file_path, logging=logging, sys=sys)
+            
 
 Condition = namedtuple('Condition', ['condition', 'name'])
 
@@ -88,13 +82,6 @@ majors = [
     Condition('course_hedu_id_len=6', '-majors')]
 
 
-if len(sys.argv) != 4 or (sys.argv[1:][0] not in ['pt', 'en']):
-    print "ERROR! use :\npython scripts/data_download/higher_education/create_files.py en/pt output_path year"
-    exit()
-
-output_path = os.path.abspath(sys.argv[2])
-logging.basicConfig(filename=os.path.abspath(os.path.join(sys.argv[2],'higher-education-data-download.log' )),level=logging.DEBUG)
-year = Condition('year='+str(sys.argv[3]), '-'+str(sys.argv[3]))
 local_imports()
-
-save(year=year, locations=locations, majors=majors, lang=sys.argv[1], output_path=output_path)
+inputs = common.test_imput(sys=sys, logging=logging, Condition=Condition)
+save(year=inputs['year'], locations=locations, majors=majors, lang=inputs['lang'], output_path=inputs['output_path'])

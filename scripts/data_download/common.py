@@ -52,7 +52,7 @@ def test_imput(sys, logging, Condition):
 
 def  download(table_columns, table, conditions, name_file, new_file_path, logging, sys):
 
-    query = 'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions) + ' LIMIT 5'
+    query = 'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions)
     logging.info('Query for file ('+str(datetime.now().hour)+':'+str(datetime.now().minute)+':'+str(datetime.now().second)+'): \n '+name_file+'\n'+query)
 
     print "Gerando ... " + new_file_path 
