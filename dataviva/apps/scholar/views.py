@@ -16,7 +16,7 @@ from werkzeug import secure_filename
 from dataviva import app
 from dataviva.utils import upload_helper
 
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/scholar/')
+#app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/scholar/')
 app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
@@ -142,7 +142,6 @@ def create():
 
         upload_helper.upload_s3_file(
             os.path.join(file_path, file_name),
-            'dataviva',
             os.path.join('scholar/article/', str(article.id)),
             {
                 'ContentType': "application/pdf",
