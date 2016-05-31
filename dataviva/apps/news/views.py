@@ -186,6 +186,8 @@ def edit(id):
 
 
 @mod.route('admin/publication/<id>/edit', methods=['POST'])
+@login_required
+@required_roles(1)
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
