@@ -125,6 +125,24 @@ def new():
     return render_template('news/new.html', form=form, action=url_for('news.create'))
 
 
+def save_b64_image(b64, upload_folder, name):
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
+
+    file_path = os.path.join(upload_folder, name)
+    image_data = base64.b64decode(b64)
+    with open(file_path, 'wb') as f:
+        f.write(image_data)
+
+    thumb_url = upload_helper.upload_s3_file(
+        file_path, os.path.join('news/publication/', name), {'ContentType': "image/png"}
+    )
+
+    shutil.rmtree(upload_folder)
+
+    return thumb_url
+
+
 @mod.route('/admin/publication/new', methods=['POST'])
 @login_required
 @required_roles(1)
@@ -153,36 +171,13 @@ def create():
         publication.show_home = form.show_home.data
         publication.active = 0
         publication.author = form.author.data
-        #Needs to remove publication.thumb to database and models
+        # TODO - Alter publication.thumb column to db.Column(db.String(400))
 
         db.session.add(publication)
         db.session.flush()
 
-        import pdb; pdb.set_trace()
-
-        app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/news/')
-
-        file_path = app.config['UPLOAD_FOLDER'] + str(publication.id)
-
-        if not os.path.exists(file_path):
-            os.makedirs(file_path)
-
-        image_data = base64.b64decode(form.thumb.data.split(',')[1])
-        file_name = 'imagem.png'
-        with open(file_name, 'wb') as f:
-            f.write(image_data)
-
-        upload_helper.upload_s3_file(
-            file_path,
-            'dataviva',
-            os.path.join('news/publication/', str(publication.id)),
-            {
-                'ContentType': "application/png",
-                'ContentDisposition': 'attachment; filename=dataviva-publication-' + str(publication.id) + '.png'
-            }
-        )
-
-        shutil.rmtree(file_path)
+        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
+        publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
@@ -230,11 +225,13 @@ def update(id):
             publication.subject_id = subject.id
 
         publication.text_content = form.text_content.data
-        publication.thumb = form.thumb.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.author = form.author.data
+
+        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
+        publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
