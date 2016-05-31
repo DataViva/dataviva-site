@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-05-16 14:29-0300\n"
+"POT-Creation-Date: 2016-05-31 14:07-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1113,7 +1113,7 @@ msgstr ""
 "Esta área foi especialmente criada para a publicação de Chamadas "
 "relacionados ao DataViva."
 
-#: dataviva/apps/contact/views.py:54 dataviva/translations/dictionary.py:645
+#: dataviva/apps/contact/views.py:54 dataviva/translations/dictionary.py:646
 msgid "Your message has been sent successfully. We will soon get back to you."
 msgstr "Sua mensagem foi enviada com sucesso. Em breve retornaremos o contato."
 
@@ -1222,6 +1222,12 @@ msgstr "Mensal"
 #: dataviva/apps/data/templates/data/index.html:46
 msgid "Filters"
 msgstr "Filtros"
+
+#: dataviva/apps/data/templates/data/index.html:55
+msgid "You need to choose at least one filter to be able to download data."
+msgstr ""
+"Você precisa escolher pelo menos um dos filtros para poder efetuar o "
+"download."
 
 #: dataviva/apps/embed/views.py:227
 msgid "You need to be logged in to star visualizations."
@@ -6694,64 +6700,69 @@ msgstr "Gráficos"
 msgid "Clean selection"
 msgstr "Limpar seleção"
 
-#: dataviva/translations/dictionary.py:646
+#: dataviva/translations/dictionary.py:643
+#, fuzzy
+msgid "Compare with"
+msgstr "Compare"
+
+#: dataviva/translations/dictionary.py:647
 msgid "Thank you"
 msgstr "Obrigado"
 
-#: dataviva/translations/dictionary.py:649
+#: dataviva/translations/dictionary.py:650
 msgid "That e-mail is already registered."
 msgstr "Este e-mail já está cadastrado."
 
-#: dataviva/translations/dictionary.py:650
+#: dataviva/translations/dictionary.py:651
 #, fuzzy
 msgid "Please check your inbox at"
 msgstr "Por favor verifique sua caixa de entrada em"
 
-#: dataviva/translations/dictionary.py:651
+#: dataviva/translations/dictionary.py:652
 msgid "Invalid email or password"
 msgstr "Senha ou e-mail inválidos."
 
-#: dataviva/translations/dictionary.py:654
+#: dataviva/translations/dictionary.py:655
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr "Desculpe, um erro inesperado ocorreu. Por favor, tente novamente"
 
-#: dataviva/translations/dictionary.py:663
+#: dataviva/translations/dictionary.py:664
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:664
+#: dataviva/translations/dictionary.py:665
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:665
+#: dataviva/translations/dictionary.py:666
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:666
+#: dataviva/translations/dictionary.py:667
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
 msgstr[1] "Milhares"
 
-#: dataviva/utils/jinja_helpers.py:116
+#: dataviva/utils/jinja_helpers.py:135
 msgid "Thousands"
 msgstr "Mil"
 
-#: dataviva/utils/jinja_helpers.py:116
+#: dataviva/utils/jinja_helpers.py:135
 msgid "Millions"
 msgstr "Milhões"
 
-#: dataviva/utils/jinja_helpers.py:116
+#: dataviva/utils/jinja_helpers.py:135
 msgid "Billions"
 msgstr "Bilhões"
 
-#: dataviva/utils/jinja_helpers.py:116
+#: dataviva/utils/jinja_helpers.py:135
 msgid "Trillions"
 msgstr "Trilhões"
 
