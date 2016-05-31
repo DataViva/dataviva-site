@@ -215,7 +215,7 @@ def update(id):
         publication.author = form.author.data
 
         if len(form.thumb.data.split(',')) > 1:
-            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
