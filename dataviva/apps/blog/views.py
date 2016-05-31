@@ -9,6 +9,9 @@ from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
+from dataviva import app
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder
+import os
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -100,6 +103,7 @@ def admin_delete():
     if ids:
         posts = Post.query.filter(Post.id.in_(ids)).all()
         for post in posts:
+            delete_s3_folder(os.path.join(mod.name, str(post.id)))
             db.session.delete(post)
 
         db.session.commit()
@@ -141,10 +145,15 @@ def create():
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        post.thumb = form.thumb.data
         post.active = 0
 
         db.session.add(post)
+        db.session.flush()
+
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
+            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+
         db.session.commit()
 
         message = u'Muito obrigado! Seu post foi submetido com sucesso!'
@@ -193,7 +202,10 @@ def update(id):
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        post.thumb = form.thumb.data
+
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(post.id))
+            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
