@@ -62,7 +62,7 @@ def save(year, locations, majors, lang, output_path):
             if table not in table_columns.keys():
                     table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in common.get_colums(table, columns_deleted)]
 
-            query = 'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions) + ' LIMIT 5'
+            query = 'SELECT '+','.join(table_columns[table])+' FROM '+table+' WHERE '+' and '.join(conditions)
             logging.info('Query for file ('+str(datetime.now().hour)+':'+str(datetime.now().minute)+':'+str(datetime.now().second)+'): \n '+name_file+'\n'+query)
 
             print "Gerando ... " + new_file_path 
