@@ -52,7 +52,8 @@ def index_subject(subject):
         Publication.subject_id == PublicationSubject.id,
         Publication.active
     ).order_by(desc(PublicationSubject.name)).all()
-    return render_template('news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
+    return render_template(
+        'news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
 
 
 @mod.route('/publication/<id>', methods=['GET'])
@@ -151,13 +152,13 @@ def create():
         publication.show_home = form.show_home.data
         publication.active = 0
         publication.author = form.author.data
-        # TODO - Alter publication.thumb column to db.Column(db.String(400))
 
         db.session.add(publication)
         db.session.flush()
 
-        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
-        publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
+            publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
@@ -210,8 +211,9 @@ def update(id):
         publication.show_home = form.show_home.data
         publication.author = form.author.data
 
-        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
-        publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, 'images', str(publication.id))
+            publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
