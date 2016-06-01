@@ -31,9 +31,28 @@
                     </li>
                 {% endfor %}
                     <li>
-                        <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab" title="Crosswalk" aria-expanded="false">
+                        <a href="#crosswalk" data-toggle="collapse" aria-controls="geral" role="tab" 
+                        data-toggle="tab" title="Crosswalk" aria-expanded="false">
                             Crosswalk
                         </a>
+                        <div class="collapse" id="crosswalk">
+                            <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
+                                target="crosswalk-pi" class="list-group-item" data-parent="#crosswalk">
+                                Product-Industry
+                            </a>
+                            <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
+                                target="crosswalk-ip" class="list-group-item" data-parent="#crosswalk">
+                                Industry-Product
+                            </a>
+                            <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
+                                target="crosswalk-oc" class="list-group-item" data-parent="#crosswalk">
+                                Occupation-Course
+                            </a>
+                            <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
+                                target="crosswalk-co" class="list-group-item" data-parent="#crosswalk">
+                                Course-Occupation
+                            </a>
+                        </div>      
                     </li>
                     <li>
                         <a href="#tab-classifications" aria-controls="geral" role="tab" data-toggle="tab" title="Classifications" aria-expanded="false">
