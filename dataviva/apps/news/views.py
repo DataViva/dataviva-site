@@ -9,6 +9,9 @@ from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
+from dataviva import app
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder
+import os
 
 mod = Blueprint('news', __name__,
                 template_folder='templates',
@@ -49,7 +52,8 @@ def index_subject(subject):
         Publication.subject_id == PublicationSubject.id,
         Publication.active
     ).order_by(desc(PublicationSubject.name)).all()
-    return render_template('news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
+    return render_template(
+        'news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
 
 
 @mod.route('/publication/<id>', methods=['GET'])
@@ -104,6 +108,7 @@ def admin_delete():
     if ids:
         publications = Publication.query.filter(Publication.id.in_(ids)).all()
         for publication in publications:
+            delete_s3_folder(os.path.join(mod.name, str(publication.id)))
             db.session.delete(publication)
 
         db.session.commit()
@@ -130,8 +135,7 @@ def create():
     else:
         publication = Publication()
         publication.title = form.title.data
-        subject_query = PublicationSubject.query.filter_by(
-            name=form.subject.data)
+        subject_query = PublicationSubject.query.filter_by(name=form.subject.data)
 
         if (subject_query.first()):
             publication.subject_id = subject_query.first().id
@@ -144,15 +148,19 @@ def create():
 
         publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
-        publication.last_modification = datetime.now().strftime(
-            '%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
-        publication.thumb = form.thumb.data
         publication.active = 0
         publication.author = form.author.data
 
         db.session.add(publication)
+        db.session.flush()
+
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
+            publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+
         db.session.commit()
 
         message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
@@ -178,6 +186,8 @@ def edit(id):
 
 
 @mod.route('admin/publication/<id>/edit', methods=['POST'])
+@login_required
+@required_roles(1)
 def update(id):
     form = RegistrationForm()
     id = int(id.encode())
@@ -199,12 +209,14 @@ def update(id):
             publication.subject_id = subject.id
 
         publication.text_content = form.text_content.data
-        publication.thumb = form.thumb.data
-        publication.last_modification = datetime.now().strftime(
-            '%Y-%m-%d %H:%M:%S')
+        publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.author = form.author.data
+
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
+            publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 

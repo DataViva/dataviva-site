@@ -3,6 +3,7 @@ from sqlalchemy import ForeignKey
 
 
 class Publication(db.Model):
+    # TODO - Alter publication.thumb column to db.Column(db.String(400))
     __tablename__ = 'news_publication'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
