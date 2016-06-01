@@ -10,9 +10,6 @@ $(document).ready(function () {
 });
 
 $('.sidebar a').on('click', function(){
-    if($(this).title == 'Crosswalk'){
-        console.log('ok');
-    }
     $('.sidebar a').attr('class','');
     $(this).toggleClass('active');
 });
