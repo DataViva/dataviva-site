@@ -12,7 +12,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_product_by_export_value_name }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3) }}</strong><span>{{ body.main_product_by_export_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3, True) }}</strong><span>{{ body.main_product_by_export_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_product_by_import_value_name }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3) }}</strong><span>{{ body.main_product_by_import_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3, True) }}</strong><span>{{ body.main_product_by_import_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
             <div class="blue-box">
                 <p class="label">{% trans %}Total of Exports{% endtrans %}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.total_exports | max_digits(3) }}</strong><span>{{ body.total_exports | magnitude }}</span>
+                    USD <strong class="counter">{{ body.total_exports | max_digits(3, True) }}</strong><span>{{ body.total_exports | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -52,7 +52,7 @@
             <div class="blue-box">
                 <p class="label">{% trans %}Total of Imports{% endtrans %}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.total_imports | max_digits(3) }}</strong><span>{{ body.total_imports | magnitude }}</span>
+                    USD <strong class="counter">{{ body.total_imports | max_digits(3, True) }}</strong><span>{{ body.total_imports | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_destination_by_export_value_name }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.main_destination_by_export_value | max_digits(3) }}</strong><span>{{ body.main_destination_by_export_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.main_destination_by_export_value | max_digits(3, True) }}</strong><span>{{ body.main_destination_by_export_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -82,7 +82,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_destination_by_import_value_name }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.main_destination_by_import_value | max_digits(3) }}</strong> <span>{{ body.main_destination_by_import_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.main_destination_by_import_value | max_digits(3, True) }}</strong> <span>{{ body.main_destination_by_import_value | magnitude }}</span>
                 </div>
             </div>
         </div>

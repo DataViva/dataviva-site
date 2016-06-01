@@ -11,7 +11,7 @@
             <div class="blue-box">
                 <p class="label">{{body.university_with_more_enrolled}}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_enrolled_number_by_university | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_enrolled_number_by_university | max_digits(3, True) }}</strong><span>{{ body.highest_enrolled_number_by_university | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="blue-box">
                 <p class="label">{{body.municipality_with_more_enrolled}} - {{body.municipality_with_more_enrolled_state.upper()}}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_enrolled_number_by_municipality | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_enrolled_number_by_municipality | max_digits(3, True) }}</strong><span>{{ body.highest_enrolled_number_by_municipality | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
             <div class="blue-box">
                 <p class="label">{{body.university_with_more_entrants}}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_entrant_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_university | magnitude  }}</span>
+                    <strong class="counter">{{ body.highest_entrant_number_by_university | max_digits(3, True) }}</strong><span>{{ body.highest_entrant_number_by_university | magnitude  }}</span>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
             <div class="blue-box">
                 <p class="label">{{body.municipality_with_more_entrants}} - {{body.municipality_with_more_entrants_state.upper()}}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3, True) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -64,7 +64,7 @@
             <div class="blue-box">
                 <p class="label">{{body.university_with_more_graduates}}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_entrant_number_by_university | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_university | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_entrant_number_by_university | max_digits(3, True) }}</strong><span>{{ body.highest_entrant_number_by_university | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -77,7 +77,7 @@
             <div class="blue-box">
                 <p class="label">{{body.municipality_with_more_graduates}} - {{body.municipality_with_more_graduates_state.upper()}}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_entrant_number_by_municipality | max_digits(3, True) }}</strong><span>{{ body.highest_entrant_number_by_municipality | magnitude }}</span>
                 </div>
             </div>
         </div>

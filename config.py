@@ -69,7 +69,6 @@ LANGUAGES = {
 ''' For full text search '''
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
-
 '''
     Oauth tokens set in environment variables from their respecive sources
 '''
@@ -81,6 +80,9 @@ FACEBOOK_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_ID")
 FACEBOOK_OAUTH_SECRET = get_env_variable("DATAVIVA_OAUTH_FACEBOOK_SECRET")
 AWS_ACCESS_KEY = get_env_variable('DATAVIVA_OAUTH_AWS_ID')
 AWS_SECRET_KEY = get_env_variable('DATAVIVA_OAUTH_AWS_SECRET')
+
+''' S3 Buckets '''
+S3_BUCKET = get_env_variable('S3_BUCKET', 'dataviva-dev')
 
 '''
     Mail credentials to send automatic emails to users

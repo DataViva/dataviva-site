@@ -1,0 +1,14 @@
+ALTER TABLE `hedu_yb` ADD COLUMN `graduates_growth_5` float DEFAULT NULL AFTER `graduates_growth`;
+ALTER TABLE `hedu_yb` ADD COLUMN `enrolled_growth_5` float DEFAULT NULL AFTER `enrolled_growth`;
+ALTER TABLE `hedu_ybc` ADD COLUMN `graduates_growth_5` float DEFAULT NULL AFTER `graduates_growth`;
+ALTER TABLE `hedu_ybc` ADD COLUMN `enrolled_growth_5` float DEFAULT NULL AFTER `enrolled_growth`;
+ALTER TABLE `hedu_ybu` ADD COLUMN `graduates_growth_5` float DEFAULT NULL AFTER `graduates_growth`;
+ALTER TABLE `hedu_ybu` ADD COLUMN `enrolled_growth_5` float DEFAULT NULL AFTER `enrolled_growth`;
+ALTER TABLE `hedu_ybuc` ADD COLUMN `graduates_growth_5` float DEFAULT NULL AFTER `graduates_growth`;
+ALTER TABLE `hedu_ybuc` ADD COLUMN `enrolled_growth_5` float DEFAULT NULL AFTER `enrolled_growth`;
+ALTER TABLE `hedu_yc` ADD COLUMN `graduates_growth_5` float DEFAULT NULL AFTER `graduates_growth`;
+ALTER TABLE `hedu_yc` ADD COLUMN `enrolled_growth_5` float DEFAULT NULL AFTER `enrolled_growth`;
+ALTER TABLE `hedu_yu` ADD COLUMN `graduates_growth_5` float DEFAULT NULL AFTER `graduates_growth`;
+ALTER TABLE `hedu_yu` ADD COLUMN `enrolled_growth_5` float DEFAULT NULL AFTER `enrolled_growth`;
+ALTER TABLE `hedu_yuc` ADD COLUMN `graduates_growth_5` float DEFAULT NULL AFTER `graduates_growth`;
+ALTER TABLE `hedu_yuc` ADD COLUMN `enrolled_growth_5` float DEFAULT NULL AFTER `enrolled_growth`;
