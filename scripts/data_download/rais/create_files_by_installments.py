@@ -152,18 +152,26 @@ def save_location_industry_occupation(year, locations, industrys, occupations, l
             conditions[2] = industry.condition
             for occupation in occupations:
                 conditions[3] = occupation.condition
-                
-                if (not(location.condition == ' 1 = 1 ' or industry.condition == ' 1 = 1 ' or occupation.condition == ' 1 = 1 ')) or (location.condition == ' 1 = 1 ' and (industry.condition != ' 1 = 1 ' and occupation.condition != ' 1 = 1 ')):
-                    if location.name == "-" + type_files:
-                        table = select_table(conditions)
-                        name_file = 'rais'+str(year.name)+str(location.name)+str(industry.name)+str(occupation.name)
-                        new_file_path = os.path.join(output_path, name_file+".csv.bz2")
-                                
+                table = select_table(conditions)
+                name_file = 'rais'+str(year.name)+str(location.name)+str(industry.name)+str(occupation.name)
+                new_file_path = os.path.join(output_path, name_file+".csv.bz2")
+                if type_files == 'all':
+                    if (not(location.condition == ' 1 = 1 ' or industry.condition == ' 1 = 1 ' or occupation.condition == ' 1 = 1 ')) or (location.condition == ' 1 = 1 ' and (industry.condition != ' 1 = 1 ' and occupation.condition != ' 1 = 1 ')):
                         print name_file
                         if table not in table_columns.keys():
                             table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in common.get_colums(table, columns_deleted)]
 
                         common.download(table_columns=table_columns, table=table, conditions=conditions, name_file=name_file, new_file_path=new_file_path, logging=logging, sys=sys)
+                else:    
+                    if (not(location.condition == ' 1 = 1 ' or industry.condition == ' 1 = 1 ' or occupation.condition == ' 1 = 1 ')) or (location.condition == ' 1 = 1 ' and (industry.condition != ' 1 = 1 ' and occupation.condition != ' 1 = 1 ')):
+                        if location.name == "-" + type_files or (location.condition == ' 1 = 1 ' and type_files == 'no_location'):
+                                    
+                            print name_file
+                            if table not in table_columns.keys():
+                                table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in common.get_colums(table, columns_deleted)]
+
+                            common.download(table_columns=table_columns, table=table, conditions=conditions, name_file=name_file, new_file_path=new_file_path, logging=logging, sys=sys)
+
 
 
 
@@ -197,7 +205,7 @@ if len(sys.argv) < 5 or (sys.argv[1:][0] not in ['pt', 'en']):
     print "ERROR! use :\npython scripts/data_download/school_census/create_files_by_installments.py en/pt output_path year files\n"
     print "i = industry files (18 files)"
     print "lo = location, occupation files (17 files)"
-    print "lio = location and industry and occupation(36 files)\n\tindicate (regions ,states ,mesoregions, microregions, municipalities)(9 files each)."
+    print "lio = location and industry and occupation(36 files)\n\tindicate all or (regions ,states ,mesoregions, microregions, municipalities, no_location)(6 files each)."
     print "a = all"
     exit()
 inputs = {}
@@ -208,22 +216,34 @@ inputs['year'] = Condition('year='+str(sys.argv[3]), '-'+str(sys.argv[3]))
 inputs['lang'] = sys.argv[1]
 files = sys.argv[4]
 
-
+f = 1
 if files == 'a' : 
     save_all(year=inputs['year'], locations=locations, industrys=industrys, occupations=occupations, lang=inputs['lang'], output_path=inputs['output_path'])
- 
+    f = 0
+
 if files == 'i':
     save_industry(year=inputs['year'], locations=locations, industrys=industrys, occupations=occupations, lang=inputs['lang'], output_path=inputs['output_path'])
+    f = 0
 
 if files == 'lo':
     save_location_occupation(year=inputs['year'], locations=locations, industrys=industrys, occupations=occupations, lang=inputs['lang'], output_path=inputs['output_path'])
+    f = 0
 
 if files == 'lio':
-    loc = ["regions", "states", "mesoregions", "microregions", "municipalities"]
-
+    loc = ["regions", "states", "mesoregions", "microregions", "municipalities", "no_location", "all"]
+    
     if len(sys.argv) != 6 or sys.argv[5] not in loc:
-        print "lio = location and industry and occupation(36 files)\n\tindicate (regions, states, mesoregions, microregions, municipalities)(9 files each)."
+        print "lio = location and industry and occupation(36 files)\n\tindicate (regions, states, mesoregions, microregions, municipalities, no_location)(6 files each)."
         exit()
     type_files = str(sys.argv[5]);
     save_location_industry_occupation(year=inputs['year'], locations=locations, industrys=industrys, occupations=occupations, lang=inputs['lang'], output_path=inputs['output_path'], type_files=type_files)
+    f = 0
 
+
+if f == 1 : 
+    print "ERROR! use :\npython scripts/data_download/school_census/create_files_by_installments.py en/pt output_path year files\n"
+    print "i = industry files (18 files)"
+    print "lo = location, occupation files (17 files)"
+    print "lio = location and industry and occupation(36 files)\n\tindicate all or (regions ,states ,mesoregions, microregions, municipalities, no_location)(6 files each)."
+    print "a = all"
+    exit()
