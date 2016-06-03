@@ -1,31 +1,51 @@
-$(function () {
-    'use strict';
-
-    $('#fileupload').fileupload({
-        url: 'upload'
-    });
-
-    $('#fileupload').fileupload({
-        submit: function (e, data) {
-            var $this = $(this);
-            //data.formData['csrf_token'] = $('#csrf_token').val();
-            data.jqXHR = $this.fileupload('send', data);
+function uploadFiles(url, files) {
+    var formData = new FormData();
+    var file = files[0];
+    formData.append(file.name, file);
+    formData.append('csrf', csrf_token[0].value);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url, true);
+    xhr.onload = function(e) {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                showMessage(xhr.responseText, 'success', 8000);
+                $('#delete').prop('disabled', false);
+            } else {
+                showMessage(xhr.statusText, 'warning', 8000);
+                $('#delete').prop('disabled', true);
+            }
         }
-    });
+    };
+    var progressBar = document.querySelector('progress');
+    xhr.upload.onprogress = function(e) {
+        if (e.lengthComputable) {
+            progressBar.value = (e.loaded / e.total) * 100;
+            progressBar.textContent = progressBar.value; // Fallback for unsupported browsers.
+        }
+    };
+    xhr.send(formData); //multipart/form-data
+}
 
-    // Load existing files:
-    $('#fileupload').addClass('fileupload-processing');
-    $.ajax({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: $('#fileupload').fileupload('option', 'url'),
-        dataType: 'json',
-        context: $('#fileupload')[0]
-    }).always(function () {
-        $(this).removeClass('fileupload-processing');
-    }).done(function (result) {
-        $(this).fileupload('option', 'done')
-            .call(this, $.Event('done'), {result: result});
+$(document).ready(function() {
+    $('input[type="file"]').get(0).addEventListener('change', function(e) {
+        uploadFiles('upload', this.files);
+    }, false);
+    
+    $('#delete').on('click', function (e) {
+        var filename = document.querySelector('input[type="file"]').files[0].name;
+        var xhr = new XMLHttpRequest();
+        xhr.open('DELETE', '/delete', true);
+        xhr.onload = function(e) {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    showMessage(xhr.responseText, 'success', 8000);
+                    $('#delete').prop('disabled', true);
+                } else {
+                    showMessage(xhr.statusText, 'warning', 8000);
+                    $('#delete').prop('disabled', false);
+                }
+            }
+        };
+        xhr.send(filename);
     });
-
 });
