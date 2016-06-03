@@ -34,7 +34,7 @@ $(document).ready(function() {
     $('#delete').on('click', function (e) {
         var filename = document.querySelector('input[type="file"]').files[0].name;
         var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', '/delete', true);
+        xhr.open('DELETE', 'delete', true);
         xhr.onload = function(e) {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {

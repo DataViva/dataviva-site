@@ -198,6 +198,7 @@ def admin_delete():
     if ids:
         articles = Article.query.filter(Article.id.in_(ids)).all()
         for article in articles:
+            delete_s3_folder(os.path.join(mod.name, str(article.id)))
             db.session.delete(article)
 
         db.session.commit()
@@ -235,6 +236,19 @@ def upload():
         return 'Upload Error!', 400
 
     #TODO - Check file size and extension
+
+@app.route('/admin/article/delete', methods=['DELETE'])
+def delete():
+    csrf_token = request.values['csrf']
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+    file_name = request.data
+    
+    if os.path.exists(upload_folder):
+        try:
+            os.remove(os.path.join(upload_folder, file_name))
+            return 'File Removed!'
+        except:
+            return 'Delete Error!', 400
 
 @mod.route('/admin/article/udsapload', methods=['GET', 'POST'])
 @mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
@@ -286,7 +300,7 @@ def uploada(id=None):
 
 
 @mod.route("/delete/<string:filename>", methods=['DELETE'])
-def delete(filename):
+def deletes(filename):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
     if os.path.exists(file_path):
