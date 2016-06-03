@@ -2,7 +2,7 @@ function uploadFiles(url, files) {
     var formData = new FormData();
     var file = files[0];
     formData.append(file.name, file);
-    formData.append('csrf', csrf_token[0].value);
+    formData.append('csrf_token', csrf_token[0].value);
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
     xhr.onload = function(e) {
@@ -30,7 +30,7 @@ $(document).ready(function() {
     $('input[type="file"]').get(0).addEventListener('change', function(e) {
         uploadFiles('upload', this.files);
     }, false);
-    
+
     $('#delete').on('click', function (e) {
         var filename = document.querySelector('input[type="file"]').files[0].name;
         var xhr = new XMLHttpRequest();

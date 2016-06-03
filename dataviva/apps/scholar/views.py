@@ -16,8 +16,6 @@ from werkzeug import secure_filename
 from dataviva import app
 from dataviva.utils import upload_helper
 
-#app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/scholar/')
-#app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
 IGNORED_FILES = set(['.gitignore'])
@@ -130,7 +128,7 @@ def create():
 
         upload_helper.upload_s3_file(
             os.path.join(upload_folder, file_name),
-            os.path.join('scholar/', str(article.id), 'files/'),
+            os.path.join('scholar/', str(article.id), 'files/', 'article'),
             {
                 'ContentType': "application/pdf",
                 'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
@@ -221,7 +219,7 @@ def all():
 @mod.route('/admin/article/upload', methods=['POST'])
 def upload():
 
-    csrf_token = request.values['csrf']
+    csrf_token = request.values['csrf_token']
 
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
 
