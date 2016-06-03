@@ -198,7 +198,7 @@ def admin_delete():
     if ids:
         articles = Article.query.filter(Article.id.in_(ids)).all()
         for article in articles:
-            delete_s3_folder(os.path.join(mod.name, str(article.id)))
+            upload_helper.delete_s3_folder(os.path.join(mod.name, str(article.id)))
             db.session.delete(article)
 
         db.session.commit()
