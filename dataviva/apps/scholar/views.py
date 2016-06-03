@@ -135,7 +135,7 @@ def create():
             }
         )
 
-        shutil.rmtree(upload_folder)
+        shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
 
