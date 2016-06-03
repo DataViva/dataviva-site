@@ -237,15 +237,14 @@ def upload():
 
     #TODO - Check file size and extension
 
-@app.route('/admin/article/delete', methods=['DELETE'])
+@mod.route('/admin/article/delete', methods=['DELETE'])
 def delete():
-    csrf_token = request.values['csrf']
+    csrf_token = request.data
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
-    file_name = request.data
     
     if os.path.exists(upload_folder):
         try:
-            os.remove(os.path.join(upload_folder, file_name))
+            shutil.rmtree(os.path.split(upload_folder)[0])
             return 'File Removed!'
         except:
             return 'Delete Error!', 400
@@ -300,7 +299,7 @@ def uploada(id=None):
 
 
 @mod.route("/delete/<string:filename>", methods=['DELETE'])
-def deletes(filename):
+def deletedsadsas(filename):
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
     if os.path.exists(file_path):
