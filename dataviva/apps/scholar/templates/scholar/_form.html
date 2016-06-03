@@ -36,25 +36,30 @@
     <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
 </form>
 
-    <div class="container">
-        <form id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-            {{ form.hidden_tag() }}
-            <div class="row fileupload-buttonbar">
-                <div class="col-lg-7">
-                    <p>
-                        <label for="file">Formato<br />
-                            <small>Aceitamos artigos somente em formato PDF, DOC e DOCX.</small>
-                        </label>
-                    </p>
-                    <span class="btn btn-success fileinput-button">
-                        <i class="glyphicon glyphicon-plus"></i>
-                        <span>Add files...</span>
-                        <input type="file" name="file">
-                    </span>
-                    <span class="fileupload-process"></span>
-                </div>
-            </div>
-            <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-        </form>
+<div class="container">
+    {{ form.hidden_tag() }}
+    <div class="row fileupload-buttonbar">
+        <div class="col-lg-7">
+            <p>
+                <label for="file">Formato<br/>
+                    <small>Aceitamos artigos somente em formato PDF.</small>
+                </label>
+            </p>
+
+            <label for="file" class="btn btn-success">
+                <i class="fa fa-plus m-r-sm"></i> Choose File
+                <input id="file" name="file" type="file">
+            </label>
+            
+            <progress min="0" max="100" value="0">0% complete</progress>
+
+            <button href="#" class="btn btn-danger" id="delete" disabled>
+                <i class="fa fa-trash-o m-r-sm"></i> Delete File
+            </button>
+
+            <div id="message"></div>
+        </div>
     </div>
+</div>
+    
 
