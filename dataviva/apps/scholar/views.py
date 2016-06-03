@@ -17,7 +17,7 @@ from dataviva import app
 from dataviva.utils import upload_helper
 
 #app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/scholar/')
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
+#app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 
 ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
 IGNORED_FILES = set(['.gitignore'])
@@ -46,20 +46,6 @@ def add_language_code(endpoint, values):
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def gen_file_name(filename):
-    """
-    If file was exist already, rename it and return a new name
-    """
-
-    i = 1
-    while os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
-        name, extension = os.path.splitext(filename)
-        filename = '%s_%s%s' % (name, str(i), extension)
-        i = i + 1
-
-    return filename
 
 
 @mod.route('/', methods=['GET'])
@@ -136,20 +122,22 @@ def create():
         db.session.add(article)
         db.session.flush()
 
-        file_path = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
+        csrf_token = request.form.get('csrf_token')
 
-        file_name = [file for file in os.listdir(file_path)][0]
+        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+
+        file_name = [file for file in os.listdir(upload_folder)][0]
 
         upload_helper.upload_s3_file(
-            os.path.join(file_path, file_name),
-            os.path.join('scholar/article/', str(article.id)),
+            os.path.join(upload_folder, file_name),
+            os.path.join('scholar/', str(article.id), 'files/'),
             {
                 'ContentType': "application/pdf",
                 'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
             }
         )
 
-        shutil.rmtree(file_path)
+        shutil.rmtree(upload_folder)
 
         db.session.commit()
 
@@ -230,9 +218,29 @@ def all():
     return jsonify(articles=articles)
 
 
-@mod.route('/admin/article/upload', methods=['GET', 'POST'])
+@mod.route('/admin/article/upload', methods=['POST'])
+def upload():
+
+    csrf_token = request.values['csrf']
+
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
+
+    if request.files:
+        file_name = request.files.keys()[0]
+        file = request.files[file_name]
+        file.save(os.path.join(upload_folder, file_name))
+        return 'File Saved!'
+    else:
+        return 'Upload Error!', 400
+
+    #TODO - Check file size and extension
+
+@mod.route('/admin/article/udsapload', methods=['GET', 'POST'])
 @mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
-def upload(id=None):
+def uploada(id=None):
     file_path = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
 
     if not os.path.exists(file_path):
