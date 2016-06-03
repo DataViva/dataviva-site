@@ -32,7 +32,6 @@ $(document).ready(function() {
     }, false);
 
     $('#delete').on('click', function (e) {
-        var filename = document.querySelector('input[type="file"]').files[0].name;
         var xhr = new XMLHttpRequest();
         xhr.open('DELETE', 'delete', true);
         xhr.onload = function(e) {
@@ -46,6 +45,6 @@ $(document).ready(function() {
                 }
             }
         };
-        xhr.send(filename);
+        xhr.send(csrf_token[0].value);
     });
 });
