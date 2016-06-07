@@ -11,7 +11,7 @@ function uploadFiles(url, files) {
                 showMessage(xhr.responseText, 'success', 8000);
                 $('#delete').prop('disabled', false);
             } else {
-                showMessage(xhr.statusText, 'warning', 8000);
+                showMessage(xhr.statusText, 'danger', 8000);
                 $('#delete').prop('disabled', true);
             }
         }
@@ -24,6 +24,16 @@ function uploadFiles(url, files) {
         }
     };
     xhr.send(formData); //multipart/form-data
+}
+
+function validateFile(){
+    if ($('input[type="file"]').val()){
+        return true;
+    }
+    else {
+        showMessage('Por favor, insira o arquivo do artigo.', 'danger', 8000);
+        return false;
+    }
 }
 
 $(document).ready(function() {
@@ -40,7 +50,7 @@ $(document).ready(function() {
                     showMessage(xhr.responseText, 'success', 8000);
                     $('#delete').prop('disabled', true);
                 } else {
-                    showMessage(xhr.statusText, 'warning', 8000);
+                    showMessage(xhr.statusText, 'danger', 8000);
                     $('#delete').prop('disabled', false);
                 }
             }
