@@ -28,12 +28,12 @@ function uploadFiles(url, files) {
 
 $(document).ready(function() {
     $('input[type="file"]').get(0).addEventListener('change', function(e) {
-        uploadFiles('upload', this.files);
+        uploadFiles('/'+window.lang+'/scholar/admin/article/upload', this.files);
     }, false);
 
     $('#delete').on('click', function (e) {
         var xhr = new XMLHttpRequest();
-        xhr.open('DELETE', 'delete', true);
+        xhr.open('DELETE', '/'+window.lang+'/scholar/admin/article/delete', true);
         xhr.onload = function(e) {
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
