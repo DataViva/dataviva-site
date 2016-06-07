@@ -27,7 +27,7 @@ function uploadFiles(url, files) {
 }
 
 function validateFile(){
-    if ($('input[type="file"]').val()){
+    if ($('#file').val()){
         return true;
     }
     else {
@@ -37,8 +37,18 @@ function validateFile(){
 }
 
 $(document).ready(function() {
-    $('input[type="file"]').get(0).addEventListener('change', function(e) {
-        uploadFiles('/'+window.lang+'/scholar/admin/article/upload', this.files);
+    $('#file').get(0).addEventListener('change', function(e) {
+        if ($('#file').val().split('.').pop().toLowerCase() !== 'pdf'){
+            showMessage('Tipo de arquivo não suportado.', 'danger', 8000);
+            return false;
+        }
+        else if ($('#file')[0].files[0].size/1024/1024 > 50){
+                showMessage('Arquivo deve possuir no máximo 50MB.', 'danger', 8000);
+                return false;
+        }
+        else {
+            uploadFiles('/'+window.lang+'/scholar/admin/article/upload', this.files);
+        }
     }, false);
 
     $('#delete').on('click', function (e) {
