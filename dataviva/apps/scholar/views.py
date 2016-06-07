@@ -257,6 +257,7 @@ def upload():
 
     #TODO - Check file size and extension
 
+]
 @mod.route('/admin/article/delete', methods=['DELETE'])
 def delete():
     csrf_token = request.data
@@ -268,66 +269,6 @@ def delete():
             return 'File Removed!'
         except:
             return 'Delete Error!', 400
-
-@mod.route('/admin/article/udsapload', methods=['GET', 'POST'])
-@mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
-def uploada(id=None):
-    file_path = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
-
-    if not os.path.exists(file_path):
-        os.makedirs(file_path)
-
-    if request.method == 'POST':
-        file = request.files['file']
-
-        if file:
-            filename = secure_filename(file.filename)
-            filename = gen_file_name(filename)
-            mimetype = file.content_type
-
-            if not allowed_file(file.filename):
-                result = UploadFile(name=filename, type=mimetype, size=0, not_allowed_msg="Filetype not allowed")
-
-            else:
-                # save file to disk
-                uploaded_file_path = os.path.join(file_path, filename)
-                file.save(uploaded_file_path)
-
-                # get file size after saving
-                size = os.path.getsize(uploaded_file_path)
-
-                # return json for js call back
-                result = UploadFile(name=filename, type=mimetype, size=size)
-
-            return simplejson.dumps({"files": [result.get_file()]})
-
-    if request.method == 'GET':
-        # get all file in ./data directory
-        files = [f for f in os.listdir(file_path) if os.path.isfile(
-            os.path.join(file_path, f)) and f not in IGNORED_FILES]
-
-        file_display = []
-
-        for f in files:
-            size = os.path.getsize(os.path.join(file_path, f))
-            file_saved = UploadFile(name=f, size=size)
-            file_display.append(file_saved.get_file())
-
-        return simplejson.dumps({"files": file_display})
-
-    return redirect(url_for('scholar.index'))
-
-
-@mod.route("/delete/<string:filename>", methods=['DELETE'])
-def deletedsadsas(filename):
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-    if os.path.exists(file_path):
-        try:
-            os.remove(file_path)
-            return simplejson.dumps({filename: 'True'})
-        except:
-            return simplejson.dumps({filename: 'False'})
 
 
 # serve static files
