@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, json
 from dataviva.apps.general.views import get_locale
 
 from sqlalchemy import desc
@@ -7,6 +7,7 @@ from models import Article, AuthorScholar, KeyWord
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
+import fnmatch
 
 import os
 import simplejson
@@ -257,7 +258,7 @@ def upload():
 
     #TODO - Check file size and extension
 
-]
+
 @mod.route('/admin/article/delete', methods=['DELETE'])
 def delete():
     csrf_token = request.data
@@ -271,7 +272,11 @@ def delete():
             return 'Delete Error!', 400
 
 
-# serve static files
-@mod.route("/data/<string:filename>", methods=['GET'])
-def get_file(filename):
-    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER']), filename=filename)
+# serve static files on server before send to s3
+@mod.route('/data', methods=['GET'])
+def get_file():
+    matches = []
+    for root, dirnames, filenames in os.walk(os.path.join(app.config['UPLOAD_FOLDER'], mod.name)):
+        for filename in fnmatch.filter(filenames, '*.pdf'):
+            matches.append(filename)
+    return jsonify(file_names=matches)
