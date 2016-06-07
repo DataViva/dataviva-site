@@ -6,7 +6,7 @@
     {% endfor %}
 {%- endmacro %}
 
-<form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data">
+<form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data" onsubmit="return validateFile()">
     {{ form.hidden_tag() }}
     <p>
         <label for="title">Título</label>
@@ -33,8 +33,12 @@
         {{ form.abstract(class="form-control", rows=5)}}
         {{ messages(form.abstract) }}
     </p>
-    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
+    <button id='submit' type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
 </form>
+
+<div class="container">
+{{article_url}}
+</div>
 
 <div class="container">
     {{ form.hidden_tag() }}
