@@ -126,7 +126,7 @@ def create():
 
         file_name = [file for file in os.listdir(upload_folder)][0]
 
-        upload_helper.upload_s3_file(
+        article.url = upload_helper.upload_s3_file(
             os.path.join(upload_folder, file_name),
             os.path.join('scholar/', str(article.id), 'files/', 'article'),
             {
@@ -154,8 +154,9 @@ def edit(id):
     form.authors.data = article.authors_str()
     form.keywords.data = article.keywords_str()
     form.abstract.data = article.abstract
+    article_url = article.url
 
-    return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
+    return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
 
 @mod.route('/admin/article/<id>/edit', methods=['POST'])
@@ -184,6 +185,25 @@ def update(id):
                 article.keywords.append(KeyWord(keyword_input))
             else:
                 article.keywords.append(keyword)
+
+        csrf_token = request.form.get('csrf_token')
+
+        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+
+        if os.path.exists(upload_folder):
+
+            file_name = [file for file in os.listdir(upload_folder)][0]
+
+            article.url = upload_helper.upload_s3_file(
+                os.path.join(upload_folder, file_name),
+                os.path.join('scholar/', str(article.id), 'files/', 'article'),
+                {
+                    'ContentType': "application/pdf",
+                    'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
+                }
+            )
+
+            shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
 
