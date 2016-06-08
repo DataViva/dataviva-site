@@ -231,8 +231,10 @@ $('.product-industry').on('click', function(){
     }
 });
 
-$('#question-crosswalk-ip').on('click', function(){
+$('.industry-product').on('click', function(){
     if(!window.IndustryProduct){
+        dataviva.requireAttrs(['cnae'], function() {});
+        dataviva.requireAttrs(['hs'], function() {});
         showCrosswalkIP()
     }
 });
