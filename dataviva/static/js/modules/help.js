@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     dataviva.requireAttrs(['bra'], function() {});
     dataviva.requireAttrs(['cnae'], function() {});
     dataviva.requireAttrs(['cbo'], function() {});
@@ -8,7 +8,7 @@ $(document).ready(function () {
     dataviva.requireAttrs(['university'], function() {});
     dataviva.requireAttrs(['course_sc'], function() {});
 });
-
+*/
 $('.sidebar a').on('click', function(){
     $('.sidebar a').attr('class','');
     $(this).toggleClass('active');

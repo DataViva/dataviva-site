@@ -38,24 +38,31 @@
                         </a>
                         <div class="collapse" id="crosswalk">
                             <ol>
-                            <a href="#tab-crosswalk-pi" aria-controls="geral" role="tab" data-toggle="tab"
-                                target="crosswalk-pi" class="list-group-item" data-parent="#crosswalk">
-                                Product-Industry
-                            </a></br>
-                            <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
+                            <div class="product-industry">
+                                <a href="#tab-crosswalk-pi" aria-controls="geral" role="tab" data-toggle="tab"
+                                    target="crosswalk-pi" class="list-group-item" data-parent="#crosswalk">
+                                    Product-Industry
+                                </a></br>
+                            </div>
+                            <div class="industry-product">
+                            <a href="#tab-crosswalk-ip" aria-controls="geral" role="tab" data-toggle="tab"
                                 target="crosswalk-ip" class="list-group-item" data-parent="#crosswalk">
                                 Industry-Product
                             </a></br>
-                            <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
+                            </div>
+                            <div class="occupation-course">
+                            <a href="#tab-crosswalk-oc" aria-controls="geral" role="tab" data-toggle="tab"
                                 target="crosswalk-oc" class="list-group-item" data-parent="#crosswalk">
                                 Occupation-Course
                             </a></br>
-                            <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
+                            </div>
+                            <div class="course-occupation">
+                            <a href="#tab-crosswalk-co" aria-controls="geral" role="tab" data-toggle="tab"
                                 target="crosswalk-co" class="list-group-item" data-parent="#crosswalk">
                                 Course-Occupation
-                            </a></br>
+                            </a></br> 
                             </ol>
-                        </div>      
+                        </div>     
                     </li>
 
                     <li>
@@ -117,7 +124,6 @@
                         </div>
                     {% endfor %}
 
-
                     <div class="col-md-6">
                     <div class="panel-heading" role="tab" id="crosswalk">
                         <h2>
@@ -129,39 +135,47 @@
 
                         <div class="collapse" id="crosswalk-page">
                             <div class="panel-heading">
+                                <div class="product-industry">
                                 <h2>
                                     <a href="#tab-crosswalk-pi" aria-controls="geral" role="tab" data-toggle="tab"
                                         target="crosswalk-pi" data-parent="#crosswalk-page">
                                         Product-Industry
                                     </a>
                                 </h2>
+                                </div>
                             </div>
 
                             <div class="panel-heading">
+                                <div class="industry-product">
                                 <h2>
                                     <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
                                         target="crosswalk-ip" data-parent="#crosswalk-page">
                                         Industry-Product
                                     </a>
                                 </h2>
+                                </div>
                             </div>    
 
                             <div class="panel-heading">
+                                <div class="occupation-course">
                                 <h2>
                                     <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
                                         target="crosswalk-oc" data-parent="#crosswalk-page">
                                         Occupation-Course
                                     </a>
                                 </h2>
+                                </div>
                             </div>
 
                             <div class="panel-heading">
+                                <div class="course-occupation">
                                 <h2>
                                     <a href="#tab-crosswalk" aria-controls="geral" role="tab" data-toggle="tab"
                                         target="crosswalk-co" data-parent="#crosswalk-page">
                                         Course-Occupation
                                     </a>
                                 </h2>
+                                </div>
                             </div>
                         </div>      
                     </div>
@@ -287,4 +301,6 @@
         </div>
     </div>
 </section>
+
+
 {% endblock %}
