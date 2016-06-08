@@ -248,8 +248,11 @@ $('.occupation-course').on('click', function(){
     }
 });
 
-$('#question-crosswalk-co').on('click', function(){
+$('.course-occupation').on('click', function(){
     if(!window.courseOccupation){
+        dataviva.requireAttrs(['cbo'], function() {});
+        dataviva.requireAttrs(['course_hedu'], function() {});
+        dataviva.requireAttrs(['course_sc'], function() {});
         showCrosswalkCO();
     }
 });
