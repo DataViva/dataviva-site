@@ -105,7 +105,7 @@ window.showCrosswalkIP = function() {
             }
         });
     };
-    window.IndustryProduct = new IndustryProductTable(loadingCrosswalkIP.hide());
+    window.industryProduct = new IndustryProductTable(loadingCrosswalkIP.hide());
 };
 
 window.showCrosswalkOC = function() {
@@ -224,35 +224,34 @@ window.showCrosswalkCO = function() {
 };
 
 $('.product-industry').on('click', function(){
-    if(!window.productIndustry){
-        dataviva.requireAttrs(['cnae'], function() {});
-        dataviva.requireAttrs(['hs'], function() {});
-        showCrosswalkPI()
-    }
+    dataviva.requireAttrs(['hs', 'cnae'], function() {
+        if(!window.productIndustry){
+            showCrosswalkPI();
+        }
+    });
 });
 
 $('.industry-product').on('click', function(){
-    if(!window.IndustryProduct){
-        dataviva.requireAttrs(['cnae'], function() {});
-        dataviva.requireAttrs(['hs'], function() {});
-        showCrosswalkIP()
-    }
+    dataviva.requireAttrs(['hs', 'cnae'], function() {
+        if(!window.industryProduct){
+            showCrosswalkIP();
+        }
+    });
 });
 
 $('.occupation-course').on('click', function(){
-    if(!window.occupationCourse){
-        dataviva.requireAttrs(['cbo'], function() {});
-        dataviva.requireAttrs(['course_hedu'], function() {});
-        dataviva.requireAttrs(['course_sc'], function() {});
-        showCrosswalkOC()
-    }
+    
+    dataviva.requireAttrs(['course_sc', 'cbo', 'course_hedu'], function() {
+        if(!window.occupationCourse){    
+            showCrosswalkOC();
+        }
+    });
 });
 
 $('.course-occupation').on('click', function(){
-    if(!window.courseOccupation){
-        dataviva.requireAttrs(['cbo'], function() {});
-        dataviva.requireAttrs(['course_hedu'], function() {});
-        dataviva.requireAttrs(['course_sc'], function() {});
-        showCrosswalkCO();
-    }
+    dataviva.requireAttrs(['course_sc', 'cbo', 'course_hedu'], function() {
+         if(!window.courseOccupation){
+            showCrosswalkCO();
+        }
+    });
 });
