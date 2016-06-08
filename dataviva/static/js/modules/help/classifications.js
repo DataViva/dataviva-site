@@ -756,9 +756,11 @@ window.showBasicCourses = function() {
     window.basicCourses = new BasicCoursesTable();
 };
 
-$('#question-classifications-locations').on('click', function(){
-    if(!window.locations){
-        showLocations();
+$('.help-classifications-locations').on('click', function(){
+    if(!window.locations){ 
+        dataviva.requireAttrs(['bra'], function() {
+            showLocations();
+        });
     }
 });
 
