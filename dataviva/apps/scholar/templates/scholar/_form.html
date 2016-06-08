@@ -37,29 +37,32 @@
 </form>
 
 <div class="container">
-{{article_url}}
-</div>
-
-<div class="container">
     {{ form.hidden_tag() }}
     <div class="row fileupload-buttonbar">
         <div class="col-lg-7">
-            <p>
-                <label for="file">Formato<br/>
-                    <small>Aceitamos artigos somente em formato PDF.</small>
+                <p>
+                    <label>Formato<br/>
+                        <small>Aceitamos artigos somente em formato PDF.</small>
+                    </label>
+                </p>
+
+            <div id="inputfile">
+                <input id="file" name="file" type="file" class="inputfile">
+
+                <label for="file" class="btn btn-success">
+                    <i class="fa fa-plus m-r-sm"></i> Choose File
                 </label>
-            </p>
+            </div>
 
-            <label for="file" class="btn btn-success">
-                <i class="fa fa-plus m-r-sm"></i> Choose File
-                <input id="file" name="file" type="file">
-            </label>
-            
-            <progress min="0" max="100" value="0">0% complete</progress>
+            <label>Arquivo referente ao artigo:<br/></label>
+                <a id="article-url" href="{{ article_url }}">Artigo <i class="fa fa-file-pdf-o m-r-sm"></i></a>
+                <button href="#" class="btn btn-danger" id="delete">
+                    <i class="fa fa-trash-o m-r-sm"></i> Delete File
+                </button>
 
-            <button href="#" class="btn btn-danger" id="delete" disabled>
-                <i class="fa fa-trash-o m-r-sm"></i> Delete File
-            </button>
+            <div id="progress">
+                <progress min="0" max="100" value="0">0% complete</progress>
+            </div>
 
             <div id="message"></div>
         </div>
