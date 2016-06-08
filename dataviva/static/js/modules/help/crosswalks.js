@@ -239,8 +239,11 @@ $('.industry-product').on('click', function(){
     }
 });
 
-$('#question-crosswalk-oc').on('click', function(){
+$('.occupation-course').on('click', function(){
     if(!window.occupationCourse){
+        dataviva.requireAttrs(['cbo'], function() {});
+        dataviva.requireAttrs(['course_hedu'], function() {});
+        dataviva.requireAttrs(['course_sc'], function() {});
         showCrosswalkOC()
     }
 });
