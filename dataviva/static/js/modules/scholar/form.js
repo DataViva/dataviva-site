@@ -36,6 +36,10 @@ function validateFile(){
     }
 }
 
+$('#progress').hide();
+$('#delete').hide();
+$('#article-url').text("");
+
 $(document).ready(function() {
     $('#file').get(0).addEventListener('change', function(e) {
         if ($('#file').val().split('.').pop().toLowerCase() !== 'pdf'){
@@ -47,7 +51,11 @@ $(document).ready(function() {
                 return false;
         }
         else {
+            $('#progress').show();
             uploadFiles('/'+window.lang+'/scholar/admin/article/upload', this.files);
+            $('#delete').show();
+            $('#inputfile').hide();
+            $('#progress').hide();
         }
     }, false);
 
@@ -59,6 +67,8 @@ $(document).ready(function() {
                 if (xhr.status === 200) {
                     showMessage(xhr.responseText, 'success', 8000);
                     $('#delete').prop('disabled', true);
+                    $('#delete').hide();
+                    $('#inputfile').show();
                 } else {
                     showMessage(xhr.statusText, 'danger', 8000);
                     $('#delete').prop('disabled', false);
