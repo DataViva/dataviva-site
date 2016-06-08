@@ -223,8 +223,10 @@ window.showCrosswalkCO = function() {
     window.courseOccupation = new CourseOccupationTable(loadingCrosswalkCO.hide());
 };
 
-$('#question-crosswalk-pi').on('click', function(){
+$('.product-industry').on('click', function(){
     if(!window.productIndustry){
+        dataviva.requireAttrs(['cnae'], function() {});
+        dataviva.requireAttrs(['hs'], function() {});
         showCrosswalkPI()
     }
 });
