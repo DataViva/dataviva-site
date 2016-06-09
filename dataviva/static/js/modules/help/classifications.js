@@ -788,10 +788,12 @@ $('.help-classifications-products').on('click', function(){
     });
 });
 
-$('#question-classifications-trade-partners').on('click', function(){
-    if(!window.tradePartners){
-        showTradePartners();
-    }
+$('.help-classifications-trade-partners').on('click', function(){
+    dataviva.requireAttrs(['wld'], function() {
+        if(!window.tradePartners){
+            showTradePartners();
+        }
+    });
 });
 
 $('#question-classifications-majors').on('click', function(){
