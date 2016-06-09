@@ -819,4 +819,3 @@ $('.help-classifications-basic-courses').on('click', function(){
         }
     });
 });
-
