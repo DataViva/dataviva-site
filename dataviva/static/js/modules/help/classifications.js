@@ -757,11 +757,12 @@ window.showBasicCourses = function() {
 };
 
 $('.help-classifications-locations').on('click', function(){
-    if(!window.locations){ 
-        dataviva.requireAttrs(['bra'], function() {
+    debugger;
+    dataviva.requireAttrs(['bra'], function() {
+        if(!window.locations){ 
             showLocations();
-        });
-    }
+        }
+    });
 });
 
 $('#question-classifications-industries').on('click', function(){
