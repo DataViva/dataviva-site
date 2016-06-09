@@ -757,7 +757,6 @@ window.showBasicCourses = function() {
 };
 
 $('.help-classifications-locations').on('click', function(){
-    debugger;
     dataviva.requireAttrs(['bra'], function() {
         if(!window.locations){ 
             showLocations();
@@ -765,10 +764,12 @@ $('.help-classifications-locations').on('click', function(){
     });
 });
 
-$('#question-classifications-industries').on('click', function(){
-    if(!window.industries){
-        showIndustries();
-    }
+$('.help-classifications-industries').on('click', function(){
+    dataviva.requireAttrs(['cnae'], function() {
+        if(!window.industries){
+            showIndustries();
+        }
+    });
 });
 
 $('#question-classifications-occupations').on('click', function(){
