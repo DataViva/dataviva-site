@@ -796,16 +796,19 @@ $('.help-classifications-trade-partners').on('click', function(){
     });
 });
 
-$('#question-classifications-majors').on('click', function(){
-    if(!window.majors){
-        showMajors();
-    }
+$('.help-classifications-majors').on('click', function(){
+        if(!window.majors){
+            showMajors();
+        }
+    
 });
 
-$('#question-classifications-universities').on('click', function(){
-    if(!window.universities){
-        showUniversities();
-    }
+$('.help-classifications-universities').on('click', function(){
+    dataviva.requireAttrs(['university'], function() {
+        if(!window.universities){
+            showUniversities();
+        }
+    });
 });
 
 $('#question-classifications-basic-courses').on('click', function(){
