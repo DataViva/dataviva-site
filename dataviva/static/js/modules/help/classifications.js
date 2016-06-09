@@ -812,9 +812,11 @@ $('.help-classifications-universities').on('click', function(){
     });
 });
 
-$('#question-classifications-basic-courses').on('click', function(){
-    if(!window.basicCourses){
-        showBasicCourses();
-    }
+$('.help-classifications-basic-courses').on('click', function(){
+    dataviva.requireAttrs(['course_sc'], function() {
+        if(!window.basicCourses){
+            showBasicCourses();
+        }
+    });
 });
 
