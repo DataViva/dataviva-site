@@ -245,7 +245,11 @@ def upload():
 
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
 
-    if not os.path.exists(upload_folder):
+    if os.path.exists(upload_folder):
+        if [file for file in os.listdir(upload_folder)][0]:
+            file_name = [file for file in os.listdir(upload_folder)][0]
+            os.remove(os.path.join(upload_folder, file_name))
+    else:
         os.makedirs(upload_folder)
 
     if request.files:
@@ -272,9 +276,18 @@ def delete():
             return 'Delete Error!', 400
 
 
-# serve static files on server before send to s3
+# serve static files on server
+@mod.route('/admin/file/<string:csrf_token1>/<string:csrf_token2>', methods=['GET'])
+def get_file(csrf_token1, csrf_token2):
+    csrf_token = csrf_token1 + '##' + csrf_token2
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+    file_name = [file for file in os.listdir(upload_folder)][0]
+    return send_from_directory(upload_folder, file_name)
+
+
+# show static files on server before send to s3
 @mod.route('/data', methods=['GET'])
-def get_file():
+def data():
     matches = []
     for root, dirnames, filenames in os.walk(os.path.join(app.config['UPLOAD_FOLDER'], mod.name)):
         for filename in fnmatch.filter(filenames, '*.pdf'):
