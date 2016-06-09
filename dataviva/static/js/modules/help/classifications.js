@@ -797,10 +797,11 @@ $('.help-classifications-trade-partners').on('click', function(){
 });
 
 $('.help-classifications-majors').on('click', function(){
+    dataviva.requireAttrs(['course_hedu'], function() {
         if(!window.majors){
             showMajors();
         }
-    
+    });
 });
 
 $('.help-classifications-universities').on('click', function(){
