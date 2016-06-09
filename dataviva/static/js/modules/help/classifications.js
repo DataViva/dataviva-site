@@ -780,10 +780,12 @@ $('.help-classifications-occupations').on('click', function(){
     });
 });
 
-$('#question-classifications-products').on('click', function(){
-    if(!window.products){
-        showProducts();
-    }
+$('.help-classifications-products').on('click', function(){
+    dataviva.requireAttrs(['hs'], function() {
+        if(!window.products){
+            showProducts();
+        }
+    });
 });
 
 $('#question-classifications-trade-partners').on('click', function(){
