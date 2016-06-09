@@ -1,0 +1,29 @@
+<div role="tabpanel" class="tab-pane" id="tab-classifications-occupations">
+    <div class="col-xs-12">
+        <h2>Occupations</h2>
+        <div id="answer-classifications-occupations" role="tabpanel" aria-labelledby="question-classifications-occupations">
+            <div class="panel-body">
+                <div class="classifications-occupations">
+                    <div class="classifications-occupations-wrapper">
+                        <div class="classifications-occupations-content">
+                            <table id="occupations-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>{% trans %}ID{% endtrans %}</th>
+                                        <th>{% trans %}Name{% endtrans %}</th>
+                                        <th>{% trans %}Total Jobs{% endtrans %}</th>
+                                        <th>{% trans %}Color{% endtrans %}</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block js_assets %}
+        <script src="/static/js/modules/help/classifications.js"></script>
+{% endblock js_assets %}

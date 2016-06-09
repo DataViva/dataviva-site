@@ -772,10 +772,12 @@ $('.help-classifications-industries').on('click', function(){
     });
 });
 
-$('#question-classifications-occupations').on('click', function(){
-    if(!window.occupations){
-        showOccupations();
-    }
+$('.help-classifications-occupations').on('click', function(){
+    dataviva.requireAttrs(['cbo'], function() {
+        if(!window.occupations){
+            showOccupations();
+        }
+    });
 });
 
 $('#question-classifications-products').on('click', function(){
