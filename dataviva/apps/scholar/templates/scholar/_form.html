@@ -46,7 +46,7 @@
                     </label>
                 </p>
 
-            <div id="inputfile">
+            <div id="input-file">
                 <input id="file" name="file" type="file" class="inputfile">
 
                 <label for="file" class="btn btn-success">
@@ -54,11 +54,12 @@
                 </label>
             </div>
 
-            <label>Arquivo referente ao artigo:<br/></label>
-                <a id="article-url" href="{{ article_url }}">Artigo <i class="fa fa-file-pdf-o m-r-sm"></i></a>
+            <div id="uploaded-file">
                 <button href="#" class="btn btn-danger" id="delete">
                     <i class="fa fa-trash-o m-r-sm"></i> Delete File
                 </button>
+                <a id="article-url" target="_blank" href=""> Artigo <i class="fa fa-file-pdf-o m-r-sm"></i></a>
+            </div>
 
             <div id="progress">
                 <progress min="0" max="100" value="0">0% complete</progress>
