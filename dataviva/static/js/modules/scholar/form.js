@@ -58,12 +58,12 @@ $(document).ready(function() {
     $('#file').get(0).addEventListener('change', function(e) {
         if ($('#file').val().split('.').pop().toLowerCase() !== 'pdf'){
             $('#file').val('');
-            showMessage('Tipo de arquivo não suportado.', 'danger', 8000);
+            showMessage('Tipo de arquivo não suportado, favor inserir um arquivo PDF.', 'danger', 8000);
             return false;
         }
         else if ($('#file')[0].files[0].size/1024/1024 > 50){
                 $('#file').val('');
-                showMessage('Arquivo deve possuir no máximo 50MB.', 'danger', 8000);
+                showMessage('Não foi possível salvar o arquivo, favor inserir um arquivo de no máximo 50 MB.', 'danger', 8000);
                 return false;
         }
         else {
