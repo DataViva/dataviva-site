@@ -131,3 +131,8 @@
 .scholar .fileinput-button input {
     display: none;
 }
+
+.scholar .sidebar ul li a.active {
+    text-decoration: none;
+    font-weight: bold;
+}
