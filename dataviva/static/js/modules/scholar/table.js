@@ -42,22 +42,6 @@ var ScholarTable = function () {
         "bFilter": true,
         "info": false,
         "initComplete": function(settings, json) {
-            $( 'input[name="show_home"]' ).each(function() {
-                var switchery = new Switchery(this, {
-                    size: 'small'
-                });
-
-                $(this).next().click(function() {
-                    var checkbox = $(this).siblings().get(0);
-
-                    var ids = [checkbox.value],
-                        status = $(checkbox).attr('name'),
-                        status_value = checkbox.checked;
-
-                    changeStatus(ids, status, status_value);
-                });
-            });
-
             $( 'input[name="approval_status"]' ).each(function() {
                 var switchery = new Switchery(this, {
                     size: 'small',
@@ -90,8 +74,7 @@ var ScholarTable = function () {
         });
         checkManySelected();
     })
-
-}
+};
 
 ScholarTable.prototype.getCheckedIds = function(first_argument) {
     var checkedIds = [];
@@ -102,8 +85,6 @@ ScholarTable.prototype.getCheckedIds = function(first_argument) {
     });
     return checkedIds;
 };
-
-
 
 var scholarTable = new ScholarTable();
 
