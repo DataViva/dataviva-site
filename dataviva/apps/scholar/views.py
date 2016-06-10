@@ -246,9 +246,9 @@ def upload():
         file_name = request.files.keys()[0]
         file = request.files[file_name]
         file.save(os.path.join(upload_folder, file_name))
-        return 'File Saved!'
+        return 'Arquivo salvo com sucesso!', 200
     else:
-        return 'Upload Error!', 400
+        return 'Não foi possível salvar o arquivo devido a um erro no servidor.', 400
 
 
 @mod.route('/admin/article/delete', methods=['DELETE'])
@@ -259,9 +259,9 @@ def delete():
     if os.path.exists(upload_folder):
         try:
             shutil.rmtree(os.path.split(upload_folder)[0])
-            return 'File Removed!'
+            return 'Arquivo removido com sucesso!', 200
         except:
-            return 'Delete Error!', 400
+            return 'Não foi possível remover o arquivo devido a um erro no servidor.', 400
 
 
 # serve static files on server
