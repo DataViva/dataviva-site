@@ -38,6 +38,12 @@
 
 <button id="admin-activate" class="btn btn-success pull-right">{% trans %}Activate{% endtrans %}</button>
 <button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">{% trans %}Deactivate{% endtrans %}</button>
+<style rel="stylesheet" type="text/css">
+    .sidebar ul li a.active {
+        text-decoration: none;
+        font-weight: bold;
+    }
+</style>
 
 {% endblock admin_content %}
 
