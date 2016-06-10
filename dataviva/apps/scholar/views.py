@@ -131,7 +131,7 @@ def create():
         db.session.commit()
 
         message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-                  Em até 15 dias você receberá um retorno sobre sua publicação no site!'
+                    Em até 15 dias você receberá um retorno sobre sua publicação no site!'
         flash(message, 'success')
         return redirect(url_for('scholar.index'))
 
@@ -218,7 +218,7 @@ def admin_delete():
         return u'Selecione algum artigo para excluí-lo.', 205
 
 
-@mod.route('/articles/all', methods=['GET'])
+@mod.route('/admin/articles/all', methods=['GET'])
 def all():
     result = Article.query.all()
     articles = []
@@ -250,8 +250,6 @@ def upload():
     else:
         return 'Upload Error!', 400
 
-    #TODO - Check file size and extension
-
 
 @mod.route('/admin/article/delete', methods=['DELETE'])
 def delete():
@@ -276,7 +274,7 @@ def get_file(csrf_token1, csrf_token2):
 
 
 # show static files on server before send to s3
-@mod.route('/data', methods=['GET'])
+@mod.route('/admin/data', methods=['GET'])
 def data():
     matches = []
     for root, dirnames, filenames in os.walk(os.path.join(app.config['UPLOAD_FOLDER'], mod.name)):

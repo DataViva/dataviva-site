@@ -5,7 +5,7 @@ var ScholarTable = function () {
         "oLanguage": {
           "sSearch": "Pesquisar "
         },
-        "sAjaxSource": "/scholar/articles/all",
+        "sAjaxSource": "/scholar/admin/articles/all",
         "sAjaxDataProp": "articles",
         "order": [[ 3, "asc" ]],
         "columnDefs": [
