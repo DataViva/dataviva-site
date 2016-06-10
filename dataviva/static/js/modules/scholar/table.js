@@ -104,9 +104,9 @@ var changeStatus = function(ids, status, status_value){
                 }
             },
             success: function (message) {
-                for (item in ids) {
-                    if ($('#'+status+ids[item])[0].checked !== status_value) {
-                        $('#'+status+ids[item]).click();
+                for (var i = 0; i < ids.length; i++) {
+                    if ($('#'+status+ids[i])[0].checked !== status_value) {
+                        $('#'+status+ids[i]).click();
                     }
                 }
 
@@ -134,8 +134,8 @@ var destroy = function(ids){
                 }
             },
             success: function (message) {
-                for (item in ids) {
-                    itemId = '#item'+ids[item];
+                for (var i = 0; i < ids.length; i++) {
+                    itemId = '#item'+ids[i];
                     scholarTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
 
