@@ -66,13 +66,6 @@ if (!String.prototype.format) {
   };
 }
 
-Array.prototype.objectIndex = function(key,value) {
-  for(var i = 0, len = this.length; i < len; i++) {
-      if (this[i][key] === value) return i;
-  }
-  return -1;
-}
-
 Element.prototype.toggleClass = function(tag) {
   var ret = false
   var classes = this.className.split(" ")
