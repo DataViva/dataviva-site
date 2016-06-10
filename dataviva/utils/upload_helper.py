@@ -45,6 +45,6 @@ def save_b64_image(b64, upload_folder, name):
 
     image_url = upload_s3_file(file_path, file_path.split(UPLOAD_FOLDER)[1], {'ContentType': "image/png"})
 
-    shutil.rmtree(upload_folder)
+    shutil.rmtree(os.path.split(upload_folder)[0])
 
     return image_url
