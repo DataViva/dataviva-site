@@ -1,25 +1,15 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, json
 from dataviva.apps.general.views import get_locale
-
-from sqlalchemy import desc
-from models import Article, AuthorScholar, KeyWord
-from dataviva import db
-from forms import RegistrationForm
-from datetime import datetime
-import fnmatch
-
-import os
-import simplejson
-import shutil
-from upload_file import UploadFile
-from werkzeug import secure_filename
-from dataviva import app
+from dataviva import app, db
 from dataviva.utils import upload_helper
-
-
-ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
-IGNORED_FILES = set(['.gitignore'])
+from models import Article, AuthorScholar, KeyWord
+from forms import RegistrationForm
+from sqlalchemy import desc
+from datetime import datetime
+import os
+import shutil
+import fnmatch
 
 
 mod = Blueprint('scholar', __name__,
