@@ -42,52 +42,10 @@ def admin():
 def all_posts():
     result = HelpSubject.query.all()
     subjects = []
-    questions = []
-    answers = []
     for row in result:
         for question in row.questions:
             subjects += [(row.id, row.name(), question.description(), question.answer())]
     return jsonify(subjects=subjects)
-
-
-@mod.route('/tab-brazilian-locations')
-def brazilian_locations():
-    return render_template('help/tab-brazilian-locations.html')
-
-
-@mod.route('/tab-products')
-def products():
-    return render_template('help/tab-products.html')
-
-
-@mod.route('/tab-basic-courses')
-def basic_courses():
-    return render_template('help/tab-basic-courses.html')
-
-
-@mod.route('/tab-industries')
-def industries():
-    return render_template('help/tab-industries.html')
-
-
-@mod.route('/tab-occupations')
-def occupations():
-    return render_template('help/tab-occupations.html')
-
-
-@mod.route('/tab-trade-partners')
-def trade_partners():
-    return render_template('help/tab-trade-partners.html')
-
-
-@mod.route('/tab-universities')
-def universities():
-    return render_template('help/tab-universities.html')
-
-
-@mod.route('/tab-majors')
-def majors():
-    return render_template('help/tab-majors.html') 
 
 
 @mod.route('/crosswalk/pi')
@@ -117,24 +75,25 @@ def crosswalk():
             for row in result:
                 data += [(row.course_hedu_id, row.cbo_id)]
 
-    return jsonify(data=data)
+    aggregated_data = []
+    row_index = 0
+    data.sort() 
+    while row_index < (len(data)):
+        category = data[row_index][0]
+        crossings = [data[row_index][1]]
+        
+        if row_index == len(data)-1:
+            aggregated_data += [(category, crossings)];
+            break;
+            
+        while category == data[row_index+1][0]:
+            crossings.append(data[row_index+1][1])
+            row_index += 1
 
+            if row_index == len(data)-1: 
+                break;
 
-@mod.route('/tab-crosswalk-pi')
-def crosswalk_pi():
-    return render_template('help/tab-crosswalk-pi.html')
-
-
-@mod.route('/tab-crosswalk-ip')
-def crosswalk_ip():
-    return render_template('help/tab-crosswalk-ip.html')
-
-
-@mod.route('/tab-crosswalk-oc')
-def crosswalk_oc():
-    return render_template('help/tab-crosswalk-oc.html')
-
-
-@mod.route('/tab-crosswalk-co')
-def crosswalk_co():
-    return render_template('help/tab-crosswalk-co.html')
+        aggregated_data += [(category, crossings)];
+        row_index += 1
+        
+    return jsonify(data=aggregated_data)

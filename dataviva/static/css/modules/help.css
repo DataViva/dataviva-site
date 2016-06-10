@@ -63,181 +63,138 @@
     color: #333;
 }
 
-/* HELP CLASSIFICATIONS DATATABLES */ 
+/* HELP DATATABLES */
 
-.help .classifications .text-up {
-  color: #3c763d;
-}
-.help .classifications .text-down {
-  color: #a94442;
-}
-.help .classifications .text-up, .text-down {
-  text-align: right;
-  display: block;
-}
-
-.help .classifications .classifications-content .dataTable {
-  border-radius: 0;
-}
-.help .classifications .classifications-content .dataTable thead tr th{
-  background: #eee;
-  border-bottom: 1px solid #ddd;
-}
-
-.help .classifications #classifications .navbar.navbar-default {
-    background-color: #f8f8f8;
-    border-top: 1px solid #e7e7e7;
-    border-bottom: 1px solid #e7e7e7;
-    margin: 20px 0;
-}
-
-.help .classifications #classifications .navbar .nav > li {
-    padding: 0;
-}
-.help .classifications #classifications .navbar .nav > li > a {
-    color: #666;
-    border-right: none !important;
-    padding: 15px 20px;
-    margin: 0;
-}
-.help .classifications #classifications .navbar .nav > li > a:hover {
-    color: #000;
-}
-
-.help .classifications .classifications-wrapper {
-    padding-bottom: 30px;
-    min-height: 300px;
-}
-
-.help .classifications .classifications-wrapper .classifications-content {
-    display: none;
-}
-
-.help .classifications .nav-classifications {
-    margin-top: 50px;
-}
-
-.help .classifications .nav-classifications .list-group .list-group-item {
-    background-color: #f5f5f5;
-    color: #337AB7;
-    font-size: 16px;
-    font-weight: 100;
-    border: none;
-    margin: 0px;
-    padding: 0px;
-}
-.help .classifications .nav-classifications .list-group .list-group-item:focus,
-.help .classifications .nav-classifications .list-group .list-group-item:active {
-}
-.help .classifications .nav-classifications .list-group .list-group-item:nth-child(odd) {
-    background-color: #DFE7E2;
-}
-.help .classifications .nav-classifications .list-group-item a {
-    text-decoration: none;
-    padding-left: 2rem;
-    line-height: 40px;
-    display: block;
-}
-.help .classifications .nav-classifications .list-group-item.active,
-.help .classifications .nav-classifications .list-group-item.active a,
-.help .classifications .nav-classifications .list-group-item a:active,
-.help .classifications .nav-classifications .list-group-item a:focus {
-    background-color: #5A9DC4;
-    color: #FFF;
-}
-.help .classifications .list-group-item:first-child {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px;
-}
-
-.help .classifications .list-group-item:last-child {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px;
-}
-
-.help .classifications .nav-classifications .list-group-item .list-subgroup {
-    background-color: #FFF;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:first-child {
-    padding-top: 15px;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:last-child {
-    padding-bottom: 15px;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a {
-    font-size: 13px;
-    font-weight: 300;
-    display: block;
-    line-height: 25px;
-}
-.help .classifications .nav-classifications .list-group-item .list-subgroup a.active,
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:active,
-.help .classifications .nav-classifications .list-group-item .list-subgroup a:focus {
-    font-weight: bold;
-    background-color: #FFF;
-    color: #337AB7;
-}
-
-.help .classifications .classifications-control {
-    display: inline-block;
-    margin-bottom: 10px
-}
-
-@media (max-width: 767px) {
-    .help .classifications #classifications .navbar .nav > li > a {
-        padding: 6px 20px;
-    }
-}
-
-.help .classifications .classifications-control .btn-group {
-    margin-right: 5px;
-}
-
-.help .classifications .classifications-control .btn-group button.active {
-    background-color: #A25A6D;
-    border-color: #A25A6D;
-    color: #FFFFFF;
-}
-
-.help .classifications .dataTables_wrapper .dataTables_filter {
+.help .dataTables_wrapper .dataTables_filter {
     display: inline;
 }
 
-.help .classifications .dataTables_wrapper .growth-arrow.up {
-    color: green;
-}
-.help .classifications .dataTables_wrapper .growth-arrow.down {
-    color: red;
-}
-.help .classifications .load {
-    min-height: 500px;
-}
-.help .classifications .dataTables_scrollHeadInner .dataTable th {
+.help .dataTables_scrollHeadInner .dataTable th {
     text-align: center;
     vertical-align: middle;
 }
-.help .classifications .dataTables_scrollBody .dataTable td.table-number {
+
+.help .dataTables_scrollBody .dataTable td.table-number {
     text-align: right;
 }
-.help .classifications .navbar-nav > li > .dropdown-menu {
-    margin-top: -6px;
-}
 
-.help .classifications table.dataTable thead .sorting:after,
-.help .classifications table.dataTable thead .sorting_asc:after,
-.help .classifications table.dataTable thead .sorting_desc:after,
-.help .classifications table.dataTable thead .sorting_asc_disabled:after,
-.help .classifications table.dataTable thead .sorting_desc_disabled:after {
+.help table.dataTable thead .sorting:after,
+.help table.dataTable thead .sorting_asc:after,
+.help table.dataTable thead .sorting_desc:after,
+.help table.dataTable thead .sorting_asc_disabled:after,
+.help table.dataTable thead .sorting_desc_disabled:after {
     top: 50%;
     transform: translateY(-50%);
     height: 25px;
 }
 
-.help .sidebar ul li a.active {
-    font-weight: bold;
-    text-decoration: none;
+/* HELP CROSSWALK DATATABLES */
+
+.help .crosswalk-pi-wrapper,
+.help .crosswalk-ip-wrapper,
+.help .crosswalk-oc-wrapper,
+.help .crosswalk-co-wrapper {
+    padding-bottom: 30px;
+    min-height: 300px;
 }
 
-.help .sidebar ul li a:hover{
+.help .crosswalk-pi-wrapper .crosswalk-pi-content,
+.help .crosswalk-ip-wrapper .crosswalk-ip-content,
+.help .crosswalk-oc-wrapper .crosswalk-oc-content,
+.help .crosswalk-co-wrapper .crosswalk-co-content {
+    display: none;
+}
+
+.help .crosswalk-pi-content .dataTable,
+.help .crosswalk-ip-content .dataTable,
+.help .crosswalk-oc-content .dataTable,
+.help .crosswalk-co-content .dataTable {
+  border-radius: 0;
+}
+
+.help .crosswalk-pi-content .dataTable thead tr th,
+.help .crosswalk-ip-content .dataTable thead tr th,
+.help .crosswalk-oc-content .dataTable thead tr th,
+.help .crosswalk-co-content .dataTable thead tr th {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+/* HELP CLASSIFICATIONS DATATABLES */
+
+.help .classifications-locations-wrapper,
+.help .classifications-industries-wrapper,
+.help .classifications-occupations-wrapper,
+.help .classifications-products-wrapper,
+.help .classifications-trade-partners-wrapper,
+.help .classifications-majors-wrapper,
+.help .classifications-universities-wrapper,
+.help .classifications-basic-courses-wrapper {
+    padding-bottom: 30px;
+    min-height: 300px;
+}
+
+.help .classifications-locations-content .dataTable,
+.help .classifications-industries-content .dataTable,
+.help .classifications-occupations-content .dataTable,
+.help .classifications-products-content .dataTable,
+.help .classifications-trade-partners-content .dataTable,
+.help .classifications-majors-content .dataTable,
+.help .classifications-universities-content .dataTable,
+.help .classifications-basic-courses-content .dataTable {
+  border-radius: 0;
+}
+
+.help .classifications-locations-content .dataTable thead tr th,
+.help .classifications-industries-content .dataTable thead tr th,
+.help .classifications-occupations-content .dataTable thead tr th,
+.help .classifications-products-content .dataTable thead tr th,
+.help .classifications-trade-partners-content .dataTable thead tr th,
+.help .classifications-majors-content .dataTable thead tr th,
+.help .classifications-universities-content .dataTable thead tr th,
+.help .classifications-basic-courses-content .dataTable thead tr th {
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+}
+
+.help .classifications-locations-control,
+.help .classifications-industries-control,
+.help .classifications-occupations-control,
+.help .classifications-products-control,
+.help .classifications-trade-partners-control,
+.help .classifications-majors-control,
+.help .classifications-basic-courses-control {
+    display: inline-block;
+    margin-bottom: 10px
+}
+
+.help .classifications-locations-control .btn-group,
+.help .classifications-industries-control .btn-group,
+.help .classifications-occupations-control .btn-group,
+.help .classifications-products-control .btn-group,
+.help .classifications-trade-partners-control .btn-group,
+.help .classifications-majors-control .btn-group,
+.help .classifications-basic-courses-control .btn-group {
+    margin-right: 5px;
+}
+
+.help .classifications-locations-control .btn-group button.active,
+.help .classifications-industries-control .btn-group button.active,
+.help .classifications-occupations-control .btn-group button.active,
+.help .classifications-products-control .btn-group button.active,
+.help .classifications-trade-partners-control .btn-group button.active,
+.help .classifications-majors-control .btn-group button.active,
+.help .classifications-basic-courses-control .btn-group button.active {
+    background-color: #A25A6D;
+    border-color: #A25A6D;
+    color: #FFFFFF;
+}
+
+.help .sidebar a.active {
     text-decoration: none;
+    font-weight: bold;
+}
+
+.help section nav ul li ol {
+    padding-left: 20px;
 }
