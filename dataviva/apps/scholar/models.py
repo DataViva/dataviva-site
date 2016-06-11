@@ -13,6 +13,7 @@ class Article(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
     abstract = db.Column(db.Text())
+    url = db.Column(db.String(400))
     theme = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
     approval_status = db.Column(db.Boolean)

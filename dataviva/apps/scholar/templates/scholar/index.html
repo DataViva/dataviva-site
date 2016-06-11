@@ -6,6 +6,19 @@
 {% endblock %}
 
 {% block scholar_content %}
+    <div id="message">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+            <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                {{ message }}
+            </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    </div>
+    
     <h2>Estudos sobre o DataViva</h2>
     <h3>Bem vindo a área de estudos do DataViva.</h3>
     <p>Aqui você encontra publicações acadêmicas e estudos que envolvem o DataViva</p>
