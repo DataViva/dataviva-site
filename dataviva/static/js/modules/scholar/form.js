@@ -91,7 +91,3 @@ $('#delete-edit').on('click', function (e) {
     $('#input-file').show();
 });
 
-$(document).ready(function(){
-    setAlertTimeOut(8000);
-});
-
