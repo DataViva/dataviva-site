@@ -84,7 +84,15 @@ def new():
 
 @mod.route('/admin/article/new', methods=['POST'])
 def create():
+    csrf_token = request.form.get('csrf_token')
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+
     form = RegistrationForm()
+
+    if not os.path.exists(upload_folder):
+        flash(u'Selecione o arquivo do artigo para enviá-lo.', 'danger')
+        return render_template('scholar/new.html', form=form)
+
     if form.validate() is False:
         return render_template('scholar/new.html', form=form)
     else:
@@ -111,22 +119,20 @@ def create():
         db.session.add(article)
         db.session.flush()
 
-        csrf_token = request.form.get('csrf_token')
+        if os.path.exists(upload_folder):
 
-        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+            file_name = [file for file in os.listdir(upload_folder)][0]
 
-        file_name = [file for file in os.listdir(upload_folder)][0]
+            article.url = upload_helper.upload_s3_file(
+                os.path.join(upload_folder, file_name),
+                os.path.join('scholar/', str(article.id), 'files/', 'article'),
+                {
+                    'ContentType': "application/pdf",
+                    'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
+                }
+            )
 
-        article.url = upload_helper.upload_s3_file(
-            os.path.join(upload_folder, file_name),
-            os.path.join('scholar/', str(article.id), 'files/', 'article'),
-            {
-                'ContentType': "application/pdf",
-                'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
-            }
-        )
-
-        shutil.rmtree(os.path.split(upload_folder)[0])
+            shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
 
@@ -152,7 +158,11 @@ def edit(id):
 
 @mod.route('/admin/article/<id>/edit', methods=['POST'])
 def update(id):
+    csrf_token = request.form.get('csrf_token')
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+
     form = RegistrationForm()
+
     if form.validate() is False:
         return render_template('scholar/edit.html', form=form)
     else:
@@ -176,10 +186,6 @@ def update(id):
                 article.keywords.append(KeyWord(keyword_input))
             else:
                 article.keywords.append(keyword)
-
-        csrf_token = request.form.get('csrf_token')
-
-        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
 
         if os.path.exists(upload_folder):
 

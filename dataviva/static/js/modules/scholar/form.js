@@ -43,17 +43,6 @@ function uploadFiles(url, files) {
 }
 
 
-function validateFile(){
-    if ($('#file').val()){
-        return true;
-    }
-    else {
-        showMessage('Por favor, insira o arquivo do artigo.', 'danger', 8000);
-        return false;
-    }
-}
-
-
 $('#file').get(0).addEventListener('change', function(e) {
     if ($('#file').val().split('.').pop().toLowerCase() !== 'pdf'){
         $('#file').val('');
@@ -100,5 +89,9 @@ $('#delete-edit').on('click', function (e) {
     showMessage('File Removed!', 'success', 8000);
     $('#uploaded-file').hide();
     $('#input-file').show();
+});
+
+$(document).ready(function(){
+    setAlertTimeOut(8000);
 });
 

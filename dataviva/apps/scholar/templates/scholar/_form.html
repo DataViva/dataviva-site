@@ -6,7 +6,7 @@
     {% endfor %}
 {%- endmacro %}
 
-<form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data" onsubmit="return validateFile()">
+<form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data">
     {{ form.hidden_tag() }}
     <p>
         <label for="title">Título</label>
@@ -36,7 +36,7 @@
     <button id='submit' type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
 </form>
 
-<div class="container">
+<div class="">
     {{ form.hidden_tag() }}
     <div class="row fileupload-buttonbar">
         <div class="col-lg-7">
@@ -65,9 +65,21 @@
                 <progress min="0" max="100" value="0">0% complete</progress>
             </div>
 
-            <div id="message"></div>
         </div>
     </div>
+</div>
+
+<div id="message">
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 </div>
 
 {% block js_assets %}
