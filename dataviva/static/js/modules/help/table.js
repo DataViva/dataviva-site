@@ -23,10 +23,17 @@ var HelpTable = function () {
                 }
             },
             {
-                "targets": 1,
+                "targets": 2,
                 "className": "column-title",
                 "render": function (data, type, subject, meta){
-                    return '<a href="/help/subject/'+subject[0]+'">'+subject[1]+'</a>';
+                    return '<a href="/help/subject/'+subject[0]+'">'+subject[2]+'</a>';
+                }
+            },
+            {
+                "targets": 3,
+                "className": "column-title",
+                "render": function (data, type, subject, meta){
+                    return subject[3].truncate(300);
                 }
             },
             {
