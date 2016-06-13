@@ -7,7 +7,7 @@ from dataviva import db
 from models import HelpSubject, HelpSubjectQuestion
 from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 from urlparse import urlparse
-from forms import RegistrationForm
+#from forms import RegistrationForm
 
 
 mod = Blueprint('help', __name__,
