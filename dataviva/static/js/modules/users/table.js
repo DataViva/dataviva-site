@@ -36,8 +36,7 @@ var UsersTable = function () {
                 } ],             
                 "paging": false,
                 "deferRender": true,
-                "scrollY": 500,
-                "scrollX": true,
+               
                 "scrollCollapse": true,
                 "info": false, //number of rows in footer table
                 "initComplete": function(settings, json) {
