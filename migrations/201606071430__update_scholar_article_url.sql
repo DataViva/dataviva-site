@@ -1,0 +1,1 @@
+ALTER TABLE scholar_article ADD url VARCHAR(400) AFTER abstract;
