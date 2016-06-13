@@ -13,6 +13,7 @@ class HelpSubjectQuestion(db.Model):
     answer_en = db.Column(db.Text(4194304))
     subject_id = db.Column(db.Integer, ForeignKey('help_subject.id'))
     subject = db.relationship('HelpSubject', backref='help_subject_question', lazy='eager')
+    active = db.Column(db.Boolean)
 
     def description(self):
         lang = getattr(g, "locale", "en")
