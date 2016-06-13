@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
+from flask.ext.login import login_required
+from dataviva.apps.admin.views import required_roles
 from models import HelpSubject
 from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 from urlparse import urlparse
@@ -33,6 +35,8 @@ def index():
 
 
 @mod.route('/admin', methods=['GET'])
+@login_required
+@required_roles(1)
 def admin():
     subjects = HelpSubject.query.all()
     return render_template('help/admin.html', subjects=subjects)
