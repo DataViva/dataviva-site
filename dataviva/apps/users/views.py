@@ -12,6 +12,9 @@ mod = Blueprint('users', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/users')
 
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
