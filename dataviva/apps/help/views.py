@@ -3,6 +3,7 @@ from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
+from dataviva import db
 from models import HelpSubject, HelpSubjectQuestion
 from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 from urlparse import urlparse
@@ -40,6 +41,19 @@ def index():
 def admin():
     subjects = HelpSubject.query.all()
     return render_template('help/admin.html', subjects=subjects)
+
+
+@mod.route('/admin/subject/<status>/<status_value>', methods=['POST'])
+@login_required
+@required_roles(1)
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        subject = HelpSubjectQuestion.query.filter_by(id=id).first_or_404()
+        setattr(subject, status, status_value == u'true')
+        db.session.commit()
+
+    message = u"Perguntas(s) alterada(s) com sucesso!"
+    return message, 200
 
 
 @mod.route('/subject/all', methods=['GET'])
