@@ -34,10 +34,13 @@ var UsersTable = function () {
                                     '" value="'+users[0]+ (data ? '" checked>' : '" >');
                     },
                 } ],             
-               "paging": true,
-               "bFilter": false,
-               "info": false, //number of rows in footer table
-               "initComplete": function(settings, json) {
+                "paging": false,
+                "deferRender": true,
+                "scrollY": 500,
+                "scrollX": true,
+                "scrollCollapse": true,
+                "info": false, //number of rows in footer table
+                "initComplete": function(settings, json) {
                     $( 'input[name="active"]' ).each(function() {
                         var switchery = new Switchery(this, {
                             size: 'small',
