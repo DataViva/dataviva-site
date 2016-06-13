@@ -12,6 +12,7 @@ class HelpSubjectQuestion(db.Model):
     answer_pt = db.Column(db.Text(4194304))
     answer_en = db.Column(db.Text(4194304))
     subject_id = db.Column(db.Integer, ForeignKey('help_subject.id'))
+    subject = db.relationship('HelpSubject', backref='help_subject_question', lazy='eager')
 
     def description(self):
         lang = getattr(g, "locale", "en")
@@ -30,7 +31,6 @@ class HelpSubject(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name_en = db.Column(db.String(50))
     name_pt = db.Column(db.String(50))
-    questions = db.relationship("HelpSubjectQuestion", backref='help_subject_question')
 
     def name(self):
         lang = getattr(g, "locale", "en")
