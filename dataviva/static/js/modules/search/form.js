@@ -1,4 +1,4 @@
-var select = $("<select></select>").attr("id", 'search-selector').addClass("search-selector form-control");
+/*var select = $("<select></select>").attr("id", 'search-selector').addClass("search-selector form-control");
 
 	$.ajax({
             method: "POST",
@@ -19,3 +19,4 @@ var select = $("<select></select>").attr("id", 'search-selector').addClass("sear
 $(document).ready(function(){
 
 });
+*/
