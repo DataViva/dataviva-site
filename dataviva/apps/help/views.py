@@ -7,6 +7,7 @@ from dataviva import db
 from models import HelpSubject, HelpSubjectQuestion
 from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 from urlparse import urlparse
+from forms import RegistrationForm
 
 
 mod = Blueprint('help', __name__,
@@ -41,6 +42,14 @@ def index():
 def admin():
     subjects = HelpSubject.query.all()
     return render_template('help/admin.html', subjects=subjects)
+
+
+@mod.route('/admin/subject/new', methods=['GET'])
+@login_required
+@required_roles(1)
+def new():
+    form = RegistrationForm()
+    return render_template('help/new.html', form=form, action=url_for('help.create'))
 
 
 @mod.route('/admin/subject/<status>/<status_value>', methods=['POST'])
