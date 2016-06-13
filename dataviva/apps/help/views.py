@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
-from models import HelpSubject
+from models import HelpSubject, HelpSubjectQuestion
 from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 from urlparse import urlparse
 
@@ -44,11 +44,10 @@ def admin():
 
 @mod.route('/subject/all', methods=['GET'])
 def all_posts():
-    result = HelpSubject.query.all()
+    result = HelpSubjectQuestion.query.all()
     subjects = []
     for row in result:
-        for question in row.questions:
-            subjects += [(row.id, row.name(), question.description(), question.answer())]
+            subjects += [(row.id, row.subject.name(), row.description(), row.answer(), row.active)]
     return jsonify(subjects=subjects)
 
 
