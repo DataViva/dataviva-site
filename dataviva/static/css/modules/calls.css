@@ -170,3 +170,8 @@
     height: 33px;
     width: 33px;
 }
+
+.calls .sidebar ul li a.active {
+    text-decoration: none;
+    font-weight: bold;
+}
