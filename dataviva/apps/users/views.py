@@ -23,11 +23,6 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
-def users():
-    return redirect(url_for('.admin_users'))
-
-
 @mod.route('/admin', methods=['GET'])
 @login_required
 @required_roles(1)
