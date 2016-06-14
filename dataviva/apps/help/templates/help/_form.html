@@ -1,0 +1,47 @@
+{% macro messages(input) -%}
+    {% for message in input.errors %}
+        <label class="m-l-md error" for="{{ input.name }}">{{ message }}</label>
+    {% endfor %}
+{%- endmacro %}
+
+<form id="help-form" method="POST" action="{{ action }}" enctype="multipart/form-data">
+
+    {{ form.hidden_tag() }}
+    <div class="form-group {{ 'has-error' if form.category.errors else '' }} ">
+        <label class="control-label" for="category">{% trans %}Category{% endtrans %}</label>
+        {{ messages(form.category) }}
+        {{ form.category(class="form-control")}}
+    </div>
+    <div class="form-group {{ 'has-error' if form.description_en.errors else '' }} ">
+        <label class="control-label" for="description_en">{% trans %}Question{% endtrans %} (EN)</label>
+        {{ messages(form.description_en) }}
+        {{ form.description_en(class="form-control", maxlength=400)}}
+    </div>
+    <div class="form-group {{ 'has-error' if form.description_pt.errors else '' }} ">
+        <label class="control-label" for="description_pt">{% trans %}Question{% endtrans %} (PT)</label>
+        {{ messages(form.description_pt) }}
+        {{ form.description_pt(class="form-control", maxlength=400)}}
+    </div>
+    <div class="form-group {{ 'has-error' if form.answer_en.errors else '' }}">
+        <label class="control-label" for="answer_en">{% trans %}Answer{% endtrans %} (EN)</label>
+        <button id="help-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+        <button id="help-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+        {{ messages(form.answer_en) }}
+        {{ form.answer_en }}
+        <div class=" summernote-wrapper">
+            <div id="text-content-editor-en" class="summernote"></div>
+        </div>
+    </div>
+    <div class="form-group {{ 'has-error' if form.answer_pt.errors else '' }}">
+        <label class="control-label" for="answer_pt">{% trans %}Answer{% endtrans %} (PT)</label>
+        <button id="help-edit-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+        <button id="help-preview-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+        {{ messages(form.answer_pt) }}
+        {{ form.answer_pt }}
+        <div class=" summernote-wrapper">
+            <div id="text-content-editor-pt" class="summernote"></div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
+</form>
