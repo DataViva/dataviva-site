@@ -58,5 +58,10 @@ class SearchQuestion(db.Model):
         lang = getattr(g, "locale", "en")
         return getattr(self, "description_" + lang)
 
+    def selectors_sorted(self):
+        selectors = self.selectors
+        selectors_sorted = sorted(selectors, key=lambda selectors: selectors.order)
+        return [x.selector_id for x in selectors_sorted]
+
     def __repr__(self):
         return '<SearchQuestion %r>' % (self.description())

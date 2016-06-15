@@ -48,20 +48,13 @@ def all_questions():
     questions_query = SearchQuestion.query.all()
     selectors = SearchQuestionSelector.query.all()
     questions = []
-    question_selectors = {}
-
-    for selector in selectors:
-        question_id = selector.question_id
-        selectors_by_question = [ x for x in selectors if x.question_id == question_id ]
-        selectors_by_question_sorted = sorted(selectors_by_question, key=lambda selectors_by_question: selectors_by_question.order)
-        question_selectors.update({question_id: [ x.selector_id for x in selectors_by_question_sorted]})
 
     for row in questions_query:
         questions += [(
             row.id,
             SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name(),
             row.description(),
-            question_selectors[row.id],
+            row.selectors_sorted(),
             row.answer
         )]
         
