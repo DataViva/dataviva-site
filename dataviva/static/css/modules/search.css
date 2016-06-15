@@ -141,3 +141,8 @@
 .search section.search-options .search-option:focus i {
     color: #5a9dc4;
 }
+
+.search .sidebar ul li a.active {
+    text-decoration: none;
+    font-weight: bold;
+}
