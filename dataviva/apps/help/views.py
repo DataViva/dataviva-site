@@ -76,6 +76,22 @@ def create():
         return redirect(url_for('help.admin'))
 
 
+@mod.route('/admin/delete', methods=['POST'])
+@login_required
+@required_roles(1)
+def admin_delete():
+    ids = request.form.getlist('ids[]')
+    if ids:
+        subjects = HelpSubjectQuestion.query.filter(HelpSubjectQuestion.id.in_(ids)).all()
+        for subject in subjects:
+            db.session.delete(subject)
+
+        db.session.commit()
+        return u"Pergunta(s) excluída(s) com sucesso!", 200
+    else:
+        return u'Selecione alguma pergunta para excluí-la.', 205
+
+
 @mod.route('/admin/subject/<status>/<status_value>', methods=['POST'])
 @login_required
 @required_roles(1)
