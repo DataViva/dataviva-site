@@ -21,7 +21,13 @@ var SearchTable = function () {
 
                     return checkbox;
                 }
-            }],
+            },{
+                "targets": 3,
+                "render": function(data, type, question, meta){
+                    return data.join(", ") ;   
+                }
+            }
+            ],
         "paging": false,
         "bFilter": true,
         "info": false,
