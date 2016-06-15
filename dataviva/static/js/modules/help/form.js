@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     //Summernote for answer-en
-    $('#text-content-editor-en').append($('#text_content-en').val())
+    $('#text-content-editor-en').append($('#answer_en').val())
     $('#text-content-editor-en').summernote(summernoteConfig);
 
     $('#help-edit-en').click(function() {
@@ -11,7 +11,7 @@ $(document).ready(function(){
 
     $('#help-preview-en').click(function() {
         var aHTML = $('#text-content-editor-en').summernote('code');
-        $('#text_content-en').val(aHTML);
+        $('#answer_en').val(aHTML);
         $('#text-content-editor-en').summernote('destroy');
     });
 
@@ -28,16 +28,16 @@ $(document).ready(function(){
     $(function() {
         $('#help-form').submit(function() {
             var aHTML = $('#text-content-editor-en').summernote('code');
-            $('#text_content-en').val(aHTML);
+            $('#answer_en').val(aHTML);
             if ($('.summernote').summernote('isEmpty')) {
-                $('#text_content-en').val('');
+                $('#answer_en').val('');
             }
             return true;
         });
     });
 
     //Summernote for answer-pr
-    $('#text-content-editor-pt').append($('#text_content-pt').val())
+    $('#text-content-editor-pt').append($('#answer_pt').val())
     $('#text-content-editor-pt').summernote(summernoteConfig);
 
     $('#help-edit-pt').click(function() {
@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     $('#help-preview-pt').click(function() {
         var aHTML = $('#text-content-editor-pt').summernote('code');
-        $('#text_content-pt').val(aHTML);
+        $('#answer_pt').val(aHTML);
         $('#text-content-editor-pt').summernote('destroy');
     });
 
@@ -64,9 +64,9 @@ $(document).ready(function(){
     $(function() {
         $('#help-form').submit(function() {
             var aHTML = $('#text-content-editor-pt').summernote('code');
-            $('#text_content-pt').val(aHTML);
+            $('#answer_pt').val(aHTML);
             if ($('.summernote').summernote('isEmpty')) {
-                $('#text_content-pt').val('');
+                $('#answer_pt').val('');
             }
             return true;
         });
