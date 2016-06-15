@@ -24,7 +24,7 @@ var SearchTable = function () {
             },{
                 "targets": 3,
                 "render": function(data, type, question, meta){
-                    return data.join(", ") ;   
+                    return data.split(',').join(', ');   
                 }
             }
             ],
