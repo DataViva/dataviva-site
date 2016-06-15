@@ -26,7 +26,7 @@ var HelpTable = function () {
                 "targets": 2,
                 "className": "column-title",
                 "render": function (data, type, subject, meta){
-                    return '<a href="/help/subject/'+subject[0]+'">'+subject[2]+'</a>';
+                    return '<a href="/help/admin/subject/'+subject[0]+'/edit">'+subject[2]+'</a>';
                 }
             },
             {
