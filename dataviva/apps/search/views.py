@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
-from models import SearchQuestion, SearchSelector, SearchProfile
+from models import SearchQuestion, SearchSelector, SearchProfile, SearchQuestionSelector
 from dataviva import db
 from forms import RegistrationForm
 
@@ -45,18 +45,26 @@ def all_selectors():
 
 @mod.route('/question/all', methods=['GET'])
 def all_questions():
-    result = SearchQuestion.query.all()
+    questions_query = SearchQuestion.query.all()
+    selectors = SearchQuestionSelector.query.all()
     questions = []
+    question_selectors = {}
 
-    for row in result:
+    for selector in selectors:
+        question_id = selector.question_id
+        selectors_by_question = [ x for x in selectors if x.question_id == question_id ]
+        selectors_by_question_sorted = sorted(selectors_by_question, key=lambda selectors_by_question: selectors_by_question.order)
+        question_selectors.update({question_id: [ x.selector_id for x in selectors_by_question_sorted]})
+
+    for row in questions_query:
         questions += [(
             row.id,
             SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name(),
             row.description(),
-            'a',
+            question_selectors[row.id],
             row.answer
         )]
-
+        
     return jsonify(questions=questions)
 
 
