@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, jsonify, request
+from flask import Blueprint, render_template, g, url_for, flash, redirect, jsonify, request
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
@@ -49,7 +49,31 @@ def admin():
 @required_roles(1)
 def new():
     form = RegistrationForm()
-    return render_template('help/new.html', form=form)#, action=url_for('help.create'))
+    return render_template('help/new.html', form=form, action=url_for('help.create'))
+
+
+@mod.route('/admin/subject/new', methods=['POST'])
+@login_required
+@required_roles(1)
+def create():
+    form = RegistrationForm()
+    if form.validate() is False:
+        return render_template('help/new.html', form=form)
+    else:
+        subject = HelpSubjectQuestion()
+        subject.subject_id = int(form.subject.data)
+        subject.description_en = form.description_en.data
+        subject.description_pt = form.description_pt.data
+        subject.answer_en = form.answer_en.data
+        subject.answer_pt = form.answer_pt.data
+        subject.active = 0
+
+        db.session.add(subject)
+        db.session.commit()
+
+        message = u'Muito obrigado! Sua pergunta foi submetida com sucesso!'
+        flash(message, 'success')
+        return redirect(url_for('help.admin'))
 
 
 @mod.route('/admin/subject/<status>/<status_value>', methods=['POST'])
