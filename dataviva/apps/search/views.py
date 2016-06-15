@@ -128,7 +128,7 @@ def edit(id):
     form.description_en.data = question.description_en
     form.description_pt.data = question.description_pt
     form.answer.data = question.answer
-    form.selector.data = question.selectors_str()
+    form.selector.data = ', '.join(question.selectors_sorted())
     return render_template('search/edit.html', form=form, action=url_for('search.update', id=id))
 
 
