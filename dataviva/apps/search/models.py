@@ -50,10 +50,6 @@ class SearchQuestion(db.Model):
     selectors = db.relationship("SearchQuestionSelector")
     profile_id = db.Column(db.Integer, ForeignKey('search_profile.id'))
 
-    def selectors_str(self):
-        selector_names = [selectors.selector_id for selectors in self.selectors]
-        return ', '.join(selector_names)
-
     def description(self):
         lang = getattr(g, "locale", "en")
         return getattr(self, "description_" + lang)
