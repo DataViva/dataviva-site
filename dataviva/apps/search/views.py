@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
 from dataviva.apps.general.views import get_locale
 
-from models import SearchQuestion, SearchSelector, SearchProfile, SearchQuestionSelector
+from models import SearchQuestion, SearchSelector, SearchProfile
 from dataviva import db
 from forms import RegistrationForm
 
@@ -46,7 +46,6 @@ def all_selectors():
 @mod.route('/question/all', methods=['GET'])
 def all_questions():
     questions_query = SearchQuestion.query.all()
-    selectors = SearchQuestionSelector.query.all()
     questions = []
 
     for row in questions_query:
@@ -54,7 +53,7 @@ def all_questions():
             row.id,
             SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name(),
             row.description(),
-            row.selectors_sorted(),
+            row.selectors,
             row.answer
         )]
         
@@ -102,15 +101,18 @@ def create():
         return render_template('search/new.html', form=form)
     else:
         question = SearchQuestion()
-        profile_id = form.profile.data
-        question.profile_id = profile_id
+        question.profile_id = form.profile.data
         question.description_en = form.description_en.data
         question.description_pt = form.description_pt.data
         question.answer = form.answer.data
 
+        db.session.add(question)
+        db.session.flush()
+
         selector_input_list = form.selector.data.split(',')
         for selector_input in selector_input_list:
-            question.selectors.append(SearchSelector(selector_input))
+            import pdb; pdb.set_trace()
+            question.selectors.append(int(question.id), selector_input)
 
         db.session.add(question)
         db.session.commit()
@@ -128,7 +130,7 @@ def edit(id):
     form.description_en.data = question.description_en
     form.description_pt.data = question.description_pt
     form.answer.data = question.answer
-    form.selector.data = ', '.join(question.selectors_sorted())
+    form.selector.data = ', '.join((question.selectors).split(','))
     return render_template('search/edit.html', form=form, action=url_for('search.update', id=id))
 
 
