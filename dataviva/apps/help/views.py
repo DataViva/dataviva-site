@@ -76,6 +76,27 @@ def create():
         return redirect(url_for('help.admin'))
 
 
+@mod.route('/admin/subject/<id>/edit', methods=['GET'])
+@login_required
+@required_roles(1)
+def edit(id):
+    form = RegistrationForm()
+    subject = HelpSubjectQuestion.query.filter_by(id=id).first_or_404()
+    form.subject.data = str(subject.subject_id)
+    form.description_en.data = subject.description_en
+    form.description_pt.data = subject.description_pt
+    form.answer_en.data = subject.answer_en
+    form.answer_pt.data = subject.answer_pt
+    return render_template('help/edit.html', form=form, action=url_for('help.update', id=id))
+
+
+@mod.route('/admin/subject/<id>/edit', methods=['POST'])
+@login_required
+@required_roles(1)
+def update(id):
+    pass
+
+
 @mod.route('/admin/delete', methods=['POST'])
 @login_required
 @required_roles(1)
