@@ -313,7 +313,7 @@
                         <div class="col-xs-12">
                             <h2>{{subject['name_' + g.locale]}}</h2>
                             <div class="panel-group" id="accordion-{{subject.id}}" role="tablist" aria-multiselectable="true">
-                                {% for question in subject.questions %}
+                                {% for question in subject.help_subject_question %}
                                     <div class="panel panel-default">
                                         <div class="panel-heading" role="tab" id="question{{question.id}}">
                                             <h2>
