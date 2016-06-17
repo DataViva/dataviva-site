@@ -94,7 +94,23 @@ def edit(id):
 @login_required
 @required_roles(1)
 def update(id):
-    pass
+    form = RegistrationForm()
+    if form.validate() is False:
+        return render_template('help/new.html', form=form)
+    else:
+        subject = HelpSubjectQuestion.query.filter_by(id=id).first_or_404()
+        subject.subject_id = int(form.subject.data)
+        subject.description_en = form.description_en.data
+        subject.description_pt = form.description_pt.data
+        subject.answer_en = form.answer_en.data
+        subject.answer_pt = form.answer_pt.data
+
+        db.session.add(subject)
+        db.session.commit()
+
+        message = u'Pergunta editada com sucesso!'
+        flash(message, 'success')
+        return redirect(url_for('help.admin'))
 
 
 @mod.route('/admin/delete', methods=['POST'])
