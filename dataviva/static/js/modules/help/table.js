@@ -7,7 +7,7 @@ var HelpTable = function () {
         },
         "sAjaxSource": "/help/subject/all",
         "sAjaxDataProp": "subjects",
-        "order": [[ 3, "asc" ]],
+        "order": [[ 1, "asc" ]],
         "columnDefs": [
             {
                 "targets": 0,
