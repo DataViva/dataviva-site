@@ -25,17 +25,6 @@ $(document).ready(function(){
         $('#textarea-feedback-en').html(text_remaining + ' caracteres restantes');
     });
 
-    $(function() {
-        $('#help-form').submit(function() {
-            var aHTML = $('#text-content-editor-en').summernote('code');
-            $('#answer_en').val(aHTML);
-            if ($('.summernote').summernote('isEmpty')) {
-                $('#answer_en').val('');
-            }
-            return true;
-        });
-    });
-
     //Summernote for answer-pr
     $('#text-content-editor-pt').append($('#answer_pt').val())
     $('#text-content-editor-pt').summernote(summernoteConfig);
@@ -63,9 +52,14 @@ $(document).ready(function(){
 
     $(function() {
         $('#help-form').submit(function() {
-            var aHTML = $('#text-content-editor-pt').summernote('code');
-            $('#answer_pt').val(aHTML);
-            if ($('.summernote').summernote('isEmpty')) {
+            var aHTMLen = $('#text-content-editor-en').summernote('code');
+            var aHTMLpt = $('#text-content-editor-pt').summernote('code');
+            $('#answer_pt').val(aHTMLpt);
+            $('#answer_en').val(aHTMLen);
+            if ($('#text-content-editor-en').summernote('isEmpty')) {
+                $('#answer_en').val('');
+            }
+            if ($('#text-content-editor-pt').summernote('isEmpty')) {
                 $('#answer_pt').val('');
             }
             return true;
