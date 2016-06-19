@@ -5,7 +5,7 @@ var HelpTable = function () {
         "oLanguage": {
           "sSearch": "Pesquisar "
         },
-        "sAjaxSource": "/help/subject/all",
+        "sAjaxSource": "/"+lang+"/help/subject/all",
         "sAjaxDataProp": "subjects",
         "order": [[ 1, "asc" ]],
         "columnDefs": [
