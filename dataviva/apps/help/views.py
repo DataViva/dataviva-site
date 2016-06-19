@@ -41,7 +41,7 @@ def index():
 @required_roles(1)
 def admin():
     subjects = HelpSubject.query.all()
-    return render_template('help/admin.html', subjects=subjects)
+    return render_template('help/admin.html', subjects=subjects, lang=g.locale)
 
 
 @mod.route('/admin/subject/new', methods=['GET'])
