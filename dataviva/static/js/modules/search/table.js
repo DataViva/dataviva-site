@@ -5,7 +5,7 @@ var SearchTable = function () {
         "oLanguage": {
           "sSearch": "Pesquisar "
         },
-        "sAjaxSource": "/search/question/all",
+        "sAjaxSource": "/"+lang+"/search/question/all",
         "sAjaxDataProp": "questions",
         "order": [],
         "columnDefs": [

@@ -47,7 +47,6 @@ def all_selectors():
 def all_questions():
     questions_query = SearchQuestion.query.all()
     questions = []
-
     for row in questions_query:
         questions += [(
             row.id,
@@ -82,7 +81,7 @@ def profile_questions(id):
 @mod.route('/admin', methods=['GET'])
 def admin():
     questions = SearchQuestion.query.all()
-    return render_template('search/admin.html', questions=questions)
+    return render_template('search/admin.html', questions=questions, lang=g.locale)
 
 
 @mod.route('/admin/question/new', methods=['GET'])
