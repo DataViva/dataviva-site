@@ -142,11 +142,7 @@ def update(id):
         question.description_en = form.description_en.data
         question.description_pt = form.description_pt.data
         question.answer = form.answer.data
-        question.selectors = []
-
-        selector_input_list = form.selector.data.split(',')
-        for selector_input in selector_input_list:
-            question.selectors.append(SearchSelector(selector_input))
+        question.selectors = form.selector.data
 
         db.session.commit()
 
