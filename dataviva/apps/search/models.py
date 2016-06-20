@@ -21,7 +21,7 @@ class SearchProfile(db.Model):
 
 class SearchSelector(db.Model):
     __tablename__ = 'search_selector'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(50), primary_key=True)
     name_pt = db.Column(db.String(50))
     name_en = db.Column(db.String(50))
 
@@ -39,7 +39,7 @@ class SearchQuestion(db.Model):
     description_pt = db.Column(db.String(400))
     description_en = db.Column(db.String(400))
     answer = db.Column(db.String(400))
-    profile_id = db.Column(db.Integer, ForeignKey('search_profile.id'))
+    profile_id = db.Column(db.String(50), ForeignKey('search_profile.id'))
     selectors = db.Column(db.String(400))
 
     def description(self):
