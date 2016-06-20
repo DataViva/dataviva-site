@@ -67,12 +67,9 @@ def profile_questions(id):
     questions = {}
     questions_query = SearchQuestion.query.filter_by(profile_id=id)
     for row in questions_query.all():
-
-        selectors = sorted(row.selectors, key=lambda x: x.order, reverse=False)
-
         questions[row.id] = {
             'description': row.description(),
-            'selectors': [rl.selector.id for rl in selectors],
+            'selectors': row.selectors.split(','),
             'answer': row.answer
         }
 
@@ -105,7 +102,8 @@ def create():
         question.description_en = form.description_en.data
         question.description_pt = form.description_pt.data
         question.answer = form.answer.data
-        question.selectors = form.selector.data
+        question.selectors = form.selector.data.replace(' ', '') #remove spaces
+
         db.session.add(question)
         db.session.flush()
 
@@ -142,7 +140,7 @@ def update(id):
         question.description_en = form.description_en.data
         question.description_pt = form.description_pt.data
         question.answer = form.answer.data
-        question.selectors = form.selector.data
+        question.selectors = form.selector.data.replace(' ', '') #remove spaces
 
         db.session.commit()
 
