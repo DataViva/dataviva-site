@@ -105,14 +105,9 @@ def create():
         question.description_en = form.description_en.data
         question.description_pt = form.description_pt.data
         question.answer = form.answer.data
-
+        question.selectors = form.selector.data
         db.session.add(question)
         db.session.flush()
-
-        selector_input_list = form.selector.data.split(',')
-        for selector_input in selector_input_list:
-            import pdb; pdb.set_trace()
-            question.selectors.append(int(question.id), selector_input)
 
         db.session.add(question)
         db.session.commit()
