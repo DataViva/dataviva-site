@@ -1,26 +1,15 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, json
 from dataviva.apps.general.views import get_locale
-
-from sqlalchemy import desc
-from models import Article, AuthorScholar, KeyWord
-from dataviva import db
-from forms import RegistrationForm
-from datetime import datetime
-
-import os
-import simplejson
-import shutil
-from upload_file import UploadFile
-from werkzeug import secure_filename
-from dataviva import app
+from dataviva import app, db
 from dataviva.utils import upload_helper
-
-app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), 'dataviva/static/data/scholar/')
-app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
-
-ALLOWED_EXTENSIONS = set(['pdf', 'doc', 'docx', 'png', 'jpeg'])
-IGNORED_FILES = set(['.gitignore'])
+from models import Article, AuthorScholar, KeyWord
+from forms import RegistrationForm
+from sqlalchemy import desc
+from datetime import datetime
+import os
+import shutil
+import fnmatch
 
 
 mod = Blueprint('scholar', __name__,
@@ -46,20 +35,6 @@ def add_language_code(endpoint, values):
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-def gen_file_name(filename):
-    """
-    If file was exist already, rename it and return a new name
-    """
-
-    i = 1
-    while os.path.exists(os.path.join(app.config['UPLOAD_FOLDER'], filename)):
-        name, extension = os.path.splitext(filename)
-        filename = '%s_%s%s' % (name, str(i), extension)
-        i = i + 1
-
-    return filename
 
 
 @mod.route('/', methods=['GET'])
@@ -109,7 +84,15 @@ def new():
 
 @mod.route('/admin/article/new', methods=['POST'])
 def create():
+    csrf_token = request.form.get('csrf_token')
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+
     form = RegistrationForm()
+
+    if not os.path.exists(upload_folder):
+        flash(u'Selecione o arquivo do artigo para enviá-lo.', 'danger')
+        return render_template('scholar/new.html', form=form)
+
     if form.validate() is False:
         return render_template('scholar/new.html', form=form)
     else:
@@ -136,26 +119,25 @@ def create():
         db.session.add(article)
         db.session.flush()
 
-        file_path = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
+        if os.path.exists(upload_folder):
 
-        file_name = [file for file in os.listdir(file_path)][0]
+            file_name = [file for file in os.listdir(upload_folder)][0]
 
-        upload_helper.upload_s3_file(
-            os.path.join(file_path, file_name),
-            'dataviva',
-            os.path.join('scholar/article/', str(article.id)),
-            {
-                'ContentType': "application/pdf",
-                'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
-            }
-        )
+            article.url = upload_helper.upload_s3_file(
+                os.path.join(upload_folder, file_name),
+                os.path.join('scholar/', str(article.id), 'files/', 'article'),
+                {
+                    'ContentType': "application/pdf",
+                    'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
+                }
+            )
 
-        shutil.rmtree(file_path)
+            shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
 
         message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-                  Em até 15 dias você receberá um retorno sobre sua publicação no site!'
+                    Em até 15 dias você receberá um retorno sobre sua publicação no site!'
         flash(message, 'success')
         return redirect(url_for('scholar.index'))
 
@@ -169,13 +151,18 @@ def edit(id):
     form.authors.data = article.authors_str()
     form.keywords.data = article.keywords_str()
     form.abstract.data = article.abstract
+    article_url = article.url
 
-    return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id))
+    return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
 
 @mod.route('/admin/article/<id>/edit', methods=['POST'])
 def update(id):
+    csrf_token = request.form.get('csrf_token')
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+
     form = RegistrationForm()
+
     if form.validate() is False:
         return render_template('scholar/edit.html', form=form)
     else:
@@ -200,6 +187,21 @@ def update(id):
             else:
                 article.keywords.append(keyword)
 
+        if os.path.exists(upload_folder):
+
+            file_name = [file for file in os.listdir(upload_folder)][0]
+
+            article.url = upload_helper.upload_s3_file(
+                os.path.join(upload_folder, file_name),
+                os.path.join('scholar/', str(article.id), 'files/', 'article'),
+                {
+                    'ContentType': "application/pdf",
+                    'ContentDisposition': 'attachment; filename=dataviva-article-' + str(article.id) + '.pdf'
+                }
+            )
+
+            shutil.rmtree(os.path.split(upload_folder)[0])
+
         db.session.commit()
 
         message = u'Estudo editado com sucesso!'
@@ -213,6 +215,7 @@ def admin_delete():
     if ids:
         articles = Article.query.filter(Article.id.in_(ids)).all()
         for article in articles:
+            upload_helper.delete_s3_folder(os.path.join(mod.name, str(article.id)))
             db.session.delete(article)
 
         db.session.commit()
@@ -221,7 +224,7 @@ def admin_delete():
         return u'Selecione algum artigo para excluí-lo.', 205
 
 
-@mod.route('/articles/all', methods=['GET'])
+@mod.route('/admin/articles/all', methods=['GET'])
 def all():
     result = Article.query.all()
     articles = []
@@ -231,68 +234,56 @@ def all():
     return jsonify(articles=articles)
 
 
-@mod.route('/admin/article/upload', methods=['GET', 'POST'])
-@mod.route('/admin/article/<id>/upload', methods=['GET', 'POST'])
-def upload(id=None):
-    file_path = app.config['UPLOAD_FOLDER'] + request.form.get('csrf_token')
+@mod.route('/admin/article/upload', methods=['POST'])
+def upload():
 
-    if not os.path.exists(file_path):
-        os.makedirs(file_path)
+    csrf_token = request.values['csrf_token']
 
-    if request.method == 'POST':
-        file = request.files['file']
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
 
-        if file:
-            filename = secure_filename(file.filename)
-            filename = gen_file_name(filename)
-            mimetype = file.content_type
+    if os.path.exists(upload_folder):
+        if [file for file in os.listdir(upload_folder)][0]:
+            file_name = [file for file in os.listdir(upload_folder)][0]
+            os.remove(os.path.join(upload_folder, file_name))
+    else:
+        os.makedirs(upload_folder)
 
-            if not allowed_file(file.filename):
-                result = UploadFile(name=filename, type=mimetype, size=0, not_allowed_msg="Filetype not allowed")
-
-            else:
-                # save file to disk
-                uploaded_file_path = os.path.join(file_path, filename)
-                file.save(uploaded_file_path)
-
-                # get file size after saving
-                size = os.path.getsize(uploaded_file_path)
-
-                # return json for js call back
-                result = UploadFile(name=filename, type=mimetype, size=size)
-
-            return simplejson.dumps({"files": [result.get_file()]})
-
-    if request.method == 'GET':
-        # get all file in ./data directory
-        files = [f for f in os.listdir(file_path) if os.path.isfile(
-            os.path.join(file_path, f)) and f not in IGNORED_FILES]
-
-        file_display = []
-
-        for f in files:
-            size = os.path.getsize(os.path.join(file_path, f))
-            file_saved = UploadFile(name=f, size=size)
-            file_display.append(file_saved.get_file())
-
-        return simplejson.dumps({"files": file_display})
-
-    return redirect(url_for('scholar.index'))
+    if request.files:
+        file_name = request.files.keys()[0]
+        file = request.files[file_name]
+        file.save(os.path.join(upload_folder, file_name))
+        return 'Arquivo salvo com sucesso!', 200
+    else:
+        return 'Não foi possível salvar o arquivo devido a um erro no servidor.', 400
 
 
-@mod.route("/delete/<string:filename>", methods=['DELETE'])
-def delete(filename):
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
-    if os.path.exists(file_path):
+@mod.route('/admin/article/delete', methods=['DELETE'])
+def delete():
+    csrf_token = request.data
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+    
+    if os.path.exists(upload_folder):
         try:
-            os.remove(file_path)
-            return simplejson.dumps({filename: 'True'})
+            shutil.rmtree(os.path.split(upload_folder)[0])
+            return 'Arquivo removido com sucesso!', 200
         except:
-            return simplejson.dumps({filename: 'False'})
+            return 'Não foi possível remover o arquivo devido a um erro no servidor.', 400
 
 
-# serve static files
-@mod.route("/data/<string:filename>", methods=['GET'])
-def get_file(filename):
-    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER']), filename=filename)
+# serve static files on server
+@mod.route('/admin/file/<string:csrf_token1>/<string:csrf_token2>', methods=['GET'])
+def get_file(csrf_token1, csrf_token2):
+    csrf_token = csrf_token1 + '##' + csrf_token2
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
+    file_name = [file for file in os.listdir(upload_folder)][0]
+    return send_from_directory(upload_folder, file_name)
+
+
+# show static files on server before send to s3
+@mod.route('/admin/data', methods=['GET'])
+def data():
+    matches = []
+    for root, dirnames, filenames in os.walk(os.path.join(app.config['UPLOAD_FOLDER'], mod.name)):
+        for filename in fnmatch.filter(filenames, '*.pdf'):
+            matches.append(filename)
+    return jsonify(file_names=matches)
