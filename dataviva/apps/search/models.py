@@ -4,14 +4,6 @@ from sqlalchemy import ForeignKey
 from dataviva.utils.title_case import title_case
 
 
-class SearchQuestionSelector(db.Model):
-    __tablename__ = 'search_question_selector'
-    question_id = db.Column(db.Integer, ForeignKey('search_question.id'), primary_key=True)
-    selector_id = db.Column(db.Integer, ForeignKey('search_selector.id'), primary_key=True)
-    order = db.Column(db.Integer)
-    selector = db.relationship("SearchSelector")
-
-
 class SearchProfile(db.Model):
     __tablename__ = 'search_profile'
     id = db.Column(db.String(50), primary_key=True)
@@ -29,7 +21,7 @@ class SearchProfile(db.Model):
 
 class SearchSelector(db.Model):
     __tablename__ = 'search_selector'
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(50), primary_key=True)
     name_pt = db.Column(db.String(50))
     name_en = db.Column(db.String(50))
 
@@ -47,12 +39,8 @@ class SearchQuestion(db.Model):
     description_pt = db.Column(db.String(400))
     description_en = db.Column(db.String(400))
     answer = db.Column(db.String(400))
-    selectors = db.relationship("SearchQuestionSelector")
-    profile_id = db.Column(db.Integer, ForeignKey('search_profile.id'))
-
-    def selectors_str(self):
-        selector_names = [selectors.selector_id for selectors in self.selectors]
-        return ', '.join(selector_names)
+    profile_id = db.Column(db.String(50), ForeignKey('search_profile.id'))
+    selectors = db.Column(db.String(400))
 
     def description(self):
         lang = getattr(g, "locale", "en")

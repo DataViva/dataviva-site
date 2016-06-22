@@ -6,8 +6,12 @@ from models import SearchProfile
 
 class RegistrationForm(Form):
 
-    profile = SelectField('profile', choices=[(profile.id, profile.name_pt) for profile in SearchProfile.query.order_by('name_pt')], validators=[
+    profile = SelectField('profile', validators=[
         validators.Required(u"Por favor, selecione o profile.")])
+
+    def set_choices(self, lang):
+        name = 'name_'+lang
+        self.profile.choices = [(profile.id, profile.name()) for profile in SearchProfile.query.order_by(name)]
 
     description_en = TextField('description', validators=[
         validators.Required(u"Por favor, insira a pergunta em inglês."),

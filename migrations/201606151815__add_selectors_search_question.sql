@@ -1,0 +1,27 @@
+ALTER TABLE search_question ADD selectors VARCHAR(400) AFTER profile_id;
+
+UPDATE search_question SET selectors = 'cnae,bra' WHERE id = '1';
+UPDATE search_question SET selectors = 'cnae,bra' WHERE id = '2';
+UPDATE search_question SET selectors = 'cnae,bra' WHERE id = '3';
+UPDATE search_question SET selectors = 'hs,bra' WHERE id = '4';
+UPDATE search_question SET selectors = 'cnae' WHERE id = '5';
+UPDATE search_question SET selectors = 'hs' WHERE id = '6';
+UPDATE search_question SET selectors = 'hs' WHERE id = '7';
+UPDATE search_question SET selectors = 'bra' WHERE id = '8';
+UPDATE search_question SET selectors = 'bra' WHERE id = '9';
+UPDATE search_question SET selectors = 'bra' WHERE id = '10';
+UPDATE search_question SET selectors = 'bra' WHERE id = '11';
+UPDATE search_question SET selectors = 'bra' WHERE id = '12';
+UPDATE search_question SET selectors = 'bra' WHERE id = '13';
+UPDATE search_question SET selectors = 'bra' WHERE id = '14';
+UPDATE search_question SET selectors = 'bra' WHERE id = '15';
+UPDATE search_question SET selectors = 'bra' WHERE id = '16';
+UPDATE search_question SET selectors = 'cnae' WHERE id = '17';
+UPDATE search_question SET selectors = 'bra' WHERE id = '18';
+UPDATE search_question SET selectors = 'bra' WHERE id = '19';
+UPDATE search_question SET selectors = 'cbo,bra' WHERE id = '20';
+UPDATE search_question SET selectors = 'cbo' WHERE id = '21';
+UPDATE search_question SET selectors = 'cbo' WHERE id = '22';
+UPDATE search_question SET selectors = 'bra' WHERE id = '23';
+UPDATE search_question SET selectors = 'bra' WHERE id = '24';
+UPDATE search_question SET selectors = 'bra,cnae,cbo' WHERE id = '25';
