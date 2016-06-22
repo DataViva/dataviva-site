@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, redirect, url_for, flash, jsoni
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from sqlalchemy import desc
-from models import Post, PostSubject
+from models import Post, Subject
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -36,20 +36,20 @@ def add_language_code(endpoint, values):
 @mod.route('/', methods=['GET'])
 def index():
     posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
-    subjects = PostSubject.query.join(Post).filter(
-        Post.subject_id == PostSubject.id,
+    subjects = Subject.query.join(Post).filter(
+        Post.subject_id == Subject.id,
         Post.active
-    ).order_by(desc(PostSubject.name)).all()
+    ).order_by(desc(Subject.name)).all()
     return render_template('blog/index.html', posts=posts, subjects=subjects)
 
 
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
     posts = Post.query.filter_by(active=True, subject_id=subject).order_by(desc(Post.postage_date)).all()
-    subjects = PostSubject.query.join(Post).filter(
-        Post.subject_id == PostSubject.id,
+    subjects = Subject.query.join(Post).filter(
+        Post.subject_id == Subject.id,
         Post.active
-    ).order_by(desc(PostSubject.name)).all()
+    ).order_by(desc(Subject.name)).all()
     return render_template('blog/index.html', posts=posts, subjects=subjects, active_subject=long(subject))
 
 
@@ -130,12 +130,12 @@ def create():
     else:
         post = Post()
         post.title = form.title.data
-        subject_query = PostSubject.query.filter_by(name=form.subject.data)
+        subject_query = Subject.query.filter_by(name=form.subject.data)
 
         if (subject_query.first()):
             post.subject_id = subject_query.first().id
         else:
-            subject = PostSubject()
+            subject = Subject()
             subject.name = form.subject.data
             db.session.add(subject)
             db.session.commit()
@@ -168,7 +168,7 @@ def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
     form.title.data = post.title
-    subject_query = PostSubject.query.filter_by(id=post.subject_id)
+    subject_query = Subject.query.filter_by(id=post.subject_id)
     form.subject.data = subject_query.first().name
     form.author.data = post.author
     form.text_content.data = post.text_content
@@ -188,12 +188,12 @@ def update(id):
     else:
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
-        subject_query = PostSubject.query.filter_by(name=form.subject.data)
+        subject_query = Subject.query.filter_by(name=form.subject.data)
 
         if (subject_query.first()):
             post.subject_id = subject_query.first().id
         else:
-            subject = PostSubject()
+            subject = Subject()
             subject.name = form.subject.data
             db.session.add(subject)
             db.session.commit()

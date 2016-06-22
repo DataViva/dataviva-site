@@ -13,7 +13,7 @@ class Post(db.Model):
     postage_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
     subject_id = db.Column(db.Integer, ForeignKey('blog_subject.id'))
-    subject = db.relationship('PostSubject', backref='blog_post', lazy='eager')
+    subject = db.relationship('Subject', backref='blog_post', lazy='eager')
 
     def date_str(self):
         return self.postage_date.strftime('%d/%m/%Y')
@@ -22,7 +22,7 @@ class Post(db.Model):
         return '<Post %r>' % (self.title)
 
 
-class PostSubject(db.Model):
+class Subject(db.Model):
     __tablename__ = 'blog_subject'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
@@ -31,4 +31,4 @@ class PostSubject(db.Model):
         self.name = name
 
     def __repr__(self):
-        return '<PostSubject %r>' % (self.name)
+        return '<Subject %r>' % (self.name)
