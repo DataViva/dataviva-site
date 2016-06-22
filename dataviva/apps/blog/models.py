@@ -32,3 +32,9 @@ class Subject(db.Model):
 
     def __repr__(self):
         return '<Subject %r>' % (self.name)
+
+
+class PostSubject(db.Model):
+    __tablename__ = 'blog_post_subject'
+    id_post = db.Column(db.Integer, primary_key=True)
+    id_subject = db.Column(db.Integer, primary_key=True)
