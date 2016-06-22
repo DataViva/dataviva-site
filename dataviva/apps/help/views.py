@@ -49,6 +49,7 @@ def admin():
 @required_roles(1)
 def new():
     form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
     return render_template('help/new.html', form=form, action=url_for('help.create'))
 
 
@@ -57,6 +58,7 @@ def new():
 @required_roles(1)
 def create():
     form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
     if form.validate() is False:
         return render_template('help/new.html', form=form)
     else:
@@ -81,6 +83,7 @@ def create():
 @required_roles(1)
 def edit(id):
     form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
     subject = HelpSubjectQuestion.query.filter_by(id=id).first_or_404()
     form.subject.data = str(subject.subject_id)
     form.description_en.data = subject.description_en
@@ -95,6 +98,7 @@ def edit(id):
 @required_roles(1)
 def update(id):
     form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
     if form.validate() is False:
         return render_template('help/new.html', form=form)
     else:
