@@ -87,12 +87,14 @@ def admin():
 @mod.route('/admin/question/new', methods=['GET'])
 def new():
     form = RegistrationForm()
+    form.set_choices(g.locale)
     return render_template('search/new.html', form=form, action=url_for('search.create'))
 
 
 @mod.route('/admin/question/new', methods=['POST'])
 def create():
     form = RegistrationForm()
+    form.set_choices(g.locale)
     if form.validate() is False:
         return render_template('search/new.html', form=form)
     else:
@@ -117,6 +119,7 @@ def create():
 @mod.route('/admin/question/<id>/edit', methods=['GET'])
 def edit(id):
     form = RegistrationForm()
+    form.set_choices(g.locale)
     question = SearchQuestion.query.filter_by(id=id).first_or_404()
     form.profile.data = question.profile_id
     form.description_en.data = question.description_en
@@ -129,6 +132,7 @@ def edit(id):
 @mod.route('admin/question/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
+    form.set_choices(g.locale)
     id = int(id.encode())
     if form.validate() is False:
         return render_template('search/edit.html', form=form)
