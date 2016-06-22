@@ -46,9 +46,9 @@ def index():
 
     for row in postsubject_query:
         if name_subjects_by_post.has_key(row.id_post):
-            name_subjects_by_post[row.id_post].append(name_subjects[row.id_subject])
+            name_subjects_by_post[row.id_post] += '-' + str(name_subjects[row.id_subject])
         else:
-            name_subjects_by_post[row.id_post] = [name_subjects[row.id_subject],]
+            name_subjects_by_post[row.id_post] = str(name_subjects[row.id_subject])
 
     posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
     subjects = Subject.query.join(Post).filter(
