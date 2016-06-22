@@ -124,9 +124,9 @@ def all():
         return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
 
 
-@mod.route('/<bra_id>')
-def index(bra_id):
-
+@mod.route('/<bra_id>', defaults={'tab': None})
+@mod.route('/<bra_id>/<tab>')
+def index(bra_id, tab):
     location = Bra.query.filter_by(id=bra_id).first_or_404()
 
     location_service = LocationService(bra_id=bra_id)
@@ -286,5 +286,11 @@ def index(bra_id):
             body['highest_enrolled_by_major'] is None:
             abort(404)
     else:
+        graph = {
+            'url': 'line/secex/' + bra_id + '/all/all/balance/?time=year',
+            'menu_option': 'education-university',
+            'type': 'tree_map',
+        }
+
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location)
+                            header=header, body=body, profile=profile, location=location, tab=tab, graph=graph)
