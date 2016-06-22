@@ -133,14 +133,14 @@
     <nav>
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
+                <li role="presentation" class="{{ 'active' if not tab }}">
                     <a href="#general"
                        aria-controls="general"
                        role="tab"
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'trade-partner' }}">
                     <a href="#trade-partner"
                        aria-controls="trade-partner"
                        role="tab"
@@ -148,7 +148,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}International Trade{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
                     <a href="#wages"
                        aria-controls="wages"
                        role="tab"
@@ -156,7 +156,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
                     <a href="#opportunities"
                        aria-controls="opportunities"
                        role="tab"
@@ -164,7 +164,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'education' }}">
                     <a href="#education"
                        aria-controls="education"
                        role="tab"
@@ -189,6 +189,7 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+  {% include "location/graphs-" + tab + ".html" %}
 </section>
 {% endblock content %}
 
