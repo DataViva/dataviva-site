@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, redirect, url_for, flash, jsoni
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from sqlalchemy import desc
-from models import Post, Subject
+from models import Post, Subject, PostSubject
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -35,12 +35,27 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
+    name_subjects_by_post = {}
+    name_subjects = {}
+    postsubject_query = PostSubject.query.all()
+    subjects_query = Subject.query.all()
+
+    for row in subjects_query:
+        name_subjects[row.id] = row.name
+
+
+    for row in postsubject_query:
+        if name_subjects_by_post.has_key(row.id_post):
+            name_subjects_by_post[row.id_post].append(name_subjects[row.id_subject])
+        else:
+            name_subjects_by_post[row.id_post] = [name_subjects[row.id_subject],]
+
     posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
     subjects = Subject.query.join(Post).filter(
         Post.subject_id == Subject.id,
         Post.active
     ).order_by(desc(Subject.name)).all()
-    return render_template('blog/index.html', posts=posts, subjects=subjects)
+    return render_template('blog/index.html', posts=posts, subjects=subjects, name_subjects_by_post=name_subjects_by_post)
 
 
 @mod.route('/<subject>', methods=['GET'])
