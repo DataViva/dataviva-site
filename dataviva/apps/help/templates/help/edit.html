@@ -6,13 +6,17 @@
             <ol class="breadcrumb">
                 <li><a href="{{ url_for('general.home') }}">Home</a></li>
                 <li><a href="{{ url_for('admin.index') }}">Admin</a></li>
-                <li><a href="{{ url_for('search.index') }}">{% trans %}Start a search{% endtrans %}</a></li>
-                <li class="active">{% trans %}Create{% endtrans %}</li>
+                <li><a href="{{ url_for('help.index') }}">Help</a></li>
+                <li class="active">{% trans %}Edit{% endtrans %}</li>
             </ol>
         </div>
     </div>
 
     <div class="container m-b-lg">
-        {% include "search/_form.html" %}
+        {% include "help/_form.html" %}
     </div>
 {% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/help/form.js"></script>
+{% endblock js_assets %}

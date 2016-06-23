@@ -45,18 +45,17 @@ def all_selectors():
 
 @mod.route('/question/all', methods=['GET'])
 def all_questions():
-    result = SearchQuestion.query.all()
+    questions_query = SearchQuestion.query.all()
     questions = []
-
-    for row in result:
+    for row in questions_query:
         questions += [(
             row.id,
             SearchProfile.query.filter_by(id=row.profile_id).first_or_404().name(),
             row.description(),
-            'a',
+            row.selectors,
             row.answer
         )]
-
+        
     return jsonify(questions=questions)
 
 
@@ -67,12 +66,9 @@ def profile_questions(id):
     questions = {}
     questions_query = SearchQuestion.query.filter_by(profile_id=id)
     for row in questions_query.all():
-
-        selectors = sorted(row.selectors, key=lambda x: x.order, reverse=False)
-
         questions[row.id] = {
             'description': row.description(),
-            'selectors': [rl.selector.id for rl in selectors],
+            'selectors': row.selectors.split(','),
             'answer': row.answer
         }
 
@@ -85,31 +81,32 @@ def profile_questions(id):
 @mod.route('/admin', methods=['GET'])
 def admin():
     questions = SearchQuestion.query.all()
-    return render_template('search/admin.html', questions=questions)
+    return render_template('search/admin.html', questions=questions, lang=g.locale)
 
 
 @mod.route('/admin/question/new', methods=['GET'])
 def new():
     form = RegistrationForm()
+    form.set_choices(g.locale)
     return render_template('search/new.html', form=form, action=url_for('search.create'))
 
 
 @mod.route('/admin/question/new', methods=['POST'])
 def create():
     form = RegistrationForm()
+    form.set_choices(g.locale)
     if form.validate() is False:
         return render_template('search/new.html', form=form)
     else:
         question = SearchQuestion()
-        profile_id = form.profile.data
-        question.profile_id = profile_id
+        question.profile_id = form.profile.data
         question.description_en = form.description_en.data
         question.description_pt = form.description_pt.data
         question.answer = form.answer.data
+        question.selectors = form.selector.data.replace(' ', '') #remove spaces
 
-        selector_input_list = form.selector.data.split(',')
-        for selector_input in selector_input_list:
-            question.selectors.append(SearchSelector(selector_input))
+        db.session.add(question)
+        db.session.flush()
 
         db.session.add(question)
         db.session.commit()
@@ -122,18 +119,20 @@ def create():
 @mod.route('/admin/question/<id>/edit', methods=['GET'])
 def edit(id):
     form = RegistrationForm()
+    form.set_choices(g.locale)
     question = SearchQuestion.query.filter_by(id=id).first_or_404()
     form.profile.data = question.profile_id
     form.description_en.data = question.description_en
     form.description_pt.data = question.description_pt
     form.answer.data = question.answer
-    form.selector.data = question.selectors_str()
+    form.selector.data = ', '.join((question.selectors).split(','))
     return render_template('search/edit.html', form=form, action=url_for('search.update', id=id))
 
 
 @mod.route('admin/question/<id>/edit', methods=['POST'])
 def update(id):
     form = RegistrationForm()
+    form.set_choices(g.locale)
     id = int(id.encode())
     if form.validate() is False:
         return render_template('search/edit.html', form=form)
@@ -144,11 +143,7 @@ def update(id):
         question.description_en = form.description_en.data
         question.description_pt = form.description_pt.data
         question.answer = form.answer.data
-        question.selectors = []
-
-        selector_input_list = form.selector.data.split(',')
-        for selector_input in selector_input_list:
-            question.selectors.append(SearchSelector(selector_input))
+        question.selectors = form.selector.data.replace(' ', '') #remove spaces
 
         db.session.commit()
 
