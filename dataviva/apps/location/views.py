@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, abort
+from flask import Blueprint, render_template, g, abort, request
 from dataviva import db
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
@@ -286,11 +286,12 @@ def index(bra_id, tab):
             body['highest_enrolled_by_major'] is None:
             abort(404)
     else:
-        graph = {
-            'url': 'line/secex/' + bra_id + '/all/all/balance/?time=year',
-            'menu_option': 'education-university',
-            'type': 'tree_map',
-        }
+        graph = request.values.to_dict()
+        if graph != {}:
+            graph = {
+                'menu': graph.keys()[0] + '-' + graph.values()[0].split('/')[0],
+                'url': graph.values()[0],
+            }
 
         return render_template('location/index.html',
                             header=header, body=body, profile=profile, location=location, tab=tab, graph=graph)
