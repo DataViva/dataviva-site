@@ -6,7 +6,7 @@ window.showGraph = function(category, tab, location) {
             success: function (graphs) {
                 $('#graphs').append(graphs);
                 $(graphs).find('a').click(function() {
-                    window.history.pushState("", "", window.location+$(graphs).find('a')[0].href.split('/'+lang)[1]);
+                    //window.history.pushState("", "", window.location+$(graphs).find('a')[0].href.split('/'+lang)[1]);
                 })
             }
         });
@@ -66,6 +66,7 @@ $(document).ready(function () {
         }
     });
 
+    $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
 
     if(document.location.hash) {
         var tab = document.location.hash.substring(1),
@@ -77,17 +78,7 @@ $(document).ready(function () {
         showGraph(category, tab, location);
     }
 
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-        if ($(this).attr('graph') != null) {
-            var category = this.dataset.id,
-                location = this.dataset.location,
-                tab = $(this).attr('aria-controls');
-
-            showGraph(category, tab, location);
-        } else {
-            $('#graphs').hide();
-        }
-    });
+    $('a[data-toggle="tab"]').on('shown.bs.tab', Category.changeTab);
 });
 
 
@@ -96,3 +87,31 @@ $('.category .nav-graph .list-group-item').click(function() {
     $(this).children().removeClass('active');
     $(this).siblings().children().removeClass('active');
 });
+
+var Category = (function() {
+
+    function changeTab(e) {
+        if ($(this).attr('graph') != null) {
+            var category = this.dataset.id,
+                location = this.dataset.location,
+                tab = $(this).attr('aria-controls');
+            
+            updateUrl(category, tab, location);
+
+            showGraph(category, tab, location);
+        } else {
+            $('#graphs').hide();
+        }
+        
+    }
+
+    function updateUrl(category, tab, location) {
+        var index = window.location.href.lastIndexOf('/');
+        window.location.href = window.location.href.slice(0, index + 1)+  tab;
+    }
+
+    return {
+        changeTab : changeTab
+    }
+
+})();
