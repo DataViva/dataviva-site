@@ -66,7 +66,9 @@ $(document).ready(function () {
         }
     });
 
-    $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
+    if($('#graphs .list-group.panel .selected').parent().hasClass('collapse')){
+        $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
+    }
 
     if(document.location.hash) {
         var tab = document.location.hash.substring(1),
@@ -101,8 +103,7 @@ var Category = (function() {
             showGraph(category, tab, location);
         } else {
             $('#graphs').hide();
-        }
-        
+        } 
     }
 
     function updateUrl(category, tab, location) {
