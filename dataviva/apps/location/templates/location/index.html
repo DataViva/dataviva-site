@@ -189,7 +189,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
-  {% include "location/graphs-" + tab + ".html" if tab != None ignore missing %}
+{% if tab != None %}
+  {% include "location/graphs-" + tab + ".html" %}
+{% endif %}
 </section>
 {% endblock content %}
 
