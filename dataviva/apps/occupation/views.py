@@ -37,9 +37,9 @@ def graphs(occupation_id, tab):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-
-@mod.route('/<occupation_id>')
-def index(occupation_id):
+@mod.route('/<occupation_id>', defaults={'tab': None})
+@mod.route('/<occupation_id>/<tab>')
+def index(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
 
     bra_id = request.args.get('bra_id')
@@ -123,4 +123,4 @@ def index(occupation_id):
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
     else :
-        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language)
+        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language, tab=tab)
