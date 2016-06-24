@@ -23,7 +23,10 @@ from dataviva.api.attrs.models import Wld
 from sqlalchemy import desc, func
 from random import randint
 from decimal import *
+from os import walk
 import sys
+import os
+
 
 reload(sys)  
 sys.setdefaultencoding('utf8')
@@ -32,6 +35,11 @@ mod = Blueprint('location', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/location',
                 static_folder='static')
+
+location_tabs_path = os.path.join(mod.root_path, mod.template_folder, mod.name)
+filenames = [filename for filename in next(os.walk(location_tabs_path))[2] if "graphs" in filename]
+location_tabs = [tabs[tabs.find('-')+1:tabs.find('.')] for tabs in filenames]
+location_tabs.append(None)
 
 
 @mod.before_request
@@ -59,8 +67,9 @@ def graphs(bra_id, tab):
     return render_template('location/graphs-' + tab + '.html', location=location)
 
 
-@mod.route('/all')
-def all():
+@mod.route('/all', defaults={'tab': None})
+@mod.route('/all/<tab>')
+def all(tab):
     location_service_brazil = All()
     product_service = Product(product_id=None)
     industry_service = Industry(cnae_id=None)
@@ -121,7 +130,17 @@ def all():
             body['highest_enrolled_by_major'] is None:
             abort(404)
     else:
-        return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
+        if tab not in location_tabs:
+            abort(404)
+
+        graph = request.values.to_dict()
+        if graph != {}:
+            graph = {
+                'menu': graph.keys()[0] + '-' + graph.values()[0].split('/')[0],
+                'url': graph.values()[0],
+            }
+        return render_template('location/index.html',
+                            header=header, body=body, profile=profile, location=location, tab=tab, graph=graph)
 
 
 @mod.route('/<bra_id>', defaults={'tab': None})
@@ -286,6 +305,9 @@ def index(bra_id, tab):
             body['highest_enrolled_by_major'] is None:
             abort(404)
     else:
+        if tab not in location_tabs:
+            abort(404)
+            
         graph = request.values.to_dict()
         if graph != {}:
             graph = {
