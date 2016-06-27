@@ -6,7 +6,7 @@
             <a href="#trade-balance-product" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-product">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="trade-balance-product">
                 <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?time=year"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#trade-balance-product">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'trade-balance-product-line' or graph == {} }}" data-parent="#trade-balance-product">
                     {% trans %}Line{% endtrans %}
                 </a>
             </div>
@@ -15,15 +15,15 @@
             <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="exports-municipality">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=export_val&depth=bra_9&color=color"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'exports-municipality-tree_map'}}" data-parent="#exports-municipality">
                     TreeMap
                 </a>
                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?color=export_val"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'exports-municipality-geo_map'}}" data-parent="#exports-municipality">
                     {%trans%}Geo Map{%endtrans%}
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?y=export_val&layout=value&sort=asc"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-municipality">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'exports-municipality-stacked'}}" data-parent="#exports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
@@ -31,15 +31,15 @@
             <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">{%trans%}Destination{%endtrans%}</a>
             <div class="collapse" id="exports-destination">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?size=export_val&depth=wld_5"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'exports-destination-tree_map'}}" data-parent="#exports-destination">
                     TreeMap
                 </a>
                 <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val&color=color"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'exports-destination-line'}}" data-parent="#exports-destination">
                     {%trans%}Line{%endtrans%}
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#exports-destination">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
@@ -48,15 +48,15 @@
             <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="imports-municipality">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=import_val&depth=bra_9&color=color"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'imports-municipality-tree_map'}}" data-parent="#imports-municipality">
                     TreeMap
                 </a>
                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?color=import_val"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'imports-municipality-geo_map'}}" data-parent="#imports-municipality">
                     {%trans%}Geo Map{%endtrans%}
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-municipality">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'imports-municipality-stacked'}}" data-parent="#imports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
@@ -64,25 +64,29 @@
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{%trans%}Origin{%endtrans%}</a>
             <div class="collapse" id="imports-origin">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?size=import_val&depth=wld_5"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'imports-origin-tree_map'}}" data-parent="#imports-origin">
                     TreeMap
                 </a>
                 <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&color=color"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'imports-origin-line'}}" data-parent="#imports-origin">
                     {%trans%}Line{%endtrans%}
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
-                   target="graphs-frame-trade-partner" class="list-group-item" data-parent="#imports-origin">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'active' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?time=year"
+        <iframe src="{% if not graph %}/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/balance/?time=year
+                     {% else %} /{{ g.locale }}/embed/{{graph.url}} {% endif %}"
                 name="graphs-frame-trade-partner"
                 id="graphs-frame-trade-partner"
                 class="embed-responsive-item" >
         </iframe>
     </div>
 </div>
+
+
+
