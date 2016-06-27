@@ -6,11 +6,18 @@ from dataviva.api.secex.services import ProductTradePartners as ProductTradePart
 from dataviva.api.secex.services import ProductMunicipalities as ProductMunicipalitiesService
 from dataviva.api.secex.services import ProductLocations as ProductLocationsService
 from dataviva.api.attrs.models import Bra, Hs
+from os import walk
+import os
 
 mod = Blueprint('product', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/product',
                 static_folder='static')
+
+product_tabs_path = os.path.join(mod.root_path, mod.template_folder, mod.name)
+filenames = [filename for filename in next(os.walk(product_tabs_path))[2] if "graphs" in filename]
+product_tabs = [tabs[tabs.find('-')+1:tabs.find('.')] for tabs in filenames]
+product_tabs.append(None)
 
 
 @mod.before_request
@@ -35,8 +42,9 @@ def graphs(product_id, tab):
     return render_template('product/graphs-'+tab+'.html', product=product, location=location)
 
 
-@mod.route('/<product_id>')
-def index(product_id):
+@mod.route('/<product_id>', defaults={'tab': None})
+@mod.route('/<product_id>/<tab>')
+def index(product_id, tab):
 
     header = {}
     body = {}
@@ -183,4 +191,18 @@ def index(product_id):
     if secex_max_year != header['year']:
         abort(404)
     else:
-        return render_template('product/index.html', header=header, body=body, product=product, location=location, language=language)
+        if tab not in product_tabs:
+             abort(404)
+
+        graph = request.values.to_dict()
+
+        if graph.has_key('bra_id'):
+            graph.pop('bra_id')
+
+        if graph != {}:
+            graph = {
+                'menu': graph.keys()[0] + '-' + graph.values()[0].split('/')[0],
+                'url': graph.values()[0],
+            }
+        
+        return render_template('product/index.html', header=header, body=body, product=product, location=location, language=language, tab=tab, graph=graph)
