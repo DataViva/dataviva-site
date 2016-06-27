@@ -66,8 +66,8 @@ $(document).ready(function () {
         }
     });
 
-    if($('#graphs .list-group.panel .selected').parent().hasClass('collapse')){
-        $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
+    if($('#graphs .list-group.panel .active').parent().hasClass('collapse')){
+        $('#graphs .list-group.panel .active').parent().attr('class', 'collapse in');
     }
 
     if(document.location.hash) {
