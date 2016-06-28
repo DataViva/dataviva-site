@@ -48,10 +48,15 @@ def index(occupation_id, tab):
 
     location = Bra.query.filter_by(id=bra_id).first()
     is_municipality = location and len(location.id) == 9
-    language = g.locale
     header = {}
     body = {}
-    body = {}
+    graph = {}
+    
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
 
     header['family_id'] = occupation_id[0]
 
@@ -80,7 +85,7 @@ def index(occupation_id, tab):
         ],
     }
 
-    if is_municipality:
+    if not is_municipality:
         tabs['wages'] += [
             'jobs-municipalities-tree_map',
             'jobs-municipalities-geo_map',
@@ -143,15 +148,11 @@ def index(occupation_id, tab):
             header['ranking'] = index + 1
             break
 
-    graph = None
-    if request.args:
-        if tab in tabs and menu in tabs[tab]:
-            graph = {
-                'menu': menu,
-                'url': url,
-            }
-        else:
-            abort(404)
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
 
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
