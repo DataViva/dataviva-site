@@ -133,39 +133,39 @@
     <nav>
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#general"
+                <li role="presentation" class="{{ 'active' if not tab }}">
+                    <a href="general"
                        aria-controls="general"
                        role="tab"
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
-                <li role="presentation">
-                    <a href="#trade-partner"
+                <li role="presentation" class="{{ 'active' if tab == 'trade-partner' }}">
+                    <a href="trade-partner"
                        aria-controls="trade-partner"
                        role="tab"
                        graph
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}International Trade{% endtrans %}</a>
                 </li>
-                <li role="presentation">
-                    <a href="#wages"
+                <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
+                    <a href="wages"
                        aria-controls="wages"
                        role="tab"
                        graph
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
                 </li>
-                <li role="presentation">
-                    <a href="#opportunities"
+                <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
+                    <a href="opportunities"
                        aria-controls="opportunities"
                        role="tab"
                        graph
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
-                <li role="presentation">
-                    <a href="#education"
+                <li role="presentation" class="{{ 'active' if tab == 'education' }}">
+                    <a href="education"
                        aria-controls="education"
                        role="tab"
                        graph
@@ -189,6 +189,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+{% if tab != None %}
+  {% include "location/graphs-" + tab + ".html" %}
+{% endif %}
 </section>
 {% endblock content %}
 
