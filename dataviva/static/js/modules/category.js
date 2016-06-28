@@ -85,9 +85,9 @@ $(document).ready(function () {
 
 
 $('.category .nav-graph .list-group-item').click(function() {
-    $(this).addClass('active').siblings().removeClass('active');
-    $(this).children().removeClass('active');
-    $(this).siblings().children().removeClass('active');
+    $(this).addClass('selected').siblings().removeClass('selected');
+    $(this).children().removeClass('selected');
+    $(this).siblings().children().removeClass('selected');
 });
 
 var Category = (function() {
@@ -97,18 +97,18 @@ var Category = (function() {
             var category = this.dataset.id,
                 location = this.dataset.location,
                 tab = $(this).attr('aria-controls');
-            
-            updateUrl(category, tab, location);
+
+            var url = window.location.href.split('?')[0];
+
+            if(url.split('/').length == 5)
+                window.history.pushState("", tab, window.location.href + '/' +tab);
+            else
+                window.history.pushState("", tab, window.location.href + '/' +tab);
 
             showGraph(category, tab, location);
         } else {
             $('#graphs').hide();
         } 
-    }
-
-    function updateUrl(category, tab, location) {
-        var index = window.location.href.lastIndexOf('/');
-        window.location.href = window.location.href.slice(0, index + 1)+  tab;
     }
 
     return {
