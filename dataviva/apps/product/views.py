@@ -6,18 +6,11 @@ from dataviva.api.secex.services import ProductTradePartners as ProductTradePart
 from dataviva.api.secex.services import ProductMunicipalities as ProductMunicipalitiesService
 from dataviva.api.secex.services import ProductLocations as ProductLocationsService
 from dataviva.api.attrs.models import Bra, Hs
-from os import walk
-import os
 
 mod = Blueprint('product', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/product',
                 static_folder='static')
-
-product_tabs_path = os.path.join(mod.root_path, mod.template_folder, mod.name)
-filenames = [filename for filename in next(os.walk(product_tabs_path))[2] if "graphs" in filename]
-product_tabs = [tabs[tabs.find('-')+1:tabs.find('.')] for tabs in filenames]
-product_tabs.append(None)
 
 
 @mod.before_request
@@ -42,20 +35,55 @@ def graphs(product_id, tab):
     return render_template('product/graphs-'+tab+'.html', product=product, location=location)
 
 
-@mod.route('/<product_id>', defaults={'tab': None})
+@mod.route('/<product_id>', defaults={'tab': 'general'})
 @mod.route('/<product_id>/<tab>')
 def index(product_id, tab):
-
-    header = {}
-    body = {}
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    language = g.locale
+    is_municipality = location and len(location.id) == 9
+    import pdb; pdb.set_trace()
+    menu = request.args.get('menu')
+    url = request.args.get('url')
 
     if location:
         location_id = location.id
     else:
         location_id = None
+
+    header = {}
+    body = {}
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
+    tabs = {
+        'general': [],
+        'opportunities': [
+            'economic-opportunities-rings'
+        ],
+        'trade-partner': [
+            'trade-balance-product-',
+            'exports-destination-tree',
+            'exports-destination-line',
+            'exports-destination-stacked',
+            'imports-origin-tree',
+            'imports-origin-line',
+            'imports-origin-stacked',
+        ],
+    }
+
+    if not is_municipality:
+        tabs['trade-partner'] += [
+            'exports-municipality-tree',
+            'exports-municipality-geo',
+            'exports-municipality-stacked',
+            'imports-municipality-tree',
+            'imports-municipality-geo',
+            'imports-municipality-stacked',
+        ]
 
     trade_partners_service = ProductTradePartnersService(
         product_id=product.id, bra_id=location_id)
@@ -87,7 +115,7 @@ def index(product_id, tab):
             header['distance_wld'] = product_service.distance_wld()
             header['opportunity_gain_wld'] = product_service.opp_gain_wld()
 
-        if len(location_id) != 9:
+        if is_municipality:
             body[
                 'municipality_name_export'] = municipalities_service.municipality_with_more_exports()
             body[
@@ -186,23 +214,15 @@ def index(product_id, tab):
     secex_max_year = db.session.query(func.max(Ymp.year)).filter(
         Ymp.month == 12).first()[0]
 
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     if header['export_value'] is None and header['import_value'] is None:
         abort(404)
-    if secex_max_year != header['year']:
+    elif secex_max_year != header['year']:
         abort(404)
     else:
-        if tab not in product_tabs:
-             abort(404)
-
-        graph = request.values.to_dict()
-
-        if graph.has_key('bra_id'):
-            graph.pop('bra_id')
-
-        if graph != {}:
-            graph = {
-                'menu': graph.keys()[0] + '-' + graph.values()[0].split('/')[0],
-                'url': graph.values()[0],
-            }
-        
-        return render_template('product/index.html', header=header, body=body, product=product, location=location, language=language, tab=tab, graph=graph)
+        return render_template('product/index.html', header=header, body=body, product=product, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
