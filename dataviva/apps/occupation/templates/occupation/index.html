@@ -39,7 +39,7 @@
             <span class="portrait dv-cbo-{{header.family_id}} hidden-xs"></span>
             <h1>
               {{ occupation.name() }} 
-              {% if not location.id %}
+              {% if not location %}
                 {% trans %}in Brazil{% endtrans %}
               {% else %}
                 {% if location.id | length <= 3 %}
