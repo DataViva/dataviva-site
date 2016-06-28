@@ -5,6 +5,9 @@ window.showGraph = function(category, tab, location) {
             url: category+"/graphs/"+tab+(location !== null ? "?bra_id="+location : ""),
             success: function (graphs) {
                 $('#graphs').append(graphs);
+                $(graphs).find('a').click(function() {
+                    //window.history.pushState("", "", window.location+$(graphs).find('a')[0].href.split('/'+lang)[1]);
+                })
             }
         });
     }
@@ -63,33 +66,43 @@ $(document).ready(function () {
         }
     });
 
-
-    if(document.location.hash) {
-        var tab = document.location.hash.substring(1),
-            category = document.location.pathname.split('/')[3],
-            location = getParameterByName('bra_id');
-
-        $('[href=#' + tab + ']').tab('show');
-
-        showGraph(category, tab, location);
+    if($('#graphs .list-group.panel .selected').parent().hasClass('collapse')){
+        $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
     }
 
-    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', Category.changeTab);
+});
+
+
+$('.category .nav-graph .list-group-item').click(function() {
+    $(this).addClass('selected').siblings().removeClass('selected');
+    $(this).children().removeClass('selected');
+    $(this).siblings().children().removeClass('selected');
+});
+
+var Category = (function() {
+
+    function changeTab(e) {
         if ($(this).attr('graph') != null) {
             var category = this.dataset.id,
                 location = this.dataset.location,
                 tab = $(this).attr('aria-controls');
 
+            var url = window.location.href.split('?')[0];
+
+            if(url.split('/').length == 5)
+                window.history.pushState("", tab, window.location.href + '/' +tab);
+            else
+                window.history.pushState("", tab, window.location.href + '/' +tab);
+
             showGraph(category, tab, location);
         } else {
             $('#graphs').hide();
-        }
-    });
-});
+        } 
+    }
 
+    return {
+        changeTab : changeTab
+    }
 
-$('.category .nav-graph .list-group-item').click(function() {
-    $(this).addClass('active').siblings().removeClass('active');
-    $(this).children().removeClass('active');
-    $(this).siblings().children().removeClass('active');
-});
+})();
