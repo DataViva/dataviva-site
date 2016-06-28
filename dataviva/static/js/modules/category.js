@@ -70,16 +70,6 @@ $(document).ready(function () {
         $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
     }
 
-    if(document.location.hash) {
-        var tab = document.location.hash.substring(1),
-            category = document.location.pathname.split('/')[3],
-            location = getParameterByName('bra_id');
-
-        $('[href=#' + tab + ']').tab('show');
-
-        showGraph(category, tab, location);
-    }
-
     $('a[data-toggle="tab"]').on('shown.bs.tab', Category.changeTab);
 });
 
