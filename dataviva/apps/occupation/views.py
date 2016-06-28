@@ -16,6 +16,27 @@ mod = Blueprint('occupation', __name__,
                 url_prefix='/<lang_code>/occupation')
 
 
+tabs = {
+    'general': [],
+    'opportunities': [
+        'economic-opportunities-rings'
+    ],
+
+    'wages': [
+        'jobs-opportunities-tree_map',
+        'jobs-opportunities-stacked',
+        'jobs-municipalities-tree_map',
+        'jobs-municipalities-geo_map',
+        'jobs-municipalities-stacked',
+        'wages-opportunities-tree_map',
+        'wages-opportunities-stacked',
+        'wages-municipalities-tree_map',
+        'wages-municipalities-geo_map',
+        'wages-municipalities-stacked',
+    ],
+}
+
+
 @mod.before_request
 def before_request():
     g.page_type = 'category'
@@ -26,23 +47,26 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
+
+
 @mod.route('/<occupation_id>/graphs/<tab>', methods=['POST'])
 def graphs(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
     return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location)
 
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', get_locale())
-
-@mod.route('/<occupation_id>', defaults={'tab': None})
+@mod.route('/<occupation_id>', defaults={'tab': 'general'})
 @mod.route('/<occupation_id>/<tab>')
 def index(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
 
     bra_id = request.args.get('bra_id')
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+
     location = Bra.query.filter_by(id=bra_id).first()
     language = g.locale
     header = {}
@@ -105,7 +129,7 @@ def index(occupation_id, tab):
             Ybo.bra_id == bra_id,
             Ybo.year == max_year_query_location)\
             .order_by(Ybo.num_jobs.desc())
-    else: 
+    else:
         max_year_query = db.session.query(func.max(Yo.year)).filter(
         Yo.cbo_id == occupation_id)
 
@@ -120,7 +144,18 @@ def index(occupation_id, tab):
             header['ranking'] = index + 1
             break
 
+    if tab in tabs:
+        if menu and url:
+            graph = {
+                'menu': menu,
+                'url': url,
+            }
+        else:
+            graph = None
+    else:
+        abort(404)
+
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
-    else :
-        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language, tab=tab)
+    else:
+        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language, tab=tab, graph=graph)
