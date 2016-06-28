@@ -144,17 +144,20 @@ def create():
         return render_template('blog/new.html', form=form)
     else:
         post = Post()
-        post.title = form.title.data
-        subject_query = Subject.query.filter_by(name=form.subject.data)
 
-        if (subject_query.first()):
-            post.subject_id = subject_query.first().id
-        else:
-            subject = Subject()
-            subject.name = form.subject.data
-            db.session.add(subject)
-            db.session.commit()
-            post.subject_id = subject.id
+        post.title = form.title.data
+        subjects = form.subject.data.replace(' ', '').split(',')
+        
+        #add subjecs se não exitirem
+        for subject in subjects :         
+            subject_query = Subject.query.filter_by(name=subject)
+            if (not subject_query.first()):
+                #post.subject_id = subject_query.first().id
+                subject = Subject()
+                subject.name = subject
+                db.session.add(subject)
+                db.session.commit()
+                #post.subject_id = subject.id
 
         post.author = form.author.data
         post.text_content = form.text_content.data
@@ -164,6 +167,15 @@ def create():
 
         db.session.add(post)
         db.session.flush()
+        
+        #depois ed add os subjects e o post add relaçao nxn post, subject
+        import pdb; pdb.set_trace()
+        for subjects in subjects: 
+            post_subject = PostSubject();
+            post_subject.id_post = post.id
+            post_subject.id_subject = subject.id
+            db.session.add(post_subject)
+            db.session.commit()
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
