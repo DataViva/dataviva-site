@@ -121,12 +121,10 @@
 </section>
 
 <section id="profile" class="profile">
-
     <nav class="col-xs-12">
-
         <div class="container">
             <ul class="nav-tabs" role="tablist">
-            <li role="presentation" class="active">
+            <li role="presentation" class="{{ 'active' if not tab }}">
                 <a  href="#general"
                     aria-controls="general"
                     role="tab"
@@ -134,7 +132,7 @@
                     data-location="{{ location.id }}"
                     data-toggle="tab">{% trans %}General{% endtrans %}</a>
             </li>
-            <li role="presentation">
+            <li role="presentation" class="{{ 'active' if tab == 'international-trade' }}">
                 <a  href="#international-trade"
                     aria-controls="international-trade"
                     role="tab"
@@ -147,19 +145,19 @@
         </div>
     </nav>
 
-
     <div class="container">
         <div class="tab-content col-xs-12">
             {% include "trade_partner/tab-general.html" %}
             {% include "trade_partner/tab-international-trade.html" %}
         </div>
-
     </div>
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+    {% if tab != None %}
+        {% include "trade_partner/graphs-" + tab + ".html" %}
+    {% endif %}
 </section>
 
-s
 {% endblock content %}
 
