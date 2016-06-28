@@ -143,16 +143,15 @@ def index(occupation_id, tab):
             header['ranking'] = index + 1
             break
 
-    if tab in tabs and menu in tabs[tab]:
-        if menu and url:
+    graph = None
+    if request.args:
+        if tab in tabs and menu in tabs[tab]:
             graph = {
                 'menu': menu,
                 'url': url,
             }
         else:
-            graph = None
-    else:
-        abort(404)
+            abort(404)
 
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
