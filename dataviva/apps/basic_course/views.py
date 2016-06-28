@@ -36,11 +36,20 @@ def graphs(basic_course_id, tab):
     return render_template('basic_course/graphs-'+tab+'.html', basic_course=basic_course, location=location)
 
 
-@mod.route('/<course_sc_id>')
-def index(course_sc_id):
+@mod.route('/<course_sc_id>', defaults={'tab': 'general'})
+@mod.route('/<course_sc_id>/<tab>')
+def index(course_sc_id, tab):
 
     basic_course = Course_sc.query.filter_by(id=course_sc_id).first_or_404()
     bra_id = request.args.get('bra_id')
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
 
     max_year_query = db.session.query(
         func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id)
@@ -103,6 +112,16 @@ def index(course_sc_id):
         'city_enrolled': city_service.city_enrolled(),
     }
 
+    tabs = {
+        'general': [],
+        'enrollments': [
+            'enrollments-basic-course-geo_map',
+            'enrollments-basic-course-stacked',
+            'enrollments-basic-course-tree_map',
+            'enrollments-school-tree_map',
+        ],
+    }
+
     if len(bra_id) == 9:
         for index, basic_course_ranking in enumerate(rank):
             if rank[index].bra_id == bra_id:
@@ -111,7 +130,13 @@ def index(course_sc_id):
 
     sc_max_year = db.session.query(func.max(Yc_sc.year)).first()[0]
 
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     if header['course_enrolled'] is None or sc_max_year != header['course_year']:
         abort(404)
     else:
-        return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, basic_course=basic_course)
+        return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, basic_course=basic_course, tab=tab, graph=graph)
