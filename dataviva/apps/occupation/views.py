@@ -16,27 +16,6 @@ mod = Blueprint('occupation', __name__,
                 url_prefix='/<lang_code>/occupation')
 
 
-tabs = {
-    'general': [],
-    'opportunities': [
-        'economic-opportunities-rings'
-    ],
-
-    'wages': [
-        'jobs-opportunities-tree_map',
-        'jobs-opportunities-stacked',
-        'jobs-municipalities-tree_map',
-        'jobs-municipalities-geo_map',
-        'jobs-municipalities-stacked',
-        'wages-opportunities-tree_map',
-        'wages-opportunities-stacked',
-        'wages-municipalities-tree_map',
-        'wages-municipalities-geo_map',
-        'wages-municipalities-stacked',
-    ],
-}
-
-
 @mod.before_request
 def before_request():
     g.page_type = 'category'
@@ -68,6 +47,7 @@ def index(occupation_id, tab):
     url = request.args.get('url')
 
     location = Bra.query.filter_by(id=bra_id).first()
+    is_municipality = location and len(location.id) == 9
     language = g.locale
     header = {}
     body = {}
@@ -80,15 +60,35 @@ def index(occupation_id, tab):
     else:
         body['is_family'] = False
 
-    body['is_not_municipality'] = True
-
     if bra_id:
         occupation_service = OccupationByLocation(
             occupation_id=occupation_id, bra_id=bra_id)
-        if len(bra_id) == 9:
-            body['is_not_municipality'] = False
     else:
         occupation_service = Occupation(occupation_id=occupation_id)
+
+    tabs = {
+        'general': [],
+        'opportunities': [
+            'economic-opportunities-rings'
+        ],
+
+        'wages': [
+            'jobs-opportunities-tree_map',
+            'jobs-opportunities-stacked',
+            'wages-opportunities-tree_map',
+            'wages-opportunities-stacked',
+        ],
+    }
+
+    if is_municipality:
+        tabs['wages'] += [
+            'jobs-municipalities-tree_map',
+            'jobs-municipalities-geo_map',
+            'jobs-municipalities-stacked',
+            'wages-municipalities-tree_map',
+            'wages-municipalities-geo_map',
+            'wages-municipalities-stacked',
+        ]
 
     occupation_municipalities_service = OccupationMunicipalities(
         occupation_id=occupation_id, bra_id=bra_id)
@@ -102,8 +102,7 @@ def index(occupation_id, tab):
     header['year'] = occupation_service.year()
     header['age_avg'] = occupation_service.age_avg()
 
-    if body['is_not_municipality']:
-
+    if not is_municipality:
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
         body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
         body['municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
@@ -144,7 +143,7 @@ def index(occupation_id, tab):
             header['ranking'] = index + 1
             break
 
-    if tab in tabs:
+    if tab in tabs and menu in tabs[tab]:
         if menu and url:
             graph = {
                 'menu': menu,
@@ -158,4 +157,4 @@ def index(occupation_id, tab):
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
     else:
-        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language, tab=tab, graph=graph)
+        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
