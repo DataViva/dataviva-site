@@ -1,17 +1,23 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
-from dataviva.api.secex.services import TradePartner, \
-    TradePartnerMunicipalities, TradePartnerProducts
+from dataviva.api.secex.services import TradePartner, TradePartnerMunicipalities, TradePartnerProducts
 from dataviva.api.secex.models import Ymw, Ymbw
 from dataviva.api.attrs.models import Wld, Bra
 from dataviva import db
 from sqlalchemy.sql.expression import func
 from dataviva.translations.dictionary import dictionary
+from os import walk
+import os
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/trade_partner')
+
+trade_partner_tabs_path = os.path.join(mod.root_path, mod.template_folder, mod.name)
+filenames = [filename for filename in next(os.walk(trade_partner_tabs_path))[2] if "graphs" in filename]
+trade_partner_tabs = [tabs[tabs.find('-')+1:tabs.find('.')] for tabs in filenames]
+trade_partner_tabs.append(None)
 
 
 @mod.before_request
@@ -36,8 +42,9 @@ def graphs(wld_id, tab):
     return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location)
 
 
-@mod.route('/<wld_id>')
-def index(wld_id):
+@mod.route('/<wld_id>', defaults={'tab': None})
+@mod.route('/<wld_id>/<tab>')
+def index(wld_id, tab):
 
     bra_id = request.args.get('bra_id')
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
@@ -144,4 +151,18 @@ def index(wld_id):
     if secex_max_year != header['year']:
         abort(404)
     else:
-        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
+        if tab not in trade_partner_tabs:
+            abort(404)
+
+    graph = request.values.to_dict()
+    
+    if graph.has_key('bra_id'):
+        graph.pop('bra_id')
+
+    if graph != {}:
+        graph = {
+            'menu': graph.keys()[0] + '-' + graph.values()[0].split('/')[0],
+            'url': graph.values()[0],
+        }
+    
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location, tab=tab, graph=graph)
