@@ -4,7 +4,7 @@
 
     <div class="row">
 
-    {% if (location.id|length) != 9 %}
+    {% if not is_municipality %}
         {% if body.municipality_export_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
