@@ -39,12 +39,20 @@ def graphs(industry_id, tab):
     return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location)
 
 
-@mod.route('/<cnae_id>', defaults={'tab': None})
+@mod.route('/<cnae_id>', defaults={'tab': 'general'})
 @mod.route('/<cnae_id>/<tab>')
 def index(cnae_id, tab):
 
     header = {}
     body = {}
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
 
     industry = Cnae.query.filter_by(id=cnae_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
@@ -127,21 +135,33 @@ def index(cnae_id, tab):
 
     rais_max_year = db.session.query(func.max(Yi.year)).first()[0]
 
+    tabs = {
+        'general': [],
+        'wages': [
+            'jobs-occupation-tree_map',
+            'jobs-occupation-stacked',
+            'jobs-municipality-geo_map',
+            'jobs-municipality-tree_map',
+            'jobs-municipality-stacked',
+            'wages-occupation-tree_map',
+            'wages-occupation-stacked',
+            'wages-municipality-geo_map',
+            'wages-municipality-tree_map',
+            'wages-municipality-stacked',
+            'wages-distribution-bar',
+        ],
+        'opportunities': [
+            'economic-activities-rings',
+        ],
+    }
+
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     if header['num_jobs'] is None or rais_max_year != header['year']:
         abort(404)
-    else:
-        if tab not in industry_tabs:
-            abort(404)
-  
-        graph = request.values.to_dict()
-        
-        if graph.has_key('bra_id'):
-            graph.pop('bra_id')
-
-        if graph != {}:
-            graph = {
-                'menu': graph.keys()[0] + '-' + graph.values()[0].split('/')[0],
-                'url': graph.values()[0],
-            }
-
-        return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph)
+    
+    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph)

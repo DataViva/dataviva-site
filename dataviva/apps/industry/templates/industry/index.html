@@ -137,7 +137,7 @@
     <nav class="">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="{{ 'active' if not tab }}">
+            <li role="presentation" class="{{ 'active' if tab == 'general' }}">
                 <a  href="general"
                     aria-controls="general"
                     role="tab"
@@ -181,7 +181,7 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
-    {% if tab != None %}
+    {% if tab != 'general' %}
         {% include "industry/graphs-" + tab + ".html" %}
     {% endif %}
 </section>
