@@ -59,27 +59,28 @@
   background-color: #e1eee6;
 }
 
-.selector-list .selected, .list-group .selected {
+.modal.dataviva .selector-list .selected,
+.modal.dataviva .list-group .selected {
   background-color: #337ab7 !important;
   color: white;
 }
 
-.selector-list .selector-list-item .item-title {
+.modal.dataviva .selector-list .selector-list-item .item-title {
   display: inline;
 }
 
-.selector-list .selector-list-item .selector-img {
+.modal.dataviva .selector-list .selector-list-item .selector-img {
   height: 50px;
   display: inline;
 }
 
-.selector-list .selector-list-item .selector-icon {
+.modal.dataviva .selector-list .selector-list-item .selector-icon {
     display: inline-block;
     width: 35px;
     text-align: center;
     font-size: 20px;
 }
-.selector-list img.symbol {
+.modal.dataviva .selector-list img.symbol {
   border-radius: 50%;
   background-color: #337ab7;
 }
@@ -126,9 +127,9 @@
     background-color: #fff !important;
     border-color: #ccc !important;
     border-radius: 4px !important;
-    font-size: 14px !important;;
-    font-weight: normal !important;;
-    line-height: 1.42857143 !important;;
+    font-size: 14px !important;
+    font-weight: normal !important;
+    line-height: 1.42857143 !important;
 }
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_button_element.d3plus_button_label[style] {
     width: auto !important;

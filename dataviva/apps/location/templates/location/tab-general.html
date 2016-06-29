@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="general">
+<div role="tabpanel" class="tab-pane {{ 'active' if not tab }}" id="general">
     <h2>{% trans %}General Profile{% endtrans %}</h2>
         {% if location.id == 'all' %}
           {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %}
