@@ -132,22 +132,21 @@
     </div>
 </section>
 
-
 <section id="profile" class="profile">
 
     <nav class="">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
-                <a  href="#general"
+            <li role="presentation" class="{{ 'active' if tab == 'general' }}">
+                <a  href="general"
                     aria-controls="general"
                     role="tab"
                     data-id="{{ industry.id }}"
                     data-location="{{ location.id }}"
                     data-toggle="tab">{% trans %}General{% endtrans %}</a>
             </li>
-            <li role="presentation">
-                <a  href="#wages"
+            <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
+                <a  href="wages" 
                     aria-controls="wages"
                     role="tab"
                     graph
@@ -156,8 +155,8 @@
                     data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
             </li>
             {% if (industry.id|length) == 6 %}
-            <li role="presentation">
-                <a  href="#opportunities"
+            <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
+                <a  href="opportunities"
                     aria-controls="opportunities"
                     role="tab"
                     graph
@@ -169,7 +168,6 @@
             </ul>
         </div>
     </nav>
-
 
     <div class="container">
         <div class="tab-content">
@@ -183,6 +181,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+    {% if tab != 'general' %}
+        {% include "industry/graphs-" + tab + ".html" %}
+    {% endif %}
 </section>
 
 {% endblock content %}

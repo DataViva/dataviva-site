@@ -3,11 +3,18 @@ from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Industry, IndustryOccupation, IndustryMunicipality, IndustryByLocation
 from dataviva.api.attrs.models import Cnae, Bra
+from os import walk
+import os
 
 
 mod = Blueprint('industry', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/industry')
+
+industry_tabs_path = os.path.join(mod.root_path, mod.template_folder, mod.name)
+filenames = [filename for filename in next(os.walk(industry_tabs_path))[2] if "graphs" in filename]
+industry_tabs = [tabs[tabs.find('-')+1:tabs.find('.')] for tabs in filenames]
+industry_tabs.append(None)
 
 
 @mod.before_request
@@ -32,11 +39,20 @@ def graphs(industry_id, tab):
     return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location)
 
 
-@mod.route('/<cnae_id>')
-def index(cnae_id):
+@mod.route('/<cnae_id>', defaults={'tab': 'general'})
+@mod.route('/<cnae_id>/<tab>')
+def index(cnae_id, tab):
 
     header = {}
     body = {}
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
 
     industry = Cnae.query.filter_by(id=cnae_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
@@ -119,7 +135,33 @@ def index(cnae_id):
 
     rais_max_year = db.session.query(func.max(Yi.year)).first()[0]
 
+    tabs = {
+        'general': [],
+        'wages': [
+            'jobs-occupation-tree_map',
+            'jobs-occupation-stacked',
+            'jobs-municipality-geo_map',
+            'jobs-municipality-tree_map',
+            'jobs-municipality-stacked',
+            'wages-occupation-tree_map',
+            'wages-occupation-stacked',
+            'wages-municipality-geo_map',
+            'wages-municipality-tree_map',
+            'wages-municipality-stacked',
+            'wages-distribution-bar',
+        ],
+        'opportunities': [
+            'economic-activities-rings',
+        ],
+    }
+
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     if header['num_jobs'] is None or rais_max_year != header['year']:
         abort(404)
-    else:
-        return render_template('industry/index.html', header=header, body=body, industry=industry, location=location)
+    
+    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph)
