@@ -90,10 +90,16 @@ var Category = (function() {
 
             var url = window.location.href.split('?')[0];
 
-            if(url.split('/').length == 5)
-                window.history.pushState("", tab, window.location.href + '/' +tab);
-            else
-                window.history.pushState("", tab, window.location.href + '/' +tab);
+            if(url.split('/').length == 6)
+                window.history.pushState('', '', url + '/' + tab);
+            else{
+                var url = window.location.href.split('?')[0];
+                url = url.split('/');
+                url.pop();
+                url = url.concat(tab);
+                url = url.join('/');
+                window.history.pushState('', '', url);
+            }
 
             showGraph(category, tab, location);
         } else {
