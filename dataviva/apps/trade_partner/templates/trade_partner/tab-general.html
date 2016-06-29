@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane {{ 'active' if not tab }}" id="general">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if header.bra_id %}
         <p>{% if g.locale == 'pt' %}{{ trade_partner.article() | capitalize }}{% endif %} {{ header.name }} 

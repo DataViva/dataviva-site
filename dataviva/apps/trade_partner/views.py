@@ -42,11 +42,20 @@ def graphs(wld_id, tab):
     return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location)
 
 
-@mod.route('/<wld_id>', defaults={'tab': None})
+@mod.route('/<wld_id>', defaults={'tab': 'general'})
 @mod.route('/<wld_id>/<tab>')
 def index(wld_id, tab):
-
     bra_id = request.args.get('bra_id')
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
+
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=bra_id).first()
     max_year_query = db.session.query(
@@ -134,6 +143,23 @@ def index(wld_id, tab):
         'lowest_balance': products_service.lowest_balance()
     }
 
+    tabs = {
+        'general': [],
+        'international-trade': [
+            'trade-balance-partner-line',
+            'exports-municipality-tree_map',
+            'exports-municipality-stacked',
+            'exports-destination-tree_map',
+            'exports-destination-stacked',
+            'exports-destination-geo_map',
+            'imports-municipality-tree_map',
+            'imports-municipality-stacked',
+            'imports-origin-tree_map',
+            'imports-origin-stacked',
+            'imports-origin-geo_map',
+        ],
+    }
+
     for index, trade_partner_ranking in enumerate(export_rank):
         if export_rank[index].wld_id == wld_id:
             header['export_rank'] = index + 1
@@ -148,21 +174,14 @@ def index(wld_id, tab):
 
     if body['highest_export_value'] is None and body['highest_import_value'] is None:
         abort(404)
+
     if secex_max_year != header['year']:
         abort(404)
-    else:
-        if tab not in trade_partner_tabs:
-            abort(404)
 
-    graph = request.values.to_dict()
-    
-    if graph.has_key('bra_id'):
-        graph.pop('bra_id')
+    if tab not in tabs:
+        abort(404)
 
-    if graph != {}:
-        graph = {
-            'menu': graph.keys()[0] + '-' + graph.values()[0].split('/')[0],
-            'url': graph.values()[0],
-        }
+    if menu and menu not in tabs[tab]:
+        abort(404)
     
     return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location, tab=tab, graph=graph)
