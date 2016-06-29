@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane {{ 'active' if not tab }}" id="general">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     <h2>{% trans %}General Profile{% endtrans %}</h2>
         {% if location.id == 'all' %}
           {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %}
@@ -16,7 +16,7 @@
           {{header.gdp_per_capita|max_digits(3)}} {{(header.gdp_per_capita|magnitude).lower()}}{% if g.locale == "en" %} USD{% endif %}.
 
         {% else %}
-          {% if profile.bra_id|length == 9 %}
+          {% if is_municipality %}
               <p>{{ header.name }}
               {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities}}
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
