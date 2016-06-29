@@ -173,7 +173,7 @@ def create():
         db.session.add(post)
         db.session.flush()
         
-        #add ralationship nxn
+        #add relationship nxn
         for subject_name in subjects:
             subject = Subject.query.filter_by(name=subject_name).first_or_404()
 
@@ -202,12 +202,21 @@ def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
     form.title.data = post.title
-    subject_query = Subject.query.filter_by(id=post.subject_id)
-    form.subject.data = subject_query.first().name
     form.author.data = post.author
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
     form.thumb.data = post.thumb
+
+    subjects = Subject.query.all()
+    subjects_dict = {}
+    for row in subjects:
+        subjects_dict[row.id] = row.name
+    post_subject_list = PostSubject.query.filter_by(id_post=post.id).all()
+    subject_names = ', '.join([ subjects_dict[x.id_subject] for x in post_subject_list ])
+    
+    form.subject.data = subject_names
+
+
     return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
 
 
