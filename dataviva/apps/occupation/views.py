@@ -26,24 +26,28 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
+
+
 @mod.route('/<occupation_id>/graphs/<tab>', methods=['POST'])
 def graphs(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
     return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location)
 
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', get_locale())
-
-
-@mod.route('/<occupation_id>')
-def index(occupation_id):
+@mod.route('/<occupation_id>', defaults={'tab': 'general'})
+@mod.route('/<occupation_id>/<tab>')
+def index(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
 
     bra_id = request.args.get('bra_id')
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+
     location = Bra.query.filter_by(id=bra_id).first()
+    is_municipality = location and len(location.id) == 9
     language = g.locale
     header = {}
     body = {}
@@ -56,15 +60,35 @@ def index(occupation_id):
     else:
         body['is_family'] = False
 
-    body['is_not_municipality'] = True
-
     if bra_id:
         occupation_service = OccupationByLocation(
             occupation_id=occupation_id, bra_id=bra_id)
-        if len(bra_id) == 9:
-            body['is_not_municipality'] = False
     else:
         occupation_service = Occupation(occupation_id=occupation_id)
+
+    tabs = {
+        'general': [],
+        'opportunities': [
+            'economic-opportunities-rings'
+        ],
+
+        'wages': [
+            'jobs-opportunities-tree_map',
+            'jobs-opportunities-stacked',
+            'wages-opportunities-tree_map',
+            'wages-opportunities-stacked',
+        ],
+    }
+
+    if is_municipality:
+        tabs['wages'] += [
+            'jobs-municipalities-tree_map',
+            'jobs-municipalities-geo_map',
+            'jobs-municipalities-stacked',
+            'wages-municipalities-tree_map',
+            'wages-municipalities-geo_map',
+            'wages-municipalities-stacked',
+        ]
 
     occupation_municipalities_service = OccupationMunicipalities(
         occupation_id=occupation_id, bra_id=bra_id)
@@ -78,8 +102,7 @@ def index(occupation_id):
     header['year'] = occupation_service.year()
     header['age_avg'] = occupation_service.age_avg()
 
-    if body['is_not_municipality']:
-
+    if not is_municipality:
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
         body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
         body['municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
@@ -105,7 +128,7 @@ def index(occupation_id):
             Ybo.bra_id == bra_id,
             Ybo.year == max_year_query_location)\
             .order_by(Ybo.num_jobs.desc())
-    else: 
+    else:
         max_year_query = db.session.query(func.max(Yo.year)).filter(
         Yo.cbo_id == occupation_id)
 
@@ -120,7 +143,18 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
+    if tab in tabs and menu in tabs[tab]:
+        if menu and url:
+            graph = {
+                'menu': menu,
+                'url': url,
+            }
+        else:
+            graph = None
+    else:
+        abort(404)
+
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
-    else :
-        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language)
+    else:
+        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, is_municipality=is_municipality, tab=tab, graph=graph)

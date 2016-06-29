@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="general">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not location.id %}
         <p>{% trans %}The {% endtrans %}{{occupation.name()}}
@@ -59,7 +59,7 @@
         <div class="dl-box col-xs-12 col-md-6">
             <h3>{% trans %}Wages and Jobs{% endtrans %} ({{body.year}})</h3>
             <dl class="dl-horizontal">
-                {% if body.is_not_municipality %}
+                {% if not is_municipality %}
                     <dt>{% trans %}Main employer Municipality{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_more_jobs }} - {{body.municipality_with_more_jobs_state.upper()}}</small>
@@ -73,7 +73,7 @@
                         <strong class="counter">{{body.activity_with_more_jobs_value | max_digits(3, True)}}</strong>
                         <span>{{body.activity_with_more_jobs_value | magnitude}} {% trans %}Jobs{% endtrans %}</span>
                     </dd>
-                {% if body.is_not_municipality %}
+                {% if not is_municipality %}
                     <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
                     <dd>
                         <small>{{body.municipality_with_biggest_wage_avg }} - {{body.municipality_with_biggest_wage_avg_state.upper()}}</small>
