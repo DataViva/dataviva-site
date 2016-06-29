@@ -37,7 +37,7 @@
 
             <span class="portrait dv-cnae-{{ industry.id[0] }} hidden-xs"></span>
             <h1>
-              {{ industry.name() }} 
+              {{ industry.name() }}
               {% if not location.id %}
                 {% trans %}in Brazil{% endtrans %}
               {% else %}
@@ -138,7 +138,7 @@
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="{{ 'active' if tab == 'general' }}">
-                <a  href="general"
+                <a  href="#general"
                     aria-controls="general"
                     role="tab"
                     data-id="{{ industry.id }}"
@@ -146,7 +146,7 @@
                     data-toggle="tab">{% trans %}General{% endtrans %}</a>
             </li>
             <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
-                <a  href="wages" 
+                <a  href="#wages"
                     aria-controls="wages"
                     role="tab"
                     graph
@@ -156,7 +156,7 @@
             </li>
             {% if (industry.id|length) == 6 %}
             <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
-                <a  href="opportunities"
+                <a  href="#opportunities"
                     aria-controls="opportunities"
                     role="tab"
                     graph
