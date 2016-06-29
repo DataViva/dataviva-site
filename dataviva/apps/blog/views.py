@@ -149,7 +149,6 @@ def create():
         return render_template('blog/new.html', form=form)
     else:
         post = Post()
-
         post.title = form.title.data
         subjects = form.subject.data.replace(', ', ',').split(',')
         
@@ -231,20 +230,37 @@ def update(id):
     else:
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
-        subject_query = Subject.query.filter_by(name=form.subject.data)
+        subjects = form.subject.data.replace(', ', ',').split(',')
+        
+        #add subjecs that not exist
+        for subject_name in subjects :         
+            subject_query = Subject.query.filter_by(name=subject_name)
+            if (not subject_query.first()):
+                new_subject = Subject()
+                new_subject.name = subject_name
+                db.session.add(new_subject)
+                db.session.flush()
 
-        if (subject_query.first()):
-            post.subject_id = subject_query.first().id
-        else:
-            subject = Subject()
-            subject.name = form.subject.data
-            db.session.add(subject)
-            db.session.commit()
-            post.subject_id = subject.id
 
+        #temporario , tirar no banco
+        post.subject_id = 1
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+        #remove old relationship
+        posts_subject_list = PostSubject.query.filter_by(id_post = post.id ).all();
+        for post_subject in posts_subject_list:
+            db.session.delete(post_subject)
+
+
+        #add new relationship nxn
+        for subject_name in subjects:
+            subject = Subject.query.filter_by(name=subject_name).first_or_404()
+            post_subject_new = PostSubject();
+            post_subject_new.id_post = post.id
+            post_subject_new.id_subject = subject.id
+            db.session.add(post_subject_new)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
