@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, abort
+from flask import Blueprint, render_template, g, abort, request
 from dataviva.apps.general.views import get_locale
 from dataviva.api.hedu.services import University, UniversityMajors
 from dataviva.api.attrs.models import University as UniversityModel
@@ -34,13 +34,23 @@ def graphs(university_id, tab):
     return render_template('university/graphs-'+tab+'.html', university=university)
 
 
-@mod.route('/<university_id>')
-def index(university_id):
+@mod.route('/<university_id>', defaults={'tab': 'general'})
+@mod.route('/<university_id>/<tab>')
+def index(university_id, tab):
 
     university = UniversityModel.query.filter_by(id=university_id).first_or_404()
 
     university_service = University(university.id)
     majors_service = UniversityMajors(university.id)
+
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
 
     header = {
         'year': university_service.year(),
@@ -60,9 +70,25 @@ def index(university_id):
         'year': majors_service.year(),
     }
 
+    tabs = {
+        'general': [],
+        'enrollments': [
+            'category-major-tree_map',
+            'category-major-stacked',
+            'category-status-line',
+            'category-shift-stacked',
+        ],
+    }
+
     hedu_max_year = db.session.query(func.max(Yu.year)).first()[0]
+
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
 
     if header['enrolled'] is None or hedu_max_year != body['year']:
         abort(404)
     else:
-        return render_template('university/index.html', university=university, header=header, body=body)
+        return render_template('university/index.html', university=university, header=header, body=body, tab=tab, graph=graph)

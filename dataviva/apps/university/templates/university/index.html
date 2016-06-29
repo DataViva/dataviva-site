@@ -87,14 +87,14 @@
 
     <div class="container">
             <ul class="nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#general"q
+                <li role="presentation" class="{{ 'active' if tab == 'general' }}">
+                    <a href="#general"
                        aria-controls="general"
                        role="tab"
                        data-university="{{ university.id }}"
                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'enrollments' }}">
                     <a href="#enrollments"
                        aria-controls="enrollments"
                        role="tab"
@@ -116,6 +116,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+  {% if tab != 'general' %}
+    {% include "university/graphs-" + tab + ".html" %}
+  {% endif %}
 </section>
 {% endblock content %}
 
