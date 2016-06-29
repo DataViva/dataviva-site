@@ -313,6 +313,12 @@
   border-radius: 0;
   font-size: 14px;
 }
+
+.category .nav-graph .list-group-item.selected {
+  background: #5a9dc4;
+  color: #FFF;
+}
+
 .category .nav-graph .list-group-item:active,
 .category .nav-graph .list-group-item:focus {
   background: #5a9dc4;

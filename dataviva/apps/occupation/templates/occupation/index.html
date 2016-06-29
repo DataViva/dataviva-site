@@ -39,7 +39,7 @@
             <span class="portrait dv-cbo-{{header.family_id}} hidden-xs"></span>
             <h1>
               {{ occupation.name() }} 
-              {% if not location.id %}
+              {% if not location %}
                 {% trans %}in Brazil{% endtrans %}
               {% else %}
                 {% if location.id | length <= 3 %}
@@ -112,7 +112,7 @@
 
     <div class="container">
           <ul class="nav-tabs" role="tablist">
-              <li role="presentation" class="active">
+              <li role="presentation" class="{{ 'active' if not tab or tab == 'general'}}">
                   <a href="#general"
                      aria-controls="general"
                      role="tab"
@@ -120,7 +120,7 @@
                      data-location="{{ location.id }}"
                      data-toggle="tab">{% trans %}General{% endtrans %}</a>
               </li>
-              <li role="presentation">
+              <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
                   <a href="#wages"
                      aria-controls="wages"
                      role="tab"
@@ -130,7 +130,7 @@
                      data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
               </li>
               {% if occupation.id|length == 4 %}
-              <li role="presentation">
+              <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
                   <a href="#opportunities"
                      aria-controls="opportunities"
                      role="tab"
@@ -157,6 +157,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+{% if tab != 'general' %}
+  {% include "occupation/graphs-" + tab + ".html" %}
+{% endif %}
 </section>
 
 {% endblock content %}

@@ -1,10 +1,10 @@
-<div role="tabpanel" class="tab-pane" id="wages">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'wages' }}" id="wages">
 
     <h2>{% trans %}Wages and Jobs{% endtrans %} ({{body.year}})</h2>
 
     <div class="row">
 
-        {% if body.is_not_municipality %}
+        {% if not is_municipality %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
                 {% trans %}Main{% endtrans %}
@@ -32,7 +32,7 @@
             </div>
         </div>                         
          
-        {% if body.is_not_municipality %}
+        {% if not is_municipality %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
                     {% trans %}Municipality with Highest{% endtrans %}
