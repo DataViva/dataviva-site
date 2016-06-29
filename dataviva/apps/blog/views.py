@@ -146,36 +146,38 @@ def create():
         post = Post()
 
         post.title = form.title.data
-        subjects = form.subject.data.replace(' ', '').split(',')
+        subjects = form.subject.data.replace(', ', ',').split(',')
         
-        #add subjecs se não exitirem
-        for subject in subjects :         
-            subject_query = Subject.query.filter_by(name=subject)
+        #add subjecs that not exist
+        for subject_name in subjects :         
+            subject_query = Subject.query.filter_by(name=subject_name)
             if (not subject_query.first()):
-                #post.subject_id = subject_query.first().id
-                subject = Subject()
-                subject.name = subject
-                db.session.add(subject)
-                db.session.commit()
-                #post.subject_id = subject.id
+                new_subject = Subject()
+                new_subject.name = subject_name
+                db.session.add(new_subject)
+                db.session.flush()
 
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.active = 0
+        #temporario , tirar no banco
+        post.subject_id = 1
 
         db.session.add(post)
         db.session.flush()
         
-        #depois ed add os subjects e o post add relaçao nxn post, subject
-        import pdb; pdb.set_trace()
-        for subjects in subjects: 
+        #add ralationship nxn
+        for subject_name in subjects:
+            subject = Subject.query.filter_by(name=subject_name).first_or_404()
+
             post_subject = PostSubject();
             post_subject.id_post = post.id
             post_subject.id_subject = subject.id
             db.session.add(post_subject)
-            db.session.commit()
+        
+        db.session.commit()
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
