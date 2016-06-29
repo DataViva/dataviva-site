@@ -6,7 +6,7 @@
             <a href="#trade-balance-location" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-location">{% trans %}Location{% endtrans %}</a>
             <div class="collapse" id="trade-balance-location">
                 <a href="/{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?time=year"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'trade-balance-location-line' or graph == {} }}" data-parent="#trade-balance-location">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'trade-balance-location-line' or not graph }}" data-parent="#trade-balance-location">
                     {% trans %}Line{% endtrans %}
                 </a>
             </div>
@@ -35,7 +35,7 @@
                </a>
             </div>
 
-            {% if location.id | length != 9 %}
+            {% if not is_municipality %}
               <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="exports-municipality">
                   <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra?depth=bra_9&controls=true&size=export_val"
@@ -74,7 +74,7 @@
                </a>
             </div>
 
-            {% if location.id | length != 9 %}
+            {% if not is_municipality %}
               <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="imports-municipality">
                   <a href="/{{ g.locale }}/embed/tree_map/secex/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=import_val"

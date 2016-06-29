@@ -6,7 +6,7 @@
             <a href="#higher-education-university" class="list-group-item" data-toggle="collapse" data-parent="#higher-education-university">{% trans %}University{% endtrans %}</a>
             <div class="collapse" id="higher-education-university">
                 <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/university/?color=color&depth=university_5&size=enrolled"
-                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'higher-education-university-tree_map' or graph == {} }}" data-parent="#higher-education-university">
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'higher-education-university-tree_map' or not graph }}" data-parent="#higher-education-university">
                     TreeMap
                 </a>
             </div>
@@ -19,7 +19,7 @@
                 </a>
             </div>
 
-            {% if location.id | length != 9 %}
+            {% if not is_municipality %}
               <a href="#education-municipality" class="list-group-item" data-toggle="collapse" data-parent="#education-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="education-municipality">
                   <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=enrolled"
@@ -63,7 +63,7 @@
                 </a>
             </div>
 
-            {% if location.id | length != 9 %}
+            {% if not is_municipality %}
               <a href="#basic-education-municipality" class="list-group-item" data-toggle="collapse" data-parent="#basic-education-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="basic-education-municipality">
                   <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=enrolled"
