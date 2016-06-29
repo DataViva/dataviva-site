@@ -118,6 +118,11 @@ def admin_delete():
     if ids:
         posts = Post.query.filter(Post.id.in_(ids)).all()
         for post in posts:
+            # deletar subjets inuteis ? 
+            posts_subject_list = PostSubject.query.filter_by(id_post = post.id ).all();
+            for post_subject in posts_subject_list:
+                db.session.delete(post_subject)
+
             delete_s3_folder(os.path.join(mod.name, str(post.id)))
             db.session.delete(post)
 
