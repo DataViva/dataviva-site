@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, g, redirect, url_for, flash, jsoni
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from sqlalchemy import desc
-from models import Post, Subject, PostSubject
+from models import Post, Subject
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
@@ -35,27 +35,29 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    name_subjects_by_post = {}
-    name_subjects = {}
-    postsubject_query = PostSubject.query.all()
-    subjects_query = Subject.query.all()
+    posts_query = db.session.query(Post).order_by(desc(Post.postage_date))
+    subjects = db.session.query(Subject).order_by(desc(Subject.name))
+    posts = []
 
-    for row in subjects_query:
-        name_subjects[row.id] = row.name
+    for post_query in posts_query:
+        post = {}
+        post['id'] = post_query.id
+        post['title'] = post_query.title 
+        post['author'] = post_query.author 
+        post['text_call'] = post_query.text_call 
+        post['text_content'] = post_query.text_content 
+        post['thumb'] = post_query.thumb 
+        post['postage_date'] = post_query.postage_date 
+        post['active'] = post_query.active
+        post['date_str'] = post_query.date_str()
+        post['subjects'] = str(post_query.subjects[0].name)
+        for index in range( 1, len(post_query.subjects)):
+            post['subjects'] += '-' + str(post_query.subjects[index].name)
+        posts.append(post)
+
+    return render_template('blog/index.html', posts=posts, subjects=subjects)
 
 
-    for row in postsubject_query:
-        if name_subjects_by_post.has_key(row.id_post):
-            name_subjects_by_post[row.id_post] += '-' + str(name_subjects[row.id_subject])
-        else:
-            name_subjects_by_post[row.id_post] = str(name_subjects[row.id_subject])
-
-    posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
-    subjects = Subject.query.join(Post).filter(
-        Post.subject_id == Subject.id,
-        Post.active
-    ).order_by(desc(Subject.name)).all()
-    return render_template('blog/index.html', posts=posts, subjects=subjects, name_subjects_by_post=name_subjects_by_post)
 
 
 @mod.route('/<subject>', methods=['GET'])
