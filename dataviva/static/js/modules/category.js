@@ -1,8 +1,8 @@
-window.showGraph = function(category, tab, location) {
+window.showGraph = function(url, tab, location) {
     if ($('#graphs #graphs-' + tab).length === 0) {
         $.ajax({
             method: "POST",
-            url: category+"/graphs/"+tab+(location !== null ? "?bra_id="+location : ""),
+            url: url + "/graphs/" + tab + (location !== null ? "?bra_id=" + location : ""),
             success: function (graphs) {
                 $('#graphs').append(graphs);
                 $(graphs).find('a').click(function() {
@@ -82,26 +82,32 @@ $('.category .nav-graph .list-group-item').click(function() {
 
 var Category = (function() {
 
+    function getUrlBeforePageTab(){
+        var url = window.location.href.split('?')[0];
+
+        if(url.split('/').length == 6)
+            return url;
+        else{
+            url = url.split('/');
+            url.pop();
+            url = url.join('/');
+            return url;
+        }
+    }
+
+    function updateUrl(tab){
+        var url = getUrlBeforePageTab();
+        window.history.pushState('', '', url + '/' + tab);
+    }
+
     function changeTab(e) {
         if ($(this).attr('graph') != null) {
-            var category = this.dataset.id,
-                location = this.dataset.location,
+            var location = this.dataset.location,
                 tab = $(this).attr('aria-controls');
 
-            var url = window.location.href.split('?')[0];
+            updateUrl(tab);
 
-            if(url.split('/').length == 6)
-                window.history.pushState('', '', url + '/' + tab);
-            else{
-                var url = window.location.href.split('?')[0];
-                url = url.split('/');
-                url.pop();
-                url = url.concat(tab);
-                url = url.join('/');
-                window.history.pushState('', '', url);
-            }
-
-            showGraph(category, tab, location);
+            showGraph(getUrlBeforePageTab(), tab, location);
         } else {
             $('#graphs').hide();
         } 
