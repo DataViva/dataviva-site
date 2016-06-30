@@ -8,3 +8,7 @@ create table blog_post_subject(
 
 insert blog_post_subject (post_id, subject_id)
     select id, subject_id from blog_post;
+
+ALTER TABLE blog_post
+  DROP FOREIGN KEY blog_post_ibfk_1;
+ 
