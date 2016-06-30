@@ -22,50 +22,6 @@ $('a[class="pull-right btn btn-primary btn-xs m-r-lg"]').click(function() {
 });
 
 $(document).ready(function () {
-    $(function() {
-        var jcarousel = $('.jcarousel');
-
-        jcarousel
-            .on('jcarousel:reload jcarousel:create', function () {
-                var carousel = $(this),
-                    width = carousel.innerWidth();
-
-                if (width >= 600) {
-                    width = 200;
-                } else if (width >= 350) {
-                    width = 170;
-                }
-
-                carousel.jcarousel('items').css('width',width);
-            })
-            .jcarousel({
-                wrap: 'circular'
-            });
-
-        $('.jcarousel-control-prev').jcarouselControl({
-            target: '-=1'
-        });
-
-        $('.jcarousel-control-next').jcarouselControl({
-            target: '+=1'
-        });
-
-        if ($('.jcarousel-wrapper .jcarousel ul li').length <= 4) {
-            $('.jcarousel-control-prev').addClass("hidden-lg")
-            $('.jcarousel-control-next').addClass("hidden-lg")
-        }
-
-        if ($('.jcarousel-wrapper .jcarousel ul li').length <= 3) {
-            $('.jcarousel-control-prev').addClass("hidden-md")
-            $('.jcarousel-control-next').addClass("hidden-md")
-        }
-
-        if ($('.jcarousel-wrapper .jcarousel ul li').length <= 2) {
-            $('.jcarousel-control-prev').addClass("hidden-sm")
-            $('.jcarousel-control-next').addClass("hidden-sm")
-        }
-    });
-
     if($('#graphs .list-group.panel .active').parent().hasClass('collapse')){
         $('#graphs .list-group.panel .active').parent().attr('class', 'collapse in');
     }
