@@ -5,6 +5,7 @@ window.showGraph = function(url, tab, location) {
             url: url + "/graphs/" + tab + (location !== null ? "?bra_id=" + location : ""),
             success: function (graphs) {
                 $('#graphs').append(graphs);
+                $('.list-group.panel a[target]').on('click', Category.updateGraphUrl);
                 $(graphs).find('a').click(function() {
                     //window.history.pushState("", "", window.location+$(graphs).find('a')[0].href.split('/'+lang)[1]);
                 })
@@ -71,8 +72,10 @@ $(document).ready(function () {
     }
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', Category.changeTab);
-});
 
+    $('.list-group.panel a[target]').on('click', Category.updateGraphUrl);
+
+});
 
 $('.category .nav-graph .list-group-item').click(function() {
     $(this).addClass('selected').siblings().removeClass('selected');
@@ -97,24 +100,41 @@ var Category = (function() {
 
     function updateUrl(tab){
         var url = getUrlBeforePageTab();
-        window.history.pushState('', '', url + '/' + tab);
+
+        if(tab != 'general')
+            window.history.pushState('', '', url + '/' + tab);
+        else
+            window.history.pushState('', '', url);
     }
 
     function changeTab(e) {
-        if ($(this).attr('graph') != null) {
-            var location = this.dataset.location,
-                tab = $(this).attr('aria-controls');
+        var location = this.dataset.location,
+            tab = $(this).attr('aria-controls');
 
-            updateUrl(tab);
+        updateUrl(tab);
 
+        if ($(this).attr('graph') != null)
             showGraph(getUrlBeforePageTab(), tab, location);
-        } else {
+        else
             $('#graphs').hide();
-        } 
+    }
+
+    function updateGraphUrl(){
+        var parent = $(this).data('parent').slice(1);
+        var graphType = $(this).attr('href').split('/')[3];
+        var menu = parent + '-' + graphType;
+
+        var graphUrl = $(this).attr('href').split('/').slice(3).join('/');
+
+        var url = window.location.href.split('?')[0] + '?menu=' + menu + '&url=' + encodeURIComponent(graphUrl);
+        window.history.pushState('', '', url);
     }
 
     return {
-        changeTab : changeTab
+        changeTab : changeTab,
+        updateGraphUrl : updateGraphUrl,
     }
 
 })();
+
+
