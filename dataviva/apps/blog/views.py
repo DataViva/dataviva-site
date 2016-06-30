@@ -100,6 +100,7 @@ def all_posts():
     for row in result:
         posts += [(row.id, row.title, row.author,
                    row.postage_date.strftime('%d/%m/%Y'), row.active)]
+
     return jsonify(posts=posts)
 
 
@@ -107,7 +108,7 @@ def all_posts():
 @login_required
 @required_roles(1)
 def admin():
-    posts = Post.query.all()
+    posts = db.session.query(Post)
     return render_template('blog/admin.html', posts=posts)
 
 
