@@ -39,7 +39,7 @@ def add_language_code(endpoint, values):
 def graphs(wld_id, tab):
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location)
+    return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location, graph=None)
 
 
 @mod.route('/<wld_id>', defaults={'tab': 'general'})

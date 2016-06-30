@@ -32,7 +32,7 @@ def add_language_code(endpoint, values):
 def graphs(product_id, tab):
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('product/graphs-'+tab+'.html', product=product, location=location)
+    return render_template('product/graphs-'+tab+'.html', product=product, location=location, graph=None)
 
 
 @mod.route('/<product_id>', defaults={'tab': 'general'})

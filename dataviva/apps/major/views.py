@@ -148,4 +148,4 @@ def graphs(course_hedu_id, tab):
     bra = request.args.get('bra_id')
     major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
     location = Bra.query.filter_by(id=bra).first()
-    return render_template('major/graphs-'+tab+'.html', major=major, location=location)
+    return render_template('major/graphs-'+tab+'.html', major=major, location=location, graph=None)

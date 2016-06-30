@@ -35,7 +35,7 @@ def add_language_code(endpoint, values):
 def graphs(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location)
+    return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location, graph=None)
 
 @mod.route('/<occupation_id>', defaults={'tab': 'general'})
 @mod.route('/<occupation_id>/<tab>')
