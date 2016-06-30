@@ -36,8 +36,13 @@ def add_language_code(endpoint, values):
 @mod.route('/', methods=['GET'])
 def index():
     posts_query = db.session.query(Post).filter(Post.active==True).order_by(desc(Post.postage_date))
-    subjects = db.session.query(Subject).order_by(desc(Subject.name))
+    subjects_query = db.session.query(Subject).order_by(desc(Subject.name))
     posts = []
+    subjects = []
+
+    for subject_query in subjects_query:
+        if len(subject_query.posts)  > 0:
+            subjects.append(subject_query)
 
     for post_query in posts_query:
         post = {}
@@ -62,8 +67,14 @@ def index():
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
     posts_query = db.session.query(Post).filter(Post.active==True).order_by(desc(Post.postage_date))
-    subjects = db.session.query(Subject).order_by(desc(Subject.name))
+    subjects_query = db.session.query(Subject).order_by(desc(Subject.name))
     posts = []
+    subjects = []
+
+    for subject_query in subjects_query:
+        if len(subject_query.posts)  > 0:
+            subjects.append(subject_query)
+
     for post in posts_query:
         if float(subject) in [x.id for x in post.subjects]:
             posts.append(post)
