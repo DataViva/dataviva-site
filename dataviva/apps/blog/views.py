@@ -117,7 +117,7 @@ def admin():
 @required_roles(1)
 def admin_activate(status, status_value):
     for id in request.form.getlist('ids[]'):
-        post = Post.query.filter_by(id=id).first_or_404()
+        post = db.session.query(Post).filter(Post.id==id)
         setattr(post, status, status_value == u'true')
         db.session.commit()
 
