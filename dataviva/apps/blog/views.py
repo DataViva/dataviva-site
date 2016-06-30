@@ -95,7 +95,7 @@ def show(id):
 
 @mod.route('/post/all', methods=['GET'])
 def all_posts():
-    result = Post.query.all()
+    result = db.session.query(Post)
     posts = []
     for row in result:
         posts += [(row.id, row.title, row.author,
