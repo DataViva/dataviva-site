@@ -1,8 +1,8 @@
-window.showGraph = function(category, tab, location) {
+window.showGraph = function(categoryId, tab, location) {
     if ($('#graphs #graphs-' + tab).length === 0) {
         $.ajax({
             method: "POST",
-            url: category+"/graphs/"+tab+(location !== null ? "?bra_id="+location : ""),
+            url: categoryId+"/graphs/"+tab+(location !== null ? "?bra_id="+location : ""),
             success: function (graphs) {
                 $('#graphs').append(graphs);
                 $(graphs).find('a').click(function() {
@@ -18,12 +18,12 @@ window.showGraph = function(category, tab, location) {
 
 $('a[class="pull-right btn btn-primary btn-xs m-r-lg"]').click(function() {
     var link = $(this).attr('href');
-    $('li[role="presentation"] a[href="'+link+'"]').closest('li').addClass('active').siblings().removeClass('active');
+    $('li[role="presentation"] a[href="'+link+'"]').closest('li').addClass('selected').siblings().removeClass('selected');
 });
 
 $(document).ready(function () {
-    if($('#graphs .list-group.panel .active').parent().hasClass('collapse')){
-        $('#graphs .list-group.panel .active').parent().attr('class', 'collapse in');
+    if($('#graphs .list-group.panel .selected').parent().hasClass('collapse')){
+        $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
     }
 
     $('a[data-toggle="tab"]').on('shown.bs.tab', Category.changeTab);
@@ -40,7 +40,7 @@ var Category = (function() {
 
     function changeTab(e) {
         if ($(this).attr('graph') != null) {
-            var category = this.dataset.id,
+            var categoryId = this.dataset.id,
                 location = this.dataset.location,
                 tab = $(this).attr('aria-controls');
 
@@ -57,7 +57,7 @@ var Category = (function() {
                 window.history.pushState('', '', url);
             }
 
-            showGraph(category, tab, location);
+            showGraph(categoryId, tab, location);
         } else {
             $('#graphs').hide();
         } 
