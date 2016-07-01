@@ -2,8 +2,47 @@
 {% block facebook_metadata %}
     <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg"/>
     <meta property="og:url" content="staging.dataviva.info/{{g.locale}}/location/{{location.id}}{{ '/' if tab }}{{ tab }}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}"/>
-    <meta property="og:title" content="DataViva: {% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} / {{ tab | title }}"/>
-    <meta property="og:description" content=""/>
+    <meta property="og:title" content="DataViva: {% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} | {{ tab | title }}"/>
+    <meta property="og:description" content="
+        {% if location.id == 'all' %}
+            {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %}...
+        {% else %}
+          {% if is_municipality %}
+                {{ header.name }}
+                {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities}}
+                {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
+                {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
+                {% trans %}km² of area, has a population of {% endtrans %}...
+            {% elif profile.bra_id|length == 7 %}
+                {% if g.locale == "pt" %}
+                    A Microrregião
+                {% endif %}
+                {{ header.name }}
+                {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions}}
+                {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }},
+                {% trans %}mesoregion, located in the state of {% endtrans %}
+            {% elif profile.bra_id|length == 5 %}
+                {% trans %}The mesoregion {% endtrans %}{{ header.name }}
+                {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions}}
+                {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
+                {% trans %}It is the {% endtrans %}...
+            {% elif profile.bra_id|length == 1 %}
+                {% if g.locale == "pt" %}
+                    A
+                {% else %}
+                    The
+                {% endif %}{{ header.name }}
+                {% trans %} is one of the {% endtrans %}{{ profile.number_of_regions-1 }}
+                {% trans %}regional divisions in Brazil, consisting of the states of {% endtrans %}...
+            {% else %}
+                {{ header.name }}
+                {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }}
+                {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }}
+                {% trans %}being the {% endtrans %}{{ profile.area_rank }}{{ profile.area_rank | ordinal }}
+                {% trans %}state in territorial area and {% endtrans %}...
+            {% endif %}
+        {% endif %}
+    "/>
 {% endblock %}
 
 <!-- extend from base layout -->
@@ -28,7 +67,7 @@
 
 <!-- Criar classes css para os backgrunds das localidades -->
 <section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
- 
+
     <div class="photo-credit">
       <div class="container">
         <a href="{{ location.img_link if location.img_link else 'https://flic.kr/p/7mfM76' }}" target="blank">
@@ -134,7 +173,6 @@
             </div><!--/.indices-->
         </div>
     </div>
-
 </section>
 
 <section id="profile" class="profile">
