@@ -1,11 +1,25 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
 <!-- Facebook Properties -->
 {% block facebook_metadata %}
     <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg"/>
     <meta property="og:url" content="staging.dataviva.info/{{g.locale}}/location/{{location.id}}{{ '/' if tab }}{{ tab }}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}"/>
-    <meta property="og:title" content="DataViva: {% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} | {{ tab | title }}"/>
+    <meta property="og:title" content="DataViva: {% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} |
+        {% if tab == 'general'%}
+            {% trans %}General{% endtrans %}
+        {% elif tab == 'trade-partner' %}
+            {% trans %}International Trade{% endtrans %}
+        {% elif tab == 'wages' %}
+            {% trans %}Wages and Jobs{% endtrans %}
+        {% elif tab == 'opportunities' %}
+            {% trans %}Economic Opportunities{% endtrans %}
+        {% elif tab == 'education' %}
+            {% trans %}Education{% endtrans %}
+        {% endif %}"/>
     <meta property="og:description" content="
         {% if location.id == 'all' %}
-            {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %}...
+            {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %} ...
         {% else %}
           {% if is_municipality %}
                 {{ header.name }}
@@ -20,7 +34,7 @@
                 {{ header.name }}
                 {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions}}
                 {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }},
-                {% trans %}mesoregion, located in the state of {% endtrans %}
+                {% trans %}mesoregion, located in the state of {% endtrans %}...
             {% elif profile.bra_id|length == 5 %}
                 {% trans %}The mesoregion {% endtrans %}{{ header.name }}
                 {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions}}
@@ -43,10 +57,7 @@
             {% endif %}
         {% endif %}
     "/>
-{% endblock %}
-
-<!-- extend from base layout -->
-{% extends "base.html" %}
+{% endblock facebook_metadata %}
 
 {% block content %}
 
