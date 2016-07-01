@@ -2,7 +2,7 @@
 {% block facebook_metadata %}
     <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg"/>
     <meta property="og:url" content="staging.dataviva.info/{{g.locale}}/location/{{location.id}}{{ '/' if tab }}{{ tab }}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}"/>
-    <meta property="og:title" content="{% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} / {{ tab | title }}"/>
+    <meta property="og:title" content="DataViva: {% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} / {{ tab | title }}"/>
     <meta property="og:description" content=""/>
 {% endblock %}
 
