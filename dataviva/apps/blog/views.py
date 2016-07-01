@@ -53,7 +53,6 @@ def index_subject(subject):
     subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     posts = []
     subjects = []
-    subject_by_post = []
 
     for subject_query in subjects_query:
         if len(subject_query.posts)  > 0:
@@ -69,13 +68,20 @@ def index_subject(subject):
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
+    subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     post = Post.query.filter_by(id=id).first_or_404()
     posts = Post.query.filter(Post.id != id, Post.active).all()
+    subjects = []
+
+    for subject_query in subjects_query:
+        if len(subject_query.posts)  > 0:
+            subjects.append(subject_query)
+
     if len(posts) > 3:
         read_more = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
         read_more = posts
-    return render_template('blog/show.html', post=post, id=id, read_more=read_more)
+    return render_template('blog/show.html', post=post, subjects=subjects, id=id, read_more=read_more)
 
 
 @mod.route('/post/all', methods=['GET'])
