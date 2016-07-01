@@ -41,7 +41,7 @@ def index(product_id, tab):
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
     is_municipality = location and len(location.id) == 9
-    import pdb; pdb.set_trace()
+
     menu = request.args.get('menu')
     url = request.args.get('url')
 
