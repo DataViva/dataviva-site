@@ -68,7 +68,7 @@ def index_subject(subject):
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
-    subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
+    subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     post = Post.query.filter_by(id=id).first_or_404()
     posts = Post.query.filter(Post.id != id, Post.active).all()
     subjects = []
@@ -86,7 +86,7 @@ def show(id):
 
 @mod.route('/post/all', methods=['GET'])
 def all_posts():
-    result = db.session.query(Post)
+    result = Post.query.all()
     posts = []
     for row in result:
         posts += [(row.id, row.title, row.author,
