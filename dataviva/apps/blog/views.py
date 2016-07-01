@@ -116,7 +116,7 @@ def admin_activate(status, status_value):
     return message, 200
 
 
-@mod.route('/admin/delete', methods=['POST'])
+@mod.route('//admindelete', methods=['POST'])
 @login_required
 @required_roles(1)
 def admin_delete():
@@ -156,37 +156,24 @@ def create():
     else:
         post = Post()
         post.title = form.title.data
-        subjects = form.subject.data.replace(', ', ',').split(',')
-        
-        #add subjecs that not exist
-        for subject_name in subjects :         
-            subject_query = Subject.query.filter_by(name=subject_name)
-            if (not subject_query.first()):
-                new_subject = Subject()
-                new_subject.name = subject_name
-                db.session.add(new_subject)
-                db.session.flush()
-
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.active = 0
-        #temporario , tirar no banco
-        post.subject_id = 1
+
+        subjects_names = form.subject.data.replace(', ', ',').split(',')
+
+        for name in subjects_names:
+            subject = Subject.query.filter_by(name=name).first_or_404()
+            if (not subject):
+                subject = Subject()
+                subject.name = name
+                db.session.add(subject)
+
+            post.subjects.append(subject)
 
         db.session.add(post)
-        db.session.flush()
-        
-        #add relationship nxn
-        for subject_name in subjects:
-            subject = Subject.query.filter_by(name=subject_name).first_or_404()
-
-            post_subject = PostSubject();
-            post_subject.id_post = post.id
-            post_subject.id_subject = subject.id
-            db.session.add(post_subject)
-        
         db.session.commit()
 
         if len(form.thumb.data.split(',')) > 1:
