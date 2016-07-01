@@ -12,7 +12,7 @@
                     <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">
                         <img src="{{post.thumb}}" class="thumbnail img-responsive">
                     </a>
-                    <span>{{post.subjects | truncate(46)}}</span>
+                    <span>{{post.subjects[0].name}}</span>
                 </div>
                 <h4>
                     <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{{post.title}}</a>
@@ -20,7 +20,7 @@
                 <p>{{ post.text_call }}</p>
                 <div class="meta">
                     <p><a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{% trans %}Continue reading{% endtrans %}</a></p>
-                    <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str }}</p>
+                    <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
                 </div>
             </div>
             <div class="clearfix"></div>

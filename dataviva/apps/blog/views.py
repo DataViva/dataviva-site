@@ -35,30 +35,13 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    posts_query = db.session.query(Post).filter(Post.active==True).order_by(desc(Post.postage_date))
-    subjects_query = db.session.query(Subject).order_by(desc(Subject.name))
-    posts = []
+    posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
+    subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     subjects = []
 
     for subject_query in subjects_query:
         if len(subject_query.posts)  > 0:
             subjects.append(subject_query)
-
-    for post_query in posts_query:
-        post = {}
-        post['id'] = post_query.id
-        post['title'] = post_query.title 
-        post['author'] = post_query.author 
-        post['text_call'] = post_query.text_call 
-        post['text_content'] = post_query.text_content 
-        post['thumb'] = post_query.thumb 
-        post['postage_date'] = post_query.postage_date 
-        post['active'] = post_query.active
-        post['date_str'] = post_query.date_str()
-        post['subjects'] = str(post_query.subjects[0].name)
-        for index in range( 1, len(post_query.subjects)):
-            post['subjects'] += '-' + str(post_query.subjects[index].name)
-        posts.append(post)
 
     return render_template('blog/index.html', posts=posts, subjects=subjects)
 
@@ -66,10 +49,11 @@ def index():
 
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
-    posts_query = db.session.query(Post).filter(Post.active==True).order_by(desc(Post.postage_date))
-    subjects_query = db.session.query(Subject).order_by(desc(Subject.name))
+    posts_query = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
+    subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     posts = []
     subjects = []
+    subject_by_post = []
 
     for subject_query in subjects_query:
         if len(subject_query.posts)  > 0:
@@ -78,6 +62,7 @@ def index_subject(subject):
     for post in posts_query:
         if float(subject) in [x.id for x in post.subjects]:
             posts.append(post)
+
     
     return render_template('blog/index.html', posts=posts, subjects=subjects, active_subject=long(subject))
 
