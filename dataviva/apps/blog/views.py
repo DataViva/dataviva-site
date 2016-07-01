@@ -99,7 +99,7 @@ def all_posts():
 @login_required
 @required_roles(1)
 def admin():
-    posts = db.session.query(Post)
+    posts = Post.query.all()
     return render_template('blog/admin.html', posts=posts)
 
 
