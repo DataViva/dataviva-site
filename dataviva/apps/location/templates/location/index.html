@@ -19,7 +19,7 @@
         {% endif %}"/>
     <meta property="og:description" content="
         {% if location.id == 'all' %}
-            {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %}...
+            {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %} ...
         {% else %}
           {% if is_municipality %}
                 {{ header.name }}
@@ -34,7 +34,7 @@
                 {{ header.name }}
                 {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions}}
                 {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }},
-                {% trans %}mesoregion, located in the state of {% endtrans %}
+                {% trans %}mesoregion, located in the state of {% endtrans %}...
             {% elif profile.bra_id|length == 5 %}
                 {% trans %}The mesoregion {% endtrans %}{{ header.name }}
                 {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions}}
