@@ -29,13 +29,13 @@ var Category = (function() {
 
     function updateUrl(tab){
         var url = getUrlBeforePageTab();
-        var bra_id = getBraidFromUrl();
+        var braId = getBraIdFromUrl();
 
         if(tab != 'general')
             url += '/' + tab;
         
-        if(bra_id)
-            url += '?bra_id=' + bra_id;
+        if(braId)
+            url += '?bra_id=' + braId;
 
         window.history.pushState('', '', url);
     }
@@ -50,23 +50,23 @@ var Category = (function() {
 
         url = window.location.href.split('?')[0] + '?menu=' + menuOption + '&url=' + graphUrl;
 
-        var bra_id = getBraidFromUrl();
+        var braId = getBraIdFromUrl();
         
-        if(bra_id)
-            url += '&bra_id=' + bra_id;
+        if(braId)
+            url += '&bra_id=' + braId;
 
         window.history.pushState('', '', url);
     }
 
-    function getBraidFromUrl(){
+    function getBraIdFromUrl(){
         var params = window.location.href.split('?')[1];
 
         if(params){
             params = params.split(/=|&/);
-            var bra_id_index = params.indexOf('bra_id');
+            var braIdIndex = params.indexOf('bra_id');
 
-            if(bra_id_index != -1)
-                return params[bra_id_index + 1];
+            if(braIdIndex != -1)
+                return params[braIdIndex + 1];
             else
                 return null;
         }
