@@ -116,7 +116,7 @@ def admin_activate(status, status_value):
     return message, 200
 
 
-@mod.route('//admindelete', methods=['POST'])
+@mod.route('/admin/delete', methods=['POST'])
 @login_required
 @required_roles(1)
 def admin_delete():
@@ -165,16 +165,12 @@ def create():
         subjects_names = form.subject.data.replace(', ', ',').split(',')
 
         for name in subjects_names:
-            subject = Subject.query.filter_by(name=name).first_or_404()
+            subject = Subject.query.filter_by(name=name).first()
             if (not subject):
                 subject = Subject()
                 subject.name = name
-                db.session.add(subject)
-
             post.subjects.append(subject)
-
         db.session.add(post)
-        db.session.commit()
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
@@ -198,16 +194,7 @@ def edit(id):
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
     form.thumb.data = post.thumb
-
-    subjects = Subject.query.all()
-    subjects_dict = {}
-    for row in subjects:
-        subjects_dict[row.id] = row.name
-    post_subject_list = PostSubject.query.filter_by(id_post=post.id).all()
-    subject_names = ', '.join([ subjects_dict[x.id_subject] for x in post_subject_list ])
-    
-    form.subject.data = subject_names
-
+    form.subject.data = ', '.join([sub.name for sub in post.subjects])
 
     return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
 
@@ -223,37 +210,21 @@ def update(id):
     else:
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
-        subjects = form.subject.data.replace(', ', ',').split(',')
-        
-        #add subjecs that not exist
-        for subject_name in subjects :         
-            subject_query = Subject.query.filter_by(name=subject_name)
-            if (not subject_query.first()):
-                new_subject = Subject()
-                new_subject.name = subject_name
-                db.session.add(new_subject)
-                db.session.flush()
-
-
-        #temporario , tirar no banco
-        post.subject_id = 1
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        subjects_names = form.subject.data.replace(', ', ',').split(',')
+        old_subjects = post.subjects
+        #not subject remove 
+        for subject in old_subjects:
+            post.subjects.remove(subject)
 
-        #remove old relationship
-        posts_subject_list = PostSubject.query.filter_by(id_post = post.id ).all();
-        for post_subject in posts_subject_list:
-            db.session.delete(post_subject)
-
-
-        #add new relationship nxn
-        for subject_name in subjects:
-            subject = Subject.query.filter_by(name=subject_name).first_or_404()
-            post_subject_new = PostSubject();
-            post_subject_new.id_post = post.id
-            post_subject_new.id_subject = subject.id
-            db.session.add(post_subject_new)
+        for name in subjects_names:
+            subject = Subject.query.filter_by(name=name).first()
+            if (not subject):
+                subject = Subject()
+                subject.name = name
+            post.subjects.append(subject)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
