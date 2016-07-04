@@ -182,8 +182,8 @@ def create():
                 subject.name = name
             post.subjects.append(subject)
         db.session.add(post)
-        db.session.flush()
 
+        db.session.flush()
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
             post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
