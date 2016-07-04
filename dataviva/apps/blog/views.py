@@ -40,8 +40,10 @@ def index():
     subjects = []
 
     for subject_query in subjects_query:
-        if len(subject_query.posts)  > 0:
-            subjects.append(subject_query)
+        for row in subject_query.posts:
+            if row.active == True:
+                subjects.append(subject_query)
+                break
 
     return render_template('blog/index.html', posts=posts, subjects=subjects)
 
@@ -55,8 +57,10 @@ def index_subject(subject):
     subjects = []
 
     for subject_query in subjects_query:
-        if len(subject_query.posts)  > 0:
-            subjects.append(subject_query)
+        for row in subject_query.posts:
+            if row.active == True:
+                subjects.append(subject_query)
+                break
 
     for post in posts_query:
         if float(subject) in [x.id for x in post.subjects]:
@@ -74,8 +78,10 @@ def show(id):
     subjects = []
 
     for subject_query in subjects_query:
-        if len(subject_query.posts)  > 0:
-            subjects.append(subject_query)
+        for row in subject_query.posts:
+            if row.active == True:
+                subjects.append(subject_query)
+                break
 
     if len(posts) > 3:
         read_more = [posts.pop(randrange(len(posts))) for _ in range(3)]
