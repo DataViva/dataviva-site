@@ -1,22 +1,22 @@
-<div id="graphs-oportunities" class="container">
+<div id="graphs-opportunities" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
         <h3>{% trans %}Visualize{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Product Space{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/network/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&spotlight=true&size=export_val" target="graphs-frame-oportunities" class="list-group-item {{'selected' if graph.menu == 'product-space-network' or not graph }}">{% trans %}Network{% endtrans %}</a>
-            <a href="/{{ g.locale }}/embed/scatter/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&controls=true&depth=hs_2&year=2014&y=pci&x=distance&size=export_val" target="graphs-frame-oportunities" class="list-group-item {{'selected' if graph.menu == 'product-space-scatter' }}">{% trans %}Scatter{% endtrans %}</a>
+            <a href="/{{ g.locale }}/embed/network/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&spotlight=true&size=export_val" target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'product-space-network' or not graph }}">{% trans %}Network{% endtrans %}</a>
+            <a href="/{{ g.locale }}/embed/scatter/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&controls=true&depth=hs_2&year=2014&y=pci&x=distance&size=export_val" target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'product-space-scatter' }}">{% trans %}Scatter{% endtrans %}</a>
             {% if location.id != 'all' %}
                 <h4>{% trans %}Activities Space{% endtrans %}</h4>
-                <a href="/{{ g.locale }}/embed/network/rais/{{location.id}}/all/all/cnae/?color=color&size=wage&spotlight=true" target="graphs-frame-oportunities" class="list-group-item {{'selected' if graph.menu == 'activities-space-network' }}">{% trans %}Network{% endtrans %}</a>
-                <a href="/{{ g.locale }}/embed/scatter/rais/{{location.id}}/all/all/cnae/?color=color&controls=true&depth=cnae_1&y=cbo_diversity_eff&x=distance&size=num_jobs" target="graphs-frame-oportunities" class="list-group-item {{'selected' if graph.menu == 'activities-space-scatter'}}">{% trans %}Scatter{% endtrans %}</a>
+                <a href="/{{ g.locale }}/embed/network/rais/{{location.id}}/all/all/cnae/?color=color&size=wage&spotlight=true" target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'activities-space-network' }}">{% trans %}Network{% endtrans %}</a>
+                <a href="/{{ g.locale }}/embed/scatter/rais/{{location.id}}/all/all/cnae/?color=color&controls=true&depth=cnae_1&y=cbo_diversity_eff&x=distance&size=num_jobs" target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'activities-space-scatter'}}">{% trans %}Scatter{% endtrans %}</a>
             {% endif %}
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
         <iframe src="{% if not graph %} /{{ g.locale }}/embed/network/secex/{{location.id}}/all/all/hs/?rca_scope=wld_rca&color=color&spotlight=true&size=export_val
                      {% else %} /{{ g.locale }}/embed/{{graph.url}} {% endif %}"
-                name="graphs-frame-oportunities"
-                id="graphs-frame-oportunities"
+                name="graphs-frame-opportunities"
+                id="graphs-frame-opportunities"
                 class="embed-responsive-item" >
         </iframe>
     </div>
