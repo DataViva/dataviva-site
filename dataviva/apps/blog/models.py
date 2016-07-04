@@ -20,7 +20,8 @@ class Post(db.Model):
 
     subjects = db.relationship(
         "Subject",
-        secondary=association_table)
+        secondary=association_table,
+        backref=db.backref('posts', lazy='dynamic'))
 
     def date_str(self):
         return self.postage_date.strftime('%d/%m/%Y')
@@ -33,9 +34,6 @@ class Subject(db.Model):
     __tablename__ = 'blog_subject'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    posts = db.relationship(
-        "Post",
-        secondary=association_table)
 
     def __repr__(self):
         return '<PostSubject %r>' % (self.name)

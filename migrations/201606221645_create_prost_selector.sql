@@ -1,7 +1,6 @@
 create table blog_post_subject(
     post_id int UNSIGNED NOT NULL, 
     subject_id int UNSIGNED NOT NULL,
-    CONSTRAINT pk_ps PRIMARY KEY(post_id, subject_id),
     FOREIGN KEY (post_id) REFERENCES blog_post(id),
     FOREIGN KEY (subject_id) REFERENCES blog_subject(id)
 );

@@ -127,16 +127,21 @@ def admin_activate(status, status_value):
 @required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
+    subjects = Subject.query.all()
+
     if ids:
         posts = Post.query.filter(Post.id.in_(ids)).all()
         for post in posts:
-            # deletar subjets inuteis ? 
-            posts_subject_list = PostSubject.query.filter_by(id_post = post.id ).all();
-            for post_subject in posts_subject_list:
-                db.session.delete(post_subject)
-
-            delete_s3_folder(os.path.join(mod.name, str(post.id)))
+            try:
+                delete_s3_folder(os.path.join(mod.name, str(post.id)))
+            except Exception:
+                pass
             db.session.delete(post)
+            db.session.flush()
+
+            for subject in subjects:
+                if subject.posts.count() == 0:
+                    db.session.delete(subject)
 
         db.session.commit()
         return u"Post(s) excluído(s) com sucesso!", 200
@@ -177,6 +182,7 @@ def create():
                 subject.name = name
             post.subjects.append(subject)
         db.session.add(post)
+        db.session.flush()
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
@@ -220,10 +226,10 @@ def update(id):
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         subjects_names = form.subject.data.replace(', ', ',').split(',')
-        old_subjects = post.subjects
-        #not subject remove 
-        for subject in old_subjects:
-            post.subjects.remove(subject)
+        num_subjects = len(post.subjects)
+
+        for i in range(0, num_subjects):
+            post.subjects.remove(post.subjects[0])
 
         for name in subjects_names:
             subject = Subject.query.filter_by(name=name).first()
@@ -232,6 +238,7 @@ def update(id):
                 subject.name = name
             post.subjects.append(subject)
 
+        db.session.flush()
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
             post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
