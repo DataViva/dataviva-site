@@ -1,10 +1,10 @@
-<div id="graphs-oportunities" class="container">
+<div id="graphs-opportunities" class="container">
     <nav class="nav-graph col-xs-12 col-md-3" >
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Economic Activities{% endtrans %}</h4>
             <a href="/{{ g.locale }}/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
-                target="graphs-frame-oportunities" class="list-group-item {{'selected' if graph.menu == 'economic-activities-rings' or not graph }}"
+                target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'economic-activities-rings' or not graph }}"
                 data-parent="#economic-activities">{% trans %}Rings{% endtrans %}</a>
         </div>
     </nav>
@@ -15,8 +15,8 @@
                      {% else %}
                         /{{ g.locale }}/embed/{{graph.url}}
                     {% endif %}"
-            name="graphs-frame-oportunities"
-            id="graphs-frame-oportunities"
+            name="graphs-frame-opportunities"
+            id="graphs-frame-opportunities"
             class="embed-responsive-item">
         </iframe>
     </div>
