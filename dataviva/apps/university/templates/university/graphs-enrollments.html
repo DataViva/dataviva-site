@@ -7,22 +7,26 @@
                 <div class="collapse" id="category-major">
                     <a href="/{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" 
                        target="graphs-frame-enrollments" 
-                       class="list-group-item {{'selected' if graph.menu == 'category-major-tree_map' or not graph }}">TreeMap</a>
+                       class="list-group-item {{'selected' if graph.menu == 'category-major-tree_map' or not graph }}"
+                       data-parent="#category-major">TreeMap</a>
                     <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" 
                        target="graphs-frame-enrollments" 
-                       class="list-group-item {{'selected' if graph.menu == 'category-major-stacked'}}">{% trans %}Stacked{% endtrans %}</a>
+                       class="list-group-item {{'selected' if graph.menu == 'category-major-stacked'}}"
+                       data-parent="#category-major">{% trans %}Stacked{% endtrans %}</a>
                 </div>
                 <a href="#category-status" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Students Status{% endtrans %}</a>
                 <div class="collapse" id="category-status">
                     <a href="/{{ g.locale }}/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" 
                        target="graphs-frame-enrollments"
-                       class="list-group-item {{'selected' if graph.menu == 'category-status-line'}}">{% trans %}Line{% endtrans %}</a>
+                       class="list-group-item {{'selected' if graph.menu == 'category-status-line'}}"
+                       data-parent="#category-status">{% trans %}Line{% endtrans %}</a>
                 </div>
                 <a href="#category-shift" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Shift{% endtrans %}</a>
                 <div class="collapse" id="category-shift">
                     <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/time/?y=students&layout=share&order=color" 
                        target="graphs-frame-enrollments" 
-                       class="list-group-item {{'selected' if graph.menu == 'category-shift-stacked'}}">{% trans %}Stacked{% endtrans %}</a>
+                       class="list-group-item {{'selected' if graph.menu == 'category-shift-stacked'}}"
+                       data-parent="#category-shift">{% trans %}Stacked{% endtrans %}</a>
                 </div>
         </div>
     </nav>
