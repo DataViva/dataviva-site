@@ -11,11 +11,6 @@ mod = Blueprint('industry', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/industry')
 
-industry_tabs_path = os.path.join(mod.root_path, mod.template_folder, mod.name)
-filenames = [filename for filename in next(os.walk(industry_tabs_path))[2] if "graphs" in filename]
-industry_tabs = [tabs[tabs.find('-')+1:tabs.find('.')] for tabs in filenames]
-industry_tabs.append(None)
-
 
 @mod.before_request
 def before_request():
@@ -163,5 +158,5 @@ def index(cnae_id, tab):
 
     if header['num_jobs'] is None or rais_max_year != header['year']:
         abort(404)
-    
+
     return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph)
