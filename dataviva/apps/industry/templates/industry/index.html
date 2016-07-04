@@ -1,6 +1,22 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
+<!-- Facebook Properties -->
+{% block facebook_metadata %}
+    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg"/>
+    <meta property="og:url" content="{{url_for('industry.index', cnae_id=industry.id, tab=tab, _external=True, _scheme='http')}}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}"/>
+    <meta property="og:title" content="DataViva: {{ industry.name() }}{% if not location.id %} {% trans %}in Brazil{% endtrans %}{% else %}{% if location.id | length <= 3 %}{{location.preposition('em')}} {{location.name()}}{% else %}{{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}{% endif %}{% endif %} |
+        {% if tab == 'general'%}
+            {% trans %}General{% endtrans %}
+        {% elif tab == 'wages' %}
+            {% trans %}Wages and Jobs{% endtrans %}
+        {% elif tab == 'opportunities' %}
+            {% trans %}Economic Opportunities{% endtrans %}
+        {% endif %}"/>
+    <meta property="og:description" content="{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}} {% trans %}is the{% endtrans %} {% if g.locale == "en" %}number {% endif %}{{header.ranking}}{% if g.locale == "pt" %}{{ header.ranking | ordinal('f') }}{% endif %} ..."/>
+    <meta property="og:type" content="website" />
+{% endblock facebook_metadata %}
+
 {% block content %}
 
 <!-- BREADCRUMB -->
