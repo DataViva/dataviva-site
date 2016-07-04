@@ -33,7 +33,7 @@ def add_language_code(endpoint, values):
 def graphs(basic_course_id, tab):
     basic_course = Course_sc.query.filter_by(id=basic_course_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('basic_course/graphs-'+tab+'.html', basic_course=basic_course, location=location)
+    return render_template('basic_course/graphs-'+tab+'.html', basic_course=basic_course, location=location, graph=None)
 
 
 @mod.route('/<course_sc_id>', defaults={'tab': 'general'})

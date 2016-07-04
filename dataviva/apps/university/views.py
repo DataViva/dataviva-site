@@ -31,7 +31,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<university_id>/graphs/<tab>', methods=['POST'])
 def graphs(university_id, tab):
     university = UniversityModel.query.filter_by(id=university_id).first_or_404()
-    return render_template('university/graphs-'+tab+'.html', university=university)
+    return render_template('university/graphs-'+tab+'.html', university=university, graph=None)
 
 
 @mod.route('/<university_id>', defaults={'tab': 'general'})

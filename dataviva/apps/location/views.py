@@ -98,7 +98,7 @@ def graphs(bra_id, tab):
         location.id = 'all'
     else:
         location = Bra.query.filter_by(id=bra_id).first()
-    return render_template('location/graphs-' + tab + '.html', location=location)
+    return render_template('location/graphs-' + tab + '.html', location=location, graph=None)
 
 
 @mod.route('/all', defaults={'tab': 'general'})

@@ -36,7 +36,7 @@ def add_language_code(endpoint, values):
 def graphs(industry_id, tab):
     industry = Cnae.query.filter_by(id=industry_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location)
+    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location, graph=None)
 
 
 @mod.route('/<cnae_id>', defaults={'tab': 'general'})
