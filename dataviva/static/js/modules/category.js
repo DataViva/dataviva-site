@@ -99,7 +99,7 @@ var Category = (function() {
                 success: function (graphs) {
                     $('#graphs').append(graphs);
                     $('.list-group.panel a[target]').on('click', Category.updateGraphUrl);
-                    expandMenu();
+                    expandMenu(tab);
                     updateClassSelected();
                 }
             });
@@ -110,9 +110,14 @@ var Category = (function() {
         $('#graphs #graphs-' + tab).show();
     }
 
-    function expandMenu(){
-        if($('#graphs .list-group.panel .selected').parent().hasClass('collapse'))
-            $('#graphs .list-group.panel .selected').parent().attr('class', 'collapse in');
+    function expandMenu(tab){
+        var graph = '';
+
+        if(typeof tab != 'undefined')
+            graph = '#graphs-' + tab
+
+        if($('#graphs ' + graph + ' .list-group.panel .selected').parent().hasClass('collapse'))
+            $('#graphs ' + graph + ' .list-group.panel .selected').parent().attr('class', 'collapse in');
     }
 
     function updateClassSelected(){
