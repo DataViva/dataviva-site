@@ -115,9 +115,9 @@ def index(course_sc_id, tab):
     tabs = {
         'general': [],
         'enrollments': [
-            'enrollments-basic-course-geo_map',
-            'enrollments-basic-course-stacked',
-            'enrollments-basic-course-tree_map',
+            'enrollments-municipality-geo_map',
+            'enrollments-municipality-stacked',
+            'enrollments-municipality-tree_map',
             'enrollments-school-tree_map',
         ],
     }

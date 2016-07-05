@@ -14,11 +14,6 @@ mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/trade_partner')
 
-trade_partner_tabs_path = os.path.join(mod.root_path, mod.template_folder, mod.name)
-filenames = [filename for filename in next(os.walk(trade_partner_tabs_path))[2] if "graphs" in filename]
-trade_partner_tabs = [tabs[tabs.find('-')+1:tabs.find('.')] for tabs in filenames]
-trade_partner_tabs.append(None)
-
 
 @mod.before_request
 def before_request():

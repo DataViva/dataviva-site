@@ -3,43 +3,43 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Jobs by{% endtrans %}</h4>
-            <a href="#jobs-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-opportunities">{% trans %}Economic Activities{% endtrans %}</a>
-            <div class="collapse" id="jobs-opportunities">
+            <a href="#jobs-economic-activities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-economic-activities">{% trans %}Economic Activities{% endtrans %}</a>
+            <div class="collapse" id="jobs-economic-activities">
                 <a href="/{{g.locale}}/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?color=color&depth=cnae_6&size=num_jobs"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-opportunities-tree_map' or not graph }}" data-parent="#jobs-opportunities">
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-economic-activities-tree_map' or not graph }}" data-parent="#jobs-economic-activities">
                     TreeMap
                 </a>
                 <a href="/{{g.locale}}/embed/stacked/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?sort=asc&layout=value&y=num_jobs&order=color"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-opportunities-stacked'}}" data-parent="#jobs-opportunities">
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-economic-activities-stacked'}}" data-parent="#jobs-economic-activities">
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
             {% if not is_municipality %}
-            <a href="#jobs-municipalities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-municipalities">{% trans %}Municipality{% endtrans %}</a>
-            <div class="collapse" id="jobs-municipalities">
+            <a href="#jobs-municipality" class="list-group-item" data-toggle="collapse" data-parent="#jobs-municipality">{% trans %}Municipality{% endtrans %}</a>
+            <div class="collapse" id="jobs-municipality">
                 <a href="/{{g.locale}}/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?color=color&depth=bra_9&size=num_jobs"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipalities-tree_map'}}" data-parent="#jobs-municipalities">
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-tree_map'}}" data-parent="#jobs-municipality">
                     TreeMap
                 </a>
                 <a href="/{{g.locale}}/embed/geo_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?color=num_jobs"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipalities-geo_map'}}" data-parent="#jobs-municipalities">
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-geo_map'}}" data-parent="#jobs-municipality">
                     {% trans %}Map{% endtrans %}
                </a>
                 <a href="/{{g.locale}}/embed/stacked/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?sort=asc&layout=value&y=num_jobs&order=color"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipalities-stacked'}}" data-parent="#jobs-municipalities">
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-stacked'}}" data-parent="#jobs-municipality">
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
             {% endif %}
             <h4>{% trans %}Wage by{% endtrans %} </h4>
-            <a href="#wages-opportunities" class="list-group-item" data-toggle="collapse" data-parent="#wages-opportunities">{% trans %}Economic Activities{% endtrans %}</a>
-            <div class="collapse" id="wages-opportunities">
+            <a href="#wages-economic-activities" class="list-group-item" data-toggle="collapse" data-parent="#wages-economic-activities">{% trans %}Economic Activities{% endtrans %}</a>
+            <div class="collapse" id="wages-economic-activities">
                 <a href="/{{g.locale}}/embed/tree_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?color=color&depth=cnae_6&size=wage"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-opportunities-tree_map'}}" data-parent="#wages-opportunities">
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-economic-activities-tree_map'}}" data-parent="#wages-economic-activities">
                     TreeMap
                 </a>
                 <a href="/{{g.locale}}/embed/stacked/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/cnae/?sort=asc&layout=value&y=wage&order=color"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-opportunities-stacked'}}" data-parent="#wages-opportunities">
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-economic-activities-stacked'}}" data-parent="#wages-economic-activities">
                     {% trans %}Stacked{% endtrans %}
                </a>
             </div>
