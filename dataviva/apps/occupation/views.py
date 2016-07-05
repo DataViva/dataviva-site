@@ -26,28 +26,37 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
-@mod.route('/<occupation_id>/graphs/<tab>', methods=['POST'])
-def graphs(occupation_id, tab):
-    occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
-    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location)
-
-
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<occupation_id>')
-def index(occupation_id):
+@mod.route('/<occupation_id>/graphs/<tab>', methods=['POST'])
+def graphs(occupation_id, tab):
+    occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
+    location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+    return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location, graph=None)
+
+@mod.route('/<occupation_id>', defaults={'tab': 'general'})
+@mod.route('/<occupation_id>/<tab>')
+def index(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
 
     bra_id = request.args.get('bra_id')
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+
     location = Bra.query.filter_by(id=bra_id).first()
-    language = g.locale
+    is_municipality = location and len(location.id) == 9
     header = {}
     body = {}
-    body = {}
+    graph = {}
+    
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
 
     header['family_id'] = occupation_id[0]
 
@@ -56,15 +65,35 @@ def index(occupation_id):
     else:
         body['is_family'] = False
 
-    body['is_not_municipality'] = True
-
     if bra_id:
         occupation_service = OccupationByLocation(
             occupation_id=occupation_id, bra_id=bra_id)
-        if len(bra_id) == 9:
-            body['is_not_municipality'] = False
     else:
         occupation_service = Occupation(occupation_id=occupation_id)
+
+    tabs = {
+        'general': [],
+        'opportunities': [
+            'economic-opportunities-rings'
+        ],
+
+        'wages': [
+            'jobs-economic-activities-tree_map',
+            'jobs-economic-activities-stacked',
+            'wages-economic-activities-tree_map',
+            'wages-economic-activities-stacked',
+        ],
+    }
+
+    if not is_municipality:
+        tabs['wages'] += [
+            'jobs-municipality-tree_map',
+            'jobs-municipality-geo_map',
+            'jobs-municipality-stacked',
+            'wages-municipality-tree_map',
+            'wages-municipality-geo_map',
+            'wages-municipality-stacked',
+        ]
 
     occupation_municipalities_service = OccupationMunicipalities(
         occupation_id=occupation_id, bra_id=bra_id)
@@ -78,8 +107,7 @@ def index(occupation_id):
     header['year'] = occupation_service.year()
     header['age_avg'] = occupation_service.age_avg()
 
-    if body['is_not_municipality']:
-
+    if not is_municipality:
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
         body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
         body['municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
@@ -105,7 +133,7 @@ def index(occupation_id):
             Ybo.bra_id == bra_id,
             Ybo.year == max_year_query_location)\
             .order_by(Ybo.num_jobs.desc())
-    else: 
+    else:
         max_year_query = db.session.query(func.max(Yo.year)).filter(
         Yo.cbo_id == occupation_id)
 
@@ -120,7 +148,13 @@ def index(occupation_id):
             header['ranking'] = index + 1
             break
 
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
-    else :
-        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, language=language)
+    else:
+        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, is_municipality=is_municipality, tab=tab, graph=graph)

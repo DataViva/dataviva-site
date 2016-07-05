@@ -1,6 +1,24 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
+<!-- Facebook Properties -->
+{% block facebook_metadata %}
+    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/basic-course/basic_course_{{ basic_course.id if basic_course.img_link else 'all' }}.jpg"/>
+    <meta property="og:url" content="{{url_for('basic_course.index', course_sc_id=basic_course.id, tab=tab, _external=True, _scheme='http')}}{% if location.id %}{{ '?bra_id=' }}{{ location.id }}{{ '&menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% elif graph.menu %}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% endif %}"/>
+    <meta property="og:title" content="DataViva: {{ basic_course.name() }}{% if not location.id %} {% trans %}in Brazil{% endtrans %}{% else %}{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}}{% else %} {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}{% endif %}{% endif %} |
+        {% if tab == 'general'%}
+            {% trans %}General{% endtrans %}
+        {% elif tab == 'enrollments' %}
+            {% trans %}Enrollments{% endtrans %}
+        {% endif %}"/>
+    <meta property="og:description" content="{% if not location.id %}
+        {% trans %}The highest number of enrollments in the {% endtrans %}{{basic_course.name()}} {% trans %}course/field of study in Brazil is in the municipality of {% endtrans %}...
+      {% else %}
+        {% trans %}The highest number of enrollments in {% endtrans %}{{ basic_course.name() }} {% trans %}in {% endtrans %}{{ location.name() }} ...
+      {% endif %}"/>
+    <meta property="og:type" content="website" />
+{% endblock facebook_metadata %}
+
 {% block content %}
 
 <!-- BREADCRUMB -->
@@ -119,7 +137,7 @@
 
     <div class="container">
           <ul class="nav-tabs" role="tablist">
-              <li role="presentation" class="active">
+              <li role="presentation" class="{{ 'active' if tab == 'general' }}">
                   <a href="#general"
                      aria-controls="general"
                      role="tab"
@@ -127,7 +145,7 @@
                      data-location="{{ location.id }}"
                      data-toggle="tab">{% trans %}General{% endtrans %}</a>
               </li>
-              <li role="presentation">
+              <li role="presentation" class="{{ 'active' if tab == 'enrollments' }}">
                   <a href="#enrollments"
                      aria-controls="enrollments"
                      role="tab"
@@ -150,6 +168,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+  {% if tab != 'general' %}
+    {% include "basic_course/graphs-" + tab + ".html" %}
+  {% endif %}
 </section>
 {% endblock content %}
 

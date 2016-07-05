@@ -28,9 +28,18 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<course_hedu_id>')
-def index(course_hedu_id):
+@mod.route('/<course_hedu_id>', defaults={'tab': 'general'})
+@mod.route('/<course_hedu_id>/<tab>')
+def index(course_hedu_id, tab):
     bra_id = request.args.get('bra_id')
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
 
     max_year_query = db.session.query(
         func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
@@ -100,6 +109,17 @@ def index(course_hedu_id):
         'highest_graduate_number_by_municipality': municipalities_service.highest_graduates_number()
     }
 
+    tabs = {
+        'general': [],
+        'enrollments': [
+            'enrollments-university-tree_map',
+            'enrollments-municipality-geo_map',
+            'enrollments-municipality-stacked',
+            'enrollments-municipality-tree_map',
+            'enrollments-status-line',
+            'enrollments-shift-stacked',
+        ],
+    }
 
     for index, maj in enumerate(rank):
         if rank[index].course_hedu_id == course_hedu_id:
@@ -110,10 +130,17 @@ def index(course_hedu_id):
 
     major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
 
+
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     if header['enrolled'] is None or hedu_max_year != header['year']:
         abort(404)
     else:
-        return render_template('major/index.html', header=header, body=body, location=location, major=major)
+        return render_template('major/index.html', header=header, body=body, location=location, major=major, tab=tab, graph=graph)
 
 
 @mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
@@ -121,4 +148,4 @@ def graphs(course_hedu_id, tab):
     bra = request.args.get('bra_id')
     major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
     location = Bra.query.filter_by(id=bra).first()
-    return render_template('major/graphs-'+tab+'.html', major=major, location=location)
+    return render_template('major/graphs-'+tab+'.html', major=major, location=location, graph=None)

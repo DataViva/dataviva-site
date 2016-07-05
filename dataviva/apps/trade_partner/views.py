@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
-from dataviva.api.secex.services import TradePartner, \
-    TradePartnerMunicipalities, TradePartnerProducts
+from dataviva.api.secex.services import TradePartner, TradePartnerMunicipalities, TradePartnerProducts
 from dataviva.api.secex.models import Ymw, Ymbw
 from dataviva.api.attrs.models import Wld, Bra
 from dataviva import db
 from sqlalchemy.sql.expression import func
 from dataviva.translations.dictionary import dictionary
+from os import walk
+import os
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
@@ -33,13 +34,23 @@ def add_language_code(endpoint, values):
 def graphs(wld_id, tab):
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location)
+    return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location, graph=None)
 
 
-@mod.route('/<wld_id>')
-def index(wld_id):
-
+@mod.route('/<wld_id>', defaults={'tab': 'general'})
+@mod.route('/<wld_id>/<tab>')
+def index(wld_id, tab):
     bra_id = request.args.get('bra_id')
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
+
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=bra_id).first()
     max_year_query = db.session.query(
@@ -127,6 +138,23 @@ def index(wld_id):
         'lowest_balance': products_service.lowest_balance()
     }
 
+    tabs = {
+        'general': [],
+        'international-trade': [
+            'trade-balance-partner-line',
+            'exports-municipality-tree_map',
+            'exports-municipality-stacked',
+            'exports-destination-tree_map',
+            'exports-destination-stacked',
+            'exports-destination-geo_map',
+            'imports-municipality-tree_map',
+            'imports-municipality-stacked',
+            'imports-origin-tree_map',
+            'imports-origin-stacked',
+            'imports-origin-geo_map',
+        ],
+    }
+
     for index, trade_partner_ranking in enumerate(export_rank):
         if export_rank[index].wld_id == wld_id:
             header['export_rank'] = index + 1
@@ -141,7 +169,14 @@ def index(wld_id):
 
     if body['highest_export_value'] is None and body['highest_import_value'] is None:
         abort(404)
+
     if secex_max_year != header['year']:
         abort(404)
-    else:
-        return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location)
+
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+    
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location, tab=tab, graph=graph)

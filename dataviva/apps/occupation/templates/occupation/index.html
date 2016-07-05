@@ -1,6 +1,22 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
+<!-- Facebook Properties -->
+{% block facebook_metadata %}
+    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/occupation/occupation_{{ occupation.id if occupation.img_link else 'all' }}.jpg"/>
+    <meta property="og:url" content="{{url_for('occupation.index', occupation_id=occupation.id, tab=tab, _external=True, _scheme='http')}}{% if location.id %}{{ '?bra_id=' }}{{ location.id }}{{ '&menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% elif graph.menu %}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% endif %}"/>
+    <meta property="og:title" content="DataViva: {{ occupation.name() }}{% if not location.id %} {% trans %}in Brazil{% endtrans %}{% else %}{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}}{% else %} {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}{% endif %}{% endif %} |
+        {% if tab == 'general'%}
+            {% trans %}General{% endtrans %}
+        {% elif tab == 'wages' %}
+            {% trans %}Wages and Jobs{% endtrans %}
+        {% elif tab == 'opportunities' %}
+            {% trans %}Economic Opportunities{% endtrans %}
+        {% endif %}"/>
+    <meta property="og:description" content="{% trans %}The {% endtrans %}{{occupation.name()}} {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}} ..."/>
+    <meta property="og:type" content="website" />
+{% endblock facebook_metadata %}
+
 {% block content %}
 
 <!-- BREADCRUMB -->
@@ -25,7 +41,7 @@
 
 
 <section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/occupation/occupation_{{ occupation.id if occupation.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
-    
+
     <div class="photo-credit">
       <div class="container">
         <a href="{{ occupation.img_link if occupation.img_link else 'https://flic.kr/p/fzSid8' }}" target="blank">
@@ -38,8 +54,8 @@
 
             <span class="portrait dv-cbo-{{header.family_id}} hidden-xs"></span>
             <h1>
-              {{ occupation.name() }} 
-              {% if not location.id %}
+              {{ occupation.name() }}
+              {% if not location %}
                 {% trans %}in Brazil{% endtrans %}
               {% else %}
                 {% if location.id | length <= 3 %}
@@ -99,10 +115,10 @@
                         </div>
                     </div>
                   </div>
-                </div>       
+                </div>
             </div>
         </div>
-</section>               
+</section>
 
 
 
@@ -112,7 +128,7 @@
 
     <div class="container">
           <ul class="nav-tabs" role="tablist">
-              <li role="presentation" class="active">
+              <li role="presentation" class="{{ 'active' if not tab or tab == 'general'}}">
                   <a href="#general"
                      aria-controls="general"
                      role="tab"
@@ -120,7 +136,7 @@
                      data-location="{{ location.id }}"
                      data-toggle="tab">{% trans %}General{% endtrans %}</a>
               </li>
-              <li role="presentation">
+              <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
                   <a href="#wages"
                      aria-controls="wages"
                      role="tab"
@@ -130,7 +146,7 @@
                      data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
               </li>
               {% if occupation.id|length == 4 %}
-              <li role="presentation">
+              <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
                   <a href="#opportunities"
                      aria-controls="opportunities"
                      role="tab"
@@ -157,6 +173,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+{% if tab != 'general' %}
+  {% include "occupation/graphs-" + tab + ".html" %}
+{% endif %}
 </section>
 
 {% endblock content %}

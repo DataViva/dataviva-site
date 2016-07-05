@@ -1,6 +1,65 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
+<!-- Facebook Properties -->
+{% block facebook_metadata %}
+    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg"/>
+    <meta property="og:url" content="{{url_for('location.index', bra_id=location.id, tab=tab, _external=True, _scheme='http') if location.id else url_for('location.all', tab=tab, _external=True, _scheme='http')}}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}"/>
+    <meta property="og:title" content="DataViva: {% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} |
+        {% if tab == 'general'%}
+            {% trans %}General{% endtrans %}
+        {% elif tab == 'trade-partner' %}
+            {% trans %}International Trade{% endtrans %}
+        {% elif tab == 'wages' %}
+            {% trans %}Wages and Jobs{% endtrans %}
+        {% elif tab == 'opportunities' %}
+            {% trans %}Economic Opportunities{% endtrans %}
+        {% elif tab == 'education' %}
+            {% trans %}Education{% endtrans %}
+        {% endif %}"/>
+    <meta property="og:description" content="
+        {% if location.id == 'all' %}
+            {% trans %}Brazil is the 7th largest world economy and the 56th most complex according to the Economic Complexity Index (ECI). In 2015, Brasil has exported{% endtrans %} ...
+        {% else %}
+          {% if is_municipality %}
+                {{ header.name }}
+                {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities}}
+                {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
+                {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
+                {% trans %}km² of area, has a population of {% endtrans %}...
+            {% elif profile.bra_id|length == 7 %}
+                {% if g.locale == "pt" %}
+                    A Microrregião
+                {% endif %}
+                {{ header.name }}
+                {% trans %}microregion is one of the{% endtrans %} {{ profile.number_of_microregions}}
+                {% trans %}subdivisions of the {% endtrans %}{{ profile.mesoregion_name }},
+                {% trans %}mesoregion, located in the state of {% endtrans %}...
+            {% elif profile.bra_id|length == 5 %}
+                {% trans %}The mesoregion {% endtrans %}{{ header.name }}
+                {% trans %} is one of the {% endtrans %}{{ profile.number_of_mesoregions}}
+                {% trans %}subdivisions of the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
+                {% trans %}It is the {% endtrans %}...
+            {% elif profile.bra_id|length == 1 %}
+                {% if g.locale == "pt" %}
+                    A
+                {% else %}
+                    The
+                {% endif %}{{ header.name }}
+                {% trans %} is one of the {% endtrans %}{{ profile.number_of_regions-1 }}
+                {% trans %}regional divisions in Brazil, consisting of the states of {% endtrans %}...
+            {% else %}
+                {{ header.name }}
+                {% trans %} is one of the {% endtrans %}{{ profile.number_of_states-1 }}
+                {% trans %}federated states of Brazil, located in the {% endtrans %}{{ profile.region_name }}
+                {% trans %}being the {% endtrans %}{{ profile.area_rank }}{{ profile.area_rank | ordinal }}
+                {% trans %}state in territorial area and {% endtrans %}...
+            {% endif %}
+        {% endif %}
+    "/>
+    <meta property="og:type" content="website" />
+{% endblock facebook_metadata %}
+
 {% block content %}
 
 <!-- BREADCRUMB -->
@@ -20,7 +79,7 @@
 
 <!-- Criar classes css para os backgrunds das localidades -->
 <section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
- 
+
     <div class="photo-credit">
       <div class="container">
         <a href="{{ location.img_link if location.img_link else 'https://flic.kr/p/7mfM76' }}" target="blank">
@@ -126,21 +185,20 @@
             </div><!--/.indices-->
         </div>
     </div>
-
 </section>
 
 <section id="profile" class="profile">
     <nav>
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active">
+                <li role="presentation" class="{{ 'active' if not tab }}">
                     <a href="#general"
                        aria-controls="general"
                        role="tab"
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'trade-partner' }}">
                     <a href="#trade-partner"
                        aria-controls="trade-partner"
                        role="tab"
@@ -148,7 +206,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}International Trade{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
                     <a href="#wages"
                        aria-controls="wages"
                        role="tab"
@@ -156,7 +214,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
                     <a href="#opportunities"
                        aria-controls="opportunities"
                        role="tab"
@@ -164,7 +222,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'education' }}">
                     <a href="#education"
                        aria-controls="education"
                        role="tab"
@@ -189,6 +247,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+  {% if tab != 'general' %}
+    {% include "location/graphs-" + tab + ".html" %}
+  {% endif %}
 </section>
 {% endblock content %}
 

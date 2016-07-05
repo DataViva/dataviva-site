@@ -1,6 +1,20 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
+<!-- Facebook Properties -->
+{% block facebook_metadata %}
+    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/university/university_{{ university.id if university.img_link else 'all' }}.jpg"/>
+    <meta property="og:url" content="{{url_for('university.index', university_id=university.id, tab=tab, _external=True, _scheme='http')}}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}"/>
+    <meta property="og:title" content="DataViva: {{ university.name() }} |
+        {% if tab == 'general'%}
+            {% trans %}General{% endtrans %}
+        {% elif tab == 'enrollments' %}
+            {% trans %}Enrollments{% endtrans %}
+        {% endif %}"/>
+    <meta property="og:description" content="{% trans %}The institution {% endtrans %} {{ university.name() }} {% trans %} is a{% endtrans %} {{ header.type }} {% trans %}educational establishment. Its main course is{% endtrans %} {{ body.major_with_more_enrollments }}, {% trans %}with{% endtrans %} ..."/>
+    <meta property="og:type" content="website" />
+{% endblock facebook_metadata %}
+
 {% block content %}
 
 <!-- BREADCRUMB -->
@@ -87,14 +101,14 @@
 
     <div class="container">
             <ul class="nav-tabs" role="tablist">
-                <li role="presentation" class="active">
-                    <a href="#general"q
+                <li role="presentation" class="{{ 'active' if tab == 'general' }}">
+                    <a href="#general"
                        aria-controls="general"
                        role="tab"
                        data-university="{{ university.id }}"
                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
-                <li role="presentation">
+                <li role="presentation" class="{{ 'active' if tab == 'enrollments' }}">
                     <a href="#enrollments"
                        aria-controls="enrollments"
                        role="tab"
@@ -116,6 +130,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+  {% if tab != 'general' %}
+    {% include "university/graphs-" + tab + ".html" %}
+  {% endif %}
 </section>
 {% endblock content %}
 

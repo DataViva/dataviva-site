@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, abort
+from flask import Blueprint, render_template, g, abort, request
 from dataviva import db
 from dataviva.apps.general.views import get_locale
 from dataviva.api.attrs.services import Location as LocationService, LocationGdpRankings, \
@@ -25,6 +25,7 @@ from random import randint
 from decimal import *
 import sys
 
+
 reload(sys)  
 sys.setdefaultencoding('utf8')
 
@@ -32,6 +33,47 @@ mod = Blueprint('location', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/location',
                 static_folder='static')
+
+tabs = {
+        'general': [],
+        'opportunities': [
+            'product-space-scatter',
+            'activities-space-network',
+            'activities-space-scatter',
+        ],
+
+        'wages': [
+            'jobs-industry-tree_map',
+            'jobs-industry-stacked',
+            'jobs-occupation-tree_map',
+            'jobs-occupation-stacked',
+            'wage-industry-tree_map',
+            'wage-industry-stacked',
+            'wage-occupation-tree_map',
+            'wage-occupation-stacked',
+        ],
+
+        'trade-partner': [
+            'trade-balance-location-line',
+            'exports-products-tree_map',
+            'exports-products-stacked',
+            'exports-destination-tree_map',
+            'exports-destination-stacked',
+            'imports-products-tree_map',
+            'imports-products-stacked',
+            'imports-origin-tree_map',
+            'imports-origin-stacked',
+        ],
+
+        'education': [
+            'higher-education-university-tree_map',
+            'education-course-tree_map',
+            'professional-education-school-tree_map',
+            'professional-education-course-tree_map',
+            'basic-education-administrative-dependencie-tree_map',
+            'basic-education-level-tree_map',
+        ],
+    }
 
 
 @mod.before_request
@@ -56,11 +98,12 @@ def graphs(bra_id, tab):
         location.id = 'all'
     else:
         location = Bra.query.filter_by(id=bra_id).first()
-    return render_template('location/graphs-' + tab + '.html', location=location)
+    return render_template('location/graphs-' + tab + '.html', location=location, graph=None)
 
 
-@mod.route('/all')
-def all():
+@mod.route('/all', defaults={'tab': 'general'})
+@mod.route('/all/<tab>')
+def all(tab):
     location_service_brazil = All()
     product_service = Product(product_id=None)
     industry_service = Industry(cnae_id=None)
@@ -73,6 +116,18 @@ def all():
 
     location = Wld.query.filter_by(id='sabra').first_or_404()
     location.id = 'all'
+    is_municipality = False
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+
+    graph = {}
+    
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
+    profile = {}
 
     header = {
         'bg_class_image': 'bg-all',
@@ -114,20 +169,66 @@ def all():
         'highest_enrolled_by_basic_course_name': basic_course_service.highest_enrolled_by_basic_course_name()
     }
 
-    profile = {}
-
     if body['total_exports'] is None and body['total_imports'] is None and body['total_jobs'] is None and \
             body['highest_enrolled_by_university'] is None and body['highest_enrolled_by_basic_course'] is None and \
             body['highest_enrolled_by_major'] is None:
             abort(404)
+    
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+    
     else:
-        return render_template('location/index.html', header=header, body=body, profile=profile, location=location)
+        return render_template('location/index.html',
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
 
 
-@mod.route('/<bra_id>')
-def index(bra_id):
-
+@mod.route('/<bra_id>', defaults={'tab': 'general'})
+@mod.route('/<bra_id>/<tab>')
+def index(bra_id, tab):
     location = Bra.query.filter_by(id=bra_id).first_or_404()
+    is_municipality = location and len(location.id) == 9
+    menu = request.args.get('menu')
+    url = request.args.get('url')
+
+    graph = {}
+    
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
+    if not is_municipality:
+        tabs['wages'] += [
+            'jobs-municipalities-tree_map',
+            'jobs-municipalities-geo_map',
+            'jobs-municipalities-stacked',
+            'wages-municipalities-tree_map',
+            'wages-municipalities-geo_map',
+            'wages-municipalities-stacked',
+        ]
+
+        tabs['wages'] += [
+            'jobs-municipality-tree_map',
+            'jobs-municipality-stacked',
+            'wages-municipality-tree_map',
+            'wages-municipality-stacked',
+        ]
+
+        tabs['trade-partner'] += [
+            'exports-municipality-tree_map',
+            'exports-municipality-stacked',
+            'imports-municipality-tree_map',
+            'imports-municipality-stacked',
+
+        ]
+
+        tabs['education'] += [
+            'education-municipality-tree_map',
+            'basic-education-municipality-tree_map',
+        ]
 
     location_service = LocationService(bra_id=bra_id)
     location_gdp_rankings_service = LocationGdpRankings(
@@ -285,6 +386,13 @@ def index(bra_id):
             body['highest_enrolled_by_university'] is None and body['highest_enrolled_by_basic_course'] is None and \
             body['highest_enrolled_by_major'] is None:
             abort(404)
+
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     else:
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
