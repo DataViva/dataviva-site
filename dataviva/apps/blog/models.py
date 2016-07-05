@@ -1,6 +1,11 @@
+from sqlalchemy import ForeignKey, Table, Column
+from sqlalchemy.ext.declarative import declarative_base 
 from dataviva import db
-from sqlalchemy import ForeignKey
 
+association_table = db.Table('blog_post_subject',
+    db.Column('post_id', db.Integer, db.ForeignKey('blog_post.id')),
+    db.Column('subject_id', db.Integer, db.ForeignKey('blog_subject.id'))
+)
 
 class Post(db.Model):
     __tablename__ = 'blog_post'
@@ -12,8 +17,11 @@ class Post(db.Model):
     thumb = db.Column(db.Text(4194304))
     postage_date = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
-    subject_id = db.Column(db.Integer, ForeignKey('blog_subject.id'))
-    subject = db.relationship('PostSubject', backref='blog_post', lazy='eager')
+
+    subjects = db.relationship(
+        "Subject",
+        secondary=association_table,
+        backref=db.backref('posts', lazy='dynamic'))
 
     def date_str(self):
         return self.postage_date.strftime('%d/%m/%Y')
@@ -22,13 +30,10 @@ class Post(db.Model):
         return '<Post %r>' % (self.title)
 
 
-class PostSubject(db.Model):
+class Subject(db.Model):
     __tablename__ = 'blog_subject'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-
-    def __init__(self, name=None):
-        self.name = name
 
     def __repr__(self):
         return '<PostSubject %r>' % (self.name)
