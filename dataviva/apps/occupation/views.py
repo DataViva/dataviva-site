@@ -78,21 +78,21 @@ def index(occupation_id, tab):
         ],
 
         'wages': [
-            'jobs-opportunities-tree_map',
-            'jobs-opportunities-stacked',
-            'wages-opportunities-tree_map',
-            'wages-opportunities-stacked',
+            'jobs-economic-activities-tree_map',
+            'jobs-economic-activities-stacked',
+            'wages-economic-activities-tree_map',
+            'wages-economic-activities-stacked',
         ],
     }
 
     if not is_municipality:
         tabs['wages'] += [
-            'jobs-municipalities-tree_map',
-            'jobs-municipalities-geo_map',
-            'jobs-municipalities-stacked',
-            'wages-municipalities-tree_map',
-            'wages-municipalities-geo_map',
-            'wages-municipalities-stacked',
+            'jobs-municipality-tree_map',
+            'jobs-municipality-geo_map',
+            'jobs-municipality-stacked',
+            'wages-municipality-tree_map',
+            'wages-municipality-geo_map',
+            'wages-municipality-stacked',
         ]
 
     occupation_municipalities_service = OccupationMunicipalities(
