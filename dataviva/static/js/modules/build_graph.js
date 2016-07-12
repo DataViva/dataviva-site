@@ -1,10 +1,19 @@
+function setDimension(type, name, id) {
+    if ($('#'+type).siblings('input').val() != id) {
+        $('#'+type).html(name);
+        $('#dimensions input[name='+type+']').val(id).trigger('change');
+    }
+}
+
+
+dataviva.requireAttrs(['datasets'], function() {
+    dataviva.attrs.datasets
+    setDimension(type, name, id)
+});
+
 var selectorGraphs = Selector()
     .callback(function(d){
-        if ($('#'+selectorGraphs.type()).siblings('input').val() != d.id) {
-            $('#'+selectorGraphs.type()).html(d.name);
-            $('#dimensions input[name='+selectorGraphs.type()+']').val(d.id).trigger('change');
-        }
-
+        setDimension(selectorGraphs.type(), d.name, d.id)
         $('#modal-selector').modal('hide');
     });
 
@@ -45,7 +54,8 @@ var BuildGraph = (function () {
         selectedView: selectedView,
         selectedGraph: selectedGraph,
         setCompare: setCompare,
-        init: init
+        init: init,
+        fillForm: fillForm
     }
 
     var selectedGraph, selectedView, dataset, views;
@@ -61,14 +71,14 @@ var BuildGraph = (function () {
         $('#dimensions').empty();
         dimensions.forEach(function(dimension, index) {
             var div = $('<div></div>').addClass('form-group'),
+                filter = $('<input></input>').attr('type', 'hidden').attr('name', dimension.id).attr('id', 'filter'+index).val('all'),
                 label = $('<label></label>').attr('for', dimension.id).addClass('control-label'),
-                cleaner = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
-                                        .html(dataviva.dictionary['clean_selection'])
-                                        .attr('onclick', 'clean_selection('+dimension.id+')'),
                 selector = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
                                         .html(dataviva.dictionary['select'])
                                         .attr('onclick', 'select_dimension(id);'),
-                filter = $('<input></input>').attr('type', 'hidden').attr('name', dimension.id).attr('id', 'filter'+index).val('all');
+                cleaner = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
+                                        .html(dataviva.dictionary['clean_selection'])
+                                        .attr('onclick', 'clean_selection('+dimension.id+')');
 
             label.html(dataviva.dictionary[dimension.id]);
             filter.change(updateViews);
@@ -229,6 +239,18 @@ var BuildGraph = (function () {
         }
 
         $('#datasets').change(changeDataSet);
+    }
+
+    function fillForm(){
+        var dataset = 'rais';
+        $('#datasets').val(dataset);
+        BuildGraph.dataset = dataset;
+        setDimensions(dataviva.datasets[dataset].dimensions);
+        $('#dimensions #filter0').val("4rj020212")
+        $('#dimensions #filter1').val("q86101")
+        $('#dimensions #filter2').val("7825")
+        updateViews();
+
     }
 })();
 

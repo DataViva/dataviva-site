@@ -42,13 +42,16 @@
                 <li><a href="{{ url_for('help.index') }}">{% trans %}HELP{% endtrans %}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right visible-md visible-lg form-inline">
-                <li class="input-group">
+                <li class="form-group">
                     {% if not g.user.is_authenticated %}
                     <a data-toggle="modal" data-target="#dataviva-login">{% trans %}Login{% endtrans %}</a>
                     {% trans %}or{% endtrans %}
                     <button class="btn btn-primary m-l m-r" data-toggle="modal" data-target="#dataviva-signup">{% trans %}Sign Up{% endtrans %}</button>
                     {% else %}
-                        <span>{% trans %}Welcome{% endtrans %}, <b>{{ g.user.firstname }}</b></span>!
+                        <span>{% trans %}Welcome{% endtrans %}, <b>{{ g.user.firstname }}</b>!</span>
+                        <div class="input-group">
+                            <a href="/{{g.locale}}/account/logout" role="button" class="btn btn-primary m-l m-r">{% trans %}Logout{% endtrans %}</a>
+                        </div>
                     {% endif %}
 
                     <div class="form-group">
@@ -61,7 +64,7 @@
                             <option value="pt" selected="selected">pt</option>
                         </select>
                     </div>
-                </div>
+                </li>
             </ul>
         </div>
     </div>
