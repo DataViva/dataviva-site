@@ -53,7 +53,7 @@ schools = Dimension('school', 'School', [
 
 attrs_datasets = [
     DataSet('rais', [locations, industries, occupations], [str(year) for year in range(2002, 2014)]),
-    DataSet('secex', [locations, products, trade_partners], [str(year) for year in range(2002, 2015)]),
-    DataSet('hedu', [locations, universities, majors], [str(year) for year in range(2009, 2014)]),
-    DataSet('sc', [locations, schools, courses], [str(year) for year in range(2007, 2015)])
+    DataSet('secex', [locations, products, trade_partners], [str(year) for year in range(2002, 2017)]),
+    DataSet('hedu', [locations, universities, majors], [str(year) for year in range(2009, 2015)]),
+    DataSet('sc', [locations, schools, courses], [str(year) for year in range(2007, 2016)])
 ]
