@@ -10,27 +10,9 @@ hedu en pt
 secex en pt 
     1378 1378
 
-
-select * from secex_ymb where year='2016';
-select * from secex_ymb where year='2015';
-select * from rais_yb where year='2014';
+select * from secex_ymb where year='2016'; ok
+select * from secex_ymb where year='2015'; ok 
+select * from rais_yb where year='2014'; falta lio e pt lo lio 
 -- ------
-select * from sc_yb where year='2015';
-select * from hedu_yb where year='2014';
-
-
-
-years = [
-    Condition('year=2002', '-2002'),
-    Condition('year=2003', '-2003'),
-    Condition('year=2004', '-2004'),
-    Condition('year=2005', '-2005'),
-    Condition('year=2006', '-2006'),
-    Condition('year=2007', '-2007'),
-    Condition('year=2008', '-2008'),
-    Condition('year=2009', '-2009'),
-    Condition('year=2010', '-2010'),
-    Condition('year=2011', '-2011'),
-    Condition('year=2012', '-2012'),
-    Condition('year=2013', '-2013'),
-    Condition('year=2014', '-2014')]
+select * from sc_yb where year='2015'; ok
+select * from hedu_yb where year='2014'; ok
