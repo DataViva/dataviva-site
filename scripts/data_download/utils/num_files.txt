@@ -1,14 +1,14 @@
 rais en pt 
-    852 852
+    71/year
 
 sc en pt 
     136 136
 
 hedu en pt 
-    85 85
+    34/year
 
 secex en pt 
-    1378 1378
+    34/year
 
 select * from secex_ymb where year='2016'; ok
 select * from secex_ymb where year='2015'; ok 
