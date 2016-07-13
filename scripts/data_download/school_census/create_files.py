@@ -58,7 +58,7 @@ def save(year, locations, schools, courses, lang, output_path):
                             continue;
 
                 table = select_table(conditions, school.name)
-                name_file = 'sc' + str(year.name)+str(school.name)+str(location.name)+str(course.name)
+                name_file = 'sc' + str(year.name)+str(location.name)+str(school.name)+str(course.name)
                 
                 new_file_path = os.path.join(output_path, name_file+".csv.bz2")
 
@@ -92,11 +92,4 @@ schools = [
 local_imports()
 inputs = common.test_imput(sys=sys, logging=logging, Condition=Condition)
 save(year=inputs['year'], locations=locations, schools=schools, courses=courses, lang=inputs['lang'], output_path=inputs['output_path'])
-
-
-
-
-
-
-
 
