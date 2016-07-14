@@ -27,8 +27,14 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/')
-def index():
+#http://localhost:5000/pt/build_graph/rais/4rj020212/q86101/7825?url=stacked%2Frais%2F4sp%2Fall%2Fall%2Fcbo%2F%3Fsort%3Dasc%26layout%3Dvalue%26y%3Dnum_jobs%26order%3Dcolor
+@mod.route('/', defaults={'dataset': None, 'filter0': None, 'filter1': None, 'filter2': None})
+@mod.route('/<dataset>', defaults={'filter0': None, 'filter1': None, 'filter2': None})
+@mod.route('/<dataset>/<filter0>', defaults={'filter1': None, 'filter2': None})
+@mod.route('/<dataset>/<filter0>/<filter1>', defaults={'filter2': None})
+@mod.route('/<dataset>/<filter0>/<filter1>/<filter2>')
+def index(dataset, filter0, filter1, filter2):
+    url = request.args.get('url')    
     return render_template('build_graph/index.html')
 
 
