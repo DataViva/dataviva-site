@@ -5,8 +5,7 @@ function setDimension(type, name, id) {
     }
 }
 
-
-dataviva.requireAttrs(['datasets'], function() {
+dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo'], function() {
     dataviva.attrs.datasets
     setDimension(type, name, id)
 });
@@ -242,22 +241,71 @@ var BuildGraph = (function () {
     }
 
     function fillForm(){
-        var dataset = 'rais';
+        var url = window.location.href.split('?')[0];
+
+        if (url.split('/')[5]){
+            var dataset = url.split('/')[5];
+        }
+
         $('#datasets').val(dataset);
         BuildGraph.dataset = dataset;
         setDimensions(dataviva.datasets[dataset].dimensions);
-        $('#dimensions #filter0').val("4rj020212")
-        $('#dimensions #filter1').val("q86101")
-        $('#dimensions #filter2').val("7825")
-        updateViews();
 
+        if (url.split('/').length == 9 && dataset != 'course_sc'){
+            var url_array = url.split('/');
+            var value2 = url_array.pop();
+            var value1 = url_array.pop();
+            var value0 = url_array.pop();
+            var filter2 = $('#dimensions div').children('button')[4].id
+            var valueText2 = 'Selected';
+            if (value2 != 'all'){
+                if (filter2 == 'cbo')
+                    valueText2 = dataviva.cbo[value2].name;
+                else if (filter2 == 'wld')
+                    valueText2 = dataviva.wld[value2].name;
+                else if (filter2 == 'course_hedu')
+                    valueText2 = dataviva.course_hedu[value2].name;
+            }
+        }
+        else if (url.split('/').length == 8){
+            var url_array = url.split('/');
+            var value1 = url_array.pop();
+            var value0 = url_array.pop();
+        }
+
+        var filter1 = $('#dimensions div').children('button')[2].id
+        var valueText1 = 'Selected';
+        if (value1 != 'all'){
+            if (filter1 == 'cnae')
+                valueText1 = dataviva.cnae[value1].name;
+            else if (filter1 == 'hs')
+                valueText1 = dataviva.hs[value1].name;
+            else if (filter1 == 'course_sc')
+                valueText1 = dataviva.course_sc[value1].name;
+            else if (filter1 == 'university')
+                valueText1 = dataviva.university[value1].name;
+        }
+
+        var valueText0 = 'Selected'
+        if (value0 != 'all'){
+            valueText0 = dataviva.bra[value0].name
+        }
+
+        $('#dimensions #filter0').val(value0)
+        $('#dimensions #bra').text(valueText0)
+        $('#dimensions #filter1').val(value1)
+        $('#dimensions #'+filter1).text(valueText1)
+        $('#dimensions #filter2').val(value2)
+        $('#dimensions #'+filter2).text(valueText2)
+
+        updateViews();
     }
 })();
-
 
 $(document).ready(function () {
     dataviva.requireAttrs(['datasets'], function() {
         BuildGraph.init();
+        BuildGraph.fillForm();
     });
 });
 
