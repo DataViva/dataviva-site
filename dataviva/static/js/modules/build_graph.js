@@ -297,6 +297,17 @@ var BuildGraph = (function () {
             $('#dimensions #'+filter2).text(valueText2)
         }
 
+        //Fill Parameters
+        if (window.location.href.split('?')[1]){
+            var urlParameters = window.location.href.split('?')[1];
+            var parameters = {};
+            $.each(urlParameters.split('%26'), function(){
+                if(this.split('%3D')[0] == 'views') parameters['views'] = this.split('%3D')[1];
+                else if (this.split('%3D')[0] == 'graph') parameters['graph'] = this.split('%3D')[1];
+                else if (this.split('%3D')[0] == 'compare') parameters['compare'] = this.split('%3D')[1];
+            })
+        }
+
         updateViews();
     }
 })();
