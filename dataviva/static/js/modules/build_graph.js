@@ -240,6 +240,21 @@ var BuildGraph = (function () {
         $('#datasets').change(changeDataSet);
     }
 
+    function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }   
+    };
+
     function fillForm(){
         var url = window.location.href.split('?')[0];
         var urlFilters = url.split('build_graph/')[1].split('/');
@@ -285,13 +300,23 @@ var BuildGraph = (function () {
         //Fill Parameters
         if (window.location.href.split('?')[1]){
             var urlParameters = window.location.href.split('?')[1];
-            var parameters = {};
+            var parameters = {
+                'views': getUrlParameter('views'),
+                'graph': getUrlParameter('graph'),
+                'compare': getUrlParameter('compare'),
+            };
+            
+            /*
             $.each(urlParameters.split('%26'), function(){
+                
                 if(this.split('%3D')[0] == 'views') parameters['views'] = this.split('%3D')[1];
                 else if (this.split('%3D')[0] == 'graph') parameters['graph'] = this.split('%3D')[1];
                 else if (this.split('%3D')[0] == 'compare') parameters['compare'] = this.split('%3D')[1];
-            })
+            })*/
         }
+        ///* link que gera jason do views http://localhost:5000/en/build_graph/views/rais/4rj020212/cnae/cbo*/
+
+        
         
         updateViews();
     }
