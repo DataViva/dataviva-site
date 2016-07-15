@@ -5,9 +5,9 @@ function setDimension(type, name, id) {
     }
 }
 
-dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'course_sc'], function() {
-    dataviva.attrs.datasets
-    setDimension(type, name, id)
+dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'course_sc', 'course_hedu', 'university'], function() {
+    //dataviva.attrs.datasets
+    //setDimension(type, name, id)
 });
 
 var selectorGraphs = Selector()
@@ -257,46 +257,27 @@ var BuildGraph = (function () {
         var filters = {};
         
         filters['f0'] = urlFilters[1];
-        $('#dimensions #filter0').val(filters['f0']);
 
-        var valueText0 = 'Selected'
-        if (filters['f0'] != 'all') valueText0 = dataviva.bra[filters['f0']].name;
-        $('#dimensions #bra').text(valueText0)
-
+        if(filters['f0']){
+            $('#dimensions #filter0').val(filters['f0']);
+            var valueText0 = (filters['f0'] == 'all') ? 'Selected' : dataviva.bra[filters['f0']].name;
+            $('#dimensions #bra').text(valueText0)
+        }
         var datasetOption = $('#dimensions div').children('button:even');
 
         var filter1 = datasetOption[1].id;
-        var filter2; 
-        if (dataset == 'sc') filter2 = 'course_sc';
-        else filter2 = datasetOption[2].id;
+        var filter2 = (dataset != 'sc') ? datasetOption[2].id : 'course_sc';
 
         filters['f1'] = urlFilters[2];
         filters['f2'] = urlFilters[3];
         
         $('#dimensions #filter1').val(filters['f1']);
-        var valueText1 = 'Selected';
-        if (filters['f1'] != 'all'){
-            if (filter1 == 'cnae')
-                valueText1 = dataviva.cnae[filters['f1']].name;
-            else if (filter1 == 'hs')
-                valueText1 = dataviva.hs[filters['f1']].name;
-            else if (filter1 == 'university')
-                valueText1 = dataviva.university[filters['f1']].name;
-        }
+        var valueText1 = (filters['f1'] == 'all') ?  'Selected' : dataviva[filter1][filters['f1']].name
         $('#dimensions #'+filter1).text(valueText1)
         
+
         $('#dimensions #filter2').val(filters['f2']);
-        var valueText2 = 'Selected';
-        if (filters['f2'] != 'all'){
-            if (filter2 == 'cbo')
-                valueText2 = dataviva.cbo[filters['f2']].name;
-            else if (filter2 == 'wld')
-                valueText2 = dataviva.wld[filters['f2']].name;
-            else if (filter2 == 'course_hedu')
-                valueText2 = dataviva.course_hedu[filters['f2']].name;
-            else if (filter2 == 'course_sc')
-                valueText2 = dataviva.course_sc[filters['f2']].name;
-        }
+        var valueText2 = (filters['f2'] == 'all') ? 'Selected' : dataviva[filter2][filters['f2']].name;
         $('#dimensions #'+filter2).text(valueText2)
 
         //Fill Parameters
@@ -309,7 +290,7 @@ var BuildGraph = (function () {
                 else if (this.split('%3D')[0] == 'compare') parameters['compare'] = this.split('%3D')[1];
             })
         }
-
+        
         updateViews();
     }
 })();
