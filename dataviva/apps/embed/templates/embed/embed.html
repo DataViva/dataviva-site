@@ -2871,7 +2871,8 @@
               else{
 
                 d3.select(pid).append("h3")
-                  .text(dataviva.format.text("share_url"))
+                  .text('URL')
+                  //.text(dataviva.format.text("share_url"))
 
                 // make input box with share link
                 //var share_url = window.location.origin + "/" + data.slug + "/";
@@ -2887,7 +2888,7 @@
 
                 d3.select(pid).append("h3")
                   .text(dataviva.format.text("embed_url"))
-
+  
                 // make input box with embed iframe
                 d3.select(pid).append("input")
                   .attr("type", "text")
