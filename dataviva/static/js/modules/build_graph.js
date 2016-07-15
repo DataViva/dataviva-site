@@ -255,6 +255,7 @@ var BuildGraph = (function () {
 
         //Fill Dimensions
         var filters = {};
+        var datasetOption = $('#dimensions div').children('button:even');
         
         filters['f0'] = urlFilters[1];
 
@@ -263,7 +264,6 @@ var BuildGraph = (function () {
             var valueText0 = (filters['f0'] == 'all') ? 'Selected' : dataviva.bra[filters['f0']].name;
             $('#dimensions #bra').text(valueText0)
         }
-        var datasetOption = $('#dimensions div').children('button:even');
 
         var filter1 = datasetOption[1].id;
         var filter2 = (dataset != 'sc') ? datasetOption[2].id : 'course_sc';
@@ -271,15 +271,17 @@ var BuildGraph = (function () {
         filters['f1'] = urlFilters[2];
         filters['f2'] = urlFilters[3];
         
-        $('#dimensions #filter1').val(filters['f1']);
-        var valueText1 = (filters['f1'] == 'all') ?  'Selected' : dataviva[filter1][filters['f1']].name
-        $('#dimensions #'+filter1).text(valueText1)
-        
+        if(filters['f1']){
+            $('#dimensions #filter1').val(filters['f1']);
+            var valueText1 = (filters['f1'] == 'all') ?  'Selected' : dataviva[filter1][filters['f1']].name
+            $('#dimensions #'+filter1).text(valueText1)
+        }
 
-        $('#dimensions #filter2').val(filters['f2']);
-        var valueText2 = (filters['f2'] == 'all') ? 'Selected' : dataviva[filter2][filters['f2']].name;
-        $('#dimensions #'+filter2).text(valueText2)
-
+        if(filters['f2']){
+            $('#dimensions #filter2').val(filters['f2']);
+            var valueText2 = (filters['f2'] == 'all') ? 'Selected' : dataviva[filter2][filters['f2']].name;
+            $('#dimensions #'+filter2).text(valueText2)
+        }
         //Fill Parameters
         if (window.location.href.split('?')[1]){
             var urlParameters = window.location.href.split('?')[1];
