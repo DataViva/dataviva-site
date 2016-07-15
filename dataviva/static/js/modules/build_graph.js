@@ -242,61 +242,60 @@ var BuildGraph = (function () {
 
     function fillForm(){
         var url = window.location.href.split('?')[0];
+        var urlFilters = url.split('build_graph/')[1].split('/');
 
-        if (url.split('/')[5]){
-            var dataset = url.split('/')[5];
+        //Fill Dataset
+        if (urlFilters[0]){
+            var dataset = urlFilters[0];
         }
 
         $('#datasets').val(dataset);
         BuildGraph.dataset = dataset;
         setDimensions(dataviva.datasets[dataset].dimensions);
 
-        if (url.split('/').length == 9 && dataset != 'course_sc'){
-            var url_array = url.split('/');
-            var value2 = url_array.pop();
-            var value1 = url_array.pop();
-            var value0 = url_array.pop();
-            var filter2 = $('#dimensions div').children('button')[4].id
-            var valueText2 = 'Selected';
-            if (value2 != 'all'){
-                if (filter2 == 'cbo')
-                    valueText2 = dataviva.cbo[value2].name;
-                else if (filter2 == 'wld')
-                    valueText2 = dataviva.wld[value2].name;
-                else if (filter2 == 'course_hedu')
-                    valueText2 = dataviva.course_hedu[value2].name;
-            }
-        }
-        else if (url.split('/').length == 8){
-            var url_array = url.split('/');
-            var value1 = url_array.pop();
-            var value0 = url_array.pop();
-        }
+        //Fill Dimensions
+        var filters = {};
+        
+        filters['f0'] = urlFilters[1];
+        $('#dimensions #filter0').val(filters['f0']);
+
+        var valueText0 = 'Selected'
+        if (filters['f0'] != 'all') valueText0 = dataviva.bra[filters['f0']].name;
+        $('#dimensions #bra').text(valueText0)
+
+        filters['f1'] = urlFilters[2];
+        $('#dimensions #filter1').val(filters['f1']);
 
         var filter1 = $('#dimensions div').children('button')[2].id
         var valueText1 = 'Selected';
-        if (value1 != 'all'){
+        if (filters['f1'] != 'all'){
             if (filter1 == 'cnae')
-                valueText1 = dataviva.cnae[value1].name;
+                valueText1 = dataviva.cnae[filters['f1']].name;
             else if (filter1 == 'hs')
-                valueText1 = dataviva.hs[value1].name;
+                valueText1 = dataviva.hs[filters['f1']].name;
             else if (filter1 == 'course_sc')
-                valueText1 = dataviva.course_sc[value1].name;
+                valueText1 = dataviva.course_sc[filters['f1']].name;
             else if (filter1 == 'university')
-                valueText1 = dataviva.university[value1].name;
+                valueText1 = dataviva.university[filters['f1']].name;
         }
-
-        var valueText0 = 'Selected'
-        if (value0 != 'all'){
-            valueText0 = dataviva.bra[value0].name
-        }
-
-        $('#dimensions #filter0').val(value0)
-        $('#dimensions #bra').text(valueText0)
-        $('#dimensions #filter1').val(value1)
         $('#dimensions #'+filter1).text(valueText1)
-        $('#dimensions #filter2').val(value2)
-        $('#dimensions #'+filter2).text(valueText2)
+        
+        if (urlFilters[3]){
+            filters['f2'] = urlFilters[3];
+            $('#dimensions #filter2').val(filters['f2']);
+
+            var filter2 = $('#dimensions div').children('button')[4].id
+            var valueText2 = 'Selected';
+            if (filters['f2'] != 'all'){
+                if (filter2 == 'cbo')
+                    valueText2 = dataviva.cbo[filters['f2']].name;
+                else if (filter2 == 'wld')
+                    valueText2 = dataviva.wld[filters['f2']].name;
+                else if (filter2 == 'course_hedu')
+                    valueText2 = dataviva.course_hedu[filters['f2']].name;
+            }
+            $('#dimensions #'+filter2).text(valueText2)
+        }
 
         updateViews();
     }
