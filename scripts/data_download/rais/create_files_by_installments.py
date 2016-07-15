@@ -36,12 +36,11 @@ def select_table(conditions):
 
     if conditions[3] != ' 1 = 1 ':
         s += 'o'
-
     return 'rais_' + s
 
 
 def save_all(year, locations, industrys, occupations, lang, output_path):
-    conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
+    conditions = [' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ']  # 4 condicoes
     table_columns = {}
     columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
 
@@ -73,7 +72,7 @@ def save_all(year, locations, industrys, occupations, lang, output_path):
 
 
 def save_industry(year, locations, industrys, occupations, lang, output_path):
-    conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
+    conditions = [' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ']  # 4 condicoes
     table_columns = {}
     columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
 
@@ -107,7 +106,7 @@ def save_industry(year, locations, industrys, occupations, lang, output_path):
 
 
 def save_location_occupation(year, locations, industrys, occupations, lang, output_path):
-    conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
+    conditions = [' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ']  # 4 condicoes
     table_columns = {}
     columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
 
@@ -118,6 +117,7 @@ def save_location_occupation(year, locations, industrys, occupations, lang, outp
 
     conditions[0] = year.condition
     for location in locations:
+        conditions[1] = location.condition
         for occupation in occupations:
             conditions[3] = occupation.condition
 
@@ -127,8 +127,6 @@ def save_location_occupation(year, locations, industrys, occupations, lang, outp
             table = select_table(conditions)
             name_file = 'rais'+str(year.name)+str(location.name)+str(occupation.name)
             new_file_path = os.path.join(output_path, name_file+".csv.bz2")
-            
-            print name_file
             if table not in table_columns.keys():
                 table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in common.get_colums(table, columns_deleted)]
 
@@ -136,7 +134,7 @@ def save_location_occupation(year, locations, industrys, occupations, lang, outp
 
 
 def save_location_industry_occupation(year, locations, industrys, occupations, lang, output_path, type_files):
-    conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
+    conditions = [' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ']  # 4 condicoes
     table_columns = {}
     columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
 

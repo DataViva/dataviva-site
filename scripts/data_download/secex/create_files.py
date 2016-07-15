@@ -41,7 +41,7 @@ def select_table(conditions):
 
 
 def save(year, months, locations, products, trade_partners, lang, output_path):
-    conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 5 condicoes
+    conditions = [' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ']  # 5 condicoes
     table_columns = {}
     columns_deleted=['bra_id_len', 'eci_old', 'eci_wld', 'hs_id_len', 'wld_id_len', 'rcd'] # tira  month para ano, tira bra_id para agregado mensal
 

@@ -41,7 +41,7 @@ def select_table(conditions):
 
 
 def save(year, locations, industrys, occupations, lang, output_path):
-    conditions = [' 1 = 1', ' 1 = 1', ' 1 = 1', ' 1 = 1']  # 4 condicoes
+    conditions = [' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ', ' 1 = 1 ']  # 4 condicoes
     table_columns = {}
     columns_deleted=['num_emp', 'hist', 'Gini', 'bra_id_len', 'cbo_id_len', 'cnae_id_len']
 
