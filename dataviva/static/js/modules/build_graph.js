@@ -5,7 +5,7 @@ function setDimension(type, name, id) {
     }
 }
 
-dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo'], function() {
+dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'course_sc'], function() {
     dataviva.attrs.datasets
     setDimension(type, name, id)
 });
@@ -263,39 +263,41 @@ var BuildGraph = (function () {
         if (filters['f0'] != 'all') valueText0 = dataviva.bra[filters['f0']].name;
         $('#dimensions #bra').text(valueText0)
 
-        filters['f1'] = urlFilters[2];
-        $('#dimensions #filter1').val(filters['f1']);
+        var datasetOption = $('#dimensions div').children('button:even');
 
-        var filter1 = $('#dimensions div').children('button')[2].id
+        var filter1 = datasetOption[1].id;
+        var filter2; 
+        if (dataset == 'sc') filter2 = 'course_sc';
+        else filter2 = datasetOption[2].id;
+
+        filters['f1'] = urlFilters[2];
+        filters['f2'] = urlFilters[3];
+        
+        $('#dimensions #filter1').val(filters['f1']);
         var valueText1 = 'Selected';
         if (filters['f1'] != 'all'){
             if (filter1 == 'cnae')
                 valueText1 = dataviva.cnae[filters['f1']].name;
             else if (filter1 == 'hs')
                 valueText1 = dataviva.hs[filters['f1']].name;
-            else if (filter1 == 'course_sc')
-                valueText1 = dataviva.course_sc[filters['f1']].name;
             else if (filter1 == 'university')
                 valueText1 = dataviva.university[filters['f1']].name;
         }
         $('#dimensions #'+filter1).text(valueText1)
         
-        if (urlFilters[3]){
-            filters['f2'] = urlFilters[3];
-            $('#dimensions #filter2').val(filters['f2']);
-
-            var filter2 = $('#dimensions div').children('button')[4].id
-            var valueText2 = 'Selected';
-            if (filters['f2'] != 'all'){
-                if (filter2 == 'cbo')
-                    valueText2 = dataviva.cbo[filters['f2']].name;
-                else if (filter2 == 'wld')
-                    valueText2 = dataviva.wld[filters['f2']].name;
-                else if (filter2 == 'course_hedu')
-                    valueText2 = dataviva.course_hedu[filters['f2']].name;
-            }
-            $('#dimensions #'+filter2).text(valueText2)
+        $('#dimensions #filter2').val(filters['f2']);
+        var valueText2 = 'Selected';
+        if (filters['f2'] != 'all'){
+            if (filter2 == 'cbo')
+                valueText2 = dataviva.cbo[filters['f2']].name;
+            else if (filter2 == 'wld')
+                valueText2 = dataviva.wld[filters['f2']].name;
+            else if (filter2 == 'course_hedu')
+                valueText2 = dataviva.course_hedu[filters['f2']].name;
+            else if (filter2 == 'course_sc')
+                valueText2 = dataviva.course_sc[filters['f2']].name;
         }
+        $('#dimensions #'+filter2).text(valueText2)
 
         //Fill Parameters
         if (window.location.href.split('?')[1]){
