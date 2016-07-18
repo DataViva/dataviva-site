@@ -308,15 +308,15 @@ var BuildGraph = (function () {
                     'graph': getUrlParameter('graph'),
                     'compare': getUrlParameter('compare'),
                 };
+
+                if(parameters.views){
+                    $('#views div select option')
+                        .filter("[value='"+parameters.views+"']")
+                        .prop('selected', true)
+                        .siblings()
+                        .prop('selected', false);
+                }
             }
-
-            var selectedViews = $('#views');
-
-            $('#views div select option')
-                .filter("[value='"+parameters.views+"']")
-                .prop('selected', true)
-                .siblings()
-                .prop('selected', false);
         });
 
         updateViews();        
