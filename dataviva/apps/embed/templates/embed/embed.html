@@ -2874,7 +2874,8 @@
                   .text(dataviva.format.text("share_url"))
 
                 // make input box with share link
-                var share_url = window.location.origin + "/"+ dataviva.language + "/" + data.slug + "/";
+
+                var share_url = window.location.origin + "/" + dataviva.language + "/" + data.slug + "/";
                 d3.select(pid).append("input")
                   .attr("type", "text")
                   .attr("class", "leon textbox mediumleon textbox large")
@@ -2901,7 +2902,7 @@
                   .text(dataviva.format.text("social_media"))
 
                 // Twitter link
-                var share_url = window.location.origin + "/"+ dataviva.language + "/" + data.slug + "/";
+                var share_url = window.location.origin + "/" + dataviva.language + "/" + data.slug + "/";
                 d3.select(pid).append("a")
                   .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
                   .attr("class", "share_button")
