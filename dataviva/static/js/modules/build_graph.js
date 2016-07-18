@@ -277,7 +277,7 @@ var BuildGraph = (function () {
         if(filters['f0']){
             $('#dimensions #filter0').val(filters['f0']);
             var valueText0 = (filters['f0'] == 'all') ? 'Selected' : dataviva.bra[filters['f0']].name;
-            $('#dimensions #bra').text(valueText0)
+            $('#dimensions #bra').text(valueText0);
         }
 
         var filter1 = datasetOption[1].id;
@@ -289,36 +289,37 @@ var BuildGraph = (function () {
         if(filters['f1']){
             $('#dimensions #filter1').val(filters['f1']);
             var valueText1 = (filters['f1'] == 'all') ?  'Selected' : dataviva[filter1][filters['f1']].name
-            $('#dimensions #'+filter1).text(valueText1)
+            $('#dimensions #'+filter1).text(valueText1);
         }
 
         if(filters['f2']){
             $('#dimensions #filter2').val(filters['f2']);
             var valueText2 = (filters['f2'] == 'all') ? 'Selected' : dataviva[filter2][filters['f2']].name;
-            $('#dimensions #'+filter2).text(valueText2)
+            $('#dimensions #'+filter2).text(valueText2);
         }
-        //Fill Parameters
-        if (window.location.href.split('?')[1]){
-            var urlParameters = window.location.href.split('?')[1];
-            var parameters = {
-                'views': getUrlParameter('views'),
-                'graph': getUrlParameter('graph'),
-                'compare': getUrlParameter('compare'),
-            };
-            
-            /*
-            $.each(urlParameters.split('%26'), function(){
-                
-                if(this.split('%3D')[0] == 'views') parameters['views'] = this.split('%3D')[1];
-                else if (this.split('%3D')[0] == 'graph') parameters['graph'] = this.split('%3D')[1];
-                else if (this.split('%3D')[0] == 'compare') parameters['compare'] = this.split('%3D')[1];
-            })*/
-        }
-        ///* link que gera jason do views http://localhost:5000/en/build_graph/views/rais/4rj020212/cnae/cbo*/
 
-        
-        
-        updateViews();
+        $(document).ajaxComplete(function() {
+            
+            //Fill Parameters
+            if (window.location.href.split('?')[1]){
+                var urlParameters = window.location.href.split('?')[1];
+                var parameters = {
+                    'views': getUrlParameter('views'),
+                    'graph': getUrlParameter('graph'),
+                    'compare': getUrlParameter('compare'),
+                };
+            }
+
+            var selectedViews = $('#views');
+
+            $('#views div select option')
+                .filter("[value='"+parameters.views+"']")
+                .prop('selected', true)
+                .siblings()
+                .prop('selected', false);
+        });
+
+        updateViews();        
     }
 })();
 
