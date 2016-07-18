@@ -304,21 +304,41 @@ var BuildGraph = (function () {
             if (window.location.href.split('?')[1]){
                 var urlParameters = window.location.href.split('?')[1];
                 var parameters = {
-                    'views': getUrlParameter('views'),
+                    'view': getUrlParameter('view'),
                     'graph': getUrlParameter('graph'),
                     'compare': getUrlParameter('compare'),
                 };
 
-                if(parameters.views){
+                if(parameters.view){
                     $('#views div select option')
-                        .filter("[value='"+parameters.views+"']")
+                        .filter("[value='"+parameters.view+"']")
                         .prop('selected', true)
                         .siblings()
                         .prop('selected', false);
+                
+                }
+        
+                BuildGraph.selectedView = parameters.view;
+                setGraphs(BuildGraph.views[parameters.view].graphs);
+
+                if(parameters.graph){
+                    $('#graphs div ul li a')
+                    .filter("[id='"+parameters.graph+"']").parent()
+                    .addClass('active')
+                    .siblings()
+                    .removeClass('active');
+                    $('#'+parameters.graph).click();
+                }
+
+                if(parameters.compare){
+                    $('#compare_filter').val(parameters.compare);
+                    $('#compare_with').text(dataviva.bra[parameters.compare].name);
+                    $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$('#compare').data('url')+'"></iframe>');
                 }
             }
         });
 
+        
         updateViews();        
     }
 })();
