@@ -1,14 +1,11 @@
+dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'course_sc', 'course_hedu', 'university'], function() {});
+
 function setDimension(type, name, id) {
     if ($('#'+type).siblings('input').val() != id) {
         $('#'+type).html(name);
         $('#dimensions input[name='+type+']').val(id).trigger('change');
     }
 }
-
-dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'course_sc', 'course_hedu', 'university'], function() {
-    //dataviva.attrs.datasets
-    //setDimension(type, name, id)
-});
 
 var selectorGraphs = Selector()
     .callback(function(d){
@@ -36,7 +33,6 @@ function select_compare() {
     d3.select("#modal-selector-content").call(selectorCompare.type('bra'));
     $('#modal-selector').modal('show');
 }
-
 
 function clean_selection(id) {
     if ($(id).siblings('input').val() != 'all') {
@@ -315,7 +311,6 @@ var BuildGraph = (function () {
                         .prop('selected', true)
                         .siblings()
                         .prop('selected', false);
-                
                 }
         
                 BuildGraph.selectedView = parameters.view;
@@ -338,7 +333,6 @@ var BuildGraph = (function () {
             }
         });
 
-        
         updateViews();        
     }
 })();
@@ -346,8 +340,10 @@ var BuildGraph = (function () {
 $(document).ready(function () {
     dataviva.requireAttrs(['datasets'], function() {
         BuildGraph.init();
-        BuildGraph.fillForm();
+        if(Boolean(window.location.href.split('/')[6])) BuildGraph.fillForm();
     });
+
+    $('.list-group.panel a[target]').on('click', Category.updateGraphUrl);
 });
 
 
