@@ -339,10 +339,8 @@ var BuildGraph = (function () {
 
     function updateUrl(){
         $('.sidebar.well #datasets').on('change', function(){
-            debugger;
-            url = initialUrl + '/' + $('.sidebar.well #datasets option:selected').val() + '/all' + '/all' + '/all';
-            window.history.pushState('', '', url);
-
+            var firstState = initialUrl + '/' + $('.sidebar.well #datasets option:selected').val() + '/all' + '/all' + '/all';
+            window.history.pushState('', '', firstState);
         });
     }
 
