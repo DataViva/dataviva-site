@@ -71,7 +71,7 @@ var BuildGraph = (function () {
                 label = $('<label></label>').attr('for', dimension.id).addClass('control-label'),
                 selector = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
                                         .html(dataviva.dictionary['select'])
-                                        .attr('onclick', 'select_dimension(id);'),
+                                        .attr('onclick', 'select_dimension(id); BuildGraph.updateUrl()'),
                 cleaner = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
                                         .html(dataviva.dictionary['clean_selection'])
                                         .attr('onclick', 'clean_selection('+dimension.id+')');
@@ -339,9 +339,31 @@ var BuildGraph = (function () {
 
     function updateUrl(){
         $('.sidebar.well #datasets').on('change', function(){
-            var firstState = initialUrl + '/' + $('.sidebar.well #datasets option:selected').val() + '/all' + '/all' + '/all';
+            var firstState = initialUrl + '/' + $('.sidebar.well #datasets option:selected').
+                val() + '/all' + '/all' + '/all' + '?view=none&graph=none&compare=none' ;
             window.history.pushState('', '', firstState);
         });
+
+
+        var oldUrl = window.location.href.split('/'); 
+        $('#filter0').on('change', function(){
+            var newUrl = initialUrl + '/' + $('.sidebar.well #datasets option:selected')
+                .val() + '/' + $('#filter0').val() + '/' + oldUrl[7] + '/' + oldUrl[8];
+            window.history.pushState('', '', newUrl);
+        });
+
+        $('#filter1').on('change', function(){   
+            var newUrl = initialUrl + '/' + $('.sidebar.well #datasets option:selected')
+                .val() + '/' + oldUrl[6] + '/' + $('#filter1').val() + '/' + oldUrl[8];
+            window.history.pushState('', '', newUrl);
+        });
+
+        $('#filter2').on('change', function(){     
+            var newUrl = initialUrl + '/' + $('.sidebar.well #datasets option:selected')
+                .val() + '/' + oldUrl[6] + '/' + oldUrl[7] + '/'+$('#filter2').val();
+            window.history.pushState('', '', newUrl);
+        });
+
     }
 
 })();
