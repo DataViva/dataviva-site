@@ -265,7 +265,8 @@ var BuildGraph = (function () {
             '&graph=' + BuildGraph.selectedGraph + 
             (BuildGraph.compare ? '&compare='+BuildGraph.compare : '');
 
-        console.log(url);
+        var newUrl = initialUrl + '/' +url
+            window.history.pushState('', '', newUrl);
     }
 
 })();
