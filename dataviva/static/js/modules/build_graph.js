@@ -50,7 +50,8 @@ var BuildGraph = (function () {
         selectedGraph: selectedGraph,
         setCompare: setCompare,
         init: init,
-        fillForm: fillForm
+        fillForm: fillForm,
+        updateUrl: updateUrl
     }
 
     var selectedGraph, selectedView, dataset, views;
@@ -335,15 +336,28 @@ var BuildGraph = (function () {
 
         updateViews();        
     }
+
+    function updateUrl(){
+        $('.sidebar.well #datasets').on('change', function(){
+            debugger;
+            url = initialUrl + '/' + $('.sidebar.well #datasets option:selected').val() + '/all' + '/all' + '/all';
+            window.history.pushState('', '', url);
+
+        });
+    }
+
 })();
+
+var initialUrl = window.location.origin + '/' + dataviva.language + '/build_graph'
 
 $(document).ready(function () {
     dataviva.requireAttrs(['datasets'], function() {
         BuildGraph.init();
-        if(Boolean(window.location.href.split('/')[6])) BuildGraph.fillForm();
+        if(window.location.href.split('/')[6]) BuildGraph.fillForm();
     });
 
-    $('.list-group.panel a[target]').on('click', Category.updateGraphUrl);
+    $('.sidebar.well select').on('click', BuildGraph.updateUrl);
+
 });
 
 
