@@ -54,6 +54,7 @@ var BuildGraph = (function () {
     var selectedGraph, selectedView, dataset, views, filter0, filter1, filter2, compare;
 
     function changeDataSet() {
+        $('#datasets #dataset-empty-option').remove();
         BuildGraph.filter0 = 'all';
         BuildGraph.filter1 = 'all';
         BuildGraph.filter2 = 'all';
@@ -61,7 +62,6 @@ var BuildGraph = (function () {
     }
 
     function selectDataSet(dataset) {
-        $('#datasets #dataset-empty-option').remove();
         BuildGraph.dataset = dataset;
         setDimensions(dataviva.datasets[dataset].dimensions);
         updateViews();
@@ -215,33 +215,46 @@ var BuildGraph = (function () {
     }
 
     function setCompare(){
+        $('#compare-location').empty();
+
+        var div = $('<div></div>').addClass('form-group'),
+            label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
+            cleaner = $('<button></button>').attr('for', 'compare_with').addClass('btn btn-xs btn-link pull-right')
+                                    .html(dataviva.dictionary['clean_selection'])
+                                    .attr('onclick', 'clean_selection('+'compare_with'+')'),
+            button = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
+                                    .attr('onclick', 'select_compare();'),
+            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare_filter').val((BuildGraph.compare) ? BuildGraph.compare : 'all');
+
+        if (BuildGraph.compare) {
+            button.html(dataviva.bra[BuildGraph.compare].name);
+        } else {
+            button.html(dataviva.dictionary['select'])
+        }
+
+        label.html(dataviva.dictionary['compare_with']);
+        filter.change(updateViews);
+
+        div.append(filter).append(label).append(button).append(cleaner);
+
+        $('#compare-location').append(div);
+
         if (BuildGraph.compare) {
             $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$('#compare').data('url')+'"></iframe>');
-        } else {
-            $('#compare-location').empty();
-
-            var div = $('<div></div>').addClass('form-group'),
-                label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
-                cleaner = $('<button></button>').attr('for', 'compare_with').addClass('btn btn-xs btn-link pull-right')
-                                        .html(dataviva.dictionary['clean_selection'])
-                                        .attr('onclick', 'clean_selection('+'compare_with'+')'),
-                button = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
-                                        .html(dataviva.dictionary['select'])
-                                        .attr('onclick', 'select_compare();'),
-                filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare_filter').val('all');
-
-            label.html(dataviva.dictionary['compare_with']);
-            filter.change(updateViews);
-
-            div.append(filter).append(label).append(button).append(cleaner);
-
-            $('#compare-location').append(div);
         }
     }
 
     function init() {
+        BuildGraph.dataset = $('#dataset').val();
+
         for (dataset in dataviva.datasets) {
             $('#datasets').append( $('<option value="'+dataset+'">'+dataviva.dictionary[dataset]+'</option>'));
+        }
+
+        if (BuildGraph.dataset){
+            $('#datasets option').filter("[value="+BuildGraph.dataset+"]")
+                .prop('selected', true).siblings().prop('selected', false);
+            $('#datasets #dataset-empty-option').remove();
         }
 
         $('#datasets').change(changeDataSet);
