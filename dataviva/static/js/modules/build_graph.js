@@ -54,7 +54,6 @@ var BuildGraph = (function () {
     var selectedGraph, selectedView, dataset, views, filter0, filter1, filter2, compare;
 
     function changeDataSet() {
-        $('#datasets #dataset-empty-option').remove();
         BuildGraph.filter0 = 'all';
         BuildGraph.filter1 = 'all';
         BuildGraph.filter2 = 'all';
@@ -62,6 +61,7 @@ var BuildGraph = (function () {
     }
 
     function selectDataSet(dataset) {
+        $('#datasets #dataset-empty-option').remove();
         BuildGraph.dataset = dataset;
         setDimensions(dataviva.datasets[dataset].dimensions);
         updateViews();
@@ -248,13 +248,10 @@ var BuildGraph = (function () {
         BuildGraph.dataset = $('#dataset').val();
 
         for (dataset in dataviva.datasets) {
-            $('#datasets').append( $('<option value="'+dataset+'">'+dataviva.dictionary[dataset]+'</option>'));
-        }
-
-        if (BuildGraph.dataset){
-            $('#datasets option').filter("[value="+BuildGraph.dataset+"]")
-                .prop('selected', true).siblings().prop('selected', false);
-            $('#datasets #dataset-empty-option').remove();
+            $('#datasets').append( $('<option value="' + dataset + '"' + 
+                (BuildGraph.dataset == dataset ? 'selected' : '') + '>' + 
+                                      dataviva.dictionary[dataset] + 
+                                     '</option>'));
         }
 
         $('#datasets').change(changeDataSet);
