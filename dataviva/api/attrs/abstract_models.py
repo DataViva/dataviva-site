@@ -1,6 +1,7 @@
 from dataviva import db
 from flask import g
 from dataviva.utils.title_case import title_case
+from dataviva.utils.title_format import get_article
 
 
 class BasicAttr(object):
@@ -13,29 +14,13 @@ class BasicAttr(object):
 
     def name(self):
         lang = getattr(g, "locale", "en")
-        return title_case(getattr(self, "name_"+lang))
+        return title_case(getattr(self, "name_" + lang))
 
     def preposition(self, preposition):
         if g.locale == "en":
-            if preposition == 'de':
-                return 'of'
-            elif preposition == 'em':
-                return 'in'
+            return ''
         else:
-            if self.article_pt:
-                if preposition == 'de':
-                    contraction = {
-                        'f': 'da',
-                        'm': 'do',
-                    }
-                elif preposition == 'em':
-                    contraction = {
-                        'f': 'na',
-                        'm': 'no',
-                    }
-                return contraction[self.gender_pt] + ('s' if self.plural_pt else '')
-            else:
-                return preposition
+            return get_article(self, preposition)
 
     def article(self):
         if self.article_pt:
