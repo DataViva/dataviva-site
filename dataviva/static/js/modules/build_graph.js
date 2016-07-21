@@ -20,11 +20,10 @@ function select_dimension(id) {
 var selectorCompare = Selector()
     .callback(function(d){
         if ($('#compare_with').siblings('input').val() != d.id) {
+            BuildGraph.compare = d.id;
             $('#compare_with').html(d.name);
             $('#compare-location input[name=compare_with]').val(d.id).trigger('change');
-            BuildGraph.compare = d.id;
         }
-        BuildGraph.setCompare();
         $('#modal-selector').modal('hide');
     });
 
@@ -35,7 +34,14 @@ function select_compare() {
 
 function clean_selection(id) {
     if ($(id).siblings('input').val() != 'all') {
-        $(id).html(dataviva.dictionary['select']);
+            BuildGraph[$(id).siblings('input').attr('id')] = 'all';
+
+            if (id == 'bra' || id == 'compare_with') {
+                $(id).html(dataviva.dictionary.brazil);        
+            } else {
+                $(id).html(dataviva.dictionary['select']);   
+            }
+        
         $(id).siblings('input').val('all').trigger('change');
     }
 }
@@ -80,7 +86,12 @@ var BuildGraph = (function () {
                                         .attr('onclick', 'clean_selection('+dimension.id+')');
 
                 if (BuildGraph['filter'+index] == 'all') {
-                    button.html(dataviva.dictionary.select);
+                    if(index != 0) {
+                        button.html(dataviva.dictionary.select);
+                    } else {
+                        button.html(dataviva.dictionary.brazil);
+                    }
+
                 } else {
                     button.html(dataviva[dimension.id][BuildGraph['filter'+index]].name);
                 }
@@ -102,13 +113,12 @@ var BuildGraph = (function () {
         $.ajax({
             method: "GET",
             url: "/" + dataviva.language + "/build_graph/views/" + BuildGraph.dataset +"/" +
-                $('#dimensions #filter0').val() +
-                ($('#compare-location input[name=compare_with]').val() ? '_' + $('#compare-location input[name=compare_with]').val() : '') + "/" +
-                ($('#dimensions #filter1').val() == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" +
-                ($('#dimensions #filter2').val() == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
+                BuildGraph.filter0 + (BuildGraph.compare ? '_' + BuildGraph.compare : '') + "/" +
+                (BuildGraph.filter1 == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" +
+                (BuildGraph.filter2 == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
             data: {
-                    filter1: $('#dimensions #filter1').val(),
-                    filter2: $('#dimensions #filter2').val()
+                    filter1: BuildGraph.filter1,
+                    filter2: BuildGraph.filter2
                 },
             success: function (result) {
                 setViews(result.views);
@@ -206,11 +216,15 @@ var BuildGraph = (function () {
 
         if (BuildGraph.selectedGraph == 'compare') {
             setCompare();
+            if(BuildGraph.compare) {
+                showGraph(graph);
+            }
         } else {
             $('#compare-location').empty();
             delete BuildGraph.compare;
-            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graph).data('url')+'"></iframe>');
+            showGraph(graph)
         }
+
         updateUrl();
     }
 
@@ -219,15 +233,19 @@ var BuildGraph = (function () {
 
         var div = $('<div></div>').addClass('form-group'),
             label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
-            cleaner = $('<button></button>').attr('for', 'compare_with').addClass('btn btn-xs btn-link pull-right')
+            cleaner = $('<button></button>').addClass('btn btn-xs btn-link pull-right')
                                     .html(dataviva.dictionary['clean_selection'])
                                     .attr('onclick', 'clean_selection('+'compare_with'+')'),
             button = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
                                     .attr('onclick', 'select_compare();'),
-            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare_filter').val((BuildGraph.compare) ? BuildGraph.compare : 'all');
+            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare').val(BuildGraph.compare);
 
         if (BuildGraph.compare) {
-            button.html(dataviva.bra[BuildGraph.compare].name);
+            if (BuildGraph.compare == 'all') {
+                button.html(dataviva.dictionary.brazil); 
+            } else {
+                button.html(dataviva.bra[BuildGraph.compare].name);    
+            }
         } else {
             button.html(dataviva.dictionary['select'])
         }
@@ -238,10 +256,10 @@ var BuildGraph = (function () {
         div.append(filter).append(label).append(button).append(cleaner);
 
         $('#compare-location').append(div);
+    }
 
-        if (BuildGraph.compare) {
-            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$('#compare').data('url')+'"></iframe>');
-        }
+    function showGraph(graph) {
+        $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graph).data('url')+'"></iframe>');
     }
 
     function init() {
