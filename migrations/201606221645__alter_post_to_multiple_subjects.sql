@@ -14,4 +14,3 @@ ALTER TABLE blog_post
  
 ALTER TABLE blog_post
   DROP subject_id;
- 
