@@ -1,10 +1,14 @@
+function setDimension(type, name, id) {
+    if ($('#'+type).siblings('input').val() != id) {
+        $('#'+type).html(name);
+        BuildGraph[$('#dimensions input[name='+type+']').attr('id')] = id;
+        $('#dimensions input[name='+type+']').val(id).trigger('change');
+    }
+}
+
 var selectorGraphs = Selector()
     .callback(function(d){
-        if ($('#'+selectorGraphs.type()).siblings('input').val() != d.id) {
-            $('#'+selectorGraphs.type()).html(d.name);
-            $('#dimensions input[name='+selectorGraphs.type()+']').val(d.id).trigger('change');
-        }
-
+        setDimension(selectorGraphs.type(), d.name, d.id)
         $('#modal-selector').modal('hide');
     });
 
@@ -16,11 +20,10 @@ function select_dimension(id) {
 var selectorCompare = Selector()
     .callback(function(d){
         if ($('#compare_with').siblings('input').val() != d.id) {
+            BuildGraph.filterCompare = d.id;
             $('#compare_with').html(d.name);
             $('#compare-location input[name=compare_with]').val(d.id).trigger('change');
-            BuildGraph.compare = d.id;
         }
-        BuildGraph.setCompare();
         $('#modal-selector').modal('hide');
     });
 
@@ -29,11 +32,17 @@ function select_compare() {
     $('#modal-selector').modal('show');
 }
 
+function clean_selection(button) {
+    if ($(button).siblings('input').val() != 'all') {
+            BuildGraph[$(button).siblings('input').attr('id')] = 'all';
 
-function clean_selection(id) {
-    if ($(id).siblings('input').val() != 'all') {
-        $(id).html(dataviva.dictionary['select']);
-        $(id).siblings('input').val('all').trigger('change');
+            if (button.id == 'bra' || button.id == 'compare_with') {
+                $(button).html(dataviva.dictionary.brazil);        
+            } else {
+                $(button).html(dataviva.dictionary['select']);   
+            }
+        
+        $(button).siblings('input').val('all').trigger('change');
     }
 }
 
@@ -48,12 +57,19 @@ var BuildGraph = (function () {
         init: init
     }
 
-    var selectedGraph, selectedView, dataset, views;
+    var selectedGraph, selectedView, dataset, views, filter0, filter1, filter2, filterCompare;
 
     function changeDataSet() {
+        BuildGraph.filter0 = 'all';
+        BuildGraph.filter1 = 'all';
+        BuildGraph.filter2 = 'all';
+        selectDataSet(this.value);
+    }
+
+    function selectDataSet(dataset) {
         $('#datasets #dataset-empty-option').remove();
-        BuildGraph.dataset = this.value;
-        setDimensions(dataviva.datasets[this.value].dimensions);
+        BuildGraph.dataset = dataset;
+        setDimensions(dataviva.datasets[dataset].dimensions);
         updateViews();
     }
 
@@ -61,22 +77,32 @@ var BuildGraph = (function () {
         $('#dimensions').empty();
         dimensions.forEach(function(dimension, index) {
             var div = $('<div></div>').addClass('form-group'),
+                filter = $('<input></input>').attr('type', 'hidden').attr('name', dimension.id).attr('id', 'filter'+index).val(BuildGraph['filter'+index]),
                 label = $('<label></label>').attr('for', dimension.id).addClass('control-label'),
+                button = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
+                                        .attr('onclick', 'select_dimension(id);'),
                 cleaner = $('<button></button>').attr('for', dimension.id).addClass('btn btn-xs btn-link pull-right')
                                         .html(dataviva.dictionary['clean_selection'])
-                                        .attr('onclick', 'clean_selection('+dimension.id+')'),
-                selector = $('<button></button>').attr('id', dimension.id).addClass('btn btn-block btn-outline btn-primary')
-                                        .html(dataviva.dictionary['select'])
-                                        .attr('onclick', 'select_dimension(id);'),
-                filter = $('<input></input>').attr('type', 'hidden').attr('name', dimension.id).attr('id', 'filter'+index).val('all');
+                                        .attr('onclick', 'clean_selection('+dimension.id+')');
 
+                if (BuildGraph['filter'+index] == 'all') {
+                    if(index != 0) {
+                        button.html(dataviva.dictionary.select);
+                    } else {
+                        button.html(dataviva.dictionary.brazil);
+                    }
+
+                } else {
+                    button.html(dataviva[dimension.id][BuildGraph['filter'+index]].name);
+                }
+                
             label.html(dataviva.dictionary[dimension.id]);
             filter.change(updateViews);
 
             if (dimension.name == 'School') {
                 div.append(filter);
             } else {
-                div.append(filter).append(label).append(selector).append(cleaner);
+                div.append(filter).append(label).append(button).append(cleaner);
             }
 
             $('#dimensions').append(div);
@@ -87,13 +113,12 @@ var BuildGraph = (function () {
         $.ajax({
             method: "GET",
             url: "/" + dataviva.language + "/build_graph/views/" + BuildGraph.dataset +"/" +
-                $('#dimensions #filter0').val() +
-                ($('#compare-location input[name=compare_with]').val() ? '_' + $('#compare-location input[name=compare_with]').val() : '') + "/" +
-                ($('#dimensions #filter1').val() == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" +
-                ($('#dimensions #filter2').val() == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
+                BuildGraph.filter0 + (BuildGraph.filterCompare ? '_' + BuildGraph.filterCompare : '') + "/" +
+                (BuildGraph.filter1 == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" +
+                (BuildGraph.filter2 == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
             data: {
-                    filter1: $('#dimensions #filter1').val(),
-                    filter2: $('#dimensions #filter2').val()
+                    filter1: BuildGraph.filter1,
+                    filter2: BuildGraph.filter2
                 },
             success: function (result) {
                 setViews(result.views);
@@ -191,52 +216,95 @@ var BuildGraph = (function () {
 
         if (BuildGraph.selectedGraph == 'compare') {
             setCompare();
+            if(BuildGraph.filterCompare) {
+                showGraph(graph);
+            }
         } else {
             $('#compare-location').empty();
-            delete BuildGraph.compare;
-            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graph).data('url')+'"></iframe>');
+            delete BuildGraph.filterCompare;
+            showGraph(graph)
         }
+
+        updateUrl();
     }
 
     function setCompare(){
-        if (BuildGraph.compare) {
-            $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$('#compare').data('url')+'"></iframe>');
+        $('#compare-location').empty();
+
+        var div = $('<div></div>').addClass('form-group'),
+            label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
+            cleaner = $('<button></button>').addClass('btn btn-xs btn-link pull-right')
+                                    .html(dataviva.dictionary['clean_selection'])
+                                    .attr('onclick', 'clean_selection('+'compare_with'+')'),
+            button = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
+                                    .attr('onclick', 'select_compare();'),
+            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'filterCompare').val(BuildGraph.filterCompare);
+
+        if (BuildGraph.filterCompare) {
+            if (BuildGraph.filterCompare == 'all') {
+                button.html(dataviva.dictionary.brazil); 
+            } else {
+                button.html(dataviva.bra[BuildGraph.filterCompare].name);    
+            }
         } else {
-            $('#compare-location').empty();
-
-            var div = $('<div></div>').addClass('form-group'),
-                label = $('<label></label>').attr('for', 'compare_with').addClass('control-label'),
-                cleaner = $('<button></button>').attr('for', 'compare_with').addClass('btn btn-xs btn-link pull-right')
-                                        .html(dataviva.dictionary['clean_selection'])
-                                        .attr('onclick', 'clean_selection('+'compare_with'+')'),
-                selector = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
-                                        .html(dataviva.dictionary['select'])
-                                        .attr('onclick', 'select_compare();'),
-                filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare_filter').val('all');
-
-            label.html(dataviva.dictionary['compare_with']);
-            filter.change(updateViews);
-
-            div.append(filter).append(label).append(selector).append(cleaner);
-
-            $('#compare-location').append(div);
+            button.html(dataviva.dictionary['select'])
         }
+
+        label.html(dataviva.dictionary['compare_with']);
+        filter.change(updateViews);
+
+        div.append(filter).append(label).append(button).append(cleaner);
+
+        $('#compare-location').append(div);
+    }
+
+    function showGraph(graph) {
+        $('#graph-wrapper').html('<iframe class="embed-responsive-item" src="'+$(graph).data('url')+'"></iframe>');
     }
 
     function init() {
+        BuildGraph.dataset = $('#dataset').val();
+
         for (dataset in dataviva.datasets) {
-            $('#datasets').append( $('<option value="'+dataset+'">'+dataviva.dictionary[dataset]+'</option>'));
+            $('#datasets').append( $('<option value="' + dataset + '"' + 
+                (BuildGraph.dataset == dataset ? 'selected' : '') + '>' + 
+                                      dataviva.dictionary[dataset] + 
+                                     '</option>'));
         }
 
         $('#datasets').change(changeDataSet);
+
+        BuildGraph.filter0 = $('#filter0').val();
+        BuildGraph.filter1 = $('#filter1').val();
+        BuildGraph.filter2 = $('#filter2').val();
+        BuildGraph.selectedView = $('#view').val();
+        BuildGraph.selectedGraph = $('#graph').val();
+        BuildGraph.filterCompare = $('#compare').val();
+
+        if(BuildGraph.dataset){
+            selectDataSet($('#dataset').val());
+        }
     }
+
+    function updateUrl(){
+        var url = BuildGraph.dataset +
+            '/' + BuildGraph.filter0 + 
+            '/' + BuildGraph.filter1 + 
+            '/' + BuildGraph.filter2 + 
+            '?view=' + BuildGraph.selectedView + 
+            '&graph=' + BuildGraph.selectedGraph + 
+            (BuildGraph.filterCompare ? '&compare='+BuildGraph.filterCompare : '');
+
+        var newUrl = initialUrl + '/' +url
+            window.history.pushState('', '', newUrl);
+    }
+
 })();
 
+var initialUrl = window.location.origin + '/' + dataviva.language + '/build_graph'
 
 $(document).ready(function () {
-    dataviva.requireAttrs(['datasets'], function() {
+    dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'course_sc', 'course_hedu', 'university'], function() {
         BuildGraph.init();
     });
 });
-
-
