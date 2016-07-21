@@ -20,7 +20,7 @@ function select_dimension(id) {
 var selectorCompare = Selector()
     .callback(function(d){
         if ($('#compare_with').siblings('input').val() != d.id) {
-            BuildGraph.compare = d.id;
+            BuildGraph.filterCompare = d.id;
             $('#compare_with').html(d.name);
             $('#compare-location input[name=compare_with]').val(d.id).trigger('change');
         }
@@ -32,17 +32,17 @@ function select_compare() {
     $('#modal-selector').modal('show');
 }
 
-function clean_selection(id) {
-    if ($(id).siblings('input').val() != 'all') {
-            BuildGraph[$(id).siblings('input').attr('id')] = 'all';
+function clean_selection(button) {
+    if ($(button).siblings('input').val() != 'all') {
+            BuildGraph[$(button).siblings('input').attr('id')] = 'all';
 
-            if (id == 'bra' || id == 'compare_with') {
-                $(id).html(dataviva.dictionary.brazil);        
+            if (button.id == 'bra' || button.id == 'compare_with') {
+                $(button).html(dataviva.dictionary.brazil);        
             } else {
-                $(id).html(dataviva.dictionary['select']);   
+                $(button).html(dataviva.dictionary['select']);   
             }
         
-        $(id).siblings('input').val('all').trigger('change');
+        $(button).siblings('input').val('all').trigger('change');
     }
 }
 
@@ -57,7 +57,7 @@ var BuildGraph = (function () {
         init: init
     }
 
-    var selectedGraph, selectedView, dataset, views, filter0, filter1, filter2, compare;
+    var selectedGraph, selectedView, dataset, views, filter0, filter1, filter2, filterCompare;
 
     function changeDataSet() {
         BuildGraph.filter0 = 'all';
@@ -113,7 +113,7 @@ var BuildGraph = (function () {
         $.ajax({
             method: "GET",
             url: "/" + dataviva.language + "/build_graph/views/" + BuildGraph.dataset +"/" +
-                BuildGraph.filter0 + (BuildGraph.compare ? '_' + BuildGraph.compare : '') + "/" +
+                BuildGraph.filter0 + (BuildGraph.filterCompare ? '_' + BuildGraph.filterCompare : '') + "/" +
                 (BuildGraph.filter1 == 'all' ? 'all' : $('#dimensions #filter1')[0].name) + "/" +
                 (BuildGraph.filter2 == 'all' ? 'all' : $('#dimensions #filter2')[0].name),
             data: {
@@ -216,12 +216,12 @@ var BuildGraph = (function () {
 
         if (BuildGraph.selectedGraph == 'compare') {
             setCompare();
-            if(BuildGraph.compare) {
+            if(BuildGraph.filterCompare) {
                 showGraph(graph);
             }
         } else {
             $('#compare-location').empty();
-            delete BuildGraph.compare;
+            delete BuildGraph.filterCompare;
             showGraph(graph)
         }
 
@@ -238,13 +238,13 @@ var BuildGraph = (function () {
                                     .attr('onclick', 'clean_selection('+'compare_with'+')'),
             button = $('<button></button>').attr('id', 'compare_with').addClass('btn btn-block btn-outline btn-primary')
                                     .attr('onclick', 'select_compare();'),
-            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'compare').val(BuildGraph.compare);
+            filter = $('<input></input>').attr('type', 'hidden').attr('name', 'compare_with').attr('id', 'filterCompare').val(BuildGraph.filterCompare);
 
-        if (BuildGraph.compare) {
-            if (BuildGraph.compare == 'all') {
+        if (BuildGraph.filterCompare) {
+            if (BuildGraph.filterCompare == 'all') {
                 button.html(dataviva.dictionary.brazil); 
             } else {
-                button.html(dataviva.bra[BuildGraph.compare].name);    
+                button.html(dataviva.bra[BuildGraph.filterCompare].name);    
             }
         } else {
             button.html(dataviva.dictionary['select'])
@@ -279,9 +279,11 @@ var BuildGraph = (function () {
         BuildGraph.filter2 = $('#filter2').val();
         BuildGraph.selectedView = $('#view').val();
         BuildGraph.selectedGraph = $('#graph').val();
-        BuildGraph.compare = $('#compare').val();
+        BuildGraph.filterCompare = $('#compare').val();
 
-        selectDataSet($('#dataset').val());
+        if(BuildGraph.dataset){
+            selectDataSet($('#dataset').val());
+        }
     }
 
     function updateUrl(){
@@ -291,7 +293,7 @@ var BuildGraph = (function () {
             '/' + BuildGraph.filter2 + 
             '?view=' + BuildGraph.selectedView + 
             '&graph=' + BuildGraph.selectedGraph + 
-            (BuildGraph.compare ? '&compare='+BuildGraph.compare : '');
+            (BuildGraph.filterCompare ? '&compare='+BuildGraph.filterCompare : '');
 
         var newUrl = initialUrl + '/' +url
             window.history.pushState('', '', newUrl);
