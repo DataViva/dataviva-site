@@ -48,7 +48,7 @@ def create():
 
         db.session.add(contact)
         db.session.commit()
-        send_mail("Mensagem recebida via página de Contato",
+        send_mail("Contato - DataViva",
                   ["contato@dataviva.info"], message_tpl)
 
         message = gettext(

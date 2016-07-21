@@ -1,6 +1,6 @@
-<div role="tabpanel" class="tab-pane" id="opportunities">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'opportunities' }}" id="opportunities">
 
-    <h2>{% trans %}Economic Opportunities{% endtrans %} ({{body.industry_year}})</h2>
+    <h2>{% trans %}Economic Opportunities{% endtrans %} ({{body.product_year}})</h2>
 
     <div class="row">
         {% if body.less_distance_by_product %}
@@ -12,7 +12,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.less_distance_by_product_name }}</p>
                 <div class="number">
-                    R$ <strong class="counter">{{ body.less_distance_by_product | max_digits(3) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
+                    <strong class="counter">{{ body.less_distance_by_product | max_digits(3, True) }}</strong><span>{{ body.less_distance_by_product | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -27,7 +27,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.less_distance_by_occupation_name }}</p>
                 <div class="number">
-                    R$ <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
+                    <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3, True) }}</strong><span>{{ body.less_distance_by_occupation | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.opportunity_gain_by_product_name }}</p>
                 <div class="number">
-                    R$ <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_product | magnitude }}</span>
+                    <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3, True) }}</strong><span>{{ body.opportunity_gain_by_product | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -57,7 +57,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.opportunity_gain_by_occupation_name }}</p>
                 <div class="number">
-                    R$ <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3) }}</strong><span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
+                    <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3, True) }}</strong><span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
                 </div>
             </div>
         </div>

@@ -1,10 +1,10 @@
-<div role="tabpanel" class="tab-pane" id="trade-partner">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'trade-partner' }}" id="trade-partner">
 
     <h2>{%trans%}International Trade{%endtrans%} ({{ header.year }})</h2>
 
     <div class="row">
 
-    {% if (location.id|length) != 9 %}
+    {% if not is_municipality %}
         {% if body.municipality_export_value %}
         <div class="col-xs-12 col-sm-6 col-md-3">
             <div class="blue-box title">
@@ -14,7 +14,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong><span>{{ body.municipality_export_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.municipality_export_value | max_digits(3, True) }}</strong><span>{{ body.municipality_export_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.municipality_name_import}} - {{ body.municipality_state_import.upper() }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong><span>{{ body.municipality_import_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.municipality_import_value | max_digits(3, True) }}</strong><span>{{ body.municipality_import_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.destination_name_export }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.destination_export_value | max_digits(3) }}</strong><span>{{ body.destination_export_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.destination_export_value | max_digits(3, True) }}</strong><span>{{ body.destination_export_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.origin_name_import }}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.origin_import_value | max_digits(3) }}</strong><span>{{ body.origin_import_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.origin_import_value | max_digits(3, True) }}</strong><span>{{ body.origin_import_value | magnitude }}</span>
                 </div>
             </div>
         </div>

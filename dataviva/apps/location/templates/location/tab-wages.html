@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="wages">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'wages' }}" id="wages">
 
     <h2>{% trans %}Wages and Jobs{% endtrans %} ({{body.industry_year}})</h2>
 
@@ -12,7 +12,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_industry_by_num_jobs_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_industry_by_num_jobs | magnitude }} {% trans %}Jobs{% endtrans %}</span>
+                    <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3, True) }}</strong><span>{{ body.main_industry_by_num_jobs | magnitude }} {% trans %}Jobs{% endtrans %}</span>
                 </div>
             </div>
         </div>
@@ -25,7 +25,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.main_occupation_by_num_jobs_name }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3) }}</strong><span>{{ body.main_occupation_by_num_jobs | magnitude }} {% trans %}Occupations{% endtrans %}</span>
+                    <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3, True) }}</strong><span>{{ body.main_occupation_by_num_jobs | magnitude }} {% trans %}Occupations{% endtrans %}</span>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
             <div class="blue-box">
                 <p class="label">{% trans %}Average Wage{% endtrans %}</p>
                 <div class="number">
-                    R$ <strong class="counter">{{ body.avg_wage | max_digits(3) }}</strong><span>{{ body.avg_wage | magnitude }}</span>
+                    R$ <strong class="counter">{{ body.avg_wage | max_digits(3, True) }}</strong><span>{{ body.avg_wage | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -49,7 +49,7 @@
             <div class="blue-box">
                 <p class="label">{% trans %}Wage Mass{% endtrans %}</p>
                 <div class="number">
-                    R$ <strong class="counter">{{ body.wage | max_digits(3) }}</strong><span>{{ body.wage | magnitude }}</span>
+                    R$ <strong class="counter">{{ body.wage | max_digits(3, True) }}</strong><span>{{ body.wage | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@
             <div class="blue-box">
                 <p class="label">{% trans %}Total of Jobs{% endtrans %}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.total_jobs | max_digits(3) }}</strong><span>{{ body.total_jobs | magnitude }}</span>
+                    <strong class="counter">{{ body.total_jobs | max_digits(3, True) }}</strong><span>{{ body.total_jobs | magnitude }}</span>
                 </div>
             </div>
         </div>

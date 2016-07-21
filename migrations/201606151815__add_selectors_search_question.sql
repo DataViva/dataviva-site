@@ -1,0 +1,26 @@
+ALTER TABLE search_question ADD selectors VARCHAR(400) AFTER profile_id;
+
+UPDATE search_question SET selectors = 'cnae,bra' WHERE id = (select id from search_question where description_pt ='Qual o número de estabelecimentos na Atividade Econômica X, na Localidade Y?');
+UPDATE search_question SET selectors = 'cnae,bra' WHERE id = (select id from search_question where description_pt ='Qual o salário médio da Atividade Econômica X, na Localidade Y?');
+UPDATE search_question SET selectors = 'cbo,cnae,bra' WHERE id = (select id from search_question where description_pt ='Qual o salário médio da Ocupação Z, na Atividade Econômica X, na Localidade Y?');
+UPDATE search_question SET selectors = 'hs,bra' WHERE id = (select id from search_question where description_pt ='Quais os principais parceiros comerciais de um Produto P na Localidade Y?');
+UPDATE search_question SET selectors = 'cnae' WHERE id = (select id from search_question where description_pt ='Quais localidades concentram o emprego na Atividade Econômica X?');
+UPDATE search_question SET selectors = 'hs' WHERE id = (select id from search_question where description_pt ='Quais as localidades que mais importam o Produto P?');
+UPDATE search_question SET selectors = 'hs' WHERE id = (select id from search_question where description_pt ='Quais as localidades que mais exportam o Produto P?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os produtos mais próximos da estrutura produtiva da Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os cursos de nível superior oferecidos na Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os cursos de nível técnico oferecidos na Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Qual a rede de produtos da Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os produtos mais próximos da estrutura produtiva da Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os produtos de maior complexidade exportados por uma Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os produtos de maior complexidade importados por uma Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Qual a rede de atividades da Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais as atividades mais próximas da estrutura produtiva da Localidade Y?');
+UPDATE search_question SET selectors = 'cnae' WHERE id = (select id from search_question where description_pt ='Quais localidades concentram o emprego na Atividade Econômica X?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os cursos de nível superior oferecidos na Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os cursos de nível técnico oferecidos na Localidade Y?');
+UPDATE search_question SET selectors = 'cbo,bra' WHERE id = (select id from search_question where description_pt ='Qual o salário médio da Ocupação Z na Localidade Y?');
+UPDATE search_question SET selectors = 'cbo' WHERE id = (select id from search_question where description_pt ='Em quais localidades paga-se o maior salário médio da Ocupação Z?');
+UPDATE search_question SET selectors = 'cbo' WHERE id = (select id from search_question where description_pt ='Em quais localidades cresce o número de empregados da Ocupação Z?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais os principais produtos exportados pela Localidade Y?');
+UPDATE search_question SET selectors = 'bra' WHERE id = (select id from search_question where description_pt ='Quais as principais atividades econômicas de uma Localidade Y?');

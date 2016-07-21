@@ -20,6 +20,7 @@
     <nav class="sidebar well col-xs-12 col-md-3" style="margin-top: 0">
         <ul class="sub-menu">
             <li>
+                <input type="hidden" id="dataset" value="{{ dataset if dataset }}">
                 <div class="form-group">
                     <label for="datasets" class="control-label">Banco de Dados</label>
                     <select class="form-control" id="datasets" name="datasets">
@@ -28,11 +29,21 @@
                 </div>
             </li>
             <li id="dimensions">
+                <input type="hidden" id="filter0" value="{{ filter0 if filter0 }}">
+                <input type="hidden" id="filter1" value="{{ filter1 if filter1 }}">
+                <input type="hidden" id="filter2" value="{{ filter2 if filter2 }}">
+            </li>
 
-            </li>
             <li id="views">
+                <input type="hidden" id="view" value="{{ view if view }}">
             </li>
+
             <li id="graphs">
+                <input type="hidden" id="graph" value="{{ graph if graph }}">
+            </li>
+
+            <li id="compare-location">
+                <input type="hidden" id="compare" value="{{ compare if compare }}">
             </li>
         </ul>
     </nav>

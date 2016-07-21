@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="general">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if header.bra_id %}
         <p>{% if g.locale == 'pt' %}{{ trade_partner.article() | capitalize }}{% endif %} {{ header.name }} 
@@ -41,7 +41,7 @@
                         </dt>
                         <dd>
                             <small>{{body.municipality_with_more_exports}} - {{body.municipality_with_more_exports_state.upper()}}</small>
-                            USD <strong class="counter">{{body.highest_export_value | max_digits(3) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
+                            USD <strong class="counter">{{body.highest_export_value | max_digits(3, True) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
                         </dd>
                     {% endif %}
                     {% if body.highest_import_value %}
@@ -50,7 +50,7 @@
                         </dt>
                         <dd>
                             <small>{{body.municipality_with_more_imports}} - {{body.municipality_with_more_imports_state.upper()}}</small>
-                            USD <strong class="counter">{{body.highest_import_value | max_digits(3) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
+                            USD <strong class="counter">{{body.highest_import_value | max_digits(3, True) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
                         </dd>
                     {% endif %}
                 {% endif %}
@@ -60,7 +60,7 @@
                         </dt>
                         <dd>
                             <small>{{body.product_with_more_exports}}</small>
-                            USD <strong class="counter">{{body.product_with_highest_export_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
+                            USD <strong class="counter">{{body.product_with_highest_export_value | max_digits(3, True) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
                         </dd>
                     {% endif %}
                     {% if body.product_with_highest_import_value %}
@@ -69,7 +69,7 @@
                         </dt>
                         <dd>
                             <small>{{body.product_with_more_imports}}</small>
-                            USD <strong class="counter">{{body.product_with_highest_import_value | max_digits(3) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
+                            USD <strong class="counter">{{body.product_with_highest_import_value | max_digits(3, True) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
                         </dd>
                     {% endif %}
                         <dt>
@@ -77,14 +77,14 @@
                         </dt>
                         <dd>
                             <small>{{body.product_with_highest_balance}}</small>
-                            USD <strong class="counter">{{body.highest_balance | max_digits(3) }}</strong> <span>{{body.highest_balance | magnitude }}</span>
+                            USD <strong class="counter">{{body.highest_balance | max_digits(3, True) }}</strong> <span>{{body.highest_balance | magnitude }}</span>
                         </dd>
                         <dt>
                             {% trans %}Product with Lowest Trade Balance Surplus{% endtrans %}
                         </dt>
                         <dd>
                             <small>{{body.product_with_lowest_balance}}</small>
-                            USD <strong class="counter">{{body.lowest_balance | max_digits(3) }}</strong> <span>{{body.lowest_balance | magnitude }}</span>
+                            USD <strong class="counter">{{body.lowest_balance | max_digits(3, True) }}</strong> <span>{{body.lowest_balance | magnitude }}</span>
                         </dd>
                     </dl>
             <a href="#international-trade" 

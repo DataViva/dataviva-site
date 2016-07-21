@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="international-trade">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'international-trade' }}" id="international-trade">
 
     <h2>{% trans %}International Trade{% endtrans %} ({{ header.year }})</h2>
 
@@ -13,7 +13,7 @@
             <div class="blue-box">
                 <p class="label">{{body.municipality_with_more_exports}} - {{body.municipality_with_more_exports_state.upper()}}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.highest_export_value | max_digits(3) }}</strong><span>{{ body.highest_export_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.highest_export_value | max_digits(3, True) }}</strong><span>{{ body.highest_export_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="blue-box">
                 <p class="label">{{body.municipality_with_more_imports}} - {{body.municipality_with_more_imports_state.upper()}}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.highest_import_value | max_digits(3) }}</strong><span>{{ body.highest_import_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.highest_import_value | max_digits(3, True) }}</strong><span>{{ body.highest_import_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="blue-box">
                 <p class="label">{{body.product_with_more_exports}}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.product_with_highest_export_value | max_digits(3) }}</strong><span>{{ body.product_with_highest_export_value | magnitude  }}</span>
+                    USD <strong class="counter">{{ body.product_with_highest_export_value | max_digits(3, True) }}</strong><span>{{ body.product_with_highest_export_value | magnitude  }}</span>
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
             <div class="blue-box">
                 <p class="label">{{body.product_with_more_imports}}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.product_with_highest_import_value | max_digits(3) }}</strong><span>{{ body.product_with_highest_import_value | magnitude }}</span>
+                    USD <strong class="counter">{{ body.product_with_highest_import_value | max_digits(3, True) }}</strong><span>{{ body.product_with_highest_import_value | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -74,7 +74,7 @@
             <div class="blue-box">
                 <p class="label">{{body.product_with_highest_balance}}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.highest_balance | max_digits(3) }}</strong><span>{{ body.highest_balance | magnitude }}</span>
+                    USD <strong class="counter">{{ body.highest_balance | max_digits(3, True) }}</strong><span>{{ body.highest_balance | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -87,7 +87,7 @@
             <div class="blue-box">
                 <p class="label">{{body.product_with_lowest_balance}}</p>
                 <div class="number">
-                    USD <strong class="counter">{{ body.lowest_balance | max_digits(3) }}</strong><span>{{ body.lowest_balance | magnitude }}</span>
+                    USD <strong class="counter">{{ body.lowest_balance | max_digits(3, True) }}</strong><span>{{ body.lowest_balance | magnitude }}</span>
                 </div>
             </div>
         </div>

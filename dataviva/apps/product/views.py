@@ -32,22 +32,58 @@ def add_language_code(endpoint, values):
 def graphs(product_id, tab):
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('product/graphs-'+tab+'.html', product=product, location=location)
+    return render_template('product/graphs-'+tab+'.html', product=product, location=location, graph=None)
 
 
-@mod.route('/<product_id>')
-def index(product_id):
-
-    header = {}
-    body = {}
+@mod.route('/<product_id>', defaults={'tab': 'general'})
+@mod.route('/<product_id>/<tab>')
+def index(product_id, tab):
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    language = g.locale
+    is_municipality = location and len(location.id) == 9
+
+    menu = request.args.get('menu')
+    url = request.args.get('url')
 
     if location:
         location_id = location.id
     else:
         location_id = None
+
+    header = {}
+    body = {}
+    graph = {}
+
+    if menu:
+        graph['menu'] = menu
+    if url:
+        graph['url'] = url
+
+    tabs = {
+        'general': [],
+        'opportunities': [
+            'economic-opportunities-rings'
+        ],
+        'trade-partner': [
+            'trade-balance-product-',
+            'exports-destination-tree',
+            'exports-destination-line',
+            'exports-destination-stacked',
+            'imports-origin-tree',
+            'imports-origin-line',
+            'imports-origin-stacked',
+        ],
+    }
+
+    if not is_municipality:
+        tabs['trade-partner'] += [
+            'exports-municipality-tree',
+            'exports-municipality-geo',
+            'exports-municipality-stacked',
+            'imports-municipality-tree',
+            'imports-municipality-geo',
+            'imports-municipality-stacked',
+        ]
 
     trade_partners_service = ProductTradePartnersService(
         product_id=product.id, bra_id=location_id)
@@ -79,7 +115,7 @@ def index(product_id):
             header['distance_wld'] = product_service.distance_wld()
             header['opportunity_gain_wld'] = product_service.opp_gain_wld()
 
-        if len(location_id) != 9:
+        if is_municipality:
             body[
                 'municipality_name_export'] = municipalities_service.municipality_with_more_exports()
             body[
@@ -178,9 +214,15 @@ def index(product_id):
     secex_max_year = db.session.query(func.max(Ymp.year)).filter(
         Ymp.month == 12).first()[0]
 
+    if tab not in tabs:
+        abort(404)
+
+    if menu and menu not in tabs[tab]:
+        abort(404)
+
     if header['export_value'] is None and header['import_value'] is None:
         abort(404)
-    if secex_max_year != header['year']:
+    elif secex_max_year != header['year']:
         abort(404)
     else:
-        return render_template('product/index.html', header=header, body=body, product=product, location=location, language=language)
+        return render_template('product/index.html', header=header, body=body, product=product, location=location, is_municipality=is_municipality, tab=tab, graph=graph)

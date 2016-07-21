@@ -3,12 +3,15 @@ from flask import Blueprint, render_template, g, redirect, url_for, flash, jsoni
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from sqlalchemy import desc
-from models import Post, PostSubject
+from models import Post, Subject
 from dataviva import db
 from forms import RegistrationForm
 from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
+from dataviva import app
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder
+import os
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -33,32 +36,58 @@ def add_language_code(endpoint, values):
 @mod.route('/', methods=['GET'])
 def index():
     posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
-    subjects = PostSubject.query.join(Post).filter(
-        Post.subject_id == PostSubject.id,
-        Post.active
-    ).order_by(desc(PostSubject.name)).all()
+    subjects_query = Subject.query.order_by(desc(Subject.name)).all()
+    subjects = []
+
+    for subject_query in subjects_query:
+        for row in subject_query.posts:
+            if row.active == True:
+                subjects.append(subject_query)
+                break
+
     return render_template('blog/index.html', posts=posts, subjects=subjects)
+
 
 
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
-    posts = Post.query.filter_by(active=True, subject_id=subject).order_by(desc(Post.postage_date)).all()
-    subjects = PostSubject.query.join(Post).filter(
-        Post.subject_id == PostSubject.id,
-        Post.active
-    ).order_by(desc(PostSubject.name)).all()
-    return render_template('blog/index.html', posts=posts, subjects=subjects)
+    posts_query = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
+    subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
+    posts = []
+    subjects = []
+
+    for subject_query in subjects_query:
+        for row in subject_query.posts:
+            if row.active == True:
+                subjects.append(subject_query)
+                break
+
+    for post in posts_query:
+        if float(subject) in [x.id for x in post.subjects]:
+            posts.append(post)
+
+    
+    return render_template('blog/index.html', posts=posts, subjects=subjects, active_subject=long(subject))
 
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
+    subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     post = Post.query.filter_by(id=id).first_or_404()
     posts = Post.query.filter(Post.id != id, Post.active).all()
+    subjects = []
+
+    for subject_query in subjects_query:
+        for row in subject_query.posts:
+            if row.active == True:
+                subjects.append(subject_query)
+                break
+
     if len(posts) > 3:
         read_more = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
         read_more = posts
-    return render_template('blog/show.html', post=post, id=id, read_more=read_more)
+    return render_template('blog/show.html', post=post, subjects=subjects, id=id, read_more=read_more)
 
 
 @mod.route('/post/all', methods=['GET'])
@@ -68,6 +97,7 @@ def all_posts():
     for row in result:
         posts += [(row.id, row.title, row.author,
                    row.postage_date.strftime('%d/%m/%Y'), row.active)]
+
     return jsonify(posts=posts)
 
 
@@ -97,10 +127,21 @@ def admin_activate(status, status_value):
 @required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
+    subjects = Subject.query.all()
+
     if ids:
         posts = Post.query.filter(Post.id.in_(ids)).all()
         for post in posts:
+            try:
+                delete_s3_folder(os.path.join(mod.name, str(post.id)))
+            except Exception:
+                pass
             db.session.delete(post)
+            db.session.flush()
+
+            for subject in subjects:
+                if subject.posts.count() == 0:
+                    db.session.delete(subject)
 
         db.session.commit()
         return u"Post(s) excluído(s) com sucesso!", 200
@@ -126,25 +167,27 @@ def create():
     else:
         post = Post()
         post.title = form.title.data
-        subject_query = PostSubject.query.filter_by(name=form.subject.data)
-
-        if (subject_query.first()):
-            post.subject_id = subject_query.first().id
-        else:
-            subject = PostSubject()
-            subject.name = form.subject.data
-            db.session.add(subject)
-            db.session.commit()
-            post.subject_id = subject.id
-
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        post.thumb = form.thumb.data
         post.active = 0
 
+        subjects_names = form.subject.data.replace(', ', ',').split(',')
+
+        for name in subjects_names:
+            subject = Subject.query.filter_by(name=name).first()
+            if (not subject):
+                subject = Subject()
+                subject.name = name
+            post.subjects.append(subject)
         db.session.add(post)
+
+        db.session.flush()
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
+            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+
         db.session.commit()
 
         message = u'Muito obrigado! Seu post foi submetido com sucesso!'
@@ -159,12 +202,12 @@ def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
     form.title.data = post.title
-    subject_query = PostSubject.query.filter_by(id=post.subject_id)
-    form.subject.data = subject_query.first().name
     form.author.data = post.author
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
     form.thumb.data = post.thumb
+    form.subject.data = ', '.join([sub.name for sub in post.subjects])
+
     return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
 
 
@@ -179,21 +222,26 @@ def update(id):
     else:
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
-        subject_query = PostSubject.query.filter_by(name=form.subject.data)
-
-        if (subject_query.first()):
-            post.subject_id = subject_query.first().id
-        else:
-            subject = PostSubject()
-            subject.name = form.subject.data
-            db.session.add(subject)
-            db.session.commit()
-            post.subject_id = subject.id
-
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        post.thumb = form.thumb.data
+        subjects_names = form.subject.data.replace(', ', ',').split(',')
+        num_subjects = len(post.subjects)
+
+        for i in range(0, num_subjects):
+            post.subjects.remove(post.subjects[0])
+
+        for name in subjects_names:
+            subject = Subject.query.filter_by(name=name).first()
+            if (not subject):
+                subject = Subject()
+                subject.name = name
+            post.subjects.append(subject)
+
+        db.session.flush()
+        if len(form.thumb.data.split(',')) > 1:
+            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
+            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 

@@ -5,7 +5,7 @@ var ScholarTable = function () {
         "oLanguage": {
           "sSearch": "Pesquisar "
         },
-        "sAjaxSource": "/scholar/articles/all",
+        "sAjaxSource": "/scholar/admin/articles/all",
         "sAjaxDataProp": "articles",
         "order": [[ 3, "asc" ]],
         "columnDefs": [
@@ -42,22 +42,6 @@ var ScholarTable = function () {
         "bFilter": true,
         "info": false,
         "initComplete": function(settings, json) {
-            $( 'input[name="show_home"]' ).each(function() {
-                var switchery = new Switchery(this, {
-                    size: 'small'
-                });
-
-                $(this).next().click(function() {
-                    var checkbox = $(this).siblings().get(0);
-
-                    var ids = [checkbox.value],
-                        status = $(checkbox).attr('name'),
-                        status_value = checkbox.checked;
-
-                    changeStatus(ids, status, status_value);
-                });
-            });
-
             $( 'input[name="approval_status"]' ).each(function() {
                 var switchery = new Switchery(this, {
                     size: 'small',
@@ -90,8 +74,7 @@ var ScholarTable = function () {
         });
         checkManySelected();
     })
-
-}
+};
 
 ScholarTable.prototype.getCheckedIds = function(first_argument) {
     var checkedIds = [];
@@ -102,8 +85,6 @@ ScholarTable.prototype.getCheckedIds = function(first_argument) {
     });
     return checkedIds;
 };
-
-
 
 var scholarTable = new ScholarTable();
 
@@ -123,9 +104,9 @@ var changeStatus = function(ids, status, status_value){
                 }
             },
             success: function (message) {
-                for (item in ids) {
-                    if ($('#'+status+ids[item])[0].checked !== status_value) {
-                        $('#'+status+ids[item]).click();
+                for (var i = 0; i < ids.length; i++) {
+                    if ($('#'+status+ids[i])[0].checked !== status_value) {
+                        $('#'+status+ids[i]).click();
                     }
                 }
 
@@ -153,8 +134,8 @@ var destroy = function(ids){
                 }
             },
             success: function (message) {
-                for (item in ids) {
-                    itemId = '#item'+ids[item];
+                for (var i = 0; i < ids.length; i++) {
+                    itemId = '#item'+ids[i];
                     scholarTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
 

@@ -1,0 +1,18 @@
+rais en pt 
+    71/year
+
+sc en pt 
+    34/year
+
+hedu en pt 
+    34/year
+
+secex en pt 
+    106/year
+
+select * from secex_ymb where year='2016'; ok
+select * from secex_ymb where year='2015'; ok 
+select * from rais_yb where year='2014'; falta lio e pt lo lio 
+-- ------
+select * from sc_yb where year='2015'; ok
+select * from hedu_yb where year='2014'; ok

@@ -1,3 +1,4 @@
-$('#help-center').click(function(){
-	  $('.tab-content #home').addClass('active').siblings().removeClass('active');
+$('.sidebar a').on('click', function(){
+    $('.sidebar a').attr('class','');
+    $(this).toggleClass('active');
 });

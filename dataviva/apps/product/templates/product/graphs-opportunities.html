@@ -4,11 +4,17 @@
         <div class="list-group panel">
             <h4>{% trans %}Economic Opportunities{% endtrans %}</h4>
             <a href="/{{ g.locale }}/embed/rings/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/hs/?rca_scope=wld_rca" 
-            target="graphs-frame-opportunities" class="list-group-item">{% trans %}Rings{% endtrans %}</a>
+            target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'economic-opportunities-rings' or not graph }}"
+            data-parent="#economic-opportunities">{% trans %}Rings{% endtrans %}</a>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9" >
-        <iframe src="/{{ g.locale }}/embed/rings/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/hs/?rca_scope=wld_rca"
+        <iframe src="
+                    {% if not graph %} 
+                        /{{ g.locale }}/embed/rings/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/hs/?rca_scope=wld_rca
+                    {% else %} 
+                        /{{ g.locale }}/embed/{{graph.url}}
+                    {% endif %}"
             name="graphs-frame-opportunities"
             id="graphs-opportunities"
             class="embed-responsive-item">

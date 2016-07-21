@@ -86,14 +86,8 @@ class Build(db.Model, AutoSerialize):
             if bra_id == "bra":
                 bra_id = "all"
 
-            # if bra_id == "all" and not self.brazil_allowed():
-            #     bra_id = "4mg"
-
             if "_" in self.bra and "_" not in bra_id:
-                if bra_id == "4rj":
-                    bra_id = bra_id + "_4mg"
-                else:
-                    bra_id = bra_id + "_4rj"
+                bra_id = bra_id + "_all"
             elif "_" not in self.bra and "_" in bra_id:
                 bra_id = bra_id.split("_")[0]
 

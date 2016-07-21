@@ -1,0 +1,28 @@
+<div role="tabpanel" class="tab-pane" id="tab-classifications-locations">
+    <div class="col-xs-12">
+        <h2>Brazilian Locations</h2>
+        <div class="panel-body">
+            <div class="classifications-locations">
+                <div class="classifications-locations-wrapper">
+                    <div class="classifications-locations-content">
+                        <table id="locations-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>{% trans %}ID{% endtrans %}</th>
+                                    <th>{% trans %}ID IBGE{% endtrans %}</th>
+                                    <th>{% trans %}Name{% endtrans %}</th>
+                                    <th>{% trans %}Population{% endtrans %}</th>
+                                    <th>{% trans %}Color{% endtrans %}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block js_assets %}
+        <script src="/static/js/modules/help/classifications.js"></script>
+{% endblock js_assets %}

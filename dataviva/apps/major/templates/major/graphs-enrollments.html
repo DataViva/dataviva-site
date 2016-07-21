@@ -5,28 +5,33 @@
         <h4>{% trans %}Enrollments By{% endtrans %}</h4>
             <a href="#enrollments-university" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Universities{% endtrans %}</a>
             <div class="collapse" id="enrollments-university">
-                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/university/?color=color&depth=university_5&size=enrolled" target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
+                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/university/?color=color&depth=university_5&size=enrolled" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-university-tree_map' or not graph }}" data-parent="#enrollments-university">TreeMap</a>
             </div>
             {% if location.id | length != 9 %}
             <a href="#enrollments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Municipalities{% endtrans %}</a>
             <div class="collapse" id="enrollments-municipality">
-                <a href="/{{ g.locale }}/embed/geo_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=enrolled" target="graphs-frame-enrollments" class="list-group-item">{% trans %}Map{% endtrans %}</a>
-                <a href="/{{ g.locale }}/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?y=enrolled&layout=value&order=color" target="graphs-frame-enrollments" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
-                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=color&depth=bra_9&size=enrolled" target="graphs-frame-enrollments" class="list-group-item">TreeMap</a>
+                <a href="/{{ g.locale }}/embed/geo_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=enrolled" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-geo_map' }}" data-parent="#enrollments-municipality">{% trans %}Map{% endtrans %}</a>
+                <a href="/{{ g.locale }}/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?y=enrolled&layout=value&order=color" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked' }}" data-parent="#enrollments-municipality">{% trans %}Stacked{% endtrans %}</a>
+                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=color&depth=bra_9&size=enrolled" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map' }}" data-parent="#enrollments-municipality">TreeMap</a>
             </div>
             {% endif %}
             <a href="#enrollments-status" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Students Situation{% endtrans %}</a>
             <div class="collapse" id="enrollments-status">
-                <a href="/{{ g.locale }}/embed/line/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/type/?y=students&scale=linear&controls=true&year=2009_2013" target="graphs-frame-enrollments" class="list-group-item">{% trans %}Line{% endtrans %}</a>
+                <a href="/{{ g.locale }}/embed/line/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/type/?y=students&scale=linear&controls=true&year=2009_2013" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-status-line' }}" data-parent="#enrollments-status">{% trans %}Line{% endtrans %}</a>
             </div>
             <a href="#enrollments-shift" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Shift{% endtrans %}</a>
             <div class="collapse" id="enrollments-shift">
-                <a href="/{{ g.locale }}/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/time/?y=students&layout=share&order=color&controls=true&year=2009_2013" target="graphs-frame-enrollments" class="list-group-item">{% trans %}Stacked{% endtrans %}</a>
+                <a href="/{{ g.locale }}/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/time/?y=students&layout=share&order=color&controls=true&year=2009_2013" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-shift-stacked' }}" data-parent="#enrollments-shift">{% trans %}Stacked{% endtrans %}</a>
             </div>
         </div>
     </nav>
     <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/university/?color=color&depth=university_5&size=enrolled"
+        <iframe src="
+                {% if not graph %}
+                    /{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/university/?color=color&depth=university_5&size=enrolled
+                {% else %}
+                    /{{ g.locale }}/embed/{{graph.url}}
+                {% endif %}"
                 name="graphs-frame-enrollments"
                 id="graphs-frame-enrollments"
                 class="embed-responsive-item" >

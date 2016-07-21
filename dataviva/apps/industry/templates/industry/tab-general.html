@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="general">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
     {% if not location %}
@@ -41,28 +41,28 @@
                 <dt>{% trans %}Occupation with highest number of jobs{% endtrans %}</dt>
                 <dd>
                     <small>{{ body.occ_with_more_number_jobs_name }}</small>
-                    <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3) }}</strong> 
+                    <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3, True) }}</strong> 
                     <span>{{ body.occ_with_more_number_jobs_value | magnitude }} {% trans %}Jobs{% endtrans %}</span>
                 </dd>
                 {% if location.id|length != 9 %}
                     <dt>{% trans %}Municipality with highest number of jobs{% endtrans %}</dt>
                     <dd>    
                         <small>{{ body.municipality_with_more_num_jobs_name }} - {{body.municipality_with_more_num_jobs_state.upper()}}</small>
-                        <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3) }}</strong> 
+                        <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3, True) }}</strong> 
                         <span>{{ body.municipality_with_more_num_jobs_value | magnitude }} {% trans %}Jobs{% endtrans %}</span>
                     </dd>
                 {% endif %}
                 <dt>{% trans %}Occupation with highest monthly average income{% endtrans %}</dt>
                 <dd>
                     <small>{{ body.occ_with_more_wage_avg_name }}</small>
-                    R$ <strong class="counter">{{ body.occ_with_more_wage_avg_value | max_digits(3) }}</strong>
+                    R$ <strong class="counter">{{ body.occ_with_more_wage_avg_value | max_digits(3, True) }}</strong>
                     <span>{{ body.occ_with_more_wage_avg_value | magnitude }}</span>
                 </dd>
                 {% if location.id|length != 9 %}
                 <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
                 <dd>
                     <small>{{ body.municipality_with_more_wage_avg_name }} - {{ body.municipality_with_more_wage_avg_state }}</small>
-                    R$ <strong class="counter">{{ body.municipality_with_more_wage_avg_value | max_digits(3) }}</strong>
+                    R$ <strong class="counter">{{ body.municipality_with_more_wage_avg_value | max_digits(3, True) }}</strong>
                     <span>{{ body.municipality_with_more_wage_avg_value | magnitude }}</span>
                 </dd>
                 {% endif %}

@@ -1,19 +1,25 @@
-{% extends "help/index.html" %}
-
-{% block classifications_table %}
-
-    <table id="crosswalk-pi-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
-        <thead>
-            <tr>
-                <th>{% trans %}Product{% endtrans %}</th>
-                <th>{% trans %}Industry{% endtrans %}</th>
-            </tr>
-        </thead>
-    </table>
-
-{% endblock classifications_table %}
+<div role="tabpanel" class="tab-pane" id="tab-crosswalk-pi">
+    <div class="col-xs-12">
+        <h2>Crosswalk Product-Industry</h2>
+        <div class="panel-body">
+            <div class="crosswalk-pi">
+                <div class="crosswalk-pi-wrapper">
+                    <div class="crosswalk-pi-content">
+                        <table id="crosswalk-pi-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>{% trans %}Product{% endtrans %}</th>
+                                    <th>{% trans %}Industry{% endtrans %}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% block js_assets %}
-        <script src="/static/js/modules/help/crosswalk-pi.js"></script>
+    <script src="/static/js/modules/help/crosswalks.js"></script>
 {% endblock js_assets %}
-

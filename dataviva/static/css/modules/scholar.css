@@ -131,3 +131,17 @@
 .scholar .fileinput-button input {
     display: none;
 }
+
+.scholar .sidebar ul li a.active {
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.scholar .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}

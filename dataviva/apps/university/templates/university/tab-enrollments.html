@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane" id="enrollments">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'enrollments' }}" id="enrollments">
 
     <h2>{% trans %}Enrollments{% endtrans %} ({{body.year}})</h2>
 
@@ -11,7 +11,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.major_with_more_enrollments }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_enrollment_number_by_major | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3, True) }}</strong><span>{{ body.highest_enrollment_number_by_major | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.major_with_more_entrants }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_entrant_number_by_major | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3, True) }}</strong><span>{{ body.highest_entrant_number_by_major | magnitude }}</span>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@
             <div class="blue-box">
                 <p class="label">{{ body.major_with_more_graduates }}</p>
                 <div class="number">
-                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3) }}</strong><span>{{ body.highest_graduate_number_by_major | magnitude }}</span>
+                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3, True) }}</strong><span>{{ body.highest_graduate_number_by_major | magnitude }}</span>
                 </div>
             </div>
         </div>

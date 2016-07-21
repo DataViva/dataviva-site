@@ -1,4 +1,4 @@
-<div role="tabpanel" class="tab-pane active" id="general">
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     <h2 class="m-t-xl">{%trans%}General Profile{%endtrans%}</h2>
     {% if not location %}
         {% if (product.id|length) == 6 %}
@@ -148,22 +148,19 @@
             {% trans %} in exports in this municipality. In {%endtrans%} {{ header.year }}, {% trans %} its commercial value was of {%endtrans%} R$ {% if header.export_value %}{{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}{% else %}0{% endif %}{% if body.municipality_export_value %}{% if body.export_value_growth_in_five_years %}{% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} {% trans %}in five years.{%endtrans%}{% else %}{% trans %} its commercial value was of {%endtrans%} R$ {{ header.export_value | max_digits(3) }}{{ (header.export_value | magnitude).lower() }}
             {% endif %}
             {% endif %}
-
-
         {% endif %}
     {% endif %}
 
     <div class="row">
-
         <div class="col-xs-12 col-md-6 col-lg-6">
             <h3>{%trans%}International Trade{%endtrans%} ({{ header.year }})</h3>
             <dl class="dl-horizontal">
-                {% if (location.id|length) != 9 %}
+                {% if not is_municipality %}
                     {% if body.municipality_export_value %}
                     <dt>{%trans%}Main Municipality by Total Value Exported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.municipality_name_export}} - {{ body.municipality_state_export.upper() }}</small>
-                        USD <strong class="counter">{{ body.municipality_export_value | max_digits(3) }}</strong>
+                        USD <strong class="counter">{{ body.municipality_export_value | max_digits(3, True) }}</strong>
                         <span>{{ body.municipality_export_value | magnitude }}</span>
                     </dd>
                     {% endif %}
@@ -171,7 +168,7 @@
                     <dt>{%trans%}Main Municipality by Total Value Imported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.municipality_name_import}} - {{ body.municipality_state_import.upper() }}</small>
-                        USD <strong class="counter">{{ body.municipality_import_value | max_digits(3) }}</strong>
+                        USD <strong class="counter">{{ body.municipality_import_value | max_digits(3, True) }}</strong>
                         <span>{{ body.municipality_import_value | magnitude }}</span>
                     </dd>
                     {% endif %}
@@ -180,7 +177,7 @@
                     <dt>{%trans%}Main Destination by Total Value Exported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.destination_name_export }}</small>
-                        USD <strong class="counter">{{ body.destination_export_value | max_digits(3) }}</strong>
+                        USD <strong class="counter">{{ body.destination_export_value | max_digits(3, True) }}</strong>
                         <span>{{ body.destination_export_value | magnitude }}</span>
                     </dd>
                     {% endif %}
@@ -188,12 +185,12 @@
                     <dt>{%trans%}Main Origin by Total Value Imported{%endtrans%}</dt>
                     <dd>
                         <small>{{ body.origin_name_import }}</small>
-                        USD <strong class="counter">{{ body.origin_import_value | max_digits(3) }}</strong> 
+                        USD <strong class="counter">{{ body.origin_import_value | max_digits(3, True) }}</strong> 
                         <span>{{ body.origin_import_value | magnitude }}</span>
                     </dd>
                     {% endif %}
             </dl>
-            <a href="#trade-partner" aria-controls="trade-partner" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg">
+            <a href="#trade-partner" aria-controls="trade-partner" role="tab" data-toggle="tab" graph class="pull-right btn btn-primary btn-xs m-r-lg">
                 {%trans%}More details{%endtrans%}
             </a>
         </div>

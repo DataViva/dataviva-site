@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row bg-white">
+            <ol class="breadcrumb">
+                <li><a href="{{ url_for('general.home') }}">Home</a></li>
+                <li><a href="{{ url_for('help.index') }}">{% trans %}Help{% endtrans %}</a></li>
+                <li class="active">{% trans %}Publish{% endtrans %}</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="container m-b-lg">
+        <h1>{% trans %}Publish Question{% endtrans %}</h1>
+        {% include "help/_form.html" %}
+    </div>
+{% endblock content %}
+
+
+{% block js_assets %}
+    <script src="/static/js/modules/help/form.js"></script>
+{% endblock js_assets %}

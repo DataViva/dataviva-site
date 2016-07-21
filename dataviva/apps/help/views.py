@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, jsonify, request
+from flask import Blueprint, render_template, g, url_for, flash, redirect, jsonify, request
 from dataviva.apps.general.views import get_locale
-from models import HelpSubject
+from flask.ext.login import login_required
+from dataviva.apps.admin.views import required_roles
+from dataviva import db
+from models import HelpSubject, HelpSubjectQuestion
 from dataviva.apps.embed.models import Crosswalk_oc, Crosswalk_pi
 from urlparse import urlparse
+from forms import RegistrationForm
 
 
 mod = Blueprint('help', __name__,
@@ -33,61 +37,122 @@ def index():
 
 
 @mod.route('/admin', methods=['GET'])
+@login_required
+@required_roles(1)
 def admin():
     subjects = HelpSubject.query.all()
-    return render_template('help/admin.html', subjects=subjects)
+    return render_template('help/admin.html', subjects=subjects, lang=g.locale)
+
+
+@mod.route('/admin/subject/new', methods=['GET'])
+@login_required
+@required_roles(1)
+def new():
+    form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
+    return render_template('help/new.html', form=form, action=url_for('help.create'))
+
+
+@mod.route('/admin/subject/new', methods=['POST'])
+@login_required
+@required_roles(1)
+def create():
+    form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
+    if form.validate() is False:
+        return render_template('help/new.html', form=form)
+    else:
+        subject = HelpSubjectQuestion()
+        subject.subject_id = int(form.subject.data)
+        subject.description_en = form.description_en.data
+        subject.description_pt = form.description_pt.data
+        subject.answer_en = form.answer_en.data
+        subject.answer_pt = form.answer_pt.data
+        subject.active = 0
+
+        db.session.add(subject)
+        db.session.commit()
+
+        message = u'Muito obrigado! Sua pergunta foi submetida com sucesso!'
+        flash(message, 'success')
+        return redirect(url_for('help.admin'))
+
+
+@mod.route('/admin/subject/<id>/edit', methods=['GET'])
+@login_required
+@required_roles(1)
+def edit(id):
+    form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
+    subject = HelpSubjectQuestion.query.filter_by(id=id).first_or_404()
+    form.subject.data = str(subject.subject_id)
+    form.description_en.data = subject.description_en
+    form.description_pt.data = subject.description_pt
+    form.answer_en.data = subject.answer_en
+    form.answer_pt.data = subject.answer_pt
+    return render_template('help/edit.html', form=form, action=url_for('help.update', id=id))
+
+
+@mod.route('/admin/subject/<id>/edit', methods=['POST'])
+@login_required
+@required_roles(1)
+def update(id):
+    form = RegistrationForm()
+    form.subject_choices(lang=g.locale)
+    if form.validate() is False:
+        return render_template('help/new.html', form=form)
+    else:
+        subject = HelpSubjectQuestion.query.filter_by(id=id).first_or_404()
+        subject.subject_id = int(form.subject.data)
+        subject.description_en = form.description_en.data
+        subject.description_pt = form.description_pt.data
+        subject.answer_en = form.answer_en.data
+        subject.answer_pt = form.answer_pt.data
+
+        db.session.add(subject)
+        db.session.commit()
+
+        message = u'Pergunta editada com sucesso!'
+        flash(message, 'success')
+        return redirect(url_for('help.admin'))
+
+
+@mod.route('/admin/delete', methods=['POST'])
+@login_required
+@required_roles(1)
+def admin_delete():
+    ids = request.form.getlist('ids[]')
+    if ids:
+        subjects = HelpSubjectQuestion.query.filter(HelpSubjectQuestion.id.in_(ids)).all()
+        for subject in subjects:
+            db.session.delete(subject)
+
+        db.session.commit()
+        return u"Pergunta(s) excluída(s) com sucesso!", 200
+    else:
+        return u'Selecione alguma pergunta para excluí-la.', 205
+
+
+@mod.route('/admin/subject/<status>/<status_value>', methods=['POST'])
+@login_required
+@required_roles(1)
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        subject = HelpSubjectQuestion.query.filter_by(id=id).first_or_404()
+        setattr(subject, status, status_value == u'true')
+        db.session.commit()
+
+    message = u"Perguntas(s) alterada(s) com sucesso!"
+    return message, 200
 
 
 @mod.route('/subject/all', methods=['GET'])
 def all_posts():
-    result = HelpSubject.query.all()
+    result = HelpSubjectQuestion.query.all()
     subjects = []
-    questions = []
-    answers = []
     for row in result:
-        for question in row.questions:
-            subjects += [(row.id, row.name(), question.description(), question.answer())]
+            subjects += [(row.id, row.subject.name(), row.description(), row.answer(), row.active)]
     return jsonify(subjects=subjects)
-
-
-@mod.route('/tab-brazilian-locations')
-def brazilian_locations():
-    return render_template('help/tab-brazilian-locations.html')
-
-
-@mod.route('/tab-products')
-def products():
-    return render_template('help/tab-products.html')
-
-
-@mod.route('/tab-basic-courses')
-def basic_courses():
-    return render_template('help/tab-basic-courses.html')
-
-
-@mod.route('/tab-industries')
-def industries():
-    return render_template('help/tab-industries.html')
-
-
-@mod.route('/tab-occupations')
-def occupations():
-    return render_template('help/tab-occupations.html')
-
-
-@mod.route('/tab-trade-partners')
-def trade_partners():
-    return render_template('help/tab-trade-partners.html')
-
-
-@mod.route('/tab-universities')
-def universities():
-    return render_template('help/tab-universities.html')
-
-
-@mod.route('/tab-majors')
-def majors():
-    return render_template('help/tab-majors.html') 
 
 
 @mod.route('/crosswalk/pi')
@@ -117,24 +182,25 @@ def crosswalk():
             for row in result:
                 data += [(row.course_hedu_id, row.cbo_id)]
 
-    return jsonify(data=data)
+    aggregated_data = []
+    row_index = 0
+    data.sort() 
+    while row_index < (len(data)):
+        category = data[row_index][0]
+        crossings = [data[row_index][1]]
+        
+        if row_index == len(data)-1:
+            aggregated_data += [(category, crossings)];
+            break;
+            
+        while category == data[row_index+1][0]:
+            crossings.append(data[row_index+1][1])
+            row_index += 1
 
+            if row_index == len(data)-1: 
+                break;
 
-@mod.route('/tab-crosswalk-pi')
-def crosswalk_pi():
-    return render_template('help/tab-crosswalk-pi.html')
-
-
-@mod.route('/tab-crosswalk-ip')
-def crosswalk_ip():
-    return render_template('help/tab-crosswalk-ip.html')
-
-
-@mod.route('/tab-crosswalk-oc')
-def crosswalk_oc():
-    return render_template('help/tab-crosswalk-oc.html')
-
-
-@mod.route('/tab-crosswalk-co')
-def crosswalk_co():
-    return render_template('help/tab-crosswalk-co.html')
+        aggregated_data += [(category, crossings)];
+        row_index += 1
+        
+    return jsonify(data=aggregated_data)

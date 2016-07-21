@@ -1,6 +1,22 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
+<!-- Facebook Properties -->
+{% block facebook_metadata %}
+    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg"/>
+    <meta property="og:url" content="{{url_for('industry.index', cnae_id=industry.id, tab=tab, _external=True, _scheme='http')}}{% if location.id %}{{ '?bra_id=' }}{{ location.id }}{{ '&menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% elif graph.menu %}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% endif %}"/>
+    <meta property="og:title" content="DataViva: {{ industry.name() }}{% if not location.id %} {% trans %}in Brazil{% endtrans %}{% else %}{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}} {% else %} {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}{% endif %}{% endif %} |
+        {% if tab == 'general'%}
+            {% trans %}General{% endtrans %}
+        {% elif tab == 'wages' %}
+            {% trans %}Wages and Jobs{% endtrans %}
+        {% elif tab == 'opportunities' %}
+            {% trans %}Economic Opportunities{% endtrans %}
+        {% endif %}"/>
+    <meta property="og:description" content="{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}} {% trans %}is the{% endtrans %} {% if g.locale == "en" %}number {% endif %}{{header.ranking}}{% if g.locale == "pt" %}{{ header.ranking | ordinal('f') }}{% endif %} ..."/>
+    <meta property="og:type" content="website" />
+{% endblock facebook_metadata %}
+
 {% block content %}
 
 <!-- BREADCRUMB -->
@@ -37,7 +53,7 @@
 
             <span class="portrait dv-cnae-{{ industry.id[0] }} hidden-xs"></span>
             <h1>
-              {{ industry.name() }} 
+              {{ industry.name() }}
               {% if not location.id %}
                 {% trans %}in Brazil{% endtrans %}
               {% else %}
@@ -65,7 +81,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Average Monthly Income{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                R$ <strong class="counter">{{ header.average_monthly_income | max_digits(3) }}</strong><br/>
+                                R$ <strong class="counter">{{ header.average_monthly_income | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.average_monthly_income | magnitude  }}</small>
                             </div>
                         </div>
@@ -74,7 +90,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Payroll{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                R$ <strong class="counter">{{ header.salary_mass | max_digits(3) }}</strong><br/>
+                                R$ <strong class="counter">{{ header.salary_mass | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.salary_mass | magnitude }}</small>
                             </div>
                         </div>
@@ -83,7 +99,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total Employment{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.num_jobs | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.num_jobs | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_jobs | magnitude }}</small>
                             </div>
                         </div>
@@ -92,7 +108,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.num_establishments | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.num_establishments | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_establishments | magnitude }}</small>
                             </div>
                         </div>
@@ -102,7 +118,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Domestic RCA{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.rca | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.rca | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.rca | magnitude}}</small>
                             </div>
                         </div>
@@ -111,7 +127,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Distance{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.distance | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.distance | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.num_establishments | magnitude }} {{"de" }} KM</small>
                             </div>
                         </div>
@@ -120,7 +136,7 @@
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Opportunity Gain{% endtrans %} ({{ header.year }})</h2>
                             <div class="number">
-                                <strong class="counter">{{ header.opportunity_gain | max_digits(3) }}</strong><br/>
+                                <strong class="counter">{{ header.opportunity_gain | max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.opportunity_gain | magnitude}}</small>
                             </div>
                         </div>
@@ -132,13 +148,12 @@
     </div>
 </section>
 
-
 <section id="profile" class="profile">
 
     <nav class="">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active">
+            <li role="presentation" class="{{ 'active' if tab == 'general' }}">
                 <a  href="#general"
                     aria-controls="general"
                     role="tab"
@@ -146,7 +161,7 @@
                     data-location="{{ location.id }}"
                     data-toggle="tab">{% trans %}General{% endtrans %}</a>
             </li>
-            <li role="presentation">
+            <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
                 <a  href="#wages"
                     aria-controls="wages"
                     role="tab"
@@ -156,7 +171,7 @@
                     data-toggle="tab">{% trans %}Wages and Jobs{% endtrans %}</a>
             </li>
             {% if (industry.id|length) == 6 %}
-            <li role="presentation">
+            <li role="presentation" class="{{ 'active' if tab == 'opportunities' }}">
                 <a  href="#opportunities"
                     aria-controls="opportunities"
                     role="tab"
@@ -170,7 +185,6 @@
         </div>
     </nav>
 
-
     <div class="container">
         <div class="tab-content">
             {% include "industry/tab-general.html" %}
@@ -183,6 +197,9 @@
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+    {% if tab != 'general' %}
+        {% include "industry/graphs-" + tab + ".html" %}
+    {% endif %}
 </section>
 
 {% endblock content %}
