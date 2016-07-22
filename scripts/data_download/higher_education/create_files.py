@@ -57,7 +57,7 @@ def save(year, locations, majors, universities, lang, output_path):
             for major in majors:
                 conditions[3] = major.condition
 
-                if location.condition == ' 1 = 1 ' and major.condition == ' 1 = 1 ':
+                if location.condition == ' 1 = 1 ' and major.condition == ' 1 = 1 ' and university.name == '':
                     continue;
 
                 table = select_table(conditions, university.name)
@@ -66,9 +66,9 @@ def save(year, locations, majors, universities, lang, output_path):
 
                 if table not in table_columns.keys():
                         table_columns[table] = [ i+" as '"+dic_lang[i]+"'" for i in common.get_colums(table, columns_deleted)]
-                
+
                 common.download(table_columns=table_columns, table=table, conditions=conditions, name_file=name_file, new_file_path=new_file_path, logging=logging, sys=sys)
-                
+
 
 Condition = namedtuple('Condition', ['condition', 'name'])
 

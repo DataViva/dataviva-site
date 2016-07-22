@@ -54,7 +54,7 @@ def save(year, locations, schools, courses, lang, output_path):
             conditions[2] = school.condition
             for course in courses:
                 conditions[3] = course.condition
-                if location.condition == ' 1 = 1 ' and course.condition == ' 1 = 1 ':
+                if location.condition == ' 1 = 1 ' and course.condition == ' 1 = 1 ' and school.name == '':
                             continue;
 
                 table = select_table(conditions, school.name)

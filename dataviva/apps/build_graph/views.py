@@ -27,9 +27,23 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+#http://localhost:5000/en/build_graph/rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=stacked
+#http://localhost:5000/en/build_graph/rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=compare&compare=4rj020212
 @mod.route('/')
-def index():
-    return render_template('build_graph/index.html')
+@mod.route('/<dataset>/<filter0>/<filter1>/<filter2>')
+def index(dataset=None, filter0=None, filter1=None, filter2=None):
+    view = request.args.get('view')
+    graph = request.args.get('graph')
+    compare = request.args.get('compare')
+    return render_template(
+        'build_graph/index.html',
+        dataset=dataset,
+        filter0=filter0,
+        filter1=filter1,
+        filter2=filter2,
+        graph=graph,
+        view=view,
+        compare=compare)
 
 
 def parse_filter(filter):
