@@ -158,7 +158,7 @@
         </dd>
         <dt>{% trans %}Total of Jobs{% endtrans %}</dt>
         <dd>
-          R$ <strong class="counter">{{ body.total_jobs | max_digits(3, True) }}</strong>
+          <strong class="counter">{{ body.total_jobs | max_digits(3, True) }}</strong>
           <span>{{ body.total_jobs | magnitude }}</span>
         </dd>
       </dl>

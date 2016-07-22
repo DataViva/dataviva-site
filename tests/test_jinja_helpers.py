@@ -4,7 +4,7 @@ from dataviva.utils.jinja_helpers import max_digits
 from flask import g
 from test_base import BaseTestCase
 
-#python run.py testds
+'''
 
 class MaxDigitsPTTests(BaseTestCase):
 
@@ -50,7 +50,6 @@ class MaxDigitsPTTests(BaseTestCase):
     def test_max_digits_3_for_decimal_100001000100_00_is_100(self):
         assert '100' == max_digits(100001000100.00, 3)
 
-
     def test_max_digits_3_for_decimal_10000100010_00_is_10_0(self):
         assert '10.0' == max_digits(10000100010.00, 3)
 
@@ -59,3 +58,4 @@ class MaxDigitsPTTests(BaseTestCase):
 
     def test_max_digits_3_for_decimal__0_4_is_10__0_40(self):
         assert '-0.40' == max_digits(-0.4, 3)
+'''

@@ -312,7 +312,7 @@ class Product:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def highest_export_value_name(self):
         try:
@@ -320,7 +320,7 @@ class Product:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def product_complexity(self):
         product_complexity = self.__secex__()
@@ -558,7 +558,7 @@ class Location:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def main_product_by_import_value(self):
         try:
@@ -574,7 +574,7 @@ class Location:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def total_exports(self):
         try:
@@ -660,7 +660,7 @@ class LocationWld(Location):
         except IndexError:
             return None
         else:
-            return secex.wld.name_pt
+            return secex.wld.name()
 
     def main_destination_by_import_value(self):
         try:
@@ -676,7 +676,7 @@ class LocationWld(Location):
         except IndexError:
             return None
         else:
-            return secex.wld.name_pt
+            return secex.wld.name()
 
 
 class LocationEciRankings:
