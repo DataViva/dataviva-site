@@ -95,8 +95,9 @@ class Industry:
             return rais.cnae.name()
 
     def avg_wage(self):
-        wage_avg = [industry.wage_avg for industry in self.__rais__() if industry.wage_avg]
-        return sum(wage_avg) / len(wage_avg)
+        wage = [industry.wage for industry in self.__rais__() if industry.wage]
+        num_jobs = [industry.num_jobs for industry in self.__rais__() if industry.num_jobs]
+        return sum(wage) / sum(num_jobs)
 
     def total_jobs(self):
         return sum([industry.num_jobs for industry in self.__rais__() if industry.num_jobs])
