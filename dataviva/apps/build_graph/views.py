@@ -5,6 +5,7 @@ from dataviva.apps.general.views import get_locale
 from dataviva.apps.embed.models import Build
 from sqlalchemy import not_
 import hashlib
+import json
 
 
 mod = Blueprint('build_graph', __name__,
@@ -27,23 +28,56 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-#http://localhost:5000/en/build_graph/rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=stacked
-#http://localhost:5000/en/build_graph/rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=compare&compare=4rj020212
 @mod.route('/')
 @mod.route('/<dataset>/<filter0>/<filter1>/<filter2>')
 def index(dataset=None, filter0=None, filter1=None, filter2=None):
-    view = request.args.get('view')
+    ''' 
+    URL Tests:
+        rais/all/all/all
+        rais/4sp090607/i56112/all?view=kCV1oruwCB
+        rais/4sp090607/i56112/all?graph=stacked
+        rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=stacked
+        rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=compare&compare=4rj020212
+    '''
+    view = request.args.get('view').replace(' ', '+') #Needs to treat '+' in parameters properly
     graph = request.args.get('graph')
     compare = request.args.get('compare')
+
+    cross = {
+        'rais'  : ['Rais', 'cnae', 'cbo'], 
+        'secex' : ['Secex', 'hs', 'wld'], 
+        'hedu'  : ['Higher Education', 'university', 'course_hedu'], 
+        'sc'    : ['School Census', '', 'course_sc']
+    }
+
+    metadata = {}
+
+    if filter0:
+        location = filter0
+
+    if filter1 == 'all':
+        cross[dataset][1] = 'all'
+
+    if filter2 == 'all':
+        cross[dataset][2] = 'all'
+
+    if dataset:
+        metadata['dataset'] = cross[dataset][0]
+
+        if graph == 'compare':
+            location = filter0 + '_' + compare
+        
+        json_request = views(dataset, location, cross[dataset][1], cross[dataset][2])
+        json_dict = json.loads(json_request.data)
+
+    if view is not None:
+        metadata['view'] = json_dict['views'][view]['name']
+        if graph is not None:
+            metadata['graph'] = json_dict['views'][view]['graphs'][graph]['name']
+
     return render_template(
-        'build_graph/index.html',
-        dataset=dataset,
-        filter0=filter0,
-        filter1=filter1,
-        filter2=filter2,
-        graph=graph,
-        view=view,
-        compare=compare)
+        'build_graph/index.html', dataset=dataset, filter0=filter0, filter1=filter1, filter2=filter2, 
+                                    graph=graph, view=view, compare=compare, metadata=metadata)
 
 
 def parse_filter(filter):
