@@ -1,5 +1,14 @@
 {% extends "base.html" %}
 
+<!-- Facebook Properties -->
+{% block facebook_metadata %}
+    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/build_graph/{{ graph if graph else 'default' }}.png"/>
+    <meta property="og:url" content="{{url_for('build_graph.index', dataset=dataset, filter0=filter0, filter1=filter1, filter2=filter2, _external=True, _scheme='http')}}{% if view %}{{ '?view=' }}{{ view }}{{ '&graph=' if graph }}{{ graph if graph }}{{ '&compare=' if compare }}{{ compare if compare }}{% elif graph %}{{ '?graph=' if graph }}{{ graph if graph}}{{ '&compare=' if compare }}{{ compare if compare}}{% endif %}"/>
+    <meta property="og:title" content="DataViva: {% if dataset and graph %} {{ metadata.graph }} | {{ metadata.dataset }} {% else %} {% trans %}Make Graphs{% endtrans %} {% endif %}"/>
+    <meta property="og:description" content="{{ metadata.view if metadata.view}}"/>
+    <meta property="og:type" content="website" />
+{% endblock facebook_metadata %}
+
 {% block content %}
 
 <div class="container">
