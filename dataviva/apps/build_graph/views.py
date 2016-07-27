@@ -41,6 +41,7 @@ def index(dataset=None, filter0=None, filter1=None, filter2=None):
     view = request.args.get('view')
     graph = request.args.get('graph')
     compare = request.args.get('compare')
+    metadata = None
 
     build_query = Build.query.join(App).filter(
         Build.dataset == dataset,
@@ -49,23 +50,24 @@ def index(dataset=None, filter0=None, filter1=None, filter2=None):
         Build.slug2_en == view,
         App.type == graph)
 
-    build = build_query.first_or_404()
+    if graph:
+        build = build_query.first_or_404()
 
-    build.set_bra(filter0)
+        build.set_bra(filter0)
 
-    if filter1 != 'all':
-        build.set_filter1(filter1)
+        if filter1 != 'all':
+            build.set_filter1(filter1)
 
-    if filter2 != 'all':
-        build.set_filter2(filter2)
+        if filter2 != 'all':
+            build.set_filter2(filter2)
 
-    title = re.sub(r'\s\(.*\)', r'', build.title())
+        title = re.sub(r'\s\(.*\)', r'', build.title())
 
-    metadata = {
-        'view': title,
-        'graph': dictionary()[graph],
-        'dataset': dictionary()[dataset],
-    }
+        metadata = {
+            'view': title,
+            'graph': dictionary()[graph],
+            'dataset': dictionary()[dataset],
+        }
 
     return render_template(
         'build_graph/index.html', dataset=dataset, filter0=filter0, filter1=filter1, filter2=filter2,
