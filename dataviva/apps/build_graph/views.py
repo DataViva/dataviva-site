@@ -28,30 +28,30 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
 def parse_filter_id(filter_id):
     if filter_id != 'all':
         return '<%>'
     else:
         return filter_id
 
+
 @mod.route('/')
 @mod.route('/<dataset>/<filter0>/<filter1>/<filter2>')
 def index(dataset=None, filter0=None, filter1=None, filter2=None):
-
-    dictionary = dictionary()
 
     view = request.args.get('view')
     graph = request.args.get('graph')
     compare = request.args.get('compare')
 
-    build_query = Build.query.filter(
+    build_query = Build.query.join(App).filter(
         Build.dataset == dataset,
         Build.filter1.like(parse_filter_id(filter1)),
         Build.filter2.like(parse_filter_id(filter2)),
         Build.slug2_en == view,
-        Build.app.type == graph)
+        App.type == graph)
 
-    builds = build_query.first_or_404()
+    build = build_query.first_or_404()
 
     build.set_bra(filter0)
 
@@ -65,13 +65,13 @@ def index(dataset=None, filter0=None, filter1=None, filter2=None):
 
     metadata = {
         'view': title,
-        'graph': dictionary(graph),
-        'dataset': dictionary(dataset),
+        'graph': dictionary()[graph],
+        'dataset': dictionary()[dataset],
     }
 
     return render_template(
-        'build_graph/index.html', dataset=dataset, filter0=filter0, filter1=filter1, filter2=filter2, 
-                                    graph=graph, view=view, compare=compare, metadata=metadata)
+        'build_graph/index.html', dataset=dataset, filter0=filter0, filter1=filter1, filter2=filter2,
+        graph=graph, view=view, compare=compare, metadata=metadata)
 
 
 def parse_filter(filter):
@@ -79,6 +79,7 @@ def parse_filter(filter):
         return '<%s>' % filter
     else:
         return filter
+
 
 @mod.route('/views/<dataset>/<bra>/<filter1>/<filter2>')
 def views(dataset, bra, filter1, filter2):
