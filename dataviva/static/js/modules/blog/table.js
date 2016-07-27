@@ -1,6 +1,8 @@
 var BlogTable = function () {
     this.tableId = '#blog-table';
 
+    $.fn.dataTable.moment('DD/MM/YYYY');
+
     this.table = $(this.tableId).DataTable({
         "oLanguage": {
           "sSearch": "Pesquisar "
