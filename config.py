@@ -83,7 +83,7 @@ AWS_SECRET_KEY = get_env_variable('DATAVIVA_OAUTH_AWS_SECRET')
 
 ''' S3 Buckets '''
 S3_BUCKET = get_env_variable('S3_BUCKET', 'dataviva-dev')
-S3_HOST = get_env_variable('S3_HOST', 'dataviva.s3.amazonaws.com')
+S3_HOST = get_env_variable('S3_HOST', 'https://dataviva.s3.amazonaws.com')
 
 '''
     Mail credentials to send automatic emails to users
