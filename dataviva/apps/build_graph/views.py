@@ -5,8 +5,6 @@ from dataviva.apps.general.views import get_locale
 from dataviva.apps.embed.models import Build, App
 from dataviva.translations.dictionary import dictionary
 from sqlalchemy import not_
-import hashlib
-import json
 
 
 mod = Blueprint('build_graph', __name__,
