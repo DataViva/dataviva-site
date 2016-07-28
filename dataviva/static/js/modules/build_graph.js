@@ -304,7 +304,7 @@ var BuildGraph = (function () {
 var initialUrl = window.location.origin + '/' + dataviva.language + '/build_graph'
 
 $(document).ready(function () {
-    dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'course_sc', 'course_hedu', 'university'], function() {
+    dataviva.requireAttrs(['datasets', 'bra', 'cnae', 'cbo', 'hs', 'wld', 'course_sc', 'course_hedu', 'university'], function() {
         BuildGraph.init();
     });
 });
