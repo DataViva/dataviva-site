@@ -5,7 +5,7 @@ from dataviva.api.sc.services import Basic_course, Basic_course_by_location, Bas
     Basic_course_school_by_location, Basic_course_city, Basic_course_city_by_location, Basic_course_by_state
 from dataviva.api.attrs.models import Bra, Course_sc
 from dataviva.api.sc.models import Ybc_sc, Yc_sc
-from dataviva import db, s3_host
+from dataviva import db
 from sqlalchemy import func
 
 mod = Blueprint('basic_course', __name__,
@@ -139,4 +139,4 @@ def index(course_sc_id, tab):
     if header['course_enrolled'] is None or sc_max_year != header['course_year']:
         abort(404)
     else:
-        return render_template('basic_course/index.html', s3_host=s3_host, header=header, body=body, body_class='perfil-estado', location=location, basic_course=basic_course, tab=tab, graph=graph)
+        return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, basic_course=basic_course, tab=tab, graph=graph)
