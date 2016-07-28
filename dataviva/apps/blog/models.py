@@ -15,7 +15,8 @@ class Post(db.Model):
     text_call = db.Column(db.String(500))
     text_content = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
-    postage_date = db.Column(db.DateTime)
+    publish_date = db.Column(db.DateTime)
+    last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
 
     subjects = db.relationship(
@@ -24,7 +25,7 @@ class Post(db.Model):
         backref=db.backref('posts', lazy='dynamic'))
 
     def date_str(self):
-        return self.postage_date.strftime('%d/%m/%Y')
+        return self.publish_date.strftime('%d/%m/%Y')
 
     def __repr__(self):
         return '<Post %r>' % (self.title)

@@ -35,7 +35,7 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    posts = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
+    posts = Post.query.filter_by(active=True).order_by(desc(Post.publish_date)).all()
     subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     subjects = []
 
@@ -51,7 +51,7 @@ def index():
 
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
-    posts_query = Post.query.filter_by(active=True).order_by(desc(Post.postage_date)).all()
+    posts_query = Post.query.filter_by(active=True).order_by(desc(Post.publish_date)).all()
     subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     posts = []
     subjects = []
@@ -96,7 +96,7 @@ def all_posts():
     posts = []
     for row in result:
         posts += [(row.id, row.title, row.author,
-                   row.postage_date.strftime('%d/%m/%Y'), row.active)]
+                   row.publish_date.strftime('%d/%m/%Y'), row.active)]
 
     return jsonify(posts=posts)
 
@@ -170,7 +170,8 @@ def create():
         post.author = form.author.data
         post.text_content = form.text_content.data
         post.text_call = form.text_call.data
-        post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
+        post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.active = 0
 
         subjects_names = form.subject.data.replace(', ', ',').split(',')
@@ -206,6 +207,7 @@ def edit(id):
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
     form.thumb.data = post.thumb
+    form.publish_date.data = post.publish_date
     form.subject.data = ', '.join([sub.name for sub in post.subjects])
 
     return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
@@ -224,7 +226,8 @@ def update(id):
         post.title = form.title.data
         post.author = form.author.data
         post.text_content = form.text_content.data
-        post.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         subjects_names = form.subject.data.replace(', ', ',').split(',')
         num_subjects = len(post.subjects)
 

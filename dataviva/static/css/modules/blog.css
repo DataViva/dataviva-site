@@ -169,6 +169,11 @@
 }
 .blog #blog-form .form-group {
     margin: 0px;
+    margin-bottom: 20px;
+}
+
+.blog .control-label {
+  margin-bottom: 0px;
 }
 
 @media (max-width: 767px) {

@@ -59,6 +59,15 @@ $(document).ready(function(){
         $('#thumb-crop').attr('src', '');
     });
 
+    $('#publish-date').datepicker({
+        format: "dd/mm/yyyy",
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
     var text_max = 500;
     $('#textarea-feedback').html(text_max + ' caracteres restantes');
 
