@@ -3,6 +3,10 @@ import re
 from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.embed.models import Build, App
+from dataviva.api.rais.services import Industry as CnaeService
+from dataviva.api.secex.services import Product as SecexService
+from dataviva.api.hedu.services import University as HeduService
+from dataviva.api.sc.services import Basic_course as ScService
 from dataviva.translations.dictionary import dictionary
 from sqlalchemy import not_
 
@@ -61,12 +65,25 @@ def index(dataset=None, filter0=None, filter1=None, filter2=None):
         if filter2 != 'all':
             build.set_filter2(filter2)
 
+        service_id = filter1 if filter1 != u'all' else None
+
+        year = ' - ' if dataset else ''
+
+        if dataset == 'rais':
+            year += str(CnaeService(service_id).get_year())
+        elif dataset == 'secex':
+            year += str(SecexService(service_id).year())
+        elif dataset == 'hedu':
+            year += str(HeduService(service_id).year())
+        elif dataset == 'sc':
+            year += str(ScService(service_id).course_year())
+
         title = re.sub(r'\s\(.*\)', r'', build.title())
 
         metadata = {
             'view': title,
             'graph': dictionary()[graph],
-            'dataset': dictionary()[dataset],
+            'dataset': dictionary()[dataset] + year,
         }
 
     return render_template(
