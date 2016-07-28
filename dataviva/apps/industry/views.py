@@ -102,7 +102,7 @@ def index(cnae_id, tab):
     #header['name_bra'] = industry_service.name()
 
     # Get rankings vars, code should be refactored
-    from dataviva import db, s3_host
+    from dataviva import db
     from sqlalchemy import func, desc
     from dataviva.api.rais.models import Yi, Ybi
 
@@ -159,4 +159,4 @@ def index(cnae_id, tab):
     if header['num_jobs'] is None or rais_max_year != header['year']:
         abort(404)
 
-    return render_template('industry/index.html', s3_host=s3_host, header=header, body=body, industry=industry, location=location, tab=tab, graph=graph)
+    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph)
