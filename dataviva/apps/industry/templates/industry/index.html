@@ -3,7 +3,7 @@
 
 <!-- Facebook Properties -->
 {% block facebook_metadata %}
-    <meta property="og:image" content="{{ s3_host }}/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg"/>
+    <meta property="og:image" content="{{ g.s3_host }}/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg"/>
     <meta property="og:url" content="{{url_for('industry.index', cnae_id=industry.id, tab=tab, _external=True, _scheme='http')}}{% if location.id %}{{ '?bra_id=' }}{{ location.id }}{{ '&menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% elif graph.menu %}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% endif %}"/>
     <meta property="og:title" content="DataViva: {{ industry.name() }}{% if not location.id %} {% trans %}in Brazil{% endtrans %}{% else %}{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}} {% else %} {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}{% endif %}{% endif %} |
         {% if tab == 'general'%}
@@ -39,7 +39,7 @@
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header" style="background: url({{ s3_host }}/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
+<section id="header" class="header" style="background: url({{ g.s3_host }}/img/industry/industry_{{ industry.id if industry.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
 
   <div class="photo-credit">
     <div class="container">
