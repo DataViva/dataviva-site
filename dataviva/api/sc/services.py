@@ -41,13 +41,17 @@ class Basic_course:
     def __init__(self, course_sc_id):
         self._statistics = None
         self._sc = None
-
         self.course_sc_id = course_sc_id
-        self.max_year_subquery = db.session.query(
-            func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
-        self.course_query = Yc_sc.query.join(Course_sc).filter(
-                Yc_sc.course_sc_id == self.course_sc_id,
-                Yc_sc.year == self.max_year_subquery)
+
+        if self.course_sc_id is None:
+            self.max_year_subquery = db.session.query(func.max(Yc_sc.year))
+            self.course_query = Yc_sc.query.join(Course_sc).filter(Yc_sc.year == self.max_year_subquery)
+        else:
+            self.max_year_subquery = db.session.query(
+                func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
+            self.course_query = Yc_sc.query.join(Course_sc).filter(
+                    Yc_sc.course_sc_id == self.course_sc_id,
+                    Yc_sc.year == self.max_year_subquery)
 
     def __sc__(self):
         if not self._sc:
