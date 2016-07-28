@@ -3,7 +3,7 @@
 
 <!-- Facebook Properties -->
 {% block facebook_metadata %}
-    <meta property="og:image" content="https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg"/>
+    <meta property="og:image" content="{{ g.s3_host }}/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg"/>
     <meta property="og:url" content="{{url_for('location.index', bra_id=location.id, tab=tab, _external=True, _scheme='http') if location.id else url_for('location.all', tab=tab, _external=True, _scheme='http')}}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}"/>
     <meta property="og:title" content="DataViva: {% if location.id | length <= 3 %}{{ location.name() }}{% else %}{{ location.name() }} - {{ location.abbreviation }}{% endif %} |
         {% if tab == 'general'%}
@@ -78,7 +78,7 @@
 <!-- BREADCRUMB -->
 
 <!-- Criar classes css para os backgrunds das localidades -->
-<section id="header" class="header" style="background: url(https://dataviva.s3.amazonaws.com/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
+<section id="header" class="header" style="background: url({{ g.s3_host }}/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
 
     <div class="photo-credit">
       <div class="container">
