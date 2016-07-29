@@ -502,11 +502,12 @@ $(document).ready(function () {
                 $fullname.addClass('error');
                 status = false;
             }
-            if ($email.val() === '' || pattern.test($email.val()) === false) {
-                $email.closest('.form-group').addClass('has-error');
-                $email.addClass('error');
-                status = false;
-            }
+            
+            // if ($email.val() === '' || pattern.test($email.val()) === false) {
+            //     $email.closest('.form-group').addClass('has-error');
+            //     $email.addClass('error');
+            //     status = false;
+            // }
 
             if (status) {
               $fullname.attr('disabled', 'disabled');
