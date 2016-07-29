@@ -10,7 +10,7 @@ else if (path[path.length - 1] === 'edit'){
     $('#input-file').hide();
     $('#progress').hide();
     $('#delete').attr('id', 'delete-edit');
-    $('#article-url').attr('href', 'https://dataviva-dev.s3.amazonaws.com/scholar/'+articleId+'/files/article');
+    $('#article-url').attr('href', dataviva.s3_host + '/scholar/'+articleId+'/files/article');
 }
 
 

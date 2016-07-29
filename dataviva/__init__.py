@@ -54,6 +54,7 @@ def get_env_variable(var_name, default=-1):
 
 cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "dv2016:")
 cache_timeout = get_env_variable("DATAVIVA_REDIS_TIMEOUT", 60000000)
+s3_host = get_env_variable("S3_HOST", 'https://dataviva.s3.amazonaws.com')
 
 view_cache = Cache(app, config={
     'CACHE_TYPE': 'redis',
