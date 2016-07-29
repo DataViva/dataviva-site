@@ -63,10 +63,10 @@ def check_status():
 
 
 def send_confirmation(user):
-    confirmation_url = "http://dataviva.info/%s/account/confirm/%s" % (g.locale, user.confirmation_code)
+    confirmation_url = "%s%s/account/confirm/%s" % (request.url_root , g.locale, user.confirmation_code)
     confirmation_tpl = render_template('account/mail/confirmation.html',
-                                       user=user.serialize(),
                                        confirmation_url=confirmation_url)
+
     send_mail("Account confirmation", [user.email], confirmation_tpl)
 
 
@@ -80,11 +80,13 @@ def signup():
 def create_user():
     form = SignupForm()
     if form.validate() is False:
-        return make_response(jsonify(form.errors), 400)
+        try:
+            return Response(form.errors['password'][0], status=400, mimetype='application/json')
+        except:
+            return Response('Error in Form.', status=400, mimetype='application/json')
     else:
         if (User.query.filter_by(email=form.email.data).count() > 0):
             return Response(dictionary()["email_already_exists"], status=400, mimetype='application/json')
-
         try:
             confirmation_code = _gen_confirmation_code(form.email.data)
             user = User(
@@ -99,7 +101,6 @@ def create_user():
         except:
             return Response(dictionary()["Sorry, an unexpected error has occured. Please try again"], status=500, mimetype='application/json')
 
-        user_srl = user.serialize()
         send_confirmation(user)
 
         message = dictionary()["check_your_inbox"] + ' ' + user.email
@@ -158,7 +159,6 @@ def confirm_pending(user_email):
 
 @mod.route('/confirm/<code>', methods=["GET"])
 def confirm(code):
-
     try:
         user = User.query.filter_by(confirmation_code=code)[-1]
         user.confirmed = True
