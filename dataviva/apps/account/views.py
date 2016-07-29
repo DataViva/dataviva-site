@@ -80,10 +80,13 @@ def signup():
 def create_user():
     form = SignupForm()
     if form.validate() is False:
-        try:
-            return Response(form.errors['password'][0], status=400, mimetype='application/json')
-        except:
-            return Response('Error in Form.', status=400, mimetype='application/json')
+        if form.errors.has_key('fullname'):
+            return Response(form.errors['fullname'], status=400, mimetype='application/json')
+        if form.errors.has_key('email'):
+            return Response(form.errors['email'], status=400, mimetype='application/json')
+        if form.errors.has_key('password'):
+            return Response(form.errors['password'], status=400, mimetype='application/json')
+        return Response('Error in Form.', status=400, mimetype='application/json')
     else:
         if (User.query.filter_by(email=form.email.data).count() > 0):
             return Response(dictionary()["email_already_exists"], status=400, mimetype='application/json')
@@ -309,7 +312,7 @@ def login():
         if provider == "google":
             callback = url_for('account.google_authorized', _external=True)
             return google.authorize(callback=callback)
-        elif provider == "twitter":
+        if provider == "twitter":
             callback = url_for('account.twitter_authorized',
                                next=request.args.get(
                                    'next') or request.referrer or None,
