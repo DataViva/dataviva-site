@@ -702,7 +702,7 @@ $(document).ready(function () {
                         }
                 }
               }).always(function() {
-                    $password.attr('disabled', 'disabled');
+                    $password.prop('disabled', false);
                     $email.prop('disabled', false);
                     $submit.prop('disabled', false);
               });
