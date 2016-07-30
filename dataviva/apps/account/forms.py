@@ -6,10 +6,10 @@ from wtforms.fields.html5 import URLField
 class SignupForm(Form):
     email = TextField('email', validators=[validators.Required(), validators.Email()])
     fullname = TextField('fullname', validators=[validators.Required(),
-                                                 validators.Length(min=3, max=128)])
+                                                    validators.Length(min=3, max=128,
+                                                    message='Name field must be between 3 and 128 characters long.')])
     password = PasswordField('password', validators=[validators.Required(),
-                                                     validators.EqualTo(
-                                                        'confirm',
+                                                        validators.EqualTo('confirm',
                                                         message='Passwords must match')])
     confirm = PasswordField('confirm', validators=[validators.Required()])
     agree_mailer = BooleanField('agree_mailer')
