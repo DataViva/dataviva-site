@@ -551,7 +551,7 @@ $(document).ready(function () {
                         }
                         catch(err) {
                             swal({
-                                title: 'Ops!',
+                                title: 'ps!',
                                 text: response.responseText,
                                 type: "error"
                             });
@@ -705,7 +705,7 @@ $(document).ready(function () {
                         }
                         catch(err) {
                             swal({
-                                title: 'Oops!',
+                                title: 'Ops!',
                                 text: response.responseText,
                                 type: "error"
                             });
