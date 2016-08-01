@@ -1,19 +1,33 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
-{% macro messages(input) -%}
-    {% for message in input.errors %}
-        <div class="alert alert-danger">
-            {{ message }}
-        </div>
-    {% endfor %}
-{%- endmacro %}
-
 {% block content %}
+	<div class="container">
+	    {% macro messages(input) -%}
+	        {% for message in input.errors %}
+	            <div class="alert alert-danger">
+	                {{ message }}
+	            </div>
+	        {% endfor %}
+	    {%- endmacro %}
+
+	    <div id="message">
+		    {% if get_flashed_messages(with_categories=true) %}
+		    {% for category, message in get_flashed_messages(with_categories=true) %}
+		        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+		            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+		            {{ message }}
+		        </div>
+		    {% endfor %}
+		    {% endif %}
+	    </div>
+	<div>
+
 	<div class="container">
 		<form class="form-dataviva mt-lg" method="post" action="/en/account/edit_profile" style="margin-top: 24px;">
 			<h1 class="text-center">{% trans %}Edit your profile{% endtrans %}</h1>
 			<ul id="regular-signup" class="col-md-8 col-md-offset-2" style="list-style: none;">
+			{{ form.hidden_tag() }}
 				<p>
 					<label for="fullname">{% trans %}Full name{% endtrans %}</label>
 					{{ form.fullname(class="form-control")}}
@@ -44,7 +58,7 @@
 				</p>
 
 				<hr/>
-				<a onclick="history.back()" class="btn btn-link">{% trans %}Cancel{% endtrans %}</a>
+				<a href="{{ url_for('general.home') }}"class="btn btn-link">{% trans %}Back{% endtrans %}</a>
 				<button type="submit" class="btn btn-success pull-right">{% trans %}Update{% endtrans %}</button>
 			</ul>
 		</form>
