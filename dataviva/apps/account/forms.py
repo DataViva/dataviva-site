@@ -36,17 +36,10 @@ class ForgotPasswordForm(Form):
     email = TextField('email', validators=[validators.Required(), validators.Email()])
 
 
-class UserEditForm(Form):
-    nickname = TextField('nickname', validators=[validators.Required()])
-    bio = TextAreaField('bio', validators=[validators.Length(min=0, max=256)])
-    website = URLField(validators=[validators.url()])
-
-
 class ProfileForm(Form):
-    fullname = TextField(
-        'fullname',
-        validators=[validators.Required(), validators.Length(min=3, max=128)]
-    )
+    fullname = TextField('fullname', validators=[validators.Required(),
+                                                    validators.Length(min=3, max=128,
+                                                    message='Name field must be between 3 and 128 characters long.')])
 
     gender = SelectField(
         'gender',
@@ -55,7 +48,7 @@ class ProfileForm(Form):
 
     website = TextField(
         'website',
-        validators=[validators.URL(), validators.Length(min=10, max=150)]
+        validators=[validators.Optional() , validators.URL(), validators.Length(min=10, max=150)]
     )
 
     bio = TextField(
