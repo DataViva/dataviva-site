@@ -217,7 +217,7 @@ def change_profile():
             user.bio = form.bio.data
             db.session.commit()
 
-            message = u'Profile dasdsadas updated successfully!'
+            message = u'Profile updated successfully!'
             flash(message, 'success')
         except:
             flash("Something went wrong!", "danger")
@@ -237,16 +237,16 @@ def change_password():
 def change():
     form = ChangePasswordForm()
     user = load_user(session["user_id"])
-    danger = 'error'
 
-    if user.password == sha512(form.current_password.data):
-        user.password = sha512(form.new_password.data)
-        db.session.commit()
-        flash("Password successfully update!", "success")
-    else:
-        flash("The current password is invalid", "danger")
 
-    flash(msg, danger)
+    if form.validate():
+        if user.password == sha512(form.current_password.data):
+            user.password = sha512(form.new_password.data)
+            db.session.commit()
+            flash("Password successfully update!", "success")
+        else:
+            flash("The current password is invalid", "danger")
+            
     return render_template("account/change_password.html", form=form)
 
 
