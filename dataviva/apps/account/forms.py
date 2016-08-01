@@ -24,7 +24,7 @@ class ChangePasswordForm(Form):
     current_password = PasswordField('current_password', validators=[validators.Required()])
     new_password = PasswordField('new_password', validators=[validators.Required()])
     confirm = PasswordField('confirm', validators=[validators.Required(), validators.EqualTo(
-        'confirm', message='Passwords must match')])
+        'new_password', message='Passwords must match')])
 
 
 class LoginForm(Form):
