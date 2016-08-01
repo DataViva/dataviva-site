@@ -127,20 +127,19 @@ def signin():
     form = SigninForm()
 
     if request.method == "POST":
-        try:
-            user = User.query.filter_by(
-                email=form.email.data,
-                password=sha512(form.password.data)
-            )[-1]
-
-            if user.confirmed:
-                login_user(user, remember=True)
-                redir = request.args.get("next", "/")
-                return redirect(redir)
+        if User.query.filter_by(email=form.email.data).first():
+            user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
+            if user:
+                if user.confirmed:
+                    login_user(user, remember=True)
+                    redir = request.args.get("next", "/")
+                    return redirect(redir)
+                else:
+                    return Response("Need to confirm your account!", status=400, mimetype='application/json')
             else:
-                return Response("Need to confirm your account!", status=400, mimetype='application/json')
-        except:
-            return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
+                return Response("Password Incorrect!", status=400, mimetype='application/json')
+        else:
+            return Response("Email not found!", status=400, mimetype='application/json')
 
     else:
         next = request.args.get("next", "")

@@ -9,12 +9,14 @@
                 <div class="loginmodal-container">
                     <h4>{% trans %}Users Acess{% endtrans %}</h4>
                     <form id="dataviva-login-form">
-                          <div class="form-group">
-                            <input type="text" name="email" placeholder="{% trans %}User{% endtrans %}" class="form-control input-lg" />
-                          </div>
-                          <div class="form-group">
-                            <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
-                          </div>
+                        {{ g.signin_form.hidden_tag() }}
+
+                        <div class="form-group">
+                        <input type="text" name="email" placeholder="{% trans %}User{% endtrans %}" class="form-control input-lg" />
+                        </div>
+                        <div class="form-group">
+                        <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
+                        </div>
                         <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Entrar">
                     </form>
                 </div>

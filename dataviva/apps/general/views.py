@@ -15,6 +15,7 @@ from dataviva.apps.account.models import User
 from dataviva.apps.news.models import Publication
 from dataviva.apps.contact.forms import ContactForm
 from dataviva.apps.account.forms import SignupForm
+from dataviva.apps.account.forms import SigninForm
 
 from dataviva.api.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
 from dataviva.translations.dictionary import dictionary
@@ -42,6 +43,7 @@ def before_request():
     g.production = False if DEBUG else True
     g.contact_form = ContactForm()
     g.signup_form = SignupForm()
+    g.signin_form = SigninForm()
     g.s3_host = s3_host
 
     if request.endpoint != 'static':
