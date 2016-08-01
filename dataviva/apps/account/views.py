@@ -132,9 +132,13 @@ def signin():
                 email=form.email.data,
                 password=sha512(form.password.data)
             )[-1]
-            login_user(user, remember=True)
-            redir = request.args.get("next", "/")
-            return redirect(redir)
+
+            if user.confirmed:
+                login_user(user, remember=True)
+                redir = request.args.get("next", "/")
+                return redirect(redir)
+            else:
+                return Response("Need to confirm your account!", status=400, mimetype='application/json')
         except:
             return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
 
