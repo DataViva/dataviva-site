@@ -14,7 +14,7 @@ from flask import Blueprint, request, render_template, flash, g, session, \
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, logout_user, current_user, \
     login_required, LoginManager
-from forms import (LoginForm, UserEditForm, SignupForm, SigninForm, ChangePasswordForm,
+from forms import (LoginForm, SignupForm, SigninForm, ChangePasswordForm,
                    ForgotPasswordForm, ProfileForm)
 from sqlalchemy import or_
 from urllib2 import Request, urlopen, URLError
@@ -208,17 +208,19 @@ def edit_profile():
 @login_required
 def change_profile():
     form = ProfileForm()
+    if form.validate():
+        try:
+            user = g.user
+            user.fullname = form.fullname.data
+            user.gender = form.gender.data
+            user.website = form.website.data
+            user.bio = form.bio.data
+            db.session.commit()
 
-    try:
-        user = g.user
-        user.fullname = form.fullname.data
-        user.gender = form.gender.data
-        user.website = form.website.data
-        user.bio = form.bio.data
-        db.session.commit()
-        flash("Profile updated successfully!", "success")
-    except:
-        flash("Something went wrong!", "danger")
+            message = u'Profile dasdsadas updated successfully!'
+            flash(message, 'success')
+        except:
+            flash("Something went wrong!", "danger")
 
     return render_template("account/edit_profile.html", form=form)
 
