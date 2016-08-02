@@ -27,6 +27,14 @@ class User(db.Model, AutoSerialize):
     bio = db.Column(db.String(256))
     image = db.Column(db.String(256))
     last_seen = db.Column(db.DateTime)
+
+    profile = db.Column(db.Integer)
+    institution = db.Column(db.String(256))
+    occupation = db.Column(db.String(150))
+    birthday = db.Column(db.DateTime)
+    uf = db.Column(db.String(2))
+    city = db.Column(db.String(256))
+
     questions = db.relationship("Question", backref='user', lazy='dynamic')
     replies = db.relationship("Reply", backref='user', lazy='dynamic')
     votes = db.relationship("Vote", backref='user', lazy='dynamic')
