@@ -18,6 +18,7 @@ class Post(db.Model):
     publish_date = db.Column(db.DateTime)
     last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
+    show_home = db.Column(db.Boolean)
 
     subjects = db.relationship(
         "Subject",

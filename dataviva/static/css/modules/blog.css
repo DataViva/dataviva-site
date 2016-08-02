@@ -204,3 +204,17 @@
     text-decoration: none;
     font-weight: bold;
 }
+
+.blog .checkbox-switch {
+    padding: 0px;
+    border: none;
+}
+
+.blog .checkbox-switch .switchery{
+    height: 33px;
+}
+
+.blog .checkbox-switch .switchery > small {
+    height: 33px;
+    width: 33px;
+}
