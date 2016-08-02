@@ -127,23 +127,19 @@ def signin():
     form = SigninForm()
 
     if request.method == "POST":
-        if User.query.filter_by(email=form.email.data).first():
-            user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
-            if user:
-                if user.confirmed:
-                    login_user(user, remember=True)
-                    redir = request.args.get("next", "/")
-                    return redirect(redir)
-                else:
-                    return Response("Need to confirm your account!", status=400, mimetype='application/json')
+        user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
+        if user:
+            if user.confirmed:
+                login_user(user, remember=True)
+                redir = request.args.get("next", "/")
+                return redirect(redir)
             else:
-                return Response("Password Incorrect!", status=400, mimetype='application/json')
+                return Response("Confirm Pending", status=401, mimetype='application/json', )
         else:
-            return Response("Email not found!", status=400, mimetype='application/json')
+            return Response("Email or Password Incorrect!", status=400, mimetype='application/json')
 
     else:
         next = request.args.get("next", "")
-
         return render_template('account/signin.html', form=form, next=next)
 
 
@@ -151,7 +147,6 @@ def signin():
 def confirm_pending(user_email):
     ''' Used to inform to the user that its account is pending
     '''
-
     try:
         user = User.query.filter_by(email=user_email)[-1]
     except IndexError:
@@ -161,6 +156,7 @@ def confirm_pending(user_email):
         return redirect('/')
 
     return render_template('account/confirm_pending.html', user=user.serialize())
+
 
 
 @mod.route('/confirm/<code>', methods=["GET"])
@@ -191,7 +187,6 @@ def resend_confirmation(user_email):
     user.confirmation_code = _gen_confirmation_code(user.email)
     db.session.commit()
     send_confirmation(user)
-
     return redirect('/account/confirm_pending/%s' % user.email)
 
 
