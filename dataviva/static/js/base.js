@@ -708,19 +708,24 @@ $(document).ready(function () {
                                 $form.find('#'+field).siblings('.control-label').after(error);
                             }
                         }
-                        catch(err) {
+                        catch(err) { 
                             swal({
                                 title: 'Ops!',
                                 text: response.responseText,
                                 type: "error"
+                            },
+                            function(isConfirm){
+                                if (response.status == 401){
+                                        window.location.pathname = "account/confirm_pending/" + $form.find('input[name="email"]').val()
+                                }
                             });
                         }
                 }
-              }).always(function() {
+                }).always(function() {
                     $password.prop('disabled', false);
                     $email.prop('disabled', false);
                     $submit.prop('disabled', false);
-              });
+                });
             }
 
             status = true;
