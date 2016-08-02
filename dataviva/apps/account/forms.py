@@ -40,18 +40,10 @@ class ProfileForm(Form):
     fullname = TextField('fullname', validators=[validators.Required(),
                                                     validators.Length(min=3, max=128,
                                                     message='Name field must be between 3 and 128 characters long.')])
+    gender = SelectField('gender', choices=[('male', 'Male'), ('female', 'Female')])
+    email = TextField('email', validators=[validators.Required(), validators.Email()])
+    country = TextField('country', validators=[validators.Required()])
+    
 
-    gender = SelectField(
-        'gender',
-         choices=[('male', 'Male'), ('female', 'Female')]
-    )
-
-    website = TextField(
-        'website',
-        validators=[validators.Optional() , validators.URL(), validators.Length(min=10, max=150)]
-    )
-
-    bio = TextField(
-        'bio',
-        validators=[validators.Length(max=256)]
-    )
+    website = TextField('website', validators=[validators.Optional(), validators.URL(), validators.Length(min=10, max=150)])
+    bio = TextField('bio', validators=[validators.Length(max=256)])
