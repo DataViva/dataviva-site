@@ -131,16 +131,14 @@ def signin():
         if user:
             if user.confirmed:
                 login_user(user, remember=True)
-                redir = request.args.get("next", "/")
-                return redirect(redir)
+                return redirect("/")
             else:
                 return Response("Confirm Pending", status=401, mimetype='application/json', )
         else:
             return Response("Email or Password Incorrect!", status=400, mimetype='application/json')
 
     else:
-        next = request.args.get("next", "")
-        return render_template('account/signin.html', form=form, next=next)
+        return render_template('account/signin.html', form=form)
 
 
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
@@ -156,7 +154,6 @@ def confirm_pending(user_email):
         return redirect('/')
 
     return render_template('account/confirm_pending.html', user=user.serialize())
-
 
 
 @mod.route('/confirm/<code>', methods=["GET"])
