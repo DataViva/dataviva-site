@@ -1,0 +1,1 @@
+ALTER TABLE blog_post ADD COLUMN show_home TINYINT(1) DEFAULT 0 AFTER active;
