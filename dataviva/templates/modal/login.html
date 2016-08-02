@@ -17,8 +17,15 @@
                         <div class="form-group">
                         <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
                         </div>
+
+                        <p><a href="/account/forgot_password">{% trans %}Forgot your password{% endtrans %}?</a></p>
                         <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Entrar">
                     </form>
+
+                        <p>{% trans %}...or sign-up using{% endtrans %}:</p>
+                        <a href="/en/account/social_auth/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
+                        <a href="" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
+                        <a href="" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a>
                 </div>
             </div>
         </div>
