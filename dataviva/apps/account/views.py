@@ -217,10 +217,17 @@ def change_profile():
     if form.validate():
         try:
             user = g.user
+
+            user.profile = form.profile.data
             user.fullname = form.fullname.data
-            user.gender = form.gender.data
-            user.website = form.website.data
-            user.bio = form.bio.data
+            user.email = form.email.data
+            user.birthday = form.birthday.data
+            user.country = form.country.data
+            user.uf = form.uf.data
+            user.city = form.city.data
+            user.occupation = form.occupation.data
+            user.institution = form.institution.data
+
             db.session.commit()
 
             message = u'Profile updated successfully!'
