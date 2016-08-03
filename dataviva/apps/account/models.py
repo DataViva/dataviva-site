@@ -19,7 +19,6 @@ class User(db.Model, AutoSerialize):
     nickname = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     fullname = db.Column(db.String(200))
-    country = db.Column(db.String(80))
     language = db.Column(db.String(20))
     gender = db.Column(db.String(10))
     website = db.Column(db.String(150))
@@ -32,6 +31,7 @@ class User(db.Model, AutoSerialize):
     institution = db.Column(db.String(256))
     occupation = db.Column(db.String(150))
     birthday = db.Column(db.DateTime)
+    country = db.Column(db.String(80))
     uf = db.Column(db.String(2))
     city = db.Column(db.String(256))
 

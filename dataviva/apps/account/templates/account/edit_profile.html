@@ -29,22 +29,60 @@
 			<ul id="regular-signup" class="col-md-8 col-md-offset-2" style="list-style: none;">
 			{{ form.hidden_tag() }}
 				<p>
+					<label for="profile">{% trans %}Profile{% endtrans %}</label>
+					{{ form.profile(class="form-control")}}
+					{{ messages(form.profile) }}
+				</p>
+
+				<p>
 					<label for="fullname">{% trans %}Full name{% endtrans %}</label>
 					{{ form.fullname(class="form-control")}}
 					{{ messages(form.fullname) }}
 				</p>
 				<p>
-					<label for="website">website</label>
-					{{ form.website(class="form-control")}}
-					{{ messages(form.website) }}
-					<small class="text-muted">ex: http://mywebsite.com</small>
+					<label for="email">Email</label>
+					{{ form.email(class="form-control")}}
+					{{ messages(form.email) }}
 				</p>
 				<p>
-					<label for="bio">bio</label>
-					{{ form.bio(class="form-control")}}
-					{{ messages(form.bio) }}
+	            <label class="control-label">{% trans %}Birthday{% endtrans %}</label>
+	            {{ messages(form.birthday) }}
+		            <div id="birthday-date" class="input-group date">
+		                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+		                {{ form.birthday(class="form-control")}}
+		            </div>
+				</p>
+				<p>
+					<label for="country">Country</label>
+					{{ form.country(class="form-control")}}
+					{{ messages(form.country) }}
+					<small class="text-muted">{% trans %}up to 80 characters{% endtrans %}</small>
+				</p>
+				<p>
+					<label for="uf">UF</label>
+					{{ form.uf(class="form-control")}}
+					{{ messages(form.uf) }}
+					<small class="text-muted">{% trans %}2 characters{% endtrans %}</small>
+				</p>
+				<p>
+					<label for="city">City</label>
+					{{ form.city(class="form-control")}}
+					{{ messages(form.city) }}
 					<small class="text-muted">{% trans %}up to 256 characters{% endtrans %}</small>
 				</p>
+				<p>
+					<label for="occupation">Occupation</label>
+					{{ form.occupation(class="form-control")}}
+					{{ messages(form.occupation) }}
+					<small class="text-muted">{% trans %}up to 150 characters{% endtrans %}</small>
+				</p>
+				<p>
+					<label for="institution">Institution</label>
+					{{ form.institution(class="form-control")}}
+					{{ messages(form.institution) }}
+					<small class="text-muted">{% trans %}up to 256 characters{% endtrans %}</small>
+				</p>
+
 
 				<hr/>
 

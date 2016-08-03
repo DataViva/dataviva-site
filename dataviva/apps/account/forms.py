@@ -39,8 +39,8 @@ class ProfileForm(Form):
     fullname = TextField('fullname', validators=[validators.Required(), validators.Length(min=3, max=128, message='Name field must be between 3 and 128 characters long.')])
     email = TextField('email', validators=[validators.Required(), validators.Email()])
     birthday = DateField('birthday', validators=[ validators.Required()],format='%d/%m/%Y', description='Date format: day/month/year')
-    country = TextField('country', validators=[validators.Required()]), 
-    uf = TextField('uf', validators=[validators.Length(min=2, max=2, message='UF field must be 2 characters.')])
+    country = TextField('country', validators=[validators.Required()])
+    uf = TextField('uf', validators=[validators.Required(), validators.Length(min=2, max=2, message='UF field must be 2 characters.')])
     city = TextField('city', validators=[validators.Required()])
     profile = SelectField('gender', choices=[('development_agents', 'Development Agents'),('entrepreneurs', 'Entrepreneurs'), ('students', 'Students and Professionals')])
     occupation = TextField('occupation', validators=[validators.Length(min=3, max=128)])
