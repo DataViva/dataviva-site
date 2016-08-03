@@ -28,6 +28,11 @@ mod = Blueprint('account', __name__,
                 static_folder='static')
 
 
+@mod.before_request
+def before_request():
+    g.page_type = 'account'
+
+
 def _gen_confirmation_code(email):
     return md5("%s-%s" % (email, datetime.now())).hexdigest()
 
@@ -191,10 +196,16 @@ def resend_confirmation(user_email):
 @login_required
 def edit_profile():
     form = ProfileForm()
+
+    form.profile.data = g.user.profile
     form.fullname.data = g.user.fullname
-    form.gender.data = g.user.gender
-    form.website.data = g.user.website
-    form.bio.data = g.user.bio
+    form.email.data = g.user.email
+    form.birthday.data = g.user.birthday
+    form.country.data = g.user.country
+    form.uf.data = g.user.uf
+    form.city.data = g.user.city
+    form.occupation.data = g.user.occupation
+    form.institution.data = g.user.institution
 
     return render_template("account/edit_profile.html", form=form)
 
