@@ -19,7 +19,6 @@ class User(db.Model, AutoSerialize):
     nickname = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     fullname = db.Column(db.String(200))
-    country = db.Column(db.String(80))
     language = db.Column(db.String(20))
     gender = db.Column(db.String(10))
     website = db.Column(db.String(150))
@@ -27,6 +26,15 @@ class User(db.Model, AutoSerialize):
     bio = db.Column(db.String(256))
     image = db.Column(db.String(256))
     last_seen = db.Column(db.DateTime)
+
+    profile = db.Column(db.String(50))
+    institution = db.Column(db.String(256))
+    occupation = db.Column(db.String(150))
+    birthday = db.Column(db.DateTime)
+    country = db.Column(db.String(80))
+    uf = db.Column(db.String(2))
+    city = db.Column(db.String(256))
+
     questions = db.relationship("Question", backref='user', lazy='dynamic')
     replies = db.relationship("Reply", backref='user', lazy='dynamic')
     votes = db.relationship("Vote", backref='user', lazy='dynamic')
@@ -58,6 +66,9 @@ class User(db.Model, AutoSerialize):
             return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)
         else:
             return 'http://www.gravatar.com/avatar/{0}?s=' + str(size) + '&d=identicon'.format(self.nickname.encode('hex'))
+
+    def birthday_str(self):
+        return self.birthday.strftime('%d/%m/%Y')
 
     def __repr__(self):
         return '<User %r>' % (self.fullname)
