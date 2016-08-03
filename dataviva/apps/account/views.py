@@ -206,6 +206,7 @@ def edit_profile():
     form.city.data = g.user.city
     form.occupation.data = g.user.occupation
     form.institution.data = g.user.institution
+    form.agree_mailer.data = g.user.agree_mailer
 
     return render_template("account/edit_profile.html", form=form)
 
@@ -227,6 +228,7 @@ def change_profile():
             user.city = form.city.data
             user.occupation = form.occupation.data
             user.institution = form.institution.data
+            user.agree_mailer = form.agree_mailer.data
 
             db.session.commit()
 
