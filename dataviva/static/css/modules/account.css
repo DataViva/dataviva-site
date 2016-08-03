@@ -1,0 +1,21 @@
+.account #account-form h1{
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.account #account-form .form-group {
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+.account #account-form .form-group label {
+    margin-bottom: 0px;
+}
+
+.account #regular-signup .alert{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+
+
