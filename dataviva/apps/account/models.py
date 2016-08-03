@@ -67,6 +67,9 @@ class User(db.Model, AutoSerialize):
         else:
             return 'http://www.gravatar.com/avatar/{0}?s=' + str(size) + '&d=identicon'.format(self.nickname.encode('hex'))
 
+    def birthday_str(self):
+        return self.birthday.strftime('%d/%m/%Y')
+
     def __repr__(self):
         return '<User %r>' % (self.fullname)
 
