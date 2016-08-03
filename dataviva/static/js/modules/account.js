@@ -8,3 +8,7 @@ $(document).ready(function(){
         autoclose: true
     });
 });
+
+$(document).ready(function(){
+    setAlertTimeOut(8000);
+});
