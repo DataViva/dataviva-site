@@ -27,7 +27,7 @@ class User(db.Model, AutoSerialize):
     image = db.Column(db.String(256))
     last_seen = db.Column(db.DateTime)
 
-    profile = db.Column(db.Integer)
+    profile = db.Column(db.String(50))
     institution = db.Column(db.String(256))
     occupation = db.Column(db.String(150))
     birthday = db.Column(db.DateTime)
