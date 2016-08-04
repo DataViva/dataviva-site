@@ -140,7 +140,7 @@ def signin():
             else:
                 return Response("Confirm Pending", status=401, mimetype='application/json', )
         else:
-            return Response("Email or Password Incorrect!", status=400, mimetype='application/json')
+            return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
 
     else:
         return render_template('account/signin.html', form=form)
@@ -158,6 +158,7 @@ def confirm_pending(user_email):
     if user.confirmed:
         return redirect('/')
 
+    flash(dictionary()["check_your_inbox"] + ' ' + user_email, 'success')
     return render_template('account/confirm_pending.html', user=user.serialize())
 
 
@@ -168,8 +169,7 @@ def confirm(code):
         user.confirmed = True
         db.session.commit()
         login_user(user, remember=True)
-        flash(
-            "Lest us know more about you. Please complete your profile.", "info")
+        flash("Lest us know more about you. Please complete your profile.", "info")
     except IndexError:
         abort(404, 'User not found')
 
@@ -232,8 +232,7 @@ def change_profile():
 
             db.session.commit()
 
-            message = u'Profile updated successfully!'
-            flash(message, 'success')
+            flash("Profile updated successfully!", "success")
         except:
             flash("Something went wrong!", "danger")
 
@@ -252,7 +251,6 @@ def change_password():
 def change():
     form = ChangePasswordForm()
     user = load_user(session["user_id"])
-
 
     if form.validate():
         if user.password == sha512(form.current_password.data):
