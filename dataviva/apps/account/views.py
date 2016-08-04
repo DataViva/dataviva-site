@@ -1,24 +1,17 @@
-from dataviva import db, lm, app
+from dataviva import db, lm
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.account.login_providers import facebook, twitter, google
-from dataviva.apps.account.models import User, Starred, ROLE_USER, ROLE_ADMIN
-from dataviva.apps.ask.forms import AskForm
-from dataviva.apps.ask.models import Question, Status, Reply
-from dataviva.utils.exist_or_404 import exist_or_404
+from dataviva.apps.account.models import User, Starred
+from dataviva.apps.ask.models import Question, Reply
 from dataviva.utils.encode import sha512
 from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from dataviva.translations.dictionary import dictionary
-from flask import Blueprint, request, render_template, flash, g, session, \
-    redirect, url_for, jsonify, abort, current_app, Response, make_response
+from flask import Blueprint, render_template, g, session, \
+    redirect, url_for, jsonify, abort, Response, flash
 from flask.ext.babel import gettext
-from flask.ext.login import login_user, logout_user, current_user, \
-    login_required, LoginManager
-from forms import (LoginForm, SignupForm, SigninForm, ChangePasswordForm,
+from flask.ext.login import login_user, login_required
+from forms import (SignupForm, ChangePasswordForm,
                    ForgotPasswordForm, ProfileForm)
-from sqlalchemy import or_
-from urllib2 import Request, urlopen, URLError
-import json
 from hashlib import md5
 
 
@@ -124,26 +117,6 @@ def social_auth(provider):
         return google.authorize(callback=callback)
 
     return render_template('account/signin.html', form=form)
-
-
-@mod.route('/signin', methods=["GET", "POST"])
-def signin():
-
-    form = SigninForm()
-
-    if request.method == "POST":
-        user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
-        if user:
-            if user.confirmed:
-                login_user(user, remember=True)
-                return redirect("/")
-            else:
-                return Response("Confirm Pending", status=401, mimetype='application/json', )
-        else:
-            return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
-
-    else:
-        return render_template('account/signin.html', form=form)
 
 
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
@@ -332,7 +305,8 @@ def update_email_preferences(id, nickname, agree):
         db.session.commit()
 
     return user
-    
+
+
 @mod.route('/remove_email/<id>/<nickname>')
 def remove_email_list(id, nickname):
     update_email_preferences(id, nickname, 0)
@@ -353,231 +327,3 @@ def preferences():
         return redirect('/account/' + user.nickname)
     else:
         return redirect('/')
-
-
-###############################
-# Views for ALL logged in users
-# ---------------------------
-@mod.route('/logout/')
-def logout():
-    session.pop('twitter_token', None)
-    session.pop('google_token', None)
-    session.pop('facebook_token', None)
-    logout_user()
-    return redirect('/')
-
-
-@mod.route('/login/', methods=['GET', 'POST'])
-@mod.route('/login/<provider>', methods=['GET', 'POST'])
-def login(provider=None):
-    form = SigninForm()
-
-    if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
-        if user:
-            if user.confirmed:
-                login_user(user, remember=True)
-                return redirect("/")
-            else:
-                return Response("Confirm Pending", status=401, mimetype='application/json', )
-        else:
-            return Response("Email or Password Incorrect!", status=400, mimetype='application/json')
-
-    elif provider:
-        if provider == "google":
-            callback = url_for('account.google_authorized', _external=True)
-            return google.authorize(callback=callback)
-
-        if provider == "twitter":
-            callback = url_for('account.twitter_authorized',
-                               next=request.args.get(
-                                   'next') or request.referrer or None,
-                               _external=True)
-            return twitter.authorize(callback=callback)
-
-        if provider == "facebook":
-            callback = url_for('account.facebook_authorized',
-                               next=request.args.get(
-                                   'next') or request.referrer or None,
-                               _external=True)
-            return facebook.authorize(callback=callback)
-
-    return render_template('account/signin.html', form=form)
-
-
-@mod.route('/complete_login/', methods=['GET', 'POST'])
-def after_login(**user_fields):
-    import re
-
-    if request.method == "POST":
-        user_fields = {k: v for k, v in request.form.items() if v is not None}
-    else:
-        user_fields = {k: v for k, v in user_fields.items() if v is not None}
-
-    print(request.host)
-
-
-    if "google_id" in user_fields:
-        user = User.query.filter_by(email=user_fields["email"]).first()
-    elif "twitter_id" in user_fields:
-        user = User.query.filter_by(
-            twitter_id=user_fields["twitter_id"]).first()
-    elif "facebook_id" in user_fields:
-        user = User.query.filter_by(
-            facebook_id=user_fields["facebook_id"]).first()
-    elif None is not re.match(r'^(localhost|127.0.0.1)', request.host):
-        user = User(id=1)
-
-    if user is None:
-
-        nickname = user_fields[
-            "nickname"] if "nickname" in user_fields else None
-        if nickname is None or nickname == "":
-            nickname = user_fields["email"].split('@')[0]
-        nickname = User.make_unique_nickname(nickname)
-        user_fields["nickname"] = nickname
-        user_fields["agree_mailer"] = 1
-        user = User(**user_fields)
-        db.session.add(user)
-        db.session.commit()
-
-    remember_me = False
-    if 'remember_me' in session:
-        remember_me = session['remember_me']
-        session.pop('remember_me', None)
-    login_user(user, remember=remember_me)
-
-    return render_template('account/complete_login.html')
-
-"""
-    TWITTER LOGIN
-    Here are the specific methods for logging in users with their
-    twitter accounts.
-"""
-
-
-@twitter.tokengetter
-def get_twitter_token():
-    """This is used by the API to look for the auth token and secret
-    it should use for API calls.  During the authorization handshake
-    a temporary set of token and secret is used, but afterwards this
-    function has to return the token and secret.  If you don't want
-    to store this in the database, consider putting it into the
-    session instead.
-    """
-    return session.get('twitter_token')
-
-
-@mod.route('/twoauth-authorized/')
-@twitter.authorized_handler
-def twitter_authorized(resp):
-    """Called after authorization.  After this function finished handling,
-    the OAuth information is removed from the session again.  When this
-    happened, the tokengetter from above is used to retrieve the oauth
-    token and secret.
-
-    Because the remote application could have re-authorized the application
-    it is necessary to update the values in the database.
-
-    If the application redirected back after denying, the response passed
-    to the function will be `None`.  Otherwise a dictionary with the values
-    the application submitted.  Note that Twitter itself does not really
-    redirect back unless the user clicks on the application name.
-    """
-
-    session['twitter_token'] = (
-        resp['oauth_token'],
-        resp['oauth_token_secret']
-    )
-    session['twitter_user'] = resp['screen_name']
-
-    response = twitter.get(
-        'users/show.json?screen_name='+resp["screen_name"]).data
-
-    fullname = response["name"] if "name" in response else None
-    nickname = response["screen_name"] if "screen_name" in response else None
-    language = response["lang"] if "lang" in response else None
-    country = response["location"] if "location" in response else None
-    image = response[
-        "profile_image_url"] if "profile_image_url" in response else None
-    id = response["id"] if "id" in response else None
-
-    return after_login(twitter_id=id, fullname=fullname, nickname=nickname, language=language, country=country, image=image)
-
-
-"""
-    FACEBOOK LOGIN
-    Here are the specific methods for logging in users with their
-    facebook accounts.
-"""
-
-
-@mod.route('/fblogin/authorized/')
-@facebook.authorized_handler
-def facebook_authorized(resp):
-    if resp is None:
-        return 'Access denied: reason=%s error=%s' % (
-            request.args['error_reason'],
-            request.args['error_description']
-        )
-    session['facebook_token'] = (resp['access_token'], '')
-    response = facebook.get(
-        '/me/?fields=picture,username,name,id,location,locale,email').data
-
-    email = response["email"] if "email" in response else None
-    fullname = response["name"] if "name" in response else None
-    language = response["locale"] if "locale" in response else None
-    country = response["location"]["name"] if "location" in response else None
-    image = response["picture"]["data"][
-        "url"] if "picture" in response else None
-    id = response["id"] if "id" in response else None
-
-    return after_login(facebook_id=id, fullname=fullname, email=email, language=language, country=country, image=image)
-
-
-@facebook.tokengetter
-def get_facebook_oauth_token():
-    return session.get('facebook_token')
-
-
-"""
-    GOOGLE LOGIN
-    Here are the specific methods for logging in users with their
-    google accounts.
-"""
-
-
-@mod.route('/google_authorized/')
-@google.authorized_handler
-def google_authorized(resp):
-    access_token = resp['access_token']
-    session['google_token'] = access_token, ''
-
-    req = Request(
-        'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
-    try:
-        res = urlopen(req)
-
-    except URLError, e:
-        if e.code == 401:
-            # Unauthorized - bad token
-            session.pop('google_token', None)
-            raise Exception('error!')
-            # return redirect(url_for('login'))
-        return res.read()
-        raise Exception('ERROR!', res.read())
-
-    response = json.loads(res.read())
-    email = response["email"] if "email" in response else None
-    fullname = response["name"] if "name" in response else None
-    language = response["locale"] if "locale" in response else None
-    gender = response["gender"] if "gender" in response else None
-    image = response["picture"] if "picture" in response else None
-    id = response["id"] if "id" in response else None
-
-    return after_login(google_id=id, email=email, fullname=fullname, language=language, gender=gender, image=image)
-
-
-@google.tokengetter
-def get_access_token():
-    return session.get('google_token')

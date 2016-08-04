@@ -61,18 +61,18 @@ def login(provider=None):
 
     if provider:
         if provider == "google":
-            callback = url_for('account.google_authorized', _external=True)
+            callback = url_for('session.google_authorized', _external=True)
             return google.authorize(callback=callback)
 
         if provider == "twitter":
-            callback = url_for('account.twitter_authorized',
+            callback = url_for('session.twitter_authorized',
                                next=request.args.get(
                                    'next') or request.referrer or None,
                                _external=True)
             return twitter.authorize(callback=callback)
 
         if provider == "facebook":
-            callback = url_for('account.facebook_authorized',
+            callback = url_for('session.facebook_authorized',
                                next=request.args.get(
                                    'next') or request.referrer or None,
                                _external=True)
@@ -81,38 +81,60 @@ def login(provider=None):
     return render_template('session/signin.html', form=form)
 
 
+"""
+    GOOGLE LOGIN
+    Here are the specific methods for logging in users with their
+    google accounts.
+"""
+
+
+@mod.route('/google_authorized/')
+@google.authorized_handler
+def google_authorized(resp):
+    access_token = resp['access_token']
+    session['google_token'] = access_token, ''
+
+    req = Request(
+        'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
+    try:
+        res = urlopen(req)
+
+    except URLError, e:
+        if e.code == 401:
+            # Unauthorized - bad token
+            session.pop('google_token', None)
+            raise Exception('error!')
+            # return redirect(url_for('login'))
+        return res.read()
+        raise Exception('ERROR!', res.read())
+
+    response = json.loads(res.read())
+    email = response["email"] if "email" in response else None
+    fullname = response["name"] if "name" in response else None
+    language = response["locale"] if "locale" in response else None
+    gender = response["gender"] if "gender" in response else None
+    image = response["picture"] if "picture" in response else None
+
+    return after_login(provider="google", email=email, fullname=fullname, language=language, gender=gender, image=image)
+
+
 @mod.route('/complete_login/', methods=['GET', 'POST'])
-def after_login(**user_fields):
-    import re
+def after_login(provider, email, fullname, language, gender, image):
 
-    if request.method == "POST":
-        user_fields = {k: v for k, v in request.form.items() if v is not None}
-    else:
-        user_fields = {k: v for k, v in user_fields.items() if v is not None}
-
-    print(request.host)
-
-    if "google_id" in user_fields:
-        user = User.query.filter_by(email=user_fields["email"]).first()
-    elif "twitter_id" in user_fields:
-        user = User.query.filter_by(
-            twitter_id=user_fields["twitter_id"]).first()
-    elif "facebook_id" in user_fields:
-        user = User.query.filter_by(
-            facebook_id=user_fields["facebook_id"]).first()
-    elif None is not re.match(r'^(localhost|127.0.0.1)', request.host):
-        user = User(id=1)
+    user = User.query.filter_by(email=email, provider=provider).first()
 
     if user is None:
+        user = User()
+        user.nickname = email.split('@')[0]
+        user.agree_mailer = True
+        user.confirmed = True
+        user.provider = provider
+        user.email = email
+        user.fullname = fullname
+        user.language = language
+        user.gender = gender
+        user.image = image
 
-        nickname = user_fields[
-            "nickname"] if "nickname" in user_fields else None
-        if nickname is None or nickname == "":
-            nickname = user_fields["email"].split('@')[0]
-        nickname = User.make_unique_nickname(nickname)
-        user_fields["nickname"] = nickname
-        user_fields["agree_mailer"] = 1
-        user = User(**user_fields)
         db.session.add(user)
         db.session.commit()
 
@@ -122,7 +144,19 @@ def after_login(**user_fields):
         session.pop('remember_me', None)
     login_user(user, remember=remember_me)
 
-    return render_template('session/complete_login.html')
+    return redirect('/')
+
+
+
+
+
+
+
+
+
+
+
+
 
 """
     TWITTER LOGIN
@@ -213,44 +247,6 @@ def facebook_authorized(resp):
 @facebook.tokengetter
 def get_facebook_oauth_token():
     return session.get('facebook_token')
-
-
-"""
-    GOOGLE LOGIN
-    Here are the specific methods for logging in users with their
-    google accounts.
-"""
-
-
-@mod.route('/google_authorized/')
-@google.authorized_handler
-def google_authorized(resp):
-    access_token = resp['access_token']
-    session['google_token'] = access_token, ''
-
-    req = Request(
-        'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
-    try:
-        res = urlopen(req)
-
-    except URLError, e:
-        if e.code == 401:
-            # Unauthorized - bad token
-            session.pop('google_token', None)
-            raise Exception('error!')
-            # return redirect(url_for('login'))
-        return res.read()
-        raise Exception('ERROR!', res.read())
-
-    response = json.loads(res.read())
-    email = response["email"] if "email" in response else None
-    fullname = response["name"] if "name" in response else None
-    language = response["locale"] if "locale" in response else None
-    gender = response["gender"] if "gender" in response else None
-    image = response["picture"] if "picture" in response else None
-    id = response["id"] if "id" in response else None
-
-    return after_login(google_id=id, email=email, fullname=fullname, language=language, gender=gender, image=image)
 
 
 @google.tokengetter

@@ -13,6 +13,7 @@ class User(db.Model, AutoSerialize):
     __tablename__ = 'account_user'
 
     id = db.Column(db.Integer, primary_key=True)
+    provider = db.Column(db.String(50))
     google_id = db.Column(db.String(120), unique=True)
     twitter_id = db.Column(db.String(120), unique=True)
     facebook_id = db.Column(db.String(120), unique=True)
