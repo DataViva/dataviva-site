@@ -1,13 +1,13 @@
 from dataviva import db, lm
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.account.models import User, Starred
+from dataviva.apps.user.models import User, Starred
 from dataviva.apps.ask.models import Question, Reply
 from dataviva.utils.encode import sha512
 from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from dataviva.translations.dictionary import dictionary
 from flask import Blueprint, render_template, g, session, \
-    redirect, url_for, jsonify, abort, Response, flash
+    redirect, jsonify, abort, Response, flash, request
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, login_required
 from forms import (SignupForm, ChangePasswordForm,
@@ -15,15 +15,15 @@ from forms import (SignupForm, ChangePasswordForm,
 from hashlib import md5
 
 
-mod = Blueprint('account', __name__,
+mod = Blueprint('user', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/account',
+                url_prefix='/<lang_code>/user',
                 static_folder='static')
 
 
 @mod.before_request
 def before_request():
-    g.page_type = 'account'
+    g.page_type = 'user'
 
 
 def _gen_confirmation_code(email):
@@ -61,8 +61,8 @@ def check_status():
 
 
 def send_confirmation(user):
-    confirmation_url = "%s%s/account/confirm/%s" % (request.url_root , g.locale, user.confirmation_code)
-    confirmation_tpl = render_template('account/mail/confirmation.html',
+    confirmation_url = "%s%s/user/confirm/%s" % (request.url_root, g.locale, user.confirmation_code)
+    confirmation_tpl = render_template('user/mail/confirmation.html',
                                        confirmation_url=confirmation_url)
 
     send_mail("Account confirmation", [user.email], confirmation_tpl)
@@ -71,7 +71,7 @@ def send_confirmation(user):
 @mod.route('/signup', methods=["GET"])
 def signup():
     form = SignupForm()
-    return render_template('account/signup.html', form=form)
+    return render_template('user/signup.html', form=form)
 
 
 @mod.route('/signup', methods=["POST"])
@@ -109,19 +109,9 @@ def create_user():
         return Response(message, status=200, mimetype='application/json')
 
 
-@mod.route('/social_auth/<provider>', methods=["GET"])
-def social_auth(provider):
-    # TODO
-    if provider == "google":
-        callback = url_for('account.google_authorized', _external=True)
-        return google.authorize(callback=callback)
-
-    return render_template('account/signin.html', form=form)
-
-
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
 def confirm_pending(user_email):
-    ''' Used to inform to the user that its account is pending
+    ''' Used to inform to the user that its user is pending
     '''
     try:
         user = User.query.filter_by(email=user_email)[-1]
@@ -132,7 +122,7 @@ def confirm_pending(user_email):
         return redirect('/')
 
     flash(dictionary()["check_your_inbox"] + ' ' + user_email, 'success')
-    return render_template('account/confirm_pending.html', user=user.serialize())
+    return render_template('user/confirm_pending.html', user=user.serialize())
 
 
 @mod.route('/confirm/<code>', methods=["GET"])
@@ -146,7 +136,7 @@ def confirm(code):
     except IndexError:
         abort(404, 'User not found')
 
-    return redirect('/account/edit_profile')
+    return redirect('/user/edit_profile')
 
 
 @mod.route('/resend_confirmation/<user_email>', methods=["GET"])
@@ -162,7 +152,7 @@ def resend_confirmation(user_email):
     user.confirmation_code = _gen_confirmation_code(user.email)
     db.session.commit()
     send_confirmation(user)
-    return redirect('/account/confirm_pending/%s' % user.email)
+    return redirect('/user/confirm_pending/%s' % user.email)
 
 
 @mod.route('/edit_profile', methods=["GET"])
@@ -181,7 +171,7 @@ def edit_profile():
     form.institution.data = g.user.institution
     form.agree_mailer.data = g.user.agree_mailer
 
-    return render_template("account/edit_profile.html", form=form)
+    return render_template("user/edit_profile.html", form=form)
 
 
 @mod.route('/edit_profile', methods=["POST"])
@@ -209,14 +199,14 @@ def change_profile():
         except:
             flash("Something went wrong!", "danger")
 
-    return render_template("account/edit_profile.html", form=form)
+    return render_template("user/edit_profile.html", form=form)
 
 
 @mod.route('/change_password', methods=["GET"])
 @login_required
 def change_password():
     form = ChangePasswordForm()
-    return render_template("account/change_password.html", form=form)
+    return render_template("user/change_password.html", form=form)
 
 
 @mod.route('/change_password', methods=["POST"])
@@ -232,14 +222,14 @@ def change():
             flash("Password successfully update!", "success")
         else:
             flash("The current password is invalid", "danger")
-            
-    return render_template("account/change_password.html", form=form)
+
+    return render_template("user/change_password.html", form=form)
 
 
 @mod.route('/forgot_password', methods=["GET"])
 def forgot_password():
     form = ForgotPasswordForm()
-    return render_template("account/forgot_password.html", form=form)
+    return render_template("user/forgot_password.html", form=form)
 
 
 @mod.route('/forgot_password', methods=["POST"])
@@ -252,19 +242,19 @@ def reset_password():
         user.password = sha512(pwd)
         db.session.commit()
 
-        email_tp = render_template('account/mail/forgot.html',
+        email_tp = render_template('user/mail/forgot.html',
                                    user=user.serialize(),
                                    new_pwd=pwd)
         send_mail("Forgot Password", [user.email], email_tp)
         flash(
             "A new password has been sent to you! Please check you inbox!", "success")
-    except Exception as e:
+    except:
         flash(
             "We couldnt find any user with the informed email address", "danger")
 
-        return render_template("account/forgot_password.html", form=form)
+        return render_template("user/forgot_password.html", form=form)
 
-    return redirect("account/signin")
+    return redirect("user/signin")
 
 
 ###############################
@@ -292,7 +282,7 @@ def user(nickname):
     activity = stars + questions + replies
     activity.sort(key=lambda a: a.timestamp, reverse=True)
 
-    return render_template("account/index.html",
+    return render_template("user/index.html",
                            user=user,
                            activity=activity)
 
@@ -324,6 +314,6 @@ def preferences():
 
         user = update_email_preferences(g.user.id, g.user.nickname, agree)
         flash(gettext("Preferences updated."))
-        return redirect('/account/' + user.nickname)
+        return redirect('/user/' + user.nickname)
     else:
         return redirect('/')

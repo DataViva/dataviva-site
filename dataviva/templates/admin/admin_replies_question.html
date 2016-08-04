@@ -107,7 +107,7 @@
 
 <div class="feed">
 	<h2>{{ q.body|safe }}</h2>
-	<p>{% if q.user.role == 0 or (q.timestamp != None and q.user.role == 1) %}{% trans %}Asked{% endtrans %} {% trans %}by{% endtrans %} <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {% if q.timestamp != None %}{{ momentjs(q.timestamp).fromNow() }}{% endif %}{% endif %}</p>
+	<p>{% if q.user.role == 0 or (q.timestamp != None and q.user.role == 1) %}{% trans %}Asked{% endtrans %} {% trans %}by{% endtrans %} <a href="{{ url_for('user.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a> {% if q.timestamp != None %}{{ momentjs(q.timestamp).fromNow() }}{% endif %}{% endif %}</p>
   	{% for r in q.replies %}
       	{% if r.hidden < 2 %}
 	        <div class="reply_box comment{% if r.id != r.parent_id %} child{% endif %}">
@@ -131,7 +131,7 @@
 
 	            <!-- User metadata -->
 	            <p class="question_attr">
-	              <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ moment_js(r.timestamp).fromNow() }}{% endif %}
+	              <a href="{{ url_for('user.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ moment_js(r.timestamp).fromNow() }}{% endif %}
 	            </p>
 	          <!-- end reply text -->
 	          </div>

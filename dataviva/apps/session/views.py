@@ -1,7 +1,7 @@
 from dataviva import db
 from dataviva.apps.session.login_providers import facebook, twitter, google
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.account.models import User
+from dataviva.apps.user.models import User
 from dataviva.utils.encode import sha512
 from dataviva.translations.dictionary import dictionary
 from flask import Blueprint, request, render_template, session, redirect, Response, url_for, g

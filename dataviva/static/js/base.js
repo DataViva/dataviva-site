@@ -525,7 +525,7 @@ $(document).ready(function () {
 
               $.ajax({
                 type: 'POST',
-                url: '/' + dataviva.language + '/account/signup',
+                url: '/' + dataviva.language + '/user/signup',
                 data: submitData,
                 dataType: 'html',
                 success: function(response) {
@@ -716,7 +716,7 @@ $(document).ready(function () {
                             },
                             function(isConfirm){
                                 if (response.status == 401){
-                                        window.location.pathname = "account/confirm_pending/" + $form.find('input[name="email"]').val()
+                                        window.location.pathname = "user/confirm_pending/" + $form.find('input[name="email"]').val()
                                 }
                             });
                         }
