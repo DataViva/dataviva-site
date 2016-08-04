@@ -13,6 +13,7 @@ from dataviva.apps.general.forms import AccessForm
 from dataviva.apps.general.models import Short
 from dataviva.apps.account.models import User
 from dataviva.apps.news.models import Publication
+from dataviva.apps.blog.models import Post
 from dataviva.apps.contact.forms import ContactForm
 from dataviva.apps.account.forms import SignupForm
 from dataviva.apps.account.forms import SigninForm
@@ -136,7 +137,13 @@ def home():
     else:
         news = publications
 
-    return render_template("general/index.html", news=news)
+    blog_posts = Post.query.filter(Post.id != id, Post.active, Post.show_home).all()
+    if len(blog_posts) > 3:
+        blog = [blog_posts.pop(randrange(len(blog_posts))) for _ in range(3)]
+    else:
+        blog = blog_posts
+
+    return render_template("general/index.html", news=news, blog=blog)
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])

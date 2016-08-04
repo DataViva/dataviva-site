@@ -96,7 +96,7 @@ def all_posts():
     posts = []
     for row in result:
         posts += [(row.id, row.title, row.author,
-                   row.publish_date.strftime('%d/%m/%Y'), row.active)]
+                   row.publish_date.strftime('%d/%m/%Y'), row.show_home, row.active)]
 
     return jsonify(posts=posts)
 
@@ -172,6 +172,7 @@ def create():
         post.text_call = form.text_call.data
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.show_home = form.show_home.data
         post.active = 0
 
         subjects_names = form.subject.data.replace(', ', ',').split(',')
@@ -206,6 +207,7 @@ def edit(id):
     form.author.data = post.author
     form.text_content.data = post.text_content
     form.text_call.data = post.text_call
+    form.show_home.data = post.show_home
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
     form.subject.data = ', '.join([sub.name for sub in post.subjects])
@@ -228,6 +230,7 @@ def update(id):
         post.text_content = form.text_content.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
+        post.show_home = form.show_home.data
         subjects_names = form.subject.data.replace(', ', ',').split(',')
         num_subjects = len(post.subjects)
 
