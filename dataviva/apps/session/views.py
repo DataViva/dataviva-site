@@ -81,11 +81,45 @@ def login(provider=None):
     return render_template('session/signin.html', form=form)
 
 
+@mod.route('/complete_login/', methods=['GET', 'POST'])
+def after_login(provider, email, fullname, language, gender, image):
+
+    user = User.query.filter_by(email=email, provider=provider).first()
+
+    if user is None:
+        user = User()
+        user.nickname = email.split('@')[0]
+        user.agree_mailer = True
+        user.confirmed = True
+        user.provider = provider
+        user.email = email
+        user.fullname = fullname
+        user.language = language
+        user.gender = gender
+        user.image = image
+
+        db.session.add(user)
+        db.session.commit()
+
+    remember_me = False
+    if 'remember_me' in session:
+        remember_me = session['remember_me']
+        session.pop('remember_me', None)
+    login_user(user, remember=remember_me)
+
+    return redirect('/')
+
+
 """
     GOOGLE LOGIN
     Here are the specific methods for logging in users with their
     google accounts.
 """
+
+
+@google.tokengetter
+def get_access_token():
+    return session.get('google_token')
 
 
 @mod.route('/google_authorized/')
@@ -118,44 +152,36 @@ def google_authorized(resp):
     return after_login(provider="google", email=email, fullname=fullname, language=language, gender=gender, image=image)
 
 
-@mod.route('/complete_login/', methods=['GET', 'POST'])
-def after_login(provider, email, fullname, language, gender, image):
-
-    user = User.query.filter_by(email=email, provider=provider).first()
-
-    if user is None:
-        user = User()
-        user.nickname = email.split('@')[0]
-        user.agree_mailer = True
-        user.confirmed = True
-        user.provider = provider
-        user.email = email
-        user.fullname = fullname
-        user.language = language
-        user.gender = gender
-        user.image = image
-
-        db.session.add(user)
-        db.session.commit()
-
-    remember_me = False
-    if 'remember_me' in session:
-        remember_me = session['remember_me']
-        session.pop('remember_me', None)
-    login_user(user, remember=remember_me)
-
-    return redirect('/')
+"""
+    FACEBOOK LOGIN
+    Here are the specific methods for logging in users with their
+    facebook accounts.
+"""
 
 
+@facebook.tokengetter
+def get_facebook_oauth_token():
+    return session.get('facebook_token')
 
 
+@mod.route('/facebook_authorized/')
+@facebook.authorized_handler
+def facebook_authorized(resp):
+    if resp is None:
+        return 'Access denied: reason=%s error=%s' % (
+            request.args['error_reason'],
+            request.args['error_description']
+        )
+    session['facebook_token'] = (resp['access_token'], '')
+    response = facebook.get('/me/?fields=picture,name,locale,email, gender').data
 
+    email = response["email"] if "email" in response else None
+    fullname = response["name"] if "name" in response else None
+    language = response["locale"] if "locale" in response else None
+    gender = response["gender"] if "gender" in response else None
+    image = response["picture"]["data"]["url"] if "picture" in response else None
 
-
-
-
-
-
+    return after_login(provider="facebook", fullname=fullname, email=email, language=language, gender=gender, image=image)
 
 
 """
@@ -200,8 +226,7 @@ def twitter_authorized(resp):
     )
     session['twitter_user'] = resp['screen_name']
 
-    response = twitter.get(
-        'users/show.json?screen_name='+resp["screen_name"]).data
+    response = twitter.get('users/show.json?screen_name=' + resp["screen_name"]).data
 
     fullname = response["name"] if "name" in response else None
     nickname = response["screen_name"] if "screen_name" in response else None
@@ -212,43 +237,3 @@ def twitter_authorized(resp):
     id = response["id"] if "id" in response else None
 
     return after_login(twitter_id=id, fullname=fullname, nickname=nickname, language=language, country=country, image=image)
-
-
-"""
-    FACEBOOK LOGIN
-    Here are the specific methods for logging in users with their
-    facebook accounts.
-"""
-
-
-@mod.route('/fblogin/authorized/')
-@facebook.authorized_handler
-def facebook_authorized(resp):
-    if resp is None:
-        return 'Access denied: reason=%s error=%s' % (
-            request.args['error_reason'],
-            request.args['error_description']
-        )
-    session['facebook_token'] = (resp['access_token'], '')
-    response = facebook.get(
-        '/me/?fields=picture,username,name,id,location,locale,email').data
-
-    email = response["email"] if "email" in response else None
-    fullname = response["name"] if "name" in response else None
-    language = response["locale"] if "locale" in response else None
-    country = response["location"]["name"] if "location" in response else None
-    image = response["picture"]["data"][
-        "url"] if "picture" in response else None
-    id = response["id"] if "id" in response else None
-
-    return after_login(facebook_id=id, fullname=fullname, email=email, language=language, country=country, image=image)
-
-
-@facebook.tokengetter
-def get_facebook_oauth_token():
-    return session.get('facebook_token')
-
-
-@google.tokengetter
-def get_access_token():
-    return session.get('google_token')
