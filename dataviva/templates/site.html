@@ -50,7 +50,7 @@
       <div id="account_tooltip" style="display:none;">
         <a id="profile_link" class="account" href=""><i class="fa fa-user"></i>{% trans %}Profile{% endtrans %}</a>
         <a id="admin_link" class="account" href="{{ url_for('admin.admin') }}"><i class="fa fa-cogs"></i>{% trans %}Admin Panel{% endtrans %}</a>
-        <a class="account" href="{{ url_for('account.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
+        <a class="account" href="{{ url_for('session.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
       </div>
 
     </div>
