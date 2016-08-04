@@ -159,6 +159,11 @@ def access():
     session['has_access'] = False
     return redirect(url_for('general.home'))
 
+@mod.route('/login', methods=['GET', 'POST'])
+@mod.route('/login/<provider>', methods=['GET', 'POST'])
+def login(provider=None):
+    return redirect(url_for('account.login', provider=provider))
+
 ###############################
 # Set language views
 # ---------------------------

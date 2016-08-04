@@ -304,48 +304,6 @@ def load_user(id):
     return User.query.get(int(id))
 
 
-###############################
-# Views for ALL logged in users
-# ---------------------------
-@mod.route('/logout/')
-def logout():
-    session.pop('twitter_token', None)
-    session.pop('google_token', None)
-    session.pop('facebook_token', None)
-    logout_user()
-    return redirect('/')
-
-
-@mod.route('/login/', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    providers = ["Facebook", "Google", "Twitter"]
-
-    if form.validate_on_submit():
-        provider = form.provider.data
-        session['remember_me'] = form.remember_me.data
-        session['provider'] = provider
-
-        if provider == "google":
-            callback = url_for('account.google_authorized', _external=True)
-            return google.authorize(callback=callback)
-        if provider == "twitter":
-            callback = url_for('account.twitter_authorized',
-                               next=request.args.get(
-                                   'next') or request.referrer or None,
-                               _external=True)
-            return twitter.authorize(callback=callback)
-        elif provider == "facebook":
-            callback = url_for('account.facebook_authorized',
-                               next=request.args.get(
-                                   'next') or request.referrer or None,
-                               _external=True)
-            return facebook.authorize(callback=callback)
-
-    return render_template(
-        'account/login.html', form=form, providers=providers)
-
-
 @mod.route('/<nickname>/')
 def user(nickname):
     user = User.query.filter_by(nickname=nickname).first_or_404()
@@ -376,8 +334,7 @@ def update_email_preferences(id, nickname, agree):
         db.session.commit()
 
     return user
-
-
+    
 @mod.route('/remove_email/<id>/<nickname>')
 def remove_email_list(id, nickname):
     update_email_preferences(id, nickname, 0)
@@ -400,6 +357,56 @@ def preferences():
         return redirect('/')
 
 
+###############################
+# Views for ALL logged in users
+# ---------------------------
+@mod.route('/logout/')
+def logout():
+    session.pop('twitter_token', None)
+    session.pop('google_token', None)
+    session.pop('facebook_token', None)
+    logout_user()
+    return redirect('/')
+
+
+@mod.route('/login/', methods=['GET', 'POST'])
+@mod.route('/login/<provider>', methods=['GET', 'POST'])
+def login(provider=None):
+    form = SigninForm()
+
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
+        if user:
+            if user.confirmed:
+                login_user(user, remember=True)
+                return redirect("/")
+            else:
+                return Response("Confirm Pending", status=401, mimetype='application/json', )
+        else:
+            return Response("Email or Password Incorrect!", status=400, mimetype='application/json')
+
+    elif provider:
+        if provider == "google":
+            callback = url_for('account.google_authorized', _external=True)
+            return google.authorize(callback=callback)
+
+        if provider == "twitter":
+            callback = url_for('account.twitter_authorized',
+                               next=request.args.get(
+                                   'next') or request.referrer or None,
+                               _external=True)
+            return twitter.authorize(callback=callback)
+
+        if provider == "facebook":
+            callback = url_for('account.facebook_authorized',
+                               next=request.args.get(
+                                   'next') or request.referrer or None,
+                               _external=True)
+            return facebook.authorize(callback=callback)
+
+    return render_template('account/signin.html', form=form)
+
+
 @mod.route('/complete_login/', methods=['GET', 'POST'])
 def after_login(**user_fields):
     import re
@@ -411,8 +418,9 @@ def after_login(**user_fields):
 
     print(request.host)
 
+
     if "google_id" in user_fields:
-        user = User.query.filter_by(google_id=user_fields["google_id"]).first()
+        user = User.query.filter_by(email=user_fields["email"]).first()
     elif "twitter_id" in user_fields:
         user = User.query.filter_by(
             twitter_id=user_fields["twitter_id"]).first()
@@ -551,6 +559,7 @@ def google_authorized(resp):
         'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
     try:
         res = urlopen(req)
+
     except URLError, e:
         if e.code == 401:
             # Unauthorized - bad token
