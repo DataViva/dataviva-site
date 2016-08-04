@@ -19,13 +19,13 @@
 }
 
 .account .account-resend-description{
-    font-size: 20px;
-    min-height: 30px;
-    margin-bottom: 15px;
+    font-size: 15px;
+    min-height: 20px;
+    margin-bottom: 10px;
 }
 
 .account .account-resend-icon{
-    font-size: 50px;
+    font-size: 35px;
     margin-bottom: 5px;
 }
 

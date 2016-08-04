@@ -142,6 +142,24 @@
     </div>
 </section>
 
+<section id="blog" class="blog bg-white">
+    <div class="container text-center">
+        <div class="navy-line wow fadeInDown"></div>
+        <h2 class="m-b-lg wow fadeInDown">{%trans%}Blog{%endtrans%}</h2>
+        <div class="row">
+            {% for post in blog %}
+                <div class="col-sm-4 wow {% if loop.first %} fadeInLeftBig {% elif loop.last %} fadeInRightBig {% else %} fadeInDown {% endif %}">
+                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{ post.title }}">
+                        <img src="{{post.thumb}}" class="img-responsive">
+                    </a>
+                    <p>
+                        {{ post.title }}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 
 {% endblock content %}
 
