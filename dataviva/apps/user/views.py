@@ -6,12 +6,10 @@ from dataviva.utils.encode import sha512
 from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from dataviva.translations.dictionary import dictionary
-from flask import Blueprint, render_template, g, session, \
-    redirect, jsonify, abort, Response, flash, request
+from flask import Blueprint, render_template, g, session, redirect, jsonify, abort, Response, flash, request
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, login_required
-from forms import (SignupForm, ChangePasswordForm,
-                   ForgotPasswordForm, ProfileForm)
+from forms import (SignupForm, ChangePasswordForm, ForgotPasswordForm, ProfileForm)
 from hashlib import md5
 
 
@@ -48,8 +46,7 @@ def check_status():
         data["user"] = g.user.nickname
         data["is_admin"] = g.user.is_admin()
 
-    # Save variable in session so we can determine if this is the user's
-    # first time on the site
+    # Save variable in session so we can determine if this is the user's first time on the site
     if 'first_time' in session:
         del session["first_time"]
     if 'first_visit' in session:
@@ -78,11 +75,11 @@ def signup():
 def create_user():
     form = SignupForm()
     if form.validate() is False:
-        if form.errors.has_key('fullname'):
+        if 'fullname' in form.errors:
             return Response(form.errors['fullname'], status=400, mimetype='application/json')
-        if form.errors.has_key('email'):
+        if 'email' in form.errors:
             return Response(form.errors['email'], status=400, mimetype='application/json')
-        if form.errors.has_key('password'):
+        if 'password' in form.errors:
             return Response(form.errors['password'], status=400, mimetype='application/json')
         return Response('Error in Form.', status=400, mimetype='application/json')
     else:
@@ -246,11 +243,9 @@ def reset_password():
                                    user=user.serialize(),
                                    new_pwd=pwd)
         send_mail("Forgot Password", [user.email], email_tp)
-        flash(
-            "A new password has been sent to you! Please check you inbox!", "success")
+        flash("A new password has been sent to you! Please check you inbox!", "success")
     except:
-        flash(
-            "We couldnt find any user with the informed email address", "danger")
+        flash("We couldnt find any user with the informed email address", "danger")
 
         return render_template("user/forgot_password.html", form=form)
 
