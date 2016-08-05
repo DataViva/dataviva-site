@@ -78,7 +78,7 @@ def login(provider=None):
                                _external=True)
             return facebook.authorize(callback=callback)
 
-    return render_template('session/signin.html', form=form)
+    return render_template('session/login.html', form=form)
 
 
 @mod.route('/complete_login', methods=['GET', 'POST'])
