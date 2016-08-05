@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, redirect, url_for, jsonify, request
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.account.models import User
+from dataviva.apps.user.models import User
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
 

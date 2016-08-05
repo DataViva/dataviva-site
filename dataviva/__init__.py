@@ -28,7 +28,7 @@ mail = Mail(app)
 db = SQLAlchemy(app)
 
 lm = LoginManager()
-lm.login_view = "/account/signin"
+lm.login_view = "/session/login"
 lm.init_app(app)
 
 babel = Babel(app)

@@ -1,0 +1,37 @@
+.account #account-form h2{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.account #account-form .form-group {
+    margin: 0px;
+    margin-bottom: 20px;
+}
+
+.account #account-form .form-group label {
+    margin-bottom: 0px;
+}
+
+.account #regular-signup .alert{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.account .account-resend-description{
+    font-size: 15px;
+    min-height: 20px;
+    margin-bottom: 10px;
+}
+
+.account .account-resend-icon{
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.account .resend-mail-btn{
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 15px;
+
+}
