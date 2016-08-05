@@ -13,39 +13,35 @@ class User(db.Model, AutoSerialize):
     __tablename__ = 'account_user'
 
     id = db.Column(db.Integer, primary_key=True)
-    provider = db.Column(db.String(50))
-    google_id = db.Column(db.String(120), unique=True)
-    twitter_id = db.Column(db.String(120), unique=True)
-    facebook_id = db.Column(db.String(120), unique=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     fullname = db.Column(db.String(200))
+    country = db.Column(db.String(80))
     language = db.Column(db.String(20))
     gender = db.Column(db.String(10))
     website = db.Column(db.String(150))
     role = db.Column(db.SmallInteger, default=ROLE_USER)
     bio = db.Column(db.String(256))
-    image = db.Column(db.String(256))
     last_seen = db.Column(db.DateTime)
-
-    profile = db.Column(db.String(50))
+    google_id = db.Column(db.String(120), unique=True)
+    twitter_id = db.Column(db.String(120), unique=True)
+    facebook_id = db.Column(db.String(120), unique=True)
+    image = db.Column(db.String(256))
+    agree_mailer = db.Column(db.Integer)
+    confirmation_code = db.Column(db.String(128))
+    confirmed = db.Column(db.Boolean, default=False)
+    password = db.Column(db.String(128))
     institution = db.Column(db.String(256))
     occupation = db.Column(db.String(150))
     birthday = db.Column(db.DateTime)
-    country = db.Column(db.String(80))
     uf = db.Column(db.String(2))
     city = db.Column(db.String(256))
-
+    profile = db.Column(db.String(50))
     questions = db.relationship("Question", backref='user', lazy='dynamic')
     replies = db.relationship("Reply", backref='user', lazy='dynamic')
     votes = db.relationship("Vote", backref='user', lazy='dynamic')
     flag = db.relationship("Flag", backref='user', lazy='dynamic')
     starred = db.relationship("Starred", backref='user', lazy='dynamic')
-    agree_mailer = db.Column(db.Integer)
-
-    password = db.Column(db.String(128))
-    confirmation_code = db.Column(db.String(128))
-    confirmed = db.Column(db.Boolean, default=False)
 
     def is_authenticated(self):
         return True
@@ -76,12 +72,12 @@ class User(db.Model, AutoSerialize):
 
     @staticmethod
     def make_unique_nickname(nickname):
-        if User.query.filter_by(nickname=nickname).first() == None:
+        if User.query.filter_by(nickname=nickname).first() is None:
             return nickname
         version = 2
         while True:
             new_nickname = nickname + str(version)
-            if User.query.filter_by(nickname=new_nickname).first() == None:
+            if User.query.filter_by(nickname=new_nickname).first() is None:
                 break
             version += 1
         return new_nickname
@@ -103,11 +99,12 @@ class User(db.Model, AutoSerialize):
             "role": self.role
         }
 
+
 class Starred(db.Model, AutoSerialize):
 
     __tablename__ = 'account_starred'
-    app_id = db.Column(db.String(80), primary_key = True)
-    user_id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key = True)
+    app_id = db.Column(db.String(80), primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey(User.id), primary_key=True)
     app_name = db.Column(db.String(255))
     timestamp = db.Column(db.DateTime)
 
