@@ -81,17 +81,16 @@ def login(provider=None):
     return render_template('session/signin.html', form=form)
 
 
-@mod.route('/complete_login/', methods=['GET', 'POST'])
-def after_login(provider, email, fullname, language, gender, image):
+@mod.route('/complete_login', methods=['GET', 'POST'])
+def after_login(email, fullname, language, gender, image):
 
-    user = User.query.filter_by(email=email, provider=provider).first()
+    user = User.query.filter_by(email=email).first()
 
     if user is None:
         user = User()
         user.nickname = email.split('@')[0]
         user.agree_mailer = True
         user.confirmed = True
-        user.provider = provider
         user.email = email
         user.fullname = fullname
         user.language = language
@@ -107,7 +106,7 @@ def after_login(provider, email, fullname, language, gender, image):
         session.pop('remember_me', None)
     login_user(user, remember=remember_me)
 
-    return redirect('/')
+    return redirect('')
 
 
 """
@@ -122,16 +121,15 @@ def get_access_token():
     return session.get('google_token')
 
 
-@mod.route('/google_authorized/')
+@mod.route('/google_authorized')
 @google.authorized_handler
 def google_authorized(resp):
     access_token = resp['access_token']
     session['google_token'] = access_token, ''
 
-    req = Request(
-        'https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token='+access_token)
+    request = Request('https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=' + access_token)
     try:
-        res = urlopen(req)
+        res = urlopen(request)
 
     except URLError, e:
         if e.code == 401:
@@ -143,13 +141,14 @@ def google_authorized(resp):
         raise Exception('ERROR!', res.read())
 
     response = json.loads(res.read())
+
     email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None
     language = response["locale"] if "locale" in response else None
     gender = response["gender"] if "gender" in response else None
     image = response["picture"] if "picture" in response else None
 
-    return after_login(provider="google", email=email, fullname=fullname, language=language, gender=gender, image=image)
+    return after_login(email=email, fullname=fullname, language=language, gender=gender, image=image)
 
 
 """
@@ -164,7 +163,7 @@ def get_facebook_oauth_token():
     return session.get('facebook_token')
 
 
-@mod.route('/facebook_authorized/')
+@mod.route('/facebook_authorized')
 @facebook.authorized_handler
 def facebook_authorized(resp):
     if resp is None:
@@ -172,8 +171,10 @@ def facebook_authorized(resp):
             request.args['error_reason'],
             request.args['error_description']
         )
+
     session['facebook_token'] = (resp['access_token'], '')
-    response = facebook.get('/me/?fields=picture,name,locale,email, gender').data
+
+    response = facebook.get('/me/?fields=picture,name,locale,email,gender').data
 
     email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None
@@ -181,7 +182,7 @@ def facebook_authorized(resp):
     gender = response["gender"] if "gender" in response else None
     image = response["picture"]["data"]["url"] if "picture" in response else None
 
-    return after_login(provider="facebook", fullname=fullname, email=email, language=language, gender=gender, image=image)
+    return after_login(email=email, fullname=fullname, language=language, gender=gender, image=image)
 
 
 """
@@ -203,7 +204,7 @@ def get_twitter_token():
     return session.get('twitter_token')
 
 
-@mod.route('/twoauth-authorized/')
+@mod.route('/twitter-authorized')
 @twitter.authorized_handler
 def twitter_authorized(resp):
     """Called after authorization.  After this function finished handling,
@@ -226,14 +227,12 @@ def twitter_authorized(resp):
     )
     session['twitter_user'] = resp['screen_name']
 
-    response = twitter.get('users/show.json?screen_name=' + resp["screen_name"]).data
+    response = twitter.get('users/show.json?include_email=true&screen_name=' + resp["screen_name"]).data
 
+    email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None
-    nickname = response["screen_name"] if "screen_name" in response else None
     language = response["lang"] if "lang" in response else None
-    country = response["location"] if "location" in response else None
-    image = response[
-        "profile_image_url"] if "profile_image_url" in response else None
-    id = response["id"] if "id" in response else None
+    gender = response["gender"] if "gender" in response else None
+    image = response["profile_image_url"] if "profile_image_url" in response else None
 
-    return after_login(twitter_id=id, fullname=fullname, nickname=nickname, language=language, country=country, image=image)
+    return after_login(email=email, fullname=fullname, language=language, gender=gender, image=image)
