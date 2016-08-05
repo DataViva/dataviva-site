@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-05 17:29-0400\n"
+"POT-Creation-Date: 2016-08-05 17:33-0400\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1856,7 +1856,7 @@ msgid "mesoregion, it is the"
 msgstr "é o "
 
 #: dataviva/apps/location/templates/location/tab-general.html:28
-msgid "city of the state by GDP"
+msgid "city in the state by GDP"
 msgstr "município do estado em PIB"
 
 #: dataviva/apps/location/templates/location/tab-general.html:39
