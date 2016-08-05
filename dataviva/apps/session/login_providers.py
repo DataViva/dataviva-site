@@ -1,8 +1,5 @@
-from flask import Flask, redirect, url_for, session, request
 from flask_oauth import OAuth
-from config import GOOGLE_OAUTH_ID, GOOGLE_OAUTH_SECRET, \
-                    TWITTER_OAUTH_ID, TWITTER_OAUTH_SECRET, \
-                    FACEBOOK_OAUTH_ID, FACEBOOK_OAUTH_SECRET
+from config import GOOGLE_OAUTH_ID, GOOGLE_OAUTH_SECRET, TWITTER_OAUTH_ID, TWITTER_OAUTH_SECRET, FACEBOOK_OAUTH_ID, FACEBOOK_OAUTH_SECRET
 
 oauth = OAuth()
 
@@ -44,4 +41,3 @@ facebook = oauth.remote_app('facebook',
     consumer_key=FACEBOOK_OAUTH_ID,
     consumer_secret=FACEBOOK_OAUTH_SECRET,
     request_token_params={'scope': 'email'})
-
