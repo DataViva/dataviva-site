@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-03 14:24-0400\n"
+"POT-Creation-Date: 2016-08-05 17:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -293,144 +293,6 @@ msgid ""
 "economy, generating inputs for the planning and decision making by "
 "entrepreneurs, students, investors and professionals of any economic "
 "sector and from anywhere in the world."
-msgstr ""
-
-#: dataviva/apps/account/views.py:364 dataviva/apps/account/views.py:377
-msgid "Preferences updated."
-msgstr ""
-
-#: dataviva/apps/account/templates/account/change_password.html:39
-msgid "Current Password"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/change_password.html:44
-msgid "New Password"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/change_password.html:49
-#: dataviva/apps/account/templates/account/signup.html:36
-msgid "Confirm Password"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/change_password.html:56
-#: dataviva/apps/account/templates/account/edit_profile.html:47
-#: dataviva/templates/modal/dataviva.html:106
-#: dataviva/templates/modal/search.html:28
-#: dataviva/templates/modal/signup.html:48
-#: dataviva/templates/modal/wizard.html:47
-msgid "Cancel"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/change_password.html:57
-#: dataviva/apps/account/templates/account/edit_profile.html:48
-#: dataviva/templates/admin/admin_questions_edit.html:44
-msgid "Update"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/confirm_pending.html:5
-msgid "Please check you inbox so that you can complete your registration."
-msgstr ""
-
-#: dataviva/apps/account/templates/account/confirm_pending.html:6
-msgid "Resend confirmation email"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/edit_profile.html:15
-msgid "Edit your profile"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/edit_profile.html:18
-#: dataviva/apps/account/templates/account/signup.html:26
-msgid "Full name"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/edit_profile.html:23
-msgid "gender"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/edit_profile.html:37
-msgid "up to 256 characters"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/edit_profile.html:43
-msgid "Change my password"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/forgot_password.html:18
-msgid "Please inform us your email, so that we can sent you a new password"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/forgot_password.html:22
-msgid "Confirm"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signin.html:15
-#: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
-#: dataviva/templates/general/upgrade.html:3
-#: dataviva/templates/include/header.html:47
-#: dataviva/translations/dictionary.py:555
-msgid "Login"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signin.html:18
-msgid "Entre com suas credenciais..."
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signin.html:26
-#: dataviva/apps/account/templates/account/signup.html:31
-#: dataviva/templates/modal/login.html:16
-#: dataviva/templates/modal/signup.html:24
-msgid "Password"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signin.html:30
-msgid "Forgot your password"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signin.html:31
-msgid "Sign In"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signin.html:35
-#: dataviva/apps/account/templates/account/signup.html:44
-msgid "...or sign-up using"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signup.html:15
-#: dataviva/templates/include/header.html:49
-#: dataviva/templates/modal/signup.html:49
-msgid "Sign Up"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signup.html:18
-msgid "Escolha suas credenciais..."
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signup.html:21
-#: dataviva/templates/admin/admin_users.html:14
-msgid "Email"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/signup.html:40
-msgid "SignUp"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/mail/confirmation.html:7
-#: dataviva/templates/include/header.html:51
-#: dataviva/translations/dictionary.py:561
-msgid "Welcome"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/mail/confirmation.html:12
-msgid "Hi there, thank you for signing up to DataViva."
-msgstr ""
-
-#: dataviva/apps/account/templates/account/mail/confirmation.html:16
-msgid "Please click the link bellow to complete your registration"
-msgstr ""
-
-#: dataviva/apps/account/templates/account/mail/confirmation.html:31
-msgid "VERIFY E-MAIL"
 msgstr ""
 
 #: dataviva/apps/admin/views.py:21 dataviva/templates/general/error.html:12
@@ -1093,6 +955,7 @@ msgid "Select"
 msgstr ""
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/apps/user/templates/user/edit_profile.html:105
 #: dataviva/templates/modal/dataviva.html:103
 #: dataviva/templates/modal/search.html:29
 #: dataviva/translations/dictionary.py:477
@@ -1788,7 +1651,6 @@ msgid " With "
 msgstr ""
 
 #: dataviva/apps/location/templates/location/index.html:29
-#: dataviva/apps/location/templates/location/tab-general.html:24
 msgid "km² of area, has a population of "
 msgstr ""
 
@@ -1915,8 +1777,12 @@ msgstr ""
 msgid "and its GDP per capita was of"
 msgstr ""
 
+#: dataviva/apps/location/templates/location/tab-general.html:24
+msgid "km² of area, it has a population of "
+msgstr ""
+
 #: dataviva/apps/location/templates/location/tab-general.html:25
-msgid "people and a GDP of "
+msgid "people and a per-capita GDP of "
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:26
@@ -1928,7 +1794,7 @@ msgid "mesoregion, it is the"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:28
-msgid "city of the state regarding the GDP ranking"
+msgid "city of the state by GDP"
 msgstr ""
 
 #: dataviva/apps/location/templates/location/tab-general.html:39
@@ -3084,6 +2950,7 @@ msgstr ""
 
 #: dataviva/apps/search/templates/search/_form.html:11
 #: dataviva/apps/search/templates/search/admin.html:31
+#: dataviva/apps/user/templates/user/edit_profile.html:35
 #: dataviva/templates/site.html:51
 msgid "Profile"
 msgstr ""
@@ -3101,6 +2968,40 @@ msgstr ""
 
 #: dataviva/apps/search/templates/search/new.html:10
 msgid "Create"
+msgstr ""
+
+#: dataviva/apps/session/templates/session/signin.html:15
+#: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
+#: dataviva/templates/general/upgrade.html:3
+#: dataviva/templates/include/header.html:47
+#: dataviva/translations/dictionary.py:555
+msgid "Login"
+msgstr ""
+
+#: dataviva/apps/session/templates/session/signin.html:18
+msgid "Entre com suas credenciais..."
+msgstr ""
+
+#: dataviva/apps/session/templates/session/signin.html:26
+#: dataviva/apps/user/templates/user/signup.html:30
+#: dataviva/templates/modal/login.html:18
+#: dataviva/templates/modal/signup.html:24
+msgid "Password"
+msgstr ""
+
+#: dataviva/apps/session/templates/session/signin.html:30
+#: dataviva/templates/modal/login.html:21
+msgid "Forgot your password"
+msgstr ""
+
+#: dataviva/apps/session/templates/session/signin.html:31
+msgid "Sign In"
+msgstr ""
+
+#: dataviva/apps/session/templates/session/signin.html:35
+#: dataviva/apps/user/templates/user/signup.html:43
+#: dataviva/templates/modal/login.html:25
+msgid "...or sign-up using"
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:14
@@ -3254,6 +3155,116 @@ msgstr ""
 
 #: dataviva/apps/university/templates/university/tab-general.html:28
 msgid "Main Course by Number of Graduates"
+msgstr ""
+
+#: dataviva/apps/user/views.py:303 dataviva/apps/user/views.py:316
+msgid "Preferences updated."
+msgstr ""
+
+#: dataviva/apps/user/templates/user/change_password.html:52
+msgid "Current Password"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/change_password.html:57
+msgid "New Password"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/change_password.html:62
+#: dataviva/apps/user/templates/user/signup.html:35
+msgid "Confirm Password"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/change_password.html:69
+#: dataviva/templates/modal/dataviva.html:106
+#: dataviva/templates/modal/search.html:28
+#: dataviva/templates/modal/signup.html:47
+#: dataviva/templates/modal/wizard.html:47
+msgid "Cancel"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/change_password.html:70
+#: dataviva/apps/user/templates/user/edit_profile.html:106
+#: dataviva/templates/admin/admin_questions_edit.html:44
+msgid "Update"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/confirm_pending.html:19
+msgid "Please check you inbox so that you can complete your registration."
+msgstr ""
+
+#: dataviva/apps/user/templates/user/confirm_pending.html:26
+msgid "Resend confirmation email"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit_profile.html:30
+msgid "Edit your profile"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit_profile.html:41
+msgid "Birthday"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit_profile.html:51
+#: dataviva/apps/user/templates/user/signup.html:20
+msgid "Full name"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit_profile.html:72
+msgid "Format: XX"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit_profile.html:96
+#: dataviva/templates/modal/signup.html:42
+msgid "I want to receive news and tips of the best use of Dataviva"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit_profile.html:101
+msgid "Change my password"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/forgot_password.html:18
+msgid "Please inform us your email, so that we can sent you a new password"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/forgot_password.html:22
+msgid "Confirm"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/signup.html:14
+#: dataviva/templates/include/header.html:49
+#: dataviva/templates/modal/signup.html:48
+msgid "Sign Up"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/signup.html:17
+msgid "Escolha suas credenciais..."
+msgstr ""
+
+#: dataviva/apps/user/templates/user/signup.html:25
+#: dataviva/templates/admin/admin_users.html:14
+msgid "Email"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/signup.html:39
+msgid "SignUp"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/mail/confirmation.html:7
+#: dataviva/templates/include/header.html:51
+#: dataviva/translations/dictionary.py:561
+msgid "Welcome"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/mail/confirmation.html:12
+msgid "Hi there, thank you for signing up to DataViva."
+msgstr ""
+
+#: dataviva/apps/user/templates/user/mail/confirmation.html:16
+msgid "Please click the link bellow to complete your registration"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/mail/confirmation.html:31
+msgid "VERIFY E-MAIL"
 msgstr ""
 
 #: dataviva/apps/users/templates/users/admin.html:33
@@ -4306,7 +4317,7 @@ msgstr ""
 #: dataviva/templates/admin/admin_questions.html:29
 #: dataviva/templates/admin/admin_replies.html:28
 #: dataviva/templates/admin/admin_users.html:12
-#: dataviva/templates/modal/login.html:13
+#: dataviva/templates/modal/login.html:15
 #: dataviva/translations/dictionary.py:459
 msgid "User"
 msgstr ""
@@ -4978,10 +4989,6 @@ msgstr ""
 
 #: dataviva/templates/modal/signup.html:32
 msgid "What profile best describes you"
-msgstr ""
-
-#: dataviva/templates/modal/signup.html:42
-msgid "I want to receive news and tips of the best use of Dataviva"
 msgstr ""
 
 #: dataviva/templates/modal/video.html:7

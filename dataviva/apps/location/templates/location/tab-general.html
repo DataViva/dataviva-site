@@ -21,11 +21,11 @@
               {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities}}
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
-              {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-              {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
+              {% trans %}km² of area, it has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
+              {% trans %}people and a per-capita GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
               {% trans %}mesoregion, it is the{% endtrans %} {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}
-              {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
+              {% trans %}city of the state by GDP{% endtrans %}.</p>
           {% elif profile.bra_id|length == 7 %}
               <p>
               {% if g.locale == "pt" %}
