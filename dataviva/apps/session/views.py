@@ -225,9 +225,8 @@ def twitter_authorized(resp):
         resp['oauth_token'],
         resp['oauth_token_secret']
     )
-    session['twitter_user'] = resp['screen_name']
 
-    response = twitter.get('users/show.json?include_email=true&screen_name=' + resp["screen_name"]).data
+    response = twitter.get('account/verify_credentials.json?include_email=true').data
 
     email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None
