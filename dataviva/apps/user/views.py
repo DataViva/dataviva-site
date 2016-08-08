@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 from dataviva import db, lm
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.user.models import User, Starred
-from dataviva.apps.ask.models import Question, Reply
+from dataviva.apps.user.models import User
 from dataviva.utils.encode import sha512
 from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from dataviva.translations.dictionary import dictionary
 from flask import Blueprint, render_template, g, session, redirect, jsonify, abort, Response, flash, request
-from flask.ext.babel import gettext
 from flask.ext.login import login_user, login_required
 from forms import (SignupForm, ChangePasswordForm, ForgotPasswordForm, ProfileForm)
 from hashlib import md5
@@ -82,7 +80,6 @@ def create():
             return Response(message, status=200, mimetype='application/json')
 
     return render_template('user/new.html', form=form)
-
 
 
 @mod.route('/edit', methods=["GET"])
@@ -235,15 +232,15 @@ def reset_password():
 
         return render_template("user/forgot_password.html", form=form)
 
-    return redirect("user/signin")
+    return redirect(g.locale + "/session/login")
 
 
 @mod.route('/admin', methods=['GET'])
 @login_required
 @required_roles(1)
 def admin():
-    users = User.query.all()
-    return render_template('users/admin.html', users=users)
+    user = User.query.all()
+    return render_template('user/admin.html', user=user)
 
 
 @mod.route('/all/', methods=['GET'])
@@ -253,6 +250,7 @@ def all():
     for row in result:
         users += [(row.id, row.fullname, row.email, row.role)]
     return jsonify(users=users)
+
 
 @mod.route('/admin/users/<status>/<status_value>', methods=['POST'])
 @login_required

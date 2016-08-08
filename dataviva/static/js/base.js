@@ -494,6 +494,8 @@ $(document).ready(function () {
             var $agree_mailer = $form.find('input[name="agree_mailer"]');
             var status        = true;
 
+            debugger
+
             if ($fullname.val() === '') {
                 $fullname.closest('.form-group').addClass('has-error');
                 $fullname.addClass('error');
@@ -522,6 +524,7 @@ $(document).ready(function () {
               $fullname.attr('disabled', 'disabled');
               $email.attr('disabled', 'disabled');
               $submit.attr('disabled', 'disabled');
+              $("[name='submit']").attr('disabled', 'disabled');
 
               $.ajax({
                 type: 'POST',
@@ -561,6 +564,7 @@ $(document).ready(function () {
                     $fullname.prop('disabled', false);
                     $email.prop('disabled', false);
                     $submit.prop('disabled', false);
+                    $("[name='submit']").prop('disabled', false);
               });
             }
 
