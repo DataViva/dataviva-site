@@ -24,7 +24,7 @@
               {% trans %}km² of area, it has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people and a per-capita GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
-              {% trans %}mesoregion, it is the{% endtrans %} {% if  profile.gdp_rank  == 1 %} {% if g.locale == "en" %} top {% endif %} {%else%} {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}{% endif %}
+              {% trans %}mesoregion, it is the{% endtrans %} {% if  profile.gdp_rank  == 1 and g.locale == "en" %} top {%else%}  {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}{% endif %}
               {% trans %}city in the state by GDP{% endtrans %}.</p>
           {% elif profile.bra_id|length == 7 %}
               <p>
