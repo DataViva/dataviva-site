@@ -525,7 +525,7 @@ $(document).ready(function () {
 
               $.ajax({
                 type: 'POST',
-                url: '/' + dataviva.language + '/user/signup',
+                url: '/' + dataviva.language + '/user/new',
                 data: submitData,
                 dataType: 'html',
                 success: function(response) {

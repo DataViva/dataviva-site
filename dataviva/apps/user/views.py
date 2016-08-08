@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from dataviva import db, lm
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.user.models import User, Starred
@@ -11,6 +12,7 @@ from flask.ext.babel import gettext
 from flask.ext.login import login_user, login_required
 from forms import (SignupForm, ChangePasswordForm, ForgotPasswordForm, ProfileForm)
 from hashlib import md5
+from dataviva.apps.admin.views import required_roles
 
 
 mod = Blueprint('user', __name__,
@@ -38,23 +40,96 @@ def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
 
-@mod.route('/status/')
-def check_status():
-    result = g.user.is_authenticated
-    data = {"logged_in": result}
-    if result:
-        data["user"] = g.user.nickname
-        data["is_admin"] = g.user.is_admin()
+@lm.user_loader
+def load_user(id):
+    return User.query.get(int(id))
 
-    # Save variable in session so we can determine if this is the user's first time on the site
-    if 'first_time' in session:
-        del session["first_time"]
-    if 'first_visit' in session:
-        session['first_visit'] = False
-    else:
-        session['first_visit'] = True
 
-    return jsonify(data)
+@mod.route('/new', methods=["POST", "GET"])
+def create():
+    form = SignupForm()
+    if request.method == "POST":
+        if form.validate() is False:
+            if 'fullname' in form.errors:
+                return Response(form.errors['fullname'], status=400, mimetype='application/json')
+            if 'email' in form.errors:
+                return Response(form.errors['email'], status=400, mimetype='application/json')
+            if 'password' in form.errors:
+                return Response(form.errors['password'], status=400, mimetype='application/json')
+            return Response('Error in Form.', status=400, mimetype='application/json')
+        else:
+            if (User.query.filter_by(email=form.email.data).count() > 0):
+                return Response(dictionary()["email_already_exists"], status=400, mimetype='application/json')
+            try:
+                confirmation_code = _gen_confirmation_code(form.email.data)
+                user = User(
+                    nickname=form.email.data.split('@')[0],
+                    fullname=form.fullname.data,
+                    email=form.email.data,
+                    password=sha512(form.password.data),
+                    confirmation_code=confirmation_code,
+                    agree_mailer=form.agree_mailer.data
+                )
+                db.session.add(user)
+                db.session.commit()
+            except:
+                return Response(dictionary()["Sorry, an unexpected error has occured. Please try again"], status=500, mimetype='application/json')
+
+            send_confirmation(user)
+
+            message = dictionary()["check_your_inbox"] + ' ' + user.email
+
+            return Response(message, status=200, mimetype='application/json')
+
+    return render_template('user/new.html', form=form)
+
+
+
+@mod.route('/edit', methods=["GET"])
+@login_required
+def edit():
+    form = ProfileForm()
+
+    form.profile.data = g.user.profile
+    form.fullname.data = g.user.fullname
+    form.email.data = g.user.email
+    form.birthday.data = g.user.birthday
+    form.country.data = g.user.country
+    form.uf.data = g.user.uf
+    form.city.data = g.user.city
+    form.occupation.data = g.user.occupation
+    form.institution.data = g.user.institution
+    form.agree_mailer.data = g.user.agree_mailer
+
+    return render_template("user/edit.html", form=form)
+
+
+@mod.route('/edit', methods=["POST"])
+@login_required
+def change_profile():
+    form = ProfileForm()
+    if form.validate():
+        try:
+            user = g.user
+
+            user.profile = form.profile.data
+            user.fullname = form.fullname.data
+            user.email = form.email.data
+            user.birthday = form.birthday.data
+            user.country = form.country.data
+            user.uf = form.uf.data
+            user.city = form.city.data
+            user.occupation = form.occupation.data
+            user.institution = form.institution.data
+            user.agree_mailer = form.agree_mailer.data
+
+            db.session.commit()
+
+            flash("Profile updated successfully!", "success")
+        except:
+            flash("Something went wrong!", "danger")
+
+    return render_template("user/edit.html", form=form)
 
 
 def send_confirmation(user):
@@ -63,47 +138,6 @@ def send_confirmation(user):
                                        confirmation_url=confirmation_url)
 
     send_mail("Account confirmation", [user.email], confirmation_tpl)
-
-
-@mod.route('/signup', methods=["GET"])
-def signup():
-    form = SignupForm()
-    return render_template('user/signup.html', form=form)
-
-
-@mod.route('/signup', methods=["POST"])
-def create_user():
-    form = SignupForm()
-    if form.validate() is False:
-        if 'fullname' in form.errors:
-            return Response(form.errors['fullname'], status=400, mimetype='application/json')
-        if 'email' in form.errors:
-            return Response(form.errors['email'], status=400, mimetype='application/json')
-        if 'password' in form.errors:
-            return Response(form.errors['password'], status=400, mimetype='application/json')
-        return Response('Error in Form.', status=400, mimetype='application/json')
-    else:
-        if (User.query.filter_by(email=form.email.data).count() > 0):
-            return Response(dictionary()["email_already_exists"], status=400, mimetype='application/json')
-        try:
-            confirmation_code = _gen_confirmation_code(form.email.data)
-            user = User(
-                fullname=form.fullname.data,
-                email=form.email.data,
-                password=sha512(form.password.data),
-                confirmation_code=confirmation_code,
-                agree_mailer=form.agree_mailer.data
-            )
-            db.session.add(user)
-            db.session.commit()
-        except:
-            return Response(dictionary()["Sorry, an unexpected error has occured. Please try again"], status=500, mimetype='application/json')
-
-        send_confirmation(user)
-
-        message = dictionary()["check_your_inbox"] + ' ' + user.email
-
-        return Response(message, status=200, mimetype='application/json')
 
 
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
@@ -133,14 +167,13 @@ def confirm(code):
     except IndexError:
         abort(404, 'User not found')
 
-    return redirect('/user/edit_profile')
+    return redirect('/user/edit')
 
 
 @mod.route('/resend_confirmation/<user_email>', methods=["GET"])
 def resend_confirmation(user_email):
     '''Used to regen the confirmation_code and send the email again to the user
     '''
-
     try:
         user = User.query.filter_by(email=user_email, confirmed=False)[-1]
     except IndexError:
@@ -150,53 +183,6 @@ def resend_confirmation(user_email):
     db.session.commit()
     send_confirmation(user)
     return redirect('/user/confirm_pending/%s' % user.email)
-
-
-@mod.route('/edit_profile', methods=["GET"])
-@login_required
-def edit_profile():
-    form = ProfileForm()
-
-    form.profile.data = g.user.profile
-    form.fullname.data = g.user.fullname
-    form.email.data = g.user.email
-    form.birthday.data = g.user.birthday
-    form.country.data = g.user.country
-    form.uf.data = g.user.uf
-    form.city.data = g.user.city
-    form.occupation.data = g.user.occupation
-    form.institution.data = g.user.institution
-    form.agree_mailer.data = g.user.agree_mailer
-
-    return render_template("user/edit_profile.html", form=form)
-
-
-@mod.route('/edit_profile', methods=["POST"])
-@login_required
-def change_profile():
-    form = ProfileForm()
-    if form.validate():
-        try:
-            user = g.user
-
-            user.profile = form.profile.data
-            user.fullname = form.fullname.data
-            user.email = form.email.data
-            user.birthday = form.birthday.data
-            user.country = form.country.data
-            user.uf = form.uf.data
-            user.city = form.city.data
-            user.occupation = form.occupation.data
-            user.institution = form.institution.data
-            user.agree_mailer = form.agree_mailer.data
-
-            db.session.commit()
-
-            flash("Profile updated successfully!", "success")
-        except:
-            flash("Something went wrong!", "danger")
-
-    return render_template("user/edit_profile.html", form=form)
 
 
 @mod.route('/change_password', methods=["GET"])
@@ -252,63 +238,33 @@ def reset_password():
     return redirect("user/signin")
 
 
-###############################
-# User management
-# ---------------------------
-@lm.user_loader
-def load_user(id):
-    return User.query.get(int(id))
+@mod.route('/admin', methods=['GET'])
+@login_required
+@required_roles(1)
+def admin():
+    users = User.query.all()
+    return render_template('users/admin.html', users=users)
 
 
-@mod.route('/<nickname>/')
-def user(nickname):
-    user = User.query.filter_by(nickname=nickname).first_or_404()
-    activity = None
+@mod.route('/all/', methods=['GET'])
+def all():
+    result = User.query.all()
+    users = []
+    for row in result:
+        users += [(row.id, row.fullname, row.email, row.role)]
+    return jsonify(users=users)
 
-    stars = Starred.query.filter_by(user=user) \
-        .order_by("timestamp desc").all()
-
-    questions = Question.query.filter_by(user=user) \
-        .order_by("timestamp desc").all()
-
-    replies = Reply.query.filter_by(user=user) \
-        .order_by("timestamp desc").all()
-
-    activity = stars + questions + replies
-    activity.sort(key=lambda a: a.timestamp, reverse=True)
-
-    return render_template("user/index.html",
-                           user=user,
-                           activity=activity)
-
-
-def update_email_preferences(id, nickname, agree):
-    user = User.query.filter_by(nickname=nickname).first_or_404()
-    if user.id == int(id) and int(agree) in [0, 1]:
-        user.agree_mailer = agree
-        db.session.add(user)
+@mod.route('/admin/users/<status>/<status_value>', methods=['POST'])
+@login_required
+@required_roles(1)
+def admin_activate(status, status_value):
+    for id in request.form.getlist('ids[]'):
+        users = User.query.filter_by(id=id).first_or_404()
+        if status_value == 'true':
+            users.role = 1
+        else:
+            users.role = 0
         db.session.commit()
 
-    return user
-
-
-@mod.route('/remove_email/<id>/<nickname>')
-def remove_email_list(id, nickname):
-    update_email_preferences(id, nickname, 0)
-    flash(gettext("Preferences updated."))
-    return redirect('/')
-
-
-@mod.route('/preferences/change_email_preference')
-def preferences():
-    if g.user.is_authenticated:
-        if g.user.agree_mailer == 1:
-            agree = 0
-        else:
-            agree = 1
-
-        user = update_email_preferences(g.user.id, g.user.nickname, agree)
-        flash(gettext("Preferences updated."))
-        return redirect('/user/' + user.nickname)
-    else:
-        return redirect('/')
+    message = u"Usuário(s) alterado(s) com sucesso!"
+    return message, 200
