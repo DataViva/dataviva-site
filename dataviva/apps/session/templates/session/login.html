@@ -16,7 +16,9 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 signin-box">
 				<p>{% trans %}Entre com suas credenciais...{% endtrans %}</p>
-				<form class="form" method="post" action="{{ url_for('user.signin') }}" >
+				<form class="form" method="post" action="{{ url_for('session.login') }}" >
+					{{ g.signin_form.hidden_tag() }}
+					
 					<div class="form-group">
 						<label for="email">Email</label>
 						{{ form.email(class="form-control")}}
