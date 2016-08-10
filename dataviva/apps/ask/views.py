@@ -5,7 +5,7 @@ from flask.ext.babel import gettext
 from dataviva import db, lm, view_cache
 # from config import SITE_MIRROR
 
-from dataviva.apps.account.models import User
+from dataviva.apps.user.models import User
 from dataviva.apps.ask.models import Question, Reply, Status, Vote, TYPE_QUESTION, TYPE_REPLY, Flag
 from dataviva.apps.ask.forms import AskForm, ReplyForm, SearchForm
 

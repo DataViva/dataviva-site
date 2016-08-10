@@ -1,7 +1,0 @@
-<!-- extend from base layout -->
-{% extends "base.html" %}
-
-{% block content %}
-    <h1>{% trans %}Please check you inbox so that you can complete your registration.{% endtrans %}</h1>
-    <a class="btn btn-link" href="/account/resend_confirmation/{{user.email}}">{% trans %}Resend confirmation email{% endtrans %}</a>
-{% endblock content %}

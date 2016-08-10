@@ -168,7 +168,7 @@
           .html(function(d){
             var user_link = ""
             if (d.user.role == 0) {
-              user_link = dataviva.format.text("by") + " <a href='/account/" + d.user.nickname + "'>" + d.user.fullname + "</a> "
+              user_link = dataviva.format.text("by") + " <a href='/user/" + d.user.nickname + "'>" + d.user.fullname + "</a> "
             }
             if (d.timestamp) var t = moment(d.timestamp).fromNow()
             else var t = ""

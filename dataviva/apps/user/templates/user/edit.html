@@ -1,0 +1,114 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <ul id="regular-signup" class="col-md-8 col-md-offset-2">
+            {% macro messages(input) -%}
+                {% for message in input.errors %}
+                    <div class="alert alert-danger">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {%- endmacro %}
+
+            <div id="message">
+                {% if get_flashed_messages(with_categories=true) %}
+                {% for category, message in get_flashed_messages(with_categories=true) %}
+                    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </ul>
+    </div>
+
+    <div class="container">
+        <form id=account-form class="form-dataviva mt-lg" method="post" action="/en/user/edit">
+            <h1 class="text-center">{% trans %}Edit your profile{% endtrans %}</h1>
+            <ul id="regular-signup" class="col-md-8 col-md-offset-2">
+            {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="form-group col-md-7 {{ 'has-error' if form.profile.errors else '' }} ">
+                        <label for="profile">{% trans %}Profile{% endtrans %}</label>
+                        {{ form.profile(class="form-control")}}
+                        {{ messages(form.profile) }}
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label class="control-label">{% trans %}Birthday{% endtrans %}</label>
+                        {{ messages(form.birthday) }}
+                        <div id="birthday-date" class="input-group date">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            {{ form.birthday(class="form-control")}}
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="form-group {{ 'has-error' if form.fullname.errors else '' }} ">
+                    <label for="fullname">{% trans %}Full name{% endtrans %}</label>
+                    {{ form.fullname(class="form-control")}}
+                    {{ messages(form.fullname) }}
+                </div>
+
+                <div class="form-group {{ 'has-error' if form.email.errors else '' }} ">
+                    <label for="email">Email</label>
+                    {{ form.email(class="form-control")}}
+                    {{ messages(form.email) }}
+                </div>
+                
+                <div class="row">
+                    <div class="form-group col-md-10 {{ 'has-error' if form.country.errors else '' }} ">
+                        <label for="country">Country</label>
+                        {{ form.country(class="form-control")}}
+                        {{ messages(form.country) }}
+                    </div>
+
+                    <div class="form-group col-md-2 {{ 'has-error' if form.uf.errors else '' }} ">
+                        <label for="uf">UF</label>
+                        {{ form.uf(class="form-control")}}
+                        <small class="text-muted">{% trans %}Format: XX{% endtrans %}</small>
+                    </div>
+                </div>
+
+                <div class="form-group {{ 'has-error' if form.city.errors else '' }} ">
+                    <label for="city">City</label>
+                    {{ form.city(class="form-control")}}
+                    {{ messages(form.city) }}
+                </div>
+
+                <div class="form-group {{ 'has-error' if form.occupation.errors else '' }} ">
+                    <label for="occupation">Occupation</label>
+                    {{ form.occupation(class="form-control")}}
+                    {{ messages(form.occupation) }}
+                </div>
+                
+                <div class="form-group {{ 'has-error' if form.institution.errors else '' }} ">
+                    <label for="institution">Institution</label>
+                    {{ form.institution(class="form-control")}}
+                    {{ messages(form.institution) }}
+                </div>
+                
+                <div class="checkbox checkbox-success checkbox-inline">
+                    <input name="agree_mailer" id="agree_mailer" type="checkbox" {{'checked' if form.agree_mailer.data}}>
+                    <label for="agree_mailer"><small>{% trans %}I want to receive news and tips of the best use of Dataviva{% endtrans %}</small></label>
+                </div>
+                
+                <hr/>
+                    <p>
+                        <a href="/user/change_password"><i class="fa fa-lock"></i> {% trans %}Change my password{% endtrans %}</a>
+                    </p>
+                <hr/>
+
+                <a id="edit-form-cancel" class="btn btn-primary" href="{{ url_for('general.home') }}"><i class="fa fa-backward m-r-sm"></i>{% trans %}Back{% endtrans %}</a>
+                <button type="submit" class="btn btn-success pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Update{% endtrans %}</button>
+            </ul>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/user/form.js"></script>
+{% endblock js_assets %}
