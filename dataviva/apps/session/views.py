@@ -78,7 +78,7 @@ def login(provider=None):
                                _external=True)
             return facebook.authorize(callback=callback)
 
-    return render_template('session/signin.html', form=form)
+    return render_template('session/login.html', form=form)
 
 
 @mod.route('/complete_login', methods=['GET', 'POST'])
@@ -194,40 +194,19 @@ def facebook_authorized(resp):
 
 @twitter.tokengetter
 def get_twitter_token():
-    """This is used by the API to look for the auth token and secret
-    it should use for API calls.  During the authorization handshake
-    a temporary set of token and secret is used, but afterwards this
-    function has to return the token and secret.  If you don't want
-    to store this in the database, consider putting it into the
-    session instead.
-    """
     return session.get('twitter_token')
 
 
 @mod.route('/twitter-authorized')
 @twitter.authorized_handler
 def twitter_authorized(resp):
-    """Called after authorization.  After this function finished handling,
-    the OAuth information is removed from the session again.  When this
-    happened, the tokengetter from above is used to retrieve the oauth
-    token and secret.
-
-    Because the remote application could have re-authorized the application
-    it is necessary to update the values in the database.
-
-    If the application redirected back after denying, the response passed
-    to the function will be `None`.  Otherwise a dictionary with the values
-    the application submitted.  Note that Twitter itself does not really
-    redirect back unless the user clicks on the application name.
-    """
 
     session['twitter_token'] = (
         resp['oauth_token'],
         resp['oauth_token_secret']
     )
-    session['twitter_user'] = resp['screen_name']
 
-    response = twitter.get('users/show.json?include_email=true&screen_name=' + resp["screen_name"]).data
+    response = twitter.get('account/verify_credentials.json?include_email=true').data
 
     email = response["email"] if "email" in response else None
     fullname = response["name"] if "name" in response else None
