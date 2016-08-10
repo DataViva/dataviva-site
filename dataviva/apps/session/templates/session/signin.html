@@ -16,7 +16,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 signin-box">
 				<p>{% trans %}Entre com suas credenciais...{% endtrans %}</p>
-				<form class="form" method="post" action="{{ url_for('account.signin', next=next) }}" >
+				<form class="form" method="post" action="{{ url_for('user.signin') }}" >
 					<div class="form-group">
 						<label for="email">Email</label>
 						{{ form.email(class="form-control")}}
@@ -27,14 +27,14 @@
 						{{ form.password(class="form-control")}}
 						{{ messages(form.password) }}
 					</div>
-					<p><a href="/account/forgot_password">{% trans %}Forgot your password{% endtrans %}?</a></p>
+					<p><a href="/user/forgot_password">{% trans %}Forgot your password{% endtrans %}?</a></p>
 					<button type="submit" class="btn btn-primary btn-lg pull-right">{% trans %}Sign In{% endtrans %}!</button>
 				</form>
 			</div><!--/.col6-->
 			<div class="col-xs-12 col-sm-6 signin-box">
 				<p>{% trans %}...or sign-up using{% endtrans %}:</p>
-				<a href="/en/account/social_auth/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
-				<a href="" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
+				<a href="/en/session/login/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
+				<a href="en/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
 				<a href="" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a>
 			</div>
 		</div>

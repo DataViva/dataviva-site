@@ -15,7 +15,7 @@ from dataviva.api.rais.views import rais_api
 
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.data.forms import DownloadForm
-from dataviva.apps.account.models import User, Starred
+from dataviva.apps.user.models import User, Starred
 from dataviva.apps.embed.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.apps.general.models import Short
 

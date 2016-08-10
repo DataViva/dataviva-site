@@ -132,5 +132,8 @@ def jinja_magnitude(number):
     if not number: 
         return ''
     integer = str(int(number))
-    orders_of_magnitude = ['', gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
+    if g.locale == 'en':
+        orders_of_magnitude = ['', gettext('Thousand'), gettext('Million'), gettext('Billion'), gettext('Trillion')]
+    elif g.locale == 'pt':
+        orders_of_magnitude = ['', gettext('Thousands'), gettext('Millions'), gettext('Billions'), gettext('Trillions')]
     return orders_of_magnitude[len(integer[::3]) - 1]

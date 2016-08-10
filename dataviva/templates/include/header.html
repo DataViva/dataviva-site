@@ -50,7 +50,7 @@
                     {% else %}
                         <span>{% trans %}Welcome{% endtrans %}, <b>{{ g.user.firstname }}</b>!</span>
                         <div class="input-group">
-                            <a href="/{{g.locale}}/account/logout" role="button" class="btn btn-primary m-l m-r">{% trans %}Logout{% endtrans %}</a>
+                            <a href="/{{g.locale}}/session/logout" role="button" class="btn btn-primary m-l m-r">{% trans %}Logout{% endtrans %}</a>
                         </div>
                     {% endif %}
 

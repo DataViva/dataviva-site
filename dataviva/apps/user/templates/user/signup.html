@@ -1,7 +1,6 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
-
 {% macro messages(input) -%}
     {% for message in input.errors %}
         <div class="alert alert-danger">
@@ -16,16 +15,16 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 signin-box">
 				<p>{% trans %}Escolha suas credenciais...{% endtrans %}</p>
-				<form class="form" method="post" action="/en/account/signup">
-					<div class="form-group">
-						<label for="email">{% trans %}Email{% endtrans %}</label>
-						{{ form.email(class="form-control")}}
-						{{ messages(form.email) }}
-					</div>
+				<form class="form" method="post" action="/en/user/signup">
 					<div class="form-group">
 						<label for="fullname">{% trans %}Full name{% endtrans %}</label>
 						{{ form.fullname(class="form-control")}}
 						{{ messages(form.fullname) }}
+					</div>
+					<div class="form-group">
+						<label for="email">{% trans %}Email{% endtrans %}</label>
+						{{ form.email(class="form-control")}}
+						{{ messages(form.email) }}
 					</div>
 					<div class="form-group">
 						<label for="password">{% trans %}Password{% endtrans %}</label>
@@ -42,12 +41,11 @@
 			</div><!--/.col6-->
 			<div class="col-xs-12 col-sm-6 signin-box">
 				<p>{% trans %}...or sign-up using{% endtrans %}:</p>
-				<a href="/en/account/social_auth/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
-				<a href="" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
+				<a href="/en/session/login/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
+				<a href="en/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
 				<a href="" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a>
 			</div>
 		</div>
 	</div><!--/.container-->
-
 
 {% endblock content %}
