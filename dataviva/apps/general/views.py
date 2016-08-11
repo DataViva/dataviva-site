@@ -160,16 +160,6 @@ def close():
 def upgrade():
     return render_template("general/upgrade.html")
 
-@mod.route('access/')
-@mod.route('access/logout/')
-def access():
-    session['has_access'] = False
-    return redirect(url_for('general.home'))
-
-@mod.route('/login', methods=['GET', 'POST'])
-@mod.route('/login/<provider>', methods=['GET', 'POST'])
-def login(provider=None):
-    return redirect(url_for('user.login', provider=provider))
 
 ###############################
 # Set language views
