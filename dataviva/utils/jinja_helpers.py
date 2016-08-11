@@ -142,7 +142,7 @@ def ordinal(number, gender='m'):
 def jinja_magnitude(number):
     if not number: 
         return ''
-    integer = str(int(number))
+    integer = str(abs(int(number)))
     if g.locale == 'en':
         orders_of_magnitude = ['', gettext('Thousand'), gettext('Million'), gettext('Billion'), gettext('Trillion')]
     elif g.locale == 'pt':
