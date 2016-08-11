@@ -12,9 +12,7 @@ from dataviva.apps.admin.views import required_roles
 from dataviva import app
 from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, save_images_locally, upload_images_to_s3
 import os
-
 import shutil
-import base64
 
 mod = Blueprint('news', __name__,
                 template_folder='templates',
