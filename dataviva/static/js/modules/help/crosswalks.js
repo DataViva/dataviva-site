@@ -11,6 +11,14 @@ window.showCrosswalkPI = function() {
         this.tableId = '#crosswalk-pi-table';
 
         this.table = $(this.tableId).DataTable({
+            dom: 'Bfti',
+            "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-crosswalk-pi'
+                }
+            ],
             "ajax": {
                 "url": "/help/crosswalk/pi",
                 "dataSrc": "data",
@@ -63,6 +71,14 @@ window.showCrosswalkIP = function() {
         this.tableId = '#crosswalk-ip-table';
 
         this.table = $(this.tableId).DataTable({
+            dom: 'Bfti',
+            "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-crosswalk-ip'
+                }
+            ],
             "ajax": {
                 "url": "/help/crosswalk/ip",
                 "dataSrc": "data",
@@ -121,6 +137,14 @@ window.showCrosswalkOC = function() {
         this.tableId = '#crosswalk-oc-table';
 
         this.table = $(this.tableId).DataTable({
+            dom: 'Bfti',
+            "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-crosswalk-oc'
+                }
+            ],
             "ajax": {
                 "url": "/help/crosswalk/oc",
                 "dataSrc": "data",
@@ -176,6 +200,14 @@ window.showCrosswalkCO = function() {
         this.tableId = '#crosswalk-co-table';
 
         this.table = $(this.tableId).DataTable({
+            dom: 'Bfti',
+            "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-crosswalk-co'
+                }
+            ],
             "ajax": {
                 "url": "/help/crosswalk/co",
                 "dataSrc": "data",

@@ -14,7 +14,7 @@ from flask import Blueprint, request, render_template, flash, g, session, \
 from flask.ext.babel import gettext
 from flask.ext.login import login_user, logout_user, current_user, \
     login_required, LoginManager
-from forms import (LoginForm, UserEditForm, SignupForm, SigninForm, ChangePasswordForm,
+from forms import (LoginForm, SignupForm, SigninForm, ChangePasswordForm,
                    ForgotPasswordForm, ProfileForm)
 from sqlalchemy import or_
 from urllib2 import Request, urlopen, URLError
@@ -26,6 +26,11 @@ mod = Blueprint('account', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/account',
                 static_folder='static')
+
+
+@mod.before_request
+def before_request():
+    g.page_type = 'account'
 
 
 def _gen_confirmation_code(email):
@@ -63,10 +68,10 @@ def check_status():
 
 
 def send_confirmation(user):
-    confirmation_url = "http://dataviva.info/%s/account/confirm/%s" % (g.locale, user.confirmation_code)
+    confirmation_url = "%s%s/account/confirm/%s" % (request.url_root , g.locale, user.confirmation_code)
     confirmation_tpl = render_template('account/mail/confirmation.html',
-                                       user=user.serialize(),
                                        confirmation_url=confirmation_url)
+
     send_mail("Account confirmation", [user.email], confirmation_tpl)
 
 
@@ -80,11 +85,16 @@ def signup():
 def create_user():
     form = SignupForm()
     if form.validate() is False:
-        return make_response(jsonify(form.errors), 400)
+        if form.errors.has_key('fullname'):
+            return Response(form.errors['fullname'], status=400, mimetype='application/json')
+        if form.errors.has_key('email'):
+            return Response(form.errors['email'], status=400, mimetype='application/json')
+        if form.errors.has_key('password'):
+            return Response(form.errors['password'], status=400, mimetype='application/json')
+        return Response('Error in Form.', status=400, mimetype='application/json')
     else:
         if (User.query.filter_by(email=form.email.data).count() > 0):
             return Response(dictionary()["email_already_exists"], status=400, mimetype='application/json')
-
         try:
             confirmation_code = _gen_confirmation_code(form.email.data)
             user = User(
@@ -99,7 +109,6 @@ def create_user():
         except:
             return Response(dictionary()["Sorry, an unexpected error has occured. Please try again"], status=500, mimetype='application/json')
 
-        user_srl = user.serialize()
         send_confirmation(user)
 
         message = dictionary()["check_your_inbox"] + ' ' + user.email
@@ -123,28 +132,24 @@ def signin():
     form = SigninForm()
 
     if request.method == "POST":
-        try:
-            user = User.query.filter_by(
-                email=form.email.data,
-                password=sha512(form.password.data)
-            )[-1]
-            login_user(user, remember=True)
-            redir = request.args.get("next", "/")
-            return redirect(redir)
-        except:
-            return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
+        user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
+        if user:
+            if user.confirmed:
+                login_user(user, remember=True)
+                return redirect("/")
+            else:
+                return Response("Confirm Pending", status=401, mimetype='application/json', )
+        else:
+            return Response("Email or Password Incorrect!", status=400, mimetype='application/json')
 
     else:
-        next = request.args.get("next", "")
-
-        return render_template('account/signin.html', form=form, next=next)
+        return render_template('account/signin.html', form=form)
 
 
 @mod.route('/confirm_pending/<user_email>', methods=["GET"])
 def confirm_pending(user_email):
     ''' Used to inform to the user that its account is pending
     '''
-
     try:
         user = User.query.filter_by(email=user_email)[-1]
     except IndexError:
@@ -158,7 +163,6 @@ def confirm_pending(user_email):
 
 @mod.route('/confirm/<code>', methods=["GET"])
 def confirm(code):
-
     try:
         user = User.query.filter_by(confirmation_code=code)[-1]
         user.confirmed = True
@@ -185,7 +189,6 @@ def resend_confirmation(user_email):
     user.confirmation_code = _gen_confirmation_code(user.email)
     db.session.commit()
     send_confirmation(user)
-
     return redirect('/account/confirm_pending/%s' % user.email)
 
 
@@ -193,10 +196,16 @@ def resend_confirmation(user_email):
 @login_required
 def edit_profile():
     form = ProfileForm()
+
+    form.profile.data = g.user.profile
     form.fullname.data = g.user.fullname
-    form.gender.data = g.user.gender
-    form.website.data = g.user.website
-    form.bio.data = g.user.bio
+    form.email.data = g.user.email
+    form.birthday.data = g.user.birthday
+    form.country.data = g.user.country
+    form.uf.data = g.user.uf
+    form.city.data = g.user.city
+    form.occupation.data = g.user.occupation
+    form.institution.data = g.user.institution
 
     return render_template("account/edit_profile.html", form=form)
 
@@ -205,17 +214,26 @@ def edit_profile():
 @login_required
 def change_profile():
     form = ProfileForm()
+    if form.validate():
+        try:
+            user = g.user
 
-    try:
-        user = g.user
-        user.fullname = form.fullname.data
-        user.gender = form.gender.data
-        user.website = form.website.data
-        user.bio = form.bio.data
-        db.session.commit()
-        flash("Profile updated successfully!", "success")
-    except:
-        flash("Something went wrong!", "danger")
+            user.profile = form.profile.data
+            user.fullname = form.fullname.data
+            user.email = form.email.data
+            user.birthday = form.birthday.data
+            user.country = form.country.data
+            user.uf = form.uf.data
+            user.city = form.city.data
+            user.occupation = form.occupation.data
+            user.institution = form.institution.data
+
+            db.session.commit()
+
+            message = u'Profile updated successfully!'
+            flash(message, 'success')
+        except:
+            flash("Something went wrong!", "danger")
 
     return render_template("account/edit_profile.html", form=form)
 
@@ -232,16 +250,16 @@ def change_password():
 def change():
     form = ChangePasswordForm()
     user = load_user(session["user_id"])
-    danger = 'error'
 
-    if user.password == sha512(form.current_password.data):
-        user.password = sha512(form.new_password.data)
-        db.session.commit()
-        flash("Password successfully update!", "success")
-    else:
-        flash("The current password is invalid", "danger")
 
-    flash(msg, danger)
+    if form.validate():
+        if user.password == sha512(form.current_password.data):
+            user.password = sha512(form.new_password.data)
+            db.session.commit()
+            flash("Password successfully update!", "success")
+        else:
+            flash("The current password is invalid", "danger")
+            
     return render_template("account/change_password.html", form=form)
 
 
@@ -309,7 +327,7 @@ def login():
         if provider == "google":
             callback = url_for('account.google_authorized', _external=True)
             return google.authorize(callback=callback)
-        elif provider == "twitter":
+        if provider == "twitter":
             callback = url_for('account.twitter_authorized',
                                next=request.args.get(
                                    'next') or request.referrer or None,

@@ -1,4 +1,5 @@
 Babel==2.1.1
+beautifulsoup4==4.5.1
 blinker==1.4
 boto3==1.3.0
 botocore==1.4.12

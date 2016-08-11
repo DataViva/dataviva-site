@@ -1,7 +1,6 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
-
 {% macro messages(input) -%}
     {% for message in input.errors %}
         <div class="alert alert-danger">
@@ -18,14 +17,14 @@
 				<p>{% trans %}Escolha suas credenciais...{% endtrans %}</p>
 				<form class="form" method="post" action="/en/account/signup">
 					<div class="form-group">
-						<label for="email">{% trans %}Email{% endtrans %}</label>
-						{{ form.email(class="form-control")}}
-						{{ messages(form.email) }}
-					</div>
-					<div class="form-group">
 						<label for="fullname">{% trans %}Full name{% endtrans %}</label>
 						{{ form.fullname(class="form-control")}}
 						{{ messages(form.fullname) }}
+					</div>
+					<div class="form-group">
+						<label for="email">{% trans %}Email{% endtrans %}</label>
+						{{ form.email(class="form-control")}}
+						{{ messages(form.email) }}
 					</div>
 					<div class="form-group">
 						<label for="password">{% trans %}Password{% endtrans %}</label>
@@ -48,6 +47,5 @@
 			</div>
 		</div>
 	</div><!--/.container-->
-
 
 {% endblock content %}

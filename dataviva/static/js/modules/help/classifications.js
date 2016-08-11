@@ -22,7 +22,14 @@ window.showLocations = function() {
         this.tableId = '#locations-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-locations-control">frtip',
+            "dom": '<"classifications-locations-control">Bfrtip',
+            "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-locations'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/bra/?depth=3",
                 "dataSrc": "data",
@@ -147,7 +154,14 @@ window.showIndustries = function() {
         this.tableId = '#industries-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-industries-control">frtip',
+            "dom": '<"classifications-industries-control">Bfrtip',
+            "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-industries'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/cnae/?depth=1",
                 "dataSrc": "data",
@@ -254,7 +268,14 @@ window.showOccupations = function() {
         this.tableId = '#occupations-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-occupations-control">frtip',
+            "dom": '<"classifications-occupations-control">Bfrtip',
+             "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-occupations'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/cbo/?depth=1",
                 "dataSrc": "data",
@@ -343,7 +364,14 @@ window.showProducts = function() {
         this.tableId = '#products-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-products-control">frtip',
+            "dom": '<"classifications-products-control">Bfrtip',
+             "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-products'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/hs/?depth=2",
                 "dataSrc": "data",
@@ -435,7 +463,14 @@ window.showTradePartners = function() {
         this.tableId = '#trade-partners-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-trade-partners-control">frtip',
+            "dom": '<"classifications-trade-partners-control">Bfrtip',
+             "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-trade-partners'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/wld/?depth=2",
                 "dataSrc": "data",
@@ -537,7 +572,14 @@ window.showMajors = function() {
         this.tableId = '#majors-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-majors-control">frtip',
+            "dom": '<"classifications-majors-control">Bfrtip',
+             "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-majors'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/course_hedu/?depth=2",
                 "dataSrc": "data",
@@ -626,7 +668,14 @@ window.showUniversities = function() {
         this.tableId = '#universities-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-universities-control">frtip',
+            "dom": '<"classifications-universities-control">Bfrtip',
+             "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-universities'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/university/?depth=5",
                 "dataSrc": "data",
@@ -691,7 +740,14 @@ window.showBasicCourses = function() {
         this.tableId = '#basic-courses-table';
 
         this.table = $(this.tableId).DataTable({
-            "dom": '<"classifications-basic-courses-control">frtip',
+            "dom": '<"classifications-basic-courses-control">Bfrtip',
+             "buttons": [ 
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-basic-courses'
+                }
+            ],
             "ajax": {
                 "url": "/attrs/course_sc/?depth=2",
                 "dataSrc": "data",
