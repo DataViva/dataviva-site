@@ -10,7 +10,6 @@ from forms import LoginForm
 from urllib2 import Request, urlopen, URLError
 import json
 
-
 mod = Blueprint('session', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/session',
@@ -19,17 +18,17 @@ mod = Blueprint('session', __name__,
 
 @mod.before_request
 def before_request():
-    g.page_type = 'session'
-
-
-@mod.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('lang_code', get_locale())
+    g.page_type = mod.name
 
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
+
+
+@mod.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('lang_code', get_locale())
 
 
 @mod.route('/logout')
