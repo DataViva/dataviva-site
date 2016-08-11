@@ -6,7 +6,7 @@ from boto3.s3.transfer import S3Transfer
 from config import AWS_ACCESS_KEY, AWS_SECRET_KEY, S3_BUCKET, UPLOAD_FOLDER
 import urllib
 import re
-
+from bs4 import BeautifulSoup
 
 def s3_client():
     return boto3.client(
@@ -56,7 +56,6 @@ def save_images_locally(upload_folder, images):
     if os.path.exists(upload_folder):
         shutil.rmtree(upload_folder)
     os.makedirs(upload_folder)
-
     for i, image in images.iteritems():
         file_path = os.path.join(upload_folder, 'img' + i)
         if image.startswith('data:'):
@@ -75,8 +74,13 @@ def save_images_locally(upload_folder, images):
 
 def upload_images_to_s3(html, object_type, object_id):
     prefix = os.path.join(object_type, str(object_id), 'images/content/')
-    pattern = 'src="([^"]+)"'
-    file_paths = re.findall(pattern, html, re.DOTALL)
+    soup = BeautifulSoup(html, 'html.parser')
+    file_paths = []
+    for img in soup.findAll('img', src=True):
+        if img['src'] == '':
+            pass
+        file_paths.append(img['src'])
+
     files = s3_client().list_objects(Bucket='dataviva-dev', Prefix=prefix)
     if files.has_key('Contents'):
         for file in files['Contents']:
