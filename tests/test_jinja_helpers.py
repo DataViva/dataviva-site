@@ -57,3 +57,6 @@ class MaxDigitsPTTests(BaseTestCase):
 
     def test_max_digits_3_for_decimal__0_4_is_10__0_40(self):
         assert '-0.40' == max_digits(-0.4, 3)
+
+    def test_max_digits_3_for_decimal__2319086130_00_is_10__0_40(self):
+        assert '-2.31' == max_digits(-2319086130.00, 3)
