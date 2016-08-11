@@ -6,13 +6,14 @@ var Publication = function() {
     self.submit_form = function(result) {
         file_paths = result.file_paths;
         for (var i = 0; i < file_paths.length; i++) {
-            $('.note-editor img[name=img' + file_paths[i]['id'] + ']')
+            $('#text-content-editor img[name=img' + file_paths[i]['id'] + ']')
                 .attr('src', file_paths[i]['path'])
                 .removeAttr('data-filename')
                 .removeAttr('name');
         }
 
-        $('#text_content').val($('#text-content-editor').summernote('code'));
+        text_content = $('#text-content-editor').html();
+        $('#text_content').val(text_content);
         self.status = true;
         $('#news-form').submit();
     }
@@ -110,11 +111,11 @@ $(document).ready(function(){
             return publication.status;
         } else {
             submittingForm.show();
-            $('#text-content-editor').summernote('code');
-            $('.note-editor').hide();
+            $('#text-content-editor').summernote('destroy');
+            $('#text-content-editor').hide();
             $('button[type=submit]').prop('disabled', true);
             var data = new FormData();
-            $('.note-editor img').each(function(i) {
+            $('#text-content-editor img').each(function(i) {
                 data.append(i+1, $(this).attr('src'));
                 $(this).attr('name', 'img' + (i+1));
             });
