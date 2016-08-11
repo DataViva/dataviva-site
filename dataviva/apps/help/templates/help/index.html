@@ -25,14 +25,14 @@
                 </li>
                 {% for subject in subjects %}
                     <li>
-                        <a href="#tab{{subject.id}}" aria-controls="geral" role="tab" data-toggle="tab" title="{{subject['name_' + g.locale]}}" aria-expanded="false">
+                        <a href="#tab{{subject.id}}" id="sidebar_subject{{subject.id}}" aria-controls="geral" role="tab" data-toggle="tab" title="{{subject['name_' + g.locale]}}" aria-expanded="false">
                             {{subject['name_' + g.locale]}}
                         </a>
                     </li>
                 {% endfor %}
 
                     <li>
-                        <a href="#crosswalk" data-toggle="collapse" aria-controls="geral" role="tab" 
+                        <a href="#crosswalk" id="sidebar_crosswalk" data-toggle="collapse" aria-controls="geral" role="tab" 
                         data-toggle="tab" title="crosswalk" aria-expanded="false">
                             Crosswalk
                         </a>
@@ -66,8 +66,8 @@
                     </li>
 
                     <li>
-                        <a href="#classifications" data-toggle="collapse" aria-controls="geral" role="tab" 
-                        data-toggle="tab" title="Crosswalk" aria-expanded="false">
+                        <a href="#classifications" id="sidebar_classifications" data-toggle="collapse" aria-controls="geral" role="tab" 
+                        data-toggle="tab" title="classifications" aria-expanded="false">
                             Classifications
                         </a>
                         <div class="collapse" id="classifications">
