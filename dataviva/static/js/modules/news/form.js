@@ -6,7 +6,7 @@ var Publication = function() {
     self.submit_form = function(result) {
         file_paths = result.file_paths;
         for (var i = 0; i < file_paths.length; i++) {
-            $('#text-content-editor img[name=img' + file_paths[i]['id'] + ']')
+            $('.note-editor img[name=img' + file_paths[i]['id'] + ']')
                 .attr('src', file_paths[i]['path'])
                 .removeAttr('data-filename')
                 .removeAttr('name');
@@ -110,12 +110,11 @@ $(document).ready(function(){
             return publication.status;
         } else {
             submittingForm.show();
-            $('#text-content-editor')
-                .summernote('destroy')
-                .hide();
+            $('#text-content-editor').summernote('code');
+            $('.note-editor').hide();
             $('button[type=submit]').prop('disabled', true);
             var data = new FormData();
-            $('#text-content-editor img').each(function(i) {
+            $('.note-editor img').each(function(i) {
                 data.append(i+1, $(this).attr('src'));
                 $(this).attr('name', 'img' + (i+1));
             });
