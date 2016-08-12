@@ -8,7 +8,7 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
 
-from dataviva import app, db, babel, view_cache, data_viva_apis, s3_host
+from dataviva import app, db, babel, view_cache, data_viva_apis, s3_host, s3_bucket
 from dataviva.apps.general.forms import AccessForm
 from dataviva.apps.general.models import Short
 from dataviva.apps.user.models import User
@@ -46,6 +46,7 @@ def before_request():
     g.signup_form = SignupForm()
     g.signin_form = LoginForm()
     g.s3_host = s3_host
+    g.s3_bucket = s3_bucket
 
     if request.endpoint != 'static':
         url = urlparse(request.url)
