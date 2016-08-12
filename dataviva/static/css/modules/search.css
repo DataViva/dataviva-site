@@ -146,3 +146,29 @@
     text-decoration: none;
     font-weight: bold;
 }
+
+.search ul.list {
+    list-style-type: disc;
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+    list-style-position: inside;//this is important addition
+}
+
+.search table {
+    width: 60%;
+}
+
+.search table, th, td {
+    text-align: center;
+    border: 1px solid black;
+    border-spacing: 5px;
+}
+
+.search .panel-body {
+    display: none;
+}
+
+.search .panel-heading{
+    cursor: pointer;
+}
