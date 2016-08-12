@@ -7,6 +7,8 @@ from models import Article, AuthorScholar, KeyWord
 from forms import RegistrationForm
 from sqlalchemy import desc
 from datetime import datetime
+from flask.ext.login import login_required
+from dataviva.apps.admin.views import required_roles
 import os
 import shutil
 import fnmatch
@@ -50,12 +52,16 @@ def show(id):
 
 
 @mod.route('/admin', methods=['GET'])
+@login_required
+@required_roles(1)
 def admin():
     articles = Article.query.all()
     return render_template('scholar/admin.html', articles=articles)
 
 
 @mod.route('/admin', methods=['POST'])
+@login_required
+@required_roles(1)
 def admin_update():
     for id, approval_status in request.form.iteritems():
         article = Article.query.filter_by(id=id).first_or_404()
@@ -66,6 +72,8 @@ def admin_update():
 
 
 @mod.route('/admin/article/<status>/<status_value>', methods=['POST'])
+@login_required
+@required_roles(1)
 def admin_activate(status, status_value):
     for id in request.form.getlist('ids[]'):
         article = Article.query.filter_by(id=id).first_or_404()
@@ -77,12 +85,16 @@ def admin_activate(status, status_value):
 
 
 @mod.route('/admin/article/new', methods=['GET'])
+@login_required
+@required_roles(1)
 def new():
     form = RegistrationForm()
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
 
 
 @mod.route('/admin/article/new', methods=['POST'])
+@login_required
+@required_roles(1)
 def create():
     csrf_token = request.form.get('csrf_token')
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
@@ -143,6 +155,8 @@ def create():
 
 
 @mod.route('/admin/article/<id>/edit', methods=['GET'])
+@login_required
+@required_roles(1)
 def edit(id):
     form = RegistrationForm()
     article = Article.query.filter_by(id=id).first_or_404()
@@ -157,6 +171,8 @@ def edit(id):
 
 
 @mod.route('/admin/article/<id>/edit', methods=['POST'])
+@login_required
+@required_roles(1)
 def update(id):
     csrf_token = request.form.get('csrf_token')
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
@@ -206,10 +222,12 @@ def update(id):
 
         message = u'Estudo editado com sucesso!'
         flash(message, 'success')
-        return redirect(url_for('scholar.index'))
+        return redirect(url_for('scholar.admin'))
 
 
 @mod.route('/admin/article/delete', methods=['POST'])
+@login_required
+@required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
     if ids:
@@ -225,6 +243,8 @@ def admin_delete():
 
 
 @mod.route('/admin/articles/all', methods=['GET'])
+@login_required
+@required_roles(1)
 def all():
     result = Article.query.all()
     articles = []
@@ -235,6 +255,8 @@ def all():
 
 
 @mod.route('/admin/article/upload', methods=['POST'])
+@login_required
+@required_roles(1)
 def upload():
 
     csrf_token = request.values['csrf_token']
@@ -258,6 +280,8 @@ def upload():
 
 
 @mod.route('/admin/article/delete', methods=['DELETE'])
+@login_required
+@required_roles(1)
 def delete():
     csrf_token = request.data
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
@@ -272,6 +296,8 @@ def delete():
 
 # serve static files on server
 @mod.route('/admin/file/<string:csrf_token1>/<string:csrf_token2>', methods=['GET'])
+@login_required
+@required_roles(1)
 def get_file(csrf_token1, csrf_token2):
     csrf_token = csrf_token1 + '##' + csrf_token2
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
@@ -281,6 +307,8 @@ def get_file(csrf_token1, csrf_token2):
 
 # show static files on server before send to s3
 @mod.route('/admin/data', methods=['GET'])
+@login_required
+@required_roles(1)
 def data():
     matches = []
     for root, dirnames, filenames in os.walk(os.path.join(app.config['UPLOAD_FOLDER'], mod.name)):
