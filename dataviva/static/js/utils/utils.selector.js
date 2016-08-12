@@ -54,7 +54,6 @@ function Selector() {
   };
 
   function util(selection) {
-
     d3.select(selection.node().parentNode).select('.modal-header .modal-title').html(dataviva.dictionary[name+'_plural'])
     selection.each(function(data) {
 
