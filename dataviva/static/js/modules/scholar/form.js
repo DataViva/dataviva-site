@@ -8,7 +8,7 @@ $(document).ready(function () {
         $('#input-file').hide();
         $('#progress').hide();
         $('#delete').attr('id', 'delete-edit');
-        $('#article-url').attr('href', dataviva.s3_host + '/scholar/'+articleId+'/files/article');
+        $('#article-url').attr('href',  'https://' + dataviva.s3_bucket + '.s3.amazonaws.com/scholar/' + articleId + '/files/article');
 
     }
 
