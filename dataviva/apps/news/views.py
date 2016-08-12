@@ -75,7 +75,7 @@ def all():
     publications = []
     for row in result:
         publications += [(row.id, row.title, row.author,
-                          row.last_modification.strftime('%d/%m/%Y'), row.show_home, row.active)]
+                          row.publish_date.strftime('%d/%m/%Y'), row.show_home, row.active)]
     return jsonify(publications=publications)
 
 

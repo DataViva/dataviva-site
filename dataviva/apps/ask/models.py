@@ -6,7 +6,7 @@ from sqlalchemy.dialects import mysql
 from dataviva import db, app
 from dataviva.utils.auto_serialize import AutoSerialize
 
-from dataviva.apps.account.models import User
+from dataviva.apps.user.models import User
 from dataviva.api.attrs import models as attr_models
 
 TYPE_QUESTION = 0

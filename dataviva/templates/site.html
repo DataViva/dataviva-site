@@ -50,7 +50,7 @@
       <div id="account_tooltip" style="display:none;">
         <a id="profile_link" class="account" href=""><i class="fa fa-user"></i>{% trans %}Profile{% endtrans %}</a>
         <a id="admin_link" class="account" href="{{ url_for('admin.admin') }}"><i class="fa fa-cogs"></i>{% trans %}Admin Panel{% endtrans %}</a>
-        <a class="account" href="{{ url_for('account.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
+        <a class="account" href="{{ url_for('session.logout') }}"><i class="fa fa-key"></i>{% trans %}Logout{% endtrans %}</a>
       </div>
 
     </div>
@@ -173,7 +173,7 @@
 
     var authenticated = function(username, is_admin) {
       d3.select("#account").text(username);
-      d3.select("#profile_link").attr("href", "/account/" + username);
+      d3.select("#profile_link").attr("href", "/user/" + username);
       if (!is_admin) {
         d3.select("#admin_link").remove();
       }
@@ -228,7 +228,7 @@
       })
     };
 
-    d3.json("/{{g.locale}}/account/status", function(error, json) {
+    d3.json("/{{g.locale}}/user/status", function(error, json) {
       if (error) return console.warn(error);
       if (json["logged_in"]) {
         authenticated(json["user"], json["is_admin"]);

@@ -121,6 +121,11 @@
     <script type="text/javascript" src="/static/datatables/Select-1.1.2/js/dataTables.select.js"></script>
     <script type="text/javascript" src="/static/datatables/fnReloadAjax.js"></script>
     <script type="text/javascript" src="/static/datatables/sorting.js"></script>
+    <script type="text/javascript" src="/static/datatables/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="/static/datatables/buttons.bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/datatables/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="/static/datatables/moment.min.js"></script>
+    <script type="text/javascript" src="/static/datatables/datetime-moment.js"></script>
 
     <script type="text/javascript" src="/static/js/utils/utils.selector.js"></script>
     <script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
@@ -133,6 +138,8 @@
       dataviva.attr_version = {{ g.attr_version|safe }};
       dataviva.color = "{{ g.color }}";
       dataviva.page = "{{ g.page_type }}";
+      dataviva.s3_host = "{{ g.s3_host }}"
+      dataviva.s3_bucket = "{{ g.s3_bucket }}"
     </script>
 
     <!-- Javascript modules -->
@@ -163,7 +170,7 @@
             height = 400,
             left = window.screenX+(window.innerWidth/2)-(width/2),
             top = window.screenY+(window.innerHeight/2)-(height/2)
-        window.open('/account/login/','','width='+width+',height='+height+',\
+        window.open('/user/login/','','width='+width+',height='+height+',\
                                         left='+left+',top='+top+',\
                                         scrollbars=no,resizable=no,\
                                         location=no,menubar=no,toolbar=no')

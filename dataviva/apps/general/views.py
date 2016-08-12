@@ -8,13 +8,15 @@ import time
 
 mod = Blueprint('general', __name__, url_prefix='/<lang_code>')
 
-from dataviva import app, db, babel, view_cache, data_viva_apis
+from dataviva import app, db, babel, view_cache, data_viva_apis, s3_host, s3_bucket
 from dataviva.apps.general.forms import AccessForm
 from dataviva.apps.general.models import Short
-from dataviva.apps.account.models import User
+from dataviva.apps.user.models import User
 from dataviva.apps.news.models import Publication
+from dataviva.apps.blog.models import Post
 from dataviva.apps.contact.forms import ContactForm
-from dataviva.apps.account.forms import SignupForm
+from dataviva.apps.user.forms import SignupForm
+from dataviva.apps.user.forms import LoginForm
 
 from dataviva.api.attrs.models import Bra, Hs, Cbo, Cnae, Course_hedu
 from dataviva.translations.dictionary import dictionary
@@ -42,6 +44,9 @@ def before_request():
     g.production = False if DEBUG else True
     g.contact_form = ContactForm()
     g.signup_form = SignupForm()
+    g.signin_form = LoginForm()
+    g.s3_host = s3_host
+    g.s3_bucket = s3_bucket
 
     if request.endpoint != 'static':
         url = urlparse(request.url)
@@ -133,7 +138,13 @@ def home():
     else:
         news = publications
 
-    return render_template("general/index.html", news=news)
+    blog_posts = Post.query.filter(Post.id != id, Post.active, Post.show_home).all()
+    if len(blog_posts) > 3:
+        blog = [blog_posts.pop(randrange(len(blog_posts))) for _ in range(3)]
+    else:
+        blog = blog_posts
+
+    return render_template("general/index.html", news=news, blog=blog)
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])
@@ -150,11 +161,6 @@ def close():
 def upgrade():
     return render_template("general/upgrade.html")
 
-@mod.route('access/')
-@mod.route('access/logout/')
-def access():
-    session['has_access'] = False
-    return redirect(url_for('general.home'))
 
 ###############################
 # Set language views

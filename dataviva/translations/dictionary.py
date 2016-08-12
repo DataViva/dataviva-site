@@ -15,6 +15,9 @@ def dictionary():
         "scatter": gettext("Scatter"),
         "stacked": gettext("Stacked"),
         "tree_map": gettext("Tree Map"),
+        "line": gettext("Line"),
+        "bar": gettext("Bar Chart"),
+        "box": gettext("Box Plot"),
 
         # Time Resolution Toggle
         "time": gettext("Time Resolution"),

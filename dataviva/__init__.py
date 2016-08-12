@@ -28,7 +28,7 @@ mail = Mail(app)
 db = SQLAlchemy(app)
 
 lm = LoginManager()
-lm.login_view = "/account/signin"
+lm.login_view = "/session/login"
 lm.init_app(app)
 
 babel = Babel(app)
@@ -54,6 +54,8 @@ def get_env_variable(var_name, default=-1):
 
 cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "dv2016:")
 cache_timeout = get_env_variable("DATAVIVA_REDIS_TIMEOUT", 60000000)
+s3_host = get_env_variable("S3_HOST", 'https://dataviva.s3.amazonaws.com')
+s3_bucket = get_env_variable("S3_BUCKET", 'dataviva-dev')
 
 view_cache = Cache(app, config={
     'CACHE_TYPE': 'redis',
