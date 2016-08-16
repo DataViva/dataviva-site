@@ -147,22 +147,26 @@
     font-weight: bold;
 }
 
-.search ul.list {
-    list-style-type: disc;
+.search .panel-body ul.list {
     columns: 2;
     -webkit-columns: 2;
     -moz-columns: 2;
-    list-style-position: inside;//this is important addition
 }
 
-.search table {
+.search .panel-body table {
     width: 60%;
+    border: 1px solid;
+    border-color: #dddddd;
+    text-align: center;
 }
 
-.search table, th, td {
+.search .panel-body th {
     text-align: center;
-    border: 1px solid black;
-    border-spacing: 5px;
+}
+
+.search .panel-body table, th, td {
+    border: 1px solid;
+    border-color: #dddddd;
 }
 
 .search .panel-body {
