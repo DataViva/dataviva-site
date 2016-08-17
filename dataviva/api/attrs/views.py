@@ -141,6 +141,7 @@ def attrs(attr="bra", Attr_id=None, depth=None):
     order = request.args.get('order', None)
     offset = request.args.get('offset', None)
     limit = request.args.get('limit', None)
+    full_year = request.args.get('full_year', None)
 
     if offset:
         offset = float(offset)
@@ -163,6 +164,10 @@ def attrs(attr="bra", Attr_id=None, depth=None):
     cache_id = "attrs:" + request.path + lang
     if depth:
         cache_id = cache_id + "/" + depth
+
+    if full_year:
+        cache_id = cache_id + "/full_year"
+
     # first lets test if this query is cached
     cached_q = cached_query(cache_id)
     if cached_q and limit is None:
@@ -207,9 +212,16 @@ def attrs(attr="bra", Attr_id=None, depth=None):
             latest_month = int(latest_month)
         latest_year = int(latest_year)
 
-        conds = [getattr(Attr_weight_tbl, "{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year]
+        # if secex, get last full year.
+        conds = []
         if latest_month:
-            conds.append(Attr_weight_tbl.month == latest_month)
+            conds = [Attr_weight_tbl.month == latest_month]
+            if full_year:
+                conds = [Attr_weight_tbl.month == '0']
+                if latest_month != 12:
+                    latest_year -= 1
+
+        conds += [getattr(Attr_weight_tbl, "{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year]
 
         query = db.session.query(Attr, Attr_weight_tbl).outerjoin(Attr_weight_tbl, and_(*conds))
         if Attr == School:
