@@ -12,7 +12,8 @@ var Publication = function() {
                 .removeAttr('name');
         }
 
-        $('#text_content').val($('#text-content-editor').summernote('code'));
+        text_content = $('#text-content-editor').html();
+        $('#text_content').val(text_content);
         self.status = true;
         $('#news-form').submit();
     }
@@ -110,9 +111,8 @@ $(document).ready(function(){
             return publication.status;
         } else {
             submittingForm.show();
-            $('#text-content-editor')
-                .summernote('destroy')
-                .hide();
+            $('#text-content-editor').summernote('destroy');
+            $('#text-content-editor').hide();
             $('button[type=submit]').prop('disabled', true);
             var data = new FormData();
             $('#text-content-editor img').each(function(i) {

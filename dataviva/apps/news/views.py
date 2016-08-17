@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, save_images_locally, upload_images_to_s3
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, save_images_temporarily, upload_images_to_s3
 import os
 import shutil
 
@@ -162,9 +162,6 @@ def create():
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
-
-        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, request.form['csrf_token'])
-        shutil.rmtree(upload_folder)
         
         db.session.commit()
         message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
@@ -176,8 +173,9 @@ def create():
 @required_roles(1)
 def upload_images():
     images = { key: value for key, value in request.form.items() if key != 'csrf_token' }
-    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, request.form['csrf_token'], 'images')
-    return jsonify(file_paths=save_images_locally(upload_folder, images))
+    path_hash = request.form['csrf_token'].replace('#', '')
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, path_hash, 'images')
+    return jsonify(file_paths=save_images_temporarily(upload_folder, images))
     
 
 @mod.route('/admin/publication/<id>/edit', methods=['GET'])
@@ -230,9 +228,6 @@ def update(id):
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
-
-        upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, request.form['csrf_token'])
-        shutil.rmtree(upload_folder)
 
         db.session.commit()
         message = u'Notícia editada com sucesso!'

@@ -51,8 +51,8 @@ def save_b64_image(b64, upload_folder, name):
 
     return image_url
 
-def save_images_locally(upload_folder, images):
-    file_paths = []
+def save_images_temporarily(upload_folder, images):
+    image_urls = []
     if os.path.exists(upload_folder):
         shutil.rmtree(upload_folder)
     os.makedirs(upload_folder)
@@ -70,22 +70,27 @@ def save_images_locally(upload_folder, images):
             else:
                 image_extension = '.png'
             urllib.urlretrieve(image, file_path + image_extension)
-        file_paths.append( { 'id': i, 'path': file_path + image_extension } )
-    return file_paths
+        image_url = upload_s3_file(file_path + image_extension, file_path.split('dataviva/static/')[1] + image_extension,  {'ContentType': "image/" + image_extension[1:]})
+        image_urls.append( { 'id': i, 'path': image_url } )
+    shutil.rmtree(upload_folder.split('/images')[0])
+    return image_urls
 
 def upload_images_to_s3(html, object_type, object_id):
+    client = s3_client()
     prefix = os.path.join(object_type, str(object_id), 'images/content/')
     pattern = 'src="([^"]+)"'
     file_paths = re.findall(pattern, html, re.DOTALL)
-    files = s3_client().list_objects(Bucket='dataviva-dev', Prefix=prefix)
+    files = client.list_objects(Bucket=S3_BUCKET, Prefix=prefix)
     if files.has_key('Contents'):
-        for file in files['Contents']:
-            s3_client().delete_object(Bucket='dataviva-dev', Key=file['Key'])
-
-    urls = []
+        delete_s3_folder(prefix)
     for file_path in file_paths:
-        image_url = upload_s3_file(file_path, prefix + file_path.split('/')[-1], {'ContentType': "image/" + file_path.split('.')[-1] })
-        html = re.sub(file_path, image_url, html)
-    
+        copy_source = {
+            'Bucket': S3_BUCKET,
+            'Key': file_path.split(S3_BUCKET + '.s3.amazonaws.com/')[1]
+        }
+        key = prefix + file_path.split('/')[-1]
+        client.copy_object(Bucket=S3_BUCKET, CopySource=copy_source, Key=key)
+        client.delete_object(Bucket=S3_BUCKET, Key=copy_source['Key'])
+        html = re.sub(file_path, 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + key, html)
     return html
 
