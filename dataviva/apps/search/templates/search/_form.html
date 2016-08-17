@@ -27,10 +27,151 @@
         {{ messages(form.selector) }}
         {{ form.selector(class="form-control", maxlength=100)}}
     </div>
+
+    <div class="panel panel-default">
+        <div id="selector-header" class="panel-heading">
+            <i class="fa fa-angle-double-down m-r-sm"></i> Explicação sobre Seletores:
+        </div>
+        <div class="panel-body">
+            <p>
+                <b>Seletor(es):</b> Referentes a natureza do dado que está sendo buscado.
+            </p>
+
+            <b> Lista seletores disponíveis:</b>
+            <ul class="list">
+                <li>bra - localidade</li>
+                <li>cbo - ocupação</li>
+                <li>cnae - setor da indústria</li>
+                <li>course_hedu - educação superior</li>
+                <li>course_sc - edução básica</li>
+                <li>hs - produto</li>
+                <li>university - universidade</li>
+                <li>wld - parceiro comercial</li>
+            </ul>
+
+            <b>Tabela com as possibilidades de relacionamento entre os seletor(es):</b>
+            <table>
+            <tr>
+                <th>Seletor</th>
+                <th>Seletores relacionáveis</th> 
+            </tr><tr>
+                <td>cbo</td>
+                <td>bra, cnae</td>
+            </tr><tr>
+                <td>cnae</td>
+                <td>bra, cbo</td>
+            </tr><tr>    
+                <td>course_hedu</td>
+                <td>bra, university</td>
+            </tr><tr>    
+                <td>course_sc</td>
+                <td>bra, school</td>
+            </tr><tr>    
+                <td>hs</td>
+                <td>bra, wld</td>
+            </tr><tr>    
+                <td>university</td>
+                <td>bra, course</td>
+            </tr><tr>    
+                <td>wld</td>
+                <td>bra, hs</td>
+            </tr>
+            </table>
+        </div>
+    </div>
+
     <div class="form-group {{ 'has-error' if form.answer.errors else '' }} ">
         <label class="control-label" for="answer">{% trans %}Answer{% endtrans %}</label>
         {{ messages(form.answer) }}
         {{ form.answer(class="form-control")}}
+    </div>
+
+    <div class="panel panel-default">
+        <div id="answer-header" class="panel-heading">
+            <i class="fa fa-angle-double-down m-r-sm"></i> Explicação de formulação da resposta:
+        </div>
+        <div class="panel-body">
+            <p>
+                <b>Resposta - URL destino: <i>/categoria/{0}/opção_aba?seletor1={1}&seletor2={2}</i></b>
+            </p>
+
+            <p>
+                <b>categoria: </b>Categoria referente ao seletor principal. Exemplo: <i>industry</i>.<br/>
+                <b>{0}: </b>Codificação sinalizando o seletor referente a categoria escolhida.<br/>
+                <b>opção_aba<SUP>*</SUP>: </b>Nome da aba default a ser exibida. Exemplo: aba Salário e Emprego (<i>wages</i>), Oportunidades (<i>opportunities</i>)...<br/>
+                <b>seletor1<SUP>*</SUP>: </b>Atributo do primeiro seletor relacionado.<br/>
+                <b>seletor2<SUP>*</SUP>: </b>Atributo do segundo seletor relacionado.<br/>
+            </p>
+
+            <p>
+                <SUP>*</SUP>Campos opcionais: Caso os mesmos não sejam usados, as codificações entre eles devem ser retiradas. 
+            </p>
+
+            <b>Opções de abas disponíveis para cada categoria:</b>
+            <table>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Opções de aba</th>
+                </tr><tr>
+                    <td>industry</td>
+                    <td>wages, opportunities</td>
+                </tr><tr>
+                    <td>location</td>
+                    <td>wages, education, trade-partner, opportunities</td>
+                </tr><tr>
+                    <td>occupation</td>
+                    <td>wages, opportunities</td>
+                </tr><tr>
+                    <td>product</td>
+                    <td>trade-partner, opportunities</td>
+                </tr><tr>
+                    <td>trade-partner</td>
+                    <td>international-trade</td>
+                </tr><tr>
+                    <td>university</td>
+                    <td>enrollments</td>
+                </tr><tr>
+                    <td>major</td>
+                    <td>enrollments</td>
+                </tr><tr>
+                    <td>basic_course</td>
+                    <td>enrollments</td>
+                </tr>
+            </table>
+            <br/>
+
+            <b>Categorias disponíveis e sua forma em atributo:</b>
+            <table>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Atributo</th>
+                </tr><tr>
+                    <td>industry</td>
+                    <td>cnae_id</td>
+                </tr><tr>
+                    <td>location</td>
+                    <td>bra_id</td>
+                </tr><tr>
+                    <td>occupation</td>
+                    <td>cbo_id</td>
+                </tr><tr>
+                    <td>product</td>
+                    <td>hs</td>
+                </tr><tr>
+                    <td>trade-partner</td>
+                    <td>wld</td>
+                </tr><tr>
+                    <td>university</td>
+                    <td>university</td>
+                </tr><tr>
+                    <td>major</td>
+                    <td>course_hedu</td>
+                </tr><tr>
+                    <td>basic_course</td>
+                    <td>course_sc</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
     <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
