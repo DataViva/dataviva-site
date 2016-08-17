@@ -83,7 +83,7 @@ def upload_images_to_s3(html, object_type, object_id):
         if img['src'] == '':
             pass
         file_paths.append(img['src'])
-    files = s3_client().list_objects(Bucket='dataviva-dev', Prefix=prefix)
+    files = client.list_objects(Bucket='dataviva-dev', Prefix=prefix)
     if files.has_key('Contents'):
         delete_s3_folder(prefix)
     for file_path in file_paths:
