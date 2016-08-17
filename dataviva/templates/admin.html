@@ -21,7 +21,7 @@
                 <li><a class="{{'active' if articles else ''}}" href="{{ url_for('scholar.admin') }}" title="Estudos">{% trans %}Scholar{% endtrans %}</a></li>
                 <li><a class="{{'active' if questions else ''}}" href="{{ url_for('search.admin') }}" title="Inicie uma Pesquisa">{% trans %}Start a search{% endtrans %}</a></li>
                 <li><a class="{{'active' if publications else ''}}" href="{{ url_for('news.admin') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
-                <li><a class="{{'active' if users else ''}}" href="{{ url_for('users.admin') }}" title="Usuários">{% trans %}Users{% endtrans %}</a></li>
+                <li><a class="{{'active' if user else ''}}" href="{{ url_for('user.admin') }}" title="Usuários">{% trans %}Users{% endtrans %}</a></li>
                 <li><a class="{{'active' if subjects else ''}}" href="{{ url_for('help.admin') }}" title="Ajuda">{% trans %}Help{% endtrans %}</a></li>
             </ul>
         </nav>

@@ -54,10 +54,8 @@ function Selector() {
   };
 
   function util(selection) {
-
     d3.select(selection.node().parentNode).select('.modal-header .modal-title').html(dataviva.dictionary[name+'_plural'])
     selection.each(function(data) {
-
       get_article = function(x) {
         var connect = "in";
         if (dataviva.language == "pt") {
@@ -936,6 +934,7 @@ function Selector() {
       else {
         function loadattrs() {
           var attr_url = "/attrs/"+type+"/?lang="+dataviva.language;
+          attr_url += (type=='hs') ? "&full_year=true" : "";
           localforage.getItem(attr_url, function(error, attrs){
             if (attrs)  {
               data = attrs.data;

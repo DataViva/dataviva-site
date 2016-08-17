@@ -2,7 +2,7 @@ var UsersTable = function () {
     this.tableId = '#users-table';
 
     this.table = $('#users-table').DataTable( {
-                "sAjaxSource": "/users/all",
+                "sAjaxSource": "/user/all",
                 "sAjaxDataProp": "users",
                 "order": [],
                 "columns": [
@@ -90,7 +90,7 @@ var changeStatus = function(ids, status, status_value){
     if (ids.length) {
         $.ajax({
             method: "POST",
-            url: "/"+lang+"/users/admin/users/"+status+"/"+status_value,
+            url: "/"+lang+"/user/admin/users/"+status+"/"+status_value,
             data: {ids:ids},
             statusCode: {
                 500: function () {
@@ -120,7 +120,7 @@ var destroy = function(ids){
     if (ids.length) {
         $.ajax({
             method: "POST",
-            url: "/"+lang+"/users/admin/delete",
+            url: "/"+lang+"/user/admin/delete",
             data: {ids:ids},
             statusCode: {
                 500: function () {
@@ -147,7 +147,7 @@ var destroy = function(ids){
 
 var edit = function(ids){
     if (ids.length) {
-        window.location = '/'+lang+'/users/admin/users/'+ids[0]+'/edit';
+        window.location = '/'+lang+'/user/admin/users/'+ids[0]+'/edit';
     } else {
         showMessage('Por favor selecione para editar.', 'warning', 8000);
     }
