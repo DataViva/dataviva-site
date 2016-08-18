@@ -21,11 +21,12 @@ mod = Blueprint('user', __name__,
 
 @mod.before_request
 def before_request():
-    g.page_type = 'user'
+    g.page_type = mod.name
 
 
-def _gen_confirmation_code(email):
-    return md5("%s-%s" % (email, datetime.now())).hexdigest()
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
 
 
 @mod.url_defaults
@@ -33,9 +34,8 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.locale = values.pop('lang_code')
+def _gen_confirmation_code(email):
+    return md5("%s-%s" % (email, datetime.now())).hexdigest()
 
 
 @lm.user_loader
@@ -230,9 +230,7 @@ def reset_password():
     except:
         flash("We couldnt find any user with the informed email address", "danger")
 
-        return render_template("user/forgot_password.html", form=form)
-
-    return redirect(g.locale + "/session/login")
+    return render_template("user/forgot_password.html", form=form)
 
 
 @mod.route('/admin', methods=['GET'])
