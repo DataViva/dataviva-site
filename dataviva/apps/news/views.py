@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, save_images_temporarily, upload_images_to_s3
 import os
 
 mod = Blueprint('news', __name__,
@@ -146,7 +146,6 @@ def create():
             db.session.commit()
             publication.subject_id = subject.id
 
-        publication.text_content = form.text_content.data
         publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
@@ -156,17 +155,27 @@ def create():
 
         db.session.add(publication)
         db.session.flush()
+        
+        Publication.query.get(publication.id).text_content = upload_images_to_s3(form.text_content.data, mod.name, publication.id)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
-
+        
         db.session.commit()
-
         message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
 
+@mod.route('/admin/publication/new/upload', methods=['POST'])
+@login_required
+@required_roles(1)
+def upload_images():
+    images = { key: value for key, value in request.form.items() if key != 'csrf_token' }
+    path_hash = request.form['csrf_token'].replace('#', '')
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, path_hash, 'images')
+    return jsonify(file_paths=save_images_temporarily(upload_folder, images))
+    
 
 @mod.route('/admin/publication/<id>/edit', methods=['GET'])
 @login_required
@@ -185,7 +194,7 @@ def edit(id):
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
 
-@mod.route('admin/publication/<id>/edit', methods=['POST'])
+@mod.route('/admin/publication/<id>/edit', methods=['POST'])
 @login_required
 @required_roles(1)
 def update(id):
@@ -208,18 +217,18 @@ def update(id):
             db.session.commit()
             publication.subject_id = subject.id
 
-        publication.text_content = form.text_content.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.author = form.author.data
+
+        publication.text_content = upload_images_to_s3(form.text_content.data, mod.name, publication.id)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
-
         message = u'Notícia editada com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
