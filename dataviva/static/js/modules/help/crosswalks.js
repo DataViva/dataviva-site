@@ -5,17 +5,31 @@ function download(crosswalk_table, attr1, attr2){
         method: 'GET',
         url: "/help/crosswalk/" + crosswalk_table + "?download=true",
         success: function (response) {
-            var csv = dataviva.dictionary[attr1] + " ID," + 
-                    dataviva.dictionary[attr1] + " Name," +
-                    dataviva.dictionary[attr2] + " ID,"+  
-                    dataviva.dictionary[attr2] + " Name\n";
+            
+            var attr1_name = (attr1 != 'course_sc') ? dataviva.dictionary[attr1] : dataviva.dictionary['course_sc'].split(' ')[1],
+                attr2_name = (attr2 != 'course_sc') ? dataviva.dictionary[attr2] : dataviva.dictionary['course_sc'].split(' ')[1];
+
+            var csv = attr1_name + " ID," + attr1_name + " Name," +
+                    attr2_name + " ID,"+  attr2_name + " Name\n";
 
             response.data.forEach(function(row){
+
                 if(row[0] && row[1]){
-                    csv+=row[0] + "," + 
-                    dataviva[attr1][row[0]].name.replace(/,/g, '') + "," + 
-                    row[1] + "," + 
-                    dataviva[attr2][row[1]].name.replace(/,/g, '') + "\n";
+
+                    if(attr1.search('course') == 0){
+                        attr1 = (row[0].match(/^[0-9]+$/)) ? 'course_sc' : 'course_hedu'
+                    }
+
+                    if(attr2.search('course') == 0){
+                        attr2 = (row[1].match(/^[0-9]+$/)) ? 'course_sc' : 'course_hedu'
+                    }
+
+                    if(dataviva[attr1][row[0]] && dataviva[attr2][row[1]]){ // table of corses have invalid attrs.
+                        csv += row[0] + "," + 
+                        dataviva[attr1][row[0]].name.replace(/,/g, '') + "," + 
+                        row[1] + "," + 
+                        dataviva[attr2][row[1]].name.replace(/,/g, '') + "\n";
+                    }
                 }
             });
 
@@ -106,9 +120,11 @@ window.showCrosswalkIP = function() {
             dom: 'Bfti',
             "buttons": [ 
                 {
-                    extend: 'csvHtml5',
+                    text: 'save',
                     text: '<i class="fa fa-floppy-o fa-lg"></i>',
-                    filename: 'dataviva-help-crosswalk-ip'
+                    action: function ( e, dt, node, config ) {
+                        download('ip', 'cnae', 'hs')
+                    }  
                 }
             ],
             "ajax": {
@@ -172,9 +188,11 @@ window.showCrosswalkOC = function() {
             dom: 'Bfti',
             "buttons": [ 
                 {
-                    extend: 'csvHtml5',
+                    text: 'save',
                     text: '<i class="fa fa-floppy-o fa-lg"></i>',
-                    filename: 'dataviva-help-crosswalk-oc'
+                    action: function ( e, dt, node, config ) {
+                        download('oc', 'cbo', 'course_sc')
+                    }  
                 }
             ],
             "ajax": {
@@ -235,9 +253,11 @@ window.showCrosswalkCO = function() {
             dom: 'Bfti',
             "buttons": [ 
                 {
-                    extend: 'csvHtml5',
+                    text: 'save',
                     text: '<i class="fa fa-floppy-o fa-lg"></i>',
-                    filename: 'dataviva-help-crosswalk-co'
+                    action: function ( e, dt, node, config ) {
+                        download('co', 'course_sc', 'cbo')
+                    }  
                 }
             ],
             "ajax": {
