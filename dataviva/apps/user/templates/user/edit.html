@@ -37,9 +37,8 @@
                         {{ messages(form.profile) }}
                     </div>
 
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-5 {{ 'has-error' if form.birthday.errors else '' }}">
                         <label class="control-label">{% trans %}Birthday{% endtrans %}</label>
-                        {{ messages(form.birthday) }}
                         <div id="birthday-date" class="input-group date">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                             {{ form.birthday(class="form-control")}}
