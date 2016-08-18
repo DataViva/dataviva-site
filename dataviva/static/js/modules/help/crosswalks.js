@@ -1,3 +1,33 @@
+//attr1 and attr2 refers to crosswalk_table, download(pi, hs, cnae)   
+function download(crosswalk_table, attr1, attr2){
+    $.ajax({
+        dataType: 'json',
+        method: 'GET',
+        url: "/help/crosswalk/" + crosswalk_table + "?download=true",
+        success: function (response) {
+            var csv = dataviva.dictionary[attr1] + " ID," + 
+                    dataviva.dictionary[attr1] + " Name," +
+                    dataviva.dictionary[attr2] + " ID,"+  
+                    dataviva.dictionary[attr2] + " Name\n";
+
+            response.data.forEach(function(row){
+                if(row[0] && row[1]){
+                    csv+=row[0] + "," + 
+                    dataviva[attr1][row[0]].name.replace(/,/g, '') + "," + 
+                    row[1] + "," + 
+                    dataviva[attr2][row[1]].name.replace(/,/g, '') + "\n";
+                }
+            });
+
+            var a = document.createElement('a');
+            a.download = "dataviva-help-crosswalk-" + crosswalk_table + ".csv";
+            a.href = 'data:text/csv;charset=utf-8,' + escape(csv);
+            a.click();
+            
+        }
+    });
+}
+
 window.showCrosswalkPI = function() {
     var headers = {
         0: "hs_id",
@@ -14,9 +44,11 @@ window.showCrosswalkPI = function() {
             dom: 'Bfti',
             "buttons": [ 
                 {
-                    extend: 'csvHtml5',
+                    text: 'save',
                     text: '<i class="fa fa-floppy-o fa-lg"></i>',
-                    filename: 'dataviva-help-crosswalk-pi'
+                    action: function ( e, dt, node, config ) {
+                        download('pi', 'hs', 'cnae')
+                    }   
                 }
             ],
             "ajax": {
