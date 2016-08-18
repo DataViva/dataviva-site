@@ -4394,7 +4394,11 @@
      * remove media object
      */
     this.removeMedia = this.wrapCommand(function () {
-      var $target = $(this.restoreTarget()).detach();
+      var $target = $(this.restoreTarget());
+      if ( $target.parent().is('figure') )
+        $target.parent().detach();
+      else
+        $target.detach();
       context.triggerEvent('media.delete', $target, $editable);
     });
 
