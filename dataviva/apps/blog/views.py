@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, save_images_temporarily, upload_images_to_s3
 import os
 
 mod = Blueprint('blog', __name__,
@@ -168,7 +168,7 @@ def create():
         post = Post()
         post.title = form.title.data
         post.author = form.author.data
-        post.text_content = form.text_content.data
+        #post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -183,9 +183,12 @@ def create():
                 subject = Subject()
                 subject.name = name
             post.subjects.append(subject)
+        
         db.session.add(post)
-
         db.session.flush()
+
+        Post.query.get(post.id).text_content = upload_images_to_s3(form.text_content.data, mod.name, post.id)
+
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
             post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
@@ -196,6 +199,14 @@ def create():
         flash(message, 'success')
         return redirect(url_for('blog.admin'))
 
+@mod.route('/admin/post/new/upload', methods=['POST'])
+@login_required
+@required_roles(1)
+def upload_images():
+    images = { key: value for key, value in request.form.items() if key != 'csrf_token' }
+    path_hash = request.form['csrf_token'].replace('#', '')
+    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, path_hash, 'images')
+    return jsonify(file_paths=save_images_temporarily(upload_folder, images))
 
 @mod.route('/admin/post/<id>/edit', methods=['GET'])
 @login_required
@@ -227,7 +238,6 @@ def update(id):
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
         post.author = form.author.data
-        post.text_content = form.text_content.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
@@ -243,6 +253,8 @@ def update(id):
                 subject = Subject()
                 subject.name = name
             post.subjects.append(subject)
+
+        post.text_content = upload_images_to_s3(form.text_content.data, mod.name, post.id)
 
         db.session.flush()
         if len(form.thumb.data.split(',')) > 1:
