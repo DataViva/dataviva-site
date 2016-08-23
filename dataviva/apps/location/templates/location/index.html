@@ -198,6 +198,8 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
+                <!-- Show tab only for recent data -->
+                {%  if body.secex_year >= header.year  %}
                 <li role="presentation" class="{{ 'active' if tab == 'trade-partner' }}">
                     <a href="#trade-partner"
                        aria-controls="trade-partner"
@@ -206,6 +208,8 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}International Trade{% endtrans %}</a>
                 </li>
+                {%  endif   %}
+                {%  if body.rais_year >= header.year  %}
                 <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
                     <a href="#wages"
                        aria-controls="wages"
@@ -222,6 +226,8 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
+                {%  endif   %}
+                {%  if body.basic_course_year >= header.year  %}
                 <li role="presentation" class="{{ 'active' if tab == 'education' }}">
                     <a href="#education"
                        aria-controls="education"
@@ -230,6 +236,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Education{% endtrans %}</a>
                 </li>
+                {%  endif   %}
 
             </ul>
         </div>
