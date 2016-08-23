@@ -57,7 +57,7 @@
                     {{ form.email(class="form-control")}}
                     {{ messages(form.email) }}
                 </div>
-                
+
                 <div class="row">
                     <div class="form-group col-md-10 {{ 'has-error' if form.country.errors else '' }} ">
                         <label for="country">Country</label>
@@ -83,21 +83,21 @@
                     {{ form.occupation(class="form-control")}}
                     {{ messages(form.occupation) }}
                 </div>
-                
+
                 <div class="form-group {{ 'has-error' if form.institution.errors else '' }} ">
                     <label for="institution">Institution</label>
                     {{ form.institution(class="form-control")}}
                     {{ messages(form.institution) }}
                 </div>
-                
+
                 <div class="checkbox checkbox-success checkbox-inline">
                     <input name="agree_mailer" id="agree_mailer" type="checkbox" {{'checked' if form.agree_mailer.data}}>
                     <label for="agree_mailer"><small>{% trans %}I want to receive news and tips of the best use of Dataviva{% endtrans %}</small></label>
                 </div>
-                
+
                 <hr/>
                     <p>
-                        <a href="/user/change_password"><i class="fa fa-lock"></i> {% trans %}Change my password{% endtrans %}</a>
+                        <a href="{{ url_for('user.change_password') }}"><i class="fa fa-lock"></i> {% trans %}Change my password{% endtrans %}</a>
                     </p>
                 <hr/>
 
