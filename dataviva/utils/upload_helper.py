@@ -22,6 +22,12 @@ def delete_s3_file(file_id):
         Key=file_id
     )
 
+def list_s3_files(prefix):
+    return s3_client().list_objects(
+        Bucket=S3_BUCKET, 
+        Prefix=prefix
+    )
+
 
 def delete_s3_folder(folder_id):
     client = s3_client()
@@ -32,7 +38,6 @@ def delete_s3_folder(folder_id):
 def upload_s3_file(file_path, file_id, extra_args={'ContentType': "html/text"}):
     transfer = S3Transfer(s3_client())
     transfer.upload_file(file_path, S3_BUCKET, file_id, extra_args=extra_args)
-
     return 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + file_id
 
 
@@ -51,49 +56,30 @@ def save_b64_image(b64, upload_folder, name):
 
     return image_url
 
-def save_images_temporarily(upload_folder, images):
-    image_urls = []
-    if os.path.exists(upload_folder):
-        shutil.rmtree(upload_folder)
-    os.makedirs(upload_folder)
-    for i, image in images.iteritems():
-        file_path = os.path.join(upload_folder, 'img' + i)
-        if image.startswith('data:'):
-            image_extension = '.' + image.split(';')[0].split('/')[1]
-            image_data = base64.b64decode(image.split(',')[1])    
-            with open(file_path + image_extension, 'wb') as f:
-                f.write(image_data)       
-        else:
-            if image.split('.')[-1] in ['jpg', 'jpeg', 'png', 'gif']:
-                image_extension = '.' + image.split('.')[-1]
-            else:
-                image_extension = '.png'
-            urllib.urlretrieve(image, file_path + image_extension)
-        image_url = upload_s3_file(file_path + image_extension, file_path.split('dataviva/static/')[1] + image_extension,  {'ContentType': "image/" + image_extension[1:]})
-        image_urls.append( { 'id': i, 'path': image_url } )
-    shutil.rmtree(upload_folder.split('/images')[0])
-    return image_urls
-
 def upload_images_to_s3(html, object_type, object_id):
     client = s3_client()
+    domain = 'https://' + S3_BUCKET + '.s3.amazonaws.com/'
     prefix = os.path.join(object_type, str(object_id), 'images/content/')
     soup = BeautifulSoup(html, 'html.parser')
-    file_paths = []
+    new_urls = []
+    all_keys = []
     for img in soup.findAll('img', src=True):
-        if img['src'] == '':
-            pass
-        file_paths.append(img['src'])
-    files = client.list_objects(Bucket='dataviva-dev', Prefix=prefix)
-    if files.has_key('Contents'):
-        delete_s3_folder(prefix)
-    for file_path in file_paths:
+        if img['src'].startswith(domain):
+            all_keys.append(img['src'].split(domain)[1])
+        if img['src'].startswith(domain + 'uploads/'):
+            new_urls.append(img['src'])
+    for url in new_urls:
         copy_source = {
             'Bucket': S3_BUCKET,
-            'Key': file_path.split(S3_BUCKET + '.s3.amazonaws.com/')[1]
+            'Key': url.split(domain)[1]
         }
-        key = prefix + file_path.split('/')[-1]
-        client.copy_object(Bucket=S3_BUCKET, CopySource=copy_source, Key=key)
+        new_key = prefix + url.split('/')[-1]
+        client.copy_object(Bucket=S3_BUCKET, CopySource=copy_source, Key=new_key)
         client.delete_object(Bucket=S3_BUCKET, Key=copy_source['Key'])
-        html = re.sub(file_path, 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + key, html)
+        html = re.sub(url, 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + new_key, html)
+    uploaded_images = list_s3_files(prefix)
+    if uploaded_images.has_key('Contents'):
+        for image in uploaded_images['Contents']:
+            if image['Key'] not in all_keys:
+                delete_s3_file(image['Key'])
     return html
-
