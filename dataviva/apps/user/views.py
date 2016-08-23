@@ -147,7 +147,7 @@ def confirm_pending(user_email):
         abort(404, 'User not found')
 
     if user.confirmed:
-        return redirect('/')
+        return redirect(url_for('general.home'))
 
     return render_template('user/confirm_pending.html', user=user.serialize())
 
