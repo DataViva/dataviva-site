@@ -37,7 +37,7 @@ def logout():
     session.pop('google_token', None)
     session.pop('facebook_token', None)
     logout_user()
-    return redirect('/')
+    return redirect(url_for('general.home'))
 
 
 @mod.route('/login', methods=['GET', 'POST'])
