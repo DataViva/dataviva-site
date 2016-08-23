@@ -10,8 +10,10 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, save_images_temporarily, upload_images_to_s3
+from dataviva.utils.upload_helper import upload_s3_file, save_b64_image, delete_s3_folder, upload_images_to_s3
 import os
+import hashlib
+from shutil import rmtree
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -35,7 +37,8 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    posts = Post.query.filter_by(active=True).order_by(desc(Post.publish_date)).all()
+    posts = Post.query.filter_by(active=True).order_by(
+        desc(Post.publish_date)).all()
     subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     subjects = []
 
@@ -48,11 +51,12 @@ def index():
     return render_template('blog/index.html', posts=posts, subjects=subjects)
 
 
-
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
-    posts_query = Post.query.filter_by(active=True).order_by(desc(Post.publish_date)).all()
-    subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
+    posts_query = Post.query.filter_by(
+        active=True).order_by(desc(Post.publish_date)).all()
+    subjects_query = subjects_query = Subject.query.order_by(
+        desc(Subject.name)).all()
     posts = []
     subjects = []
 
@@ -66,7 +70,6 @@ def index_subject(subject):
         if float(subject) in [x.id for x in post.subjects]:
             posts.append(post)
 
-    
     return render_template('blog/index.html', posts=posts, subjects=subjects, active_subject=long(subject))
 
 
@@ -183,15 +186,18 @@ def create():
                 subject = Subject()
                 subject.name = name
             post.subjects.append(subject)
-        
+
         db.session.add(post)
         db.session.flush()
 
-        Post.query.get(post.id).text_content = upload_images_to_s3(form.text_content.data, mod.name, post.id)
+        Post.query.get(post.id).text_content = upload_images_to_s3(
+            form.text_content.data, mod.name, post.id)
 
         if len(form.thumb.data.split(',')) > 1:
-            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
-            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+            upload_folder = os.path.join(
+                app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
+            post.thumb = save_b64_image(
+                form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
@@ -199,14 +205,33 @@ def create():
         flash(message, 'success')
         return redirect(url_for('blog.admin'))
 
-@mod.route('/admin/post/new/upload', methods=['POST'])
+
+@mod.route('/admin/upload', methods=['POST'])
 @login_required
 @required_roles(1)
-def upload_images():
-    images = { key: value for key, value in request.form.items() if key != 'csrf_token' }
-    path_hash = request.form['csrf_token'].replace('#', '')
-    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, path_hash, 'images')
-    return jsonify(file_paths=save_images_temporarily(upload_folder, images))
+def upload_image():
+    file = request.files['image']
+    csrf_token = request.form['csrf_token'].replace('#', '')
+    local_folder = os.path.join(
+        app.config['UPLOAD_FOLDER'],
+        mod.name,
+        csrf_token,
+        'images'
+    )
+    if not os.path.exists(local_folder):
+        os.makedirs(local_folder)
+    h = hashlib.new('ripemd160')
+    h.update(os.urandom(32))
+    file_name = h.hexdigest()
+    file_path = os.path.join(local_folder, file_name)
+    file.save(file_path)
+    image_url = upload_s3_file(
+        file_path,
+        os.path.join('uploads', mod.name, csrf_token, 'images/content', file_name),
+        {'ContentType': file.content_type}
+    )
+    rmtree(os.path.dirname(local_folder))
+    return jsonify(image={'url': image_url})
 
 @mod.route('/admin/post/<id>/edit', methods=['GET'])
 @login_required
@@ -254,12 +279,15 @@ def update(id):
                 subject.name = name
             post.subjects.append(subject)
 
-        post.text_content = upload_images_to_s3(form.text_content.data, mod.name, post.id)
+        post.text_content = upload_images_to_s3(
+            form.text_content.data, mod.name, post.id)
 
         db.session.flush()
         if len(form.thumb.data.split(',')) > 1:
-            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
-            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+            upload_folder = os.path.join(
+                app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
+            post.thumb = save_b64_image(
+                form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
