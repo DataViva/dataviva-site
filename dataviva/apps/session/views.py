@@ -52,7 +52,7 @@ def login(provider=None):
             if user:
                 if user.confirmed:
                     login_user(user, remember=True)
-                    return redirect("/")
+                    return redirect(url_for('general.home'))
                 else:
                     return Response(dictionary()["confirmation_pending"], status=401, mimetype='application/json', )
 
@@ -105,7 +105,7 @@ def after_login(email, fullname, language, gender, image):
         session.pop('remember_me', None)
     login_user(user, remember=remember_me)
 
-    return redirect('')
+    return redirect(url_for('general.home'))
 
 
 """
