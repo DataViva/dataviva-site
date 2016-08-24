@@ -656,7 +656,7 @@ def dictionary():
         "confirmation_pending": gettext("Confirmation pending."),
 
         #user
-        "update_profile": gettext("Profile successfully updated!"),
+        "updated_profile": gettext("Profile successfully updated!"),
         "complete_profile": gettext("Let us know more about you. Please complete your profile."),
         "updated_password": gettext("Password successfully updated!"),
         "invalid_password": gettext("The current password is invalid."),
