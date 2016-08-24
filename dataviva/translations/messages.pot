@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-24 15:11-0300\n"
+"POT-Creation-Date: 2016-08-24 17:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1226,6 +1226,7 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/index.html:72
 #: dataviva/apps/rankings/templates/rankings/_base.html:44
 #: dataviva/apps/rankings/templates/rankings/occupation.html:13
+#: dataviva/apps/user/templates/user/edit.html:82
 #: dataviva/templates/site.html:65 dataviva/translations/dictionary.py:142
 #: dataviva/translations/dictionary.py:357
 msgid "Occupation"
@@ -3128,6 +3129,7 @@ msgid "Brazil"
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:69
+#: dataviva/apps/user/templates/user/edit.html:63
 #: dataviva/translations/dictionary.py:152
 msgid "Country"
 msgstr ""
@@ -3322,6 +3324,14 @@ msgstr ""
 
 #: dataviva/apps/user/templates/user/edit.html:71
 msgid "Format: XX"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit.html:76
+msgid "City"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit.html:88
+msgid "Institution"
 msgstr ""
 
 #: dataviva/apps/user/templates/user/edit.html:95

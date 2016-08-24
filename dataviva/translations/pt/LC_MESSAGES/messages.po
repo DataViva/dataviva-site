@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-24 15:11-0300\n"
+"POT-Creation-Date: 2016-08-24 17:24-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1276,6 +1276,7 @@ msgstr "Atividade Econômica"
 #: dataviva/apps/occupation/templates/occupation/index.html:72
 #: dataviva/apps/rankings/templates/rankings/_base.html:44
 #: dataviva/apps/rankings/templates/rankings/occupation.html:13
+#: dataviva/apps/user/templates/user/edit.html:82
 #: dataviva/templates/site.html:65 dataviva/translations/dictionary.py:142
 #: dataviva/translations/dictionary.py:357
 msgid "Occupation"
@@ -3227,6 +3228,7 @@ msgid "Brazil"
 msgstr "Brasil"
 
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:69
+#: dataviva/apps/user/templates/user/edit.html:63
 #: dataviva/translations/dictionary.py:152
 msgid "Country"
 msgstr "País"
@@ -3417,7 +3419,7 @@ msgstr "Edite o seu perfil"
 
 #: dataviva/apps/user/templates/user/edit.html:41
 msgid "Birthday"
-msgstr ""
+msgstr "Data de Aniversário"
 
 #: dataviva/apps/user/templates/user/edit.html:50
 #: dataviva/apps/user/templates/user/signup.html:20
@@ -3427,6 +3429,16 @@ msgstr "Nome Completo"
 #: dataviva/apps/user/templates/user/edit.html:71
 msgid "Format: XX"
 msgstr ""
+
+#: dataviva/apps/user/templates/user/edit.html:76
+#, fuzzy
+msgid "City"
+msgstr "Cidade"
+
+#: dataviva/apps/user/templates/user/edit.html:88
+#, fuzzy
+msgid "Institution"
+msgstr "Instituição"
 
 #: dataviva/apps/user/templates/user/edit.html:95
 #: dataviva/templates/modal/signup.html:42
@@ -3440,7 +3452,7 @@ msgstr "Alterar minha senha"
 #: dataviva/apps/user/templates/user/forgot_password.html:28
 msgid "Please inform us your email, so that we can send you a new password"
 msgstr ""
-"or favor, informe-nos seu email para que possamos lhe enviar uma nova "
+"Por favor, informe-nos seu email para que possamos lhe enviar uma nova "
 "senha"
 
 #: dataviva/apps/user/templates/user/forgot_password.html:33
@@ -6892,7 +6904,9 @@ msgstr "A senha inserida é inválida."
 
 #: dataviva/translations/dictionary.py:663
 msgid "A new password has been sent to you! Please check you inbox!"
-msgstr "Uma nova senha foi enviada para você! Por favor, verifique sua caixa de entrada!"
+msgstr ""
+"Uma nova senha foi enviada para você! Por favor, verifique sua caixa de "
+"entrada!"
 
 #: dataviva/translations/dictionary.py:664
 msgid "We couldn't find any user with the informed email address."
