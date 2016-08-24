@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-18 18:10-0300\n"
+"POT-Creation-Date: 2016-08-24 15:11-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -3435,36 +3435,33 @@ msgstr "Eu quero receber novidades e dicas sobre o melhor do Dataviva"
 
 #: dataviva/apps/user/templates/user/edit.html:100
 msgid "Change my password"
-msgstr "Alterar minha Senha"
+msgstr "Alterar minha senha"
 
 #: dataviva/apps/user/templates/user/forgot_password.html:28
-msgid "Please inform us your email, so that we can sent you a new password"
+msgid "Please inform us your email, so that we can send you a new password"
 msgstr ""
-"Por favor, informe-nos seu email para que possamos lhe enviar uma nova "
+"or favor, informe-nos seu email para que possamos lhe enviar uma nova "
 "senha"
 
-#: dataviva/apps/user/templates/user/forgot_password.html:32
+#: dataviva/apps/user/templates/user/forgot_password.html:33
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: dataviva/apps/user/templates/user/signup.html:14
+#: dataviva/apps/user/templates/user/signup.html:39
 #: dataviva/templates/include/header.html:49
 #: dataviva/templates/modal/signup.html:48
 msgid "Sign Up"
 msgstr "Cadastre-se"
 
 #: dataviva/apps/user/templates/user/signup.html:17
-msgid "Escolha suas credenciais..."
-msgstr ""
+msgid "Choose your credentials..."
+msgstr "Escolha suas credenciais..."
 
 #: dataviva/apps/user/templates/user/signup.html:25
 #: dataviva/templates/admin/admin_users.html:14
 msgid "Email"
 msgstr "Email"
-
-#: dataviva/apps/user/templates/user/signup.html:39
-msgid "SignUp"
-msgstr "Cadastre-se"
 
 #: dataviva/apps/user/templates/user/mail/confirmation.html:7
 #: dataviva/templates/include/header.html:51
@@ -6878,28 +6875,52 @@ msgid "Confirmation pending."
 msgstr "Confirmaçāo de e-mail pendente."
 
 #: dataviva/translations/dictionary.py:659
+msgid "Profile successfully updated!"
+msgstr "Perfil atualizado com sucesso!"
+
+#: dataviva/translations/dictionary.py:660
+msgid "Let us know more about you. Please complete your profile."
+msgstr "Deixe-nos saber mais sobre você. Por favor, complete seu perfil."
+
+#: dataviva/translations/dictionary.py:661
+msgid "Password successfully updated!"
+msgstr "Senha alterada com sucesso!"
+
+#: dataviva/translations/dictionary.py:662
+msgid "The current password is invalid."
+msgstr "A senha inserida é inválida."
+
+#: dataviva/translations/dictionary.py:663
+msgid "A new password has been sent to you! Please check you inbox!"
+msgstr "Uma nova senha foi enviada para você! Por favor, verifique sua caixa de entrada!"
+
+#: dataviva/translations/dictionary.py:664
+msgid "We couldn't find any user with the informed email address."
+msgstr "Nenhum usuário foi encontrado com o e-mail informado."
+
+#: dataviva/translations/dictionary.py:667
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr "Desculpe, um erro inesperado ocorreu. Por favor, tente novamente"
 
-#: dataviva/translations/dictionary.py:668 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:676 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:669 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:677 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:670 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:678 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:671 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:679 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
@@ -7190,4 +7211,10 @@ msgstr "com"
 
 #~ msgid "Preferences updated."
 #~ msgstr "Preferências atualizadas."
+
+#~ msgid "Escolha suas credenciais..."
+#~ msgstr ""
+
+#~ msgid "SignUp"
+#~ msgstr "Cadastre-se"
 

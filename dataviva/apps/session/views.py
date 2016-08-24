@@ -56,7 +56,7 @@ def login(provider=None):
                 else:
                     return Response(dictionary()["confirmation_pending"], status=401, mimetype='application/json', )
 
-        return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
+        return Response(dictionary()["invalid_email_or_password"], status=400, mimetype='application/json')
 
     if provider:
         if provider == "google":

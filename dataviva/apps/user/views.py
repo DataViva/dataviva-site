@@ -71,7 +71,7 @@ def create():
                 db.session.add(user)
                 db.session.commit()
             except:
-                return Response(dictionary()["Sorry, an unexpected error has occured. Please try again"], status=500, mimetype='application/json')
+                return Response(dictionary()["500"], status=500, mimetype='application/json')
 
             send_confirmation(user)
 
@@ -108,7 +108,6 @@ def change_profile():
     if form.validate():
         try:
             user = g.user
-
             user.profile = form.profile.data
             user.fullname = form.fullname.data
             user.email = form.email.data
@@ -122,9 +121,9 @@ def change_profile():
 
             db.session.commit()
 
-            flash("Profile updated successfully!", "success")
+            flash(dictionary()["updated_profile"], "success")
         except:
-            flash("Something went wrong!", "danger")
+            flash(dictionary()["500"], "danger")
 
     return render_template("user/edit.html", form=form)
 
@@ -159,7 +158,7 @@ def confirm(code):
         user.confirmed = True
         db.session.commit()
         login_user(user, remember=True)
-        flash("Lest us know more about you. Please complete your profile.", "info")
+        flash(dictionary()["complete_profile"], "info")
     except IndexError:
         abort(404, 'User not found')
 
@@ -199,9 +198,9 @@ def change():
         if user.password == sha512(form.current_password.data):
             user.password = sha512(form.new_password.data)
             db.session.commit()
-            flash("Password successfully update!", "success")
+            flash(dictionary()["updated_password"], "success")
         else:
-            flash("The current password is invalid", "danger")
+            flash(dictionary()["invalid_password"], "danger")
 
     return render_template("user/change_password.html", form=form)
 
@@ -226,9 +225,9 @@ def reset_password():
                                    user=user.serialize(),
                                    new_pwd=pwd)
         send_mail("Forgot Password", [user.email], email_tp)
-        flash("A new password has been sent to you! Please check you inbox!", "success")
+        flash(dictionary()["new_password_sent"], "success")
     except:
-        flash("We couldnt find any user with the informed email address", "danger")
+        flash(dictionary()["couldnt_find_user"], "danger")
 
     return render_template("user/forgot_password.html", form=form)
 
