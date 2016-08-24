@@ -6,7 +6,7 @@ from dataviva.utils.encode import sha512
 from dataviva.utils.send_mail import send_mail
 from datetime import datetime
 from dataviva.translations.dictionary import dictionary
-from flask import Blueprint, render_template, g, session, redirect, jsonify, abort, Response, flash, request
+from flask import Blueprint, render_template, g, session, redirect, jsonify, abort, Response, flash, request, url_for
 from flask.ext.login import login_user, login_required
 from forms import (SignupForm, ChangePasswordForm, ForgotPasswordForm, ProfileForm)
 from hashlib import md5
@@ -21,11 +21,12 @@ mod = Blueprint('user', __name__,
 
 @mod.before_request
 def before_request():
-    g.page_type = 'user'
+    g.page_type = mod.name
 
 
-def _gen_confirmation_code(email):
-    return md5("%s-%s" % (email, datetime.now())).hexdigest()
+@mod.url_value_preprocessor
+def pull_lang_code(endpoint, values):
+    g.locale = values.pop('lang_code')
 
 
 @mod.url_defaults
@@ -33,9 +34,8 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.url_value_preprocessor
-def pull_lang_code(endpoint, values):
-    g.locale = values.pop('lang_code')
+def _gen_confirmation_code(email):
+    return md5("%s-%s" % (email, datetime.now())).hexdigest()
 
 
 @lm.user_loader
@@ -149,7 +149,6 @@ def confirm_pending(user_email):
     if user.confirmed:
         return redirect('/')
 
-    flash(dictionary()["check_your_inbox"] + ' ' + user_email, 'success')
     return render_template('user/confirm_pending.html', user=user.serialize())
 
 
@@ -164,7 +163,7 @@ def confirm(code):
     except IndexError:
         abort(404, 'User not found')
 
-    return redirect('/user/edit')
+    return redirect(url_for('user.edit'))
 
 
 @mod.route('/resend_confirmation/<user_email>', methods=["GET"])
@@ -179,7 +178,8 @@ def resend_confirmation(user_email):
     user.confirmation_code = _gen_confirmation_code(user.email)
     db.session.commit()
     send_confirmation(user)
-    return redirect('/user/confirm_pending/%s' % user.email)
+    flash(dictionary()["check_your_inbox"] + ' ' + user_email, 'success')
+    return redirect(url_for('user.confirm_pending', user_email=user.email))
 
 
 @mod.route('/change_password', methods=["GET"])
@@ -230,9 +230,7 @@ def reset_password():
     except:
         flash("We couldnt find any user with the informed email address", "danger")
 
-        return render_template("user/forgot_password.html", form=form)
-
-    return redirect(g.locale + "/session/login")
+    return render_template("user/forgot_password.html", form=form)
 
 
 @mod.route('/admin', methods=['GET'])

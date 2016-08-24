@@ -54,7 +54,7 @@ def login(provider=None):
                     login_user(user, remember=True)
                     return redirect("/")
                 else:
-                    return Response("Confirm Pending", status=401, mimetype='application/json', )
+                    return Response(dictionary()["confirmation_pending"], status=401, mimetype='application/json', )
 
         return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
 
