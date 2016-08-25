@@ -124,7 +124,29 @@ var summernoteConfig = {
         ['insert', ['link', 'picture', 'video']],
         ['view', ['fullscreen', 'codeview', 'help']]
       ],
-    placeholder: 'Escreva aqui o conteúdo desta publicação'
+    placeholder: 'Escreva aqui o conteúdo desta publicação',
+    callbacks: {
+        onImageUpload: function(files) {
+            var noteEditor = dataviva.ui.loading('.note-editor');
+            noteEditor.text(dataviva.dictionary['loading'] + "...");
+            var file = files[0];
+            var data = new FormData();
+            data.append('image', file);
+            data.append('csrf_token', $('#csrf_token').val());
+            $.ajax({
+                type: 'POST',
+                url: '/' + dataviva.language + '/' + window.location.pathname.split('/')[2] + '/admin/upload',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function(data) {
+                    noteEditor.hide();
+                    $('#text-content-editor').summernote('insertImage', data.image.url);
+                }
+            });
+        }
+    }
 }
 
 function selectorCallback(id, event) {
