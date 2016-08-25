@@ -171,4 +171,8 @@
   height: 227px;
   width: 350px;
 }
+.home .news .row .col-sm-4 p{
+  margin-bottom: 30px;
+  max-height: 15px;
+}
 /* NEWS END */

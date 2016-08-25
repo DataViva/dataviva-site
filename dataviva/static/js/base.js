@@ -523,7 +523,7 @@ $(document).ready(function () {
                 $fullname.addClass('error');
                 status = false;
             }
-            
+
             if ($email.val() === '') {
                 $email.closest('.form-group').addClass('has-error');
                 $email.addClass('error');
@@ -734,7 +734,7 @@ $(document).ready(function () {
                                 $form.find('#'+field).siblings('.control-label').after(error);
                             }
                         }
-                        catch(err) { 
+                        catch(err) {
                             swal({
                                 title: 'Ops!',
                                 text: response.responseText,
@@ -742,7 +742,7 @@ $(document).ready(function () {
                             },
                             function(isConfirm){
                                 if (response.status == 401){
-                                        window.location.pathname = "user/confirm_pending/" + $form.find('input[name="email"]').val()
+                                    window.location.pathname = "/" + dataviva.language + "/user/confirm_pending/" + $form.find('input[name="email"]').val()
                                 }
                             });
                         }

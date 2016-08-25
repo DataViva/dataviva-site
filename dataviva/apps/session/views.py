@@ -37,7 +37,7 @@ def logout():
     session.pop('google_token', None)
     session.pop('facebook_token', None)
     logout_user()
-    return redirect('/')
+    return redirect(url_for('general.home'))
 
 
 @mod.route('/login', methods=['GET', 'POST'])
@@ -52,11 +52,11 @@ def login(provider=None):
             if user:
                 if user.confirmed:
                     login_user(user, remember=True)
-                    return redirect("/")
+                    return redirect(url_for('general.home'))
                 else:
                     return Response(dictionary()["confirmation_pending"], status=401, mimetype='application/json', )
 
-        return Response(dictionary()["invalid_password"], status=400, mimetype='application/json')
+        return Response(dictionary()["invalid_email_or_password"], status=400, mimetype='application/json')
 
     if provider:
         if provider == "google":
@@ -105,7 +105,7 @@ def after_login(email, fullname, language, gender, image):
         session.pop('remember_me', None)
     login_user(user, remember=remember_me)
 
-    return redirect('')
+    return redirect(url_for('general.home'))
 
 
 """
