@@ -77,10 +77,6 @@ $(document).ready(function(){
         $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
     });
 
-    var submittingForm = dataviva.ui.loading('#blog-form');
-    submittingForm.text(dataviva.dictionary['loading'] + "...");
-    submittingForm.hide();
-
     $('#blog-form').submit(function() {
         var aHTML = $('#text-content-editor').summernote('code');
         $('#text_content').val(aHTML);

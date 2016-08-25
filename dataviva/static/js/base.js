@@ -127,6 +127,8 @@ var summernoteConfig = {
     placeholder: 'Escreva aqui o conteúdo desta publicação',
     callbacks: {
         onImageUpload: function(files) {
+            var noteEditor = dataviva.ui.loading('.note-editor');
+            noteEditor.text(dataviva.dictionary['loading'] + "...");
             var file = files[0];
             var data = new FormData();
             data.append('image', file);
@@ -139,6 +141,7 @@ var summernoteConfig = {
                 processData: false,
                 data: data,
                 success: function(data) {
+                    noteEditor.hide();
                     $('#text-content-editor').summernote('insertImage', data.image.url);
                 }
             });
