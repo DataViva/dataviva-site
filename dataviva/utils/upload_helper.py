@@ -5,6 +5,7 @@ import shutil
 from boto3.s3.transfer import S3Transfer
 from config import AWS_ACCESS_KEY, AWS_SECRET_KEY, S3_BUCKET, UPLOAD_FOLDER
 import re
+import hashlib
 from bs4 import BeautifulSoup
 
 
@@ -83,6 +84,7 @@ def upload_images_to_s3(html, object_type, object_id):
             'Key': url.split(domain)[1]
         }
         new_key = prefix + url.split('/')[-1]
+        all_keys.append(new_key)
         client.copy_object(
             Bucket=S3_BUCKET, CopySource=copy_source, Key=new_key)
         client.delete_object(
@@ -95,3 +97,26 @@ def upload_images_to_s3(html, object_type, object_id):
             if image['Key'] not in all_keys:
                 delete_s3_file(image['Key'])
     return html
+
+
+def save_file_temp(file, object_type, csrf_token):
+    local_folder = os.path.join(
+        UPLOAD_FOLDER,
+        object_type,
+        csrf_token
+    )
+    if not os.path.exists(local_folder):
+        os.makedirs(local_folder)
+    h = hashlib.new('ripemd160')
+    h.update(os.urandom(32))
+    file_name = h.hexdigest()
+    file_path = os.path.join(local_folder, file_name)
+    file.save(file_path)
+    image_url = upload_s3_file(
+        file_path,
+        os.path.join(
+            'uploads', object_type, csrf_token, 'images/content', file_name),
+        {'ContentType': file.content_type}
+    )
+    shutil.rmtree(os.path.dirname(local_folder))
+    return image_url

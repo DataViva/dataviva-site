@@ -10,10 +10,8 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import upload_s3_file, save_b64_image, delete_s3_folder, upload_images_to_s3
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp
 import os
-import hashlib
-from shutil import rmtree
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -44,7 +42,7 @@ def index():
 
     for subject_query in subjects_query:
         for row in subject_query.posts:
-            if row.active == True:
+            if row.active is True:
                 subjects.append(subject_query)
                 break
 
@@ -62,7 +60,7 @@ def index_subject(subject):
 
     for subject_query in subjects_query:
         for row in subject_query.posts:
-            if row.active == True:
+            if row.active is True:
                 subjects.append(subject_query)
                 break
 
@@ -70,7 +68,10 @@ def index_subject(subject):
         if float(subject) in [x.id for x in post.subjects]:
             posts.append(post)
 
-    return render_template('blog/index.html', posts=posts, subjects=subjects, active_subject=long(subject))
+    return render_template('blog/index.html',
+                           posts=posts,
+                           subjects=subjects,
+                           active_subject=long(subject))
 
 
 @mod.route('/post/<id>', methods=['GET'])
@@ -82,7 +83,7 @@ def show(id):
 
     for subject_query in subjects_query:
         for row in subject_query.posts:
-            if row.active == True:
+            if row.active is True:
                 subjects.append(subject_query)
                 break
 
@@ -90,7 +91,11 @@ def show(id):
         read_more = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
         read_more = posts
-    return render_template('blog/show.html', post=post, subjects=subjects, id=id, read_more=read_more)
+    return render_template('blog/show.html',
+                           post=post,
+                           subjects=subjects,
+                           id=id,
+                           read_more=read_more)
 
 
 @mod.route('/post/all', methods=['GET'])
@@ -99,8 +104,8 @@ def all_posts():
     posts = []
     for row in result:
         posts += [(row.id, row.title, row.author,
-                   row.publish_date.strftime('%d/%m/%Y'), row.show_home, row.active)]
-
+                   row.publish_date.strftime('%d/%m/%Y'),
+                   row.show_home, row.active)]
     return jsonify(posts=posts)
 
 
@@ -157,7 +162,8 @@ def admin_delete():
 @required_roles(1)
 def new():
     form = RegistrationForm()
-    return render_template('blog/new.html', form=form, action=url_for('blog.create'))
+    return render_template('blog/new.html',
+                           form=form, action=url_for('blog.create'))
 
 
 @mod.route('/admin/post/new', methods=['POST'])
@@ -171,7 +177,6 @@ def create():
         post = Post()
         post.title = form.title.data
         post.author = form.author.data
-        #post.text_content = form.text_content.data
         post.text_call = form.text_call.data
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -212,26 +217,9 @@ def create():
 def upload_image():
     file = request.files['image']
     csrf_token = request.form['csrf_token'].replace('#', '')
-    local_folder = os.path.join(
-        app.config['UPLOAD_FOLDER'],
-        mod.name,
-        csrf_token,
-        'images'
-    )
-    if not os.path.exists(local_folder):
-        os.makedirs(local_folder)
-    h = hashlib.new('ripemd160')
-    h.update(os.urandom(32))
-    file_name = h.hexdigest()
-    file_path = os.path.join(local_folder, file_name)
-    file.save(file_path)
-    image_url = upload_s3_file(
-        file_path,
-        os.path.join('uploads', mod.name, csrf_token, 'images/content', file_name),
-        {'ContentType': file.content_type}
-    )
-    rmtree(os.path.dirname(local_folder))
+    image_url = save_file_temp(file, mod.name, csrf_token)
     return jsonify(image={'url': image_url})
+
 
 @mod.route('/admin/post/<id>/edit', methods=['GET'])
 @login_required
@@ -248,7 +236,9 @@ def edit(id):
     form.publish_date.data = post.publish_date
     form.subject.data = ', '.join([sub.name for sub in post.subjects])
 
-    return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
+    return render_template('blog/edit.html',
+                           form=form,
+                           action=url_for('blog.update', id=id))
 
 
 @mod.route('/admin/post/<id>/edit', methods=['POST'])
