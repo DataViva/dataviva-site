@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-24 17:24-0300\n"
+"POT-Creation-Date: 2016-08-25 14:46-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -367,8 +367,7 @@ msgstr "Inicie uma Pesquisa"
 #: dataviva/apps/news/templates/news/index.html:4
 #: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:12
-#: dataviva/templates/admin.html:23 dataviva/templates/general/index.html:129
-#: dataviva/templates/include/footer.html:8
+#: dataviva/templates/admin.html:23 dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:546
 msgid "News"
@@ -772,9 +771,9 @@ msgstr "No total, o município possui"
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:82
 #: dataviva/apps/industry/templates/industry/tab-general.html:73
 #: dataviva/apps/location/templates/location/tab-general.html:133
-#: dataviva/apps/location/templates/location/tab-general.html:172
+#: dataviva/apps/location/templates/location/tab-general.html:174
 #: dataviva/apps/location/templates/location/tab-general.html:222
-#: dataviva/apps/location/templates/location/tab-general.html:270
+#: dataviva/apps/location/templates/location/tab-general.html:272
 #: dataviva/apps/major/templates/major/tab-general.html:109
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:92
 #: dataviva/apps/product/templates/product/tab-general.html:194
@@ -1325,7 +1324,7 @@ msgstr "Atividades Econômicas"
 #: dataviva/apps/help/templates/help/index.html:93
 #: dataviva/apps/help/templates/help/index.html:245
 #: dataviva/apps/help/templates/help/tab-classifications-occupations.html:3
-#: dataviva/apps/location/templates/location/tab-general.html:152
+#: dataviva/apps/location/templates/location/tab-general.html:154
 #: dataviva/apps/location/templates/location/tab-wages.html:28
 #: dataviva/templates/about.html:62
 #: dataviva/templates/general/browse_categories.html:71
@@ -1517,8 +1516,8 @@ msgstr "Barras"
 #: dataviva/apps/industry/templates/industry/tab-general.html:39
 #: dataviva/apps/industry/templates/industry/tab-wages.html:3
 #: dataviva/apps/location/templates/location/index.html:14
-#: dataviva/apps/location/templates/location/index.html:215
-#: dataviva/apps/location/templates/location/tab-general.html:138
+#: dataviva/apps/location/templates/location/index.html:219
+#: dataviva/apps/location/templates/location/tab-general.html:140
 #: dataviva/apps/location/templates/location/tab-wages.html:3
 #: dataviva/apps/occupation/templates/occupation/index.html:12
 #: dataviva/apps/occupation/templates/occupation/index.html:146
@@ -1533,7 +1532,7 @@ msgstr "Salário e Emprego"
 #: dataviva/apps/industry/templates/industry/index.html:181
 #: dataviva/apps/industry/templates/industry/tab-opportunities.html:2
 #: dataviva/apps/location/templates/location/index.html:16
-#: dataviva/apps/location/templates/location/index.html:223
+#: dataviva/apps/location/templates/location/index.html:227
 #: dataviva/apps/location/templates/location/tab-general.html:180
 #: dataviva/apps/location/templates/location/tab-opportunities.html:3
 #: dataviva/apps/occupation/templates/occupation/graphs-opportunities.html:5
@@ -1653,7 +1652,7 @@ msgstr "Ocupação com maior número de empregos"
 #: dataviva/apps/industry/templates/industry/tab-general.html:52
 #: dataviva/apps/industry/templates/industry/tab-wages.html:15
 #: dataviva/apps/industry/templates/industry/tab-wages.html:30
-#: dataviva/apps/location/templates/location/tab-general.html:145
+#: dataviva/apps/location/templates/location/tab-general.html:147
 #: dataviva/apps/location/templates/location/tab-wages.html:15
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:67
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:74
@@ -1797,7 +1796,7 @@ msgid "Wage by"
 msgstr "Salário por"
 
 #: dataviva/apps/location/templates/location/index.html:12
-#: dataviva/apps/location/templates/location/index.html:207
+#: dataviva/apps/location/templates/location/index.html:209
 #: dataviva/apps/location/templates/location/tab-general.html:97
 #: dataviva/apps/location/templates/location/tab-trade-partner.html:3
 #: dataviva/apps/product/templates/product/index.html:12
@@ -1814,9 +1813,9 @@ msgid "International Trade"
 msgstr "Comércio Internacional"
 
 #: dataviva/apps/location/templates/location/index.html:18
-#: dataviva/apps/location/templates/location/index.html:231
+#: dataviva/apps/location/templates/location/index.html:237
 #: dataviva/apps/location/templates/location/tab-education.html:3
-#: dataviva/apps/location/templates/location/tab-general.html:228
+#: dataviva/apps/location/templates/location/tab-general.html:230
 msgid "Education"
 msgstr "Educaçāo"
 
@@ -2084,23 +2083,23 @@ msgstr "Total de Exportações"
 msgid "Total of Imports"
 msgstr "Total de Importações"
 
-#: dataviva/apps/location/templates/location/tab-general.html:140
+#: dataviva/apps/location/templates/location/tab-general.html:142
 #: dataviva/apps/location/templates/location/tab-wages.html:9
 msgid "Main Economic Activity"
 msgstr "Principal atividade econômica"
 
-#: dataviva/apps/location/templates/location/tab-general.html:147
+#: dataviva/apps/location/templates/location/tab-general.html:149
 #: dataviva/apps/location/templates/location/tab-wages.html:22
 msgid "Main Occupation"
 msgstr "Principal Ocupaçāo"
 
-#: dataviva/apps/location/templates/location/tab-general.html:154
+#: dataviva/apps/location/templates/location/tab-general.html:156
 #: dataviva/apps/location/templates/location/tab-wages.html:35
 #: dataviva/apps/location/templates/location/tab-wages.html:38
 msgid "Average Wage"
 msgstr "Salário Médio"
 
-#: dataviva/apps/location/templates/location/tab-general.html:159
+#: dataviva/apps/location/templates/location/tab-general.html:161
 #: dataviva/apps/location/templates/location/tab-wages.html:59
 #: dataviva/apps/location/templates/location/tab-wages.html:62
 msgid "Total of Jobs"
@@ -2122,19 +2121,19 @@ msgstr "Produto com Maior Ganho de Oportunidade"
 msgid "Economic Activity with Highest Opportunity Gain"
 msgstr "Atividade Econômica com Maior Ganho de Oportunidade"
 
-#: dataviva/apps/location/templates/location/tab-general.html:231
+#: dataviva/apps/location/templates/location/tab-general.html:233
 msgid "University with Highest Number of Enrollments"
 msgstr "Universidade com Maior Número de Matrículas"
 
-#: dataviva/apps/location/templates/location/tab-general.html:239
+#: dataviva/apps/location/templates/location/tab-general.html:241
 msgid "Major with Highest Number of Enrollments"
 msgstr "Curso Superior com Maior Número de Matrículas"
 
-#: dataviva/apps/location/templates/location/tab-general.html:247
+#: dataviva/apps/location/templates/location/tab-general.html:249
 msgid "School with Highest Number of Enrollments"
 msgstr "Escola com Maior Número de Matrículas"
 
-#: dataviva/apps/location/templates/location/tab-general.html:255
+#: dataviva/apps/location/templates/location/tab-general.html:257
 msgid "Basic Course with Highest Number of Enrollments"
 msgstr "Curso Básico com Maior Número de Matrículas"
 
@@ -5359,9 +5358,9 @@ msgstr ""
 msgid "Free Sign Up"
 msgstr "Cadastrar Gratuitamente"
 
-#: dataviva/templates/general/index.html:148
-msgid "Blog"
-msgstr ""
+#: dataviva/templates/general/index.html:129
+msgid "Highlights"
+msgstr "Destaques"
 
 #: dataviva/templates/general/select.html:3
 msgid "Choose a Classification"
@@ -7231,4 +7230,7 @@ msgstr "com"
 
 #~ msgid "SignUp"
 #~ msgstr "Cadastre-se"
+
+#~ msgid "Blog"
+#~ msgstr ""
 
