@@ -182,25 +182,28 @@ def crosswalk():
             for row in result:
                 data += [(row.course_hedu_id, row.cbo_id)]
 
+    if(request.args.get('download')):
+        return jsonify(data=data)
+
     aggregated_data = []
     row_index = 0
-    data.sort() 
+    data.sort()
     while row_index < (len(data)):
         category = data[row_index][0]
         crossings = [data[row_index][1]]
-        
-        if row_index == len(data)-1:
-            aggregated_data += [(category, crossings)];
-            break;
-            
-        while category == data[row_index+1][0]:
-            crossings.append(data[row_index+1][1])
+
+        if row_index == len(data) - 1:
+            aggregated_data += [(category, crossings)]
+            break
+
+        while category == data[row_index + 1][0]:
+            crossings.append(data[row_index + 1][1])
             row_index += 1
 
-            if row_index == len(data)-1: 
-                break;
+            if row_index == len(data) - 1:
+                break
 
-        aggregated_data += [(category, crossings)];
+        aggregated_data += [(category, crossings)]
         row_index += 1
-        
+
     return jsonify(data=aggregated_data)

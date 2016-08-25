@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-18 18:10-0300\n"
+"POT-Creation-Date: 2016-08-24 17:24-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1226,6 +1226,7 @@ msgstr ""
 #: dataviva/apps/occupation/templates/occupation/index.html:72
 #: dataviva/apps/rankings/templates/rankings/_base.html:44
 #: dataviva/apps/rankings/templates/rankings/occupation.html:13
+#: dataviva/apps/user/templates/user/edit.html:82
 #: dataviva/templates/site.html:65 dataviva/translations/dictionary.py:142
 #: dataviva/translations/dictionary.py:357
 msgid "Occupation"
@@ -3128,6 +3129,7 @@ msgid "Brazil"
 msgstr ""
 
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:69
+#: dataviva/apps/user/templates/user/edit.html:63
 #: dataviva/translations/dictionary.py:152
 msgid "Country"
 msgstr ""
@@ -3324,6 +3326,14 @@ msgstr ""
 msgid "Format: XX"
 msgstr ""
 
+#: dataviva/apps/user/templates/user/edit.html:76
+msgid "City"
+msgstr ""
+
+#: dataviva/apps/user/templates/user/edit.html:88
+msgid "Institution"
+msgstr ""
+
 #: dataviva/apps/user/templates/user/edit.html:95
 #: dataviva/templates/modal/signup.html:42
 msgid "I want to receive news and tips of the best use of Dataviva"
@@ -3334,30 +3344,27 @@ msgid "Change my password"
 msgstr ""
 
 #: dataviva/apps/user/templates/user/forgot_password.html:28
-msgid "Please inform us your email, so that we can sent you a new password"
+msgid "Please inform us your email, so that we can send you a new password"
 msgstr ""
 
-#: dataviva/apps/user/templates/user/forgot_password.html:32
+#: dataviva/apps/user/templates/user/forgot_password.html:33
 msgid "Confirm"
 msgstr ""
 
 #: dataviva/apps/user/templates/user/signup.html:14
+#: dataviva/apps/user/templates/user/signup.html:39
 #: dataviva/templates/include/header.html:49
 #: dataviva/templates/modal/signup.html:48
 msgid "Sign Up"
 msgstr ""
 
 #: dataviva/apps/user/templates/user/signup.html:17
-msgid "Escolha suas credenciais..."
+msgid "Choose your credentials..."
 msgstr ""
 
 #: dataviva/apps/user/templates/user/signup.html:25
 #: dataviva/templates/admin/admin_users.html:14
 msgid "Email"
-msgstr ""
-
-#: dataviva/apps/user/templates/user/signup.html:39
-msgid "SignUp"
 msgstr ""
 
 #: dataviva/apps/user/templates/user/mail/confirmation.html:7
@@ -6247,28 +6254,52 @@ msgid "Confirmation pending."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:659
+msgid "Profile successfully updated!"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:660
+msgid "Let us know more about you. Please complete your profile."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:661
+msgid "Password successfully updated!"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:662
+msgid "The current password is invalid."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:663
+msgid "A new password has been sent to you! Please check you inbox!"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:664
+msgid "We couldn't find any user with the informed email address."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:667
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:668 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:676 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:669 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:677 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:670 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:678 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:671 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:679 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
