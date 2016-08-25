@@ -132,23 +132,17 @@ def after_request(response):
 def home():
     g.page_type = 'home'
 
-    # get all the news
-    publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
-
-    # get all blog posts
+    news_publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
     blog_posts = Post.query.filter(Post.id != id, Post.active, Post.show_home).all()
 
-    # merge
-    publications += blog_posts
+    news_publications += blog_posts
 
-    publications = sorted(publications, key=lambda x: x.publish_date, reverse=True)
+    all_publications = sorted(news_publications, key=lambda x: x.publish_date, reverse=True)
 
-    if len(publications) > 6:
-        news = publications[0:6]
-    else:
-        news = publications
+    if len(all_publications) > 6:
+        all_publications = all_publications[0:6]
 
-    return render_template("general/index.html", row1=news[0:3], row2=news[3:6])
+    return render_template("general/index.html", publications=all_publications)
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])
