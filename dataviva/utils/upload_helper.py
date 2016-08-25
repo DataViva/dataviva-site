@@ -118,5 +118,5 @@ def save_file_temp(file, object_type, csrf_token):
             'uploads', object_type, csrf_token, 'images/content', file_name),
         {'ContentType': file.content_type}
     )
-    shutil.rmtree(os.path.dirname(local_folder))
+    shutil.rmtree(local_folder)
     return image_url
