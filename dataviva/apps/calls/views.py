@@ -4,6 +4,8 @@ from dataviva.apps.general.views import get_locale
 from forms import RegistrationForm
 from models import Call
 from dataviva import db
+from flask.ext.login import login_required
+from dataviva.apps.admin.views import required_roles
 
 
 mod = Blueprint('calls', __name__,
@@ -27,12 +29,16 @@ def add_language_code(endpoint, values):
 
 
 @mod.route('/admin/call/new', methods=['GET'])
+@login_required
+@required_roles(1)
 def new():
     form = RegistrationForm()
     return render_template('calls/new.html', form=form)
 
 
 @mod.route('/admin/call/new', methods=['POST'])
+@login_required
+@required_roles(1)
 def create():
     form = RegistrationForm()
     if form.validate() is False:
@@ -52,6 +58,8 @@ def create():
 
 
 @mod.route('/admin/call/<id>/edit', methods=['GET'])
+@login_required
+@required_roles(1)
 def edit(id):
     form = RegistrationForm()
     call = Call.query.filter_by(id=id).first_or_404()
@@ -61,6 +69,8 @@ def edit(id):
 
 
 @mod.route('/admin/call/<id>/edit', methods=['POST'])
+@login_required
+@required_roles(1)
 def update(id):
     form = RegistrationForm()
     if form.validate() is False:
@@ -78,6 +88,8 @@ def update(id):
 
 
 @mod.route('/admin/delete', methods=['POST'])
+@login_required
+@required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
     if ids:
@@ -92,12 +104,16 @@ def admin_delete():
 
 
 @mod.route('/admin', methods=['GET'])
+@login_required
+@required_roles(1)
 def admin():
     calls = Call.query.all()
     return render_template('calls/admin.html', calls=calls)
 
 
 @mod.route('/admin/call/<status>/<status_value>', methods=['POST'])
+@login_required
+@required_roles(1)
 def admin_update(status, status_value):
     for id in request.form.getlist('ids[]'):
         call = Call.query.filter_by(id=id).first_or_404()

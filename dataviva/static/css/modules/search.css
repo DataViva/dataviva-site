@@ -146,3 +146,33 @@
     text-decoration: none;
     font-weight: bold;
 }
+
+.search .panel-body ul.list {
+    columns: 2;
+    -webkit-columns: 2;
+    -moz-columns: 2;
+}
+
+.search .panel-body table {
+    width: 60%;
+    border: 1px solid;
+    border-color: #dddddd;
+    text-align: center;
+}
+
+.search .panel-body th {
+    text-align: center;
+}
+
+.search .panel-body table, th, td {
+    border: 1px solid;
+    border-color: #dddddd;
+}
+
+.search .panel-body {
+    display: none;
+}
+
+.search .panel-heading{
+    cursor: pointer;
+}

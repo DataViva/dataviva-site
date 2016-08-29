@@ -97,7 +97,7 @@
             height = 400,
             left = window.screenX+(window.innerWidth/2)-(width/2),
             top = window.screenY+(window.innerHeight/2)-(height/2)
-        window.open('/account/login/','','width='+width+',height='+height+',\
+        window.open('/user/login/','','width='+width+',height='+height+',\
                                         left='+left+',top='+top+',\
                                         scrollbars=no,resizable=no,\
                                         location=no,menubar=no,toolbar=no')
@@ -2918,7 +2918,7 @@
                 description += " "
                 description += "{{ _('through more than 100 million interactive visualizations.') }}"
                 d3.select(pid).append("a")
-                  .attr("href", "http://www.facebook.com/dialog/feed?display=popup&app_id={{facebook_id}}&description="+description+"&name="+app.viz.title()+"&link="+share_url+"/&picture="+window.location.origin+"/static/img/icons/DataViva.png&redirect_uri="+window.location.origin+"/close/")
+                  .attr("href", "http://www.facebook.com/dialog/feed?display=popup&app_id={{facebook_id}}&description="+description+"&name="+app.viz.title()+"&link="+share_url+"&picture="+window.location.origin+"/static/img/icons/DataViva.png&redirect_uri="+window.location.origin+"/close/")
                   .attr("class", "share_button")
                   .attr("target", "_blank")
                   .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")

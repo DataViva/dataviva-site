@@ -128,7 +128,7 @@
                             <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %} ({{header.year}})</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.life_expectation|max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">Anos</small>
+                                <small class="magnitude">{% trans %}Years{% endtrans %}</small>
                             </div>
                         </div>
                     </div>
@@ -198,6 +198,8 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
                 </li>
+                <!-- Show tab only for exist data -->
+                {% if body.secex_year is not none %}
                 <li role="presentation" class="{{ 'active' if tab == 'trade-partner' }}">
                     <a href="#trade-partner"
                        aria-controls="trade-partner"
@@ -206,6 +208,8 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}International Trade{% endtrans %}</a>
                 </li>
+                {% endif %}
+                {% if body.rais_year is not none %}
                 <li role="presentation" class="{{ 'active' if tab == 'wages' }}">
                     <a href="#wages"
                        aria-controls="wages"
@@ -222,6 +226,8 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Economic Opportunities{% endtrans %}</a>
                 </li>
+                {% endif %}
+                {% if body.university_year is not none %}
                 <li role="presentation" class="{{ 'active' if tab == 'education' }}">
                     <a href="#education"
                        aria-controls="education"
@@ -230,7 +236,7 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Education{% endtrans %}</a>
                 </li>
-
+                {% endif %}
             </ul>
         </div>
     </nav>
@@ -238,10 +244,19 @@
     <div class="container">
         <div class="tab-content">
           {% include "location/tab-general.html" %}
-          {% include "location/tab-trade-partner.html" %}
-          {% include "location/tab-wages.html" %}
-          {% include "location/tab-opportunities.html" %}
-          {% include "location/tab-education.html" %}
+
+          {% if body.secex_year is not none %}
+            {% include "location/tab-trade-partner.html" %}
+          {% endif %}
+
+          {% if body.rais_year is not none %}
+            {% include "location/tab-wages.html" %}
+            {% include "location/tab-opportunities.html" %}
+          {% endif %}
+
+          {% if body.university_year is not none %}
+            {% include "location/tab-education.html" %}
+          {% endif %}
         </div>
     </div>
 </section>

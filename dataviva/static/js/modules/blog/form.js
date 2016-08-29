@@ -14,7 +14,6 @@ var inputThumbCallback = function() {
 }
 
 $(document).ready(function(){
-
     $('#text-content-editor').append($('#text_content').val())
     $('#text-content-editor').summernote(summernoteConfig);
 
@@ -78,14 +77,12 @@ $(document).ready(function(){
         $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
     });
 
-    $(function() {
-        $('#blog-form').submit(function() {
-            var aHTML = $('#text-content-editor').summernote('code');
-            $('#text_content').val(aHTML);
-            if ($('.summernote').summernote('isEmpty')) {
-                $('#text_content').val('');
-            }
-            return true;
-        });
+    $('#blog-form').submit(function() {
+        var aHTML = $('#text-content-editor').summernote('code');
+        $('#text_content').val(aHTML);
+        if ($('.summernote').summernote('isEmpty')) {
+            $('#text_content').val('');
+        }
+        return true;
     });
 });

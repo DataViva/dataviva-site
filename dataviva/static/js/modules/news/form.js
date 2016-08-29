@@ -1,29 +1,3 @@
-var Publication = function() {
-    var self = this;
-
-    self.status = false;
-
-    self.submit_form = function(result) {
-        file_paths = result.file_paths;
-        for (var i = 0; i < file_paths.length; i++) {
-            $('#text-content-editor img[name=img' + file_paths[i]['id'] + ']')
-                .attr('src', file_paths[i]['path'])
-                .removeAttr('data-filename')
-                .removeAttr('name');
-        }
-        $('figure').each(function() {
-            if ($(this).children('img').length == 0) {
-                $(this).children('figcaption').remove();
-            }
-        })
-        text_content = $('#text-content-editor').html();
-        $('#text_content').val(text_content);
-        self.status = true;
-        $('#news-form').submit();
-    }
-
-}
-
 var inputThumbCallback = function() {
     $('#thumb-img').hide();
     $('.thumb-buttons').hide();
@@ -58,8 +32,6 @@ function add_caption(image) {
 }
 
 $(document).ready(function(){
-    var publication = new Publication();
-
     $('#text-content-editor').append($('#text_content').val())
     $('#text-content-editor').summernote(summernoteConfig);
 
@@ -124,36 +96,12 @@ $(document).ready(function(){
         $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
     });
 
-    var submittingForm = dataviva.ui.loading('#news-form');
-    submittingForm.text(dataviva.dictionary['loading'] + "...");
-    submittingForm.hide();
-
     $('#news-form').submit(function() {
-        if (publication.status) {
-            return publication.status;
-        } else {
-            submittingForm.show();
-            $('#text-content-editor').summernote('destroy');
-            $('#text-content-editor').hide();
-            $('button[type=submit]').prop('disabled', true);
-            var data = new FormData();
-            $('#text-content-editor img').each(function(i) {
-                data.append(i+1, $(this).attr('src'));
-                $(this).attr('name', 'img' + (i+1));
-            });
-            data.append('csrf_token', $('#csrf_token').val());
-            $.ajax({
-                url: '/' + dataviva.language + '/news/admin/publication/new/upload',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: data,
-                type: 'POST',
-                success: function (result) {
-                    publication.submit_form(result);
-                }
-            });
-            return false;
+        var aHTML = $('#text-content-editor').summernote('code');
+        $('#text_content').val(aHTML);
+        if ($('.summernote').summernote('isEmpty')) {
+            $('#text_content').val('');
         }
+        return true;
     });
 });
