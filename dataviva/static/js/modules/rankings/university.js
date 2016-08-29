@@ -20,7 +20,14 @@ var universityTable = function () {
     this.tableId = '#university-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-university'
+            }
+        ],
         "ajax": {
             "url": "/hedu/all/all/show/all/?order=enrolled.desc",
             "dataSrc": "data",

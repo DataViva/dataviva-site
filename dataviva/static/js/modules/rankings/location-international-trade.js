@@ -24,7 +24,14 @@ var LocationTradeRanking = function () {
     this.tableId = '#location-international-trade-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-location-international-trade'
+            }
+        ],
         "ajax": {
             "url": "/secex/all-0/show.9/all/all/?order=eci.desc",
             "dataSrc": "data",
