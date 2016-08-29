@@ -26,7 +26,14 @@ var EconomicActivitiesTable = function () {
     this.tableId = '#economic-activities-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-economic-activities'
+            }
+        ],
         "ajax": {
             "url": "/rais/all/all/show.6/all/?order=num_jobs.desc",
             "dataSrc": "data",

@@ -26,7 +26,14 @@ var LocationWages = function () {
     this.tableId = '#location-wages-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-location-wages-and-employment'
+            }
+        ],
         "ajax": {
             "url": "/rais/all/show.9/all/all/?order=num_jobs.desc",
             "dataSrc": "data",
