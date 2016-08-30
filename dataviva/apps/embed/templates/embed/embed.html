@@ -33,6 +33,7 @@
     <script>moment.lang("{{g.locale}}")</script>
     <script src="/static/js/modules/embed/utils.dataviva.js"></script>
     <script src="/static/js/modules/embed/utils.general.js"></script>
+    <script type="text/javascript" src="/static/js/libs/jquery-2.1.1.js"></script>
 
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/modules/embed/styles.apps.css" />
     <script>var redirect = false</script>
@@ -46,6 +47,7 @@
       dataviva.language = "{{ g.locale }}";
       dataviva.dictionary = {{ g.dictionary|safe }};
       dataviva.attr_version = {{ g.attr_version|safe }};
+      dataviva.s3_host = "{{ g.s3_host }}"
     </script>
 
   </head>
@@ -2901,41 +2903,57 @@
                 d3.select(pid).append("h3")
                   .text(dataviva.format.text("social_media"))
 
-                // Twitter link
-                var share_url = window.location.origin + "/" + dataviva.language + "/" + data.slug + "/";
-                d3.select(pid).append("a")
-                  .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
-                  .attr("class", "share_button")
-                  .attr("target", "_blank")
-                  .attr("onclick", "return !window.open(this.href, 'Twitter', 'width=640,height=300')")
-                  .attr("id", "Twitter")
-                  .attr("title", function(){
-                    return dataviva.language == "pt" ? "Tweetar" : "Tweet";
-                  })
+                var category_name = document.referrer.split('/')[4];
+                var category_id = document.referrer.split('/')[5];
+                var url_image =  dataviva.s3_host+"/img/"+category_name+"/"+category_name+"_"+category_id+".jpg"
+                var share_url = "http://staging.dataviva.info/" + dataviva.language + "/" + data.slug + "/"
+                //var share_url = window.location.origin + "/" + dataviva.language + "/" + data.slug + "/";
 
-                // Facebook link
-                var description = "{{ _('DataViva is opening up data for the entire formal sector of the Brazilian economy') }}"
-                description += " "
-                description += "{{ _('through more than 100 million interactive visualizations.') }}"
-                d3.select(pid).append("a")
-                  .attr("href", "http://www.facebook.com/dialog/feed?display=popup&app_id={{facebook_id}}&description="+description+"&name="+app.viz.title()+"&link="+share_url+"&picture="+window.location.origin+"/static/img/icons/DataViva.png&redirect_uri="+window.location.origin+"/close/")
-                  .attr("class", "share_button")
-                  .attr("target", "_blank")
-                  .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
-                  .attr("id", "Facebook")
-                  .attr("title", "Facebook")
+                $.ajax({
+                    url: '/embed/image?link=' + url_image,
+                    type:'GET',
+                    success: function(request, status){
 
-                // Google link
-                d3.select(pid).append("a")
-                  .attr("href", function(){
-                    var lang = dataviva.language == "pt" ? "pt-BR" : "en-US";
-                    return "https://plus.google.com/share?url=" + share_url + "&hl=" + lang
-                  })
-                  .attr("class", "share_button")
-                  .attr("target", "_blank")
-                  .attr("onclick", "return !window.open(this.href, 'Google+', 'width=640,height=300')")
-                  .attr("id", "Google")
-                  .attr("title", "Google+")
+                      if(request != "200"){
+                        url_image =  dataviva.s3_host+"/img/"+category_name+"/"+category_name+"_all.jpg"
+                      }
+
+                      // Twitter link
+                      d3.select(pid).append("a")
+                        .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
+                        .attr("class", "share_button")
+                        .attr("target", "_blank")
+                        .attr("onclick", "return !window.open(this.href, 'Twitter', 'width=640,height=300')")
+                        .attr("id", "Twitter")
+                        .attr("title", function(){
+                          return dataviva.language == "pt" ? "Tweetar" : "Tweet";
+                        })
+
+                      // Facebook link
+                      var description = "{{ _('DataViva is opening up data for the entire formal sector of the Brazilian economy') }}"
+                      description += " "
+                      description += "{{ _('through more than 100 million interactive visualizations.') }}"
+                      d3.select(pid).append("a")
+                        .attr("href", "http://www.facebook.com/dialog/feed?display=popup&app_id={{facebook_id}}&description="+description+"&name="+app.viz.title()+"&link="+share_url+"&picture="+url_image+"&redirect_uri="+window.location.origin+"/close/")
+                        .attr("class", "share_button")
+                        .attr("target", "_blank")
+                        .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
+                        .attr("id", "Facebook")
+                        .attr("title", "Facebook")
+
+                      // Google link
+                      d3.select(pid).append("a")
+                        .attr("href", function(){
+                          var lang = dataviva.language == "pt" ? "pt-BR" : "en-US";
+                          return "https://plus.google.com/share?url=" + share_url + "&hl=" + lang
+                        })
+                        .attr("class", "share_button")
+                        .attr("target", "_blank")
+                        .attr("onclick", "return !window.open(this.href, 'Google+', 'width=640,height=300')")
+                        .attr("id", "Google")
+                        .attr("title", "Google+")
+                    }
+                });
 
               }
             })
