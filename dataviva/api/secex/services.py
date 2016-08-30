@@ -375,7 +375,7 @@ class ProductTradePartners(Product):
             self.max_year_query = db.session.query(
                 func.max(Ymbpw.year)).filter_by(
                 hs_id=product_id, bra_id=bra_id).filter(
-                Ympw.year < self.max_database_year)
+                Ymbpw.year < self.max_database_year)
             self.secex_query = Ymbpw.query.join(Wld).filter(
                 Ymbpw.hs_id == self.product_id,
                 Ymbpw.year == self.max_year_query,
