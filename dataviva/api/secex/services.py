@@ -13,10 +13,8 @@ class TradePartner:
         self._secex_sorted_by_imports = None
         self.wld_id = wld_id
         self.bra_id = bra_id
-        self.max_database_year = db.session.query(func.max(Ymw.year))
         self.max_year_query = db.session.query(
-            func.max(Ymw.year)).filter_by(wld_id=wld_id).filter(
-            Ymw.year < self.max_database_year)
+            func.max(Ymw.year)).filter_by(wld_id=wld_id, month=12)
         if bra_id is not None:
             self.secex_query = Ymbw.query.join(Wld).filter(
                 Ymbw.wld_id == self.wld_id,
@@ -133,10 +131,8 @@ class TradePartnerMunicipalities(TradePartner):
 
     def __init__(self, wld_id, bra_id):
         TradePartner.__init__(self, wld_id, bra_id)
-        self.max_database_year = db.session.query(func.max(Ymbw.year))
         self.max_year_query = db.session.query(
-            func.max(Ymbw.year)).filter_by(wld_id=wld_id).filter(
-            Ymbw.year < self.max_database_year)
+            func.max(Ymbw.year)).filter_by(wld_id=wld_id, month=12)
         if bra_id is not None:
             self.secex_query = Ymbw.query.join(Wld).join(Bra).filter(
                 Ymbw.wld_id == self.wld_id,
@@ -172,10 +168,8 @@ class TradePartnerProducts(TradePartner):
 
     def __init__(self, wld_id, bra_id):
         TradePartner.__init__(self, wld_id, bra_id)
-        self.max_database_year = db.session.query(func.max(Ympw.year))
         self.max_year_query = db.session.query(
-            func.max(Ympw.year)).filter_by(wld_id=wld_id).filter(
-            Ympw.year < self.max_database_year)
+            func.max(Ympw.year)).filter_by(wld_id=wld_id, month=12)
         if bra_id is not None:
             self.secex_query = Ymbpw.query.join(Wld).filter(
                 Ymbpw.wld_id == self.wld_id,
@@ -215,22 +209,21 @@ class Product:
         self._secex_sorted_by_exports = None
         self._secex_sorted_by_imports = None
         self.product_id = product_id
-        self.max_database_year = db.session.query(func.max(Ymp.year))
 
         if product_id is None:
             self.max_year_query = db.session.query(
-                func.max(Ymp.year)).filter(Ymp.year < self.max_database_year)
+                func.max(Ymp.year)).filter_by(month=12)
             self.secex_query = Ymp.query.join(Hs).filter(
-                Ymp.month == 0,
-                Ymp.year == self.max_year_query)
+                    Ymp.month == 0,
+                    Ymp.year == self.max_year_query)
         else:
             self.max_year_query = db.session.query(
-                func.max(Ymp.year)).filter_by(hs_id=product_id).filter(
-                Ymp.year < self.max_database_year)
+                func.max(Ymp.year)).filter_by(hs_id=product_id, month=12)
             self.secex_query = Ymp.query.join(Hs).filter(
                 Ymp.hs_id == self.product_id,
                 Ymp.month == 0,
                 Ymp.year == self.max_year_query)
+
 
     def __secex__(self):
         if not self._secex:
@@ -338,17 +331,16 @@ class Product:
         return export_value_growth_in_five_years.export_val_growth_5
 
     def all_imported(self):
-        total_imported = db.session.query(func.sum(Ymb.import_val)).filter_by(
-            year=self.max_year_query,
-            month=0,
-            bra_id_len=1).one()
+        total_imported = db.session.query(func.sum(Ymb.import_val)).filter_by(year=self.max_year_query,
+            month = 0,
+            bra_id_len = 1).one()
         return float(total_imported[0])
 
+
     def all_exported(self):
-        total_exported = db.session.query(func.sum(Ymb.export_val)).filter_by(
-            year=self.max_year_query,
-            month=0,
-            bra_id_len=1).one()
+        total_exported = db.session.query(func.sum(Ymb.export_val)).filter_by(year = self.max_year_query,
+            month = 0,
+            bra_id_len = 1).one()
         return float(total_exported[0])
 
     def all_trade_balance(self):
@@ -359,10 +351,8 @@ class ProductTradePartners(Product):
 
     def __init__(self, product_id, bra_id):
         Product.__init__(self, product_id)
-        self.max_database_year = db.session.query(func.max(Ympw.year))
         self.max_year_query = db.session.query(
-            func.max(Ympw.year)).filter_by(hs_id=product_id).filter(
-            Ympw.year < self.max_database_year)
+            func.max(Ympw.year)).filter_by(hs_id=product_id, month=12)
         self.secex_query = Ympw.query.join(Wld).filter(
             Ympw.hs_id == self.product_id,
             Ympw.wld_id_len == 5,
@@ -373,9 +363,7 @@ class ProductTradePartners(Product):
         if bra_id:
             self.bra_id = bra_id
             self.max_year_query = db.session.query(
-                func.max(Ymbpw.year)).filter_by(
-                hs_id=product_id, bra_id=bra_id).filter(
-                Ymbpw.year < self.max_database_year)
+                func.max(Ymbpw.year)).filter_by(hs_id=product_id, bra_id=bra_id, month=12)
             self.secex_query = Ymbpw.query.join(Wld).filter(
                 Ymbpw.hs_id == self.product_id,
                 Ymbpw.year == self.max_year_query,
@@ -404,10 +392,8 @@ class ProductMunicipalities(Product):
 
     def __init__(self, product_id, bra_id):
         Product.__init__(self, product_id)
-        self.max_database_year = db.session.query(func.max(Ymbp.year))
         self.max_year_query = db.session.query(
-            func.max(Ymbp.year)).filter_by(hs_id=product_id).filter(
-            Ymbp.year < self.max_database_year)
+            func.max(Ymbp.year)).filter_by(hs_id=product_id, month=12)
         self.secex_query = Ymbp.query.join(Bra).filter(
             Ymbp.hs_id == self.product_id,
             Ymbp.bra_id_len == 9,
@@ -418,14 +404,12 @@ class ProductMunicipalities(Product):
         if bra_id:
             self.bra_id = bra_id
             self.max_year_query = db.session.query(
-                func.max(Ymbp.year)).filter_by(
-                hs_id=product_id, bra_id=bra_id).filter(
-                Ymbp < self.max_database_year)
+                func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id, month=12)
             self.secex_query = Ymbp.query.join(Bra).filter(
                 Ymbp.hs_id == self.product_id,
                 Ymbp.year == self.max_year_query,
                 Ymbp.bra_id_len == 9,
-                Ymbp.bra_id.like(str(self.bra_id) + '%'),
+                Ymbp.bra_id.like(str(self.bra_id)+'%'),
                 Ymbp.month == 0)
 
     def municipality_with_more_exports(self):
@@ -467,11 +451,8 @@ class ProductLocations(Product):
         self._secex = None
         self.bra_id = bra_id
         self.product_id = product_id
-        self.max_database_year = db.session.query(func.max(Ymbp.year))
         self.max_year_query = db.session.query(
-            func.max(Ymbp.year)).filter_by(
-            hs_id=product_id, bra_id=bra_id).filter(
-            Ymbp.year < self.max_database_year)
+            func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id, month=12)
         self.secex_query = Ymbp.query.filter(
             Ymbp.hs_id == self.product_id,
             Ymbp.bra_id == self.bra_id,
@@ -544,7 +525,7 @@ class Location:
         if not self._secex_sorted_by_distance:
             not_nulls_list = []
             for i in self.__secex_list__():
-                if i.distance is not None:
+                if i.distance != None:
                     not_nulls_list.append(i)
             not_nulls_list.sort(
                 key=lambda secex: secex.distance_wld, reverse=False)
@@ -555,7 +536,7 @@ class Location:
         if not self._secex_sorted_by_opp_gain:
             not_nulls_list = []
             for i in self.__secex_list__():
-                if i.opp_gain is not None:
+                if i.opp_gain != None:
                     not_nulls_list.append(i)
             not_nulls_list.sort(
                 key=lambda secex: secex.opp_gain_wld, reverse=True)
@@ -602,7 +583,7 @@ class Location:
             export_sum = 0
             secex = self.__secex_sorted_by_exports__()
             for i in secex:
-                if i.export_val is not None:
+                if not i.export_val == None:
                     export_sum += i.export_val
         except IndexError:
             return None
@@ -614,7 +595,7 @@ class Location:
             import_sum = 0
             secex = self.__secex_sorted_by_imports__()
             for i in secex:
-                if i.import_val is not None:
+                if not i.import_val == None:
                     import_sum += i.import_val
         except IndexError:
             return None
@@ -659,10 +640,8 @@ class LocationWld(Location):
     def __init__(self, bra_id):
         Location.__init__(self, bra_id)
         self.bra_id = bra_id
-        self.max_database_year = db.session.query(func.max(Ymbw.year))
         self.max_year_query = db.session.query(
-            func.max(Ymbw.year)).filter_by(bra_id=self.bra_id).filter(
-            Ymbw.year < self.max_database_year)
+            func.max(Ymbw.year)).filter_by(bra_id=self.bra_id, month=12)
         self.secex_query = Ymbw.query.join(Wld).filter(
             Ymbw.bra_id == self.bra_id,
             Ymbw.month == 0,
@@ -708,10 +687,8 @@ class LocationEciRankings:
         self._secex = None
         self._secex_sorted_by_eci = None
         self.bra_id = bra_id
-        self.max_database_year = db.session.query(func.max(Ymb.year))
         self.max_year_query = db.session.query(
-            func.max(Ymb.year)).filter_by(bra_id=self.bra_id).filter(
-            Ymb.year < self.max_database_year)
+            func.max(Ymb.year)).filter_by(bra_id=self.bra_id, month=12)
         self.secex_query = Ymb.query.filter(
             Ymb.year == self.max_year_query,
             Ymb.month == 0,
