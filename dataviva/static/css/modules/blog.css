@@ -220,6 +220,7 @@
 }
 
 .blog figure figcaption {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: italic;
     font-size: 12px;
 }
