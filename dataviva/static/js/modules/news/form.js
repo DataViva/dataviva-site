@@ -13,23 +13,24 @@ var inputThumbCallback = function() {
     });
 }
 
-function add_caption(image) {
+var add_caption = function(image) {
     image.wrap('<figure> </figure>');
     figcaption = $('<figcaption> </figcaption>');
     if (image.attr('data-original-title'))
         figcaption.html(image.attr('data-original-title'));
     figcaption.appendTo(image.parent());
     var image_float = image.css('float');
+    var image_width = image.css('width');
     if (image_float == 'left' || image_float == 'right') {
         image
             .css('float', 'none')
             .parent().css('float', image_float);
     }
-    image.parent().css('width', image.css('width'));
+    image.parent().css('width', image_width);
     image.css('width', '100%');
 }
 
-function remove_caption(image) {
+var remove_caption = function(image) {
     image.siblings('figcaption').remove();
     var figure_width = image.parent().css('width');
     image.css('width', figure_width);
@@ -65,12 +66,12 @@ $(document).ready(function(){
     $('#news-preview').click(function() {
         $('#news-preview').prop('disabled', true);
         $('#news-edit').prop('disabled', false);
-        $('#summernote-field img').each(function() {
+        $('#text-content-editor').summernote('destroy');
+        $('#text-content-editor img').each(function() {
             add_caption($(this));
         });
-        var aHTML = $('#text-content-editor').summernote('code');
-        $('#text_content').val(aHTML);        
-        $('#text-content-editor').summernote('destroy');
+        var aHTML = $('#text-content-editor').html();
+        $('#text_content').val(aHTML);
     });
 
     cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
