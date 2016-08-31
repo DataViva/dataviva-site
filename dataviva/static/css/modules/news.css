@@ -175,3 +175,13 @@
     text-decoration: none;
     font-weight: bold;
 }
+
+.news figure figcaption {
+    font-style: italic;
+    font-size: 12px;
+}
+
+.news .note-editor img, .news figure {
+    margin: 20px 20px 10px 20px;
+    text-align: center;
+}
