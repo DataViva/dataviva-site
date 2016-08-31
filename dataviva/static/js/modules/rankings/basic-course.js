@@ -15,7 +15,14 @@ var BasicCourseTable = function () {
     this.tableId = '#basic-course-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-basic-course'
+            }
+        ],
         "ajax": {
             "url": "/sc/all/all/all/show.5/?order=enrolled.desc",
             "dataSrc": "data",

@@ -21,11 +21,11 @@
               {% trans %}is one of the {% endtrans %}{{ profile.number_of_municipalities}}
               {% trans %}cities in the state of {% endtrans %}{{ location.preposition('de') }} {{ profile.state_name }}.
               {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
-              {% trans %}km² of area, has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
-              {% trans %}people and a GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
+              {% trans %}km² of area, it has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
+              {% trans %}people and a per-capita GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
               {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
-              {% trans %}mesoregion, it is the{% endtrans %} {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}
-              {% trans %}city of the state regarding the GDP ranking{% endtrans %}.</p>
+              {% trans %}mesoregion, it is the{% endtrans %} {% if  profile.gdp_rank  == 1 and g.locale == "en" %} top {%else%}  {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}{% endif %}
+              {% trans %}city in the state by GDP{% endtrans %}.</p>
           {% elif profile.bra_id|length == 7 %}
               <p>
               {% if g.locale == "pt" %}
@@ -92,185 +92,186 @@
         {% endif %}
 
   <div class="row">
-
-    <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}International Trade{% endtrans %} ({{body.product_year}})</h3>
-      <dl class="dl-horizontal">
-        {% if body.main_product_by_export_value %}
-        <dt>{% trans %}Main Product by Total Value Exported{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.main_product_by_export_value_name }}</small>
-          USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3, True) }}</strong>
-          <span>{{ body.main_product_by_export_value | magnitude }}</span>
-        </dd>
-        {% endif %}
-        {% if body.main_product_by_import_value %}
-        <dt>{% trans %}Main Product by Total Value Imported{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.main_product_by_import_value_name}}</small>
-          USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3, True) }}</strong>
-          <span>{{ body.main_product_by_import_value | magnitude }}</span>
-        </dd>
-        {% endif %}
-        <dt>{% trans %}Total of Exports{% endtrans %}</dt>
-        <dd>
-          USD <strong class="counter">{{ body.total_exports | max_digits(3, True) }}</strong>
-          <span>{{ body.total_exports | magnitude }}</span>
-        </dd>
-        <dt>{% trans %}Total of Imports{% endtrans %}</dt>
-        <dd>
-          USD <strong class="counter">{{ body.total_imports | max_digits(3, True) }}</strong>
-          <span>{{ body.total_imports | magnitude }}</span>
-        </dd>
-      </dl>
-      <a href="#trade-partner"
-                    aria-controls="trade-partner"
-                    role="tab"
-                    data-toggle="tab"
-                    class="pull-right btn btn-primary btn-xs m-r-lg"
-                    graph
-                    data-id="{{ location.id }}">
-        {% trans %}More details{% endtrans %}
-      </a>
-    </div><!--/.col-->
-
-    <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}Wages and Jobs{% endtrans %} ({{body.industry_year}})</h3>
-      <dl class="dl-horizontal">
-        <dt>{% trans %}Main Economic Activity{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.main_industry_by_num_jobs_name}}</small>
-          <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3, True) }}</strong>
-          <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
-          {% trans %}Jobs{% endtrans %}
-        </dd>
-        <dt>{% trans %}Main Occupation{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.main_occupation_by_num_jobs_name}}</small>
-          <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3, True) }}</strong>
-          <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
-          {% trans %}Occupations{% endtrans %}
-        </dd>
-        <dt>{% trans %}Average Wage{% endtrans %}</dt>
-        <dd>
-          R$ <strong class="counter">{{ body.avg_wage | max_digits(3, True) }}</strong>
-          <span>{{ body.avg_wage | magnitude }}</span>
-        </dd>
-        <dt>{% trans %}Total of Jobs{% endtrans %}</dt>
-        <dd>
-          R$ <strong class="counter">{{ body.total_jobs | max_digits(3, True) }}</strong>
-          <span>{{ body.total_jobs | magnitude }}</span>
-        </dd>
-      </dl>
-      <a href="#wages"
-                    aria-controls="wages"
-                    role="tab"
-                    data-toggle="tab"
-                    class="pull-right btn btn-primary btn-xs m-r-lg"
-                    graph
-                    data-id="{{ location.id }}">
-        {% trans %}More details{% endtrans %}
-      </a>
-    </div>
-  </div>
-
-  <div class="row">
-    {% if location.id != 'all' %}
-    <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}Economic Opportunities{% endtrans %} ({{body.industry_year}})</h3>
-      <dl class="dl-horizontal">
-        {% if body.less_distance_by_product %}
-        <dt>{% trans %}Product with Shortest Distance{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.less_distance_by_product_name}}</small>
-          <strong class="counter">{{ body.less_distance_by_product | max_digits(3, True) }}</strong>
-          <span>{{ body.less_distance_by_product | magnitude }}</span>
-        </dd>
-        {% endif %}
-        {% if body.less_distance_by_occupation %}
-        <dt>{% trans %}Economic Activity with Shortest Distance{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.less_distance_by_occupation_name}}</small>
-          <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3, True) }}</strong>
-          <span>{{ body.less_distance_by_occupation | magnitude }}</span>
-        </dd>
-        {% endif %}
-        {% if body.opportunity_gain_by_product %}
-        <dt>{% trans %}Product with Highest Opportunity Gain{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.opportunity_gain_by_product_name}}</small>
-          <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3, True) }}</strong>
-          <span>{{ body.opportunity_gain_by_product | magnitude }}</span>
-        </dd>
-        {% endif %}
-        {% if body.opportunity_gain_by_occupation %}
-        <dt>{% trans %}Economic Activity with Highest Opportunity Gain{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.opportunity_gain_by_occupation_name}}</small>
-          <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3, True) }}</strong>
-          <span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
-        </dd>
-        {% endif %}
-      </dl>
-      <a href="#opportunities"
-                    aria-controls="opportunities"
-                    role="tab"
-                    data-toggle="tab"
-                    class="pull-right btn btn-primary btn-xs m-r-lg"
-                    graph
-                    data-id="{{ location.id }}">
+    {% if body.secex_year is not none %}
+      <div class="dl-box col-xs-12 col-md-6">
+        <h3>{% trans %}International Trade{% endtrans %} ({{body.product_year}})</h3>
+        <dl class="dl-horizontal">
+          {% if body.main_product_by_export_value %}
+          <dt>{% trans %}Main Product by Total Value Exported{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.main_product_by_export_value_name }}</small>
+            USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3, True) }}</strong>
+            <span>{{ body.main_product_by_export_value | magnitude }}</span>
+          </dd>
+          {% endif %}
+          {% if body.main_product_by_import_value %}
+          <dt>{% trans %}Main Product by Total Value Imported{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.main_product_by_import_value_name}}</small>
+            USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3, True) }}</strong>
+            <span>{{ body.main_product_by_import_value | magnitude }}</span>
+          </dd>
+          {% endif %}
+          <dt>{% trans %}Total of Exports{% endtrans %}</dt>
+          <dd>
+            USD <strong class="counter">{{ body.total_exports | max_digits(3, True) }}</strong>
+            <span>{{ body.total_exports | magnitude }}</span>
+          </dd>
+          <dt>{% trans %}Total of Imports{% endtrans %}</dt>
+          <dd>
+            USD <strong class="counter">{{ body.total_imports | max_digits(3, True) }}</strong>
+            <span>{{ body.total_imports | magnitude }}</span>
+          </dd>
+        </dl>
+        <a href="#trade-partner"
+                      aria-controls="trade-partner"
+                      role="tab"
+                      data-toggle="tab"
+                      class="pull-right btn btn-primary btn-xs m-r-lg"
+                      graph
+                      data-id="{{ location.id }}">
           {% trans %}More details{% endtrans %}
-      </a>
-    </div>
+        </a>
+      </div>
     {% endif %}
 
-    <div class="dl-box col-xs-12 col-md-6">
-      <h3>{% trans %}Education{% endtrans %} ({{body.university_year}})</h3>
-      <dl class="dl-horizontal">
-      {% if body.highest_enrolled_by_university %}
-        <dt>{% trans %}University with Highest Number of Enrollments{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.highest_enrolled_by_university_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3, True)}}</strong>
-          <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
-        </dd>
-        {% endif %}
-        {% if body.highest_enrolled_by_major %}
-        <dt>{% trans %}Major with Highest Number of Enrollments{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.highest_enrolled_by_major_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3, True)}}</strong>
-          <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
-        </dd>
-        {% endif %}
-        {% if body.highest_enrolled_by_school %}
-        <dt>{% trans %}School with Highest Number of Enrollments{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.highest_enrolled_by_school_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3, True)}}</strong>
-          <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
-        </dd>
-        {% endif %}
-        {% if body.highest_enrolled_by_basic_course %}
-        <dt>{% trans %}Basic Course with Highest Number of Enrollments{% endtrans %}</dt>
-        <dd>
-          <small>{{ body.highest_enrolled_by_basic_course_name}}</small>
-          <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3, True)}}</strong>
-          <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
-        </dd>
-        {% endif %}
-      </dl>
-      <a href="#education"
-                    aria-controls="education"
-                    role="tab"
-                    data-toggle="tab"
-                    class="pull-right btn btn-primary btn-xs m-r-lg"
-                    graph
-                    data-id="{{ location.id }}">
+    {% if body.rais_year is not none %}
+      <div class="dl-box col-xs-12 col-md-6">
+        <h3>{% trans %}Wages and Jobs{% endtrans %} ({{body.industry_year}})</h3>
+        <dl class="dl-horizontal">
+          <dt>{% trans %}Main Economic Activity{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.main_industry_by_num_jobs_name}}</small>
+            <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3, True) }}</strong>
+            <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
+            {% trans %}Jobs{% endtrans %}
+          </dd>
+          <dt>{% trans %}Main Occupation{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.main_occupation_by_num_jobs_name}}</small>
+            <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3, True) }}</strong>
+            <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
+            {% trans %}Occupations{% endtrans %}
+          </dd>
+          <dt>{% trans %}Average Wage{% endtrans %}</dt>
+          <dd>
+            R$ <strong class="counter">{{ body.avg_wage | max_digits(3, True) }}</strong>
+            <span>{{ body.avg_wage | magnitude }}</span>
+          </dd>
+          <dt>{% trans %}Total of Jobs{% endtrans %}</dt>
+          <dd>
+            <strong class="counter">{{ body.total_jobs | max_digits(3, True) }}</strong>
+            <span>{{ body.total_jobs | magnitude }}</span>
+          </dd>
+        </dl>
+        <a href="#wages"
+                      aria-controls="wages"
+                      role="tab"
+                      data-toggle="tab"
+                      class="pull-right btn btn-primary btn-xs m-r-lg"
+                      graph
+                      data-id="{{ location.id }}">
           {% trans %}More details{% endtrans %}
-      </a>
-    </div>
+        </a>
+      </div>
 
-  </div><!--/.row-->
+      {% if location.id != 'all' %}
+        <div class="dl-box col-xs-12 col-md-6">
+          <h3>{% trans %}Economic Opportunities{% endtrans %} ({{body.industry_year}})</h3>
+          <dl class="dl-horizontal">
+            {% if body.less_distance_by_product %}
+            <dt>{% trans %}Product with Shortest Distance{% endtrans %}</dt>
+            <dd>
+              <small>{{ body.less_distance_by_product_name}}</small>
+              <strong class="counter">{{ body.less_distance_by_product | max_digits(3, True) }}</strong>
+              <span>{{ body.less_distance_by_product | magnitude }}</span>
+            </dd>
+            {% endif %}
+            {% if body.less_distance_by_occupation %}
+            <dt>{% trans %}Economic Activity with Shortest Distance{% endtrans %}</dt>
+            <dd>
+              <small>{{ body.less_distance_by_occupation_name}}</small>
+              <strong class="counter">{{ body.less_distance_by_occupation | max_digits(3, True) }}</strong>
+              <span>{{ body.less_distance_by_occupation | magnitude }}</span>
+            </dd>
+            {% endif %}
+            {% if body.opportunity_gain_by_product %}
+            <dt>{% trans %}Product with Highest Opportunity Gain{% endtrans %}</dt>
+            <dd>
+              <small>{{ body.opportunity_gain_by_product_name}}</small>
+              <strong class="counter">{{ body.opportunity_gain_by_product | max_digits(3, True) }}</strong>
+              <span>{{ body.opportunity_gain_by_product | magnitude }}</span>
+            </dd>
+            {% endif %}
+            {% if body.opportunity_gain_by_occupation %}
+            <dt>{% trans %}Economic Activity with Highest Opportunity Gain{% endtrans %}</dt>
+            <dd>
+              <small>{{ body.opportunity_gain_by_occupation_name}}</small>
+              <strong class="counter">{{ body.opportunity_gain_by_occupation | max_digits(3, True) }}</strong>
+              <span>{{ body.opportunity_gain_by_occupation | magnitude }}</span>
+            </dd>
+            {% endif %}
+          </dl>
+          <a href="#opportunities"
+                        aria-controls="opportunities"
+                        role="tab"
+                        data-toggle="tab"
+                        class="pull-right btn btn-primary btn-xs m-r-lg"
+                        graph
+                        data-id="{{ location.id }}">
+              {% trans %}More details{% endtrans %}
+          </a>
+        </div>
+      {% endif %}
+    {% endif %}
 
+    {% if body.university_year is not none %}
+      <div class="dl-box col-xs-12 col-md-6">
+        <h3>{% trans %}Education{% endtrans %} ({{body.university_year}})</h3>
+        <dl class="dl-horizontal">
+        {% if body.highest_enrolled_by_university %}
+          <dt>{% trans %}University with Highest Number of Enrollments{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.highest_enrolled_by_university_name}}</small>
+            <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3, True)}}</strong>
+            <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
+          </dd>
+          {% endif %}
+          {% if body.highest_enrolled_by_major %}
+          <dt>{% trans %}Major with Highest Number of Enrollments{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.highest_enrolled_by_major_name}}</small>
+            <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3, True)}}</strong>
+            <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
+          </dd>
+          {% endif %}
+          {% if body.highest_enrolled_by_school %}
+          <dt>{% trans %}School with Highest Number of Enrollments{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.highest_enrolled_by_school_name}}</small>
+            <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3, True)}}</strong>
+            <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
+          </dd>
+          {% endif %}
+          {% if body.highest_enrolled_by_basic_course %}
+          <dt>{% trans %}Basic Course with Highest Number of Enrollments{% endtrans %}</dt>
+          <dd>
+            <small>{{ body.highest_enrolled_by_basic_course_name}}</small>
+            <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3, True)}}</strong>
+            <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
+          </dd>
+          {% endif %}
+        </dl>
+        <a href="#education"
+                      aria-controls="education"
+                      role="tab"
+                      data-toggle="tab"
+                      class="pull-right btn btn-primary btn-xs m-r-lg"
+                      graph
+                      data-id="{{ location.id }}">
+            {% trans %}More details{% endtrans %}
+        </a>
+      </div>
+    {% endif %}
+  </div>
 </div>

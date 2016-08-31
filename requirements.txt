@@ -1,4 +1,5 @@
 Babel==2.1.1
+beautifulsoup4==4.5.1
 blinker==1.4
 boto3==1.3.0
 botocore==1.4.12
@@ -27,9 +28,14 @@ MarkupSafe==0.23
 MySQL-python==1.2.3
 nose==1.3.7
 oauth2==1.9.0.post1
+oauth2client==3.0.0
+pyasn1==0.1.9
+pyasn1-modules==0.0.8
 python-dateutil==2.5.3
 pytz==2015.7
 redis==2.7.6
+requests==2.11.1
+rsa==3.4.2
 selenium==2.44.0
 simplejson==3.3.1
 six==1.10.0

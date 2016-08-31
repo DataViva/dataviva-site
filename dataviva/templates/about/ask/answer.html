@@ -46,7 +46,7 @@
 
       <!-- Question metadata -->
       <p class="question_attr">
-        {% if q.user.role == 0 or (q.timestamp != None and q.user.role == 1) %}{% trans %}Asked{% endtrans %} {% if q.user.role == 0 %}{% trans %}by{% endtrans %} <a href="{{ url_for('account.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a>{% endif %} {% if q.timestamp != None %}{{ moment_js(q.timestamp).fromNow() }}{% endif %}{% endif %}
+        {% if q.user.role == 0 or (q.timestamp != None and q.user.role == 1) %}{% trans %}Asked{% endtrans %} {% if q.user.role == 0 %}{% trans %}by{% endtrans %} <a href="{{ url_for('user.user', nickname=q.user.nickname) }}">{{q.user.fullname}}</a>{% endif %} {% if q.timestamp != None %}{{ moment_js(q.timestamp).fromNow() }}{% endif %}{% endif %}
       </p>
 
       {% if q.status_notes %}
@@ -86,7 +86,7 @@
 	            {% endif %}
 	            <!-- User metadata -->
 	            <p class="question_attr">
-	              <a href="{{ url_for('account.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ moment_js(r.timestamp).fromNow() }}{% endif %}
+	              <a href="{{ url_for('user.user', nickname=r.user.nickname) }}">{{r.user.fullname}}</a>{% if r.timestamp != None %} {{ moment_js(r.timestamp).fromNow() }}{% endif %}
 	            </p>
 	          <!-- end reply text -->
 

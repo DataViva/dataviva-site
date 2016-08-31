@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc, Ys
+from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybs, Ybsc, Ys
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva import db
 from sqlalchemy import desc, func, not_
@@ -41,13 +41,17 @@ class Basic_course:
     def __init__(self, course_sc_id):
         self._statistics = None
         self._sc = None
-
         self.course_sc_id = course_sc_id
-        self.max_year_subquery = db.session.query(
-            func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
-        self.course_query = Yc_sc.query.join(Course_sc).filter(
-                Yc_sc.course_sc_id == self.course_sc_id,
-                Yc_sc.year == self.max_year_subquery)
+
+        if self.course_sc_id is None:
+            self.max_year_subquery = db.session.query(func.max(Yc_sc.year))
+            self.course_query = Yc_sc.query.join(Course_sc).filter(Yc_sc.year == self.max_year_subquery)
+        else:
+            self.max_year_subquery = db.session.query(
+                func.max(Yc_sc.year)).filter_by(course_sc_id=course_sc_id)
+            self.course_query = Yc_sc.query.join(Course_sc).filter(
+                    Yc_sc.course_sc_id == self.course_sc_id,
+                    Yc_sc.year == self.max_year_subquery)
 
     def __sc__(self):
         if not self._sc:
@@ -228,14 +232,13 @@ class LocationSchool:
         self.bra_id = bra_id
         self._sc_list = None
         self._sc_sorted_by_enrollment = None
-        self.max_year_query = db.session.query(func.max(Ybsc.year)).filter_by(bra_id=bra_id)
+        self.max_year_query = db.session.query(func.max(Ybs.year)).filter_by(bra_id=bra_id)
 
         self.sc_query = db.session.query(
-                            func.sum(Ybsc.enrolled).label("enrolled"),
+                            func.sum(Ybs.enrolled).label("enrolled"),
                             School).join(School).filter(
-                            Ybsc.bra_id == self.bra_id,
-                            not_(Ybsc.course_sc_id.like('xx%')),
-                            Ybsc.year == self.max_year_query).group_by(Ybsc.school_id)
+                            Ybs.bra_id == self.bra_id,
+                            Ybs.year == self.max_year_query).group_by(Ybs.school_id)
 
     def __sc_list__(self):
         if not self._sc_list:

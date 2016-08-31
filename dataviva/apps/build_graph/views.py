@@ -2,9 +2,13 @@
 import re
 from flask import Blueprint, render_template, g, jsonify, request
 from dataviva.apps.general.views import get_locale
-from dataviva.apps.embed.models import Build
+from dataviva.apps.embed.models import Build, App
+from dataviva.api.rais.services import Industry as CnaeService
+from dataviva.api.secex.services import Product as SecexService
+from dataviva.api.hedu.services import University as HeduService
+from dataviva.api.sc.services import Basic_course as ScService
+from dataviva.translations.dictionary import dictionary
 from sqlalchemy import not_
-import hashlib
 
 
 mod = Blueprint('build_graph', __name__,
@@ -27,23 +31,64 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-#http://localhost:5000/en/build_graph/rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=stacked
-#http://localhost:5000/en/build_graph/rais/4sp090607/i56112/all?view=kCV1oruwCB&graph=compare&compare=4rj020212
+def parse_filter_id(filter_id):
+    if filter_id != 'all':
+        return '<%>'
+    else:
+        return filter_id
+
+
 @mod.route('/')
 @mod.route('/<dataset>/<filter0>/<filter1>/<filter2>')
 def index(dataset=None, filter0=None, filter1=None, filter2=None):
+
     view = request.args.get('view')
     graph = request.args.get('graph')
     compare = request.args.get('compare')
+    metadata = None
+
+    build_query = Build.query.join(App).filter(
+        Build.dataset == dataset,
+        Build.filter1.like(parse_filter_id(filter1)),
+        Build.filter2.like(parse_filter_id(filter2)),
+        Build.slug2_en == view,
+        App.type == graph)
+
+    if graph:
+        build = build_query.first_or_404()
+
+        build.set_bra(filter0)
+
+        if filter1 != 'all':
+            build.set_filter1(filter1)
+
+        if filter2 != 'all':
+            build.set_filter2(filter2)
+
+        service_id = filter1 if filter1 != u'all' else None
+
+        year = ' - ' if dataset else ''
+
+        if dataset == 'rais':
+            year += str(CnaeService(service_id).get_year())
+        elif dataset == 'secex':
+            year += str(SecexService(service_id).year())
+        elif dataset == 'hedu':
+            year += str(HeduService(service_id).year())
+        elif dataset == 'sc':
+            year += str(ScService(service_id).course_year())
+
+        title = re.sub(r'\s\(.*\)', r'', build.title())
+
+        metadata = {
+            'view': title,
+            'graph': dictionary()[graph],
+            'dataset': dictionary()[dataset] + year,
+        }
+
     return render_template(
-        'build_graph/index.html',
-        dataset=dataset,
-        filter0=filter0,
-        filter1=filter1,
-        filter2=filter2,
-        graph=graph,
-        view=view,
-        compare=compare)
+        'build_graph/index.html', dataset=dataset, filter0=filter0, filter1=filter1, filter2=filter2,
+        graph=graph, view=view, compare=compare, metadata=metadata)
 
 
 def parse_filter(filter):
@@ -78,7 +123,7 @@ def views(dataset, bra, filter1, filter2):
 
         title = re.sub(r'\s\(.*\)', r'', build.title())
 
-        id = hashlib.md5(build.slug2_en).digest().encode("base64")[0:10]
+        id = build.slug2_en
 
         if id not in views:
             views[id] = {

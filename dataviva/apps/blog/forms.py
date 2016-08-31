@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import HiddenField, TextField, TextAreaField, validators
+from wtforms import HiddenField, TextField, TextAreaField, DateField, BooleanField, validators
 
 
 class RegistrationForm(Form):
@@ -9,10 +9,18 @@ class RegistrationForm(Form):
         validators.Length(max=400)
     ])
 
+    show_home = BooleanField('show_home')
+
     author = TextField('author', validators=[
         validators.Required(u"Por favor, insira o autor do post."),
         validators.Length(max=100)
     ])
+
+    publish_date = DateField('publish_date', validators=[
+        validators.Required(u"Por favor, insira a data do post.")],
+        format='%d/%m/%Y',
+        description='Formato da data: dia/mês/ano'
+    )
 
     subject = TextField('subject', validators=[
         validators.Required(u"Por favor, insira a categoria do post.")
@@ -30,3 +38,4 @@ class RegistrationForm(Form):
     thumb = HiddenField('thumb', validators=[
         validators.Required(u"Por favor, insira uma imagem para a chamada.")
     ])
+

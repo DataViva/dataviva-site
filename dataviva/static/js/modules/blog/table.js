@@ -1,6 +1,8 @@
 var BlogTable = function () {
     this.tableId = '#blog-table';
 
+    $.fn.dataTable.moment('DD/MM/YYYY');
+
     this.table = $(this.tableId).DataTable({
         "oLanguage": {
           "sSearch": "Pesquisar "
@@ -33,6 +35,15 @@ var BlogTable = function () {
                 "targets": 4,
                 "orderable": false,
                 "className": "column-checkbox",
+                "render": function (data, type, publication, meta){
+                   return '<input type="checkbox" name="show_home" id="show_home'+publication[0]+
+                   '" value="'+publication[0]+ (data ? '" checked>' : '" >');
+                }
+            },
+            {
+                "targets": 5,
+                "orderable": false,
+                "className": "column-checkbox",
                 "render": function (data, type, post, meta){
                    return '<input type="checkbox" name="active" id="active'+post[0]+
                    '" value="'+post[0]+ (data ? '" checked>' : '" >');
@@ -42,6 +53,22 @@ var BlogTable = function () {
         "bFilter": true,
         "info": false,
         "initComplete": function(settings, json) {
+            $( 'input[name="show_home"]' ).each(function() {
+                var switchery = new Switchery(this, {
+                    size: 'small'
+                });
+
+                $(this).next().click(function() {
+                    var checkbox = $(this).siblings().get(0);
+
+                    var ids = [checkbox.value],
+                        status = $(checkbox).attr('name'),
+                        status_value = checkbox.checked;
+
+                    changeStatus(ids, status, status_value);
+                });
+            });
+
             $( 'input[name="active"]' ).each(function() {
                 var switchery = new Switchery(this, {
                     size: 'small',

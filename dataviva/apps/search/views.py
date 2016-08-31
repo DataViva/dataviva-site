@@ -5,6 +5,8 @@ from dataviva.apps.general.views import get_locale
 from models import SearchQuestion, SearchSelector, SearchProfile
 from dataviva import db
 from forms import RegistrationForm
+from flask.ext.login import login_required
+from dataviva.apps.admin.views import required_roles
 
 
 mod = Blueprint('search', __name__,
@@ -79,6 +81,8 @@ def profile_questions(id):
 
 
 @mod.route('/admin', methods=['GET'])
+@login_required
+@required_roles(1)
 def admin():
     questions = SearchQuestion.query.all()
     return render_template('search/admin.html', questions=questions, lang=g.locale)
@@ -92,6 +96,8 @@ def new():
 
 
 @mod.route('/admin/question/new', methods=['POST'])
+@login_required
+@required_roles(1)
 def create():
     form = RegistrationForm()
     form.set_choices(g.locale)
@@ -117,6 +123,8 @@ def create():
 
 
 @mod.route('/admin/question/<id>/edit', methods=['GET'])
+@login_required
+@required_roles(1)
 def edit(id):
     form = RegistrationForm()
     form.set_choices(g.locale)
@@ -130,6 +138,8 @@ def edit(id):
 
 
 @mod.route('admin/question/<id>/edit', methods=['POST'])
+@login_required
+@required_roles(1)
 def update(id):
     form = RegistrationForm()
     form.set_choices(g.locale)
@@ -153,6 +163,8 @@ def update(id):
 
 
 @mod.route('/admin/delete', methods=['POST'])
+@login_required
+@required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
     if ids:

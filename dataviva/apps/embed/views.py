@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from io import BytesIO
 import time
+import requests
 from StringIO import StringIO
 from datetime import datetime
 from collections import defaultdict
@@ -15,7 +16,7 @@ from dataviva.api.rais.views import rais_api
 
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.data.forms import DownloadForm
-from dataviva.apps.account.models import User, Starred
+from dataviva.apps.user.models import User, Starred
 from dataviva.apps.embed.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.apps.general.models import Short
 
@@ -537,3 +538,10 @@ def crosswalk_recs(dataset, filter, id):
                 {"title": a.name(), "url": a.url(), "type": attr_swap[filter]} for a in attrs]
 
     return crosswalk
+
+
+@mod.route('/image', methods=['GET'])
+def image():
+    url = request.args.get('link');
+    code = requests.get(url).status_code;
+    return Response(str(code), status=200)   

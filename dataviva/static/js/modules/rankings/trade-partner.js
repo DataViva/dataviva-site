@@ -24,7 +24,14 @@ var TradePartnerTable = function () {
     this.tableId = '#trade-partner-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-trade-partner'
+            }
+        ],
         "ajax": {
             "url": "/secex/all-0/all/all/show.5/?order=export_val.desc",
             "dataSrc": "data",

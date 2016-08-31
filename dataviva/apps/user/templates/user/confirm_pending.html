@@ -1,0 +1,32 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <ul id="account-form" class="col-md-8 col-md-offset-2">
+
+            <div id="message">
+                {% if get_flashed_messages(with_categories=true) %}
+                {% for category, message in get_flashed_messages(with_categories=true) %}
+                    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+
+            <h2>{% trans %}Please check you inbox so that you can complete your registration.{% endtrans %}</h2>
+            <div class="resend-mail-btn">
+                <a id="account-resend-email" class="btn btn-primary" href="/{{g.locale}}/user/resend_confirmation/{{user.email}}">
+                    <div class="account-resend-icon">
+                        <i class="fa fa-envelope-o"></i>
+                    </div>
+                    <div class="account-resend-description">
+                        {% trans %}Resend confirmation email{% endtrans %}
+                    </div>
+                </a>
+            </div>
+        </ul>
+    </div>
+{% endblock content %}

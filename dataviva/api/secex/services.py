@@ -312,7 +312,7 @@ class Product:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def highest_export_value_name(self):
         try:
@@ -320,7 +320,7 @@ class Product:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def product_complexity(self):
         product_complexity = self.__secex__()
@@ -485,8 +485,10 @@ class Location:
         self._secex_sorted_by_distance = None
         self._secex_sorted_by_opp_gain = None
         self.bra_id = bra_id
+        self.max_database_year = db.session.query(func.max(Ymbp.year))
         self.max_year_query = db.session.query(
-            func.max(Ymbp.year)).filter_by(bra_id=self.bra_id, month=12)
+            func.max(Ymbp.year)).filter_by(bra_id=self.bra_id).filter(
+            Ymbp.year < self.max_database_year)
         self.secex_query = Ymbp.query.join(Hs).filter(
             Ymbp.bra_id == self.bra_id,
             Ymbp.month == 0,
@@ -558,7 +560,7 @@ class Location:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def main_product_by_import_value(self):
         try:
@@ -574,7 +576,7 @@ class Location:
         except IndexError:
             return None
         else:
-            return secex.hs.name_pt
+            return secex.hs.name()
 
     def total_exports(self):
         try:
@@ -660,7 +662,7 @@ class LocationWld(Location):
         except IndexError:
             return None
         else:
-            return secex.wld.name_pt
+            return secex.wld.name()
 
     def main_destination_by_import_value(self):
         try:
@@ -676,7 +678,7 @@ class LocationWld(Location):
         except IndexError:
             return None
         else:
-            return secex.wld.name_pt
+            return secex.wld.name()
 
 
 class LocationEciRankings:

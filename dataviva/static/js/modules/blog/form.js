@@ -14,7 +14,6 @@ var inputThumbCallback = function() {
 }
 
 $(document).ready(function(){
-
     $('#text-content-editor').append($('#text_content').val())
     $('#text-content-editor').summernote(summernoteConfig);
 
@@ -59,6 +58,15 @@ $(document).ready(function(){
         $('#thumb-crop').attr('src', '');
     });
 
+    $('#publish-date').datepicker({
+        format: "dd/mm/yyyy",
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true
+    });
+
     var text_max = 500;
     $('#textarea-feedback').html(text_max + ' caracteres restantes');
 
@@ -69,14 +77,12 @@ $(document).ready(function(){
         $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
     });
 
-    $(function() {
-        $('#blog-form').submit(function() {
-            var aHTML = $('#text-content-editor').summernote('code');
-            $('#text_content').val(aHTML);
-            if ($('.summernote').summernote('isEmpty')) {
-                $('#text_content').val('');
-            }
-            return true;
-        });
+    $('#blog-form').submit(function() {
+        var aHTML = $('#text-content-editor').summernote('code');
+        $('#text_content').val(aHTML);
+        if ($('.summernote').summernote('isEmpty')) {
+            $('#text_content').val('');
+        }
+        return true;
     });
 });

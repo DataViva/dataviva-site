@@ -15,6 +15,9 @@ def dictionary():
         "scatter": gettext("Scatter"),
         "stacked": gettext("Stacked"),
         "tree_map": gettext("Tree Map"),
+        "line": gettext("Line"),
+        "bar": gettext("Bar Chart"),
+        "box": gettext("Box Plot"),
 
         # Time Resolution Toggle
         "time": gettext("Time Resolution"),
@@ -646,10 +649,19 @@ def dictionary():
         "contact_message": gettext("Your message has been sent successfully. We will soon get back to you."),
         "thank_you": gettext("Thank you"),
 
-        #signup
+        #session
         "email_already_exists": gettext("That e-mail is already registered."),
         "check_your_inbox": gettext("Please check your inbox at"),
-        "invalid_password": gettext("Invalid email or password"),
+        "invalid_email_or_password": gettext("Invalid email or password."),
+        "confirmation_pending": gettext("Confirmation pending."),
+
+        #user
+        "updated_profile": gettext("Profile successfully updated!"),
+        "complete_profile": gettext("Let us know more about you. Please complete your profile."),
+        "updated_password": gettext("Password successfully updated!"),
+        "invalid_password": gettext("The current password is invalid."),
+        "new_password_sent": gettext("A new password has been sent to you! Please check you inbox!"),
+        "couldnt_find_user": gettext("We couldn't find any user with the informed email address."),
 
         #errors
         "500": gettext("Sorry, an unexpected error has occured. Please try again"),

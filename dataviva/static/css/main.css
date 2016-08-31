@@ -959,3 +959,6 @@ h1.login-title {
     display: none;
 }
 
+.input-group a#edit-header{ 
+  margin-right: 0px;
+}
