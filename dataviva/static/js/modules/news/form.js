@@ -65,7 +65,7 @@ $(document).ready(function(){
     $('#news-preview').click(function() {
         $('#news-preview').prop('disabled', true);
         $('#news-edit').prop('disabled', false);
-        $('.note-editor img').each(function() {
+        $('#summernote-field img').each(function() {
             add_caption($(this));
         });
         var aHTML = $('#text-content-editor').summernote('code');
@@ -126,11 +126,17 @@ $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip();
 
     $('#news-form').submit(function() {
+        $('#news-form > button[type=submit]').prop('disabled', true);
+        $('#summernote-field').hide();
+        var submittingForm = dataviva.ui.loading('#news-form');
+        submittingForm.text(dataviva.dictionary['loading'] + "...");
+
         $('#text-content-editor').summernote('destroy');
         $('#text-content-editor img').each(function() {
             if ($(this).parent().is('figure') == false)
                add_caption($(this));
         });
+
         var aHTML = $('#text-content-editor').html();
         $('#text_content').val(aHTML);
         if ($('.summernote').summernote('isEmpty')) {
