@@ -26,7 +26,14 @@ var OccupationTable = function () {
     this.tableId = '#occupation-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-occupations'
+            }
+        ],
         "ajax": {
             "url": "/rais/all/all/all/show.4/?order=num_jobs.desc",
             "dataSrc": "data",
