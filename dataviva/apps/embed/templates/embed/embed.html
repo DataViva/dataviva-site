@@ -2906,8 +2906,7 @@
                 var category_name = document.referrer.split('/')[4];
                 var category_id = document.referrer.split('/')[5];
                 var url_image =  dataviva.s3_host+"/img/"+category_name+"/"+category_name+"_"+category_id+".jpg"
-                var share_url = "http://staging.dataviva.info/" + dataviva.language + "/" + data.slug + "/"
-                //var share_url = window.location.origin + "/" + dataviva.language + "/" + data.slug + "/";
+                var share_url = window.location.origin + "/" + dataviva.language + "/" + data.slug + "/";
 
                 $.ajax({
                     url: '/embed/image?link=' + url_image,
