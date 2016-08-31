@@ -77,17 +77,17 @@
                 var $img = $($editable.data('target'));
                 var imgInfo = {
                     imgDom: $img,
-                    title: $img.attr('title'),
+                    title: $img.attr('data-original-title'),
                 };
                 this.showLinkDialog(imgInfo).then(function (imgInfo) {
                     ui.hideDialog(self.$dialog);
                     var $img = imgInfo.imgDom;
 
                     if (imgInfo.title) {
-                        $img.attr('title', imgInfo.title);
+                        $img.attr('data-original-title', imgInfo.title);
                     }
                     else {
-                        $img.removeAttr('title');
+                        $img.removeAttr('data-original-title');
                     }
 
                     $note.val(context.invoke('code'));
@@ -109,11 +109,12 @@
                                 imgDom: imgInfo.imgDom,
                                 title: $imageTitle.val(),
                             });
-                            add_caption(imgInfo.imgDom);                           
                         });
-
                         $imageTitle.val(imgInfo.title).trigger('focus');
-
+                        imgInfo.imgDom
+                            .attr('data-toggle', 'tooltip')
+                            .attr('data-placement', 'bottom');
+                        imgInfo.imgDom.tooltip(); 
                     });
 
                     ui.onDialogHidden(self.$dialog, function () {
