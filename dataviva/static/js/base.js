@@ -132,7 +132,7 @@ var summernoteConfig = {
             ['custom', ['imageTitle']]
         ]
     },
-    placeholder: 'Escreva aqui o conteúdo desta publicação',
+    placeholder: dataviva.dictionary['summernote_placeholder'],
     imageTitle: {
         specificAltField: true,
     },
