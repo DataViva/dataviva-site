@@ -20,7 +20,14 @@ var MajorTable = function () {
     this.tableId = '#major-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-major'
+            }
+        ],
         "ajax": {
             "url": "/hedu/all/all/all/show.6/?order=enrolled.desc",
             "dataSrc": "data",

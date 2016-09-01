@@ -178,8 +178,8 @@ def create():
         post.title = form.title.data
         post.author = form.author.data
         post.text_call = form.text_call.data
-        post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
         post.active = 0
 
@@ -253,6 +253,7 @@ def update(id):
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
         post.author = form.author.data
+        post.text_call = form.text_call.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
