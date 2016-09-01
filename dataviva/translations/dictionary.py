@@ -645,17 +645,17 @@ def dictionary():
         "clean_selection": gettext("Clean selection"),
         "compare_with": gettext("Compare with"),
 
-        #contact
+        # contact
         "contact_message": gettext("Your message has been sent successfully. We will soon get back to you."),
         "thank_you": gettext("Thank you"),
 
-        #session
+        # session
         "email_already_exists": gettext("That e-mail is already registered."),
         "check_your_inbox": gettext("Please check your inbox at"),
         "invalid_email_or_password": gettext("Invalid email or password."),
         "confirmation_pending": gettext("Confirmation pending."),
 
-        #user
+        # user
         "updated_profile": gettext("Profile successfully updated!"),
         "complete_profile": gettext("Let us know more about you. Please complete your profile."),
         "updated_password": gettext("Password successfully updated!"),
@@ -663,7 +663,12 @@ def dictionary():
         "new_password_sent": gettext("A new password has been sent to you! Please check you inbox!"),
         "couldnt_find_user": gettext("We couldn't find any user with the informed email address."),
 
-        #errors
+        # headlines
+        "characters_left": gettext("characters left"),
+        "file_too_large": gettext("File too large."),
+        "summernote_placeholder": gettext("Your publication content goes here"),
+
+        # errors
         "500": gettext("Sorry, an unexpected error has occured. Please try again"),
     }
 

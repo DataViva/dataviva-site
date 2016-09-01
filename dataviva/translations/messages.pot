@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-08-25 14:54-0300\n"
+"POT-Creation-Date: 2016-09-01 16:41-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -6277,28 +6277,40 @@ msgid "We couldn't find any user with the informed email address."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:667
+msgid "characters left"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:668
+msgid "File too large."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:669
+msgid "Your publication content goes here"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:672
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:676 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:681 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:677 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:682 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:678 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:683 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:679 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:684 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
