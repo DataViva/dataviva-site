@@ -133,6 +133,9 @@ var summernoteConfig = {
         ]
     },
     placeholder: 'Escreva aqui o conteúdo desta publicação',
+    imageTitle: {
+        specificAltField: true,
+    },
     callbacks: {
         onImageUpload: function(files) {
             var noteEditor = dataviva.ui.loading('.note-editor');

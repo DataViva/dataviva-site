@@ -15,12 +15,14 @@
         'pt': {
             edit: 'Salvar',
             titleLabel: 'Legenda',
+            altLabel: 'Fonte',
             tooltip: 'Editar legenda'
         },
         'en': {
             edit: 'Save',
-            titleLabel: 'Subtitle',
-            tooltip: 'Edit subtitle'
+            titleLabel: 'Caption',
+            altLabel: 'Source',
+            tooltip: 'Edit caption'
         }
     };
 
@@ -35,6 +37,10 @@
 
             if (typeof context.options.imageTitle === 'undefined') {
                 context.options.imageTitle = {};
+            }
+
+            if (typeof context.options.imageTitle.specificAltField === 'undefined') {
+                context.options.imageTitle.specificAltField = false;
             }
 
             var options = context.options;
@@ -59,6 +65,13 @@
                              '<input class="note-image-title-text form-control" type="text" />' +
                            '</div>';
 
+                if (options.imageTitle.specificAltField) {
+                    body += '<div class="form-group">' +
+                               '<label>' + text[dataviva.language].altLabel + '</label>' +
+                               '<input class="note-image-alt-text form-control" type="text" />' +
+                             '</div>';
+                }
+
                 var footer = '<button href="#" class="btn btn-success note-image-title-btn">' + text[dataviva.language].edit + '</button>';
                             
                 this.$dialog = ui.dialog({
@@ -78,10 +91,18 @@
                 var imgInfo = {
                     imgDom: $img,
                     title: $img.attr('data-original-title'),
+                    alt: $img.attr('title')
                 };
                 this.showLinkDialog(imgInfo).then(function (imgInfo) {
                     ui.hideDialog(self.$dialog);
                     var $img = imgInfo.imgDom;
+
+                    if (imgInfo.alt) {
+                        $img.attr('title', imgInfo.alt);
+                    }
+                    else {
+                        $img.removeAttr('title');
+                    }
 
                     if (imgInfo.title) {
                         $img.attr('data-original-title', imgInfo.title);
@@ -98,6 +119,7 @@
             this.showLinkDialog = function (imgInfo) {
                 return $.Deferred(function (deferred) {
                     var $imageTitle = self.$dialog.find('.note-image-title-text'),
+                        $imageAlt = (options.imageTitle.specificAltField) ? self.$dialog.find('.note-image-alt-text') : null,
                         $editBtn = self.$dialog.find('.note-image-title-btn');
 
                     ui.onDialogShown(self.$dialog, function () {
@@ -108,13 +130,19 @@
                             deferred.resolve({
                                 imgDom: imgInfo.imgDom,
                                 title: $imageTitle.val(),
+                                alt: (options.imageTitle.specificAltField) ? $imageAlt.val() : $imageTitle.val(),
                             });
                         });
+
                         $imageTitle.val(imgInfo.title).trigger('focus');
+
+                        if (options.imageTitle.specificAltField)
+                            $imageAlt.val(imgInfo.alt);
+
                         imgInfo.imgDom
                             .attr('data-toggle', 'tooltip')
                             .attr('data-placement', 'bottom');
-                        imgInfo.imgDom.tooltip(); 
+                        load_tooltip(imgInfo.imgDom);
                     });
 
                     ui.onDialogHidden(self.$dialog, function () {

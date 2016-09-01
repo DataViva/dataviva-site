@@ -40,6 +40,13 @@ var remove_caption = function(image) {
     image.unwrap();
 }
 
+var load_tooltip = function(image) {
+    var image_title =image.attr('title');
+    image.attr('title', '');
+    image.tooltip();
+    image.attr('title', image_title);
+}
+
 $(document).ready(function(){
 
     $('#news-edit').prop('disabled', true);
@@ -60,7 +67,9 @@ $(document).ready(function(){
                 remove_caption($(this));
         });
         $('#text-content-editor').summernote(summernoteConfig);
-        $('[data-toggle=tooltip]').tooltip();
+        $('[data-toggle="tooltip"]').each(function() {
+            load_tooltip($(this));
+        });
     });
 
     $('#news-preview').click(function() {
@@ -124,7 +133,9 @@ $(document).ready(function(){
         $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
     });
 
-    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="tooltip"]').each(function() {
+        load_tooltip($(this));
+    });
 
     $('#news-form').submit(function() {
         $('#news-form > button[type=submit]').prop('disabled', true);
