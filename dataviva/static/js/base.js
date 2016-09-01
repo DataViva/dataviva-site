@@ -124,7 +124,18 @@ var summernoteConfig = {
         ['insert', ['link', 'picture', 'video']],
         ['view', ['fullscreen', 'codeview', 'help']]
       ],
+    popover: {
+        image: [
+            ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']],
+            ['custom', ['imageTitle']]
+        ]
+    },
     placeholder: 'Escreva aqui o conteúdo desta publicação',
+    imageTitle: {
+        specificAltField: true,
+    },
     callbacks: {
         onImageUpload: function(files) {
             var noteEditor = dataviva.ui.loading('.note-editor');

@@ -79,7 +79,7 @@
         <div id="textarea-feedback"></div>
     </div>
 
-    <div class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
+    <div id="summernote-field" class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
         <label class="control-label" for="text_content">{% trans %}Content{% endtrans %}</label>
         <button id="blog-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
         <button id="blog-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>

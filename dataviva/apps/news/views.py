@@ -162,7 +162,7 @@ def create():
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
-        
+
         db.session.commit()
         message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
         flash(message, 'success')
@@ -185,7 +185,7 @@ def upload_images():
     path_hash = request.form['csrf_token'].replace('#', '')
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, path_hash, 'images')
     return jsonify(file_paths=save_images_temporarily(upload_folder, images))
-    
+
 
 @mod.route('/admin/publication/<id>/edit', methods=['GET'])
 @login_required
@@ -227,6 +227,7 @@ def update(id):
             db.session.commit()
             publication.subject_id = subject.id
 
+        publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
@@ -234,7 +235,7 @@ def update(id):
 
         publication.text_content = upload_images_to_s3(
             form.text_content.data, mod.name, publication.id)
-        
+
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
             publication.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
