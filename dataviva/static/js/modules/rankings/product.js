@@ -25,7 +25,14 @@ var ProductTable = function () {
     this.tableId = '#product-table';
 
     this.table = $(this.tableId).DataTable({
-        "dom": '<"rankings-control">frtip',
+        "dom": '<"rankings-control">Bfrtip',
+        "buttons": [ 
+            {
+                extend: 'csvHtml5',
+                text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                filename: 'rankings-product'
+            }
+        ],
         "ajax": {
             "url": "/secex/all-0/all/show.6/all/?order=pci.desc",
             "dataSrc": "data",
