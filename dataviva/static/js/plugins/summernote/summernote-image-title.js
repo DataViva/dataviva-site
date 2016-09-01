@@ -142,7 +142,10 @@
                         imgInfo.imgDom
                             .attr('data-toggle', 'tooltip')
                             .attr('data-placement', 'bottom');
-                        load_tooltip(imgInfo.imgDom);
+                        var image_title = imgInfo.imgDom.attr('title');
+                        imgInfo.imgDom.attr('title', '');
+                        imgInfo.imgDom.tooltip();
+                        imgInfo.imgDom.attr('title', image_title);
                     });
 
                     ui.onDialogHidden(self.$dialog, function () {

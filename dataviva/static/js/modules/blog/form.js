@@ -40,11 +40,13 @@ var remove_caption = function(image) {
     image.unwrap();
 }
 
-var load_tooltip = function(image) {
-    var image_title = image.attr('title');
-    image.attr('title', '');
-    image.tooltip();
-    image.attr('title', image_title);
+var load_tooltips = function() {
+    $('[data-toggle="tooltip"]').each(function() {
+        var image_title = $(this).attr('title');
+        $(this).attr('title', '');
+        $(this).tooltip();
+        $(this).attr('title', image_title);
+    });
 }
 
 $(document).ready(function(){
@@ -66,9 +68,7 @@ $(document).ready(function(){
                 remove_caption($(this));
         });
         $('#text-content-editor').summernote(summernoteConfig);
-        $('[data-toggle="tooltip"]').each(function() {
-            load_tooltip($(this));
-        });
+        load_tooltips();
     });
 
     $('#blog-preview').click(function() {
@@ -131,9 +131,7 @@ $(document).ready(function(){
         $('#textarea-feedback').html(text_remaining + ' caracteres restantes');
     });
 
-    $('[data-toggle="tooltip"]').each(function() {
-        load_tooltip($(this));
-    })
+    load_tooltips();
 
     $('#blog-form').submit(function() {
         $('#blog-form > button[type=submit]').prop('disabled', true);
