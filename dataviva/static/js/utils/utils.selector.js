@@ -492,6 +492,25 @@ function Selector() {
           };
         }
 
+        //remove unreported keys.
+        if(type == 'cbo'){
+          delete data['x'];
+          delete data['xxxx'];
+        }
+        if(type == 'hs'){
+          delete data['22'];
+          delete data['229999'];
+        }
+        if(type == 'wld'){
+          delete data['xx'];
+          delete data['xxxxd'];
+          delete data['xxxxc'];
+        }
+        if(type == 'course_hedu'){
+          delete data['00'];
+          delete data['000000'];
+        }
+
         for (var a in data) {
 
           if (!data[a].display_id) {
