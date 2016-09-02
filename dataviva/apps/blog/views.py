@@ -176,8 +176,10 @@ def create():
     else:
         post = Post()
         post.title = form.title.data
+        post.title_en = form.title_en.data
         post.author = form.author.data
         post.text_call = form.text_call.data
+        post.text_call_en = form.text_call_en.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
@@ -197,6 +199,8 @@ def create():
 
         Post.query.get(post.id).text_content = upload_images_to_s3(
             form.text_content.data, mod.name, post.id)
+
+        Post.query.get(post.id).text_content_en = form.text_content_en.data
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(
@@ -228,9 +232,12 @@ def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
     form.title.data = post.title
+    form.title_en.data = post.title_en
     form.author.data = post.author
     form.text_content.data = post.text_content
+    form.text_content_en.data = post.text_content_en
     form.text_call.data = post.text_call
+    form.text_call_en.data = post.text_call_en
     form.show_home.data = post.show_home
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
@@ -252,8 +259,10 @@ def update(id):
     else:
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
+        post.title_en = form.title_en.data
         post.author = form.author.data
         post.text_call = form.text_call.data
+        post.text_call_en = form.text_call_en.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
@@ -272,6 +281,8 @@ def update(id):
 
         post.text_content = upload_images_to_s3(
             form.text_content.data, mod.name, post.id)
+
+        post.text_content_en = form.text_content_en.data
 
         db.session.flush()
         if len(form.thumb.data.split(',')) > 1:

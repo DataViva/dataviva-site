@@ -9,6 +9,11 @@ class RegistrationForm(Form):
         validators.Length(max=400)
     ])
 
+    title_en = TextField('title_en', validators=[
+        validators.Required(u"Por favor, insira o título do post."),
+        validators.Length(max=400)
+    ])
+
     show_home = BooleanField('show_home')
 
     author = TextField('author', validators=[
@@ -31,7 +36,16 @@ class RegistrationForm(Form):
         validators.Length(max=500)
     ])
 
+    text_call_en = TextAreaField('text_call_en', validators=[
+        validators.Required(u"Por favor, insira uma chamada para o post."),
+        validators.Length(max=500)
+    ])
+
     text_content = HiddenField('text_content', validators=[
+        validators.Required(u"Por favor, insira o conteúdo do post.")
+    ]) 
+
+    text_content_en = HiddenField('text_content_en', validators=[
         validators.Required(u"Por favor, insira o conteúdo do post.")
     ])
 
