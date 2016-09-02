@@ -2608,14 +2608,67 @@
         downloadDone();
       }
       else {
+
         if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")
         else var svg = d3.select("#app > svg")
         // Add necessary name space junk and get raw node
         svg.attr("version", 1.1)
           .attr("xmlns", "http://www.w3.org/2000/svg")
           .node()
+        svg.insert('defs',":first-child")
         // Extract the data as SVG text string
+
         var svg_xml = (new XMLSerializer).serializeToString(svg.node());
+
+        //tratamento do png
+        if (type == "png"){
+            //pegar o css
+            var style = "\n";
+            var requiredSheets = ['phylogram_d3.css', 'open_sans.css'];
+            for (var i=0; i<document.styleSheets.length; i++) {
+                var sheet = document.styleSheets[i];
+                if (sheet.href) {
+                    var sheetName = sheet.href.split('/').pop();
+                    if (requiredSheets.indexOf(sheetName) != -1) {
+                        var rules = sheet.rules;
+                        if (rules) {
+                            for (var j=0; j<rules.length; j++) {
+                                style += (rules[j].cssText + '\n');
+                            }
+                        }
+                    }
+                }
+            }
+
+            img = new Image(),
+            serializer = new XMLSerializer()
+
+            d3.select("svg defs")
+                .append('style')
+                .attr('type','text/css')
+                .html(style);
+
+            var svgStr = serializer.serializeToString(svg.node());
+            img.src = 'data:image/svg+xml;base64,'+window.btoa(unescape(encodeURIComponent(svgStr)));
+
+
+            var canvas = document.createElement("canvas");
+            document.body.appendChild(canvas);
+
+            var w = svg.node().getBBox().width,
+                h = svg.node().getBBox().height;
+
+            canvas.width = w;
+            canvas.height = h;
+            var context = canvas.getContext("2d")
+            context.fillStyle = "white";
+            context.fillRect(0,0,w,h);
+            context.drawImage(img,0,0,w,h);
+
+            svg_xml = canvas.toDataURL("image/png");
+
+          }
+
         form['data'].value = svg_xml;
         // Submit the <FORM> to the server.
         // The result will be an attachment file to download.
@@ -2625,6 +2678,7 @@
         csrf_token = document.getElementById("csrf_token").value;
         form['data'].value = form['data'].value.replace(/&/g, "%26")
         progress = 0
+
         d3.xhr("/{{g.locale}}/embed/download/")
         .header("Content-Type", "application/x-www-form-urlencoded")
             .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
