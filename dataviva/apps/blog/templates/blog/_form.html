@@ -95,21 +95,21 @@
         <div id="textarea-feedback"></div>
     </div>
 
-    <div id="summernote-field" class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
+    <div id="summernote-pt" class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
         <label class="control-label" for="text_content">{% trans %}Content{% endtrans %}</label>
-        <button id="blog-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-        <button id="blog-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+        <button id="blog-edit-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+        <button id="blog-preview-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
         {{ messages(form.text_content) }}
         {{ form.text_content }}
         <div class=" summernote-wrapper">
-            <div id="text-content-editor" class="summernote"></div>
+            <div id="text-content-editor-pt" class="summernote"></div>
         </div>
     </div>
 
-    <div class="form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
+    <div id="summernote-en" class="form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
         <label class="control-label" for="text_content">{% trans %}Content{% endtrans %} (en)</label>
-        <button id="blog-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-        <button id="blog-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+        <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+        <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
         {{ messages(form.text_content) }}
         {{ form.text_content }}
         <div class=" summernote-wrapper">

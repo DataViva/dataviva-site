@@ -138,10 +138,11 @@ var summernoteConfig = {
     },
     callbacks: {
         onImageUpload: function(files) {
-            var noteEditor = dataviva.ui.loading('#summernote-field');
-            noteEditor.text(dataviva.dictionary['loading'] + "...");
-            var file = files[0];
-            var data = new FormData();
+            var language_code = $(this).attr('id').split('-').pop();
+            var summernoteLoading = dataviva.ui.loading('#summernote-' + language_code);
+            summernoteLoading.text(dataviva.dictionary['loading'] + "...");
+            var file = files[0],
+                data = new FormData();
             data.append('image', file);
             data.append('csrf_token', $('#csrf_token').val());
             $.ajax({
@@ -152,7 +153,7 @@ var summernoteConfig = {
                 processData: false,
                 data: data,
                 success: function(data) {
-                    $('#text-content-editor').summernote('insertImage', data.image.url);
+                    $('#text-content-editor-' + language_code).summernote('insertImage', data.image.url);
                 },
                 error: function(err) {
                     swal({
@@ -162,7 +163,7 @@ var summernoteConfig = {
                     });
                 },
                 complete: function() {
-                    noteEditor.hide();
+                    summernoteLoading.hide();
                 }
             });
         }
