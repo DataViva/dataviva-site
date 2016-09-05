@@ -342,7 +342,6 @@ function Selector() {
       };
 
       create_elements = function() {
-
         header = container.append("div").attr("class","selector_header");
 
         icon = header.append("div").attr("class","selector_header_icon");
@@ -431,6 +430,12 @@ function Selector() {
         $('#leon_header_select').attr('class','btn btn-primary');
         select_value(data[initial_value]);
 
+        var category = window.location.pathname.split('/')[2];
+        
+        if(type == "bra" && category == "trade_partner"){
+          $('#leon_header_select').hide();
+        }
+        
       };
 
       search_string = function(d) {
