@@ -49,29 +49,6 @@ var load_tooltips = function() {
     });
 }
 
-var show_editor = function(edit_button, preview_button, editor) {
-    preview_button.prop('disabled', false);
-    edit_button.prop('disabled', true);
-    summernoteConfig['focus'] = true;
-    editor.find('img').each(function() {
-        if ($(this).parent().is('figure'))
-            remove_caption($(this));
-    });
-    editor.summernote(summernoteConfig);
-    load_tooltips();
-}
-
-var show_preview = function(edit_button, preview_button, editor, text_content) {
-    preview_button.prop('disabled', true);
-    edit_button.prop('disabled', false);
-    editor.summernote('destroy');
-    editor.find('img').each(function() {
-        add_caption($(this));
-    });
-    var aHTML = editor.html();
-    text_content.val(aHTML);
-}
-
 $(document).ready(function(){
 
     $('#blog-edit-pt, #blog-edit-en').prop('disabled', true);
@@ -87,36 +64,36 @@ $(document).ready(function(){
     $('#text-content-editor-pt').summernote(summernoteConfig);
     $('#text-content-editor-en').summernote(summernoteConfig);
 
-    $('#blog-edit-pt').click(function() {
-        show_editor(
-            $('#blog-edit-pt'),
-            $('#blog-preview-pt'),
-            $('#text-content-editor-pt')
-        );
-    });
-    $('#blog-edit-en').click(function() {
-        show_editor(
-            $('#blog-edit-en'),
-            $('#blog-preview-en'),
-            $('#text-content-editor-en')
-        );
+    $('#blog-edit-pt, #blog-edit-en').click(function() {
+        var lang_ext = $(this).attr('id').split('-').pop();
+        var editor = $('#text-content-editor-'  + lang_ext);
+
+        $('#blog-preview-'  + lang_ext).prop('disabled', false);
+        $('#blog-edit-' + lang_ext).prop('disabled', true);
+
+        summernoteConfig['focus'] = true;
+        editor.find('img').each(function() {
+            if ($(this).parent().is('figure'))
+                remove_caption($(this));
+        });
+        editor.summernote(summernoteConfig);
+        load_tooltips();
     });
 
-    $('#blog-preview-pt').click(function() {
-        show_preview(
-            $('#blog-edit-pt'),
-            $('#blog-preview-pt'),
-            $('#text-content-editor-pt'),
-            $('text_content')
-        );
-    });
-    $('#blog-preview-en').click(function() {
-        show_preview(
-            $('#blog-edit-en'),
-            $('#blog-preview-en'),
-            $('#text-content-editor-en'),
-            $('text_content_en')
-        );
+    $('#blog-preview-pt, #blog-preview-en').click(function() {
+        var lang_ext = $(this).attr('id').split('-').pop();
+        var editor = $('#text-content-editor-'  + lang_ext),
+            text_content = lang_ext == 'pt' ? $('text_content') : $('text_content_en');
+
+        $('#blog-preview-' + lang_ext).prop('disabled', true);
+        $('#blog-edit-' + lang_ext).prop('disabled', false);
+
+        editor.summernote('destroy');
+        editor.find('img').each(function() {
+            add_caption($(this));
+        });
+        var aHTML = editor.html();
+        text_content.val(aHTML);
     });
 
     cropInput($('#thumb-crop'), $('#thumb-input'), inputThumbCallback)
@@ -159,26 +136,19 @@ $(document).ready(function(){
     });
 
     var text_max = 500;
-    $('#textarea-feedback-pt').html(text_max + ' ' + dataviva.dictionary['characters_left']);
-    $('#textarea-feedback-en').html(text_max + ' ' + dataviva.dictionary['characters_left']);
+    $('[name=textarea-feedback]').html(text_max + ' ' + dataviva.dictionary['characters_left']);
 
-    $('#text_call').keyup(function() {
-        var text_length = $('#text_call').val().length;
+    $('#text_call, #text_call_en').keyup(function() {
+        var text_length = $(this).val().length;
         var text_remaining = text_max - text_length;
-        $('#textarea-feedback-pt').html(text_remaining + ' ' + dataviva.dictionary['characters_left']);
-    });  
-    $('#text_call_en').keyup(function() {
-        var text_length = $('#text_call_en').val().length;
-        var text_remaining = text_max - text_length;
-        $('#textarea-feedback-en').html(text_remaining + ' ' + dataviva.dictionary['characters_left']);
+        $(this).siblings('[name=textarea-feedback]').html(text_remaining + ' ' + dataviva.dictionary['characters_left']);
     });
 
     load_tooltips();
 
     $('#blog-form').submit(function() {
         $('#blog-form > button[type=submit]').prop('disabled', true);
-        $('#summernote-pt').hide();
-        $('#summernote-en').hide();
+        $('#summernote-pt, #summernote-en').hide();
 
         var submittingForm = dataviva.ui.loading('#blog-form');
         submittingForm.text(dataviva.dictionary['loading'] + "...");

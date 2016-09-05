@@ -85,35 +85,39 @@
         <label class="control-label" for="text_call">{% trans %}Call{% endtrans %}</label>
         {{ messages(form.text_call) }}
         {{ form.text_call(class="form-control", rows=5, maxlength=500)}}
-        <div id="textarea-feedback-pt"></div>
+        <div name="textarea-feedback"></div>
     </div>
 
     <div class="form-group m-t-sm {{ 'has-error' if form.text_call_en.errors else '' }}">
         <label class="control-label" for="text_call_en">{% trans %}Call{% endtrans %} (en)</label>
         {{ messages(form.text_call_en) }}
         {{ form.text_call_en(class="form-control", rows=5, maxlength=500)}}
-        <div id="textarea-feedback-en"></div>
+        <div name="textarea-feedback"></div>
     </div>
 
-    <div id="summernote-pt" class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
-        <label class="control-label" for="text_content">{% trans %}Content{% endtrans %}</label>
-        <button id="blog-edit-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-        <button id="blog-preview-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
-        {{ messages(form.text_content) }}
-        {{ form.text_content }}
-        <div class=" summernote-wrapper">
-            <div id="text-content-editor-pt" class="summernote"></div>
+    <div class="row">
+        <div id="summernote-pt" class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
+            <label class="control-label" for="text_content">{% trans %}Content{% endtrans %}</label>
+            <button id="blog-edit-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+            <button id="blog-preview-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+            {{ messages(form.text_content) }}
+            {{ form.text_content }}
+            <div class=" summernote-wrapper">
+                <div id="text-content-editor-pt" class="summernote"></div>
+            </div>
         </div>
     </div>
 
-    <div id="summernote-en" class="form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
-        <label class="control-label" for="text_content">{% trans %}Content{% endtrans %} (en)</label>
-        <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-        <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
-        {{ messages(form.text_content) }}
-        {{ form.text_content }}
-        <div class=" summernote-wrapper">
-            <div id="text-content-editor-en" class="summernote"></div>
+    <div class="row">
+        <div id="summernote-en" class="form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
+            <label class="control-label" for="text_content">{% trans %}Content{% endtrans %} (en)</label>
+            <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+            <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+            {{ messages(form.text_content) }}
+            {{ form.text_content }}
+            <div class=" summernote-wrapper">
+                <div id="text-content-editor-en" class="summernote"></div>
+            </div>
         </div>
     </div>
 
