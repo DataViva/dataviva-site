@@ -505,6 +505,7 @@ function Selector() {
           delete data['xx'];
           delete data['xxxxd'];
           delete data['xxxxc'];
+          delete data['sabra'];
         }
         if(type == 'course_hedu'){
           delete data['00'];
