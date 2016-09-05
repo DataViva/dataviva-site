@@ -8,6 +8,16 @@
 
     {{ form.hidden_tag() }}
     <div class="row">
+        <div class="form-group col-md-2">
+            <label class="control-label" for="authors">Habilitar publicação em inglês</label>
+            {{ messages(form.dual_language) }}
+            <div class="form-control checkbox-switch">
+                {{ form.dual_language(class="js-switch") }}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="form-group col-md-10 {{ 'has-error' if form.title.errors else '' }} ">
             <label class="control-label" for="title">{% trans %}Title{% endtrans %}</label>
             {{ messages(form.title) }}

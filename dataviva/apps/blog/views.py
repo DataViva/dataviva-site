@@ -183,6 +183,7 @@ def create():
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
+        post.dual_language = form.dual_language.data
         post.active = 0
 
         subjects_names = form.subject.data.replace(', ', ',').split(',')
@@ -239,6 +240,7 @@ def edit(id):
     form.text_call.data = post.text_call
     form.text_call_en.data = post.text_call_en
     form.show_home.data = post.show_home
+    form.dual_language.data = post.dual_language
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
     form.subject.data = ', '.join([sub.name for sub in post.subjects])
@@ -266,6 +268,7 @@ def update(id):
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
+        post.dual_language = form.dual_language.data
         subjects_names = form.subject.data.replace(', ', ',').split(',')
         num_subjects = len(post.subjects)
 

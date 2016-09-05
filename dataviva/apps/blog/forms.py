@@ -16,6 +16,8 @@ class RegistrationForm(Form):
 
     show_home = BooleanField('show_home')
 
+    dual_language = BooleanField('dual_language')
+
     author = TextField('author', validators=[
         validators.Required(u"Por favor, insira o autor do post."),
         validators.Length(max=100)
