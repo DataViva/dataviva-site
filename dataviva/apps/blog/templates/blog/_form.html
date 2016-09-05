@@ -9,7 +9,7 @@
     {{ form.hidden_tag() }}
     <div class="row">
         <div class="form-group col-md-2">
-            <label class="control-label" for="authors">Habilitar publicação em inglês</label>
+            <label class="control-label" for="authors">Publicar em inglês</label>
             {{ messages(form.dual_language) }}
             <div class="form-control checkbox-switch">
                 {{ form.dual_language(class="js-switch") }}
@@ -30,15 +30,14 @@
                 {{ form.show_home(class="js-switch") }}
             </div>
         </div>
-    </div>
-
-    <div class="row">
         <div class="form-group col-md-10 {{ 'has-error' if form.title_en.errors else '' }} ">
             <label class="control-label" for="title_en">{% trans %}Title{% endtrans %} (en)</label>
             {{ messages(form.title_en) }}
             {{ form.title_en(class="form-control", maxlength=400)}}
         </div>
     </div>
+
+        
 
     <div class="row">
         <div class="form-group col-md-7 {{ 'has-error' if form.author.errors else '' }} ">

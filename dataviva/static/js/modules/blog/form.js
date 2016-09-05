@@ -51,6 +51,17 @@ var load_tooltips = function() {
 
 $(document).ready(function(){
 
+    if ($('#dual_language').is(':not(:checked)')) {
+        $('#title_en, #text_call_en, #summernote-en')
+            .hide()
+            .siblings().hide();
+    }
+    $('#dual_language').change(function() {
+        $('#title_en, #text_call_en, #summernote-en')
+            .fadeToggle()
+            .siblings().fadeToggle();
+    });
+
     $('#blog-edit-pt, #blog-edit-en').prop('disabled', true);
 
     $('#text-content-editor-pt').append($('#text_content').val());
