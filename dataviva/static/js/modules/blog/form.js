@@ -159,13 +159,18 @@ $(document).ready(function(){
     });
 
     var text_max = 500;
-    $('#textarea-feedback').html(text_max + ' ' + dataviva.dictionary['characters_left']);
+    $('#textarea-feedback-pt').html(text_max + ' ' + dataviva.dictionary['characters_left']);
+    $('#textarea-feedback-en').html(text_max + ' ' + dataviva.dictionary['characters_left']);
 
     $('#text_call').keyup(function() {
         var text_length = $('#text_call').val().length;
         var text_remaining = text_max - text_length;
-
-        $('#textarea-feedback').html(text_remaining + ' ' + dataviva.dictionary['characters_left']);
+        $('#textarea-feedback-pt').html(text_remaining + ' ' + dataviva.dictionary['characters_left']);
+    });  
+    $('#text_call_en').keyup(function() {
+        var text_length = $('#text_call_en').val().length;
+        var text_remaining = text_max - text_length;
+        $('#textarea-feedback-en').html(text_remaining + ' ' + dataviva.dictionary['characters_left']);
     });
 
     load_tooltips();

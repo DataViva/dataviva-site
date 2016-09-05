@@ -85,14 +85,14 @@
         <label class="control-label" for="text_call">{% trans %}Call{% endtrans %}</label>
         {{ messages(form.text_call) }}
         {{ form.text_call(class="form-control", rows=5, maxlength=500)}}
-        <div id="textarea-feedback"></div>
+        <div id="textarea-feedback-pt"></div>
     </div>
 
     <div class="form-group m-t-sm {{ 'has-error' if form.text_call_en.errors else '' }}">
         <label class="control-label" for="text_call_en">{% trans %}Call{% endtrans %} (en)</label>
         {{ messages(form.text_call_en) }}
         {{ form.text_call_en(class="form-control", rows=5, maxlength=500)}}
-        <div id="textarea-feedback"></div>
+        <div id="textarea-feedback-en"></div>
     </div>
 
     <div id="summernote-pt" class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
