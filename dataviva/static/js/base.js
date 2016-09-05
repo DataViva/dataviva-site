@@ -124,10 +124,21 @@ var summernoteConfig = {
         ['insert', ['link', 'picture', 'video']],
         ['view', ['fullscreen', 'codeview', 'help']]
       ],
-    placeholder: 'Escreva aqui o conteúdo desta publicação',
+    popover: {
+        image: [
+            ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+            ['float', ['floatLeft', 'floatRight', 'floatNone']],
+            ['remove', ['removeMedia']],
+            ['custom', ['imageTitle']]
+        ]
+    },
+    placeholder: dataviva.dictionary['summernote_placeholder'],
+    imageTitle: {
+        specificAltField: true,
+    },
     callbacks: {
         onImageUpload: function(files) {
-            var noteEditor = dataviva.ui.loading('.note-editor');
+            var noteEditor = dataviva.ui.loading('#summernote-field');
             noteEditor.text(dataviva.dictionary['loading'] + "...");
             var file = files[0];
             var data = new FormData();
@@ -141,8 +152,17 @@ var summernoteConfig = {
                 processData: false,
                 data: data,
                 success: function(data) {
-                    noteEditor.hide();
                     $('#text-content-editor').summernote('insertImage', data.image.url);
+                },
+                error: function(err) {
+                    swal({
+                        title: 'Ops!',
+                        text: dataviva.dictionary['file_too_large'],
+                        type: "error"
+                    });
+                },
+                complete: function() {
+                    noteEditor.hide();
                 }
             });
         }
