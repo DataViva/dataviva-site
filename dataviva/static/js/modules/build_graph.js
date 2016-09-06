@@ -29,6 +29,7 @@ var selectorCompare = Selector()
 
 function select_compare() {
     d3.select("#modal-selector-content").call(selectorCompare.type('bra'));
+    $('#leon_header_select').hide()
     $('#modal-selector').modal('show');
 }
 
