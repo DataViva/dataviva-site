@@ -27,9 +27,18 @@ var selectorCompare = Selector()
         $('#modal-selector').modal('hide');
     });
 
+function wait_model_load(){
+    if($("#leon_header_select")[0]){
+        $("#leon_header_select").hide()
+    }else{
+        setTimeout(wait_model_load, 1)
+    }
+}
+
 function select_compare() {
     d3.select("#modal-selector-content").call(selectorCompare.type('bra'));
     $('#modal-selector').modal('show');
+    wait_model_load();
 }
 
 function clean_selection(button) {
