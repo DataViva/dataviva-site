@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
 import os
 
 mod = Blueprint('blog', __name__,
@@ -198,10 +198,13 @@ def create():
         db.session.add(post)
         db.session.flush()
 
-        Post.query.get(post.id).text_content = upload_images_to_s3(
+        text_content_pt = upload_images_to_s3(
             form.text_content.data, mod.name, post.id)
-
-        Post.query.get(post.id).text_content_en = form.text_content_en.data
+        text_content_en = upload_images_to_s3(
+            form.text_content_en.data, mod.name, post.id)
+        Post.query.get(post.id).text_content = text_content_pt
+        Post.query.get(post.id).text_content_en = text_content_en
+        clean_s3_folder(text_content_en, text_content_pt, mod.name, post.id)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(
@@ -284,8 +287,9 @@ def update(id):
 
         post.text_content = upload_images_to_s3(
             form.text_content.data, mod.name, post.id)
-
-        post.text_content_en = form.text_content_en.data
+        post.text_content_en = upload_images_to_s3(
+            form.text_content_en.data, mod.name, post.id)
+        clean_s3_folder(post.text_content, post.text_content_en, mod.name, post.id)
 
         db.session.flush()
         if len(form.thumb.data.split(',')) > 1:
