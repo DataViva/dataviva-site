@@ -112,9 +112,12 @@ def views(dataset, bra, filter1, filter2):
 
     views = {}
     for build in build_query.all():
+        if bra == 'all' and build.app.type == 'compare':
+            break
+
         if bra:
             build.set_bra(bra)
-            
+
         if filter1 != 'all':
             build.set_filter1(request.args.get('filter1'))
 
