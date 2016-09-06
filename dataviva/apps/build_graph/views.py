@@ -114,7 +114,7 @@ def views(dataset, bra, filter1, filter2):
     for build in build_query.all():
         if bra:
             build.set_bra(bra)
-
+            
         if filter1 != 'all':
             build.set_filter1(request.args.get('filter1'))
 
