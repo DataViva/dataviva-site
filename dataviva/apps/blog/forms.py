@@ -1,6 +1,21 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import HiddenField, TextField, TextAreaField, DateField, BooleanField, validators
+from wtforms import HiddenField, TextField, TextAreaField, DateField, BooleanField, validators, ValidationError
+
+
+def validate_title_en(form, field):
+    if form.dual_language.data and not form.title_en.data:
+        raise ValidationError(u"Por favor, insira o título do post.")
+
+
+def validate_text_call_en(form, field):
+    if form.dual_language.data and not form.text_call_en.data:
+        raise ValidationError(u"Por favor, insira a chamada do post.")
+
+
+def validate_text_content_en(form, field):
+    if form.dual_language.data and not form.text_content_en.data:
+        raise ValidationError(u"Por favor, insira o conteúdo do post.")
 
 
 class RegistrationForm(Form):
@@ -10,8 +25,8 @@ class RegistrationForm(Form):
     ])
 
     title_en = TextField('title_en', validators=[
-        validators.Required(u"Por favor, insira o título do post."),
-        validators.Length(max=400)
+        validators.Length(max=400),
+        validate_title_en
     ])
 
     show_home = BooleanField('show_home')
@@ -39,8 +54,8 @@ class RegistrationForm(Form):
     ])
 
     text_call_en = TextAreaField('text_call_en', validators=[
-        validators.Required(u"Por favor, insira uma chamada para o post."),
-        validators.Length(max=500)
+        validators.Length(max=500),
+        validate_text_call_en
     ])
 
     text_content = HiddenField('text_content', validators=[
@@ -48,7 +63,7 @@ class RegistrationForm(Form):
     ]) 
 
     text_content_en = HiddenField('text_content_en', validators=[
-        validators.Required(u"Por favor, insira o conteúdo do post.")
+        validate_text_content_en
     ])
 
     thumb = HiddenField('thumb', validators=[
