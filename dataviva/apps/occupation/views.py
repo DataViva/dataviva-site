@@ -43,6 +43,8 @@ def index(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
 
     bra_id = request.args.get('bra_id')
+    bra_id = bra_id if bra_id != 'all' else None
+
     menu = request.args.get('menu')
     url = request.args.get('url')
 
