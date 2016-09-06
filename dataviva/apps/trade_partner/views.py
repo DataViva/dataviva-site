@@ -4,11 +4,9 @@ from dataviva.apps.general.views import get_locale
 from dataviva.api.secex.services import TradePartner, TradePartnerMunicipalities, TradePartnerProducts
 from dataviva.api.secex.models import Ymw, Ymbw
 from dataviva.api.attrs.models import Wld, Bra
-from dataviva import db
 from sqlalchemy.sql.expression import func
 from dataviva.translations.dictionary import dictionary
-from os import walk
-import os
+from dataviva import db
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
@@ -34,7 +32,7 @@ def add_language_code(endpoint, values):
 def graphs(wld_id, tab):
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('trade_partner/graphs-'+tab+'.html', trade_partner=trade_partner, location=location, graph=None)
+    return render_template('trade_partner/graphs-' + tab + '.html', trade_partner=trade_partner, location=location, graph=None)
 
 
 @mod.route('/<wld_id>', defaults={'tab': 'general'})
@@ -50,6 +48,8 @@ def index(wld_id, tab):
     if url:
         graph['url'] = url
 
+    if wld_id == 'sabra':
+        abort(404)
 
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=bra_id).first()
@@ -117,7 +117,7 @@ def index(wld_id, tab):
             'wld_id': wld_id,
             'bra_id': bra_id,
             'location_name': trade_partner_service.location_name(),
-            'location_type': dictionary()['bra_'+str(len(bra_id))]
+            'location_type': dictionary()['bra_' + str(len(bra_id))]
         }
 
     body = {
@@ -178,5 +178,5 @@ def index(wld_id, tab):
 
     if menu and menu not in tabs[tab]:
         abort(404)
-    
+
     return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location, tab=tab, graph=graph)

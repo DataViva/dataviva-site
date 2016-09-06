@@ -42,6 +42,8 @@ def index(course_sc_id, tab):
 
     basic_course = Course_sc.query.filter_by(id=course_sc_id).first_or_404()
     bra_id = request.args.get('bra_id')
+    bra_id = bra_id if bra_id != 'all' else None
+    
     menu = request.args.get('menu')
     url = request.args.get('url')
     graph = {}

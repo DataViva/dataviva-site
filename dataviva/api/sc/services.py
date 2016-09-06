@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybsc, Ys
+from dataviva.api.sc.models import Yc_sc, Ysc, Ybc_sc, Ybs, Ybsc, Ys
 from dataviva.api.attrs.models import School, Bra, Course_sc
 from dataviva import db
 from sqlalchemy import desc, func, not_
@@ -232,14 +232,13 @@ class LocationSchool:
         self.bra_id = bra_id
         self._sc_list = None
         self._sc_sorted_by_enrollment = None
-        self.max_year_query = db.session.query(func.max(Ybsc.year)).filter_by(bra_id=bra_id)
+        self.max_year_query = db.session.query(func.max(Ybs.year)).filter_by(bra_id=bra_id)
 
         self.sc_query = db.session.query(
-                            func.sum(Ybsc.enrolled).label("enrolled"),
+                            func.sum(Ybs.enrolled).label("enrolled"),
                             School).join(School).filter(
-                            Ybsc.bra_id == self.bra_id,
-                            not_(Ybsc.course_sc_id.like('xx%')),
-                            Ybsc.year == self.max_year_query).group_by(Ybsc.school_id)
+                            Ybs.bra_id == self.bra_id,
+                            Ybs.year == self.max_year_query).group_by(Ybs.school_id)
 
     def __sc_list__(self):
         if not self._sc_list:

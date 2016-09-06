@@ -132,19 +132,17 @@ def after_request(response):
 def home():
     g.page_type = 'home'
 
-    publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
-    if len(publications) > 3:
-        news = [publications.pop(randrange(len(publications))) for _ in range(3)]
-    else:
-        news = publications
-
+    news_publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
     blog_posts = Post.query.filter(Post.id != id, Post.active, Post.show_home).all()
-    if len(blog_posts) > 3:
-        blog = [blog_posts.pop(randrange(len(blog_posts))) for _ in range(3)]
-    else:
-        blog = blog_posts
 
-    return render_template("general/index.html", news=news, blog=blog)
+    news_publications += blog_posts
+
+    all_publications = sorted(news_publications, key=lambda x: x.publish_date, reverse=True)
+
+    if len(all_publications) > 6:
+        all_publications = all_publications[0:6]
+
+    return render_template("general/index.html", publications=all_publications)
 
 
 @mod.route('/inicie-uma-pesquisa/', methods=['GET'])

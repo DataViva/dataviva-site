@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, save_images_temporarily, upload_images_to_s3
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp
 import os
 
 mod = Blueprint('blog', __name__,
@@ -35,30 +35,32 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    posts = Post.query.filter_by(active=True).order_by(desc(Post.publish_date)).all()
+    posts = Post.query.filter_by(active=True).order_by(
+        desc(Post.publish_date)).all()
     subjects_query = Subject.query.order_by(desc(Subject.name)).all()
     subjects = []
 
     for subject_query in subjects_query:
         for row in subject_query.posts:
-            if row.active == True:
+            if row.active is True:
                 subjects.append(subject_query)
                 break
 
     return render_template('blog/index.html', posts=posts, subjects=subjects)
 
 
-
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
-    posts_query = Post.query.filter_by(active=True).order_by(desc(Post.publish_date)).all()
-    subjects_query = subjects_query = Subject.query.order_by(desc(Subject.name)).all()
+    posts_query = Post.query.filter_by(
+        active=True).order_by(desc(Post.publish_date)).all()
+    subjects_query = subjects_query = Subject.query.order_by(
+        desc(Subject.name)).all()
     posts = []
     subjects = []
 
     for subject_query in subjects_query:
         for row in subject_query.posts:
-            if row.active == True:
+            if row.active is True:
                 subjects.append(subject_query)
                 break
 
@@ -66,8 +68,10 @@ def index_subject(subject):
         if float(subject) in [x.id for x in post.subjects]:
             posts.append(post)
 
-    
-    return render_template('blog/index.html', posts=posts, subjects=subjects, active_subject=long(subject))
+    return render_template('blog/index.html',
+                           posts=posts,
+                           subjects=subjects,
+                           active_subject=long(subject))
 
 
 @mod.route('/post/<id>', methods=['GET'])
@@ -79,7 +83,7 @@ def show(id):
 
     for subject_query in subjects_query:
         for row in subject_query.posts:
-            if row.active == True:
+            if row.active is True:
                 subjects.append(subject_query)
                 break
 
@@ -87,7 +91,11 @@ def show(id):
         read_more = [posts.pop(randrange(len(posts))) for _ in range(3)]
     else:
         read_more = posts
-    return render_template('blog/show.html', post=post, subjects=subjects, id=id, read_more=read_more)
+    return render_template('blog/show.html',
+                           post=post,
+                           subjects=subjects,
+                           id=id,
+                           read_more=read_more)
 
 
 @mod.route('/post/all', methods=['GET'])
@@ -96,8 +104,8 @@ def all_posts():
     posts = []
     for row in result:
         posts += [(row.id, row.title, row.author,
-                   row.publish_date.strftime('%d/%m/%Y'), row.show_home, row.active)]
-
+                   row.publish_date.strftime('%d/%m/%Y'),
+                   row.show_home, row.active)]
     return jsonify(posts=posts)
 
 
@@ -154,7 +162,8 @@ def admin_delete():
 @required_roles(1)
 def new():
     form = RegistrationForm()
-    return render_template('blog/new.html', form=form, action=url_for('blog.create'))
+    return render_template('blog/new.html',
+                           form=form, action=url_for('blog.create'))
 
 
 @mod.route('/admin/post/new', methods=['POST'])
@@ -168,10 +177,9 @@ def create():
         post = Post()
         post.title = form.title.data
         post.author = form.author.data
-        #post.text_content = form.text_content.data
         post.text_call = form.text_call.data
-        post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
         post.active = 0
 
@@ -183,15 +191,18 @@ def create():
                 subject = Subject()
                 subject.name = name
             post.subjects.append(subject)
-        
+
         db.session.add(post)
         db.session.flush()
 
-        Post.query.get(post.id).text_content = upload_images_to_s3(form.text_content.data, mod.name, post.id)
+        Post.query.get(post.id).text_content = upload_images_to_s3(
+            form.text_content.data, mod.name, post.id)
 
         if len(form.thumb.data.split(',')) > 1:
-            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
-            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+            upload_folder = os.path.join(
+                app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
+            post.thumb = save_b64_image(
+                form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 
@@ -199,14 +210,16 @@ def create():
         flash(message, 'success')
         return redirect(url_for('blog.admin'))
 
-@mod.route('/admin/post/new/upload', methods=['POST'])
+
+@mod.route('/admin/upload', methods=['POST'])
 @login_required
 @required_roles(1)
-def upload_images():
-    images = { key: value for key, value in request.form.items() if key != 'csrf_token' }
-    path_hash = request.form['csrf_token'].replace('#', '')
-    upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, path_hash, 'images')
-    return jsonify(file_paths=save_images_temporarily(upload_folder, images))
+def upload_image():
+    file = request.files['image']
+    csrf_token = request.form['csrf_token'].replace('#', '')
+    image_url = save_file_temp(file, mod.name, csrf_token)
+    return jsonify(image={'url': image_url})
+
 
 @mod.route('/admin/post/<id>/edit', methods=['GET'])
 @login_required
@@ -223,7 +236,9 @@ def edit(id):
     form.publish_date.data = post.publish_date
     form.subject.data = ', '.join([sub.name for sub in post.subjects])
 
-    return render_template('blog/edit.html', form=form, action=url_for('blog.update', id=id))
+    return render_template('blog/edit.html',
+                           form=form,
+                           action=url_for('blog.update', id=id))
 
 
 @mod.route('/admin/post/<id>/edit', methods=['POST'])
@@ -238,6 +253,7 @@ def update(id):
         post = Post.query.filter_by(id=id).first_or_404()
         post.title = form.title.data
         post.author = form.author.data
+        post.text_call = form.text_call.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
@@ -254,12 +270,15 @@ def update(id):
                 subject.name = name
             post.subjects.append(subject)
 
-        post.text_content = upload_images_to_s3(form.text_content.data, mod.name, post.id)
+        post.text_content = upload_images_to_s3(
+            form.text_content.data, mod.name, post.id)
 
         db.session.flush()
         if len(form.thumb.data.split(',')) > 1:
-            upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
-            post.thumb = save_b64_image(form.thumb.data.split(',')[1], upload_folder, 'thumb')
+            upload_folder = os.path.join(
+                app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
+            post.thumb = save_b64_image(
+                form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
 

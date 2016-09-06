@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from io import BytesIO
 import time
+import requests
 from StringIO import StringIO
 from datetime import datetime
 from collections import defaultdict
@@ -526,3 +527,10 @@ def crosswalk_recs(dataset, filter, id):
                 {"title": a.name(), "url": a.url(), "type": attr_swap[filter]} for a in attrs]
 
     return crosswalk
+
+
+@mod.route('/image', methods=['GET'])
+def image():
+    url = request.args.get('link');
+    code = requests.get(url).status_code;
+    return Response(str(code), status=200)   
