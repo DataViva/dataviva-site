@@ -15,7 +15,11 @@
                     <span>{{post.subjects[0].name}}</span>
                 </div>
                 <h4>
-                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{{post.title}}</a>
+                    {% if post.dual_language and g.locale == "en" %}
+                        <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title_en}}">{{post.title_en}}</a>
+                    {% else %}
+                        <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title}}">{{post.title}}</a>
+                    {% endif %}
                 </h4>
                 <p>{{ post.text_call }}</p>
                 <div class="meta">

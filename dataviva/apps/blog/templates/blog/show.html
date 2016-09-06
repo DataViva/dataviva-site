@@ -18,7 +18,13 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item post single">
-            <h4>{{ post.title }}</h4>
+            <h4>
+                {% if post.dual_language and g.locale == "en" %}
+                    {{ post.title_en|safe }}
+                {% else %}
+                    {{ post.title|safe }}
+                {% endif %}
+            </h4>
             <div class="meta">
                 <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
             </div>
@@ -35,7 +41,11 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            {{ post.text_content|safe }}
+            {% if post.dual_language and g.locale == "en" %}
+                {{ post.text_content_en|safe }}
+            {% else %}
+                {{ post.text_content|safe }}
+            {% endif %}
         </div>
         <div class="clearfix"></div>
         <div class="related">
@@ -47,7 +57,13 @@
                         <img src="{{post.thumb}}" class="img-responsive">
                     </a>
                     <p>
-                        <a href="#" title="{{ post.title }}">{{ post.title }}</a>
+                        <a href="#" title="{{ post.title }}"> 
+                            {% if post.dual_language and g.locale == "en" %}
+                                {{ post.title_en|safe }}
+                            {% else %}
+                                {{ post.title|safe }}
+                            {% endif %}
+                        </a>
                     </p>
                 </div>
             {% endfor %}
