@@ -48,6 +48,9 @@ def index(wld_id, tab):
     if url:
         graph['url'] = url
 
+    if wld_id == 'sabra':
+        abort(404)
+
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=bra_id).first()
     max_year_query = db.session.query(
