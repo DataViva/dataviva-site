@@ -8,7 +8,7 @@ answer_pt = '<p>Tree Map &eacute; um aplicativo descritivo que permite visualiza
 <p>A l&oacute;gica do Tree Map &eacute; a mesma utilizada em um gr&aacute;fico de pizza ou outra forma de representa&ccedil;&atilde;o visual de distribui&ccedil;&atilde;o da participa&ccedil;&atilde;o de itens no somat&oacute;rio total. A utiliza&ccedil;&atilde;o de blocos agrupados por grandes grupos e em ordem de import&acirc;ncia permite uma visualiza&ccedil;&atilde;o r&aacute;pida dos itens com maior participa&ccedil;&atilde;o e em qual grande grupo ele est&aacute; contido, possibilitando uma an&aacute;lise simples e r&aacute;pida dos percentuais de participa&ccedil;&atilde;o.</p>
 <p>Uma das visualiza&ccedil;&otilde;es, por exemplo, mostra a participa&ccedil;&atilde;o de cada um dos produtos nas exporta&ccedil;&otilde;es de Minas Gerais, revelando com clareza a participa&ccedil;&atilde;o significativa do produto Min&eacute;rio de Ferro nas exporta&ccedil;&otilde;es do estado. V&aacute;rias outras perspectivas s&atilde;o poss&iacute;veis por meio dessa visualiza&ccedil;&atilde;o, utilizando as vari&aacute;veis &#8203;&#8203;dispon&iacute;veis na plataforma como atividades econ&ocirc;micas, ocupa&ccedil;&otilde;es, localidades, al&eacute;m da interse&ccedil;&atilde;o entre essas vari&aacute;veis.</p>
 <p><a href="/pt/build_graph/secex/4mg/all/all?view=Imports/Exports&graph=tree_map" target="_blank" class="btn btn-success" title="Tree Map"><i class="dv-graph-tree_map m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Tree Map'
+WHERE description_en = 'Tree Map';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -20,7 +20,7 @@ answer_pt = '<p>A visualiza&ccedil;&atilde;o Evolu&ccedil;&atilde;o permite anal
 <p>O objetivo do aplicativo Evolu&ccedil;&atilde;o &eacute; permitir a visualiza&ccedil;&atilde;o dos dados em uma s&eacute;rie hist&oacute;rica, revelando produtos, atividades econ&ocirc;micas, ocupa&ccedil;&otilde;es ou localidades com maior participa&ccedil;&atilde;o ao longo do tempo e seu hist&oacute;rico de crescimento ou redu&ccedil;&atilde;o, seja em valores brutos ou percentuais.</p>
 <p>Uma das visualiza&ccedil;&otilde;es, por exemplo, permite avaliar o crescimento total do mercado de trabalho no estado de Minas Gerais e quais os grupos de ocupa&ccedil;&atilde;o tiveram maior contribui&ccedil;&atilde;o neste crescimento, desde 2002. Assim como outras visualiza&ccedil;&otilde;es, &eacute; poss&iacute;vel modificar os dados exibidos para qualquer uma das vari&aacute;veis &#8203;&#8203;b&aacute;sicas dispon&iacute;veis no DataViva (produtos, atividades, ocupa&ccedil;&otilde;es) e seus cruzamentos com as localidades de todo o Brasil em diferentes n&iacute;veis de agrega&ccedil;&atilde;o (regi&atilde;oes, estados, mesorregi&otilde;es, microrregi&otilde;es e munic&iacute;pios).</p>
 <p><a href="/pt/build_graph/rais/4mg/all/all?view=Employment%20by%20Municipality&graph=stacked" target="_blank" class="btn btn-success" title="Evolu&ccedil;&atilde;o"><i class="dv-graph-stacked m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Stacked'
+WHERE description_en = 'Stacked';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -30,7 +30,7 @@ answer_en = '<p>The Geo Map is a descriptive geographical visualization that ena
 answer_pt = '<p>O Mapa &eacute; uma visualiza&ccedil;&atilde;o descritiva geogr&aacute;fica que possibilita uma an&aacute;lise da distribui&ccedil;&atilde;o espacial das vari&aacute;veis dispon&iacute;veis no DataViva. A partir de uma escala de calor, s&atilde;o mostrados os munic&iacute;pios com maiores valores (em vermelho) e menores valores (em azul), permite a navega&ccedil;&atilde;o de aproxima&ccedil;&atilde;o (zoom in) e afastamento (zoom out) para exibição de maiores informa&ccedil;&otilde;es sobre o munic&iacute;pio selecionado. Este aplicativo tem como objetivo revelar a distribui&ccedil;&atilde;o geogr&aacute;fica dos dados.</p>
 <p>Uma das visualiza&ccedil;&otilde;es, por exemplo, exibe as atividades econ&ocirc;micas em Minas Gerais por munic&iacute;pio, evidenciando sua concentra&ccedil;&atilde;o na Regi&atilde;o Metropolitana de Belo Horizonte. Assim como nas outras visualizações, &eacute; poss&iacute;vel alterar a perspectiva de acordo com a vari&aacute;vel desejada.</p>
 <p><a href="/pt/build_graph/rais/4mg/all/all?view=Employment%20by%20Municipality&graph=geo_map" target="_blank" class="btn btn-success" title="Mapa"><i class="dv-graph-geo_map m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Geo Map'
+WHERE description_en = 'Geo Map';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -46,7 +46,7 @@ answer_pt = '<p>O aplicativo de Rede disponibiliza a visualiza&ccedil;&atilde;o 
 <p>Uma das visualiza&ccedil;&otilde;es presentes no DataViva, por exemplo, é o Espa&ccedil;o de Produtos para Minas Gerais. A visualiza&ccedil;&atilde;o de Rede mostra, de forma simplificada, em quais produtos o estado possui vantagem comparativa e de quais categorias eles pertencem.</p>
 <p>Para melhor entendimento e interpreta&ccedil;&atilde;o dessa visualiza&ccedil;&atilde;o &eacute; recomendado consultar os conceitos b&aacute;sicos da teoria do <i>Product Space</i>.</p>
 <p><a href="/pt/build_graph/secex/4mg/all/all?view=Product%20Space&graph=network" target="_blank" class="btn btn-success" title="Rede"><i class="dv-graph-network m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Network'
+WHERE description_en = 'Network';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -60,7 +60,7 @@ answer_pt = '<p>A visualiza&ccedil;&atilde;o de An&eacute;is &eacute; prescritiv
 <p>Semelhante a outros aplicativos, a visualiza&ccedil;&atilde;o de An&eacute;is utiliza um conjunto de cores padr&atilde;o que permite verificar qual grupo um produto, ind&uacute;stria ou atividade econ&ocirc;mica pertence, bem como outros grupos com os quais ele est&aacute; conectado. &Eacute; interessante compreender corretamente os conceitos da teoria do <i>Product Space</i> para interpretar essa visualiza&ccedil;&atilde;o prescritiva.</p>
 <p>Uma das visualiza&ccedil;&otilde;es, por exemplo, mostra as conex&otilde;es para os bi&oacute;logos em Minas Gerais, sendo poss&iacute;vel analisar as ocupa&ccedil;&otilde;es conectadas aos bi&oacute;logos de forma direta ou em segundo grau.</p>
 <p><a href="/pt/build_graph/rais/4mg/all/2211?view=Similar%20Occupations&graph=rings" target="_blank" class="btn btn-success" title="An&eacute;is"><i class="dv-graph-rings m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Rings'
+WHERE description_en = 'Rings';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -74,7 +74,7 @@ answer_pt = '<p>A visualiza&ccedil;&atilde;o de Dispers&atilde;o &eacute; mais u
 <p>Uma visualiza&ccedil;&atilde;o, por exemplo, que mostra as atividades econ&ocirc;micas de Minas Gerais e o seu plano de distribui&ccedil;&atilde;o considerando a dist&acirc;ncia (eixo x) e as ocupa&ccedil;&otilde;es &uacute;nicas (eixo y). Note que Constru&ccedil;&atilde;o &eacute; um dos grupos de atividade com o maior n&uacute;mero de ocupa&ccedil;&otilde;es &uacute;nicas e uma das menores dist&acirc;ncias para o estado, enquanto que Atividades Financeiras &eacute; um grupo com um n&uacute;mero menor de ocupa&ccedil;&otilde;es &uacute;nicas e uma dist&acirc;ncia maior. Consequentemente, a visualiza&ccedil;&atilde;o permite uma f&aacute;cil an&aacute;lise das atividades e produtos de uma regi&atilde;o dado a interse&ccedil;&atilde;o de dois indicadores calculados baseando na teoria do <i>Product Space</i>.</p>
 <p>Assim como em outras visualiza&ccedil;&otilde;es prescritivas, &eacute; recomendado conhecer os termos e os conceitos da teoria do <i>Product Space</i> para fazer uma interpreta&ccedil;&atilde;o correta da visualiza&ccedil;&atilde;o.</p>
 <p><a href="/pt/build_graph/rais/4mg/all/all?view=Industries&graph=scatter" target="_blank" class="btn btn-success" title="Dispers&atilde;o"><i class="dv-graph-scatter m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Scatter'
+WHERE description_en = 'Scatter';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -86,7 +86,7 @@ answer_pt = '<p>A visualiza&ccedil;&atilde;o Compare tem como objetivo facilitar
 <p>Uma poss&iacute;vel visualiza&ccedil;&atilde;o, &eacute; a compara&ccedil;&atilde;o de exporta&ccedil;&atilde;o de Minas Gerais e Rio de Janeiro, revelando que a categoria Produtos Minerais est&aacute; liderando em ambos os estados, com um valor similar, dado que ela est&aacute; pr&oacute;xima &agrave; linha diagonal do gr&aacute;fico. Outros produtos, como Artes e Antiguidades, s&atilde;o mais exportados pelo estado do Rio de Janeiro, enquanto que os produtos da categoria de Metais Preciosos s&atilde;o mais exportados por Minas Gerais.</p>
 <p>Essa compara&ccedil;&atilde;o pode ajudar encontrando outras localidades de refer&ecirc;ncia ou determinando as localidades mais interessante para um investimentos em particular ou atividades econ&ocirc;micas que est&atilde;o mais concentradas em certas regi&otilde;es . Compare cria visualiza&ccedil;&otilde;es com os principais dados dispon&iacute;veis no DataViva (produtos, atividades, ocupa&ccedil;&otilde;es) e revela ou confirma hip&oacute;teses sobre a diferen&ccedil;a ou similaridade entre as vari&aacute;veis de duas localidade brasileiras.</p>
 <p><a href="/pt/build_graph/secex/4mg/all/all?view=Imports/Exports%20Comparison&graph=compare&compare=4rj" target="_blank" class="btn btn-success" title="Compare"><i class="dv-graph-compare m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Compare'
+WHERE description_en = 'Compare';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -99,7 +99,7 @@ answer_pt = '<p>A visualiza&ccedil;&atilde;o de Ocupa&ccedil;&atilde;o trata esp
 <p>Diferentemente dos demais aplicativos, Ocupa&ccedil;&otilde;es permite apenas um tipo de visualiza&ccedil;&atilde;o, pois foi criado especialmente para a an&aacute;lise das ocupa&ccedil;&otilde;es (relacionadas com as atividades econ&ocirc;micas). Por&eacute;m, a visualiza&ccedil;&atilde;o pode ser feita utilizando diferentes par&acirc;metros e tipos de agrupamento.</p>
 <p>Uma poss&iacute;vel visualiza&ccedil;&atilde;o mostra o n&uacute;mero m&eacute;dio de empregos por estabelecimentos para a atividade econ&ocirc;mica Restaurantes em Minas Gerais.</p>
 <p><a href="/pt/build_graph/rais/4mg/i56112/all?view=Occugrid&graph=occugrid" target="_blank" class="btn btn-success" title="<Ocupa&ccedil;&atilde;o</p>"><i class="dv-graph-occugrid m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Occugrid'
+WHERE description_en = 'Occugrid';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -113,7 +113,7 @@ answer_pt = '<p>O Gr&aacute;fico de Linha permite analisar as mudan&ccedil;as de
 <p>Como em outras visualiza&ccedil;&otilde;es, voc&ecirc; pode modificar o dado sendo mostrado para cada umas das vari&aacute;veis dispon&iacute;veis no DataViva (produtos, atividades, ocupa&ccedil;&otilde;es) e sua interse&ccedil;&atilde;o com qualquer localidade do Brasil, em qualquer um dos n&iacute;veis (estado, regi&atilde;o, munic&iacute;pio). </p>
 <p>Uma visualiza&ccedil;&atilde;o, por exemplo, &eacute; para as atividades econ&ocirc;micas de Minas Gerais, revelando o crescimento global da economia no estado e quais setores tiveram maior contribui&ccedil;&atilde;o para esse crescimento.</p>
 <p><a href="/pt/build_graph/rais/4mg/all/all?view=Industries&graph=line" target="_blank" class="btn btn-success" title="Linha"><i class="dv-graph-line m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o<i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Line'
+WHERE description_en = 'Line';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -123,7 +123,7 @@ answer_en = '<p>The Box Plot visualization allows analyzing the change of a vari
 answer_pt = '<p>O Box Plot &eacute; uma visualiza&ccedil;&atilde;o que permite analisar a mudan&ccedil;a de intervalo das vari&aacute;veis numa s&eacute;rie de pontos distintos. Cada caixa representa um interquartil de uma s&eacute;rie de dados. Esse intervalo &eacute; representado pelo primeiro e o terceiro quartil. A linha de bisse&ccedil;&atilde;o da caixa &eacute; a representa&ccedil;&atilde;o da mediana e os extremos dela s&atilde;o a representa&ccedil;&atilde;o do m&aacute;ximo e do m&iacute;nimo para esse interquartil.</p>
 <p>Essa visualiza&ccedil;&atilde;o &eacute; &uacute;til para mostrar a distribui&ccedil;&atilde;o de sal&aacute;rio ao longo do tempo, ou a distribui&ccedil;&atilde;o de idade em diferentes n&iacute;veis de educa&ccedil;&atilde;o. Como exemplo, podemos pegar a distribui&ccedil;&atilde;o de sal&aacute;rio para o estado de Minas Gerais. Mesmos com a discrep&acirc;ncia de dados para o valor m&aacute;ximo e m&iacute;nimo ainda &eacute; poss&iacute;vel compreender a distribui&ccedil;&atilde;o dos sal&aacute;rios para a maior parte dos empregados.</p>
 <p><a href="/pt/build_graph/rais/4mg/all/all?view=Wage%20Distribution&graph=box" target="_blank" class="btn btn-success" title="Box Plot"><i class="dv-graph-box m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o</i><i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Box Plot'
+WHERE description_en = 'Box Plot';
 
 UPDATE dataviva.help_subject_question
 SET
@@ -133,4 +133,4 @@ answer_en = '<p>The Bar Chart visualization allows analyzing values as a histogr
 answer_pt = '<p>O Gr&aacute;fico de Barras &eacute; uma visualiza&ccedil;&atilde;o que permite analisar valores num histograma. Os dados s&atilde;o representados por ret&acirc;ngulos no eixo x, sendo o eixo y a representa&ccedil;&atilde;o da frequ&ecirc;ncia de ocorr&ecirc;ncia de cada um desses. O tamanho de cada ret&acirc;ngulo &eacute; calculado por duas vezes o desvio padr&atilde;o para cima e para baixo do valor m&eacute;dio. </p>
 <p>Essa visualiza&ccedil;&atilde;o &eacute; &uacute;til para mostrar a distribui&ccedil;&atilde;o de sal&aacute;rio para um &uacute;nico filtro, como localiza&ccedil;&atilde;o ou ocupa&ccedil;&atilde;o. Como exemplo de visualiza&ccedil;&atilde;o, temos a distribui&ccedil;&atilde;o de sal&aacute;rios em Minas Gerais. Nela &eacute; poss&iacute;vel avaliar o total de empregados (frequ&ecirc;ncia representada no eixo y), para cada umas das faixas de renda (dado salarial representado pelo eixo x). Assim, avalia-se a quantidade de pessoas empregadas que recebem cada uma das faixas salariais.</p>
 <p><a href="/pt/build_graph/rais/4mg/all/all?view=Wage%20Distribution&graph=bar" target="_blank" class="btn btn-success" title="Gr&aacute;fico de Barras"><i class="dv-graph-bar m-r-sm"></i>Abrir visualiza&ccedil;&atilde;o</i><i class="m-l-xl fa fa-angle-right"></i></a></p>'
-WHERE description_en = 'Bar Chart'
+WHERE description_en = 'Bar Chart';
