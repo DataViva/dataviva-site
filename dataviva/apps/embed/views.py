@@ -400,24 +400,7 @@ def download():
     elif format == "url2csv":
         mimetype = "text/csv;charset=UTF-16"
 
-    if format == "png" or format == "pdf":
-        #temp = tempfile.NamedTemporaryFile()
-        #temp.write(data.encode("utf-16"))
-        #temp.seek(0)
-        #zoom = "1"
-        #background = "#ffffff"
-        #p = subprocess.Popen(["rsvg-convert", "-z", zoom, "-f", format,
-        #                      "--background-color={0}".format(background), temp.name], stdout=subprocess.PIPE)
-        #out, err = p.communicate()
-        #response_data = out
-        
-        subst = data.replace(" ", "+")
-        subst = subst[subst.index(',')+1:] #tira o cabecalho
-        subst = subst + '=' * (4 - len(subst) % 4)
-        response_data = base64.b64decode(subst)
-    else:
-        response_data = data.encode("utf-16")
-
+    response_data = data.encode("utf-16")
 
     content_disposition = "attachment;filename=%s.%s" % (title_safe, format)
     content_disposition = content_disposition.replace(",", "_")
