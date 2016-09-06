@@ -31,7 +31,9 @@ def add_language_code(endpoint, values):
 @mod.route('/<course_hedu_id>', defaults={'tab': 'general'})
 @mod.route('/<course_hedu_id>/<tab>')
 def index(course_hedu_id, tab):
-    bra_id = request.args.get('bra_id')
+    bra_id = request.args.get('bra_id') 
+    bra_id = bra_id if bra_id != 'all' else None
+    
     menu = request.args.get('menu')
     url = request.args.get('url')
     graph = {}
