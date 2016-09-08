@@ -648,6 +648,11 @@ def dictionary():
         # contact
         "contact_message": gettext("Your message has been sent successfully. We will soon get back to you."),
         "thank_you": gettext("Thank you"),
+        "form_contact_name": gettext("Please enter your name."),
+        "form_contact_email_required": gettext("Please enter your email address."),
+        "form_contact_email": gettext("Please enter a valid email address."),
+        "form_contact_subject": gettext("Please enter subject."),
+        "form_contact_message": gettext("Please enter message."),
 
         # session
         "email_already_exists": gettext("That e-mail is already registered."),

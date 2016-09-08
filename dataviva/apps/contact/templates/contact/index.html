@@ -13,66 +13,68 @@
 
 <div class="container">
 	<ol class="breadcrumb">
-		<li><a href="01-index.html">Home</a></li>
+		<li><a href="{{ url_for('general.home') }}">Home</a></li>
 		<li class="active"><span>{% trans %}Contact{% endtrans %}<span></span></span></li>
 		</ol>
 		<div class="row">
 			<div id="message">
 			{% if get_flashed_messages(with_categories=true) %}
-			{% for category, message in get_flashed_messages(with_categories=true) %}
-			    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
-			        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-			        {{ message }}
-			    </div>
-			{% endfor %}
+    			{% for category, message in get_flashed_messages(with_categories=true) %}
+    			    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+    			        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+    			        {{ message }}
+    			    </div>
+    			{% endfor %}
 			{% endif %}
 			</div>
 
-			<div class="main-content col-xs-15 col-md-11">
-				<div class="institucional">
-					<h2>{% trans %}Contact{% endtrans %}</h2>
-					<p>{% trans %}Got any questions or want to send a suggestion? Contact the DataViva team using the form below:{% endtrans %}</p>
-					<div class="row">
-						<form method="post" action="{{ action }}" class="form-horizontal">
-						{{ form.hidden_tag() }}
-							<div class="form-group">
-								<label for="footer-nome" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Name{% endtrans %}</label>
-								<div class="col-xs-15 col-sm-10 col-md-11">
-									{{ form.name(class="form-control")}}
-    								{{ messages(form.name) }}
-								</div>
+			<div class="main-content col-md-9">
+				<h2>{% trans %}Contact{% endtrans %}</h2>
+				<p>{% trans %}Got any questions or want to send a suggestion? Contact the DataViva team using the form below:{% endtrans %}</p>
+				<div class="row">
+					<form method="post" action="{{ action }}" class="form-horizontal">
+					{{ form.hidden_tag() }}
+						<div class="form-group">
+							<label for="footer-nome" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Name{% endtrans %}</label>
+							<div class="col-xs-15 col-sm-10 col-md-11">
+								{{ form.name(class="form-control")}}
+								{{ messages(form.name) }}
 							</div>
-							<div class="form-group">
-								<label for="footer-email" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">E-mail</label>
-								<div class="col-xs-15 col-sm-10 col-md-11">
-									{{ form.email(class="form-control")}}
-    								{{ messages(form.email) }}
-								</div>
+						</div>
+						<div class="form-group">
+							<label for="footer-email" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">E-mail</label>
+							<div class="col-xs-15 col-sm-10 col-md-11">
+								{{ form.email(class="form-control")}}
+								{{ messages(form.email) }}
 							</div>
-							<div class="form-group">
-								<label for="footer-subject" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Subject{% endtrans %}</label>
-								<div class="col-xs-15 col-sm-10 col-md-11">
-									{{ form.subject(class="form-control")}}
-    								{{ messages(form.subject) }}
-								</div>
+						</div>
+						<div class="form-group">
+							<label for="footer-subject" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Subject{% endtrans %}</label>
+							<div class="col-xs-15 col-sm-10 col-md-11">
+								{{ form.subject(class="form-control")}}
+								{{ messages(form.subject) }}
 							</div>
-							<div class="form-group">
-								<label for="footer-message" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Message{% endtrans %}</label>
-								<div class="col-xs-15 col-sm-10 col-md-11">
-									{{ form.message(class="form-control", rows=5)}}
-    								{{ messages(form.message) }}
-								</div>
+						</div>
+						<div class="form-group">
+							<label for="footer-message" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Message{% endtrans %}</label>
+							<div class="col-xs-15 col-sm-10 col-md-11">
+								{{ form.message(class="form-control", rows=5)}}
+								{{ messages(form.message) }}
 							</div>
-							<div class="form-group">
-								<div class="col-sm-offset-8 col-md-offset-10 col-xs-15 col-sm-10 col-md-11">
-									<button type="submit" class="btn btn-default btn-dataviva">{% trans %}Send{% endtrans %}</button>
-								</div>
+						</div>
+						<div class="form-group">
+							<div class="col-md-11">
+                                <button id="submit" type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
 							</div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 
 {% endblock content %}
+
+{% block js_assets %}
+    <script src="/static/js/modules/contact.js"></script>
+{% endblock js_assets %}
