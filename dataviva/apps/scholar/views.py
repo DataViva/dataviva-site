@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, json
 from dataviva.apps.general.views import get_locale
-from dataviva import app, db
+from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
 from forms import RegistrationForm
@@ -9,6 +9,7 @@ from sqlalchemy import desc
 from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
+from dataviva.utils.send_mail import send_mail
 import os
 import shutil
 import fnmatch
@@ -84,6 +85,11 @@ def admin_activate(status, status_value):
     return message, 200
 
 
+def warning_new_article(article):
+    confirmation_tpl = 'New article in Scholar'
+    send_mail("New Article", admin_email, confirmation_tpl)
+
+
 @mod.route('/admin/article/new', methods=['GET'])
 @login_required
 def new():
@@ -146,9 +152,12 @@ def create():
 
         db.session.commit()
 
+        warning_new_article(article)
+
         message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-                    Em até 15 dias você receberá um retorno sobre sua publicação no site!'
+                    Em até 10 dias você receberá um retorno sobre sua publicação no site!'
         flash(message, 'success')
+
         return redirect(url_for('scholar.index'))
 
 
