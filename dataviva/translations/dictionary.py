@@ -667,6 +667,7 @@ def dictionary():
         "characters_left": gettext("characters left"),
         "file_too_large": gettext("File too large."),
         "summernote_placeholder": gettext("Your publication content goes here"),
+        "publish_in_english": gettext("Publish in English"),
 
         # errors
         "500": gettext("Sorry, an unexpected error has occured. Please try again"),

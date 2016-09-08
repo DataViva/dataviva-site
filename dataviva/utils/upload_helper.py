@@ -95,6 +95,7 @@ def upload_images_to_s3(html, object_type, object_id):
             html = re.sub(url, domain + new_key, html)
     return html
 
+
 def clean_s3_folder(html_en, html_pt, object_type, object_id):
     soup_pt = BeautifulSoup(html_pt, 'html.parser')
     soup_en = BeautifulSoup(html_en, 'html.parser')
@@ -114,6 +115,7 @@ def clean_s3_folder(html_en, html_pt, object_type, object_id):
         for image in uploaded_images['Contents']:
             if image['Key'] not in imgs:
                 delete_s3_file(image['Key'])
+
 
 def save_file_temp(file, object_type, csrf_token):
     local_folder = os.path.join(

@@ -14,20 +14,18 @@
             {{ form.title(class="form-control", maxlength=400)}}
         </div>
         <div class="form-group col-md-2">
-            <label class="control-label" for="authors">Publicar em inglês</label>
+            <label class="control-label" for="authors">{% trans %}Publish in English{% endtrans %}</label>
             {{ messages(form.dual_language) }}
             <div class="form-control checkbox-switch">
                 {{ form.dual_language(class="js-switch") }}
             </div>
         </div>
         <div class="form-group col-md-10 {{ 'has-error' if form.title_en.errors else '' }} ">
-            <label class="control-label" for="title_en">{% trans %}Title{% endtrans %} ({% trans %}inglês{% endtrans %})</label>
+            <label class="control-label" for="title_en">{% trans %}Title{% endtrans %} ({% trans %}English{% endtrans %})</label>
             {{ messages(form.title_en) }}
             {{ form.title_en(class="form-control", maxlength=400)}}
         </div>
     </div>
-
-        
 
     <div class="row">
         <div class="form-group col-md-7 {{ 'has-error' if form.author.errors else '' }} ">
@@ -95,7 +93,7 @@
     </div>
 
     <div class="form-group m-t-sm {{ 'has-error' if form.text_call_en.errors else '' }}">
-        <label class="control-label" for="text_call_en">{% trans %}Call{% endtrans %} (inglês)</label>
+        <label class="control-label" for="text_call_en">{% trans %}Call{% endtrans %} ({% trans %}English{% endtrans %})</label>
         {{ messages(form.text_call_en) }}
         {{ form.text_call_en(class="form-control", rows=5, maxlength=500)}}
         <div name="textarea-feedback"></div>
@@ -116,7 +114,7 @@
 
     <div class="row">
         <div id="summernote-en" class="form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
-            <label class="control-label" for="text_content">{% trans %}Content{% endtrans %} (inglês)</label>
+            <label class="control-label" for="text_content">{% trans %}Content{% endtrans %} ({% trans %}English{% endtrans %})</label>
             <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
             <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
             {{ messages(form.text_content) }}

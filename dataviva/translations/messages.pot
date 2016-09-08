@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-01 16:41-0300\n"
+"POT-Creation-Date: 2016-09-08 16:07-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -757,6 +757,7 @@ msgid "All"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:12
+#: dataviva/apps/blog/templates/blog/_form.html:24
 #: dataviva/apps/blog/templates/blog/admin.html:31
 #: dataviva/apps/calls/templates/calls/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:12
@@ -765,55 +766,71 @@ msgid "Title"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:17
+#: dataviva/translations/dictionary.py:670
+msgid "Publish in English"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_form.html:24
+#: dataviva/apps/blog/templates/blog/_form.html:96
+#: dataviva/apps/blog/templates/blog/_form.html:117
+#: dataviva/templates/include/header.html:60
+#: dataviva/translations/dictionary.py:548
+msgid "English"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_form.html:32
+#: dataviva/apps/news/templates/news/_form.html:28
+msgid "Author"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_form.html:37
+msgid "Post Date"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_form.html:45
 #: dataviva/apps/blog/templates/blog/admin.html:34
 #: dataviva/apps/news/templates/news/_form.html:18
 #: dataviva/apps/news/templates/news/admin.html:33
 msgid "Show in"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:27
-#: dataviva/apps/news/templates/news/_form.html:28
-msgid "Author"
-msgstr ""
-
-#: dataviva/apps/blog/templates/blog/_form.html:32
-msgid "Post Date"
-msgstr ""
-
-#: dataviva/apps/blog/templates/blog/_form.html:41
+#: dataviva/apps/blog/templates/blog/_form.html:53
 #: dataviva/apps/help/templates/help/_form.html:11
 #: dataviva/apps/help/templates/help/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:42
 msgid "Category"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:46
+#: dataviva/apps/blog/templates/blog/_form.html:58
 #: dataviva/apps/news/templates/news/_form.html:47
 msgid "Call Image"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:56
+#: dataviva/apps/blog/templates/blog/_form.html:68
 #: dataviva/apps/news/templates/news/_form.html:57
 msgid "New Image"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:66
+#: dataviva/apps/blog/templates/blog/_form.html:78
 #: dataviva/apps/news/templates/news/_form.html:67
 msgid "Complete Edition"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:76
+#: dataviva/apps/blog/templates/blog/_form.html:89
+#: dataviva/apps/blog/templates/blog/_form.html:96
 #: dataviva/apps/calls/templates/calls/new.html:7
 #: dataviva/apps/news/templates/news/_form.html:77
 msgid "Call"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:83
+#: dataviva/apps/blog/templates/blog/_form.html:104
+#: dataviva/apps/blog/templates/blog/_form.html:117
 #: dataviva/apps/news/templates/news/_form.html:84
 msgid "Content"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:84
+#: dataviva/apps/blog/templates/blog/_form.html:105
+#: dataviva/apps/blog/templates/blog/_form.html:118
 #: dataviva/apps/blog/templates/blog/admin.html:41
 #: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/calls/templates/calls/admin.html:39
@@ -831,14 +848,15 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:85
+#: dataviva/apps/blog/templates/blog/_form.html:106
+#: dataviva/apps/blog/templates/blog/_form.html:119
 #: dataviva/apps/help/templates/help/_form.html:28
 #: dataviva/apps/help/templates/help/_form.html:38
 #: dataviva/apps/news/templates/news/_form.html:86
 msgid "Preview "
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:93
+#: dataviva/apps/blog/templates/blog/_form.html:128
 #: dataviva/apps/calls/templates/calls/_form.html:21
 #: dataviva/apps/contact/templates/contact/index.html:68
 #: dataviva/apps/help/templates/help/_form.html:46
@@ -900,13 +918,13 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/index.html:22
+#: dataviva/apps/blog/templates/blog/index.html:26
 #: dataviva/apps/news/templates/news/index.html:22
 msgid "Continue reading"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/index.html:23
-#: dataviva/apps/blog/templates/blog/show.html:23
+#: dataviva/apps/blog/templates/blog/index.html:27
+#: dataviva/apps/blog/templates/blog/show.html:29
 #: dataviva/apps/news/templates/news/index.html:23
 #: dataviva/apps/news/templates/news/show.html:22
 msgid "By"
@@ -928,12 +946,12 @@ msgstr ""
 msgid "Visualize"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/show.html:30
+#: dataviva/apps/blog/templates/blog/show.html:36
 #: dataviva/apps/news/templates/news/show.html:29
 msgid "Tweet"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/show.html:42
+#: dataviva/apps/blog/templates/blog/show.html:52
 #: dataviva/apps/news/templates/news/show.html:41
 msgid "See also"
 msgstr ""
@@ -1084,12 +1102,12 @@ msgstr ""
 msgid "You need to choose at least one filter to be able to download data."
 msgstr ""
 
-#: dataviva/apps/embed/views.py:227
+#: dataviva/apps/embed/views.py:228
 msgid "You need to be logged in to star visualizations."
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2917
+#: dataviva/apps/embed/templates/embed/embed.html:2932
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
@@ -1097,32 +1115,32 @@ msgid ""
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2919
+#: dataviva/apps/embed/templates/embed/embed.html:2934
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:58
+#: dataviva/apps/embed/templates/embed/embed.html:60
 msgid "Refresh the Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:59
+#: dataviva/apps/embed/templates/embed/embed.html:61
 msgid "Download this Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:60
+#: dataviva/apps/embed/templates/embed/embed.html:62
 msgid "Save this Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:61
+#: dataviva/apps/embed/templates/embed/embed.html:63
 msgid "Share/Embed"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:62
+#: dataviva/apps/embed/templates/embed/embed.html:64
 msgid "Show Visualization Tutorial"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:64
+#: dataviva/apps/embed/templates/embed/embed.html:66
 msgid "Show/Hide Controls"
 msgstr ""
 
@@ -4920,11 +4938,6 @@ msgstr ""
 msgid "or"
 msgstr ""
 
-#: dataviva/templates/include/header.html:60
-#: dataviva/translations/dictionary.py:548
-msgid "English"
-msgstr ""
-
 #: dataviva/templates/include/header.html:61
 #: dataviva/translations/dictionary.py:549
 msgid "Portuguese"
@@ -6288,29 +6301,29 @@ msgstr ""
 msgid "Your publication content goes here"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:672
+#: dataviva/translations/dictionary.py:673
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:681 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:682 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:682 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:683 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:683 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:684 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:684 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:685 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""

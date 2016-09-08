@@ -79,7 +79,7 @@ $(document).ready(function(){
 
     $('#blog-edit-pt, #blog-edit-en').click(function() {
         var lang_ext = $(this).attr('id').split('-').pop();
-        var editor = $('#text-content-editor-'  + lang_ext);
+        var editor = $('#text-content-editor-' + lang_ext);
 
         $('#blog-preview-'  + lang_ext).prop('disabled', false);
         $('#blog-edit-' + lang_ext).prop('disabled', true);
