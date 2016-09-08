@@ -29,7 +29,7 @@
             <p>
                 {{ article.abstract }}
             </p>
-            <p><a href="{{ article.url }}" class="btn btn-success btn-md">Baixar arquivo (PDF)</a></p>
+            <p><a href="{{ article.url if g.user.is_authenticated else '/session/login' }}" class="btn btn-success btn-md">Baixar arquivo (PDF)</a></p>
         </div>
     </div>
 </div>
