@@ -12,7 +12,7 @@
 <section id="scholar">
     <div class="container">
         <nav class="sidebar col-md-3">
-            <a href="{{ url_for('scholar.new') }}" class="btn btn-success btn-lg">Publique um estudo</a>
+            <a href="{{ url_for('scholar.new') if g.user.is_authenticated else '/session/login' }}" class="btn btn-success btn-lg">Publique um estudo</a>
             <h3>Temas</h3>
             <ul class="sub-menu">
                 <li><a href="{{ url_for('scholar.index') }}" title="Todos"><strong>Todos</strong></a></li>
