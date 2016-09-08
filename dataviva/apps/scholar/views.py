@@ -86,7 +86,6 @@ def admin_activate(status, status_value):
 
 @mod.route('/admin/article/new', methods=['GET'])
 @login_required
-@required_roles(1)
 def new():
     form = RegistrationForm()
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
@@ -94,7 +93,6 @@ def new():
 
 @mod.route('/admin/article/new', methods=['POST'])
 @login_required
-@required_roles(1)
 def create():
     csrf_token = request.form.get('csrf_token')
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
