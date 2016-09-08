@@ -103,7 +103,7 @@ def all_posts():
     result = Post.query.all()
     posts = []
     for row in result:
-        posts += [(row.id, row.title, row.author,
+        posts += [(row.id, row.title_pt, row.author,
                    row.publish_date.strftime('%d/%m/%Y'),
                    row.show_home, row.active)]
     return jsonify(posts=posts)
@@ -175,10 +175,10 @@ def create():
         return render_template('blog/new.html', form=form)
     else:
         post = Post()
-        post.title = form.title.data
+        post.title_pt = form.title_pt.data
         post.title_en = form.title_en.data
         post.author = form.author.data
-        post.text_call = form.text_call.data
+        post.text_call_pt = form.text_call_pt.data
         post.text_call_en = form.text_call_en.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
@@ -199,10 +199,10 @@ def create():
         db.session.flush()
 
         text_content_pt = upload_images_to_s3(
-            form.text_content.data, mod.name, post.id)
+            form.text_content_pt.data, mod.name, post.id)
         text_content_en = upload_images_to_s3(
             form.text_content_en.data, mod.name, post.id)
-        Post.query.get(post.id).text_content = text_content_pt
+        Post.query.get(post.id).text_content_pt = text_content_pt
         Post.query.get(post.id).text_content_en = text_content_en
         clean_s3_folder(text_content_en, text_content_pt, mod.name, post.id)
 
@@ -235,12 +235,12 @@ def upload_image():
 def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
-    form.title.data = post.title
+    form.title_pt.data = post.title_pt
     form.title_en.data = post.title_en
     form.author.data = post.author
-    form.text_content.data = post.text_content
+    form.text_content_pt.data = post.text_content_pt
     form.text_content_en.data = post.text_content_en
-    form.text_call.data = post.text_call
+    form.text_call_pt.data = post.text_call_pt
     form.text_call_en.data = post.text_call_en
     form.show_home.data = post.show_home
     form.dual_language.data = post.dual_language
@@ -263,10 +263,10 @@ def update(id):
         return render_template('blog/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()
-        post.title = form.title.data
+        post.title_pt = form.title_pt.data
         post.title_en = form.title_en.data
         post.author = form.author.data
-        post.text_call = form.text_call.data
+        post.text_call_pt = form.text_call_pt.data
         post.text_call_en = form.text_call_en.data
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
@@ -285,11 +285,11 @@ def update(id):
                 subject.name = name
             post.subjects.append(subject)
 
-        post.text_content = upload_images_to_s3(
-            form.text_content.data, mod.name, post.id)
+        post.text_content_pt = upload_images_to_s3(
+            form.text_content_pt.data, mod.name, post.id)
         post.text_content_en = upload_images_to_s3(
             form.text_content_en.data, mod.name, post.id)
-        clean_s3_folder(post.text_content, post.text_content_en, mod.name, post.id)
+        clean_s3_folder(post.text_content_pt, post.text_content_en, mod.name, post.id)
 
         db.session.flush()
         if len(form.thumb.data.split(',')) > 1:

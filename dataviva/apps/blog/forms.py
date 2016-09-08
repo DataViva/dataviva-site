@@ -19,7 +19,7 @@ def validate_text_content_en(form, field):
 
 
 class RegistrationForm(Form):
-    title = TextField('title', validators=[
+    title_pt = TextField('title_pt', validators=[
         validators.Required(u"Por favor, insira o título do post."),
         validators.Length(max=400)
     ])
@@ -48,7 +48,7 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira a categoria do post.")
     ])
 
-    text_call = TextAreaField('text_call', validators=[
+    text_call_pt = TextAreaField('text_call_pt', validators=[
         validators.Required(u"Por favor, insira uma chamada para o post."),
         validators.Length(max=500)
     ])
@@ -58,7 +58,7 @@ class RegistrationForm(Form):
         validate_text_call_en
     ])
 
-    text_content = HiddenField('text_content', validators=[
+    text_content_pt = HiddenField('text_content_pt', validators=[
         validators.Required(u"Por favor, insira o conteúdo do post.")
     ]) 
 

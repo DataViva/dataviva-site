@@ -66,7 +66,7 @@ $(document).ready(function(){
 
     $('#blog-edit-pt, #blog-edit-en').prop('disabled', true);
 
-    $('#text-content-editor-pt').append($('#text_content').val());
+    $('#text-content-editor-pt').append($('#text_content_pt').val());
     $('#text-content-editor-en').append($('#text_content_en').val());
 
     $('#text-content-editor-pt img, #text-content-editor-en img').each(function() {
@@ -96,7 +96,7 @@ $(document).ready(function(){
     $('#blog-preview-pt, #blog-preview-en').click(function() {
         var lang_ext = $(this).attr('id').split('-').pop();
         var editor = $('#text-content-editor-'  + lang_ext),
-            text_content = lang_ext == 'pt' ? $('text_content') : $('text_content_en');
+            text_content = lang_ext == 'pt' ? $('text_content_pt') : $('text_content_en');
 
         $('#blog-preview-' + lang_ext).prop('disabled', true);
         $('#blog-edit-' + lang_ext).prop('disabled', false);
@@ -151,7 +151,7 @@ $(document).ready(function(){
     var text_max = 500;
     $('[name=textarea-feedback]').html(text_max + ' ' + dataviva.dictionary['characters_left']);
 
-    $('#text_call, #text_call_en').keyup(function() {
+    $('#text_call_pt, #text_call_en').keyup(function() {
         var text_length = $(this).val().length;
         var text_remaining = text_max - text_length;
         $(this).siblings('[name=textarea-feedback]').html(text_remaining + ' ' + dataviva.dictionary['characters_left']);
@@ -175,9 +175,9 @@ $(document).ready(function(){
         });
 
         var pt_html = $('#text-content-editor-pt').html();
-        $('#text_content').val(pt_html);
+        $('#text_content_pt').val(pt_html);
         if ($('#text-content-editor-pt').summernote('isEmpty')) {
-            $('#text_content').val('');
+            $('#text_content_pt').val('');
         }
 
         var en_html = $('#text-content-editor-en').html();
