@@ -86,8 +86,9 @@ def admin_activate(status, status_value):
 
 
 def warning_new_article(article):
-    confirmation_tpl = 'New article in Scholar'
-    send_mail("New Article", ["italodaldegan@gmail.com",admin_email,"italodaldegan@hotmail.com"], confirmation_tpl)
+    confirmation_tpl = render_template(
+            'mail/message_template.html', article=article)
+    send_mail("New Article", [admin_email], confirmation_tpl)
 
 
 @mod.route('/admin/article/new', methods=['GET'])
@@ -152,13 +153,16 @@ def create():
 
         db.session.commit()
 
-        warning_new_article(article)
+        # warning_new_article(article)
 
-        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-                    Em até 10 dias você receberá um retorno sobre sua publicação no site!'
-        flash(message, 'success')
+        # message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
+        #             Em até 10 dias você receberá um retorno sobre sua publicação no site!'
+        # flash(message, 'success')
 
-        return redirect(url_for('scholar.index'))
+        return render_template(
+            'mail/advise_new_study.html', article=article)
+
+        # return redirect(url_for('scholar.index'))
 
 
 @mod.route('/admin/article/<id>/edit', methods=['GET'])
