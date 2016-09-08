@@ -8,18 +8,22 @@
 
     {{ form.hidden_tag() }}
     <div class="row">
-        <div class="form-group col-md-10 {{ 'has-error' if form.title.errors else '' }} ">
-            <label class="control-label" for="title">{% trans %}Title{% endtrans %}</label>
-            {{ messages(form.title) }}
-            {{ form.title(class="form-control", maxlength=400)}}
+        <div class="form-group col-md-10 {{ 'has-error' if form.title_pt.errors else '' }} ">
+            <label class="control-label" for="title_pt">{% trans %}Title{% endtrans %}</label>
+            {{ messages(form.title_pt) }}
+            {{ form.title_pt(class="form-control", maxlength=400)}}
         </div>
-
         <div class="form-group col-md-2">
-            <label class="control-label" for="authors">{% trans %}Show in{% endtrans %} Home</label>
-            {{ messages(form.show_home) }}
+            <label class="control-label" for="authors">{% trans %}Publish in English{% endtrans %}</label>
+            {{ messages(form.dual_language) }}
             <div class="form-control checkbox-switch">
-                {{ form.show_home(class="js-switch") }}
+                {{ form.dual_language(class="js-switch") }}
             </div>
+        </div>
+        <div class="form-group col-md-10 {{ 'has-error' if form.title_en.errors else '' }} ">
+            <label class="control-label" for="title_en">{% trans %}Title{% endtrans %} ({% trans %}English{% endtrans %})</label>
+            {{ messages(form.title_en) }}
+            {{ form.title_en(class="form-control", maxlength=400)}}
         </div>
     </div>
 
@@ -29,12 +33,19 @@
             {{ messages(form.author) }}
             {{ form.author(class="form-control", maxlength=100)}}
         </div>
-        <div class="form-group col-md-5 {{ 'has-error' if form.publish_date.errors else '' }}">
+        <div class="form-group col-md-3 {{ 'has-error' if form.publish_date.errors else '' }}">
             <label class="control-label">{% trans %}News Date{% endtrans %}</label>
             {{ messages(form.publish_date) }}
             <div id="publish-date" class="input-group date">
                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                 {{ form.publish_date(class="form-control")}}
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <label class="control-label" for="authors">{% trans %}Show in{% endtrans %} Home</label>
+            {{ messages(form.show_home) }}
+            <div class="form-control checkbox-switch">
+                {{ form.show_home(class="js-switch") }}
             </div>
         </div>
     </div>
@@ -73,21 +84,44 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    <div class="form-group m-t-sm {{ 'has-error' if form.text_call.errors else '' }}">
-        <label class="control-label" for="text_call">{% trans %}Call{% endtrans %}</label>
-        {{ messages(form.text_call) }}
-        {{ form.text_call(class="form-control", rows=5, maxlength=500)}}
-        <div id="textarea-feedback"></div>
+
+    <div class="form-group m-t-sm {{ 'has-error' if form.text_call_pt.errors else '' }}">
+        <label class="control-label" for="text_call_pt">{% trans %}Call{% endtrans %}</label>
+        {{ messages(form.text_call_pt) }}
+        {{ form.text_call_pt(class="form-control", rows=5, maxlength=500)}}
+        <div name="textarea-feedback"></div>
     </div>
 
-    <div id="summernote-field" class="form-group {{ 'has-error' if form.text_content.errors else '' }}">
-        <label class="control-label" for="text_content">{% trans %}Content{% endtrans %}</label>
-        <button id="news-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-        <button id="news-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
-        {{ messages(form.text_content) }}
-        {{ form.text_content }}
-        <div class=" summernote-wrapper">
-            <div id="text-content-editor" class="summernote"></div>
+     <div class="form-group m-t-sm {{ 'has-error' if form.text_call_en.errors else '' }}">
+        <label class="control-label" for="text_call_en">{% trans %}Call{% endtrans %} ({% trans %}English{% endtrans %})</label>
+        {{ messages(form.text_call_en) }}
+        {{ form.text_call_en(class="form-control", rows=5, maxlength=500)}}
+        <div name="textarea-feedback"></div>
+    </div>
+
+    <div class="row">
+        <div id="summernote-pt" class="form-group {{ 'has-error' if form.text_content_pt.errors else '' }}">
+            <label class="control-label" for="text_content_pt">{% trans %}Content{% endtrans %}</label>
+            <button id="blog-edit-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+            <button id="blog-preview-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+            {{ messages(form.text_content_pt) }}
+            {{ form.text_content_pt }}
+            <div class=" summernote-wrapper">
+                <div id="text-content-editor-pt" class="summernote"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="summernote-en" class="form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
+            <label class="control-label" for="text_content_en">{% trans %}Content{% endtrans %} ({% trans %}English{% endtrans %})</label>
+            <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+            <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+            {{ messages(form.text_content_en) }}
+            {{ form.text_content_en }}
+            <div class=" summernote-wrapper">
+                <div id="text-content-editor-en" class="summernote"></div>
+            </div>
         </div>
     </div>
 

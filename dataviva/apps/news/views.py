@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp
+from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
 import os
 
 mod = Blueprint('news', __name__,
@@ -74,7 +74,7 @@ def all():
     result = Publication.query.all()
     publications = []
     for row in result:
-        publications += [(row.id, row.title, row.author,
+        publications += [(row.id, row.title_pt, row.author,
                           row.publish_date.strftime('%d/%m/%Y'), row.show_home, row.active)]
     return jsonify(publications=publications)
 
@@ -134,7 +134,8 @@ def create():
         return render_template('news/new.html', form=form)
     else:
         publication = Publication()
-        publication.title = form.title.data
+        publication.title_pt = form.title_pt.data
+        publication.title_en = form.title_en.data
         subject_query = PublicationSubject.query.filter_by(name=form.subject.data)
 
         if (subject_query.first()):
@@ -146,18 +147,25 @@ def create():
             db.session.commit()
             publication.subject_id = subject.id
 
-        publication.text_call = form.text_call.data
+        publication.text_call_pt = form.text_call_pt.data
+        publication.text_call_en = form.text_call_en.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
+        publication.dual_language = form.dual_language.data
         publication.active = 0
         publication.author = form.author.data
 
         db.session.add(publication)
         db.session.flush()
 
-        Publication.query.get(publication.id).text_content = upload_images_to_s3(
-            form.text_content.data, mod.name, publication.id)
+        text_content_pt = upload_images_to_s3(
+            form.text_content_pt.data, mod.name, publication.id)
+        text_content_en = upload_images_to_s3(
+            form.text_content_en.data, mod.name, publication.id)
+        Publication.query.get(publication.id).text_content_pt = text_content_pt
+        Publication.query.get(publication.id).text_content_en = text_content_en
+        clean_s3_folder(text_content_en, text_content_pt, mod.name, publication.id)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')
@@ -193,13 +201,17 @@ def upload_images():
 def edit(id):
     form = RegistrationForm()
     publication = Publication.query.filter_by(id=id).first_or_404()
-    form.title.data = publication.title
+    form.title_pt.data = publication.title_pt
+    form.title_en.data = publication.title_en
     form.author.data = publication.author
     form.subject.data = publication.subject.name if publication.subject else ''
-    form.text_content.data = publication.text_content
+    form.text_content_pt.data = publication.text_content_pt
+    form.text_content_en.data = publication.text_content_en
     form.publish_date.data = publication.publish_date
-    form.text_call.data = publication.text_call
+    form.text_call_pt.data = publication.text_call_pt
+    form.text_call_en.data = publication.text_call_en
     form.show_home.data = publication.show_home
+    form.dual_language.data = publication.dual_language
     form.thumb.data = publication.thumb
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -214,7 +226,8 @@ def update(id):
         return render_template('news/edit.html', form=form)
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
-        publication.title = form.title.data
+        publication.title_pt = form.title_pt.data
+        publication.title_en = form.title_en.data
         subject_query = PublicationSubject.query.filter_by(
             name=form.subject.data)
 
@@ -227,14 +240,19 @@ def update(id):
             db.session.commit()
             publication.subject_id = subject.id
 
-        publication.text_call = form.text_call.data
+        publication.text_call_pt = form.text_call_pt.data
+        publication.text_call_en = form.text_call_en.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
+        publication.dual_language = form.dual_language.data
         publication.author = form.author.data
 
-        publication.text_content = upload_images_to_s3(
-            form.text_content.data, mod.name, publication.id)
+        publication.text_content_pt = upload_images_to_s3(
+            form.text_content_pt.data, mod.name, publication.id)
+        publication.text_content_en = upload_images_to_s3(
+            form.text_content_en.data, mod.name, publication.id)
+        clean_s3_folder(publication.text_content_pt, publication.text_content_en, mod.name, publication.id)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, str(publication.id), 'images')

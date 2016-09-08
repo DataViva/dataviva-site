@@ -21,7 +21,11 @@
                         <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title_pt}}">{{post.title_pt}}</a>
                     {% endif %}
                 </h4>
-                <p>{{ post.text_call_pt }}</p>
+                {% if post.dual_language and g.locale == "en" %}
+                    <p>{{ post.text_call_en }}</p>
+                {% else %}
+                    <p>{{ post.text_call_pt }}</p>
+                {% endif %}
                 <div class="meta">
                     <p><a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title_pt}}">{% trans %}Continue reading{% endtrans %}</a></p>
                     <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>

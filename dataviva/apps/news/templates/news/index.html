@@ -15,9 +15,17 @@
                     <span>{{publication.subject.name}}</span>
                 </div>
                 <h4>
-                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">{{publication.title}}</a>
+                    {% if publication.dual_language and g.locale == "en" %}
+                        <a href="{{url_for('blog.show', id=publication.id)}}" title="{{publication.title_en}}">{{ publication.title_en }}</a>
+                    {% else %}
+                        <a href="{{url_for('blog.show', id=publication.id)}}" title="{{publication.title_pt}}">{{ publication.title_pt }}</a>
+                    {% endif %}
                 </h4>
-                <p>{{ publication.text_call}}</p>
+                {% if publication.dual_language and g.locale == "en" %}
+                    <p>{{ publication.text_call_en }}</p>
+                {% else %}
+                    <p>{{ publication.text_call_pt }}</p>
+                {% endif %}
                 <div class="meta">
                     <p class="read-more"><a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">{% trans %}Continue reading{% endtrans %}</a></p>
                     <p class="data">{% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}</p>

@@ -57,13 +57,11 @@
                         <img src="{{post.thumb}}" class="img-responsive">
                     </a>
                     <p>
-                        <a href="#" title="{{ post.title_pt }}"> 
-                            {% if post.dual_language and g.locale == "en" %}
-                                {{ post.title_en|safe }}
-                            {% else %}
-                                {{ post.title_pt|safe }}
-                            {% endif %}
-                        </a>
+                        {% if post.dual_language and g.locale == "en" %}
+                            <a href="#" title="{{ post.title_en }}">{{ post.title_en|safe }}</a>
+                        {% else %}
+                            <a href="#" title="{{ post.title_pt }}">{{ post.title_pt|safe }}</a>
+                        {% endif %}
                     </p>
                 </div>
             {% endfor %}
