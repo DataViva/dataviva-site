@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-01 16:41-0300\n"
+"POT-Creation-Date: 2016-09-08 16:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -980,7 +980,7 @@ msgid ""
 "DataViva."
 msgstr ""
 
-#: dataviva/apps/contact/views.py:54 dataviva/translations/dictionary.py:649
+#: dataviva/apps/contact/views.py:55 dataviva/translations/dictionary.py:649
 msgid "Your message has been sent successfully. We will soon get back to you."
 msgstr ""
 
@@ -1084,12 +1084,12 @@ msgstr ""
 msgid "You need to choose at least one filter to be able to download data."
 msgstr ""
 
-#: dataviva/apps/embed/views.py:227
+#: dataviva/apps/embed/views.py:228
 msgid "You need to be logged in to star visualizations."
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2917
+#: dataviva/apps/embed/templates/embed/embed.html:2999
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
@@ -1097,32 +1097,32 @@ msgid ""
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2919
+#: dataviva/apps/embed/templates/embed/embed.html:3001
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:58
+#: dataviva/apps/embed/templates/embed/embed.html:63
 msgid "Refresh the Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:59
+#: dataviva/apps/embed/templates/embed/embed.html:64
 msgid "Download this Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:60
+#: dataviva/apps/embed/templates/embed/embed.html:65
 msgid "Save this Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:61
+#: dataviva/apps/embed/templates/embed/embed.html:66
 msgid "Share/Embed"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:62
+#: dataviva/apps/embed/templates/embed/embed.html:67
 msgid "Show Visualization Tutorial"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:64
+#: dataviva/apps/embed/templates/embed/embed.html:69
 msgid "Show/Hide Controls"
 msgstr ""
 
@@ -6236,81 +6236,101 @@ msgstr ""
 msgid "Thank you"
 msgstr ""
 
+#: dataviva/translations/dictionary.py:651
+msgid "Please enter your name."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:652
+msgid "Please enter your email address."
+msgstr ""
+
 #: dataviva/translations/dictionary.py:653
-msgid "That e-mail is already registered."
+msgid "Please enter a valid email address."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:654
-msgid "Please check your inbox at"
+msgid "Please enter subject."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:655
-msgid "Invalid email or password."
+msgid "Please enter message."
 msgstr ""
 
-#: dataviva/translations/dictionary.py:656
-msgid "Confirmation pending."
+#: dataviva/translations/dictionary.py:658
+msgid "That e-mail is already registered."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:659
-msgid "Profile successfully updated!"
+msgid "Please check your inbox at"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:660
-msgid "Let us know more about you. Please complete your profile."
+msgid "Invalid email or password."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:661
-msgid "Password successfully updated!"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:662
-msgid "The current password is invalid."
-msgstr ""
-
-#: dataviva/translations/dictionary.py:663
-msgid "A new password has been sent to you! Please check you inbox!"
+msgid "Confirmation pending."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:664
-msgid "We couldn't find any user with the informed email address."
+msgid "Profile successfully updated!"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:665
+msgid "Let us know more about you. Please complete your profile."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:666
+msgid "Password successfully updated!"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:667
-msgid "characters left"
+msgid "The current password is invalid."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:668
-msgid "File too large."
+msgid "A new password has been sent to you! Please check you inbox!"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:669
-msgid "Your publication content goes here"
+msgid "We couldn't find any user with the informed email address."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:672
+msgid "characters left"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:673
+msgid "File too large."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:674
+msgid "Your publication content goes here"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:677
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:681 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:686 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:682 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:687 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:683 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:688 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:684 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:689 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
