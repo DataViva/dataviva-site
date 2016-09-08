@@ -485,8 +485,10 @@ class Location:
         self._secex_sorted_by_distance = None
         self._secex_sorted_by_opp_gain = None
         self.bra_id = bra_id
+        self.max_database_year = db.session.query(func.max(Ymbp.year))
         self.max_year_query = db.session.query(
-            func.max(Ymbp.year)).filter_by(bra_id=self.bra_id, month=12)
+            func.max(Ymbp.year)).filter_by(bra_id=self.bra_id).filter(
+            Ymbp.year < self.max_database_year)
         self.secex_query = Ymbp.query.join(Hs).filter(
             Ymbp.bra_id == self.bra_id,
             Ymbp.month == 0,

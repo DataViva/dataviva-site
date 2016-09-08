@@ -218,3 +218,14 @@
     height: 33px;
     width: 33px;
 }
+
+.blog figure figcaption {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: italic;
+    font-size: 12px;
+}
+
+.blog .note-editor img, .blog figure {
+    margin: 20px 20px 10px 20px;
+    text-align: center;
+}

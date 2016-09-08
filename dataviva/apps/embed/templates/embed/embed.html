@@ -33,6 +33,10 @@
     <script>moment.lang("{{g.locale}}")</script>
     <script src="/static/js/modules/embed/utils.dataviva.js"></script>
     <script src="/static/js/modules/embed/utils.general.js"></script>
+    <script src="/static/js/plugins/jspdf/FileSaver.js"></script>
+    <script src="/static/js/plugins/jspdf/jspdf.js"></script>
+    <script src="/static/js/plugins/jspdf/addimage.js"></script>
+    <script type="text/javascript" src="/static/js/libs/jquery-2.1.1.js"></script>
 
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/modules/embed/styles.apps.css" />
     <script>var redirect = false</script>
@@ -46,6 +50,7 @@
       dataviva.language = "{{ g.locale }}";
       dataviva.dictionary = {{ g.dictionary|safe }};
       dataviva.attr_version = {{ g.attr_version|safe }};
+      dataviva.s3_host = "{{ g.s3_host }}"
     </script>
 
   </head>
@@ -74,7 +79,7 @@
       <form id="svgform" action="/{{g.locale}}/embed/download/" method="post">
           {{ form.hidden_tag() }}
       </form>
-
+    
     <script type="text/javascript">
 
       if (!window.location.origin) {
@@ -2608,32 +2613,96 @@
         downloadDone();
       }
       else {
+
         if (app.build.app.type == "geo_map") var svg = d3.select("div#map svg")
         else var svg = d3.select("#app > svg")
         // Add necessary name space junk and get raw node
         svg.attr("version", 1.1)
           .attr("xmlns", "http://www.w3.org/2000/svg")
           .node()
+        svg.insert('defs',":first-child")
         // Extract the data as SVG text string
-        var svg_xml = (new XMLSerializer).serializeToString(svg.node());
-        form['data'].value = svg_xml;
-        // Submit the <FORM> to the server.
-        // The result will be an attachment file to download.
-        form['output_format'].value = type;
-        form['title'].value = title;
-        form['downloadToken'].value = new Date().getTime();
-        csrf_token = document.getElementById("csrf_token").value;
-        form['data'].value = form['data'].value.replace(/&/g, "%26")
-        progress = 0
-        d3.xhr("/{{g.locale}}/embed/download/")
-        .header("Content-Type", "application/x-www-form-urlencoded")
-            .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
-           urlFile = data.response
-           window.location.href = urlFile
-           downloadDone();
-        })
-      }
 
+        var svg_xml = (new XMLSerializer).serializeToString(svg.node());
+
+        if (type == "png" || type == "pdf"){
+            var style = "\n";
+            var requiredSheets = ['phylogram_d3.css', 'open_sans.css'];
+            for (var i=0; i<document.styleSheets.length; i++) {
+              var sheet = document.styleSheets[i];
+              if (sheet.href) {
+                var sheetName = sheet.href.split('/').pop();
+                if (requiredSheets.indexOf(sheetName) != -1) {
+                  var rules = sheet.rules;
+                  if (rules) {
+                    for (var j=0; j<rules.length; j++) {
+                      style += (rules[j].cssText + '\n');
+                    }
+                  }
+                }
+              }
+            }
+
+            img = new Image(),
+
+            d3.select("svg defs")
+                .append('style')
+                .attr('type','text/css')
+                .html(style);
+
+            img.src = 'data:image/svg+xml;base64,'+window.btoa(unescape(encodeURIComponent(svg_xml)));
+
+            var canvas = document.createElement("canvas");
+            document.body.appendChild(canvas);
+
+            var w = svg.node().getBBox().width,
+                h = svg.node().getBBox().height;
+
+            canvas.width = w;
+            canvas.height = h;
+            var context = canvas.getContext("2d")
+            context.fillStyle = "white";
+            context.fillRect(0,0,w,h);
+            context.drawImage(img,0,0,w,h);
+
+          if (type == "pdf"){
+            w = w*0.264583333;
+            h = h*0.264583333;
+            pdf = new jsPDF('l', 'mm', [w, h]);
+            pdf.addImage(canvas, 'JPEG', 0,0,w,h)
+            pdf.save(title);
+            downloadDone();
+          } 
+          else {
+            img_download = canvas.toDataURL("image/png");
+            var download = document.createElement('a');
+            download.href = img_download;
+            download.download = title + ".png";
+            download.click();
+            downloadDone();
+          }
+        } 
+        else{
+          form['data'].value = svg_xml;
+          // Submit the <FORM> to the server.
+          // The result will be an attachment file to download.
+          form['output_format'].value = type;
+          form['title'].value = title;
+          form['downloadToken'].value = new Date().getTime();
+          csrf_token = document.getElementById("csrf_token").value;
+          form['data'].value = form['data'].value.replace(/&/g, "%26")
+          progress = 0
+
+          d3.xhr("/{{g.locale}}/embed/download/")
+          .header("Content-Type", "application/x-www-form-urlencoded")
+          .post("output_format="+type+"&title="+ title+"&downloadToken="+ new Date().getTime() +"&data="+ form['data'].value +"&csrf_token="+ csrf_token, function(e, data){
+              urlFile = data.response
+              window.location.href = urlFile
+              downloadDone();
+            }
+          )
+        }
+      }
     }
 
     /*********************/
@@ -2901,41 +2970,56 @@
                 d3.select(pid).append("h3")
                   .text(dataviva.format.text("social_media"))
 
-                // Twitter link
+                var category_name = document.referrer.split('/')[4];
+                var category_id = document.referrer.split('/')[5];
+                var url_image =  dataviva.s3_host+"/img/"+category_name+"/"+category_name+"_"+category_id+".jpg"
                 var share_url = window.location.origin + "/" + dataviva.language + "/" + data.slug + "/";
-                d3.select(pid).append("a")
-                  .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
-                  .attr("class", "share_button")
-                  .attr("target", "_blank")
-                  .attr("onclick", "return !window.open(this.href, 'Twitter', 'width=640,height=300')")
-                  .attr("id", "Twitter")
-                  .attr("title", function(){
-                    return dataviva.language == "pt" ? "Tweetar" : "Tweet";
-                  })
 
-                // Facebook link
-                var description = "{{ _('DataViva is opening up data for the entire formal sector of the Brazilian economy') }}"
-                description += " "
-                description += "{{ _('through more than 100 million interactive visualizations.') }}"
-                d3.select(pid).append("a")
-                  .attr("href", "http://www.facebook.com/dialog/feed?display=popup&app_id={{facebook_id}}&description="+description+"&name="+app.viz.title()+"&link="+share_url+"&picture="+window.location.origin+"/static/img/icons/DataViva.png&redirect_uri="+window.location.origin+"/close/")
-                  .attr("class", "share_button")
-                  .attr("target", "_blank")
-                  .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
-                  .attr("id", "Facebook")
-                  .attr("title", "Facebook")
+                $.ajax({
+                    url: '/embed/image?link=' + url_image,
+                    type:'GET',
+                    success: function(request, status){
 
-                // Google link
-                d3.select(pid).append("a")
-                  .attr("href", function(){
-                    var lang = dataviva.language == "pt" ? "pt-BR" : "en-US";
-                    return "https://plus.google.com/share?url=" + share_url + "&hl=" + lang
-                  })
-                  .attr("class", "share_button")
-                  .attr("target", "_blank")
-                  .attr("onclick", "return !window.open(this.href, 'Google+', 'width=640,height=300')")
-                  .attr("id", "Google")
-                  .attr("title", "Google+")
+                      if(request != "200"){
+                        url_image =  dataviva.s3_host+"/img/"+category_name+"/"+category_name+"_all.jpg"
+                      }
+
+                      // Twitter link
+                      d3.select(pid).append("a")
+                        .attr("href", "https://twitter.com/share?url="+share_url+"&text="+app.viz.title()+"&hashtags=dataviva")
+                        .attr("class", "share_button")
+                        .attr("target", "_blank")
+                        .attr("onclick", "return !window.open(this.href, 'Twitter', 'width=640,height=300')")
+                        .attr("id", "Twitter")
+                        .attr("title", function(){
+                          return dataviva.language == "pt" ? "Tweetar" : "Tweet";
+                        })
+
+                      // Facebook link
+                      var description = "{{ _('DataViva is opening up data for the entire formal sector of the Brazilian economy') }}"
+                      description += " "
+                      description += "{{ _('through more than 100 million interactive visualizations.') }}"
+                      d3.select(pid).append("a")
+                        .attr("href", "http://www.facebook.com/dialog/feed?display=popup&app_id={{facebook_id}}&description="+description+"&name="+app.viz.title()+"&link="+share_url+"&picture="+url_image+"&redirect_uri="+window.location.origin+"/close/")
+                        .attr("class", "share_button")
+                        .attr("target", "_blank")
+                        .attr("onclick", "return !window.open(this.href, 'Facebook', 'width=640,height=300')")
+                        .attr("id", "Facebook")
+                        .attr("title", "Facebook")
+
+                      // Google link
+                      d3.select(pid).append("a")
+                        .attr("href", function(){
+                          var lang = dataviva.language == "pt" ? "pt-BR" : "en-US";
+                          return "https://plus.google.com/share?url=" + share_url + "&hl=" + lang
+                        })
+                        .attr("class", "share_button")
+                        .attr("target", "_blank")
+                        .attr("onclick", "return !window.open(this.href, 'Google+', 'width=640,height=300')")
+                        .attr("id", "Google")
+                        .attr("title", "Google+")
+                    }
+                });
 
               }
             })
