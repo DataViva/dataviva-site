@@ -254,7 +254,6 @@ def all():
 
 @mod.route('/admin/article/upload', methods=['POST'])
 @login_required
-@required_roles(1)
 def upload():
 
     csrf_token = request.values['csrf_token']
@@ -279,7 +278,6 @@ def upload():
 
 @mod.route('/admin/article/delete', methods=['DELETE'])
 @login_required
-@required_roles(1)
 def delete():
     csrf_token = request.data
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
@@ -295,8 +293,8 @@ def delete():
 # serve static files on server
 @mod.route('/admin/file/<string:csrf_token1>/<string:csrf_token2>', methods=['GET'])
 @login_required
-@required_roles(1)
 def get_file(csrf_token1, csrf_token2):
+    import pdb; pdb.set_trace()
     csrf_token = csrf_token1 + '##' + csrf_token2
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
     file_name = [file for file in os.listdir(upload_folder)][0]
