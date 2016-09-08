@@ -87,7 +87,7 @@ def admin_activate(status, status_value):
 
 def warning_new_article(article):
     confirmation_tpl = 'New article in Scholar'
-    send_mail("New Article", admin_email, confirmation_tpl)
+    send_mail("New Article", ["italodaldegan@gmail.com",admin_email,"italodaldegan@hotmail.com"], confirmation_tpl)
 
 
 @mod.route('/admin/article/new', methods=['GET'])
