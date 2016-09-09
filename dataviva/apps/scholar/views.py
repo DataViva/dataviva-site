@@ -82,8 +82,8 @@ def admin_activate(status, status_value):
 
 
 def new_article_advise(article):
-    confirmation_tpl = render_template('mail/message_template.html', article=article)
-    send_mail("New Article", [admin_email], confirmation_tpl)
+    avise_message = render_template('mail/message_template.html', article=article)
+    send_mail("New Article", [admin_email], avise_message)
 
 
 @mod.route('/admin/article/new', methods=['GET'])
