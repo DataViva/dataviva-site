@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory
 from dataviva.apps.general.views import get_locale
+from dataviva.translations.dictionary import dictionary
 from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
@@ -33,11 +34,6 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @mod.route('/', methods=['GET'])
@@ -154,9 +150,7 @@ def create():
 
         new_article_advise(article)
 
-        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será \
-        analisado pela equipe do DataViva. Em até 10 dias você receberá um \
-        retorno sobre sua publicação no site!'
+        message = dictionary()["article_submission"]
         flash(message, 'success')
 
         return redirect(url_for('scholar.index'))
