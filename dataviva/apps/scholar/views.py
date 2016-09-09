@@ -148,13 +148,12 @@ def create():
 
         db.session.commit()
 
-        # new_article_advise(article)
+        new_article_advise(article)
 
         message = dictionary()["article_submission"]
         flash(message, 'success')
 
-        return render_template('scholar/mail/new_article_advise.html', article=article)
-        # return redirect(url_for('scholar.index'))
+        return redirect(url_for('scholar.index'))
 
 
 @mod.route('/admin/article/<id>/edit', methods=['GET'])
