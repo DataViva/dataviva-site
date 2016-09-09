@@ -83,7 +83,7 @@ def admin_activate(status, status_value):
 
 def new_article_advise(article):
     advise_message = render_template('scholar/mail/new_article_advise.html', article=article)
-    send_mail("New Article", [admin_email], advise_message)
+    send_mail("New Article", ["contato@dataviva.info","dataviva@fapemig.br"], advise_message)
 
 
 @mod.route('/admin/article/new', methods=['GET'])
