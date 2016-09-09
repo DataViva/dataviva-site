@@ -668,6 +668,9 @@ def dictionary():
         "file_too_large": gettext("File too large."),
         "summernote_placeholder": gettext("Your publication content goes here"),
 
+        # scholar
+        "article_submission": gettext("Thank you! Your study was successfully submitted and will be reviewed by the DataViva team. In up to ten days you will receive a feedback regarding its publication on the website!"),
+
         # errors
         "500": gettext("Sorry, an unexpected error has occured. Please try again"),
     }

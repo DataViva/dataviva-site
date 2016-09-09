@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-01 16:41-0300\n"
+"POT-Creation-Date: 2016-09-09 15:41-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1132,12 +1132,12 @@ msgstr ""
 "Você precisa escolher pelo menos um dos filtros para poder efetuar o "
 "download."
 
-#: dataviva/apps/embed/views.py:227
+#: dataviva/apps/embed/views.py:228
 msgid "You need to be logged in to star visualizations."
 msgstr "Você precisa fazer o login para favoritar visualizações."
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2917
+#: dataviva/apps/embed/templates/embed/embed.html:2999
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
@@ -1147,32 +1147,32 @@ msgstr ""
 "economia"
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2919
+#: dataviva/apps/embed/templates/embed/embed.html:3001
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid "through more than 100 million interactive visualizations."
 msgstr "brasileira em mais de 100 milhões de visualizações interativas."
 
-#: dataviva/apps/embed/templates/embed/embed.html:58
+#: dataviva/apps/embed/templates/embed/embed.html:63
 msgid "Refresh the Visualization"
 msgstr "Recarregue esta Visualização"
 
-#: dataviva/apps/embed/templates/embed/embed.html:59
+#: dataviva/apps/embed/templates/embed/embed.html:64
 msgid "Download this Visualization"
 msgstr "Baixe esta Visualização"
 
-#: dataviva/apps/embed/templates/embed/embed.html:60
+#: dataviva/apps/embed/templates/embed/embed.html:65
 msgid "Save this Visualization"
 msgstr "Salvar essa Visualização"
 
-#: dataviva/apps/embed/templates/embed/embed.html:61
+#: dataviva/apps/embed/templates/embed/embed.html:66
 msgid "Share/Embed"
 msgstr "Compartilhar/Incorporar"
 
-#: dataviva/apps/embed/templates/embed/embed.html:62
+#: dataviva/apps/embed/templates/embed/embed.html:67
 msgid "Show Visualization Tutorial"
 msgstr "Mostrar Tutorial da Visualização"
 
-#: dataviva/apps/embed/templates/embed/embed.html:64
+#: dataviva/apps/embed/templates/embed/embed.html:69
 msgid "Show/Hide Controls"
 msgstr "Mostrar/Ocultar Controles"
 
@@ -6924,28 +6924,38 @@ msgid "Your publication content goes here"
 msgstr "Escreva aqui o conteúdo desta publicação"
 
 #: dataviva/translations/dictionary.py:672
+msgid ""
+"Thank you! Your study was successfully submitted and will be reviewed by "
+"the DataViva team. In up to ten days you will receive a feedback "
+"regarding its publication on the website!"
+msgstr ""
+"Obrigado! Seu estudo foi submetido com sucesso e será analisado pela "
+"equipe do DataViva. Em até dez dias você receberá um retorno sobre sua "
+"publicação no site!"
+
+#: dataviva/translations/dictionary.py:675
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr "Desculpe, um erro inesperado ocorreu. Por favor, tente novamente"
 
-#: dataviva/translations/dictionary.py:681 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:684 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] "Trilhão"
 msgstr[1] "Trilhões"
 
-#: dataviva/translations/dictionary.py:682 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:685 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] "Bilhão"
 msgstr[1] "Bilhões"
 
-#: dataviva/translations/dictionary.py:683 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:686 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] "Milhão"
 msgstr[1] "Milhões"
 
-#: dataviva/translations/dictionary.py:684 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:687 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] "Mil"
