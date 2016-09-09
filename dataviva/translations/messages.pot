@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-08 16:52-0300\n"
+"POT-Creation-Date: 2016-09-09 16:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -840,7 +840,7 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:93
 #: dataviva/apps/calls/templates/calls/_form.html:21
-#: dataviva/apps/contact/templates/contact/index.html:68
+#: dataviva/apps/contact/templates/contact/index.html:67
 #: dataviva/apps/help/templates/help/_form.html:46
 #: dataviva/apps/news/templates/news/_form.html:94
 #: dataviva/apps/search/templates/search/_form.html:177
@@ -980,25 +980,25 @@ msgid ""
 "DataViva."
 msgstr ""
 
-#: dataviva/apps/contact/views.py:55 dataviva/translations/dictionary.py:649
+#: dataviva/apps/contact/views.py:61 dataviva/translations/dictionary.py:649
 msgid "Your message has been sent successfully. We will soon get back to you."
 msgstr ""
 
 #: dataviva/apps/contact/templates/contact/index.html:17
-#: dataviva/apps/contact/templates/contact/index.html:33
+#: dataviva/apps/contact/templates/contact/index.html:32
 #: dataviva/templates/about/ask/index.html:57
 #: dataviva/templates/include/header.html:7
 #: dataviva/translations/dictionary.py:547
 msgid "Contact"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:34
+#: dataviva/apps/contact/templates/contact/index.html:33
 msgid ""
 "Got any questions or want to send a suggestion? Contact the DataViva team"
 " using the form below:"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:39
+#: dataviva/apps/contact/templates/contact/index.html:38
 #: dataviva/apps/help/templates/help/tab-classifications-basic-courses.html:12
 #: dataviva/apps/help/templates/help/tab-classifications-industries.html:12
 #: dataviva/apps/help/templates/help/tab-classifications-locations.html:13
@@ -1016,11 +1016,11 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:53
+#: dataviva/apps/contact/templates/contact/index.html:52
 msgid "Subject"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:60
+#: dataviva/apps/contact/templates/contact/index.html:59
 #: dataviva/templates/include/footer.html:59
 #: dataviva/templates/include/footer.html:61
 #: dataviva/translations/dictionary.py:600
@@ -6309,28 +6309,35 @@ msgid "Your publication content goes here"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:677
+msgid ""
+"Thank you! Your study was successfully submitted and will be reviewed by "
+"the DataViva team. In up to ten days you will receive a feedback "
+"regarding its publication on the website!"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:680
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:686 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:689 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:687 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:690 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:688 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:691 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:689 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:692 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
