@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, json
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory
 from dataviva.apps.general.views import get_locale
+from dataviva.translations.dictionary import dictionary
 from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
@@ -33,11 +34,6 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @mod.route('/', methods=['GET'])
@@ -85,9 +81,9 @@ def admin_activate(status, status_value):
     return message, 200
 
 
-def warning_new_article(article):
-    confirmation_tpl = 'New article in Scholar'
-    send_mail("New Article", ["italodaldegan@gmail.com",admin_email,"italodaldegan@hotmail.com"], confirmation_tpl)
+def new_article_advise(article):
+    avise_message = render_template('mail/message_template.html', article=article)
+    send_mail("New Article", [admin_email], avise_message)
 
 
 @mod.route('/admin/article/new', methods=['GET'])
@@ -152,10 +148,9 @@ def create():
 
         db.session.commit()
 
-        warning_new_article(article)
+        new_article_advise(article)
 
-        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-                    Em até 10 dias você receberá um retorno sobre sua publicação no site!'
+        message = dictionary()["article_submission"]
         flash(message, 'success')
 
         return redirect(url_for('scholar.index'))
