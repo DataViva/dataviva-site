@@ -40,6 +40,7 @@ class Subject(db.Model):
     __tablename__ = 'blog_subject'
     id = db.Column(db.Integer, primary_key=True)
     name_pt = db.Column(db.String(50))
+    name_en = db.Column(db.String(50))
 
     def __repr__(self):
         return '<PostSubject %r>' % (self.name_pt)

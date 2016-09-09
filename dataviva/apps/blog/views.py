@@ -186,13 +186,15 @@ def create():
         post.dual_language = form.dual_language.data
         post.active = 0
 
-        subjects_names = form.subject.data.replace(', ', ',').split(',')
+        subjects_pt = form.subject_pt.data.replace(', ', ',').split(',')
+        subjects_en = form.subject_en.data.replace(', ', ',').split(',')
 
-        for name in subjects_names:
-            subject = Subject.query.filter_by(name_pt=name).first()
-            if (not subject):
+        for name_pt, name_en in zip(subjects_pt, subjects_en):
+            subject = Subject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+            if not subject:
                 subject = Subject()
-                subject.name_pt = name
+                subject.name_pt = name_pt
+                subject.name_en = name_en
             post.subjects.append(subject)
 
         db.session.add(post)
@@ -246,7 +248,8 @@ def edit(id):
     form.dual_language.data = post.dual_language
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
-    form.subject.data = ', '.join([sub.name_pt for sub in post.subjects])
+    form.subject_pt.data = ', '.join([sub.name_pt for sub in post.subjects])
+    form.subject_en.data = ', '.join([sub.name_en for sub in post.subjects])
 
     return render_template('blog/edit.html',
                            form=form,
@@ -272,17 +275,20 @@ def update(id):
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
         post.dual_language = form.dual_language.data
-        subjects_names = form.subject.data.replace(', ', ',').split(',')
+
+        subjects_pt = form.subject_pt.data.replace(', ', ',').split(',')
+        subjects_en = form.subject_en.data.replace(', ', ',').split(',')
         num_subjects = len(post.subjects)
 
         for i in range(0, num_subjects):
             post.subjects.remove(post.subjects[0])
 
-        for name in subjects_names:
-            subject = Subject.query.filter_by(name_pt=name).first()
-            if (not subject):
+        for name_pt, name_en in zip(subjects_pt, subjects_en):
+            subject = Subject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+            if not subject:
                 subject = Subject()
-                subject.name_pt = name
+                subject.name_pt = name_pt
+                subject.name_en = name_en
             post.subjects.append(subject)
 
         post.text_content_pt = upload_images_to_s3(
