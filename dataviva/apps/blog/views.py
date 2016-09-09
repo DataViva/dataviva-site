@@ -37,7 +37,7 @@ def add_language_code(endpoint, values):
 def index():
     posts = Post.query.filter_by(active=True).order_by(
         desc(Post.publish_date)).all()
-    subjects_query = Subject.query.order_by(desc(Subject.name)).all()
+    subjects_query = Subject.query.order_by(desc(Subject.name_pt)).all()
     subjects = []
 
     for subject_query in subjects_query:
@@ -54,7 +54,7 @@ def index_subject(subject):
     posts_query = Post.query.filter_by(
         active=True).order_by(desc(Post.publish_date)).all()
     subjects_query = subjects_query = Subject.query.order_by(
-        desc(Subject.name)).all()
+        desc(Subject.name_pt)).all()
     posts = []
     subjects = []
 
@@ -76,7 +76,7 @@ def index_subject(subject):
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
-    subjects_query = Subject.query.order_by(desc(Subject.name)).all()
+    subjects_query = Subject.query.order_by(desc(Subject.name_pt)).all()
     post = Post.query.filter_by(id=id).first_or_404()
     posts = Post.query.filter(Post.id != id, Post.active).all()
     subjects = []
@@ -189,10 +189,10 @@ def create():
         subjects_names = form.subject.data.replace(', ', ',').split(',')
 
         for name in subjects_names:
-            subject = Subject.query.filter_by(name=name).first()
+            subject = Subject.query.filter_by(name_pt=name).first()
             if (not subject):
                 subject = Subject()
-                subject.name = name
+                subject.name_pt = name
             post.subjects.append(subject)
 
         db.session.add(post)
@@ -246,7 +246,7 @@ def edit(id):
     form.dual_language.data = post.dual_language
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
-    form.subject.data = ', '.join([sub.name for sub in post.subjects])
+    form.subject.data = ', '.join([sub.name_pt for sub in post.subjects])
 
     return render_template('blog/edit.html',
                            form=form,
@@ -279,10 +279,10 @@ def update(id):
             post.subjects.remove(post.subjects[0])
 
         for name in subjects_names:
-            subject = Subject.query.filter_by(name=name).first()
+            subject = Subject.query.filter_by(name_pt=name).first()
             if (not subject):
                 subject = Subject()
-                subject.name = name
+                subject.name_pt = name
             post.subjects.append(subject)
 
         post.text_content_pt = upload_images_to_s3(
