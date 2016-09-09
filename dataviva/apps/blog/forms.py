@@ -27,6 +27,10 @@ def validate_subject_en(form, field):
         if len(subjects_pt) != len(subjects_en):
             raise ValidationError(u"Por favor, insira a mesma quantidade de categorias em português e em inglês.")
 
+def validate_subjects(form, field):
+    subjects = field.data.replace(', ', ',').split(',')
+    if '' in subjects:
+            raise ValidationError(u"Por favor, insira uma vírgula somente entre duas categorias.")
 
 class RegistrationForm(Form):
     title_pt = TextField('title_pt', validators=[
@@ -55,11 +59,13 @@ class RegistrationForm(Form):
     )
 
     subject_pt = TextField('subject', validators=[
-        validators.Required(u"Por favor, insira a categoria do post.")
+        validators.Required(u"Por favor, insira a categoria do post."),
+        validate_subjects
     ])
 
     subject_en = TextField('subject', validators=[
-        validate_subject_en
+        validate_subject_en,
+        validate_subjects
     ])
 
     text_call_pt = TextAreaField('text_call_pt', validators=[
