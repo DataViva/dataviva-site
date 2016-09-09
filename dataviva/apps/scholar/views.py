@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, json
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory
 from dataviva.apps.general.views import get_locale
 from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
@@ -85,9 +85,8 @@ def admin_activate(status, status_value):
     return message, 200
 
 
-def warning_new_article(article):
-    confirmation_tpl = render_template(
-            'mail/message_template.html', article=article)
+def new_article_advise(article):
+    confirmation_tpl = render_template('mail/message_template.html', article=article)
     send_mail("New Article", [admin_email], confirmation_tpl)
 
 
@@ -153,16 +152,14 @@ def create():
 
         db.session.commit()
 
-        # warning_new_article(article)
+        new_article_advise(article)
 
-        # message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-        #             Em até 10 dias você receberá um retorno sobre sua publicação no site!'
-        # flash(message, 'success')
+        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será \
+        analisado pela equipe do DataViva. Em até 10 dias você receberá um \
+        retorno sobre sua publicação no site!'
+        flash(message, 'success')
 
-        return render_template(
-            'mail/advise_new_study.html', article=article)
-
-        # return redirect(url_for('scholar.index'))
+        return redirect(url_for('scholar.index'))
 
 
 @mod.route('/admin/article/<id>/edit', methods=['GET'])
