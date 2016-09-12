@@ -81,14 +81,8 @@ def admin_activate(status, status_value):
     return message, 200
 
 
-def creat_study_url(article_id):
-    url = request.url + str(article_id)
-    url2 = url.replace("/admin","",1).replace("new","",1)
-    return url2
-
-
-def new_article_advise(article):
-    url = creat_study_url(article.id)
+def new_article_advise(article, server_domain):
+    url = server_domain + g.locale + '/' + mod.name + '/article/' + str(article.id)
     advise_message = render_template('scholar/mail/new_article_advise.html', article=article, url=url)
     send_mail("Novo estudo [" + article.date_str() + "]", [admin_email], advise_message)
 
@@ -155,7 +149,7 @@ def create():
 
         db.session.commit()
 
-        new_article_advise(article)
+        new_article_advise(article, request.url_root)
 
         message = dictionary()["article_submission"]
         flash(message, 'success')
