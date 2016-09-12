@@ -206,7 +206,6 @@ def create():
                     subject.name_en = ''
                     post.subjects.append(subject)
 
-
         db.session.add(post)
         db.session.flush()
 

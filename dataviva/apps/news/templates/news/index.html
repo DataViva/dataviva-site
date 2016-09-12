@@ -12,7 +12,7 @@
                     <a href="{{url_for('news.show', id=publication.id)}}" title="{{publication.title}}">
                         <img src="{{publication.thumb}}" class="thumbnail img-responsive">
                     </a>
-                    <span>{{publication.subject.name}}</span>
+                    <span>{{publication.subjects[0].name_pt}}</span>
                 </div>
                 <h4>
                     {% if publication.dual_language and g.locale == "en" %}

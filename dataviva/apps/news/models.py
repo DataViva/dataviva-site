@@ -1,6 +1,11 @@
+from sqlalchemy import ForeignKey, Table, Column
 from dataviva import db
-from sqlalchemy import ForeignKey
 
+
+association_table = db.Table('news_publication_subject',
+    db.Column('publication_id', db.Integer, db.ForeignKey('news_publication.id')),
+    db.Column('subject_id', db.Integer, db.ForeignKey('news_subject.id'))
+)
 
 class Publication(db.Model):
     # TODO - Alter publication.thumb column to db.Column(db.String(400))
@@ -14,13 +19,16 @@ class Publication(db.Model):
     text_content_pt = db.Column(db.Text(4194304))
     text_content_en = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
-    last_modification = db.Column(db.DateTime)
     publish_date = db.Column(db.DateTime)
+    last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
     show_home = db.Column(db.Boolean)
     dual_language = db.Column(db.Boolean)
-    subject_id = db.Column(db.Integer, ForeignKey('news_subject.id'))
-    subject = db.relationship('PublicationSubject', backref='news_publication', lazy='eager')
+
+    subjects = db.relationship(
+        "PublicationSubject",
+        secondary=association_table,
+        backref=db.backref('publications', lazy='dynamic'))
 
     def date(self):
         return self.publish_date.strftime('%d/%m/%Y')
@@ -32,10 +40,12 @@ class Publication(db.Model):
 class PublicationSubject(db.Model):
     __tablename__ = 'news_subject'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name_pt = db.Column(db.String(50))
+    name_en = db.Column(db.String(50))
 
     def __init__(self, name=None):
-        self.name = name
+        self.name_pt = name_pt
+        self.name_en = name_en
 
     def __repr__(self):
-        return '<PublicationSubject %r>' % (self.name)
+        return '<PublicationSubject %r>' % (self.name_pt)

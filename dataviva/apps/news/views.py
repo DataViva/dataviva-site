@@ -40,7 +40,7 @@ def index():
     subjects = PublicationSubject.query.join(Publication).filter(
         Publication.subject_id == PublicationSubject.id,
         Publication.active
-    ).order_by(desc(PublicationSubject.name)).all()
+    ).order_by(desc(PublicationSubject.name_pt)).all()
     return render_template('news/index.html', publications=publications, subjects=subjects)
 
 
@@ -51,7 +51,7 @@ def index_subject(subject):
     subjects = PublicationSubject.query.join(Publication).filter(
         Publication.subject_id == PublicationSubject.id,
         Publication.active
-    ).order_by(desc(PublicationSubject.name)).all()
+    ).order_by(desc(PublicationSubject.name_pt)).all()
     return render_template(
         'news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
 
@@ -136,17 +136,6 @@ def create():
         publication = Publication()
         publication.title_pt = form.title_pt.data
         publication.title_en = form.title_en.data
-        subject_query = PublicationSubject.query.filter_by(name=form.subject.data)
-
-        if (subject_query.first()):
-            publication.subject_id = subject_query.first().id
-        else:
-            subject = PublicationSubject()
-            subject.name = form.subject.data
-            db.session.add(subject)
-            db.session.commit()
-            publication.subject_id = subject.id
-
         publication.text_call_pt = form.text_call_pt.data
         publication.text_call_en = form.text_call_en.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -155,6 +144,26 @@ def create():
         publication.dual_language = form.dual_language.data
         publication.active = 0
         publication.author = form.author.data
+
+        subjects_pt = form.subject_pt.data.replace(', ', ',').split(',')
+
+        if form.dual_language.data:
+            subjects_en = form.subject_en.data.replace(', ', ',').split(',')
+            for name_pt, name_en in zip(subjects_pt, subjects_en):
+                subject = Subject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+                if not subject:
+                    subject = Subject()
+                    subject.name_pt = name_pt
+                    subject.name_en = name_en
+                publication.subjects.append(subject)
+        else:
+            for name_pt in subjects_pt:
+                subject = Subject.query.filter_by(name_pt=name_pt, name_en='').first()
+                if not subject:
+                    subject = Subject()
+                    subject.name_pt = name_pt
+                    subject.name_en = ''
+                    publication.subjects.append(subject)
 
         db.session.add(publication)
         db.session.flush()
@@ -204,7 +213,6 @@ def edit(id):
     form.title_pt.data = publication.title_pt
     form.title_en.data = publication.title_en
     form.author.data = publication.author
-    form.subject.data = publication.subject.name if publication.subject else ''
     form.text_content_pt.data = publication.text_content_pt
     form.text_content_en.data = publication.text_content_en
     form.publish_date.data = publication.publish_date
@@ -213,6 +221,10 @@ def edit(id):
     form.show_home.data = publication.show_home
     form.dual_language.data = publication.dual_language
     form.thumb.data = publication.thumb
+    form.subject_pt.data = ', '.join([sub.name_pt for sub in publication.subjects])
+    if publication.dual_language:
+        form.subject_en.data = ', '.join([sub.name_en for sub in publication.subjects])
+
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
 
@@ -228,18 +240,6 @@ def update(id):
         publication = Publication.query.filter_by(id=id).first_or_404()
         publication.title_pt = form.title_pt.data
         publication.title_en = form.title_en.data
-        subject_query = PublicationSubject.query.filter_by(
-            name=form.subject.data)
-
-        if (subject_query.first()):
-            publication.subject_id = subject_query.first().id
-        else:
-            subject = PublicationSubject()
-            subject.name = form.subject.data
-            db.session.add(subject)
-            db.session.commit()
-            publication.subject_id = subject.id
-
         publication.text_call_pt = form.text_call_pt.data
         publication.text_call_en = form.text_call_en.data
         publication.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -247,6 +247,30 @@ def update(id):
         publication.show_home = form.show_home.data
         publication.dual_language = form.dual_language.data
         publication.author = form.author.data
+
+        subjects_pt = form.subject_pt.data.replace(', ', ',').split(',')
+        num_subjects = len(publication.subjects)
+
+        for i in range(0, num_subjects):
+            publication.subjects.remove(publication.subjects[0])
+
+        if form.dual_language.data:
+            subjects_en = form.subject_en.data.replace(', ', ',').split(',')
+            for name_pt, name_en in zip(subjects_pt, subjects_en):
+                subject = Subject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+                if not subject:
+                    subject = Subject()
+                    subject.name_pt = name_pt
+                    subject.name_en = name_en
+                publication.subjects.append(subject)
+        else:
+            for name_pt in subjects_pt:
+                subject = Subject.query.filter_by(name_pt=name_pt, name_en='').first()
+                if not subject:
+                    subject = Subject()
+                    subject.name_pt = name_pt
+                    subject.name_en = ''
+                    publication.subjects.append(subject)
 
         publication.text_content_pt = upload_images_to_s3(
             form.text_content_pt.data, mod.name, publication.id)

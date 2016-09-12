@@ -20,7 +20,7 @@
                 {{ form.dual_language(class="js-switch") }}
             </div>
         </div>
-        <div class="form-group col-md-10 {{ 'has-error' if form.title_en.errors else '' }} ">
+        <div class="other-lang-field form-group col-md-10 {{ 'has-error' if form.title_en.errors else '' }} ">
             <label class="control-label" for="title_en">{% trans %}Title{% endtrans %} ({% trans %}English{% endtrans %})</label>
             {{ messages(form.title_en) }}
             {{ form.title_en(class="form-control", maxlength=400)}}
@@ -53,6 +53,11 @@
         <label class="control-label" for="subject">{% trans %}Category{% endtrans %}</label>
         {{ messages(form.subject) }}
         {{ form.subject(class="form-control")}}
+    </div>
+    <div class="other-lang-field form-group {{ 'has-error' if form.subject_en.errors else '' }} ">
+        <label class="control-label" for="subject_en">{% trans %}Category{% endtrans %} ({% trans %}English{% endtrans %})</label>
+        {{ messages(form.subject_en) }}
+        {{ form.subject_en(class="form-control")}}
     </div>
     <div class="form-group {{ 'has-error' if form.thumb.errors else '' }} ">
         <label class="control-label" for="thumb-input">{% trans %}Call Image{% endtrans %}</label>
@@ -92,7 +97,7 @@
         <div name="textarea-feedback"></div>
     </div>
 
-     <div class="form-group m-t-sm {{ 'has-error' if form.text_call_en.errors else '' }}">
+     <div class="other-lang-field form-group m-t-sm {{ 'has-error' if form.text_call_en.errors else '' }}">
         <label class="control-label" for="text_call_en">{% trans %}Call{% endtrans %} ({% trans %}English{% endtrans %})</label>
         {{ messages(form.text_call_en) }}
         {{ form.text_call_en(class="form-control", rows=5, maxlength=500)}}
@@ -113,7 +118,7 @@
     </div>
 
     <div class="row">
-        <div id="summernote-en" class="form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
+        <div id="summernote-en" class="other-lang-field form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
             <label class="control-label" for="text_content_en">{% trans %}Content{% endtrans %} ({% trans %}English{% endtrans %})</label>
             <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
             <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>

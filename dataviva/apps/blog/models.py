@@ -2,6 +2,7 @@ from sqlalchemy import ForeignKey, Table, Column
 from sqlalchemy.ext.declarative import declarative_base 
 from dataviva import db
 
+
 association_table = db.Table('blog_post_subject',
     db.Column('post_id', db.Integer, db.ForeignKey('blog_post.id')),
     db.Column('subject_id', db.Integer, db.ForeignKey('blog_subject.id'))

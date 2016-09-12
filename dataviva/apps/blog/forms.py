@@ -29,6 +29,7 @@ def validate_subject_en(form, field):
         if len(subjects_pt) != len(subjects_en):
             raise ValidationError(u"Por favor, insira a mesma quantidade de categorias em português e em inglês.")
 
+
 def validate_subject_pt(form, field):
     subjects = form.subject_pt.data.replace(', ', ',').split(',')
     if '' in subjects:

@@ -17,6 +17,23 @@ def validate_text_content_en(form, field):
     if form.dual_language.data and not form.text_content_en.data:
         raise ValidationError(u"Por favor, insira o conteúdo da notícia.")
 
+def validate_subject_en(form, field):
+    if form.dual_language.data:
+        if not form.subject_en.data:
+            raise ValidationError(u"Por favor, insira a categoria do post.")
+        subjects_pt = form.subject_pt.data.replace(', ', ',').split(',')
+        subjects_en = form.subject_en.data.replace(', ', ',').split(',')
+        if '' in subjects_en:
+            raise ValidationError(u"Por favor, insira uma vírgula somente entre duas categorias.")
+        if len(subjects_pt) != len(subjects_en):
+            raise ValidationError(u"Por favor, insira a mesma quantidade de categorias em português e em inglês.")
+
+
+def validate_subject_pt(form, field):
+    subjects = form.subject_pt.data.replace(', ', ',').split(',')
+    if '' in subjects:
+        raise ValidationError(u"Por favor, insira uma vírgula somente entre duas categorias.")
+
 
 class RegistrationForm(Form):
     title_pt = TextField('title_pt', validators=[
@@ -44,8 +61,13 @@ class RegistrationForm(Form):
         description='Formato da data: dia/mês/ano'
     )
 
-    subject = TextField('subject', validators=[
-        validators.Required(u"Por favor, insira a categoria da notícia.")
+    subject_pt = TextField('subject_pt', validators=[
+        validators.Required(u"Por favor, insira a categoria do post."),
+        validate_subject_pt
+    ])
+
+    subject_en = TextField('subject_en', validators=[
+        validate_subject_en,
     ])
 
     text_call_pt = TextAreaField('text_call_pt', validators=[
