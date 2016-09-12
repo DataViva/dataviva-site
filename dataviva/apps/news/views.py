@@ -35,23 +35,39 @@ def add_language_code(endpoint, values):
 
 @mod.route('/', methods=['GET'])
 def index():
-    publications = Publication.query.filter_by(
-        active=True).order_by(desc(Publication.publish_date)).all()
-    subjects = PublicationSubject.query.join(Publication).filter(
-        Publication.subject_id == PublicationSubject.id,
-        Publication.active
-    ).order_by(desc(PublicationSubject.name_pt)).all()
+    publications = Publication.query.filter_by(active=True).order_by(
+        desc(Publication.publish_date)).all()
+    subjects_query = PublicationSubject.query.order_by(desc(PublicationSubject.name_pt)).all()
+    subjects = []
+
+    for subject_query in subjects_query:
+        for row in subject_query.publications:
+            if row.active is True:
+                subjects.append(subject_query)
+                break
+
     return render_template('news/index.html', publications=publications, subjects=subjects)
 
 
 @mod.route('/<subject>', methods=['GET'])
 def index_subject(subject):
-    publications = Publication.query.filter_by(
-        active=True, subject_id=subject).order_by(desc(Publication.publish_date)).all()
-    subjects = PublicationSubject.query.join(Publication).filter(
-        Publication.subject_id == PublicationSubject.id,
-        Publication.active
-    ).order_by(desc(PublicationSubject.name_pt)).all()
+    publications_query = Publication.query.filter_by(
+        active=True).order_by(desc(Publication.publish_date)).all()
+    subjects_query = subjects_query = PublicationSubject.query.order_by(
+        desc(PublicationSubject.name_pt)).all()
+    publications = []
+    subjects = []
+
+    for subject_query in subjects_query:
+        for row in subject_query.publications:
+            if row.active is True:
+                subjects.append(subject_query)
+                break
+
+    for publication in publications_query:
+        if float(subject) in [x.id for x in publication.subjects]:
+            publications.append(publication)
+
     return render_template(
         'news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
 
@@ -150,17 +166,17 @@ def create():
         if form.dual_language.data:
             subjects_en = form.subject_en.data.replace(', ', ',').split(',')
             for name_pt, name_en in zip(subjects_pt, subjects_en):
-                subject = Subject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
                 if not subject:
-                    subject = Subject()
+                    subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = name_en
                 publication.subjects.append(subject)
         else:
             for name_pt in subjects_pt:
-                subject = Subject.query.filter_by(name_pt=name_pt, name_en='').first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en='').first()
                 if not subject:
-                    subject = Subject()
+                    subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = ''
                     publication.subjects.append(subject)
@@ -257,17 +273,17 @@ def update(id):
         if form.dual_language.data:
             subjects_en = form.subject_en.data.replace(', ', ',').split(',')
             for name_pt, name_en in zip(subjects_pt, subjects_en):
-                subject = Subject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
                 if not subject:
-                    subject = Subject()
+                    subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = name_en
                 publication.subjects.append(subject)
         else:
             for name_pt in subjects_pt:
-                subject = Subject.query.filter_by(name_pt=name_pt, name_en='').first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en='').first()
                 if not subject:
-                    subject = Subject()
+                    subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = ''
                     publication.subjects.append(subject)

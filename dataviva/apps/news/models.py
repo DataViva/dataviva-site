@@ -43,7 +43,7 @@ class PublicationSubject(db.Model):
     name_pt = db.Column(db.String(50))
     name_en = db.Column(db.String(50))
 
-    def __init__(self, name=None):
+    def __init__(self, name_pt=None, name_en=None):
         self.name_pt = name_pt
         self.name_en = name_en
 
