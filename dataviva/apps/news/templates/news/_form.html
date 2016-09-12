@@ -107,8 +107,8 @@
     <div class="row">
         <div id="summernote-pt" class="form-group {{ 'has-error' if form.text_content_pt.errors else '' }}">
             <label class="control-label" for="text_content_pt">{% trans %}Content{% endtrans %}</label>
-            <button id="blog-edit-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-            <button id="blog-preview-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+            <button id="news-edit-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+            <button id="news-preview-pt" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
             {{ messages(form.text_content_pt) }}
             {{ form.text_content_pt }}
             <div class=" summernote-wrapper">
@@ -120,8 +120,8 @@
     <div class="row">
         <div id="summernote-en" class="other-lang-field form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
             <label class="control-label" for="text_content_en">{% trans %}Content{% endtrans %} ({% trans %}English{% endtrans %})</label>
-            <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-            <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
+            <button id="news-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+            <button id="news-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
             {{ messages(form.text_content_en) }}
             {{ form.text_content_en }}
             <div class=" summernote-wrapper">
