@@ -51,17 +51,9 @@ var load_tooltips = function() {
 
 $(document).ready(function(){
 
-    if ($('#dual_language').is(':not(:checked)')) {
-        $('#text_call_en, #summernote-en')
-            .hide()
-            .siblings().hide();
-        $('#title_en').parent().hide();
-    }
     $('#dual_language').change(function() {
-        $('#text_call_en, #summernote-en')
-            .fadeToggle()
-            .siblings().fadeToggle();
-        $('#title_en').parent().fadeToggle();
+        $('.other-lang-field')
+            .fadeToggle();
     });
 
     $('#blog-edit-pt, #blog-edit-en').prop('disabled', true);
