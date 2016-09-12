@@ -2,13 +2,13 @@
 {% block mail_body %}
 <div>
     <h2 class='title'>O Dataviva recebeu um novo estudo!</h2>
-    <b>Título:</b> {{ article.title }} (<a href="{{url_for('scholar.show', id=article.id)}}">Acessar Estudo</a>)</br>
+    <b>Título:</b> {{ article.title }} (<a href="{{url_for('scholar.show', id=article.id)}}" target="_blank">Acessar Estudo</a>)</br>
     <b>Autor:</b> {{ article.authors_str() }}</br>
     <b>Palavras-Chave:</b> {{ article.keywords_str() }}</br>
     <b>Data de Publicação:</b> {{ article.date_str() }}</br>
     
     <p>{{ article.abstract }}</p>
 
-    <a href="{{ article.url }}">Baixar Arquivo (PDF)</a>
+    <a href="{{ article.url }}" target="_blank">Baixar Arquivo (PDF)</a>
 </div>
 {% endblock %}
