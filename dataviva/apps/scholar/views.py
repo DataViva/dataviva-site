@@ -81,9 +81,16 @@ def admin_activate(status, status_value):
     return message, 200
 
 
+def creat_study_url(article_id):
+    url = request.url + str(article_id)
+    url2 = url.replace("/admin","",1).replace("new","",1)
+    return url2
+
+
 def new_article_advise(article):
-    advise_message = render_template('scholar/mail/new_article_advise.html', article=article)
-    send_mail("New Article", ["contato@dataviva.info","dataviva@fapemig.br"], advise_message)
+    url = creat_study_url(article.id)
+    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, url=url)
+    send_mail("Novo estudo [" + article.date_str() + "]", [admin_email], advise_message)
 
 
 @mod.route('/admin/article/new', methods=['GET'])
@@ -298,7 +305,6 @@ def delete():
 @mod.route('/admin/file/<string:csrf_token1>/<string:csrf_token2>', methods=['GET'])
 @login_required
 def get_file(csrf_token1, csrf_token2):
-    import pdb; pdb.set_trace()
     csrf_token = csrf_token1 + '##' + csrf_token2
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
     file_name = [file for file in os.listdir(upload_folder)][0]
