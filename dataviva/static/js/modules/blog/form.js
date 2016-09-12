@@ -51,6 +51,10 @@ var load_tooltips = function() {
 
 $(document).ready(function(){
 
+    if ($('#dual_language').is(':checked')) {
+        $('.other-lang-field').fadeToggle();
+    }
+
     $('#dual_language').change(function() {
         $('.other-lang-field')
             .fadeToggle();
