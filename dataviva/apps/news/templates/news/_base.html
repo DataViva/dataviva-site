@@ -17,8 +17,12 @@
         <ul>
             <li><a href="{{ url_for('news.index') }}" title="Todos" class="{{'active' if not active_subject else ''}}">{% trans %}All{% endtrans %}</a></li>
             {% for subject in subjects %}
-                <li><a href="{{ url_for('news.index') }}{{subject.id}}" title="{{subject.name}}" class="{{'active' if subject.id == active_subject else ''}}">{{subject.name}}</a></li>
-            {% endfor %} 
+                {% if g.locale == "en" and subject.name_en %}
+                    <li><a href="{{ url_for('news.index') }}{{subject.id}}" title="{{subject.name_en}}" class="{{'active' if subject.id == active_subject else ''}}">{{subject.name_en}}</a></li>
+                {% else %}
+                    <li><a href="{{ url_for('news.index') }}{{subject.id}}" title="{{subject.name_pt}}" class="{{'active' if subject.id == active_subject else ''}}">{{subject.name_pt}}</a></li>
+                {% endif %}
+            {% endfor %}
         </ul>
     </nav>
     <section id="news" class="col-md-9">
