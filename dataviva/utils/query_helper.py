@@ -53,12 +53,14 @@ def query_table(table, columns=[], filters=[], groups=[], limit=0, order=None, s
     
     if  'bra_id' in data['headers']:
         index_bra = data['headers'].index('bra_id')
-        data['headers'].append(dictionary()['bra'])
+        data['headers'].insert(0, dictionary()['bra'])
         
-        location_name = bra_profiles([data['data'][0][index_bra]])[0].name()
-        #import pdb; pdb.set_trace()
+        location_name = {}
+        for location in Bra.query.all():
+            location_name[location.id] = location.name()
+
         for i, row  in enumerate(data['data']):
-            data['data'][i].append(location_name)  
+            data['data'][i].insert(0, location_name[row[index_bra]])  
                               
     return data
 
