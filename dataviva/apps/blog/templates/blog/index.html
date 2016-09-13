@@ -9,25 +9,17 @@
         {% for post in posts %}
             <div class="item post">
                 <div class="thumbnail">
-                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title_pt}}">
+                    <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_pt }}">
                         <img src="{{post.thumb}}" class="thumbnail img-responsive">
                     </a>
-                    <span>{{post.subjects[0].name_pt}}</span>
+                    <span>{{ post.subjects[0].name_en if post.dual_language and g.locale == 'en' else post.subjects[0].name_pt }}</span>
                 </div>
                 <h4>
-                    {% if post.dual_language and g.locale == "en" %}
-                        <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title_en}}">{{post.title_en}}</a>
-                    {% else %}
-                        <a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title_pt}}">{{post.title_pt}}</a>
-                    {% endif %}
+                    <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}</a>
                 </h4>
-                {% if post.dual_language and g.locale == "en" %}
-                    <p>{{ post.text_call_en }}</p>
-                {% else %}
-                    <p>{{ post.text_call_pt }}</p>
-                {% endif %}
+                <p>{{ post.text_call_en if post.dual_language and g.locale == 'en' else post.text_call_pt }}</p>
                 <div class="meta">
-                    <p><a href="{{url_for('blog.show', id=post.id)}}" title="{{post.title_pt}}">{% trans %}Continue reading{% endtrans %}</a></p>
+                    <p><a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{% trans %}Continue reading{% endtrans %}</a></p>
                     <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
                 </div>
             </div>

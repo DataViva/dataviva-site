@@ -18,13 +18,7 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item post single">
-            <h4>
-                {% if post.dual_language and g.locale == "en" %}
-                    {{ post.title_en|safe }}
-                {% else %}
-                    {{ post.title_pt|safe }}
-                {% endif %}
-            </h4>
+            <h4>{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</h4>
             <div class="meta">
                 <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
             </div>
@@ -41,11 +35,7 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            {% if post.dual_language and g.locale == "en" %}
-                {{ post.text_content_en|safe }}
-            {% else %}
-                {{ post.text_content_pt|safe }}
-            {% endif %}
+            {{ post.text_content_en|safe if post.dual_language and g.locale == 'en' else post.text_content_pt|safe }}
         </div>
         <div class="clearfix"></div>
         <div class="related">
@@ -57,11 +47,7 @@
                         <img src="{{post.thumb}}" class="img-responsive">
                     </a>
                     <p>
-                        {% if post.dual_language and g.locale == "en" %}
-                            <a href="#" title="{{ post.title_en }}">{{ post.title_en|safe }}</a>
-                        {% else %}
-                            <a href="#" title="{{ post.title_pt }}">{{ post.title_pt|safe }}</a>
-                        {% endif %}
+                        <a href="#" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</a>
                     </p>
                 </div>
             {% endfor %}

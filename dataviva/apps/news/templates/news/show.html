@@ -17,13 +17,7 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item publication single">
-            <h4>
-                {% if publication.dual_language and g.locale == "en" %}
-                    {{ publication.title_en|safe }}
-                {% else %}
-                    {{ publication.title_pt|safe }}
-                {% endif %}
-            </h4>
+            <h4>{{ publication.title_en|safe if publication.dual_language and g.locale == 'en' else publication.title_pt|safe }}</h4>
             <div class="meta">
                 <p class="data">{% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}</p>
             </div>
@@ -40,11 +34,7 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            {% if publication.dual_language and g.locale == "en" %}
-                {{ publication.text_content_en|safe }}
-            {% else %}
-                {{ publication.text_content_pt|safe }}
-            {% endif %}
+            {{ publication.text_content_en|safe if publication.dual_language and g.locale == 'en' else publication.text_content_pt|safe }}
         </div>
         <div class="clearfix"></div>
         <div class="related">
@@ -55,13 +45,7 @@
                     <a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title }}">
                         <img src="{{publication.thumb}}" class="img-responsive">
                     </a>
-                    <p>
-                        {% if publication.dual_language and g.locale == "en" %}
-                            <a href="#" title="{{ publication.title_en }}">{{ publication.title_en|safe }}</a>
-                        {% else %}
-                            <a href="#" title="{{ publication.title_pt }}">{{ publication.title_pt|safe }}</a>
-                        {% endif %}
-                    </p>
+                    <p><a href="#" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">{{ publication.title_en|safe if publication.dual_language and g.locale == 'en' else publication.title_pt|safe }}</a></p>
                 </div>
             {% endfor %}
             </div>
