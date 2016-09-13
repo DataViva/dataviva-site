@@ -136,7 +136,7 @@ def create():
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
-            article.file = upload_helper.upload_s3_file(
+            article.file_url = upload_helper.upload_s3_file(
                 os.path.join(upload_folder, file_name),
                 os.path.join('scholar/', str(article.id), 'files/', 'article'),
                 {
@@ -168,7 +168,7 @@ def edit(id):
     form.authors.data = article.authors_str()
     form.keywords.data = article.keywords_str()
     form.abstract.data = article.abstract
-    article_url = article.file
+    article_url = article.file_url
 
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
@@ -210,7 +210,7 @@ def update(id):
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
-            article.file = upload_helper.upload_s3_file(
+            article.file_url = upload_helper.upload_s3_file(
                 os.path.join(upload_folder, file_name),
                 os.path.join('scholar/', str(article.id), 'files/', 'article'),
                 {
