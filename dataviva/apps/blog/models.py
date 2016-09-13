@@ -34,7 +34,7 @@ class Post(db.Model):
         return self.publish_date.strftime('%d/%m/%Y')
 
     def __repr__(self):
-        return '<Post %r>' % (self.title)
+        return '<Post %r>' % (self.title_pt)
 
 
 class Subject(db.Model):
