@@ -82,9 +82,9 @@ def admin_activate(status, status_value):
 
 
 def new_article_advise(article, server_domain):
-    url = server_domain + g.locale + '/' + mod.name + '/article/' + str(article.id)
-    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, url=url)
-    send_mail("Novo estudo [" + article.date_str() + "]", [admin_email], advise_message)
+    article_url = server_domain + g.locale + '/' + mod.name + '/article/' + str(article.id)
+    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, article_url=article_url)
+    send_mail("Novo Estudo", [admin_email], advise_message)
 
 
 @mod.route('/admin/article/new', methods=['GET'])
@@ -136,7 +136,7 @@ def create():
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
-            article.url = upload_helper.upload_s3_file(
+            article.file = upload_helper.upload_s3_file(
                 os.path.join(upload_folder, file_name),
                 os.path.join('scholar/', str(article.id), 'files/', 'article'),
                 {
@@ -168,7 +168,7 @@ def edit(id):
     form.authors.data = article.authors_str()
     form.keywords.data = article.keywords_str()
     form.abstract.data = article.abstract
-    article_url = article.url
+    article_url = article.file
 
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
@@ -210,7 +210,7 @@ def update(id):
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
-            article.url = upload_helper.upload_s3_file(
+            article.file = upload_helper.upload_s3_file(
                 os.path.join(upload_folder, file_name),
                 os.path.join('scholar/', str(article.id), 'files/', 'article'),
                 {
