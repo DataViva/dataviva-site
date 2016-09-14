@@ -166,20 +166,22 @@ def create():
         if form.dual_language.data:
             subjects_en = form.subject_en.data.replace(', ', ',').split(',')
             for name_pt, name_en in zip(subjects_pt, subjects_en):
-                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt).first()
                 if not subject:
                     subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = name_en
+                else:
+                    subject.name_en = name_en
                 publication.subjects.append(subject)
         else:
             for name_pt in subjects_pt:
-                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en='').first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt).first()
                 if not subject:
                     subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = ''
-                    publication.subjects.append(subject)
+                publication.subjects.append(subject)
 
         db.session.add(publication)
         db.session.flush()
@@ -273,20 +275,22 @@ def update(id):
         if form.dual_language.data:
             subjects_en = form.subject_en.data.replace(', ', ',').split(',')
             for name_pt, name_en in zip(subjects_pt, subjects_en):
-                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en=name_en).first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt).first()
                 if not subject:
                     subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = name_en
+                else:
+                    subject.name_en = name_en
                 publication.subjects.append(subject)
         else:
             for name_pt in subjects_pt:
-                subject = PublicationSubject.query.filter_by(name_pt=name_pt, name_en='').first()
+                subject = PublicationSubject.query.filter_by(name_pt=name_pt).first()
                 if not subject:
                     subject = PublicationSubject()
                     subject.name_pt = name_pt
                     subject.name_en = ''
-                    publication.subjects.append(subject)
+                publication.subjects.append(subject)
 
         publication.text_content_pt = upload_images_to_s3(
             form.text_content_pt.data, mod.name, publication.id)
