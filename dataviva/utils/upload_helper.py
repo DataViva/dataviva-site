@@ -3,6 +3,7 @@ import os
 import base64
 import shutil
 from boto3.s3.transfer import S3Transfer
+from botocore.exceptions import ClientError
 from config import AWS_ACCESS_KEY, AWS_SECRET_KEY, S3_BUCKET, UPLOAD_FOLDER
 import re
 import hashlib
@@ -72,31 +73,48 @@ def upload_images_to_s3(html, object_type, object_id):
     prefix = os.path.join(object_type, str(object_id), 'images/content/')
     soup = BeautifulSoup(html, 'html.parser')
     new_urls = []
-    all_keys = []
+
     for img in soup.findAll('img', src=True):
-        if img['src'].startswith(domain + prefix):
-            all_keys.append(img['src'].split(domain)[1])
         if img['src'].startswith(domain + 'uploads/'):
             new_urls.append(img['src'])
+
     for url in new_urls:
-        copy_source = {
-            'Bucket': S3_BUCKET,
-            'Key': url.split(domain)[1]
-        }
         new_key = prefix + url.split('/')[-1]
-        all_keys.append(new_key)
-        client.copy_object(
-            Bucket=S3_BUCKET, CopySource=copy_source, Key=new_key)
-        client.delete_object(
-            Bucket=S3_BUCKET, Key=copy_source['Key'])
-        html = re.sub(
-            url, 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + new_key, html)
+        try:
+            copy_source = {
+                'Bucket': S3_BUCKET,
+                'Key': url.split(domain)[1]
+            }
+            client.copy_object(
+                Bucket=S3_BUCKET, CopySource=copy_source, Key=new_key)
+            client.delete_object(
+                Bucket=S3_BUCKET, Key=copy_source['Key'])
+        except ClientError:
+            pass
+        finally:
+            html = re.sub(url, domain + new_key, html)
+    return html
+
+
+def clean_s3_folder(html_en, html_pt, object_type, object_id):
+    soup_pt = BeautifulSoup(html_pt, 'html.parser')
+    soup_en = BeautifulSoup(html_en, 'html.parser')
+    domain = 'https://' + S3_BUCKET + '.s3.amazonaws.com/'
+    prefix = os.path.join(object_type, str(object_id), 'images/content/')
+    imgs = []
+
+    for img in soup_pt.findAll('img', src=True):
+        if img['src'].startswith(domain + prefix):
+            imgs.append(img['src'].split(domain)[1])
+    for img in soup_en.findAll('img', src=True):
+        if img['src'].startswith(domain + prefix) and img['src'].split(domain)[1] not in imgs:
+            imgs.append(img['src'].split(domain)[1])
+
     uploaded_images = list_s3_files(prefix)
     if 'Contents' in uploaded_images:
         for image in uploaded_images['Contents']:
-            if image['Key'] not in all_keys:
+            if image['Key'] not in imgs:
                 delete_s3_file(image['Key'])
-    return html
 
 
 def save_file_temp(file, object_type, csrf_token):

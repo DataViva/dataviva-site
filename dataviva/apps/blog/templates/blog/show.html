@@ -4,8 +4,8 @@
 {% block facebook_metadata %}
     <meta property="og:image" content="http://dataviva.info/static/img/blog/blog_{{ post.id }}.png" />
     <meta property="og:url" content="{{ url_for('blog.show', id=post.id, _external=True, _scheme='http') }}" />
-    <meta property="og:title" content="{{ post.title }}" />
-    <meta property="og:description" content="{{post.text_call}}" />
+    <meta property="og:title" content="{{ post.title_pt }}" />
+    <meta property="og:description" content="{{post.text_call_pt}}" />
     <meta property="og:type" content="article" />
 {% endblock %}
 
@@ -18,7 +18,7 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item post single">
-            <h4>{{ post.title }}</h4>
+            <h4>{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</h4>
             <div class="meta">
                 <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
             </div>
@@ -35,7 +35,7 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            {{ post.text_content|safe }}
+            {{ post.text_content_en|safe if post.dual_language and g.locale == 'en' else post.text_content_pt|safe }}
         </div>
         <div class="clearfix"></div>
         <div class="related">
@@ -43,11 +43,11 @@
             <div class="row">
                 {% for post in read_more %}
                 <div class="col-xs-12 col-sm-6 col-lg-4 {% if loop.last %} hidden-sm hidden-md {% endif %} read-more">
-                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{ post.title }}">
+                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{ post.title_pt }}">
                         <img src="{{post.thumb}}" class="img-responsive">
                     </a>
                     <p>
-                        <a href="#" title="{{ post.title }}">{{ post.title }}</a>
+                        <a href="#" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</a>
                     </p>
                 </div>
             {% endfor %}
