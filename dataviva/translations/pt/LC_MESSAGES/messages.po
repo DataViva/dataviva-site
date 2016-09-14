@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-14 15:14-0300\n"
+"POT-Creation-Date: 2016-09-14 15:34-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -811,7 +811,7 @@ msgstr "Título"
 #: dataviva/apps/news/templates/news/_form.html:17
 #: dataviva/translations/dictionary.py:675
 msgid "Publish in English"
-msgstr "Publique em inglês"
+msgstr "Publicar em inglês"
 
 #: dataviva/apps/blog/templates/blog/_form.html:24
 #: dataviva/apps/blog/templates/blog/_form.html:58
