@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-08 16:07-0300\n"
+"POT-Creation-Date: 2016-09-14 14:52-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -761,25 +761,32 @@ msgstr ""
 #: dataviva/apps/blog/templates/blog/admin.html:31
 #: dataviva/apps/calls/templates/calls/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:12
+#: dataviva/apps/news/templates/news/_form.html:24
 #: dataviva/apps/news/templates/news/admin.html:30
 msgid "Title"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:17
+#: dataviva/apps/news/templates/news/_form.html:17
 #: dataviva/translations/dictionary.py:670
 msgid "Publish in English"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:24
-#: dataviva/apps/blog/templates/blog/_form.html:96
-#: dataviva/apps/blog/templates/blog/_form.html:117
+#: dataviva/apps/blog/templates/blog/_form.html:58
+#: dataviva/apps/blog/templates/blog/_form.html:101
+#: dataviva/apps/blog/templates/blog/_form.html:122
+#: dataviva/apps/news/templates/news/_form.html:24
+#: dataviva/apps/news/templates/news/_form.html:58
+#: dataviva/apps/news/templates/news/_form.html:101
+#: dataviva/apps/news/templates/news/_form.html:122
 #: dataviva/templates/include/header.html:60
 #: dataviva/translations/dictionary.py:548
 msgid "English"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:32
-#: dataviva/apps/news/templates/news/_form.html:28
+#: dataviva/apps/news/templates/news/_form.html:32
 msgid "Author"
 msgstr ""
 
@@ -789,48 +796,52 @@ msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:45
 #: dataviva/apps/blog/templates/blog/admin.html:34
-#: dataviva/apps/news/templates/news/_form.html:18
+#: dataviva/apps/news/templates/news/_form.html:45
 #: dataviva/apps/news/templates/news/admin.html:33
 msgid "Show in"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:53
+#: dataviva/apps/blog/templates/blog/_form.html:58
 #: dataviva/apps/help/templates/help/_form.html:11
 #: dataviva/apps/help/templates/help/admin.html:31
-#: dataviva/apps/news/templates/news/_form.html:42
+#: dataviva/apps/news/templates/news/_form.html:53
+#: dataviva/apps/news/templates/news/_form.html:58
 msgid "Category"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:58
-#: dataviva/apps/news/templates/news/_form.html:47
+#: dataviva/apps/blog/templates/blog/_form.html:63
+#: dataviva/apps/news/templates/news/_form.html:63
 msgid "Call Image"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:68
-#: dataviva/apps/news/templates/news/_form.html:57
+#: dataviva/apps/blog/templates/blog/_form.html:73
+#: dataviva/apps/news/templates/news/_form.html:73
 msgid "New Image"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:78
-#: dataviva/apps/news/templates/news/_form.html:67
+#: dataviva/apps/blog/templates/blog/_form.html:83
+#: dataviva/apps/news/templates/news/_form.html:83
 msgid "Complete Edition"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:89
-#: dataviva/apps/blog/templates/blog/_form.html:96
+#: dataviva/apps/blog/templates/blog/_form.html:94
+#: dataviva/apps/blog/templates/blog/_form.html:101
 #: dataviva/apps/calls/templates/calls/new.html:7
-#: dataviva/apps/news/templates/news/_form.html:77
+#: dataviva/apps/news/templates/news/_form.html:94
+#: dataviva/apps/news/templates/news/_form.html:101
 msgid "Call"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:104
-#: dataviva/apps/blog/templates/blog/_form.html:117
-#: dataviva/apps/news/templates/news/_form.html:84
+#: dataviva/apps/blog/templates/blog/_form.html:109
+#: dataviva/apps/blog/templates/blog/_form.html:122
+#: dataviva/apps/news/templates/news/_form.html:109
+#: dataviva/apps/news/templates/news/_form.html:122
 msgid "Content"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:105
-#: dataviva/apps/blog/templates/blog/_form.html:118
+#: dataviva/apps/blog/templates/blog/_form.html:110
+#: dataviva/apps/blog/templates/blog/_form.html:123
 #: dataviva/apps/blog/templates/blog/admin.html:41
 #: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/calls/templates/calls/admin.html:39
@@ -838,7 +849,8 @@ msgstr ""
 #: dataviva/apps/help/templates/help/_form.html:37
 #: dataviva/apps/help/templates/help/admin.html:40
 #: dataviva/apps/help/templates/help/edit.html:10
-#: dataviva/apps/news/templates/news/_form.html:85
+#: dataviva/apps/news/templates/news/_form.html:110
+#: dataviva/apps/news/templates/news/_form.html:123
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
 #: dataviva/apps/search/templates/search/admin.html:40
@@ -848,19 +860,20 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:106
-#: dataviva/apps/blog/templates/blog/_form.html:119
+#: dataviva/apps/blog/templates/blog/_form.html:111
+#: dataviva/apps/blog/templates/blog/_form.html:124
 #: dataviva/apps/help/templates/help/_form.html:28
 #: dataviva/apps/help/templates/help/_form.html:38
-#: dataviva/apps/news/templates/news/_form.html:86
+#: dataviva/apps/news/templates/news/_form.html:111
+#: dataviva/apps/news/templates/news/_form.html:124
 msgid "Preview "
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:128
+#: dataviva/apps/blog/templates/blog/_form.html:133
 #: dataviva/apps/calls/templates/calls/_form.html:21
 #: dataviva/apps/contact/templates/contact/index.html:68
 #: dataviva/apps/help/templates/help/_form.html:46
-#: dataviva/apps/news/templates/news/_form.html:94
+#: dataviva/apps/news/templates/news/_form.html:133
 #: dataviva/apps/search/templates/search/_form.html:177
 #: dataviva/templates/include/footer.html:67
 msgid "Send"
@@ -918,13 +931,13 @@ msgstr ""
 msgid "Deactivate"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/index.html:26
+#: dataviva/apps/blog/templates/blog/index.html:22
 #: dataviva/apps/news/templates/news/index.html:22
 msgid "Continue reading"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/index.html:27
-#: dataviva/apps/blog/templates/blog/show.html:29
+#: dataviva/apps/blog/templates/blog/index.html:23
+#: dataviva/apps/blog/templates/blog/show.html:23
 #: dataviva/apps/news/templates/news/index.html:23
 #: dataviva/apps/news/templates/news/show.html:22
 msgid "By"
@@ -946,12 +959,12 @@ msgstr ""
 msgid "Visualize"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/show.html:36
+#: dataviva/apps/blog/templates/blog/show.html:30
 #: dataviva/apps/news/templates/news/show.html:29
 msgid "Tweet"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/show.html:52
+#: dataviva/apps/blog/templates/blog/show.html:42
 #: dataviva/apps/news/templates/news/show.html:41
 msgid "See also"
 msgstr ""
@@ -2297,7 +2310,7 @@ msgstr ""
 msgid "students enrolled in the municipality"
 msgstr ""
 
-#: dataviva/apps/news/templates/news/_form.html:33
+#: dataviva/apps/news/templates/news/_form.html:37
 msgid "News Date"
 msgstr ""
 
