@@ -7279,4 +7279,3 @@ msgstr "com"
 
 #~ msgid "Highlights"
 #~ msgstr "Destaques"
-
