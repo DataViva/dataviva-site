@@ -121,11 +121,21 @@ def admin_activate(status, status_value):
 @required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
+    subjects = PublicationSubject.query.all()
+
     if ids:
         publications = Publication.query.filter(Publication.id.in_(ids)).all()
         for publication in publications:
-            delete_s3_folder(os.path.join(mod.name, str(publication.id)))
+            try:
+                delete_s3_folder(os.path.join(mod.name, str(publication.id)))
+            except Exception:
+                pass
             db.session.delete(publication)
+            db.session.flush()
+
+            for subject in subjects:
+                if subject.publications.count() == 0:
+                    db.session.delete(subject)
 
         db.session.commit()
         return u"Notícia(s) excluída(s) com sucesso!", 200
