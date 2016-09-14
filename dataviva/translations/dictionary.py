@@ -648,6 +648,11 @@ def dictionary():
         # contact
         "contact_message": gettext("Your message has been sent successfully. We will soon get back to you."),
         "thank_you": gettext("Thank you"),
+        "form_contact_name": gettext("Please enter your name."),
+        "form_contact_email_required": gettext("Please enter your email address."),
+        "form_contact_email": gettext("Please enter a valid email address."),
+        "form_contact_subject": gettext("Please enter subject."),
+        "form_contact_message": gettext("Please enter message."),
 
         # session
         "email_already_exists": gettext("That e-mail is already registered."),
@@ -668,6 +673,9 @@ def dictionary():
         "file_too_large": gettext("File too large."),
         "summernote_placeholder": gettext("Your publication content goes here"),
         "publish_in_english": gettext("Publish in English"),
+
+        # scholar
+        "article_submission": gettext("Thank you! Your study was successfully submitted and will be reviewed by the DataViva team. In up to ten days you will receive a feedback regarding its publication on the website!"),
 
         # errors
         "500": gettext("Sorry, an unexpected error has occured. Please try again"),

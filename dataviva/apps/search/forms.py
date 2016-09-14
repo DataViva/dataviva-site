@@ -19,7 +19,7 @@ class RegistrationForm(Form):
     ])
 
     description_pt = TextField('description', validators=[
-        validators.Required(u"Por favor, insira a pergunta em inglês."),
+        validators.Required(u"Por favor, insira a pergunta em português."),
         validators.Length(max=400)
     ])
 

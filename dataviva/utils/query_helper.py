@@ -2,6 +2,7 @@ import re
 from dataviva import db
 from sqlalchemy import func, desc, or_
 from dataviva.api.attrs.models import bra_pr, Bra
+from dataviva.translations.dictionary import dictionary
 
 SHOW='show'
 SHOW2='.show.'
@@ -49,6 +50,18 @@ def query_table(table, columns=[], filters=[], groups=[], limit=0, order=None, s
     else:
         column_names = [c.key for c in columns]
         data = [dict(zip(column_names, vals)) for vals in query.all()]
+    
+    if  'bra_id' in data['headers']:
+        index_bra = data['headers'].index('bra_id')
+        data['headers'].insert(0, dictionary()['bra'])
+        
+        location_name = {}
+        for location in Bra.query.all():
+            location_name[location.id] = location.name()
+
+        for i, row  in enumerate(data['data']):
+            data['data'][i].insert(0, location_name[row[index_bra]])  
+                              
     return data
 
 def _show_filters_to_add(column, value, table, colname):

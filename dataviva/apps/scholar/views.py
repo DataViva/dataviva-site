@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, json
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory
 from dataviva.apps.general.views import get_locale
-from dataviva import app, db
+from dataviva.translations.dictionary import dictionary
+from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
 from forms import RegistrationForm
@@ -9,6 +10,7 @@ from sqlalchemy import desc
 from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
+from dataviva.utils.send_mail import send_mail
 import os
 import shutil
 import fnmatch
@@ -32,11 +34,6 @@ def pull_lang_code(endpoint, values):
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
-
-
-def allowed_file(filename):
-    return '.' in filename and \
-        filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @mod.route('/', methods=['GET'])
@@ -84,9 +81,14 @@ def admin_activate(status, status_value):
     return message, 200
 
 
+def new_article_advise(article, server_domain):
+    article_url = server_domain + g.locale + '/' + mod.name + '/article/' + str(article.id)
+    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, article_url=article_url)
+    send_mail("Novo Estudo", [admin_email], advise_message)
+
+
 @mod.route('/admin/article/new', methods=['GET'])
 @login_required
-@required_roles(1)
 def new():
     form = RegistrationForm()
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
@@ -94,7 +96,6 @@ def new():
 
 @mod.route('/admin/article/new', methods=['POST'])
 @login_required
-@required_roles(1)
 def create():
     csrf_token = request.form.get('csrf_token')
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
@@ -135,7 +136,7 @@ def create():
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
-            article.url = upload_helper.upload_s3_file(
+            article.file_url = upload_helper.upload_s3_file(
                 os.path.join(upload_folder, file_name),
                 os.path.join('scholar/', str(article.id), 'files/', 'article'),
                 {
@@ -148,9 +149,11 @@ def create():
 
         db.session.commit()
 
-        message = u'Muito obrigado! Seu estudo foi submetido com sucesso e será analisado pela equipe do DataViva. \
-                    Em até 15 dias você receberá um retorno sobre sua publicação no site!'
+        new_article_advise(article, request.url_root)
+
+        message = dictionary()["article_submission"]
         flash(message, 'success')
+
         return redirect(url_for('scholar.index'))
 
 
@@ -165,7 +168,7 @@ def edit(id):
     form.authors.data = article.authors_str()
     form.keywords.data = article.keywords_str()
     form.abstract.data = article.abstract
-    article_url = article.url
+    article_url = article.file_url
 
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
@@ -207,7 +210,7 @@ def update(id):
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
-            article.url = upload_helper.upload_s3_file(
+            article.file_url = upload_helper.upload_s3_file(
                 os.path.join(upload_folder, file_name),
                 os.path.join('scholar/', str(article.id), 'files/', 'article'),
                 {
@@ -256,7 +259,6 @@ def all():
 
 @mod.route('/admin/article/upload', methods=['POST'])
 @login_required
-@required_roles(1)
 def upload():
 
     csrf_token = request.values['csrf_token']
@@ -281,7 +283,6 @@ def upload():
 
 @mod.route('/admin/article/delete', methods=['DELETE'])
 @login_required
-@required_roles(1)
 def delete():
     csrf_token = request.data
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
@@ -297,7 +298,6 @@ def delete():
 # serve static files on server
 @mod.route('/admin/file/<string:csrf_token1>/<string:csrf_token2>', methods=['GET'])
 @login_required
-@required_roles(1)
 def get_file(csrf_token1, csrf_token2):
     csrf_token = csrf_token1 + '##' + csrf_token2
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')

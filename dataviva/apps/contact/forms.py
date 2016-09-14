@@ -1,22 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, TextAreaField, validators, ValidationError
-
-
-class NumberOfWords(object):
-    def __init__(self, max, message=None):
-        self.max = max
-        if not message:
-            message = u"Campo deve possuir no máximo %d palavras." % (max)
-        self.message = message
-
-    def __call__(self, form, field):
-        if len(field.data.split()) > self.max:
-            raise ValidationError(self.message)
+from wtforms import TextField, TextAreaField, validators
 
 
 class ContactForm(Form):
-    name = TextField('name', [validators.Required(u"Por favor, insira o seu nome."), validators.Length(max=100)])
-    email = TextField('email', [validators.Required(u"Por favor, insira o seu e-mail."), NumberOfWords(max=1)])
-    subject = TextField('subject', [validators.Length(max=200)])
-    message = TextAreaField('message', [validators.Required(u"Por favor, insira a mensagem."), NumberOfWords(max=250)])
+    name = TextField('name', validators=[validators.Required(message="form_contact_name"), validators.Length(max=50)])
+    email = TextField('email', validators=[validators.Required(message="form_contact_email_required"), validators.Email(message="form_contact_email")])
+    subject = TextField('subject', validators=[validators.Required(message="form_contact_subject"), validators.Length(max=50)])
+    message = TextAreaField('message', validators=[validators.Required(message="form_contact_message"), validators.Length(max=500)])
