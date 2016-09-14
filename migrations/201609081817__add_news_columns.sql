@@ -1,0 +1,5 @@
+ALTER TABLE `dataviva`.`news_publication` 
+ADD COLUMN `title_en` VARCHAR(400) NULL DEFAULT NULL,
+ADD COLUMN `text_call_en` VARCHAR(500) NULL DEFAULT NULL,
+ADD COLUMN `text_content_en` LONGTEXT NULL DEFAULT NULL,
+ADD COLUMN `dual_language` TINYINT(1) NULL DEFAULT '0';
