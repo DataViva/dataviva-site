@@ -123,6 +123,9 @@
   color: #666;
   font-size: 13px;
 }
+.blog .post p.data > a {
+  text-transform: none;
+}
 .blog .post p.data {
   color: #5a9dc4;
   text-transform: uppercase;
@@ -182,7 +185,6 @@
   }
 }
 
-
 @media (max-width: 1199px) {
   .blog .read-more {
       text-align: center;
@@ -230,6 +232,6 @@
     text-align: center;
 }
 
-.other-lang-field {
+.dual-lang-field {
   display: none;
 }

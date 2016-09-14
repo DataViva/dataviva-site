@@ -18,9 +18,17 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item post single">
-            <h4>{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</h4>
+            <h4 name="content-pt" class="dual-lang-field">{{ post.title_pt|safe }}</h4>
+            {% if post.dual_language %}
+                <h4 name="content-en" class="dual-lang-field">{{ post.title_en|safe }}</h4>
+            {% endif %}
             <div class="meta">
-                <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
+                <p class="data">
+                    {% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}
+                {% if post.dual_language %}
+                    <br><a id="change-language" class="data">{{ 'Read in English' if g.locale == 'pt' else 'Ler em português' }}</a>
+                {% endif %}
+                </p>      
             </div>
             <ul class="social">
                 <li>
@@ -35,7 +43,10 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            {{ post.text_content_en|safe if post.dual_language and g.locale == 'en' else post.text_content_pt|safe }}
+            <div name="content-pt" class="dual-lang-field">{{ post.text_content_pt|safe }}</div>
+            {% if post.dual_language %}
+            <div name="content-en" class="dual-lang-field">{{ post.text_content_en|safe }}</div>
+            {% endif %}
         </div>
         <div class="clearfix"></div>
         <div class="related">
