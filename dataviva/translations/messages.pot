@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-14 14:52-0300\n"
+"POT-Creation-Date: 2016-09-09 16:10-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -757,91 +757,63 @@ msgid "All"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:12
-#: dataviva/apps/blog/templates/blog/_form.html:24
 #: dataviva/apps/blog/templates/blog/admin.html:31
 #: dataviva/apps/calls/templates/calls/admin.html:31
 #: dataviva/apps/news/templates/news/_form.html:12
-#: dataviva/apps/news/templates/news/_form.html:24
 #: dataviva/apps/news/templates/news/admin.html:30
 msgid "Title"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:17
-#: dataviva/apps/news/templates/news/_form.html:17
-#: dataviva/translations/dictionary.py:670
-msgid "Publish in English"
-msgstr ""
-
-#: dataviva/apps/blog/templates/blog/_form.html:24
-#: dataviva/apps/blog/templates/blog/_form.html:58
-#: dataviva/apps/blog/templates/blog/_form.html:101
-#: dataviva/apps/blog/templates/blog/_form.html:122
-#: dataviva/apps/news/templates/news/_form.html:24
-#: dataviva/apps/news/templates/news/_form.html:58
-#: dataviva/apps/news/templates/news/_form.html:101
-#: dataviva/apps/news/templates/news/_form.html:122
-#: dataviva/templates/include/header.html:60
-#: dataviva/translations/dictionary.py:548
-msgid "English"
-msgstr ""
-
-#: dataviva/apps/blog/templates/blog/_form.html:32
-#: dataviva/apps/news/templates/news/_form.html:32
-msgid "Author"
-msgstr ""
-
-#: dataviva/apps/blog/templates/blog/_form.html:37
-msgid "Post Date"
-msgstr ""
-
-#: dataviva/apps/blog/templates/blog/_form.html:45
 #: dataviva/apps/blog/templates/blog/admin.html:34
-#: dataviva/apps/news/templates/news/_form.html:45
+#: dataviva/apps/news/templates/news/_form.html:18
 #: dataviva/apps/news/templates/news/admin.html:33
 msgid "Show in"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:53
-#: dataviva/apps/blog/templates/blog/_form.html:58
+#: dataviva/apps/blog/templates/blog/_form.html:27
+#: dataviva/apps/news/templates/news/_form.html:28
+msgid "Author"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_form.html:32
+msgid "Post Date"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_form.html:41
 #: dataviva/apps/help/templates/help/_form.html:11
 #: dataviva/apps/help/templates/help/admin.html:31
-#: dataviva/apps/news/templates/news/_form.html:53
-#: dataviva/apps/news/templates/news/_form.html:58
+#: dataviva/apps/news/templates/news/_form.html:42
 msgid "Category"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:63
-#: dataviva/apps/news/templates/news/_form.html:63
+#: dataviva/apps/blog/templates/blog/_form.html:46
+#: dataviva/apps/news/templates/news/_form.html:47
 msgid "Call Image"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:73
-#: dataviva/apps/news/templates/news/_form.html:73
+#: dataviva/apps/blog/templates/blog/_form.html:56
+#: dataviva/apps/news/templates/news/_form.html:57
 msgid "New Image"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:83
-#: dataviva/apps/news/templates/news/_form.html:83
+#: dataviva/apps/blog/templates/blog/_form.html:66
+#: dataviva/apps/news/templates/news/_form.html:67
 msgid "Complete Edition"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:94
-#: dataviva/apps/blog/templates/blog/_form.html:101
+#: dataviva/apps/blog/templates/blog/_form.html:76
 #: dataviva/apps/calls/templates/calls/new.html:7
-#: dataviva/apps/news/templates/news/_form.html:94
-#: dataviva/apps/news/templates/news/_form.html:101
+#: dataviva/apps/news/templates/news/_form.html:77
 msgid "Call"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:109
-#: dataviva/apps/blog/templates/blog/_form.html:122
-#: dataviva/apps/news/templates/news/_form.html:109
-#: dataviva/apps/news/templates/news/_form.html:122
+#: dataviva/apps/blog/templates/blog/_form.html:83
+#: dataviva/apps/news/templates/news/_form.html:84
 msgid "Content"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:110
-#: dataviva/apps/blog/templates/blog/_form.html:123
+#: dataviva/apps/blog/templates/blog/_form.html:84
 #: dataviva/apps/blog/templates/blog/admin.html:41
 #: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/calls/templates/calls/admin.html:39
@@ -849,8 +821,7 @@ msgstr ""
 #: dataviva/apps/help/templates/help/_form.html:37
 #: dataviva/apps/help/templates/help/admin.html:40
 #: dataviva/apps/help/templates/help/edit.html:10
-#: dataviva/apps/news/templates/news/_form.html:110
-#: dataviva/apps/news/templates/news/_form.html:123
+#: dataviva/apps/news/templates/news/_form.html:85
 #: dataviva/apps/news/templates/news/admin.html:40
 #: dataviva/apps/news/templates/news/edit.html:9
 #: dataviva/apps/search/templates/search/admin.html:40
@@ -860,20 +831,18 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:111
-#: dataviva/apps/blog/templates/blog/_form.html:124
+#: dataviva/apps/blog/templates/blog/_form.html:85
 #: dataviva/apps/help/templates/help/_form.html:28
 #: dataviva/apps/help/templates/help/_form.html:38
-#: dataviva/apps/news/templates/news/_form.html:111
-#: dataviva/apps/news/templates/news/_form.html:124
+#: dataviva/apps/news/templates/news/_form.html:86
 msgid "Preview "
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_form.html:133
+#: dataviva/apps/blog/templates/blog/_form.html:93
 #: dataviva/apps/calls/templates/calls/_form.html:21
-#: dataviva/apps/contact/templates/contact/index.html:68
+#: dataviva/apps/contact/templates/contact/index.html:67
 #: dataviva/apps/help/templates/help/_form.html:46
-#: dataviva/apps/news/templates/news/_form.html:133
+#: dataviva/apps/news/templates/news/_form.html:94
 #: dataviva/apps/search/templates/search/_form.html:177
 #: dataviva/templates/include/footer.html:67
 msgid "Send"
@@ -1011,25 +980,25 @@ msgid ""
 "DataViva."
 msgstr ""
 
-#: dataviva/apps/contact/views.py:54 dataviva/translations/dictionary.py:649
+#: dataviva/apps/contact/views.py:61 dataviva/translations/dictionary.py:649
 msgid "Your message has been sent successfully. We will soon get back to you."
 msgstr ""
 
 #: dataviva/apps/contact/templates/contact/index.html:17
-#: dataviva/apps/contact/templates/contact/index.html:33
+#: dataviva/apps/contact/templates/contact/index.html:32
 #: dataviva/templates/about/ask/index.html:57
 #: dataviva/templates/include/header.html:7
 #: dataviva/translations/dictionary.py:547
 msgid "Contact"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:34
+#: dataviva/apps/contact/templates/contact/index.html:33
 msgid ""
 "Got any questions or want to send a suggestion? Contact the DataViva team"
 " using the form below:"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:39
+#: dataviva/apps/contact/templates/contact/index.html:38
 #: dataviva/apps/help/templates/help/tab-classifications-basic-courses.html:12
 #: dataviva/apps/help/templates/help/tab-classifications-industries.html:12
 #: dataviva/apps/help/templates/help/tab-classifications-locations.html:13
@@ -1047,11 +1016,11 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:53
+#: dataviva/apps/contact/templates/contact/index.html:52
 msgid "Subject"
 msgstr ""
 
-#: dataviva/apps/contact/templates/contact/index.html:60
+#: dataviva/apps/contact/templates/contact/index.html:59
 #: dataviva/templates/include/footer.html:59
 #: dataviva/templates/include/footer.html:61
 #: dataviva/translations/dictionary.py:600
@@ -1120,7 +1089,7 @@ msgid "You need to be logged in to star visualizations."
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2932
+#: dataviva/apps/embed/templates/embed/embed.html:2999
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
@@ -1128,32 +1097,32 @@ msgid ""
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2934
+#: dataviva/apps/embed/templates/embed/embed.html:3001
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid "through more than 100 million interactive visualizations."
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:60
+#: dataviva/apps/embed/templates/embed/embed.html:63
 msgid "Refresh the Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:61
+#: dataviva/apps/embed/templates/embed/embed.html:64
 msgid "Download this Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:62
+#: dataviva/apps/embed/templates/embed/embed.html:65
 msgid "Save this Visualization"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:63
+#: dataviva/apps/embed/templates/embed/embed.html:66
 msgid "Share/Embed"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:64
+#: dataviva/apps/embed/templates/embed/embed.html:67
 msgid "Show Visualization Tutorial"
 msgstr ""
 
-#: dataviva/apps/embed/templates/embed/embed.html:66
+#: dataviva/apps/embed/templates/embed/embed.html:69
 msgid "Show/Hide Controls"
 msgstr ""
 
@@ -2310,7 +2279,7 @@ msgstr ""
 msgid "students enrolled in the municipality"
 msgstr ""
 
-#: dataviva/apps/news/templates/news/_form.html:37
+#: dataviva/apps/news/templates/news/_form.html:33
 msgid "News Date"
 msgstr ""
 
@@ -4951,6 +4920,11 @@ msgstr ""
 msgid "or"
 msgstr ""
 
+#: dataviva/templates/include/header.html:60
+#: dataviva/translations/dictionary.py:548
+msgid "English"
+msgstr ""
+
 #: dataviva/templates/include/header.html:61
 #: dataviva/translations/dictionary.py:549
 msgid "Portuguese"
@@ -6262,81 +6236,108 @@ msgstr ""
 msgid "Thank you"
 msgstr ""
 
+#: dataviva/translations/dictionary.py:651
+msgid "Please enter your name."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:652
+msgid "Please enter your email address."
+msgstr ""
+
 #: dataviva/translations/dictionary.py:653
-msgid "That e-mail is already registered."
+msgid "Please enter a valid email address."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:654
-msgid "Please check your inbox at"
+msgid "Please enter subject."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:655
-msgid "Invalid email or password."
+msgid "Please enter message."
 msgstr ""
 
-#: dataviva/translations/dictionary.py:656
-msgid "Confirmation pending."
+#: dataviva/translations/dictionary.py:658
+msgid "That e-mail is already registered."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:659
-msgid "Profile successfully updated!"
+msgid "Please check your inbox at"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:660
-msgid "Let us know more about you. Please complete your profile."
+msgid "Invalid email or password."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:661
-msgid "Password successfully updated!"
-msgstr ""
-
-#: dataviva/translations/dictionary.py:662
-msgid "The current password is invalid."
-msgstr ""
-
-#: dataviva/translations/dictionary.py:663
-msgid "A new password has been sent to you! Please check you inbox!"
+msgid "Confirmation pending."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:664
-msgid "We couldn't find any user with the informed email address."
+msgid "Profile successfully updated!"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:665
+msgid "Let us know more about you. Please complete your profile."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:666
+msgid "Password successfully updated!"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:667
-msgid "characters left"
+msgid "The current password is invalid."
 msgstr ""
 
 #: dataviva/translations/dictionary.py:668
-msgid "File too large."
+msgid "A new password has been sent to you! Please check you inbox!"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:669
-msgid "Your publication content goes here"
+msgid "We couldn't find any user with the informed email address."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:672
+msgid "characters left"
 msgstr ""
 
 #: dataviva/translations/dictionary.py:673
+msgid "File too large."
+msgstr ""
+
+#: dataviva/translations/dictionary.py:674
+msgid "Your publication content goes here"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:677
+msgid ""
+"Thank you! Your study was successfully submitted and will be reviewed by "
+"the DataViva team. In up to ten days you will receive a feedback "
+"regarding its publication on the website!"
+msgstr ""
+
+#: dataviva/translations/dictionary.py:680
 msgid "Sorry, an unexpected error has occured. Please try again"
 msgstr ""
 
-#: dataviva/translations/dictionary.py:682 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:689 dataviva/utils/jinja_helpers.py:147
 msgid "Trillion"
 msgid_plural "Trillions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:683 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:690 dataviva/utils/jinja_helpers.py:147
 msgid "Billion"
 msgid_plural "Billions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:684 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:691 dataviva/utils/jinja_helpers.py:147
 msgid "Million"
 msgid_plural "Millions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: dataviva/translations/dictionary.py:685 dataviva/utils/jinja_helpers.py:147
+#: dataviva/translations/dictionary.py:692 dataviva/utils/jinja_helpers.py:147
 msgid "Thousand"
 msgid_plural "Thousands"
 msgstr[0] ""
@@ -6411,4 +6412,3 @@ msgstr ""
 msgctxt "9"
 msgid "th"
 msgstr ""
-
