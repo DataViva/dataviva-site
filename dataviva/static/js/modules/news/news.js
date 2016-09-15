@@ -1,9 +1,9 @@
 var change_language = function(current_cnt, current_btn, hidden_cnt, hidden_btn, duration) {
 	if (current_cnt.is(':visible')) {
 		current_cnt.hide();
-		current_btn.removeClass('active').attr('disabled', true);
+		current_btn.removeClass('active');
 		hidden_cnt.fadeToggle(duration);
-		hidden_btn.addClass('active').attr('disabled', false);
+		hidden_btn.addClass('active');
 	}
 }
 
@@ -16,6 +16,7 @@ $(function() {
 	var fade_duration = 800;
 
 	$('#to-pt').on('click', function() {
+		console.log(1);
 		change_language(
 			$("[name='content-en']"),
 			$('#to-en'),

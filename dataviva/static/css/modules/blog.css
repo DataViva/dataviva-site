@@ -137,6 +137,7 @@
 .blog .post p.data a.active {
   font-weight: bold;
   cursor: default;
+  pointer-events: none;
 }
 .blog .post h4,
 .blog .post p {

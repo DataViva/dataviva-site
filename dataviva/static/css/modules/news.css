@@ -126,6 +126,7 @@
 .news .publication p.data a.active {
   font-weight: bold;
   cursor: default;
+  pointer-events: none;
 }
 .news .publication h4,
 .news .publication p {
