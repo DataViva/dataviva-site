@@ -25,7 +25,9 @@
                 <p class="data">
                 {% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}
                 {% if publication.dual_language %}
-                    <br><a id="change-language" class="data">{{ 'Read in English' if g.locale == 'pt' else 'Ler em português' }}</a>
+                    <br>
+                    <a id="to-en" class="{{ 'active' if g.locale == 'en' }}" {{ 'disabled' if g.locale == 'en' }}>English</a> |
+                    <a id="to-pt" class="{{ 'active' if g.locale == 'pt' }}" {{ 'disabled' if g.locale == 'pt' }}>Português</a>
                 {% endif %}
                 </p>
             </div>
