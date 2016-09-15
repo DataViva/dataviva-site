@@ -41,10 +41,10 @@
                 <li><a href="{{ url_for('partners.index') }}">{% trans %}PARTNERS{% endtrans %}</a></li>
                 <li><a href="{{ url_for('help.index') }}">{% trans %}HELP{% endtrans %}</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right visible-md visible-lg form-inline">
+            <ul class="nav navbar-nav navbar-right form-inline">
                 <li class="form-group">
                     {% if not g.user.is_authenticated %}
-                        <a class="login" data-toggle="modal" data-target="#dataviva-login">{% trans %}Login{% endtrans %}</a>
+                        <a class="login" data-toggle="modal" data-target="#dataviva-login"><i class="fa fa-sign-in m-r-xs"></i>{% trans %}Login{% endtrans %}</a>
                         {% trans %}or{% endtrans %}
                         <button class="btn btn-primary m-l m-r" data-toggle="modal" data-target="#dataviva-signup">{% trans %}Sign Up{% endtrans %}</button>
                 </li>
@@ -68,11 +68,11 @@
                         </li>
                     {% endif %}
                 <li class="form-group">
-                    <select class="form-control visible-lg" name="language-selector">
+                    <select class="form-control visible-lg visible-md" name="language-selector">
                         <option value="en">{% trans %}English{% endtrans %}</option>
                         <option value="pt" selected="selected">{% trans %}Portuguese{% endtrans %}</option>
                     </select>
-                    <select class="form-control visible-md" name="language-selector">
+                    <select class="form-control visible-sm visible-xs" name="language-selector">
                         <option value="en">en</option>
                         <option value="pt" selected="selected">pt</option>
                     </select>
