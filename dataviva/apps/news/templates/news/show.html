@@ -17,9 +17,17 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item publication single">
-            <h4>{{ publication.title_en|safe if publication.dual_language and g.locale == 'en' else publication.title_pt|safe }}</h4>
+            <h4 name="content-pt" class="dual-lang-field">{{ publication.title_pt|safe }}</h4>
+            {% if publication.dual_language %}
+                <h4 name="content-en" class="dual-lang-field">{{ publication.title_en|safe }}</h4>
+            {% endif %}
             <div class="meta">
-                <p class="data">{% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}</p>
+                <p class="data">
+                {% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}
+                {% if publication.dual_language %}
+                    <br><a id="change-language" class="data">{{ 'Read in English' if g.locale == 'pt' else 'Ler em português' }}</a>
+                {% endif %}
+                </p>
             </div>
             <ul class="social">
                 <li>
@@ -34,8 +42,10 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            {{ publication.text_content_en|safe if publication.dual_language and g.locale == 'en' else publication.text_content_pt|safe }}
-        </div>
+            <div name="content-pt" class="dual-lang-field">{{ publication.text_content_pt|safe }}</div>
+            {% if publication.dual_language %}
+                <div name="content-en" class="dual-lang-field">{{ publication.text_content_en|safe }}</div>
+            {% endif %}        </div>
         <div class="clearfix"></div>
         <div class="related">
             <h4>{% trans %}See also{% endtrans %}</h4>
