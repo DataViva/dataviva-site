@@ -123,12 +123,13 @@
   color: #666;
   font-size: 13px;
 }
-.blog .post p.data > a {
-  text-transform: none;
-}
 .blog .post p.data {
   color: #5a9dc4;
   text-transform: uppercase;
+}
+.blog .post p.data > a {
+  text-transform: none;
+  color: inherit;
 }
 .blog .post h4,
 .blog .post p {
