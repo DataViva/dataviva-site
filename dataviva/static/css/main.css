@@ -879,12 +879,14 @@ table.data-blue thead th small {
 /*  SIGNIN SIGUNP LOGIN FORGOT PASS */
 .btn-google:hover,
 .btn-facebook:hover,
-.btn-twitter:hover {
+.btn-twitter:hover,
+.btn-github:hover {
   color: white;
 }
 .btn-google,
 .btn-facebook,
-.btn-twitter {
+.btn-twitter,
+.btn-github {
   display: block;
   color: rgba(255,255,255,.9);
   margin-bottom: 15px;
@@ -895,6 +897,8 @@ table.data-blue thead th small {
 .btn-facebook:hover{ background-color: #22407F; }
 .btn-twitter{ background-color: #55ACEE; }
 .btn-twitter:hover{ background-color: #3C93D5; }
+.btn-github{ background-color: #4C4B4B; }
+.btn-github:hover{ background-color: #010101; }
 
 h1.login-title {
   padding: 20px 45px 0;
