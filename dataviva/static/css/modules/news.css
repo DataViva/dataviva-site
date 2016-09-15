@@ -116,6 +116,10 @@
   color: #5a9dc4;
   text-transform: uppercase;
 }
+.news .publication p.data > a {
+  text-transform: none;
+  color: inherit;
+}
 .news .publication h4,
 .news .publication p {
   margin: 0 0 10px;
