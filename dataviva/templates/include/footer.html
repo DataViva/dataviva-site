@@ -38,7 +38,6 @@
             <li><a class="visible-sm btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">Entre em contato</a></li>
         </ul>
     </div>
-    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
     <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
         <h3>{%trans%}Contact Us{%endtrans%}</h3>
         <form method="post" id="contact-form" action="{{ url_for('contact.create') }}" class="form-horizontal">
@@ -69,5 +68,30 @@
             </div>
         </form>
     </div>
+    <div class="col-sm-4 col-md-4 col-md-offset-2 col-lg-offset-2">
+        <ul class="list-inline">
+            <li>
+                <a class="btn btn-block btn-social btn-facebook" href="http://www.facebook.com/dataviva" target="blank" title="Facebook" >
+                    <span class="fa fa-facebook"></span>
+                </a>
+            </li>
+            <li>
+                <a class="btn btn-block btn-social btn-twitter" href="https://twitter.com/_dataviva" target="blank" title="Twitter">
+                    <span class="fa fa-twitter"></span>
+                </a>
+            </li>  
+            <li>
+                <a class="btn btn-md btn-google" href="https://www.youtube.com/channel/UCr3LFrH_7cI_PYSgnDXV7KA" target="blank" title="Youtube">
+                    <span class="fa fa-youtube"></span> 
+                </a>
+            </li>  
+            <li>
+                <a class="btn btn-md btn-github" href="https://github.com/DataViva" target="blank" title="GitHub">
+                    <span class="fa fa-github"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('general.contact') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
     </div>
 </footer>
