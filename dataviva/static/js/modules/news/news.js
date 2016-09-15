@@ -16,7 +16,6 @@ $(function() {
 	var fade_duration = 800;
 
 	$('#to-pt').on('click', function() {
-		console.log(1);
 		change_language(
 			$("[name='content-en']"),
 			$('#to-en'),
