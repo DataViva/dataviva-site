@@ -1,19 +1,37 @@
+var change_language = function(current_cnt, current_btn, hidden_cnt, hidden_btn, duration) {
+	if (current_cnt.is(':visible')) {
+		current_cnt.hide();
+		current_btn.removeClass('active').attr('disabled', true);
+		hidden_cnt.fadeToggle(duration);
+		hidden_btn.addClass('active').attr('disabled', false);
+	}
+}
+
 $(function() {
 	if (dataviva.language == 'en' && $("[name='content-en']").length)
 		$("[name='content-en']").fadeToggle()
 	else
 		$("[name='content-pt']").fadeToggle();
 
-	$('#change-language').on('click', function() {
-		var fade_duration = 800;
-		if ($("[name='content-pt']").is(':visible')) {
-			$("[name='content-pt']").hide();
-			$("[name='content-en']").fadeToggle(fade_duration);
-			$('#change-language').html('Ler em português');
-		} else {
-			$("[name='content-en']").hide();
-			$("[name='content-pt']").fadeToggle(fade_duration);
-			$('#change-language').html('Read in English');
-		}
+	var fade_duration = 800;
+
+	$('#to-pt').on('click', function() {
+		change_language(
+			$("[name='content-en']"),
+			$('#to-en'),
+			$("[name='content-pt']"),
+			$('#to-pt'),
+			fade_duration
+		);
+	});
+
+	$('#to-en').on('click', function() {
+		change_language(
+			$("[name='content-pt']"),
+			$('#to-pt'),
+			$("[name='content-en']"),
+			$('#to-en'),
+			fade_duration
+		);
 	});
 });

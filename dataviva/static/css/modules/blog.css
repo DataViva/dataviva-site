@@ -127,15 +127,21 @@
   color: #5a9dc4;
   text-transform: uppercase;
 }
-.blog .post p.data > a {
+.blog .post p.data a {
   text-transform: none;
   color: inherit;
+}
+.blog .post p.data a:not(.active):hover {
+  color: #23527c;
+}
+.blog .post p.data a.active {
+  font-weight: bold;
+  cursor: default;
 }
 .blog .post h4,
 .blog .post p {
   margin: 0 0 10px;
 }
-
 .blog .post:before {
   display: none;
 }
