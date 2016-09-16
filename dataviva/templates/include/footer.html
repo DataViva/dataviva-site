@@ -38,11 +38,10 @@
             <li><h3>{% trans %}Support{% endtrans %}</h3></li>
             <li><a href="{{ url_for('help.index') }}" title="Ajuda">{% trans %}Help{% endtrans %}</a></li>
             <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">{% trans %}Virtual Tour{% endtrans %}</a></li>
-            <li><a class="visible-sm btn btn-white" href="{{ url_for('contact.create') }}" title="Entre em contato">Entre em contato</a></li>
+            <li><a href="{{ url_for('contact.create') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a></li>
         </ul>
     </div>
-   
-    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('contact.create') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
+    
     <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
         <h3>{%trans%}Contact Us{%endtrans%}</h3>
 
