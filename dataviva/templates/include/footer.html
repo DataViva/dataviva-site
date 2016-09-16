@@ -38,11 +38,12 @@
             <li><h3>{% trans %}Support{% endtrans %}</h3></li>
             <li><a href="{{ url_for('help.index') }}" title="Ajuda">{% trans %}Help{% endtrans %}</a></li>
             <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">{% trans %}Virtual Tour{% endtrans %}</a></li>
-            <li class="visible-xs visible-sm"><a href="{{ url_for('contact.index') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a></li>
+            <li><a class="visible-sm btn btn-white" href="{{ url_for('contact.create') }}" title="Entre em contato">Entre em contato</a></li>
         </ul>
     </div>
-
-    <div class="col-xs-12 col-md-6 col-lg-6 visible-md visible-lg">
+   
+    <a class="visible-xs col-xs-offset-3 col-xs-6 btn btn-white" href="{{ url_for('contact.create') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a>
+    <div class="col-xs-12 col-md-5 col-lg-6 visible-md visible-lg">
         <h3>{%trans%}Contact Us{%endtrans%}</h3>
 
         <form method="post" id="contact-form" action="{{ url_for('contact.create') }}" class="form-horizontal">
