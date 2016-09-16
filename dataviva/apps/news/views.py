@@ -250,7 +250,7 @@ def edit(id):
     form.dual_language.data = publication.dual_language
     form.thumb.data = publication.thumb
     form.subject_pt.data = ', '.join([sub.name_pt for sub in publication.subjects])
-    form.subject_en.data = ', '.join([sub.name_en for sub in publication.subjects if sub_name.en])
+    form.subject_en.data = ', '.join([sub.name_en for sub in publication.subjects if sub.name_en])
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
