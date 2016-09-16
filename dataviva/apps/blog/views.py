@@ -260,8 +260,7 @@ def edit(id):
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
     form.subject_pt.data = ', '.join([sub.name_pt for sub in post.subjects])
-    if post.dual_language:
-        form.subject_en.data = ', '.join([sub.name_en for sub in post.subjects])
+    form.subject_en.data = ', '.join([sub.name_en for sub in post.subjects if sub.name_en])
 
     return render_template('blog/edit.html',
                            form=form,
