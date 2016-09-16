@@ -1,8 +1,7 @@
 {% extends "blog/_base.html" %}
 
-<!-- Facebook Properties -->
 {% block facebook_metadata %}
-    <meta property="og:image" content="http://dataviva.info/static/img/blog/blog_{{ post.id }}.png" />
+    <meta property="og:image" content="{{ post.thumb }}" />
     <meta property="og:url" content="{{ url_for('blog.show', id=post.id, _external=True, _scheme='http') }}" />
     <meta property="og:title" content="{{ post.title_pt }}" />
     <meta property="og:description" content="{{post.text_call_pt}}" />
@@ -30,7 +29,7 @@
                     <a id="to-en" class="{{ 'active' if g.locale == 'en' }}" {{ 'disabled' if g.locale == 'en' }}>English</a> |
                     <a id="to-pt" class="{{ 'active' if g.locale == 'pt' }}" {{ 'disabled' if g.locale == 'pt' }}>Português</a>
                 {% endif %}
-                </p>      
+                </p>
             </div>
             <ul class="social">
                 <li>
@@ -60,7 +59,7 @@
                         <img src="{{post.thumb}}" class="img-responsive">
                     </a>
                     <p>
-                        <a href="#" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</a>
+                        <a href="{{url_for('blog.show', id=post.id)}}" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</a>
                     </p>
                 </div>
             {% endfor %}
