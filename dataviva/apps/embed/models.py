@@ -53,6 +53,7 @@ class Build(db.Model, AutoSerialize):
     slug2_en = db.Column(db.String(80))
     slug2_pt = db.Column(db.String(80))
     app_id = db.Column(db.Integer, db.ForeignKey(App.id))
+    imports = False
 
     ui = db.relationship('UI', secondary=build_ui,
             backref=db.backref('Builds'), lazy='dynamic')
@@ -60,6 +61,9 @@ class Build(db.Model, AutoSerialize):
             backref=db.backref('Builds', lazy='dynamic'))
 
     params = None
+
+    def set_import(self):
+        self.imports = True
 
     def get_ui(self, ui_type):
         return self.ui.filter(UI.type == ui_type).first()
@@ -462,7 +466,13 @@ class Build(db.Model, AutoSerialize):
         title = getattr(self, "title_{}".format(g.locale))
         title = self.format_text(title, kwargs)
 
+        if self.imports and "wld" in title and "bra" in title:
+            title = title.replace("wld", "temp", 2)
+            title = title.replace("bra", "wld", 2)
+            title = title.replace("temp", "bra", 2)
+
         if title:
+
             for f in ["bra", "cnae", "hs", "cbo", "wld", "university", "course_hedu", "course_sc"]:
                 if hasattr(self, f):
                     attr = getattr(self, f)
@@ -560,3 +570,4 @@ class Crosswalk_pi(db.Model):
         if dataset == "rais":
             return self.hs_id
         return self.cnae_id
+
