@@ -147,6 +147,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     current_app = App.query.filter_by(type=app_name).first_or_404()
     current_build = Build.query.filter_by(
         app=current_app, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first_or_404()
+    global_vars = {x[0]: x[1] for x in request.args.items()}
     current_build.set_filter1(filter1_attr)
     current_build.set_filter2(filter2_attr)
     current_build.set_bra(bra_attr)
@@ -163,7 +164,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
 
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
-    global_vars = {x[0]: x[1] for x in request.args.items()}
+
     if "controls" not in global_vars:
         global_vars["controls"] = "true"
 
@@ -174,6 +175,16 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         is_starred = Starred.query.filter_by(
             user=g.user, app_id=app_id).first()
         starred = 1 if is_starred else -1
+
+    if "size" in global_vars:
+        if global_vars["size"] == "import_val":
+            current_build.set_import()
+    if "y" in global_vars:
+        if global_vars["y"] == "import_val":
+            current_build.set_import()
+    if "axes" in global_vars:
+        if global_vars["axes"] == "import_val":
+            current_build.set_import()
 
     if request.is_xhr:
         ret = jsonify({
@@ -187,14 +198,13 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         if starred == 0 and cached_q is None:
             cached_query(cache_id, ret.data)
     else:
-
+        current_build.set_import()
         year_range_dict = __year_range__.copy()
 
         if current_build.app.type in ['network', 'rings', 'scatter']:
             year_range_dict["secex"] = ["2000-1", "2015-12"]
 
         year_range = json.dumps(year_range_dict)
-
         ret = make_response(render_template("embed/embed.html",
                                             # apps = App.query.all(),
                                             # all_builds = all_builds,
