@@ -107,8 +107,10 @@ def is_xhr():
 #@view_cache.cached(key_prefix=api_cache_key("apps:embed"), unless=is_xhr)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
+
     prefix = "apps:embed:xhr:"
     lang = request.args.get('lang', None) or g.locale
+    global_vars = {x[0]: x[1] for x in request.args.items()}
 
     if (g.user is None or not g.user.is_authenticated) and request.is_xhr:
         cache_id = prefix + request.path + lang
@@ -118,6 +120,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
             ret.headers['Content-Encoding'] = 'gzip'
             ret.headers['Content-Length'] = str(len(ret.data))
             return ret
+
 
     build_filter1, build_filter2 = filler(dataset, filter1, filter2)
 
@@ -147,7 +150,6 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
     current_app = App.query.filter_by(type=app_name).first_or_404()
     current_build = Build.query.filter_by(
         app=current_app, dataset=dataset, filter1=build_filter1, filter2=build_filter2, output=output).first_or_404()
-    global_vars = {x[0]: x[1] for x in request.args.items()}
     current_build.set_filter1(filter1_attr)
     current_build.set_filter2(filter2_attr)
     current_build.set_bra(bra_attr)
