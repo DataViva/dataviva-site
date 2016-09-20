@@ -466,10 +466,25 @@ class Build(db.Model, AutoSerialize):
         title = getattr(self, "title_{}".format(g.locale))
         title = self.format_text(title, kwargs)
 
-        if self.imports and "wld" in title and "bra" in title:
-            title = title.replace("wld", "temp", 2)
-            title = title.replace("bra", "wld", 2)
-            title = title.replace("temp", "bra", 2)
+
+        if g.locale == "pt":
+            if "wld" in title and "bra" in title:
+                if self.imports:
+                    if "comercializam" not in title:
+                        if title.index("wld") > title.index("bra"):
+                            title = title.replace("wld", "temp", 2)
+                            title = title.replace("bra", "wld", 2)
+                            title = title.replace("temp", "bra", 2)
+                    else:
+                        title = title.replace("comercializam <wld_para>", "importam <wld_de>")
+
+        else:
+            if self.imports:
+                if "of <bra>" and "to <wld>" in title:
+                    title = title.replace("to <wld>", "to <bra>")
+                    title = title.replace("of <bra>", "from <wld>")
+                if "trade with" in title:
+                    title = title.replace("trade with", "import from")
 
         if title:
 
