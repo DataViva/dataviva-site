@@ -26453,17 +26453,18 @@ print = require("../../../core/console/print.coffee");
 stylesheet = require("../../../client/css.coffee");
 
 module.exports = function(vars) {
-  var button, color, containerPadding, enter, family, left, min_height, padding, size, stripY, style, titleClass, titleGroup, top, weight;
+  var button, color, containerPadding, enter, family, left, min_height, padding, size, stripY, style, titleClass, titleGroup, top, weight, margin;
   if (!vars.small && vars.history.states.length > 0) {
     if (vars.dev.value) {
       print.time("drawing back button");
     }
     button = vars.container.value.selectAll("div#d3plus_back_button").data(["d3plus_back_button"]).style("position", "relative").style("z-index", 1900);
-    size = vars.title.sub.font.size;
+    size = 14;
     color = vars.title.sub.font.color;
     family = vars.title.sub.font.family.value;
-    weight = vars.title.sub.font.weight;
+    weight = "bold";
     padding = vars.title.sub.padding;
+    margin = "5px 0px";
     titleClass = false;
     if (vars.title.sub.value && ["start", "left"].indexOf(vars.title.sub.font.align) < 0) {
       titleClass = "sub";
@@ -26491,7 +26492,7 @@ module.exports = function(vars) {
     containerPadding = parseFloat(vars.container.value.style("padding-left"), 10);
     left = vars.margin.left + size / 2 + containerPadding;
     style = function(elem) {
-      return elem.style("position", "absolute").style("left", left + "px").style("top", top + "px").style("color", color).style("font-family", family).style("font-weight", weight).style("font-size", size + "px");
+      return elem.style("position", "absolute").style("left", left + "px").style("top", top + "px").style("color", color).style("font-family", family).style("font-weight", weight).style("font-size", size + "px").style("margin", margin);
     };
     enter = button.enter().append("div").attr("id", "d3plus_back_button").style("opacity", 0).call(style).html(function() {
       var arrow;

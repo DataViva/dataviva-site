@@ -48,13 +48,12 @@ def login(provider=None):
     if request.method == "POST":
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data, password=sha512(form.password.data)).first()
-
             if user:
                 if user.confirmed:
                     login_user(user, remember=True)
                     return redirect(url_for('general.home'))
                 else:
-                    return Response(dictionary()["confirmation_pending"], status=401, mimetype='application/json', )
+                    return Response(dictionary()["confirmation_pending"], status=401, mimetype='application/json')
 
         return Response(dictionary()["invalid_email_or_password"], status=400, mimetype='application/json')
 

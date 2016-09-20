@@ -219,10 +219,6 @@ if not DEBUG:
         return render_template('general/error.html',
             error = error, sabrina = sabrina), error_code
 
-@mod.route('contact/')
-def contact():
-    return render_template("general/contact.html")
-
 
 @mod.route('/error/')
 def error():
