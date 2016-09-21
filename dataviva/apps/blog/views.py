@@ -11,6 +11,8 @@ from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
 from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from flask_paginate import Pagination
+from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
 
 mod = Blueprint('blog', __name__,
@@ -34,9 +36,11 @@ def add_language_code(endpoint, values):
 
 
 @mod.route('/', methods=['GET'])
-def index():
+@mod.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    num_posts = Post.query.filter_by(active=True).count()
     posts = Post.query.filter_by(active=True).order_by(
-        desc(Post.publish_date)).all()
+        desc(Post.publish_date)).offset(ITEMS_PER_PAGE * (page - 1)).limit(ITEMS_PER_PAGE).all()
     subjects_query = Subject.query.order_by(desc(Subject.name_pt)).all()
     subjects = []
 
@@ -46,7 +50,15 @@ def index():
                 subjects.append(subject_query)
                 break
 
-    return render_template('blog/index.html', posts=posts, subjects=subjects)
+    pagination = Pagination(page=page,
+                            total=num_posts,
+                            per_page=ITEMS_PER_PAGE,
+                            bs_version=BOOTSTRAP_VERSION)
+
+    return render_template('blog/index.html',
+                            posts=posts,
+                            subjects=subjects,
+                            pagination=pagination)
 
 
 @mod.route('/<subject>', methods=['GET'])
