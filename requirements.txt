@@ -3,6 +3,7 @@ beautifulsoup4==4.5.1
 blinker==1.4
 boto3==1.3.0
 botocore==1.4.12
+click==6.6
 decorator==4.0.9
 docutils==0.12
 Flask==0.10.1
@@ -11,6 +12,7 @@ Flask-Cache==0.13.1
 Flask-Login==0.3.2
 Flask-Mail==0.9.0
 Flask-OAuth==0.12
+flask-paginate==0.4.5
 Flask-Runner==2.1.1
 Flask-Script==0.5.3
 Flask-SQLAlchemy==0.16
