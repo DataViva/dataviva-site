@@ -11,6 +11,8 @@ from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
 from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from flask_paginate import Pagination
+from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
 
 mod = Blueprint('news', __name__,
@@ -34,9 +36,11 @@ def add_language_code(endpoint, values):
 
 
 @mod.route('/', methods=['GET'])
-def index():
+@mod.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    num_publications = Publication.query.filter_by(active=True).count()
     publications = Publication.query.filter_by(active=True).order_by(
-        desc(Publication.publish_date)).all()
+        desc(Publication.publish_date)).offset(ITEMS_PER_PAGE * (page - 1)).limit(ITEMS_PER_PAGE).all()
     subjects_query = PublicationSubject.query.order_by(desc(PublicationSubject.name_pt)).all()
     subjects = []
 
@@ -46,7 +50,17 @@ def index():
                 subjects.append(subject_query)
                 break
 
-    return render_template('news/index.html', publications=publications, subjects=subjects)
+    pagination = Pagination(page=page,
+                            total=num_publications,
+                            per_page=ITEMS_PER_PAGE,
+                            prev_label='<i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>',
+                            next_label='<i class="fa fa-chevron-right fa-1x" aria-hidden="true"></i>',
+                            bs_version=BOOTSTRAP_VERSION)
+
+    return render_template('news/index.html',
+                            publications=publications,
+                            subjects=subjects,
+                            pagination=pagination)
 
 
 @mod.route('/<subject>', methods=['GET'])

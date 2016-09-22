@@ -140,10 +140,9 @@
     text-align: center;
 }
 .news .publication-list nav .pagination {
-    font-size: 10px;
+    font-size: 15px;
     display: inline-block;
 }
-
 
 .news .thumb .thumb-controls img {
     width: 350px;
