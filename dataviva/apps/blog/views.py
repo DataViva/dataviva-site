@@ -53,6 +53,8 @@ def index(page=1):
     pagination = Pagination(page=page,
                             total=num_posts,
                             per_page=ITEMS_PER_PAGE,
+                            prev_label='<i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>',
+                            next_label='<i class="fa fa-chevron-right fa-1x" aria-hidden="true"></i>',
                             bs_version=BOOTSTRAP_VERSION)
 
     return render_template('blog/index.html',
