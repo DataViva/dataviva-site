@@ -502,9 +502,7 @@
                 title = title.replace(match, val)
               }
             }
-
           }
-
         }
 
         if (title.indexOf("(") < 0) {
@@ -517,7 +515,7 @@
         return title;
 
       }
-
+      
       app.build.title = format_title(app.build.title);
       app.viz.title(app.build.title);
       required_bras();
@@ -877,8 +875,29 @@
 
       d3.select("#controls").selectAll("*").remove();
       d3plus.tooltip.remove();
+      var request_var_title = false
+      var request_var = false
+      var request_parameter = false
+      if (app.vars.size) {
+        request_var_title = "size"
+        request_var = app.vars.size;}
+      else if (app.vars.y) {
+        request_var_title = "y"
+        request_var = app.vars.y;}
+      else if (app.vars.axes) {
+        request_var_title = "axes"
+        request_var = app.vars.axes;}
 
-      d3.json("/{{g.locale}}/embed/"+app.url+"?lang="+dataviva.language)
+      if (request_var && request_var_title){
+
+        var request_parameter = request_var_title + "=" + request_var;
+
+      } else {
+
+        var request_parameter = "/"
+      }
+
+      d3.json("/{{g.locale}}/embed/"+app.url+"?lang="+dataviva.language+"&" + request_parameter)
         .header("X-Requested-With", "XMLHttpRequest")
         .get(function(error, data){
 
