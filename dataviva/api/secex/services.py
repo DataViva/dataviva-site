@@ -451,8 +451,10 @@ class ProductLocations(Product):
         self._secex = None
         self.bra_id = bra_id
         self.product_id = product_id
+        self.max_database_year = db.session.query(func.max(Ymbp.year))
         self.max_year_query = db.session.query(
-            func.max(Ymbp.year)).filter_by(hs_id=product_id, bra_id=bra_id, month=12)
+            func.max(Ymbp.year)).filter_by(bra_id=bra_id, hs_id=product_id).filter(
+            Ymbp.year < self.max_database_year)
         self.secex_query = Ymbp.query.filter(
             Ymbp.hs_id == self.product_id,
             Ymbp.bra_id == self.bra_id,
