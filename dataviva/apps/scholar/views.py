@@ -183,7 +183,6 @@ def create():
 
         message = dictionary()["article_submission"]
         flash(message, 'success')
-
         return redirect(url_for('scholar.index'))
 
 
@@ -263,11 +262,18 @@ def update(id):
 @required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
+    keywords = KeyWord.query.all()
+
     if ids:
         articles = Article.query.filter(Article.id.in_(ids)).all()
         for article in articles:
             upload_helper.delete_s3_folder(os.path.join(mod.name, str(article.id)))
             db.session.delete(article)
+            db.session.flush()
+
+            for keyword in keywords:
+                if keyword.articles.count() == 0:
+                    db.session.delete(keyword)
 
         db.session.commit()
         return u"Artigo(s) excluído(s) com sucesso!", 200
