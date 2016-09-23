@@ -11,6 +11,8 @@ from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
 from dataviva.utils.send_mail import send_mail
+from flask_paginate import Pagination
+from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
 import shutil
 import fnmatch
@@ -37,9 +39,22 @@ def add_language_code(endpoint, values):
 
 
 @mod.route('/', methods=['GET'])
-def index():
-    articles = Article.query.filter_by(approval_status=True).order_by(desc(Article.postage_date)).all()
-    return render_template('scholar/index.html', articles=articles)
+@mod.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    articles_query = Article.query.filter_by(approval_status=True)
+    articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+    num_articles = articles_query.count()
+
+    pagination = Pagination(page=page,
+                            total=num_articles,
+                            per_page=ITEMS_PER_PAGE,
+                            prev_label='<i class="fa fa-chevron-left fa-1x" aria-hidden="true"></i>',
+                            next_label='<i class="fa fa-chevron-right fa-1x" aria-hidden="true"></i>',
+                            bs_version=BOOTSTRAP_VERSION)
+
+    return render_template('scholar/index.html',
+                            articles=articles,
+                            pagination=pagination)
 
 
 @mod.route('/article/<id>', methods=['GET'])
