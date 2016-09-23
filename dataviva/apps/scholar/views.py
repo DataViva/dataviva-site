@@ -146,11 +146,11 @@ def create():
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.approval_status = 0
 
-        author_input_list = form.authors.data.split(',')
+        author_input_list = form.authors.data.replace(', ', ',').split(',')
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.split(',')
+        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
         for keyword_input in keyword_input_list:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
@@ -222,11 +222,11 @@ def update(id):
         article.authors = []
         article.keywords = []
 
-        author_input_list = form.authors.data.split(',')
+        author_input_list = form.authors.data.replace(', ', ',').split(',')
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.split(',')
+        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
         for keyword_input in keyword_input_list:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
