@@ -38,9 +38,17 @@ def add_language_code(endpoint, values):
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
-    num_posts = Post.query.filter_by(active=True).count()
-    posts = Post.query.filter_by(active=True).order_by(
-        desc(Post.publish_date)).offset(ITEMS_PER_PAGE * (page - 1)).limit(ITEMS_PER_PAGE).all()
+    posts_query = Post.query.filter_by(active=True)
+    posts = []
+
+    subject = request.args.get('subject')
+    if subject:
+        posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).order_by(desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).count()
+    else:
+        posts = posts_query.order_by(desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_posts = posts_query.count()
+
     subjects_query = Subject.query.order_by(desc(Subject.name_pt)).all()
     subjects = []
 
@@ -61,31 +69,6 @@ def index(page=1):
                             posts=posts,
                             subjects=subjects,
                             pagination=pagination)
-
-
-@mod.route('/<subject>', methods=['GET'])
-def index_subject(subject):
-    posts_query = Post.query.filter_by(
-        active=True).order_by(desc(Post.publish_date)).all()
-    subjects_query = subjects_query = Subject.query.order_by(
-        desc(Subject.name_pt)).all()
-    posts = []
-    subjects = []
-
-    for subject_query in subjects_query:
-        for row in subject_query.posts:
-            if row.active is True:
-                subjects.append(subject_query)
-                break
-
-    for post in posts_query:
-        if float(subject) in [x.id for x in post.subjects]:
-            posts.append(post)
-
-    return render_template('blog/index.html',
-                           posts=posts,
-                           subjects=subjects,
-                           active_subject=long(subject))
 
 
 @mod.route('/post/<id>', methods=['GET'])

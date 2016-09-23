@@ -38,9 +38,17 @@ def add_language_code(endpoint, values):
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
-    num_publications = Publication.query.filter_by(active=True).count()
-    publications = Publication.query.filter_by(active=True).order_by(
-        desc(Publication.publish_date)).offset(ITEMS_PER_PAGE * (page - 1)).limit(ITEMS_PER_PAGE).all()
+    publications_query = Publication.query.filter_by(active=True)
+    publications = []
+
+    subject = request.args.get('subject')
+    if subject:
+        publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).order_by(desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).count()
+    else:
+        publications = publications_query.order_by(desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_publications = publications_query.count()
+
     subjects_query = PublicationSubject.query.order_by(desc(PublicationSubject.name_pt)).all()
     subjects = []
 
@@ -61,29 +69,6 @@ def index(page=1):
                             publications=publications,
                             subjects=subjects,
                             pagination=pagination)
-
-
-@mod.route('/<subject>', methods=['GET'])
-def index_subject(subject):
-    publications_query = Publication.query.filter_by(
-        active=True).order_by(desc(Publication.publish_date)).all()
-    subjects_query = subjects_query = PublicationSubject.query.order_by(
-        desc(PublicationSubject.name_pt)).all()
-    publications = []
-    subjects = []
-
-    for subject_query in subjects_query:
-        for row in subject_query.publications:
-            if row.active is True:
-                subjects.append(subject_query)
-                break
-
-    for publication in publications_query:
-        if float(subject) in [x.id for x in publication.subjects]:
-            publications.append(publication)
-
-    return render_template(
-        'news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
 
 
 @mod.route('/publication/<id>', methods=['GET'])
