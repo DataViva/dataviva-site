@@ -166,7 +166,7 @@ class Location:
         return bra.total
 
     def area(self):
-        bs_query = Bs.query.filter(Bra.id == self.bra_id).first()
+        bs_query = Bs.query.filter(Bs.bra_id == self.bra_id, Bs.stat_id == 'area').first()
         return bs_query.stat_val
 
     def states_in_a_region(self):
