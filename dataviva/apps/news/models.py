@@ -34,7 +34,7 @@ class Publication(db.Model):
         return self.publish_date.strftime('%d/%m/%Y')
 
     def __repr__(self):
-        return '<Publication %r>' % (self.title)
+        return '<Publication %r>' % (self.title_pt)
 
 
 class PublicationSubject(db.Model):
