@@ -1007,9 +1007,3 @@ h1.login-title {
 .input-group a#edit-header{
   margin-right: 0px;
 }
-
-/* Pagination */
-nav > ul > li.next > a > i,
-nav > ul > li.previous > a > i {
-  font-size: 10px;
-}
