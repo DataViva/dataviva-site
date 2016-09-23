@@ -42,8 +42,24 @@ def add_language_code(endpoint, values):
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
     articles_query = Article.query.filter_by(approval_status=True)
-    articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
-    num_articles = articles_query.count()
+    articles = []
+
+    keyword = request.args.get('keyword')
+    if keyword:
+        articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).count()
+    else:
+        articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_articles = articles_query.count()
+
+    keywords_query = KeyWord.query.order_by(desc(KeyWord.name)).all()
+    keywords = []
+
+    for keyword_query in keywords_query:
+        for row in keyword_query.articles:
+            if row.approval_status is True:
+                keywords.append(keyword_query)
+                break
 
     pagination = Pagination(page=page,
                             total=num_articles,
@@ -54,6 +70,7 @@ def index(page=1):
 
     return render_template('scholar/index.html',
                             articles=articles,
+                            keywords=keywords,
                             pagination=pagination)
 
 

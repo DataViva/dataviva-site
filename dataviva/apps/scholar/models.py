@@ -18,7 +18,9 @@ class Article(db.Model):
     postage_date = db.Column(db.DateTime)
     approval_status = db.Column(db.Boolean)
     authors = db.relationship('AuthorScholar', backref='scholar_article', lazy='eager')
-    keywords = db.relationship('KeyWord', secondary=article_keyword_table)
+    keywords = db.relationship('KeyWord',
+                                secondary=article_keyword_table,
+                                backref=db.backref('articles', lazy='dynamic'))
 
     def authors_str(self):
         author_names = [author.name for author in self.authors]
