@@ -11,6 +11,8 @@ from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
 from dataviva.utils.send_mail import send_mail
+from flask_paginate import Pagination
+from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
 import shutil
 import fnmatch
@@ -37,9 +39,37 @@ def add_language_code(endpoint, values):
 
 
 @mod.route('/', methods=['GET'])
-def index():
-    articles = Article.query.filter_by(approval_status=True).order_by(desc(Article.postage_date)).all()
-    return render_template('scholar/index.html', articles=articles)
+@mod.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    articles_query = Article.query.filter_by(approval_status=True)
+    articles = []
+
+    keyword = request.args.get('keyword')
+    if keyword:
+        articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).count()
+    else:
+        articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_articles = articles_query.count()
+
+    keywords_query = KeyWord.query.order_by(desc(KeyWord.name)).all()
+    keywords = []
+
+    for keyword_query in keywords_query:
+        for row in keyword_query.articles:
+            if row.approval_status is True:
+                keywords.append(keyword_query)
+                break
+
+    pagination = Pagination(page=page,
+                            total=num_articles,
+                            per_page=ITEMS_PER_PAGE,
+                            bs_version=BOOTSTRAP_VERSION)
+
+    return render_template('scholar/index.html',
+                            articles=articles,
+                            keywords=keywords,
+                            pagination=pagination)
 
 
 @mod.route('/article/<id>', methods=['GET'])
@@ -116,11 +146,11 @@ def create():
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.approval_status = 0
 
-        author_input_list = form.authors.data.split(',')
+        author_input_list = form.authors.data.replace(', ', ',').split(',')
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.split(',')
+        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
         for keyword_input in keyword_input_list:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
@@ -153,7 +183,6 @@ def create():
 
         message = dictionary()["article_submission"]
         flash(message, 'success')
-
         return redirect(url_for('scholar.index'))
 
 
@@ -193,11 +222,11 @@ def update(id):
         article.authors = []
         article.keywords = []
 
-        author_input_list = form.authors.data.split(',')
+        author_input_list = form.authors.data.replace(', ', ',').split(',')
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.split(',')
+        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
         for keyword_input in keyword_input_list:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
 
@@ -233,11 +262,18 @@ def update(id):
 @required_roles(1)
 def admin_delete():
     ids = request.form.getlist('ids[]')
+    keywords = KeyWord.query.all()
+
     if ids:
         articles = Article.query.filter(Article.id.in_(ids)).all()
         for article in articles:
             upload_helper.delete_s3_folder(os.path.join(mod.name, str(article.id)))
             db.session.delete(article)
+            db.session.flush()
+
+            for keyword in keywords:
+                if keyword.articles.count() == 0:
+                    db.session.delete(keyword)
 
         db.session.commit()
         return u"Artigo(s) excluído(s) com sucesso!", 200

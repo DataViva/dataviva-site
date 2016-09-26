@@ -11,6 +11,8 @@ from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
 from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from flask_paginate import Pagination
+from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
 
 mod = Blueprint('news', __name__,
@@ -34,9 +36,19 @@ def add_language_code(endpoint, values):
 
 
 @mod.route('/', methods=['GET'])
-def index():
-    publications = Publication.query.filter_by(active=True).order_by(
-        desc(Publication.publish_date)).all()
+@mod.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    publications_query = Publication.query.filter_by(active=True)
+    publications = []
+
+    subject = request.args.get('subject')
+    if subject:
+        publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).order_by(desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).count()
+    else:
+        publications = publications_query.order_by(desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_publications = publications_query.count()
+
     subjects_query = PublicationSubject.query.order_by(desc(PublicationSubject.name_pt)).all()
     subjects = []
 
@@ -46,30 +58,15 @@ def index():
                 subjects.append(subject_query)
                 break
 
-    return render_template('news/index.html', publications=publications, subjects=subjects)
+    pagination = Pagination(page=page,
+                            total=num_publications,
+                            per_page=ITEMS_PER_PAGE,
+                            bs_version=BOOTSTRAP_VERSION)
 
-
-@mod.route('/<subject>', methods=['GET'])
-def index_subject(subject):
-    publications_query = Publication.query.filter_by(
-        active=True).order_by(desc(Publication.publish_date)).all()
-    subjects_query = subjects_query = PublicationSubject.query.order_by(
-        desc(PublicationSubject.name_pt)).all()
-    publications = []
-    subjects = []
-
-    for subject_query in subjects_query:
-        for row in subject_query.publications:
-            if row.active is True:
-                subjects.append(subject_query)
-                break
-
-    for publication in publications_query:
-        if float(subject) in [x.id for x in publication.subjects]:
-            publications.append(publication)
-
-    return render_template(
-        'news/index.html', publications=publications, subjects=subjects, active_subject=long(subject))
+    return render_template('news/index.html',
+                            publications=publications,
+                            subjects=subjects,
+                            pagination=pagination)
 
 
 @mod.route('/publication/<id>', methods=['GET'])

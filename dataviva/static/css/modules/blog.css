@@ -150,10 +150,9 @@
     text-align: center;
 }
 .blog .post-list nav .pagination {
-    font-size: 10px;
+    font-size: 15px;
     display: inline-block;
 }
-
 .blog .thumb .thumb-controls img {
     width: 350px;
     height: 227px;
@@ -214,32 +213,26 @@
     text-decoration: none;
     font-weight: bold;
 }
-
 .blog .checkbox-switch {
     padding: 0px;
     border: none;
 }
-
 .blog .checkbox-switch .switchery{
     height: 33px;
 }
-
 .blog .checkbox-switch .switchery > small {
     height: 33px;
     width: 33px;
 }
-
 .blog figure figcaption {
     font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-style: italic;
     font-size: 12px;
 }
-
 .blog .note-editor img, .blog figure {
     margin: 20px 20px 10px 20px;
     text-align: center;
 }
-
-.dual-lang-field {
+.blog .dual-lang-field {
   display: none;
 }

@@ -95,8 +95,13 @@ MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL", False)
 MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME", 'contato@dataviva.info')
 MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
 
-
 '''
     Administrator email
 '''
 ADMINISTRATOR_EMAIL = 'contato@dataviva.info'
+
+'''
+    Pagination
+'''
+ITEMS_PER_PAGE = 10
+BOOTSTRAP_VERSION = 3

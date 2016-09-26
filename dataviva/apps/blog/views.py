@@ -11,6 +11,8 @@ from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
 from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from flask_paginate import Pagination
+from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
 
 mod = Blueprint('blog', __name__,
@@ -34,9 +36,19 @@ def add_language_code(endpoint, values):
 
 
 @mod.route('/', methods=['GET'])
-def index():
-    posts = Post.query.filter_by(active=True).order_by(
-        desc(Post.publish_date)).all()
+@mod.route('/<int:page>', methods=['GET'])
+def index(page=1):
+    posts_query = Post.query.filter_by(active=True)
+    posts = []
+
+    subject = request.args.get('subject')
+    if subject:
+        posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).order_by(desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).count()
+    else:
+        posts = posts_query.order_by(desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_posts = posts_query.count()
+
     subjects_query = Subject.query.order_by(desc(Subject.name_pt)).all()
     subjects = []
 
@@ -46,32 +58,15 @@ def index():
                 subjects.append(subject_query)
                 break
 
-    return render_template('blog/index.html', posts=posts, subjects=subjects)
-
-
-@mod.route('/<subject>', methods=['GET'])
-def index_subject(subject):
-    posts_query = Post.query.filter_by(
-        active=True).order_by(desc(Post.publish_date)).all()
-    subjects_query = subjects_query = Subject.query.order_by(
-        desc(Subject.name_pt)).all()
-    posts = []
-    subjects = []
-
-    for subject_query in subjects_query:
-        for row in subject_query.posts:
-            if row.active is True:
-                subjects.append(subject_query)
-                break
-
-    for post in posts_query:
-        if float(subject) in [x.id for x in post.subjects]:
-            posts.append(post)
+    pagination = Pagination(page=page,
+                            total=num_posts,
+                            per_page=ITEMS_PER_PAGE,
+                            bs_version=BOOTSTRAP_VERSION)
 
     return render_template('blog/index.html',
-                           posts=posts,
-                           subjects=subjects,
-                           active_subject=long(subject))
+                            posts=posts,
+                            subjects=subjects,
+                            pagination=pagination)
 
 
 @mod.route('/post/<id>', methods=['GET'])

@@ -15,9 +15,9 @@
     <nav class="sidebar col-md-3">
         <h3>{% trans %}Topics{% endtrans %}</h3>
         <ul>
-            <li><a href="{{ url_for('news.index') }}" title="Todos" class="{{'active' if not active_subject else ''}}">{% trans %}All{% endtrans %}</a></li>
+            <li><a href="{{ url_for('news.index') }}" title="Todos" class="{{ 'active' if not request.args.get('subject') }}">{% trans %}All{% endtrans %}</a></li>
             {% for subject in subjects %}
-                <li><a href="{{ url_for('news.index') }}{{ subject.id }}" title="{{ subject.name_en if g.locale == 'en' and subject.name_en else subject.name_pt }}" class="{{ 'active' if subject.id == active_subject else '' }}">{{ subject.name_en if g.locale == 'en' and subject.name_en else subject.name_pt }}</a></li>
+                <li><a href="{{ url_for('news.index', subject=subject.id) }}" title="{{ subject.name_en if g.locale == 'en' and subject.name_en else subject.name_pt }}" class="{{ 'active' if subject.id == request.args.get('subject')|int }}">{{ subject.name_en if g.locale == 'en' and subject.name_en else subject.name_pt }}</a></li>
             {% endfor %}
         </ul>
     </nav>
