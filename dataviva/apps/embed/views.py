@@ -1,28 +1,21 @@
 # -*- coding: utf-8 -*-
-from io import BytesIO
-import time
 import requests
-from StringIO import StringIO
 from datetime import datetime
-from collections import defaultdict
 from sqlalchemy import func
-from random import randint
-from flask import Blueprint, request, render_template, g, Response, make_response, send_file, jsonify, url_for, redirect, jsonify
+from flask import Blueprint, request, render_template, g, Response, make_response, jsonify
 from flask.ext.babel import gettext
 
 from dataviva import db, datavivadir, __year_range__, view_cache
 from dataviva.api.attrs.models import Bra, Cnae, Hs, Cbo, Wld, University, Course_hedu, Course_sc, Search
-from dataviva.api.rais.views import rais_api
 
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.data.forms import DownloadForm
-from dataviva.apps.user.models import User, Starred
+from dataviva.apps.user.models import Starred
 from dataviva.apps.embed.models import Build, UI, App, Crosswalk_oc, Crosswalk_pi
 from dataviva.apps.general.models import Short
 
-from dataviva.translations.translate import translate
 from dataviva.utils.gzip_data import gzip_data
-from dataviva.utils.cached_query import cached_query, api_cache_key
+from dataviva.utils.cached_query import cached_query
 from dataviva.utils.title_format import title_format
 
 import json
@@ -30,13 +23,7 @@ import urllib2
 import urllib
 from config import FACEBOOK_OAUTH_ID, basedir, GZIP_DATA
 import os
-import urlparse
-import random
 import zipfile
-import sys
-import gzip
-from dataviva.utils.cached_query import api_cache_key
-
 
 mod = Blueprint('embed', __name__,
                 template_folder='templates',
@@ -107,17 +94,34 @@ def is_xhr():
 #@view_cache.cached(key_prefix=api_cache_key("apps:embed"), unless=is_xhr)
 def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
           filter1="all", filter2="all", output="cbo"):
+
     prefix = "apps:embed:xhr:"
     lang = request.args.get('lang', None) or g.locale
+    global_vars = {x[0]: x[1] for x in request.args.items()}
+
+    imports = False
+
+    if "size" in global_vars:
+        if global_vars["size"] == "import_val":
+            imports = True
+    if "y" in global_vars:
+        if global_vars["y"] == "import_val":
+            imports = True
+    if "axes" in global_vars:
+        if global_vars["axes"] == "import_val":
+            imports = True
 
     if (g.user is None or not g.user.is_authenticated) and request.is_xhr:
         cache_id = prefix + request.path + lang
+        if imports:
+            cache_id = cache_id + "imports"
         cached_q = cached_query(cache_id)
         if cached_q:
             ret = make_response(cached_q)
             ret.headers['Content-Encoding'] = 'gzip'
             ret.headers['Content-Length'] = str(len(ret.data))
             return ret
+
 
     build_filter1, build_filter2 = filler(dataset, filter1, filter2)
 
@@ -163,7 +167,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
 
     '''Get URL query parameters from reqest.args object to return to the view.
     '''
-    global_vars = {x[0]: x[1] for x in request.args.items()}
+
     if "controls" not in global_vars:
         global_vars["controls"] = "true"
 
@@ -174,6 +178,9 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         is_starred = Starred.query.filter_by(
             user=g.user, app_id=app_id).first()
         starred = 1 if is_starred else -1
+
+    if imports:
+        current_build.set_import()
 
     if request.is_xhr:
         ret = jsonify({
@@ -187,14 +194,13 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         if starred == 0 and cached_q is None:
             cached_query(cache_id, ret.data)
     else:
-
+        current_build.set_import()
         year_range_dict = __year_range__.copy()
 
         if current_build.app.type in ['network', 'rings', 'scatter']:
             year_range_dict["secex"] = ["2000-1", "2015-12"]
 
         year_range = json.dumps(year_range_dict)
-
         ret = make_response(render_template("embed/embed.html",
                                             # apps = App.query.all(),
                                             # all_builds = all_builds,
