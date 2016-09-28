@@ -17,7 +17,10 @@ class Article(db.Model):
     theme = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
     approval_status = db.Column(db.Boolean)
-    authors = db.relationship('AuthorScholar', backref='scholar_article', lazy='eager')
+    authors = db.relationship('AuthorScholar',
+                                backref='scholar_article',
+                                lazy='eager',
+                                cascade='all, delete-orphan')
     keywords = db.relationship('KeyWord',
                                 secondary=article_keyword_table,
                                 backref=db.backref('articles', lazy='dynamic'))
