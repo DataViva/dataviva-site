@@ -19,13 +19,13 @@
         {{ messages(form.theme) }}
     </p>
     <p>
-        <label for="author">Autor</label>
-        {{ form.authors(class="form-control")}}
+        <label for="author">Autor(es)</label>
+        {{ form.authors(class="form-control", placeholder="Separe os autores por vírgula")}}
         {{ messages(form.authors) }}
     </p>
     <p>
         <label for="keywords">Palavras-Chave</label>
-        {{ form.keywords(class="form-control")}}
+        {{ form.keywords(class="form-control", placeholder="Separe as palavras-chave por vírgula")}}
         {{ messages(form.keywords) }}
     </p>
     <p>
