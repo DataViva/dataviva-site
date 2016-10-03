@@ -28,6 +28,10 @@ class Article(db.Model):
     def authors_str(self):
         author_names = [author.name for author in self.authors]
         return ', '.join(author_names)
+    
+    def keywords_str(self):
+        keyword_names = [keyword.name for keyword in self.keywords]
+        return ', '.join(keyword_names)
 
     def date_str(self):
         return self.postage_date.strftime('%d/%m/%Y')
