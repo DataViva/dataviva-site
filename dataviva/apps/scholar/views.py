@@ -150,10 +150,8 @@ def create():
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
-        for keyword_input in keyword_input_list:
+        for keyword_input in form.keywords.data:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
-
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
             else:
@@ -195,7 +193,7 @@ def edit(id):
     form.title.data = article.title
     form.theme.data = article.theme
     form.authors.data = article.authors_str()
-    form.keywords.data = article.keywords_str()
+    form.keywords.data = [keyword.name for keyword in article.keywords]
     form.abstract.data = article.abstract
     article_url = article.file_url
 
@@ -226,10 +224,8 @@ def update(id):
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
-        for keyword_input in keyword_input_list:
+        for keyword_input in form.keywords.data:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
-
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
             else:

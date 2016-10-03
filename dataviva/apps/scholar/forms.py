@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, TextAreaField, validators, ValidationError
+from wtforms import TextField, TextAreaField, SelectMultipleField, validators, ValidationError
+from models import KeyWord
 
 
 class NumberOfWords(object):
@@ -32,10 +33,10 @@ class RegistrationForm(Form):
         validators.Length(max=100)
     ])
 
-    keywords = TextField('keywords', validators=[
-        validators.Required(u"Por favor, insira as palavras-chave do artigo."),
-        NumberOfWords(max=3)
-    ])
+    keywords = SelectMultipleField('keywords',
+        choices=[(keyword.name, keyword.name) for keyword in KeyWord.query.order_by('name').all()],
+        validators=[validators.Required(u"Por favor, insira as palavras-chave do artigo.")]
+    )
 
     abstract = TextAreaField('abstract', validators=[
         validators.Required(u"Por favor, insira o resumo do artigo."),
