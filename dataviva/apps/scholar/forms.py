@@ -16,6 +16,9 @@ class NumberOfWords(object):
         if len(field.data.split()) > self.max:
             raise ValidationError(self.message)
 
+def validate_keywords(form, field):
+    if len(field.data) > 3:
+        raise ValidationError(u"Por favor, insira no máximo três palavras-chave para o artigo.")
 
 class RegistrationForm(Form):
     title = TextField('title', validators=[
@@ -35,7 +38,10 @@ class RegistrationForm(Form):
 
     keywords = SelectMultipleField('keywords',
         choices=[(keyword.name, keyword.name) for keyword in KeyWord.query.order_by('name').all()],
-        validators=[validators.Required(u"Por favor, insira as palavras-chave do artigo.")]
+        validators=[
+            validators.Required(u"Por favor, insira no mínimo uma palavra-chave para o artigo."),
+            validate_keywords
+        ]
     )
 
     abstract = TextAreaField('abstract', validators=[
