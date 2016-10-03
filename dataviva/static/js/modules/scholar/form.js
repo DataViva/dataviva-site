@@ -1,16 +1,19 @@
 $(document).ready(function () {
     var path = window.location.pathname.split('/');
-    if (path[path.length - 1] === 'new'){
+
+    if (path[path.length - 1] === 'new') {
         $('#uploaded-file').hide();
         $('#progress').hide();
-    }else if (path[path.length - 1] === 'edit'){
+    } else if (path[path.length - 1] === 'edit') {
         var articleId = path[path.length - 2];
         $('#input-file').hide();
         $('#progress').hide();
         $('#delete').attr('id', 'delete-edit');
         $('#article-url').attr('href',  'https://' + dataviva.s3_bucket + '.s3.amazonaws.com/scholar/' + articleId + '/files/article');
-
     }
+
+    select2Config.placeholder = 'Selecione palavras-chave existentes ou escreva novas';
+    $('#keywords').select2(select2Config);
 
     function uploadFiles(url, files) {
         var formData = new FormData();

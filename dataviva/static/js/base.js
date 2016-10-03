@@ -170,6 +170,11 @@ var summernoteConfig = {
     }
 }
 
+var select2Config = {
+    tags: true,
+    tokenSeparators: [',']
+}
+
 function selectorCallback(id, event) {
     url = window.location.origin + window.location.pathname + '?bra_id='+id;
     window.location = url;
