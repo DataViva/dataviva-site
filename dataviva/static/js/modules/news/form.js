@@ -14,6 +14,8 @@ var inputThumbCallback = function() {
 }
 
 var add_caption = function(image) {
+    if (image.attr('src').trim() == "http://placehold.it/1600x900/FFFFFF?text=")
+        return;
     image.wrap('<figure> </figure>');
     figcaption = $('<figcaption> </figcaption>');
     if (image.attr('data-original-title'))
@@ -31,6 +33,8 @@ var add_caption = function(image) {
 }
 
 var remove_caption = function(image) {
+    if (image.attr('src').trim() == "http://placehold.it/1600x900/FFFFFF?text=")
+        return;
     image.siblings('figcaption').remove();
     var figure_width = image.parent().css('max-width');
     image.css('width', figure_width);
