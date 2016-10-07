@@ -52,15 +52,6 @@ def index(page=1):
         articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_articles = articles_query.count()
 
-    keywords_query = KeyWord.query.order_by(desc(KeyWord.name)).all()
-    keywords = []
-
-    for keyword_query in keywords_query:
-        for row in keyword_query.articles:
-            if row.approval_status is True:
-                keywords.append(keyword_query)
-                break
-
     pagination = Pagination(page=page,
                             total=num_articles,
                             per_page=ITEMS_PER_PAGE,
@@ -68,7 +59,7 @@ def index(page=1):
 
     return render_template('scholar/index.html',
                             articles=articles,
-                            keywords=keywords,
+                            keywords=approved_articles_keywords(),
                             pagination=pagination)
 
 
