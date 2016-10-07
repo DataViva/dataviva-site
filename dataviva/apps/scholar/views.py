@@ -52,15 +52,6 @@ def index(page=1):
         articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_articles = articles_query.count()
 
-    keywords_query = KeyWord.query.order_by(desc(KeyWord.name)).all()
-    keywords = []
-
-    for keyword_query in keywords_query:
-        for row in keyword_query.articles:
-            if row.approval_status is True:
-                keywords.append(keyword_query)
-                break
-
     pagination = Pagination(page=page,
                             total=num_articles,
                             per_page=ITEMS_PER_PAGE,
@@ -68,7 +59,7 @@ def index(page=1):
 
     return render_template('scholar/index.html',
                             articles=articles,
-                            keywords=keywords,
+                            keywords=approved_articles_keywords(),
                             pagination=pagination)
 
 
@@ -117,10 +108,24 @@ def new_article_advise(article, server_domain):
     send_mail("Novo Estudo", [admin_email], advise_message)
 
 
+def approved_articles_keywords():
+    keywords_query = KeyWord.query.order_by(KeyWord.name).all()
+    keywords = []
+
+    for keyword_query in keywords_query:
+        for row in keyword_query.articles:
+            if row.approval_status is True:
+                keywords.append(keyword_query)
+                break
+
+    return keywords
+
+
 @mod.route('/admin/article/new', methods=['GET'])
 @login_required
 def new():
     form = RegistrationForm()
+    form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
 
 
@@ -150,10 +155,8 @@ def create():
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
-        for keyword_input in keyword_input_list:
+        for keyword_input in form.keywords.data:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
-
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
             else:
@@ -191,11 +194,12 @@ def create():
 @required_roles(1)
 def edit(id):
     form = RegistrationForm()
+    form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
     article = Article.query.filter_by(id=id).first_or_404()
     form.title.data = article.title
     form.theme.data = article.theme
     form.authors.data = article.authors_str()
-    form.keywords.data = article.keywords_str()
+    form.keywords.data = [keyword.name for keyword in article.keywords]
     form.abstract.data = article.abstract
     article_url = article.file_url
 
@@ -226,10 +230,8 @@ def update(id):
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
-        keyword_input_list = form.keywords.data.replace(', ', ',').split(',')
-        for keyword_input in keyword_input_list:
+        for keyword_input in form.keywords.data:
             keyword = KeyWord.query.filter_by(name=keyword_input).first()
-
             if not keyword:
                 article.keywords.append(KeyWord(keyword_input))
             else:

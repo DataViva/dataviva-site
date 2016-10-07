@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
 from wtforms import TextField, TextAreaField, validators, ValidationError
+from dataviva.utils.custom_fields import TagsField
+from models import KeyWord, Article
 
 
 class NumberOfWords(object):
@@ -14,6 +16,11 @@ class NumberOfWords(object):
     def __call__(self, form, field):
         if len(field.data.split()) > self.max:
             raise ValidationError(self.message)
+
+
+def validate_keywords(form, field):
+    if len(field.data) > 3:
+        raise ValidationError(u"Por favor, insira no máximo três palavras-chave para o artigo.")
 
 
 class RegistrationForm(Form):
@@ -32,10 +39,13 @@ class RegistrationForm(Form):
         validators.Length(max=100)
     ])
 
-    keywords = TextField('keywords', validators=[
-        validators.Required(u"Por favor, insira as palavras-chave do artigo."),
-        NumberOfWords(max=3)
-    ])
+    keywords = TagsField('keywords',
+        choices=[],
+        validators=[
+            validators.Required(u"Por favor, insira no mínimo uma palavra-chave para o artigo."),
+            validate_keywords
+        ]
+    )
 
     abstract = TextAreaField('abstract', validators=[
         validators.Required(u"Por favor, insira o resumo do artigo."),
