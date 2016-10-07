@@ -3,7 +3,6 @@ from flask.ext.wtf import Form
 from wtforms import TextField, TextAreaField, validators, ValidationError
 from dataviva.utils.custom_fields import TagsField
 from models import KeyWord, Article
-from sqlalchemy import desc
 
 
 class NumberOfWords(object):
@@ -24,18 +23,6 @@ def validate_keywords(form, field):
         raise ValidationError(u"Por favor, insira no máximo três palavras-chave para o artigo.")
 
 
-def get_choices():
-    keywords_query = KeyWord.query.order_by(desc(KeyWord.name)).all()
-    keywords = []
-
-    for keyword_query in keywords_query:
-        for row in keyword_query.articles:
-            if row.approval_status is True:
-                keywords.append((keyword_query.name, keyword_query.name))
-                break
-    return keywords
-
-
 class RegistrationForm(Form):
     title = TextField('title', validators=[
         validators.Required(u"Por favor, insira o título do artigo."),
@@ -53,7 +40,7 @@ class RegistrationForm(Form):
     ])
 
     keywords = TagsField('keywords',
-        choices=get_choices(),
+        choices=[],
         validators=[
             validators.Required(u"Por favor, insira no mínimo uma palavra-chave para o artigo."),
             validate_keywords
