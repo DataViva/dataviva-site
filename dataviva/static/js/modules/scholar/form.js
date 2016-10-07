@@ -12,7 +12,7 @@ $(document).ready(function () {
         $('#article-url').attr('href',  'https://' + dataviva.s3_bucket + '.s3.amazonaws.com/scholar/' + articleId + '/files/article');
     }
 
-    select2Config.placeholder = 'Selecione palavras-chave existentes ou escreva novas';
+    select2Config.placeholder = 'Separe as palavras-chave por vírgula';
     $('#keywords').select2(select2Config);
 
     function uploadFiles(url, files) {
