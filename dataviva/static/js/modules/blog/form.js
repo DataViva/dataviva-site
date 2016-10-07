@@ -14,25 +14,29 @@ var inputThumbCallback = function() {
 }
 
 var add_caption = function(image) {
+    if (image.attr('src').trim() == "http://placehold.it/1600x900/FFFFFF?text=")
+        return;
     image.wrap('<figure> </figure>');
     figcaption = $('<figcaption> </figcaption>');
     if (image.attr('data-original-title'))
         figcaption.html(image.attr('data-original-title'));
     figcaption.appendTo(image.parent());
-    var image_float = image.css('float');
-    var image_width = image.css('width');
+    var image_float = image.css('float'),
+        image_width = image.css('width');
     if (image_float == 'left' || image_float == 'right') {
         image
             .css('float', 'none')
             .parent().css('float', image_float);
     }
-    image.parent().css('width', image_width);
+    image.parent().css('max-width', image_width);
     image.css('width', '100%');
 }
 
 var remove_caption = function(image) {
+    if (image.attr('src').trim() == "http://placehold.it/1600x900/FFFFFF?text=")
+        return;
     image.siblings('figcaption').remove();
-    var figure_width = image.parent().css('width');
+    var figure_width = image.parent().css('max-width');
     image.css('width', figure_width);
     var figure_float = image.parent().css('float');
     if (figure_float == 'left' || figure_float == 'right')
