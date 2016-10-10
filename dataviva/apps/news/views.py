@@ -35,6 +35,18 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+def active_publications_subjects():
+    subjects_query = PublicationSubject.query.all()
+    subjects = []
+    for subject_query in subjects_query:
+        for row in subject_query.publications:
+            if row.active is True:
+                subjects.append(subject_query)
+                break
+    subjects.sort(key=lambda sub: sub.name_en.lower() if g.locale == 'en' and sub.name_en else sub.name_pt.lower())
+    return subjects
+
+
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
@@ -49,15 +61,6 @@ def index(page=1):
         publications = publications_query.order_by(desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_publications = publications_query.count()
 
-    subjects_query = PublicationSubject.query.order_by(desc(PublicationSubject.name_pt)).all()
-    subjects = []
-
-    for subject_query in subjects_query:
-        for row in subject_query.publications:
-            if row.active is True:
-                subjects.append(subject_query)
-                break
-
     pagination = Pagination(page=page,
                             total=num_publications,
                             per_page=ITEMS_PER_PAGE,
@@ -65,7 +68,7 @@ def index(page=1):
 
     return render_template('news/index.html',
                             publications=publications,
-                            subjects=subjects,
+                            subjects=active_publications_subjects(),
                             pagination=pagination)
 
 
