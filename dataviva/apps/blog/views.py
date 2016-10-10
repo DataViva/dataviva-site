@@ -35,6 +35,18 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+def active_posts_subjects():
+    subjects_query = Subject.query.all()
+    subjects = []
+    for subject_query in subjects_query:
+        for row in subject_query.posts:
+            if row.active is True:
+                subjects.append(subject_query)
+                break
+    subjects.sort(key=lambda sub: sub.name_en.lower() if g.locale == 'en' and sub.name_en else sub.name_pt.lower())
+    return subjects
+
+
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
@@ -49,14 +61,6 @@ def index(page=1):
         posts = posts_query.order_by(desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_posts = posts_query.count()
 
-    subjects_query = Subject.query.order_by(desc(Subject.name_pt)).all()
-    subjects = []
-
-    for subject_query in subjects_query:
-        for row in subject_query.posts:
-            if row.active is True:
-                subjects.append(subject_query)
-                break
 
     pagination = Pagination(page=page,
                             total=num_posts,
@@ -65,22 +69,14 @@ def index(page=1):
 
     return render_template('blog/index.html',
                             posts=posts,
-                            subjects=subjects,
+                            subjects=active_posts_subjects(),
                             pagination=pagination)
 
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
-    subjects_query = Subject.query.order_by(desc(Subject.name_pt)).all()
     post = Post.query.filter_by(id=id).first_or_404()
     posts = Post.query.filter(Post.id != id, Post.active).all()
-    subjects = []
-
-    for subject_query in subjects_query:
-        for row in subject_query.posts:
-            if row.active is True:
-                subjects.append(subject_query)
-                break
 
     if len(posts) > 3:
         read_more = [posts.pop(randrange(len(posts))) for _ in range(3)]
@@ -88,7 +84,7 @@ def show(id):
         read_more = posts
     return render_template('blog/show.html',
                            post=post,
-                           subjects=subjects,
+                           subjects=active_posts_subjects(),
                            id=id,
                            read_more=read_more)
 
