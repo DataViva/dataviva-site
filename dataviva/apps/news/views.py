@@ -82,7 +82,11 @@ def show(id):
             publications.pop(randrange(len(publications))) for _ in range(3)]
     else:
         read_more = publications
-    return render_template('news/show.html', publication=publication, id=id, read_more=read_more)
+    return render_template('news/show.html',
+                            publication=publication,
+                            subjects=active_publications_subjects(),
+                            id=id,
+                            read_more=read_more)
 
 
 @mod.route('/publication/all', methods=['GET'])
