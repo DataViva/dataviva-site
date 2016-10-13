@@ -1288,7 +1288,7 @@ h6,
   font-size: 12px;
 }
 p {
-  margin: 0 0 10px;
+  margin: 10px 0 10px;
 }
 .lead {
   margin-bottom: 20px;
@@ -3436,6 +3436,7 @@ fieldset[disabled] .btn-link:focus {
 }
 .btn-lg,
 .btn-group-lg > .btn {
+  height: 46px;
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.3333333;
@@ -5973,7 +5974,7 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 600px;
+    width: 430px;
     margin: 30px auto;
   }
   .modal-content {
