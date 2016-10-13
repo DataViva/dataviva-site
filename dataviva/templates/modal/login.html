@@ -6,26 +6,41 @@
             </div>
 
             <div class="modal-body">
-                <div class="loginmodal-container">
-                    <h4>{% trans %}Users Acess{% endtrans %}</h4>
-                    <form id="dataviva-login-form">
-                        {{ g.signin_form.hidden_tag() }}
+                <div class="loginmodal-container" style="display: flex; justify-content: space-between;">
+                    <div class="container">
+                        <div class="col-xs-12" >
+                            <h4>{% trans %}Users Acess{% endtrans %}:</h4>
+                            <form id="dataviva-login-form">
+                                {{ g.signin_form.hidden_tag() }}
 
-                        <div class="form-group">
-                        <input type="text" name="email" placeholder="{% trans %}User{% endtrans %}" class="form-control input-lg" />
+                                <div class="form-group">
+                                    <input type="text" name="email" placeholder="{% trans %}User{% endtrans %}" class="form-control input-lg" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
+                                </div>
+                                <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Entrar">
+                                <p style="text-align:left"><a href="{{ url_for('user.forgot_password') }}">{% trans %}Forgot your password{% endtrans %}?</a></p>
+                            </form>
                         </div>
-                        <div class="form-group">
-                        <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
+                        <div class="col-xs-12">
+                        <h2 style="width: 100%; text-align: center; border-bottom: 1px solid #cfcfcf; line-height: 0.1em; margin: 10px 0 20px;"><span style="background:#fff; padding:0 10px; ">ou</span></h2>
+                        </div>
+                        <div class="col-xs-12">
+                            <h4>Utilize suas redes sociais:</h4>
+                            <div style="padding:1%" class="col-xs-4">
+                                <a href="/{{ g.locale }}/session/login/google" class="btn btn-lg btn-google"><i class="fa fa-google"></i></a>
+                            </div>
+                            <div style="padding:1%" class="col-xs-4">
+                                <a href="/{{ g.locale }}/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i></a>
+                            </div>
+                            <div style="padding:1%" class="col-xs-4">
+                                <a href="/{{ g.locale }}/session/login/twitter" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i></a>
+                            </div>
+                            <p style="text-align:right"><a href="{{ url_for('user.forgot_password') }}">Cadastre-se</a></p>
                         </div>
 
-                        <p><a href="{{ url_for('user.forgot_password') }}">{% trans %}Forgot your password{% endtrans %}?</a></p>
-                        <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Entrar">
-                    </form>
-
-                        <p>{% trans %}...or sign-up using{% endtrans %}:</p>
-                        <a href="/{{ g.locale }}/session/login/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
-                        <a href="/{{ g.locale }}/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
-                        <a href="/{{ g.locale }}/session/login/twitter" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a>
+                    </div>
                 </div>
             </div>
         </div>
