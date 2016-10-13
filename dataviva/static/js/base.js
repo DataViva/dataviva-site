@@ -542,8 +542,6 @@ $(document).ready(function () {
             var $agree_mailer = $form.find('input[name="agree_mailer"]');
             var status        = true;
 
-            debugger
-
             if ($fullname.val() === '') {
                 $fullname.closest('.form-group').addClass('has-error');
                 $fullname.addClass('error');

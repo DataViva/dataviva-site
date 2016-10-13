@@ -9,14 +9,28 @@
     {% endfor %}
 {%- endmacro %}
 
+
+
+
 {% block content %}
 
 	<div class="container">
+		<div id="message">
+		{% if get_flashed_messages(with_categories=true) %}
+			{% for category, message in get_flashed_messages(with_categories=true) %}
+		        <div class="alert alert-{{category}}">
+		            {{ message }}
+		        </div>
+			{% endfor %}
+		{% endif %}
+		</div>
+
+
 		<h1 class="login-title">{% trans %}Login{% endtrans %}</h1>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 signin-box">
 				<p>{% trans %}Please enter your credentials{% endtrans %}...</p>
-				<form class="form" method="post" action="{{ url_for('session.login') }}" >
+				<form class="form" method="post" action="{{ url_for('session.login', htmlForm=true) }}" >
 					{{ g.signin_form.hidden_tag() }}
 					
 					<div class="form-group">
@@ -30,14 +44,14 @@
 						{{ messages(form.password) }}
 					</div>
 					<p><a href="/user/forgot_password">{% trans %}Forgot your password{% endtrans %}?</a></p>
-					<button type="submit" class="btn btn-primary btn-lg pull-right">{% trans %}Sign In{% endtrans %}!</button>
+					<button type="submit" class="btn btn-primary btn-lg pull-right">{% trans %}Login{% endtrans %}!</button>
 				</form>
 			</div><!--/.col6-->
 			<div class="col-xs-12 col-sm-6 signin-box">
 				<p>{% trans %}...or sign-up using{% endtrans %}:</p>
-				<a href="/en/session/login/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
-				<a href="en/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
-				<a href="" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a>
+				<a href="/{{ g.locale }}/session/login/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
+				<a href="/{{ g.locale }}/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
+				<a href="/{{ g.locale }}/session/login/twitter" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a>
 			</div>
 		</div>
 	</div><!--/.container-->
