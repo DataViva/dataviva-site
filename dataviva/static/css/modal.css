@@ -181,6 +181,7 @@
 
 
 /* MODAL DE LOGIN */
+
 #dataviva-login .modal-header, #dataviva-signup .modal-header{
   padding: 5px 10px
 }
@@ -195,6 +196,7 @@
   line-height: 1.2em;
   margin: 0 0 15px;
 }
+
 
 /* MODAL DE SIGNUP */
 #dataviva-signup .intro{
@@ -232,7 +234,6 @@
 }
 
 .modal .modal-content{
-    min-width: 625px;
 }
 
 .modal .question-header .chosen-options .question .question-option {
