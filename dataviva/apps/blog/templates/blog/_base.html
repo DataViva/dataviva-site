@@ -17,7 +17,7 @@
         <ul class="sub-menu">
             <li><a href="{{ url_for('blog.index') }}" title="Todos" class="{{ 'active' if not request.args.get('subject') }}">{% trans %}All{% endtrans %}</a></li>
             {% for subject in subjects %}
-                <li><a href="{{ url_for('blog.index', subject=subject.id) }}" title="{{ subject.name_en if g.locale == 'en' and subject.name_en else subject.name_pt }}" class="{{ 'active' if subject.id == request.args.get('subject')|int }}">{{ subject.name_en if g.locale == 'en' and subject.name_en else subject.name_pt }}</a></li>
+                <li><a href="{{ url_for('blog.index', subject=subject.id) }}" title="{{ subject.name }}" class="{{ 'active' if subject.id == request.args.get('subject')|int }}">{{ subject.name }}</a></li>
             {% endfor %}
         </ul>
     </nav>
