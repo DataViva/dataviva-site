@@ -15,7 +15,7 @@
 		<h1 class="login-title">{% trans %}Login{% endtrans %}</h1>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 signin-box">
-				<p>{% trans %}Entre com suas credenciais...{% endtrans %}</p>
+				<p>{% trans %}Please enter your credentials{% endtrans %}...</p>
 				<form class="form" method="post" action="{{ url_for('session.login') }}" >
 					{{ g.signin_form.hidden_tag() }}
 					
