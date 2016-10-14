@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
 from wtforms import HiddenField, TextField, TextAreaField, validators, DateField, BooleanField, ValidationError
+from dataviva.utils.custom_fields import TagsField
 
 
 def validate_title_en(form, field):
@@ -61,14 +62,13 @@ class RegistrationForm(Form):
         description='Formato da data: dia/mês/ano'
     )
 
-    subject_pt = TextField('subject_pt', validators=[
-        validators.Required(u"Por favor, insira a categoria do post."),
-        validate_subject_pt
+    subject_pt = TagsField('subject_pt',
+        choices=[],
+        validators=[
+            validators.Required(u"Por favor, insira a categoria do post."),
     ])
 
-    subject_en = TextField('subject_en', validators=[
-        validate_subject_en,
-    ])
+    subject_en = TagsField('subject_en', choices=[])
 
     text_call_pt = TextAreaField('text_call_pt', validators=[
         validators.Required(u"Por favor, insira uma chamada para a notícia."),
