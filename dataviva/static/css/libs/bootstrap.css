@@ -1288,7 +1288,7 @@ h6,
   font-size: 12px;
 }
 p {
-  margin: 10px 0 10px;
+  margin: 0 0 10px;
 }
 .lead {
   margin-bottom: 20px;
@@ -5974,7 +5974,7 @@ button.close {
 }
 @media (min-width: 768px) {
   .modal-dialog {
-    width: 430px;
+    width: 600px;
     margin: 30px auto;
   }
   .modal-content {
