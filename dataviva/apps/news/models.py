@@ -3,9 +3,12 @@ from dataviva import db
 
 
 association_table = db.Table('news_publication_subject',
-    db.Column('publication_id', db.Integer, db.ForeignKey('news_publication.id')),
-    db.Column('subject_id', db.Integer, db.ForeignKey('news_subject.id'))
-)
+                             db.Column(
+                                 'publication_id', db.Integer, db.ForeignKey('news_publication.id')),
+                             db.Column(
+                                 'subject_id', db.Integer, db.ForeignKey('news_subject.id'))
+                             )
+
 
 class Publication(db.Model):
     # TODO - Alter publication.thumb column to db.Column(db.String(400))
@@ -40,12 +43,12 @@ class Publication(db.Model):
 class PublicationSubject(db.Model):
     __tablename__ = 'news_subject'
     id = db.Column(db.Integer, primary_key=True)
-    name_pt = db.Column(db.String(50))
-    name_en = db.Column(db.String(50))
+    name = db.Column(db.String(50))
+    language = db.Column(db.String(2))
 
-    def __init__(self, name_pt=None, name_en=None):
-        self.name_pt = name_pt
-        self.name_en = name_en
+    def __init__(self, name=None, language=None):
+        self.name = name
+        self.language = language
 
     def __repr__(self):
-        return '<PublicationSubject %r>' % (self.name_pt)
+        return '<PublicationSubject %r (%r)>' % self.name % self.language
