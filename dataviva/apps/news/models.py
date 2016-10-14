@@ -51,4 +51,4 @@ class PublicationSubject(db.Model):
         self.language = language
 
     def __repr__(self):
-        return '<PublicationSubject %r (%r)>' % self.name % self.language
+        return '<PublicationSubject %r (%r)>' % (self.name, self.language)

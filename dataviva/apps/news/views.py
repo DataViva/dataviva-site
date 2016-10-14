@@ -166,9 +166,9 @@ def admin_delete():
 def new():
     form = RegistrationForm()
     form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in active_publications_subjects('pt')]
+                               for subject in PublicationSubject.query.filter_by(language='pt').order_by(PublicationSubject.name).all()]
     form.subject_en.choices = [(subject.name, subject.name)
-                               for subject in active_publications_subjects('en')]
+                               for subject in PublicationSubject.query.filter_by(language='en').order_by(PublicationSubject.name).all()]
     return render_template('news/new.html', form=form, action=url_for('news.create'))
 
 
@@ -178,6 +178,8 @@ def new():
 def create():
     form = RegistrationForm()
     if form.validate() is False:
+        form.subject_pt.choices = [(subject, subject) for subject in form.subject_pt.data]
+        form.subject_en.choices = [(subject, subject) for subject in form.subject_en.data]
         return render_template('news/new.html', form=form)
     else:
         publication = Publication()
@@ -248,12 +250,17 @@ def upload_images():
 @required_roles(1)
 def edit(id):
     form = RegistrationForm()
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in active_publications_subjects('pt')]
-    form.subject_en.choices = [(subject.name, subject.name)
-                               for subject in active_publications_subjects('en')]
-
     publication = Publication.query.filter_by(id=id).first_or_404()
+
+    form.subject_pt.choices = [(subject.name, subject.name)
+                               for subject in publication.subjects if subject.language == 'pt']
+    form.subject_en.choices = [(subject.name, subject.name)
+                               for subject in publication.subjects if subject.language == 'en']
+    subject_pt_query = PublicationSubject.query.filter_by(language='pt').order_by(PublicationSubject.name)
+    subject_en_query = PublicationSubject.query.filter_by(language='en').order_by(PublicationSubject.name)
+    form.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (subject.name, subject.name) not in form.subject_pt.choices])
+    form.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (subject.name, subject.name) not in form.subject_en.choices])
+
     form.title_pt.data = publication.title_pt
     form.title_en.data = publication.title_en
     form.author.data = publication.author
@@ -278,6 +285,8 @@ def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
+        form.subject_pt.choices = [(subject, subject) for subject in form.subject_pt.data]
+        form.subject_en.choices = [(subject, subject) for subject in form.subject_en.data]
         return render_template('news/edit.html', form=form)
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()

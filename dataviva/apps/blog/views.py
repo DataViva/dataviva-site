@@ -167,7 +167,6 @@ def new():
                                for subject in active_posts_subjects('pt')]
     form.subject_en.choices = [(subject.name, subject.name)
                                for subject in active_posts_subjects('en')]
-
     return render_template('blog/new.html',
                            form=form, action=url_for('blog.create'))
 
@@ -178,6 +177,8 @@ def new():
 def create():
     form = RegistrationForm()
     if form.validate() is False:
+        form.subject_pt.choices = [(subject, subject) for subject in form.subject_pt.data]
+        form.subject_en.choices = [(subject, subject) for subject in form.subject_en.data]
         return render_template('blog/new.html', form=form)
     else:
         post = Post()
@@ -235,12 +236,17 @@ def upload_image():
 @required_roles(1)
 def edit(id):
     form = RegistrationForm()
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in active_posts_subjects('pt')]
-    form.subject_en.choices = [(subject.name, subject.name)
-                               for subject in active_posts_subjects('en')]
-
     post = Post.query.filter_by(id=id).first_or_404()
+
+    form.subject_pt.choices = [(subject.name, subject.name)
+                               for subject in publication.subjects if subject.language == 'pt']
+    form.subject_en.choices = [(subject.name, subject.name)
+                               for subject in publication.subjects if subject.language == 'en']
+    subject_pt_query = Subject.query.filter_by(language='pt').order_by(Subject.name)
+    subject_en_query = Subject.query.filter_by(language='en').order_by(Subject.name)
+    form.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (subject.name, subject.name) not in form.subject_pt.choices])
+    form.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (subject.name, subject.name) not in form.subject_en.choices])
+
     form.title_pt.data = post.title_pt
     form.title_en.data = post.title_en
     form.author.data = post.author
@@ -267,6 +273,8 @@ def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
+        form.subject_pt.choices = [(subject, subject) for subject in form.subject_pt.data]
+        form.subject_en.choices = [(subject, subject) for subject in form.subject_en.data]
         return render_template('blog/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()
