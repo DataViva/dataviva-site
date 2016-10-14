@@ -35,16 +35,26 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-def active_posts_subjects():
-    subjects_query = Subject.query.all()
+def active_posts_subjects(language):
+    subjects_query = Subject.query.filter_by(
+        language=language).order_by(Subject.name).all()
     subjects = []
     for subject_query in subjects_query:
         for row in subject_query.posts:
             if row.active is True:
                 subjects.append(subject_query)
                 break
-    subjects.sort(key=lambda sub: sub.name_en.lower() if g.locale == 'en' and sub.name_en else sub.name_pt.lower())
     return subjects
+
+
+def add_subjects(post, subjects_input, language):
+    for subject_input in subjects_input:
+        subject = Subject.query.filter_by(
+            name=subject_input).first()
+        if not subject:
+            post.subjects.append(Subject(subject_input, language))
+        else:
+            post.subjects.append(subject)
 
 
 @mod.route('/', methods=['GET'])
@@ -69,7 +79,7 @@ def index(page=1):
 
     return render_template('blog/index.html',
                             posts=posts,
-                            subjects=active_posts_subjects(),
+                            subjects=active_posts_subjects(g.locale),
                             pagination=pagination)
 
 
@@ -84,7 +94,7 @@ def show(id):
         read_more = posts
     return render_template('blog/show.html',
                            post=post,
-                           subjects=active_posts_subjects(),
+                           subjects=active_posts_subjects(g.locale),
                            id=id,
                            read_more=read_more)
 
@@ -153,6 +163,11 @@ def admin_delete():
 @required_roles(1)
 def new():
     form = RegistrationForm()
+    form.subject_pt.choices = [(subject.name, subject.name)
+                               for subject in active_posts_subjects('pt')]
+    form.subject_en.choices = [(subject.name, subject.name)
+                               for subject in active_posts_subjects('en')]
+
     return render_template('blog/new.html',
                            form=form, action=url_for('blog.create'))
 
@@ -177,27 +192,9 @@ def create():
         post.dual_language = form.dual_language.data
         post.active = 0
 
-        subjects_pt = form.subject_pt.data.replace(', ', ',').split(',')
-
+        add_subjects(post, form.subject_pt.data, 'pt')
         if form.dual_language.data:
-            subjects_en = form.subject_en.data.replace(', ', ',').split(',')
-            for name_pt, name_en in zip(subjects_pt, subjects_en):
-                subject = Subject.query.filter_by(name_pt=name_pt).first()
-                if not subject:
-                    subject = Subject()
-                    subject.name_pt = name_pt
-                    subject.name_en = name_en
-                else:
-                    subject.name_en = name_en
-                post.subjects.append(subject)
-        else:
-            for name_pt in subjects_pt:
-                subject = Subject.query.filter_by(name_pt=name_pt).first()
-                if not subject:
-                    subject = Subject()
-                    subject.name_pt = name_pt
-                    subject.name_en = ''
-                post.subjects.append(subject)
+            add_subjects(post, form.subject_en.data, 'en')
 
         db.session.add(post)
         db.session.flush()
@@ -238,6 +235,11 @@ def upload_image():
 @required_roles(1)
 def edit(id):
     form = RegistrationForm()
+    form.subject_pt.choices = [(subject.name, subject.name)
+                               for subject in active_posts_subjects('pt')]
+    form.subject_en.choices = [(subject.name, subject.name)
+                               for subject in active_posts_subjects('en')]
+
     post = Post.query.filter_by(id=id).first_or_404()
     form.title_pt.data = post.title_pt
     form.title_en.data = post.title_en
@@ -250,8 +252,8 @@ def edit(id):
     form.dual_language.data = post.dual_language
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
-    form.subject_pt.data = ', '.join([sub.name_pt for sub in post.subjects])
-    form.subject_en.data = ', '.join([sub.name_en for sub in post.subjects if sub.name_en])
+    form.subject_pt.data = [subject.name for subject in post.subjects]
+    form.subject_en.data = [subject.name for subject in post.subjects]
 
     return render_template('blog/edit.html',
                            form=form,
@@ -278,31 +280,13 @@ def update(id):
         post.show_home = form.show_home.data
         post.dual_language = form.dual_language.data
 
-        subjects_pt = form.subject_pt.data.replace(', ', ',').split(',')
         num_subjects = len(post.subjects)
-
         for i in range(0, num_subjects):
             post.subjects.remove(post.subjects[0])
 
+        add_subjects(post, form.subject_pt.data, 'pt')
         if form.dual_language.data:
-            subjects_en = form.subject_en.data.replace(', ', ',').split(',')
-            for name_pt, name_en in zip(subjects_pt, subjects_en):
-                subject = Subject.query.filter_by(name_pt=name_pt).first()
-                if not subject:
-                    subject = Subject()
-                    subject.name_pt = name_pt
-                    subject.name_en = name_en
-                else:
-                    subject.name_en = name_en
-                post.subjects.append(subject)
-        else:
-            for name_pt in subjects_pt:
-                subject = Subject.query.filter_by(name_pt=name_pt).first()
-                if not subject:
-                    subject = Subject()
-                    subject.name_pt = name_pt
-                    subject.name_en = ''
-                post.subjects.append(subject)
+            add_subjects(post, form.subject_en.data, 'en')
 
         post.text_content_pt = upload_images_to_s3(
             form.text_content_pt.data, mod.name, post.id)

@@ -40,8 +40,12 @@ class Post(db.Model):
 class Subject(db.Model):
     __tablename__ = 'blog_subject'
     id = db.Column(db.Integer, primary_key=True)
-    name_pt = db.Column(db.String(50))
-    name_en = db.Column(db.String(50))
+    name = db.Column(db.String(50))
+    language = db.Column(db.String(2))
+
+    def __init__(self, name=None, language=None):
+        self.name = name
+        self.language = language
 
     def __repr__(self):
-        return '<PostSubject %r>' % (self.name_pt)
+        return '<PostSubject %r (%r)>' % self.name % self.language
