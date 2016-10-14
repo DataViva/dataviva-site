@@ -197,6 +197,43 @@
   margin: 0 0 15px;
 }
 
+#dataviva-login .loginmodal-container {
+  display: flex; 
+  justify-content: space-between;
+}
+
+#dataviva-login .login-modal-dialog {
+  max-width:430px;
+}
+
+#dataviva-login h2{
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid #cfcfcf; 
+  line-height: 0.1em; 
+  margin: 10px 0 20px;
+}
+
+#dataviva-login .login-modal-divider{
+  background:#fff; 
+  padding:0 10px;
+}
+
+#dataviva-login .login-button{
+  padding-bottom:10px;
+}
+
+#dataviva-login .forgot-password{
+  text-align:left;
+}
+
+#dataviva-login .social-media-button { 
+  padding:1%;
+}
+
+#dataviva-login .signup { 
+  text-align:right;
+}
 
 /* MODAL DE SIGNUP */
 #dataviva-signup .intro{

@@ -1,12 +1,12 @@
 <div class="modal fade dataviva" tabindex="-1" role="dialog" id="dataviva-login" data-show="true">
-    <div class="modal-dialog" style="max-width:430px;">
+    <div class="modal-dialog login-modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
 
             <div class="modal-body">
-                <div class="loginmodal-container" style="display: flex; justify-content: space-between;">
+                <div class="loginmodal-container">
                     <div class="container">
                         <div class="col-xs-12" >
                             <h4>{% trans %}Users Acess{% endtrans %}:</h4>
@@ -19,29 +19,28 @@
                                 <div class="form-group">
                                     <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
                                 </div>
-                                <div style="padding-bottom:10px">
+                                <div class="login-button">
                                     <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Entrar">
                                 </div>
-                                <p style="text-align:left"><a href="{{ url_for('user.forgot_password') }}">{% trans %}Forgot your password{% endtrans %}?</a></p>
+                                <p class="forgot-password"><a href="{{ url_for('user.forgot_password') }}">{% trans %}Forgot your password{% endtrans %}?</a></p>
                             </form>
                         </div>
                         <div class="col-xs-12">
-                        <h2 style="width: 100%; text-align: center; border-bottom: 1px solid #cfcfcf; line-height: 0.1em; margin: 10px 0 20px;"><span style="background:#fff; padding:0 10px; ">{% trans %}or{% endtrans %}</span></h2>
+                        <h2><span class="login-modal-divider">{% trans %}or{% endtrans %}</span></h2>
                         </div>
                         <div class="col-xs-12">
                             <h4>{% trans %}Use your social media:{% endtrans %}</h4>
-                            <div style="padding:1%" class="col-xs-4">
+                            <div class="col-xs-4 social-media-button">
                                 <a href="/{{ g.locale }}/session/login/google" class="btn btn-lg btn-google"><i class="fa fa-google"></i></a>
                             </div>
-                            <div style="padding:1%" class="col-xs-4">
+                            <div class="col-xs-4 social-media-button">
                                 <a href="/{{ g.locale }}/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i></a>
                             </div>
-                            <div style="padding:1%" class="col-xs-4">
+                            <div class="col-xs-4 social-media-button">
                                 <a href="/{{ g.locale }}/session/login/twitter" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i></a>
                             </div>
-                            <p style="text-align:right"><a data-toggle="modal" data-target="#dataviva-signup">{% trans %}Sign Up{% endtrans %}</a></p>
+                            <p class="signup"><a data-toggle="modal" data-target="#dataviva-signup">{% trans %}Sign Up{% endtrans %}</a></p>
                         </div>
-
                     </div>
                 </div>
             </div>
