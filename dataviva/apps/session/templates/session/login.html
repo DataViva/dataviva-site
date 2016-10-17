@@ -10,8 +10,6 @@
 {%- endmacro %}
 
 
-
-
 {% block content %}
 
 	<div class="container">
@@ -29,7 +27,7 @@
 		<h1 class="login-title">{% trans %}Login{% endtrans %}</h1>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 signin-box">
-				<p>{% trans %}Please enter your credentials{% endtrans %}...</p>
+				<p>{% trans %}Login with{% endtrans %}...</p>
 				<form class="form" method="post" action="{{ url_for('session.login', htmlForm=true) }}" >
 					{{ g.signin_form.hidden_tag() }}
 					

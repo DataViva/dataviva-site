@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-13 19:06-0300\n"
+"POT-Creation-Date: 2016-10-17 13:57-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3111,8 +3111,8 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:29
-#: dataviva/apps/session/templates/session/login.html:47
+#: dataviva/apps/session/templates/session/login.html:27
+#: dataviva/apps/session/templates/session/login.html:45
 #: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
 #: dataviva/templates/general/upgrade.html:3
 #: dataviva/templates/include/header.html:47
@@ -3120,23 +3120,23 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:32
-msgid "Please enter your credentials"
+#: dataviva/apps/session/templates/session/login.html:30
+msgid "Login with"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:42
+#: dataviva/apps/session/templates/session/login.html:40
 #: dataviva/apps/user/templates/user/signup.html:30
 #: dataviva/templates/modal/login.html:18
 #: dataviva/templates/modal/signup.html:24
 msgid "Password"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:46
+#: dataviva/apps/session/templates/session/login.html:44
 #: dataviva/templates/modal/login.html:21
 msgid "Forgot your password"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:51
+#: dataviva/apps/session/templates/session/login.html:49
 #: dataviva/apps/user/templates/user/signup.html:43
 #: dataviva/templates/modal/login.html:25
 msgid "...or sign-up using"
