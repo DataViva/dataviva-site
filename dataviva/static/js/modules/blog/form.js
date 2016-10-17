@@ -72,6 +72,14 @@ $(document).ready(function(){
         });
     });
 
+    $('#subject_en, #subject_pt').on('select2:select', function(e) {
+        var elm = e.params.data.element;
+        $elm = $(elm);
+        $t = $(this);
+        $t.append($elm);
+        $t.trigger('change.select2');
+    });
+
     $('#blog-edit-pt, #blog-edit-en').prop('disabled', true);
 
     $('#text-content-editor-pt').append($('#text_content_pt').val());
