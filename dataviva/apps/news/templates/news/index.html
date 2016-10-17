@@ -9,13 +9,17 @@
         {% for publication in publications %}
             <div class="item publication">
                 <div class="thumbnail">
-                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">
+                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">
                         <img src="{{ publication.thumb }}" class="thumbnail img-responsive">
                     </a>
-                    <span>{{ publication.subjects[0].name_en if publication.dual_language and g.locale == 'en' else publication.subjects[0].name_pt }}</span>
+                    {% for subject in publication.subjects if subject.language == g.locale %}
+                        {% if loop.first %}
+                            <span>{{ subject.name }}</span>
+                        {% endif %}
+                    {% endfor %}
                 </div>
                 <h4>
-                        <a href="{{ url_for('blog.show', id=publication.id) }}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}</a>
+                    <a href="{{ url_for('blog.show', id=publication.id) }}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}</a>
                 </h4>
                 <p>{{ publication.text_call_en if publication.dual_language and g.locale == 'en' else publication.text_call_pt }}</p>
                 <div class="meta">

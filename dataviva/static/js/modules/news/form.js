@@ -21,8 +21,10 @@ var add_caption = function(image) {
     if (image.attr('data-original-title'))
         figcaption.html(image.attr('data-original-title'));
     figcaption.appendTo(image.parent());
+
     var image_float = image.css('float'),
         image_width = image.css('width');
+
     if (image_float == 'left' || image_float == 'right') {
         image
             .css('float', 'none')
@@ -30,6 +32,7 @@ var add_caption = function(image) {
     }
     image.parent().css('max-width', image_width);
     image.css('width', '100%');
+    image.css('height', 'auto');
 }
 
 var remove_caption = function(image) {
@@ -54,14 +57,19 @@ var load_tooltips = function() {
 }
 
 $(document).ready(function(){
+    select2Config.placeholder = 'Separe as palavras-chave por vírgula';
+    $('#subject_pt').select2(select2Config);
 
     if ($('#dual_language').is(':checked')) {
-        $('.dual-lang-field').fadeToggle();
+        $('.dual-lang-field').fadeToggle(function() {
+            $('#subject_en').select2(select2Config);
+        });
     }
 
     $('#dual_language').change(function() {
-        $('.dual-lang-field')
-            .fadeToggle();
+        $('.dual-lang-field').fadeToggle(function() {
+            $('#subject_en').select2(select2Config);
+        });
     });
 
     $('#news-edit-pt, #news-edit-en').prop('disabled', true);

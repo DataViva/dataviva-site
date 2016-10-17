@@ -1,5 +1,5 @@
 <div class="modal fade dataviva" tabindex="-1" role="dialog" id="dataviva-login" data-show="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog login-modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -7,25 +7,41 @@
 
             <div class="modal-body">
                 <div class="loginmodal-container">
-                    <h4>{% trans %}Users Acess{% endtrans %}</h4>
-                    <form id="dataviva-login-form">
-                        {{ g.signin_form.hidden_tag() }}
+                    <div class="container">
+                        <div class="col-xs-12" >
+                            <h4>{% trans %}Users Acess{% endtrans %}:</h4>
+                            <form id="dataviva-login-form">
+                                {{ g.signin_form.hidden_tag() }}
 
-                        <div class="form-group">
-                        <input type="text" name="email" placeholder="{% trans %}User{% endtrans %}" class="form-control input-lg" />
+                                <div class="form-group">
+                                    <input type="text" name="email" placeholder="{% trans %}User{% endtrans %}" class="form-control input-lg" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
+                                </div>
+                                <div class="login-button">
+                                    <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Entrar">
+                                </div>
+                                <p class="forgot-password"><a href="{{ url_for('user.forgot_password') }}">{% trans %}Forgot your password{% endtrans %}?</a></p>
+                            </form>
                         </div>
-                        <div class="form-group">
-                        <input type="password" name="password" placeholder="{% trans %}Password{% endtrans %}" class="form-control input-lg" />
+                        <div class="col-xs-12">
+                        <h2><span class="login-modal-divider">{% trans %}or{% endtrans %}</span></h2>
                         </div>
-
-                        <p><a href="{{ url_for('user.forgot_password') }}">{% trans %}Forgot your password{% endtrans %}?</a></p>
-                        <input type="submit" name="submit" class="btn btn-primary btn-block btn-lg" value="Entrar">
-                    </form>
-
-                        <p>{% trans %}...or sign-up using{% endtrans %}:</p>
-                        <a href="/{{ g.locale }}/session/login/google" class="btn btn-lg btn-google"> <i class="fa fa-google"></i> Google</a>
-                        <a href="/{{ g.locale }}/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i> Facebook</a>
-                        <a href="/{{ g.locale }}/session/login/twitter" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i> Twitter</a>
+                        <div class="col-xs-12">
+                            <h4>{% trans %}Use your social media:{% endtrans %}</h4>
+                            <div class="col-xs-4 social-media-button">
+                                <a href="/{{ g.locale }}/session/login/google" class="btn btn-lg btn-google"><i class="fa fa-google"></i></a>
+                            </div>
+                            <div class="col-xs-4 social-media-button">
+                                <a href="/{{ g.locale }}/session/login/facebook" class="btn btn-lg btn-facebook"> <i class="fa fa-facebook"></i></a>
+                            </div>
+                            <div class="col-xs-4 social-media-button">
+                                <a href="/{{ g.locale }}/session/login/twitter" class="btn btn-lg btn-twitter"> <i class="fa fa-twitter"></i></a>
+                            </div>
+                            <p class="signup"><a data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#dataviva-signup"><span aria-hidden="true">{% trans %}Sign Up{% endtrans %}</span></a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

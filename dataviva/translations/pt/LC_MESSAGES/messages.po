@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-09-14 15:34-0300\n"
+"POT-Creation-Date: 2016-10-17 14:24-0200\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -224,7 +224,7 @@ msgid "Average Age"
 msgstr "Idade Média"
 
 #: dataviva/apps/about/templates/about/index.html:14
-#: dataviva/templates/include/footer.html:5
+#: dataviva/templates/include/footer.html:6
 #: dataviva/translations/dictionary.py:591
 msgid "About"
 msgstr "Sobre"
@@ -240,7 +240,7 @@ msgstr ""
 "mais de 5 mil municípios brasileiros."
 
 #: dataviva/apps/about/templates/about/index.html:27
-#: dataviva/templates/include/footer.html:6
+#: dataviva/templates/include/footer.html:7
 #: dataviva/translations/dictionary.py:594
 msgid "The"
 msgstr "O"
@@ -367,7 +367,7 @@ msgstr "Inicie uma Pesquisa"
 #: dataviva/apps/news/templates/news/index.html:4
 #: dataviva/apps/news/templates/news/new.html:8
 #: dataviva/apps/news/templates/news/show.html:12
-#: dataviva/templates/admin.html:23 dataviva/templates/include/footer.html:8
+#: dataviva/templates/admin.html:23 dataviva/templates/include/footer.html:9
 #: dataviva/templates/include/header.html:5
 #: dataviva/translations/dictionary.py:546
 msgid "News"
@@ -382,7 +382,7 @@ msgstr "Usuários"
 
 #: dataviva/apps/admin/templates/admin/index.html:87
 #: dataviva/apps/help/templates/help/new.html:8
-#: dataviva/templates/admin.html:25 dataviva/templates/include/footer.html:36
+#: dataviva/templates/admin.html:25 dataviva/templates/include/footer.html:39
 #: dataviva/translations/dictionary.py:598
 msgid "Help"
 msgstr "Ajuda"
@@ -821,7 +821,7 @@ msgstr "Publicar em inglês"
 #: dataviva/apps/news/templates/news/_form.html:58
 #: dataviva/apps/news/templates/news/_form.html:101
 #: dataviva/apps/news/templates/news/_form.html:122
-#: dataviva/templates/include/header.html:60
+#: dataviva/templates/include/header.html:72
 #: dataviva/translations/dictionary.py:548
 msgid "English"
 msgstr "Inglês"
@@ -897,7 +897,7 @@ msgstr "Conteúdo"
 #: dataviva/apps/news/templates/news/edit.html:9
 #: dataviva/apps/search/templates/search/admin.html:40
 #: dataviva/apps/search/templates/search/edit.html:10
-#: dataviva/templates/include/header.html:53
+#: dataviva/templates/include/header.html:64
 #: dataviva/translations/dictionary.py:456
 msgid "Edit"
 msgstr "Editar"
@@ -917,7 +917,7 @@ msgstr "Visualizar "
 #: dataviva/apps/help/templates/help/_form.html:46
 #: dataviva/apps/news/templates/news/_form.html:133
 #: dataviva/apps/search/templates/search/_form.html:177
-#: dataviva/templates/include/footer.html:67
+#: dataviva/templates/include/footer.html:68
 msgid "Send"
 msgstr "Enviar"
 
@@ -973,15 +973,15 @@ msgstr "Ativar"
 msgid "Deactivate"
 msgstr "Desativar"
 
-#: dataviva/apps/blog/templates/blog/index.html:22
-#: dataviva/apps/news/templates/news/index.html:22
+#: dataviva/apps/blog/templates/blog/index.html:26
+#: dataviva/apps/news/templates/news/index.html:26
 msgid "Continue reading"
 msgstr "Continue lendo"
 
-#: dataviva/apps/blog/templates/blog/index.html:23
-#: dataviva/apps/blog/templates/blog/show.html:23
-#: dataviva/apps/news/templates/news/index.html:23
-#: dataviva/apps/news/templates/news/show.html:22
+#: dataviva/apps/blog/templates/blog/index.html:27
+#: dataviva/apps/blog/templates/blog/show.html:26
+#: dataviva/apps/news/templates/news/index.html:27
+#: dataviva/apps/news/templates/news/show.html:26
 msgid "By"
 msgstr "por"
 
@@ -995,26 +995,26 @@ msgstr "Publicar"
 msgid "Publish a "
 msgstr "Publicar um"
 
-#: dataviva/apps/blog/templates/blog/show.html:14
+#: dataviva/apps/blog/templates/blog/show.html:13
 #: dataviva/apps/location/templates/location/graphs-opportunities.html:3
 #: dataviva/apps/news/templates/news/show.html:13
 msgid "Visualize"
 msgstr "Visualização"
 
-#: dataviva/apps/blog/templates/blog/show.html:30
-#: dataviva/apps/news/templates/news/show.html:29
+#: dataviva/apps/blog/templates/blog/show.html:39
+#: dataviva/apps/news/templates/news/show.html:39
 msgid "Tweet"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/show.html:42
-#: dataviva/apps/news/templates/news/show.html:41
+#: dataviva/apps/blog/templates/blog/show.html:54
+#: dataviva/apps/news/templates/news/show.html:53
 msgid "See also"
 msgstr "Veja também"
 
 #: dataviva/apps/build_graph/templates/build_graph/index.html:7
 #: dataviva/apps/data/templates/data/index.html:18
 #: dataviva/templates/general/browse_categories.html:24
-#: dataviva/templates/include/footer.html:29
+#: dataviva/templates/include/footer.html:31
 #: dataviva/translations/dictionary.py:596
 msgid "Make Graphs"
 msgstr "Construa Gráficos"
@@ -1028,6 +1028,7 @@ msgid "Select"
 msgstr "Selecione"
 
 #: dataviva/apps/calls/templates/calls/_form.html:22
+#: dataviva/apps/user/templates/user/change_password.html:47
 #: dataviva/apps/user/templates/user/edit.html:104
 #: dataviva/templates/modal/dataviva.html:103
 #: dataviva/templates/modal/search.html:29
@@ -1085,8 +1086,7 @@ msgstr ""
 #: dataviva/apps/help/templates/help/tab-classifications-trade-partners.html:13
 #: dataviva/apps/help/templates/help/tab-classifications-universities.html:12
 #: dataviva/apps/user/templates/user/admin.html:32
-#: dataviva/templates/include/footer.html:47
-#: dataviva/templates/include/footer.html:49
+#: dataviva/templates/include/footer.html:52
 #: dataviva/templates/modal/signup.html:16
 #: dataviva/templates/modal/signup.html:17
 #: dataviva/translations/dictionary.py:340
@@ -1098,8 +1098,7 @@ msgid "Subject"
 msgstr "Assunto"
 
 #: dataviva/apps/contact/templates/contact/index.html:59
-#: dataviva/templates/include/footer.html:59
-#: dataviva/templates/include/footer.html:61
+#: dataviva/templates/include/footer.html:62
 #: dataviva/translations/dictionary.py:600
 msgid "Message"
 msgstr "Mensagem"
@@ -1107,7 +1106,7 @@ msgstr "Mensagem"
 #: dataviva/apps/data/templates/data/index.html:8
 #: dataviva/apps/data/templates/data/index.html:22
 #: dataviva/templates/general/browse_categories.html:25
-#: dataviva/templates/include/footer.html:30
+#: dataviva/templates/include/footer.html:32
 #: dataviva/translations/dictionary.py:595
 msgid "Database Download"
 msgstr "Download de Dados"
@@ -1163,12 +1162,12 @@ msgstr ""
 "Você precisa escolher pelo menos um dos filtros para poder efetuar o "
 "download."
 
-#: dataviva/apps/embed/views.py:228
+#: dataviva/apps/embed/views.py:234
 msgid "You need to be logged in to star visualizations."
 msgstr "Você precisa fazer o login para favoritar visualizações."
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:2999
+#: dataviva/apps/embed/templates/embed/embed.html:3018
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid ""
 "DataViva is opening up data for the entire formal sector of the Brazilian"
@@ -1178,7 +1177,7 @@ msgstr ""
 "economia"
 
 #: dataviva/apps/embed/templates/embed/embed.html:6
-#: dataviva/apps/embed/templates/embed/embed.html:3001
+#: dataviva/apps/embed/templates/embed/embed.html:3020
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
 msgid "through more than 100 million interactive visualizations."
 msgstr "brasileira em mais de 100 milhões de visualizações interativas."
@@ -1361,7 +1360,7 @@ msgstr "Atividades Econômicas"
 #: dataviva/templates/general/browse_categories.html:71
 #: dataviva/templates/general/index.html:69
 #: dataviva/templates/general/select.html:29
-#: dataviva/templates/include/footer.html:19
+#: dataviva/templates/include/footer.html:21
 #: dataviva/translations/dictionary.py:163
 #: dataviva/translations/dictionary.py:358
 msgid "Occupations"
@@ -1373,7 +1372,7 @@ msgstr "Ocupações"
 #: dataviva/templates/about.html:66
 #: dataviva/templates/general/browse_categories.html:87
 #: dataviva/templates/general/index.html:81
-#: dataviva/templates/include/footer.html:21
+#: dataviva/templates/include/footer.html:23
 #: dataviva/translations/dictionary.py:360
 msgid "Products"
 msgstr "Produtos"
@@ -1382,7 +1381,7 @@ msgstr "Produtos"
 #: dataviva/apps/help/templates/help/index.html:267
 #: dataviva/templates/general/browse_categories.html:95
 #: dataviva/templates/general/index.html:87
-#: dataviva/templates/include/footer.html:22
+#: dataviva/templates/include/footer.html:24
 #: dataviva/translations/dictionary.py:364
 msgid "Trade Partners"
 msgstr "Parceiros Comerciais"
@@ -1403,7 +1402,7 @@ msgstr "Cursos Superiores"
 #: dataviva/templates/about.html:78
 #: dataviva/templates/general/browse_categories.html:103
 #: dataviva/templates/general/index.html:93
-#: dataviva/templates/include/footer.html:23
+#: dataviva/templates/include/footer.html:25
 #: dataviva/translations/dictionary.py:188
 #: dataviva/translations/dictionary.py:189
 #: dataviva/translations/dictionary.py:366
@@ -1415,7 +1414,7 @@ msgstr "Universidades"
 #: dataviva/apps/help/templates/help/tab-classifications-basic-courses.html:3
 #: dataviva/templates/about.html:82
 #: dataviva/templates/general/browse_categories.html:119
-#: dataviva/templates/include/footer.html:25
+#: dataviva/templates/include/footer.html:27
 #: dataviva/translations/dictionary.py:372
 msgid "Basic Courses"
 msgstr "Cursos Básicos"
@@ -1509,7 +1508,7 @@ msgstr "ID MDIC"
 #: dataviva/apps/rankings/templates/rankings/_base.html:47
 #: dataviva/templates/general/browse_categories.html:79
 #: dataviva/templates/general/index.html:75
-#: dataviva/templates/include/footer.html:20
+#: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:583
 msgid "Economic Activities"
 msgstr "Atividades Econômicas"
@@ -3114,7 +3113,7 @@ msgstr "ID Curso"
 #: dataviva/templates/about.html:38
 #: dataviva/templates/general/browse_categories.html:111
 #: dataviva/templates/general/index.html:99
-#: dataviva/templates/include/footer.html:24
+#: dataviva/templates/include/footer.html:26
 #: dataviva/translations/dictionary.py:297
 msgid "Higher Education"
 msgstr "Ensino Superior"
@@ -3210,7 +3209,8 @@ msgstr "Escolha uma opção ou digite o que procura"
 msgid "Create"
 msgstr "Criar"
 
-#: dataviva/apps/session/templates/session/login.html:15
+#: dataviva/apps/session/templates/session/login.html:27
+#: dataviva/apps/session/templates/session/login.html:45
 #: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
 #: dataviva/templates/general/upgrade.html:3
 #: dataviva/templates/include/header.html:47
@@ -3218,29 +3218,24 @@ msgstr "Criar"
 msgid "Login"
 msgstr "Entre"
 
-#: dataviva/apps/session/templates/session/login.html:18
-msgid "Entre com suas credenciais..."
-msgstr ""
+#: dataviva/apps/session/templates/session/login.html:30
+msgid "Login with"
+msgstr "Entre com suas credenciais"
 
-#: dataviva/apps/session/templates/session/login.html:28
+#: dataviva/apps/session/templates/session/login.html:40
 #: dataviva/apps/user/templates/user/signup.html:30
-#: dataviva/templates/modal/login.html:18
+#: dataviva/templates/modal/login.html:20
 #: dataviva/templates/modal/signup.html:24
 msgid "Password"
 msgstr "Senha"
 
-#: dataviva/apps/session/templates/session/login.html:32
-#: dataviva/templates/modal/login.html:21
+#: dataviva/apps/session/templates/session/login.html:44
+#: dataviva/templates/modal/login.html:25
 msgid "Forgot your password"
 msgstr "Esqueceu sua Senha"
 
-#: dataviva/apps/session/templates/session/login.html:33
-msgid "Sign In"
-msgstr "Entre"
-
-#: dataviva/apps/session/templates/session/login.html:37
+#: dataviva/apps/session/templates/session/login.html:49
 #: dataviva/apps/user/templates/user/signup.html:43
-#: dataviva/templates/modal/login.html:25
 #, fuzzy
 msgid "...or sign-up using"
 msgstr "Ou cadastre-se usando"
@@ -3408,28 +3403,20 @@ msgstr "Principal Curso por Número de Alunos Concluintes"
 msgid "E-mail"
 msgstr "E-mail"
 
-#: dataviva/apps/user/templates/user/change_password.html:52
+#: dataviva/apps/user/templates/user/change_password.html:30
 msgid "Current Password"
 msgstr "Senha Atual"
 
-#: dataviva/apps/user/templates/user/change_password.html:57
+#: dataviva/apps/user/templates/user/change_password.html:35
 msgid "New Password"
 msgstr "Nova Senha"
 
-#: dataviva/apps/user/templates/user/change_password.html:62
+#: dataviva/apps/user/templates/user/change_password.html:40
 #: dataviva/apps/user/templates/user/signup.html:35
 msgid "Confirm Password"
 msgstr "Confirmar Senha"
 
-#: dataviva/apps/user/templates/user/change_password.html:69
-#: dataviva/templates/modal/dataviva.html:106
-#: dataviva/templates/modal/search.html:28
-#: dataviva/templates/modal/signup.html:47
-#: dataviva/templates/modal/wizard.html:47
-msgid "Cancel"
-msgstr "Cancelar"
-
-#: dataviva/apps/user/templates/user/change_password.html:70
+#: dataviva/apps/user/templates/user/change_password.html:48
 #: dataviva/apps/user/templates/user/edit.html:105
 #: dataviva/templates/admin/admin_questions_edit.html:44
 msgid "Update"
@@ -3492,6 +3479,7 @@ msgstr "Confirmar"
 #: dataviva/apps/user/templates/user/signup.html:14
 #: dataviva/apps/user/templates/user/signup.html:39
 #: dataviva/templates/include/header.html:49
+#: dataviva/templates/modal/login.html:42
 #: dataviva/templates/modal/signup.html:48
 msgid "Sign Up"
 msgstr "Cadastre-se"
@@ -3506,7 +3494,6 @@ msgid "Email"
 msgstr "Email"
 
 #: dataviva/apps/user/templates/user/mail/confirmation.html:7
-#: dataviva/templates/include/header.html:51
 #: dataviva/translations/dictionary.py:561
 msgid "Welcome"
 msgstr "Seja bem vindo"
@@ -3527,7 +3514,7 @@ msgstr "VERIFICAR E-MAIL"
 #: dataviva/templates/about.html:16 dataviva/templates/about/ask/ask.html:4
 #: dataviva/templates/about/ask/index.html:4
 #: dataviva/templates/include/footer.html:41
-#: dataviva/templates/include/footer.html:43
+#: dataviva/templates/include/footer.html:46
 #: dataviva/translations/dictionary.py:593
 msgid "Contact Us"
 msgstr "Fale Conosco"
@@ -3659,7 +3646,7 @@ msgstr "Ajuda"
 
 #: dataviva/templates/site.html:30 dataviva/templates/about/crosswalk.html:10
 #: dataviva/templates/about/ask/index.html:27
-#: dataviva/templates/include/footer.html:17
+#: dataviva/templates/include/footer.html:19
 #: dataviva/translations/dictionary.py:635
 msgid "Search"
 msgstr "Pesquisar"
@@ -3671,7 +3658,7 @@ msgstr "Pesquisar"
 msgid "Admin Panel"
 msgstr "Painel do Administrador"
 
-#: dataviva/templates/site.html:53 dataviva/templates/include/header.html:54
+#: dataviva/templates/site.html:53 dataviva/templates/include/header.html:65
 msgid "Logout"
 msgstr "Sair"
 
@@ -4911,7 +4898,7 @@ msgstr "Lembrar-me"
 #: dataviva/templates/admin/admin_questions.html:29
 #: dataviva/templates/admin/admin_replies.html:28
 #: dataviva/templates/admin/admin_users.html:12
-#: dataviva/templates/modal/login.html:15
+#: dataviva/templates/modal/login.html:17
 #: dataviva/translations/dictionary.py:459
 msgid "User"
 msgstr "Usuário"
@@ -5035,7 +5022,7 @@ msgid "Another Features"
 msgstr "Outros Recursos"
 
 #: dataviva/templates/general/browse_categories.html:23
-#: dataviva/templates/include/footer.html:28
+#: dataviva/templates/include/footer.html:30
 #: dataviva/translations/dictionary.py:597
 msgid "View Rankings"
 msgstr "Visualize Rankings"
@@ -5446,27 +5433,27 @@ msgstr ""
 "Explorer anteriores à versão 9. Por favor, atualize seu navegador para "
 "utilizar o site."
 
-#: dataviva/templates/include/footer.html:7
+#: dataviva/templates/include/footer.html:8
 #: dataviva/templates/include/partners.html:4
 #: dataviva/translations/dictionary.py:587
 msgid "Partners"
 msgstr "Parceiros"
 
-#: dataviva/templates/include/footer.html:14
+#: dataviva/templates/include/footer.html:16
 msgid "Explore"
 msgstr "Explore"
 
-#: dataviva/templates/include/footer.html:18
+#: dataviva/templates/include/footer.html:20
 #: dataviva/translations/dictionary.py:356
 msgid "Locations"
 msgstr "Localidades"
 
-#: dataviva/templates/include/footer.html:35
+#: dataviva/templates/include/footer.html:38
 #: dataviva/translations/dictionary.py:592
 msgid "Support"
 msgstr "Suporte"
 
-#: dataviva/templates/include/footer.html:37
+#: dataviva/templates/include/footer.html:40
 #: dataviva/translations/dictionary.py:599
 msgid "Virtual Tour"
 msgstr "Tour Virtual"
@@ -5527,11 +5514,17 @@ msgid "HELP"
 msgstr "AJUDA"
 
 #: dataviva/templates/include/header.html:48
+#: dataviva/templates/modal/login.html:29
 #: dataviva/translations/dictionary.py:557
 msgid "or"
 msgstr "ou"
 
 #: dataviva/templates/include/header.html:61
+#: dataviva/translations/dictionary.py:460
+msgid "Admin"
+msgstr "Administrador"
+
+#: dataviva/templates/include/header.html:73
 #: dataviva/translations/dictionary.py:549
 msgid "Portuguese"
 msgstr "Português"
@@ -5643,9 +5636,20 @@ msgstr "Não encontrei o que estava procurando"
 msgid "Advance"
 msgstr "Avançar"
 
-#: dataviva/templates/modal/login.html:10
+#: dataviva/templates/modal/dataviva.html:106
+#: dataviva/templates/modal/search.html:28
+#: dataviva/templates/modal/signup.html:47
+#: dataviva/templates/modal/wizard.html:47
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: dataviva/templates/modal/login.html:12
 msgid "Users Acess"
 msgstr "Acesso de usuários"
+
+#: dataviva/templates/modal/login.html:32
+msgid "Use your social media:"
+msgstr "Utilize suas redes sociais:"
 
 #: dataviva/templates/modal/signup.html:10
 msgid ""
@@ -6650,10 +6654,6 @@ msgstr "Visível"
 msgid "Hidden"
 msgstr "Oculto"
 
-#: dataviva/translations/dictionary.py:460
-msgid "Admin"
-msgstr "Administrador"
-
 #: dataviva/translations/dictionary.py:463
 #, fuzzy
 msgid "activate"
@@ -7305,4 +7305,13 @@ msgstr "com"
 
 #~ msgid "Highlights"
 #~ msgstr "Destaques"
+
+#~ msgid "Entre com suas credenciais..."
+#~ msgstr ""
+
+#~ msgid "Sign In"
+#~ msgstr "Origem"
+
+#~ msgid "Please enter your credentials"
+#~ msgstr "Entre com suas credenciais"
 

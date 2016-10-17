@@ -170,6 +170,11 @@ var summernoteConfig = {
     }
 }
 
+var select2Config = {
+    tags: true,
+    tokenSeparators: [',']
+}
+
 function selectorCallback(id, event) {
     url = window.location.origin + window.location.pathname + '?bra_id='+id;
     window.location = url;
@@ -536,8 +541,6 @@ $(document).ready(function () {
             var $confirm      = $form.find('input[name="confirm"]');
             var $agree_mailer = $form.find('input[name="agree_mailer"]');
             var status        = true;
-
-            debugger
 
             if ($fullname.val() === '') {
                 $fullname.closest('.form-group').addClass('has-error');

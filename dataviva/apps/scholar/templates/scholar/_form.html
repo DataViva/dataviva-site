@@ -25,8 +25,9 @@
     </p>
     <p>
         <label for="keywords">Palavras-Chave</label>
-        {{ form.keywords(class="form-control", placeholder="Separe as palavras-chave por vírgula")}}
+        {{ form.keywords(class="form-control") }}
         {{ messages(form.keywords) }}
+        <small>Você pode definir suas próprias palavras-chave</small>
     </p>
     <p>
         <label for="abstract">Resumo</label>
