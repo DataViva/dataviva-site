@@ -12,7 +12,6 @@
             </div>
             <h4>{%trans%}Exports By{%endtrans%}</h4>
             {% if not is_municipality%}
-            {{is_municipality}}
             <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="exports-municipality">
                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?size=export_val&depth=bra_9&color=color"
