@@ -23,7 +23,6 @@ class Publication(db.Model):
     last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
     show_home = db.Column(db.Boolean)
-    dual_language = db.Column(db.Boolean)
 
     subjects = db.relationship(
         "PublicationSubject",

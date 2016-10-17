@@ -178,7 +178,6 @@ def create():
             '%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
-        publication.dual_language = form.dual_language.data
         publication.active = 0
         publication.author = form.author.data
 
@@ -243,7 +242,6 @@ def edit(id):
     form.publish_date.data = publication.publish_date
     form.text_call_pt.data = publication.text_call_pt
     form.show_home.data = publication.show_home
-    form.dual_language.data = publication.dual_language
     form.thumb.data = publication.thumb
     form.subject_pt.data = [
         subject.name for subject in publication.subjects if subject.language == 'pt']
@@ -270,7 +268,6 @@ def update(id):
             '%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
-        publication.dual_language = form.dual_language.data
         publication.author = form.author.data
 
         num_subjects = len(publication.subjects)

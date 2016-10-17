@@ -12,13 +12,6 @@
             {{ messages(form.title_pt) }}
             {{ form.title_pt(class="form-control", maxlength=400)}}
         </div>
-        <div class="form-group col-md-2">
-            <label class="control-label" for="authors">{% trans %}Publish in English{% endtrans %}</label>
-            {{ messages(form.dual_language) }}
-            <div class="form-control checkbox-switch">
-                {{ form.dual_language(class="js-switch") }}
-            </div>
-        </div>
     </div>
     <div class="row">
         <div class="form-group col-md-7 {{ 'has-error' if form.author.errors else '' }}">

@@ -5,15 +5,6 @@ from dataviva.utils.custom_fields import TagsField
 from models import Subject
 
 
-def english_field(message):
-
-    def _english_field(form, field):
-        if form.dual_language.data and not field.data:
-            raise ValidationError(message)
-
-    return _english_field
-
-
 class RegistrationForm(Form):
     title_pt = TextField('title_pt', validators=[
         validators.Required(u"Por favor, insira o título do post."),
@@ -21,8 +12,6 @@ class RegistrationForm(Form):
     ])
 
     show_home = BooleanField('show_home')
-
-    dual_language = BooleanField('dual_language')
 
     author = TextField('author', validators=[
         validators.Required(u"Por favor, insira o autor do post."),
