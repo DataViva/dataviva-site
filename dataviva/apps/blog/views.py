@@ -65,12 +65,14 @@ def index(page=1):
 
     subject = request.args.get('subject')
     if subject:
-        posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).order_by(desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
-        num_posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).count()
+        posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).order_by(
+            desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_posts = posts_query.filter(
+            Post.subjects.any(Subject.id == subject)).count()
     else:
-        posts = posts_query.order_by(desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        posts = posts_query.order_by(desc(Post.publish_date)).paginate(
+            page, ITEMS_PER_PAGE, True).items
         num_posts = posts_query.count()
-
 
     pagination = Pagination(page=page,
                             total=num_posts,
@@ -78,9 +80,9 @@ def index(page=1):
                             bs_version=BOOTSTRAP_VERSION)
 
     return render_template('blog/index.html',
-                            posts=posts,
-                            subjects=active_posts_subjects(g.locale),
-                            pagination=pagination)
+                           posts=posts,
+                           subjects=active_posts_subjects(g.locale),
+                           pagination=pagination)
 
 
 @mod.route('/post/<id>', methods=['GET'])
@@ -177,8 +179,10 @@ def new():
 def create():
     form = RegistrationForm()
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject) for subject in form.subject_pt.data]
-        form.subject_en.choices = [(subject, subject) for subject in form.subject_en.data]
+        form.subject_pt.choices = [(subject, subject)
+                                   for subject in form.subject_pt.data]
+        form.subject_en.choices = [(subject, subject)
+                                   for subject in form.subject_en.data]
         return render_template('blog/new.html', form=form)
     else:
         post = Post()
@@ -239,13 +243,17 @@ def edit(id):
     post = Post.query.filter_by(id=id).first_or_404()
 
     form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in publication.subjects if subject.language == 'pt']
+                               for subject in post.subjects if subject.language == 'pt']
     form.subject_en.choices = [(subject.name, subject.name)
-                               for subject in publication.subjects if subject.language == 'en']
-    subject_pt_query = Subject.query.filter_by(language='pt').order_by(Subject.name)
-    subject_en_query = Subject.query.filter_by(language='en').order_by(Subject.name)
-    form.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (subject.name, subject.name) not in form.subject_pt.choices])
-    form.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (subject.name, subject.name) not in form.subject_en.choices])
+                               for subject in post.subjects if subject.language == 'en']
+    subject_pt_query = Subject.query.filter_by(
+        language='pt').order_by(Subject.name)
+    subject_en_query = Subject.query.filter_by(
+        language='en').order_by(Subject.name)
+    form.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (
+        subject.name, subject.name) not in form.subject_pt.choices])
+    form.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (
+        subject.name, subject.name) not in form.subject_en.choices])
 
     form.title_pt.data = post.title_pt
     form.title_en.data = post.title_en
@@ -273,8 +281,10 @@ def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject) for subject in form.subject_pt.data]
-        form.subject_en.choices = [(subject, subject) for subject in form.subject_en.data]
+        form.subject_pt.choices = [(subject, subject)
+                                   for subject in form.subject_pt.data]
+        form.subject_en.choices = [(subject, subject)
+                                   for subject in form.subject_en.data]
         return render_template('blog/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()
@@ -300,7 +310,8 @@ def update(id):
             form.text_content_pt.data, mod.name, post.id)
         post.text_content_en = upload_images_to_s3(
             form.text_content_en.data, mod.name, post.id)
-        clean_s3_folder(post.text_content_pt, post.text_content_en, mod.name, post.id)
+        clean_s3_folder(
+            post.text_content_pt, post.text_content_en, mod.name, post.id)
 
         db.session.flush()
         if len(form.thumb.data.split(',')) > 1:
