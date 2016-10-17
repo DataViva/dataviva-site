@@ -29,7 +29,7 @@ var Category = (function() {
 
     function updateUrl(tab){
         var url = getUrlBeforePageTab();
-        var braId = getBraIdFromUrl();
+        var braId = dataviva.getArgUrl('bra_id');
 
         if(tab != 'general')
             url += '/' + tab;
@@ -50,7 +50,7 @@ var Category = (function() {
 
         url = window.location.href.split('?')[0] + '?menu=' + menuOption + '&url=' + graphUrl;
 
-        var braId = getBraIdFromUrl();
+        var braId = dataviva.getArgUrl('bra_id');
         
         if(braId)
             url += '&bra_id=' + braId;
@@ -58,20 +58,6 @@ var Category = (function() {
         window.history.pushState('', '', url);
     }
 
-    function getBraIdFromUrl(){
-        var params = window.location.href.split('?')[1];
-
-        if(params){
-            params = params.split(/=|&/);
-            var braIdIndex = params.indexOf('bra_id');
-
-            if(braIdIndex != -1)
-                return params[braIdIndex + 1];
-            else
-                return null;
-        }
-
-    }
 
     function changeTab() {
         var location = this.dataset.location,
