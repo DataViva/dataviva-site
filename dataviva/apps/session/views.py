@@ -4,7 +4,7 @@ from dataviva.apps.general.views import get_locale
 from dataviva.apps.user.models import User
 from dataviva.utils.encode import sha512
 from dataviva.translations.dictionary import dictionary
-from flask import Blueprint, request, render_template, session, redirect, Response, url_for, g
+from flask import Blueprint, request, render_template, session, redirect, Response, url_for, g, flash
 from flask.ext.login import login_user, logout_user
 from forms import LoginForm
 from urllib2 import Request, urlopen, URLError
@@ -40,10 +40,31 @@ def logout():
     return redirect(url_for('general.home'))
 
 
+def errorLogin(html_form, status, form):
+    if status == 401:
+        message = dictionary()["confirmation_pending"]
+        if html_form:
+            flash(message, 'danger')
+        else:
+            return Response(message, status=401, mimetype='application/json')
+    
+        return redirect('/user/confirm_pending/' + form.email.data)
+
+    elif status == 400:
+        message = dictionary()["invalid_email_or_password"]
+        if html_form:
+            flash(message, 'danger')
+        else:
+            return Response(message, status=400, mimetype='application/json')
+
+        return render_template('session/login.html', form=form)
+
+
 @mod.route('/login', methods=['GET', 'POST'])
 @mod.route('/login/<provider>', methods=['GET', 'POST'])
 def login(provider=None):
     form = LoginForm()
+    html_form = request.args.get('htmlForm')
 
     if request.method == "POST":
         if form.validate_on_submit():
@@ -53,9 +74,8 @@ def login(provider=None):
                     login_user(user, remember=True)
                     return redirect(url_for('general.home'))
                 else:
-                    return Response(dictionary()["confirmation_pending"], status=401, mimetype='application/json')
-
-        return Response(dictionary()["invalid_email_or_password"], status=400, mimetype='application/json')
+                    return errorLogin(html_form=html_form, status=401, form=form)
+        return errorLogin(html_form=html_form, status=400, form=form)
 
     if provider:
         if provider == "google":
