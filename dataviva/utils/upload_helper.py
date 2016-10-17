@@ -96,18 +96,14 @@ def upload_images_to_s3(html, object_type, object_id):
     return html
 
 
-def clean_s3_folder(html_en, html_pt, object_type, object_id):
-    soup_pt = BeautifulSoup(html_pt, 'html.parser')
-    soup_en = BeautifulSoup(html_en, 'html.parser')
+def clean_s3_folder(html, object_type, object_id):
+    soup_pt = BeautifulSoup(html, 'html.parser')
     domain = 'https://' + S3_BUCKET + '.s3.amazonaws.com/'
     prefix = os.path.join(object_type, str(object_id), 'images/content/')
     imgs = []
 
     for img in soup_pt.findAll('img', src=True):
         if img['src'].startswith(domain + prefix):
-            imgs.append(img['src'].split(domain)[1])
-    for img in soup_en.findAll('img', src=True):
-        if img['src'].startswith(domain + prefix) and img['src'].split(domain)[1] not in imgs:
             imgs.append(img['src'].split(domain)[1])
 
     uploaded_images = list_s3_files(prefix)

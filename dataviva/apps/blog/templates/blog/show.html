@@ -4,7 +4,7 @@
     <meta property="og:image" content="{{ post.thumb }}" />
     <meta property="og:url" content="{{ url_for('blog.show', id=post.id, _external=True, _scheme='http') }}" />
     <meta property="og:title" content="{{ post.title_pt }}" />
-    <meta property="og:description" content="{{post.text_call_pt}}" />
+    <meta property="og:description" content="{{ post.text_call_pt }}" />
     <meta property="og:type" content="article" />
 {% endblock %}
 
@@ -17,19 +17,9 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item post single">
-            <h4 name="content-pt" class="dual-lang-field">{{ post.title_pt|safe }}</h4>
-            {% if post.dual_language %}
-                <h4 name="content-en" class="dual-lang-field">{{ post.title_en|safe }}</h4>
-            {% endif %}
+            <h4>{{ post.title_pt|safe }}</h4>
             <div class="meta">
-                <p class="data">
-                    {% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}
-                {% if post.dual_language %}
-                    <br>
-                    <a id="to-en" class="{{ 'active' if g.locale == 'en' }}" {{ 'disabled' if g.locale == 'en' }}>English</a> |
-                    <a id="to-pt" class="{{ 'active' if g.locale == 'pt' }}" {{ 'disabled' if g.locale == 'pt' }}>Português</a>
-                {% endif %}
-                </p>
+                <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
             </div>
             <ul class="social">
                 <li>
@@ -44,10 +34,7 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            <div name="content-pt" class="dual-lang-field">{{ post.text_content_pt|safe }}</div>
-            {% if post.dual_language %}
-                <div name="content-en" class="dual-lang-field">{{ post.text_content_en|safe }}</div>
-            {% endif %}
+            {{ post.text_content_pt|safe }}
         </div>
         <div class="clearfix"></div>
         <div class="related">
@@ -55,11 +42,11 @@
             <div class="row">
                 {% for post in read_more %}
                 <div class="col-xs-12 col-sm-6 col-lg-4 {% if loop.last %} hidden-sm hidden-md {% endif %} read-more">
-                    <a href="{{url_for('blog.show', id=post.id)}}" title="{{ post.title_pt }}">
+                    <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_pt }}">
                         <img src="{{post.thumb}}" class="img-responsive">
                     </a>
                     <p>
-                        <a href="{{url_for('blog.show', id=post.id)}}" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{{ post.title_en|safe if post.dual_language and g.locale == 'en' else post.title_pt|safe }}</a>
+                        <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_pt }}">{{ post.title_pt|safe }}</a>
                     </p>
                 </div>
             {% endfor %}

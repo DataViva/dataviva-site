@@ -15,15 +15,9 @@ def english_field(message):
 
 
 class RegistrationForm(Form):
-
     title_pt = TextField('title_pt', validators=[
         validators.Required(u"Por favor, insira o título do post."),
         validators.Length(max=400)
-    ])
-
-    title_en = TextField('title_en', validators=[
-        validators.Length(max=400),
-        english_field(u"Por favor, insira o título do post.")
     ])
 
     show_home = BooleanField('show_home')
@@ -47,28 +41,13 @@ class RegistrationForm(Form):
             validators.Required(u"Por favor, insira a categoria do post."),
     ])
 
-    subject_en = TagsField('subject_en',
-        choices=[],
-        validators=[
-            english_field(u"Por favor, insira a categoria do post.")
-        ])
-
     text_call_pt = TextAreaField('text_call_pt', validators=[
         validators.Required(u"Por favor, insira uma chamada para o post."),
         validators.Length(max=500)
     ])
 
-    text_call_en = TextAreaField('text_call_en', validators=[
-        validators.Length(max=500),
-        english_field(u"Por favor, insira uma chamada para o post.")
-    ])
-
     text_content_pt = HiddenField('text_content_pt', validators=[
         validators.Required(u"Por favor, insira o conteúdo do post.")
-    ]) 
-
-    text_content_en = HiddenField('text_content_en', validators=[
-        english_field(u"Por favor, insirao conteúdo do post.")
     ])
 
     thumb = HiddenField('thumb', validators=[
@@ -78,9 +57,5 @@ class RegistrationForm(Form):
     def set_remaining_choices(self):
         subject_pt_query = Subject.query.filter_by(
             language='pt').order_by(Subject.name)
-        subject_en_query = Subject.query.filter_by(
-            language='en').order_by(Subject.name)
         self.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (
             subject.name, subject.name) not in self.subject_pt.choices])
-        self.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (
-            subject.name, subject.name) not in self.subject_en.choices])

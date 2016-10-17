@@ -5,7 +5,6 @@
 {%- endmacro %}
 
 <form id="blog-form" method="POST" action="{{ action }}" enctype="multipart/form-data">
-
     {{ form.hidden_tag() }}
     <div class="row">
         <div class="form-group col-md-10 {{ 'has-error' if form.title_pt.errors else '' }} ">
@@ -20,13 +19,7 @@
                 {{ form.dual_language(class="js-switch") }}
             </div>
         </div>
-        <div class="dual-lang-field form-group col-md-10 {{ 'has-error' if form.title_en.errors else '' }} ">
-            <label class="control-label" for="title_en">{% trans %}Title{% endtrans %} ({% trans %}English{% endtrans %})</label>
-            {{ messages(form.title_en) }}
-            {{ form.title_en(class="form-control", maxlength=400)}}
-        </div>
     </div>
-
     <div class="row">
         <div class="form-group col-md-7 {{ 'has-error' if form.author.errors else '' }} ">
             <label class="control-label" for="author">{% trans %}Author{% endtrans %}</label>
@@ -53,11 +46,6 @@
         <label class="control-label" for="subject_pt">{% trans %}Category{% endtrans %}</label>
         {{ messages(form.subject_pt) }}
         {{ form.subject_pt(class="form-control")}}
-    </div>
-    <div class="dual-lang-field form-group {{ 'has-error' if form.subject_en.errors else '' }} ">
-        <label class="control-label" for="subject_en">{% trans %}Category{% endtrans %} ({% trans %}English{% endtrans %})</label>
-        {{ messages(form.subject_en) }}
-        {{ form.subject_en(class="form-control")}}
     </div>
     <div class="form-group {{ 'has-error' if form.thumb.errors else '' }} ">
         <label class="control-label" for="thumb-input">{% trans %}Call Image{% endtrans %}</label>
@@ -89,21 +77,12 @@
         </div>
     </div>
     <div class="clearfix"></div>
-
     <div class="form-group m-t-sm {{ 'has-error' if form.text_call_pt.errors else '' }}">
         <label class="control-label" for="text_call_pt">{% trans %}Call{% endtrans %}</label>
         {{ messages(form.text_call_pt) }}
         {{ form.text_call_pt(class="form-control", rows=5, maxlength=500)}}
         <div name="textarea-feedback"></div>
     </div>
-
-    <div class="dual-lang-field form-group m-t-sm {{ 'has-error' if form.text_call_en.errors else '' }}">
-        <label class="control-label" for="text_call_en">{% trans %}Call{% endtrans %} ({% trans %}English{% endtrans %})</label>
-        {{ messages(form.text_call_en) }}
-        {{ form.text_call_en(class="form-control", rows=5, maxlength=500)}}
-        <div name="textarea-feedback"></div>
-    </div>
-
     <div class="row">
         <div id="summernote-pt" class="col-md-12 form-group {{ 'has-error' if form.text_content_pt.errors else '' }}">
             <label class="control-label" for="text_content_pt">{% trans %}Content{% endtrans %}</label>
@@ -116,19 +95,5 @@
             </div>
         </div>
     </div>
-
-    <div class="row">
-        <div id="summernote-en" class="col-md-12 dual-lang-field form-group {{ 'has-error' if form.text_content_en.errors else '' }}">
-            <label class="control-label" for="text_content_en">{% trans %}Content{% endtrans %} ({% trans %}English{% endtrans %})</label>
-            <button id="blog-edit-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-            <button id="blog-preview-en" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
-            {{ messages(form.text_content_en) }}
-            {{ form.text_content_en }}
-            <div class=" summernote-wrapper">
-                <div id="text-content-editor-en" class="summernote"></div>
-            </div>
-        </div>
-    </div>
-
     <button type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
 </form>

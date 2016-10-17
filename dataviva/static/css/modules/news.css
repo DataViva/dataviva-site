@@ -198,9 +198,6 @@
     text-align: center;
 }
 
-.news .dual-lang-field {
-  display: none;
-}
 @media (min-width: 500px) {
   .news .visu-wrapper {
     height: 607px
