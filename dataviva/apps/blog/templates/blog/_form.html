@@ -12,6 +12,11 @@
             {{ messages(form.title_pt) }}
             {{ form.title_pt(class="form-control", maxlength=400)}}
         </div>
+        <div class="form-group col-md-2">
+            <label class="control-label" for="language">{% trans %}Language{% endtrans %}</label>
+            {{ messages(form.language) }}
+            {{ form.language(class="form-control") }}
+        </div>
     </div>
     <div class="row">
         <div class="form-group col-md-7 {{ 'has-error' if form.author.errors else '' }} ">

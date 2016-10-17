@@ -3,11 +3,9 @@ from dataviva import db
 
 
 association_table = db.Table('news_publication_subject',
-                             db.Column(
-                                 'publication_id', db.Integer, db.ForeignKey('news_publication.id')),
-                             db.Column(
-                                 'subject_id', db.Integer, db.ForeignKey('news_subject.id'))
-                             )
+    db.Column('publication_id', db.Integer, db.ForeignKey('news_publication.id')),
+    db.Column('subject_id', db.Integer, db.ForeignKey('news_subject.id'))
+)
 
 
 class Publication(db.Model):
@@ -23,6 +21,7 @@ class Publication(db.Model):
     last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
     show_home = db.Column(db.Boolean)
+    language = db.Column(db.String(2))
 
     subjects = db.relationship(
         "PublicationSubject",

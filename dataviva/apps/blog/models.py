@@ -20,6 +20,7 @@ class Post(db.Model):
     last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
     show_home = db.Column(db.Boolean)
+    language = db.Column(db.String(2))
 
     subjects = db.relationship(
         "Subject",

@@ -180,8 +180,8 @@ def create():
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
         post.active = 0
-
-        post.add_subjects(form.subject_pt.data, 'pt')
+        post.language = form.language.data
+        post.add_subjects(form.subject_pt.data, form.language.data)
 
         db.session.add(post)
         db.session.flush()
@@ -221,8 +221,7 @@ def edit(id):
     form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
 
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in post.subjects if subject.language == 'pt']
+    form.subject_pt.choices = [(subject.name, subject.name) for subject in post.subjects]
     form.set_remaining_choices()
 
     form.title_pt.data = post.title_pt
@@ -232,7 +231,8 @@ def edit(id):
     form.show_home.data = post.show_home
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
-    form.subject_pt.data = [subject.name for subject in post.subjects if subject.language == 'pt']
+    form.subject_pt.data = [subject.name for subject in post.subjects]
+    form.language.data = post.language
 
     return render_template('blog/edit.html',
                            form=form,
@@ -258,12 +258,13 @@ def update(id):
         post.last_modification = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
+        post.language = form.language.data
 
         num_subjects = len(post.subjects)
         for i in range(0, num_subjects):
             post.subjects.remove(post.subjects[0])
 
-        post.add_subjects(form.subject_pt.data, 'pt')
+        post.add_subjects(form.subject_pt.data, form.language.data)
 
         post.text_content_pt = upload_images_to_s3(
             form.text_content_pt.data, mod.name, post.id)
