@@ -36,6 +36,15 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post %r>' % (self.title_pt)
 
+    def add_subjects(self, subjects_input, language):
+        for subject_input in subjects_input:
+            subject = Subject.query.filter_by(
+                name=subject_input, language=language).first()
+            if not subject:
+                self.subjects.append(Subject(subject_input, language))
+            else:
+                self.subjects.append(subject)
+
 
 class Subject(db.Model):
     __tablename__ = 'blog_subject'
@@ -48,4 +57,4 @@ class Subject(db.Model):
         self.language = language
 
     def __repr__(self):
-        return '<PostSubject %r (%r)>' % self.name % self.language
+        return '<PostSubject %r (%r)>' % (self.name, self.language)

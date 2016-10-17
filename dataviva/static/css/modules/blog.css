@@ -236,3 +236,23 @@
 .blog .dual-lang-field {
   display: none;
 }
+@media (min-width: 500px) {
+  .blog .visu-wrapper {
+    height: 607px
+  }
+}
+@media (min-width: 300px) and (max-width: 499px) {
+  .blog .visu-wrapper {
+    height: 440px;
+  }
+}
+@media (max-width: 299px) {
+  .blog .visu-wrapper {
+    height: 330px;
+  }
+}
+@media (max-width: 380px) {
+  .blog .visu-wrapper {
+    margin: 0px -30px 0 -30px;
+  }
+}
