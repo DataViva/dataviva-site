@@ -39,6 +39,17 @@
   right: 0;
   text-transform: uppercase;
 }
+
+.news .read-more {
+    text-align: center;
+}
+
+.news .read-more img {
+    height: 165px;
+    width: 254px;
+    display: inline-block;
+}
+
 .news .related h4 {
   color: #666;
   font-size: 25px;
@@ -168,6 +179,33 @@
 .news .thumb .thumb-crop {
     max-height: 550px;
 }
+
+@media (max-width: 767px) {
+  .news #news-form .form-group {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .news .read-more {
+      text-align: center;
+  }
+
+  .news .read-more img {
+      height: 227px;
+      width: 350px;
+      display: inline-block;
+  }
+  .news .read-more img {
+      height: 227px;
+      width: 350px;
+      display: inline-block;
+  }
+}
+
+
+
+
 .news .checkbox-switch {
     padding: 0px;
     border: none;
@@ -181,7 +219,7 @@
     height: 33px;
     width: 33px;
 }
- 
+
 .news .sidebar ul li a.active {
     text-decoration: none;
     font-weight: bold;

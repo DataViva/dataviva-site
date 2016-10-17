@@ -57,14 +57,19 @@ var load_tooltips = function() {
 }
 
 $(document).ready(function(){
+    select2Config.placeholder = 'Separe as palavras-chave por vírgula';
+    $('#subject_pt').select2(select2Config);
 
     if ($('#dual_language').is(':checked')) {
-        $('.dual-lang-field').fadeToggle();
+        $('.dual-lang-field').fadeToggle(function() {
+            $('#subject_en').select2(select2Config);
+        });
     }
 
     $('#dual_language').change(function() {
-        $('.dual-lang-field')
-            .fadeToggle();
+        $('.dual-lang-field').fadeToggle(function() {
+            $('#subject_en').select2(select2Config);
+        });
     });
 
     $('#blog-edit-pt, #blog-edit-en').prop('disabled', true);
