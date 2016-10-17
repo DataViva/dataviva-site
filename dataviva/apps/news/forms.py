@@ -2,6 +2,7 @@
 from flask.ext.wtf import Form
 from wtforms import HiddenField, TextField, TextAreaField, validators, DateField, BooleanField, ValidationError
 from dataviva.utils.custom_fields import TagsField
+from models import PublicationSubject
 
 
 def english_field(message):
@@ -72,3 +73,13 @@ class RegistrationForm(Form):
     thumb = HiddenField('thumb', validators=[
         validators.Required(u"Por favor, insira uma imagem para a chamada.")
     ])
+
+    def set_remaining_choices(self):
+        subject_pt_query = PublicationSubject.query.filter_by(
+            language='pt').order_by(PublicationSubject.name)
+        subject_en_query = PublicationSubject.query.filter_by(
+            language='en').order_by(PublicationSubject.name)
+        self.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (
+            subject.name, subject.name) not in self.subject_pt.choices])
+        self.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (
+            subject.name, subject.name) not in self.subject_en.choices])

@@ -47,16 +47,6 @@ def active_posts_subjects(language):
     return subjects
 
 
-def add_subjects(post, subjects_input, language):
-    for subject_input in subjects_input:
-        subject = Subject.query.filter_by(
-            name=subject_input).first()
-        if not subject:
-            post.subjects.append(Subject(subject_input, language))
-        else:
-            post.subjects.append(subject)
-
-
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
@@ -166,9 +156,9 @@ def admin_delete():
 def new():
     form = RegistrationForm()
     form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in active_posts_subjects('pt')]
+                               for subject in Subject.query.filter_by(language='pt').order_by(Subject.name).all()]
     form.subject_en.choices = [(subject.name, subject.name)
-                               for subject in active_posts_subjects('en')]
+                               for subject in Subject.query.filter_by(language='en').order_by(Subject.name).all()]
     return render_template('blog/new.html',
                            form=form, action=url_for('blog.create'))
 
@@ -183,6 +173,7 @@ def create():
                                    for subject in form.subject_pt.data]
         form.subject_en.choices = [(subject, subject)
                                    for subject in form.subject_en.data]
+        form.set_remaining_choices()
         return render_template('blog/new.html', form=form)
     else:
         post = Post()
@@ -197,9 +188,9 @@ def create():
         post.dual_language = form.dual_language.data
         post.active = 0
 
-        add_subjects(post, form.subject_pt.data, 'pt')
+        post.add_subjects(form.subject_pt.data, 'pt')
         if form.dual_language.data:
-            add_subjects(post, form.subject_en.data, 'en')
+            post.add_subjects(form.subject_en.data, 'en')
 
         db.session.add(post)
         db.session.flush()
@@ -246,14 +237,7 @@ def edit(id):
                                for subject in post.subjects if subject.language == 'pt']
     form.subject_en.choices = [(subject.name, subject.name)
                                for subject in post.subjects if subject.language == 'en']
-    subject_pt_query = Subject.query.filter_by(
-        language='pt').order_by(Subject.name)
-    subject_en_query = Subject.query.filter_by(
-        language='en').order_by(Subject.name)
-    form.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (
-        subject.name, subject.name) not in form.subject_pt.choices])
-    form.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (
-        subject.name, subject.name) not in form.subject_en.choices])
+    form.set_remaining_choices()
 
     form.title_pt.data = post.title_pt
     form.title_en.data = post.title_en
@@ -266,8 +250,8 @@ def edit(id):
     form.dual_language.data = post.dual_language
     form.thumb.data = post.thumb
     form.publish_date.data = post.publish_date
-    form.subject_pt.data = [subject.name for subject in post.subjects]
-    form.subject_en.data = [subject.name for subject in post.subjects]
+    form.subject_pt.data = [subject.name for subject in post.subjects if subject.language == 'pt']
+    form.subject_en.data = [subject.name for subject in post.subjects if subject.language == 'en']
 
     return render_template('blog/edit.html',
                            form=form,
@@ -285,6 +269,7 @@ def update(id):
                                    for subject in form.subject_pt.data]
         form.subject_en.choices = [(subject, subject)
                                    for subject in form.subject_en.data]
+        form.set_remaining_choices()
         return render_template('blog/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()
@@ -302,9 +287,9 @@ def update(id):
         for i in range(0, num_subjects):
             post.subjects.remove(post.subjects[0])
 
-        add_subjects(post, form.subject_pt.data, 'pt')
+        post.add_subjects(form.subject_pt.data, 'pt')
         if form.dual_language.data:
-            add_subjects(post, form.subject_en.data, 'en')
+            post.add_subjects(form.subject_en.data, 'en')
 
         post.text_content_pt = upload_images_to_s3(
             form.text_content_pt.data, mod.name, post.id)

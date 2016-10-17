@@ -74,3 +74,13 @@ class RegistrationForm(Form):
     thumb = HiddenField('thumb', validators=[
         validators.Required(u"Por favor, insira uma imagem para a chamada.")
     ])
+
+    def set_remaining_choices(self):
+        subject_pt_query = Subject.query.filter_by(
+            language='pt').order_by(Subject.name)
+        subject_en_query = Subject.query.filter_by(
+            language='en').order_by(Subject.name)
+        self.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (
+            subject.name, subject.name) not in self.subject_pt.choices])
+        self.subject_en.choices.extend([(subject.name, subject.name) for subject in subject_en_query if (
+            subject.name, subject.name) not in self.subject_en.choices])
