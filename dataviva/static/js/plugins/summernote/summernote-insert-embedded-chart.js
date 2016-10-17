@@ -1,18 +1,3 @@
-function doGetCaretPosition (ctrl) {
-        var CaretPos = 0;   // IE Support
-        if (document.selection) {
-            ctrl.focus ();
-            var Sel = document.selection.createRange ();
-            Sel.moveStart ('character', -ctrl.value.length);
-            CaretPos = Sel.text.length;
-        }
-
-        // Firefox support
-        else if (ctrl.selectionStart || ctrl.selectionStart == '0')
-            CaretPos = ctrl.selectionStart;
-        return (CaretPos);
-    }
-
 (function(factory){
     if(typeof define==='function'&&define.amd){
         define(['jquery'],factory);
@@ -23,6 +8,7 @@ function doGetCaretPosition (ctrl) {
     }
 }
 (function($){
+    // Button text
     var text = {
         'pt': {
             edit: 'Inserir visualização',
@@ -55,6 +41,7 @@ function doGetCaretPosition (ctrl) {
             
             context.memo('button.chart', function () {
                 var button = ui.button({
+                    // Button icon
                     contents: '<i class="fa fa-area-chart" aria-hidden="true"></i>',
                     tooltip: text[dataviva.language].tooltip,
                     click: function (e) {
@@ -65,6 +52,7 @@ function doGetCaretPosition (ctrl) {
                 return button.render();
             });
 
+            // Modal showing enter options
             this.initialize = function () {
                 var $container = options.dialogsInBody ? $(document.body) : $editor;
 
@@ -97,14 +85,17 @@ function doGetCaretPosition (ctrl) {
 
                     context.invoke('focus');
 
-                    // Creating a wrapper to embed the chart
+                    // Creating a struct to be responsive
                     var chart = document.createElement('div'),
                         wrapper = document.createElement('div'),
                         img = document.createElement('img'),
                         iframe = document.createElement('iframe');
+                        embed = document.createElement('embed');
                     
+                    // Placehold to embed graph
                     img.src = "http://placehold.it/1600x900/FFFFFF?text= ";
 
+                    // Getting the given url
                     resquest_iframe = urlInfo.url;
                     
                     if (resquest_iframe.lenght != 0){
@@ -113,22 +104,22 @@ function doGetCaretPosition (ctrl) {
                         // If iframe wasn't embedded
                         if (iframe.nodeName != "IFRAME") {
                             var url = iframe;
-                            iframe = document.createElement('iframe');
-                            iframe.src = url.wholeText;
+                            embed.src = url.wholeText;
                         }
+                        else
+                            embed.src = iframe.src;
 
-                        // remove width/height if the iframe already have
-                        $(iframe).removeAttr('width', 'height');
+                        chart.style = "max-width: 868px; height:auto; margin:0px auto;";
+                        img.style = "display:block; width:100%; height:100%;";
+                        wrapper.style = "position: relative;";
+                        wrapper.className = "visu-wrapper";
+                        embed.style = "position:absolute; top:0; left:0; width:100%; height:100%;";
 
-                        chart.style = "width:auto; height:auto; margin:0 auto;";
-                        img.style = "display:block; width:100%; height:auto;";
-                        wrapper.style.position = "relative";
-                        iframe.style = "position:absolute; top:0; left:0; width:100%; height:100%;";
-                        
                         wrapper.appendChild(img);
-                        wrapper.appendChild(iframe);
+                        wrapper.appendChild(embed);
                         chart.appendChild(wrapper);
 
+                        // Restoring focus on text edtion point
                         context.invoke('editor.restoreRange');
                         context.invoke('editor.focus');
 
@@ -149,6 +140,7 @@ function doGetCaretPosition (ctrl) {
                     ui.onDialogShown(self.$dialog, function () {
                         context.triggerEvent('dialog.shown');
 
+                        // Saving the text edition point
                         context.invoke('editor.saveRange');
 
                         $url.val('').trigger('focus');
