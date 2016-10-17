@@ -39,6 +39,16 @@ class Publication(db.Model):
     def __repr__(self):
         return '<Publication %r>' % (self.title_pt)
 
+    def add_subjects(self, subjects_input, language):
+        for subject_input in subjects_input:
+            subject = PublicationSubject.query.filter_by(
+                name=subject_input, language=language).first()
+            if not subject:
+                self.subjects.append(
+                    PublicationSubject(subject_input, language))
+            else:
+                self.subjects.append(subject)
+
 
 class PublicationSubject(db.Model):
     __tablename__ = 'news_subject'
@@ -51,4 +61,4 @@ class PublicationSubject(db.Model):
         self.language = language
 
     def __repr__(self):
-        return '<PublicationSubject %r (%r)>' % self.name % self.language
+        return '<PublicationSubject %r (%r)>' % (self.name, self.language)
