@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-14 16:24-0300\n"
+"POT-Creation-Date: 2016-10-17 13:57-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3111,7 +3111,8 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:15
+#: dataviva/apps/session/templates/session/login.html:27
+#: dataviva/apps/session/templates/session/login.html:45
 #: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
 #: dataviva/templates/general/upgrade.html:3
 #: dataviva/templates/include/header.html:47
@@ -3119,28 +3120,25 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:18
-msgid "Entre com suas credenciais..."
+#: dataviva/apps/session/templates/session/login.html:30
+msgid "Login with"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:28
+#: dataviva/apps/session/templates/session/login.html:40
 #: dataviva/apps/user/templates/user/signup.html:30
-#: dataviva/templates/modal/login.html:20
+#: dataviva/templates/modal/login.html:18
 #: dataviva/templates/modal/signup.html:24
 msgid "Password"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:32
-#: dataviva/templates/modal/login.html:25
+#: dataviva/apps/session/templates/session/login.html:44
+#: dataviva/templates/modal/login.html:21
 msgid "Forgot your password"
 msgstr ""
 
-#: dataviva/apps/session/templates/session/login.html:33
-msgid "Sign In"
-msgstr ""
-
-#: dataviva/apps/session/templates/session/login.html:37
+#: dataviva/apps/session/templates/session/login.html:49
 #: dataviva/apps/user/templates/user/signup.html:43
+#: dataviva/templates/modal/login.html:25
 msgid "...or sign-up using"
 msgstr ""
 
@@ -3374,7 +3372,6 @@ msgstr ""
 #: dataviva/apps/user/templates/user/signup.html:14
 #: dataviva/apps/user/templates/user/signup.html:39
 #: dataviva/templates/include/header.html:49
-#: dataviva/templates/modal/login.html:42
 #: dataviva/templates/modal/signup.html:48
 msgid "Sign Up"
 msgstr ""
@@ -4407,7 +4404,7 @@ msgstr ""
 #: dataviva/templates/admin/admin_questions.html:29
 #: dataviva/templates/admin/admin_replies.html:28
 #: dataviva/templates/admin/admin_users.html:12
-#: dataviva/templates/modal/login.html:17
+#: dataviva/templates/modal/login.html:15
 #: dataviva/translations/dictionary.py:459
 msgid "User"
 msgstr ""
@@ -4937,7 +4934,6 @@ msgid "HELP"
 msgstr ""
 
 #: dataviva/templates/include/header.html:48
-#: dataviva/templates/modal/login.html:29
 #: dataviva/translations/dictionary.py:557
 msgid "or"
 msgstr ""
@@ -5064,12 +5060,8 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: dataviva/templates/modal/login.html:12
+#: dataviva/templates/modal/login.html:10
 msgid "Users Acess"
-msgstr ""
-
-#: dataviva/templates/modal/login.html:32
-msgid "Use your social media:"
 msgstr ""
 
 #: dataviva/templates/modal/signup.html:10
@@ -6441,4 +6433,3 @@ msgstr ""
 msgctxt "9"
 msgid "th"
 msgstr ""
-
