@@ -9,21 +9,19 @@
         {% for post in posts %}
             <div class="item post">
                 <div class="thumbnail">
-                    <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_pt }}">
+                    <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title }}">
                         <img src="{{ post.thumb }}" class="thumbnail img-responsive">
                     </a>
-                    {% for subject in post.subjects if subject.language == g.locale %}
-                        {% if loop.first %}
-                            <span>{{ subject.name }}</span>
-                        {% endif %}
-                    {% endfor %}
+                    {% if post.subjects %}
+                        <span>{{ post.subjects[0].name }}</span>
+                    {% endif %}
                 </div>
                 <h4>
-                    <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}</a>
+                    <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title }}">{{ post.title }}</a>
                 </h4>
-                <p>{{ post.text_call_en if post.dual_language and g.locale == 'en' else post.text_call_pt }}</p>
+                <p>{{ post.text_call }}</p>
                 <div class="meta">
-                    <p><a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title_en if post.dual_language and g.locale == 'en' else post.title_pt }}">{% trans %}Continue reading{% endtrans %}</a></p>
+                    <p><a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title }}">{% trans %}Continue reading{% endtrans %}</a></p>
                     <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
                 </div>
             </div>

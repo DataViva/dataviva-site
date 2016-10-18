@@ -132,8 +132,8 @@ def after_request(response):
 def home():
     g.page_type = 'home'
 
-    news_publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home).all()
-    blog_posts = Post.query.filter(Post.id != id, Post.active, Post.show_home).all()
+    news_publications = Publication.query.filter(Publication.id != id, Publication.active, Publication.show_home, Publication.language == g.locale).all()
+    blog_posts = Post.query.filter(Post.id != id, Post.active, Post.show_home, Post.language == g.locale).all()
 
     news_publications += blog_posts
 
