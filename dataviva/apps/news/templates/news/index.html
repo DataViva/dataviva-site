@@ -12,11 +12,9 @@
                     <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title_pt }}">
                         <img src="{{ publication.thumb }}" class="thumbnail img-responsive">
                     </a>
-                    {% for subject in publication.subjects if subject.language == g.locale %}
-                        {% if loop.first %}
-                            <span>{{ subject.name }}</span>
-                        {% endif %}
-                    {% endfor %}
+                    {% if publication.subjects %}
+                        <span>{{ publication.subjects[0].name }}</span>
+                    {% endif %}
                 </div>
                 <h4>
                     <a href="{{ url_for('blog.show', id=publication.id) }}" title="{{ publication.title_pt }}">{{ publication.title_pt }}</a>
