@@ -155,8 +155,7 @@ def admin_delete():
 @required_roles(1)
 def new():
     form = RegistrationForm()
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in Subject.query.order_by(Subject.name).all()]
+    form.set_choices()
     return render_template('blog/new.html',
                            form=form, action=url_for('blog.create'))
 
@@ -167,9 +166,7 @@ def new():
 def create():
     form = RegistrationForm()
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject)
-                                   for subject in form.subject_pt.data]
-        form.set_remaining_choices()
+        form.set_choices()
         return render_template('blog/new.html', form=form)
     else:
         post = Post()
@@ -218,12 +215,10 @@ def upload_image():
 @login_required
 @required_roles(1)
 def edit(id):
-    form = RegistrationForm()
     post = Post.query.filter_by(id=id).first_or_404()
-
+    form = RegistrationForm()
     form.subject_pt.choices = [(subject.name, subject.name) for subject in post.subjects]
-    form.set_remaining_choices()
-
+    form.set_choices()
     form.title_pt.data = post.title_pt
     form.author.data = post.author
     form.text_content_pt.data = post.text_content_pt
@@ -246,9 +241,7 @@ def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject)
-                                   for subject in form.subject_pt.data]
-        form.set_remaining_choices()
+        form.set_choices()
         return render_template('blog/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()

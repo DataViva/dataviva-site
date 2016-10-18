@@ -47,7 +47,9 @@ class RegistrationForm(Form):
         choices=[('pt', 'Português'), ('en', 'Inglês')],
     )
 
-    def set_remaining_choices(self):
-        subject_pt_query = PublicationSubject.query.order_by(PublicationSubject.name)
-        self.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (
-            subject.name, subject.name) not in self.subject_pt.choices])
+    def set_choices(self):
+        if self.subject_pt.data:
+            self.subject_pt.choices = [(name, name) for name in self.subject_pt.data]
+        for subject in PublicationSubject.query.order_by(PublicationSubject.name):
+            if (subject.name, subject.name) not in self.subject_pt.choices:
+                self.subject_pt.choices.append((subject.name, subject.name))

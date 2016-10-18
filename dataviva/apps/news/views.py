@@ -155,8 +155,7 @@ def admin_delete():
 @required_roles(1)
 def new():
     form = RegistrationForm()
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in PublicationSubject.query.order_by(PublicationSubject.name).all()]
+    form.set_choices()
     return render_template('news/new.html', form=form, action=url_for('news.create'))
 
 
@@ -166,9 +165,7 @@ def new():
 def create():
     form = RegistrationForm()
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject)
-                                   for subject in form.subject_pt.data]
-        form.set_remaining_choices()
+        form.set_choices()
         return render_template('news/new.html', form=form)
     else:
         publication = Publication()
@@ -180,8 +177,8 @@ def create():
         publication.show_home = form.show_home.data
         publication.active = 0
         publication.author = form.author.data
-
-        publication.add_subjects(form.subject_pt.data, 'pt')
+        publication.language = form.language.data
+        publication.add_subjects(form.subject_pt.data, form.language.data)
 
         db.session.add(publication)
         db.session.flush()
@@ -229,13 +226,10 @@ def upload_images():
 @login_required
 @required_roles(1)
 def edit(id):
-    form = RegistrationForm()
     publication = Publication.query.filter_by(id=id).first_or_404()
-
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in publication.subjects if subject.language == 'pt']
-    form.set_remaining_choices()
-
+    form = RegistrationForm()
+    form.subject_pt.choices = [(subject.name, subject.name) for subject in publication.subjects]
+    form.set_choices()
     form.title_pt.data = publication.title_pt
     form.author.data = publication.author
     form.text_content_pt.data = publication.text_content_pt
@@ -243,8 +237,8 @@ def edit(id):
     form.text_call_pt.data = publication.text_call_pt
     form.show_home.data = publication.show_home
     form.thumb.data = publication.thumb
-    form.subject_pt.data = [
-        subject.name for subject in publication.subjects if subject.language == 'pt']
+    form.subject_pt.data = [subject.name for subject in publication.subjects]
+    form.language.data = publication.language
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -256,9 +250,7 @@ def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject)
-                                   for subject in form.subject_pt.data]
-        form.set_remaining_choices()
+        form.set_choices()
         return render_template('news/edit.html', form=form)
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
@@ -269,12 +261,13 @@ def update(id):
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
         publication.author = form.author.data
+        publication.language = form.language.data
 
         num_subjects = len(publication.subjects)
         for i in range(0, num_subjects):
             publication.subjects.remove(publication.subjects[0])
 
-        publication.add_subjects(form.subject_pt.data, 'pt')
+        publication.add_subjects(form.subject_pt.data, form.language.data)
 
         publication.text_content_pt = upload_images_to_s3(
             form.text_content_pt.data, mod.name, publication.id)
