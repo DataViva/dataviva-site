@@ -9,21 +9,19 @@
         {% for publication in publications %}
             <div class="item publication">
                 <div class="thumbnail">
-                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">
+                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
                         <img src="{{ publication.thumb }}" class="thumbnail img-responsive">
                     </a>
-                    {% for subject in publication.subjects if subject.language == g.locale %}
-                        {% if loop.first %}
-                            <span>{{ subject.name }}</span>
-                        {% endif %}
-                    {% endfor %}
+                    {% if publication.subjects %}
+                        <span>{{ publication.subjects[0].name }}</span>
+                    {% endif %}
                 </div>
                 <h4>
-                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}</a>
+                    <a href="{{ url_for('blog.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a>
                 </h4>
-                <p>{{ publication.text_call_en if publication.dual_language and g.locale == 'en' else publication.text_call_pt }}</p>
+                <p>{{ publication.text_call }}</p>
                 <div class="meta">
-                    <p class="read-more"><a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">{% trans %}Continue reading{% endtrans %}</a></p>
+                    <p class="read-more"><a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">{% trans %}Continue reading{% endtrans %}</a></p>
                     <p class="data">{% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}</p>
                 </div>
             </div>

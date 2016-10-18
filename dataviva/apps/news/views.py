@@ -50,7 +50,7 @@ def active_publications_subjects(language):
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
-    publications_query = Publication.query.filter_by(active=True)
+    publications_query = Publication.query.filter_by(active=True, language=g.locale)
     publications = []
 
     subject = request.args.get('subject')
@@ -97,7 +97,7 @@ def all():
     result = Publication.query.all()
     publications = []
     for row in result:
-        publications += [(row.id, row.title_pt, row.author,
+        publications += [(row.id, row.title, row.author,
                           row.publish_date.strftime('%d/%m/%Y'), row.show_home, row.active)]
     return jsonify(publications=publications)
 
@@ -155,10 +155,7 @@ def admin_delete():
 @required_roles(1)
 def new():
     form = RegistrationForm()
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in PublicationSubject.query.filter_by(language='pt').order_by(PublicationSubject.name).all()]
-    form.subject_en.choices = [(subject.name, subject.name)
-                               for subject in PublicationSubject.query.filter_by(language='en').order_by(PublicationSubject.name).all()]
+    form.set_choices()
     return render_template('news/new.html', form=form, action=url_for('news.create'))
 
 
@@ -168,41 +165,28 @@ def new():
 def create():
     form = RegistrationForm()
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject)
-                                   for subject in form.subject_pt.data]
-        form.subject_en.choices = [(subject, subject)
-                                   for subject in form.subject_en.data]
-        form.set_remaining_choices()
+        form.set_choices()
         return render_template('news/new.html', form=form)
     else:
         publication = Publication()
-        publication.title_pt = form.title_pt.data
-        publication.title_en = form.title_en.data
-        publication.text_call_pt = form.text_call_pt.data
-        publication.text_call_en = form.text_call_en.data
+        publication.title = form.title.data
+        publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime(
             '%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
-        publication.dual_language = form.dual_language.data
         publication.active = 0
         publication.author = form.author.data
-
-        publication.add_subjects(form.subject_pt.data, 'pt')
-        if form.dual_language.data:
-            publication.add_subjects(form.subject_en.data, 'en')
+        publication.language = form.language.data
+        publication.add_subjects(form.subject.data, form.language.data)
 
         db.session.add(publication)
         db.session.flush()
 
-        text_content_pt = upload_images_to_s3(
-            form.text_content_pt.data, mod.name, publication.id)
-        text_content_en = upload_images_to_s3(
-            form.text_content_en.data, mod.name, publication.id)
-        Publication.query.get(publication.id).text_content_pt = text_content_pt
-        Publication.query.get(publication.id).text_content_en = text_content_en
-        clean_s3_folder(
-            text_content_en, text_content_pt, mod.name, publication.id)
+        text_content = upload_images_to_s3(
+            form.text_content.data, mod.name, publication.id)
+        Publication.query.get(publication.id).text_content = text_content
+        clean_s3_folder(text_content, mod.name, publication.id)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(
@@ -242,30 +226,19 @@ def upload_images():
 @login_required
 @required_roles(1)
 def edit(id):
-    form = RegistrationForm()
     publication = Publication.query.filter_by(id=id).first_or_404()
-
-    form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in publication.subjects if subject.language == 'pt']
-    form.subject_en.choices = [(subject.name, subject.name)
-                               for subject in publication.subjects if subject.language == 'en']
-    form.set_remaining_choices()
-
-    form.title_pt.data = publication.title_pt
-    form.title_en.data = publication.title_en
+    form = RegistrationForm()
+    form.subject.choices = [(subject.name, subject.name) for subject in publication.subjects]
+    form.set_choices()
+    form.title.data = publication.title
     form.author.data = publication.author
-    form.text_content_pt.data = publication.text_content_pt
-    form.text_content_en.data = publication.text_content_en
+    form.text_content.data = publication.text_content
     form.publish_date.data = publication.publish_date
-    form.text_call_pt.data = publication.text_call_pt
-    form.text_call_en.data = publication.text_call_en
+    form.text_call.data = publication.text_call
     form.show_home.data = publication.show_home
-    form.dual_language.data = publication.dual_language
     form.thumb.data = publication.thumb
-    form.subject_pt.data = [
-        subject.name for subject in publication.subjects if subject.language == 'pt']
-    form.subject_en.data = [
-        subject.name for subject in publication.subjects if subject.language == 'en']
+    form.subject.data = [subject.name for subject in publication.subjects]
+    form.language.data = publication.language
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -277,39 +250,28 @@ def update(id):
     form = RegistrationForm()
     id = int(id.encode())
     if form.validate() is False:
-        form.subject_pt.choices = [(subject, subject)
-                                   for subject in form.subject_pt.data]
-        form.subject_en.choices = [(subject, subject)
-                                   for subject in form.subject_en.data]
-        form.set_remaining_choices()
+        form.set_choices()
         return render_template('news/edit.html', form=form)
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
-        publication.title_pt = form.title_pt.data
-        publication.title_en = form.title_en.data
-        publication.text_call_pt = form.text_call_pt.data
-        publication.text_call_en = form.text_call_en.data
+        publication.title = form.title.data
+        publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime(
             '%Y-%m-%d %H:%M:%S')
         publication.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         publication.show_home = form.show_home.data
-        publication.dual_language = form.dual_language.data
         publication.author = form.author.data
+        publication.language = form.language.data
 
         num_subjects = len(publication.subjects)
         for i in range(0, num_subjects):
             publication.subjects.remove(publication.subjects[0])
 
-        publication.add_subjects(form.subject_pt.data, 'pt')
-        if form.dual_language.data:
-            publication.add_subjects(form.subject_en.data, 'en')
+        publication.add_subjects(form.subject.data, form.language.data)
 
-        publication.text_content_pt = upload_images_to_s3(
-            form.text_content_pt.data, mod.name, publication.id)
-        publication.text_content_en = upload_images_to_s3(
-            form.text_content_en.data, mod.name, publication.id)
-        clean_s3_folder(publication.text_content_pt,
-                        publication.text_content_en, mod.name, publication.id)
+        publication.text_content = upload_images_to_s3(
+            form.text_content.data, mod.name, publication.id)
+        clean_s3_folder(publication.text_content, mod.name, publication.id)
 
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(

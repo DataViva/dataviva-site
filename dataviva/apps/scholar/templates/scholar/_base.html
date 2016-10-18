@@ -12,7 +12,12 @@
 <section id="scholar">
     <div class="container">
         <nav class="sidebar col-md-3">
-            <a href="{{ url_for('scholar.new') if g.user.is_authenticated else '/session/login' }}" class="btn btn-success btn-lg">Publique um estudo</a>
+            {% if g.user.is_authenticated %}
+            <a href="{{ url_for('scholar.new')}}" class="btn btn-success btn-lg">Publique um estudo</a>
+            {% else %}
+            <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">Publique um estudo</a>
+            {% endif %}
+            <!-- <a href="{{ url_for('scholar.new') if g.user.is_authenticated else '/session/login' }}" class="btn btn-success btn-lg">Publique um estudo</a>-->
             <h3>Temas</h3>
             <ul class="sub-menu">
                 <li><a href="{{ url_for('scholar.index') }}" title="Todos" class="{{ 'active' if not request.args.get('keyword') }}">Todos</a></li>

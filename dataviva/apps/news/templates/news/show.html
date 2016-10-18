@@ -3,8 +3,8 @@
 {% block facebook_metadata %}
     <meta property="og:image" content="{{ publication.thumb }}" />
     <meta property="og:url" content="{{ url_for('news.show', id=publication.id, _external=True, _scheme='http') }}" />
-    <meta property="og:title" content="{{ publication.title_pt }}" />
-    <meta property="og:description" content="{{ publication.text_call_pt }}" />
+    <meta property="og:title" content="{{ publication.title }}" />
+    <meta property="og:description" content="{{ publication.text_call }}" />
     <meta property="og:type" content="article" />
 {% endblock %}
 
@@ -17,19 +17,9 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item publication single">
-            <h4 name="content-pt" class="dual-lang-field">{{ publication.title_pt|safe }}</h4>
-            {% if publication.dual_language %}
-                <h4 name="content-en" class="dual-lang-field">{{ publication.title_en|safe }}</h4>
-            {% endif %}
+            <h4>{{ publication.title|safe }}</h4>
             <div class="meta">
-                <p class="data">
-                {% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}
-                {% if publication.dual_language %}
-                    <br>
-                    <a id="to-en" class="{{ 'active' if g.locale == 'en' }}" {{ 'disabled' if g.locale == 'en' }}>English</a> |
-                    <a id="to-pt" class="{{ 'active' if g.locale == 'pt' }}" {{ 'disabled' if g.locale == 'pt' }}>Português</a>
-                {% endif %}
-                </p>
+                <p class="data">{% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}</p>
             </div>
             <ul class="social">
                 <li>
@@ -44,20 +34,17 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            <div name="content-pt" class="dual-lang-field">{{ publication.text_content_pt|safe }}</div>
-            {% if publication.dual_language %}
-                <div name="content-en" class="dual-lang-field">{{ publication.text_content_en|safe }}</div>
-            {% endif %}        </div>
+            {{ publication.text_content|safe }}
         <div class="clearfix"></div>
         <div class="related">
             <h4>{% trans %}See also{% endtrans %}</h4>
             <div class="row">
                 {% for publication in read_more %}
                 <div class="col-xs-12 col-sm-6 col-lg-4 {% if loop.last %} hidden-sm hidden-md {% endif %} read-more">
-                    <a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title }}">
-                        <img src="{{publication.thumb}}" class="img-responsive">
+                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
+                        <img src="{{ publication.thumb }}" class="img-responsive">
                     </a>
-                    <p><a href="{{url_for('news.show', id=publication.id)}}" title="{{ publication.title_en if publication.dual_language and g.locale == 'en' else publication.title_pt }}">{{ publication.title_en|safe if publication.dual_language and g.locale == 'en' else publication.title_pt|safe }}</a></p>
+                    <p><a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a></p>
                 </div>
             {% endfor %}
             </div>
