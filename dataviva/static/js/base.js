@@ -445,7 +445,7 @@ $(document).ready(function () {
             } else {
                 path.splice(1, 0, this.value);
             }
-            window.location.href = path.join('/') + window.location.search + window.location.hash;
+            window.location.href = path.join('/') + window.location.search.replace('subject=' + dataviva.getArgUrl('subject'), '') + window.location.hash;
         }
     });
 
