@@ -94,8 +94,8 @@ $(document).ready(function(){
 
     $('#blog-preview').click(function() {
         var editor = $('#text-content-editor');
-        $('#blog-preview-' + lang_ext).prop('disabled', true);
-        $('#blog-edit-' + lang_ext).prop('disabled', false);
+        $('#blog-preview').prop('disabled', true);
+        $('#blog-edit').prop('disabled', false);
         editor.summernote('destroy');
         editor.find('img').each(function() {
             add_caption($(this));
