@@ -50,7 +50,7 @@ def active_posts_subjects(language):
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
-    posts_query = Post.query.filter_by(active=True)
+    posts_query = Post.query.filter_by(active=True, language=g.locale)
     posts = []
 
     subject = request.args.get('subject')
@@ -156,7 +156,7 @@ def admin_delete():
 def new():
     form = RegistrationForm()
     form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in Subject.query.filter_by(language='pt').order_by(Subject.name).all()]
+                               for subject in Subject.query.order_by(Subject.name).all()]
     return render_template('blog/new.html',
                            form=form, action=url_for('blog.create'))
 

@@ -50,7 +50,7 @@ def active_publications_subjects(language):
 @mod.route('/', methods=['GET'])
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
-    publications_query = Publication.query.filter_by(active=True)
+    publications_query = Publication.query.filter_by(active=True, language=g.locale)
     publications = []
 
     subject = request.args.get('subject')
@@ -156,7 +156,7 @@ def admin_delete():
 def new():
     form = RegistrationForm()
     form.subject_pt.choices = [(subject.name, subject.name)
-                               for subject in PublicationSubject.query.filter_by(language='pt').order_by(PublicationSubject.name).all()]
+                               for subject in PublicationSubject.query.order_by(PublicationSubject.name).all()]
     return render_template('news/new.html', form=form, action=url_for('news.create'))
 
 

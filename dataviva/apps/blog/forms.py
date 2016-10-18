@@ -48,7 +48,6 @@ class RegistrationForm(Form):
     )
 
     def set_remaining_choices(self):
-        subject_pt_query = Subject.query.filter_by(
-            language='pt').order_by(Subject.name)
+        subject_pt_query = Subject.query.order_by(Subject.name)
         self.subject_pt.choices.extend([(subject.name, subject.name) for subject in subject_pt_query if (
             subject.name, subject.name) not in self.subject_pt.choices])
