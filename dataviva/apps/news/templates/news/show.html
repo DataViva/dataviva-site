@@ -3,8 +3,8 @@
 {% block facebook_metadata %}
     <meta property="og:image" content="{{ publication.thumb }}" />
     <meta property="og:url" content="{{ url_for('news.show', id=publication.id, _external=True, _scheme='http') }}" />
-    <meta property="og:title" content="{{ publication.title_pt }}" />
-    <meta property="og:description" content="{{ publication.text_call_pt }}" />
+    <meta property="og:title" content="{{ publication.title }}" />
+    <meta property="og:description" content="{{ publication.text_call }}" />
     <meta property="og:type" content="article" />
 {% endblock %}
 
@@ -17,7 +17,7 @@
 <div class="institucional search">
     <div class="articles">
         <div class="item publication single">
-            <h4>{{ publication.title_pt|safe }}</h4>
+            <h4>{{ publication.title|safe }}</h4>
             <div class="meta">
                 <p class="data">{% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}</p>
             </div>
@@ -34,7 +34,7 @@
                     <g:plusone size="medium"></g:plusone>
                 </li>
             </ul>
-            {{ publication.text_content_pt|safe }}
+            {{ publication.text_content|safe }}
         <div class="clearfix"></div>
         <div class="related">
             <h4>{% trans %}See also{% endtrans %}</h4>
@@ -44,7 +44,7 @@
                     <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
                         <img src="{{ publication.thumb }}" class="img-responsive">
                     </a>
-                    <p><a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title_pt }}">{{ publication.title_pt }}</a></p>
+                    <p><a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a></p>
                 </div>
             {% endfor %}
             </div>

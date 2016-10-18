@@ -138,8 +138,7 @@ var summernoteConfig = {
     },
     callbacks: {
         onImageUpload: function(files) {
-            var lang_ext = $(this).attr('id').split('-').pop();
-            var summernoteLoading = dataviva.ui.loading('#summernote-' + lang_ext);
+            var summernoteLoading = dataviva.ui.loading('#summernote');
             summernoteLoading.text(dataviva.dictionary['loading'] + "...");
             var file = files[0],
                 data = new FormData();
@@ -153,7 +152,7 @@ var summernoteConfig = {
                 processData: false,
                 data: data,
                 success: function(data) {
-                    $('#text-content-editor-' + lang_ext).summernote('insertImage', data.image.url);
+                    $('#text-content-editor').summernote('insertImage', data.image.url);
                 },
                 error: function(err) {
                     swal({

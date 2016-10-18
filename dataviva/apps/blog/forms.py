@@ -6,7 +6,7 @@ from models import Subject
 
 
 class RegistrationForm(Form):
-    title_pt = TextField('title_pt', validators=[
+    title = TextField('title', validators=[
         validators.Required(u"Por favor, insira o título do post."),
         validators.Length(max=400)
     ])
@@ -24,18 +24,18 @@ class RegistrationForm(Form):
         description='Formato da data: dia/mês/ano'
     )
 
-    subject_pt = TagsField('subject_pt',
+    subject = TagsField('subject',
         choices=[],
         validators=[
             validators.Required(u"Por favor, insira a categoria do post."),
     ])
 
-    text_call_pt = TextAreaField('text_call_pt', validators=[
+    text_call = TextAreaField('text_call', validators=[
         validators.Required(u"Por favor, insira uma chamada para o post."),
         validators.Length(max=500)
     ])
 
-    text_content_pt = HiddenField('text_content_pt', validators=[
+    text_content = HiddenField('text_content', validators=[
         validators.Required(u"Por favor, insira o conteúdo do post.")
     ])
 
@@ -48,8 +48,8 @@ class RegistrationForm(Form):
     )
 
     def set_choices(self):
-        if self.subject_pt.data:
-            self.subject_pt.choices = [(name, name) for name in self.subject_pt.data]
+        if self.subject.data:
+            self.subject.choices = [(name, name) for name in self.subject.data]
         for subject in Subject.query.order_by(Subject.name):
-            if (subject.name, subject.name) not in self.subject_pt.choices:
-                self.subject_pt.choices.append((subject.name, subject.name))
+            if (subject.name, subject.name) not in self.subject.choices:
+                self.subject.choices.append((subject.name, subject.name))
