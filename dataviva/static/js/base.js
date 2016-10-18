@@ -257,11 +257,25 @@ dataviva.getUrlAttr = function(attr) {
   else return attr;
 }
 
+dataviva.getArgUrl = function(arg){
+    var params = window.location.href.split('?')[1];
+
+    if(params){
+        params = params.split(/=|&/);
+        var argIndex = params.indexOf(arg);
+
+        if(argIndex != -1)
+            return params[argIndex + 1];
+        else
+            return null;
+    }
+}
 
 var selectorHrefCallback = Selector()
     .callback(function(d){
-        window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id +
-        window.location.search;
+        var argBra = dataviva.getArgUrl('bra_id');
+        window.location = "/" + lang + "/" + dataviva.getAttrUrl(selectorHrefCallback.type()) + "/" + d.id  + 
+                            ((argBra) ? '?bra_id=' +  argBra : '' );
     });
 
 var select_attr = function(id) {
