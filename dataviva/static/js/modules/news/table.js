@@ -32,7 +32,7 @@ var NewsTable = function () {
                 }
             },
             {
-                "targets": 4,
+                "targets": 5,
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, publication, meta){
@@ -41,7 +41,7 @@ var NewsTable = function () {
                 }
             },
             {
-                "targets": 5,
+                "targets": 6,
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, publication, meta){
@@ -146,6 +146,8 @@ var changeStatus = function(ids, status, status_value){
 }
 
 var destroy = function(ids){
+    var deleteLoading = dataviva.ui.loading('#admin-content');
+    deleteLoading.text('Excluindo...');
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -167,6 +169,9 @@ var destroy = function(ids){
                 }
 
                 showMessage(message, 'success', 8000);
+            },
+            complete: function() {
+                deleteLoading.hide();
             }
         });
     } else {

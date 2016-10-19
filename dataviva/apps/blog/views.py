@@ -96,8 +96,8 @@ def all_posts():
     result = Post.query.all()
     posts = []
     for row in result:
-        posts += [(row.id, row.title, row.author,
-                   row.publish_date.strftime('%d/%m/%Y'),
+        posts += [(row.id, row.title, row.language.upper(),
+                   row.author, row.publish_date.strftime('%d/%m/%Y'),
                    row.show_home, row.active)]
     return jsonify(posts=posts)
 
