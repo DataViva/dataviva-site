@@ -32,7 +32,7 @@ var BlogTable = function () {
                 }
             },
             {
-                "targets": 4,
+                "targets": 5,
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, publication, meta){
@@ -41,14 +41,15 @@ var BlogTable = function () {
                 }
             },
             {
-                "targets": 5,
+                "targets": 6,
                 "orderable": false,
                 "className": "column-checkbox",
                 "render": function (data, type, post, meta){
                    return '<input type="checkbox" name="active" id="active'+post[0]+
                    '" value="'+post[0]+ (data ? '" checked>' : '" >');
                 }
-            }],
+            }
+        ],
         "paging": false,
         "bFilter": true,
         "info": false,
