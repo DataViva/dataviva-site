@@ -21,6 +21,7 @@ class Post(db.Model):
     active = db.Column(db.Boolean)
     show_home = db.Column(db.Boolean)
     language = db.Column(db.String(2))
+    main_subject = db.Column(db.String(50))
 
     subjects = db.relationship(
         "Subject",
@@ -41,6 +42,8 @@ class Post(db.Model):
                 self.subjects.append(Subject(subject_input, language))
             else:
                 self.subjects.append(subject)
+            if subject_input == subjects_input[0]:
+                self.main_subject = subject_input
 
 
 class Subject(db.Model):
