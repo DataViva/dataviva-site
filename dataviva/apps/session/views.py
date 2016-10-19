@@ -47,7 +47,7 @@ def errorLogin(html_form, status, form):
             flash(message, 'danger')
         else:
             return Response(message, status=401, mimetype='application/json')
-    
+
         return redirect('/user/confirm_pending/' + form.email.data)
 
     elif status == 400:
@@ -72,7 +72,7 @@ def login(provider=None):
             if user:
                 if user.confirmed:
                     login_user(user, remember=True)
-                    return redirect(url_for('general.home'))
+                    return redirect(request.referrer)
                 else:
                     return errorLogin(html_form=html_form, status=401, form=form)
         return errorLogin(html_form=html_form, status=400, form=form)
@@ -84,15 +84,13 @@ def login(provider=None):
 
         if provider == "twitter":
             callback = url_for('session.twitter_authorized',
-                               next=request.args.get(
-                                   'next') or request.referrer or None,
+                               next=request.referrer or None,
                                _external=True)
             return twitter.authorize(callback=callback)
 
         if provider == "facebook":
             callback = url_for('session.facebook_authorized',
-                               next=request.args.get(
-                                   'next') or request.referrer or None,
+                               next=request.referrer or None,
                                _external=True)
             return facebook.authorize(callback=callback)
 
@@ -124,7 +122,7 @@ def after_login(email, fullname, language, gender, image):
         session.pop('remember_me', None)
     login_user(user, remember=remember_me)
 
-    return redirect(url_for('general.home'))
+    return redirect(request.args.get('next') or request.referrer)
 
 
 """
