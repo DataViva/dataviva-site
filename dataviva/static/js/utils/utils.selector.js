@@ -427,7 +427,15 @@ function Selector() {
 
         }
 
-        $('#leon_header_select').attr('class','btn btn-primary');
+        $('#leon_header_select')
+          .attr('class','m-l-xs btn btn-primary btn-outline btn-toggle')
+          //.prepend("<i class='fa fa-check-square-o'></i>")
+
+        $('#leon_header_select').on('click', function(){
+          $('.modal .btn-toggle').removeClass('active');
+          $(this).toggleClass('active');
+        });
+
         select_value(data[initial_value]);
 
         var category = window.location.pathname.split('/')[2];
@@ -435,7 +443,7 @@ function Selector() {
         if(type == "bra" && category == "trade_partner"){
           $('#leon_header_select').hide();
         }
-        
+
       };
 
       search_string = function(d) {
@@ -855,11 +863,11 @@ function Selector() {
               			update_distance(val.property("value"),v.id);
               		}
 
-        			selector_load.text(dataviva.format.text("wait")).show();
+        			    selector_load.text(dataviva.format.text("wait")).show();
       				  	callback(data[v.id],name);
 
-                    $('.modal .selector_body .btn-toggle').removeClass('active');
-                    $(this).toggleClass('active');
+                  $('.modal .btn-toggle').removeClass('active');
+                  $(this).toggleClass('active');
                 };
 
 
