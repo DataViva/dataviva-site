@@ -29,7 +29,13 @@
             <p>
                 {{ article.abstract }}
             </p>
-            <p><a href="{{ article.file_url if g.user.is_authenticated else '/session/login' }}" class="btn btn-success btn-md">Baixar arquivo (PDF)</a></p>
+            <p>
+                {% if g.user.is_authenticated %}
+                    <a href="{{ article.file_url }}" class="btn btn-success btn-md">Baixar arquivo (PDF)</a>
+                {% else %}
+                    <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-md">Baixar arquivo (PDF)</a>
+                {% endif %}
+            </p>
         </div>
     </div>
 </div>
