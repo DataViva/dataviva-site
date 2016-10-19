@@ -12,9 +12,7 @@
                     <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title }}">
                         <img src="{{ post.thumb }}" class="thumbnail img-responsive">
                     </a>
-                    {% if post.subjects %}
-                        <span>{{ post.subjects[0].name }}</span>
-                    {% endif %}
+                     <span>{{ post.main_subject }}</span>
                 </div>
                 <h4>
                     <a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title }}">{{ post.title }}</a>
