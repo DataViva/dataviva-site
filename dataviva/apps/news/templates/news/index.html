@@ -12,9 +12,7 @@
                     <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
                         <img src="{{ publication.thumb }}" class="thumbnail img-responsive">
                     </a>
-                    {% if publication.subjects %}
-                        <span>{{ publication.subjects[0].name }}</span>
-                    {% endif %}
+                    <span>{{ publication.main_subject }}</span>
                 </div>
                 <h4>
                     <a href="{{ url_for('blog.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a>
