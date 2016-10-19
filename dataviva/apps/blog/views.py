@@ -96,8 +96,8 @@ def all_posts():
     result = Post.query.all()
     posts = []
     for row in result:
-        posts += [(row.id, row.title, row.author,
-                   row.publish_date.strftime('%d/%m/%Y'),
+        posts += [(row.id, row.title, row.language.upper(),
+                   row.author, row.publish_date.strftime('%d/%m/%Y'),
                    row.show_home, row.active)]
     return jsonify(posts=posts)
 
@@ -217,7 +217,9 @@ def upload_image():
 def edit(id):
     post = Post.query.filter_by(id=id).first_or_404()
     form = RegistrationForm()
-    form.subject.choices = [(subject.name, subject.name) for subject in post.subjects]
+    form.subject.choices = ([(subject.name, subject.name) for subject in post.subjects])
+    form.subject.choices.remove((post.main_subject, post.main_subject))
+    form.subject.choices.insert(0, (post.main_subject, post.main_subject))
     form.set_choices()
     form.title.data = post.title
     form.author.data = post.author
