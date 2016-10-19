@@ -147,6 +147,8 @@ var changeStatus = function(ids, status, status_value){
 }
 
 var destroy = function(ids){
+    var deleteLoading = dataviva.ui.loading('#admin-content');
+    deleteLoading.text('Excluindo...');
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -166,8 +168,10 @@ var destroy = function(ids){
                     itemId = '#item'+ids[i];
                     blogTable.table.row($(itemId).parents('tr')).remove().draw();
                 }
-
                 showMessage(message, 'success', 8000);
+            },
+            complete: function() {
+                deleteLoading.hide();
             }
         });
     } else {
