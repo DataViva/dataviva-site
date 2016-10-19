@@ -59,6 +59,9 @@
 .has-error .control-label {
   color: #676a6c;
 }
+.has-error .select2-container--default .select2-selection--multiple {
+  border-color: #A94442 !important;
+}
 .input-group-addon {
   background-color: #fff;
   border: 1px solid #E5E6E7;

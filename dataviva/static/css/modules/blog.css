@@ -233,9 +233,6 @@
     margin: 20px;
     text-align: center;
 }
-.blog .dual-lang-field {
-  display: none;
-}
 @media (min-width: 500px) {
   .blog .visu-wrapper {
     height: 607px

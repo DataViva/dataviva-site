@@ -11,19 +11,16 @@ association_table = db.Table('blog_post_subject',
 class Post(db.Model):
     __tablename__ = 'blog_post'
     id = db.Column(db.Integer, primary_key=True)
-    title_pt = db.Column(db.String(400))
-    title_en = db.Column(db.String(400))
+    title = db.Column(db.String(400))
     author = db.Column(db.String(100))
-    text_call_pt = db.Column(db.String(500))
-    text_call_en = db.Column(db.String(500))
-    text_content_pt = db.Column(db.Text(4194304))
-    text_content_en = db.Column(db.Text(4194304))
+    text_call = db.Column(db.String(500))
+    text_content = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
     publish_date = db.Column(db.DateTime)
     last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
     show_home = db.Column(db.Boolean)
-    dual_language = db.Column(db.Boolean)
+    language = db.Column(db.String(2))
 
     subjects = db.relationship(
         "Subject",
@@ -34,7 +31,7 @@ class Post(db.Model):
         return self.publish_date.strftime('%d/%m/%Y')
 
     def __repr__(self):
-        return '<Post %r>' % (self.title_pt)
+        return '<Post %r>' % (self.title)
 
     def add_subjects(self, subjects_input, language):
         for subject_input in subjects_input:
