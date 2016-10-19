@@ -429,7 +429,7 @@ function Selector() {
 
         $('#leon_header_select')
           .attr('class','m-l-xs btn btn-primary btn-outline btn-toggle')
-          .prepend("<i class='fa fa-check-square-o'></i>")
+          //.prepend("<i class='fa fa-check-square-o'></i>")
 
         $('#leon_header_select').on('click', function(){
           $('.modal .btn-toggle').removeClass('active');
