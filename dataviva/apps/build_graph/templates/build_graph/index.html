@@ -26,7 +26,7 @@
     <p>Selecione parâmetros para construir seu gráfico.</p>
     <br />
 
-    <nav class="sidebar well col-xs-12 col-md-3" style="margin-top: 0">
+    <nav class="sidebar well col-xs-12 col-sm-3 col-md-3" style="margin-top: 0">
         <ul class="sub-menu">
             <li>
                 <input type="hidden" id="dataset" value="{{ dataset if dataset }}">
@@ -56,7 +56,10 @@
             </li>
         </ul>
     </nav>
-    <div id="graph-wrapper" class="embed-responsive embed-responsive-16by9">
+    <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
+        <div id="graph-wrapper" class="embed-responsive responsive-wrapper">
+        </div>
     </div>
+
 </section>
 {% endblock content %}

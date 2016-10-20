@@ -1,5 +1,5 @@
 <div id="graphs-enrollments" class="container">
-    <nav class="nav-graph col-xs-12 col-md-3" >
+    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3">
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{%trans%}Enrollments By{%endtrans%}</h4>
@@ -29,25 +29,27 @@
             </div>
         </div>
     </nav>
-    <div class="embed-responsive embed-responsive-16by9">
-        {% if graph %}
-            <iframe src="/{{ g.locale }}/embed/{{graph.url}}" 
-                    name="graphs-frame-enrollments"
-                    id="graphs-frame-enrollments"
-                    class="embed-responsive-item">
-            </iframe>
-        {% elif location.id | length != 9 %}
-            <iframe src="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled" 
-                    name="graphs-frame-enrollments"
-                    id="graphs-frame-enrollments"
-                    class="embed-responsive-item">
-            </iframe>
-        {% else %}
-            <iframe src="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/school/?color=color&depth=school_8&size=enrolled" 
-                    name="graphs-frame-enrollments"
-                    id="graphs-frame-enrollments"
-                    class="embed-responsive-item">
-            </iframe>
-        {% endif %}
+    <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
+        <div class="embed-responsive responsive-wrapper">
+            {% if graph %}
+                <iframe src="/{{ g.locale }}/embed/{{graph.url}}" 
+                        name="graphs-frame-enrollments"
+                        id="graphs-frame-enrollments"
+                        class="embed-responsive-item">
+                </iframe>
+            {% elif location.id | length != 9 %}
+                <iframe src="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled" 
+                        name="graphs-frame-enrollments"
+                        id="graphs-frame-enrollments"
+                        class="embed-responsive-item">
+                </iframe>
+            {% else %}
+                <iframe src="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/school/?color=color&depth=school_8&size=enrolled" 
+                        name="graphs-frame-enrollments"
+                        id="graphs-frame-enrollments"
+                        class="embed-responsive-item">
+                </iframe>
+            {% endif %}
+        </div>
     </div>
 </div>
