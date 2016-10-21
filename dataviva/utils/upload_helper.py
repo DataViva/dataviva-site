@@ -8,6 +8,8 @@ from config import AWS_ACCESS_KEY, AWS_SECRET_KEY, S3_BUCKET, UPLOAD_FOLDER
 import re
 import hashlib
 from bs4 import BeautifulSoup
+import datetime
+import csv
 
 
 def s3_client():
@@ -134,3 +136,35 @@ def save_file_temp(file, object_type, csrf_token):
     )
     shutil.rmtree(local_folder)
     return image_url
+
+def log_operation(module, operation, user, objs):
+    date = datetime.datetime.now()
+    file_name = '_'.join(['log', module, str(date.year), str(date.month)]) + '.csv'
+    upload_folder = os.path.join(UPLOAD_FOLDER, 'logs', module)
+    key = os.path.join('logs', module, file_name)
+    file_location = os.path.join(UPLOAD_FOLDER, key) + '.csv'
+    client = s3_client()
+
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
+    try:
+        client.download_file(S3_BUCKET, key, file_location)
+    except Exception:
+        pass
+
+    create_file = False if os.path.isfile(file_location) else True
+    try:
+        with open(file_location, 'a') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            if create_file:
+                writer.writerow(['module', 'operation', 'date', 'user_id', 'user_email', 'object_id', 'object_title'])
+            for obj in objs:
+                writer.writerow([module, operation, date.strftime('%d-%m-%Y %H:%M'), str(user[0]), user[1], str(obj[0]), obj[1]])
+    except Exception:
+        pass
+
+    try:
+        client.upload_file(file_location, S3_BUCKET, key)
+    except Exception:
+        pass
+    os.remove(file_location)
