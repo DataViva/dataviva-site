@@ -1,5 +1,5 @@
 <div id="graphs-opportunities" class="container">
-    <nav class="nav-graph col-xs-12 col-md-3" >
+    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3" >
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Economic Opportunities{% endtrans %}</h4>
@@ -8,16 +8,18 @@
             data-parent="#economic-opportunities">{% trans %}Rings{% endtrans %}</a>
         </div>
     </nav>
-    <div class="embed-responsive embed-responsive-16by9" >
-        <iframe src="
-                    {% if not graph %} 
-                        /{{ g.locale }}/embed/rings/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/hs/?rca_scope=wld_rca
-                    {% else %} 
-                        /{{ g.locale }}/embed/{{graph.url}}
-                    {% endif %}"
-            name="graphs-frame-opportunities"
-            id="graphs-opportunities"
-            class="embed-responsive-item">
-        </iframe>
+    <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
+        <div class="embed-responsive responsive-wrapper">
+            <iframe src="
+                        {% if not graph %} 
+                            /{{ g.locale }}/embed/rings/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/hs/?rca_scope=wld_rca
+                        {% else %} 
+                            /{{ g.locale }}/embed/{{graph.url}}
+                        {% endif %}"
+                name="graphs-frame-opportunities"
+                id="graphs-opportunities"
+                class="embed-responsive-item">
+            </iframe>
+        </div>
     </div>
 </div>
