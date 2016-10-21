@@ -6,7 +6,7 @@
     {% endfor %}
 {%- endmacro %}
 
-<form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data">
+<form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data" id="scholar-form">
     {{ form.hidden_tag() }}
     <p>
         <label for="title">Título</label>

@@ -125,7 +125,8 @@ def approved_articles_keywords():
 @login_required
 def new():
     form = RegistrationForm()
-    form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
+    form.set_choices(approved_articles_keywords())
+    #form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
 
 
@@ -142,6 +143,7 @@ def create():
         return render_template('scholar/new.html', form=form)
 
     if form.validate() is False:
+        form.set_choices(approved_articles_keywords())
         return render_template('scholar/new.html', form=form)
     else:
         article = Article()
@@ -192,9 +194,10 @@ def create():
 @login_required
 @required_roles(1)
 def edit(id):
-    form = RegistrationForm()
-    form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
     article = Article.query.filter_by(id=id).first_or_404()
+    form = RegistrationForm()
+    form.keywords.choices = ([(keyword.name, keyword.name) for keyword in article.keywords])
+    form.set_choices(approved_articles_keywords())
     form.title.data = article.title
     form.theme.data = article.theme
     form.authors.data = article.authors_str()
@@ -211,13 +214,13 @@ def edit(id):
 def update(id):
     csrf_token = request.form.get('csrf_token')
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
-
+    article = Article.query.filter_by(id=id).first_or_404()
     form = RegistrationForm()
 
     if form.validate() is False:
+        form.set_choices(approved_articles_keywords())
         return render_template('scholar/edit.html', form=form)
     else:
-        article = Article.query.filter_by(id=id).first_or_404()
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
