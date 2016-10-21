@@ -181,9 +181,8 @@ def create():
             shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
-
+        upload_helper.log_operation(module=mod.name, operation='create', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
         new_article_advise(article, request.url_root)
-
         message = dictionary()["article_submission"]
         flash(message, 'success')
         return redirect(url_for('scholar.index'))
@@ -253,7 +252,7 @@ def update(id):
             shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
-
+        upload_helper.log_operation(module=mod.name, operation='update', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
         message = u'Estudo editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('scholar.admin'))
@@ -265,6 +264,7 @@ def update(id):
 def admin_delete():
     ids = request.form.getlist('ids[]')
     keywords = KeyWord.query.all()
+    deleted_articles = []
 
     if ids:
         articles = Article.query.filter(Article.id.in_(ids)).all()
@@ -272,12 +272,14 @@ def admin_delete():
             upload_helper.delete_s3_folder(os.path.join(mod.name, str(article.id)))
             db.session.delete(article)
             db.session.flush()
+            deleted_articles.append((article.id, article.title))
 
             for keyword in keywords:
                 if keyword.articles.count() == 0:
                     db.session.delete(keyword)
 
         db.session.commit()
+        upload_helper.log_operation(module=mod.name, operation='delete', user=(g.user.id, g.user.email), objs=deleted_articles)
         return u"Artigo(s) excluído(s) com sucesso!", 200
     else:
         return u'Selecione algum artigo para excluí-lo.', 205
