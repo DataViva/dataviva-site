@@ -92,5 +92,10 @@ $(document).ready(function () {
         $('#input-file').show();
     });
 
+    $('#scholar-form').submit(function() {
+        var submitLoading = dataviva.ui.loading('section#scholar');
+        submitLoading.text('Enviando... Por favor aguarde.');
+    });
+
 });
 
