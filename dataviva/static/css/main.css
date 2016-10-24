@@ -1007,3 +1007,48 @@ h1.login-title {
 .input-group a#edit-header{
   margin-right: 0px;
 }
+
+@media screen and (max-width: 990px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 350ms ease-in-out;
+    -moz-transition: all 350ms ease-in-out;
+    transition: all 350ms ease-in-out;
+  }
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -40%; 
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -40%; 
+  }
+
+  .row-offcanvas-right.active {
+    right: 40%; 
+  }
+
+  .row-offcanvas-left.active {
+    left: 40%; 
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 40%;
+    margin-left:20px;
+  }
+}
+
+.toggle-btn-submenu{
+  padding-bottom:15px
+}
