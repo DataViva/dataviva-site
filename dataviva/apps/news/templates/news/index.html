@@ -15,7 +15,7 @@
                     <span>{{ publication.main_subject }}</span>
                 </div>
                 <h4>
-                    <a href="{{ url_for('blog.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a>
+                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a>
                 </h4>
                 <p>{{ publication.text_call }}</p>
                 <div class="meta">
