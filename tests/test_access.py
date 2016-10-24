@@ -63,3 +63,37 @@ class AccessScreenTests(BaseTestCase):
     def test_help_screen_access(self):
         response = self.client.get(url_for('help.index'))
         self.assert_200(response)
+
+    def test_location_screen_access(self):
+        response = self.client.get(g.locale + '/location/4mg')
+        self.assert_200(response)
+
+    def test_occupation_screen_access(self):
+        response = self.client.get(g.locale + '/occupation/4110')
+        self.assert_200(response)
+
+    def test_industry_screen_access(self):
+        response = self.client.get(g.locale + '/industry/o84116')
+        self.assert_200(response)
+
+    def test_product_screen_access(self):
+        response = self.client.get(g.locale + '/product/021201')
+        self.assert_200(response)
+
+    def test_trade_partner_screen_access(self):
+        response = self.client.get(g.locale + '/trade_partner/aschn')
+        self.assert_200(response)
+
+    def test_university_screen_access(self):
+        response = self.client.get(g.locale + '/university/00594')
+        self.assert_200(response)
+
+    def test_major_screen_access(self):
+        response = self.client.get(g.locale + '/major/523E04')
+        self.assert_200(response)
+
+    def test_basic_course_screen_access(self):
+        response = self.client.get(g.locale + '/basic_course/07085')
+        self.assert_200(response)
+
+
