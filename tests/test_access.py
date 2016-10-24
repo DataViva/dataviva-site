@@ -51,4 +51,7 @@ class AccessScreenTests(BaseTestCase):
     def test_partners_screen_access(self):
         response = self.client.get(url_for('partners.index'))
         self.assert_200(response)
- 
+
+    def test_be_a_partner_screen_access(self):
+        response = self.client.get(url_for('partners.be_a_partner'))
+        self.assert_200(response)
