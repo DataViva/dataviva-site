@@ -2,7 +2,7 @@ from flask import g, url_for
 from test_base import BaseTestCase
 
 
-class GeneralModuleTests(BaseTestCase):
+class AccessScreenTests(BaseTestCase):
 
 
     def setUp(self):
@@ -19,19 +19,22 @@ class GeneralModuleTests(BaseTestCase):
 #        response = self.client.get('/pt/')
 #        self.assert_200(response)
 
-    def test_should_redirect_to_home_screen(self):
+    def test_home_screen_access(self):
         response = self.client.get('/')
         self.assertRedirects(response, url_for('general.home'))
 
-    def test_should_redirect_to_help_screen(self):
+    def test_help_screen_access(self):
         response = self.client.get(url_for('help.index'))
         self.assert_200(response)
 
-    def test_should_redirect_to_search_screen(self):
+    def test_search_screen_access(self):
         response = self.client.get(url_for('general.search'))
         self.assert_200(response)
 
-    def test_should_redirect_to_rankings_screen(self):
+    def test_rankin_screen_access(self):
         response = self.client.get(url_for('rankings.index'))
         self.assert_200(response)
 
+    def test_buid_graph_screen_access(self):
+        response = self.client.get(url_for('build_graph.index'))
+        self.assert_200(response)
