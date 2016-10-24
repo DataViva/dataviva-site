@@ -126,7 +126,6 @@ def approved_articles_keywords():
 def new():
     form = RegistrationForm()
     form.set_choices(approved_articles_keywords())
-    #form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
 
 
