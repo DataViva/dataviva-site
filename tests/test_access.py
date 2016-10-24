@@ -56,10 +56,6 @@ class AccessScreenTests(BaseTestCase):
         response = self.client.get(url_for('partners.be_a_partner'))
         self.assert_200(response)
 
-    def test_partners_screen_access(self):
-        response = self.client.get(url_for('partners.index'))
-        self.assert_200(response)
-
     def test_help_screen_access(self):
         response = self.client.get(url_for('help.index'))
         self.assert_200(response)
@@ -97,3 +93,22 @@ class AccessScreenTests(BaseTestCase):
         self.assert_200(response)
 
 
+    def test_scholar_screen_access(self):
+        response = self.client.get(url_for('scholar.index'))
+        self.assert_200(response)
+
+    def test_scholar_screen_access(self):
+        response = self.client.get(url_for('scholar.index'))
+        self.assert_200(response)
+
+    def test_news_screen_access(self):
+        response = self.client.get(url_for('news.index'))
+        self.assert_200(response)
+
+    def test_blog_screen_access(self):
+        response = self.client.get(url_for('blog.index'))
+        self.assert_200(response)
+
+    def test_contact_screen_access(self):
+        response = self.client.get(url_for('contact.index'))
+        self.assert_200(response)
