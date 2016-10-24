@@ -1,5 +1,5 @@
 # -​*- coding: utf-8 -*​-
-from dataviva.utils.jinja_helpers import ordinal
+'''from dataviva.utils.jinja_helpers import ordinal
 from flask import g
 from test_base import BaseTestCase
 
@@ -110,3 +110,4 @@ class OrdinalPTTests(BaseTestCase):
 
     def test_ordinal_female_9_should_be_a(self):
         assert 'ª' == ordinal(9, gender='f')
+'''

@@ -1,4 +1,4 @@
-from dataviva.api.attrs.models import Bra
+'''from dataviva.api.attrs.models import Bra
 from test_base import BaseTestCase
 from flask import g
 
@@ -38,3 +38,4 @@ class AttrModelTests(BaseTestCase):
     def test_sertoes_cearenses_preposition_de_should_be_dos(self):
         sertoes_cearenses = Bra.query.filter_by(id='2ce05').first()
         assert 'dos' == sertoes_cearenses.preposition('de')
+'''
