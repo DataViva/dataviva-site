@@ -12,19 +12,28 @@
 </div>
 
 <div class="container">
-    <nav class="sidebar col-md-3">
-        <h3>{% trans %}Topics{% endtrans %}</h3>
-        <ul>
-            <li><a href="{{ url_for('news.index') }}" title="Todos" class="{{ 'active' if not request.args.get('subject') }}">{% trans %}All{% endtrans %}</a></li>
-            {% for subject in subjects %}
-                <li><a href="{{ url_for('news.index', subject=subject.id) }}" title="{{ subject.name }}" class="{{ 'active' if subject.id == request.args.get('subject')|int }}">{{ subject.name }}</a></li>
-            {% endfor %}
-        </ul>
-    </nav>
-    <section id="news" class="col-md-9">
-        <h1>{% trans %}News{% endtrans %}</h1>
-        {% block news_content %}
-        {% endblock news_content %}
-    </section>
+    <div class="row row-offcanvas row-offcanvas-left">
+        <nav class="sidebar col-md-3 row-offcanvas sidebar-offcanvas">
+            <h3>{% trans %}Topics{% endtrans %}</h3>
+            <ul>
+                <li><a href="{{ url_for('news.index') }}" title="Todos" class="{{ 'active' if not request.args.get('subject') }}">{% trans %}All{% endtrans %}</a></li>
+                {% for subject in subjects %}
+                    <li><a href="{{ url_for('news.index', subject=subject.id) }}" title="{{ subject.name }}" class="{{ 'active' if subject.id == request.args.get('subject')|int }}">{{ subject.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </nav>
+        <section id="blog" class="col-md-9">
+            <div class="toggle-btn-submenu">
+                <button type="button" class="fa visible-xs visible-sm btn btn-white" aria-hidden="true" data-toggle="offcanvas" data-target=".sidebar-nav" >
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+            <h1>{% trans %}News{% endtrans %}</h1>
+            {% block news_content %}
+            {% endblock news_content %}
+        </section>
+    </div>
 </div>
+
+
 {% endblock content %}
