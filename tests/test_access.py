@@ -47,3 +47,8 @@ class AccessScreenTests(BaseTestCase):
     def test_data_screen_access(self):
         response = self.client.get(url_for('data.index'))
         self.assert_200(response)
+
+    def test_partners_screen_access(self):
+        response = self.client.get(url_for('partners.index'))
+        self.assert_200(response)
+ 
