@@ -23,8 +23,8 @@ class AccessScreenTests(BaseTestCase):
         response = self.client.get('/')
         self.assertRedirects(response, url_for('general.home'))
 
-    def test_help_screen_access(self):
-        response = self.client.get(url_for('help.index'))
+    def test_about_screen_access(self):
+        response = self.client.get(url_for('about.index'))
         self.assert_200(response)
 
     def test_search_screen_access(self):
@@ -54,4 +54,12 @@ class AccessScreenTests(BaseTestCase):
 
     def test_be_a_partner_screen_access(self):
         response = self.client.get(url_for('partners.be_a_partner'))
+        self.assert_200(response)
+
+    def test_partners_screen_access(self):
+        response = self.client.get(url_for('partners.index'))
+        self.assert_200(response)
+
+    def test_help_screen_access(self):
+        response = self.client.get(url_for('help.index'))
         self.assert_200(response)
