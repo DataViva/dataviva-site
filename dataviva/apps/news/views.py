@@ -286,7 +286,7 @@ def update(id):
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
-        log_operation(module=mod.name, operation='update', user=(g.user.id, g.user.email), objs=[(publication.id, publication.title)])
+        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(publication.id, publication.title)])
 
         message = u'Notícia editada com sucesso!'
         flash(message, 'success')

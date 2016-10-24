@@ -254,7 +254,7 @@ def update(id):
             shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
-        upload_helper.log_operation(module=mod.name, operation='update', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
+        upload_helper.log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
         message = u'Estudo editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('scholar.admin'))
