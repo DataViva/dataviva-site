@@ -43,3 +43,7 @@ class AccessScreenTests(BaseTestCase):
         response = self.client.get(g.locale + 
         	'/build_graph/rais/all/all/all?view=Employment%20by%20Municipality&graph=geo_map')
         self.assert_200(response)
+
+    def test_data_screen_access(self):
+        response = self.client.get(url_for('data.index'))
+        self.assert_200(response)
