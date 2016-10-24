@@ -123,7 +123,8 @@ var destroyConfirmation = function(ids){
         swal({ 
             title: 'Você tem certeza?',
             text: 'Você não será capaz de recuperar o(s) artigo(s)!',
-            type: 'warning',   showCancelButton: true,
+            type: 'warning',   
+            showCancelButton: true,
             confirmButtonText: 'Sim, deletar!',
             closeOnConfirm: true
         }, function(){

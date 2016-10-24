@@ -52,12 +52,9 @@ class RegistrationForm(Form):
         NumberOfWords(max=250)
     ])
 
-'''
-REGRAS FORMULÁRIO:
-    Título - (Máximo 400 caracteres)
-    Tema - (Máximo 5 palavras)
-    Autor - (Exibir FREITAS, E;)
-    Palavras-Chave - (Máximo 3 conjuntos)
-    Resumo - (Máximo 250 palavras)
-    Formato - (PDF, DOC, DOCX - Tamanho máximo de arquivo: 50MB)
-'''
+    def set_choices(self, keywords_query):
+        if self.keywords.data:
+            self.keywords.choices = [(name, name) for name in self.keywords.data]
+        for keyword in keywords_query:
+            if (keyword.name, keyword.name) not in self.keywords.choices:
+                self.keywords.choices.append((keyword.name, keyword.name))

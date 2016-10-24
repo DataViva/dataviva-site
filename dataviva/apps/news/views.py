@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
@@ -129,6 +129,7 @@ def admin_activate(status, status_value):
 def admin_delete():
     ids = request.form.getlist('ids[]')
     subjects = PublicationSubject.query.all()
+    deleted_publications = []
 
     if ids:
         publications = Publication.query.filter(Publication.id.in_(ids)).all()
@@ -139,12 +140,14 @@ def admin_delete():
                 pass
             db.session.delete(publication)
             db.session.flush()
+            deleted_publications.append((publication.id, publication.title))
 
             for subject in subjects:
                 if subject.publications.count() == 0:
                     db.session.delete(subject)
 
         db.session.commit()
+        log_operation(module=mod.name, operation='delete', user=(g.user.id, g.user.email), objs=deleted_publications)
         return u"Notícia(s) excluída(s) com sucesso!", 200
     else:
         return u'Selecione alguma notícia para excluí-la.', 205
@@ -195,6 +198,7 @@ def create():
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
+        log_operation(module=mod.name, operation='create', user=(g.user.id, g.user.email), objs=[(publication.id, publication.title)])
         message = u'Muito obrigado! Sua notícia foi submetida com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
@@ -282,6 +286,8 @@ def update(id):
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
+        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(publication.id, publication.title)])
+
         message = u'Notícia editada com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
