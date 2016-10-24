@@ -38,3 +38,8 @@ class AccessScreenTests(BaseTestCase):
     def test_buid_graph_screen_access(self):
         response = self.client.get(url_for('build_graph.index'))
         self.assert_200(response)
+
+    def test_buid_graph_costummer_screen_access(self):
+        response = self.client.get(g.locale + 
+        	'/build_graph/rais/all/all/all?view=Employment%20by%20Municipality&graph=geo_map')
+        self.assert_200(response)
