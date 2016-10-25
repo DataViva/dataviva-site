@@ -11,13 +11,13 @@ class AccessScreenTests(BaseTestCase):
     def test_should_redirect_when_access_root(self):
         assert '302 FOUND' == self.client.get('/').status
 
-#    def test_english_home_screen_is_up_and_running(self):
-#        response = self.client.get('/en/')
-#        self.assert_200(response, message=None)
+    def test_english_home_screen_is_up_and_running(self):
+        response = self.client.get('/en/')
+        self.assert_200(response)
 
-#    def test_portuguese_home_screen_is_up_and_running(self):
-#        response = self.client.get('/pt/')
-#        self.assert_200(response)
+    def test_portuguese_home_screen_is_up_and_running(self):
+        response = self.client.get('/pt/')
+        self.assert_200(response)
 
     def test_home_screen_access(self):
         response = self.client.get('/')
@@ -91,7 +91,6 @@ class AccessScreenTests(BaseTestCase):
     def test_basic_course_screen_access(self):
         response = self.client.get(g.locale + '/basic_course/07085')
         self.assert_200(response)
-
 
     def test_scholar_screen_access(self):
         response = self.client.get(url_for('scholar.index'))
