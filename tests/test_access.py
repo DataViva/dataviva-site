@@ -31,10 +31,6 @@ class AccessScreenTests(BaseTestCase):
         response = self.client.get(url_for('general.search'))
         self.assert_200(response)
 
-    def test_rankin_screen_access(self):
-        response = self.client.get(url_for('rankings.index'))
-        self.assert_200(response)
-
     def test_buid_graph_screen_access(self):
         response = self.client.get(url_for('build_graph.index'))
         self.assert_200(response)
@@ -110,4 +106,45 @@ class AccessScreenTests(BaseTestCase):
 
     def test_contact_screen_access(self):
         response = self.client.get(url_for('contact.index'))
+        self.assert_200(response)
+
+    #No test ajax request, only access.
+    def test_rankings_index_screen_acces(self):
+        response = self.client.get(url_for('rankings.index'))
+        self.assert_200(response)
+
+    def test_rankings_location_international_trade_screen_access(self):
+        response = self.client.get(url_for('rankings.location_international_trade'))
+        self.assert_200(response)
+
+    def test_rankings_location_wages_screen_access(self):
+        response = self.client.get(url_for('rankings.location_wages'))
+        self.assert_200(response)
+
+    def test_rankings_occupation_screen_access(self):
+        response = self.client.get(url_for('rankings.occupation'))
+        self.assert_200(response)
+
+    def test_rankings_economic_activities_screen_access(self):
+        response = self.client.get(url_for('rankings.economic_activities'))
+        self.assert_200(response)
+
+    def test_rankings_product_screen_access(self):
+        response = self.client.get(url_for('rankings.product'))
+        self.assert_200(response)
+
+    def test_rankings_trade_partner_screen_access(self):
+        response = self.client.get(url_for('rankings.trade_partner'))
+        self.assert_200(response)
+
+    def test_rankings_university_screen_access(self):
+        response = self.client.get(url_for('rankings.university'))
+        self.assert_200(response)
+
+    def test_rankings_major_screen_access(self):
+        response = self.client.get(url_for('rankings.major'))
+        self.assert_200(response)
+
+    def test_rankings_basic_course_screen_access(self):
+        response = self.client.get(url_for('rankings.basic_course'))
         self.assert_200(response)
