@@ -6,7 +6,7 @@ from flask.ext.babel import gettext
 from dataviva.utils.send_mail import send_mail
 from forms import ContactForm
 from models import Form
-from dataviva import db
+from dataviva import db, admin_email
 from datetime import datetime
 
 
@@ -56,7 +56,7 @@ def create():
 
         db.session.add(contact)
         db.session.commit()
-        send_mail("Contato - DataViva", ["contato@dataviva.info"], message_tpl)
+        send_mail("Contato - DataViva", [admin_email], message_tpl)
 
         message = gettext("Your message has been sent successfully. We will soon get back to you.")
         flash(message, 'success')

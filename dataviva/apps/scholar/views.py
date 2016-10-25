@@ -125,7 +125,7 @@ def approved_articles_keywords():
 @login_required
 def new():
     form = RegistrationForm()
-    form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
+    form.set_choices(approved_articles_keywords())
     return render_template('scholar/new.html', form=form, action=url_for('scholar.create'))
 
 
@@ -142,6 +142,7 @@ def create():
         return render_template('scholar/new.html', form=form)
 
     if form.validate() is False:
+        form.set_choices(approved_articles_keywords())
         return render_template('scholar/new.html', form=form)
     else:
         article = Article()
@@ -181,9 +182,8 @@ def create():
             shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
-
+        upload_helper.log_operation(module=mod.name, operation='create', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
         new_article_advise(article, request.url_root)
-
         message = dictionary()["article_submission"]
         flash(message, 'success')
         return redirect(url_for('scholar.index'))
@@ -193,9 +193,10 @@ def create():
 @login_required
 @required_roles(1)
 def edit(id):
-    form = RegistrationForm()
-    form.keywords.choices = [(keyword.name, keyword.name) for keyword in approved_articles_keywords()]
     article = Article.query.filter_by(id=id).first_or_404()
+    form = RegistrationForm()
+    form.keywords.choices = ([(keyword.name, keyword.name) for keyword in article.keywords])
+    form.set_choices(approved_articles_keywords())
     form.title.data = article.title
     form.theme.data = article.theme
     form.authors.data = article.authors_str()
@@ -212,13 +213,13 @@ def edit(id):
 def update(id):
     csrf_token = request.form.get('csrf_token')
     upload_folder = os.path.join(app.config['UPLOAD_FOLDER'], mod.name, csrf_token, 'files')
-
+    article = Article.query.filter_by(id=id).first_or_404()
     form = RegistrationForm()
 
     if form.validate() is False:
+        form.set_choices(approved_articles_keywords())
         return render_template('scholar/edit.html', form=form)
     else:
-        article = Article.query.filter_by(id=id).first_or_404()
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
@@ -253,7 +254,7 @@ def update(id):
             shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
-
+        upload_helper.log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
         message = u'Estudo editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('scholar.admin'))
@@ -265,6 +266,7 @@ def update(id):
 def admin_delete():
     ids = request.form.getlist('ids[]')
     keywords = KeyWord.query.all()
+    deleted_articles = []
 
     if ids:
         articles = Article.query.filter(Article.id.in_(ids)).all()
@@ -272,12 +274,14 @@ def admin_delete():
             upload_helper.delete_s3_folder(os.path.join(mod.name, str(article.id)))
             db.session.delete(article)
             db.session.flush()
+            deleted_articles.append((article.id, article.title))
 
             for keyword in keywords:
                 if keyword.articles.count() == 0:
                     db.session.delete(keyword)
 
         db.session.commit()
+        upload_helper.log_operation(module=mod.name, operation='delete', user=(g.user.id, g.user.email), objs=deleted_articles)
         return u"Artigo(s) excluído(s) com sucesso!", 200
     else:
         return u'Selecione algum artigo para excluí-lo.', 205

@@ -324,3 +324,27 @@
   background: #5a9dc4;
   color: #FFF;
 }
+
+/* Responsive graph */
+@media (min-width: 500px) {
+  .responsive-wrapper {min-height: 607px;}
+}
+@media (min-width: 300px) and (max-width: 499px) {
+  .responsive-wrapper {height: 440px;}
+}
+@media (max-width: 299px) {
+  .responsive-wrapper {height: 330px;}
+}
+.responsive-frame {
+    max-width: 868px;
+    height: auto;
+    margin: 0px auto;
+}
+.responsive-wrapper {
+    position: relative;
+}
+.graph-placeholder {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
@@ -129,6 +129,7 @@ def admin_activate(status, status_value):
 def admin_delete():
     ids = request.form.getlist('ids[]')
     subjects = Subject.query.all()
+    deleted_posts = []
 
     if ids:
         posts = Post.query.filter(Post.id.in_(ids)).all()
@@ -139,12 +140,15 @@ def admin_delete():
                 pass
             db.session.delete(post)
             db.session.flush()
+            deleted_posts.append((post.id, post.title))
 
             for subject in subjects:
                 if subject.posts.count() == 0:
                     db.session.delete(subject)
 
         db.session.commit()
+        log_operation(module=mod.name, operation='delete', user=(g.user.id, g.user.email), objs=deleted_posts)
+
         return u"Post(s) excluído(s) com sucesso!", 200
     else:
         return u'Selecione algum post para excluí-lo.', 205
@@ -195,7 +199,7 @@ def create():
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
-
+        log_operation(module=mod.name, operation='create', user=(g.user.id, g.user.email), objs=[(post.id, post.title)])
         message = u'Muito obrigado! Seu post foi submetido com sucesso!'
         flash(message, 'success')
         return redirect(url_for('blog.admin'))
@@ -266,6 +270,7 @@ def update(id):
         clean_s3_folder(post.text_content, mod.name, post.id)
 
         db.session.flush()
+
         if len(form.thumb.data.split(',')) > 1:
             upload_folder = os.path.join(
                 app.config['UPLOAD_FOLDER'], mod.name, str(post.id), 'images')
@@ -273,6 +278,7 @@ def update(id):
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
+        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(post.id, post.title)])
 
         message = u'Post editado com sucesso!'
         flash(message, 'success')

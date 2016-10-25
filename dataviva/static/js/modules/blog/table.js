@@ -146,37 +146,50 @@ var changeStatus = function(ids, status, status_value){
     }
 }
 
-var destroy = function(ids){
-    var deleteLoading = dataviva.ui.loading('#admin-content');
-    deleteLoading.text('Excluindo...');
+var destroyConfirmation = function(ids){
     if (ids.length) {
-        $.ajax({
-            method: "POST",
-            url: "/"+lang+"/blog/admin/delete",
-            data: {ids:ids},
-            statusCode: {
-                500: function () {
-                    showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
-                },
-                404: function () {
-                    showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
-                    blogTable.table.fnReloadAjax();
-                }
-            },
-            success: function (message) {
-                for (var i = 0; i < ids.length; i++) {
-                    itemId = '#item'+ids[i];
-                    blogTable.table.row($(itemId).parents('tr')).remove().draw();
-                }
-                showMessage(message, 'success', 8000);
-            },
-            complete: function() {
-                deleteLoading.hide();
-            }
+        swal({ 
+            title: 'Você tem certeza?',
+            text: 'Você não será capaz de recuperar o(s) post(s)!',
+            type: 'warning',   showCancelButton: true,
+            confirmButtonText: 'Sim, deletar!',
+            closeOnConfirm: true
+        }, function(){
+            destroy(ids);
         });
     } else {
         showMessage('Por favor selecione para excluir.', 'warning', 8000);
     }
+}
+
+var destroy = function(ids){
+    var deleteLoading = dataviva.ui.loading('#admin-content');
+    deleteLoading.text('Excluindo...');
+    $.ajax({
+        method: "POST",
+        url: "/"+lang+"/blog/admin/delete",
+        data: {ids:ids},
+        statusCode: {
+            500: function () {
+                showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
+            },
+            404: function () {
+                showMessage('Uma ou mais notícias selecionados não puderam ser encontradas, a lista de notícias será atualizada.', 'info', 8000);
+                blogTable.table.fnReloadAjax();
+            }
+        },
+        success: function (message) {
+            for (var i = 0; i < ids.length; i++) {
+                itemId = '#item'+ids[i];
+                blogTable.table.row($(itemId).parents('tr')).remove().draw();
+            }
+                
+            showMessage(message, 'success', 8000);
+        },
+        complete: function() {
+            deleteLoading.hide();
+        }
+    });
 }
 
 var edit = function(ids){
@@ -197,7 +210,7 @@ var checkManySelected = function() {
 
 $(document).ready(function(){
     $('#admin-delete').click(function() {
-        destroy(blogTable.getCheckedIds());
+        destroyConfirmation(blogTable.getCheckedIds());
     });
     $('#admin-edit').click(function() {
         edit(blogTable.getCheckedIds());

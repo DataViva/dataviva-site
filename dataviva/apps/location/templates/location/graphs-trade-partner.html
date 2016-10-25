@@ -1,5 +1,5 @@
 <div id="graphs-trade-partner" class="container">
-    <nav class="nav-graph col-xs-12 col-md-3" >
+    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3" >
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Trade Balance{% endtrans %}</h4>
@@ -89,12 +89,14 @@
             {% endif %}
         </div>
     </nav>
-    <div class="embed-responsive embed-responsive-16by9">
-        <iframe src="{% if not graph %} /{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?time=year
-                     {% else %} /{{ g.locale }}/embed/{{graph.url}} {% endif %}"
-                name="graphs-frame-trade-partner"
-                id="graphs-frame-trade-partner"
-                class="embed-responsive-item" >
-        </iframe>
+    <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
+        <div class="embed-responsive responsive-wrapper">
+            <iframe src="{% if not graph %} /{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?time=year
+                         {% else %} /{{ g.locale }}/embed/{{graph.url}} {% endif %}"
+                    name="graphs-frame-trade-partner"
+                    id="graphs-frame-trade-partner"
+                    class="embed-responsive-item" >
+            </iframe>
+        </div>
     </div>
 </div>
