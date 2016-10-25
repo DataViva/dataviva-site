@@ -8,7 +8,7 @@ from flask.ext.mail import Message
 
 
 def send_mail(title, recipients, message):
-    msg = Message(title, sender="DataViva", recipients=recipients)
+    msg = Message(title, sender="DataViva <contato@dataviva.info>", recipients=recipients)
     msg.body = message
     msg.html = msg.body
     mail.send(msg)
