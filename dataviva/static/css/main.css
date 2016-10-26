@@ -1073,7 +1073,10 @@ h1.login-title {
     margin-left:20px;
   }
 }
-
 .toggle-btn-submenu{
   padding-bottom:15px
 }
+
+.scholar-publish-btn{
+  padding-top:15px;
+ }
