@@ -1,41 +1,47 @@
 .modal.dataviva .modal-header {
-    background: #9eddbf;
-    border-radius: 4px 4px 0px 0px;
+  background: #9eddbf;
+  border-radius: 4px 4px 0px 0px;
 }
+
 .modal.dataviva .modal-header,
 .modal.dataviva .modal-header button {
-    color: #FFF;
-    opacity: 1;
+  color: #FFF;
+  opacity: 1;
 }
+
 .modal.dataviva .modal-header h4 {
-    font-size: 18px;
-    font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
 }
+
 #modal-search .modal-body,
 #modal-selector .modal-body,
 #dataviva-signup .modal-body {
-    min-height: 400px;
+  min-height: 400px;
 }
+
 .modal.dataviva .modal-body h2 {
-    font-size:20px;
-    margin:1rem 0;
+  font-size:20px;
+  margin:1rem 0;
 }
+
 .modal.dataviva .nav-tabs {
-    border: 0px;
-    margin: 10px 0px;
+  border: 0px;
+  margin: 10px 0px;
 }
 
 .modal.dataviva .form-group.search input,
 .modal.dataviva .form-group.search input:focus {
-    min-width: 310px;
-    border: 1px solid #e5e6e7 !important;
-    border-left: 0px !important;
-    padding-left: 10px;
+  min-width: 310px;
+  border: 1px solid #e5e6e7 !important;
+  border-left: 0px !important;
+  padding-left: 10px;
 }
+
 .modal.dataviva .form-group.search .input-group-addon {
-    color:#9eddbf;
-    border-right: 0px;
-    padding-right: 0px;
+  color: #9eddbf;
+  border-right: 0px;
+  padding-right: 0px;
 }
 
 .modal.dataviva .selector-list {
@@ -45,17 +51,19 @@
 }
 
 .modal.dataviva .selector-list-item {
-    padding: 0px 15px;
-    font-size: 20px;
-    font-weight: 300;
-    line-height: 60px;
+  padding: 0px 15px;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 60px;
 }
+
 .modal.dataviva .selector-list-item:hover {
-    background-color: #5a9dc4 !important;
-    color: #FFF;
-    cursor: pointer;
+  background-color: #5a9dc4 !important;
+  color: #FFF;
+  cursor: pointer;
 }
-.modal.dataviva .selector-list .selector-list-item:nth-child(odd){
+
+.modal.dataviva .selector-list .selector-list-item:nth-child(odd) {
   background-color: #e1eee6;
 }
 
@@ -75,121 +83,133 @@
 }
 
 .modal.dataviva .selector-list .selector-list-item .selector-icon {
-    display: inline-block;
-    width: 35px;
-    text-align: center;
-    font-size: 20px;
+  display: inline-block;
+  width: 35px;
+  text-align: center;
+  font-size: 20px;
 }
+
 .modal.dataviva .selector-list img.symbol {
   border-radius: 50%;
   background-color: #337ab7;
 }
 
+/* MODALS */
 
-
-
-
-/* MODAIS */
 .modal-body .selector .selector_header {
-    padding: 0 0 20px 0;
-    position: relative;
+  padding: 0 0 20px 0;
+  position: relative;
 }
+
 .modal-body .selector .selector_header #header_select_div {
-    position: absolute;
-    top: 15px;
-    right: 10px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
 }
 
 .modal-body .selector_header .selector_header_icon, .modal-body .selector_header .selector_title_div {
-    height: 60px;
-    margin: 0;
+  height: 60px;
+  margin: 0;
 }
+
 .modal-body .selector_header .selector_header_icon {
-    float: left;
-    margin: 6px 0 0 !important;
+  float: left;
+  margin: 6px 0 0 !important;
 }
 
 .modal-body .selector_header .selector_title_div {
-    background: #eee;
-    display: block;
-    margin: -15px -15px 20px;
-    padding: 15px 80px;
+  background: #eee;
+  display: block;
+  margin: -15px -15px 20px;
+  padding: 15px 80px;
 }
 
 .modal-body .selector .selector_body {
-    padding: 0;
+  padding: 0;
 }
+
 .modal-body .selector .selector_body .search_result:nth-child(4n+1) {
-    background: #F3F6F3;
+  background: #F3F6F3;
 }
+
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_node[style] {
-    color: #333 !important;
-    background-color: #fff !important;
-    border-color: #ccc !important;
-    border-radius: 4px !important;
-    font-size: 14px !important;
-    font-weight: normal !important;
-    line-height: 1.42857143 !important;
+  color: #333 !important;
+  background-color: #fff !important;
+  border-color: #ccc !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  font-weight: normal !important;
+  line-height: 1.42857143 !important;
 }
+
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_button_element.d3plus_button_label[style] {
-    width: auto !important;
-    padding: 6px 24px 6px 12px !important;
+  width: auto !important;
+  padding: 6px 24px 6px 12px !important;
 }
+
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_drop_list[style] {
-    width: auto !important;
+  width: auto !important;
 }
+
 .modal-body .selector .selector_body .search_result .search_buttons .proximity_toggles .d3plus_drop_list .d3plus_node[style] {
-    border-radius: 0 !important;
+  border-radius: 0 !important;
 }
+
 .proximity_toggles .d3plus_title[style] {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
 
 .modal-body .selector .selector_header .selector_depth {
-    text-align: left;
-    margin-bottom: 10px;
+  text-align: left;
+  margin-bottom: 10px;
 }
+
 .modal-body .selector .selector_header .selector_depth #leon_selector_depth_toggle {
-    padding-left: 0;
+  padding-left: 0;
 }
+
 .selector_header .breadcrumb{
-    padding: 0;
-    background: transparent;
+  padding: 0;
+  background: transparent;
 }
+
 .selector .search_result > div.search_withins {
-    color: #999999 !important;
-    font-size: 12px !important;
-    margin-top: 5px;
+  color: #999999 !important;
+  font-size: 12px !important;
+  margin-top: 5px;
 }
+
 .selector div.search_buttons > div.proximity_toggles {
-    float: left;
+  float: left;
 }
+
 .modal-body .selector_body .search_buttons .btn-primary[style] {
-    background-color: #a25a6d !important;
-    border-color: #a25a6d !important;
-    color: #ffffff !important;
-    margin-bottom: 0 !important;
+  background-color: #a25a6d !important;
+  border-color: #a25a6d !important;
+  color: #ffffff !important;
+  margin-bottom: 0 !important;
 }
 
 .modal-body .selector .btn.btn-default[style] {
-    border-color: #e7eaec !important;
+  border-color: #e7eaec !important;
 }
 
 .modal-footer .chosen-options {
-    text-align: center;
+  text-align: center;
 }
 
+/* LOGIN MODAL */
 
-/* MODAL DE LOGIN */
-
-#dataviva-login .modal-header, #dataviva-signup .modal-header{
+#dataviva-login .modal-header, #dataviva-signup .modal-header {
   padding: 5px 10px
 }
+
 #dataviva-login .login-help {
   display: block;
   margin-top: 20px;
   text-align: center;
 }
+
 #dataviva-login h4, #dataviva-signup h4 {
   font-size: 29px;
   font-weight: 300;
@@ -206,7 +226,7 @@
   max-width:430px;
 }
 
-#dataviva-login h2{
+#dataviva-login h2 {
   width: 100%; 
   text-align: center; 
   border-bottom: 1px solid #cfcfcf; 
@@ -214,63 +234,67 @@
   margin: 10px 0 20px;
 }
 
-#dataviva-login .login-modal-divider{
-  background:#fff; 
-  padding:0 10px;
+#dataviva-login .login-modal-divider {
+  background: #fff;
+  padding: 0 10px;
 }
 
-#dataviva-login .login-button{
-  padding-bottom:10px;
+#dataviva-login .login-button {
+  padding-bottom: 10px;
 }
 
-#dataviva-login .forgot-password{
-  text-align:left;
+#dataviva-login .forgot-password {
+  text-align: left;
 }
 
 #dataviva-login .social-media-button { 
-  padding:1%;
+  padding: 1%;
 }
 
 #dataviva-login .signup { 
-  text-align:right;
+  text-align: right;
 }
 
-/* MODAL DE SIGNUP */
-#dataviva-signup .intro{
+/* SIGNUP MODAL */
+
+#dataviva-signup .intro {
   background: rgba(0,0,0,.03);
   border-bottom: 1px solid #eeeeee;
   margin: -15px -15px 10px;
   padding: 17px 65px 10px;
 }
+
 #dataviva-signup .intro p{
   color: #999;
 }
-#dataviva-signup .body-container{
+
+#dataviva-signup .body-container {
   padding: 10px 50px;
 }
-#dataviva-signup .modal-footer{
+
+#dataviva-signup .modal-footer {
   background: rgba(0,0,0,.03);
   margin: 0 -15px -15px;
   border-radius: 0 0 4px 4px;
 }
 
-/* MODAL DE PERGUNTAS */
+/* SEARCH MODAL */
+
 .modal .modal-search-title {
   margin: 0;
   line-height: 1.42857143;
 }
+
 .modal .question-header {
   text-align: center;
   margin-bottom: 0;
 }
-.modal .question-header h4{
+
+.modal .question-header h4 {
   font-size: 16px;
   line-height: 1.45em;
   margin: 0 0 20px 0;
   text-align: center;
-}
-
-.modal .modal-content{
 }
 
 .modal .question-header .chosen-options .question .question-option {
@@ -279,6 +303,5 @@
 }
 
 #modal-dataviva-video .modal-container.modal-video h1 {
-    margin-top: 0px;
+  margin-top: 0px;
 }
-
