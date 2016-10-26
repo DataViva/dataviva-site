@@ -18,8 +18,8 @@ class UserTests(BaseTestCase):
 	    return self.client.get('/' + g.locale + 'session/logout', follow_redirects=True)
 
     def test_login(self):
-		data=dict(email='gilmardealcantara@gmail.com', password='123456')
-	  	rv = self.client.post('/en/session/login?html_form=test', data=data, follow_redirects=True)
+		data=dict(email='gilmardealcantara@gmail.com', password='')
+	  	rv = self.client.post('/en/session/login?html_form=test', data=data)
 		assert 'You were logged in' in rv.data
 
 
@@ -27,6 +27,6 @@ class UserTests(BaseTestCase):
 from flask.ext.login import login_user, logout_user, current_user
 app.config['WTF_CSRF_ENABLED'] = False
 app.testing=True
-data=dict(email='gilmardealcantara@gmail.com', password='123456')
+data=dict(email='gilmardealcantara@gmail.com', password='')
 response = app.test_client().post('/en/session/login', data=data, follow_redirects=True)
 '''
