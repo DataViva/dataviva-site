@@ -26,9 +26,11 @@
         <div class="navbar-collapse collapse" id="navbar">
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{{ url_for('about.index') }}">{% trans %}ABOUT{% endtrans %}</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}SEARCH{% endtrans %}<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
+                <li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#dropdown-nav-submenu" role="button"  aria-expanded="false">{% trans %}SEARCH{% endtrans %}<span class="caret"></span></a>
+                </li>
+                <div class="dropdown dropdown-nav-submenu" id="dropdown-nav-submenu" >
+                    <ul class="dropdown-menu submenu-dropdown-items">
                         <li class="divisor">{% trans %}Basic Features{% endtrans %}</li>
                         <li><a href="{{ url_for('general.search') }}"><i class="fa fa-angle-right"></i> {% trans %}START A SEARCH{% endtrans %}</a></li>
                         <li><a href="{{ url_for('rankings.index') }}"><i class="fa fa-angle-right"></i> {% trans %}VIEW RANKINGS{% endtrans %}</a></li>
@@ -37,45 +39,42 @@
                         <li><a href="{{ url_for('build_graph.index') }}"><i class="fa fa-angle-right"></i> {% trans %}MAKE GRAPHS{% endtrans %}</a></li>
                         <li><a href="{{ url_for('data.index') }}"><i class="fa fa-angle-right"></i> {% trans %}DATABASE DOWNLOAD{% endtrans %}</a></li>
                     </ul>
-                </li>
+                </div>
                 <li><a href="{{ url_for('partners.index') }}">{% trans %}PARTNERS{% endtrans %}</a></li>
                 <li><a href="{{ url_for('help.index') }}">{% trans %}HELP{% endtrans %}</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right form-inline">
-                <li class="form-group">
-                    {% if not g.user.is_authenticated %}
+                {% if not g.user.is_authenticated %}
+                    <li class="form-group login-buttons-nav">
                         <a class="login" data-toggle="modal" data-target="#dataviva-login"><i class="fa fa-sign-in m-r-xs"></i>{% trans %}Login{% endtrans %}</a>
                         {% trans %}or{% endtrans %}
                         <button class="btn btn-primary m-l m-r" data-toggle="modal" data-target="#dataviva-signup">{% trans %}Sign Up{% endtrans %}</button>
-                </li>
-                    {% else %}
-                        <li class="form-group">
-                            <div class="dropdown">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
-                                    <i class="fa fa-user m-r-sm"></i>
-                                    <b>{{ g.user.firstname }}</b>
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-left">
-                                  {% if g.user.role %}
-                                      <li><a href="/{{g.locale}}/admin" id="admin-header"><i class="fa fa-angle-right"></i> {% trans %}Admin{% endtrans %}</a></li>
-                                      <li role="separator" class="divider"></li>
-                                  {% endif %}
-                                  <li><a href="/{{g.locale}}/user/edit" id="edit-header"><i class="fa fa-angle-right"></i> {% trans %}Edit{% endtrans %}</a></li>
-                                  <li><a href="/{{g.locale}}/session/logout" id="logout-header"><i class="fa fa-angle-right"></i> {% trans %}Logout{% endtrans %}</a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    {% endif %}
-                <li class="form-group">
-                    <select class="form-control visible-lg visible-md" name="language-selector">
+                    </li>
+                {% else %}
+                    <li class="form-group login-buttons-nav">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+                                <i class="fa fa-user m-r-sm"></i>
+                                <b>{{ g.user.firstname }}</b>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                {% if g.user.role %}
+                                    <li><a href="/{{g.locale}}/admin" id="admin-header"><i class="fa fa-angle-right"></i> {% trans %}Admin{% endtrans %}</a></li>
+                                    <li role="separator" class="divider"></li>
+                                {% endif %}
+                                <li><a href="/{{g.locale}}/user/edit" id="edit-header"><i class="fa fa-angle-right"></i> {% trans %}Edit{% endtrans %}</a></li>
+                                <li><a href="/{{g.locale}}/session/logout" id="logout-header"><i class="fa fa-angle-right"></i> {% trans %}Logout{% endtrans %}</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                {% endif %}
+                <li class="form-group lang-form-choose-nav">
+                    <select class="form-control visible-lg visible-md visible-sm visible-xs" name="language-selector">
                         <option value="en">{% trans %}English{% endtrans %}</option>
                         <option value="pt" selected="selected">{% trans %}Portuguese{% endtrans %}</option>
                     </select>
-                    <select class="form-control visible-sm visible-xs" name="language-selector">
-                        <option value="en">en</option>
-                        <option value="pt" selected="selected">pt</option>
-                    </select>
+
                 </li>
             </ul>
         </div>
