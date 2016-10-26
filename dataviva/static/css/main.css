@@ -159,9 +159,18 @@ body {
   border-right: 1px solid #5A9DC4;
 }
 @media (max-width: 991px) {
+  .navbar-default .navbar-nav > li:hover {
+      background-color: #f2fffb;
+  }
   .navbar-default .navbar-nav > li {
-    padding-top: 25px;
-    padding-bottom: 23px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+  .navbar-default .navbar-nav > li:not(:last-child) > a {
+  border-right: 0px;
+  }
+  .navbar-default .navbar-nav > li.form-group {
+    margin-bottom:0px;
   }
   .navbar-header {
         float: none;
@@ -197,11 +206,27 @@ body {
   .collapsing {
     overflow: hidden!important;
   }
+  .login-buttons-nav{
+    float:left !important;
+    padding-left: 15px;
+  }
+  .lang-form-choose-nav{
+    float:left !important;
+    padding-right:15px !important;
+  }
 }
 @media (min-width: 992px) {
   .navbar-default .navbar-nav > li {
     padding-top: 29px;
     padding-bottom: 23px;
+  }
+
+  .dropdown-nav-submenu {
+    float:left; 
+  }
+  .submenu-dropdown-items{
+    margin-left: -110px;
+    margin-top: 65px;
   }
 }
 @media (max-width: 767px) {
