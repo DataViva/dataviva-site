@@ -1,4 +1,4 @@
-'''#coding: utf-8
+#coding: utf-8
 
 from dataviva.utils.jinja_helpers import max_digits
 from flask import g
@@ -60,4 +60,3 @@ class MaxDigitsPTTests(BaseTestCase):
 
     def test_max_digits_3_for_decimal__2319086130_00_is_10__0_40(self):
         assert '-2.31' == max_digits(-2319086130.00, 3)
-'''
