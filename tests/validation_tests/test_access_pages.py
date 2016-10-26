@@ -1,9 +1,12 @@
+'''
+run:  nosetests tests/validation_tests/*py
+'''
+
 from flask import g, url_for
 from test_base import BaseTestCase
 
 
 class AccessScreenTests(BaseTestCase):
-
 
     def setUp(self):
         g.locale = 'en'
