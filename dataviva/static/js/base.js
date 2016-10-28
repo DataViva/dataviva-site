@@ -174,6 +174,47 @@ var select2Config = {
     tokenSeparators: [',']
 }
 
+function initLogsDownload(module) {
+    $('#logs-download-modal').on('shown.bs.modal', function() {
+        $(this).find('select').select2({
+            placeholder: 'Selecione um arquivo...'
+        });
+    });
+
+    var form = $('#logs-download-modal form'),
+        select = $('#logs-download-modal select'),
+        downloadButton = $('#logs-download-btn');
+    form.attr('action', '/' + module + '/admin/logs/zip');
+
+    if (!select.children('option').length) {
+        $.ajax({
+            url: '/' + module + '/admin/logs/get',
+            success: function(data) {
+                $.each(data.logs, function(i, log) {
+                    var option = $.parseHTML('<option>');
+                    $(option)
+                        .val(log.link)
+                        .text(log.date);
+                    select.append(option);
+                });
+                select.val('');
+                select.prop('disabled', false);
+            }
+        });
+    }
+
+    select.on('change', function() {
+        if ($(this).val())
+            downloadButton.prop('disabled', false);
+    });
+
+    downloadButton.click(function() {
+        var anchor = document.createElement('a');
+        anchor.href = select.val();
+        anchor.click();
+    });
+}
+
 function selectorCallback(id, event) {
     url = window.location.origin + window.location.pathname + '?bra_id='+id;
     window.location = url;

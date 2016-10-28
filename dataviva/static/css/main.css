@@ -1045,10 +1045,20 @@ h1.login-title {
     position: absolute;
     top: 0;
     width: 40%;
-    margin-left:20px;
+    margin-left: 20px;
   }
 }
 
-.toggle-btn-submenu{
-  padding-bottom:15px
+.toggle-btn-submenu {
+  padding-bottom: 15px;
+}
+
+#blog-table_wrapper .col-sm-6 .dataTables_filter,
+#news-table_wrapper .col-sm-6 .dataTables_filter,
+#scholar-table_wrapper .col-sm-6 .dataTables_filter {
+  display: inline;
+}
+
+.dataTables_wrapper .col-sm-6 .dt-buttons.btn-group {
+  margin-left: 6px;
 }
