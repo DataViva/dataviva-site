@@ -407,7 +407,6 @@ footer .btn-white:hover {
     .lang-form-choose-nav{
     padding-right:0px !important;
   }
-
     .login-buttons-nav{
     padding-left: 0px;
   }
@@ -422,6 +421,9 @@ footer .btn-white:hover {
     margin-right: 13px;
   }
 
+  .login-buttons-nav .dropdown-toggle {
+    margin-left: 15px;
+  }
 }
 footer .form-control:focus,
 .single-line:focus {
