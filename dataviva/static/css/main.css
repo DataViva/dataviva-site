@@ -1053,16 +1053,6 @@ h1.login-title {
   padding-bottom: 15px;
 }
 
-#blog-table_wrapper .col-sm-6 .dataTables_filter,
-#news-table_wrapper .col-sm-6 .dataTables_filter,
-#scholar-table_wrapper .col-sm-6 .dataTables_filter {
-  display: inline;
-}
-
-.dataTables_wrapper .col-sm-6 .dt-buttons.btn-group {
-  margin-left: 6px;
-}
-
 #admin-content {
   margin-bottom: 50px;
 }
