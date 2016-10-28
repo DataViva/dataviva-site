@@ -43,8 +43,9 @@
 <button id="admin-activate" class="btn btn-success pull-right">{% trans %}Activate{% endtrans %}</button>
 <button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">{% trans %}Deactivate{% endtrans %}</button>
 
-{% endblock admin_content %}
+{% include "modal/download_logs.html" %}
 
+{% endblock admin_content %}
 
 {% block js_assets %}
     <script src="/static/js/modules/news/table.js"></script>
