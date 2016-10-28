@@ -1062,3 +1062,7 @@ h1.login-title {
 .dataTables_wrapper .col-sm-6 .dt-buttons.btn-group {
   margin-left: 6px;
 }
+
+#admin-content {
+  margin-bottom: 50px;
+}
