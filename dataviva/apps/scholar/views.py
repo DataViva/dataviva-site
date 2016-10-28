@@ -242,6 +242,7 @@ def update(id):
         form.set_choices(approved_articles_keywords())
         return render_template('scholar/edit.html', form=form)
     else:
+        old_title = article.title
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
@@ -276,7 +277,7 @@ def update(id):
             shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
-        upload_helper.log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
+        upload_helper.log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(article.id, old_title)])
         message = u'Estudo editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('scholar.admin'))

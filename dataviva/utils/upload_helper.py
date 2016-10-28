@@ -139,6 +139,7 @@ def save_file_temp(file, object_type, csrf_token):
     shutil.rmtree(local_folder)
     return image_url
 
+
 def log_operation(module, operation, user, objs):
     date = datetime.datetime.now()
     file_name = '_'.join(['log', module, str(date.year), str(date.month)]) + '.csv'
@@ -170,6 +171,7 @@ def log_operation(module, operation, user, objs):
     except Exception:
         pass
     os.remove(file_location)
+
 
 def get_logs(module):
     logs = []

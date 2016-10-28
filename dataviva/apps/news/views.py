@@ -282,6 +282,7 @@ def update(id):
         return render_template('news/edit.html', form=form)
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
+        old_title = publication.title
         publication.title = form.title.data
         publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime(
@@ -308,7 +309,7 @@ def update(id):
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
-        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(publication.id, publication.title)])
+        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(publication.id, old_title)])
 
         message = u'Notícia editada com sucesso!'
         flash(message, 'success')

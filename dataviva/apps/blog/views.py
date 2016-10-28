@@ -276,6 +276,7 @@ def update(id):
         return render_template('blog/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()
+        old_title = post.title
         post.title = form.title.data
         post.author = form.author.data
         post.text_call = form.text_call.data
@@ -304,7 +305,7 @@ def update(id):
 
         db.session.commit()
         log_operation(module=mod.name, operation='edit', user=(
-            g.user.id, g.user.email), objs=[(post.id, post.title)])
+            g.user.id, g.user.email), objs=[(post.id, old_title)])
 
         message = u'Post editado com sucesso!'
         flash(message, 'success')
