@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import boto3
 import os
 import base64
@@ -10,7 +11,6 @@ import hashlib
 from bs4 import BeautifulSoup
 import datetime
 import csv
-from calendar import TimeEncoding, month_name
 import zipfile
 
 
@@ -142,7 +142,7 @@ def save_file_temp(file, object_type, csrf_token):
 
 def log_operation(module, operation, user, objs):
     date = datetime.datetime.now()
-    file_name = '_'.join(['log', module, str(date.year), str(date.month)]) + '.csv'
+    file_name = '_'.join(['log', module, str(date.year), '{:02d}'.format(date.month)]) + '.csv'
     upload_folder = os.path.join(UPLOAD_FOLDER, 'logs', module)
     key = os.path.join('logs', module, file_name)
     file_location = os.path.join(UPLOAD_FOLDER, key) + '.csv'
@@ -176,18 +176,14 @@ def log_operation(module, operation, user, objs):
 def get_logs(module):
     logs = []
     files = s3_client().list_objects(Bucket=S3_BUCKET, Prefix='logs/'+module)
-
     if 'Contents' in files:
         for file in files['Contents']:
-            # Gets log month name in portuguese
-            with TimeEncoding('pt_BR.utf-8') as encoding:
-                month = month_name[int(file['Key'].split('_')[3].split('.')[0])]
-                if encoding is not None:
-                    month = month.decode(encoding)
-
+            months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+            month = months[int(file['Key'].split('_')[3].split('.')[0])-1]
             year = file['Key'].split('_')[2]
             link = 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + file['Key']
-            logs.append({'date': ' '.join([month.title(), year]), 'link': link})
+            logs.append({'date': ' '.join([month, year]), 'link': link})
 
     return logs
 
