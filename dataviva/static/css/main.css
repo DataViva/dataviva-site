@@ -159,7 +159,7 @@ body {
   border-right: 1px solid #5A9DC4;
 }
 @media (max-width: 991px) {
-  .navbar-default .navbar-nav > li:hover {
+  .navbar-default .navbar-left > li:hover {
       background-color: #f2fffb;
   }
   .navbar-default .navbar-nav > li {
