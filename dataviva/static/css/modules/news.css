@@ -198,6 +198,14 @@
     text-align: center;
 }
 
+.news .col-sm-6 .dataTables_filter {
+  display: inline;
+}
+
+.news .dataTables_wrapper .col-sm-6 .dt-buttons.btn-group {
+  margin-left: 6px;
+}
+
 @media (min-width: 500px) {
   .news .visu-wrapper {
     height: 607px

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_file
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from sqlalchemy import desc
@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder, get_logs, zip_logs
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
@@ -110,6 +110,28 @@ def admin():
     return render_template('blog/admin.html', posts=posts)
 
 
+@mod.route('/admin/logs/get', methods=['GET'])
+@login_required
+@required_roles(1)
+def admin_get_logs():
+    return jsonify(logs=get_logs(mod.name))
+
+
+@mod.route('/admin/logs/zip', methods=['GET'])
+@login_required
+@required_roles(1)
+def admin_zip_logs():
+    zipfile = zip_logs(mod.name)
+    try:
+        if zipfile:
+            return send_file(zipfile['location'], attachment_filename=zipfile['name'], as_attachment=True)
+    except Exception:
+        pass
+    finally:
+        if os.path.isfile(zipfile['location']):
+            os.remove(zipfile['location'])
+
+
 @mod.route('/admin/post/<status>/<status_value>', methods=['POST'])
 @login_required
 @required_roles(1)
@@ -147,7 +169,8 @@ def admin_delete():
                     db.session.delete(subject)
 
         db.session.commit()
-        log_operation(module=mod.name, operation='delete', user=(g.user.id, g.user.email), objs=deleted_posts)
+        log_operation(module=mod.name, operation='delete', user=(
+            g.user.id, g.user.email), objs=deleted_posts)
 
         return u"Post(s) excluído(s) com sucesso!", 200
     else:
@@ -199,7 +222,8 @@ def create():
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
-        log_operation(module=mod.name, operation='create', user=(g.user.id, g.user.email), objs=[(post.id, post.title)])
+        log_operation(module=mod.name, operation='create', user=(
+            g.user.id, g.user.email), objs=[(post.id, post.title)])
         message = u'Muito obrigado! Seu post foi submetido com sucesso!'
         flash(message, 'success')
         return redirect(url_for('blog.admin'))
@@ -221,7 +245,8 @@ def upload_image():
 def edit(id):
     post = Post.query.filter_by(id=id).first_or_404()
     form = RegistrationForm()
-    form.subject.choices = ([(subject.name, subject.name) for subject in post.subjects])
+    form.subject.choices = (
+        [(subject.name, subject.name) for subject in post.subjects])
     form.subject.choices.remove((post.main_subject, post.main_subject))
     form.subject.choices.insert(0, (post.main_subject, post.main_subject))
     form.set_choices()
@@ -251,6 +276,7 @@ def update(id):
         return render_template('blog/edit.html', form=form)
     else:
         post = Post.query.filter_by(id=id).first_or_404()
+        old_title = post.title
         post.title = form.title.data
         post.author = form.author.data
         post.text_call = form.text_call.data
@@ -278,7 +304,8 @@ def update(id):
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
-        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(post.id, post.title)])
+        log_operation(module=mod.name, operation='edit', user=(
+            g.user.id, g.user.email), objs=[(post.id, old_title)])
 
         message = u'Post editado com sucesso!'
         flash(message, 'success')

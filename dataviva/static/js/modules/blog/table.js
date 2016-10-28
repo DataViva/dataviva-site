@@ -50,6 +50,17 @@ var BlogTable = function () {
                 }
             }
         ],
+        "buttons": [
+            {
+                text: "<i class='fa fa-clock-o'></i>",
+                className: 'btn btn-sm btn-white',
+                titleAttr: 'Histórico de operações',
+                action: function (e, dt, node, config) {
+                    $('#logs-download-modal').modal('show');
+                    initLogsDownload('blog');
+                }
+            }
+        ],
         "paging": false,
         "bFilter": true,
         "info": false,
@@ -90,6 +101,9 @@ var BlogTable = function () {
             $('input[name="selected-item"]').change(function() {
                 checkManySelected();
             });
+
+            $('#blog-table_wrapper .col-sm-6:eq(1)').addClass('text-right');
+            $('#blog-table').dataTable().api().buttons().container().appendTo('#blog-table_wrapper .col-sm-6:eq(1)');
         }
     });
 
@@ -116,7 +130,7 @@ BlogTable.prototype.getCheckedIds = function(first_argument) {
 
 var blogTable = new BlogTable();
 
-var changeStatus = function(ids, status, status_value){
+var changeStatus = function(ids, status, status_value) {
     if (ids.length) {
         $.ajax({
             method: "POST",
@@ -168,7 +182,7 @@ var destroy = function(ids){
     $.ajax({
         method: "POST",
         url: "/"+lang+"/blog/admin/delete",
-        data: {ids:ids},
+        data: {ids: ids},
         statusCode: {
             500: function () {
                 showMessage('Não foi possível alterar a(s) notícia(s) selecionada(s) devido a um erro no servidor.', 'danger', 8000);
@@ -192,7 +206,7 @@ var destroy = function(ids){
     });
 }
 
-var edit = function(ids){
+var edit = function(ids) {
     if (ids.length) {
         window.location = '/'+lang+'/blog/admin/post/'+ids[0]+'/edit';
     } else {

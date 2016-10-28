@@ -1092,13 +1092,18 @@ h1.login-title {
     position: absolute;
     top: 0;
     width: 40%;
-    margin-left:20px;
+    margin-left: 20px;
   }
 }
-.toggle-btn-submenu{
-  padding-bottom:15px
+
+.toggle-btn-submenu {
+  padding-bottom: 15px;
 }
 
-.scholar-publish-btn{
-  padding-top:15px;
- }
+.scholar-publish-btn {
+  padding-top: 15px;
+}
+
+#admin-content {
+  margin-bottom: 50px;
+}

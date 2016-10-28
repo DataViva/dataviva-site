@@ -145,3 +145,11 @@
   position: absolute;
   z-index: -1;
 }
+
+.scholar .col-sm-6 .dataTables_filter {
+  display: inline;
+}
+
+.scholar .dataTables_wrapper .col-sm-6 .dt-buttons.btn-group {
+  margin-left: 6px;
+}
