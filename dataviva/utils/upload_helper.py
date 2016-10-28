@@ -10,7 +10,7 @@ import hashlib
 from bs4 import BeautifulSoup
 import datetime
 import csv
-from calendar import month_name
+from calendar import TimeEncoding, month_name
 import zipfile
 
 
@@ -174,13 +174,21 @@ def log_operation(module, operation, user, objs):
 def get_logs(module):
     logs = []
     files = s3_client().list_objects(Bucket=S3_BUCKET, Prefix='logs/'+module)
+
     if 'Contents' in files:
         for file in files['Contents']:
-            month = month_name[int(file['Key'].split('_')[3].split('.')[0])]
+            # Gets log month name in portuguese
+            with TimeEncoding('pt_BR.utf-8') as encoding:
+                month = month_name[int(file['Key'].split('_')[3].split('.')[0])]
+                if encoding is not None:
+                    month = month.decode(encoding)
+
             year = file['Key'].split('_')[2]
             link = 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + file['Key']
-            logs.append({'date': ' '.join([month, year]), 'link': link})
+            logs.append({'date': ' '.join([month.title(), year]), 'link': link})
+
     return logs
+
 
 def zip_logs(module):
     client = s3_client()
@@ -188,22 +196,28 @@ def zip_logs(module):
     h = hashlib.new('ripemd160')
     h.update(os.urandom(32))
     upload_folder = os.path.join(UPLOAD_FOLDER, 'logs', module, h.hexdigest())
+
     if 'Contents' in s3_files:
         if not os.path.exists(upload_folder):
             os.makedirs(upload_folder)
+
         for s3_file in s3_files['Contents']:
             key = s3_file['Key']
             file_location = os.path.join(upload_folder, key.split('/')[-1])
             client.download_file(S3_BUCKET, key, file_location)
+
         timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M')
         zip_file_name = '_'.join(['log', module, timestamp]) + '.zip'
         zip_file_folder = os.path.join(UPLOAD_FOLDER, 'logs', module)
         zip_file_location = os.path.join(zip_file_folder, zip_file_name)
+
         with zipfile.ZipFile(zip_file_location, 'w') as zip:
             for root, dirs, files in os.walk(upload_folder):
                 for file in files:
                     abs_filename = os.path.join(upload_folder, file)
                     zip.write(abs_filename, arcname=file)
+
         shutil.rmtree(upload_folder)
         return {'location': zip_file_location, 'name': zip_file_name}
+
     return None
