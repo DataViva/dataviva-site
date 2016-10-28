@@ -3,34 +3,53 @@
 {% block content %}
 
 <div class="container">
-    <ol class="breadcrumb">
-        <li><a href="{{ url_for('general.home') }}">Home</a></li>
-        {% block breadcrumb %}{% endblock %}
-    </ol>
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li><a href="{{ url_for('general.home') }}">Home</a></li>
+            {% block breadcrumb %}{% endblock %}
+        </ol>
+    </div>
 </div>
 
 <section id="scholar">
     <div class="container">
-        <nav class="sidebar col-md-3">
-            {% if g.user.is_authenticated %}
-                <a href="{{ url_for('scholar.new')}}" class="btn btn-success btn-lg">Publique um estudo</a>
-            {% else %}
-                <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">Publique um estudo</a>
-            {% endif %}
-            <h3>Temas</h3>
-            <ul class="sub-menu">
-                <li><a href="{{ url_for('scholar.index') }}" title="Todos" class="{{ 'active' if not request.args.get('keyword') }}">Todos</a></li>
-                {% for keyword in keywords %}
-                    <li><a href="{{ url_for('scholar.index', keyword=keyword.id) }}" title="{{ keyword.name }}" class="{{ 'active' if keyword.id == request.args.get('keyword')|int }}">{{ keyword.name }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
+        <div class="row row-offcanvas row-offcanvas-left">
+            <nav class="sidebar col-md-3 row-offcanvas sidebar-offcanvas">
+                <div class="visible-md visible-lg">
+                    {% if g.user.is_authenticated %}
+                        <a href="{{ url_for('scholar.new')}}" class="btn btn-success btn-lg">Publique um estudo</a>
+                    {% else %}
+                        <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">Publique um estudo</a>
+                    {% endif %}
+                </div>
+                <h3>Temas</h3>
+                <ul class="sub-menu">
+                    <li><a href="{{ url_for('scholar.index') }}" title="Todos" class="{{ 'active' if not request.args.get('keyword') }}">Todos</a></li>
+                    {% for keyword in keywords %}
+                        <li><a href="{{ url_for('scholar.index', keyword=keyword.id) }}" title="{{ keyword.name }}" class="{{ 'active' if keyword.id == request.args.get('keyword')|int }}">{{ keyword.name }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
 
-        <div class="scholar-content col-md-9">
+            <div class="scholar-content col-md-9">
+                <div class="visible-xs visible-sm">
+                    <div>
+                        <button type="button" class="fa  btn btn-white" aria-hidden="true" data-toggle="offcanvas" data-target=".sidebar-nav" >
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="scholar-publish-btn">
+                    {% if g.user.is_authenticated %}
+                        <a href="{{ url_for('scholar.new')}}" class="btn btn-success btn-lg">Publique um estudo</a>
+                    {% else %}
+                        <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">Publique um estudo</a>
+                    {% endif %}
+                    </div>
+                </div>
                 {% block scholar_content %}
                 {% endblock scholar_content %}
-        </div>
-
+            </div>
+            </div>
     </div>
 </section>
 {% endblock content %}
