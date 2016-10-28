@@ -159,7 +159,7 @@ body {
   border-right: 1px solid #5A9DC4;
 }
 @media (max-width: 991px) {
-  .navbar-default .navbar-nav > li:hover {
+  .navbar-default .navbar-left > li:hover {
       background-color: #f2fffb;
   }
   .navbar-default .navbar-nav > li {
@@ -402,6 +402,26 @@ footer .btn-white:hover {
   footer .btn-white:hover {
     padding: 10px 0px;
   }
+}
+@media (max-width: 369px) {
+    .lang-form-choose-nav{
+    padding-right:0px !important;
+  }
+
+    .login-buttons-nav{
+    padding-left: 0px;
+  }
+  .lang-form-choose-nav > select{
+    padding-left: 1px;
+    padding-right:5px;
+  }
+  .login-buttons-nav > button {
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-left: 12px;
+    margin-right: 13px;
+  }
+
 }
 footer .form-control:focus,
 .single-line:focus {
