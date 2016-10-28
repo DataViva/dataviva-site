@@ -184,11 +184,11 @@ function initLogsDownload(module) {
     var form = $('#logs-download-modal form'),
         select = $('#logs-download-modal select'),
         downloadButton = $('#logs-download-btn');
-    form.attr('action', '/' + module + '/admin/logs/zip');
+    form.attr('action', '/' + dataviva.language + module + '/admin/logs/zip');
 
     if (!select.children('option').length) {
         $.ajax({
-            url: '/' + module + '/admin/logs/get',
+            url: '/' + dataviva.language + module + '/admin/logs/get',
             success: function(data) {
                 $.each(data.logs, function(i, log) {
                     var option = $.parseHTML('<option>');
