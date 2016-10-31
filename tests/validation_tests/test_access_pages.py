@@ -5,7 +5,6 @@ run:  nosetests tests/validation_tests/*py
 from flask import g, url_for
 from test_base import BaseTestCase
 
-
 class AccessScreenTests(BaseTestCase):
 
     def setUp(self):
@@ -151,3 +150,4 @@ class AccessScreenTests(BaseTestCase):
     def test_rankings_basic_course_screen_access(self):
         response = self.client.get(url_for('rankings.basic_course'))
         self.assert_200(response)
+        
