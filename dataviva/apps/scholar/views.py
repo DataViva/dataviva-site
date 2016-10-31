@@ -84,10 +84,10 @@ def admin_get_logs():
     return jsonify(logs=logs)
 
 
-@mod.route('/admin/logs/zip', methods=['GET'])
+@mod.route('/admin/logs/zip/<date>', methods=['GET'])
 @login_required
 @required_roles(1)
-def admin_zip_logs():
+def admin_zip_logs(date):
     zipfile = upload_helper.zip_logs(mod.name)
     if zipfile:
         response = send_file(zipfile['location'], attachment_filename=zipfile['name'], as_attachment=True)

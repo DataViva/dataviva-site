@@ -183,8 +183,9 @@ function initLogsDownload(module) {
 
     var form = $('#logs-download-modal form'),
         select = $('#logs-download-modal select'),
-        downloadButton = $('#logs-download-btn');
-    form.attr('action', '/' + module + '/admin/logs/zip');
+        downloadButton = $('#logs-download-btn'),
+        url = ['', module, 'admin/logs/zip', moment().format('YYYYMMDDHHmmss')].join('/');
+    form.attr('action', url);
 
     if (!select.children('option').length) {
         $.ajax({
