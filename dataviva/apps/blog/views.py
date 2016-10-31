@@ -122,14 +122,13 @@ def admin_get_logs():
 @required_roles(1)
 def admin_zip_logs():
     zipfile = zip_logs(mod.name)
-    try:
-        if zipfile:
-            return send_file(zipfile['location'], attachment_filename=zipfile['name'], as_attachment=True)
-    except Exception:
-        pass
-    finally:
+    if zipfile:
+        response = send_file(zipfile['location'], attachment_filename=zipfile['name'], as_attachment=True)
         if os.path.isfile(zipfile['location']):
             os.remove(zipfile['location'])
+        return response
+    flash('Não foi possível baixar o arquivo.', 'danger')
+    return redirect(url_for('blog.admin'))
 
 
 @mod.route('/admin/post/<status>/<status_value>', methods=['POST'])
