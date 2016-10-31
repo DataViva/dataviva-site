@@ -11,7 +11,5 @@ class UserTests(BaseTestCase):
 		data=dict(email=test_user_email, password=test_user_password)
 	  	response = self.client.post('/en/session/login', data=data)
 	  	assert '302 FOUND' == response.status
-	  	responde = self.client.get('/logout')
+	  	response = self.client.get('/logout')
 	  	assert '302 FOUND' == response.status
-
-	  	
