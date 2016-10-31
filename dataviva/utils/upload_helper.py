@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import boto3
 import os
 import base64
@@ -10,6 +11,7 @@ import hashlib
 from bs4 import BeautifulSoup
 import datetime
 import csv
+import zipfile
 
 
 def s3_client():
@@ -137,9 +139,10 @@ def save_file_temp(file, object_type, csrf_token):
     shutil.rmtree(local_folder)
     return image_url
 
+
 def log_operation(module, operation, user, objs):
     date = datetime.datetime.now()
-    file_name = '_'.join(['log', module, str(date.year), str(date.month)]) + '.csv'
+    file_name = '_'.join(['log', module, str(date.year), '{:02d}'.format(date.month)]) + '.csv'
     upload_folder = os.path.join(UPLOAD_FOLDER, 'logs', module)
     key = os.path.join('logs', module, file_name)
     file_location = os.path.join(UPLOAD_FOLDER, key) + '.csv'
@@ -168,3 +171,51 @@ def log_operation(module, operation, user, objs):
     except Exception:
         pass
     os.remove(file_location)
+
+
+def get_logs(module):
+    logs = []
+    files = s3_client().list_objects(Bucket=S3_BUCKET, Prefix='logs/'+module)
+    if 'Contents' in files:
+        for file in files['Contents']:
+            months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                    'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+            month = months[int(file['Key'].split('_')[3].split('.')[0])-1]
+            year = file['Key'].split('_')[2]
+            link = 'https://' + S3_BUCKET + '.s3.amazonaws.com/' + file['Key']
+            logs.append({'date': ' '.join([month, year]), 'link': link})
+
+    return logs
+
+
+def zip_logs(module):
+    client = s3_client()
+    s3_files = client.list_objects(Bucket=S3_BUCKET, Prefix='logs/'+module)
+    h = hashlib.new('ripemd160')
+    h.update(os.urandom(32))
+    upload_folder = os.path.join(UPLOAD_FOLDER, 'logs', module, h.hexdigest())
+
+    if 'Contents' in s3_files:
+        if not os.path.exists(upload_folder):
+            os.makedirs(upload_folder)
+
+        for s3_file in s3_files['Contents']:
+            key = s3_file['Key']
+            file_location = os.path.join(upload_folder, key.split('/')[-1])
+            client.download_file(S3_BUCKET, key, file_location)
+
+        timestamp = datetime.datetime.now().strftime('%Y%m%d%H%M')
+        zip_file_name = '_'.join(['log', module, timestamp]) + '.zip'
+        zip_file_folder = os.path.join(UPLOAD_FOLDER, 'logs', module)
+        zip_file_location = os.path.join(zip_file_folder, zip_file_name)
+
+        with zipfile.ZipFile(zip_file_location, 'w') as zip:
+            for root, dirs, files in os.walk(upload_folder):
+                for file in files:
+                    abs_filename = os.path.join(upload_folder, file)
+                    zip.write(abs_filename, arcname=file)
+
+        shutil.rmtree(upload_folder)
+        return {'location': zip_file_location, 'name': zip_file_name}
+
+    return None

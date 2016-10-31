@@ -32,7 +32,7 @@
             <th></th>
             <th>{% trans %}Author(s){% endtrans %}</th>
             <th>{% trans %}Date{% endtrans %}</th>
-            <th>{% trans %}Show in{% endtrans %} Home</th>
+            <th>Home</th>
             <th>{% trans %}Active{% endtrans %}</th>
         </tr>
     </thead>
@@ -43,6 +43,8 @@
 <button id="admin-delete" class="btn btn-danger"><i class="fa fa-trash-o m-r-sm"></i>{% trans %}Delete{% endtrans %}</button>
 <button id="admin-activate" class="btn btn-success pull-right">{% trans %}Activate{% endtrans %}</button>
 <button id="admin-deactivate" class="btn btn-white pull-right m-r-sm">{% trans %}Deactivate{% endtrans %}</button>
+
+{% include "modal/download_logs.html" %}
 
 {% endblock admin_content %}
 

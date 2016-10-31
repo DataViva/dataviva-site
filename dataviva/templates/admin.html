@@ -16,13 +16,13 @@
         <nav class="sidebar col-md-2">
             <h3>{% trans %}Modules{% endtrans %}</h3>
             <ul>
-                <li><a class="{{'active' if posts else ''}}" href="{{ url_for('blog.admin') }}" title="Blog">Blog</a></li>
-                <li><a class="{{'active' if calls else ''}}" href="{{ url_for('calls.admin') }}" title="Chamadas">{% trans %}Calls{% endtrans %}</a></li>
-                <li><a class="{{'active' if articles else ''}}" href="{{ url_for('scholar.admin') }}" title="Estudos">{% trans %}Scholar{% endtrans %}</a></li>
-                <li><a class="{{'active' if questions else ''}}" href="{{ url_for('search.admin') }}" title="Inicie uma Pesquisa">{% trans %}Start a search{% endtrans %}</a></li>
-                <li><a class="{{'active' if publications else ''}}" href="{{ url_for('news.admin') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
-                <li><a class="{{'active' if user else ''}}" href="{{ url_for('user.admin') }}" title="Usuários">{% trans %}Users{% endtrans %}</a></li>
-                <li><a class="{{'active' if subjects else ''}}" href="{{ url_for('help.admin') }}" title="Ajuda">{% trans %}Help{% endtrans %}</a></li>
+                <li><a class="{{'active' if posts }}" href="{{ url_for('blog.admin') }}" title="Blog">Blog</a></li>
+                <li><a class="{{'active' if calls }}" href="{{ url_for('calls.admin') }}" title="{% trans %}Calls{% endtrans %}">{% trans %}Calls{% endtrans %}</a></li>
+                <li><a class="{{'active' if articles }}" href="{{ url_for('scholar.admin') }}" title="{% trans %}Scholar{% endtrans %}">{% trans %}Scholar{% endtrans %}</a></li>
+                <li><a class="{{'active' if questions }}" href="{{ url_for('search.admin') }}" title="{% trans %}Start a search{% endtrans %}">{% trans %}Start a search{% endtrans %}</a></li>
+                <li><a class="{{'active' if publications }}" href="{{ url_for('news.admin') }}" title="{% trans %}News{% endtrans %}">{% trans %}News{% endtrans %}</a></li>
+                <li><a class="{{'active' if user }}" href="{{ url_for('user.admin') }}" title="{% trans %}Users{% endtrans %}">{% trans %}Users{% endtrans %}</a></li>
+                <li><a class="{{'active' if subjects }}" href="{{ url_for('help.admin') }}" title="{% trans %}Help{% endtrans %}">{% trans %}Help{% endtrans %}</a></li>
             </ul>
         </nav>
         <div id="admin-content" class="col-md-10">

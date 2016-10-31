@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_file
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
 from sqlalchemy import desc
@@ -10,7 +10,7 @@ from datetime import datetime
 from random import randrange
 from dataviva.apps.admin.views import required_roles
 from dataviva import app
-from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder
+from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s3_folder, upload_images_to_s3, save_file_temp, clean_s3_folder, get_logs, zip_logs
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
@@ -109,6 +109,26 @@ def admin():
     publications = Publication.query.all()
     return render_template('news/admin.html', publications=publications)
 
+
+@mod.route('/admin/logs/get', methods=['GET'])
+@login_required
+@required_roles(1)
+def admin_get_logs():
+    return jsonify(logs=get_logs(mod.name))
+
+
+@mod.route('/admin/logs/zip', methods=['GET'])
+@login_required
+@required_roles(1)
+def admin_zip_logs():
+    zipfile = zip_logs(mod.name)
+    if zipfile:
+        response = send_file(zipfile['location'], attachment_filename=zipfile['name'], as_attachment=True)
+        if os.path.isfile(zipfile['location']):
+            os.remove(zipfile['location'])
+        return response
+    flash('Não foi possível baixar o arquivo.', 'danger')
+    return redirect(url_for('news.admin'))
 
 @mod.route('/admin/publication/<status>/<status_value>', methods=['POST'])
 @login_required
@@ -260,6 +280,7 @@ def update(id):
         return render_template('news/edit.html', form=form)
     else:
         publication = Publication.query.filter_by(id=id).first_or_404()
+        old_title = publication.title
         publication.title = form.title.data
         publication.text_call = form.text_call.data
         publication.last_modification = datetime.now().strftime(
@@ -286,7 +307,7 @@ def update(id):
                 form.thumb.data.split(',')[1], upload_folder, 'thumb')
 
         db.session.commit()
-        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(publication.id, publication.title)])
+        log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(publication.id, old_title)])
 
         message = u'Notícia editada com sucesso!'
         flash(message, 'success')

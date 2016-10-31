@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-19 17:51-0200\n"
+"POT-Creation-Date: 2016-10-28 18:28-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -323,7 +323,7 @@ msgid "Start a search"
 msgstr ""
 
 #: dataviva/apps/admin/templates/admin/index.html:65
-#: dataviva/apps/news/templates/news/_base.html:25
+#: dataviva/apps/news/templates/news/_base.html:31
 #: dataviva/apps/news/templates/news/admin.html:4
 #: dataviva/apps/news/templates/news/admin.html:8
 #: dataviva/apps/news/templates/news/edit.html:8
@@ -742,14 +742,14 @@ msgstr ""
 msgid "More details"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_base.html:16
+#: dataviva/apps/blog/templates/blog/_base.html:17
 #: dataviva/apps/data/templates/data/index.html:15
-#: dataviva/apps/news/templates/news/_base.html:16
+#: dataviva/apps/news/templates/news/_base.html:17
 msgid "Topics"
 msgstr ""
 
-#: dataviva/apps/blog/templates/blog/_base.html:18
-#: dataviva/apps/news/templates/news/_base.html:18
+#: dataviva/apps/blog/templates/blog/_base.html:19
+#: dataviva/apps/news/templates/news/_base.html:19
 #: dataviva/templates/about/ask/index.html:51
 #: dataviva/templates/account/index.html:24
 #: dataviva/translations/dictionary.py:392
@@ -780,9 +780,7 @@ msgid "Post Date"
 msgstr ""
 
 #: dataviva/apps/blog/templates/blog/_form.html:36
-#: dataviva/apps/blog/templates/blog/admin.html:35
 #: dataviva/apps/news/templates/news/_form.html:36
-#: dataviva/apps/news/templates/news/admin.html:34
 msgid "Show in"
 msgstr ""
 
@@ -832,7 +830,7 @@ msgstr ""
 #: dataviva/apps/news/templates/news/edit.html:9
 #: dataviva/apps/search/templates/search/admin.html:40
 #: dataviva/apps/search/templates/search/edit.html:10
-#: dataviva/templates/include/header.html:64
+#: dataviva/templates/include/header.html:66
 #: dataviva/translations/dictionary.py:456
 msgid "Edit"
 msgstr ""
@@ -3090,7 +3088,7 @@ msgstr ""
 #: dataviva/apps/session/templates/session/login.html:45
 #: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
 #: dataviva/templates/general/upgrade.html:3
-#: dataviva/templates/include/header.html:47
+#: dataviva/templates/include/header.html:49
 #: dataviva/translations/dictionary.py:555
 msgid "Login"
 msgstr ""
@@ -3345,7 +3343,7 @@ msgstr ""
 
 #: dataviva/apps/user/templates/user/signup.html:14
 #: dataviva/apps/user/templates/user/signup.html:39
-#: dataviva/templates/include/header.html:49
+#: dataviva/templates/include/header.html:51
 #: dataviva/templates/modal/login.html:42
 #: dataviva/templates/modal/signup.html:48
 msgid "Sign Up"
@@ -3524,7 +3522,7 @@ msgstr ""
 msgid "Admin Panel"
 msgstr ""
 
-#: dataviva/templates/site.html:53 dataviva/templates/include/header.html:65
+#: dataviva/templates/site.html:53 dataviva/templates/include/header.html:67
 msgid "Logout"
 msgstr ""
 
@@ -4849,6 +4847,10 @@ msgstr ""
 msgid "Virtual Tour"
 msgstr ""
 
+#: dataviva/templates/include/footer.html:75
+msgid "Follow Us"
+msgstr ""
+
 #: dataviva/templates/include/header.html:4
 #: dataviva/translations/dictionary.py:545
 msgid "Studies"
@@ -4864,63 +4866,63 @@ msgstr ""
 msgid "SEARCH"
 msgstr ""
 
-#: dataviva/templates/include/header.html:32
+#: dataviva/templates/include/header.html:34
 #: dataviva/translations/dictionary.py:558
 msgid "Basic Features"
 msgstr ""
 
-#: dataviva/templates/include/header.html:33
+#: dataviva/templates/include/header.html:35
 #: dataviva/translations/dictionary.py:552
 msgid "START A SEARCH"
 msgstr ""
 
-#: dataviva/templates/include/header.html:34
+#: dataviva/templates/include/header.html:36
 #: dataviva/translations/dictionary.py:562
 msgid "VIEW RANKINGS"
 msgstr ""
 
-#: dataviva/templates/include/header.html:36
+#: dataviva/templates/include/header.html:38
 #: dataviva/translations/dictionary.py:559
 msgid "Advanced Features"
 msgstr ""
 
-#: dataviva/templates/include/header.html:37
+#: dataviva/templates/include/header.html:39
 #: dataviva/translations/dictionary.py:563
 msgid "MAKE GRAPHS"
 msgstr ""
 
-#: dataviva/templates/include/header.html:38
+#: dataviva/templates/include/header.html:40
 #: dataviva/translations/dictionary.py:564
 msgid "DATABASE DOWNLOAD"
 msgstr ""
 
-#: dataviva/templates/include/header.html:41
+#: dataviva/templates/include/header.html:43
 #: dataviva/translations/dictionary.py:553
 msgid "PARTNERS"
 msgstr ""
 
-#: dataviva/templates/include/header.html:42
+#: dataviva/templates/include/header.html:44
 #: dataviva/translations/dictionary.py:554
 msgid "HELP"
 msgstr ""
 
-#: dataviva/templates/include/header.html:48
+#: dataviva/templates/include/header.html:50
 #: dataviva/templates/modal/login.html:29
 #: dataviva/translations/dictionary.py:557
 msgid "or"
 msgstr ""
 
-#: dataviva/templates/include/header.html:61
+#: dataviva/templates/include/header.html:63
 #: dataviva/translations/dictionary.py:460
 msgid "Admin"
 msgstr ""
 
-#: dataviva/templates/include/header.html:72
+#: dataviva/templates/include/header.html:74
 #: dataviva/translations/dictionary.py:548
 msgid "English"
 msgstr ""
 
-#: dataviva/templates/include/header.html:73
+#: dataviva/templates/include/header.html:75
 #: dataviva/translations/dictionary.py:549
 msgid "Portuguese"
 msgstr ""

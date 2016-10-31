@@ -48,7 +48,19 @@ var NewsTable = function () {
                    return '<input type="checkbox" name="active" id="active'+publication[0]+
                    '" value="'+publication[0]+ (data ? '" checked>' : '" >');
                 }
-            }],
+            }
+        ],
+        "buttons": [
+            {
+                text: "<i class='fa fa-clock-o'></i>",
+                className: 'btn btn-sm btn-white',
+                titleAttr: 'Histórico de operações',
+                action: function (e, dt, node, config) {
+                    $('#logs-download-modal').modal('show');
+                    initLogsDownload('news');
+                }
+            }
+        ],
         "paging": false,
         "bFilter": true,
         "info": false,
@@ -89,6 +101,9 @@ var NewsTable = function () {
             $('input[name="selected-item"]').change(function() {
                 checkManySelected();
             });
+
+            $('#news-table_wrapper .col-sm-6:eq(1)').addClass('text-right');
+            $('#news-table').dataTable().api().buttons().container().appendTo('#news-table_wrapper .col-sm-6:eq(1)');
         }
     });
 

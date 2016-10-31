@@ -4,9 +4,9 @@
     <div class="col-sm-4 col-md-2 col-lg-2 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
         <ul>
             <li><h3>{% trans %}About{% endtrans %}</h3></li>
-            <li><a href="{{ url_for('about.index') }}" title="O Dataviva">{% trans %}The{% endtrans %} Dataviva</a></li>
-            <li><a href="{{ url_for('partners.index') }}" title="Parcerias">{% trans %}Partners{% endtrans %}</a></li>
-            <li><a href="{{ url_for('news.index') }}" title="Notícias">{% trans %}News{% endtrans %}</a></li>
+            <li><a href="{{ url_for('about.index') }}" title="{% trans %}The{% endtrans %} Dataviva">{% trans %}The{% endtrans %} Dataviva</a></li>
+            <li><a href="{{ url_for('partners.index') }}" title="{% trans %}Partners{% endtrans %}">{% trans %}Partners{% endtrans %}</a></li>
+            <li><a href="{{ url_for('news.index') }}" title="{% trans %}News{% endtrans %}">{% trans %}News{% endtrans %}</a></li>
             <li><a href="{{ url_for('blog.index') }}" title="Blog">Blog</a></li>
         </ul>
     </div>
@@ -27,18 +27,18 @@
                     <li><span class="link" onclick="select_attr('course_sc');" title="{% trans %}Basic Courses{% endtrans %}">{% trans %}Basic Courses{% endtrans %}</span></li>
                 </ul>
             </li>
-            <li><a href="{{ url_for('rankings.index') }}" title="Visualize Rankings">{% trans %}View Rankings{% endtrans %}</a></li>
-            <li><a href="{{ url_for('build_graph.index') }}" title="Crie seu gráfico">{% trans %}Make Graphs{% endtrans %}</a></li>
-            <li><a href="{{ url_for('data.index') }}" title="Download de dados">{% trans %}Database Download{% endtrans %}</a></li>
+            <li><a href="{{ url_for('rankings.index') }}" title="{% trans %}View Rankings{% endtrans %}">{% trans %}View Rankings{% endtrans %}</a></li>
+            <li><a href="{{ url_for('build_graph.index') }}" title="{% trans %}Make Graphs{% endtrans %}">{% trans %}Make Graphs{% endtrans %}</a></li>
+            <li><a href="{{ url_for('data.index') }}" title="{% trans %}Database Download{% endtrans %}">{% trans %}Database Download{% endtrans %}</a></li>
         </ul>
     </div>
 
     <div class="col-sm-4 col-md-2 col-lg-2">
         <ul>
             <li><h3>{% trans %}Support{% endtrans %}</h3></li>
-            <li><a href="{{ url_for('help.index') }}" title="Ajuda">{% trans %}Help{% endtrans %}</a></li>
-            <li><a href="{{ url_for('help.index') }}" title="Tour Virtual">{% trans %}Virtual Tour{% endtrans %}</a></li>
-            <li><a href="{{ url_for('contact.create') }}" title="Entre em contato">{%trans%}Contact Us{%endtrans%}</a></li>
+            <li><a href="{{ url_for('help.index') }}" title="{% trans %}Help{% endtrans %}">{% trans %}Help{% endtrans %}</a></li>
+            <li><a href="{{ url_for('help.index') }}" title="{% trans %}Virtual Tour{% endtrans %}">{% trans %}Virtual Tour{% endtrans %}</a></li>
+            <li><a href="{{ url_for('contact.create') }}" title="{%trans%}Contact Us{%endtrans%}">{%trans%}Contact Us{%endtrans%}</a></li>
         </ul>
     </div>
 
@@ -72,7 +72,7 @@
 
     </div>
     <div class="col-sm-4 col-md-3 col-lg-3 col-md-offset-2 col-lg-offset-2 margin-top">
-        <h3>SIGA-NOS</h3>
+        <h3>{%trans%}Follow Us{%endtrans%}</h3>
         <ul class="list-inline">
             <li>
                 <a class="btn btn-block btn-social btn-facebook" href="http://www.facebook.com/dataviva" target="blank" title="Facebook" >
@@ -83,12 +83,12 @@
                 <a class="btn btn-block btn-social btn-twitter" href="https://twitter.com/_dataviva" target="blank" title="Twitter">
                     <span class="fa fa-twitter"></span>
                 </a>
-            </li>  
+            </li>
             <li>
                 <a class="btn btn-md btn-google" href="https://www.youtube.com/channel/UCr3LFrH_7cI_PYSgnDXV7KA" target="blank" title="Youtube">
-                    <span class="fa fa-youtube"></span> 
+                    <span class="fa fa-youtube"></span>
                 </a>
-            </li>  
+            </li>
             <li>
                 <a class="btn btn-md btn-github" href="https://github.com/DataViva" target="blank" title="GitHub">
                     <span class="fa fa-github"></span>

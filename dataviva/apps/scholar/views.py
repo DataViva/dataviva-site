@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory
+from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, send_file
 from dataviva.apps.general.views import get_locale
 from dataviva.translations.dictionary import dictionary
 from dataviva import app, db, admin_email
@@ -75,6 +75,27 @@ def show(id):
 def admin():
     articles = Article.query.all()
     return render_template('scholar/admin.html', articles=articles)
+
+@mod.route('/admin/logs/get', methods=['GET'])
+@login_required
+@required_roles(1)
+def admin_get_logs():
+    logs = upload_helper.get_logs(mod.name)
+    return jsonify(logs=logs)
+
+
+@mod.route('/admin/logs/zip', methods=['GET'])
+@login_required
+@required_roles(1)
+def admin_zip_logs():
+    zipfile = upload_helper.zip_logs(mod.name)
+    if zipfile:
+        response = send_file(zipfile['location'], attachment_filename=zipfile['name'], as_attachment=True)
+        if os.path.isfile(zipfile['location']):
+            os.remove(zipfile['location'])
+        return response
+    flash('Não foi possível baixar o arquivo.', 'danger')
+    return redirect(url_for('scholar.admin'))
 
 
 @mod.route('/admin', methods=['POST'])
@@ -220,6 +241,7 @@ def update(id):
         form.set_choices(approved_articles_keywords())
         return render_template('scholar/edit.html', form=form)
     else:
+        old_title = article.title
         article.title = form.title.data
         article.theme = form.theme.data
         article.abstract = form.abstract.data
@@ -254,7 +276,7 @@ def update(id):
             shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
-        upload_helper.log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
+        upload_helper.log_operation(module=mod.name, operation='edit', user=(g.user.id, g.user.email), objs=[(article.id, old_title)])
         message = u'Estudo editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('scholar.admin'))

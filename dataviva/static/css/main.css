@@ -159,9 +159,18 @@ body {
   border-right: 1px solid #5A9DC4;
 }
 @media (max-width: 991px) {
+  .navbar-default .navbar-left > li:hover {
+      background-color: #f2fffb;
+  }
   .navbar-default .navbar-nav > li {
-    padding-top: 25px;
-    padding-bottom: 23px;
+    padding-top: 8px;
+    padding-bottom: 7px;
+  }
+  .navbar-default .navbar-nav > li:not(:last-child) > a {
+  border-right: 0px;
+  }
+  .navbar-default .navbar-nav > li.form-group {
+    margin-bottom:0px;
   }
   .navbar-header {
         float: none;
@@ -197,11 +206,27 @@ body {
   .collapsing {
     overflow: hidden!important;
   }
+  .login-buttons-nav{
+    float:left !important;
+    padding-left: 15px;
+  }
+  .lang-form-choose-nav{
+    float:left !important;
+    padding-right:15px !important;
+  }
 }
 @media (min-width: 992px) {
   .navbar-default .navbar-nav > li {
     padding-top: 29px;
     padding-bottom: 23px;
+  }
+
+  .dropdown-nav-submenu {
+    float:left; 
+  }
+  .submenu-dropdown-items{
+    margin-left: -110px;
+    margin-top: 65px;
   }
 }
 @media (max-width: 767px) {
@@ -376,6 +401,28 @@ footer .btn-white:hover {
   footer .btn-white:focus,
   footer .btn-white:hover {
     padding: 10px 0px;
+  }
+}
+@media (max-width: 369px) {
+    .lang-form-choose-nav{
+    padding-right:0px !important;
+  }
+    .login-buttons-nav{
+    padding-left: 0px;
+  }
+  .lang-form-choose-nav > select{
+    padding-left: 1px;
+    padding-right:5px;
+  }
+  .login-buttons-nav > button {
+    padding-left: 6px;
+    padding-right: 6px;
+    margin-left: 12px;
+    margin-right: 13px;
+  }
+
+  .login-buttons-nav .dropdown-toggle {
+    margin-left: 15px;
   }
 }
 footer .form-control:focus,
@@ -1045,10 +1092,18 @@ h1.login-title {
     position: absolute;
     top: 0;
     width: 40%;
-    margin-left:20px;
+    margin-left: 20px;
   }
 }
 
-.toggle-btn-submenu{
-  padding-bottom:15px
+.toggle-btn-submenu {
+  padding-bottom: 15px;
+}
+
+.scholar-publish-btn {
+  padding-top: 15px;
+}
+
+#admin-content {
+  margin-bottom: 50px;
 }
