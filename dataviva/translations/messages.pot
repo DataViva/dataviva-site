@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-10-28 18:28-0200\n"
+"POT-Creation-Date: 2016-10-31 18:21-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3089,6 +3089,7 @@ msgstr ""
 #: dataviva/templates/site.html:36 dataviva/templates/account/login.html:4
 #: dataviva/templates/general/upgrade.html:3
 #: dataviva/templates/include/header.html:49
+#: dataviva/templates/modal/login.html:23
 #: dataviva/translations/dictionary.py:555
 msgid "Login"
 msgstr ""
@@ -5040,7 +5041,7 @@ msgid "Cancel"
 msgstr ""
 
 #: dataviva/templates/modal/login.html:12
-msgid "Users Acess"
+msgid "Users Access"
 msgstr ""
 
 #: dataviva/templates/modal/login.html:32
