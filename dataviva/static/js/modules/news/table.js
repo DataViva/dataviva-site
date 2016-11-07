@@ -9,7 +9,7 @@ var NewsTable = function () {
         },
         "sAjaxSource": "/news/publication/all",
         "sAjaxDataProp": "publications",
-        "order": [[ 3, "asc" ]],
+        "order": [[ 4, "desc" ]],
         "columnDefs": [
             {
                 "targets": 0,
