@@ -92,7 +92,7 @@ def edit():
     form.email.data = g.user.email
     form.birthday.data = g.user.birthday
     form.country.data = g.user.country
-    form.uf.data = g.user.uf
+    form.state_province_region.data = g.user.state_province_region
     form.city.data = g.user.city
     form.occupation.data = g.user.occupation
     form.institution.data = g.user.institution
@@ -113,7 +113,7 @@ def change_profile():
             user.email = form.email.data
             user.birthday = form.birthday.data
             user.country = form.country.data
-            user.uf = form.uf.data
+            user.state_province_region = form.state_province_region.data
             user.city = form.city.data
             user.occupation = form.occupation.data
             user.institution = form.institution.data
