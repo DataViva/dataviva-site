@@ -59,16 +59,15 @@
                 </div>
 
                 <div class="row">
-                    <div class="form-group col-md-10 {{ 'has-error' if form.country.errors else '' }} ">
+                    <div class="form-group col-md-8 {{ 'has-error' if form.country.errors else '' }} ">
                         <label for="country">{% trans %}Country{% endtrans %}</label>
                         {{ form.country(class="form-control")}}
                         {{ messages(form.country) }}
                     </div>
 
-                    <div class="form-group col-md-2 {{ 'has-error' if form.uf.errors else '' }} ">
-                        <label for="uf">UF</label>
-                        {{ form.uf(class="form-control")}}
-                        <small class="text-muted">{% trans %}Format: XX{% endtrans %}</small>
+                    <div class="form-group col-md-4 {{ 'has-error' if form.state_province_region.errors else '' }} ">
+                        <label for="state_province_region">{% trans %}State/Province/Region{% endtrans %}</label>
+                        {{ form.state_province_region(class="form-control")}}
                     </div>
                 </div>
 

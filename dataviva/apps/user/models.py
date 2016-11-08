@@ -34,7 +34,7 @@ class User(db.Model, AutoSerialize):
     institution = db.Column(db.String(256))
     occupation = db.Column(db.String(150))
     birthday = db.Column(db.DateTime)
-    uf = db.Column(db.String(2))
+    state_province_region = db.Column(db.String(256))
     city = db.Column(db.String(256))
     profile = db.Column(db.String(50))
     questions = db.relationship("Question", backref='user', lazy='dynamic')

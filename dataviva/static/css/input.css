@@ -38,6 +38,9 @@
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
   background-color: #5A9DC4;
 }
+.select2-container.select2-container--default {
+  width: 100% !important;
+}
 .has-success .form-control {
   border-color: #1AB394;
 }
