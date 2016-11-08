@@ -7,7 +7,7 @@
             <a href="#enrollments-basic-course" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-basic-course">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="enrollments-municipality">
                 <a href="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled"
-                   target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-geo_map' or not graph }}"" data-parent="#enrollments-municipality">
+                   target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-geo_map' or not graph }}" data-parent="#enrollments-municipality">
                     {% trans %}Map{% endtrans %}
                 </a>
                 <a href="/{{ g.locale }}/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?y=enrolled&layout=value&order=color"
