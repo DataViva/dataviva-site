@@ -57,7 +57,8 @@ cache_timeout = get_env_variable("DATAVIVA_REDIS_TIMEOUT", 60000000)
 s3_host = get_env_variable("S3_HOST", 'https://dataviva.s3.amazonaws.com')
 s3_bucket = get_env_variable("S3_BUCKET", 'dataviva-dev')
 admin_email = get_env_variable("ADMINISTRATOR_EMAIL", 'contato@dataviva.info')
-
+test_user_email = get_env_variable("TEST_USER_EMAIL","")
+test_user_password = get_env_variable("TEST_USER_PASSWORD","")
 
 view_cache = Cache(app, config={
     'CACHE_TYPE': 'redis',
