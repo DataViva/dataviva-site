@@ -40,7 +40,7 @@ class ProfileForm(Form):
     email = TextField('email', validators=[validators.Required(), validators.Email()])
     birthday = DateField('birthday', validators=[ validators.Required()],format='%d/%m/%Y', description='Date format: day/month/year')
     country = TextField('country', validators=[validators.Required(), validators.Length(max=50, message='Country field must be 50 characters long.')])
-    uf = TextField('uf', validators=[validators.Required(), validators.Length(min=2, max=2, message='Format error.')])
+    state_province_region = TextField('state_province_region', validators=[validators.Required(), validators.Length( max=50, message='Format error.')])
     city = TextField('city', validators=[validators.Required(), validators.Length(max=50, message='City field must be 50 characters long.')])
     profile = SelectField('gender', choices=[('development_agents', 'Development Agents'),('entrepreneurs', 'Entrepreneurs'), ('students', 'Students and Professionals')])
     occupation = TextField('occupation', validators=[validators.Required(), validators.Length(max=50, message='Occupation field must be 50 characters long.')])
