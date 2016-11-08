@@ -48,7 +48,7 @@
     <div class="form-group {{ 'has-error' if form.thumb.errors else '' }} ">
         <label class="control-label" for="thumb-input">{% trans %}Call Image{% endtrans %}</label>
         {{ messages(form.thumb) }}
-        <div class="thumb">
+        <div class="thumb row">
             <div class="thumb-controls col-md-4">
                 <div id="thumb-preview" class="crop-preview"></div>
                 <img id="thumb-img" src="{{ form.thumb.data if form.thumb.data else 'http://placehold.it/350x227?text=Insira+uma+imagem'}}">
