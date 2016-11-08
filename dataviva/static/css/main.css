@@ -1094,6 +1094,10 @@ h1.login-title {
     width: 40%;
     margin-left: 20px;
   }
+
+  .container-big {
+    margin-left: 0px;
+  }
 }
 
 .toggle-btn-submenu {
