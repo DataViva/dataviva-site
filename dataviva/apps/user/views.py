@@ -215,6 +215,7 @@ def forgot_password():
 def reset_password():
     form = ForgotPasswordForm()
 
+
     try:
         user = User.query.filter_by(email=form.email.data)[-1]
         pwd = md5(str(datetime.now()) + form.email.data).hexdigest()[0:5]
@@ -228,9 +229,9 @@ def reset_password():
         flash(dictionary()["new_password_sent"], "success")
     except:
         flash(dictionary()["couldnt_find_user"], "danger")
+        return render_template("user/forgot_password.html", form=form)
 
-    return render_template("user/forgot_password.html", form=form)
-
+    return redirect(url_for('user.reset_password'))
 
 @mod.route('/admin', methods=['GET'])
 @login_required
