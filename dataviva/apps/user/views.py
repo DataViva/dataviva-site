@@ -215,7 +215,6 @@ def forgot_password():
 def reset_password():
     form = ForgotPasswordForm()
 
-
     try:
         user = User.query.filter_by(email=form.email.data)[-1]
         pwd = md5(str(datetime.now()) + form.email.data).hexdigest()[0:5]
