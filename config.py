@@ -105,8 +105,3 @@ ADMINISTRATOR_EMAIL = 'contato@dataviva.info'
 '''
 ITEMS_PER_PAGE = 10
 BOOTSTRAP_VERSION = 3
-'''
-    TEST USER
-'''
-TEST_USER_EMAIL = get_env_variable("TEST_USER_EMAIL", "")
-TEST_USER_PASSWORD = get_env_variable("TEST_USER_PASSWORD", "")
