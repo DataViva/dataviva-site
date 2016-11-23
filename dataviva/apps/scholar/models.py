@@ -43,7 +43,7 @@ class Article(db.Model):
 class AuthorScholar(db.Model):
     __tablename__ = 'scholar_author'
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50))
+    name = db.Column(db.String(500))
     article_id = db.Column(db.Integer, ForeignKey('scholar_article.id'))
 
     def __init__(self, name=None):
