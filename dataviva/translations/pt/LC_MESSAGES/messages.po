@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-01 14:25-0200\n"
+"POT-Creation-Date: 2016-11-25 16:03-0200\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -849,17 +849,28 @@ msgid "Complete Edition"
 msgstr "Finalizar edição"
 
 #: dataviva/apps/blog/templates/blog/_form.html:79
+#: dataviva/apps/news/templates/news/_form.html:79
+msgid "Call Image Source"
+msgstr "Fonte da Imagem da Chamada"
+
+#: dataviva/apps/blog/templates/blog/_form.html:79
+#: dataviva/apps/news/templates/news/_form.html:79
+#, fuzzy
+msgid "optional"
+msgstr "opcional"
+
+#: dataviva/apps/blog/templates/blog/_form.html:84
 #: dataviva/apps/calls/templates/calls/new.html:7
-#: dataviva/apps/news/templates/news/_form.html:80
+#: dataviva/apps/news/templates/news/_form.html:84
 msgid "Call"
 msgstr "Chamada"
 
-#: dataviva/apps/blog/templates/blog/_form.html:86
-#: dataviva/apps/news/templates/news/_form.html:87
+#: dataviva/apps/blog/templates/blog/_form.html:91
+#: dataviva/apps/news/templates/news/_form.html:91
 msgid "Content"
 msgstr "Conteúdo"
 
-#: dataviva/apps/blog/templates/blog/_form.html:87
+#: dataviva/apps/blog/templates/blog/_form.html:92
 #: dataviva/apps/blog/templates/blog/admin.html:42
 #: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/calls/templates/calls/admin.html:39
@@ -867,7 +878,7 @@ msgstr "Conteúdo"
 #: dataviva/apps/help/templates/help/_form.html:37
 #: dataviva/apps/help/templates/help/admin.html:40
 #: dataviva/apps/help/templates/help/edit.html:10
-#: dataviva/apps/news/templates/news/_form.html:88
+#: dataviva/apps/news/templates/news/_form.html:92
 #: dataviva/apps/news/templates/news/admin.html:41
 #: dataviva/apps/news/templates/news/edit.html:9
 #: dataviva/apps/search/templates/search/admin.html:40
@@ -877,18 +888,18 @@ msgstr "Conteúdo"
 msgid "Edit"
 msgstr "Editar"
 
-#: dataviva/apps/blog/templates/blog/_form.html:88
+#: dataviva/apps/blog/templates/blog/_form.html:93
 #: dataviva/apps/help/templates/help/_form.html:28
 #: dataviva/apps/help/templates/help/_form.html:38
-#: dataviva/apps/news/templates/news/_form.html:89
+#: dataviva/apps/news/templates/news/_form.html:93
 msgid "Preview "
 msgstr "Visualizar "
 
-#: dataviva/apps/blog/templates/blog/_form.html:96
+#: dataviva/apps/blog/templates/blog/_form.html:101
 #: dataviva/apps/calls/templates/calls/_form.html:21
 #: dataviva/apps/contact/templates/contact/index.html:67
 #: dataviva/apps/help/templates/help/_form.html:46
-#: dataviva/apps/news/templates/news/_form.html:97
+#: dataviva/apps/news/templates/news/_form.html:101
 #: dataviva/apps/search/templates/search/_form.html:177
 #: dataviva/templates/include/footer.html:68
 msgid "Send"

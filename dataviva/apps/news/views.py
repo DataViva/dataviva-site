@@ -203,6 +203,9 @@ def create():
         publication.language = form.language.data
         publication.add_subjects(form.subject.data, form.language.data)
 
+        if form.thumb_src.data:
+            publication.thumb_src = form.thumb_src.data
+
         db.session.add(publication)
         db.session.flush()
 
@@ -265,6 +268,8 @@ def edit(id):
     form.thumb.data = publication.thumb
     form.subject.data = [subject.name for subject in publication.subjects]
     form.language.data = publication.language
+    if publication.thumb_src:
+        form.thumb_src.data = publication.thumb_src
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -289,6 +294,10 @@ def update(id):
         publication.show_home = form.show_home.data
         publication.author = form.author.data
         publication.language = form.language.data
+        if form.thumb_src.data:
+            publication.thumb_src = form.thumb_src.data
+        else:
+            publication.thumb_src = None
 
         num_subjects = len(publication.subjects)
         for i in range(0, num_subjects):
