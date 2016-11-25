@@ -17,6 +17,7 @@ class Publication(db.Model):
     text_call = db.Column(db.String(500))
     text_content = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
+    thumb_src = db.Column(db.String(400))
     publish_date = db.Column(db.DateTime)
     last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)
