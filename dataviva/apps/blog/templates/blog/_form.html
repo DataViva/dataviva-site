@@ -75,6 +75,11 @@
         </div>
     </div>
     <div class="clearfix"></div>
+    <div class="form-group {{ 'has-error' if form.thumb_src.errors }}">
+        <label class="control-label" for="thumb_src">{% trans %}Call Image Source{% endtrans %} ({% trans %}optional{% endtrans %})</label>
+        {{ messages(form.thumb_src) }}
+        {{ form.thumb_src(class="form-control") }}
+    </div>
     <div class="form-group m-t-sm {{ 'has-error' if form.text_call.errors else '' }}">
         <label class="control-label" for="text_call">{% trans %}Call{% endtrans %}</label>
         {{ messages(form.text_call) }}
