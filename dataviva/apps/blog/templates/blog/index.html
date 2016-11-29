@@ -5,6 +5,14 @@
 {% endblock %}
 
 {% block blog_content %}
+    {% if search_result %}
+        <h2 class="search-result">
+        {% if posts|length == 1 %}
+            1 result found for "{ search_result }}"
+        {% else %}
+            {{ posts|length }} results found for "{{ search_result }}"
+        </h2>
+    {% endif %}
     <div class="post-list">
         {% for post in posts %}
             <div class="item post">
@@ -25,6 +33,8 @@
             </div>
             <div class="clearfix"></div>
         {% endfor %}
-        <nav>{{ pagination.links }}</nav>
+        {% if pagination %}
+            <nav>{{ pagination.links }}</nav>
+        {% endif %}
     </div>
 {% endblock blog_content %}

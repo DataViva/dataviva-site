@@ -14,6 +14,8 @@ from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
+import flask_whooshalchemy
+
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -318,3 +320,18 @@ def update(id):
         message = u'Post editado com sucesso!'
         flash(message, 'success')
         return redirect(url_for('blog.admin'))
+
+
+@mod.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'GET':
+        return redirect(url_for('blog.index'))
+    query = request.form['query']
+    result = Post.query.whoosh_search(query).filter_by(active=True)
+    posts = []
+    for post in result:
+        posts.append(post)
+    return render_template('blog/index.html',
+                           posts=posts,
+                           subjects=active_posts_subjects(g.locale),
+                           search_result=query)
