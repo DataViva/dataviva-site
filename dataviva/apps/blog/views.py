@@ -324,7 +324,7 @@ def update(id):
 
 @mod.route('/search', methods=['GET', 'POST'])
 def search():
-    if request.method == 'GET':
+    if request.method == 'GET' or not query:
         return redirect(url_for('blog.index'))
     query = request.form['query']
     posts = Post.query.whoosh_search(query).filter_by(active=True).all()
