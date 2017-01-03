@@ -206,6 +206,11 @@
   margin-left: 6px;
 }
 
+.news .search-result {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
 @media (min-width: 500px) {
   .news .visu-wrapper {
     height: 607px
