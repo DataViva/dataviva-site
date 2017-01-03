@@ -321,3 +321,15 @@ def update(id):
         message = u'Notícia editada com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
+
+
+@mod.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'GET':
+        return redirect(url_for('news.index'))
+    query = request.form['query']
+    publications = Publication.query.whoosh_search(query).filter_by(active=True).all()
+    return render_template('news/index.html',
+                           publications=publications,
+                           subjects=active_publications_subjects(g.locale),
+                           search_result=query)

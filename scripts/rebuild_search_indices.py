@@ -1,17 +1,21 @@
 import datetime
 import whoosh
 import flask_whooshalchemy
-from os import getcwd
-from sys import path
+import os
+import sys
+from shutil import rmtree
 
 
 program_start = datetime.datetime.utcnow()
 
-if getcwd() not in path:
-    path.insert(0, getcwd())
+basedir = os.path.abspath(__file__).split('/scripts/')[0]
+if basedir not in sys.path:
+    sys.path.insert(0, basedir)
 
 from dataviva import app
+from config import WHOOSH_BASE
 from dataviva.apps.blog.models import Post
+from dataviva.apps.news.models import Publication
 
 
 def log(message):
@@ -46,6 +50,9 @@ def rebuild_index(model):
 
 
 if __name__ == "__main__":
-    model_list = [Post]
+    if os.path.exists(WHOOSH_BASE):
+        rmtree(WHOOSH_BASE)
+    import pdb; pdb.set_trace()
+    model_list = [Post, Publication]
     for model in model_list:
         rebuild_index(model)

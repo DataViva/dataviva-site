@@ -25,6 +25,8 @@
             </div>
             <div class="clearfix"></div>
         {% endfor %}
-        <nav>{{ pagination.links }}</nav>
+        {% if pagination %}
+            <nav>{{ pagination.links }}</nav>
+        {% endif %}
     </div>
 {% endblock news_content %}

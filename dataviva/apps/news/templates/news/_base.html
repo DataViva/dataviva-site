@@ -22,13 +22,31 @@
                 {% endfor %}
             </ul>
         </nav>
-        <section id="blog" class="col-md-9">
-            <div class="toggle-btn-submenu">
-                <button type="button" class="fa visible-xs visible-sm btn btn-white" aria-hidden="true" data-toggle="offcanvas" data-target=".sidebar-nav" >
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </button>
+        <section id="news" class="col-md-9">
+           <div class="row visible-xs visible-sm toggle-btn-submenu">
+                <div class="col-xs-12">
+                    <button type="button" class="fa btn btn-white" aria-hidden="true" data-toggle="offcanvas" data-target=".sidebar-nav">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
-            <h1>{% trans %}News{% endtrans %}</h1>
+            <div class="row">
+                <div class="col-xs-3">
+                    <h1>{% trans %}News{% endtrans %}</h1>
+                </div>
+                <div class="col-md-offset-4 col-md-5 col-sm-offset-3 col-sm-6 col-xs-8 search-form-wrapper">
+                    <form action="{{ url_for('news.search') }}" method="post">
+                        <div class="input-group">
+                            <input name="query" type="text" class="form-control input-sm" aria-label="..." placeholder="{% trans %}Search{% endtrans %}" required>
+                            <div class="input-group-btn">
+                                <button title="{% trans %}Search{% endtrans %}" aria-label="{% trans %}Search{% endtrans %}" class="btn btn-sm btn-default">
+                                    <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             {% block news_content %}
             {% endblock news_content %}
         </section>

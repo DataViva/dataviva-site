@@ -1,7 +1,6 @@
 from sqlalchemy import ForeignKey, Table, Column
 from sqlalchemy.ext.declarative import declarative_base 
 from dataviva import db
-import flask_whooshalchemy
 
 
 association_table = db.Table('blog_post_subject',
