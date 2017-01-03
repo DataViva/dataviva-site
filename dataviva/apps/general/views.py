@@ -159,6 +159,9 @@ def close():
 def upgrade():
     return render_template("general/upgrade.html")
 
+@mod.route('/None/')
+def none_page():
+    return redirect(url_for('general.home'))
 
 ###############################
 # Set language views
