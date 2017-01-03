@@ -8,11 +8,11 @@
     {% if search_result %}
         <h2 class="search-result">
         {% if posts|length == 1 %}
-            1 result found for "{{ search_result }}"
+            1 {% trans %}result found for{% endtrans %} "{{ search_result }}"
         {% else %}
-            {{ posts|length }} results found for "{{ search_result }}"
-        </h2>
+            {{ posts|length }} {% trans %}results found for{% endtrans %} "{{ search_result }}"
         {% endif %}
+        </h2>
     {% endif %}
     <div class="post-list">
         {% for post in posts %}

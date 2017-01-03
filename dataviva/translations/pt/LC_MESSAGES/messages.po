@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-25 16:03-0200\n"
+"POT-Creation-Date: 2017-01-03 16:01-0200\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -797,6 +797,15 @@ msgstr "Assuntos"
 msgid "All"
 msgstr "Tudo"
 
+#: dataviva/apps/blog/templates/blog/_base.html:40
+#: dataviva/apps/blog/templates/blog/_base.html:42
+#: dataviva/templates/site.html:30 dataviva/templates/about/crosswalk.html:10
+#: dataviva/templates/about/ask/index.html:27
+#: dataviva/templates/include/footer.html:19
+#: dataviva/translations/dictionary.py:635
+msgid "Search"
+msgstr "Pesquisar"
+
 #: dataviva/apps/blog/templates/blog/_form.html:11
 #: dataviva/apps/blog/templates/blog/admin.html:31
 #: dataviva/apps/calls/templates/calls/admin.html:31
@@ -957,12 +966,20 @@ msgstr "Ativar"
 msgid "Deactivate"
 msgstr "Desativar"
 
-#: dataviva/apps/blog/templates/blog/index.html:22
+#: dataviva/apps/blog/templates/blog/index.html:11
+msgid "result found for"
+msgstr "resultado encontrado para"
+
+#: dataviva/apps/blog/templates/blog/index.html:13
+msgid "results found for"
+msgstr "resultados encontrados para"
+
+#: dataviva/apps/blog/templates/blog/index.html:31
 #: dataviva/apps/news/templates/news/index.html:22
 msgid "Continue reading"
 msgstr "Continue lendo"
 
-#: dataviva/apps/blog/templates/blog/index.html:23
+#: dataviva/apps/blog/templates/blog/index.html:32
 #: dataviva/apps/blog/templates/blog/show.html:22
 #: dataviva/apps/news/templates/news/index.html:23
 #: dataviva/apps/news/templates/news/show.html:22
@@ -3628,13 +3645,6 @@ msgstr "Rankings"
 #: dataviva/templates/site.html:28
 msgid "Learn More"
 msgstr "Ajuda"
-
-#: dataviva/templates/site.html:30 dataviva/templates/about/crosswalk.html:10
-#: dataviva/templates/about/ask/index.html:27
-#: dataviva/templates/include/footer.html:19
-#: dataviva/translations/dictionary.py:635
-msgid "Search"
-msgstr "Pesquisar"
 
 #: dataviva/templates/site.html:52
 #: dataviva/templates/admin/admin_replies.html:3
