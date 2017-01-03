@@ -327,10 +327,7 @@ def search():
     if request.method == 'GET':
         return redirect(url_for('blog.index'))
     query = request.form['query']
-    result = Post.query.whoosh_search(query).filter_by(active=True)
-    posts = []
-    for post in result:
-        posts.append(post)
+    posts = Post.query.whoosh_search(query).filter_by(active=True).all()
     return render_template('blog/index.html',
                            posts=posts,
                            subjects=active_posts_subjects(g.locale),
