@@ -43,6 +43,13 @@
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
+            <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{%trans%}Port{%endtrans%}</a>
+            <div class="collapse" id="exports-port">
+                <a href="/{{ g.locale }}/viz/product/trade-partner/export/port/{{product.id}}/{{location.id_ibge if location}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-destination">
+                    Line
+                </a>
+            </div>
             <h4>{%trans%}Imports By{%endtrans%}</h4>
             {% if not is_municipality%}
             <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{%trans%}Municipality{%endtrans%}</a>

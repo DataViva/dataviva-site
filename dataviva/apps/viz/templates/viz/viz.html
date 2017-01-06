@@ -1,0 +1,19 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<div id="viz" class="embed-responsive responsive-wrapper"></div>
+<!-- 
+<script type="text/javascript" src="/static/js/libs/d3.min.js"></script>
+<script type="text/javascript" src="/static/js/libs/d3plus.min.js"></script>
+<script type="text/javascript" src="/static/js/libs/jquery-2.1.1.js"></script>
+ -->
+<script type="text/javascript" src="http://d3plus.org/js/d3.js"></script>
+<script type="text/javascript" src="http://d3plus.org/js/d3plus.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/static/js/modules/viz/async.js"></script>
+
+<script type="text/javascript">
+	var url = '{{url|safe}}';
+	var params = '{{params|safe}}'
+</script>
+<script type="text/javascript" src="/static/js/modules/viz/{{script}}"></script>
