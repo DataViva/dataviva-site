@@ -67,6 +67,7 @@
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
+            
             {% endif %}
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{%trans%}Origin{%endtrans%}</a>
             <div class="collapse" id="imports-origin">
@@ -81,6 +82,13 @@
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
                     {%trans%}Stacked{%endtrans%}
+                </a>
+            </div>
+            <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Port{%endtrans%}</a>
+            <div class="collapse" id="imports-port">
+                <a href="/{{ g.locale }}/viz/product/trade-partner/import/port/{{product.id}}/{{location.id_ibge if location}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-destination">
+                    Line
                 </a>
             </div>
         </div>

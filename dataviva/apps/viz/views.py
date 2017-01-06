@@ -47,7 +47,7 @@ def product_service(product):
 @mod.route('/product/trade-partner/export/port/<string:product>/<string:location>')
 @mod.route('/product/trade-partner/export/port/<string:product>/', defaults={'location': None})
 def viz_export_port(product, location):
-    script = 'product_trade-partner_export_port_line.js'
+    script = 'product_trade-partner_exports_port_line.js'
 
     filters = [
         ('type', 'export'),
@@ -57,12 +57,75 @@ def viz_export_port(product, location):
     if location:
         filters.append(location_service(location))
 
-    url = "http://localhost:5001/secex/year/port?{filters}".format(
+    url = "http://api.staging.dataviva.info/secex/year/port?{filters}".format(
         filters=urllib.urlencode(filters)
     )
-    
-    params = {
-        'title': request.args.get('title')
-    }
 
-    return render_template('viz/viz.html', url=url, script=script, params=params)
+    return render_template('viz/viz.html', url=url, script=script)
+
+
+@mod.route('/product/trade-partner/import/port/<string:product>/<string:location>')
+@mod.route('/product/trade-partner/import/port/<string:product>/', defaults={'location': None})
+def viz_import_port(product, location):
+    script = 'product_trade-partner_imports_port_line.js'
+
+    filters = [
+        ('type', 'import'),
+        product_service(product)
+    ]
+
+    if location:
+        filters.append(location_service(location))
+
+    url = "http://api.staging.dataviva.info/secex/year/port?{filters}".format(
+        filters=urllib.urlencode(filters)
+    )
+
+
+    return render_template('viz/viz.html', url=url, script=script)    
+
+
+@mod.route('/industry/wage-and-jobs/jobs/gender/<string:industry>/<string:location>')
+@mod.route('/industry/wage-and-jobs/jobs/gender/<string:industry>/', defaults={'location': None})
+def viz_jobs_gender_radar(industry, location):
+    script = 'industry_wage-and-jobs_wages_gender_radar.js'
+
+    filters = []
+
+    if location:
+        filters.append(location_service(location))
+
+    url = "http://api.staging.dataviva.info/rais/year/gender/cnae_section?{filters}".format(
+        filters=urllib.urlencode(filters)
+    )
+
+
+    return render_template('viz/viz.html', url=url, script=script)
+
+
+@mod.route('/industry/wage-and-jobs/wages/gender/<string:industry>/<string:location>')
+@mod.route('/industry/wage-and-jobs/wages/gender/<string:industry>/', defaults={'location': None})
+def viz_wages_gender_radar(industry, location):
+    script = 'industry_wage-and-jobs_jobs_gender_radar.js'
+
+    filters = []
+
+    if location:
+        filters.append(location_service(location))
+
+    url = "http://api.staging.dataviva.info/rais/year/gender/cnae_section?{filters}".format(
+        filters=urllib.urlencode(filters)
+    )
+
+
+    return render_template('viz/viz.html', url=url, script=script)
+
+
+
+
+
+
+
+
+
+
