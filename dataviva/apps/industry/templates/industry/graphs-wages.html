@@ -22,6 +22,13 @@
                     <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?sort=asc&layout=value&y=num_jobs&order=color" 
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-stacked'}}" data-parent="#jobs-municipality">{% trans %}Stacked{% endtrans %}</a>
                 </div>
+                <a href="#jobs-gender" class="list-group-item" data-toggle="collapse" data-parent="#jobs-gender">{% trans %}Gender{% endtrans %}</a>
+                <div class="collapse" id="jobs-gender">
+                    <a href="/{{ g.locale }}/viz/industry/wage-and-jobs/wages/gender/{{ industry.id }}/{{location.id_ibge if location}}"
+                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-gender-radar' }}"
+                    data-parent="#jobs-gender">Radar</a>
+                    </div>
+
                 {% endif %}
             <h4>{% trans %}Wages By{% endtrans %}</h4>
                 <a href="#wages-occupation" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Occupation{% endtrans %}</a>
@@ -49,6 +56,12 @@
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-distribution-bar'}}" data-parent="#wages-distribution">{% trans %}Bar Chart{% endtrans %}</a>
                 </div>
                 {% endif %}
+                <a href="#wages-gender" class="list-group-item" data-toggle="collapse" data-parent="#wages-gender">{% trans %}Gender{% endtrans %}</a>
+                <div class="collapse" id="wages-gender">
+                    <a href="/{{ g.locale }}/viz/industry/wage-and-jobs/jobs/gender/{{ industry.id }}/{{location.id_ibge if location}}"
+                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-gender-radar' }}"
+                    data-parent="#wages-gender">Radar</a>
+                </div>
         </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
