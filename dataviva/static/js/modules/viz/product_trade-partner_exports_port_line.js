@@ -5,7 +5,7 @@ var title = window.parent.document.querySelector('h1').childNodes[0].textContent
 $(document).ready(function(){
     ajaxQueue([
         url,
-        "http://localhost:5001/metadata/ports"
+        "http://api.staging.dataviva.info/metadata/ports"
     ], 
 
     function(responses){
