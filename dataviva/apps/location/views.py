@@ -91,14 +91,39 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
     if bra_id == 'all':
         location = Wld.query.filter_by(id='sabra').first()
         location.id = 'all'
+        depth = None
+        id_ibge = None
     else:
         location = Bra.query.filter_by(id=bra_id).first()
-    return render_template('location/graphs-' + tab + '.html', location=location, graph=None)
+        depth = location_depth(bra_id)
+        id_ibge = str(location.id_ibge)[:6] if location.id_ibge else handle_region_bra_id(location.bra_id[0])
+
+    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None)
 
 
 @mod.route('/all', defaults={'tab': 'general'})
