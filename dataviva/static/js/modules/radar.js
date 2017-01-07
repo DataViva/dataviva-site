@@ -7,6 +7,14 @@ var data = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + polygon + "/" + label;
 
+
+var loading = dataviva.ui.loading('.loading');
+if (lang == "en") {
+    loading.text('loading' + "...");
+} else {
+    loading.text('carregando' + "...");
+}
+
 $(document).ready(function(){
     ajaxQueue([
         url,
@@ -35,6 +43,8 @@ $(document).ready(function(){
             item["name"] = label_metadata[item[label]]["name_" + lang];
             item[polygon] = polygon_metadata[item[polygon]]["name_" + lang];
         });
+
+        loading.hide();
 
         var visualization = d3plus.viz()
             .container("#radar")
