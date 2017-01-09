@@ -19,13 +19,8 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<dataset>/<polygon>/<label>')
-def index(dataset, polygon, label):
-    return render_template('radar/index.html', dataset=dataset, polygon=polygon, label=label)
+@mod.route('/<dataset>/<polygon>/<label>/<value>')
+def index(dataset, polygon, label, value):
+    filters = urllib.urlencode(request.args.items())
 
-
-
-
-
-
-
+    return render_template('radar/index.html', dataset=dataset, polygon=polygon, label=label, value=value, filters=filters)
