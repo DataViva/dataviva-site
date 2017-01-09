@@ -52,8 +52,13 @@ def active_publications_subjects(language):
 def index(page=1):
     publications_query = Publication.query.filter_by(active=True, language=g.locale)
     publications = []
-
+    search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     subject = request.args.get('subject')
+
+    if search:
+        publications = publications_query.whoosh_search(search).order_by(
+            desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_publications = len(publications_query.whoosh_search(search).all())
     if subject:
         publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).order_by(
             desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
@@ -72,6 +77,7 @@ def index(page=1):
     return render_template('news/index.html',
                            publications=publications,
                            subjects=active_publications_subjects(g.locale),
+                           search_result=search,
                            pagination=pagination)
 
 
@@ -321,15 +327,3 @@ def update(id):
         message = u'Notícia editada com sucesso!'
         flash(message, 'success')
         return redirect(url_for('news.admin'))
-
-
-@mod.route('/search', methods=['GET', 'POST'])
-def search():
-    query = request.form['query'] if 'query' in request.form else ''
-    if request.method == 'GET' or not query:
-        return redirect(url_for('news.index'))
-    publications = Publication.query.whoosh_search(query).filter_by(active=True).all()
-    return render_template('news/index.html',
-                           publications=publications,
-                           subjects=active_publications_subjects(g.locale),
-                           search_result=query)

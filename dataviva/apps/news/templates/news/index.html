@@ -7,10 +7,10 @@
 {% block news_content %}
     {% if search_result %}
         <h2 class="search-result">
-        {% if publications|length == 1 %}
+        {% if pagination.total == 1 %}
             1 {% trans %}result found for{% endtrans %} "{{ search_result }}"
         {% else %}
-            {{ publications|length }} {% trans %}results found for{% endtrans %} "{{ search_result }}"
+            {{ pagination.total }} {% trans %}results found for{% endtrans %} "{{ search_result }}"
         {% endif %}
         </h2>
     {% endif %}
@@ -34,8 +34,6 @@
             </div>
             <div class="clearfix"></div>
         {% endfor %}
-        {% if pagination %}
-            <nav>{{ pagination.links }}</nav>
-        {% endif %}
+        <nav>{{ pagination.links }}</nav>
     </div>
 {% endblock news_content %}
