@@ -52,7 +52,6 @@ def rebuild_index(model):
 if __name__ == "__main__":
     if os.path.exists(WHOOSH_BASE):
         rmtree(WHOOSH_BASE)
-    import pdb; pdb.set_trace()
     model_list = [Post, Publication]
     for model in model_list:
         rebuild_index(model)
