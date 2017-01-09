@@ -59,7 +59,7 @@ def index(page=1):
         publications = publications_query.whoosh_search(search).order_by(
             desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_publications = len(publications_query.whoosh_search(search).all())
-    if subject:
+    elif subject:
         publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).order_by(
             desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_publications = publications_query.filter(
