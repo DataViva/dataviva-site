@@ -1,6 +1,19 @@
 var data = [];
+var pageTitle = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
+var title;
 
-var title = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
+if(lang == 'en')
+    title = 'Exportation of ' + pageTitle + ' by port';
+else
+    title = 'Exportação de  ' + pageTitle + ' por porto';
+
+
+var loading = dataviva.ui.loading('.loading');
+if (lang == "en") {
+    loading.text('loading' + "...");
+} else {
+    loading.text('carregando' + "...");
+}
 
 $(document).ready(function(){
     ajaxQueue([
@@ -9,7 +22,7 @@ $(document).ready(function(){
     ], 
 
     function(responses){
-        responses[1].data.forEach(function(item , index){
+        responses[0].data.forEach(function(item , index){
             data.push({
                 "year": item[0],
                 "port": item[1],
@@ -19,8 +32,10 @@ $(document).ready(function(){
         });
 
         data.map(function(item){
-            item.name = responses[0].ports[item.port];
+            item.name = responses[1][item.port];
         });
+
+        loading.hide();
 
         var visualization = d3plus.viz()
             .container("#viz")
@@ -30,11 +45,16 @@ $(document).ready(function(){
             .id("port")
             .background("transparent")
             .shape({"interpolate": "monotone"})
-            .x("year")
+            .x({
+                "value": 'year',
+                'label': {
+                    'value': lang == 'en' ? "Year" : "Ano"
+                }
+            })
             .y({
                 "value": "value",
                 "label": {
-                    "value": "Value",
+                    "value": lang == 'en' ? "Value [$ USD]" : "Valor [$ USD]",
                     "font": {
                         "size": 20
                     }
@@ -50,10 +70,24 @@ $(document).ready(function(){
                     else {
                         return formatted;
                     }
+                },
+                "text": function(text, params) {
+
+                    if (text === "value") {
+                        return lang == 'en' ? 'Value' : 'Valor';
+                    }
+                    else {
+                        return d3plus.string.title(text, params);
+                    }
+
                 }
             })
             .title({
-                "font": {"align": "left"},
+                "font": {
+                    "align": "left",
+                    "size": 22,
+                    "color": '#888'
+                },
                 "padding": 5,
                 "sub": {"font": {"align": "left"}},
                 "total": {"font": {"align": "left"}}
@@ -64,7 +98,7 @@ $(document).ready(function(){
              })
             .ui([
                     {
-                        "label": "Escala",
+                        "label": lang == 'en' ? "Scale" : "Escala",
                         "type": "drop",
                         "value": [
                             {"Linear": "linear"},
@@ -78,17 +112,22 @@ $(document).ready(function(){
                     },
                     {
                         "method" : "y",
-                        "label"  : "Eixo Y",
-                        "value": [
-                            {"Value": "value"},
-                            {"KG": "kg"}
-                        ],
+                        "label"  : lang == 'en' ? "Y-Axis" : "Eixo Y",
+                        "value": lang == 'en' ? [{"Value": "value"}, {"KG": "kg"}] : [{"Valor": "value"}, {"KG": "kg"}],
                         "method": function(value, viz){
 
-                            var label = {
-                                "value": "Valor da exportação [$ USD]",
-                                "kg": "Peso total da exportação"
-                            };
+                            var label;
+
+                            if(lang == 'en')
+                                label = {
+                                    "value": "Value [$ USD]",
+                                    "kg": "Amount [KG]"
+                                };
+                            else
+                                label = {
+                                    "value": "Valor [$ USD]",
+                                    "kg": "Quantidade [KG]"
+                                };
 
                             viz.y({
                                 "value": value,
@@ -100,7 +139,7 @@ $(document).ready(function(){
                     }
             ])
             .time({
-                "value": "year"
+                "value": lang == 'en' ? "Year" : "Ano"
             })
             .draw()
     });
