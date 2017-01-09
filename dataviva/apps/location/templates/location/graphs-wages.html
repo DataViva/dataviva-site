@@ -43,7 +43,7 @@
 
             <a href="#jobs-gender" class="list-group-item" data-toggle="collapse" data-parent="#jobs-gender">{% trans %}Gender{% endtrans %}</a>
             <div class="collapse" id="jobs-gender">
-              <a href="/{{ g.locale }}/radar/rais/gender/cnae_section?value=jobs{{'&' + depth + '=' + id_ibge if depth}}"
+              <a href="/{{ g.locale }}/radar/rais/gender/cnae_section/jobs{{'?' + depth + '=' + id_ibge if depth}}"
               target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-gender-radar' }}"
               data-parent="#jobs-gender">Radar</a>
             </div>
@@ -89,7 +89,7 @@
 
             <a href="#wages-gender" class="list-group-item" data-toggle="collapse" data-parent="#wages-gender">{% trans %}Gender{% endtrans %}</a>
             <div class="collapse" id="wages-gender">
-                <a href="/{{ g.locale }}/radar/rais/gender/cnae_section?value=average_monthly_wage{{'&' + depth + '=' + id_ibge if depth}}"
+                <a href="/{{ g.locale }}/radar/rais/gender/cnae_section/average_monthly_wage{{'?' + depth + '=' + id_ibge if depth}}"
                 target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-gender-radar'}}"
                 data-parent="#wages-gender">Radar</a>
             </div>

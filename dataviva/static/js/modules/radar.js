@@ -3,9 +3,10 @@ var data = [],
     dataset = $("#radar").attr("dataset"),
     polygon = $("#radar").attr("polygon"),
     label = $("#radar").attr("label"),
-    values = $("#radar").attr("values").split(","),
+    value = $("#radar").attr("value"),
+    filters = $("#radar").attr("filters"),
     url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + polygon + "/" + label;
+        dataset + "/year/" + polygon + "/" + label + ( filters ? "?" + filters : '');
 
 
 var loading = dataviva.ui.loading('.loading');
@@ -55,12 +56,36 @@ $(document).ready(function(){
                 "value": polygon,
                 "tooltip": "name"
             })
-            .size("jobs")
+            .size(value)
             .time({
                 "value": "year",
                 "solo": []
             })
             .background("transparent")
+            .format({
+                "number": function(number, params) {
+                    var formatted = d3plus.number.format(number, params);
+                    if (params.key === "average_monthly_wage") {
+                        return "$" + formatted + " USD";
+                    }
+                    else {
+                        return formatted;
+                    }
+                },
+                "text": function(text, params) {
+                    if (text === "average_monthly_wage") {
+                        return lang == 'en' ? 'Average monthly wage' : 'Salário médio mensal';
+                    }
+                    else if(text === "jobs") {
+                        return lang == 'en' ? 'Jobs' : 'Empregos';
+                    }
+
+                    else {
+                        return d3plus.string.title(text, params);
+                    }
+
+                }
+            })
             .draw();
     });
 });
