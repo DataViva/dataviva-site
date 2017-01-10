@@ -16,6 +16,21 @@ if (lang == "en") {
     loading.text('carregando' + "...");
 }
 
+var compare = function(a, b){
+    if(a.year < b.year)
+        return -1;
+    if(a.year > b.year)
+        return 1;
+
+    if(a[label] < b[label])
+        return -1;
+    if(a[label] > b[label])
+        return 1;
+
+    return 0;
+}
+
+
 $(document).ready(function(){
     ajaxQueue([
         url,
@@ -45,6 +60,7 @@ $(document).ready(function(){
             item[polygon] = polygon_metadata[item[polygon]]["name_" + lang];
         });
 
+        data.sort(compare);
         loading.hide();
 
         var visualization = d3plus.viz()
