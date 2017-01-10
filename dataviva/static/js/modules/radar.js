@@ -8,6 +8,16 @@ var data = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + polygon + "/" + label + ( filters ? "?" + filters : '');
 
+var pageTitle = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
+var title;
+
+if(lang == 'en')
+    title = 'Economic Activity in ' + pageTitle + ' by gender';
+else
+    title = 'Atividade Econômica em ' + pageTitle + ' por gênero';
+
+$('#title').html(title);
+
 
 var loading = dataviva.ui.loading('.loading');
 if (lang == "en") {

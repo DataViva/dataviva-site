@@ -2,6 +2,9 @@
 <html lang="{{ g.locale }}">
 <meta charset="utf-8">
 
+
+
+<h3 class="custom-title" id="title"></h3>
 <div id="radar"
     class="embed-responsive responsive-wrapper"
     dataset="{{dataset}}"
@@ -26,6 +29,15 @@
 
     .loading .page-loader {
         background: none;
+    }
+
+    .custom-title {
+        font-size: 22px;
+        font-family: "HelveticaNeue-Light";
+        font-weight: normal;
+        color: #666;
+        position: absolute;
+        top: -13px;
     }
 
     .d3plus_radial > path[fill="#282F6B"],
