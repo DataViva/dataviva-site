@@ -27,6 +27,34 @@
     .loading .page-loader {
         background: none;
     }
+
+    .d3plus_radial > path[fill="#282F6B"],
+    .d3plus_radial > path[fill="#b22200"] {
+        fill: rgba(255,255,255,.0) !important;
+        fill-opacity: 0 !important;
+        stroke-width: 2 !important;
+    }
+    .d3plus_radial > path[fill="#282F6B"]:hover,
+    .d3plus_radial > path[fill="#b22200"]:hover {
+        fill-opacity: .5 !important;
+    }
+    .d3plus_radial > path[fill="#282F6B"]:hover {
+        fill: rgba(40,47,107,1) !important;
+    }
+    .d3plus_radial > path[fill="#b22200"]:hover {
+        fill: rgba(178,34,0,1) !important;
+    }
+    .text.d3plus_radar_labels {
+        font-size: 11px;
+        transition: none !important
+    }
+    .d3plus_title.title > text{
+        font-family: "HelveticaNeue-Light", sans-serif;
+        fill: rgb(68, 68, 68);
+        text-decoration: none;
+        text-transform: none;
+        font-size: 22px;
+    }
 </style>
 
 <script type="text/javascript" src="http://d3plus.org/js/d3.js"></script>
