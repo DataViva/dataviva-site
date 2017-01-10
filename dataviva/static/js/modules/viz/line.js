@@ -1,17 +1,19 @@
 var data = [];
+var pageTitle = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
 var title;
+
 
 if(type == 'import'){
     if(lang == 'en')
-        title = 'Importation of ' + getPageTitle() + ' by port';
+        title = 'Importation of ' + pageTitle + ' by port';
     else
-        title = 'Importação de  ' + getPageTitle() + ' por porto';
+        title = 'Importação de  ' + pageTitle + ' por porto';
 }
 else {
     if(lang == 'en')
-        title = 'Exportation of ' + getPageTitle() + ' by port';
+        title = 'Exportation of ' + pageTitle + ' by port';
     else
-        title = 'Exportação de  ' + getPageTitle() + ' por porto';   
+        title = 'Exportação de  ' + pageTitle + ' por porto';   
 }
 
 
@@ -22,9 +24,6 @@ if (lang == "en") {
     loading.text('carregando' + "...");
 }
 
-var getPageTitle = function(){
-    return window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
-};
 
 var fillMissingYears = function(data){
     var years = new Set();
