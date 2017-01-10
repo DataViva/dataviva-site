@@ -8,6 +8,16 @@ var data = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + polygon + "/" + label + ( filters ? "?" + filters : '');
 
+var pageTitle = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
+var title;
+
+if(lang == 'en')
+    title = 'Economic Activity in ' + pageTitle + ' by gender';
+else
+    title = 'Atividade Econômica em ' + pageTitle + ' por gênero';
+
+$('#title').html(title);
+
 
 var loading = dataviva.ui.loading('.loading');
 if (lang == "en") {
@@ -15,6 +25,21 @@ if (lang == "en") {
 } else {
     loading.text('carregando' + "...");
 }
+
+var compare = function(a, b){
+    if(a.year < b.year)
+        return -1;
+    if(a.year > b.year)
+        return 1;
+
+    if(a[label] < b[label])
+        return -1;
+    if(a[label] > b[label])
+        return 1;
+
+    return 0;
+}
+
 
 $(document).ready(function(){
     ajaxQueue([
@@ -45,6 +70,7 @@ $(document).ready(function(){
             item[polygon] = polygon_metadata[item[polygon]]["name_" + lang];
         });
 
+        data.sort(compare);
         loading.hide();
 
         var visualization = d3plus.viz()
