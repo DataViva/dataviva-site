@@ -8,13 +8,23 @@ var data = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + polygon + "/" + label + ( filters ? "?" + filters : '');
 
-var pageTitle = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
-var title;
+var titleHelper = {
+    'jobs': {
+        'en': 'Jobs in ',
+        'pt': 'Empregos em '
+    },
+    'average_monthly_wage': {
+        'en': 'Average Monthly Wage in ',
+        'pt': 'Salário Médio Mensal em '
+    },
+    'gender': {
+        'en': ' by gender',
+        'pt': ' por gênero'
+    },
+    'pageTitle': window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim()
+}
 
-if(lang == 'en')
-    title = 'Economic Activity in ' + pageTitle + ' by gender';
-else
-    title = 'Atividade Econômica em ' + pageTitle + ' por gênero';
+var title = titleHelper[value][lang] + titleHelper.pageTitle + titleHelper.gender[lang];
 
 $('#title').html(title);
 
@@ -100,7 +110,7 @@ $(document).ready(function(){
                 },
                 "text": function(text, params) {
                     if (text === "average_monthly_wage") {
-                        return lang == 'en' ? 'Average monthly wage' : 'Salário médio mensal';
+                        return lang == 'en' ? 'Average Monthly Wage' : 'Salário Médio Mensal';
                     }
                     else if(text === "jobs") {
                         return lang == 'en' ? 'Jobs' : 'Empregos';
