@@ -21,8 +21,7 @@ var titleHelper = {
         'en': ' by gender',
         'pt': ' por gênero'
     },
-    // 'pageTitle': window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim()
-    'pageTitle': 'gagdsvzvz'
+    'pageTitle': window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim()
 }
 
 var title = titleHelper[value][lang] + titleHelper.pageTitle + titleHelper.gender[lang];
