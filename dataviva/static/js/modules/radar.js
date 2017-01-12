@@ -148,11 +148,37 @@ var addTooltipToLabels = function(){
 window.onmousemove = function (e) {
     var tooltip = $('#tooltip');
 
-    var x = e.clientX,
-        y = e.clientY;
+    var windowSize = {
+        x: $(window).width(),
+        y: $(window).height()
+    };
 
-    $('#tooltip').css('top', (y + 20) + 'px');
-    $('#tooltip').css('left', (x + 20) + 'px');
+    var tooltipSize = {
+        x: $(tooltip).width(),
+        y: $(tooltip).height()
+    };
+
+    var cursorPosition = {
+        x: e.clientX,
+        y: e.clientY
+    };
+
+    var offset = 10;
+
+    if(cursorPosition.x + tooltipSize.x + offset > windowSize.x){
+        $('#tooltip').css('left', (cursorPosition.x - offset - tooltipSize.x) + 'px');
+    }
+    else {
+        $('#tooltip').css('left', (cursorPosition.x + offset) + 'px');
+    }
+
+    if(cursorPosition.y + tooltipSize.y + offset > windowSize.y){
+        $('#tooltip').css('top', (cursorPosition.y - offset - tooltipSize.y) + 'px');
+    }
+    else {
+        $('#tooltip').css('top', (cursorPosition.y + offset) + 'px');
+    }
+
 };
 
 $(document).ready(function(){
