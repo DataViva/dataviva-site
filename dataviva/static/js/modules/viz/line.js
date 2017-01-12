@@ -49,8 +49,8 @@ var fillMissingYears = function(data){
                 data.push({
                     "year": year,
                     "port": port,
-                    "value": 0,
-                    "kg": 0
+                    "value": 1, // The values are setted as 1 because the logarithmic scale on the d3plus line chart does not work when the data has more than one value equal to 0.
+                    "kg": 1
                 });
         });
     });
@@ -88,7 +88,7 @@ var loadViz = function(data){
             "number": function(number, params) {
                 var formatted = d3plus.number.format(number, params);
                 if (params.key === "value") {
-                    if(formatted == 0)
+                    if(formatted == 1)
                         return lang == 'en' ? "Not Available" : "Não disponível";
                     return "$" + formatted + " USD";
                 }
