@@ -37,11 +37,6 @@ if (lang == "en") {
 }
 
 var compare = function(a, b){
-    if(a.gender < b.gender)
-        return -1;
-    if(a.gender > b.gender)
-        return 1;
-
     if(a.year < b.year)
         return -1;
     if(a.year > b.year)
@@ -51,7 +46,6 @@ var compare = function(a, b){
         return -1;
     if(a[label] > b[label])
         return 1;
-
 
     return 0;
 }
