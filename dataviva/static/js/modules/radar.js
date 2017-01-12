@@ -54,7 +54,7 @@ var tooltipTemplate = '<div id="d3plus_tooltip_id_visualization_focus" class="d3
 
 var getTooltipData = function (data, label, years){
     var filteredData = data.filter(function(item){
-        return years.indexOf(item.year) != -1 && item.name == label;
+        return years.indexOf(item.year) != -1 && item.name.toLowerCase() == label.toLowerCase();
     });
 
     var maleData = filteredData.filter(function(item){
