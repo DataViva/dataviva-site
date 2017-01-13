@@ -1,4 +1,5 @@
 <!doctype html>
+<html lang="{{ g.locale }}">
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
@@ -28,13 +29,17 @@
 </head>
 
 <body>
-    <div id="viz" class="embed-responsive responsive-wrapper"></div>
+    <div id="line"
+        class="embed-responsive responsive-wrapper"
+        dataset="{{dataset}}"
+        line="{{line}}"
+        values="{{values}}"
+        filters="{{filters}}">
+    </div>
     <div class="loading"></div>
 
     <script type="text/javascript">
-        var url = '{{url|safe}}';
-        var lang = '{{g.locale}}';
         var type = '{{type}}';
     </script>
-    <script type="text/javascript" src="/static/js/modules/viz/line.js"></script>
+    <script type="text/javascript" src="/static/js/modules/line.js"></script>
 </body>
