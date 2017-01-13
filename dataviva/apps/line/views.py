@@ -3,9 +3,9 @@ from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 import urllib
 
-mod = Blueprint('viz', __name__,
+mod = Blueprint('line', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/viz',
+                url_prefix='/<lang_code>/line',
                 static_folder='static')
 
 
@@ -24,7 +24,7 @@ def before_request():
     g.page_type = mod.name
 
 
-def location_service(location):
+def location_service(id_ibge):
     locations = {
         1: "region",    #todo
         2: "state",
@@ -33,7 +33,8 @@ def location_service(location):
         7: "municipality"
     }
 
-    return (locations[len(location)], location)
+    return (locations[len(id_ibge)], id_ibge)
+
 
 def product_service(product):
     if len(product) == 2:
@@ -44,21 +45,27 @@ def product_service(product):
         return ('product', product[2:])
 
 
-@mod.route('/product/trade-partner/<type>/port/<string:product>/<string:location>')
-@mod.route('/product/trade-partner/<type>/port/<string:product>/', defaults={'location': None})
-def viz_export_port(type, product, location):
-    script = 'product_trade-partner_exports_port_line.js'
 
-    filters = [
-        ('type', type),
-        product_service(product)
-    ]
+@mod.route('/<dataset>/<line>')
+def index(dataset, line):
+    values = request.args.getlist('value')
+    values = ','.join(values)
 
-    if location:
-        filters.append(location_service(location))
+    type = request.args.get('type')
+    product = request.args.get('product')
+    id_ibge = request.args.get('id_ibge')
 
-    url = "http://api.staging.dataviva.info/secex/year/port?{filters}".format(
-        filters=urllib.urlencode(filters)
-    )
+    filters = []
 
-    return render_template('viz/viz.html', url=url, type=type)
+    if type:
+        filters.append(('type', type))
+
+    if product:
+        filters.append(product_service(product))
+
+    if id_ibge:
+        filters.append(location_service(id_ibge))
+
+    filters = urllib.urlencode(filters)
+
+    return render_template('line/index.html', dataset=dataset, line=line, filters=filters, values=values, type=type)
