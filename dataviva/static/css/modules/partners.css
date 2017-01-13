@@ -1,28 +1,3 @@
-.partners #partners h2 {
-    text-align: center;
-    font-size: 35px;
-    margin-bottom: 30px;
-}
-
-.partners section {
-    padding: 4.5rem 0;
-}
-
-.partners .partnership {
-    color: #FFF;
-}
-
-.partners .partnership h2{
-    font-size: 35px;
-}
-
-.partners .partnership h4{
-    font-size: 20px;
-    color: #fff;
-    font-weight: 500;
-}
-
-p {
-	text-align: justify;
-    font-size: 15px;
+#partners .container.text-center div:last-child a img{
+    margin-top: 50px;
 }
