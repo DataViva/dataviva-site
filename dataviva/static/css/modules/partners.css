@@ -1,3 +1,5 @@
-#partners .container.text-center div:last-child a img{
-    margin-top: 50px;
+@media (max-width: 767px) {
+	#partners .container.text-center div:last-child a img {
+    	margin-top: 50px;
+    }
 }
