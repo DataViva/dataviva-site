@@ -23,8 +23,13 @@ var titleHelper = {
 };
 
 // TODO: Title creator
-var pageTitle = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
-var title = titleHelper[type][lang] + pageTitle + titleHelper.port[lang];
+var title = 'Title';
+
+if(window.parent.document.querySelector('h1')){
+    var pageTitle = window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim();
+    title = titleHelper[type][lang] + pageTitle + titleHelper.port[lang];
+}
+
 
 var titleStyle = {
     "font": {
