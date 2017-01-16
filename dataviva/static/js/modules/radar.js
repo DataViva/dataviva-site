@@ -21,7 +21,7 @@ var titleHelper = {
         'en': ' by gender',
         'pt': ' por gênero'
     },
-    'pageTitle': window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim()
+    'pageTitle': window.parent.document.querySelector('h1') ? window.parent.document.querySelector('h1').childNodes[0].textContent.replace(/\s+/g,' ').trim() : 'Title'
 }
 
 var title = titleHelper[value][lang] + titleHelper.pageTitle + titleHelper.gender[lang];
@@ -50,7 +50,7 @@ var compare = function(a, b){
     return 0;
 }
 
-var tooltipTemplate = '<div id="d3plus_tooltip_id_visualization_focus" class="d3plus_tooltip d3plus_tooltip_small" style="color: rgb(68, 68, 68); font-family: "Helvetica Neue"; font-weight: 200; font-size: 12px; box-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 3px; position: absolute; max-height: 610px; z-index: 2000; top: 7px; left: 721px;"> <div class="d3plus_tooltip_container" style="background-color: rgb(255, 255, 255); padding: 6px; width: 236px;"> <div class="d3plus_tooltip_header" style="position: relative; z-index: 1;"> <div class="d3plus_tooltip_title" style="max-width: 244px; color: rgb(40, 47, 107); vertical-align: top; width: 220px; display: inline-block; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; z-index: 1; font-size: 16px; line-height: 17px; padding: 3px;">{{title}}</div></div><div class="d3plus_tooltip_data_container" style="overflow-y: auto; z-index: -1; max-height: 151px;"> <div class="d3plus_tooltip_data_block" style="font-size: 12px; padding: 3px 6px; position: relative; color: rgb(0, 0, 0);"> <div class="d3plus_tooltip_data_name" style="display: inline-block; width: 156.641px; min-height: 15px;">{{male_label}}</div><div class="d3plus_tooltip_data_value" style="display: block; position: absolute; text-align: right; top: 3px; right: 6px; width: 37.3594px;">{{male_data}}</div></div><div class="d3plus_tooltip_data_seperator" style="background-color: rgb(221, 221, 221); display: block; height: 1px; margin: 0px 3px;"></div><div class="d3plus_tooltip_data_block" style="font-size: 12px; padding: 3px 6px; position: relative; color: rgb(0, 0, 0);"> <div class="d3plus_tooltip_data_name" style="display: inline-block; width: 156.641px; min-height: 15px;">{{female_label}}</div><div class="d3plus_tooltip_data_value" style="display: block; position: absolute; text-align: right; top: 3px; right: 6px; width: 37.3594px;">{{female_data}}</div></div></div><div class="d3plus_tooltip_footer" style="font-size: 10px; position: relative; text-align: center;"></div></div></div>';
+var tooltipTemplate = '<div id="d3plus_tooltip_id_visualization_focus" class="d3plus_tooltip d3plus_tooltip_small" style="color: rgb(68, 68, 68); font-family: "Helvetica Neue"; font-weight: 200; font-size: 12px; box-shadow: rgba(0, 0, 0, 0.247059) 0px 1px 3px; position: absolute; max-height: 610px; z-index: 2000; top: 7px; left: 721px;"> <div class="d3plus_tooltip_container" style="background-color: rgb(255, 255, 255); padding: 6px; width: 236px;"> <div class="d3plus_tooltip_header" style="position: relative; z-index: 1;"> <div class="d3plus_tooltip_title" style="max-width: 244px; color: rgb(40, 47, 107); vertical-align: top; width: 220px; display: inline-block; overflow: hidden; text-overflow: ellipsis; word-wrap: break-word; z-index: 1; font-size: 16px; line-height: 17px; padding: 3px;">{{title}}</div></div><div class="d3plus_tooltip_data_container" style="overflow-y: auto; z-index: -1; max-height: 151px;"> <div class="d3plus_tooltip_data_block" style="font-size: 12px; padding: 3px 6px; position: relative; color: rgb(0, 0, 0);"> <div class="d3plus_tooltip_data_name" style="display: inline-block; width: 156.641px; min-height: 15px;">{{male_label}}</div><div class="d3plus_tooltip_data_value" style="display: block; position: absolute; text-align: right; top: 3px; right: 6px; ">{{male_data}}</div></div><div class="d3plus_tooltip_data_seperator" style="background-color: rgb(221, 221, 221); display: block; height: 1px; margin: 0px 3px;"></div><div class="d3plus_tooltip_data_block" style="font-size: 12px; padding: 3px 6px; position: relative; color: rgb(0, 0, 0);"> <div class="d3plus_tooltip_data_name" style="display: inline-block; width: 156.641px; min-height: 15px;">{{female_label}}</div><div class="d3plus_tooltip_data_value" style="display: block; position: absolute; text-align: right; top: 3px; right: 6px; ">{{female_data}}</div></div></div><div class="d3plus_tooltip_footer" style="font-size: 10px; position: relative; text-align: center;"></div></div></div>';
 
 var avg = function(items, attr){
     var sum = items.reduce(function(acc, item){ return acc + item[attr]; }, 0);
@@ -232,6 +232,10 @@ $(document).ready(function(){
         });
 
         data.map(function(item){
+            item["image"] = item.gender == '1' ? '/static/img/icons/genders/male.png' : '/static/img/icons/genders/female.png'
+        });
+
+        data.map(function(item){
             item["name"] = label_metadata[item[label]]["name_" + lang];
             item[polygon] = polygon_metadata[item[polygon]]["name_" + lang];
         });
@@ -252,6 +256,10 @@ $(document).ready(function(){
             .time({
                 "value": "year",
                 "solo": []
+            })
+            .icon({
+                "style": "knockout",
+                "value": "image"
             })
             .background("transparent")
             .format({
