@@ -4,8 +4,8 @@ var tree_map = document.getElementById('tree_map')
     dataset = tree_map.getAttribute('dataset'),
     filters = tree_map.getAttribute('filters'),
     urls = ['http://api.staging.dataviva.info/metadata/' + squares,
-            'http://api.staging.dataviva.info/' + dataset + '/year/type/' + squares + '?type=import&' + filters),
-            'http://api.staging.dataviva.info/' + dataset + '/year/type/' + squares + '?type=export&' + filters)];
+            'http://api.staging.dataviva.info/' + dataset + '/year/type/' + squares + '?type=import&' + filters,
+            'http://api.staging.dataviva.info/' + dataset + '/year/type/' + squares + '?type=export&' + filters];
 
 var buildData = function(responseApi, squaresMetadata){
 
@@ -50,7 +50,8 @@ var loadViz = function(importData, exportData, flag) {
         .ui([
             {
                 'method' : 'size',
-                'value' : ['value', 'kg']
+                'label': '',
+                'value' : [{[dictionary['value']]: 'value'}, 'kg']
             },
             {
                 'method' : function(flag) {
@@ -58,13 +59,14 @@ var loadViz = function(importData, exportData, flag) {
                             .draw();
                 },
                 'type': 'button',
-                'value'  : ['import', 'export']
+                'value'  : [{[dictionary['imports']]: 'import'}, {[dictionary['exports']]: 'export'}]
             }
         ])
+        .time('year')
         .draw();
 };
 
-var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading']);
+var loading = dataviva.ui.loading('.loading').text(dictionary['loading']);
 
 $(document).ready(function(){
     ajaxQueue(
