@@ -44,12 +44,39 @@ def product_service(product):
     else:
         return ('product', product[2:])
 
+def wld_service(wld):
+    wlds = {
+        2: "continent",
+        3: "country"
+    }
+
+    return (wlds[len(wld)], wld)
+
+def occupation_service(occupation):
+    occupations = {
+        1: "occupation_group",
+        4: "occupation"
+    }
+
+    return (occupations[len(occupation)], occupation)
+
+def industry_service(industry):
+    if len(industry) == 1:
+        return ('cnae_section', industry)
+    elif len(industry) == 3:
+        return ('cnae_division', industry[1:])
+    else:
+        return ('cnae', industry[1:])
+
 
 @mod.route('/<dataset>/<x>/<y>')
 def index(dataset, x, y):
     product = request.args.get('product')
     id_ibge = request.args.get('id_ibge')
     type = request.args.get('type')
+    wld = request.args.get('wld')
+    occupation = request.args.get('occupation')
+    industry = request.args.get('industry')
     counts = request.args.getlist('count')
 
     filters = []
@@ -59,6 +86,15 @@ def index(dataset, x, y):
 
     if type:
         filters.append(('type', type))
+
+    if wld:
+        filters.append(wld_service(wld))
+
+    if occupation:
+        filters.append(occupation_service(occupation))
+
+    if industry:
+        filters.append(industry_service(industry))
 
     if product:
         filters.append(product_service(product))
