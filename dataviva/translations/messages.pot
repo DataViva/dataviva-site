@@ -1,14 +1,14 @@
 # Translations template for PROJECT.
-# Copyright (C) 2016 ORGANIZATION
+# Copyright (C) 2017 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-11-01 14:25-0200\n"
+"POT-Creation-Date: 2017-01-17 13:56-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -259,12 +259,14 @@ msgstr ""
 #: dataviva/apps/about/templates/about/index.html:34
 msgid ""
 "DataViva is an initiative of the Government of the State of Minas Gerais "
-"and Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG) – "
-"The State of Minas Gerais foundation for research funding and support – "
-"that offers its users a dynamic access experience to a large range of "
-"public data. Totally developed in free software and with open access to "
-"all, DataViva was created to contribute to the implementation of public "
-"policies, private and public investments, and to help academic studies."
+"and Minas Gerais Investment and Trade Promotion Agency (INDI) with the "
+"support of Fundação de Amparo à Pesquisa do Estado de Minas Gerais "
+"(FAPEMIG) – The State of Minas Gerais foundation for research funding and"
+" support – that offers its users a dynamic access experience to a large "
+"range of public data. Totally developed in free software and with open "
+"access to all, DataViva was created to contribute to the implementation "
+"of public policies, private and public investments, and to help academic "
+"studies."
 msgstr ""
 
 #: dataviva/apps/about/templates/about/index.html:35
