@@ -1,4 +1,6 @@
 var data = [],
+    solo = [],
+    MAX_BARS = 10,
     lang = document.documentElement.lang,
     dataset = $("#bar").attr("dataset"),
     x = $("#bar").attr("x").split(","),
@@ -19,24 +21,34 @@ var textHelper = {
     }
 };
 
+var visualization;
 
 var loadViz = function(data){
-     var visualization = d3plus.viz()
+     visualization = d3plus.viz()
         .container("#bar")
         .data(data)
         .type("bar")
-        .id(y[0])
-        .y(y[0])
-        .y({"scale": "discrete"}) // Manually set Y-axis to be discrete
-        .x(x[0])
+        .id({
+            'value': currentY,
+            'solo': solo
+        })
+        .y({
+            "value": currentY,
+            "scale": "discrete" // Manually set Y-axis to be discrete
+        })
+        .x(currentX)
         .ui([
             {
-                'value': y,
                 'type': 'drop',
+                'value': y,
                 'method': function(value, viz){
-                    var filteredData = processData(data);
-                    console.log(filteredData);
-                    viz.data(filteredData).y(value).id(value).draw();
+                    viz.y(value)
+                       .id({
+                            'value': value,
+                            'solo': solo
+                       })
+                       .draw();
+                    currentY = value;
                 }
             },
             {
@@ -84,91 +96,57 @@ var addNameToData = function(data){
     return data;
 };
 
-var processData = function(data){
-    
+var groupDataByCurrentY = function(data){
+    var sumByItem = {};
 
-    var filterDataBySelectedYears = function(data){
-        var getSelectedYears = function(data){
-            var years = new Set();
+    data.forEach(function(item){
+        if(sumByItem[item[currentY]] == undefined)
+            sumByItem[item[currentY]] = {
+                "sum": 0,
+                "name": item[currentY]
+            };
 
-            data.forEach(function(item){
-                years.add(item.year);
-            });
+        sumByItem[item[currentY]].sum += item[currentX];
+    });
 
-            return Array.from(years);
-        };
+    var list = [];
 
-        var years = getSelectedYears(data);
-
-        data = data.filter(function(item){
-            return years.indexOf(item.year) != -1;
+    for(var item in sumByItem){
+        list.push({
+            name: sumByItem[item].name,
+            sum: sumByItem[item].sum
         });
-
-        return data;
-    };
-
-    var filterTopData = function(data){
-        var getTopCurrentYNames = function(groupedData){
-            var compare = function(a, b){
-                if(a.sum < b.sum)
-                    return 1;
-                if(a.sum > b.sum)
-                    return -1;
-
-                return 0;
-            }
-
-            var list = groupedData.sort(compare).slice(0, 10);
-
-            var selected = list.map(function(item){
-                return item.name;
-            });
-
-            return selected;
-        }
-
-        var groupDataByCurrentY = function(data){
-            var sumByItem = {};
-
-            data.forEach(function(item){
-                if(sumByItem[item[currentY]] == undefined)
-                    sumByItem[item[currentY]] = {
-                        "sum": 0,
-                        "name": item[currentY]
-                    };
-
-                sumByItem[item[currentY]].sum += item[currentX];
-            });
-
-            var list = [];
-
-            for(var item in sumByItem){
-                list.push({
-                    name: sumByItem[item].name,
-                    sum: sumByItem[item].sum
-                });
-            }
-
-            return list;
-        }
-
-        var groupedData = groupDataByCurrentY(data);
-        var topCurrenYNames = getTopCurrentYNames(groupedData);
-
-        data = data.filter(function(item){
-            return topCurrenYNames.indexOf(item[currentY]) != -1;
-        })
-
-        return data;
     }
 
-    var filteredData = (JSON.parse(JSON.stringify(data)));
-
-    filteredData = filterDataBySelectedYears(filteredData);
-    filteredData = filterTopData(filteredData);
-
-    return filteredData;
+    return list;
 }
+
+var getTopCurrentYNames = function(groupedData){
+    var compare = function(a, b){
+        if(a.sum < b.sum)
+            return 1;
+        if(a.sum > b.sum)
+            return -1;
+
+        return 0;
+    }
+
+    var list = groupedData.sort(compare).slice(0, MAX_BARS);
+
+    var selected = list.map(function(item){
+        return item.name;
+    });
+
+    return selected;
+}
+
+var updateSolo = function(data){
+    var copiedData = (JSON.parse(JSON.stringify(data)));
+    var groupedData = groupDataByCurrentY(copiedData);
+    solo = getTopCurrentYNames(groupedData);
+
+    return solo;
+};
 
 var loading = dataviva.ui.loading('.loading').text(textHelper.loading[lang]);
 
@@ -191,10 +169,10 @@ $(document).ready(function(){
 
             data = buildData(api);
             data = addNameToData(data);
-            filteredData = processData(data);
+            solo = updateSolo(data);
 
             loading.hide();
-            loadViz(filteredData);
+            loadViz(data);
         }
     );
 });

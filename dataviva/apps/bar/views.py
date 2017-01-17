@@ -50,8 +50,12 @@ def index(dataset, x, y):
     product = request.args.get('product')
     id_ibge = request.args.get('id_ibge')
     type = request.args.get('type')
+    counts = request.args.getlist('count')
 
     filters = []
+
+    for count in counts:
+        filters.append(('count', count))
 
     if type:
         filters.append(('type', type))
