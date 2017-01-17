@@ -44,6 +44,13 @@ def product_service(product):
     else:
         return ('product', product[2:])
 
+def wld_service(wld):
+    wlds = {
+        2: "continent",
+        3: "country"
+    }
+
+    return (wlds[len(wld)], wld)
 
 
 @mod.route('/<dataset>/<line>')
@@ -54,11 +61,15 @@ def index(dataset, line):
     type = request.args.get('type')
     product = request.args.get('product')
     id_ibge = request.args.get('id_ibge')
+    wld = request.args.get('wld')
 
     filters = []
 
     if type:
         filters.append(('type', type))
+        
+    if wld:
+        filters.append(wld_service(wld))
 
     if product:
         filters.append(product_service(product))
