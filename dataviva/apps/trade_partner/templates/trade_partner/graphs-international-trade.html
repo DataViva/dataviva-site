@@ -45,6 +45,16 @@
                 </a>
             </div>
             {% endif %}
+            <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{% trans %}Port{% endtrans %}</a>
+            <div class="collapse" id="exports-port">
+                <a href="#" 
+                   target="graphs-frame-international-trade"
+                   class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+           
+
             <h4>{% trans %}Imports By{% endtrans %}</h4>
             <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="imports-municipality">
@@ -79,6 +89,15 @@
                 </a>
             </div>
             {% endif %}
+
+            <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{% trans %}Port{% endtrans %}</a>
+            <div class="collapse" id="imports-port">
+                <a href="#" 
+                   target="graphs-frame-international-trade"
+                   class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-port">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
     </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
