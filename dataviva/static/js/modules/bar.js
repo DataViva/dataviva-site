@@ -27,6 +27,7 @@ var loadViz = function(data){
      visualization = d3plus.viz()
         .container("#bar")
         .data(data)
+        .background("transparent")
         .type("bar")
         .id({
             'value': currentY,
@@ -39,22 +40,16 @@ var loadViz = function(data){
         .x(currentX)
         .ui([
             {
-                'type': 'drop',
-                'value': y,
-                'method': function(value, viz){
-                    viz.y(value)
-                       .id({
-                            'value': value,
-                            'solo': solo
-                       })
-                       .draw();
-                    currentY = value;
-                }
-            },
-            {
                 'method': 'x',
                 'value': x,
                 'type': 'drop'
+            },
+            {
+                'value': y,
+                'type': 'drop',
+                'method': function(value, viz){
+                    viz.y(value).id(value).draw();
+                }
             }
         ])
         .time('year')
@@ -87,10 +82,27 @@ var buildData = function(responseApi){
 var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
-            item[itemY] = metadatas[itemY][item[itemY]]['name_' + lang];
+            if(metadatas[itemY][item[itemY]] == undefined){
+                // console.log("Not found name to: " + itemY + ' - ' + item[itemY]);
+                item[itemY] = 'NOT FOUND!';
+            }
+            else{
+                item[itemY] = metadatas[itemY][item[itemY]]['name_' + lang];
+            }
+
 
             return item;
         });
+    });
+
+    data = data.map(function(item){
+        if(item['wage_received'] != undefined)
+            item['wage_received'] = +item['wage_received'];
+
+        if(item['average_monthly_wage'] != undefined)
+            item['average_monthly_wage'] = +item['average_monthly_wage'];
+
+        return item;
     });
 
     return data;
