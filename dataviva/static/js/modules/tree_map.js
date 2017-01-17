@@ -3,15 +3,9 @@ var tree_map = document.getElementById('tree_map')
     squares = tree_map.getAttribute('squares'),
     dataset = tree_map.getAttribute('dataset'),
     filters = tree_map.getAttribute('filters'),
-    urls = ['http://api.staging.dataviva.info/metadata/' + squares];
-    
-    if (dataset == 'secex') {
-        urls.push('http://api.staging.dataviva.info/' + dataset + '/type/' + squares + '?type=import&' + filters);
-        urls.push('http://api.staging.dataviva.info/' + dataset + '/type/' + squares + '?type=export&' + filters);
-    } else {
-        urls.push('http://api.staging.dataviva.info/' + dataset + '/' + squares + (filters ? '?' + filters : ''));
-    }
-
+    urls = ['http://api.staging.dataviva.info/metadata/' + squares,
+            'http://api.staging.dataviva.info/' + dataset + '/year/type/' + squares + '?type=import&' + filters),
+            'http://api.staging.dataviva.info/' + dataset + '/year/type/' + squares + '?type=export&' + filters)];
 
 var buildData = function(responseApi, squaresMetadata){
 
@@ -34,18 +28,13 @@ var buildData = function(responseApi, squaresMetadata){
     });
 
     for (var i = data.length - 1; i >= 0; i--) {
-        try {          
-            if (squares == 'state')
-                data[i][squares] = squaresMetadata[data[i][squares]];
-            else
-                data[i][squares] = squaresMetadata[data[i][squares]]['name_' + lang];
-            if (data[i][squares] === undefined) 
-                data.splice(i, 1);
+        try {
+            data[i][squares] = squaresMetadata[data[i][squares]]['name_' + lang];
         } catch (e) {
-            data.splice(i,1);
+            data.splice(i, 1);
         }
     }
-    
+
     return data;
 }
 
@@ -60,23 +49,22 @@ var loadViz = function(importData, exportData, flag) {
         .background('transparent')
         .ui([
             {
-                    'method' : 'size',
-                    'value' : ['value', 'kg']
+                'method' : 'size',
+                'value' : ['value', 'kg']
             },
             {
-            'method' : function(flag) {
-                    viz.data(flag == 'import' ? importData : exportData)
-                        .draw();
+                'method' : function(flag) {
+                        viz.data(flag == 'import' ? importData : exportData)
+                            .draw();
                 },
                 'type': 'button',
                 'value'  : ['import', 'export']
             }
         ])
         .draw();
-
 };
 
-var loading = dataviva.ui.loading('.loading').text('Loading');
+var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading']);
 
 $(document).ready(function(){
     ajaxQueue(

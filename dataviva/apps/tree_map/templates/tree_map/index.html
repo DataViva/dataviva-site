@@ -31,15 +31,14 @@
 <body>
     <div id="tree_map"
         class="embed-responsive responsive-wrapper"
-        dataset="{{dataset}}"
-        squares="{{squares}}"
-        sizes="{{sizes}}"
-        filters="{{filters}}">
+        dataset="{{ dataset }}"
+        squares="{{ squares }}"
+        filters="{{ filters }}">
     </div>
     <div class="loading"></div>
 
     <script type="text/javascript">
-        var type = '{{type}}';
+        dataviva.dictionary = {{ dictionary|safe }};
     </script>
     <script type="text/javascript" src="/static/js/modules/tree_map.js"></script>
 </body>

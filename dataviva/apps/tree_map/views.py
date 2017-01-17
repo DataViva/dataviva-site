@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
+from dataviva.translations.dictionary import dictionary 
 import urllib
+import json
 
 mod = Blueprint('tree_map', __name__,
                 template_folder='templates',
@@ -43,4 +45,4 @@ def index(dataset='secex', squares='product'):
     filters = [(filter, request.args.get(filter)) for filter in expected_filters if request.args.get(filter)]
     filters = urllib.urlencode(filters)
 
-    return render_template('tree_map/index.html', dataset=dataset, squares=squares, filters=filters)
+    return render_template('tree_map/index.html', dataset=dataset, squares=squares, filters=filters, dictionary=json.dumps(dictionary()))
