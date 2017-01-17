@@ -49,6 +49,10 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-destination">
                     Line
                 </a>
+                <a href="#"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-destination">
+                    {%trans%}Bar{%endtrans%}
+                </a>
             </div>
             <h4>{%trans%}Imports By{%endtrans%}</h4>
             {% if not is_municipality%}
@@ -89,6 +93,18 @@
                 <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg&product={{product.id}}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-destination">
                     Line
+                </a>
+                <a href="#"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-destination">
+                    {%trans%}Bar{%endtrans%}
+                </a>
+            </div>
+
+            <a href="#imports-flow" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Flow{%endtrans%}</a>
+            <div class="collapse" id="imports-port">
+                <a href="#"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-flow-bar'}}" data-parent="#exports-flow">
+                    {%trans%}Bar{%endtrans%}
                 </a>
             </div>
         </div>
