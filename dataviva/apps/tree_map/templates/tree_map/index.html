@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="{{ g.locale }}">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
+
+    <script type="text/javascript" src="http://d3plus.org/js/d3.js"></script>
+    <script type="text/javascript" src="http://d3plus.org/js/d3plus.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
+    <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
+    <script type="text/javascript" src="/static/js/libs/async.js"></script>
+
+    <style type="text/css">
+        body {
+          background: none;
+        }
+
+        .loading {
+            top: 200px;
+        }
+
+        .loading .page-loader {
+            background: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="tree_map"
+        class="embed-responsive responsive-wrapper"
+        dataset="{{dataset}}"
+        squares="{{squares}}"
+        sizes="{{sizes}}"
+        filters="{{filters}}">
+    </div>
+    <div class="loading"></div>
+
+    <script type="text/javascript">
+        var type = '{{type}}';
+    </script>
+    <script type="text/javascript" src="/static/js/modules/tree_map.js"></script>
+</body>
