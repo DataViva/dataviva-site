@@ -52,7 +52,7 @@ var uiHelper = {
         ],
         "method" : function(value, viz){
             viz.y({
-                "scale": value,
+                "scale": value
             }).draw();
         }
     },
@@ -62,10 +62,10 @@ var uiHelper = {
         "type": "drop",
         "value": [
             {
-                "Exportação": "export"
+                "Exportação": "export_value"
             },
             {
-                "Importação": "import"
+                "Importação": "import_value"
             }
         ],
         "method": function(value, viz){
@@ -80,17 +80,15 @@ var uiHelper = {
         "type": "drop",
         "value": [
             {
-                "Decrescente" : "desc"
+                "Ascendente" : "asc"
             },
             {
-                "Crescente" : "asc"
+                "Descendente" : "desc"
             }
         ],
         "method": function(value, viz){
-            viz.y({
-                "order": {
-                    "sort": value
-                }
+            viz.order({
+                "sort": value
             }).draw();
         }
     },
@@ -99,18 +97,15 @@ var uiHelper = {
         "type": "drop",
         "value": [
             {
-                "Valor" : "value"
+                "Valor" : "export_value"
             },
             {
-                "Nome" : "name"
-                //"Setor" : "sector" < ??????????????
+                "Nome" : "continent"
             }
         ],
         "method": function(value, viz){
-            viz.y({
-                "order": {
-                    "value": value
-                }
+            viz.order({
+                "value": value
             }).draw();
         }
     }
@@ -126,7 +121,8 @@ var loadStacked = function (data){
         .color("continent")
         .id("continent")
         .text("continent")
-        .y({"value":"export", "label": "Export value"})
+        .y({"value":"export_value", "label": "Export value"})
+        .order({"value":"export_value", "sort":"asc"})
         .x({"value": "year", "label": "Year"})
         .time("year")
         .background("transparent")
@@ -136,7 +132,7 @@ var loadStacked = function (data){
             "data": true,
             "size": [25,25],
             "filters": true,
-            "sort": "asce",
+            "sort": "asc",
             "value": "size"
         })
         .title({
@@ -172,16 +168,17 @@ $(document).ready(function(){
                 dataItem["year"] = item[0]
                 dataItem["wld_id"] = item[1]
 
-                if (item[2] == "export")
-                    dataItem["export"] = item[3]
-                else
-                    dataItem["import"] = item[3]
-
-                dataItem["kg"] = +item[4]
+                if (item[2] == "export"){
+                    dataItem["export_value"] = item[3]
+                    dataItem["export_kg"] = +item[4]
+                }
+                else {
+                    dataItem["import_value"] = item[3]
+                    dataItem["import_kg"] = +item[4]
+                    }
 
                 data.push(dataItem);
             });
-
             data = mappingCountryToContinent (data, label_metadata);
 
             loading.hide();
