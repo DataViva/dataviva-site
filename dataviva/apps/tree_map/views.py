@@ -38,11 +38,11 @@ def location_service(id_ibge):
     return (locations[len(id_ibge)], id_ibge)
 
 
-@mod.route('/<dataset>/<squares>/')
-def index(dataset='secex', squares='product'):
-    expected_filters = ['type', 'id_ibge', 'year']
+@mod.route('/<dataset>/<squares>/<group>')
+def index(dataset='secex', squares='product', group='state'):
+    expected_filters = ['type', 'state', 'year']
 
     filters = [(filter, request.args.get(filter)) for filter in expected_filters if request.args.get(filter)]
     filters = urllib.urlencode(filters)
 
-    return render_template('tree_map/index.html', dataset=dataset, squares=squares, filters=filters, dictionary=json.dumps(dictionary()))
+    return render_template('tree_map/index.html', dataset=dataset, squares=squares, group=group, filters=filters, dictionary=json.dumps(dictionary()))
