@@ -1,20 +1,16 @@
-var data = []
-var title;
-var type = ""
-var lang = "en"
+var data = [],
+    lang = document.documentElement.lang,
+    dataset = $("#stacked").attr("dataset"),
+    label = $("#stacked").attr("label"),
 
-// if(type == 'import'){
-//     if(lang == 'en')
-//         title = 'Importation of ' + pageTitle + ' by port';
-//     else
-//         title = 'Importação de  ' + pageTitle + ' por porto';
-// }
-// else {
-//     if(lang == 'en')
-//         title = 'Exportation of ' + pageTitle + ' by port';
-//     else
-//         title = 'Exportação de  ' + pageTitle + ' por porto';   
-// }
+    // country, municipality, product
+    division = $(#stacked).attr("division")
+
+    value = $("#stacked").attr("value"),
+    filters = $("#stacked").attr("filters"),
+    url = "http://api.staging.dataviva.info/" + 
+        dataset + "/year/" + division + "/type/" + ( filters ? "?" + filters : '');
+
 
 var loading = dataviva.ui.loading('.loading');
 
@@ -40,14 +36,14 @@ var mappingCountryToContinent = function(data, label_metadata) {
 
 var uiHelper = {
     "scale": {
-        "label": "Escala",
+        "label": "Layout",
         "type" : "drop",
         "value" : [
             {
                 "Valor": "linear"
             }, 
             {
-                "Porcentagem": "share"
+                "Participação de Mercado": "share"
             }
         ],
         "method" : function(value, viz){
@@ -58,7 +54,7 @@ var uiHelper = {
     },
 
     "yaxis": {
-        "label": "Import/Export",
+        "label": "Eixo Y",
         "type": "drop",
         "value": [
             {
@@ -113,7 +109,7 @@ var uiHelper = {
 
 var loadStacked = function (data){
     var visualization = d3plus.viz()
-        .title("Origens das Importações/Destinos das Exportações dos Soja do Brasil (Jan2000-Mar 2016)")
+        .title({"value": "Origens das Importações/Destinos das Exportações dos Soja do Brasil (Jan2000-Mar 2016)", "font": {"family": "Times", "size": "24","align": "left"}})
         .axes({"background": {"color": "white"}})
         .container("#stacked")
         .type("stacked")
@@ -122,38 +118,28 @@ var loadStacked = function (data){
         .id("continent")
         .text("continent")
         .y({"value":"export_value", "label": "Export value"})
-        .order({"value":"export_value", "sort":"asc"})
         .x({"value": "year", "label": "Year"})
         .time("year")
         .background("transparent")
-        .messages({"style": "large", "branding": true})
         .shape({"interpolate": "monotone"})
         .legend({
-            "data": true,
-            "size": [25,25],
             "filters": true,
-            "sort": "asc",
-            "value": "size"
         })
         .title({
-            "sub": {"value" : "Baseado nos Estados Produtores", "font": {"family": "Times", "color": "#756bb1", "size": "14","align": "left"}},
-            "total": true,
-            "font": {"align": "left"},
-            "padding": 5,
-            "align": "left"
+            "sub": {"value" : "Baseado nos Estados Produtores", "font": {"family": "Times", "size": "14","align": "left"}}
         })
         .ui([
+            uiHelper.yorder,
             uiHelper.scale,
-            uiHelper.yaxis,
             uiHelper.ysort,
-            uiHelper.yorder
+            uiHelper.yaxis
         ])
         .draw()
 }
 
 $(document).ready(function(){
         ajaxQueue([
-            "http://api.staging.dataviva.info/secex/year/country/type/?product=1201",
+            url,
             "http://api.staging.dataviva.info/metadata/continents"
         ],
 

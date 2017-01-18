@@ -19,7 +19,7 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<dataset>')
+@mod.route('/<dataset>/')
 def index(dataset):
     filters = urllib.urlencode(request.args.items())
 
