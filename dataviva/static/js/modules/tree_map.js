@@ -52,6 +52,7 @@ var loadViz = function(data) {
         .size('value')
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
+        .legend({"size": 50})
         .ui([
             {
                 'method' : 'size',
@@ -59,6 +60,11 @@ var loadViz = function(data) {
                 'value' : [{[dictionary['value']]: 'value'}, 'kg']
             },
         ])
+        .format({
+            'text': function(text) {
+                return text == 'value' || text == 'share' ? dictionary[text] : text;
+            }
+        })
         .time('year')
         .draw();
 };

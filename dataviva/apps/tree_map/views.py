@@ -40,7 +40,7 @@ def location_service(id_ibge):
 
 @mod.route('/<dataset>/<squares>/<group>')
 def index(dataset='secex', squares='product', group='state'):
-    expected_filters = ['type', 'state', 'year']
+    expected_filters = ['type', 'state', 'year', 'section']
 
     filters = [(filter, request.args.get(filter)) for filter in expected_filters if request.args.get(filter)]
     filters = urllib.urlencode(filters)
