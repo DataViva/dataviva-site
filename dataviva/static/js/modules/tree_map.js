@@ -2,6 +2,7 @@ var tree_map = document.getElementById('tree_map')
     lang = document.documentElement.lang,
     squares = tree_map.getAttribute('squares'),
     group = tree_map.getAttribute('group'),
+    depths = tree_map.getAttribute('depths').split('+'),
     dataset = tree_map.getAttribute('dataset'),
     filters = tree_map.getAttribute('filters'),
     urls = ['http://api.staging.dataviva.info/metadata/' + squares,
@@ -9,9 +10,9 @@ var tree_map = document.getElementById('tree_map')
             'http://api.staging.dataviva.info/' + dataset + '/year/' + squares + '/' + group + '?' + filters
     ];
 
-var buildData = function(responseApi, squaresMetadata, groupMetadata){
+var buildData = function(responseApi, squaresMetadata, groupMetadata) {
 
-    var getAttrByName = function(item, attr){
+    var getAttrByName = function(item, attr) {
         var index = headers.indexOf(attr);
         return item[index];
     }
@@ -19,7 +20,7 @@ var buildData = function(responseApi, squaresMetadata, groupMetadata){
     var data = [];
     var headers = responseApi.headers;
 
-    responseApi.data.forEach(function(item){
+    responseApi.data.forEach(function(item) {
         var dataItem = {};
 
         headers.forEach(function(header){
@@ -46,8 +47,8 @@ var loadViz = function(data) {
         .container('#tree_map')
         .data(data)
         .type('tree_map')
-        .id([group, squares])
-        .depth(1)
+        .id(depths)
+        .depth(depths.length)
         .color(group)
         .size('value')
         .labels({'align': 'left', 'valign': 'top'})
@@ -56,9 +57,17 @@ var loadViz = function(data) {
         .ui([
             {
                 'method' : 'size',
-                'label': '',
-                'value' : [{[dictionary['value']]: 'value'}, 'kg']
+                'label': dictionary['value'],
+                'value' : [{[dictionary['value']]: 'value', 'KG': 'kg'}]
             },
+            {
+                'method': function(value) {
+                    viz.depth(depths.indexOf(value)).draw();
+                },
+                'type': 'drop',
+                'label': dictionary['depth'],
+                'value': depths
+            }
         ])
         .format({
             'text': function(text) {
@@ -71,7 +80,7 @@ var loadViz = function(data) {
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['loading']);
 
-$(document).ready(function(){
+$(document).ready(function() {
     ajaxQueue(
         urls, 
         function(responses){
