@@ -27,7 +27,7 @@ def before_request():
 
 
 @mod.route('/<dataset>/<squares>/<group>')
-def index(dataset='secex', squares='product', group='state'):
+def index(dataset, squares, group):
     expected_filters = ['type', 'state', 'year', 'section']
 
     filters = [(filter, request.args.get(filter)) for filter in expected_filters if request.args.get(filter)]
@@ -39,6 +39,8 @@ def index(dataset='secex', squares='product', group='state'):
         depths = ['section', 'product']
     elif squares == 'municipality':
         depths = ['state', 'municipality']
+    elif squares == 'country':
+        depths = ['continent', 'country']
     else:
         depths = [squares]
 

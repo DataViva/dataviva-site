@@ -33,6 +33,8 @@ var buildData = function(responseApi, squaresMetadata, groupMetadata) {
     for (var i = data.length - 1; i >= 0; i--) {
         try {
             data[i][squares] = squaresMetadata[data[i][squares]]['name_' + lang];
+            if (group == 'section')
+                data[i]['icon'] = '/static/img/icons/' + group + '/section_' + data[i][group] + '.png';
             data[i][group] = groupMetadata[data[i][group]]['name_' + lang];
         } catch (e) {
             data.splice(i, 1);
@@ -43,30 +45,39 @@ var buildData = function(responseApi, squaresMetadata, groupMetadata) {
 }
 
 var loadViz = function(data) {
+
+    var moveElementToFirstPosition = function(array, element) {
+        var newArray = array.slice(0);
+        newArray.splice(newArray.indexOf(element), 1);
+        newArray.splice(0, 0, element);
+        return newArray;
+    };
+
     var viz = d3plus.viz()
         .container('#tree_map')
         .data(data)
         .type('tree_map')
         .id(depths)
-        .depth(depths.length)
-        .color(group)
         .size('value')
+        .depth(depths.length-1)
+        .color(group)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
-        .legend({"size": 50})
         .ui([
             {
                 'method' : 'size',
                 'label': dictionary['value'],
-                'value' : [{[dictionary['value']]: 'value', 'KG': 'kg'}]
+                'value' : [{[dictionary['value']]: 'value'}, {'KG': 'kg'}]
             },
             {
                 'method': function(value) {
-                    viz.depth(depths.indexOf(value)).draw();
+                    viz.depth(depths.indexOf(value))
+                        .draw();
                 },
+                'default': depths.indexOf(squares),
                 'type': 'drop',
                 'label': dictionary['depth'],
-                'value': depths
+                'value': moveElementToFirstPosition(depths, squares)
             }
         ])
         .format({
@@ -74,6 +85,8 @@ var loadViz = function(data) {
                 return text == 'value' || text == 'share' ? dictionary[text] : text;
             }
         })
+        .icon({'value': 'icon', 'style': 'knockout'})
+        .legend({'size': 60, 'filters': true, 'order': {'sort': 'asc', 'value': 'continent'}})
         .time('year')
         .draw();
 };
