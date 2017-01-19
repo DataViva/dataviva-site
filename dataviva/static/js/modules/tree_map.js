@@ -10,6 +10,10 @@ var tree_map = document.getElementById('tree_map')
             'http://api.staging.dataviva.info/' + dataset + '/year/' + squares + '/' + group + '?' + filters
     ];
 
+
+dictionary['state'] = (lang == "en") ? "State" : "Estado"
+dictionary['municipality'] = (lang == "en") ? "Municipality" : "Municipio"
+
 var buildData = function(responseApi, squaresMetadata, groupMetadata) {
 
     var getAttrByName = function(item, attr) {
@@ -46,10 +50,13 @@ var buildData = function(responseApi, squaresMetadata, groupMetadata) {
 
 var loadViz = function(data) {
 
-    var moveElementToFirstPosition = function(array, element) {
+    var depthSelectorHelper = function(array, element) {
         var newArray = array.slice(0);
         newArray.splice(newArray.indexOf(element), 1);
         newArray.splice(0, 0, element);
+        newArray.forEach(function(item, index){
+            newArray[index] = {[dictionary[item]] : item} 
+        })
         return newArray;
     };
 
@@ -77,7 +84,7 @@ var loadViz = function(data) {
                 'default': depths.indexOf(squares),
                 'type': 'drop',
                 'label': dictionary['depth'],
-                'value': moveElementToFirstPosition(depths, squares)
+                'value': depthSelectorHelper(depths, squares)
             }
         ])
         .format({
@@ -86,7 +93,7 @@ var loadViz = function(data) {
             }
         })
         .icon({'value': 'icon', 'style': 'knockout'})
-        .legend({'size': 60, 'filters': true, 'order': {'sort': 'asc', 'value': 'continent'}})
+        .legend({'size': 60, 'filters': true, 'order': {'sort': 'desc', 'value': 'size'})
         .time('year')
         .draw();
 };
