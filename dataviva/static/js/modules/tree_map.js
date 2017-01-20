@@ -4,11 +4,7 @@ var tree_map = document.getElementById('tree_map')
     group = tree_map.getAttribute('group'),
     depths = tree_map.getAttribute('depths').split('+'),
     dataset = tree_map.getAttribute('dataset'),
-    filters = tree_map.getAttribute('filters'),
-    urls = ['http://api.staging.dataviva.info/metadata/' + squares,
-            'http://api.staging.dataviva.info/metadata/' + (group == 'section' ? 'product_section' : group),
-            'http://api.staging.dataviva.info/' + dataset + '/year/' + squares + '/' + group + '?' + filters
-    ];
+    filters = tree_map.getAttribute('filters');
 
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
@@ -17,6 +13,9 @@ dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
 dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
 dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
 dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
+dictionary['by'] = lang == 'en' ? 'by' : 'por';
+dictionary['of'] = lang == 'en' ? 'of' : 'de';
+dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
 
 var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
@@ -37,9 +36,11 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
             });
 
             dataItem[squares] = squaresMetadata[dataItem[squares]]['name_' + lang];
-            if (group == 'section')
-                dataItem['icon'] = '/static/img/icons/' + group + '/section_' + dataItem[group] + '.png';
-            dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
+            if (group) {
+                if (group == 'section')
+                    dataItem['icon'] = '/static/img/icons/' + group + '/section_' + dataItem[group] + '.png';
+                dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
+            }
 
             data.push(dataItem);
         } catch(e) {
@@ -52,7 +53,7 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
 var loadViz = function(data) {
 
-    var depthSelectorHelper = function(depths, squares) {
+    var depthSelectorBuilder = function() {
         var array = depths.slice(0);
         array.splice(array.indexOf(squares), 1);
         array.splice(0, 0, squares);
@@ -72,6 +73,14 @@ var loadViz = function(data) {
         };
     };
 
+    var sizeSelectorBuilder = function() {
+        return {
+            'method' : 'size',
+            'label': dictionary['value'],
+            'value' : [{[dictionary['value']]: 'value'}, {'KG': 'kg'}]
+        };
+    };
+
     var viz = d3plus.viz()
         .container('#tree_map')
         .data(data)
@@ -79,38 +88,52 @@ var loadViz = function(data) {
         .id(depths)
         .size('value')
         .depth(depths.length-1)
-        .color(group)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
-        .time({'value': 'year', 'solo': 2016})
+        .time('year')
         .ui([
-            {
-                'method' : 'size',
-                'label': dictionary['value'],
-                'value' : [{[dictionary['value']]: 'value'}, {'KG': 'kg'}]
-            },
-            depthSelectorHelper(depths, squares)
+ 
         ])
         .format('pt_BR')
         .icon({'value': 'icon', 'style': 'knockout'})
-        .legend({'size': 40, 'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
+        .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({
             'branding': true,
             'style': 'large'
-        })
-        .draw();
+        });
+
+        if (group) {
+            viz.color(group);
+        }
+
+        if (depths.length > 1) {
+            viz.ui([sizeSelectorBuilder(), depthSelectorBuilder()]);
+        } else {
+            viz.ui([sizeSelectorBuilder()]);
+        }
+
+        viz.draw();
 };
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
 
 $(document).ready(function() {
+    var urls = ['http://api.staging.dataviva.info/' + dataset + '/year/' + squares + '/' + group + '?' + filters,
+        'http://api.staging.dataviva.info/metadata/' + squares
+    ];
+
+    if (group)
+        urls.push('http://api.staging.dataviva.info/metadata/' + (group == 'section' ? 'product_section' : group));
+
     ajaxQueue(
         urls, 
         function(responses){
-            var squaresMetadata = responses[0],
-                groupMetadata = responses[1],
-                data = buildData(responses[2], squaresMetadata, groupMetadata);
+            var data = responses[0],
+                squaresMetadata = responses[1],
+                groupMetadata = group ? responses[2] : [];
+
+            data = buildData(data, squaresMetadata, groupMetadata);
 
             loading.hide();
             loadViz(data);
