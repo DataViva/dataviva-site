@@ -16,6 +16,9 @@ dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados forn
 dictionary['by'] = lang == 'en' ? 'by' : 'por';
 dictionary['of'] = lang == 'en' ? 'of' : 'de';
 dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
+dictionary['country'] = lang == 'en' ? 'Country' : 'País';
+dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
+
 
 var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
@@ -106,9 +109,6 @@ var loadViz = function(data) {
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
         .time('year')
-        .ui([
- 
-        ])
         .format('pt_BR')
         .icon({'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})

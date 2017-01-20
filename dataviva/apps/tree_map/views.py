@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
-from dataviva.translations.dictionary import dictionary 
+from dataviva.translations.dictionary import dictionary
 import urllib
 import json
 
@@ -29,11 +29,18 @@ def before_request():
 @mod.route('/<dataset>/<squares>')
 @mod.route('/<dataset>/<squares>/<group>')
 def index(dataset, squares, group=''):
-    expected_filters = ['type', 'state', 'year', 'section']
+    expected_filters = ['type', 'state', 'year', 'section', 'product']
+    filters = []
 
-    filters = [(filter, request.args.get(filter)) for filter in expected_filters if request.args.get(filter)]
+    for filter in expected_filters:
+        value = request.args.get(filter)
+        if value:
+            if filter == 'product':
+                filters.append((filter, value[2:]))
+            else:
+                filters.append((filter, value))
+
     filters = urllib.urlencode(filters)
-
 
     depths = []
     if squares == 'product':
