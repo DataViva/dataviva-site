@@ -11,10 +11,12 @@ var tree_map = document.getElementById('tree_map')
     ];
 
 
-dictionary['state'] = (lang == "en") ? "State" : "Estado"
-dictionary['municipality'] = (lang == "en") ? "Municipality" : "Municipio"
+dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
+dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Municipio';
+dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
+dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
 
-var buildData = function(responseApi, squaresMetadata, groupMetadata) {
+var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
     var getAttrByName = function(item, attr) {
         var index = headers.indexOf(attr);
@@ -22,28 +24,26 @@ var buildData = function(responseApi, squaresMetadata, groupMetadata) {
     }
 
     var data = [];
-    var headers = responseApi.headers;
+    var headers = apiResponse.headers;
 
-    responseApi.data.forEach(function(item) {
-        var dataItem = {};
-
-        headers.forEach(function(header){
-            dataItem[header] = getAttrByName(item, header);
-        });
-
-        data.push(dataItem);
-    });
-
-    for (var i = data.length - 1; i >= 0; i--) {
+    apiResponse.data.forEach(function(item) {
         try {
-            data[i][squares] = squaresMetadata[data[i][squares]]['name_' + lang];
+            var dataItem = {};
+
+            headers.forEach(function(header){
+                dataItem[header] = getAttrByName(item, header);
+            });
+
+            dataItem[squares] = squaresMetadata[dataItem[squares]]['name_' + lang];
             if (group == 'section')
-                data[i]['icon'] = '/static/img/icons/' + group + '/section_' + data[i][group] + '.png';
-            data[i][group] = groupMetadata[data[i][group]]['name_' + lang];
-        } catch (e) {
-            data.splice(i, 1);
+                dataItem['icon'] = '/static/img/icons/' + group + '/section_' + dataItem[group] + '.png';
+            dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
+
+            data.push(dataItem);
+        } catch(e) {
+
         }
-    }
+    });
 
     return data;
 }
@@ -93,7 +93,7 @@ var loadViz = function(data) {
             }
         })
         .icon({'value': 'icon', 'style': 'knockout'})
-        .legend({'size': 60, 'filters': true, 'order': {'sort': 'desc', 'value': 'size'})
+        .legend({'size': 40, 'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .time('year')
         .draw();
 };
