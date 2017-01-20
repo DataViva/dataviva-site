@@ -19,8 +19,9 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
-@mod.route('/<dataset>/<division>')
-def index(dataset, division):
-    filters = urllib.urlencode(request.args.items())
+@mod.route('/<dataset>/<area>')
+def index(dataset, area):
+    filters = urllib.urlencode([("product",request.args.get("product"))])
 
-    return render_template('stacked/index.html', dataset=dataset, division=division)
+    import pdb; pdb.set_trace()
+    return render_template('stacked/index.html', dataset=dataset, area=area, filters=filters)
