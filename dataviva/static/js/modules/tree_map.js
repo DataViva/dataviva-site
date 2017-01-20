@@ -81,6 +81,21 @@ var loadViz = function(data) {
         };
     };
 
+    var titleBuilder = function() {
+        var title = 'squares: ' + squares;
+        if (group) {
+            title += ', group: ' + group;
+        }
+
+        filters.split('&').forEach(function(item) {
+            var key = item.split('=')[0],
+                value = item.split('=')[1];
+            title += ', ' + key + ': ' + value;
+        });
+
+        return title;
+    };
+
     var viz = d3plus.viz()
         .container('#tree_map')
         .data(data)
@@ -101,7 +116,8 @@ var loadViz = function(data) {
         .messages({
             'branding': true,
             'style': 'large'
-        });
+        })
+        .title({'total': true, 'value': titleBuilder()});
 
         if (group) {
             viz.color(group);

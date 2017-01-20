@@ -26,7 +26,7 @@ def before_request():
     g.page_type = mod.name
 
 
-@mod.route('/<dataset>/<squares>/')
+@mod.route('/<dataset>/<squares>')
 @mod.route('/<dataset>/<squares>/<group>')
 def index(dataset, squares, group=''):
     expected_filters = ['type', 'state', 'year', 'section']
