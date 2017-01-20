@@ -15,6 +15,8 @@ dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Municipio';
 dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
 dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
+dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
+dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
 
 var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
@@ -80,6 +82,7 @@ var loadViz = function(data) {
         .color(group)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
+        .time({'value': 'year', 'solo': 2016})
         .ui([
             {
                 'method' : 'size',
@@ -91,11 +94,15 @@ var loadViz = function(data) {
         .format('pt_BR')
         .icon({'value': 'icon', 'style': 'knockout'})
         .legend({'size': 40, 'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
-        .time('year')
+        .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
+        .messages({
+            'branding': true,
+            'style': 'large'
+        })
         .draw();
 };
 
-var loading = dataviva.ui.loading('.loading').text(dictionary['loading']);
+var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
 
 $(document).ready(function() {
     ajaxQueue(
