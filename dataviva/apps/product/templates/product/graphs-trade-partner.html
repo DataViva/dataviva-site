@@ -38,6 +38,10 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-line'}}" data-parent="#exports-destination">
                     {%trans%}Line{%endtrans%}
                </a>
+                <a href="/{{ g.locale }}/line/secex/continent/country?type=export&value=value&value=kg&product={{product.id}}{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == ''}}" data-parent="#exports-destination">
+                    Line New API
+                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
                     {%trans%}Stacked{%endtrans%}
@@ -67,7 +71,7 @@
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
-            
+
             {% endif %}
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{%trans%}Origin{%endtrans%}</a>
             <div class="collapse" id="imports-origin">

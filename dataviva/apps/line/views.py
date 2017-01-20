@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request, abort
+from flask import Blueprint, render_template, g, request, json
 from dataviva.apps.general.views import get_locale
+from dataviva.translations.dictionary import dictionary
 import urllib
 
 mod = Blueprint('line', __name__,
@@ -45,9 +46,9 @@ def product_service(product):
         return ('product', product[2:])
 
 
-
-@mod.route('/<dataset>/<line>')
-def index(dataset, line):
+@mod.route('/<dataset>/<line>', defaults={'group': None})
+@mod.route('/<dataset>/<line>/<group>')
+def index(dataset, line, group):
     values = request.args.getlist('value')
     values = ','.join(values)
 
@@ -68,4 +69,4 @@ def index(dataset, line):
 
     filters = urllib.urlencode(filters)
 
-    return render_template('line/index.html', dataset=dataset, line=line, filters=filters, values=values, type=type)
+    return render_template('line/index.html', dataset=dataset, line=line, group=group, filters=filters, values=values, type=type, dictionary=json.dumps(dictionary()))
