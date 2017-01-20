@@ -42,7 +42,7 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
             data.push(dataItem);
         } catch(e) {
 
-        }
+        };
     });
 
     return data;
@@ -50,14 +50,24 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
 var loadViz = function(data) {
 
-    var depthSelectorHelper = function(array, element) {
-        var newArray = array.slice(0);
-        newArray.splice(newArray.indexOf(element), 1);
-        newArray.splice(0, 0, element);
-        newArray.forEach(function(item, index){
-            newArray[index] = {[dictionary[item]] : item} 
-        })
-        return newArray;
+    var depthSelectorHelper = function(depths, squares) {
+        var array = depths.slice(0);
+        array.splice(array.indexOf(squares), 1);
+        array.splice(0, 0, squares);
+        array.forEach(function(item, i){
+            array[i] = {[dictionary[item]] : item};
+        });
+
+        return {
+            'method': function(value) {
+                viz.depth(depths.indexOf(value));
+                viz.draw();
+            },
+            'default': depths.indexOf(squares),
+            'type': 'drop',
+            'label': dictionary['depth'],
+            'value': array
+        };
     };
 
     var viz = d3plus.viz()
@@ -76,16 +86,7 @@ var loadViz = function(data) {
                 'label': dictionary['value'],
                 'value' : [{[dictionary['value']]: 'value'}, {'KG': 'kg'}]
             },
-            {
-                'method': function(value) {
-                    viz.depth(depths.indexOf(value))
-                        .draw();
-                },
-                'default': depths.indexOf(squares),
-                'type': 'drop',
-                'label': dictionary['depth'],
-                'value': depthSelectorHelper(depths, squares)
-            }
+            depthSelectorHelper(depths, squares)
         ])
         .format({
             'text': function(text) {
