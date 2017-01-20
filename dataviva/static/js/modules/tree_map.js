@@ -10,7 +10,7 @@ var tree_map = document.getElementById('tree_map')
             'http://api.staging.dataviva.info/' + dataset + '/year/' + squares + '/' + group + '?' + filters
     ];
 
-
+// Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Municipio';
 dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
@@ -88,11 +88,7 @@ var loadViz = function(data) {
             },
             depthSelectorHelper(depths, squares)
         ])
-        .format({
-            'text': function(text) {
-                return text == 'value' || text == 'share' ? dictionary[text] : text;
-            }
-        })
+        .format('pt_BR')
         .icon({'value': 'icon', 'style': 'knockout'})
         .legend({'size': 40, 'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .time('year')
