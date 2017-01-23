@@ -79,6 +79,8 @@ def index(dataset, x, y):
     industry = request.args.get('industry')
     counts = request.args.getlist('count')
 
+    options = request.args.get('options')
+
     filters = []
 
     for count in counts:
@@ -104,4 +106,4 @@ def index(dataset, x, y):
 
     filters = urllib.urlencode(filters)
 
-    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters)
+    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options)

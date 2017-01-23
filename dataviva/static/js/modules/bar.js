@@ -3,13 +3,14 @@ var data = [],
     MAX_BARS = 10,
     lang = document.documentElement.lang,
     dataset = $("#bar").attr("dataset"),
+    options = $("#bar").attr("options").split(","),
     x = $("#bar").attr("x").split(","),
     currentX = x[0],
     y = $("#bar").attr("y").split(","),
     currentY = y[0],
     filters = $("#bar").attr("filters"),
     url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + y.join("/") + ( filters ? "?" + filters : '');
+        dataset + "/year/" + ( options.indexOf('month') != -1 ? 'month/' : '' ) + y.join("/") + ( filters ? "?" + filters : '');
 
 
 // TODO: Title creator
@@ -22,6 +23,22 @@ var textHelper = {
 };
 
 var visualization;
+
+var uis = [
+        {
+            'method': 'x',
+            'value': x,
+            'type': 'drop'
+        },
+        {
+            'value': y,
+            'type': 'drop',
+            'method': function(value, viz){
+                viz.y(value).id(value).draw();
+            }
+        }
+    ];
+
 
 var loadViz = function(data){
      visualization = d3plus.viz()
@@ -38,20 +55,7 @@ var loadViz = function(data){
             "scale": "discrete" // Manually set Y-axis to be discrete
         })
         .x(currentX)
-        .ui([
-            {
-                'method': 'x',
-                'value': x,
-                'type': 'drop'
-            },
-            {
-                'value': y,
-                'type': 'drop',
-                'method': function(value, viz){
-                    viz.y(value).id(value).draw();
-                }
-            }
-        ])
+        .ui(uis)
         .time('year')
         .draw()
 };
@@ -102,8 +106,21 @@ var addNameToData = function(data){
         if(item['average_monthly_wage'] != undefined)
             item['average_monthly_wage'] = +item['average_monthly_wage'];
 
+        if(item['month'] != undefined)
+            item['date'] = item['year'] + '/' + item['month'];
+
         return item;
     });
+
+    if(options.indexOf('month') != -1){
+        uis.push({
+            'method': 'time',
+            'value': [
+                {'month': 'date'},
+                {'year': 'year'}
+            ]
+        });
+    }
 
     return data;
 };
