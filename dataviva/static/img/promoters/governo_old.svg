@@ -8,12 +8,12 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    data-name="Layer 1"
-   width="250"
-   height="250"
+   width="103.01"
+   height="40.099998"
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="governo.svg">
+   sodipodi:docname="vectorpaint.svg">
   <metadata
      id="metadata67">
     <rdf:RDF>
@@ -39,20 +39,19 @@
      inkscape:window-height="1026"
      id="namedview65"
      showgrid="false"
-     inkscape:zoom="1.2048193"
-     inkscape:cx="-136.62573"
-     inkscape:cy="257.15333"
+     inkscape:zoom="6.8154869"
+     inkscape:cx="52.041549"
+     inkscape:cy="44.126628"
      inkscape:window-x="0"
      inkscape:window-y="24"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg2"
-     showborder="true" />
+     inkscape:current-layer="svg2" />
   <rect
      id="backgroundrect"
      width="122.01"
      height="40.099998"
-     x="-2.0541453"
-     y="256.99863"
+     x="0"
+     y="0"
      style="fill:none;stroke:none" />
   <defs
      id="defs5">
@@ -119,7 +118,7 @@
      id="title31">governo</title>
   <g
      id="g3423"
-     transform="matrix(2.427688,0,0,2.427688,-45.859803,72.727572)">
+     transform="translate(-18.824999,0.01105464)">
     <path
        class="cls-1"
        d="m 64.810004,10.910001 5.46,-10.25000008 a 0.87,0.87 0 0 1 1,-0.48 l 2.26,0 0,16.13000008 -2.64,0 0,-11.3400001 -4.8,8.7300001 a 1.16,1.16 0 0 1 -1.06,0.66 l -0.41,0 a 1.16,1.16 0 0 1 -1.06,-0.66 l -4.86,-8.7800001 0,11.3900001 -2.64,0 0,-16.13000008 2.21,0 a 0.89,0.89 0 0 1 1,0.48 z"
@@ -160,7 +159,7 @@
        style="fill:#231f20;fill-rule:evenodd" />
     <polygon
        class="cls-1"
-       points="78.17,24.43 78.17,26.64 72.79,26.64 72.79,31 79.62,31 79.62,33.29 69.9,33.29 69.9,17.88 79.62,17.88 79.62,17.88 79.62,20.16 72.79,20.16 72.79,24.43 "
+       points="72.79,31 79.62,31 79.62,33.29 69.9,33.29 69.9,17.88 79.62,17.88 79.62,17.88 79.62,20.16 72.79,20.16 72.79,24.43 78.17,24.43 78.17,26.64 72.79,26.64 "
        id="svg_7"
        style="fill:#231f20;fill-rule:evenodd" />
     <path
@@ -191,12 +190,12 @@
        style="fill:#231f20;fill-rule:evenodd" />
     <polygon
        class="cls-3"
-       points="38.21,0.2 18.66,22.87 18.66,22.87 56.05,33.29 "
+       points="18.66,22.87 18.66,22.87 56.05,33.29 38.21,0.2 "
        id="svg_13"
        style="fill:url(#GradientFill_1);fill-rule:evenodd" />
     <polygon
        class="cls-4"
-       points="38.21,0.2 20.37,33.29 20.37,33.29 56.05,33.29 "
+       points="20.37,33.29 20.37,33.29 56.05,33.29 38.21,0.2 "
        id="svg_14"
        style="fill:url(#GradientFill_2);fill-rule:evenodd" />
     <path
@@ -219,7 +218,7 @@
        style="fill:#808285;fill-rule:evenodd" />
     <polygon
        class="cls-5"
-       points="43.8,37.96 43.8,38.48 42.52,38.48 42.52,39.52 44.15,39.52 44.15,40.06 41.83,40.06 41.83,36.4 44.15,36.4 44.15,36.4 44.15,36.94 42.52,36.94 42.52,37.96 "
+       points="42.52,39.52 44.15,39.52 44.15,40.06 41.83,40.06 41.83,36.4 44.15,36.4 44.15,36.4 44.15,36.94 42.52,36.94 42.52,37.96 43.8,37.96 43.8,38.48 42.52,38.48 "
        id="svg_18"
        style="fill:#808285;fill-rule:evenodd" />
     <path
@@ -248,12 +247,12 @@
        style="fill:#808285;fill-rule:evenodd" />
     <polygon
        class="cls-5"
-       points="82.78,37.96 82.78,38.48 81.5,38.48 81.5,39.52 83.13,39.52 83.13,40.06 80.82,40.06 80.82,36.4 83.13,36.4 83.13,36.4 83.13,36.94 81.5,36.94 81.5,37.96 "
+       points="81.5,39.52 83.13,39.52 83.13,40.06 80.82,40.06 80.82,36.4 83.13,36.4 83.13,36.4 83.13,36.94 81.5,36.94 81.5,37.96 82.78,37.96 82.78,38.48 81.5,38.48 "
        id="svg_23"
        style="fill:#808285;fill-rule:evenodd" />
     <polygon
        class="cls-5"
-       points="92.88,40.06 92.2,40.06 92.2,36.96 91.09,36.96 91.09,36.4 93.98,36.4 93.98,36.4 93.98,36.96 92.88,36.96 "
+       points="91.09,36.4 93.98,36.4 93.98,36.4 93.98,36.96 92.88,36.96 92.88,40.06 92.2,40.06 92.2,36.96 91.09,36.96 "
        id="svg_24"
        style="fill:#808285;fill-rule:evenodd" />
     <path
