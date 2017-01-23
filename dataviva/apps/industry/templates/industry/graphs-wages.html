@@ -25,7 +25,7 @@
 
                 {% endif %}
 
-                <a href="#jobs-demographic" class="list-group-item" data-toggle="collapse" data-parent="#jobs-demographic">{% trans %}Demographic{% endtrans %}</a>
+                <a href="#jobs-demographic" class="list-group-item" data-toggle="collapse" data-parent="#jobs-demographic">{% trans %}Demographic Informations{% endtrans %}</a>
                  <div class="collapse" id="jobs-demographic">
                      <a href="/{{g.locale}}/bar/rais/jobs/gender,ethnicity,literacy?industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                         target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-demographic-bar'}}" data-parent="#jobs-demographic">
@@ -33,7 +33,7 @@
                      </a>
                  </div>
 
-                 <a href="#jobs-establishments" class="list-group-item" data-toggle="collapse" data-parent="#jobs-establishments">{% trans %}Establishments{% endtrans %}</a>
+                 <a href="#jobs-establishments" class="list-group-item" data-toggle="collapse" data-parent="#jobs-establishments">{% trans %}Establishments Informations{% endtrans %}</a>
                  <div class="collapse" id="jobs-establishments">
                      <a href="/{{g.locale}}/bar/rais/jobs/simple,establishment_size?industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                         target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-establishments-bar'}}" data-parent="#jobs-establishments">
@@ -69,7 +69,7 @@
                 </div>
                 {% endif %}
 
-                <a href="#wages-demographic" class="list-group-item" data-toggle="collapse" data-parent="#wages-demographic">{% trans %}Demographic{% endtrans %}</a>
+                <a href="#wages-demographic" class="list-group-item" data-toggle="collapse" data-parent="#wages-demographic">{% trans %}Demographic Informations{% endtrans %}</a>
                 <div class="collapse" id="wages-demographic">
                     <a href="/{{g.locale}}/bar/rais/wage_received,average_monthly_wage/gender,ethnicity,literacy?industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                        target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-demographic-bar'}}" data-parent="#wages-demographic">
@@ -77,7 +77,7 @@
                     </a>
                 </div>
 
-                <a href="#wages-establishments" class="list-group-item" data-toggle="collapse" data-parent="#wages-establishments">{% trans %}Establishments{% endtrans %}</a>
+                <a href="#wages-establishments" class="list-group-item" data-toggle="collapse" data-parent="#wages-establishments">{% trans %}Establishments Informations{% endtrans %}</a>
                 <div class="collapse" id="wages-establishments">
                     <a href="/{{g.locale}}/bar/rais/wage_received,average_monthly_wage/simple,establishment_size?industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                        target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-establishments-bar'}}" data-parent="#wages-establishments">
