@@ -179,6 +179,6 @@ $(document).ready(function(){
         formattedData.sort(compare)
 
         loading.hide();
-        loadViz(data2);
+        loadViz(formattedData);
     })
 });
