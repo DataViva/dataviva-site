@@ -55,7 +55,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
                     {%trans%}Line{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=month{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=month,percentage{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
                     {% trans %}Bar{% endtrans %}
                 </a>
@@ -105,7 +105,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-port">
                     {%trans%}Line{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=month{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=month,percentage{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-port">
                     {% trans %}Bar{% endtrans %}
                 </a>

@@ -83,6 +83,41 @@ var buildData = function(responseApi){
     return data;
 }
 
+var addPercentage = function(data){
+    if(options.indexOf('percentage') == -1)
+        return data;
+
+    var groupBy = options.indexOf('month') != -1 ? 'date' : 'year';
+
+    var total = {};
+
+    data.forEach(function(item){
+        x.forEach(function(xValue){
+            if(total[xValue] == undefined)
+                total[xValue] = {};
+
+            if(total[xValue][item.year] == undefined)
+                total[xValue][item.year] = 0;
+
+            total[xValue][item.year] += item[xValue];
+        });
+    });
+
+    data = data.map(function(item){
+        x.forEach(function(xValue){
+            item[xValue + '_pct'] = item[xValue] / total[xValue][item.year];
+        });
+
+        return item;
+    });
+
+    x.forEach(function(xValue){
+        x.push(xValue + '_pct')
+    });
+
+    return data;
+}
+
 var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
@@ -198,6 +233,7 @@ $(document).ready(function(){
 
             data = buildData(api);
             data = addNameToData(data);
+            data = addPercentage(data);
             solo = updateSolo(data);
 
             loading.hide();
