@@ -32,7 +32,7 @@ def add_language_code(endpoint, values):
 def graphs(product_id, tab):
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('product/graphs-'+tab+'.html', product=product, location=location, graph=None)
+    return render_template('product/graphs-' + tab + '.html', product=product, location=location, graph=None)
 
 
 @mod.route('/<product_id>', defaults={'tab': 'general'})
@@ -69,10 +69,16 @@ def index(product_id, tab):
             'trade-balance-product-line',
             'exports-destination-tree_map',
             'new-api-exports-destination-tree_map',
+            'new-api-exports-port-line',
+            'new-api-exports-port-bar',
+            'new-api-exports-port-tree_map',
             'exports-destination-line',
             'exports-destination-stacked',
             'imports-origin-tree_map',
             'new-api-imports-origin-tree_map',
+            'new-api-imports-port-line',
+            'new-api-imports-port-bar',
+            'new-api-imports-port-tree_map',
             'imports-origin-line',
             'imports-origin-stacked',
         ],
