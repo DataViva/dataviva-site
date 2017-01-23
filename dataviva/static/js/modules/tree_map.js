@@ -1,8 +1,10 @@
 var tree_map = document.getElementById('tree_map')
     lang = document.documentElement.lang,
     squares = tree_map.getAttribute('squares'),
+    size = tree_map.getAttribute('size'),
     group = tree_map.getAttribute('group'),
-    depths = tree_map.getAttribute('depths').split('+'),
+    depths = tree_map.getAttribute('depths').split(' '),
+    values = tree_map.getAttribute('values').split(' '),
     dataset = tree_map.getAttribute('dataset'),
     filters = tree_map.getAttribute('filters');
 
@@ -18,6 +20,7 @@ dictionary['of'] = lang == 'en' ? 'of' : 'de';
 dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
 dictionary['country'] = lang == 'en' ? 'Country' : 'País';
 dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
+dictionary['kg'] = 'KG';
 
 
 var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
@@ -77,12 +80,25 @@ var loadViz = function(data) {
     };
 
     var sizeSelectorBuilder = function() {
+        var options = [];
+        values.forEach(function(item) {
+            options.push({[dictionary[item]]: item});
+        });
         return {
             'method' : 'size',
             'label': dictionary['value'],
-            'value' : [{[dictionary['value']]: 'value'}, {'KG': 'kg'}]
+            'value' : options
         };
     };
+
+    var uiBuilder = function() {
+        ui = [];
+        if (depths[0] != '')
+            ui.push(depthSelectorBuilder());
+        if (values[0] != '')
+            ui.push(sizeSelectorBuilder());
+        return ui;
+    }
 
     var titleBuilder = function() {
         var title = 'squares: ' + squares;
@@ -103,9 +119,7 @@ var loadViz = function(data) {
         .container('#tree_map')
         .data(data)
         .type('tree_map')
-        .id(depths)
-        .size('value')
-        .depth(depths.length-1)
+        .size(size)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
         .time('year')
@@ -117,16 +131,18 @@ var loadViz = function(data) {
             'branding': true,
             'style': 'large'
         })
-        .title({'total': true, 'value': titleBuilder()});
+        .title({'total': true, 'value': titleBuilder()})
+        .ui(uiBuilder());
 
         if (group) {
             viz.color(group);
         }
 
-        if (depths.length > 1) {
-            viz.ui([sizeSelectorBuilder(), depthSelectorBuilder()]);
+        if (depths[0] == '') {
+            viz.id({'value': squares})
         } else {
-            viz.ui([sizeSelectorBuilder()]);
+            viz.id({'value': depths});
+            viz.depth(depths.indexOf(squares));
         }
 
         viz.draw();

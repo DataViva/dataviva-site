@@ -26,30 +26,31 @@ def before_request():
     g.page_type = mod.name
 
 
-@mod.route('/<dataset>/<squares>')
-@mod.route('/<dataset>/<squares>/<group>')
-def index(dataset, squares, group=''):
+@mod.route('/<dataset>/<squares>/<size>')
+def index(dataset, squares, size):
     expected_filters = ['type', 'state', 'year', 'section', 'product']
     filters = []
 
     for filter in expected_filters:
         value = request.args.get(filter)
         if value:
-            if filter == 'product':
-                filters.append((filter, value[2:]))
-            else:
-                filters.append((filter, value))
+            filters.append((filter, value[2:] if filter == 'product' else value))
 
     filters = urllib.urlencode(filters)
 
-    depths = []
-    if squares == 'product':
-        depths = ['section', 'product']
-    elif squares == 'municipality':
-        depths = ['state', 'municipality']
-    elif squares == 'country':
-        depths = ['continent', 'country']
-    else:
-        depths = [squares]
+    group = request.args.get('group') or ''
 
-    return render_template('tree_map/index.html', dataset=dataset, squares=squares, group=group, depths='+'.join(depths), filters=filters, dictionary=json.dumps(dictionary()))
+    params = {}
+    for param in ['depths', 'values']:
+        value = request.args.get(param)
+        params[param] = value if value and len(value.split()) > 1 else ''
+
+    return render_template('tree_map/index.html',
+                           dataset=dataset,
+                           squares=squares,
+                           size=size,
+                           group=group,
+                           depths=params['depths'],
+                           values=params['values'],
+                           filters=filters,
+                           dictionary=json.dumps(dictionary()))
