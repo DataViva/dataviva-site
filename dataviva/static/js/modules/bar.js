@@ -25,20 +25,141 @@ var textHelper = {
 var visualization;
 
 var uis = [
-        {
-            'method': 'x',
-            'value': x,
-            'type': 'drop'
-        },
-        {
-            'value': y,
-            'type': 'drop',
-            'method': function(value, viz){
-                viz.y(value).id(value).draw();
-            }
+    {
+        'method': 'x',
+        'value': x,
+        'type': 'drop'
+    },
+    {
+        'value': y,
+        'type': 'drop',
+        'method': function(value, viz){
+            viz.y(value).id(value).draw();
         }
-    ];
+    }
+];
 
+var textHelper = {
+    'loading': {
+        'en': 'loading ...',
+        'pt': 'carregando ...'
+    },
+    'average_monthly_wage': {
+        'en': 'Salário Médio Mensal',
+        'pt': 'Average Monthly Wage'
+    },
+    'jobs': {
+        'en': 'Jobs',
+        'pt': 'Empregos'
+    },
+    'year': {
+        'en': 'Year',
+        'pt': 'Ano'
+    },
+    'scale': {
+        'en': "Scale",
+        'pt': "Escala"
+    },
+    'yaxis': {
+        'en': "Y-Axis",
+        'pt': "Eixo Y"
+    },
+    'xaxis': {
+        'en': "X-Axis",
+        'pt': "Eixo X"
+    },
+    'locale': {
+        'en': 'en_US',
+        'pt': 'pt_BR'
+    },
+    'average_monthly_wage': {
+        'en': "Average Monthly Wage",
+        'pt': "Salário Médio Mensal"  
+    },
+    'kg': {
+        'en': 'Amount',
+        'pt': 'Quantidade'
+    },
+    'value': {
+        'en': "Value",
+        'pt': "Valor"
+    },
+    'kg_label': {
+        'en': 'Amount [kg]',
+        'pt': 'Quantidade [kg]'
+    },
+    'value_label': {
+        'en': "Value [$ USD]",
+        'pt': "Valor [$ USD]"
+    },
+    'average_monthly_wage_label': {
+        'en': "Average Monthly Wage [$ USD]",
+        'pt': "Salário Médio Mensal [$ USD]"  
+    },
+    'jobs_label': {
+        'en': "Jobs",
+        'pt': "Empregos"  
+    },
+    'kg_pct': {
+        'en': "% de kg",
+        'pt': "% of kg"  
+    },
+    'value_pct': {
+        'en': "% de US$",
+        'pt': "% of US$"  
+    },
+    'simples': {
+        'en': "Simples",
+        'pt': "Simples"  
+    },
+    'establishment_size': {
+        'en': "Establishment Size",
+        'pt': "Tamanho do Estabelecimento"  
+    },
+    'wage_received': {
+        'en': "Wage Received",
+        'pt': "Salário Recebido"  
+    },
+    'gender': {
+        'en': "Gender",
+        'pt': "Salário Recebido"  
+    },
+    'ethnicity': {
+        'en': "Ethnicity",
+        'pt': "Etnia"  
+    },
+    'literacy': {
+        'en': "Literacy",
+        'pt': "Escolaridade"  
+    }
+};
+
+var formatHelper = {
+    "text": function(text, params) {
+        if (textHelper[text] != undefined)
+            return textHelper[text][lang];
+
+        return d3plus.string.title(text, params);
+    },
+
+    "number": function(number, params) {
+        var formatted = d3plus.number.format(number, params);
+        
+        if (params.key == "value" && params.labels == undefined)
+            return "$" + formatted + " USD";
+
+        if (params.key == "kg" && params.labels == undefined)
+            return formatted + " kg";
+
+        if (params.key == "kg_pct" && params.labels == undefined)
+            return parseFloat(formatted * 100).toFixed(1) + "%";
+
+        if (params.key == "value_pct" && params.labels == undefined)
+            return parseFloat(formatted * 100).toFixed(1) + "%";
+
+        return formatted;
+    }
+};
 
 var loadViz = function(data){
      visualization = d3plus.viz()
@@ -56,6 +177,7 @@ var loadViz = function(data){
         })
         .x(currentX)
         .ui(uis)
+        .format(formatHelper    )
         .time('year')
         .draw()
 };
