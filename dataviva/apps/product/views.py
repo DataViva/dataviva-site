@@ -57,7 +57,8 @@ def index(product_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     tabs = {
         'general': [],
@@ -65,11 +66,13 @@ def index(product_id, tab):
             'economic-opportunities-rings'
         ],
         'trade-partner': [
-            'trade-balance-product-',
-            'exports-destination-tree',
+            'trade-balance-product-line',
+            'exports-destination-tree_map',
+            'new-api-exports-destination-tree_map',
             'exports-destination-line',
             'exports-destination-stacked',
-            'imports-origin-tree',
+            'imports-origin-tree_map',
+            'new-api-imports-origin-tree_map',
             'imports-origin-line',
             'imports-origin-stacked',
         ],
@@ -77,11 +80,13 @@ def index(product_id, tab):
 
     if not is_municipality:
         tabs['trade-partner'] += [
-            'exports-municipality-tree',
-            'exports-municipality-geo',
+            'exports-municipality-tree_map',
+            'new-api-exports-municipality-tree_map',
+            'exports-municipality-geo_map',
             'exports-municipality-stacked',
-            'imports-municipality-tree',
-            'imports-municipality-geo',
+            'imports-municipality-tree_map',
+            'new-api-imports-municipality-tree_map',
+            'imports-municipality-geo_map',
             'imports-municipality-stacked',
         ]
 
