@@ -26,9 +26,9 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-stacked'}}" data-parent="#exports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/stacked/secex/municipality"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
-                    New Stacked
+                <a href="/{{ g.locale }}/stacked/secex/municipality?type=export"
+                   target="graphs-frame-trade-partner">
+                    New Stacked Municipality Export
                 </a>
             </div>
             {% endif %}
@@ -44,13 +44,12 @@
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color"
 
-                /{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?y=export_val&layout=value&sort=asc
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
                     {%trans%}Stacked{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/stacked/secex/continent/"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
-                    New Stacked
+                <a href="/{{ g.locale }}/stacked/secex/country?type=export"
+                   target="" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
+                    New Stacked Country  Export
                 </a>
             </div>
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{%trans%}Port{%endtrans%}</a>
@@ -76,6 +75,10 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-municipality-stacked'}}" data-parent="#imports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
+                <a href="/{{ g.locale }}/stacked/secex/municipality?type=import"
+                   target="graphs-frame-trade-partner">
+                    New Stacked Municipality Import
+                </a>
             </div>
             
             {% endif %}
@@ -92,6 +95,10 @@
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
                     {%trans%}Stacked{%endtrans%}
+                </a>
+                <a href="/{{ g.locale }}/stacked/secex/country?type=import"
+                   target="graphs-frame-trade-partner">
+                    New Stacked Country Import
                 </a>
             </div>
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Port{%endtrans%}</a>

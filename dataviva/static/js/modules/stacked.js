@@ -4,7 +4,7 @@ var data = [],
     area = $("#stacked").attr("area"),
     filters = $("#stacked").attr("filters"),
     url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + area + "/type/" + ( filters ? "?" + filters : '');
+        dataset + "/year/" + area + "/type" + ( filters ? "?" + filters : '');
 
 
 var loading = dataviva.ui.loading('.loading');
