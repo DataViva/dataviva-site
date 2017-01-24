@@ -3,9 +3,9 @@ from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 import urllib
 
-mod = Blueprint('line', __name__,
+mod = Blueprint('bar', __name__,
                 template_folder='templates',
-                url_prefix='/<lang_code>/line',
+                url_prefix='/<lang_code>/bar',
                 static_folder='static')
 
 
@@ -52,24 +52,51 @@ def wld_service(wld):
 
     return (wlds[len(wld)], wld)
 
+def occupation_service(occupation):
+    occupations = {
+        1: "occupation_group",
+        4: "occupation"
+    }
 
-@mod.route('/<dataset>/<line>')
-def index(dataset, line):
-    values = request.args.getlist('value')
-    values = ','.join(values)
+    return (occupations[len(occupation)], occupation)
 
-    type = request.args.get('type')
+def industry_service(industry):
+    if len(industry) == 1:
+        return ('cnae_section', industry)
+    elif len(industry) == 3:
+        return ('cnae_division', industry[1:])
+    else:
+        return ('cnae', industry[1:])
+
+
+@mod.route('/<dataset>/<x>/<y>')
+def index(dataset, x, y):
     product = request.args.get('product')
     id_ibge = request.args.get('id_ibge')
+    type = request.args.get('type')
     wld = request.args.get('wld')
+    occupation = request.args.get('occupation')
+    industry = request.args.get('industry')
+    counts = request.args.getlist('count')
+
+    options = request.args.get('options')
 
     filters = []
 
+    for count in counts:
+        filters.append(('count', count))
+
     if type:
         filters.append(('type', type))
-        
+
     if wld:
         filters.append(wld_service(wld))
+
+    if occupation:
+        filters.append(occupation_service(occupation))
+
+    if industry:
+        filters.append(industry_service(industry))
 
     if product:
         filters.append(product_service(product))
@@ -79,4 +106,4 @@ def index(dataset, line):
 
     filters = urllib.urlencode(filters)
 
-    return render_template('line/index.html', dataset=dataset, line=line, filters=filters, values=values, type=type)
+    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options)

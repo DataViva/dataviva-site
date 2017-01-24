@@ -42,7 +42,10 @@ var Category = (function() {
 
     function updateGraphUrl(){
         var parent = $(this).data('parent').slice(1);
-        var graphType = $(this).attr('href').split('/')[3];
+
+        var index = $(this).attr('href').split('/')[2] == 'embed' ? 3 : 2;
+        var graphType = $(this).attr('href').split('/')[index];
+
         var menuOption = parent + '-' + graphType;
 
         var graphUrl = $(this).attr('href').split('/').slice(3).join('/');
