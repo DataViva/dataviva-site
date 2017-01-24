@@ -28,13 +28,11 @@ def before_request():
 
 @mod.route('/<dataset>/<squares>/<size>')
 def index(dataset, squares, size):
-    expected_filters = ['type', 'state', 'year', 'section', 'product']
     filters = []
 
-    for filter in expected_filters:
-        value = request.args.get(filter)
-        if value:
-            filters.append((filter, value[2:] if filter == 'product' else value))
+    for key, value in request.args.items():
+        if key not in ['depths', 'values', 'group'] and value:
+            filters.append((key, value[2:] if key == 'product' else value))
 
     filters = urllib.urlencode(filters)
 

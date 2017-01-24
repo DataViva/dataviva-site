@@ -2,8 +2,8 @@ var tree_map = document.getElementById('tree_map')
     lang = document.documentElement.lang,
     squares = tree_map.getAttribute('squares'),
     size = tree_map.getAttribute('size'),
-    group = tree_map.getAttribute('group'),
-    depths = tree_map.getAttribute('depths').split(' '),
+    depths = tree_map.getAttribute('depths') ? tree_map.getAttribute('depths').split(' ') : [],
+    group = tree_map.getAttribute('group') || depths[0] || '',
     values = tree_map.getAttribute('values').split(' '),
     dataset = tree_map.getAttribute('dataset'),
     filters = tree_map.getAttribute('filters');
@@ -20,6 +20,8 @@ dictionary['of'] = lang == 'en' ? 'of' : 'de';
 dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
 dictionary['country'] = lang == 'en' ? 'Country' : 'País';
 dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
+dictionary['mesoregion'] = lang == 'en' ? 'Mesoregion' : 'Mesorregião';
+dictionary['microregion'] = lang == 'en' ? 'Microregion' : 'Microrregião';
 dictionary['kg'] = 'KG';
 
 
@@ -69,10 +71,10 @@ var loadViz = function(data) {
 
         return {
             'method': function(value) {
-                viz.depth(depths.indexOf(value));
+                viz.id(value == group ? group : [group, value]);
+                viz.depth(value == group ? 0 : 1);
                 viz.draw();
             },
-            'default': depths.indexOf(squares),
             'type': 'drop',
             'label': dictionary['depth'],
             'value': array
@@ -93,7 +95,7 @@ var loadViz = function(data) {
 
     var uiBuilder = function() {
         ui = [];
-        if (depths[0] != '')
+        if (depths.length)
             ui.push(depthSelectorBuilder());
         if (values[0] != '')
             ui.push(sizeSelectorBuilder());
@@ -101,18 +103,24 @@ var loadViz = function(data) {
     }
 
     var titleBuilder = function() {
-        var title = 'squares: ' + squares;
-        if (group) {
-            title += ', group: ' + group;
+        return {
+            'total': true, 
+            'value': 'Title',
+            'font': {
+                'size': 22, 
+                'align': 'left'
+            },
+            'sub': {
+                'font': {
+                    'align': 'left'
+                }
+            },
+            'total': {
+                'font': {
+                    'align': 'left'
+                }
+            }
         }
-
-        filters.split('&').forEach(function(item) {
-            var key = item.split('=')[0],
-                value = item.split('=')[1];
-            title += ', ' + key + ': ' + value;
-        });
-
-        return title;
     };
 
     var viz = d3plus.viz()
@@ -127,31 +135,30 @@ var loadViz = function(data) {
         .icon({'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
-        .messages({
-            'branding': true,
-            'style': 'large'
-        })
-        .title({'total': true, 'value': titleBuilder()})
+        .messages({'branding': true, 'style': 'large' })
+        .title(titleBuilder())
+        .resize(true)
+        .id(group ? [group, squares] : squares)
+        .depth(1)
         .ui(uiBuilder());
 
         if (group) {
             viz.color(group);
         }
-
-        if (depths[0] == '') {
-            viz.id({'value': squares})
-        } else {
-            viz.id({'value': depths});
-            viz.depth(depths.indexOf(squares));
-        }
-
+        viz.dev(true)
         viz.draw();
 };
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
 
 $(document).ready(function() {
-    var urls = ['http://api.staging.dataviva.info/' + dataset + '/year/' + squares + '/' + group + '?' + filters,
+    var dimensions = [dataset, 'year', squares];
+    if (group && depths.length && depths.indexOf(group) == -1 || !depths.length)
+        dimensions.push(group);
+    if (depths.length)
+        dimensions = dimensions.concat(depths);
+
+    var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
         'http://api.staging.dataviva.info/metadata/' + squares
     ];
 
