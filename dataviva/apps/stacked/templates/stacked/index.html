@@ -1,31 +1,52 @@
 <!doctype html>
 <html lang="{{ g.locale }}">
-<meta charset="utf-8">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
 
-<h3 class="custom-title" id="title"></h3>
-<div id="stacked"
-    class="embed-responsive responsive-wrapper"
-    dataset="{{dataset}}"
-    area="{{area}}"
-    filters="{{filters}}"
-    value="{{value}}">
-</div>
+	<script type="text/javascript" src="http://d3plus.org/js/d3.js"></script>
+	<script type="text/javascript" src="http://d3plus.org/js/d3plus.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
 
-<div class="loading"></div>
-<link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
-<link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
 
-<style type="text/css">
-    
-</style>
+	<script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
+	<script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
+	<script type="text/javascript" src="/static/js/libs/async.js"></script>
 
-<script type="text/javascript" src="http://d3plus.org/js/d3.js"></script>
-<script type="text/javascript" src="http://d3plus.org/js/d3plus.js"></script>
+	<style type="text/css">
+		body {
+		  background: none;
+		}
 
-<script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
-<script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
-<script type="text/javascript" src="/static/js/libs/jquery-2.1.1.js"></script>
+		.loading {
+		    top: 200px;
+		}
 
-<script type="text/javascript" src="/static/js/libs/async.js"></script>
-<script type="text/javascript" src="/static/js/modules/stacked.js"></script>
+		.loading .page-loader {
+		    background: none;
+		}
+	</style>
+</head>
+
+<body>
+    <div id="stacked"
+        class="embed-responsive responsive-wrapper"
+        dataset="{{ dataset }}"
+        area="{{ area }}"
+        filters="{{filters}}"
+        depths="{{ depths }}"
+        values="{{ values }}"
+        group="{{ group }}"
+        value="{{value}}">
+    </div>
+
+	<div class="loading"></div>
+
+	<script type="text/javascript">
+        dataviva.dictionary = {{ dictionary|safe }};
+    </script>
+	<script type="text/javascript" src="/static/js/modules/stacked.js"></script>
+</body>
+
 </html>
