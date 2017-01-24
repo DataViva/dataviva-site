@@ -69,6 +69,7 @@ def index(product_id, tab):
             'trade-balance-product-line',
             'exports-destination-tree_map',
             'new-api-exports-destination-tree_map',
+            'new-api-exports-destination-line',
             'new-api-exports-port-line',
             'new-api-exports-port-bar',
             'new-api-exports-port-tree_map',

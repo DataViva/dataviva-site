@@ -45,6 +45,7 @@ def product_service(product):
     else:
         return ('product', product[2:])
 
+
 def wld_service(wld):
     wlds = {
         2: "continent",
@@ -52,6 +53,7 @@ def wld_service(wld):
     }
 
     return (wlds[len(wld)], wld)
+
 
 @mod.route('/<dataset>/<line>', defaults={'group': None})
 @mod.route('/<dataset>/<line>/<group>')
@@ -68,7 +70,7 @@ def index(dataset, line, group):
 
     if type:
         filters.append(('type', type))
-        
+
     if wld:
         filters.append(wld_service(wld))
 
