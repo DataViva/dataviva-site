@@ -1,10 +1,11 @@
 var stacked = document.getElementById('stacked'),
-    dataset = stacked.getAttribute("dataset"),
-    filters = stacked.getAttribute("filters"),
-    area = stacked.getAttribute("area"),
+    dataset = stacked.getAttribute('dataset'),
+    filters = stacked.getAttribute('filters'),
+    area = stacked.getAttribute('area'),
     group = stacked.getAttribute('group'),
     depths = stacked.getAttribute('depths').split(' '),
     values = stacked.getAttribute('values').split(' '),
+    type = stacked.getAttribute('pType').split(' '),
     lang = document.documentElement.lang
 
 var loading = dataviva.ui.loading('.loading');
@@ -116,10 +117,10 @@ var uiHelper = {
         "type": "drop",
         "value": [
             {
-                "Exportação": "export_value"
+                "Importação": "import_value"
             },
             {
-                "Importação": "import_value"
+                "Exportação": "export_value"
             }
         ],
         "method": function(value, viz){
@@ -185,7 +186,7 @@ var uiHelper = {
     }
 };
 
-var loadStacked = function (data, areas_depth){
+var loadStacked = function (data, areas_depth, y_type){
     var visualization = d3plus.viz()
         .title({"value": "Origens das Importações/Destinos das Exportações dos Soja do Brasil (Jan2000-Mar 2016)", "font": {"family": "Times", "size": "24","align": "left"}})
         .axes({"background": {"color": "white"}})
@@ -194,7 +195,7 @@ var loadStacked = function (data, areas_depth){
         .data(data)
         .color(areas_depth[0])
         .id(areas_depth)
-        .y({"value":"export_value", "label": "Export value"})
+        .y(y_type)
         .x({"value": "year", "label": "Year"})
         .time("year")
         .background("transparent")
@@ -229,6 +230,15 @@ $(document).ready(function(){
         if (group)
             urls.push('http://api.staging.dataviva.info/metadata/' + (group == 'section' ? 'product_section' : group));
 
+        debugger;
+        // TODO: fazer de um jeito melhor
+        if (type == 'export') {
+            y_type = {"value":"export_value", "label": "Export value"};
+        }
+        else {
+            y_type = {"value":"import_value", "label": "Import value"};
+        }
+
         if (area == "country"){
             ajaxQueue(
                 urls,
@@ -240,14 +250,10 @@ $(document).ready(function(){
 
                     data = buildData (json);
 
-                    debugger;
-                    // mapCountryToContinent (data, continent_metadata, country_metadata, lang);
-
-
                     areas_depth = ["area2", "area"];
 
                     loading.hide();
-                    loadStacked(data, areas_depth);
+                    loadStacked(data, areas_depth, y_type);
             });
         }
 

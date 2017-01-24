@@ -34,7 +34,7 @@ def index(dataset, area):
 	filters = urllib.urlencode(filters)
 
 	group = request.args.get('group') or ''
-	prod_type = request.args.get('type') or ''
+	pType = request.args.get('type') or ''
 
 	params = {}
 	for param in ['depths', 'values']:
@@ -44,7 +44,7 @@ def index(dataset, area):
 	return render_template('stacked/index.html',
 							dataset=dataset,
 							area=area,
-							prod_type=prod_type,
+							pType=pType,
 							group=group,
 							depths=params['depths'],
 							values=params['values'],
