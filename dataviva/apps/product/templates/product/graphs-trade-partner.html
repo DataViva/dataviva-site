@@ -30,9 +30,9 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-stacked'}}" data-parent="#exports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/stacked/secex/municipality?type=export"
-                   target="graphs-frame-trade-partner">
-                    New Stacked Municipality Export
+                <a href=" /stacked/secex/municipality?values=value+kg&group=state&depths=state+mesorregion+microrregion+municipality&type=export&year=2016{% if product.id %}&product={{ product.id }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="##new-api-exports-port">
+                    New Stacked
                 </a>
             </div>
             {% endif %}
@@ -55,9 +55,9 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
                     {%trans%}Stacked{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/stacked/secex/country?type=export"
-                   target="" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
-                    New Stacked Country  Export
+                <a href="/stacked/secex/country?values=value+kg&group=continent&depths=continent+country&type=export&year=2016{% if product.id %}&product={{ product.id }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-destination-stacked'}}" data-parent="##new-api-exports-port">
+                    New Stacked
                 </a>
             </div>
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{%trans%}Port{%endtrans%}</a>
@@ -94,9 +94,9 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-municipality-stacked'}}" data-parent="#imports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/stacked/secex/municipality?type=import"
-                   target="graphs-frame-trade-partner">
-                    New Stacked Municipality Import
+                <a href=" /stacked/secex/municipality?values=value+kg&group=state&depths=state+mesorregion+microrregion+municipality&type=import&year=2016{% if product.id %}&product={{ product.id }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-import-municipality-stacked'}}" data-parent="##new-api-exports-port">
+                    New Stacked
                 </a>
             </div>
 
@@ -119,9 +119,9 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
                     {%trans%}Stacked{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/stacked/secex/country?type=import"
-                   target="graphs-frame-trade-partner">
-                    New Stacked Country Import
+                <a href="/stacked/secex/country?values=value+kg&group=continent&depths=continent+country&type=import&year=2016{% if product.id %}&product={{ product.id }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-import-port-destination-stacked'}}" data-parent="##new-api-exports-port">
+                    New Stacked
                 </a>
             </div>
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Port{%endtrans%}</a>
