@@ -1,64 +1,57 @@
-var data = [],
-    lang = document.documentElement.lang,
-    dataset = $("#stacked").attr("dataset"),
-    area = $("#stacked").attr("area"),
-    filters = $("#stacked").attr("filters"),
-    url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + area + "/type" + ( filters ? "?" + filters : '');
-
+var stacked = document.getElementById('stacked'),
+    dataset = stacked.getAttribute("dataset"),
+    filters = stacked.getAttribute("filters"),
+    area = stacked.getAttribute("area"),
+    group = stacked.getAttribute('group'),
+    depths = stacked.getAttribute('depths').split(' '),
+    values = stacked.getAttribute('values').split(' '),
+    lang = document.documentElement.lang
 
 var loading = dataviva.ui.loading('.loading');
 
-if (lang == "en")
-    loading.text('loading' + "...");
-else
-    loading.text('carregando' + "...");
+// Temporarily translates text until dictionary is updated
+dataviva.dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
+dataviva.dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Municipio';
+dataviva.dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
+dataviva.dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
+dataviva.dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
+dataviva.dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
+dataviva.dictionary['by'] = lang == 'en' ? 'by' : 'por';
+dataviva.dictionary['of'] = lang == 'en' ? 'of' : 'de';
+dataviva.dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
+dataviva.dictionary['country'] = lang == 'en' ? 'Country' : 'País';
+dataviva.dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
+dataviva.dictionary['kg'] = 'KG';
 
 
-var formatData = function(json) {
+var buildData = function(json) {
+    var data = [];
+
     json.data.forEach(function(item, index){
         var dataItem = {};
 
         dataItem["year"] = item[0]
-        dataItem["area"] = item[1]
+        dataItem["month"] = item[0].toString() + "/" + item[1].toString() + "/01"
+        dataItem["area"] = item[2]
+        dataItem["area2"] = item[3]
 
-        if (item[2] == "export"){
-            dataItem["export_value"] = item[3]
-            dataItem["export_kg"] = +item[4]
+        if (item[4] == "export"){
+            dataItem["export_value"] = item[5]
+            dataItem["export_kg"] = +item[6]
         }
         else {
-            dataItem["import_value"] = item[3]
-            dataItem["import_kg"] = +item[4]
+            dataItem["import_value"] = item[5]
+            dataItem["import_kg"] = +item[6]
             }
 
         data.push(dataItem);
     });
-}
 
-// Add continet to contry
-var mapCountryToContinent = function(continent_metadata, country_metadata, lang) {
-
-    for (country_index in data){
-        for (continent in continent_metadata){
-            for (x in continent_metadata[continent].countries){
-                if (continent_metadata[continent].countries[x] == data[country_index].area){
-                    
-                    if (lang == "pt"){
-                        data[country_index]["area2"] = continent_metadata[continent].name_pt;                                 
-                        data[country_index]["area"] = country_metadata[data[country_index]["area"]].name_pt;                                 
-                    }
-                    else {
-                        data[country_index]["area2"] = continent_metadata[continent].name_en;
-                        data[country_index]["area"] = country_metadata[data[country_index]["area"]].name_en;                                 
-                    }
-                }
-            };
-        };
-    };
+    return data;
 }
 
 // Add microrregion and mesorregion to municipality 
-var mapMunicipalityToRegions = function(state_metadata, municipality_metadata, lang) {
+var mapMunicipalityToRegions = function(data, state_metadata, municipality_metadata, lang) {
 
     for (municipality_index in data){
         try {
@@ -79,7 +72,7 @@ var mapMunicipalityToRegions = function(state_metadata, municipality_metadata, l
 }
 
 // Add the section and chapter of product
-var mapProductToSection = function(product_metadata, lang) {
+var mapProductToSection = function(data, product_metadata, lang) {
     for (product_index in data){
         try {
             data[product_index]["area2"] = product_metadata[data[product_index]["area"]].chapter;
@@ -169,6 +162,26 @@ var uiHelper = {
                 "value": value
             }).draw();
         }
+    },
+    "time_range": {
+        "label": "Resolução temporal",
+        "value": [
+            {
+                "Ano": "year"
+            },
+            {
+                "Mês": "month"
+            }
+        ],
+        "method": function(value, viz){
+            viz.x({
+                    "value": value,
+                    "label": value 
+            });
+            viz.time({
+                "value": value
+            }).draw();
+        }
     }
 };
 
@@ -187,6 +200,10 @@ var loadStacked = function (data, areas_depth){
         .background("transparent")
         .shape({"interpolate": "monotone"})
         .legend({
+            "order": {
+                   "sort": "asc",
+                   "value": "id"
+                 },
             "filters": true,
         })
         .title({
@@ -196,45 +213,48 @@ var loadStacked = function (data, areas_depth){
             uiHelper.yorder,
             uiHelper.scale,
             uiHelper.ysort,
-            uiHelper.yaxis
+            uiHelper.yaxis,
+            uiHelper.time_range
         ])
         .draw()
 }
 
+var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading'] + '...');
+
 $(document).ready(function(){
+        var urls = ["http://api.staging.dataviva.info/" + dataset + "/year/month/" + (group ? area + "/" + group : area) + "/type" + ( filters ? "?" + filters : '')    ,
+                'http://api.staging.dataviva.info/metadata/' + area
+        ];
+
+        if (group)
+            urls.push('http://api.staging.dataviva.info/metadata/' + (group == 'section' ? 'product_section' : group));
 
         if (area == "country"){
-            ajaxQueue([
-                url,
-                "http://api.staging.dataviva.info/metadata/continents",
-                "http://api.staging.dataviva.info/metadata/country"
-            ],
+            ajaxQueue(
+                urls,
+                function(responses){
 
-            function(responses){
+                    var json = responses[0],
+                        continent_metadata = responses[1];
+                        country_metadata = responses[2];
 
-                var json = responses[0],
-                    continent_metadata = responses[1];
-                    country_metadata = responses[2];
+                    data = buildData (json);
 
-
-                formatData (json);
-
-                mapCountryToContinent (continent_metadata, country_metadata, lang);
+                    debugger;
+                    // mapCountryToContinent (data, continent_metadata, country_metadata, lang);
 
 
-                areas_depth = ["area2", "area"];
+                    areas_depth = ["area2", "area"];
 
-                loading.hide();
-
-                loadStacked(data, areas_depth);
+                    loading.hide();
+                    loadStacked(data, areas_depth);
             });
         }
 
         else if (area == "municipality"){
             ajaxQueue([
-                url,
+                urls,
                 "http://api.staging.dataviva.info/metadata/state",
-                "http://api.staging.dataviva.info/metadata/municipality"
             ],
 
             function(responses){
@@ -243,38 +263,38 @@ $(document).ready(function(){
                     state_metadata = responses[1];
                     municipality_metadata = responses[2];
 
-                formatData(json);
+                data = buildData(json);
 
-                mapMunicipalityToRegions (state_metadata, municipality_metadata, lang);
+                mapMunicipalityToRegions (data, state_metadata, municipality_metadata, lang);
 
                 areas_depth = ["area4", "area3", "area2", "area"];
 
                 loading.hide();
-
                 loadStacked(data, areas_depth);
             });
         }
 
         else if (area == "product"){
             ajaxQueue([
-                url,
-                "http://api.staging.dataviva.info/metadata/product"
+                urls
             ],
 
             function(responses){
                 var json = responses[0],
                     product_metadata = responses[1];                
 
-                formatData(json);
+                data = buildData(json);
 
-                mapProductToSection (product_metadata, lang);
+                mapProductToSection (data, product_metadata, lang);
 
                 areas_depth = ["area3", "area2", "area"];
 
                 loading.hide();
-
                 loadStacked(data, areas_depth);
             });
+        }
+        else {
+            console.log("Unexpected area. Options: product, municipality and country.")
         }
 });
 
