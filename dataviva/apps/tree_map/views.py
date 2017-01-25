@@ -26,13 +26,48 @@ def before_request():
     g.page_type = mod.name
 
 
+def location_service(id_ibge):
+    locations = {
+        1: "region",    #todo
+        2: "state",
+        6: "mesoregion",
+        6: "microregion",
+        7: "municipality"
+    }
+
+    return (locations[len(id_ibge)], id_ibge)
+
+
+def product_service(product):
+    if len(product) == 2:
+        return ('section', product[:2])
+    elif len(product) == 4:
+        return ('chapter', product[2:4])
+    else:
+        return ('product', product[2:])
+
+
+def wld_service(wld):
+    wlds = {
+        2: "continent",
+        3: "country"
+    }
+
+    return (wlds[len(wld)], wld)
+
+
 @mod.route('/<dataset>/<squares>/<size>')
 def index(dataset, squares, size):
     filters = []
 
     for key, value in request.args.items():
         if key not in ['depths', 'values', 'group'] and value:
-            filters.append((key, value[2:] if key == 'product' else value))
+            if key == 'product':
+                filters.append(product_service(value))
+            elif key == 'id_ibge':
+                filters.append(location_service(value))
+            else:
+                filters.append((key, value))
 
     filters = urllib.urlencode(filters)
 
