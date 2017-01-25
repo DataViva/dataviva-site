@@ -149,8 +149,8 @@ var textHelper = {
         'pt': "Tamanho do Estabelecimento"  
     },
     'salary_mass': {
-        'en': "Mass Salary",
-        'pt': "Salário em Massa"  
+        'en': "Salary Mass",
+        'pt': "Massa Salarial"  
     }
 
 };
