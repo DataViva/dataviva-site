@@ -4,7 +4,7 @@ var tree_map = document.getElementById('tree_map')
     size = tree_map.getAttribute('size'),
     depths = tree_map.getAttribute('depths') ? tree_map.getAttribute('depths').split(' ') : [],
     group = tree_map.getAttribute('group') || depths[0] || '',
-    values = tree_map.getAttribute('values').split(' '),
+    values = tree_map.getAttribute('values').split(' ') || [],
     dataset = tree_map.getAttribute('dataset'),
     filters = tree_map.getAttribute('filters');
 
@@ -97,7 +97,7 @@ var loadViz = function(data) {
         ui = [];
         if (depths.length)
             ui.push(depthSelectorBuilder());
-        if (values[0] != '')
+        if (values.length)
             ui.push(sizeSelectorBuilder());
         return ui;
     }
@@ -105,21 +105,10 @@ var loadViz = function(data) {
     var titleBuilder = function() {
         return {
             'value': 'Title',
-            'font': {
-                'size': 22, 
-                'align': 'left'
-            },
-            'sub': {
-                'font': {
-                    'align': 'left'
-                }
-            },
-            'total': {
-                'font': {
-                    'align': 'left'
-                },
-                'value': true
-            }
+            'font': {'size': 22, 'align': 'left'},
+            'sub': {'font': {'align': 'left'}},
+            'total': {'font': {'align': 'left'}},
+            'value': true
         }
     };
 
@@ -142,9 +131,9 @@ var loadViz = function(data) {
         .resize(true)
         .ui(uiBuilder());
 
-        if (group) {
+        if (group) 
             viz.color(group);
-        }
+
         viz.dev(true)
         viz.draw();
 };
