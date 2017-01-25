@@ -27,7 +27,7 @@ def before_request():
 
 def location_service(id_ibge):
     locations = {
-        1: "region",    #todo
+        1: "region",
         2: "state",
         6: "mesoregion",
         6: "microregion",
@@ -55,31 +55,38 @@ def wld_service(wld):
     return (wlds[len(wld)], wld)
 
 
-@mod.route('/<dataset>/<line>', defaults={'group': None})
-@mod.route('/<dataset>/<line>/<group>')
-def index(dataset, line, group):
-    values = request.args.getlist('value')
-    values = ','.join(values)
-
-    type = request.args.get('type')
-    product = request.args.get('product')
-    id_ibge = request.args.get('id_ibge')
-    wld = request.args.get('wld')
-
+@mod.route('/<dataset>/<line>/<y_value>')
+def index(dataset, line, y_value):
     filters = []
 
-    if type:
-        filters.append(('type', type))
+    for key, value in request.args.items():
+        if key not in ['depths', 'values', 'group'] and value:
+            filters.append((key, value[2:] if key == 'product' else value))
 
-    if wld:
-        filters.append(wld_service(wld))
+    group = request.args.get('group') or ''
 
-    if product:
-        filters.append(product_service(product))
+    params = {}
+    for param in ['depths', 'values']:
+        value = request.args.get(param)
+        params[param] = value if value and len(value.split()) > 1 else ''
 
-    if id_ibge:
-        filters.append(location_service(id_ibge))
+    if 'wld' in filters:
+        filters.append(wld_service(filters['wld']))
+
+    if 'product' in filters:
+        filters.append(product_service(filters['product']))
+
+    if 'id_ibge' in filters:
+        filters.append(location_service(filters['id_ibge']))
 
     filters = urllib.urlencode(filters)
 
-    return render_template('line/index.html', dataset=dataset, line=line, group=group, filters=filters, values=values, type=type, dictionary=json.dumps(dictionary()))
+    return render_template('line/index.html',
+                           dataset=dataset,
+                           line=line,
+                           y_value=y_value,
+                           group=group,
+                           depths=params['depths'],
+                           values=params['values'],
+                           filters=filters,
+                           dictionary=json.dumps(dictionary()))

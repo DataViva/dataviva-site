@@ -1,11 +1,13 @@
 var lineGraph = document.getElementById('lineGraph'),
     lang = document.documentElement.lang,
-    line = lineGraph.getAttribute("line"),
-    group = lineGraph.getAttribute("group"),
-    dataset = lineGraph.getAttribute("dataset"),
-    values = lineGraph.getAttribute("values").split(','),
-    value = values[0],
-    filters = lineGraph.getAttribute("filters");
+    line = lineGraph.getAttribute('line'),
+    yValue = lineGraph.getAttribute('yvalue'),
+    depths = lineGraph.getAttribute('depths') ? lineGraph.getAttribute('depths').split(' ') : [],
+    group = lineGraph.getAttribute('group') || depths[0] || '',
+    dataset = lineGraph.getAttribute('dataset'),
+    values = lineGraph.getAttribute('values').split(' ') || [],
+    filters = lineGraph.getAttribute('filters'),
+    type = /type=[a-z]*/.exec(filters.split('&'))[0].split('=')[1];
 
 // Temporarily translates text until dictionary is updated
 dataviva.dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
@@ -18,16 +20,17 @@ dataviva.dictionary['of'] = lang == 'en' ? 'of' : 'de';
 dataviva.dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
 dataviva.dictionary['country'] = lang == 'en' ? 'Country' : 'País';
 dataviva.dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
-dataviva.dictionary['Y Axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
+dataviva.dictionary['y_axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
+dataviva.dictionary['trade_value'] == lang == 'en' ? 'Trade Value' : 'Valor do Comércio';
 
 function string2date(dateString) {
-    dateString = dateString.split("-");
-    var month = (dateString.length == 2 && dateString[1] !== "0") ? dateString[1] : 1;
+    dateString = dateString.split('-');
+    var month = (dateString.length == 2 && dateString[1] !== '0') ? dateString[1] : 1;
     var year = dateString[0];
-    return new Date(month+"/01/"+year)
+    return new Date(month + '/01/' + year)
 }
 
-var buildData = function(responseApi){
+var buildData = function(responseApi, lineMetadata, groupMetadata){
 
     var getAttrByName = function(item, attr){
         var index = headers.indexOf(attr);
@@ -44,11 +47,11 @@ var buildData = function(responseApi){
             dataItem[header] = getAttrByName(item, header);
         });
 
-        if(dataItem[line] != "xx"){
-            dataItem["icon"] = "/static/img/icons/" + line + "/" + line + "_" + dataItem[line] + ".png";
-            if(dataItem[line] in line_metadata) dataItem[line] = line_metadata[dataItem[line]]['name_' + lang];
-            if(dataItem[group] in group_metadata) dataItem[group] = group_metadata[dataItem[group]]['name_' + lang];
-            dataItem['date'] = string2date(dataItem['year'] + "-" + dataItem['month'])
+        if(dataItem[group] != 'xx'){
+            dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
+            if(dataItem[line] in lineMetadata) dataItem[line] = lineMetadata[dataItem[line]]['name_' + lang];
+            if(dataItem[group] in groupMetadata) dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
+            dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
             data.push(dataItem);
         }
     });
@@ -59,19 +62,19 @@ var buildData = function(responseApi){
 var loadViz = function(data){
 
     var setYAxisLabel = function (type) {
-        if (!type) return "Trade Value [$ USD]" //add to dict
+        if (!type) return dataviva.dictionary['trade_value'] + ' [$ USD]'
         else if (type == 'export') return dataviva.dictionary['exports'] + ' [$ USD]'
         else if (type == 'import') return dataviva.dictionary['imports'] + ' [$ USD]'
     }
 
-    var uiBuilder = {
+    var uiComponents = {
         'scale': {
-            "label": dataviva.dictionary['scale'],
-            "type": "drop",
-            "value": [{"Linear": "linear"}, {"Log": "log"}],
-            "method": function(value, viz){
+            'label': dataviva.dictionary['scale'],
+            'type': 'drop',
+            'value': [{'Linear': 'linear'}, {'Log': 'log'}],
+            'method': function(value, viz){
                 viz.y({
-                    "scale": value
+                    'scale': value
                 }).draw();
             }
         },
@@ -80,8 +83,8 @@ var loadViz = function(data){
             'value': values,
             'method': function(value, viz){
                 viz.y({
-                    "value": value,
-                    "label": setYAxisLabel(type)
+                    'value': value,
+                    'label': setYAxisLabel(type)
                 }).draw();
             }
         },
@@ -90,83 +93,86 @@ var loadViz = function(data){
             'value': [{[dataviva.dictionary['year']]: 'year'}, {[dataviva.dictionary['month']]: 'date'}],
             'method': function(value, viz){
                 viz.x({
-                    "value": value,
-                    "label": dataviva.dictionary['month']
+                    'value': value,
+                    'label': dataviva.dictionary['month']
                 })
-                .time({"value": value})
+                .time({'value': value})
                 .draw();
             }
         }
     };
 
-    var uiComponents = [uiBuilder.scale, uiBuilder.yaxis];
-    if (dataset == 'secex') uiComponents.push(uiBuilder.xaxis);
+    var uiBuilder = [uiComponents.scale, uiComponents.yaxis];
+    if (dataset == 'secex') uiBuilder.push(uiComponents.xaxis);
 
     var titleBuilder = function() {
-        var title = 'line: ' + line;
-        if (group) {
-            title += ', group: ' + group;
+         return {
+            'value': 'Title',
+            'font': {'size': 22, 'align': 'left'},
+            'sub': {'font': {'align': 'left'}},
+            'total': {'font': {'align': 'left'}},
+            'value': true
         }
-
-        filters.split('&').forEach(function(item) {
-            var key = item.split('=')[0],
-                value = item.split('=')[1];
-            title += ', ' + key + ': ' + value;
-        });
-
-        return title;
     };
 
     var viz = d3plus.viz()
-        .container("#lineGraph")
-        .data({"value": data, "stroke": {"width": 2}})
-        .type("line")
-        .id([line, group])
-        .background("transparent")
-        .shape({"interpolate": "monotone"})
+        .container('#lineGraph')
+        .data({'value': data, 'stroke': {'width': 2}})
+        .type('line')
+        .id([group, line])
+        .background('transparent')
+        .shape({'interpolate': 'monotone'})
         .x({
-            "value": "year",
-            "label": {"font": {"size": 20}},
-            "ticks": {"font": {"size": 17}
+            'value': 'year',
+            'label': {'font': {'size': 20}},
+            'ticks': {'font': {'size': 17}
             }
         })
         .y({
-            "value": value,
-            "label": {"value": setYAxisLabel(type), "font": {"size": 20}},
-            "ticks": {"font": {"size": 17}}
+            'value': 'value',
+            'label': {'value': setYAxisLabel(type), 'font': {'size': 20}},
+            'ticks': {'font': {'size': 17}}
         })
         .footer(dataviva.dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large'})
-        .title({'total': true, 'value': titleBuilder()})
-        .ui(uiComponents)
-        .color(line)
-        .icon({"value": "icon", "style": "knockout"})
-        .time({"value": "year"})
-        .axes({"background": {"color": "#FFFFFF"}})
+        .title(titleBuilder())
+        .ui(uiBuilder)
+        .color(group)
+        .icon({'value': 'icon', 'style': 'knockout'})
+        .time({'value': 'year'})
+        .axes({'background': {'color': '#FFFFFF'}})
+        .dev(true)
         .draw()
 };
 
-var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading'] + "...");
+var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading'] + '...');
 
 $(document).ready(function(){
-    url = "http://api.staging.dataviva.info/" + dataset + "/year/" + line + '/' + group + ( filters ? "?" + filters : '');
-    if (dataset == 'secex') url = url.replace('/year', '/year/month');
+    var dimensions = [dataset, 'year', line];
+    if (group && depths.length && depths.indexOf(group) == -1 || !depths.length) dimensions.push(group);
+    depths.forEach(function(depth) {
+        if (depth != line) dimensions.push(depth);
+    });
 
-    ajaxQueue([
-        url,
-        "http://api.staging.dataviva.info/metadata/" + line,
-        "http://api.staging.dataviva.info/metadata/" + group
-    ],
+    var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
+        'http://api.staging.dataviva.info/metadata/' + line
+    ];
 
-    function(responses){
-        apiData = responses[0];
-        line_metadata = responses[1];
-        group_metadata = responses[2];
+    if (dataset == 'secex') urls[0] = urls[0].replace('/year', '/year/month');
 
-        var data = buildData(apiData);
-        data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
+    if (group) urls.push('http://api.staging.dataviva.info/metadata/' + group);
 
-        loading.hide();
-        loadViz(data);
-    })
+    ajaxQueue(
+        urls,
+        function(responses){
+            var apiData = responses[0],
+                lineMetadata = responses[1],
+                groupMetadata = group ? responses[2] : [];
+
+            var data = buildData(apiData, lineMetadata, groupMetadata);
+            data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
+
+            loading.hide();
+            loadViz(data);
+        })
 });

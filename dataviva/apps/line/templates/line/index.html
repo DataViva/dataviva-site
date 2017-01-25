@@ -31,16 +31,17 @@
 <body>
     <div id="lineGraph"
         class="embed-responsive responsive-wrapper"
-        line="{{line}}"
-        group="{{group}}"
-        dataset="{{dataset}}"
-        values="{{values}}"
-        filters="{{filters}}">
+        dataset="{{ dataset }}"
+        line="{{ line }}"
+        y_value="{{ y_value }}"
+        group="{{ group }}"
+        depths="{{ depths }}"
+        values="{{ values }}"
+        filters="{{ filters }}"
     </div>
     <div class="loading"></div>
 
     <script type="text/javascript">
-        var type = "{{type}}";
         dataviva.dictionary = {{dictionary|safe}};
     </script>
     <script type="text/javascript" src="/static/js/modules/line2.js"></script>
