@@ -94,7 +94,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-origin-tree_map'}}" data-parent="#imports-origin">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/secex/country/value?values=value+kg&group=continent&depths=continent+countrytype=import&year=2016{% if product.id %}&product={{ product.id }}{% endif %}{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/tree_map/secex/country/value?values=value+kg&group=continent&depths=continent+country&type=import&year=2016{% if product.id %}&product={{ product.id }}{% endif %}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-tree_map'}}" data-parent="#new-api-imports-origin">
                     TreeMap new API
                 </a>
