@@ -73,16 +73,16 @@ var textHelper = {
         'pt': 'pt_BR'
     },
     'average_monthly_wage': {
-        'en': "Average Monthly Wage",
-        'pt': "Salário Médio Mensal"  
+        'en': "Average Wage",
+        'pt': "Salário Médio"  
     },
     'kg': {
-        'en': 'Amount',
-        'pt': 'Quantidade'
+        'en': 'kg',
+        'pt': 'kg'
     },
     'value': {
-        'en': "Value",
-        'pt': "Valor"
+        'en': "US$",
+        'pt': "US$"
     },
     'kg_label': {
         'en': 'Amount [kg]',
@@ -101,12 +101,12 @@ var textHelper = {
         'pt': "Empregos"  
     },
     'kg_pct': {
-        'en': "% de kg",
-        'pt': "% of kg"  
+        'en': "% of kg",
+        'pt': "% de kg"  
     },
     'value_pct': {
-        'en': "% de US$",
-        'pt': "% of US$"  
+        'en': "% of US$",
+        'pt': "% de US$"  
     },
     'simples': {
         'en': "Simples",
@@ -122,7 +122,7 @@ var textHelper = {
     },
     'gender': {
         'en': "Gender",
-        'pt': "Salário Recebido"  
+        'pt': "Gênero"  
     },
     'ethnicity': {
         'en': "Ethnicity",
@@ -131,7 +131,28 @@ var textHelper = {
     'literacy': {
         'en': "Literacy",
         'pt': "Escolaridade"  
+    },
+    'month': {
+        'en': "Month",
+        'pt': "Mês"  
+    },
+    'port': {
+        'en': "Port",
+        'pt': "Porto"  
+    },
+    'legal_nature': {
+        'en': "Legal Nature",
+        'pt': "Natureza Jurídica"  
+    },
+    'size_establishment': {
+        'en': "Establishment Size ",
+        'pt': "Tamanho do Estabelecimento"  
+    },
+    'salary_mass': {
+        'en': "Salary Mass",
+        'pt': "Massa Salarial"  
     }
+
 };
 
 var formatHelper = {
