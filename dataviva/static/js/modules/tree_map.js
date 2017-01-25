@@ -45,7 +45,7 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
             dataItem[squares] = squaresMetadata[dataItem[squares]]['name_' + lang];
             if (group) {
-                if (group == 'section')
+                if (group == 'product_section')
                     dataItem['icon'] = '/static/img/icons/' + group + '/section_' + dataItem[group] + '.png';
                 dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
             }
@@ -104,7 +104,6 @@ var loadViz = function(data) {
 
     var titleBuilder = function() {
         return {
-            'total': true, 
             'value': 'Title',
             'font': {
                 'size': 22, 
@@ -118,7 +117,8 @@ var loadViz = function(data) {
             'total': {
                 'font': {
                     'align': 'left'
-                }
+                },
+                'value': true
             }
         }
     };
@@ -137,9 +137,9 @@ var loadViz = function(data) {
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large' })
         .title(titleBuilder())
-        .resize(true)
         .id(group ? [group, squares] : squares)
         .depth(1)
+        .resize(true)
         .ui(uiBuilder());
 
         if (group) {
@@ -155,15 +155,17 @@ $(document).ready(function() {
     var dimensions = [dataset, 'year', squares];
     if (group && depths.length && depths.indexOf(group) == -1 || !depths.length)
         dimensions.push(group);
-    if (depths.length)
-        dimensions = dimensions.concat(depths);
+    depths.forEach(function(depth) {
+        if (depth != squares)
+            dimensions.push(depth);
+    });
 
     var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
         'http://api.staging.dataviva.info/metadata/' + squares
     ];
 
     if (group)
-        urls.push('http://api.staging.dataviva.info/metadata/' + (group == 'section' ? 'product_section' : group));
+        urls.push('http://api.staging.dataviva.info/metadata/' + group);
 
     ajaxQueue(
         urls, 
