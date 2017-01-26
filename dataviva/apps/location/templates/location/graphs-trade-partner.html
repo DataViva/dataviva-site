@@ -18,7 +18,7 @@
                     TreeMap
                 </a>
 
-                <a href="/{{ g.locale }}/tree_map/secex/product/value?depths=product_section+product&values=value+kg&type=export&year=2016{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/tree_map/secex/product/value?depths=product_section+product&values=value+kg&type=export&year=2016{{ '&id_ibge=%s' % location.id_ibge if location }}{{ '&wld=%s' % trade_partner.id if trade_partner }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-products-tree_map'}}" data-parent="#new-api-exports-products">
                     TreeMap new API
                 </a>
@@ -147,7 +147,7 @@
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
             <iframe src="{% if not graph %} /{{ g.locale }}/embed/line/secex/{{location.id}}/all/all/balance/?time=year
-                         {% else %} /{{ g.locale }}/embed/{{graph.url}} {% endif %}"
+                         {% else %} /{{ g.locale }}/{{ graph.url }}{% endif %}"
                     name="graphs-frame-trade-partner"
                     id="graphs-frame-trade-partner"
                     class="embed-responsive-item" >
