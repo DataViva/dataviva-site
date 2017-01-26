@@ -67,6 +67,7 @@ def index(product_id, tab):
         ],
         'trade-partner': [
             'trade-balance-product-line',
+            'new-api-trade-balance-product-line',
             'exports-destination-tree_map',
             'new-api-exports-destination-tree_map',
             'new-api-exports-destination-line',

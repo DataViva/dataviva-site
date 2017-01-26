@@ -47,12 +47,7 @@ def product_service(product):
 
 
 def wld_service(wld):
-    wlds = {
-        2: "continent",
-        3: "country"
-    }
-
-    return (wlds[len(wld)], wld)
+    return ('country' if len(wld) == 3 else 'continent', wld)
 
 
 @mod.route('/<dataset>/<line>/<y_value>')

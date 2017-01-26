@@ -7,21 +7,14 @@ var lineGraph = document.getElementById('lineGraph'),
     dataset = lineGraph.getAttribute('dataset'),
     values = lineGraph.getAttribute('values').split(' ') || [],
     filters = lineGraph.getAttribute('filters'),
-    type = /type=[a-z]*/.exec(filters.split('&'))[0].split('=')[1];
+    type = /type=[a-z]*/.test(filters.split('&')) ? /type=[a-z]*/.exec(filters.split('&'))[0].split('=')[1] : 'balance';
 
 // Temporarily translates text until dictionary is updated
-dataviva.dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
-dataviva.dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';
-dataviva.dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
-dataviva.dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
-dataviva.dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
-dataviva.dictionary['by'] = lang == 'en' ? 'by' : 'por';
-dataviva.dictionary['of'] = lang == 'en' ? 'of' : 'de';
-dataviva.dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
-dataviva.dictionary['country'] = lang == 'en' ? 'Country' : 'País';
-dataviva.dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
 dataviva.dictionary['y_axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
-dataviva.dictionary['trade_value'] == lang == 'en' ? 'Trade Value' : 'Valor do Comércio';
+dataviva.dictionary['trade_value'] = lang == 'en' ? 'Trade Value' : 'Valor do Comércio';
+dataviva.dictionary['trade_balance'] = lang == 'en' ? 'Trade Balance' : 'Balança Comercial';
+dataviva.dictionary['exports_imports'] = lang == 'en' ? 'Exports/Imports' : 'Exportações/Importações';
+dataviva.dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
 
 function string2date(dateString) {
     dateString = dateString.split('-');
@@ -47,13 +40,20 @@ var buildData = function(responseApi, lineMetadata, groupMetadata){
             dataItem[header] = getAttrByName(item, header);
         });
 
-        if(dataItem[group] != 'xx'){
-            dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
-            if(dataItem[line] in lineMetadata) dataItem[line] = lineMetadata[dataItem[line]]['name_' + lang];
-            if(dataItem[group] in groupMetadata) dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
+        try{
+            if(lineMetadata) dataItem[line] = lineMetadata[dataItem[line]]['name_' + lang];
+
+            if(group){
+                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
+                dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
+            }
+
+            if(type == 'balance') dataItem['icon'] = '/static/img/icons/' + type + '/' + dataItem['type'] + '_val.png';
+
             dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
             data.push(dataItem);
         }
+        catch(e){};
     });
 
     return data;
@@ -61,10 +61,10 @@ var buildData = function(responseApi, lineMetadata, groupMetadata){
 
 var loadViz = function(data){
 
-    var setYAxisLabel = function (type) {
-        if (!type) return dataviva.dictionary['trade_value'] + ' [$ USD]'
-        else if (type == 'export') return dataviva.dictionary['exports'] + ' [$ USD]'
-        else if (type == 'import') return dataviva.dictionary['imports'] + ' [$ USD]'
+    var yAxisLabelBuilder = function (type) {
+        if (type == 'export') return dataviva.dictionary['exports'] + ' [$ USD]'
+        if (type == 'import') return dataviva.dictionary['imports'] + ' [$ USD]'
+        if (type == 'balance')return dataviva.dictionary['trade_value'] + ' [$ USD]'
     }
 
     var uiComponents = {
@@ -79,7 +79,7 @@ var loadViz = function(data){
             }
         },
         'yaxis': {
-            'label': dataviva.dictionary['Y Axis'],
+            'label': dataviva.dictionary['y_axis'],
             'value': values,
             'method': function(value, viz){
                 viz.y({
@@ -109,9 +109,8 @@ var loadViz = function(data){
          return {
             'value': 'Title',
             'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}},
-            'total': {'font': {'align': 'left'}},
-            'value': true
+            'sub': {'value': 'Subtitle', 'font': {'align': 'left'}},
+            'total': {'font': {'align': 'left'}}
         }
     };
 
@@ -119,7 +118,6 @@ var loadViz = function(data){
         .container('#lineGraph')
         .data({'value': data, 'stroke': {'width': 2}})
         .type('line')
-        .id([group, line])
         .background('transparent')
         .shape({'interpolate': 'monotone'})
         .x({
@@ -130,19 +128,22 @@ var loadViz = function(data){
         })
         .y({
             'value': 'value',
-            'label': {'value': setYAxisLabel(type), 'font': {'size': 20}},
+            'label': {'value': yAxisLabelBuilder(type), 'font': {'size': 20}},
             'ticks': {'font': {'size': 17}}
         })
         .footer(dataviva.dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large'})
         .title(titleBuilder())
         .ui(uiBuilder)
-        .color(group)
         .icon({'value': 'icon', 'style': 'knockout'})
         .time({'value': 'year'})
         .axes({'background': {'color': '#FFFFFF'}})
         .dev(true)
-        .draw()
+
+        if (group) viz.id([group, line]).color(group)
+        else viz.id(line).color(line)
+
+        viz.draw()
 };
 
 var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading'] + '...');
@@ -154,11 +155,11 @@ $(document).ready(function(){
         if (depth != line) dimensions.push(depth);
     });
 
-    var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
-        'http://api.staging.dataviva.info/metadata/' + line
-    ];
+    var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters];
 
     if (dataset == 'secex') urls[0] = urls[0].replace('/year', '/year/month');
+
+    if (line != 'type') urls.push('http://api.staging.dataviva.info/metadata/' + line);
 
     if (group) urls.push('http://api.staging.dataviva.info/metadata/' + group);
 
@@ -166,8 +167,8 @@ $(document).ready(function(){
         urls,
         function(responses){
             var apiData = responses[0],
-                lineMetadata = responses[1],
-                groupMetadata = group ? responses[2] : [];
+                lineMetadata = line != 'type' ? responses[1] : undefined,
+                groupMetadata = group ? responses[2] : undefined;
 
             var data = buildData(apiData, lineMetadata, groupMetadata);
             data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
