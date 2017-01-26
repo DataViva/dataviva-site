@@ -48,12 +48,15 @@ def product_service(product):
 
 
 def wld_service(wld):
-    wlds = {
-        2: "continent",
-        3: "country"
-    }
+   if wld.isdigit():
+       wld = '%03d' % int(wld)
 
-    return (wlds[len(wld)], wld)
+   wlds = {
+       2: "continent",
+       3: "country"
+   }
+
+   return (wlds[len(wld)], wld)
 
 
 @mod.route('/<dataset>/<squares>/<size>')
@@ -66,6 +69,8 @@ def index(dataset, squares, size):
                 filters.append(product_service(value))
             elif key == 'id_ibge':
                 filters.append(location_service(value))
+            elif key == 'wld':
+                filters.append(wld_service(value))
             else:
                 filters.append((key, value))
 

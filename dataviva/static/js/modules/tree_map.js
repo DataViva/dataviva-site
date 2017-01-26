@@ -1,18 +1,17 @@
 var tree_map = document.getElementById('tree_map')
     lang = document.documentElement.lang,
+    dataset = tree_map.getAttribute('dataset'),
     squares = tree_map.getAttribute('squares'),
     size = tree_map.getAttribute('size'),
-    depths = tree_map.getAttribute('depths') ? tree_map.getAttribute('depths').split(' ') : [],
-    group = tree_map.getAttribute('group') || depths[0] || '',
-    values = tree_map.getAttribute('values').split(' ') || [],
-    dataset = tree_map.getAttribute('dataset'),
     filters = tree_map.getAttribute('filters');
+    depths = tree_map.getAttribute('depths') ? tree_map.getAttribute('depths').split(' ') : [],
+    values = tree_map.getAttribute('values') ? tree_map.getAttribute('values').split(' ') : [],
+    group = tree_map.getAttribute('group') || depths[0] || '',
 
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Municipio';
-dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
-dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
+dictionary['product_section'] = lang == 'en' ? 'Section' : 'Seção';
 dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
 dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
 dictionary['by'] = lang == 'en' ? 'by' : 'por';
@@ -45,8 +44,8 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
             dataItem[squares] = squaresMetadata[dataItem[squares]]['name_' + lang];
             if (group) {
-                if (group == 'product_section')
-                    dataItem['icon'] = '/static/img/icons/' + group + '/section_' + dataItem[group] + '.png';
+                if (group == 'product_section' || group == 'continent')
+                    dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
                 dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
             }
 
@@ -107,8 +106,7 @@ var loadViz = function(data) {
             'value': 'Title',
             'font': {'size': 22, 'align': 'left'},
             'sub': {'font': {'align': 'left'}},
-            'total': {'font': {'align': 'left'}},
-            'value': true
+            'total': {'font': {'align': 'left'}}
         }
     };
 
