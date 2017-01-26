@@ -56,13 +56,19 @@ tabs = {
         'trade-partner': [
             'trade-balance-location-line',
             'exports-products-tree_map',
+            'new-api-exports-products-tree_map',
             'exports-products-stacked',
             'exports-destination-tree_map',
+            'new-api-exports-destination-tree_map',
             'exports-destination-stacked',
             'imports-products-tree_map',
+            'new-api-imports-products-tree_map',
             'imports-products-stacked',
             'imports-origin-tree_map',
+            'new-api-imports-origin-tree_map',
             'imports-origin-stacked',
+            'new-api-imports-port',
+            'new-api-exports-port',
         ],
 
         'education': [
@@ -150,7 +156,8 @@ def all(tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     profile = {}
 
