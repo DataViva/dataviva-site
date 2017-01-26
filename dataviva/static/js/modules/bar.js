@@ -15,29 +15,31 @@ var data = [],
 
 // TODO: Title creator
 var title = 'Title';
-var textHelper = {
-    'loading': {
-        'en': 'loading ...',
-        'pt': 'carregando ...'
-    }
-};
 
 var visualization;
 
-var uis = [
-    {
+var uis = [];
+
+if(x.length > 1){
+    uis.push({
         'method': 'x',
         'value': x,
-        'type': 'drop'
-    },
-    {
+        'type': 'drop',
+        'label': 'xaxis'
+    });
+}
+
+if(y.length > 1){
+    uis.push({
         'value': y,
         'type': 'drop',
+        'label': 'yaxis',
         'method': function(value, viz){
             viz.y(value).id(value).draw();
         }
-    }
-];
+    });
+}
+
 
 var textHelper = {
     'loading': {
@@ -108,7 +110,7 @@ var textHelper = {
         'en': "% of US$",
         'pt': "% de US$"  
     },
-    'simples': {
+    'simple': {
         'en': "Simples",
         'pt': "Simples"  
     },
@@ -151,6 +153,10 @@ var textHelper = {
     'salary_mass': {
         'en': "Salary Mass",
         'pt': "Massa Salarial"  
+    },
+    'time_resolution': {
+        'en': "Time Resolution",
+        'pt': "Resolução temporal"  
     }
 
 };
