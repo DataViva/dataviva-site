@@ -11,6 +11,8 @@ association_table = db.Table('news_publication_subject',
 class Publication(db.Model):
     # TODO - Alter publication.thumb column to db.Column(db.String(400))
     __tablename__ = 'news_publication'
+    __searchable__ = ['title', 'author', 'main_subject', 'text_call']
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
     author = db.Column(db.String(100))

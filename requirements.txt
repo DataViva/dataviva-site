@@ -17,6 +17,7 @@ Flask-Runner==2.1.1
 Flask-Script==0.5.3
 Flask-SQLAlchemy==0.16
 Flask-Testing==0.4.2
+Flask-WhooshAlchemy==0.56
 Flask-WTF==0.12
 futures==3.0.5
 hiredis==0.1.1
@@ -45,4 +46,6 @@ speaklater==1.3
 SQLAlchemy==0.8.1
 validators==0.10
 Werkzeug==0.11.3
+Whoosh==2.7.4
+WhooshAlchemy==0.1.4
 WTForms==2.0.2
