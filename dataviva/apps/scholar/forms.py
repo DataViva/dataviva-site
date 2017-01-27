@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, TextAreaField, validators, ValidationError
+from wtforms import TextField, TextAreaField, HiddenField, validators, ValidationError
 from dataviva.utils.custom_fields import TagsField
 from models import KeyWord, Article
 
@@ -47,7 +47,7 @@ class RegistrationForm(Form):
         ]
     )
 
-    abstract = TextAreaField('abstract', validators=[
+    abstract = HiddenField('abstract', validators=[
         validators.Required(u"Por favor, insira o resumo do artigo."),
         NumberOfWords(max=250)
     ])
