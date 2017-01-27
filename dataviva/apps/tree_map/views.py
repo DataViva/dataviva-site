@@ -28,7 +28,7 @@ def before_request():
 
 def location_service(id_ibge):
     locations = {
-        1: "region",    #todo
+        1: "region",
         2: "state",
         6: "mesoregion",
         6: "microregion",
@@ -40,23 +40,23 @@ def location_service(id_ibge):
 
 def product_service(product):
     if len(product) == 2:
-        return ('section', product[:2])
+        return ('product_section', product[:2])
     elif len(product) == 4:
-        return ('chapter', product[2:4])
+        return ('product_chapter', product[2:4])
     else:
         return ('product', product[2:])
 
 
 def wld_service(wld):
-   if wld.isdigit():
-       wld = '%03d' % int(wld)
+    if wld.isdigit():
+        wld = '%03d' % int(wld)
 
-   wlds = {
-       2: "continent",
-       3: "country"
-   }
+    wlds = {
+        2: "continent",
+        3: "country"
+    }
 
-   return (wlds[len(wld)], wld)
+    return (wlds[len(wld)], wld)
 
 
 @mod.route('/<dataset>/<squares>/<size>')
