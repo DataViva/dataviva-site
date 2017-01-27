@@ -45,6 +45,21 @@
                 </a>
             </div>
             {% endif %}
+            <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{% trans %}Port{% endtrans %}</a>
+            <div class="collapse" id="exports-port">
+                <a href="/{{ g.locale }}/line/secex/port?type=export&value=kg&value=value&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}" 
+                   target="graphs-frame-international-trade"
+                   class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
+                    {% trans %}Line{% endtrans %}
+                </a>
+                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&options=month&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}&location={{ location.id }}"
+                   target="graphs-frame-international-trade"
+                   class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+           
+
             <h4>{% trans %}Imports By{% endtrans %}</h4>
             <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="imports-municipality">
@@ -79,6 +94,20 @@
                 </a>
             </div>
             {% endif %}
+
+            <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{% trans %}Port{% endtrans %}</a>
+            <div class="collapse" id="imports-port">
+                <a href="/{{ g.locale }}/line/secex/port?type=import&value=kg&value=value&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}" 
+                   target="graphs-frame-international-trade"
+                   class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
+                    {% trans %}Line{% endtrans %}
+                </a>
+                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&options=month&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}&location={{ location.id }}" 
+                   target="graphs-frame-international-trade"
+                   class="list-group-item {{'selected' if graph.menu == 'import-port-bar'}}" data-parent="#import-port">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
     </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
