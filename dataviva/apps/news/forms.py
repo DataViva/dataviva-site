@@ -43,6 +43,10 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira uma imagem para a chamada.")
     ])
 
+    thumb_src = TextField('thumb_src', validators=[
+        validators.Length(max=400)
+    ])
+
     language = SelectField('language',
         choices=[('pt', 'Português'), ('en', 'Inglês')],
     )

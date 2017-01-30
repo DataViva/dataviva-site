@@ -286,6 +286,15 @@
   margin-left: 6px;
 }
 
+.blog .search-form-wrapper {
+  padding-top: 5px;
+}
+
+.blog .search-result {
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+
 @media (min-width: 500px) {
   .blog .visu-wrapper {
     height: 607px

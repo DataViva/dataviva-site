@@ -52,9 +52,14 @@ def active_publications_subjects(language):
 def index(page=1):
     publications_query = Publication.query.filter_by(active=True, language=g.locale)
     publications = []
-
+    search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     subject = request.args.get('subject')
-    if subject:
+
+    if search:
+        publications = publications_query.whoosh_search(search).order_by(
+            desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_publications = len(publications_query.whoosh_search(search).all())
+    elif subject:
         publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).order_by(
             desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_publications = publications_query.filter(
@@ -72,6 +77,7 @@ def index(page=1):
     return render_template('news/index.html',
                            publications=publications,
                            subjects=active_publications_subjects(g.locale),
+                           search_result=search,
                            pagination=pagination)
 
 
@@ -203,6 +209,9 @@ def create():
         publication.language = form.language.data
         publication.add_subjects(form.subject.data, form.language.data)
 
+        if form.thumb_src.data:
+            publication.thumb_src = form.thumb_src.data
+
         db.session.add(publication)
         db.session.flush()
 
@@ -265,6 +274,8 @@ def edit(id):
     form.thumb.data = publication.thumb
     form.subject.data = [subject.name for subject in publication.subjects]
     form.language.data = publication.language
+    if publication.thumb_src:
+        form.thumb_src.data = publication.thumb_src
 
     return render_template('news/edit.html', form=form, action=url_for('news.update', id=id))
 
@@ -289,6 +300,10 @@ def update(id):
         publication.show_home = form.show_home.data
         publication.author = form.author.data
         publication.language = form.language.data
+        if form.thumb_src.data:
+            publication.thumb_src = form.thumb_src.data
+        else:
+            publication.thumb_src = None
 
         num_subjects = len(publication.subjects)
         for i in range(0, num_subjects):

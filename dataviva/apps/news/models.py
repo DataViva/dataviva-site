@@ -11,12 +11,15 @@ association_table = db.Table('news_publication_subject',
 class Publication(db.Model):
     # TODO - Alter publication.thumb column to db.Column(db.String(400))
     __tablename__ = 'news_publication'
+    __searchable__ = ['title', 'author', 'main_subject', 'text_call']
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
     author = db.Column(db.String(100))
     text_call = db.Column(db.String(500))
     text_content = db.Column(db.Text(4194304))
     thumb = db.Column(db.Text(4194304))
+    thumb_src = db.Column(db.String(400))
     publish_date = db.Column(db.DateTime)
     last_modification = db.Column(db.DateTime)
     active = db.Column(db.Boolean)

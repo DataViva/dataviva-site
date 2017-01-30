@@ -1,11 +1,11 @@
 Babel==2.1.1
 beautifulsoup4==4.5.1
-blinker==1.4
-boto3==1.3.0
-botocore==1.4.12
+blinker==1.3
+boto3==1.4.3
+botocore==1.4.93
 click==6.6
 decorator==4.0.9
-docutils==0.12
+docutils==0.13.1
 Flask==0.10.1
 Flask-Babel==0.8
 Flask-Cache==0.13.1
@@ -17,6 +17,7 @@ Flask-Runner==2.1.1
 Flask-Script==0.5.3
 Flask-SQLAlchemy==0.16
 Flask-Testing==0.4.2
+Flask-WhooshAlchemy-Redux==0.7.1
 Flask-WTF==0.12
 futures==3.0.5
 hiredis==0.1.1
@@ -33,11 +34,12 @@ oauth2==1.9.0.post1
 oauth2client==3.0.0
 pyasn1==0.1.9
 pyasn1-modules==0.0.8
-python-dateutil==2.5.3
+python-dateutil==2.6.0
 pytz==2015.7
 redis==2.7.6
 requests==2.11.1
 rsa==3.4.2
+s3transfer==0.1.10
 selenium==2.44.0
 simplejson==3.3.1
 six==1.10.0
@@ -45,4 +47,5 @@ speaklater==1.3
 SQLAlchemy==0.8.1
 validators==0.10
 Werkzeug==0.11.3
+Whoosh==2.6.0
 WTForms==2.0.2

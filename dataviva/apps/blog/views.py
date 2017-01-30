@@ -14,6 +14,8 @@ from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
+import flask_whooshalchemy
+
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -52,9 +54,14 @@ def active_posts_subjects(language):
 def index(page=1):
     posts_query = Post.query.filter_by(active=True, language=g.locale)
     posts = []
-
+    search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     subject = request.args.get('subject')
-    if subject:
+    
+    if search:
+        posts = posts_query.whoosh_search(search).order_by(
+            desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_posts = len(posts_query.whoosh_search(search).all())
+    elif subject:
         posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).order_by(
             desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_posts = posts_query.filter(
@@ -72,6 +79,7 @@ def index(page=1):
     return render_template('blog/index.html',
                            posts=posts,
                            subjects=active_posts_subjects(g.locale),
+                           search_result=search,
                            pagination=pagination)
 
 
@@ -206,6 +214,9 @@ def create():
         post.language = form.language.data
         post.add_subjects(form.subject.data, form.language.data)
 
+        if form.thumb_src.data:
+            post.thumb_src = form.thumb_src.data
+
         db.session.add(post)
         db.session.flush()
 
@@ -258,6 +269,8 @@ def edit(id):
     form.publish_date.data = post.publish_date
     form.subject.data = [subject.name for subject in post.subjects]
     form.language.data = post.language
+    if post.thumb_src:
+        form.thumb_src.data = post.thumb_src
 
     return render_template('blog/edit.html',
                            form=form,
@@ -283,6 +296,10 @@ def update(id):
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
         post.language = form.language.data
+        if form.thumb_src.data:
+            post.thumb_src = form.thumb_src.data
+        else:
+            post.thumb_src = None
 
         num_subjects = len(post.subjects)
         for i in range(0, num_subjects):

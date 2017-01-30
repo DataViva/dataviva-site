@@ -5,11 +5,20 @@
 {% endblock %}
 
 {% block news_content %}
+    {% if search_result %}
+        <h2 class="search-result">
+        {% if pagination.total == 1 %}
+            1 {% trans %}result found for{% endtrans %} "{{ search_result }}"
+        {% else %}
+            {{ pagination.total }} {% trans %}results found for{% endtrans %} "{{ search_result }}"
+        {% endif %}
+        </h2>
+    {% endif %}
     <div class="publication-list">
         {% for publication in publications %}
             <div class="item publication">
                 <div class="thumbnail">
-                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
+                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.thumb_src if publication.thumb_src }}">
                         <img src="{{ publication.thumb }}" class="thumbnail img-responsive">
                     </a>
                     <span>{{ publication.main_subject }}</span>
