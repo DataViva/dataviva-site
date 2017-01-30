@@ -207,7 +207,10 @@ var loadViz = function(data){
         .x(currentX)
         .ui(uis)
         .format(formatHelper    )
-        .time('year')
+        .time({
+            'value': 'year',
+            'solo': [lastYear(data)]
+        })
         .aggs({
             'average_wage': 'mean'
         })
@@ -365,6 +368,17 @@ var updateSolo = function(data){
     solo = getTopCurrentYNames(groupedData);
 
     return solo;
+};
+
+var lastYear = function(data){
+    var year = 0;
+
+    data.forEach(function(item){
+        if(item.year > year)
+            year = item.year;
+    });
+
+    return year;
 };
 
 var loading = dataviva.ui.loading('.loading').text(textHelper.loading[lang]);
