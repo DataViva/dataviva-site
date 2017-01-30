@@ -45,6 +45,9 @@ def product_service(product):
         return ('product', product[2:])
 
 def wld_service(wld):
+    if wld.isdigit():
+        wld = '%03d' % int(wld)
+
     wlds = {
         2: "continent",
         3: "country"
