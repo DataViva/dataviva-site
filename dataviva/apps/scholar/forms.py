@@ -36,7 +36,7 @@ class RegistrationForm(Form):
 
     authors = TextField('authors', validators=[
         validators.Required(u"Por favor, insira o(s) autor(es) do artigo."),
-        validators.Length(max=100)
+        validators.Length(max=500)
     ])
 
     keywords = TagsField('keywords',

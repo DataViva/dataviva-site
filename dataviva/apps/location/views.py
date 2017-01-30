@@ -91,14 +91,49 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
+def _location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
     if bra_id == 'all':
         location = Wld.query.filter_by(id='sabra').first()
         location.id = 'all'
+        depth = None
+        id_ibge = None
     else:
         location = Bra.query.filter_by(id=bra_id).first()
-    return render_template('location/graphs-' + tab + '.html', location=location, graph=None)
+        depth = location_depth(bra_id)
+        id_ibge = _location_service(depth, location)
+
+    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None)
 
 
 @mod.route('/all', defaults={'tab': 'general'})
@@ -192,6 +227,18 @@ def index(bra_id, tab):
     is_municipality = location and len(location.id) == 9
     menu = request.args.get('menu')
     url = request.args.get('url')
+
+    if bra_id == 'all':
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = _location_service(depth, location)
+
+    if location:
+        location_id = location.id
+    else:
+        location_id = None
 
     graph = {}
     
@@ -395,4 +442,4 @@ def index(bra_id, tab):
 
     else:
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)

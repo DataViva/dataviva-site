@@ -26,12 +26,50 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
+def location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
 
 @mod.route('/<industry_id>/graphs/<tab>', methods=['POST'])
 def graphs(industry_id, tab):
     industry = Cnae.query.filter_by(id=industry_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location, graph=None)
+
+    bra_id = request.args.get('bra_id')
+    if not bra_id:
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = location_service(depth, location)
+
+    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location, graph=None, id_ibge=id_ibge)
 
 
 @mod.route('/<cnae_id>', defaults={'tab': 'general'})
@@ -51,6 +89,14 @@ def index(cnae_id, tab):
 
     industry = Cnae.query.filter_by(id=cnae_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
+
+    bra_id = request.args.get('bra_id')
+    if not bra_id:
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = location_service(depth, location)
 
     if location:
         location_id = location.id
@@ -159,4 +205,4 @@ def index(cnae_id, tab):
     if header['num_jobs'] is None or rais_max_year != header['year']:
         abort(404)
 
-    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph)
+    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph, id_ibge=id_ibge)

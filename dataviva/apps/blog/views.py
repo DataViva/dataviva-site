@@ -206,6 +206,9 @@ def create():
         post.language = form.language.data
         post.add_subjects(form.subject.data, form.language.data)
 
+        if form.thumb_src.data:
+            post.thumb_src = form.thumb_src.data
+
         db.session.add(post)
         db.session.flush()
 
@@ -258,6 +261,8 @@ def edit(id):
     form.publish_date.data = post.publish_date
     form.subject.data = [subject.name for subject in post.subjects]
     form.language.data = post.language
+    if post.thumb_src:
+        form.thumb_src.data = post.thumb_src
 
     return render_template('blog/edit.html',
                            form=form,
@@ -283,6 +288,10 @@ def update(id):
         post.publish_date = form.publish_date.data.strftime('%Y-%m-%d')
         post.show_home = form.show_home.data
         post.language = form.language.data
+        if form.thumb_src.data:
+            post.thumb_src = form.thumb_src.data
+        else:
+            post.thumb_src = None
 
         num_subjects = len(post.subjects)
         for i in range(0, num_subjects):

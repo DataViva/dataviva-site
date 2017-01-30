@@ -9,7 +9,7 @@
         {% for publication in publications %}
             <div class="item publication">
                 <div class="thumbnail">
-                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
+                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.thumb_src if publication.thumb_src }}">
                         <img src="{{ publication.thumb }}" class="thumbnail img-responsive">
                     </a>
                     <span>{{ publication.main_subject }}</span>

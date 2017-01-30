@@ -43,6 +43,17 @@
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
+            <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{%trans%}Port{%endtrans%}</a>
+            <div class="collapse" id="exports-port">
+                <a href="/{{ g.locale }}/line/secex/port?type=export&value=value&value=kg&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-destination">
+                    {%trans%}Line{%endtrans%}
+                </a>
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-destination">
+                    {%trans%}Bar{%endtrans%}
+                </a>
+            </div>
             <h4>{%trans%}Imports By{%endtrans%}</h4>
             {% if not is_municipality%}
             <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{%trans%}Municipality{%endtrans%}</a>
@@ -60,6 +71,7 @@
                     {%trans%}Stacked{%endtrans%}
                 </a>
             </div>
+            
             {% endif %}
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{%trans%}Origin{%endtrans%}</a>
             <div class="collapse" id="imports-origin">
@@ -74,6 +86,17 @@
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
                     {%trans%}Stacked{%endtrans%}
+                </a>
+            </div>
+            <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Port{%endtrans%}</a>
+            <div class="collapse" id="imports-port">
+                <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-destination">
+                    {%trans%}Line{%endtrans%}
+                </a>
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-destination">
+                    {%trans%}Bar{%endtrans%}
                 </a>
             </div>
         </div>
