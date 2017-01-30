@@ -208,6 +208,9 @@ var loadViz = function(data){
         .ui(uis)
         .format(formatHelper    )
         .time('year')
+        .aggs({
+            'average_wage': 'mean'
+        })
         .draw()
 };
 
