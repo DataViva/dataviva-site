@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-01-18 13:43-0200\n"
+"POT-Creation-Date: 2017-01-30 14:13-0200\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -364,7 +364,7 @@ msgid "Start a search"
 msgstr "Inicie uma Pesquisa"
 
 #: dataviva/apps/admin/templates/admin/index.html:65
-#: dataviva/apps/news/templates/news/_base.html:31
+#: dataviva/apps/news/templates/news/_base.html:35
 #: dataviva/apps/news/templates/news/admin.html:4
 #: dataviva/apps/news/templates/news/admin.html:8
 #: dataviva/apps/news/templates/news/edit.html:8
@@ -801,6 +801,17 @@ msgstr "Assuntos"
 msgid "All"
 msgstr "Tudo"
 
+#: dataviva/apps/blog/templates/blog/_base.html:40
+#: dataviva/apps/blog/templates/blog/_base.html:42
+#: dataviva/apps/news/templates/news/_base.html:40
+#: dataviva/apps/news/templates/news/_base.html:42
+#: dataviva/templates/site.html:30 dataviva/templates/about/crosswalk.html:10
+#: dataviva/templates/about/ask/index.html:27
+#: dataviva/templates/include/footer.html:19
+#: dataviva/translations/dictionary.py:635
+msgid "Search"
+msgstr "Pesquisar"
+
 #: dataviva/apps/blog/templates/blog/_form.html:11
 #: dataviva/apps/blog/templates/blog/admin.html:31
 #: dataviva/apps/calls/templates/calls/admin.html:31
@@ -853,17 +864,28 @@ msgid "Complete Edition"
 msgstr "Finalizar edição"
 
 #: dataviva/apps/blog/templates/blog/_form.html:79
+#: dataviva/apps/news/templates/news/_form.html:79
+msgid "Call Image Source"
+msgstr ""
+
+#: dataviva/apps/blog/templates/blog/_form.html:79
+#: dataviva/apps/news/templates/news/_form.html:79
+#, fuzzy
+msgid "optional"
+msgstr "População"
+
+#: dataviva/apps/blog/templates/blog/_form.html:84
 #: dataviva/apps/calls/templates/calls/new.html:7
-#: dataviva/apps/news/templates/news/_form.html:80
+#: dataviva/apps/news/templates/news/_form.html:84
 msgid "Call"
 msgstr "Chamada"
 
-#: dataviva/apps/blog/templates/blog/_form.html:86
-#: dataviva/apps/news/templates/news/_form.html:87
+#: dataviva/apps/blog/templates/blog/_form.html:91
+#: dataviva/apps/news/templates/news/_form.html:91
 msgid "Content"
 msgstr "Conteúdo"
 
-#: dataviva/apps/blog/templates/blog/_form.html:87
+#: dataviva/apps/blog/templates/blog/_form.html:92
 #: dataviva/apps/blog/templates/blog/admin.html:42
 #: dataviva/apps/blog/templates/blog/edit.html:10
 #: dataviva/apps/calls/templates/calls/admin.html:39
@@ -871,7 +893,7 @@ msgstr "Conteúdo"
 #: dataviva/apps/help/templates/help/_form.html:37
 #: dataviva/apps/help/templates/help/admin.html:40
 #: dataviva/apps/help/templates/help/edit.html:10
-#: dataviva/apps/news/templates/news/_form.html:88
+#: dataviva/apps/news/templates/news/_form.html:92
 #: dataviva/apps/news/templates/news/admin.html:41
 #: dataviva/apps/news/templates/news/edit.html:9
 #: dataviva/apps/search/templates/search/admin.html:40
@@ -881,18 +903,18 @@ msgstr "Conteúdo"
 msgid "Edit"
 msgstr "Editar"
 
-#: dataviva/apps/blog/templates/blog/_form.html:88
+#: dataviva/apps/blog/templates/blog/_form.html:93
 #: dataviva/apps/help/templates/help/_form.html:28
 #: dataviva/apps/help/templates/help/_form.html:38
-#: dataviva/apps/news/templates/news/_form.html:89
+#: dataviva/apps/news/templates/news/_form.html:93
 msgid "Preview "
 msgstr "Visualizar "
 
-#: dataviva/apps/blog/templates/blog/_form.html:96
+#: dataviva/apps/blog/templates/blog/_form.html:101
 #: dataviva/apps/calls/templates/calls/_form.html:21
 #: dataviva/apps/contact/templates/contact/index.html:67
 #: dataviva/apps/help/templates/help/_form.html:46
-#: dataviva/apps/news/templates/news/_form.html:97
+#: dataviva/apps/news/templates/news/_form.html:101
 #: dataviva/apps/search/templates/search/_form.html:177
 #: dataviva/templates/include/footer.html:68
 msgid "Send"
@@ -950,14 +972,24 @@ msgstr "Ativar"
 msgid "Deactivate"
 msgstr "Desativar"
 
-#: dataviva/apps/blog/templates/blog/index.html:22
-#: dataviva/apps/news/templates/news/index.html:22
+#: dataviva/apps/blog/templates/blog/index.html:11
+#: dataviva/apps/news/templates/news/index.html:11
+msgid "result found for"
+msgstr "resultado encontrado para"
+
+#: dataviva/apps/blog/templates/blog/index.html:13
+#: dataviva/apps/news/templates/news/index.html:13
+msgid "results found for"
+msgstr "resultados encontrados para"
+
+#: dataviva/apps/blog/templates/blog/index.html:31
+#: dataviva/apps/news/templates/news/index.html:31
 msgid "Continue reading"
 msgstr "Continue lendo"
 
-#: dataviva/apps/blog/templates/blog/index.html:23
+#: dataviva/apps/blog/templates/blog/index.html:32
 #: dataviva/apps/blog/templates/blog/show.html:22
-#: dataviva/apps/news/templates/news/index.html:23
+#: dataviva/apps/news/templates/news/index.html:32
 #: dataviva/apps/news/templates/news/show.html:22
 msgid "By"
 msgstr "por"
@@ -3621,13 +3653,6 @@ msgstr "Rankings"
 #: dataviva/templates/site.html:28
 msgid "Learn More"
 msgstr "Ajuda"
-
-#: dataviva/templates/site.html:30 dataviva/templates/about/crosswalk.html:10
-#: dataviva/templates/about/ask/index.html:27
-#: dataviva/templates/include/footer.html:19
-#: dataviva/translations/dictionary.py:635
-msgid "Search"
-msgstr "Pesquisar"
 
 #: dataviva/templates/site.html:52
 #: dataviva/templates/admin/admin_replies.html:3
