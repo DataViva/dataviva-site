@@ -22,10 +22,18 @@ var uis = [];
 
 if(x.length > 1){
     uis.push({
-        'method': 'x',
         'value': x,
         'type': 'drop',
-        'label': 'xaxis'
+        'label': 'xaxis',
+        'method': function(value, viz){
+            currentX = value;
+            viz.x(value)
+               .order({
+                    'value': currentX,
+                    'sort': 'asc'
+                })
+               .draw();
+        }
     });
 }
 
@@ -35,6 +43,7 @@ if(y.length > 1){
         'type': 'drop',
         'label': 'yaxis',
         'method': function(value, viz){
+            currentY = value;
             viz.y(value).id(value).draw();
         }
     });
@@ -213,6 +222,10 @@ var loadViz = function(data){
         })
         .aggs({
             'average_wage': 'mean'
+        })
+        .order({
+            'value': currentX,
+            'sort': 'asc'
         })
         .draw()
 };
