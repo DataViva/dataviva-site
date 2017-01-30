@@ -13,7 +13,7 @@ var titleHelper = {
         'en': 'Jobs in ',
         'pt': 'Empregos em '
     },
-    'average_monthly_wage': {
+    'average_wage': {
         'en': 'Average Monthly Wage in ',
         'pt': 'Salário Médio Mensal em '
     },
@@ -104,9 +104,9 @@ var formatTooltipData = function(tooltipData){
         tooltipData.male.jobs = d3plus.number.format(tooltipData.male.jobs);
         tooltipData.female.jobs = d3plus.number.format(tooltipData.female.jobs);
     }
-    else if(value == 'average_monthly_wage'){
-        tooltipData.male.average_monthly_wage = '$' + d3plus.number.format(tooltipData.male.average_monthly_wage) + ' USD';
-        tooltipData.female.average_monthly_wage = '$' + d3plus.number.format(tooltipData.female.average_monthly_wage) + ' USD';
+    else if(value == 'average_wage'){
+        tooltipData.male.average_wage = '$' + d3plus.number.format(tooltipData.male.average_wage) + ' USD';
+        tooltipData.female.average_wage = '$' + d3plus.number.format(tooltipData.female.average_wage) + ' USD';
     }
 
     return tooltipData;
@@ -225,7 +225,7 @@ $(document).ready(function(){
             dataItem["year"] = item[0]
             dataItem[polygon] = item[1]
             dataItem[label] = item[2]
-            dataItem["average_monthly_wage"] = +item[5]
+            dataItem["average_wage"] = +item[5]
             dataItem["jobs"] = item[6]
 
             data.push(dataItem);
@@ -265,7 +265,7 @@ $(document).ready(function(){
             .format({
                 "number": function(number, params) {
                     var formatted = d3plus.number.format(number, params);
-                    if (params.key === "average_monthly_wage") {
+                    if (params.key === "average_wage") {
                         return "$" + formatted + " USD";
                     }
                     else {
@@ -273,7 +273,7 @@ $(document).ready(function(){
                     }
                 },
                 "text": function(text, params) {
-                    if (text === "average_monthly_wage") {
+                    if (text === "average_wage") {
                         return lang == 'en' ? 'Average Monthly Wage' : 'Salário Médio Mensal';
                     }
                     else if(text === "jobs") {

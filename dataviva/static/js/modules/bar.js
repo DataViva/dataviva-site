@@ -46,7 +46,7 @@ var textHelper = {
         'en': 'loading ...',
         'pt': 'carregando ...'
     },
-    'average_monthly_wage': {
+    'average_wage': {
         'en': 'Salário Médio Mensal',
         'pt': 'Average Monthly Wage'
     },
@@ -74,7 +74,7 @@ var textHelper = {
         'en': 'en_US',
         'pt': 'pt_BR'
     },
-    'average_monthly_wage': {
+    'average_wage': {
         'en': "Average Wage",
         'pt': "Salário Médio"  
     },
@@ -94,7 +94,7 @@ var textHelper = {
         'en': "Value [$ USD]",
         'pt': "Valor [$ USD]"
     },
-    'average_monthly_wage_label': {
+    'average_wage_label': {
         'en': "Average Monthly Wage [$ USD]",
         'pt': "Salário Médio Mensal [$ USD]"  
     },
@@ -118,9 +118,9 @@ var textHelper = {
         'en': "Establishment Size",
         'pt': "Tamanho do Estabelecimento"  
     },
-    'wage_received': {
-        'en': "Wage Received",
-        'pt': "Salário Recebido"  
+    'wage': {
+        'en': "Salary Mass",
+        'pt': "Massa Salarial"   
     },
     'gender': {
         'en': "Gender",
@@ -150,10 +150,6 @@ var textHelper = {
         'en': "Establishment Size ",
         'pt': "Tamanho do Estabelecimento"  
     },
-    'salary_mass': {
-        'en': "Salary Mass",
-        'pt': "Massa Salarial"  
-    },
     'time_resolution': {
         'en': "Time Resolution",
         'pt': "Resolução Temporal"  
@@ -177,6 +173,12 @@ var formatHelper = {
 
         if (params.key == "kg" && params.labels == undefined)
             return formatted + " kg";
+
+        if (params.key == "wage" && params.labels == undefined)
+            return "$" + formatted + " BRL";
+
+        if (params.key == "average_wage" && params.labels == undefined)
+            return "$" + formatted + " BRL";
 
         if (params.key == "kg_pct" && params.labels == undefined)
             return parseFloat(formatted * 100).toFixed(1) + "%";
@@ -284,11 +286,11 @@ var addNameToData = function(data){
     });
 
     data = data.map(function(item){
-        if(item['wage_received'] != undefined)
-            item['wage_received'] = +item['wage_received'];
+        if(item['wage'] != undefined)
+            item['wage'] = +item['wage'];
 
-        if(item['average_monthly_wage'] != undefined)
-            item['average_monthly_wage'] = +item['average_monthly_wage'];
+        if(item['average_wage'] != undefined)
+            item['average_wage'] = +item['average_wage'];
 
         if(item['month'] != undefined)
             item['date'] = item['year'] + '/' + item['month'];
