@@ -52,9 +52,14 @@ def active_publications_subjects(language):
 def index(page=1):
     publications_query = Publication.query.filter_by(active=True, language=g.locale)
     publications = []
-
+    search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     subject = request.args.get('subject')
-    if subject:
+
+    if search:
+        publications = publications_query.whoosh_search(search).order_by(
+            desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_publications = len(publications_query.whoosh_search(search).all())
+    elif subject:
         publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).order_by(
             desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_publications = publications_query.filter(
@@ -72,6 +77,7 @@ def index(page=1):
     return render_template('news/index.html',
                            publications=publications,
                            subjects=active_publications_subjects(g.locale),
+                           search_result=search,
                            pagination=pagination)
 
 
