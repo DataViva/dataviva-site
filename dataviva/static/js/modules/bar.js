@@ -156,7 +156,7 @@ var textHelper = {
     },
     'time_resolution': {
         'en': "Time Resolution",
-        'pt': "Resolução temporal"  
+        'pt': "Resolução Temporal"  
     }
 
 };
@@ -299,6 +299,7 @@ var addNameToData = function(data){
     if(options.indexOf('month') != -1){
         uis.push({
             'method': 'time',
+            'label': 'time_resolution',
             'value': [
                 {'month': 'date'},
                 {'year': 'year'}
