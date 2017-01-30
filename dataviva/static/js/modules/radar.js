@@ -236,6 +236,9 @@ $(document).ready(function(){
         });
 
         data.map(function(item){
+            if(item.industry_section == '')
+                item.industry_section = '0';
+
             item["name"] = label_metadata[item[label]]["name_" + lang];
             item[polygon] = polygon_metadata[item[polygon]]["name_" + lang];
         });
