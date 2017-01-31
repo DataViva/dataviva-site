@@ -6,7 +6,7 @@ var tree_map = document.getElementById('tree_map')
     filters = tree_map.getAttribute('filters');
     depths = tree_map.getAttribute('depths') ? tree_map.getAttribute('depths').split(' ') : [],
     values = tree_map.getAttribute('values') ? tree_map.getAttribute('values').split(' ') : [],
-    group = tree_map.getAttribute('group') || depths[0] || '',
+    group = tree_map.getAttribute('group') || depths[0] || '';
 
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
@@ -21,6 +21,19 @@ dictionary['country'] = lang == 'en' ? 'Country' : 'País';
 dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
 dictionary['mesoregion'] = lang == 'en' ? 'Mesoregion' : 'Mesorregião';
 dictionary['microregion'] = lang == 'en' ? 'Microregion' : 'Microrregião';
+dictionary['region'] = lang == 'en' ? 'Region' : 'Região';
+dictionary['basic_values'] = lang == 'en' ? 'Basic Values' : 'Valores Básicos';
+dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
+dictionary['cnae_id'] = lang == 'en' ? 'CNAE ID' : 'ID CNAE';
+dictionary['wld_id'] = lang == 'en' ? 'WLD ID' : 'ID WLD';
+dictionary['hs_id'] = lang == 'en' ? 'HS ID' : 'ID HS';
+dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
+dictionary['tooltip_id'] = 'ID';
+dictionary['per'] = lang == 'en' ? 'per' : 'por';
+dictionary['exports_weight'] = lang == 'en' ? 'Export Weight' : 'Peso das Exportações';
+dictionary['imports_weight'] = lang == 'en' ? 'Import Weight' : 'Peso das Importações';
+dictionary['imports_per_weight'] = lang == 'en' ? 'Imports per kg' : 'Importações por peso';
+dictionary['exports_per_weight'] = lang == 'en' ? 'Exports per kg' : 'Exportações por peso';
 dictionary['kg'] = 'KG';
 
 
@@ -42,9 +55,18 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
                 dataItem[header] = getAttrByName(item, header);
             });
 
+            dataItem['tooltip_id'] = dataItem[squares];
+
+            depths.forEach(function(depth) {
+                if (depth != squares && depth != group) {
+                    dataItem[depth] = squaresMetadata[dataItem[squares]][depth]['name'];
+                }
+            });
+            
             dataItem[squares] = squaresMetadata[dataItem[squares]]['name_' + lang];
+            
             if (group) {
-                if (group == 'product_section' || group == 'continent')
+                if (group == 'product_section' || group == 'continent' || group == 'state')
                     dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
                 dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
             }
@@ -110,6 +132,113 @@ var loadViz = function(data) {
         }
     };
 
+    var tooltipBuilder = function() {
+        return {
+            'short': {
+                '': ['tooltip_id'],
+                [dictionary['basic_values']]: [size]
+            },
+            'long': {
+                '': ['tooltip_id'],
+                [dictionary['basic_values']]: values.length ? values : [size]
+            }
+        }
+    };
+
+    var getUrlArgs = function() {
+        var args = {};
+        window.location.search.split('?')[1].split('&').forEach(function(arg) {
+            args[arg.split('=')[0]] = arg.split('=')[1];
+        })
+        return args;
+    };
+
+    var formatHelper = function() {
+        var args = getUrlArgs();
+        var formatDict = {
+            'secex': {
+                'share': dictionary['market_share'],
+                'tooltip_id': {
+                    'municipality': dictionary['ibge_id'],
+                    'product': dictionary['hs_id'],
+                    'country': dictionary['wld_id']
+                },
+                'kg': {
+                    'export': dictionary['exports_weight'],
+                    'import': dictionary['exports_weight']
+                },
+                'value': {
+                    'export': dictionary['exports'],
+                    'import': dictionary['imports']
+                },
+                'value_per_kg': {
+                    'export': dictionary['exports_per_weight'],
+                    'import': dictionary['imports_per_weight']
+                }
+            }
+        };
+
+        return {
+            'text': function(text, key) { 
+                switch (text) {
+                    case 'tooltip_id':
+                        return formatDict[dataset][text][squares] || dictionary[text];
+                    case 'value':
+                    case 'kg':
+                    case 'value_per_kg':
+                        return formatDict[dataset][text][args['type']];
+                    default:
+                        return dictionary[text] || text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+                };
+                
+            },
+            'number': function(value, opts) {
+                var result;
+
+                if (value.toString().split('.')[0].length > 3) {
+
+                    var symbol = d3.formatPrefix(value).symbol;
+                    symbol = symbol.replace('G', 'B');
+                    
+                    value = d3.formatPrefix(value).scale(value);
+                    value = parseFloat(d3.format('.3g')(value));
+
+                    if (symbol && lang === 'pt') {
+                        var digit = parseFloat(value.toString().split('.')[0]);
+                        switch (symbol) {
+                            case 'T':
+                                symbol = digit < 2 ? ' Trilh\u00e3o' : ' Trilh\u00f5es';
+                                break;
+                            case 'B':
+                                symbol = digit < 2 ? ' Bilh\u00e3o' : ' Bilh\u00f5es';
+                                break;
+                            case 'M':
+                                symbol = digit < 2 ? ' Milh\u00e3o' : ' Milh\u00f5es';
+                                break;
+                            case 'k':
+                                symbol = ' Mil';
+                        }
+                    }
+
+                    result = value + symbol;
+                }
+                
+                switch (opts.key) {
+                    case 'share':
+                        result = d3.round(value, 2) + '%';
+                        break;
+                    case 'value':
+                        result = '$' + result + ' USD';
+                        break;
+                    case 'kg':
+                        result += ' kg';
+                };
+
+                return result;
+            }
+        }
+    };
+
     var viz = d3plus.viz()
         .container('#tree_map')
         .data(data)
@@ -118,19 +247,19 @@ var loadViz = function(data) {
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
         .time('year')
-        .format('pt_BR')
-        .icon({'value': 'icon', 'style': 'knockout'})
+        .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large' })
         .title(titleBuilder())
         .id(group ? [group, squares] : squares)
         .depth(1)
-        .resize(true)
+        .tooltip(tooltipBuilder())
+        .format(formatHelper())
         .ui(uiBuilder());
 
         if (group) 
-            viz.color(group);
+            viz.color({'scale':'category20', 'value': group});
 
         viz.dev(true)
         viz.draw();

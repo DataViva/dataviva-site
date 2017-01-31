@@ -30,8 +30,8 @@ def location_service(id_ibge):
     locations = {
         1: "region",
         2: "state",
-        6: "mesoregion",
-        6: "microregion",
+        4: "mesoregion",
+        5: "microregion",
         7: "municipality"
     }
 

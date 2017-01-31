@@ -18,7 +18,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-tree_map'}}" data-parent="#exports-municipality">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?values=value+kg&group=state&depths=state+municipality&type=export&year=2016{% if product.id %}&product={{ product.id }}{% endif %}{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?values=value+kg&group=state&depths=state+mesoregion+microregion+municipality&type=export&year=2016{% if product.id %}&product={{ product.id }}{% endif %}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-tree_map'}}" data-parent="#new-api-exports-municipality">
                     TreeMap new API
                 </a>
@@ -73,7 +73,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-municipality-tree_map'}}" data-parent="#imports-municipality">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?values=value+kg&group=state&depths=state+municipality&type=import&year=2016{% if product.id %}&product={{ product.id }}{% endif %}{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?values=value+kg&group=state&depths=state+mesoregion+microregion+municipality&type=import&year=2016{% if product.id %}&product={{ product.id }}{% endif %}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-tree_map'}}" data-parent="#new-api-imports-municipality">
                     TreeMap new API
                 </a>
