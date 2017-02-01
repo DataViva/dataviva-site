@@ -111,6 +111,16 @@ def handle_region_bra_id(bra_id):
         "5": "4"
     }[bra_id]
 
+def _location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
     if bra_id == 'all':
@@ -121,7 +131,7 @@ def graphs(bra_id, tab):
     else:
         location = Bra.query.filter_by(id=bra_id).first()
         depth = location_depth(bra_id)
-        id_ibge = str(location.id_ibge)[:6] if location.id_ibge else handle_region_bra_id(location.bra_id[0])
+        id_ibge = _location_service(depth, location)
 
     return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None)
 
@@ -217,6 +227,18 @@ def index(bra_id, tab):
     is_municipality = location and len(location.id) == 9
     menu = request.args.get('menu')
     url = request.args.get('url')
+
+    if bra_id == 'all':
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = _location_service(depth, location)
+
+    if location:
+        location_id = location.id
+    else:
+        location_id = None
 
     graph = {}
     
@@ -420,4 +442,4 @@ def index(bra_id, tab):
 
     else:
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)

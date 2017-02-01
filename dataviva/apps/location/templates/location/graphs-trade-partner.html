@@ -51,11 +51,11 @@
 
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{% trans %}Port{% endtrans %}</a>
             <div class="collapse" id="exports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=export&value=value&value=kg{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/line/secex/port?type=export&value=value&value=kg{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
                     {%trans%}Line{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=month,percentage{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=month,percentage{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
                     {% trans %}Bar{% endtrans %}
                 </a>
@@ -101,11 +101,11 @@
             {% endif %}
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{% trans %}Port{% endtrans %}</a>
             <div class="collapse" id="imports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-port">
                     {%trans%}Line{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=month,percentage{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=month,percentage{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-port">
                     {% trans %}Bar{% endtrans %}
                 </a>

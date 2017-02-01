@@ -52,7 +52,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
                     {% trans %}Line{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&options=month&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}&location={{ location.id }}"
+                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&options=month&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
                     {% trans %}Bar{% endtrans %}
@@ -102,7 +102,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
                     {% trans %}Line{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&options=month&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}&location={{ location.id }}" 
+                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&options=month&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}" 
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'import-port-bar'}}" data-parent="#import-port">
                     {% trans %}Bar{% endtrans %}

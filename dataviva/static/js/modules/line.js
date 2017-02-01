@@ -55,7 +55,7 @@ var textHelper = {
         'en': 'loading ...',
         'pt': 'carregando ...'
     },
-    'average_monthly_wage': {
+    'average_wage': {
         'en': 'Salário Médio Mensal',
         'pt': 'Average Monthly Wage'
     },
@@ -79,7 +79,7 @@ var textHelper = {
         'en': 'en_US',
         'pt': 'pt_BR'
     },
-    'average_monthly_wage': {
+    'average_wage': {
         'en': "Average Monthly Wage",
         'pt': "Salário Médio Mensal"  
     },
@@ -99,7 +99,7 @@ var textHelper = {
         'en': "Value [$ USD]",
         'pt': "Valor [$ USD]"
     },
-    'average_monthly_wage_label': {
+    'average_wage_label': {
         'en': "Average Monthly Wage [$ USD]",
         'pt': "Salário Médio Mensal [$ USD]"  
     },
@@ -284,8 +284,8 @@ var processData = function(data){
     });
 
     data = data.map(function(item){
-        item['average_monthly_wage'] = +item['average_monthly_wage'];
-        item['wage_received'] = +item['wage_received'];
+        item['average_wage'] = +item['average_wage'];
+        item['wage'] = +item['wage'];
 
         return item;
     });
