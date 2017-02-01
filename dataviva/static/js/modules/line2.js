@@ -59,12 +59,45 @@ var buildData = function(responseApi, lineMetadata, groupMetadata){
     return data;
 }
 
+var buildTradeBalanceData = function(data){
+
+    for (var i = 0; i < data.length; i++) {
+        var tradeBalance = {}
+        if (i < data.length -1){
+
+            try{
+                tradeBalance['date'] = string2date(data[i]['year'] + '-' + data[i]['month'])
+                tradeBalance['year'] = data[i]['year']
+                tradeBalance['month'] = data[i]['month']
+                tradeBalance['balance'] = 'Trade Value';
+
+                if(data[i]['year'] == data[i+1]['year'] && data[i]['month'] != data[i+1]['month']){
+                    if(data[i]['type'] == 'export') tradeBalance['value'] = data[i]['value'];
+                    else tradeBalance['value'] = -data[i]['value'];
+                }
+
+                if(data[i]['year'] == data[i+1]['year'] && data[i]['month'] == data[i+1]['month'] && data[i]['type'] != data[i+1]['type']){
+                    if(data[i]['type'] == 'export') tradeBalance['value'] = data[i]['value'] - data[i+1]['value'];
+                    else tradeBalance['value'] = data[i+1]['value'] - data[i]['value'];
+                    i++;
+                }
+
+                tradeBalanceData.push(tradeBalance);
+
+            }catch(e){
+                debugger;
+            }
+        }
+
+    };
+};
+
 var loadViz = function(data){
 
     var yAxisLabelBuilder = function (type) {
         if (type == 'export') return dataviva.dictionary['exports'] + ' [$ USD]'
         if (type == 'import') return dataviva.dictionary['imports'] + ' [$ USD]'
-        if (type == 'balance')return dataviva.dictionary['trade_value'] + ' [$ USD]'
+        if (type == 'balance') return dataviva.dictionary['trade_value'] + ' [$ USD]'
     }
 
     var uiComponents = {
@@ -84,7 +117,7 @@ var loadViz = function(data){
             'method': function(value, viz){
                 viz.y({
                     'value': value,
-                    'label': setYAxisLabel(type)
+                    'label': yAxisLabelBuilder(type)
                 }).draw();
             }
         },
@@ -99,11 +132,24 @@ var loadViz = function(data){
                 .time({'value': value})
                 .draw();
             }
+        },
+        'balance': {
+            'label': dataviva.dictionary['depth'],
+            'value': [{[dataviva.dictionary['exports_imports']]: 'type'}, {[dataviva.dictionary['trade_balance']]: 'value'}],
+            'method': function(value, viz){
+                if(value == 'type') viz.data(data).id(line);
+                else viz.data(tradeBalanceData).id('balance');
+                viz.draw();
+            }
         }
     };
 
     var uiBuilder = [uiComponents.scale, uiComponents.yaxis];
     if (dataset == 'secex') uiBuilder.push(uiComponents.xaxis);
+    if (type == 'balance'){
+        uiBuilder.push(uiComponents.balance);
+        uiBuilder.splice(uiBuilder.indexOf(uiComponents.yaxis), 1);
+    }
 
     var titleBuilder = function() {
          return {
@@ -116,7 +162,7 @@ var loadViz = function(data){
 
     var viz = d3plus.viz()
         .container('#lineGraph')
-        .data({'value': data, 'stroke': {'width': 2}})
+        .data({'value': data})
         .type('line')
         .background('transparent')
         .shape({'interpolate': 'monotone'})
@@ -136,6 +182,7 @@ var loadViz = function(data){
         .title(titleBuilder())
         .ui(uiBuilder)
         .icon({'value': 'icon', 'style': 'knockout'})
+        .legend({'order': {'sort': 'desc','value': 'size'}, "size": 25})
         .time({'value': 'year'})
         .axes({'background': {'color': '#FFFFFF'}})
         .dev(true)
@@ -147,6 +194,9 @@ var loadViz = function(data){
 };
 
 var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading'] + '...');
+
+var data = [];
+var tradeBalanceData = [];
 
 $(document).ready(function(){
     var dimensions = [dataset, 'year', line];
@@ -170,8 +220,10 @@ $(document).ready(function(){
                 lineMetadata = line != 'type' ? responses[1] : undefined,
                 groupMetadata = group ? responses[2] : undefined;
 
-            var data = buildData(apiData, lineMetadata, groupMetadata);
+            data = buildData(apiData, lineMetadata, groupMetadata);
             data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
+
+            if(type == 'balance') buildTradeBalanceData(data);
 
             loading.hide();
             loadViz(data);

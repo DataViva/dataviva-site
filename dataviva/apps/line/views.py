@@ -47,7 +47,15 @@ def product_service(product):
 
 
 def wld_service(wld):
-    return ('country' if len(wld) == 3 else 'continent', wld)
+    if wld.isdigit():
+        wld = '%03d' % int(wld)
+
+    wlds = {
+        2: "continent",
+        3: "country"
+    }
+
+    return (wlds[len(wld)], wld)
 
 
 @mod.route('/<dataset>/<line>/<y_value>')
@@ -56,7 +64,16 @@ def index(dataset, line, y_value):
 
     for key, value in request.args.items():
         if key not in ['depths', 'values', 'group'] and value:
-            filters.append((key, value[2:] if key == 'product' else value))
+            if key == 'product':
+                filters.append(product_service(value))
+            elif key == 'id_ibge':
+                filters.append(location_service(value))
+            elif key == 'wld':
+                filters.append(wld_service(value))
+            else:
+                filters.append((key, value))
+
+    filters = urllib.urlencode(filters)
 
     group = request.args.get('group') or ''
 
@@ -64,17 +81,6 @@ def index(dataset, line, y_value):
     for param in ['depths', 'values']:
         value = request.args.get(param)
         params[param] = value if value and len(value.split()) > 1 else ''
-
-    if 'wld' in filters:
-        filters.append(wld_service(filters['wld']))
-
-    if 'product' in filters:
-        filters.append(product_service(filters['product']))
-
-    if 'id_ibge' in filters:
-        filters.append(location_service(filters['id_ibge']))
-
-    filters = urllib.urlencode(filters)
 
     return render_template('line/index.html',
                            dataset=dataset,
