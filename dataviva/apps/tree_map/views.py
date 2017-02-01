@@ -64,7 +64,7 @@ def index(dataset, squares, size):
     filters = []
 
     for key, value in request.args.items():
-        if key not in ['depths', 'values', 'group'] and value:
+        if key not in ['depths', 'sizes', 'group'] and value:
             if key == 'product':
                 filters.append(product_service(value))
             elif key == 'id_ibge':
@@ -79,7 +79,7 @@ def index(dataset, squares, size):
     group = request.args.get('group') or ''
 
     params = {}
-    for param in ['depths', 'values']:
+    for param in ['depths', 'sizes']:
         value = request.args.get(param)
         params[param] = value if value and len(value.split()) > 1 else ''
 
@@ -89,6 +89,6 @@ def index(dataset, squares, size):
                            size=size,
                            group=group,
                            depths=params['depths'],
-                           values=params['values'],
+                           sizes=params['sizes'],
                            filters=filters,
                            dictionary=json.dumps(dictionary()))

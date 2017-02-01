@@ -5,7 +5,7 @@ var tree_map = document.getElementById('tree_map')
     size = tree_map.getAttribute('size'),
     filters = tree_map.getAttribute('filters');
     depths = tree_map.getAttribute('depths') ? tree_map.getAttribute('depths').split(' ') : [],
-    values = tree_map.getAttribute('values') ? tree_map.getAttribute('values').split(' ') : [],
+    sizes = tree_map.getAttribute('sizes') ? tree_map.getAttribute('sizes').split(' ') : [],
     group = tree_map.getAttribute('group') || depths[0] || '';
 
 // Temporarily translates text until dictionary is updated
@@ -104,7 +104,7 @@ var loadViz = function(data) {
 
     var sizeSelectorBuilder = function() {
         var options = [];
-        values.forEach(function(item) {
+        sizes.forEach(function(item) {
             options.push({[dictionary[item]]: item});
         });
         return {
@@ -118,7 +118,7 @@ var loadViz = function(data) {
         ui = [];
         if (depths.length)
             ui.push(depthSelectorBuilder());
-        if (values.length)
+        if (sizes.length)
             ui.push(sizeSelectorBuilder());
         return ui;
     }
@@ -140,7 +140,7 @@ var loadViz = function(data) {
             },
             'long': {
                 '': ['tooltip_id'],
-                [dictionary['basic_values']]: values.length ? values : [size]
+                [dictionary['basic_values']]: sizes.length ? sizes : [size]
             }
         }
     };
@@ -188,7 +188,7 @@ var loadViz = function(data) {
                     case 'value_per_kg':
                         return formatDict[dataset][text][args['type']];
                     default:
-                        return dictionary[text] || text.charAt(0).toUpperCase() + text.substr(1).toLowerCase();
+                        return dictionary[text] || text;
                 };
                 
             },
