@@ -33,6 +33,7 @@ if(x.length > 1){
                     'sort': 'asc'
                 })
                .draw();
+               totalOfCurrentX()
         }
     });
 }
@@ -48,7 +49,6 @@ if(y.length > 1){
         }
     });
 }
-
 
 var textHelper = {
     'loading': {
@@ -162,6 +162,10 @@ var textHelper = {
     'time_resolution': {
         'en': "Time Resolution",
         'pt': "Resolução Temporal"  
+    },
+    'total_of': {
+        'en': "Total in selected years: ",
+        'pt': "Total nos anos selecionados: ",
     }
 
 };
@@ -215,10 +219,13 @@ var loadViz = function(data){
         })
         .x(currentX)
         .ui(uis)
-        .format(formatHelper    )
+        .format(formatHelper)
         .time({
             'value': 'year',
-            'solo': [lastYear(data)]
+            'solo': {
+                'value': [lastYear(data)],
+                'callback': totalOfCurrentX
+            }
         })
         .aggs({
             'average_wage': 'mean'
@@ -228,6 +235,44 @@ var loadViz = function(data){
             'sort': 'asc'
         })
         .draw()
+};
+
+var getSelectedYears = function() {
+    var years = $('#timeline #labels [fill="rgba(68,68,68,1)"]').map(function (index, item){
+        return +item.innerHTML
+    })
+
+    years = Array.from(years);
+    years = years.filter(function(item){
+        return item > 0;
+    });
+    return years;
+}
+
+var totalOfCurrentX = function(){
+    if (currentX.endsWith('_pct')){
+        var years = getSelectedYears();
+        var key = currentX.slice(0, currentX.indexOf('_pct'));
+        var total = data.reduce(function(acc, item){
+            if(years.indexOf(item.year) != -1){
+                acc += item[key];
+            }
+            return acc;
+        }, 0);
+        visualization.title({
+            'sub': {
+                'value': textHelper["total_of"][lang] + ' ' +  formatHelper.number(total, {key: key}),
+                'font': {
+                    'align': 'left'
+                }
+            }
+        })
+    }
+    else{
+        visualization.title({
+            'sub': false
+        })
+    }
 };
 
 var buildData = function(responseApi){
