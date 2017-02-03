@@ -8,7 +8,7 @@ var lang = document.documentElement.lang,
     values = $("#line").attr("values").split(','),
     value = values[0],
     url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + line + ( filters ? "?" + filters : '');
+        dataset + "/year/" + ( options.indexOf('month') != -1 ? 'month/' : '' ) + line + ( filters ? "?" + filters : '');
 
 var titleHelper = {
     'import': {
@@ -113,6 +113,14 @@ var textHelper = {
     'data_provided_by': {
         'en': "Data provided by ",
         'pt': "Dados fornecidos por ",
+    },
+        'month': {
+        'en': "Month",
+        'pt': "Mês"  
+    },
+    'time_resolution': {
+        'en': "Time Resolution",
+        'pt': "Resolução Temporal"  
     }
 };
 
@@ -177,8 +185,26 @@ var uiHelper = {
             })
             .draw();
         }
+    },
+    'time_resolution': {
+        'label': 'time_resolution',
+        'value': [
+            {'year': 'year'},
+            {'month': 'date'}
+        ],
+        'method': function(value, viz){
+            viz.time(value).x(value).draw();
+        }
     }
 };
+var uis = [
+    uiHelper.scale,
+    uiHelper.yaxis
+];
+
+if(options.indexOf('month') != -1){
+    uis.push(uiHelper.time_resolution);
+}
 
 var currentY = line;
 var currentX = value;
@@ -276,14 +302,11 @@ var loadViz = function(data){
         .title(titleStyle)
         .title(title)
         .tooltip("type")
-        .ui([
-            uiHelper.scale,
-            uiHelper.yaxis
-        ])
+        .ui(uis)
         .footer({
             "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
         })
-        .time(textHelper.year[lang])
+        .time('year')
 
         if(options.indexOf('singlecolor') != -1){
             visualization.color({
@@ -364,7 +387,9 @@ var processData = function(data){
     data = data.map(function(item){
         if(item['month'] != undefined)
             item['date'] = item['year'] + '/' + item['month'];
-    }
+
+        return item;
+    });
 
     data = fillMissingDates(data);
 
@@ -380,8 +405,11 @@ var processData = function(data){
     });
 
     data = data.map(function(item){
-        item['average_wage'] = +item['average_wage'];
-        item['wage'] = +item['wage'];
+        if(item['average_wage'])
+            item['average_wage'] = +item['average_wage'];
+        
+        if(item['wage'])
+            item['wage'] = +item['wage'];
 
         return item;
     });
