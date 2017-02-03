@@ -247,13 +247,19 @@ var loadViz = function(data){
             'solo': solo
         })
         .background("transparent")
+        .font({
+            'size': 13
+        })
         .shape({
             "interpolate": "monotone"
         })
         .x({
             "value": 'year',
             'label': {
-                'value': textHelper.year[lang]
+                'value': textHelper.year[lang],
+                'font': {
+                    'size': 16
+                }
             }
         })
         .y({
@@ -261,10 +267,11 @@ var loadViz = function(data){
             "label": {
                 "value": textHelper[value + '_label'][lang],
                 "font": {
-                    "size": 20
+                    "size": 22
                 }
             }
         })
+
         .format(formatHelper)
         .title(titleStyle)
         .title(title)
