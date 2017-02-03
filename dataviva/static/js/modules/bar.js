@@ -166,6 +166,10 @@ var textHelper = {
     'total_of': {
         'en': "Total in selected years: ",
         'pt': "Total nos anos selecionados: ",
+    },
+    'data_provided_by': {
+        'en': "Data provided by ",
+        'pt': "Dados fornecidos por ",
     }
 
 };
@@ -233,6 +237,9 @@ var loadViz = function(data){
         .order({
             'value': currentX,
             'sort': 'asc'
+        })
+        .footer({
+            "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
         })
         .draw()
 };
