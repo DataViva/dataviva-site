@@ -234,7 +234,17 @@ var loadViz = function(data){
             'value': currentX,
             'sort': 'asc'
         })
-        .draw()
+
+
+        if(options.indexOf('singlecolor') != -1){
+            visualization.color({
+                "value" : function(d){
+                    return "#4d90fe";
+                }
+            }).legend(false)
+        }
+
+        visualization.draw()
 };
 
 var getSelectedYears = function() {

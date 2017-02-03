@@ -1,6 +1,7 @@
 var lang = document.documentElement.lang,
     dataset = $("#line").attr("dataset"),
     line = $("#line").attr("line"),
+    options = $("#line").attr("options").split(","),
     filters = $("#line").attr("filters"),
     values = $("#line").attr("values").split(','),
     value = values[0],
@@ -203,7 +204,16 @@ var loadViz = function(data){
             uiHelper.yaxis
         ])
         .time(textHelper.year[lang])
-        .draw()
+
+        if(options.indexOf('singlecolor') != -1){
+            visualization.color({
+                "value" : function(d){
+                    return "#4d90fe";
+                }
+            }).legend(false)
+        }
+
+        visualization.draw()
 };
 
 var buildData = function(responseApi){
