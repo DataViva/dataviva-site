@@ -1,4 +1,6 @@
 var lang = document.documentElement.lang,
+    solo = [],
+    data = [],
     dataset = $("#line").attr("dataset"),
     line = $("#line").attr("line"),
     options = $("#line").attr("options").split(","),
@@ -165,12 +167,73 @@ var uiHelper = {
         'label': textHelper.yaxis[lang],
         'value': values,
         'method': function(value, viz){
+            currentX = value;
+            solo = updateSolo(data)
             viz.y({
                 "value": value,
-                "label": textHelper[value + '_label'][lang]
-            }).draw();
+                "label": textHelper[value + '_label'][lang],
+            }).id({
+                'solo': solo
+            })
+            .draw();
         }
     }
+};
+
+var currentY = line;
+var currentX = value;
+var MAX_BARS = 10;
+
+var groupDataByCurrentY = function(data){
+    var sumByItem = {};
+
+    data.forEach(function(item){
+        if(sumByItem[item[currentY]] == undefined)
+            sumByItem[item[currentY]] = {
+                "sum": 0,
+                "name": item[currentY]
+            };
+
+        sumByItem[item[currentY]].sum += item[currentX];
+    });
+
+    var list = [];
+
+    for(var item in sumByItem){
+        list.push({
+            name: sumByItem[item].name,
+            sum: sumByItem[item].sum
+        });
+    }
+
+    return list;
+}
+
+var getTopCurrentYNames = function(groupedData){
+    var compare = function(a, b){
+        if(a.sum < b.sum)
+            return 1;
+        if(a.sum > b.sum)
+            return -1;
+
+        return 0;
+    }
+
+    var list = groupedData.sort(compare).slice(0, MAX_BARS);
+
+    var selected = list.map(function(item){
+        return item.name;
+    });
+
+    return selected;
+}
+
+var updateSolo = function(data){
+    var copiedData = (JSON.parse(JSON.stringify(data)));
+    var groupedData = groupDataByCurrentY(copiedData);
+    solo = getTopCurrentYNames(groupedData);
+
+    return solo;
 };
 
 var loadViz = function(data){
@@ -179,7 +242,10 @@ var loadViz = function(data){
         .data(data)
         .type("line")
         .text("name")
-        .id(line)
+        .id({
+            'value': line,
+            'solo': solo
+        })
         .background("transparent")
         .shape({
             "interpolate": "monotone"
@@ -230,7 +296,6 @@ var buildData = function(responseApi){
         return item[index];
     }
 
-    var data = [];
     var headers = responseApi.headers;
 
     responseApi.data.forEach(function(item){
@@ -324,6 +389,7 @@ $(document).ready(function(){
 
         var data = buildData(api);
         data = processData(data);
+        solo = updateSolo(data);
 
         loading.hide();
         loadViz(data);
