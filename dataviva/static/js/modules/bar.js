@@ -176,10 +176,13 @@ var textHelper = {
 
 var formatHelper = {
     "text": function(text, params) {
+        if(params.labels == false)
+            return text;
+
         if (textHelper[text] != undefined)
             return textHelper[text][lang];
 
-        return d3plus.string.title(text, params);
+        return d3plus.string.title(text, params); 
     },
 
     "number": function(number, params) {
