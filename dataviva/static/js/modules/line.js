@@ -107,6 +107,10 @@ var textHelper = {
     'jobs_label': {
         'en': "Jobs",
         'pt': "Empregos"  
+    },
+    'data_provided_by': {
+        'en': "Data provided by ",
+        'pt': "Dados fornecidos por ",
     }
 };
 
@@ -203,6 +207,9 @@ var loadViz = function(data){
             uiHelper.scale,
             uiHelper.yaxis
         ])
+        .footer({
+            "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
+        })
         .time(textHelper.year[lang])
 
         if(options.indexOf('singlecolor') != -1){
