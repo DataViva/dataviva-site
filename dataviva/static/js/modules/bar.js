@@ -213,15 +213,30 @@ var loadViz = function(data){
         .data(data)
         .background("transparent")
         .type("bar")
+        .font({
+            'size': 13
+        })
         .id({
             'value': currentY,
             'solo': solo
         })
         .y({
             "value": currentY,
-            "scale": "discrete" // Manually set Y-axis to be discrete
+            "scale": "discrete",
+            'label': {
+                'font': {
+                    'size': 22
+                }
+            }
         })
-        .x(currentX)
+        .x({
+            "value": currentX,
+            'label': {
+                'font': {
+                    'size': 16
+                }
+            }
+        })
         .ui(uis)
         .format(formatHelper)
         .time({
