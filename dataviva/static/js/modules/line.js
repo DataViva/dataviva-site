@@ -315,29 +315,31 @@ var FAKE_VALUE = 1;
 
 var processData = function(data){
 
-    var fillMissingYears = function(data){
-        var years = new Set();
+    var fillMissingDates = function(data){
+        var dates = new Set();
         var lines = new Set();
         var check = {};
 
         data.forEach(function(item){
-            years.add(item.year);
+            dates.add(item.date);
             lines.add(item[line]);
 
             if(check[item[line]] == undefined)
                 check[item[line]] = {};
 
-            check[item[line]][item.year] = true;
+            check[item[line]][item.date] = true;
         });
 
-        years = Array.from(years);
+        dates = Array.from(dates);
         lines = Array.from(lines);
 
-        years.forEach(function(year){
+        dates.forEach(function(date){
             lines.forEach(function(lineValue){
-                if(check[lineValue][year] == undefined){
+                if(check[lineValue][date] == undefined){
                     var dataItem = {};
-                    dataItem['year'] = year;
+                    dataItem['date'] = date;
+                    dataItem['year'] = date.split('/')[0];
+                    dataItem['month'] = date.split('/')[1];
                     dataItem[line] = lineValue;
 
                     values.forEach(function(value){
@@ -352,7 +354,12 @@ var processData = function(data){
         return data;
     };
 
-    data = fillMissingYears(data);
+    data = data.map(function(item){
+        if(item['month'] != undefined)
+            item['date'] = item['year'] + '/' + item['month'];
+    }
+
+    data = fillMissingDates(data);
 
     data = data.map(function(item){
         if(line_metadata[item[line]])
