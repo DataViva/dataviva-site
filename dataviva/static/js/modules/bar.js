@@ -171,8 +171,37 @@ var textHelper = {
         'en': "Data provided by ",
         'pt': "Dados fornecidos por ",
     }
-
 };
+
+
+var formatNumber = function(digit ){
+    var text = {};
+
+    text = {
+        'T': {
+            'en': digit < 2 ? 'Trillion' : 'Trillions',
+            'pt': digit < 2 ? 'Trilhão' : 'Trilhões'
+        },
+        'B': {
+            'en': digit < 2 ? 'Billion' : 'Billions',
+            'pt': digit < 2 ? 'Bilhão' : 'Bilhões'
+        },
+        'M': {
+            'en': digit < 2 ? 'Million' : 'Millions',
+            'pt': digit < 2 ? 'Bilhão' : 'Bilhões'
+        },
+        'k': {
+            'en': 'Thousand',
+            'pt': 'Mil'
+        }
+    }
+
+    if(text[digit.slice(-1)] == undefined)
+        return digit;
+
+    return  digit.slice(0, -1) + ' ' + text[digit.slice(-1)][lang];
+}
+
 
 var formatHelper = {
     "text": function(text, params) {
@@ -187,6 +216,8 @@ var formatHelper = {
 
     "number": function(number, params) {
         var formatted = d3plus.number.format(number, params);
+
+        formatted = formatNumber(formatted)
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
