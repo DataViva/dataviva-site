@@ -201,10 +201,10 @@ var formatHelper = {
             return "$" + formatted + " BRL";
 
         if (params.key == "kg_pct" && params.labels == undefined)
-            return parseFloat(formatted * 100).toFixed(1) + "%";
+            return parseFloat(formatted).toFixed(1) + "%";
 
         if (params.key == "value_pct" && params.labels == undefined)
-            return parseFloat(formatted * 100).toFixed(1) + "%";
+            return parseFloat(formatted).toFixed(1) + "%";
 
         return formatted;
     }
@@ -355,7 +355,7 @@ var addPercentage = function(data){
 
     data = data.map(function(item){
         x.forEach(function(xValue){
-            item[xValue + '_pct'] = item[xValue] / total[xValue][item.year];
+            item[xValue + '_pct'] = 100 * (item[xValue] / total[xValue][item.year]);
         });
 
         return item;
