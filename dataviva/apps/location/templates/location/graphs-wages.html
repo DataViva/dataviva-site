@@ -41,13 +41,6 @@
               </div>
             {% endif %}
 
-            <a href="#jobs-gender" class="list-group-item" data-toggle="collapse" data-parent="#jobs-gender">{% trans %}Gender{% endtrans %}</a>
-            <div class="collapse" id="jobs-gender">
-              <a href="/{{ g.locale }}/radar/rais/gender/industry_section/jobs?{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-              target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-gender-radar' }}"
-              data-parent="#jobs-gender">Radar</a>
-            </div>
-
             <a href="#jobs-demographic" class="list-group-item" data-toggle="collapse" data-parent="#jobs-demographic">{% trans %}Demographic Informations{% endtrans %}</a>
             <div class="collapse" id="jobs-demographic">
                 <a href="/{{g.locale}}/bar/rais/jobs/gender,ethnicity,literacy?{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
@@ -102,13 +95,6 @@
                  </a>
               </div>
             {% endif %}
-
-            <a href="#wages-gender" class="list-group-item" data-toggle="collapse" data-parent="#wages-gender">{% trans %}Gender{% endtrans %}</a>
-            <div class="collapse" id="wages-gender">
-                <a href="/{{ g.locale }}/radar/rais/gender/industry_section/average_wage?{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-gender-radar'}}"
-                data-parent="#wages-gender">Radar</a>
-            </div>
 
             <a href="#wages-demographic" class="list-group-item" data-toggle="collapse" data-parent="#wages-demographic">{% trans %}Demographic Informations{% endtrans %}</a>
             <div class="collapse" id="wages-demographic">
