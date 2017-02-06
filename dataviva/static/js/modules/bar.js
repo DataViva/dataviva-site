@@ -173,10 +173,9 @@ var textHelper = {
     }
 };
 
-
-var formatNumber = function(digit ){
+var formatNumber = function(digit){
     var text = {};
-
+    
     text = {
         'T': {
             'en': digit < 2 ? 'Trillion' : 'Trillions',
@@ -188,7 +187,7 @@ var formatNumber = function(digit ){
         },
         'M': {
             'en': digit < 2 ? 'Million' : 'Millions',
-            'pt': digit < 2 ? 'Bilhão' : 'Bilhões'
+            'pt': digit < 2 ? 'Milhão' : 'Milhões   '
         },
         'k': {
             'en': 'Thousand',

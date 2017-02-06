@@ -138,7 +138,7 @@ var formatNumber = function(digit ){
         },
         'M': {
             'en': digit < 2 ? 'Million' : 'Millions',
-            'pt': digit < 2 ? 'Bilhão' : 'Bilhões'
+            'pt': digit < 2 ? 'Milhão' : 'Milhões'
         },
         'k': {
             'en': 'Thousand',
