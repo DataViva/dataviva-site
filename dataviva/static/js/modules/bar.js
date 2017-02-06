@@ -127,6 +127,14 @@ var textHelper = {
         'en': "Establishment Size",
         'pt': "Tamanho do Estabelecimento"  
     },
+    'average_establishment_size': {
+        'en': "Average Establishment Size",
+        'pt': "Tamanho Médio do Estabelecimento"  
+    },
+    'establishment_count': {
+        'en': "Establishments",
+        'pt': "Estabelecimentos"  
+    },
     'wage': {
         'en': "Salary Mass",
         'pt': "Massa Salarial"   
@@ -178,27 +186,27 @@ var formatNumber = function(digit){
     
     text = {
         'T': {
-            'en': digit < 2 ? 'Trillion' : 'Trillions',
-            'pt': digit < 2 ? 'Trilhão' : 'Trilhões'
+            'en': digit < 2 ? ' Trillion' : ' Trillions',
+            'pt': digit < 2 ? ' Trilhão' : ' Trilhões'
         },
         'B': {
-            'en': digit < 2 ? 'Billion' : 'Billions',
-            'pt': digit < 2 ? 'Bilhão' : 'Bilhões'
+            'en': digit < 2 ? ' Billion' : ' Billions',
+            'pt': digit < 2 ? ' Bilhão' : ' Bilhões'
         },
         'M': {
-            'en': digit < 2 ? 'Million' : 'Millions',
-            'pt': digit < 2 ? 'Milhão' : 'Milhões   '
+            'en': digit < 2 ? ' Million' : ' Millions',
+            'pt': digit < 2 ? ' Milhão' : ' Milhões   '
         },
         'k': {
-            'en': 'Thousand',
-            'pt': 'Mil'
+            'en': ' Thousand',
+            'pt': ' Mil'
         }
     }
 
     if(text[digit.slice(-1)] == undefined)
         return digit;
 
-    return  digit.slice(0, -1) + ' ' + text[digit.slice(-1)][lang];
+    return  digit.slice(0, -1) + text[digit.slice(-1)][lang];
 }
 
 
@@ -328,7 +336,7 @@ var totalOfCurrentX = function(){
     
     visualization.title({
         'sub': {
-            'value': textHelper["total_of"][lang] + ' ' +  formatHelper.number(total, {key: key}),
+            'value': textHelper["total_of"][lang] + formatHelper.number(total, {key: key}),
             'font': {
                 'align': 'left'
             }

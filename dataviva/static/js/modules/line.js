@@ -223,7 +223,9 @@ var uiHelper = {
             {'month': 'date'}
         ],
         'method': function(value, viz){
-            viz.time(value).x(value).draw();
+            viz.time(value)
+                .x(value)
+                .draw();
         }
     }
 };
@@ -292,8 +294,10 @@ var updateSolo = function(data){
     return solo;
 };
 
+var visualization;
+
 var loadViz = function(data){
-    var visualization = d3plus.viz()
+    visualization = d3plus.viz()
         .container("#line")
         .data(data)
         .type("line")
