@@ -32,8 +32,8 @@ if(x.length > 1){
                     'value': currentX,
                     'sort': 'asc'
                 })
-               .draw();
                totalOfCurrentX()
+            viz.draw()
         }
     });
 }
@@ -171,8 +171,36 @@ var textHelper = {
         'en': "Data provided by ",
         'pt': "Dados fornecidos por ",
     }
-
 };
+
+var formatNumber = function(digit){
+    var text = {};
+    
+    text = {
+        'T': {
+            'en': digit < 2 ? 'Trillion' : 'Trillions',
+            'pt': digit < 2 ? 'Trilhão' : 'Trilhões'
+        },
+        'B': {
+            'en': digit < 2 ? 'Billion' : 'Billions',
+            'pt': digit < 2 ? 'Bilhão' : 'Bilhões'
+        },
+        'M': {
+            'en': digit < 2 ? 'Million' : 'Millions',
+            'pt': digit < 2 ? 'Milhão' : 'Milhões   '
+        },
+        'k': {
+            'en': 'Thousand',
+            'pt': 'Mil'
+        }
+    }
+
+    if(text[digit.slice(-1)] == undefined)
+        return digit;
+
+    return  digit.slice(0, -1) + ' ' + text[digit.slice(-1)][lang];
+}
+
 
 var formatHelper = {
     "text": function(text, params) {
@@ -187,6 +215,8 @@ var formatHelper = {
 
     "number": function(number, params) {
         var formatted = d3plus.number.format(number, params);
+
+        formatted = formatNumber(formatted)
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
@@ -268,7 +298,7 @@ var loadViz = function(data){
                 }
             }).legend(false)
         }
-
+        totalOfCurrentX();
         visualization.draw()
 };
 
@@ -285,29 +315,25 @@ var getSelectedYears = function() {
 }
 
 var totalOfCurrentX = function(){
-    if (currentX.endsWith('_pct')){
-        var years = getSelectedYears();
-        var key = currentX.slice(0, currentX.indexOf('_pct'));
-        var total = data.reduce(function(acc, item){
-            if(years.indexOf(item.year) != -1){
-                acc += item[key];
+    var years = getSelectedYears();
+    years = years.length == 0 ? [lastYear(data)] : years;
+
+    var key = currentX.endsWith('_pct') ? currentX.slice(0, currentX.indexOf('_pct')) : currentX;
+    var total = data.reduce(function(acc, item){
+        if(years.indexOf(item.year) != -1){
+            acc += item[key];
+        }
+        return acc;
+    }, 0);
+    
+    visualization.title({
+        'sub': {
+            'value': textHelper["total_of"][lang] + ' ' +  formatHelper.number(total, {key: key}),
+            'font': {
+                'align': 'left'
             }
-            return acc;
-        }, 0);
-        visualization.title({
-            'sub': {
-                'value': textHelper["total_of"][lang] + ' ' +  formatHelper.number(total, {key: key}),
-                'font': {
-                    'align': 'left'
-                }
-            }
-        })
-    }
-    else{
-        visualization.title({
-            'sub': false
-        })
-    }
+        }
+    })
 };
 
 var buildData = function(responseApi){
@@ -372,7 +398,6 @@ var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
             if(metadatas[itemY][item[itemY]] == undefined){
-                // console.log("Not found name to: " + itemY + ' - ' + item[itemY]);
                 item[itemY] = 'NOT FOUND!';
             }
             else{
