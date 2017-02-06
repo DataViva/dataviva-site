@@ -32,8 +32,8 @@ if(x.length > 1){
                     'value': currentX,
                     'sort': 'asc'
                 })
-               .draw();
                totalOfCurrentX()
+            viz.draw()
         }
     });
 }
@@ -268,7 +268,7 @@ var loadViz = function(data){
                 }
             }).legend(false)
         }
-
+        totalOfCurrentX();
         visualization.draw()
 };
 
@@ -285,29 +285,25 @@ var getSelectedYears = function() {
 }
 
 var totalOfCurrentX = function(){
-    if (currentX.endsWith('_pct')){
-        var years = getSelectedYears();
-        var key = currentX.slice(0, currentX.indexOf('_pct'));
-        var total = data.reduce(function(acc, item){
-            if(years.indexOf(item.year) != -1){
-                acc += item[key];
+    var years = getSelectedYears();
+    years = years.length == 0 ? [lastYear(data)] : years;
+
+    var key = currentX.endsWith('_pct') ? currentX.slice(0, currentX.indexOf('_pct')) : currentX;
+    var total = data.reduce(function(acc, item){
+        if(years.indexOf(item.year) != -1){
+            acc += item[key];
+        }
+        return acc;
+    }, 0);
+    
+    visualization.title({
+        'sub': {
+            'value': textHelper["total_of"][lang] + ' ' +  formatHelper.number(total, {key: key}),
+            'font': {
+                'align': 'left'
             }
-            return acc;
-        }, 0);
-        visualization.title({
-            'sub': {
-                'value': textHelper["total_of"][lang] + ' ' +  formatHelper.number(total, {key: key}),
-                'font': {
-                    'align': 'left'
-                }
-            }
-        })
-    }
-    else{
-        visualization.title({
-            'sub': false
-        })
-    }
+        }
+    })
 };
 
 var buildData = function(responseApi){
@@ -372,7 +368,6 @@ var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
             if(metadatas[itemY][item[itemY]] == undefined){
-                // console.log("Not found name to: " + itemY + ' - ' + item[itemY]);
                 item[itemY] = 'NOT FOUND!';
             }
             else{
