@@ -51,7 +51,7 @@
 
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{% trans %}Port{% endtrans %}</a>
             <div class="collapse" id="exports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=export&value=value&value=kg{{ '&id_ibge=%s' % id_ibge if id_ibge}}&options=singlecolor"
+                <a href="/{{ g.locale }}/line/secex/port?type=export&value=value&value=kg{{ '&id_ibge=%s' % id_ibge if id_ibge}}&options=singlecolor,month"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
                     {%trans%}Line{%endtrans%}
                 </a>
@@ -101,7 +101,7 @@
             {% endif %}
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{% trans %}Port{% endtrans %}</a>
             <div class="collapse" id="imports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg{{ '&id_ibge=%s' % id_ibge if id_ibge}}&options=singlecolor"
+                <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg{{ '&id_ibge=%s' % id_ibge if id_ibge}}&options=singlecolor,month"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-port">
                     {%trans%}Line{%endtrans%}
                 </a>
