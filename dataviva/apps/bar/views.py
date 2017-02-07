@@ -28,8 +28,8 @@ def location_service(id_ibge):
     locations = {
         1: "region",    #todo
         2: "state",
-        6: "mesoregion",
-        6: "microregion",
+        4: "mesoregion",
+        5: "microregion",
         7: "municipality"
     }
 
@@ -38,13 +38,16 @@ def location_service(id_ibge):
 
 def product_service(product):
     if len(product) == 2:
-        return ('section', product[:2])
+        return ('product_section', product[:2])
     elif len(product) == 4:
-        return ('chapter', product[2:4])
+        return ('product_chapter', product[2:4])
     else:
         return ('product', product[2:])
 
 def wld_service(wld):
+    if wld.isdigit():
+        wld = '%03d' % int(wld)
+
     wlds = {
         2: "continent",
         3: "country"
@@ -55,18 +58,18 @@ def wld_service(wld):
 def occupation_service(occupation):
     occupations = {
         1: "occupation_group",
-        4: "occupation"
+        4: "occupation_family"
     }
 
     return (occupations[len(occupation)], occupation)
 
 def industry_service(industry):
     if len(industry) == 1:
-        return ('cnae_section', industry)
+        return ('industry_section', industry)
     elif len(industry) == 3:
-        return ('cnae_division', industry[1:])
+        return ('industry_division', industry[1:])
     else:
-        return ('cnae', industry[1:])
+        return ('industry_class', industry[1:])
 
 
 @mod.route('/<dataset>/<x>/<y>')

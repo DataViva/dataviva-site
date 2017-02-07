@@ -15,36 +15,47 @@ var data = [],
 
 // TODO: Title creator
 var title = 'Title';
-var textHelper = {
-    'loading': {
-        'en': 'loading ...',
-        'pt': 'carregando ...'
-    }
-};
 
 var visualization;
 
-var uis = [
-    {
-        'method': 'x',
+var uis = [];
+
+if(x.length > 1){
+    uis.push({
         'value': x,
-        'type': 'drop'
-    },
-    {
+        'type': 'drop',
+        'label': 'xaxis',
+        'method': function(value, viz){
+            currentX = value;
+            viz.x(value)
+               .order({
+                    'value': currentX,
+                    'sort': 'asc'
+                })
+               .draw();
+        }
+    });
+}
+
+if(y.length > 1){
+    uis.push({
         'value': y,
         'type': 'drop',
+        'label': 'yaxis',
         'method': function(value, viz){
+            currentY = value;
             viz.y(value).id(value).draw();
         }
-    }
-];
+    });
+}
+
 
 var textHelper = {
     'loading': {
         'en': 'loading ...',
         'pt': 'carregando ...'
     },
-    'average_monthly_wage': {
+    'average_wage': {
         'en': 'Salário Médio Mensal',
         'pt': 'Average Monthly Wage'
     },
@@ -72,17 +83,17 @@ var textHelper = {
         'en': 'en_US',
         'pt': 'pt_BR'
     },
-    'average_monthly_wage': {
-        'en': "Average Monthly Wage",
-        'pt': "Salário Médio Mensal"  
+    'average_wage': {
+        'en': "Average Wage",
+        'pt': "Salário Médio"  
     },
     'kg': {
-        'en': 'Amount',
-        'pt': 'Quantidade'
+        'en': 'kg',
+        'pt': 'kg'
     },
     'value': {
-        'en': "Value",
-        'pt': "Valor"
+        'en': "US$",
+        'pt': "US$"
     },
     'kg_label': {
         'en': 'Amount [kg]',
@@ -92,7 +103,7 @@ var textHelper = {
         'en': "Value [$ USD]",
         'pt': "Valor [$ USD]"
     },
-    'average_monthly_wage_label': {
+    'average_wage_label': {
         'en': "Average Monthly Wage [$ USD]",
         'pt': "Salário Médio Mensal [$ USD]"  
     },
@@ -101,14 +112,14 @@ var textHelper = {
         'pt': "Empregos"  
     },
     'kg_pct': {
-        'en': "% de kg",
-        'pt': "% of kg"  
+        'en': "% of kg",
+        'pt': "% de kg"  
     },
     'value_pct': {
-        'en': "% de US$",
-        'pt': "% of US$"  
+        'en': "% of US$",
+        'pt': "% de US$"  
     },
-    'simples': {
+    'simple': {
         'en': "Simples",
         'pt': "Simples"  
     },
@@ -116,13 +127,13 @@ var textHelper = {
         'en': "Establishment Size",
         'pt': "Tamanho do Estabelecimento"  
     },
-    'wage_received': {
-        'en': "Wage Received",
-        'pt': "Salário Recebido"  
+    'wage': {
+        'en': "Salary Mass",
+        'pt': "Massa Salarial"   
     },
     'gender': {
         'en': "Gender",
-        'pt': "Salário Recebido"  
+        'pt': "Gênero"  
     },
     'ethnicity': {
         'en': "Ethnicity",
@@ -131,7 +142,28 @@ var textHelper = {
     'literacy': {
         'en': "Literacy",
         'pt': "Escolaridade"  
+    },
+    'month': {
+        'en': "Month",
+        'pt': "Mês"  
+    },
+    'port': {
+        'en': "Port",
+        'pt': "Porto"  
+    },
+    'legal_nature': {
+        'en': "Legal Nature",
+        'pt': "Natureza Jurídica"  
+    },
+    'size_establishment': {
+        'en': "Establishment Size ",
+        'pt': "Tamanho do Estabelecimento"  
+    },
+    'time_resolution': {
+        'en': "Time Resolution",
+        'pt': "Resolução Temporal"  
     }
+
 };
 
 var formatHelper = {
@@ -150,6 +182,12 @@ var formatHelper = {
 
         if (params.key == "kg" && params.labels == undefined)
             return formatted + " kg";
+
+        if (params.key == "wage" && params.labels == undefined)
+            return "$" + formatted + " BRL";
+
+        if (params.key == "average_wage" && params.labels == undefined)
+            return "$" + formatted + " BRL";
 
         if (params.key == "kg_pct" && params.labels == undefined)
             return parseFloat(formatted * 100).toFixed(1) + "%";
@@ -178,7 +216,17 @@ var loadViz = function(data){
         .x(currentX)
         .ui(uis)
         .format(formatHelper    )
-        .time('year')
+        .time({
+            'value': 'year',
+            'solo': [lastYear(data)]
+        })
+        .aggs({
+            'average_wage': 'mean'
+        })
+        .order({
+            'value': currentX,
+            'sort': 'asc'
+        })
         .draw()
 };
 
@@ -257,11 +305,11 @@ var addNameToData = function(data){
     });
 
     data = data.map(function(item){
-        if(item['wage_received'] != undefined)
-            item['wage_received'] = +item['wage_received'];
+        if(item['wage'] != undefined)
+            item['wage'] = +item['wage'];
 
-        if(item['average_monthly_wage'] != undefined)
-            item['average_monthly_wage'] = +item['average_monthly_wage'];
+        if(item['average_wage'] != undefined)
+            item['average_wage'] = +item['average_wage'];
 
         if(item['month'] != undefined)
             item['date'] = item['year'] + '/' + item['month'];
@@ -272,6 +320,7 @@ var addNameToData = function(data){
     if(options.indexOf('month') != -1){
         uis.push({
             'method': 'time',
+            'label': 'time_resolution',
             'value': [
                 {'month': 'date'},
                 {'year': 'year'}
@@ -332,6 +381,17 @@ var updateSolo = function(data){
     solo = getTopCurrentYNames(groupedData);
 
     return solo;
+};
+
+var lastYear = function(data){
+    var year = 0;
+
+    data.forEach(function(item){
+        if(item.year > year)
+            year = item.year;
+    });
+
+    return year;
 };
 
 var loading = dataviva.ui.loading('.loading').text(textHelper.loading[lang]);

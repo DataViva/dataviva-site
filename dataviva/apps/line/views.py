@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request, abort
+from flask import Blueprint, render_template, g, request, json
 from dataviva.apps.general.views import get_locale
+from dataviva.translations.dictionary import dictionary
 import urllib
 
 mod = Blueprint('line', __name__,
@@ -26,7 +27,7 @@ def before_request():
 
 def location_service(id_ibge):
     locations = {
-        1: "region",    #todo
+        1: "region",
         2: "state",
         6: "mesoregion",
         6: "microregion",
@@ -44,7 +45,11 @@ def product_service(product):
     else:
         return ('product', product[2:])
 
+
 def wld_service(wld):
+    if wld.isdigit():
+        wld = '%03d' % int(wld)
+
     wlds = {
         2: "continent",
         3: "country"
@@ -53,30 +58,36 @@ def wld_service(wld):
     return (wlds[len(wld)], wld)
 
 
-@mod.route('/<dataset>/<line>')
-def index(dataset, line):
-    values = request.args.getlist('value')
-    values = ','.join(values)
-
-    type = request.args.get('type')
-    product = request.args.get('product')
-    id_ibge = request.args.get('id_ibge')
-    wld = request.args.get('wld')
-
+@mod.route('/<dataset>/<line>/<y_value>')
+def index(dataset, line, y_value):
     filters = []
 
-    if type:
-        filters.append(('type', type))
-        
-    if wld:
-        filters.append(wld_service(wld))
-
-    if product:
-        filters.append(product_service(product))
-
-    if id_ibge:
-        filters.append(location_service(id_ibge))
+    for key, value in request.args.items():
+        if key not in ['depths', 'values', 'group'] and value:
+            if key == 'product':
+                filters.append(product_service(value))
+            elif key == 'id_ibge':
+                filters.append(location_service(value))
+            elif key == 'wld':
+                filters.append(wld_service(value))
+            else:
+                filters.append((key, value))
 
     filters = urllib.urlencode(filters)
 
-    return render_template('line/index.html', dataset=dataset, line=line, filters=filters, values=values, type=type)
+    group = request.args.get('group') or ''
+
+    params = {}
+    for param in ['depths', 'values']:
+        value = request.args.get(param)
+        params[param] = value if value and len(value.split()) > 1 else ''
+
+    return render_template('line/index.html',
+                           dataset=dataset,
+                           line=line,
+                           y_value=y_value,
+                           group=group,
+                           depths=params['depths'],
+                           values=params['values'],
+                           filters=filters,
+                           dictionary=json.dumps(dictionary()))
