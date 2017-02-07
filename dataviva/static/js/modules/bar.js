@@ -45,10 +45,70 @@ if(y.length > 1){
         'label': 'yaxis',
         'method': function(value, viz){
             currentY = value;
-            viz.y(value).id(value).draw();
+            viz.y(value).color(currentY + "_color").legend(false).id(value).draw();
         }
     });
 }
+
+var colorHelper = {
+   'gender': {
+       '0': '#d11141',
+       '1': '#00b159'
+   },
+   'literacy': {
+       '-1':'#c3c3c3',
+       '1': '#d11141',
+       '2': '#00b159',
+       '3': '#00aedb',
+       '4': '#f37735',
+       '5': '#ffc425',
+       '6': '#a200ff',
+       '7': '#d9534f'
+   },
+    'ethnicity': {
+       '-1': '#c3c3c3',
+       '1': '#d11141',
+       '2': '#00b159',
+       '4': '#00aedb',
+       '6': '#f37735',
+       '8': '#ffc425'
+   },
+   'simple': {
+      '0': '#d11141',
+      '1': '#00b159' 
+    },
+   'establishment_size': {
+      '-1': '#c3c3c3',
+      '0': '#d11141',
+      '1': '#00b159',
+      '2': '#00aedb',
+      '3': '#f37735',
+      '4': '#ffc425'
+    },
+   'legal_nature': {
+      '-1':'#c3c3c3',
+      '1':'#d11141',
+      '2':'#00b159',
+      '3':'#00aedb',
+      '4':'#f37735',
+      '5':'#ffc425',
+      '6':'#a200ff',
+      '7':'#d9534f'
+    }
+}
+
+var addColor = function(data){
+   data = data.map(function(item){
+       for(key in colorHelper){
+           if(item[key] != undefined)
+               item[key + '_color'] = colorHelper[key][item[key]];
+       }
+
+       return item;
+   });
+
+   return data;
+};
 
 var textHelper = {
     'loading': {
@@ -297,7 +357,8 @@ var loadViz = function(data){
         .footer({
             "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
         })
-
+        .color(currentY + "_color")
+        .legend(false)
 
         if(options.indexOf('singlecolor') != -1){
             visualization.color({
@@ -527,6 +588,7 @@ $(document).ready(function(){
             });
 
             data = buildData(api);
+            data = addColor(data);
             data = addNameToData(data);
             data = addPercentage(data);
             solo = updateSolo(data);
