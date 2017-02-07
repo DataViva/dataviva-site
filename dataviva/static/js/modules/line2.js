@@ -11,10 +11,28 @@ var lineGraph = document.getElementById('lineGraph'),
 
 // Temporarily translates text until dictionary is updated
 dataviva.dictionary['y_axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
-dataviva.dictionary['trade_value'] = lang == 'en' ? 'Trade Value' : 'Valor do Comércio';
+dataviva.dictionary['trade_value'] = lang == 'en' ? 'Trade Value (USD)' : 'Valor do Comércio (USD)';
 dataviva.dictionary['trade_balance'] = lang == 'en' ? 'Trade Balance' : 'Balança Comercial';
 dataviva.dictionary['exports_imports'] = lang == 'en' ? 'Exports/Imports' : 'Exportações/Importações';
 dataviva.dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
+dataviva.dictionary['basic_values'] = lang == 'en' ? 'Basic Values' : 'Valores Básicos';
+dataviva.dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
+dataviva.dictionary['cnae_id'] = lang == 'en' ? 'CNAE ID' : 'ID CNAE';
+dataviva.dictionary['wld_id'] = lang == 'en' ? 'WLD ID' : 'ID WLD';
+dataviva.dictionary['hs_id'] = lang == 'en' ? 'HS ID' : 'ID HS';
+dataviva.dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
+dataviva.dictionary['tooltip_id'] = 'ID';
+dataviva.dictionary['per'] = lang == 'en' ? 'per' : 'por';
+dataviva.dictionary['export'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
+dataviva.dictionary['import'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
+dataviva.dictionary['exports'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
+dataviva.dictionary['imports'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
+dataviva.dictionary['exports_weight'] = lang == 'en' ? 'Export Weight (kg)' : 'Peso das Exportações (kg)';
+dataviva.dictionary['imports_weight'] = lang == 'en' ? 'Import Weight (kg)' : 'Peso das Importações (kg)';
+dataviva.dictionary['imports_per_weight'] = lang == 'en' ? 'Imports per kg' : 'Importações por peso';
+dataviva.dictionary['exports_per_weight'] = lang == 'en' ? 'Exports per kg' : 'Exportações por peso';
+dataviva.dictionary['kg'] = 'KG';
+dataviva.dictionary['including'] = lang == 'en' ? 'including' : 'incluindo';
 
 function string2date(dateString) {
     dateString = dateString.split('-');
@@ -95,9 +113,15 @@ var buildTradeBalanceData = function(data){
 var loadViz = function(data){
 
     var yAxisLabelBuilder = function (type) {
-        if (type == 'export') return dataviva.dictionary['exports'] + ' [$ USD]'
-        if (type == 'import') return dataviva.dictionary['imports'] + ' [$ USD]'
-        if (type == 'balance') return dataviva.dictionary['trade_value'] + ' [$ USD]'
+        if (type == 'export')
+        {
+            (value = 'value_per_kg') ? dataviva.dictionary['exports_weight'] : dataviva.dictionary['exports'];  
+        }   
+        if (type == 'import') 
+        {
+            (value = 'value_per_kg') ? dataviva.dictionary['imports_weight'] : dataviva.dictionary['imports']; 
+        } 
+        if (type == 'balance') return dataviva.dictionary['trade_value']
     }
 
     var uiComponents = {
@@ -160,6 +184,84 @@ var loadViz = function(data){
         }
     };
 
+    var tooltipBuilder = function() {
+        return {
+            'short': {
+                '': [yValue]
+            },
+            'long': {
+                '': values,
+                '': values.length ? values : [yValue]     
+            } 
+        }
+    };
+
+
+    var formatHelper = function() {
+        var formatDict = {
+            'secex': {
+                'share': dataviva.dictionary['market_share'],
+                'tooltip_id': {
+                    'municipality': dataviva.dictionary['ibge_id'],
+                    'product': dataviva.dictionary['hs_id'],
+                    'country': dataviva.dictionary['wld_id']
+                },
+                'kg': {
+                    'export': dataviva.dictionary['exports_weight'],
+                    'import': dataviva.dictionary['exports_weight']
+                },
+                'value': {
+                    'export': dataviva.dictionary['exports'],
+                    'import': dataviva.dictionary['imports']
+                },
+                'value_per_kg': {
+                    'export': dataviva.dictionary['exports_per_weight'],
+                    'import': dataviva.dictionary['imports_per_weight']
+                }
+            }
+        };
+
+        return {
+            'text': function(text, key) { 
+                switch (text) {
+                    case 'tooltip_id':
+                        return formatDict[dataset][text][line] || dataviva.dictionary[text];
+                    case 'value':
+                    case 'yValue':
+                        return formatDict[dataset]['value'][type];
+                    case 'kg':
+                    case 'value_per_kg':
+                        return formatDict[dataset][text][type];
+                    default:
+                        return dataviva.dictionary[text] || text;
+                };
+
+            },
+            'number': function(value, opts) {
+                var result;
+
+                if (value.toString().split('.')[0].length > 3) {
+
+                    var symbol = d3.formatPrefix(value).symbol;
+                    symbol = symbol.replace('G', 'B');
+                    
+                    value = d3.formatPrefix(value).scale(value);
+                    value = parseFloat(d3.format('.3g')(value));
+
+                    result = value + symbol;
+                }
+                
+                switch (opts.key) {
+                    case 'share':
+                        result = d3.round(value, 2) + '%';
+                        break;
+                };
+
+                return result;
+            }
+        }
+    }; 
+
     var viz = d3plus.viz()
         .container('#lineGraph')
         .data({'value': data})
@@ -180,12 +282,13 @@ var loadViz = function(data){
         .footer(dataviva.dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large'})
         .title(titleBuilder())
+        .tooltip(tooltipBuilder())
+        .format(formatHelper())
         .ui(uiBuilder)
         .icon({'value': 'icon', 'style': 'knockout'})
         .legend({'order': {'sort': 'desc','value': 'size'}, "size": 25})
         .time({'value': 'year'})
         .axes({'background': {'color': '#FFFFFF'}})
-        .dev(true)
 
         if (group) viz.id([group, line]).color(group)
         else viz.id(line).color(line)
