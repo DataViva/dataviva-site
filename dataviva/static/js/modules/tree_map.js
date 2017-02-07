@@ -6,7 +6,8 @@ var tree_map = document.getElementById('tree_map')
     filters = tree_map.getAttribute('filters');
     depths = tree_map.getAttribute('depths') ? tree_map.getAttribute('depths').split(' ') : [],
     sizes = tree_map.getAttribute('sizes') ? tree_map.getAttribute('sizes').split(' ') : [],
-    group = tree_map.getAttribute('group') || depths[0] || '';
+    group = tree_map.getAttribute('group') || depths[0] || '',
+    controls = true;
 
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
@@ -28,7 +29,7 @@ dictionary['cnae_id'] = lang == 'en' ? 'CNAE ID' : 'ID CNAE';
 dictionary['wld_id'] = lang == 'en' ? 'WLD ID' : 'ID WLD';
 dictionary['hs_id'] = lang == 'en' ? 'HS ID' : 'ID HS';
 dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
-dictionary['tooltip_id'] = 'ID';
+dictionary['item_id'] = 'ID';
 dictionary['per'] = lang == 'en' ? 'per' : 'por';
 dictionary['exports_weight'] = lang == 'en' ? 'Export Weight' : 'Peso das Exportações';
 dictionary['imports_weight'] = lang == 'en' ? 'Import Weight' : 'Peso das Importações';
@@ -36,6 +37,28 @@ dictionary['imports_per_weight'] = lang == 'en' ? 'Imports per kg' : 'Importaç�
 dictionary['exports_per_weight'] = lang == 'en' ? 'Exports per kg' : 'Exportações por peso';
 dictionary['kg'] = 'KG';
 
+var formatDict = {
+    'secex': {
+        'share': 'market_share',
+        'item_id': {
+            'municipality': 'ibge_id',
+            'product': 'hs_id',
+            'country': 'wld_id'
+        },
+        'kg': {
+            'export': 'exports_weight',
+            'import': 'exports_weight'
+        },
+        'value': {
+            'export': 'exports',
+            'import': 'imports'
+        },
+        'value_per_kg': {
+            'export': 'exports_per_weight',
+            'import': 'imports_per_weight'
+        }
+    }
+};
 
 var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 
@@ -55,7 +78,7 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
                 dataItem[header] = getAttrByName(item, header);
             });
 
-            dataItem['tooltip_id'] = dataItem[squares];
+            dataItem[formatDict[dataset]['item_id'][squares]] = dataItem[squares];
 
             depths.forEach(function(depth) {
                 if (depth != squares && depth != group) {
@@ -66,7 +89,7 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
             dataItem[squares] = squaresMetadata[dataItem[squares]]['name_' + lang];
             
             if (group) {
-                if (group == 'product_section' || group == 'continent' || group == 'state')
+                if (group == 'product_section' || group == 'continent')
                     dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
                 dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
             }
@@ -127,19 +150,19 @@ var loadViz = function(data) {
         return {
             'value': 'Title',
             'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}},
-            'total': {'font': {'align': 'left'}}
+            'sub': {'font': {'align': 'left'}, 'value': 'Subtitle'},
+            'total': {'font': {'align': 'left'}, 'value': true}
         }
     };
 
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': ['tooltip_id'],
+                '': ['item_id'],
                 [dictionary['basic_values']]: [size]
             },
             'long': {
-                '': ['tooltip_id'],
+                '': ['item_id'],
                 [dictionary['basic_values']]: sizes.length ? sizes : [size]
             }
         }
@@ -155,38 +178,16 @@ var loadViz = function(data) {
 
     var formatHelper = function() {
         var args = getUrlArgs();
-        var formatDict = {
-            'secex': {
-                'share': dictionary['market_share'],
-                'tooltip_id': {
-                    'municipality': dictionary['ibge_id'],
-                    'product': dictionary['hs_id'],
-                    'country': dictionary['wld_id']
-                },
-                'kg': {
-                    'export': dictionary['exports_weight'],
-                    'import': dictionary['exports_weight']
-                },
-                'value': {
-                    'export': dictionary['exports'],
-                    'import': dictionary['imports']
-                },
-                'value_per_kg': {
-                    'export': dictionary['exports_per_weight'],
-                    'import': dictionary['imports_per_weight']
-                }
-            }
-        };
 
         return {
             'text': function(text, key) { 
                 switch (text) {
-                    case 'tooltip_id':
-                        return formatDict[dataset][text][squares] || dictionary[text];
+                    case 'item_id':
+                        return dictionary[formatDict[dataset][text][squares]] || dictionary[text];
                     case 'value':
                     case 'kg':
                     case 'value_per_kg':
-                        return formatDict[dataset][text][args['type']];
+                        return dictionary[formatDict[dataset][text][args['type']]];
                     default:
                         return dictionary[text] || text;
                 };
@@ -234,6 +235,12 @@ var loadViz = function(data) {
                         result += ' kg';
                 };
 
+                if (lang == 'pt') {
+                    var n = result.split('.')
+                    n[0] = n[0].replace(',', '.')
+                    result = n.join(',')
+                }
+
                 return result;
             }
         }
@@ -258,11 +265,12 @@ var loadViz = function(data) {
         .format(formatHelper())
         .ui(uiBuilder());
 
-        if (group) 
-            viz.color({'scale':'category20', 'value': group});
+    if (group)
+        viz.color({'scale':'category20', 'value': group});
 
-        viz.dev(true)
-        viz.draw();
+    viz.draw();
+
+    toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
 };
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
@@ -285,7 +293,7 @@ $(document).ready(function() {
 
     ajaxQueue(
         urls, 
-        function(responses){
+        function(responses) {
             var data = responses[0],
                 squaresMetadata = responses[1],
                 groupMetadata = group ? responses[2] : [];
@@ -294,5 +302,6 @@ $(document).ready(function() {
 
             loading.hide();
             loadViz(data);
-        })
+        }
+    );
 });

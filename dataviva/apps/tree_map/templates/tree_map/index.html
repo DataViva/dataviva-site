@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/graphs-tools.css" />
 
     <script type="text/javascript" src="/static/js/libs/d3.min.js"></script>
     <script type="text/javascript" src="/static/js/libs/d3plus.min.js"></script>
@@ -13,9 +15,10 @@
     <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
     <script type="text/javascript" src="/static/js/libs/async.js"></script>
 
+
     <style type="text/css">
         body {
-          background: none;
+            background: none;
         }
 
         .loading {
@@ -29,6 +32,8 @@
 </head>
 
 <body>
+    {% include "graphs/tools.html" %}
+
     <div id="tree_map"
         class="embed-responsive responsive-wrapper"
         dataset="{{ dataset }}"
@@ -36,7 +41,7 @@
         size="{{ size }}"
         filters="{{ filters }}"
         depths="{{ depths }}"
-        values="{{ values }}"
+        sizes="{{ sizes }}"
         group="{{ group }}">
     </div>
     <div class="loading"></div>
@@ -45,4 +50,5 @@
         var dictionary = {{ dictionary|safe }};
     </script>
     <script type="text/javascript" src="/static/js/modules/tree_map.js"></script>
+    <script type="text/javascript" src="/static/js/modules/graphs-tools.js"></script>
 </body>
