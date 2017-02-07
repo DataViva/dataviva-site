@@ -17,6 +17,7 @@ var data = [],
 var title = 'Title';
 
 var visualization;
+var percentage = false;
 
 var uis = [];
 
@@ -27,12 +28,16 @@ if(x.length > 1){
         'label': 'xaxis',
         'method': function(value, viz){
             currentX = value;
-            viz.x(value)
+
+            if(percentage)
+                currentX = currentX + '_pct';
+
+            viz.x(currentX)
                .order({
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
                     'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
                 })
-               totalOfCurrentX()
+            totalOfCurrentX()
             viz.draw()
         }
     });
@@ -307,6 +312,14 @@ var textHelper = {
     'data_provided_by': {
         'en': "Data provided by ",
         'pt': "Dados fornecidos por ",
+    },
+    'percentage_terms': {
+        'en': 'Percentage Terms',
+        'pt': 'Termos Percentuais'
+    },
+    'values': {
+        'en': 'Values',
+        'pt': 'Valores'
     }
 };
 
@@ -395,6 +408,7 @@ var loadViz = function(data){
         .y({
             "value": currentY,
             "scale": "discrete",
+            'grid': false,
             'label': {
                 'font': {
                     'size': 22
@@ -533,9 +547,23 @@ var addPercentage = function(data){
         return item;
     });
 
-    x.forEach(function(xValue){
-        x.push(xValue + '_pct')
-    });
+    uis.unshift({
+        'value': ['values', 'percentage_terms'],
+        'type': 'drop',
+        'label': 'Layout',
+        'method': function(value, viz){
+            percentage = value == 'percentage_terms' ? true : false;
+
+            if(currentX.indexOf( "_pct" ) != -1)
+                currentX = currentX.slice(0, -4);
+
+            if(percentage)
+                currentX = currentX + '_pct';
+
+            viz.x(currentX).draw()
+            totalOfCurrentX()
+        }
+    })
 
     return data;
 }
