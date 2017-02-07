@@ -29,8 +29,8 @@ if(x.length > 1){
             currentX = value;
             viz.x(value)
                .order({
-                    'value': currentX,
-                    'sort': 'asc'
+                    'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+                    'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
                 })
                totalOfCurrentX()
             viz.draw()
@@ -45,10 +45,77 @@ if(y.length > 1){
         'label': 'yaxis',
         'method': function(value, viz){
             currentY = value;
-            viz.y(value).id(value).draw();
+            viz.y(value)
+                .id(value)
+                .order({
+                    'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+                    'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
+                })
+                .draw();
         }
     });
 }
+
+var orderHelper = {
+    'ethnicity': {
+        '-1': 6,
+        '1': 5,
+        '2': 1,
+        '4': 3,
+        '6': 4,
+        '8': 2
+    },
+    'gender': {
+        '0': 2,
+        '1': 1
+    },
+    'literacy': {
+        '-1': 8,
+        '1': 7,
+        '2': 6,
+        '3': 5,
+        '4': 4,
+        '5': 3,
+        '6': 2,
+        '7': 1
+    },
+    'simple': {
+        '0': 2,
+        '1': 1 
+    },
+    'establishment_size': {
+        '-1': 5,
+        '0': 6,
+        '1': 4,
+        '2': 3,
+        '3': 2,
+        '4': 1
+    },
+    'legal_nature': {
+        '-1': 8,
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7
+    }
+}
+
+var addOrder = function(data){
+    data = data.map(function(item){
+        for(key in orderHelper){
+            if(item[key] != undefined)
+                item[key + '_order'] = orderHelper[key][item[key]];
+        }
+
+        return item;
+    });
+
+    return data;
+};
+
 
 var textHelper = {
     'loading': {
@@ -182,20 +249,25 @@ var textHelper = {
 };
 
 var formatNumber = function(digit){
-    var text = {};
-    
-    text = {
+    var lastDigit = digit.slice(-1);
+
+    if(!isNaN(lastDigit))
+        return digit;
+
+    var number =  digit.slice(0, -1);
+
+    var scale = {
         'T': {
-            'en': digit < 2 ? ' Trillion' : ' Trillions',
-            'pt': digit < 2 ? ' Trilhão' : ' Trilhões'
+            'en': number < 2 ? ' Trillion' : ' Trillions',
+            'pt': number < 2 ? ' Trilhão' : ' Trilhões'
         },
         'B': {
-            'en': digit < 2 ? ' Billion' : ' Billions',
-            'pt': digit < 2 ? ' Bilhão' : ' Bilhões'
+            'en': number < 2 ? ' Billion' : ' Billions',
+            'pt': number < 2 ? ' Bilhão' : ' Bilhões'
         },
         'M': {
-            'en': digit < 2 ? ' Million' : ' Millions',
-            'pt': digit < 2 ? ' Milhão' : ' Milhões   '
+            'en': number < 2 ? ' Million' : ' Millions',
+            'pt': number < 2 ? ' Milhão' : ' Milhões'
         },
         'k': {
             'en': ' Thousand',
@@ -203,10 +275,7 @@ var formatNumber = function(digit){
         }
     }
 
-    if(text[digit.slice(-1)] == undefined)
-        return digit;
-
-    return  digit.slice(0, -1) + text[digit.slice(-1)][lang];
+    return number + scale[lastDigit][lang];
 }
 
 
@@ -288,11 +357,17 @@ var loadViz = function(data){
             }
         })
         .aggs({
-            'average_wage': 'mean'
+            'average_wage': 'mean',
+            'ethnicity_order': 'mean',
+            'gender_order': 'mean',
+            'literacy_order': 'mean',
+            'simple_order': 'mean',
+            'establishment_size_order': 'mean',
+            'legal_nature_order': 'mean'
         })
         .order({
-            'value': currentX,
-            'sort': 'asc'
+            'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+            'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
         })
         .footer({
             "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
@@ -527,6 +602,7 @@ $(document).ready(function(){
             });
 
             data = buildData(api);
+            data = addOrder(data);
             data = addNameToData(data);
             data = addPercentage(data);
             solo = updateSolo(data);
