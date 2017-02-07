@@ -358,13 +358,12 @@ var loadViz = function(data){
         })
         .aggs({
             'average_wage': 'mean',
-            'legal_nature_order': 'mean',
-            'ethnicity': 'mean',
-            'gender': 'mean',
-            'literacy': 'mean',
-            'simple': 'mean',
-            'establishment_size': 'mean'
-
+            'ethnicity_order': 'mean',
+            'gender_order': 'mean',
+            'literacy_order': 'mean',
+            'simple_order': 'mean',
+            'establishment_size_order': 'mean',
+            'legal_nature_order': 'mean'
         })
         .order({
             'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
