@@ -124,32 +124,34 @@ var textHelper = {
     }
 };
 
-var formatNumber = function(digit ){
-    var text = {};
+var formatNumber = function(digit){
+    var lastDigit = digit.slice(-1);
 
-    text = {
+    if(!isNaN(lastDigit))
+        return digit;
+
+    var number =  digit.slice(0, -1);
+
+    var scale = {
         'T': {
-            'en': digit < 2 ? 'Trillion' : 'Trillions',
-            'pt': digit < 2 ? 'Trilhão' : 'Trilhões'
+            'en': number < 2 ? ' Trillion' : ' Trillions',
+            'pt': number < 2 ? ' Trilhão' : ' Trilhões'
         },
         'B': {
-            'en': digit < 2 ? 'Billion' : 'Billions',
-            'pt': digit < 2 ? 'Bilhão' : 'Bilhões'
+            'en': number < 2 ? ' Billion' : ' Billions',
+            'pt': number < 2 ? ' Bilhão' : ' Bilhões'
         },
         'M': {
-            'en': digit < 2 ? 'Million' : 'Millions',
-            'pt': digit < 2 ? 'Milhão' : 'Milhões'
+            'en': number < 2 ? ' Million' : ' Millions',
+            'pt': number < 2 ? ' Milhão' : ' Milhões'
         },
         'k': {
-            'en': 'Thousand',
-            'pt': 'Mil'
+            'en': ' Thousand',
+            'pt': ' Mil'
         }
     }
 
-    if(text[digit.slice(-1)] == undefined)
-        return digit;
-
-    return  digit.slice(0, -1) + ' ' + text[digit.slice(-1)][lang];
+    return number + scale[lastDigit][lang];
 }
 
 var formatHelper = {
