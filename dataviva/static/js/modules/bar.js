@@ -3,6 +3,7 @@ var data = [],
     MAX_BARS = 10,
     lang = document.documentElement.lang,
     dataset = $("#bar").attr("dataset"),
+    subtitle = $("#bar").attr("subtitle"),
     options = $("#bar").attr("options").split(","),
     x = $("#bar").attr("x").split(","),
     currentX = x[0],
@@ -320,6 +321,14 @@ var textHelper = {
     'values': {
         'en': 'Values',
         'pt': 'Valores'
+    },
+    'exporting_municipality': {
+        'en': "Based on the Exporting Municipality",
+        'pt': "Baseado nos Municípios Exportadores" 
+    },
+    'state_production': {
+        'en': "Based on State Production",
+        'pt': "Baseado nos Estados Produtores" 
     }
 };
 
@@ -349,7 +358,6 @@ var formatNumber = function(digit){
             'pt': ' Mil'
         }
     }
-
     return number + scale[lastDigit][lang];
 }
 
@@ -485,10 +493,10 @@ var totalOfCurrentX = function(){
         }
         return acc;
     }, 0);
-    
+
     visualization.title({
         'sub': {
-            'value': textHelper["total_of"][lang] + formatHelper.number(total, {key: key}),
+            'value': textHelper["total_of"][lang] + formatHelper.number(total, {key: key}) + (subtitle ? ' - ' + textHelper[subtitle][lang] : ''),
             'font': {
                 'align': 'left'
             }

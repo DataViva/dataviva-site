@@ -83,6 +83,7 @@ def index(dataset, x, y):
     counts = request.args.getlist('count')
 
     options = request.args.get('options')
+    subtitle = request.args.get('subtitle', '')
 
     filters = []
 
@@ -109,4 +110,5 @@ def index(dataset, x, y):
 
     filters = urllib.urlencode(filters)
 
-    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options)
+    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options, subtitle=subtitle)
+    

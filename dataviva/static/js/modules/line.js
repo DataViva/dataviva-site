@@ -4,6 +4,7 @@ var lang = document.documentElement.lang,
     dataset = $("#line").attr("dataset"),
     line = $("#line").attr("line"),
     options = $("#line").attr("options").split(","),
+    subtitle = $("#line").attr("subtitle"),
     filters = $("#line").attr("filters"),
     values = $("#line").attr("values").split(','),
     value = values[0],
@@ -121,6 +122,14 @@ var textHelper = {
     'time_resolution': {
         'en': "Time Resolution",
         'pt': "Resolução Temporal"  
+    },
+    'exporting_municipality': {
+        'en': "Based on the Exporting Municipality",
+        'pt': "Baseado nos Municípios Exportadores" 
+    },
+    'state_production': {
+        'en': "Based on State Production",
+        'pt': "Baseado nos Estados Produtores" 
     }
 };
 
@@ -321,7 +330,7 @@ var loadViz = function(data){
                 'value': textHelper.year[lang],
                 'font': {
                     'size': 16
-                }
+                }     
             }
         })
         .y({
@@ -350,6 +359,17 @@ var loadViz = function(data){
                     return "#4d90fe";
                 }
             }).legend(false)
+        }
+
+        if(subtitle != ""){
+            visualization.title({
+                'sub': {
+                    'value': textHelper[subtitle][lang],
+                    'font': {
+                        'align': 'left'
+                    }
+                }
+            })
         }
 
         visualization.draw()
