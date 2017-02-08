@@ -404,8 +404,8 @@ var processData = function(data){
                 if(check[lineValue][date] == undefined){
                     var dataItem = {};
                     dataItem['date'] = date;
-                    dataItem['year'] = date.split('/')[0];
-                    dataItem['month'] = date.split('/')[1];
+                    dataItem['year'] = date.getFullYear();
+                    dataItem['month'] = date.getMonth() + 1;
                     dataItem[line] = lineValue;
 
                     values.forEach(function(value){
@@ -422,7 +422,7 @@ var processData = function(data){
 
     data = data.map(function(item){
         if(item['month'] != undefined)
-            item['date'] = item['year'] + '/' + item['month'];
+            item['date'] = new Date(item['year'], item['month'] - 1);
 
         return item;
     });
@@ -465,7 +465,7 @@ $(document).ready(function(){
         api = responses[0];
         line_metadata = responses[1];
 
-        var data = buildData(api);
+        data = buildData(api);
         data = processData(data);
         solo = updateSolo(data);
 
