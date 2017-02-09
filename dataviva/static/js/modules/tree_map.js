@@ -60,46 +60,69 @@ var buildData = function(apiResponse, squaresMetadata, groupMetadata) {
 }
 
 var loadViz = function(data) {
-
-    var depthSelectorBuilder = function() {
-        var array = depths.slice(0);
-        array.splice(array.indexOf(squares), 1);
-        array.splice(0, 0, squares);
-        array.forEach(function(item, i){
-            array[i] = {[dictionary[item]] : item};
-        });
-
-        return {
-            'method': function(value) {
-                viz.id(value == group ? group : [group, value]);
-                viz.depth(value == group ? 0 : 1);
-                viz.draw();
-            },
-            'type': array.length > 3 ? 'drop' : '',
-            'label': dictionary['depth'],
-            'value': array
-        };
-    };
-
-    var sizeSelectorBuilder = function() {
-        var options = [];
-        sizes.forEach(function(item) {
-            options.push({[dictionary[item]]: item});
-        });
-        return {
-            'method' : 'size',
-            'type': options.length > 3 ? 'drop' : '',
-            'label': dictionary['value'],
-            'value' : options
-        };
-    };
-
     var uiBuilder = function() {
         ui = [];
-        if (depths.length)
-            ui.push(depthSelectorBuilder());
-        if (sizes.length)
-            ui.push(sizeSelectorBuilder());
+
+        if (depths.length) {
+            var options = depths.slice(0);
+            options.splice(options.indexOf(squares), 1);
+            options.splice(0, 0, squares);
+            options.forEach(function(item, i){
+                options[i] = {[dictionary[item]] : item};
+            });
+
+            ui.push({
+                'method': function(value) {
+                    viz.id(value == group ? group : [group, value]);
+                    viz.depth(value == group ? 0 : 1);
+                    viz.draw();
+                },
+                'type': options.length > 3 ? 'drop' : '',
+                'label': dictionary['depth'],
+                'value': options
+            });
+        }
+
+        if (sizes.length) {
+            var options = [];
+            sizes.forEach(function(item) {
+                options.push({[dictionary[item]]: item});
+            });
+
+            ui.push({
+                'method' : 'size',
+                'type': options.length > 3 ? 'drop' : '',
+                'label': dictionary['value'],
+                'value' : options
+            });
+        }
+
+        var args = getUrlArgs();
+        if (args['year']) {
+            ui.push({
+                'method': function(value) {
+                    if (value == args['year']) {
+                        loadViz(data);
+                    } else {
+                        var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...'),
+                            copy = filters;
+
+                        filters = filters.replace(/&year=[0-9]{4}/, '');
+
+                        d3.json(getUrls()[0], function(allYearsData) {
+                            allYearsData = buildData(allYearsData, squaresMetadata, groupMetadata);
+                            viz.data(allYearsData);
+                            viz.draw();
+
+                            filters = copy;
+                            loadingData.hide();
+                        });
+                    }
+                },
+                'value': [args['year'], dictionary['Show All Years']]
+            })
+        }
+
         return ui;
     }
 
