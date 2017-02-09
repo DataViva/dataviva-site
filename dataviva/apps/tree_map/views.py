@@ -59,6 +59,24 @@ def wld_service(wld):
     return (wlds[len(wld)], wld)
 
 
+def occupation_service(occupation):
+   occupations = {
+       1: "occupation_group",
+       4: "occupation_family"
+   }
+
+   return (occupations[len(occupation)], occupation)
+
+
+def industry_service(industry):
+   if len(industry) == 1:
+       return ('industry_section', industry)
+   elif len(industry) == 3:
+       return ('industry_division', industry[1:])
+   else:
+       return ('industry_class', industry[1:])
+
+
 @mod.route('/<dataset>/<squares>/<size>')
 def index(dataset, squares, size):
     filters = []
@@ -71,6 +89,10 @@ def index(dataset, squares, size):
                 filters.append(location_service(value))
             elif key == 'wld':
                 filters.append(wld_service(value))
+            elif key == 'occupation':
+                filters.append(occupation_service(value))
+            elif key == 'industry':
+                filters.append(industry_service(value))
             else:
                 filters.append((key, value))
 

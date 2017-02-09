@@ -21,12 +21,14 @@
             background: none;
         }
 
-        .loading {
-            top: 200px;
-        }
-
-        .loading .page-loader {
-            background: none;
+        .loading.init {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: 0;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            text-align: center;
         }
     </style>
 </head>
@@ -44,11 +46,15 @@
         sizes="{{ sizes }}"
         group="{{ group }}">
     </div>
-    <div class="loading"></div>
+    <div class="loading init"></div>
 
     <script type="text/javascript">
         var dictionary = {{ dictionary|safe }};
     </script>
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
     <script type="text/javascript" src="/static/js/modules/tree_map.js"></script>
-    <script type="text/javascript" src="/static/js/modules/graphs-tools.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/tools.js"></script>
+    <script src="/static/js/plugins/jspdf/FileSaver.js"></script>
+    <script src="/static/js/plugins/jspdf/jspdf.js"></script>
+    <script src="/static/js/plugins/jspdf/addimage.js"></script>
 </body>
