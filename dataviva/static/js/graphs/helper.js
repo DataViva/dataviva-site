@@ -33,13 +33,16 @@ dictionary['total_jobs'] = lang == 'en' ? 'Total Jobs' : 'Total de Empregos';
 dictionary['average_establishment_size'] = lang == 'en' ? 'Jobs per Establishment' : 'Empregos por Estabelecimento';
 dictionary['occupation_family'] = lang == 'en' ? 'Family' : 'Família';
 dictionary['occupation_group'] = lang == 'en' ? 'Main Group' : 'Grande Grupo';
+dictionary['Creating URL'] = lang == 'en' ? 'Creating URL' : 'Criando URL';
 dictionary['kg'] = 'KG';
 
 var getUrlArgs = function() {
     var args = {};
-    window.location.search.split('?')[1].split('&').forEach(function(arg) {
-        args[arg.split('=')[0]] = arg.split('=')[1];
-    })
+    if (window.location.search) {
+        window.location.search.split('?')[1].split('&').forEach(function(arg) {
+            args[arg.split('=')[0]] = arg.split('=')[1];
+        });
+    }
     return args;
 };
 
