@@ -92,7 +92,7 @@ var loadViz = function(data) {
             ui.push({
                 'method' : 'size',
                 'type': options.length > 3 ? 'drop' : '',
-                'label': dictionary['value'],
+                'label': dictionary['sizing'],
                 'value' : options
             });
         }
@@ -119,7 +119,8 @@ var loadViz = function(data) {
                         });
                     }
                 },
-                'value': [args['year'], dictionary['Show All Years']]
+                'value': [args['year'], dictionary['all']],
+                'label': dictionary['year']
             })
         }
 
@@ -142,7 +143,7 @@ var loadViz = function(data) {
                 [dictionary['basic_values']]: [size]
             },
             'long': {
-                '': ['item_id'],
+                '': DICT[dataset]['item_id'][squares],
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
@@ -175,7 +176,6 @@ var loadViz = function(data) {
     toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
 };
 
-var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
 
 var getUrls = function() {
     var dimensions = [dataset, 'year', squares];
@@ -198,6 +198,8 @@ var getUrls = function() {
 var squaresMetadata = [],
     groupMetadata = [];
 
+var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
+
 $(document).ready(function() {
     ajaxQueue(
         getUrls(), 
@@ -209,8 +211,10 @@ $(document).ready(function() {
 
             data = buildData(data, squaresMetadata, groupMetadata);
 
-            loading.hide();
             loadViz(data);
+
+            loading.hide();
+            d3.select('#mask').remove();
         }
     );
 });

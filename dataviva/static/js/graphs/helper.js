@@ -15,12 +15,9 @@ dictionary['mesoregion'] = lang == 'en' ? 'Mesoregion' : 'Mesorregião';
 dictionary['microregion'] = lang == 'en' ? 'Microregion' : 'Microrregião';
 dictionary['region'] = lang == 'en' ? 'Region' : 'Região';
 dictionary['basic_values'] = lang == 'en' ? 'Basic Values' : 'Valores Básicos';
-dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
-dictionary['cnae_id'] = lang == 'en' ? 'CNAE ID' : 'ID CNAE';
-dictionary['wld_id'] = lang == 'en' ? 'WLD ID' : 'ID WLD';
-dictionary['hs_id'] = lang == 'en' ? 'HS ID' : 'ID HS';
 dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
 dictionary['item_id'] = 'ID';
+dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
 dictionary['per'] = lang == 'en' ? 'per' : 'por';
 dictionary['exports_weight'] = lang == 'en' ? 'Export Weight' : 'Peso das Exportações';
 dictionary['imports_weight'] = lang == 'en' ? 'Import Weight' : 'Peso das Importações';
@@ -34,6 +31,8 @@ dictionary['average_wage'] = lang == 'en' ? 'Average Monthly Wages' : 'Renda Men
 dictionary['industry_class'] = lang == 'en' ? 'Class' : 'Classe';
 dictionary['total_jobs'] = lang == 'en' ? 'Total Jobs' : 'Total de Empregos';
 dictionary['average_establishment_size'] = lang == 'en' ? 'Jobs per Establishment' : 'Empregos por Estabelecimento';
+dictionary['occupation_family'] = lang == 'en' ? 'Family' : 'Família';
+dictionary['occupation_group'] = lang == 'en' ? 'Main Group' : 'Grande Grupo';
 dictionary['kg'] = 'KG';
 
 var getUrlArgs = function() {
@@ -136,29 +135,29 @@ var formatHelper = function() {
 
 var DICT = {
     'secex': {
-        'share': 'market_share',
         'item_id': {
             'municipality': 'ibge_id',
             'product': 'hs_id',
             'country': 'wld_id'
         },
         'kg': {
-            'export': 'exports_weight',
-            'import': 'imports_weight'
+            'export': 'export_kg',
+            'import': 'import_kg'
         },
         'value': {
             'export': 'exports',
             'import': 'imports'
         },
         'value_per_kg': {
-            'export': 'exports_per_weight',
-            'import': 'imports_per_weight'
+            'export': 'export_val_kg',
+            'import': 'import_val_kg'
         }
     },
     'rais': {
         'item_id': {
             'industry_class': 'cnae_id',
-            'municipality': 'ibge_id'
+            'municipality': 'ibge_id',
+            'occupation_family': 'cbo_id'
         },
         'jobs': 'total_jobs'
     }
@@ -172,7 +171,8 @@ var DEPTHS = {
     },
     'rais': {
         'industry_class': ['industry_section', 'industry_division', 'industry_class'],
-        'municipality': ['state', 'mesoregion', 'microregion', 'municipality']
+        'municipality': ['state', 'mesoregion', 'microregion', 'municipality'],
+        'occupation_family': ['occupation_group', 'occupation_family']
     }
 };
 
@@ -184,7 +184,8 @@ var SIZES = {
     },
     'rais': {
         'industry_class': ['jobs', 'wage', 'establishment_count'],
-        'municipality': ['jobs', 'wage', 'establishment_count']
+        'municipality': ['jobs', 'wage', 'establishment_count'],
+        'occupation_family': ['jobs', 'wage']
     }
 };
 
@@ -205,4 +206,4 @@ var CALC_BASIC_VALUES = {
     'rais': {}
 };
 
-var HAS_ICONS = ['continent', 'industry_section', 'product_section'];
+var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group'];

@@ -28,7 +28,7 @@ def before_request():
 
 def location_service(id_ibge):
     locations = {
-        1: "region",
+        1: "region",    #todo
         2: "state",
         4: "mesoregion",
         5: "microregion",
@@ -60,21 +60,21 @@ def wld_service(wld):
 
 
 def occupation_service(occupation):
-   occupations = {
-       1: "occupation_group",
-       4: "occupation_family"
-   }
+    occupations = {
+        1: "occupation_group",
+        4: "occupation_family"
+    }
 
-   return (occupations[len(occupation)], occupation)
+    return (occupations[len(occupation)], occupation)
 
 
 def industry_service(industry):
-   if len(industry) == 1:
-       return ('industry_section', industry)
-   elif len(industry) == 3:
-       return ('industry_division', industry[1:])
-   else:
-       return ('industry_class', industry[1:])
+    if len(industry) == 1:
+        return ('industry_section', industry)
+    elif len(industry) == 3:
+        return ('industry_division', industry[1:])
+    else:
+        return ('industry_class', industry[1:])
 
 
 @mod.route('/<dataset>/<squares>/<size>')

@@ -11,7 +11,7 @@
     <script type="text/javascript" src="/static/js/libs/d3plus.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
+    <script src="/static/js/modules/embed/utils.dataviva.js"></script>
     <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
     <script type="text/javascript" src="/static/js/libs/async.js"></script>
 
@@ -19,16 +19,6 @@
     <style type="text/css">
         body {
             background: none;
-        }
-
-        .loading.init {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin: 0;
-            transform: translate(-50%, -50%);
-            padding: 20px;
-            text-align: center;
         }
     </style>
 </head>
@@ -46,7 +36,7 @@
         sizes="{{ sizes }}"
         group="{{ group }}">
     </div>
-    <div class="loading init"></div>
+    <div id="mask" class="loading"></div>
 
     <script type="text/javascript">
         var dictionary = {{ dictionary|safe }};

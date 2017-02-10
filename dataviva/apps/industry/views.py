@@ -47,7 +47,8 @@ def index(cnae_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     industry = Cnae.query.filter_by(id=cnae_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
@@ -134,14 +135,18 @@ def index(cnae_id, tab):
         'general': [],
         'wages': [
             'jobs-occupation-tree_map',
+            'new-api-jobs-occupation-tree_map',
             'jobs-occupation-stacked',
             'jobs-municipality-geo_map',
             'jobs-municipality-tree_map',
+            'new-api-jobs-municipality-tree_map',
             'jobs-municipality-stacked',
             'wages-occupation-tree_map',
+            'new-api-wages-occupation-tree_map',
             'wages-occupation-stacked',
             'wages-municipality-geo_map',
             'wages-municipality-tree_map',
+            'new-api-wages-municipality-tree_map',
             'wages-municipality-stacked',
             'wages-distribution-bar',
         ],
