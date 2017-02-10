@@ -379,15 +379,47 @@ var buildData = function(responseApi){
 
 var FAKE_VALUE = 1;
 
+var firstYear = function(data){
+    var minYear = 9999;
+
+    data.forEach(function(item){
+        if(item.year < minYear)
+            minYear = item.year;
+    });
+
+    return minYear;
+};
+
+var lastYear = function(data){
+    var maxYear = 0;
+
+    data.forEach(function(item){
+        if(item.year > maxYear)
+            maxYear = item.year;
+    });
+
+    return maxYear;
+};
+
 var processData = function(data){
 
-    var fillMissingDates = function(data){
-        var dates = new Set();
+    var allDates = function(minYear, maxYear){
+        var dates = [];
+            var months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+                for(var year = minYear; year <= maxYear; year++){
+                    months.forEach(function(month){
+                        dates.push(new Date(year, month));
+                    })
+                }
+
+    return dates;
+};
+
+var fillMissingDates = function(data){
         var lines = new Set();
         var check = {};
-
+  
         data.forEach(function(item){
-            dates.add(item.date);
             lines.add(item[line]);
 
             if(check[item[line]] == undefined)
@@ -396,7 +428,7 @@ var processData = function(data){
             check[item[line]][item.date] = true;
         });
 
-        dates = Array.from(dates);
+        var dates = allDates(firstYear(data), lastYear(data));
         lines = Array.from(lines);
 
         dates.forEach(function(date){
