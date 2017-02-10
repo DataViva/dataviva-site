@@ -78,16 +78,25 @@ var toolsBuilder = function(viz, data, title, ui) {
 
     d3.select('#share-btn').on('click', function() {
         dataviva.popover.show('#share-popover');
-    });
 
-    d3.select('#share-popover').selectAll('input').on('click', function() {
-        this.focus();
-        this.select();
-    });
-   
-    d3.xhr('/' + lang + '/embed/shorten/') 
+        var loadingPopover = dataviva.ui.loading('#share-popover'),
+            url = window.location.href;
+
+        if (currentYear) {
+            if (url.match(/year=[0-9]{4}/))
+                url = url.replace(/year=[0-9]{4}/, 'year=' + currentYear);
+            else if (url.match(/\?/))
+                url += '&year=' + currentYear;
+            else
+                url += '?year=' + currentYear;
+        } else {
+            url = url.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}&?/, '?');
+        }
+        console.log(url);
+
+        d3.xhr('/' + lang + '/embed/shorten/')
         .header('Content-type','application/json')
-        .post(JSON.stringify({'url': window.location.href}), function(error, data) {
+        .post(JSON.stringify({'url': url}), function(error, data) {
             var shortUrl = window.location.origin + '/' + lang + '/' + JSON.parse(data.response).slug;
 
             d3.select('#shortened-url').attr('value', shortUrl);
@@ -102,7 +111,15 @@ var toolsBuilder = function(viz, data, title, ui) {
             d3.select('#google-btn').on('click', function() {
                 return !window.open(this.href, 'Google', 'width=640,height=300');
             });
+
+            loadingPopover.hide();
         });
+    });
+
+    d3.select('#share-popover').selectAll('input').on('click', function() {
+        this.focus();
+        this.select();
+    });
 
     d3.select('#download-btn').on('click', function() {
         dataviva.popover.show('#download-popover');

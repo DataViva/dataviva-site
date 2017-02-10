@@ -4,6 +4,7 @@ var tree_map = document.getElementById('tree_map'),
     size = tree_map.getAttribute('size'),
     filters = tree_map.getAttribute('filters'),
     controls = true,
+    currentYear = +getUrlArgs()['year'] || 0,
     depths = DEPTHS[dataset][squares],
     group = depths[0],
     sizes = SIZES[dataset][squares],
@@ -107,7 +108,7 @@ var loadViz = function(data) {
                         var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...'),
                             copy = filters;
 
-                        filters = filters.replace(/&year=[0-9]{4}/, '');
+                        filters = filters.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
 
                         d3.json(getUrls()[0], function(allYearsData) {
                             allYearsData = buildData(allYearsData, squaresMetadata, groupMetadata);
@@ -115,6 +116,7 @@ var loadViz = function(data) {
                             viz.draw();
 
                             filters = copy;
+                            currentYear = 0;
                             loadingData.hide();
                         });
                     }
@@ -149,6 +151,11 @@ var loadViz = function(data) {
         }
     };
 
+    var timelineCallback = function(years) {
+        currentYear = years.length == 1 ? years[0].getFullYear() : 0;
+        toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
+    };
+
     var viz = d3plus.viz()
         .container('#tree_map')
         .data(data)
@@ -156,7 +163,7 @@ var loadViz = function(data) {
         .size(size)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
-        .time('year')
+        .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
