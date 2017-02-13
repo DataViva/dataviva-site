@@ -36,13 +36,26 @@ var buildData = function(apiResponse, circlesMetadata, connections) {
 
             dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
 
+            connections.nodes.forEach(function(node){
+                if(node[DICT[dataset]['item_id'][circles]].slice(-4) == dataItem[DICT[dataset]['item_id'][circles]])
+                    node[circles] = dataItem[circles]
+            });
+
+            if(dataItem[DICT[dataset]['item_id'][circles]] == focus)
+                focus = dataItem[circles]
+
             data.push(dataItem);
         } catch(e) {
 
         };
     });
 
-    return data;
+    connections.edges.forEach(function(edge){
+        edge.source = connections.nodes[edge.source][circles];
+        edge.target = connections.nodes[edge.target][circles];
+    });
+
+    return [data, connections.edges];
 }
 
 var loadViz = function(data) {
@@ -107,8 +120,6 @@ var loadViz = function(data) {
         toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
     };
 
-    focus = '041602'
-
     var viz = d3plus.viz()
         .container('#rings')
         .type('rings')
@@ -123,7 +134,6 @@ var loadViz = function(data) {
         .title(titleBuilder())
         .id(circles)
         .tooltip(tooltipBuilder())
-        .format(formatHelper())
         .ui(uiBuilder());
 
     viz.draw();
@@ -131,9 +141,14 @@ var loadViz = function(data) {
     toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
 };
 
-
 var getUrls = function() {
     var dimensions = [dataset, 'year', circles];
+
+    //http://api.staging.dataviva.info/secex/year/product/type/?year=2015
+    //if (dataset == 'secex')
+    //    dimensions.push('type') exports and imports separately
+
+    //http://api.staging.dataviva.info/rais/year/occupation_family/?year=2014&count=establishment
 
     var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
         'http://api.staging.dataviva.info/metadata/' + circles
@@ -157,14 +172,15 @@ $(document).ready(function() {
             circlesMetadata = responses[1];
             connections = responses[2];
 
-            connections.edges.forEach(function(edge){
-                edge.source = connections.nodes[edge.source]['hs_id']
-                edge.target = connections.nodes[edge.target]['hs_id']
-            });
-
             data = buildData(data, circlesMetadata, connections);
 
-            loadViz(connections.edges);
+
+            data[0].forEach(function(item){
+                if(item[circles] == focus)
+                    console.log(item)
+            });
+
+            loadViz(data[1]);
 
             loading.hide();
             d3.select('#mask').remove();
