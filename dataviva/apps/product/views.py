@@ -27,6 +27,7 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
 def location_depth(bra_id):
     locations = {
         1: "region",    #todo
@@ -38,6 +39,7 @@ def location_depth(bra_id):
 
     return locations[len(bra_id)]
 
+
 def handle_region_bra_id(bra_id):
     return {
         "1": "1",
@@ -46,6 +48,7 @@ def handle_region_bra_id(bra_id):
         "4": "3",
         "5": "4"
     }[bra_id]
+
 
 def location_service(depth, location):
     if depth == 'region':
@@ -56,6 +59,7 @@ def location_service(depth, location):
         return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
     else:
         return location.id_ibge
+
 
 @mod.route('/<product_id>/graphs/<tab>', methods=['POST'])
 def graphs(product_id, tab):
@@ -103,7 +107,8 @@ def index(product_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     tabs = {
         'general': [],
@@ -111,11 +116,21 @@ def index(product_id, tab):
             'economic-opportunities-rings'
         ],
         'trade-partner': [
-            'trade-balance-product-',
-            'exports-destination-tree',
+            'trade-balance-product-line',
+            'new-api-trade-balance-product-line',
+            'exports-destination-tree_map',
+            'new-api-exports-destination-tree_map',
+            'new-api-exports-destination-line',
+            'new-api-exports-port-line',
+            'new-api-exports-port-bar',
+            'new-api-exports-port-tree_map',
             'exports-destination-line',
             'exports-destination-stacked',
-            'imports-origin-tree',
+            'imports-origin-tree_map',
+            'new-api-imports-origin-tree_map',
+            'new-api-imports-port-line',
+            'new-api-imports-port-bar',
+            'new-api-imports-port-tree_map',
             'imports-origin-line',
             'imports-origin-stacked',
         ],
@@ -123,11 +138,13 @@ def index(product_id, tab):
 
     if not is_municipality:
         tabs['trade-partner'] += [
-            'exports-municipality-tree',
-            'exports-municipality-geo',
+            'exports-municipality-tree_map',
+            'new-api-exports-municipality-tree_map',
+            'exports-municipality-geo_map',
             'exports-municipality-stacked',
-            'imports-municipality-tree',
-            'imports-municipality-geo',
+            'imports-municipality-tree_map',
+            'new-api-imports-municipality-tree_map',
+            'imports-municipality-geo_map',
             'imports-municipality-stacked',
         ]
 

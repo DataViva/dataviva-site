@@ -84,7 +84,8 @@ def index(wld_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     if wld_id == 'sabra':
         abort(404)
@@ -194,13 +195,17 @@ def index(wld_id, tab):
         'international-trade': [
             'trade-balance-partner-line',
             'exports-municipality-tree_map',
+            'new-api-exports-municipality-tree_map',
             'exports-municipality-stacked',
             'exports-destination-tree_map',
+            'new-api-exports-destination-tree_map',
             'exports-destination-stacked',
             'exports-destination-geo_map',
             'imports-municipality-tree_map',
+            'new-api-imports-municipality-tree_map',
             'imports-municipality-stacked',
             'imports-origin-tree_map',
+            'new-api-imports-origin-tree_map',
             'imports-origin-stacked',
             'imports-origin-geo_map',
         ],

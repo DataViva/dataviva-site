@@ -28493,24 +28493,20 @@ module.exports = {
         }
       }
     }
-    csv_data = "data:text/csv;charset=utf-8,";
+    csv_data = "data:text/csv;charset=utf-8,\n";
     for (i = q = 0, len7 = csv_to_return.length; q < len7; i = ++q) {
       c = csv_to_return[i];
       dataString = c.join(",");
       csv_data += (i < csv_to_return.length ? dataString + "\n" : dataString);
     }
-    if (ie) {
-      blob = new Blob([csv_data], {
+
+    blob = new Blob([csv_data], {
         type: "text/csv;charset=utf-8;"
       });
-      navigator.msSaveBlob(blob, title + ".csv");
-    } else {
-      encodedUri = encodeURI(csv_data);
-      link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", title + ".csv");
-      link.click();
-    }
+
+    if (ie) navigator.msSaveBlob(blob, title + ".csv");
+    else saveAs(blob, title + ".csv");
+    
     this.data = csv_to_return;
     return columns;
   },
