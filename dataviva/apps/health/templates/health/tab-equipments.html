@@ -1,0 +1,21 @@
+<div role="tabpanel" class="tab-pane {{ 'active' if tab == 'equipments' }}" id="equipments">
+
+        <h2>{% trans %}Equipments{% endtrans %}</h2>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <div class="blue-box title">
+                    {% trans %}Equipments{% endtrans %}
+                </div>
+                <div class="blue-box">
+                    <p class="label">{% trans %}Total of Equipments{% endtrans %}</p>
+                    <div class="number">
+                        <strong class="counter"> {{ total.equipments | max_digits(3, True) }} </strong><span>{{ total.equipments | magnitude }} 
+                        {% trans %}equipments{% endtrans %}</span>
+                    </div>
+                </div>
+            </div>
+
+        </div><!--/.row-->
+    </div>
