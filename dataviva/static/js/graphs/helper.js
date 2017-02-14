@@ -50,7 +50,7 @@ var formatHelper = function() {
     var args = getUrlArgs();
 
     return {
-        'text': function(text, key) { 
+        'text': function(text, key) {
             switch (text) {
                 case 'item_id':
                     return dictionary[DICT[dataset][text][squares]] || dictionary[text];
@@ -60,10 +60,12 @@ var formatHelper = function() {
                     return dictionary[DICT[dataset][text][args['type']]];
                 case 'jobs':
                     return dictionary[DICT[dataset][text]];
+                case 'primary connections':
+                    return text.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
                 default:
                     return dictionary[text] || text;
             };
-            
+
         },
         'number': function(value, opts) {
             var result;
@@ -72,7 +74,7 @@ var formatHelper = function() {
 
                 var symbol = d3.formatPrefix(value).symbol;
                 symbol = symbol.replace('G', 'B');
-                
+
                 value = d3.formatPrefix(value).scale(value);
                 value = parseFloat(d3.format('.3g')(value));
 
@@ -103,7 +105,7 @@ var formatHelper = function() {
             if (result > 0 && result < 1) {
                 result = d3.round(result, 3);
             }
-            
+
             switch (opts.key) {
                 case 'share':
                     result = d3.round(value, 2) + '%';
@@ -141,6 +143,7 @@ var DICT = {
         'item_id': {
             'municipality': 'ibge_id',
             'product': 'hs_id',
+            'product_section': 'id',
             'country': 'wld_id'
         },
         'kg': {
@@ -200,10 +203,12 @@ var BASIC_VALUES = {
 var CALC_BASIC_VALUES = {
     'secex': {
         'exports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
+            var type = getUrlArgs()['type'] || dataItem['type'];
+            return type == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
         },
         'imports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
+            var type = getUrlArgs()['type'] || dataItem['type'];
+            return type == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
         }
     },
     'rais': {}

@@ -36,7 +36,14 @@ var buildData = function(apiResponse, circlesMetadata, connections) {
 
             dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
 
+            var group = DEPTHS[dataset][circles][0]
+            var groupId = circlesMetadata[dataItem[DICT[dataset]['item_id'][circles]]][group][DICT[dataset]['item_id'][group]]
+
+            if (HAS_ICONS.indexOf(group) >= 0)
+                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + groupId + '.png';
+
             connections.nodes.forEach(function(node){
+                //slice -4 for secex
                 if(node[DICT[dataset]['item_id'][circles]].slice(-4) == dataItem[DICT[dataset]['item_id'][circles]])
                     node[circles] = dataItem[circles]
             });
@@ -58,7 +65,7 @@ var buildData = function(apiResponse, circlesMetadata, connections) {
     return [data, connections.edges];
 }
 
-var loadViz = function(data) {
+var loadViz = function(data, connections) {
     var uiBuilder = function() {
         ui = [];
 
@@ -106,7 +113,7 @@ var loadViz = function(data) {
         return {
             'short': {
                 '': DICT[dataset]['item_id'][circles],
-                [dictionary['basic_values']]: [focus]
+                [dictionary['basic_values']]: [focus] //export_val, import_val, export_kg, import_kg
             },
             'long': {
                 '': DICT[dataset]['item_id'][circles],
@@ -123,21 +130,25 @@ var loadViz = function(data) {
     var viz = d3plus.viz()
         .container('#rings')
         .type('rings')
-        .edges(data)
+        .data(data)
+        .edges(connections)
         .focus(focus)
         .background('transparent')
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon({'value': 'icon', 'style': 'knockout'})
-        //.legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
+        //.legend({'filters': true, 'order': {'sort': 'asc', 'value': 'id'}})
+        .color({'scale':'category20', 'value': circles})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large' })
         .title(titleBuilder())
         .id(circles)
         .tooltip(tooltipBuilder())
+        .format(formatHelper())
         .ui(uiBuilder());
 
     viz.draw();
 
+    //refresh button not working
     toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
 };
 
@@ -145,8 +156,8 @@ var getUrls = function() {
     var dimensions = [dataset, 'year', circles];
 
     //http://api.staging.dataviva.info/secex/year/product/type/?year=2015
-    //if (dataset == 'secex')
-    //    dimensions.push('type') exports and imports separately
+    // if (dataset == 'secex')
+    //     dimensions.push('type') // exports and imports separately
 
     //http://api.staging.dataviva.info/rais/year/occupation_family/?year=2014&count=establishment
 
@@ -156,6 +167,7 @@ var getUrls = function() {
 
     if (dataset == 'secex')
         urls.push('/' + lang + '/rings/networks/hs/');
+        //cbo, cnae, hs, isic
 
     return urls;
 };
@@ -174,13 +186,7 @@ $(document).ready(function() {
 
             data = buildData(data, circlesMetadata, connections);
 
-
-            data[0].forEach(function(item){
-                if(item[circles] == focus)
-                    console.log(item)
-            });
-
-            loadViz(data[1]);
+            loadViz(data[0], data[1]);
 
             loading.hide();
             d3.select('#mask').remove();
