@@ -19,6 +19,8 @@ dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de 
 dictionary['item_id'] = 'ID';
 dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
 dictionary['per'] = lang == 'en' ? 'per' : 'por';
+dictionary['exports_value'] = lang == 'en' ? 'Export Value' : 'Valor das Exportações';
+dictionary['imports_value'] = lang == 'en' ? 'Import Value' : 'Valor das Importações';
 dictionary['exports_weight'] = lang == 'en' ? 'Export Weight' : 'Peso das Exportações';
 dictionary['imports_weight'] = lang == 'en' ? 'Import Weight' : 'Peso das Importações';
 dictionary['imports_per_weight'] = lang == 'en' ? 'Imports per kg' : 'Importações por peso';
@@ -199,6 +201,9 @@ var BASIC_VALUES = {
     'secex': ['value', 'kg'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size']
 };
+
+if (rings)
+    BASIC_VALUES['secex'] = ['exports_value', 'exports_weight', 'imports_value', 'imports_weight']
 
 var CALC_BASIC_VALUES = {
     'secex': {

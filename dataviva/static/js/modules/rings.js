@@ -8,7 +8,7 @@ var rings = document.getElementById('rings'),
     basicValues = BASIC_VALUES[dataset],
     calcBasicValues = CALC_BASIC_VALUES[dataset];
 
-var buildData = function(apiResponse, circlesMetadata, connections) {
+var buildData = function(apiResponse, circlesMetadata) {
 
     var getAttrByName = function(item, attr) {
         var index = headers.indexOf(attr);
@@ -57,15 +57,37 @@ var buildData = function(apiResponse, circlesMetadata, connections) {
         };
     });
 
-    connections.edges.forEach(function(edge){
-        edge.source = connections.nodes[edge.source][circles];
-        edge.target = connections.nodes[edge.target][circles];
+    return data;
+};
+
+var expandedData = function(data) {
+
+    var expandedData = [];
+
+    data.forEach(function(item){
+        if(item['type'] == 'export'){
+            data.forEach(function(item2){
+                if(item['product'] == item2['product'] && item2['type'] == 'import'){
+                    item['exports_value'] = item['value'];
+                    item['exports_weight'] = item['kg'];
+                    item['imports_value'] = item2['value'];
+                    item['imports_weight'] = item2['kg'];
+                    item['imports_per_weight'] = item2['imports_per_weight'];
+
+                    delete item['type'];
+                    delete item['value'];
+                    delete item['kg'];
+
+                    expandedData.push(item);
+                }
+            });
+        }
     });
 
-    return [data, connections.edges];
-}
+    return expandedData;
+};
 
-var loadViz = function(data, connections) {
+var loadViz = function(data) {
     var uiBuilder = function() {
         ui = [];
 
@@ -76,20 +98,8 @@ var loadViz = function(data, connections) {
                     if (value == args['year']) {
                         loadViz(data);
                     } else {
-                        var loadingData = dataviva.ui.loading('#rings').text(dictionary['Downloading Additional Years'] + '...'),
-                            copy = filters;
-
-                        filters = filters.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
-
-                        d3.json(getUrls()[0], function(allYearsData) {
-                            allYearsData = buildData(allYearsData, circlesMetadata, connections);
-                            viz.data(allYearsData);
-                            viz.draw();
-
-                            filters = copy;
-                            currentYear = 0;
-                            loadingData.hide();
-                        });
+                        var loadingData = dataviva.ui.loading('#rings').text(dictionary['Downloading Additional Years'] + '...');
+                        window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\year=[0-9]{4}/, '');
                     }
                 },
                 'value': [args['year'], dictionary['all']],
@@ -113,7 +123,7 @@ var loadViz = function(data, connections) {
         return {
             'short': {
                 '': DICT[dataset]['item_id'][circles],
-                [dictionary['basic_values']]: [focus] //export_val, import_val, export_kg, import_kg
+                [dictionary['basic_values']]: [focus]
             },
             'long': {
                 '': DICT[dataset]['item_id'][circles],
@@ -131,7 +141,7 @@ var loadViz = function(data, connections) {
         .container('#rings')
         .type('rings')
         .data(data)
-        .edges(connections)
+        .edges(connections.edges)
         .focus(focus)
         .background('transparent')
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
@@ -148,30 +158,35 @@ var loadViz = function(data, connections) {
 
     viz.draw();
 
-    //refresh button not working
     toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
 };
 
 var getUrls = function() {
     var dimensions = [dataset, 'year', circles];
 
-    //http://api.staging.dataviva.info/secex/year/product/type/?year=2015
-    // if (dataset == 'secex')
-    //     dimensions.push('type') // exports and imports separately
-
-    //http://api.staging.dataviva.info/rais/year/occupation_family/?year=2014&count=establishment
+    if (dataset == 'secex')
+        dimensions.push('type')
 
     var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
         'http://api.staging.dataviva.info/metadata/' + circles
     ];
 
-    if (dataset == 'secex')
-        urls.push('/' + lang + '/rings/networks/hs/');
-        //cbo, cnae, hs, isic
+    //http://api.staging.dataviva.info/secex/year/product/type/?year=2015
+    //http://api.staging.dataviva.info/rais/year/occupation_family/?year=2014&count=establishment
+
+    var connectionsHelper = {
+        'product': 'hs',
+        'occupation_family': 'cbo',
+        'industry_class': 'cnae'
+        //'': 'isic'
+    };
+
+    urls.push('/' + lang + '/rings/networks/' + connectionsHelper[circles] + '/');
 
     return urls;
 };
 
+var connections = [];
 var circlesMetadata = [];
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
@@ -184,9 +199,17 @@ $(document).ready(function() {
             circlesMetadata = responses[1];
             connections = responses[2];
 
-            data = buildData(data, circlesMetadata, connections);
+            data = buildData(data, circlesMetadata);
 
-            loadViz(data[0], data[1]);
+            if(dataset == 'secex')
+                data = expandedData(data);
+
+            connections.edges.forEach(function(edge){
+                edge.source = connections.nodes[edge.source][circles];
+                edge.target = connections.nodes[edge.target][circles];
+            });
+
+            loadViz(data);
 
             loading.hide();
             d3.select('#mask').remove();
