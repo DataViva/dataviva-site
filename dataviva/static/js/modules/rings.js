@@ -42,19 +42,27 @@ var buildData = function(apiResponse, circlesMetadata) {
             if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + groupId + '.png';
 
+            //Adds names to nodes IDs according to the rings' circles (e.g., '021202' > 'Soybeans')
             connections.nodes.forEach(function(node){
-                var nodeKey = dataset == 'secex' ? node[DICT[dataset]['item_id'][circles]].slice(-4) : node[DICT[dataset]['item_id'][circles]]
+                var nodeKey;
+                if(circles == 'product')
+                    nodeKey = node[DICT[dataset]['item_id'][circles]].slice(-4);
+
+                if(circles == 'occupation_family')
+                    nodeKey = node[DICT[dataset]['item_id'][circles]];
+
+                if(circles == 'industry_class')
+                    nodeKey = node[DICT[dataset]['item_id'][circles].slice(-2)].substr(1);
+
                 if(nodeKey == dataItem[DICT[dataset]['item_id'][circles]])
                     node[circles] = dataItem[circles]
             });
 
             if(dataItem[DICT[dataset]['item_id'][circles]] == focus)
-                focus = dataItem[circles]
+                focus = dataItem[circles];
 
             data.push(dataItem);
-        } catch(e) {
-
-        };
+        } catch(e) {};
     });
 
     return data;
@@ -66,13 +74,13 @@ var expandedData = function(data) {
 
     data.forEach(function(item){
         if(item['type'] == 'export'){
-            data.forEach(function(item2){
-                if(item['product'] == item2['product'] && item2['type'] == 'import'){
+            data.forEach(function(importItem){
+                if(item['product'] == importItem['product'] && importItem['type'] == 'import'){
                     item['exports_value'] = item['value'];
                     item['exports_weight'] = item['kg'];
-                    item['imports_value'] = item2['value'];
-                    item['imports_weight'] = item2['kg'];
-                    item['imports_per_weight'] = item2['imports_per_weight'];
+                    item['imports_value'] = importItem['value'];
+                    item['imports_weight'] = importItem['kg'];
+                    item['imports_per_weight'] = importItem['imports_per_weight'];
 
                     delete item['type'];
                     delete item['value'];
@@ -85,6 +93,30 @@ var expandedData = function(data) {
     });
 
     return expandedData;
+};
+
+var connectionsData = function() {
+
+    if(dataset == 'secex'){
+        connections.edges.forEach(function(edge){
+            edge.source = connections.nodes[edge.source][circles];
+            edge.target = connections.nodes[edge.target][circles];
+        });
+    }
+
+    if(dataset == 'rais'){
+        var id = circles == 'occupation_family' ? 'cbo_id' : 'id';
+
+        for (var i = 0; i < connections.edges.length; i++) {
+            for (var j = 0; j < connections.nodes.length; j++) {
+                if (connections.edges[i]['source'] == connections.nodes[j][id])
+                    connections.edges[i]['source'] = connections.nodes[j][circles];
+
+                if (connections.edges[i]['target'] == connections.nodes[j][id])
+                    connections.edges[i]['target'] = connections.nodes[j][circles];
+            };
+        };
+    }
 };
 
 var loadViz = function(data) {
@@ -171,9 +203,6 @@ var getUrls = function() {
         'http://api.staging.dataviva.info/metadata/' + circles
     ];
 
-    //http://api.staging.dataviva.info/secex/year/product/type/?year=2015
-    //http://api.staging.dataviva.info/rais/year/occupation_family/?year=2014&count=establishment
-
     var connectionsHelper = {
         'product': 'hs',
         'occupation_family': 'cbo',
@@ -191,6 +220,10 @@ var circlesMetadata = [];
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
+// http://localhost:5000/en/rings/secex/product/1201?year=2015
+// http://localhost:5000/en/rings/rais/occupation_family/4110?year=2014&count=establishment
+// http://localhost:5000/en/rings/rais/industry_class/84116?year=2014&count=establishment
+
 $(document).ready(function() {
     ajaxQueue(
         getUrls(),
@@ -201,27 +234,10 @@ $(document).ready(function() {
 
             data = buildData(data, circlesMetadata);
 
-            if(dataset == 'secex'){
+            if(dataset == 'secex')
                 data = expandedData(data);
 
-                connections.edges.forEach(function(edge){
-                    edge.source = connections.nodes[edge.source][circles];
-                    edge.target = connections.nodes[edge.target][circles];
-                });
-            }
-
-            if(dataset == 'rais'){
-                for (var i = 0; i < connections.edges.length; i++) {
-                    for (var j = 0; j < connections.nodes.length; j++) {
-                        if (connections.edges[i]['source'] == connections.nodes[j]['cbo_id'])
-                            connections.edges[i]['source'] = connections.nodes[j][circles]
-
-                        if (connections.edges[i]['target'] == connections.nodes[j]['cbo_id'])
-                            connections.edges[i]['target'] = connections.nodes[j][circles]
-                    };
-                };
-            }
-
+            connectionsData(data);
             loadViz(data);
 
             loading.hide();
