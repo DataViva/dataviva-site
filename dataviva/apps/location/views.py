@@ -26,7 +26,7 @@ from decimal import *
 import sys
 
 
-reload(sys)  
+reload(sys)
 sys.setdefaultencoding('utf8')
 
 mod = Blueprint('location', __name__,
@@ -44,12 +44,16 @@ tabs = {
 
         'wages': [
             'jobs-industry-tree_map',
+            'new-api-jobs-industry-tree_map',
             'jobs-industry-stacked',
             'jobs-occupation-tree_map',
+            'new-api-jobs-occupation-tree_map',
             'jobs-occupation-stacked',
             'wage-industry-tree_map',
+            'new-api-wage-industry-tree_map',
             'wage-industry-stacked',
             'wage-occupation-tree_map',
+            'new-api-wage-occupation-tree_map',
             'wage-occupation-stacked',
         ],
 
@@ -108,6 +112,7 @@ def location_depth(bra_id):
 
     return locations[len(bra_id)]
 
+
 def handle_region_bra_id(bra_id):
     return {
         "1": "1",
@@ -116,6 +121,7 @@ def handle_region_bra_id(bra_id):
         "4": "3",
         "5": "4"
     }[bra_id]
+
 
 def _location_service(depth, location):
     if depth == 'region':
@@ -126,6 +132,7 @@ def _location_service(depth, location):
         return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
     else:
         return location.id_ibge
+
 
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
@@ -162,7 +169,7 @@ def all(tab):
     url = request.args.get('url')
 
     graph = {}
-    
+
     if menu:
         graph['menu'] = menu
     if url:
@@ -215,13 +222,13 @@ def all(tab):
             body['highest_enrolled_by_university'] is None and body['highest_enrolled_by_basic_course'] is None and \
             body['highest_enrolled_by_major'] is None:
             abort(404)
-    
+
     if tab not in tabs:
         abort(404)
 
     if menu and menu not in tabs[tab]:
         abort(404)
-    
+
     else:
         return render_template('location/index.html',
                             header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
@@ -248,40 +255,59 @@ def index(bra_id, tab):
         location_id = None
 
     graph = {}
-    
+
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
+
+    depth = location_depth(bra_id)
+    if depth == 'region':
+        id_ibge = handle_region_bra_id(location.id)
+    elif depth == 'mesoregion':
+        id_ibge = str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    elif depth == 'microregion':
+        id_ibge = str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        id_ibge = location.id_ibge
 
     if not is_municipality:
         tabs['wages'] += [
             'jobs-municipalities-tree_map',
+            'new-api-jobs-municipalities-tree_map',
             'jobs-municipalities-geo_map',
             'jobs-municipalities-stacked',
             'wages-municipalities-tree_map',
+            'new-api-wages-municipalities-tree_map',
             'wages-municipalities-geo_map',
             'wages-municipalities-stacked',
         ]
 
         tabs['wages'] += [
             'jobs-municipality-tree_map',
+            'new-api-jobs-municipality-tree_map',
             'jobs-municipality-stacked',
             'wages-municipality-tree_map',
+            'new-api-wages-municipality-tree_map',
             'wages-municipality-stacked',
         ]
 
         tabs['trade-partner'] += [
             'exports-municipality-tree_map',
+            'new-api-exports-municipality-tree_map',
             'exports-municipality-stacked',
             'imports-municipality-tree_map',
+            'new-api-imports-municipality-tree_map',
             'imports-municipality-stacked',
 
         ]
 
         tabs['education'] += [
             'education-municipality-tree_map',
+            'new-api-education-municipality-tree_map',
             'basic-education-municipality-tree_map',
+            'new-api-basic-education-municipality-tree_map',
         ]
 
     location_service = LocationService(bra_id=bra_id)

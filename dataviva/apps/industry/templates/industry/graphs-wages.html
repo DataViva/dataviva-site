@@ -8,7 +8,7 @@
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=num_jobs" 
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-occupation-tree_map' or not graph }}"
                     data-parent="#jobs-occupation">TreeMap</a>
-                    <a href="/{{ g.locale }}/tree_map/rais/occupation_family/jobs?year=2014&industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}" 
+                    <a href="/{{ g.locale }}/tree_map/rais/occupation_family/jobs?year=2014&industry={{ industry.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-occupation-tree_map' }}"
                     data-parent="#new-api-jobs-occupation">TreeMap new API</a>
                     <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?sort=asc&layout=value&y=num_jobs&order=color" 
@@ -22,7 +22,7 @@
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-geo_map'}}" data-parent="#jobs-municipality">{% trans %}Map{% endtrans %}</a>
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=num_jobs" 
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-tree_map'}}" data-parent="#jobs-municipality">TreeMap</a>
-                    <a href="/{{ g.locale }}/tree_map/rais/municipality/jobs?year=2014&count=establishments&industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}" 
+                    <a href="/{{ g.locale }}/tree_map/rais/municipality/jobs?year=2014&count=establishments&industry={{ industry.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-tree_map' }}"
                     data-parent="#new-api-jobs-municipality">TreeMap new API</a>
                     <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?sort=asc&layout=value&y=num_jobs&order=color" 
@@ -53,7 +53,7 @@
                 <div class="collapse" id="wages-occupation">
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?color=color&depth=cbo_4&size=wage" 
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wage-occupation-tree_map'}}" data-parent="#wages-occupation">TreeMap</a>
-                    <a href="/{{ g.locale }}/tree_map/rais/occupation_family/wage?year=2014&industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}" 
+                    <a href="/{{ g.locale }}/tree_map/rais/occupation_family/wage?year=2014&industry={{ industry.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-occupation-tree_map' }}"
                     data-parent="#new-api-wages-occupation">TreeMap new API</a>
                     <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cbo/?y=wage" 
@@ -66,7 +66,7 @@
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-municipality-geo_map'}}" data-parent="#wages-municipality">{% trans %}Map{% endtrans %}</a>
                     <a href="/{{ g.locale }}/embed/tree_map/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?color=color&depth=bra_9&size=wage" 
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-municipality-tree_map'}}" data-parent="#wages-municipality">TreeMap</a>
-                    <a href="/{{ g.locale }}/tree_map/rais/municipality/wage?year=2014&count=establishment&industry={{ industry.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}" 
+                    <a href="/{{ g.locale }}/tree_map/rais/municipality/wage?year=2014&count=establishment&industry={{ industry.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-municipality-tree_map' }}"
                     data-parent="#new-api-wages-municipality">TreeMap new API</a>
                     <a href="/{{ g.locale }}/embed/stacked/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/bra/?y=wage&sort=asc&layout=value&order=color" 

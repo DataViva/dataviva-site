@@ -67,7 +67,7 @@ LANGUAGES = {
 }
 
 ''' For full text search '''
-WHOOSH_BASE = os.path.join(basedir, 'search.db')
+WHOOSH_BASE = os.path.join(basedir, 'dataviva/utils/search_indices')
 
 '''
     Oauth tokens set in environment variables from their respecive sources
