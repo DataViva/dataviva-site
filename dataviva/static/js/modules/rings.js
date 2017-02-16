@@ -134,7 +134,7 @@ var loadViz = function(data) {
 
     var timelineCallback = function(years) {
         currentYear = years.length == 1 ? years[0].getFullYear() : 0;
-        toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
+        toolsBuilder(rings.id, viz, data, titleBuilder().value, uiBuilder());
     };
 
     var viz = d3plus.viz()
@@ -158,7 +158,7 @@ var loadViz = function(data) {
 
     viz.draw();
 
-    toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
+    toolsBuilder(rings.id, viz, data, titleBuilder().value, uiBuilder());
 };
 
 var getUrls = function() {

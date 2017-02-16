@@ -1,4 +1,4 @@
-var toolsBuilder = function(viz, data, title, ui) {
+var toolsBuilder = function(app, viz, data, title, ui) {
 
     function expireCookie( cName ) {
         document.cookie =
@@ -8,14 +8,14 @@ var toolsBuilder = function(viz, data, title, ui) {
       }
 
     var initializeDownload = function(){
-        var svg = d3.select("#tree_map > svg")
+        var svg = d3.select("#" + app + " > svg")
         // Add necessary name space junk and get raw node
 
         svg.attr("version", 1.1)
             .attr("xmlns", "http://www.w3.org/2000/svg")
             .node()
         svg.insert('defs',":first-child")
-        var svg_xml = (new XMLSerializer).serializeToString(svg.node());            
+        var svg_xml = (new XMLSerializer).serializeToString(svg.node());
         var style = "\n";
         var requiredSheets = ['phylogram_d3.css', 'open_sans.css'];
 
@@ -31,7 +31,7 @@ var toolsBuilder = function(viz, data, title, ui) {
                         }
                     }
                 }
-            } 
+            }
         }
 
         img = new Image();
@@ -146,7 +146,7 @@ var toolsBuilder = function(viz, data, title, ui) {
         pdf = new jsPDF('l', 'mm', [w, h]);
         pdf.addImage(canvas, 'JPEG', 0,0,w,h);
         pdf.save(title);
-        
+
         dataviva.popover.hide();
         expireCookie("downloadToken");
     });
@@ -155,7 +155,7 @@ var toolsBuilder = function(viz, data, title, ui) {
         var initialize = initializeDownload();
         canvas = initialize[0];
         title = initialize[3];
-        
+
         img_download = canvas.toDataURL("image/png");
         var download = document.createElement('a');
         download.href = img_download;
@@ -170,7 +170,7 @@ var toolsBuilder = function(viz, data, title, ui) {
         var initialize = initializeDownload();
         title = initialize[3];
         svg = initialize[4];
-        
+
         var svgBlob = new Blob([svg], {type:"image/svg+xml;charset=utf-8"});
         saveAs(svgBlob, title + ".svg");
 
