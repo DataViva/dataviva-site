@@ -145,7 +145,6 @@ var DICT = {
         'item_id': {
             'municipality': 'ibge_id',
             'product': 'hs_id',
-            'product_section': 'id',
             'country': 'wld_id'
         },
         'kg': {

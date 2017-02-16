@@ -36,15 +36,15 @@ var buildData = function(apiResponse, circlesMetadata) {
 
             dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
 
-            var group = DEPTHS[dataset][circles][0]
-            var groupId = circlesMetadata[dataItem[DICT[dataset]['item_id'][circles]]][group][DICT[dataset]['item_id'][group]]
+            var group = DEPTHS[dataset][circles][0];
+            var groupId = circlesMetadata[dataItem[DICT[dataset]['item_id'][circles]]][group]['id'];
 
             if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + groupId + '.png';
 
             connections.nodes.forEach(function(node){
-                //slice -4 for secex
-                if(node[DICT[dataset]['item_id'][circles]].slice(-4) == dataItem[DICT[dataset]['item_id'][circles]])
+                var nodeKey = dataset == 'secex' ? node[DICT[dataset]['item_id'][circles]].slice(-4) : node[DICT[dataset]['item_id'][circles]]
+                if(nodeKey == dataItem[DICT[dataset]['item_id'][circles]])
                     node[circles] = dataItem[circles]
             });
 
@@ -201,13 +201,26 @@ $(document).ready(function() {
 
             data = buildData(data, circlesMetadata);
 
-            if(dataset == 'secex')
+            if(dataset == 'secex'){
                 data = expandedData(data);
 
-            connections.edges.forEach(function(edge){
-                edge.source = connections.nodes[edge.source][circles];
-                edge.target = connections.nodes[edge.target][circles];
-            });
+                connections.edges.forEach(function(edge){
+                    edge.source = connections.nodes[edge.source][circles];
+                    edge.target = connections.nodes[edge.target][circles];
+                });
+            }
+
+            if(dataset == 'rais'){
+                for (var i = 0; i < connections.edges.length; i++) {
+                    for (var j = 0; j < connections.nodes.length; j++) {
+                        if (connections.edges[i]['source'] == connections.nodes[j]['cbo_id'])
+                            connections.edges[i]['source'] = connections.nodes[j][circles]
+
+                        if (connections.edges[i]['target'] == connections.nodes[j]['cbo_id'])
+                            connections.edges[i]['target'] = connections.nodes[j][circles]
+                    };
+                };
+            }
 
             loadViz(data);
 
