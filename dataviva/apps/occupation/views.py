@@ -131,7 +131,7 @@ def index(occupation_id, tab):
     header = {}
     body = {}
     graph = {}
-    
+
     if menu:
         graph['menu'] = menu
     if url:
@@ -167,7 +167,8 @@ def index(occupation_id, tab):
     tabs = {
         'general': [],
         'opportunities': [
-            'economic-opportunities-rings'
+            'economic-opportunities-rings',
+            'new-api-economic-opportunities-rings'
         ],
 
         'wages': [
@@ -217,7 +218,7 @@ def index(occupation_id, tab):
     body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
     body['year'] = occupation_activities_service.year()
-    
+
     rais_max_year = db.session.query(func.max(Yo.year)).first()[0]
 
     if location:
@@ -238,7 +239,7 @@ def index(occupation_id, tab):
             Yo.cbo_id_len == len(occupation_id),
             Yo.year == max_year_query)\
             .order_by(Yo.num_jobs.desc())
-        
+
     rais = rais_query.all()
     for index, occ in enumerate(rais):
         if rais[index].cbo_id == occupation_id:

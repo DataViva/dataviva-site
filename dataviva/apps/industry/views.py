@@ -220,6 +220,12 @@ def index(cnae_id, tab):
 
     tabs = {
         'general': [],
+
+        'opportunities': [
+            'economic-activities-rings',
+            'new-api-economic-activities-rings'
+        ],
+
         'wages': [
             'jobs-occupation-tree_map',
             'new-api-jobs-occupation-tree_map',
@@ -236,10 +242,7 @@ def index(cnae_id, tab):
             'new-api-wages-municipality-tree_map',
             'wages-municipality-stacked',
             'wages-distribution-bar',
-        ],
-        'opportunities': [
-            'economic-activities-rings',
-        ],
+        ]
     }
 
     if tab not in tabs:

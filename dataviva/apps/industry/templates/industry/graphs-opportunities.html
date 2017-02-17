@@ -4,17 +4,22 @@
         <div class="list-group panel">
             <h4>{% trans %}Economic Activities{% endtrans %}</h4>
             <a href="/{{ g.locale }}/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
-                target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'economic-activities-rings' or not graph }}"
-                data-parent="#economic-activities">{% trans %}Rings{% endtrans %}</a>
+                target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'economic-activities-rings'}}"
+                data-parent="#economic-activities">{% trans %}Rings{% endtrans %}
+            </a>
+            <a href="/{{ g.locale }}/rings/rais/industry_class/{{ industry.id }}?year=2014{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'new-api-economic-activities-rings' or not graph}}"
+                data-parent="#new-api-economic-activities">Rings New API
+            </a>
         </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
             <iframe src="
                         {% if not graph %}
-                            /{{ g.locale }}/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae
+                            /{{ g.locale }}/rings/rais/industry_class/{{ industry.id }}?year=2014{{ '&id_ibge=%s' % id_ibge if id_ibge }}
                          {% else %}
-                            /{{ g.locale }}/embed/{{graph.url}}
+                            /{{ g.locale }}/{{graph.url}}
                         {% endif %}"
                 name="graphs-frame-opportunities"
                 id="graphs-frame-opportunities"

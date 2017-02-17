@@ -178,7 +178,6 @@ var loadViz = function(data) {
         .background('transparent')
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon({'value': 'icon', 'style': 'knockout'})
-        //.legend({'filters': true, 'order': {'sort': 'asc', 'value': 'id'}})
         .color({'scale':'category20', 'value': circles})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large' })
@@ -207,7 +206,6 @@ var getUrls = function() {
         'product': 'hs',
         'occupation_family': 'cbo',
         'industry_class': 'cnae'
-        //'': 'isic'
     };
 
     urls.push('/' + lang + '/rings/networks/' + connectionsHelper[circles] + '/');
@@ -219,10 +217,6 @@ var connections = [];
 var circlesMetadata = [];
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
-
-// http://localhost:5000/en/rings/secex/product/1201?year=2015
-// http://localhost:5000/en/rings/rais/occupation_family/4110?year=2014&count=establishment
-// http://localhost:5000/en/rings/rais/industry_class/84116?year=2014&count=establishment
 
 $(document).ready(function() {
     ajaxQueue(

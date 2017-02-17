@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, render_template, g, request, make_response
 from dataviva.apps.general.views import get_locale
 from dataviva.translations.dictionary import dictionary
+from dataviva.utils.cached_query import cached_query
+from dataviva import datavivadir
+from config import GZIP_DATA
 import urllib
 import json
+
 
 mod = Blueprint('rings', __name__,
                 template_folder='templates',
@@ -97,18 +101,18 @@ def index(dataset, circles, focus):
 
     filters = urllib.urlencode(filters)
 
+    if circles == 'product':
+        focus = product_service(focus)[1]
+
+    if circles == 'industry_class':
+        focus = industry_service(focus)[1]
+
     return render_template('rings/index.html',
                            dataset=dataset,
                            circles=circles,
                            focus=focus,
                            filters=filters,
                            dictionary=json.dumps(dictionary()))
-
-
-from flask import make_response
-from dataviva import datavivadir
-from dataviva.utils.cached_query import cached_query
-from config import GZIP_DATA
 
 
 @mod.route('/networks/<type>/')

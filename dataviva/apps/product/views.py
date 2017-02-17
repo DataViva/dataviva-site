@@ -113,7 +113,8 @@ def index(product_id, tab):
     tabs = {
         'general': [],
         'opportunities': [
-            'economic-opportunities-rings'
+            'economic-opportunities-rings',
+            'new-api-economic-opportunities-rings'
         ],
         'trade-partner': [
             'trade-balance-product-line',
