@@ -2,47 +2,15 @@ var stacked = document.getElementById('stacked'),
     dataset = stacked.getAttribute('dataset'),
     filters = stacked.getAttribute('filters'),
     area = stacked.getAttribute('area'),
-    group = stacked.getAttribute('group'),
-    depths = stacked.getAttribute('depths').split(' '),
+    controls = true,
+    depths = DEPTHS[dataset][area],
+    group = depths[0],
     values = stacked.getAttribute('values').split(' '),
     type = stacked.getAttribute('type').split(' '),
+    currentYear = +getUrlArgs()['year'] || 0,
     lang = document.documentElement.lang;
-
-// Temporarily translates text until dictionary is updated
-dataviva.dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
-dataviva.dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Municipio';
-dataviva.dictionary['section'] = lang == 'en' ? 'Section' : 'Seção';
-dataviva.dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
-dataviva.dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
-dataviva.dictionary['by'] = lang == 'en' ? 'by' : 'por';
-dataviva.dictionary['of'] = lang == 'en' ? 'of' : 'de';
-dataviva.dictionary['country'] = lang == 'en' ? 'Country' : 'País';
-dataviva.dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
-dataviva.dictionary['kg'] = 'KG';
-dataviva.dictionary['Based'] =  lang == 'en' ? 'Continent' : 'Baseado';
-dataviva.dictionary['year'] =  lang == 'en' ? 'Year' : 'Ano';
-dataviva.dictionary['time-resolution'] =  lang == 'en' ? 'Time Resolution' : 'Resolução temporal';
-dataviva.dictionary['Order'] =  lang == 'en' ? 'Order' : 'Ordem';
-dataviva.dictionary['sort'] =  lang == 'en' ? 'Sort' : 'Ordenar';
-dataviva.dictionary['export'] =  lang == 'en' ? 'Export' : 'Exportação';
-dataviva.dictionary['import'] =  lang == 'en' ? 'Import' : 'Importação';
-dataviva.dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Particiação de Mercado';
-dataviva.dictionary['y-axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
-dataviva.dictionary['desc'] = lang == 'en' ? 'Descending' : 'Descendente';
-dataviva.dictionary['asc'] = lang == 'en' ? 'Ascending' : 'Ascendente';
-dataviva.dictionary['value'] = lang == 'en' ? 'Value' : 'Valor';
-dataviva.dictionary['name'] = lang == 'en' ? 'Name' : 'Nome';
-dataviva.dictionary['Year'] = lang == 'en' ? 'Year' : 'Ano';
-dataviva.dictionary['Month'] = lang == 'en' ? 'Month' : 'Mês';
-dataviva.dictionary['unknown-region'] = lang == 'en' ? 'Unknown Region' : 'Região Desconhecida';
-
-var temp_regionNames = {
-    1: "Região Norte",
-    2: "Região Nordeste",
-    3: "Região Sudeste",
-    4: "Região Sul",
-    5: "Região Centro-Oeste"
-}
+    basicValues = BASIC_VALUES[dataset],
+    calcBasicValues = CALC_BASIC_VALUES[dataset];
 
 var buildData = function(apiData, areaMetadata, groupMetadata) {
     
@@ -60,44 +28,35 @@ var buildData = function(apiData, areaMetadata, groupMetadata) {
 
             headers.forEach(function(header){
                 dataItem[header] = getAttrByName(item, header);
+                if (['wage', 'average_wage'].indexOf(header) >= 0)
+                    dataItem[header] = +dataItem[header]
             });
 
-            dataItem['tooltip_id'] = dataItem[area];
+            dataItem[DICT[dataset]['item_id'][area]] = dataItem[area];
+
+            for (key in calcBasicValues) {
+                dataItem[key] = calcBasicValues[key](dataItem);   
+            }
 
             depths.forEach(function(depth) {
                 if (depth != area && depth != group) {
-                    if (area == 'product'){
-                        // this is due to metadata having only 'chapter' instead of 'product_chapter'
-                        depth = depth.split('_')[1]
-                        dataItem[depth] = areaMetadata[dataItem[area]][depth]['name_' + lang];
-                    } else {
-                        dataItem[depth] = areaMetadata[dataItem[area]][depth]['name'];
-                    }
-                }
-
-                if (area == 'municipality'){
-                    if (depth == 'microregion'){
-                        dataItem[depth] = dataItem[depth] + ' ';
-                    } else if (depth == 'state'){
-                        dataItem[depth] = ' ' + dataItem[depth];
-                    } else if (depth == 'region'){
-                        dataItem[depth] = temp_regionNames[dataItem[depth]];
-                    }
+                    dataItem[depth] = areaMetadata[dataItem[area]][depth]['name_' + lang];
                 }
             });
             
             dataItem[area] = areaMetadata[dataItem[area]]['name_' + lang];
             
             if (group) {
-                if (group == 'product_section' || group == 'continent' || group == 'state'){
+                if (HAS_ICONS.indexOf(group) >= 0)
                     dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
-                }
-                if (group != 'region') {
-                    // this is due to not having region metadata yet
-                    dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
-                }
+                dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
             }
             
+            if (dataItem.microregion){
+                dataItem.microregion = dataItem.microregion + ' ';
+            } else if (dataItem.state){
+                dataItem.state = ' ' + dataItem.state;
+            }
             if (dataItem.month){
                 dataItem.month = dataItem.year + "/" + dataItem.month + "/01";
             }
@@ -111,102 +70,115 @@ var buildData = function(apiData, areaMetadata, groupMetadata) {
     return data;
 }
 
-// Options to set in vizu
-var uiHelper = {
-    "scale": {
-        "label": "Layout",
-        "type" : "drop",
-        "value" : [
-            {
-                [dataviva.dictionary['year']]: "linear"
-            }, 
-            {
-                [dataviva.dictionary['market-share']]: "share"
-            }
-        ],
-        "method" : function(value, viz){
-            viz.y({
-                "scale": value
-            })
-            .draw();
-        }
-    },
-    // "yaxis": {
-    //     "label": dataviva.dictionary['y-axis'],
-    //     "type": "drop",
-    //     "value": [
-    //         {
-    //             [dataviva.dictionary['import']]: "import_value"
-    //         },
-    //         {
-    //             [dataviva.dictionary['export']]: "export_value"
-    //         }
-    //     ],
-    //     "method": function(value, viz){
-    //         viz.y({
-    //             "value": value,
-    //             "label": value
-    //         }).draw();
-    //     }
-    // },
-    "ysort": {
-        "label": dataviva.dictionary['sort'],
-        "type": "drop",
-        "value": [
-            {
-                [dataviva.dictionary['desc']] : "desc"
-            },
-            {
-                [dataviva.dictionary['asc']] : "asc"
-            }
-        ],
-        "method": function(value, viz){
-            viz.order({
-                "sort": value
-            }).draw();
-        }
-    },
-    "yorder": {
-        "label": dataviva.dictionary['Order'],
-        "type": "drop",
-        "value": [
-            {
-                [dataviva.dictionary['value']] : "value"
-            },
-            {
-                [dataviva.dictionary['name']] : "area2"
-            }
-        ],
-        "method": function(value, viz){
-            viz.order({
-                "value": value
-            }).draw();
-        }
-    },
-    "time_range": {
-        "label": dataviva.dictionary['time-resolution'],
-        "value": [
-            {
-                [dataviva.dictionary['Year']]: "year"
-            },
-            {
-                [dataviva.dictionary['Month']]: "month"
-            }
-        ],
-        "method": function(value, viz){
-            viz.x({
-                    "value": value,
-                    "label": value
-            });
-            viz.time({
-                "value": value
-            }).draw();
-        }
-    }
-};
+var loadViz = function (data, type){
 
-var loadStacked = function (data, type){
-    data_type = {"value": "value", "label": (type == 'export' ? dataviva.dictionary["Total Value Exported"] : dataviva.dictionary["Total Value Imported"]) + ' [$ USD]'};
+    var titleBuilder = function() {
+        return {
+            'value': 'Title',
+            'font': {'size': 22, 'align': 'left'},
+            'sub': {'font': {'align': 'left'}, 'value': 'Subtitle'},
+            'total': {'font': {'align': 'left'}, 'value': true}
+        }
+    };
+
+    var tooltipBuilder = function() {
+        return {
+            'short': {
+                '': DICT[dataset]['item_id'][area],
+                [dictionary['basic_values']]: 'value'
+            },
+            'long': {
+                '': DICT[dataset]['item_id'][area],
+                [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
+            }
+        }
+    };
+
+    var uiBuilder = function() {
+        ui = [];
+
+        ui.push( {
+            "label": "Layout",
+            "type" : "drop",
+            "value" : [
+                {
+                    [dictionary['year']]: "linear"
+                }, 
+                {
+                    [dictionary['market-share']]: "share"
+                }
+            ],
+            "method" : function(value, viz){
+                viz.y({
+                    "scale": value
+                })
+                .draw();
+            }
+        });
+
+        ui.push({
+            "label": dictionary['sort'],
+            "type": "drop",
+            "value": [
+                {
+                    [dictionary['desc']] : "desc"
+                },
+                {
+                    [dictionary['asc']] : "asc"
+                }
+            ],
+            "method": function(value, viz){
+                viz.order({
+                    "sort": value
+                }).draw();
+            }
+        });
+
+        ui.push({
+            "label": dictionary['Order'],
+            "type": "drop",
+            "value": [
+                {
+                    [dictionary['value']] : "value"
+                },
+                {
+                    [dictionary['name']] : "area2"
+                }
+            ],
+            "method": function(value, viz){
+                viz.order({
+                    "value": value
+                }).draw();
+            }
+        });
+
+
+        ui.push({
+            "label": dictionary['time-resolution'],
+            "value": [
+                {
+                    [dictionary['year']]: "year"
+                },
+                {
+                    [dictionary['month']]: "month"
+                }
+            ],
+            "method": function(value, viz){
+                viz.x({
+                        "value": value,
+                        "label": value
+                });
+                viz.time({
+                    "value": value
+                }).draw();
+            }
+        });
+
+        return ui;
+    }
+
+
+    data_type = {"value": "value", "label": (type == 'export' ? dictionary["Total Value Exported"] : dictionary["Total Value Imported"]) + ' [$ USD]'};
 
     var viz = d3plus.viz()
         .title({"value": "Inserir título", "font": {"family": "Times", "size": "24","align": "left"}})
@@ -222,15 +194,11 @@ var loadStacked = function (data, type){
         .title({
             "sub": {"value" : "Inserir sub-título", "font": {"align": "left"}}
         })
+        .tooltip(tooltipBuilder())
+        .ui(uiBuilder())
         // .legend({"filters": true})
-        .footer(dataviva.dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
-        .ui([
-            uiHelper.yorder,
-            uiHelper.scale,
-            uiHelper.ysort,
-            // uiHelper.yaxis,
-            uiHelper.time_range
-        ]);
+        .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
+        .format(formatHelper())
 
         if (group) {
             viz.color(group);
@@ -242,18 +210,13 @@ var loadStacked = function (data, type){
             viz.id(depths);
         }
 
-        if (area == "municipality") {
-            viz.depth(1)
-            viz.order("region")
-        }
-
         viz.draw()
+
+        toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
 }
 
-var loading = dataviva.ui.loading('.loading').text(dataviva.dictionary['loading'] + '...');
-
-$(document).ready(function(){
-    var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year') , area];
+var getUrls = function() {
+    var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year'), area];
     if (group && depths.length && depths.indexOf(group) == -1 || !depths.length)
         dimensions.push(group);
     depths.forEach(function(depth) {
@@ -267,17 +230,30 @@ $(document).ready(function(){
 
     if (group)
         urls.push('http://api.staging.dataviva.info/metadata/' + group);
-    
-    ajaxQueue(
-        urls,
-        function(responses){
-            var apiData = responses[0],
-                areaMetadata = responses[1];
-                groupMetadata = group ? responses[2] : [];
+    return urls;
+};
 
-            data = buildData(apiData, areaMetadata, groupMetadata);
+var areaMetadata = [],
+    groupMetadata = [];
+
+var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
+
+
+$(document).ready(function() {
+    ajaxQueue(
+        getUrls(), 
+        function(responses) {
+            var data = responses[0];
+            areaMetadata = responses[1];
+            if (group)
+                groupMetadata = responses[2];
+
+            data = buildData(data, areaMetadata, groupMetadata);
+
+            loadViz(data, type);
 
             loading.hide();
-            loadStacked(data, type);
-    });
+            d3.select('#mask').remove();
+        }
+    );
 });
