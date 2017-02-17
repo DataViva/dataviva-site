@@ -21,37 +21,60 @@ def add_language_code(endpoint, values):
 	values.setdefault('lang_code', get_locale())
 
 
-def location_service(id_ibge):
-	locations = {
-		1: "region",
-		2: "state",
-		4: "mesoregion",
-		5: "microregion",
-		7: "municipality"
-	}
+@mod.before_request
+def before_request():
+    g.page_type = mod.name
 
-	return (locations[len(id_ibge)], id_ibge)
+
+def location_service(id_ibge):
+    locations = {
+        1: "region",    #todo
+        2: "state",
+        4: "mesoregion",
+        5: "microregion",
+        7: "municipality"
+    }
+
+    return (locations[len(id_ibge)], id_ibge)
 
 
 def product_service(product):
-	if len(product) == 2:
-		return ('section', product[:2])
-	elif len(product) == 4:
-		return ('chapter', product[2:4])
-	else:
-		return ('product', product[2:])
+    if len(product) == 2:
+        return ('product_section', product[:2])
+    elif len(product) == 4:
+        return ('product_chapter', product[2:4])
+    else:
+        return ('product', product[2:])
 
 
 def wld_service(wld):
-   if wld.isdigit():
-       wld = '%03d' % int(wld)
+    if wld.isdigit():
+        wld = '%03d' % int(wld)
 
-   wlds = {
-       2: "continent",
-       3: "country"
-   }
+    wlds = {
+        2: "continent",
+        3: "country"
+    }
 
-   return (wlds[len(wld)], wld)
+    return (wlds[len(wld)], wld)
+
+
+def occupation_service(occupation):
+    occupations = {
+        1: "occupation_group",
+        4: "occupation_family"
+    }
+
+    return (occupations[len(occupation)], occupation)
+
+
+def industry_service(industry):
+    if len(industry) == 1:
+        return ('industry_section', industry)
+    elif len(industry) == 3:
+        return ('industry_division', industry[1:])
+    else:
+        return ('industry_class', industry[1:])
 
 
 @mod.route('/<dataset>/<area>/<value>')
