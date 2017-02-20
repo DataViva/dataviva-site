@@ -7,7 +7,7 @@
                 target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'economic-activities-rings'}}"
                 data-parent="#economic-activities">{% trans %}Rings{% endtrans %}
             </a>
-            <a href="/{{ g.locale }}/rings/rais/industry_class/{{ industry.id }}?year=2014{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+            <a href="/{{ g.locale }}/rings/rais/industry_class/{{ industry.id }}?year=2014&count=establishments{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                 target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'new-api-economic-activities-rings' or not graph}}"
                 data-parent="#new-api-economic-activities">Rings New API
             </a>
