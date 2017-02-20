@@ -136,6 +136,10 @@
     <script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
     <script type="text/javascript" src="/static/js/utils/utils.general.js"></script>
 
+    {% block script %}
+      
+    {% endblock %}
+
     <script>
       if(redirect) window.location = "/upgrade/"
       dataviva.language = "{{ g.locale }}";
