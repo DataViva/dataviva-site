@@ -1,19 +1,104 @@
 var lang = document.documentElement.lang;
 
+var DICT = {
+    'secex': {
+        'item_id': {
+            'municipality': 'ibge_id',
+            'product': 'hs_id',
+            'country': 'wld_id'
+        },
+        'kg': {
+            'export': 'export_kg',
+            'import': 'import_kg'
+        },
+        'value': {
+            'export': 'exports',
+            'import': 'imports'
+        },
+        'value_per_kg': {
+            'export': 'export_val_kg',
+            'import': 'import_val_kg'
+        }
+    },
+    'rais': {
+        'item_id': {
+            'industry_class': 'cnae_id',
+            'municipality': 'ibge_id',
+            'occupation_family': 'cbo_id'
+        },
+        'jobs': 'total_jobs'
+    }
+};
+
+var DEPTHS = {
+    'secex': {
+        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'municipality'],
+        'product': ['product_section', 'product'],
+        'country': ['continent', 'country'],
+        'port': ['port']
+    },
+    'rais': {
+        'industry_class': ['industry_section', 'industry_division', 'industry_class'],
+        'municipality': ['state', 'mesoregion', 'microregion', 'municipality'],
+        'occupation_family': ['occupation_group', 'occupation_family']
+    }
+};
+
+var SIZES = {
+    'secex': {
+        'municipality': ['value', 'kg'],
+        'product': ['value', 'kg'],
+        'country': ['value', 'kg'],
+        'port': ['value', 'kg']
+    },
+    'rais': {
+        'industry_class': ['jobs', 'wage', 'establishment_count'],
+        'municipality': ['jobs', 'wage', 'establishment_count'],
+        'occupation_family': ['jobs', 'wage']
+    }
+};
+
+var BASIC_VALUES = {
+    'secex': ['value', 'kg'],
+    'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size']
+};
+
+var CALC_BASIC_VALUES = {
+    'secex': {
+        'exports_per_weight': function(dataItem) {
+            return getUrlArgs()['type'] == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
+        },
+        'imports_per_weight': function(dataItem) {
+            return getUrlArgs()['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
+        }
+    },
+    'rais': {}
+};
+
+var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group'];
+
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
-dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Municipio';
+dictionary['states'] = lang == 'en' ? 'States' : 'Estados';
+dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';
+dictionary['municipalities'] = lang == 'en' ? 'Municipalities' : 'Municípios';
 dictionary['product_section'] = lang == 'en' ? 'Section' : 'Seção';
 dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
 dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
 dictionary['by'] = lang == 'en' ? 'by' : 'por';
+dictionary['that trade'] = lang == 'en' ? 'that trade' : 'que comercializam';
 dictionary['of'] = lang == 'en' ? 'of' : 'de';
 dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
 dictionary['country'] = lang == 'en' ? 'Country' : 'País';
+dictionary['countries'] = lang == 'en' ? 'Countries' : 'Países';
 dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
+dictionary['continents'] = lang == 'en' ? 'Continents' : 'Continentes';
 dictionary['mesoregion'] = lang == 'en' ? 'Mesoregion' : 'Mesorregião';
+dictionary['mesoregions'] = lang == 'en' ? 'Mesoregions' : 'Mesorregiões';
 dictionary['microregion'] = lang == 'en' ? 'Microregion' : 'Microrregião';
+dictionary['microregions'] = lang == 'en' ? 'Microregions' : 'Microrregiões';
 dictionary['region'] = lang == 'en' ? 'Region' : 'Região';
+dictionary['regions'] = lang == 'en' ? 'Regions' : 'Regiões';
 dictionary['basic_values'] = lang == 'en' ? 'Basic Values' : 'Valores Básicos';
 dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
 dictionary['item_id'] = 'ID';
@@ -35,6 +120,43 @@ dictionary['occupation_family'] = lang == 'en' ? 'Family' : 'Família';
 dictionary['occupation_group'] = lang == 'en' ? 'Main Group' : 'Grande Grupo';
 dictionary['Creating URL'] = lang == 'en' ? 'Creating URL' : 'Criando URL';
 dictionary['kg'] = 'KG';
+
+var PLURAL = {
+    'municipality': 'municipalities',
+    'state': 'states',
+    'microregion': 'microregions',
+    'mesoregion': 'mesoregions',
+    'region': 'regions',
+    'country': 'countries',
+    'product': 'products',
+    'industry_class': 'industries',
+    'industry_section': 'industries',
+    'industry_division': 'industries',
+    'industry_division': 'industries',
+    'occupation_group': 'occupations',
+    'occupation_family': 'occupations'
+};
+
+var titleBuilder = function(shapes, dataset, filters, yearRange) {
+    var title = baseTitle,
+        subtitle = baseSubtitle;
+
+    var formatYearRange = function() {
+        if (yearRange[0] && yearRange[1])
+            return '(' + yearRange[0] + '-' + yearRange[1] + ')';
+        if (yearRange[1])
+            return '(' + yearRange[1] + ')';
+    };
+
+    if (yearRange[0] || yearRange[1])
+        title += ' ' + formatYearRange();
+
+    title = title.replace('<shapes>', PLURAL[shapes]);
+    title = title.charAt(0).toUpperCase() + title.slice(1);
+    
+    console.log(title);
+    return {'title': title, 'subtitle': subtitle};
+};
 
 var getUrlArgs = function() {
     var args = {};
@@ -106,7 +228,7 @@ var formatHelper = function() {
             
             switch (opts.key) {
                 case 'share':
-                    result = d3.round(value, 2) + '%';
+                    result = d3.round(value, 1) + '%';
                     break;
                 case 'value':
                 case 'imports_per_weight':
@@ -136,77 +258,3 @@ var formatHelper = function() {
     }
 };
 
-var DICT = {
-    'secex': {
-        'item_id': {
-            'municipality': 'ibge_id',
-            'product': 'hs_id',
-            'country': 'wld_id'
-        },
-        'kg': {
-            'export': 'export_kg',
-            'import': 'import_kg'
-        },
-        'value': {
-            'export': 'exports',
-            'import': 'imports'
-        },
-        'value_per_kg': {
-            'export': 'export_val_kg',
-            'import': 'import_val_kg'
-        }
-    },
-    'rais': {
-        'item_id': {
-            'industry_class': 'cnae_id',
-            'municipality': 'ibge_id',
-            'occupation_family': 'cbo_id'
-        },
-        'jobs': 'total_jobs'
-    }
-};
-
-var DEPTHS = {
-    'secex': {
-        'municipality': ['state', 'mesoregion', 'microregion', 'municipality'],
-        'product': ['product_section', 'product'],
-        'country': ['continent', 'country']
-    },
-    'rais': {
-        'industry_class': ['industry_section', 'industry_division', 'industry_class'],
-        'municipality': ['state', 'mesoregion', 'microregion', 'municipality'],
-        'occupation_family': ['occupation_group', 'occupation_family']
-    }
-};
-
-var SIZES = {
-    'secex': {
-        'municipality': ['value', 'kg'],
-        'product': ['value', 'kg'],
-        'country': ['value', 'kg']
-    },
-    'rais': {
-        'industry_class': ['jobs', 'wage', 'establishment_count'],
-        'municipality': ['jobs', 'wage', 'establishment_count'],
-        'occupation_family': ['jobs', 'wage']
-    }
-};
-
-var BASIC_VALUES = {
-    'secex': ['value', 'kg'],
-    'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size']
-};
-
-var CALC_BASIC_VALUES = {
-    'secex': {
-        'exports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
-        },
-        'imports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
-        }
-    },
-    'rais': {}
-};
-
-var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group'];

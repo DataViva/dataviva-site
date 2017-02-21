@@ -82,13 +82,13 @@ var toolsBuilder = function(viz, data, title, ui) {
         var loadingPopover = dataviva.ui.loading('#share-popover'),
             url = window.location.href;
 
-        if (currentYear) {
+        if (!yearRange[0] && yearRange[1]) {
             if (url.match(/year=[0-9]{4}/))
-                url = url.replace(/year=[0-9]{4}/, 'year=' + currentYear);
+                url = url.replace(/year=[0-9]{4}/, 'year=' + yearRange[1]);
             else if (url.match(/\?/))
-                url += '&year=' + currentYear;
+                url += '&year=' + yearRange[1];
             else
-                url += '?year=' + currentYear;
+                url += '?year=' + yearRange[1];
         } else {
             url = url.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}&?/, '?');
         }
@@ -178,6 +178,7 @@ var toolsBuilder = function(viz, data, title, ui) {
         expireCookie("downloadToken");
     });
 
+    var controls = true;
     d3.select('#controls-toggle-btn').on('click', function() {
         controls = !controls;
         viz.ui(controls ? ui : []);
