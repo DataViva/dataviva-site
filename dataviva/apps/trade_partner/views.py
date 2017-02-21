@@ -57,6 +57,29 @@ def location_service(depth, location):
     else:
         return location.id_ibge
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+
+def location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
+
 @mod.route('/<wld_id>/graphs/<tab>', methods=['POST'])
 def graphs(wld_id, tab):
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
@@ -95,18 +118,14 @@ def index(wld_id, tab):
     max_year_query = db.session.query(
         func.max(Ymw.year)).filter_by(wld_id=wld_id)
 
-    bra_id = request.args.get('bra_id')
+    bra_id = bra_id if bra_id != 'all' else None
+
     if not bra_id:
         depth = None
         id_ibge = None
     else:
         depth = location_depth(bra_id)
         id_ibge = location_service(depth, location)
-
-    if location:
-        location_id = location.id
-    else:
-        location_id = None
 
     if bra_id:
         trade_partner_service = TradePartner(wld_id, bra_id)
