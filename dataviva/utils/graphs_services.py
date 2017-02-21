@@ -30,3 +30,15 @@ def industry_service(industry):
     if len(industry) == 3:
         return ('industry_division', industry[1:])
     return ('industry_class', industry[1:])
+
+
+def filter_service(key):
+    if key in ['region', 'state', 'mesoregion', 'microregion', 'municipality']:
+        return 'location'
+    if key in ['continent', 'country']:
+        return 'partner'
+    if key in ['industry_division', 'industry_section', 'industry_class']:
+        return 'industry'
+    if key in ['occupation_group', 'occupation_family']:
+        return 'occupation'
+    return key

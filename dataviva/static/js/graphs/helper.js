@@ -63,7 +63,7 @@ var BASIC_VALUES = {
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size']
 };
 
-if (rings)
+if (document.getElementById('rings'))
     BASIC_VALUES['secex'] = ['exports_value', 'exports_weight', 'imports_value', 'imports_weight']
 
 var CALC_BASIC_VALUES = {
@@ -159,7 +159,6 @@ var titleBuilder = function(shapes, dataset, filters, yearRange) {
     title = title.replace('<shapes>', PLURAL[shapes]);
     title = title.charAt(0).toUpperCase() + title.slice(1);
 
-    console.log(title);
     return {'title': title, 'subtitle': subtitle};
 };
 

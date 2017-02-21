@@ -3,8 +3,9 @@ var rings = document.getElementById('rings'),
     circles = rings.getAttribute('circles'),
     focus = rings.getAttribute('focus'),
     filters = rings.getAttribute('filters'),
-    controls = true,
-    currentYear = +getUrlArgs()['year'] || 0,
+    baseTitle = rings.getAttribute('graph-title'),
+    baseSubtitle = rings.getAttribute('graph-subtitle'),
+    yearRange = getUrlArgs()['year'] ? [0, +getUrlArgs()['year']] : [0, 0],
     basicValues = BASIC_VALUES[dataset],
     calcBasicValues = CALC_BASIC_VALUES[dataset];
 
@@ -142,11 +143,12 @@ var loadViz = function(data) {
         return ui;
     }
 
-    var titleBuilder = function() {
+    var titleHelper = function() {
+        var title = titleBuilder(circles, dataset, getUrlArgs(), yearRange);
         return {
-            'value': 'Title',
+            'value': title['title'],
             'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}, 'value': 'Subtitle'},
+            'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
             'total': {'font': {'align': 'left'}, 'value': true}
         }
     };
@@ -165,8 +167,9 @@ var loadViz = function(data) {
     };
 
     var timelineCallback = function(years) {
-        currentYear = years.length == 1 ? years[0].getFullYear() : 0;
+        yearRange = years.length == 1 ? [0, years[0].getFullYear()] : [years[0].getFullYear(), years[years.length - 1].getFullYear()];
         toolsBuilder(rings.id, viz, data, titleBuilder().value, uiBuilder());
+        viz.title(titleHelper());
     };
 
     var viz = d3plus.viz()
@@ -181,7 +184,7 @@ var loadViz = function(data) {
         .color({'scale':'category20', 'value': circles})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large' })
-        .title(titleBuilder())
+        .title(titleHelper())
         .id(circles)
         .tooltip(tooltipBuilder())
         .format(formatHelper())
@@ -189,7 +192,7 @@ var loadViz = function(data) {
 
     viz.draw();
 
-    toolsBuilder(rings.id, viz, data, titleBuilder().value, uiBuilder());
+    toolsBuilder(rings.id, viz, data, titleHelper().value, uiBuilder());
 };
 
 var getUrls = function() {
