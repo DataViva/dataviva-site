@@ -75,7 +75,7 @@ var expandedData = function(data) {
     data.forEach(function(item){
         if(item['type'] == 'export'){
             data.forEach(function(importItem){
-                if(item['product'] == importItem['product'] && importItem['type'] == 'import'){
+                if(item['product'] == importItem['product'] && importItem['type'] == 'import' && item['year'] == importItem['year']){
                     item['exports_value'] = item['value'];
                     item['exports_weight'] = item['kg'];
                     item['imports_value'] = importItem['value'];
