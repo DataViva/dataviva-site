@@ -86,6 +86,7 @@ def index(product_id, tab):
     url = request.args.get('url')
 
     bra_id = request.args.get('bra_id')
+    bra_id = bra_id if bra_id != 'all' else None
     if not bra_id:
         depth = None
         id_ibge = None
