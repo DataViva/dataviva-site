@@ -1,4 +1,4 @@
-var toolsBuilder = function(viz, data, title, ui) {
+var toolsBuilder = function(app, viz, data, title, ui) {
 
     function expireCookie( cName ) {
         document.cookie =
@@ -8,7 +8,7 @@ var toolsBuilder = function(viz, data, title, ui) {
       }
 
     var initializeDownload = function(){
-        var svg = d3.select("#tree_map > svg")
+        var svg = d3.select("#" + app + " > svg")
         // Add necessary name space junk and get raw node
 
         svg.attr("version", 1.1)
@@ -178,6 +178,7 @@ var toolsBuilder = function(viz, data, title, ui) {
         expireCookie("downloadToken");
     });
 
+    var controls = true;
     d3.select('#controls-toggle-btn').on('click', function() {
         controls = !controls;
         viz.ui(controls ? ui : []);

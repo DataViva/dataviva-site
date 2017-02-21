@@ -250,7 +250,7 @@ var loadViz = function (data){
 
         viz.draw()
 
-        toolsBuilder(viz, data, titleBuilder().value, uiBuilder());
+        toolsBuilder(stacked.id, viz, data, titleBuilder().value, uiBuilder());
 }
 
 var getUrls = function() {
