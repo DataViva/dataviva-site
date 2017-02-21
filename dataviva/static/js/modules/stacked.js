@@ -70,7 +70,7 @@ var buildData = function(apiData, areaMetadata, groupMetadata) {
     return data;
 }
 
-var loadViz = function (data, type){
+var loadViz = function (data){
 
     var titleBuilder = function() {
         return {
@@ -142,43 +142,81 @@ var loadViz = function (data, type){
                     [dictionary['value']] : "value"
                 },
                 {
-                    [dictionary['name']] : "area2"
+                    [dictionary['name']] : "name"
                 }
             ],
             "method": function(value, viz){
+
+                if (value == "value"){
+                    value = viz.y();
+                }
+                else {
+                    value = viz.id();
+                }
+
                 viz.order({
                     "value": value
                 }).draw();
             }
         });
 
-
-        ui.push({
-            "label": dictionary['time-resolution'],
-            "value": [
-                {
-                    [dictionary['year']]: "year"
-                },
-                {
-                    [dictionary['month']]: "month"
+        if (dataset == 'secex'){
+            ui.push({
+                "label": dictionary['time-resolution'],
+                "value": [
+                    {
+                        [dictionary['year']]: "year"
+                    },
+                    {
+                        [dictionary['month']]: "month"
+                    }
+                ],
+                "method": function(value, viz){
+                    viz.x({
+                            "value": value,
+                            "label": value
+                    });
+                    viz.time({
+                        "value": value
+                    }).draw();
                 }
-            ],
-            "method": function(value, viz){
-                viz.x({
+            });
+        }
+
+        if (dataset == 'rais'){
+            ui.push({
+                "label": dictionary['y-axis'],
+                "type": "drop",
+                "value": [
+                    {
+                        [dictionary[values[0]]]: values[0]
+                    },
+                    {
+                        [dictionary[values[1]]]: values[1]
+                    },
+                    {
+                        [dictionary[values[2]]]: values[2]
+                    }
+                ],
+                "method": function(value, viz){
+
+                    viz.y({
                         "value": value,
-                        "label": value
-                });
-                viz.time({
-                    "value": value
-                }).draw();
-            }
-        });
+                        "label": dictionary[value]
+                    });
+
+                    viz.order({
+                        "value": value
+                    }).draw();
+                }
+            });
+        }
 
         return ui;
     }
 
 
-    data_type = {"value": "value", "label": (type == 'export' ? dictionary["Total Value Exported"] : dictionary["Total Value Imported"]) + ' [$ USD]'};
+    data_type = {"value": values[0], "label": (type == 'export' ? dictionary["Total Value Exported"] : dictionary["Total Value Imported"]) + ' [$ USD]'};
 
     var viz = d3plus.viz()
         .title({"value": "Inserir título", "font": {"family": "Times", "size": "24","align": "left"}})
@@ -196,7 +234,7 @@ var loadViz = function (data, type){
         })
         .tooltip(tooltipBuilder())
         .ui(uiBuilder())
-        // .legend({"filters": true})
+        .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .format(formatHelper())
 
@@ -250,7 +288,7 @@ $(document).ready(function() {
 
             data = buildData(data, areaMetadata, groupMetadata);
 
-            loadViz(data, type);
+            loadViz(data);
 
             loading.hide();
             d3.select('#mask').remove();

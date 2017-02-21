@@ -89,6 +89,10 @@ def index(dataset, area, value):
 				filters.append(location_service(value))
 			elif key == 'wld':
 				filters.append(wld_service(value))
+			elif key == 'occupation':
+				filters.append(occupation_service(value))
+			elif key == 'industry':
+				filters.append(industry_service(value))
 			else:
 				filters.append((key, value))
 
