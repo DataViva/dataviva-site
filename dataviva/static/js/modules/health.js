@@ -158,12 +158,113 @@ $(document).ready(function(){
         tab: 'equipments'
     });
 
-    // Indicator.add({
-    //     url: '/',
-    //     title: 'Numero de Leitos',
-    //     value:  'beds', 
-    //     preffix: 'R$'
-    // });
+//INDICATOR ADD
+
+    //LEITOS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
+        title: 'Numero de Leitos',
+        value:  'beds'
+    });
+
+    //EQUIPAMENTOS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
+        title: 'Numero de Equipamentos',
+        value:  'equipments'
+    });
+
+    //PROFISSIONAIS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
+        title: 'Numero de Profissionais',
+        value:  'professionals'
+    });
+
+    //ESTABELECIMENTOS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+        title: 'Numero de Estabelecimentos',
+        value:  'establishments'
+    });
+    //
+
+//GENERAL ADD
+
+//ESTABLISHMENT
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+        title: 'Total de Estabelecimentos',
+        label: '',
+        value: 'establishments'
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filters,
+        title: 'Município com maior numero de Estabelecimentos',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'establishments',
+    });
+
+//BED
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
+        title: 'Total de leitos',
+        label: '',
+        value: 'beds'
+
+    });
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filters,
+        title: 'Município com maior numero de Leitos',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'beds'
+    });
+
+//PROFESSIONAL
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
+        title: 'Total of Professionals',
+        label: '',
+        value: 'professionals',
+        prefix: 'Total of professionals '
+
+    });
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
+        title: 'Município com Maior numero de Profissionais',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'professionals',
+        prefix: 'Total of profissionais'
+    });
+
+//EQUIPMENT
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
+        title: 'Total de Equipments',
+        label: '',
+        value: 'equipments',
+        prefix: 'Total of Equipments '
+
+    });
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filters,
+        title: 'Município com Maior numero de Equipamentos',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'equipments'
+    });
 })
 
 var buildData = function(responseApi){
@@ -205,6 +306,60 @@ var getMetadata = function(key){
     });
 }
 
+var General = (function(){
+    var template = '' +
+          '<dt>{{title}}</dt>'+
+          '<dd>'+
+            '<small>{{label}}</small>'+
+            '<strong class="counter">{{preffix}} {{value}} </strong>'+
+            '<span>{{magnitude}}</span>'+
+          '</dd>';
+
+    var add = function(data){
+
+        var api;
+        var metadata;
+
+        $.when(
+            $.ajax({
+                url: data.url,
+                type: 'GET',
+                success: function(response){
+                    api = buildData(response)[0];
+                }
+            }),
+
+            !data.label.metadata ? undefined : $.ajax({
+                url: 'http://api.staging.dataviva.info/metadata/' + data.label.value, 
+                type: 'GET',
+                success: function(response){
+                    metadata = response;
+                }
+            })
+        ).then(function() {
+            var label = data.label;
+            if (typeof data.label == 'object')
+                label = metadata[api[data.label.value]].name_pt;
+
+            var formattedValue = Magnitude(api[data.value]);
+            var value = formattedValue.split(' ')[0].replace('.', ',');
+            var magnitude = formattedValue.split(' ')[1] || '';
+
+            var filledTemplate = template.replace('{{title}}', data.title || '')
+                                .replace('{{label}}', label.toUpperCase() || '')
+                                .replace('{{value}}', value)
+                                .replace('{{magnitude}}', magnitude)
+                                .replace('{{preffix}}', data.preffix || '' );
+
+            $('#general-' + data.value + ' .dl-horizontal').append(filledTemplate);
+        });
+    }
+
+    return {
+        add: add
+    };
+})();
+
 var Indicator = (function(){
     var template = '' +
     '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">' +
@@ -222,7 +377,9 @@ var Indicator = (function(){
             url: data.url,
             type: 'GET',
             success: function(response){
-                var formattedValue = Magnitude(123456);
+                var api = buildData(response)[0];
+
+                var formattedValue = Magnitude(api[data.value]);
                 var value = formattedValue.split(' ')[0].replace('.', ',');
                 var magnitude = formattedValue.split(' ')[1] || '';
                 
@@ -234,7 +391,7 @@ var Indicator = (function(){
                 $('#header .indices .row').append(filledTemplate);
             }
         });
-    };
+    }
 
     return {
         add: add

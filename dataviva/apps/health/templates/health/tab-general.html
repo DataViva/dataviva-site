@@ -13,77 +13,52 @@
     município do estado em PIB.</p>
 
     <div class="row">
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}Establishments{% endtrans %}</h3>
+      <div class="dl-box col-xs-12 col-md-6" id="general-establishments">
+          <h3>Estabelecimentos</h3>
         <dl class="dl-horizontal">
-          <dt>{% trans %}Total of establishments{% endtrans %}</dt>
-          <dd>
-            <strong class="counter"> {{ total.establishments | max_digits(3, True) }} </strong>
-            <span>{{ total.establishments | magnitude }}</span>
-          </dd>
-        </dl>
+              </dl>
         <a href="#establishments"
             aria-controls="establishments"
             role="tab"
             data-toggle="tab"
-            graph
-            class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+            graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
         </a>
       </div>
 
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}Equipments{% endtrans %}</h3>
+      <div class="dl-box col-xs-12 col-md-6" id="general-beds">
+       <h3>Leitos</h3>
         <dl class="dl-horizontal">
-          <dt>{% trans %}Total of equipments{% endtrans %}</dt>
-          <dd>
-            <strong class="counter"> {{ total.equipments | max_digits(3, True) }}</strong>
-            <span>{{ total.establishments | magnitude }}</span>
-          </dd>
-        </dl>
-        <a href="#equipments"
-            aria-controls="equipments"
+              </dl>
+        <a href="#beds"
+            aria-controls="beds"
             role="tab"
             data-toggle="tab"
-            graph
-            class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+            graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
         </a>
       </div>
 
-        <div class="dl-box col-xs-12 col-md-6">
-          <h3>{% trans %}Beds{% endtrans %}</h3>
-          <dl class="dl-horizontal"> 
-            <dt>{% trans %}Total of beds{% endtrans %}</dt>
-            <dd>
-              <strong class="counter"> {{ total.beds | max_digits(3, True) }}</strong>
-              <span>{{ total.beds | magnitude }}</span>
-            </dd>
-          </dl>
-          <a href="#beds"
-              aria-controls="beds"
-              role="tab"
-              data-toggle="tab"
-              graph
-              class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
-          </a>
-        </div>
+      <div class="dl-box col-xs-12 col-md-6" id="general-professionals">
+      <h3>Profissionais</h3>
+       <dl class="dl-horizontal">
+             </dl>
+       <a href="#professionals"
+           aria-controls="professionals"
+           role="tab"
+           data-toggle="tab"
+           graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+       </a>
+      </div>
 
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}Professionals{% endtrans %}</h3>
-        <dl class="dl-horizontal">
-                
-          <dt>{% trans %}Total of professionals{% endtrans %}</dt>
-          <dd>
-            <strong class="counter"> {{ total.professionals | max_digits(3, True) }}</strong>
-            <span>{{ total.professionals | magnitude }}</span>
-          </dd>
-        </dl>
-        <a href="#professionals"
-            aria-controls="professionals"
-            role="tab"
-            data-toggle="tab"
-            graph 
-            class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
-        </a>
+      <div class="dl-box col-xs-12 col-md-6" id="general-equipments">
+      <h3>Equipamentos</h3>
+       <dl class="dl-horizontal">
+             </dl>
+       <a href="#equipments"
+           aria-controls="equipments"
+           role="tab"
+           data-toggle="tab"
+           graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+       </a>
       </div>
 
     </div>
