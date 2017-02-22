@@ -2,35 +2,168 @@ $(document).ready(function(){
     var filters = location.search.slice(1);
 
     if(filters.split('=').indexOf('municipality') == -1){
-        BlueBox.add({
-            url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?order=beds&direction=desc&limit=1&' + filters,
-            title: 'Município com Maior',
-            subtitle: 'Número de Leitos',
-            label: {
-                metadata: true,
-                value: 'municipality'
-            },
-            value: 'beds',
-            suffix: 'Leitos',
-            tab: 'beds'
-        });
+        // BlueBox.add({
+        //     url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?order=beds&direction=desc&limit=1&' + filters,
+        //     title: 'Município com Maior',
+        //     subtitle: 'Número de Leitos',
+        //     label: {
+        //         metadata: true,
+        //         value: 'municipality'
+        //     },
+        //     value: 'beds',
+        //     suffix: 'Leitos',
+        //     tab: 'beds'
+        // });
+
     }
+
+    // ESTABLISHMENTS
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+        title: 'Total de Estabelecimentos',
+        label: 'Total de Estabelecimentos',
+        value: 'establishments',
+        tab: 'establishments'
+    });
+
+    BlueBox.add({
+        url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filters,
+        title: 'Município com Maior',
+        subtitle: 'Número de Estabelecimentos',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'establishments',
+        suffix: 'Estabelecimentos',
+        tab: 'establishments'
+    });
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_establishment/establishment_type/?year=2015&" + filters,
+        title: 'Principal Tipo Estabelecimento',
+        subtitle: 'por Quantidade',
+        label: {
+            metadata: true,
+            value: 'establishment_type'
+        },
+        value: 'establishments',
+        tab: 'establishments'
+    });
+
+    // BEDS
+
+    BlueBox.add({
+        url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filters,
+        title: 'Município com Maior',
+        subtitle: 'Número de Leitos',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'beds',
+        suffix: 'Leitos',
+        tab: 'beds'
+    });
+
+    BlueBox.add({
+        url: 'http://api.staging.dataviva.info/cnes_bed/year/bed_type/?year=2015&order=beds&direction=desc&limit=1&' + filters,
+        title: 'Principal Tipo Leito',
+        subtitle: 'por Quantidade',
+        label: {
+            metadata: true,
+            value: 'bed_type'
+        },
+        value: 'beds',
+        tab: 'beds'
+    });
 
     BlueBox.add({
         url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
         title: 'Total de Leitos',
         label: 'Total de Leitos',
         value: 'beds',
-        suffix: 'Leitos',
         tab: 'beds'
     });
 
-    Indicator.add({
-        url: '/',
-        title: 'Numero de Leitos',
-        value:  'beds', 
-        preffix: 'R$'
+    // PROFESSIONALS
+
+    BlueBox.add({
+        url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
+        title: 'Município com Maior',
+        subtitle: 'Número de Profissionais',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'professionals',
+        suffix: 'Profissionais',
+        tab: 'professionals'
     });
+
+    BlueBox.add({
+        url: 'http://api.staging.dataviva.info/cnes_professional/year/occupation_family/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
+        title: 'Principal Ocupação',
+        subtitle: 'por Empregos',
+        label: {
+            metadata: true,
+            value: 'occupation_family'
+        },
+        value: 'professionals',
+        tab: 'professionals'
+    });
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
+        title: 'Total de Profissionais',
+        label: 'Total de Profissionais',
+        value: 'professionals',
+        tab: 'professionals'
+    });
+
+    // EQUIPMENTS
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
+        title: 'Total de Equipamentos',
+        label: 'Total de Equipamentos',
+        value: 'equipments',
+        tab: 'equipments'
+    });
+
+    BlueBox.add({
+        url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filters,
+        title: 'Município com Maior',
+        subtitle: 'Número de Equipamentos',
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'equipments',
+        suffix: 'Equipamentos',
+        tab: 'equipments'
+    });
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_equipment/equipment_type/?year=2015&" + filters,
+        title: 'Principal Equipamento',
+        subtitle: 'por Quantidade',
+        label: {
+            metadata: true,
+            value: 'equipment_type'
+        },
+        value: 'equipments',
+        suffix: 'Equipamentos',
+        tab: 'equipments'
+    });
+
+    // Indicator.add({
+    //     url: '/',
+    //     title: 'Numero de Leitos',
+    //     value:  'beds', 
+    //     preffix: 'R$'
+    // });
 })
 
 var buildData = function(responseApi){
