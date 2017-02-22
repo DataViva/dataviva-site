@@ -3,6 +3,7 @@ var data = [],
     MAX_BARS = 10,
     lang = document.documentElement.lang,
     dataset = $("#bar").attr("dataset"),
+    subtitle = $("#bar").attr("subtitle"),
     options = $("#bar").attr("options").split(","),
     x = $("#bar").attr("x").split(","),
     currentX = x[0],
@@ -15,36 +16,181 @@ var data = [],
 
 // TODO: Title creator
 var title = 'Title';
-var textHelper = {
-    'loading': {
-        'en': 'loading ...',
-        'pt': 'carregando ...'
-    }
-};
 
 var visualization;
+var percentage = false;
 
-var uis = [
-    {
-        'method': 'x',
+var uis = [];
+
+if(x.length > 1){
+    uis.push({
         'value': x,
-        'type': 'drop'
-    },
-    {
+        'type': 'drop',
+        'label': 'xaxis',
+        'method': function(value, viz){
+            currentX = value;
+
+            if(percentage)
+                currentX = currentX + '_pct';
+
+            viz.x(currentX)
+               .order({
+                    'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+                    'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
+                })
+            totalOfCurrentX()
+            viz.draw()
+        }
+    });
+}
+
+if(y.length > 1){
+    uis.push({
         'value': y,
         'type': 'drop',
+        'label': 'yaxis',
         'method': function(value, viz){
-            viz.y(value).id(value).draw();
+            currentY = value;
+
+            viz.y(value)
+                .id(value)
+                .order({
+                    'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+                    'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
+                })
+                .color(currentY + "_color")
+                .legend(false)
+                .draw();
         }
+    });
+}
+
+var colorHelper = {
+   'gender': {
+        '0': '#d73027',
+        '1': '#4575b4'
+   },
+   'literacy': {
+        '-1':'#d73027',
+        '1':'#f46d43',
+        '2':'#fdae61',
+        '3':'#fee090',
+        '4':'#e0f3f8',
+        '5':'#abd9e9',
+        '6':'#74add1',
+        '7':'#4575b4'
+   },
+   'ethnicity': {
+        '-1': '#f46d43',
+        '1': '#fdae61',
+        '2': '#fee090',
+        '4': '#e0f3f8',
+        '6': '#abd9e9',
+        '8': '#74add1'
+   },
+   'simple': {
+        '0': '#f46d43',
+        '1': '#74add1' 
+   },
+   'establishment_size': {
+        '-1': '#d73027',
+        '0': '#f46d43',
+        '1': '#fdae61',
+        '2': '#abd9e9',
+        '3': '#74add1',
+        '4': '#4575b4'
+   },
+   'legal_nature': {
+        '-1':'#d73027',
+        '1':'#f46d43',
+        '2':'#fdae61',
+        '3':'#fee090',
+        '4':'#e0f3f8',
+        '5':'#abd9e9',
+        '6':'#74add1',
+        '7':'#4575b4'
     }
-];
+}
+
+var addColor = function(data){
+   data = data.map(function(item){
+       for(key in colorHelper){
+           if(item[key] != undefined)
+               item[key + '_color'] = colorHelper[key][item[key]];
+       }
+
+       return item;
+   });
+
+   return data;
+};
+
+var orderHelper = {
+    'ethnicity': {
+        '-1': 6,
+        '1': 5,
+        '2': 1,
+        '4': 3,
+        '6': 4,
+        '8': 2
+    },
+    'gender': {
+        '0': 2,
+        '1': 1
+    },
+    'literacy': {
+        '-1': 8,
+        '1': 7,
+        '2': 6,
+        '3': 5,
+        '4': 4,
+        '5': 3,
+        '6': 2,
+        '7': 1
+    },
+    'simple': {
+        '0': 2,
+        '1': 1 
+    },
+    'establishment_size': {
+        '-1': 5,
+        '0': 6,
+        '1': 4,
+        '2': 3,
+        '3': 2,
+        '4': 1
+    },
+    'legal_nature': {
+        '-1': 8,
+        '1': 1,
+        '2': 2,
+        '3': 3,
+        '4': 4,
+        '5': 5,
+        '6': 6,
+        '7': 7
+    }
+}
+
+var addOrder = function(data){
+    data = data.map(function(item){
+        for(key in orderHelper){
+            if(item[key] != undefined)
+                item[key + '_order'] = orderHelper[key][item[key]];
+        }
+
+        return item;
+    });
+
+    return data;
+};
 
 var textHelper = {
     'loading': {
         'en': 'loading ...',
         'pt': 'carregando ...'
     },
-    'average_monthly_wage': {
+    'average_wage': {
         'en': 'Salário Médio Mensal',
         'pt': 'Average Monthly Wage'
     },
@@ -72,17 +218,17 @@ var textHelper = {
         'en': 'en_US',
         'pt': 'pt_BR'
     },
-    'average_monthly_wage': {
-        'en': "Average Monthly Wage",
-        'pt': "Salário Médio Mensal"  
+    'average_wage': {
+        'en': "Average Wage",
+        'pt': "Salário Médio"  
     },
     'kg': {
-        'en': 'Amount',
-        'pt': 'Quantidade'
+        'en': 'kg',
+        'pt': 'kg'
     },
     'value': {
-        'en': "Value",
-        'pt': "Valor"
+        'en': "US$",
+        'pt': "US$"
     },
     'kg_label': {
         'en': 'Amount [kg]',
@@ -92,7 +238,7 @@ var textHelper = {
         'en': "Value [$ USD]",
         'pt': "Valor [$ USD]"
     },
-    'average_monthly_wage_label': {
+    'average_wage_label': {
         'en': "Average Monthly Wage [$ USD]",
         'pt': "Salário Médio Mensal [$ USD]"  
     },
@@ -101,14 +247,14 @@ var textHelper = {
         'pt': "Empregos"  
     },
     'kg_pct': {
-        'en': "% de kg",
-        'pt': "% of kg"  
+        'en': "% of kg",
+        'pt': "% de kg"  
     },
     'value_pct': {
-        'en': "% de US$",
-        'pt': "% of US$"  
+        'en': "% of US$",
+        'pt': "% de US$"  
     },
-    'simples': {
+    'simple': {
         'en': "Simples",
         'pt': "Simples"  
     },
@@ -116,13 +262,21 @@ var textHelper = {
         'en': "Establishment Size",
         'pt': "Tamanho do Estabelecimento"  
     },
-    'wage_received': {
-        'en': "Wage Received",
-        'pt': "Salário Recebido"  
+    'average_establishment_size': {
+        'en': "Average Establishment Size",
+        'pt': "Tamanho Médio do Estabelecimento"  
+    },
+    'establishment_count': {
+        'en': "Establishments",
+        'pt': "Estabelecimentos"  
+    },
+    'wage': {
+        'en': "Salary Mass",
+        'pt': "Massa Salarial"   
     },
     'gender': {
         'en': "Gender",
-        'pt': "Salário Recebido"  
+        'pt': "Gênero"  
     },
     'ethnicity': {
         'en': "Ethnicity",
@@ -131,19 +285,98 @@ var textHelper = {
     'literacy': {
         'en': "Literacy",
         'pt': "Escolaridade"  
+    },
+    'month': {
+        'en': "Month",
+        'pt': "Mês"  
+    },
+    'port': {
+        'en': "Port",
+        'pt': "Porto"  
+    },
+    'legal_nature': {
+        'en': "Legal Nature",
+        'pt': "Natureza Jurídica"  
+    },
+    'size_establishment': {
+        'en': "Establishment Size ",
+        'pt': "Tamanho do Estabelecimento"  
+    },
+    'time_resolution': {
+        'en': "Time Resolution",
+        'pt': "Resolução Temporal"  
+    },
+    'total_of': {
+        'en': "Total in selected years: ",
+        'pt': "Total nos anos selecionados: ",
+    },
+    'data_provided_by': {
+        'en': "Data provided by ",
+        'pt': "Dados fornecidos por ",
+    },
+    'percentage_terms': {
+        'en': 'Percentage Terms',
+        'pt': 'Termos Percentuais'
+    },
+    'values': {
+        'en': 'Values',
+        'pt': 'Valores'
+    },
+    'exporting_municipality': {
+        'en': "Based on the Exporting Municipality",
+        'pt': "Baseado nos Municípios Exportadores" 
+    },
+    'state_production': {
+        'en': "Based on State Production",
+        'pt': "Baseado nos Estados Produtores" 
     }
 };
 
+var formatNumber = function(digit){
+    var lastDigit = digit.slice(-1);
+
+    if(!isNaN(lastDigit))
+        return digit;
+
+    var number =  digit.slice(0, -1);
+
+    var scale = {
+        'T': {
+            'en': number < 2 ? ' Trillion' : ' Trillions',
+            'pt': number < 2 ? ' Trilhão' : ' Trilhões'
+        },
+        'B': {
+            'en': number < 2 ? ' Billion' : ' Billions',
+            'pt': number < 2 ? ' Bilhão' : ' Bilhões'
+        },
+        'M': {
+            'en': number < 2 ? ' Million' : ' Millions',
+            'pt': number < 2 ? ' Milhão' : ' Milhões'
+        },
+        'k': {
+            'en': ' Thousand',
+            'pt': ' Mil'
+        }
+    }
+    return number + scale[lastDigit][lang];
+}
+
+
 var formatHelper = {
     "text": function(text, params) {
+        if(params.labels == false)
+            return text;
+
         if (textHelper[text] != undefined)
             return textHelper[text][lang];
 
-        return d3plus.string.title(text, params);
+        return d3plus.string.title(text, params); 
     },
 
     "number": function(number, params) {
         var formatted = d3plus.number.format(number, params);
+
+        formatted = formatNumber(formatted)
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
@@ -151,11 +384,17 @@ var formatHelper = {
         if (params.key == "kg" && params.labels == undefined)
             return formatted + " kg";
 
+        if (params.key == "wage" && params.labels == undefined)
+            return "$" + formatted + " BRL";
+
+        if (params.key == "average_wage" && params.labels == undefined)
+            return "$" + formatted + " BRL";
+
         if (params.key == "kg_pct" && params.labels == undefined)
-            return parseFloat(formatted * 100).toFixed(1) + "%";
+            return parseFloat(formatted).toFixed(1) + "%";
 
         if (params.key == "value_pct" && params.labels == undefined)
-            return parseFloat(formatted * 100).toFixed(1) + "%";
+            return parseFloat(formatted).toFixed(1) + "%";
 
         return formatted;
     }
@@ -167,19 +406,102 @@ var loadViz = function(data){
         .data(data)
         .background("transparent")
         .type("bar")
+        .font({
+            'size': 13
+        })
         .id({
             'value': currentY,
             'solo': solo
         })
         .y({
             "value": currentY,
-            "scale": "discrete" // Manually set Y-axis to be discrete
+            "scale": "discrete",
+            'grid': false,
+            'label': {
+                'font': {
+                    'size': 22
+                }
+            }
         })
-        .x(currentX)
+        .x({
+            "value": currentX,
+            'label': {
+                'font': {
+                    'size': 16
+                }
+            }
+        })
         .ui(uis)
-        .format(formatHelper    )
-        .time('year')
-        .draw()
+        .format(formatHelper)
+        .time({
+            'value': 'year',
+            'solo': {
+                'value': [lastYear(data)],
+                'callback': totalOfCurrentX
+            }
+        })
+        .aggs({
+            'average_wage': 'mean',
+            'ethnicity_order': 'mean',
+            'gender_order': 'mean',
+            'literacy_order': 'mean',
+            'simple_order': 'mean',
+            'establishment_size_order': 'mean',
+            'legal_nature_order': 'mean'
+        })
+        .order({
+            'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+            'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
+        })
+        .footer({
+            "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
+        })
+        .color(currentY + "_color")
+        .legend(false)
+
+        if(options.indexOf('singlecolor') != -1){
+            visualization.color({
+                "value" : function(d){
+                    return "#4575b4";
+                }
+            }).legend(false)
+        }
+        totalOfCurrentX();
+        visualization.draw()
+};
+
+var getSelectedYears = function() {
+    var years = $('#timeline #labels [fill="rgba(68,68,68,1)"]').map(function (index, item){
+        return +item.innerHTML
+    })
+
+    years = Array.from(years);
+    years = years.filter(function(item){
+        return item > 0;
+    });
+    return years;
+}
+
+var totalOfCurrentX = function(){
+    var years = getSelectedYears();
+    years = years.length == 0 ? [lastYear(data)] : years;
+
+    var key = currentX.endsWith('_pct') ? currentX.slice(0, currentX.indexOf('_pct')) : currentX;
+    var total = data.reduce(function(acc, item){
+        if(years.indexOf(item.year) != -1){
+            acc += item[key];
+        }
+        return acc;
+    }, 0);
+
+    visualization.title({
+        'sub': {
+            'value': textHelper["total_of"][lang] + formatHelper.number(total, {key: key}) + (subtitle ? ' - ' + textHelper[subtitle][lang] : ''),
+            'font': {
+                'align': 'left'
+            }
+        }
+    })
 };
 
 var buildData = function(responseApi){
@@ -227,15 +549,29 @@ var addPercentage = function(data){
 
     data = data.map(function(item){
         x.forEach(function(xValue){
-            item[xValue + '_pct'] = item[xValue] / total[xValue][item.year];
+            item[xValue + '_pct'] = 100 * (item[xValue] / total[xValue][item.year]);
         });
 
         return item;
     });
 
-    x.forEach(function(xValue){
-        x.push(xValue + '_pct')
-    });
+    uis.unshift({
+        'value': ['values', 'percentage_terms'],
+        'type': 'drop',
+        'label': 'Layout',
+        'method': function(value, viz){
+            percentage = value == 'percentage_terms' ? true : false;
+
+            if(currentX.indexOf( "_pct" ) != -1)
+                currentX = currentX.slice(0, -4);
+
+            if(percentage)
+                currentX = currentX + '_pct';
+
+            viz.x(currentX).draw()
+            totalOfCurrentX()
+        }
+    })
 
     return data;
 }
@@ -244,7 +580,6 @@ var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
             if(metadatas[itemY][item[itemY]] == undefined){
-                // console.log("Not found name to: " + itemY + ' - ' + item[itemY]);
                 item[itemY] = 'NOT FOUND!';
             }
             else{
@@ -257,11 +592,11 @@ var addNameToData = function(data){
     });
 
     data = data.map(function(item){
-        if(item['wage_received'] != undefined)
-            item['wage_received'] = +item['wage_received'];
+        if(item['wage'] != undefined)
+            item['wage'] = +item['wage'];
 
-        if(item['average_monthly_wage'] != undefined)
-            item['average_monthly_wage'] = +item['average_monthly_wage'];
+        if(item['average_wage'] != undefined)
+            item['average_wage'] = +item['average_wage'];
 
         if(item['month'] != undefined)
             item['date'] = item['year'] + '/' + item['month'];
@@ -272,6 +607,7 @@ var addNameToData = function(data){
     if(options.indexOf('month') != -1){
         uis.push({
             'method': 'time',
+            'label': 'time_resolution',
             'value': [
                 {'month': 'date'},
                 {'year': 'year'}
@@ -334,6 +670,17 @@ var updateSolo = function(data){
     return solo;
 };
 
+var lastYear = function(data){
+    var year = 0;
+
+    data.forEach(function(item){
+        if(item.year > year)
+            year = item.year;
+    });
+
+    return year;
+};
+
 var loading = dataviva.ui.loading('.loading').text(textHelper.loading[lang]);
 
 $(document).ready(function(){
@@ -354,6 +701,8 @@ $(document).ready(function(){
             });
 
             data = buildData(api);
+            data = addColor(data);
+            data = addOrder(data);
             data = addNameToData(data);
             data = addPercentage(data);
             solo = updateSolo(data);
