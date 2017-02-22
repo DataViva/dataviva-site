@@ -3,22 +3,56 @@
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Establishments per{% endtrans %}</h4>
-            <a href="#trade-balance-location" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-location">Tipo</a>
-            <a href="#trade-balance-location" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-location">Atendimento ao SUS</a>
-            
-            <h4>Leitos por</h4>
-            <a href="#trade-balance-location" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-location">Tipo</a>
-            <a href="#trade-balance-location" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-location">Atendimento ao SUS</a>
+            <a href="#establishments-type" class="list-group-item" data-toggle="collapse" data-parent="#establishments-type">Tipo</a>
+            <div class="collapse" id="establishments-type">
+                <a href="/{{g.locale}}/bar/cnes_establishment/establishments/establishment_type?options=singlecolor"
+                   target="graphs-frame-wages" class="list-group-item selected" data-parent="#establishments-type" >
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
 
+            <a href="#establishments-sus" class="list-group-item" data-toggle="collapse" data-parent="#establishments-sus">Atendimento ao SUS</a>
+            <div class="collapse" id="establishments-sus">
+                <a href="/{{g.locale}}/bar/cnes_establishment/establishments/sus_bond"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-type">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+
+            <h4>Leitos por</h4>
+            <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">Tipo</a>
+            <div class="collapse" id="beds-type">
+                <a href="/{{g.locale}}/bar/cnes_bed/beds/bed_type?options=singlecolor"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-type">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+            <a href="#beds-sus" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus">Atendimento ao SUS</a>
+            <div class="collapse" id="beds-sus">
+                <a href="/{{g.locale}}/bar/cnes_bed/beds/sus_bond?options=singlecolor"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-sus">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
             
             <h4>Profissionais por</h4>
-            <a href="#trade-balance-location" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-location">Ocupação</a>
-
+            <a href="#professionals-occupation" class="list-group-item" data-toggle="collapse" data-parent="#professionals-occupation">Ocupação</a>
+            <div class="collapse" id="professionals-occupation">
+                <a href="/{{g.locale}}/bar/cnes_professional/professionals/occupation_family?options=singlecolor"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#professionals-occupation">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
             
         </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
+            <iframe src="{% if not graph %} /{{g.locale}}/bar/cnes_establishment/establishments/establishment_type?options=singlecolor {% endif %}"
+                    name="graphs-frame-wages"
+                    id="graphs-frame-wages"
+                    class="embed-responsive-item" >
+            </iframe>
         </div>
     </div>
 </div>
