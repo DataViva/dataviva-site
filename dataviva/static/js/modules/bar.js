@@ -58,9 +58,12 @@ if(y.length > 1){
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
                     'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
                 })
-                .color(currentY + "_color")
                 .legend(false)
-                .draw();
+
+            if(colorHelper[currentY] != undefined)
+                viz.color(currentY + "_color");
+
+            viz.draw();
         }
     });
 }
@@ -329,6 +332,30 @@ var textHelper = {
     'state_production': {
         'en': "Based on State Production",
         'pt': "Baseado nos Estados Produtores" 
+    },
+    'establishment_type': {
+        'en': "Establishment Type",
+        'pt': "Tipo de Estabelecimento"   
+    },
+    'establishments': {
+        'en': "Establishments",
+        'pt': "Estabelecimentos"   
+    },
+    'sus_bond': {
+        'en': "SUS Bond",
+        'pt': "Vínculo SUS"
+    },
+    'bed_type': {
+        'en': "Bed Type",
+        'pt': "Tipo de Leito"
+    },
+    'occupation_family': {
+        'en': "Occupation",
+        'pt': "Ocupação"
+    },
+    'professionals': {
+        'en': "Professionals",
+        'pt': "Profissionais"
     }
 };
 
@@ -456,8 +483,10 @@ var loadViz = function(data){
         .footer({
             "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
         })
-        .color(currentY + "_color")
         .legend(false)
+
+        if(colorHelper[currentY] != undefined)
+            visualization.color(currentY + "_color");
 
         if(options.indexOf('singlecolor') != -1){
             visualization.color({
@@ -580,6 +609,7 @@ var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
             if(metadatas[itemY][item[itemY]] == undefined){
+                console.log(item[itemY])
                 item[itemY] = 'NOT FOUND!';
             }
             else{
