@@ -2,12 +2,10 @@ var stacked = document.getElementById('stacked'),
     dataset = stacked.getAttribute('dataset'),
     filters = stacked.getAttribute('filters'),
     area = stacked.getAttribute('area'),
-    controls = true,
     depths = DEPTHS[dataset][area],
     group = depths[0],
     values = stacked.getAttribute('values').split(' '),
     type = stacked.getAttribute('type').split(' '),
-    currentYear = +getUrlArgs()['year'] || 0,
     lang = document.documentElement.lang;
     basicValues = BASIC_VALUES[dataset],
     calcBasicValues = CALC_BASIC_VALUES[dataset];
@@ -184,25 +182,21 @@ var loadViz = function (data){
         }
 
         if (dataset == 'rais'){
+            var axis_values = [];
+
+            for (var i = 0, len = values.length; i < len; i++) {
+              axis_values.push({[dictionary[values[i]]] : values[i]})
+            }
+
             ui.push({
                 "label": dictionary['y-axis'],
                 "type": "drop",
-                "value": [
-                    {
-                        [dictionary[values[0]]]: values[0]
-                    },
-                    {
-                        [dictionary[values[1]]]: values[1]
-                    },
-                    {
-                        [dictionary[values[2]]]: values[2]
-                    }
-                ],
+                "value": axis_values,
                 "method": function(value, viz){
 
                     viz.y({
                         "value": value,
-                        "label": dictionary[value]
+                        "label": yAxisLabelBuilder(value)
                     });
 
                     viz.order({
@@ -215,8 +209,35 @@ var loadViz = function (data){
         return ui;
     }
 
+    var yAxisLabelBuilder = function (type) {
+        if (type == 'export')
+        {
+            (value = 'value_per_kg') ? dictionary['exports_weight'] : dictionary['exports'];  
+        }   
+        if (type == 'import') 
+        {
+            (value = 'value_per_kg') ? dictionary['imports_weight'] : dictionary['imports']; 
+        } 
+        if (type == 'balance') 
+        {
+            return dictionary['trade_value']
+        } 
+        if (type == 'jobs')
+        { 
+            return dictionary['total_jobs']
+        } 
+        if (type == 'wage')
+        {
+            return dictionary['wage']
+        }
+        if (type == 'establishment_count')
+        {
+            return dictionary['establishment_count']
+        }
 
-    data_type = {"value": values[0], "label": (type == 'export' ? dictionary["Total Value Exported"] : dictionary["Total Value Imported"]) + ' [$ USD]'};
+    }
+    
+    data_type = { "value": values[0], "label": (type == "" ? yAxisLabelBuilder(values[0]) : yAxisLabelBuilder(type))}
 
     var viz = d3plus.viz()
         .title({"value": "Inserir título", "font": {"family": "Times", "size": "24","align": "left"}})
