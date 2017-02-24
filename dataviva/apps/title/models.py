@@ -6,6 +6,8 @@ class GraphTitle(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title_en = db.Column(db.String(255))
     subtitle_en = db.Column(db.String(255))
+    title_pt = db.Column(db.String(255))
+    subtitle_pt = db.Column(db.String(255))
     dataset = db.Column(db.String(45))
     graph = db.Column(db.String(45))
     shapes = db.Column(db.String(45))

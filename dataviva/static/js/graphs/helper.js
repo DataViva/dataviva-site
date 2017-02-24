@@ -127,19 +127,19 @@ dictionary['Creating URL'] = lang == 'en' ? 'Creating URL' : 'Criando URL';
 dictionary['kg'] = 'KG';
 
 var PLURAL = {
-    'municipality': 'municipalities',
-    'state': 'states',
-    'microregion': 'microregions',
-    'mesoregion': 'mesoregions',
-    'region': 'regions',
-    'country': 'countries',
-    'product': 'products',
-    'industry_class': 'industries',
-    'industry_section': 'industries',
-    'industry_division': 'industries',
-    'industry_division': 'industries',
-    'occupation_group': 'occupations',
-    'occupation_family': 'occupations'
+    'municipality': dictionary['municipalities'],
+    'state': dictionary['states'],
+    'microregion': dictionary['microregions'],
+    'mesoregion': dictionary['mesoregions'],
+    'region': dictionary['regions'],
+    'country': dictionary['countries'],
+    'product': dictionary['products'],
+    'industry_class': dictionary['industries'],
+    'industry_section': dictionary['industries'],
+    'industry_division': dictionary['industries'],
+    'industry_division': dictionary['industries'],
+    'occupation_group': dictionary['occupations'],
+    'occupation_family': dictionary['occupations']
 };
 
 var titleBuilder = function(shapes, dataset, filters, yearRange) {

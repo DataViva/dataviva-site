@@ -27,13 +27,31 @@ def before_request():
     g.page_type = mod.name
 
 
+def filter_service(key):
+    if key in ['region', 'state', 'mesoregion', 'microregion', 'municipality']:
+        return 'location'
+    if key in  ['continent', 'country']:
+        return 'partner'
+    if key in ['industry_division', 'industry_section', 'industry_class']:
+        return 'industry'
+    if key in ['occupation_group', 'occupation_family']:
+        return 'occupation'
+    return key
+
+
+def location_service(id_ibge):
+    if len(id_ibge) == 1:
+        return {'1': '1', '2': '2', '3': '4', '4': '5', '5': '3'}[id_ibge]
+    if len(id_ibge) == 5:
+        return id_ibge[0:2] + '0' + id_ibge[2:]
+    if len(id_ibge) == 4:
+        return id_ibge[0:2] + '00' + id_ibge[2:]
+    return id_ibge
+
+
 def value_service(filter, value):
-    if filter == 'location' and len(value) == 1:
-        value = {'1': '1', '2': '2', '3': '4', '4': '5', '5': '3'}[value]
-    elif filter == 'location' and len(value) == 5:
-        value = value[0:2] + '0' + value[2:]
-    elif filter == 'location' and len(value) == 4:
-        value = value[0:2] + '00' + value[2:]
+    if filter == 'location':
+        value = location_service(value)
 
     models = {
         'product': (Hs, 'id'),
@@ -47,8 +65,21 @@ def value_service(filter, value):
         model = models[filter][0]
         result = model.query.filter_by(**{models[filter][1]: value}).first()
         if result:
-            return result.name_en
+            return getattr(result, 'name_' + g.locale)
     return None
+
+def inflect(title, object, preposition, name):
+    inflections = {'in': ['no', 'na', 'em'], 'from': ['do', 'da', 'de'], 'of': [
+        'do', 'da', 'de'], 'to': ['para o', 'para a', 'para']}
+
+    if object.article_pt and object.gender_pt == 'm':
+        inflection = inflections[preposition][0]
+    elif object.article_pt and object.gender_pt == 'f':
+        inflection = inflections[preposition][1]
+    else:
+        inflection = inflections[preposition][2]
+
+    return title.replace('<' + name + '_' + preposition + '>', inflection)
 
 
 def get_title(dataset, shapes, graph, api_filters):
@@ -75,11 +106,33 @@ def get_title(dataset, shapes, graph, api_filters):
     query['graph'] = graph
 
     result = GraphTitle.query.filter_by(**query).first()
-    if result:
-        title = result.title_en
+
+    if result:       
+        title = getattr(result, 'title_' + g.locale)
         for key, value in values.iteritems():
             title = title.replace('<' + key + '>', value)
-        title = title.replace('<location>', 'Brazil')
-        return title, result.subtitle_en
+
+        title = title.replace('<location>', 'Brazil' if g.locale == 'en' else 'Brasil')
+
+        if 'location' in api_filters:
+            id = ('id' if len(api_filters['location']) == 1 else 'id_ibge', location_service(api_filters['location']))
+            location = Bra.query.filter_by(**{id[0]: id[1]}).first()
+
+            for preposition in ['in', 'from', 'of']:
+                if '<location_' + preposition + '>' in title:
+                    title = inflect(title, location, preposition, 'location')
+
+        title = title.replace('<location_in>', 'no').replace('<location_from', 'do').replace('<location_of>', 'do')
+
+        if 'partner' in api_filters:
+            if api_filters['partner'].isdigit():
+                partner = Wld.query.filter_by(id_mdic=api_filters['partner']).first()
+            else:
+                partner = Wld.query.get(api_filters['partner'])
+
+            if '<partner_to>' in title:
+                title = inflect(title, partner, 'to', 'partner')
+
+        return title, getattr(result, 'subtitle_' + g.locale)
 
     return None, None

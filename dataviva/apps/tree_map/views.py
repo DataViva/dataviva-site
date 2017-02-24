@@ -43,7 +43,12 @@ def index(dataset, squares, size):
 
         if key not in ['depths', 'sizes', 'group'] and value and key in services:
             filters.append(services[key](value))
-            title_attrs['location' if key == 'id_ibge' else key] = value
+            if key == 'id_ibge':
+              title_attrs['location'] = value
+            elif key == 'wld':
+              title_attrs['partner'] = value
+            else:
+              title_attrs[key] = value
         else:
             filters.append((key, value))
 
