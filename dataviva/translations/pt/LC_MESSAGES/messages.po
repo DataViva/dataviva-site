@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-01-27 15:06-0200\n"
+"POT-Creation-Date: 2017-03-03 18:14-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -400,6 +400,10 @@ msgid "You need to be logged in to flag replies."
 msgstr "Você precisa fazer o login para marcar respostas."
 
 #: dataviva/apps/basic_course/templates/basic_course/graphs-enrollments.html:3
+#: dataviva/apps/health/templates/health/graphs-beds.html:3
+#: dataviva/apps/health/templates/health/graphs-equipments.html:3
+#: dataviva/apps/health/templates/health/graphs-establishments.html:3
+#: dataviva/apps/health/templates/health/graphs-professionals.html:3
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:3
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:3
 #: dataviva/apps/location/templates/location/graphs-education.html:3
@@ -432,7 +436,7 @@ msgstr "Matrículas por"
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:39
 #: dataviva/apps/location/templates/location/graphs-trade-partner.html:90
 #: dataviva/apps/location/templates/location/graphs-wages.html:31
-#: dataviva/apps/location/templates/location/graphs-wages.html:93
+#: dataviva/apps/location/templates/location/graphs-wages.html:86
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:18
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:64
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:15
@@ -468,9 +472,9 @@ msgstr "Mapa"
 #: dataviva/apps/location/templates/location/graphs-wages.html:14
 #: dataviva/apps/location/templates/location/graphs-wages.html:26
 #: dataviva/apps/location/templates/location/graphs-wages.html:39
-#: dataviva/apps/location/templates/location/graphs-wages.html:76
-#: dataviva/apps/location/templates/location/graphs-wages.html:88
-#: dataviva/apps/location/templates/location/graphs-wages.html:101
+#: dataviva/apps/location/templates/location/graphs-wages.html:69
+#: dataviva/apps/location/templates/location/graphs-wages.html:81
+#: dataviva/apps/location/templates/location/graphs-wages.html:94
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:14
 #: dataviva/apps/major/templates/major/graphs-enrollments.html:24
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:14
@@ -517,6 +521,7 @@ msgstr "no Brasil"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:10
 #: dataviva/apps/basic_course/templates/basic_course/index.html:146
+#: dataviva/apps/health/templates/health/index.html:64
 #: dataviva/apps/industry/templates/industry/index.html:10
 #: dataviva/apps/industry/templates/industry/index.html:162
 #: dataviva/apps/location/templates/location/index.html:10
@@ -576,6 +581,7 @@ msgid "in "
 msgstr "na "
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:49
+#: dataviva/apps/health/templates/health/index.html:27
 #: dataviva/apps/industry/templates/industry/index.html:47
 #: dataviva/apps/location/templates/location/index.html:86
 #: dataviva/apps/major/templates/major/index.html:45
@@ -587,6 +593,7 @@ msgid "picture by"
 msgstr "foto por"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:69
+#: dataviva/apps/health/templates/health/index.html:38
 #: dataviva/apps/industry/templates/industry/index.html:68
 #: dataviva/apps/location/templates/location/index.html:105
 #: dataviva/apps/occupation/templates/occupation/index.html:69
@@ -773,6 +780,10 @@ msgid "The city has "
 msgstr "No total, o município possui"
 
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:82
+#: dataviva/apps/health/templates/health/tab-general.html:21
+#: dataviva/apps/health/templates/health/tab-general.html:33
+#: dataviva/apps/health/templates/health/tab-general.html:45
+#: dataviva/apps/health/templates/health/tab-general.html:57
 #: dataviva/apps/industry/templates/industry/tab-general.html:73
 #: dataviva/apps/location/templates/location/tab-general.html:133
 #: dataviva/apps/location/templates/location/tab-general.html:174
@@ -1226,6 +1237,73 @@ msgstr "Anterior"
 msgid "Next"
 msgstr "Próximo"
 
+#: dataviva/apps/health/templates/health/graphs-beds.html:5
+msgid "Beds per"
+msgstr "Leitos por"
+
+#: dataviva/apps/health/templates/health/graphs-equipments.html:5
+msgid "Equipments per"
+msgstr "Equipamentos por"
+
+#: dataviva/apps/health/templates/health/graphs-establishments.html:5
+msgid "Establishments per"
+msgstr "Estabelecimentos por"
+
+#: dataviva/apps/health/templates/health/graphs-establishments.html:10
+#: dataviva/apps/health/templates/health/graphs-establishments.html:18
+#: dataviva/apps/health/templates/health/graphs-establishments.html:27
+#: dataviva/apps/health/templates/health/graphs-establishments.html:34
+#: dataviva/apps/health/templates/health/graphs-establishments.html:43
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:32
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:40
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:76
+#: dataviva/apps/industry/templates/industry/graphs-wages.html:84
+#: dataviva/apps/location/templates/location/graphs-trade-partner.html:60
+#: dataviva/apps/location/templates/location/graphs-trade-partner.html:110
+#: dataviva/apps/location/templates/location/graphs-wages.html:48
+#: dataviva/apps/location/templates/location/graphs-wages.html:56
+#: dataviva/apps/location/templates/location/graphs-wages.html:103
+#: dataviva/apps/location/templates/location/graphs-wages.html:111
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:39
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:47
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:85
+#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:93
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:62
+#: dataviva/apps/product/templates/product/graphs-trade-partner.html:118
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:58
+#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:108
+msgid "Bar"
+msgstr "Barras"
+
+#: dataviva/apps/health/templates/health/graphs-professionals.html:5
+msgid "Professionals per"
+msgstr "Profissionais por"
+
+#: dataviva/apps/health/templates/health/index.html:41
+#: dataviva/apps/health/templates/health/index.html:71
+#: dataviva/apps/health/templates/health/tab-establishments.html:3
+#: dataviva/apps/health/templates/health/tab-general.html:14
+msgid "Establishments"
+msgstr "Estabelecimentos"
+
+#: dataviva/apps/health/templates/health/index.html:78
+#: dataviva/apps/health/templates/health/tab-equipments.html:3
+#: dataviva/apps/health/templates/health/tab-general.html:50
+msgid "Equipments"
+msgstr "Equipamentos"
+
+#: dataviva/apps/health/templates/health/index.html:85
+#: dataviva/apps/health/templates/health/tab-beds.html:3
+#: dataviva/apps/health/templates/health/tab-general.html:26
+msgid "Beds"
+msgstr "Leitos"
+
+#: dataviva/apps/health/templates/health/index.html:92
+#: dataviva/apps/health/templates/health/tab-general.html:38
+#: dataviva/apps/health/templates/health/tab-professionals.html:3
+msgid "Professionals"
+msgstr "Profissionais"
+
 #: dataviva/apps/help/templates/help/_form.html:16
 #: dataviva/apps/help/templates/help/_form.html:21
 #: dataviva/apps/help/templates/help/admin.html:32
@@ -1290,7 +1368,7 @@ msgstr "Produto"
 #: dataviva/apps/help/templates/help/tab-crosswalk-pi.html:12
 #: dataviva/apps/industry/templates/industry/index.html:71
 #: dataviva/apps/location/templates/location/graphs-wages.html:6
-#: dataviva/apps/location/templates/location/graphs-wages.html:68
+#: dataviva/apps/location/templates/location/graphs-wages.html:61
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:13
 #: dataviva/templates/site.html:64 dataviva/translations/dictionary.py:361
 msgid "Industry"
@@ -1309,7 +1387,7 @@ msgstr "Atividade Econômica"
 #: dataviva/apps/industry/templates/industry/tab-wages.html:9
 #: dataviva/apps/industry/templates/industry/tab-wages.html:39
 #: dataviva/apps/location/templates/location/graphs-wages.html:18
-#: dataviva/apps/location/templates/location/graphs-wages.html:80
+#: dataviva/apps/location/templates/location/graphs-wages.html:73
 #: dataviva/apps/occupation/templates/occupation/index.html:72
 #: dataviva/apps/rankings/templates/rankings/_base.html:44
 #: dataviva/apps/rankings/templates/rankings/occupation.html:13
@@ -1536,38 +1614,17 @@ msgstr "Empregos por"
 
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:28
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:72
-#: dataviva/apps/location/templates/location/graphs-wages.html:51
-#: dataviva/apps/location/templates/location/graphs-wages.html:113
+#: dataviva/apps/location/templates/location/graphs-wages.html:44
+#: dataviva/apps/location/templates/location/graphs-wages.html:99
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:35
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:81
 msgid "Demographic Informations"
 msgstr "Informações Demográficas"
 
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:32
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:40
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:76
-#: dataviva/apps/industry/templates/industry/graphs-wages.html:84
-#: dataviva/apps/location/templates/location/graphs-trade-partner.html:60
-#: dataviva/apps/location/templates/location/graphs-trade-partner.html:110
-#: dataviva/apps/location/templates/location/graphs-wages.html:55
-#: dataviva/apps/location/templates/location/graphs-wages.html:63
-#: dataviva/apps/location/templates/location/graphs-wages.html:117
-#: dataviva/apps/location/templates/location/graphs-wages.html:125
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:39
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:47
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:85
-#: dataviva/apps/occupation/templates/occupation/graphs-wages.html:93
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:62
-#: dataviva/apps/product/templates/product/graphs-trade-partner.html:118
-#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:58
-#: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:108
-msgid "Bar"
-msgstr "Barras"
-
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:36
 #: dataviva/apps/industry/templates/industry/graphs-wages.html:80
-#: dataviva/apps/location/templates/location/graphs-wages.html:59
-#: dataviva/apps/location/templates/location/graphs-wages.html:121
+#: dataviva/apps/location/templates/location/graphs-wages.html:52
+#: dataviva/apps/location/templates/location/graphs-wages.html:107
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:43
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:89
 msgid "Establishments Informations"
@@ -1881,12 +1938,7 @@ msgstr "Origem"
 msgid "Job By"
 msgstr "Empregos por"
 
-#: dataviva/apps/location/templates/location/graphs-wages.html:44
-#: dataviva/apps/location/templates/location/graphs-wages.html:106
-msgid "Gender"
-msgstr "Gênero"
-
-#: dataviva/apps/location/templates/location/graphs-wages.html:67
+#: dataviva/apps/location/templates/location/graphs-wages.html:60
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:51
 #, fuzzy
 msgid "Wage by"
@@ -5411,17 +5463,25 @@ msgstr ""
 "Fundamental, Ensino Médio, Técnico em Enfermagem, Técnico em "
 "Agropecuária."
 
-#: dataviva/templates/general/index.html:116
+#: dataviva/templates/general/index.html:110
+msgid "Texto da tooltip da saúde"
+msgstr ""
+
+#: dataviva/templates/general/index.html:111
+msgid "Estabelecimentos de Saúde"
+msgstr ""
+
+#: dataviva/templates/general/index.html:122
 msgid "Headlines"
 msgstr "Destaques"
 
-#: dataviva/templates/general/index.html:133
+#: dataviva/templates/general/index.html:139
 #: dataviva/templates/modal/signup.html:10
 #: dataviva/translations/dictionary.py:584
 msgid "Sign Up free and make the most of DataViva"
 msgstr "Cadastre-se gratuitamente e aproveite o DataViva ao máximo"
 
-#: dataviva/templates/general/index.html:134
+#: dataviva/templates/general/index.html:140
 #: dataviva/translations/dictionary.py:585
 msgid ""
 "Save the graphs you need and get our free content in your e-mail. Signing"
@@ -5431,7 +5491,7 @@ msgstr ""
 " cadastro você terá acesso a recursos exclusivos para facilitar sua "
 "pesquisa."
 
-#: dataviva/templates/general/index.html:135
+#: dataviva/templates/general/index.html:141
 #: dataviva/templates/modal/signup.html:9
 #: dataviva/translations/dictionary.py:586
 msgid "Free Sign Up"
@@ -7387,4 +7447,7 @@ msgstr "com"
 
 #~ msgid "Format: XX"
 #~ msgstr ""
+
+#~ msgid "Gender"
+#~ msgstr "Gênero"
 

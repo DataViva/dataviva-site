@@ -34,7 +34,7 @@ var NewSelector = (function(){
 		    	$('#modal-selector .modal-header h4.modal-title').html('Estabelecimentos')
 		    	$('#modal-selector-content').append($(searchInputTemplate))
 		    	for(var key in response){
-		    		$('#modal-selector-content .selector_body').append($(itemTemplate.replace('{{name}}', response[key].name_pt).replace('{{cnes_id}}', key)))
+		    		$('#modal-selector-content .selector_body').append($(itemTemplate.replace(/{{name}}/g, response[key].name_pt).replace(/{{cnes_id}}/g, key)))
 		    	}
 
 		    	addFilter()

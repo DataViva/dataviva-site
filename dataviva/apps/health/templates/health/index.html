@@ -12,7 +12,7 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" > Hospital João 23</a>
+                <a href="#" title="Trocar"> {{ establishment.name }}</a>
             </li>
         </ol>
     </div>
@@ -32,13 +32,13 @@
         <div class="container">
 
             <span class="portrait hidden-xs"></span>
-            <h1>Hospital João 23
+            <h1>{{ establishment.name }}
                 <div class="btn-group">
                   <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {% trans %}change{% endtrans %} <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a href="#" onclick="select_attr_search('bra');">{% trans %}Location{% endtrans %}</a></li>
+                    <li><a href="#" onclick="NewSelector.show('establishments')" >{% trans %}Establishments{% endtrans %}</a></li>
                   </ul>
                 </div>
             </h1>

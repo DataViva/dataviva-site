@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 
@@ -20,16 +22,14 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-@mod.route('/<id>', defaults={'tab': 'general'})
-def index(id, tab):
-    total = {
-        'beds': 100000,
-        'professionals': 100000,
-        'equipments': 100000,
-        'establishments': 100000,
+@mod.route('/<cnes_id>', defaults={'tab': 'general'})
+def index(cnes_id, tab):
+    establishment = {
+        'name' : u"Hospital João 23",
+        'img' : ""
     }
 
-    return render_template('health/index.html', total=total, tab=tab)
+    return render_template('health/index.html', tab=tab, establishment=establishment)
 
 @mod.route('/<id>/graphs/<tab>', methods=['POST'])
 def graphs(id, tab):
