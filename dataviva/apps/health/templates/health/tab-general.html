@@ -2,88 +2,60 @@
     <h2>Perfil Geral</h2>
 
 
-    <p>Belo Horizonte
-    é um dos 853
-    municípios do estado de Minas Gerais.
-    Com área de 331 
-    km², possui 2,37 milhões
-    de habitantes e PIB per Capita de R$ 23,0 mil.
-    Localizado na Mesorregião Metropolitana de Belo Horizonte,
-    é o    1º
-    município do estado em PIB.</p>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
 
     <div class="row">
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}Establishments{% endtrans %}</h3>
+      <div class="dl-box col-xs-12 col-md-6" id="general-establishments">
+          <h3>{% trans %}Establishments{% endtrans %}</h3>
         <dl class="dl-horizontal">
-          <dt>{% trans %}Total of establishments{% endtrans %}</dt>
-          <dd>
-            <strong class="counter"> {{ total.establishments | max_digits(3, True) }} </strong>
-            <span>{{ total.establishments | magnitude }}</span>
-          </dd>
-        </dl>
+              </dl>
         <a href="#establishments"
             aria-controls="establishments"
             role="tab"
             data-toggle="tab"
-            graph
-            class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+            graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
         </a>
       </div>
 
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}Equipments{% endtrans %}</h3>
+      <div class="dl-box col-xs-12 col-md-6" id="general-beds">
+       <h3>{% trans %}Beds{% endtrans %}</h3>
         <dl class="dl-horizontal">
-          <dt>{% trans %}Total of equipments{% endtrans %}</dt>
-          <dd>
-            <strong class="counter"> {{ total.equipments | max_digits(3, True) }}</strong>
-            <span>{{ total.establishments | magnitude }}</span>
-          </dd>
-        </dl>
-        <a href="#equipments"
-            aria-controls="equipments"
+              </dl>
+        <a href="#beds"
+            aria-controls="beds"
             role="tab"
             data-toggle="tab"
-            graph
-            class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+            graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
         </a>
       </div>
 
-        <div class="dl-box col-xs-12 col-md-6">
-          <h3>{% trans %}Beds{% endtrans %}</h3>
-          <dl class="dl-horizontal"> 
-            <dt>{% trans %}Total of beds{% endtrans %}</dt>
-            <dd>
-              <strong class="counter"> {{ total.beds | max_digits(3, True) }}</strong>
-              <span>{{ total.beds | magnitude }}</span>
-            </dd>
-          </dl>
-          <a href="#beds"
-              aria-controls="beds"
-              role="tab"
-              data-toggle="tab"
-              graph
-              class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
-          </a>
-        </div>
+      <div class="dl-box col-xs-12 col-md-6" id="general-professionals">
+      <h3>{% trans %}Professionals{% endtrans %}</h3>
+       <dl class="dl-horizontal">
+             </dl>
+       <a href="#professionals"
+           aria-controls="professionals"
+           role="tab"
+           data-toggle="tab"
+           graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+       </a>
+      </div>
 
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}Professionals{% endtrans %}</h3>
-        <dl class="dl-horizontal">
-                
-          <dt>{% trans %}Total of professionals{% endtrans %}</dt>
-          <dd>
-            <strong class="counter"> {{ total.professionals | max_digits(3, True) }}</strong>
-            <span>{{ total.professionals | magnitude }}</span>
-          </dd>
-        </dl>
-        <a href="#professionals"
-            aria-controls="professionals"
-            role="tab"
-            data-toggle="tab"
-            graph 
-            class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
-        </a>
+      <div class="dl-box col-xs-12 col-md-6" id="general-equipments">
+      <h3>{% trans %}Equipments{% endtrans %}</h3>
+       <dl class="dl-horizontal">
+             </dl>
+       <a href="#equipments"
+           aria-controls="equipments"
+           role="tab"
+           data-toggle="tab"
+           graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+       </a>
       </div>
 
     </div>

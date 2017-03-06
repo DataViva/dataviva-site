@@ -12,7 +12,7 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" > Hospital João 23</a>
+                <a href="#" title="Trocar"> {{ establishment.name }}</a>
             </li>
         </ol>
     </div>
@@ -32,13 +32,13 @@
         <div class="container">
 
             <span class="portrait hidden-xs"></span>
-            <h1>Hospital João 23
+            <h1>{{ establishment.name }}
                 <div class="btn-group">
                   <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {% trans %}change{% endtrans %} <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a href="#" onclick="select_attr_search('bra');">{% trans %}Location{% endtrans %}</a></li>
+                    <li><a href="#" onclick="NewSelector.show('establishments')" >{% trans %}Establishments{% endtrans %}</a></li>
                   </ul>
                 </div>
             </h1>
@@ -46,54 +46,6 @@
 
             <div class="indices">
                 <div class="row">
-
-                    
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total of establishments{% endtrans %}</h2>
-                            <div class="number">
-                                <strong class="counter"> {{ total.establishments | max_digits(3, True) }} </strong><br>
-                                <small class="magnitude">{{ total.establishments | magnitude }}</small>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                    
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total of equipments{% endtrans %}</h2>
-                            <div class="number">
-                                <strong class="counter"> {{ total.equipments | max_digits(3, True) }} </strong><br>
-                                <small class="magnitude">{{ total.equipments | magnitude }}</small>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                    
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total of beds{% endtrans %}</h2>
-                            <div class="number">
-                                <strong class="counter"> {{ total.beds | max_digits(3, True) }} </strong><br>
-                                <small class="magnitude">{{ total.beds | magnitude }}</small>
-                            </div>
-                        </div>
-                    </div>
-                    
-
-                    
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total of professionals{% endtrans %}</h2>
-                            <div class="number">
-                                <strong class="counter"> {{ total.professionals | max_digits(3, True) }} </strong><br>
-                                <small class="magnitude">{{ total.professionals | magnitude }}</small>
-                            </div>
-                        </div>
-                    </div>
-                    
                 </div><!--/.row-->
             </div><!--/.indices-->
         </div>

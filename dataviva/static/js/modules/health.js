@@ -16,7 +16,82 @@ $(document).ready(function(){
         // });
 
     }
+//GENERAL ADD
 
+//ESTABLISHMENT
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+        title:  dictionary.total_of_establishments,
+        label: '',
+        value: 'establishments'
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filters,
+        title: dictionary.municipality_with_highest_number_of_establishments,
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'establishments',
+    });
+
+//BED
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
+        title:  dictionary.total_of_beds,
+        label: '',
+        value: 'beds'
+
+    });
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filters,
+        title: dictionary.municipality_with_highest_number_of_beds,
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'beds'
+    });
+
+//PROFESSIONAL
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
+        title:  dictionary.total_of_professionals,
+        label: '',
+        value: 'professionals',
+        prefix: 'Total of professionals '
+
+    });
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
+        title: dictionary.municipality_with_highest_number_of_professionals,
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'professionals',
+        prefix: 'Total of profissionais'
+    });
+
+//EQUIPMENT
+    General.add({
+        url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
+        title: dictionary.total_of_equipments,
+        label: '',
+        value: 'equipments',
+        prefix: 'Total of Equipments '
+
+    });
+    General.add({
+        url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filters,
+        title: dictionary.municipality_with_highest_number_of_equipments,
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'equipments'
+    });
     // ESTABLISHMENTS
 
     BlueBox.add({
@@ -158,13 +233,74 @@ $(document).ready(function(){
         tab: 'equipments'
     });
 
-    // Indicator.add({
-    //     url: '/',
-    //     title: 'Numero de Leitos',
-    //     value:  'beds', 
-    //     preffix: 'R$'
-    // });
+//INDICATOR ADD
+
+    //LEITOS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
+        title: dictionary.number_beds,
+        value:  'beds'
+    });
+
+    //EQUIPAMENTOS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
+        title: dictionary.number_equipments,
+        value:  'equipments'
+    });
+
+    //PROFISSIONAIS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
+        title: dictionary.number_professionals,
+        value:  'professionals'
+    });
+
+    //ESTABELECIMENTOS
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+        title: dictionary.number_establishments,
+        value:  'establishments'
+    });
+    //
+
+
 })
+
+var lang = location.pathname.split('/')[1];
+var dictionary = {};
+
+dictionary['total_of_establishments'] = lang == 'en' ? 'Total of Establishments' : 'Total de Estabelecimentos';
+dictionary['municipality_with_highest_number_of_establishments'] = lang == 'en' ? 'Municipality with the highest number of Establishments' : 'Município com maior numero de Estabelecimentos';
+dictionary['establishments'] = lang == 'en' ? 'establishments' : 'estabelecimentos';
+
+dictionary['total_of_professionals'] = lang == 'en' ? 'Total of Professionals' : 'Total de Profissionais';
+dictionary['municipality_with_highest_number_of_professionals'] = lang == 'en' ? 'Municipality with the highest number of Professionals' : 'Município com maior numero de Profissionais';
+dictionary['professionals'] = lang == 'en' ? 'professionals' : 'profissionais';
+
+dictionary['total_of_beds'] = lang == 'en' ? 'Total of beds' : 'Total de Leitos';
+dictionary['municipality_with_highest_number_of_beds'] = lang == 'en' ? 'Municipality with the highest number of Beds' : 'Município com maior numero de Leitos';
+dictionary['beds'] = lang == 'en' ? 'beds' : 'Leitos';
+
+dictionary['total_of_equipments'] = lang == 'en' ? 'Total of equipments' : 'Total de Equipamentos';
+dictionary['municipality_with_highest_number_of_equipments'] = lang == 'en' ? 'Municipality with the highest number of equipments' : 'Município com maior numero de Equipamentos';
+dictionary['equipments'] = lang == 'en' ? 'equipments' : 'Equipamentos';
+
+dictionary['number_establishments'] = lang == 'en' ? 'Number of Establishments' : 'Numero de Estabelecimentos';
+dictionary['number_beds'] = lang == 'en' ? 'Number of Beds' : 'Numero de Leitos';
+dictionary['number_professionals'] = lang == 'en' ? 'Number of Professionals' : 'Numero de Profissionais';
+dictionary['number_equipments'] = lang == 'en' ? 'Number of Equipments' : 'Numero de Equipamentos';
+
+dictionary['trillion'] = lang == 'en' ? 'Trillion' : 'Trilhão';
+dictionary['billion'] = lang == 'en' ? 'Billion' : 'Bilhão';
+dictionary['million'] = lang == 'en' ? 'Million' : 'Milhão';
+
+dictionary['trillions'] = lang == 'en' ? 'Trillions' : 'Trilhões';
+dictionary['billions'] = lang == 'en' ? 'Billions' : 'Bilhões';
+dictionary['millions'] = lang == 'en' ? 'Millions' : 'Milhões';
+
+dictionary['thousand'] = lang == 'en' ? 'Thousand' : 'Mil';
+
 
 var buildData = function(responseApi){
     var getAttrByName = function(item, attr){
@@ -205,6 +341,56 @@ var getMetadata = function(key){
     });
 }
 
+var General = (function(){
+    var template = '' +
+          '<dt>{{title}}</dt>'+
+          '<dd>'+
+            '<small>{{label}}</small>'+
+            '<strong class="counter">{{preffix}} {{value}} </strong>'+
+            '<span>{{magnitude}}</span>'+
+          '</dd>';
+
+    var add = function(data){
+
+        var api;
+        var metadata;
+
+        $.when(
+            $.ajax({
+                url: data.url,
+                type: 'GET',
+                success: function(response){
+                    api = buildData(response)[0];
+                }
+            }),
+
+            !data.label.metadata ? undefined : getMetadata(data.label.value).then(function(response){
+                metadata = response;
+            })
+        ).then(function() {
+            var label = data.label;
+            if (typeof data.label == 'object')
+                label = metadata[api[data.label.value]].name_pt;
+
+            var formattedValue = Magnitude(api[data.value]);
+            var value = formattedValue.split(' ')[0].replace('.', ',');
+            var magnitude = formattedValue.split(' ')[1] || '';
+
+            var filledTemplate = template.replace('{{title}}', data.title || '')
+                                .replace('{{label}}', label.toUpperCase() || '')
+                                .replace('{{value}}', value)
+                                .replace('{{magnitude}}', magnitude)
+                                .replace('{{preffix}}', data.preffix || '' );
+
+            $('#general-' + data.value + ' .dl-horizontal').append(filledTemplate);
+        });
+    }
+
+    return {
+        add: add
+    };
+})();
+
 var Indicator = (function(){
     var template = '' +
     '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">' +
@@ -222,7 +408,9 @@ var Indicator = (function(){
             url: data.url,
             type: 'GET',
             success: function(response){
-                var formattedValue = Magnitude(123456);
+                var api = buildData(response)[0];
+
+                var formattedValue = Magnitude(api[data.value]);
                 var value = formattedValue.split(' ')[0].replace('.', ',');
                 var magnitude = formattedValue.split(' ')[1] || '';
                 
@@ -234,7 +422,7 @@ var Indicator = (function(){
                 $('#header .indices .row').append(filledTemplate);
             }
         });
-    };
+    }
 
     return {
         add: add
@@ -270,12 +458,8 @@ var BlueBox = (function(){
                 }           
             }),
 
-            !data.label.metadata ? undefined : $.ajax({
-                url: 'http://api.staging.dataviva.info/metadata/' + data.label.value, 
-                type: 'GET',      
-                success: function(response){                          
-                    metadata = response;
-                }           
+            !data.label.metadata ? undefined : getMetadata(data.label.value).then(function(response){
+                metadata = response;
             })
         ).then(function() {
             var label = data.label;
@@ -307,11 +491,11 @@ var Magnitude = function(n){
     if (n < 1000)
         return n + '';
     if (n < 1000000)
-        return (n/1000).toPrecision(3) + ' Mil';
+        return (n/1000).toPrecision(3) + ' ' + dictionary.thousand;
     if (n < 1000000000)
-        return n < 2000000 ? (n/1000000).toPrecision(3) + ' Milhão' : (n/1000000).toPrecision(3) + ' Milhões';
+        return n < 2000000 ? (n/1000000).toPrecision(3) + dictionary.million : (n/1000000).toPrecision(3) + ' ' + dictionary.millions;
     if (n < 1000000000000)
-        return n < 2000000000 ? (n/1000000000).toPrecision(3) + ' Bilhão' : (n/1000000000).toPrecision(3) + ' Bilhões';
+        return n < 2000000000 ? (n/1000000000).toPrecision(3) + dictionary.billion : (n/1000000000).toPrecision(3) + ' ' + dictionary.billions;
     if (n < 1000000000000000)
-        return n < 2000000000000 ? (n/1000000000000).toPrecision(3) + ' Trilhão' : (n/1000000000000).toPrecision(3) + ' Trilhões';
+        return n < 2000000000000 ? (n/1000000000000).toPrecision(3) + dictionary.trillion : (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillions;
 };
