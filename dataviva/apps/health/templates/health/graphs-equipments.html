@@ -3,13 +3,23 @@
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Equipments per{% endtrans %}</h4>
-            <a href="#equipments" class="list-group-item" data-toggle="collapse" data-parent="#equipments">Tipo</a>
+            <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">Tipo</a>
+            <div class="collapse" id="equipments-type">
+                <a href="/{{g.locale}}/bar/cnes_equipment/equipments/equipment_type?options=singlecolor"
+                   target="graphs-frame-wages" class="list-group-item selected" data-parent="#equipments-type" >
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
             <a href="#equipments" class="list-group-item" data-toggle="collapse" data-parent="#equipments">Atendimento ao SUS</a>
-            
         </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
+            <iframe src="{% if not graph %} /{{g.locale}}/bar/cnes_equipment/equipments/equipment_type?options=singlecolor {% endif %}"
+                    name="graphs-frame-wages"
+                    id="graphs-frame-wages"
+                    class="embed-responsive-item" >
+            </iframe>
         </div>
     </div>
 </div>

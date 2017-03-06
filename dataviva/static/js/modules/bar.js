@@ -356,6 +356,14 @@ var textHelper = {
     'professionals': {
         'en': "Professionals",
         'pt': "Profissionais"
+    },
+    'equipment_type': {
+        'en': "Equipment Type",
+        'pt': "Tipo de Equipamento"
+    },
+    'equipments': {
+        'en': "Equipments",
+        'pt': "Equipamentos"
     }
 };
 
