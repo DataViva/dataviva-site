@@ -27,6 +27,11 @@ var DICT = {
             'occupation_family': 'cbo_id'
         },
         'jobs': 'total_jobs'
+    },
+    'cnes_establishment': {
+        'item_id': {
+            'municipality': 'ibge_id'
+        }
     }
 };
 
@@ -41,6 +46,9 @@ var DEPTHS = {
         'industry_class': ['industry_section', 'industry_division', 'industry_class'],
         'municipality': ['state', 'mesoregion', 'microregion', 'municipality'],
         'occupation_family': ['occupation_group', 'occupation_family']
+    },
+    'cnes_establishment': {
+        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'municipality']
     }
 };
 
@@ -55,12 +63,16 @@ var SIZES = {
         'industry_class': ['jobs', 'wage', 'establishment_count'],
         'municipality': ['jobs', 'wage', 'establishment_count'],
         'occupation_family': ['jobs', 'wage']
+    },
+    'cnes_establishment': {
+        'municipality': ['establishments']
     }
 };
 
 var BASIC_VALUES = {
     'secex': ['value', 'kg'],
-    'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size']
+    'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
+    'cnes_establishment': ['establishments']
 };
 
 if (document.getElementById('rings'))
@@ -75,7 +87,8 @@ var CALC_BASIC_VALUES = {
             return getUrlArgs()['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
         }
     },
-    'rais': {}
+    'rais': {},
+    'cnes_establishment': {}
 };
 
 var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group'];
@@ -123,6 +136,7 @@ dictionary['total_jobs'] = lang == 'en' ? 'Total Jobs' : 'Total de Empregos';
 dictionary['average_establishment_size'] = lang == 'en' ? 'Jobs per Establishment' : 'Empregos por Estabelecimento';
 dictionary['occupation_family'] = lang == 'en' ? 'Family' : 'Família';
 dictionary['occupation_group'] = lang == 'en' ? 'Main Group' : 'Grande Grupo';
+dictionary['establishments'] = lang == 'en' ? 'Total Establishments' : 'Total de Estabelecimentos';
 dictionary['Creating URL'] = lang == 'en' ? 'Creating URL' : 'Criando URL';
 dictionary['kg'] = 'KG';
 
