@@ -68,7 +68,7 @@ def jinja_split(s, char):
 def max_digits(number, digits, counter=None):
     negative = False
     separator = ',' if g.locale == 'pt' and counter == None else '.'
-    if number < 0:
+    if number and number < 0:
         negative = True
         number = abs(number)
 

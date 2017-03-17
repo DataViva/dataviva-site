@@ -60,6 +60,39 @@ def location_service(depth, location):
     else:
         return location.id_ibge
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
+
+def location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
+
 @mod.route('/<occupation_id>/graphs/<tab>', methods=['POST'])
 def graphs(occupation_id, tab):
     occupation = Cbo.query.filter_by(id=occupation_id).first_or_404()
@@ -82,20 +115,28 @@ def index(occupation_id, tab):
 
     bra_id = request.args.get('bra_id')
     bra_id = bra_id if bra_id != 'all' else None
+    location = Bra.query.filter_by(id=bra_id).first()
+    is_municipality = location and len(location.id) == 9
+
+    if not bra_id:
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = location_service(depth, location)
 
     menu = request.args.get('menu')
     url = request.args.get('url')
 
-    location = Bra.query.filter_by(id=bra_id).first()
-    is_municipality = location and len(location.id) == 9
     header = {}
     body = {}
     graph = {}
-    
+
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     if not bra_id:
         depth = None
@@ -126,13 +167,16 @@ def index(occupation_id, tab):
     tabs = {
         'general': [],
         'opportunities': [
-            'economic-opportunities-rings'
+            'economic-opportunities-rings',
+            'new-api-economic-opportunities-rings'
         ],
 
         'wages': [
             'jobs-economic-activities-tree_map',
+            'new-api-jobs-economic-activities-tree_map',
             'jobs-economic-activities-stacked',
             'wages-economic-activities-tree_map',
+            'new-api-wages-economic-activities-tree_map',
             'wages-economic-activities-stacked',
         ],
     }
@@ -140,9 +184,11 @@ def index(occupation_id, tab):
     if not is_municipality:
         tabs['wages'] += [
             'jobs-municipality-tree_map',
+            'new-api-jobs-municipality-tree_map',
             'jobs-municipality-geo_map',
             'jobs-municipality-stacked',
             'wages-municipality-tree_map',
+            'new-api-wages-municipality-tree_map',
             'wages-municipality-geo_map',
             'wages-municipality-stacked',
         ]
@@ -172,7 +218,7 @@ def index(occupation_id, tab):
     body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
     body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
     body['year'] = occupation_activities_service.year()
-    
+
     rais_max_year = db.session.query(func.max(Yo.year)).first()[0]
 
     if location:
@@ -193,7 +239,7 @@ def index(occupation_id, tab):
             Yo.cbo_id_len == len(occupation_id),
             Yo.year == max_year_query)\
             .order_by(Yo.num_jobs.desc())
-        
+
     rais = rais_query.all()
     for index, occ in enumerate(rais):
         if rais[index].cbo_id == occupation_id:
