@@ -404,6 +404,7 @@ var Indicator = (function(){
     '</div>';
     
     var add = function(data){
+        //
         $.ajax({
             url: data.url,
             type: 'GET',
@@ -432,11 +433,11 @@ var Indicator = (function(){
 var BlueBox = (function(){
     var template = '' +
     '<div class="col-xs-12 col-sm-6 col-md-4">' +
-        '<div class="blue-box title">' +
+        '<div class="blue-box title blue-box--loading">' +
             '{{title}}' +
             '<small>{{subtitle}}</small>' +
         '</div>' +
-        '<div class="blue-box">' +
+        '<div class="blue-box blue-box--loading">' +
             '<p class="label">{{label}}</p>' +
             '<div class="number">' +
                 '<strong class="counter">{{value}}</strong><span>{{magnitude}} {{suffix}}</span>' +
@@ -448,6 +449,9 @@ var BlueBox = (function(){
 
         var api;
         var metadata;
+
+        data['template'] = $(template);
+        $('#' + data.tab + ' .row').append(data.template);
 
         $.when(
             $.ajax({
@@ -476,9 +480,11 @@ var BlueBox = (function(){
                                 .replace('{{value}}', value)
                                 .replace('{{magnitude}}', magnitude)
                                 .replace('{{prefix}}', data.prefix || '' )
-                                .replace('{{suffix}}', data.suffix || '');
+                                .replace('{{suffix}}', data.suffix || '')
+                                .replace('blue-box--loading', '')
+                                .replace('blue-box--loading', '')
 
-            $('#' + data.tab + ' .row').append(filledTemplate);
+            data.template.replaceWith(filledTemplate);
         });       
     }
 

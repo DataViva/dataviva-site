@@ -1,0 +1,42 @@
+
+.blue-box.blue-box--loading {
+  background: #5A9DC4;
+  text-indent: -999999px;
+  position: relative;
+  opacity: .5;
+}
+.blue-box.title.blue-box--loading {
+  margin-bottom: 0;
+  padding-bottom: 10px
+}
+.blue-box.blue-box--loading:before,
+.blue-box.blue-box--loading:after {
+  background: #f6f7f8;
+  background: linear-gradient(to right, #83B5D3 8%, #5A9DC4 18%, #83B5D3 33%);
+  background-size: 800px 104px;
+  content: " ";
+  left: 20px;
+  position: absolute;
+  height: 14px;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderLoader;
+  animation-timing-function: linear;
+}
+.blue-box.blue-box--loading:before {
+  width: calc(100% - 40px);
+  top: 15px;
+}
+.blue-box.blue-box--loading:after {
+  width: calc(100% - 80px);
+  top: 32px;
+}
+@keyframes placeHolderLoader{
+    0%{
+        background-position: -468px 0
+    }
+    100%{
+        background-position: 468px 0
+    }
+}
