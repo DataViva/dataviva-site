@@ -27,6 +27,7 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
 def location_depth(bra_id):
     locations = {
         1: "region",    #todo
@@ -38,6 +39,7 @@ def location_depth(bra_id):
 
     return locations[len(bra_id)]
 
+
 def handle_region_bra_id(bra_id):
     return {
         "1": "1",
@@ -46,6 +48,7 @@ def handle_region_bra_id(bra_id):
         "4": "3",
         "5": "4"
     }[bra_id]
+
 
 def location_service(depth, location):
     if depth == 'region':
@@ -56,6 +59,7 @@ def location_service(depth, location):
         return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
     else:
         return location.id_ibge
+
 
 @mod.route('/<product_id>/graphs/<tab>', methods=['POST'])
 def graphs(product_id, tab):
@@ -84,6 +88,7 @@ def index(product_id, tab):
     url = request.args.get('url')
 
     bra_id = request.args.get('bra_id')
+    bra_id = bra_id if bra_id != 'all' else None
     if not bra_id:
         depth = None
         id_ibge = None
@@ -109,12 +114,15 @@ def index(product_id, tab):
     tabs = {
         'general': [],
         'opportunities': [
-            'economic-opportunities-rings'
+            'economic-opportunities-rings',
+            'new-api-economic-opportunities-rings'
         ],
         'trade-partner': [
             'trade-balance-product-line',
+            'new-api-trade-balance-product-line',
             'exports-destination-tree_map',
             'new-api-exports-destination-tree_map',
+            'new-api-exports-destination-line',
             'new-api-exports-port-line',
             'new-api-exports-port-bar',
             'new-api-exports-port-tree_map',

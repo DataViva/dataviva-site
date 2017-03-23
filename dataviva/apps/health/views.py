@@ -23,6 +23,7 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 @mod.route('/<cnes_id>', defaults={'tab': 'general'})
+@mod.route('/<cnes_id>/<tab>')
 def index(cnes_id, tab):
     establishment = {
         'name' : u"Hospital João 23",
