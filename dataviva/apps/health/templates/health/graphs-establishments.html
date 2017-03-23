@@ -2,45 +2,45 @@
     <nav class="nav-graph col-xs-12 col-sm-3 col-md-3" >
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
+
             <h4>{% trans %}Establishments per{% endtrans %}</h4>
-            <a href="#establishments-type" class="list-group-item" data-toggle="collapse" data-parent="#establishments-type">Tipo</a>
-            <div class="collapse" id="establishments-type">
-                <a href="/{{g.locale}}/bar/cnes_establishment/establishments/establishment_type?options=singlecolor"
-                   target="graphs-frame-wages" class="list-group-item selected" data-parent="#establishments-type" >
-                    {% trans %}Bar{% endtrans %}
+            <a href="#establishments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#establishments-municipality">Municipio</a>
+            <div class="collapse" id="establishments-municipality">
+                <a href="/{{g.locale}}/map/cnes_establishment/establishments/municipality"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-municipality">
+                    {% trans %}Map{% endtrans %}
+                </a>
+                <a href="/{{g.locale}}/tree_map/cnes_establishment/municipality/establishments"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-municipality">
+                    {% trans %}Treemap{% endtrans %}
+                </a>
+                <a href="/{{g.locale}}/stacked/cnes_establishment/establishments/municipality"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-municipality">
+                    {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
 
-            <a href="#establishments-sus" class="list-group-item" data-toggle="collapse" data-parent="#establishments-sus">Atendimento ao SUS</a>
-            <div class="collapse" id="establishments-sus">
-                <a href="/{{g.locale}}/bar/cnes_establishment/establishments/sus_bond"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-type">
-                    {% trans %}Bar{% endtrans %}
+            <a href="#establishments-provider" class="list-group-item" data-toggle="collapse" data-parent="#establishments-provider">Prestador/Unidade</a>
+            <div class="collapse" id="establishments-provider">
+                <a href="/{{g.locale}}/tree_map/cnes_establishment/provider_type/establishments"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-provider">
+                    {% trans %}Treemap{% endtrans %}
+                </a>
+                <a href="/{{g.locale}}/stacked/cnes_establishment/establishments/municipality"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-provider">
+                    {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
 
-            <h4>Leitos por</h4>
-            <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">Tipo</a>
-            <div class="collapse" id="beds-type">
-                <a href="/{{g.locale}}/bar/cnes_bed/beds/bed_type?options=singlecolor"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-type">
-                    {% trans %}Bar{% endtrans %}
+            <a href="#establishments-facilities" class="list-group-item" data-toggle="collapse" data-parent="#establishments-facilities">Instalações</a>
+            <div class="collapse" id="establishments-facilities">
+                <a href="/{{g.locale}}/tree_map/cnes_establishment/facilities/establishments"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-facilities">
+                    {% trans %}Treemap{% endtrans %}
                 </a>
-            </div>
-            <a href="#beds-sus" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus">Atendimento ao SUS</a>
-            <div class="collapse" id="beds-sus">
-                <a href="/{{g.locale}}/bar/cnes_bed/beds/sus_bond?options=singlecolor"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-sus">
-                    {% trans %}Bar{% endtrans %}
-                </a>
-            </div>
-            
-            <h4>Profissionais por</h4>
-            <a href="#professionals-occupation" class="list-group-item" data-toggle="collapse" data-parent="#professionals-occupation">Ocupação</a>
-            <div class="collapse" id="professionals-occupation">
-                <a href="/{{g.locale}}/bar/cnes_professional/professionals/occupation_family?options=singlecolor"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#professionals-occupation">
-                    {% trans %}Bar{% endtrans %}
+                <a href="/{{g.locale}}/stacked/cnes_establishment/establishments/municipality"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-facilities">
+                    {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
             
