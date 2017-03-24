@@ -54,84 +54,27 @@ var titleStyle = {
     }
 }
 
-var textHelper = {
-    'loading': {
-        'en': 'loading ...',
-        'pt': 'carregando ...'
-    },
-    'average_wage': {
-        'en': 'Salário Médio Mensal',
-        'pt': 'Average Monthly Wage'
-    },
-    'jobs': {
-        'en': 'Jobs',
-        'pt': 'Empregos'
-    },
-    'year': {
-        'en': 'Year',
-        'pt': 'Ano'
-    },
-    'scale': {
-        'en': "Scale",
-        'pt': "Escala"
-    },
-    'yaxis': {
-        'en': "Y-Axis",
-        'pt': "Eixo Y"
-    },
-    'locale': {
-        'en': 'en_US',
-        'pt': 'pt_BR'
-    },
-    'average_wage': {
-        'en': "Average Monthly Wage",
-        'pt': "Salário Médio Mensal"  
-    },
-    'kg': {
-        'en': 'Amount',
-        'pt': 'Quantidade'
-    },
-    'value': {
-        'en': "Value",
-        'pt': "Valor"
-    },
-    'kg_label': {
-        'en': 'Amount [kg]',
-        'pt': 'Quantidade [kg]'
-    },
-    'value_label': {
-        'en': "Value [$ USD]",
-        'pt': "Valor [$ USD]"
-    },
-    'average_wage_label': {
-        'en': "Average Monthly Wage [$ USD]",
-        'pt': "Salário Médio Mensal [$ USD]"  
-    },
-    'jobs_label': {
-        'en': "Jobs",
-        'pt': "Empregos"  
-    },
-    'data_provided_by': {
-        'en': "Data provided by ",
-        'pt': "Dados fornecidos por ",
-    },
-        'month': {
-        'en': "Month",
-        'pt': "Mês"  
-    },
-    'time_resolution': {
-        'en': "Time Resolution",
-        'pt': "Resolução Temporal"  
-    },
-    'exporting_municipality': {
-        'en': "Based on the Exporting Municipality",
-        'pt': "Baseado nos Municípios Exportadores" 
-    },
-    'state_production': {
-        'en': "Based on State Production",
-        'pt': "Baseado nos Estados Produtores" 
-    }
-};
+var dictionary = {};
+
+dictionary['loading'] = lang ==  'en' ? 'loading ...' : 'carregando ...';
+dictionary['average_wage'] = lang ==  'en' ? 'Salário Médio Mensal' : 'Average Monthly Wage';
+dictionary['jobs'] = lang ==  'en' ? 'Jobs' : 'Empregos';
+dictionary['year'] = lang ==  'en' ? 'Year' : 'Ano';
+dictionary['scale'] = lang ==  'en' ? "Scale" : "Escala";
+dictionary['yaxis'] = lang ==  'en' ? "Y-Axis" : "Eixo Y";
+dictionary['locale'] = lang ==  'en' ? 'en_US' : 'pt_BR';
+dictionary['average_wage'] = lang ==  'en' ? "Average Monthly Wage" : "Salário Médio Mensal"  ;
+dictionary['kg'] = lang ==  'en' ? 'Amount' : 'Quantidade';
+dictionary['value'] = lang ==  'en' ? "Value" : "Valor";
+dictionary['kg_label'] = lang ==  'en' ? 'Amount [kg]' : 'Quantidade [kg]';
+dictionary['value_label'] = lang ==  'en' ? "Value [$ USD]" : "Valor [$ USD]";
+dictionary['average_wage_label'] = lang ==  'en' ? "Average Monthly Wage [$ USD]" : "Salário Médio Mensal [$ USD]"  ;
+dictionary['jobs_label'] = lang ==  'en' ? "Jobs" : "Empregos"  ;
+dictionary['data_provided_by'] = lang ==  'en' ? "Data provided by " : "Dados fornecidos por ";
+dictionary['month'] = lang ==  'en' ? "Month" : "Mês"  ;
+dictionary['time_resolution'] = lang ==  'en' ? "Time Resolution" : "Resolução Temporal"  ;
+dictionary['exporting_municipality'] = lang ==  'en' ? "Based on the Exporting Municipality" : "Baseado nos Municípios Exportadores" ;
+dictionary['state_production'] = lang ==  'en' ? "Based on State Production" : "Baseado nos Estados Produtores";
 
 var formatNumber = function(digit){
     var lastDigit = digit.slice(-1);
@@ -165,8 +108,8 @@ var formatNumber = function(digit){
 
 var formatHelper = {
     "text": function(text, params) {
-        if (textHelper[text] != undefined)
-            return textHelper[text][lang];
+        if (dictionary[text] != undefined)
+            return dictionary[text];
 
         return d3plus.string.title(text, params);
     },
@@ -177,10 +120,10 @@ var formatHelper = {
         formatted = formatNumber(formatted)
 
         if (params.key == "value" && number == FAKE_VALUE)
-            return lang == 'en' ? "Not Available" : "Não disponível";
+            return lang == 'en'? "Not Available" : "Não disponível";
 
         if (params.key == "kg" && number == FAKE_VALUE)
-            return lang == 'en' ? "Not Available" : "Não disponível";
+            return lang == 'en'? "Not Available" : "Não disponível";
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
@@ -194,7 +137,7 @@ var formatHelper = {
 
 var uiHelper = {
     'scale': {
-        "label": textHelper.scale[lang],
+        "label": dictionary.scale,
         "type": "drop",
         "value": [
             {
@@ -213,14 +156,14 @@ var uiHelper = {
         }
     },
     'yaxis': {
-        'label': textHelper.yaxis[lang],
+        'label': dictionary.yaxis,
         'value': values,
         'method': function(value, viz){
             currentX = value;
             solo = updateSolo(data)
             viz.y({
                 "value": value,
-                "label": textHelper[value + '_label'][lang],
+                "label": dictionary[value + '_label'],
             }).id({
                 'solo': solo
             })
@@ -327,7 +270,7 @@ var loadViz = function(data){
         .x({
             "value": 'year',
             'label': {
-                'value': textHelper.year[lang],
+                'value': dictionary.year,
                 'font': {
                     'size': 16
                 }     
@@ -336,7 +279,7 @@ var loadViz = function(data){
         .y({
             "value": value,
             "label": {
-                "value": textHelper[value + '_label'][lang],
+                "value": dictionary[value + '_label'],
                 "font": {
                     "size": 22
                 }
@@ -349,7 +292,7 @@ var loadViz = function(data){
         .tooltip("type")
         .ui(uis)
         .footer({
-            "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
+            "value": dictionary["data_provided_by"] + dataset.toUpperCase()
         })
         .time('year')
 
@@ -364,7 +307,7 @@ var loadViz = function(data){
         if(subtitle != ""){
             visualization.title({
                 'sub': {
-                    'value': textHelper[subtitle][lang],
+                    'value': dictionary[subtitle],
                     'font': {
                         'align': 'left'
                     }
@@ -485,7 +428,7 @@ var fillMissingDates = function(data){
         if(line_metadata[item[line]])
             item.name = line_metadata[item[line]]['name_' + lang];
         else{
-            item.name = lang == 'en' ? 'Undefined': 'Não disponível';
+            item.name = lang == 'en'? 'Undefined': 'Não disponível';
             console.log(item[line])
         }
 
@@ -505,7 +448,7 @@ var fillMissingDates = function(data){
     return data;
 }
 
-var loading = dataviva.ui.loading('.loading').text(textHelper.loading[lang]);
+var loading = dataviva.ui.loading('.loading').text(dictionary.loading);
 
 $(document).ready(function(){
     ajaxQueue([

@@ -188,184 +188,52 @@ var addOrder = function(data){
     return data;
 };
 
-var textHelper = {
-    'loading': {
-        'en': 'loading ...',
-        'pt': 'carregando ...'
-    },
-    'average_wage': {
-        'en': 'Salário Médio Mensal',
-        'pt': 'Average Monthly Wage'
-    },
-    'jobs': {
-        'en': 'Jobs',
-        'pt': 'Empregos'
-    },
-    'year': {
-        'en': 'Year',
-        'pt': 'Ano'
-    },
-    'scale': {
-        'en': "Scale",
-        'pt': "Escala"
-    },
-    'yaxis': {
-        'en': "Y-Axis",
-        'pt': "Eixo Y"
-    },
-    'xaxis': {
-        'en': "X-Axis",
-        'pt': "Eixo X"
-    },
-    'locale': {
-        'en': 'en_US',
-        'pt': 'pt_BR'
-    },
-    'average_wage': {
-        'en': "Average Wage",
-        'pt': "Salário Médio"  
-    },
-    'kg': {
-        'en': 'kg',
-        'pt': 'kg'
-    },
-    'value': {
-        'en': "US$",
-        'pt': "US$"
-    },
-    'kg_label': {
-        'en': 'Amount [kg]',
-        'pt': 'Quantidade [kg]'
-    },
-    'value_label': {
-        'en': "Value [$ USD]",
-        'pt': "Valor [$ USD]"
-    },
-    'average_wage_label': {
-        'en': "Average Monthly Wage [$ USD]",
-        'pt': "Salário Médio Mensal [$ USD]"  
-    },
-    'jobs_label': {
-        'en': "Jobs",
-        'pt': "Empregos"  
-    },
-    'kg_pct': {
-        'en': "% of kg",
-        'pt': "% de kg"  
-    },
-    'value_pct': {
-        'en': "% of US$",
-        'pt': "% de US$"  
-    },
-    'simple': {
-        'en': "Simples",
-        'pt': "Simples"  
-    },
-    'establishment_size': {
-        'en': "Establishment Size",
-        'pt': "Tamanho do Estabelecimento"  
-    },
-    'average_establishment_size': {
-        'en': "Average Establishment Size",
-        'pt': "Tamanho Médio do Estabelecimento"  
-    },
-    'establishment_count': {
-        'en': "Establishments",
-        'pt': "Estabelecimentos"  
-    },
-    'wage': {
-        'en': "Salary Mass",
-        'pt': "Massa Salarial"   
-    },
-    'gender': {
-        'en': "Gender",
-        'pt': "Gênero"  
-    },
-    'ethnicity': {
-        'en': "Ethnicity",
-        'pt': "Etnia"  
-    },
-    'literacy': {
-        'en': "Literacy",
-        'pt': "Escolaridade"  
-    },
-    'month': {
-        'en': "Month",
-        'pt': "Mês"  
-    },
-    'port': {
-        'en': "Port",
-        'pt': "Porto"  
-    },
-    'legal_nature': {
-        'en': "Legal Nature",
-        'pt': "Natureza Jurídica"  
-    },
-    'size_establishment': {
-        'en': "Establishment Size ",
-        'pt': "Tamanho do Estabelecimento"  
-    },
-    'time_resolution': {
-        'en': "Time Resolution",
-        'pt': "Resolução Temporal"  
-    },
-    'total_of': {
-        'en': "Total in selected years: ",
-        'pt': "Total nos anos selecionados: ",
-    },
-    'data_provided_by': {
-        'en': "Data provided by ",
-        'pt': "Dados fornecidos por ",
-    },
-    'percentage_terms': {
-        'en': 'Percentage Terms',
-        'pt': 'Termos Percentuais'
-    },
-    'values': {
-        'en': 'Values',
-        'pt': 'Valores'
-    },
-    'exporting_municipality': {
-        'en': "Based on the Exporting Municipality",
-        'pt': "Baseado nos Municípios Exportadores" 
-    },
-    'state_production': {
-        'en': "Based on State Production",
-        'pt': "Baseado nos Estados Produtores" 
-    },
-    'establishment_type': {
-        'en': "Establishment Type",
-        'pt': "Tipo de Estabelecimento"   
-    },
-    'establishments': {
-        'en': "Establishments",
-        'pt': "Estabelecimentos"   
-    },
-    'sus_bond': {
-        'en': "SUS Bond",
-        'pt': "Vínculo SUS"
-    },
-    'bed_type': {
-        'en': "Bed Type",
-        'pt': "Tipo de Leito"
-    },
-    'occupation_family': {
-        'en': "Occupation",
-        'pt': "Ocupação"
-    },
-    'professionals': {
-        'en': "Professionals",
-        'pt': "Profissionais"
-    },
-    'equipment_type': {
-        'en': "Equipment Type",
-        'pt': "Tipo de Equipamento"
-    },
-    'equipments': {
-        'en': "Equipments",
-        'pt': "Equipamentos"
-    }
-};
+var dictionary = {};
+
+dictionary['loading'] = lang == 'en' ? 'loading ...' : 'carregando ...';
+dictionary['average_wage'] = lang == 'en' ? 'Salário Médio Mensal' : 'Average Monthly Wage';
+dictionary['jobs'] = lang == 'en' ? 'Jobs' : 'Empregos';
+dictionary['year'] = lang == 'en' ? 'Year' : 'Ano';
+dictionary['scale'] = lang == 'en' ? "Scale" : "Escala";
+dictionary['yaxis'] = lang == 'en' ? "Y-Axis" : "Eixo Y";
+dictionary['xaxis'] = lang == 'en' ? "X-Axis" : "Eixo X";
+dictionary['locale'] = lang == 'en' ? 'en_US' : 'pt_BR';
+dictionary['average_wage'] = lang == 'en' ? "Average Wage" : "Salário Médio";
+dictionary['kg'] = lang == 'en' ? 'kg' : 'kg';
+dictionary['value'] = lang == 'en' ? "US$" : "US$";
+dictionary['kg_label'] = lang == 'en' ? 'Amount [kg]' : 'Quantidade [kg]';
+dictionary['value_label'] = lang == 'en' ? "Value [$ USD]" : "Valor [$ USD]";
+dictionary['average_wage_label'] = lang == 'en' ? "Average Monthly Wage [$ USD]" : "Salário Médio Mensal [$ USD]";
+dictionary['jobs_label'] = lang == 'en' ? "Jobs" : "Empregos";
+dictionary['kg_pct'] = lang == 'en' ? "% of kg" : "% de kg";
+dictionary['value_pct'] = lang == 'en' ? "% of US$" : "% de US$";
+dictionary['simple'] = lang == 'en' ? "Simples" : "Simples";
+dictionary['establishment_size'] = lang == 'en' ? "Establishment Size" : "Tamanho do Estabelecimento";
+dictionary['average_establishment_size'] = lang == 'en' ? "Average Establishment Size" : "Tamanho Médio do Estabelecimento";
+dictionary['establishment_count'] = lang == 'en' ? "Establishments" : "Estabelecimentos";
+dictionary['wage'] = lang == 'en' ? "Salary Mass" : "Massa Salarial";
+dictionary['gender'] = lang == 'en' ? "Gender" : "Gênero";
+dictionary['ethnicity'] = lang == 'en' ? "Ethnicity" : "Etnia";
+dictionary['literacy'] = lang == 'en' ? "Literacy" : "Escolaridade";
+dictionary['month'] = lang == 'en' ? "Month" : "Mês";
+dictionary['port'] = lang == 'en' ? "Port" : "Porto";
+dictionary['legal_nature'] = lang == 'en' ? "Legal Nature" : "Natureza Jurídica";
+dictionary['size_establishment'] = lang == 'en' ? "Establishment Size " : "Tamanho do Estabelecimento";
+dictionary['time_resolution'] = lang == 'en' ? "Time Resolution" : "Resolução Temporal";
+dictionary['total_of'] = lang == 'en' ? "Total in selected years: " : "Total nos anos selecionados: ";
+dictionary['data_provided_by'] = lang == 'en' ? "Data provided by " : "Dados fornecidos por ";
+dictionary['percentage_terms'] = lang == 'en' ? 'Percentage Terms' : 'Termos Percentuais';
+dictionary['values'] = lang == 'en' ? 'Values' : 'Valores';
+dictionary['exporting_municipality'] = lang == 'en' ? "Based on the Exporting Municipality" : "Baseado nos Municípios Exportadores";
+dictionary['state_production'] = lang == 'en' ? "Based on State Production" : "Baseado nos Estados Produtores";
+dictionary['establishment_type'] = lang == 'en' ? "Establishment Type" : "Tipo de Estabelecimento";
+dictionary['establishments'] = lang == 'en' ? "Establishments" : "Estabelecimentos";
+dictionary['sus_bond'] = lang == 'en' ? "SUS Bond" : "Vínculo SUS";
+dictionary['bed_type'] = lang == 'en' ? "Bed Type" : "Tipo de Leito";
+dictionary['occupation_family'] = lang == 'en' ? "Occupation" : "Ocupação";
+dictionary['professionals'] = lang == 'en' ? "Professionals" : "Profissionais";
+dictionary['equipment_type'] = lang == 'en' ? "Equipment Type" : "Tipo de Equipamento";
+dictionary['equipments'] = lang == 'en' ? "Equipments" : "Equipamentos";
 
 var formatNumber = function(digit){
     var lastDigit = digit.slice(-1);
@@ -402,8 +270,8 @@ var formatHelper = {
         if(params.labels == false)
             return text;
 
-        if (textHelper[text] != undefined)
-            return textHelper[text][lang];
+        if (dictionary[text] != undefined)
+            return dictionary[text];
 
         return d3plus.string.title(text, params); 
     },
@@ -489,7 +357,7 @@ var loadViz = function(data){
             'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
         })
         .footer({
-            "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
+            "value": dictionary["data_provided_by"] + dataset.toUpperCase()
         })
         .legend(false)
 
@@ -533,7 +401,7 @@ var totalOfCurrentX = function(){
 
     visualization.title({
         'sub': {
-            'value': textHelper["total_of"][lang] + formatHelper.number(total, {key: key}) + (subtitle ? ' - ' + textHelper[subtitle][lang] : ''),
+            'value': dictionary["total_of"] + formatHelper.number(total, {key: key}) + (subtitle ? ' - ' + dictionary[subtitle] : ''),
             'font': {
                 'align': 'left'
             }
@@ -719,7 +587,7 @@ var lastYear = function(data){
     return year;
 };
 
-var loading = dataviva.ui.loading('.loading').text(textHelper.loading[lang]);
+var loading = dataviva.ui.loading('.loading').text(dictionary.loading);
 
 $(document).ready(function(){
     var urls = [url];
