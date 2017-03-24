@@ -5,7 +5,7 @@
             <h4>{% trans %}Establishments per{% endtrans %}</h4>
             <a href="#establishments-type" class="list-group-item" data-toggle="collapse" data-parent="#establishments-type">Tipo</a>
             <div class="collapse" id="establishments-type">
-                <a href="/{{g.locale}}/bar/cnes_establishment/establishments/establishment_type?options=singlecolor"
+                <a href="/{{g.locale}}/bar/cnes_establishment/establishments/unit_type?options=singlecolor"
                    target="graphs-frame-wages" class="list-group-item selected" data-parent="#establishments-type" >
                     {% trans %}Bar{% endtrans %}
                 </a>
@@ -16,6 +16,14 @@
                 <a href="/{{g.locale}}/bar/cnes_establishment/establishments/sus_bond"
                    target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-type">
                     {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+
+            <a href="#establishments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#establishments-municipality">{% trans %}Municipality{% endtrans %}</a>
+            <div class="collapse" id="establishments-municipality">
+                <a href="/{{g.locale}}/tree_map/cnes_establishment/municipality/establishments"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#establishments-type">
+                    {% trans %}TreeMap{% endtrans %}
                 </a>
             </div>
 
@@ -48,7 +56,7 @@
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
-            <iframe src="{% if not graph %} /{{g.locale}}/bar/cnes_establishment/establishments/establishment_type?options=singlecolor {% endif %}"
+            <iframe src="{% if not graph %}/{{g.locale}}/tree_map/cnes_establishment/unit_type/establishments{% endif %}"
                     name="graphs-frame-wages"
                     id="graphs-frame-wages"
                     class="embed-responsive-item" >
