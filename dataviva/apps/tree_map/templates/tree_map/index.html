@@ -2,48 +2,50 @@
 <html lang="{{ g.locale }}">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
+    <title>DataViva</title>
+    <link type="text/css" rel="stylesheet" href="/static/css/main.css">
+    <link type="text/css" rel="stylesheet" href="/static/css/bgs.css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/graphs-tools.css" />
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon"/>
 
-    <script type="text/javascript" src="http://d3plus.org/js/d3.js"></script>
-    <script type="text/javascript" src="http://d3plus.org/js/d3plus.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-
-    <script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
+    <script type="text/javascript" src="/static/js/libs/d3.min.js"></script>
+    <script type="text/javascript" src="/static/js/libs/d3plus.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/modules/embed/utils.dataviva.js"></script>
     <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
     <script type="text/javascript" src="/static/js/libs/async.js"></script>
+    <script type="text/javascript" src="/static/js/modules/embed/utils.general.js"></script>
+
 
     <style type="text/css">
         body {
-          background: none;
-        }
-
-        .loading {
-            top: 200px;
-        }
-
-        .loading .page-loader {
             background: none;
         }
     </style>
 </head>
 
 <body>
+    {% include "graphs/tools.html" %}
+
     <div id="tree_map"
         class="embed-responsive responsive-wrapper"
         dataset="{{ dataset }}"
         squares="{{ squares }}"
         size="{{ size }}"
         filters="{{ filters }}"
-        depths="{{ depths }}"
-        values="{{ values }}"
-        filters="{{ filters }}"
-        group="{{ group }}">
+        graph-title="{{ title }}"
+        graph-subtitle="{{ subtitle }}">
     </div>
-    <div class="loading"></div>
+    <div id="mask" class="loading"></div>
 
     <script type="text/javascript">
         var dictionary = {{ dictionary|safe }};
     </script>
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
     <script type="text/javascript" src="/static/js/modules/tree_map.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/tools.js"></script>
+    <script src="/static/js/plugins/jspdf/FileSaver.js"></script>
+    <script src="/static/js/plugins/jspdf/jspdf.js"></script>
+    <script src="/static/js/plugins/jspdf/addimage.js"></script>
 </body>

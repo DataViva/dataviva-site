@@ -10,7 +10,7 @@ db
 dataviva/static/json/coords/*.json
 dataviva/static/json/networks/*.json
 dataviva/static/uploads/*/*
-dataviva/utils/search_indices/*
+dataviva/utils/search_indices/
 .htpasswd
 dump.rdb
 *.log

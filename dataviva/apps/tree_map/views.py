@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request, abort
+from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.translations.dictionary import dictionary
+from dataviva.apps.embed.models import Build
+from dataviva.apps.title.views import get_title
+from dataviva.utils.graphs_services import *
 import urllib
 import json
 
@@ -28,29 +31,36 @@ def before_request():
 
 @mod.route('/<dataset>/<squares>/<size>')
 def index(dataset, squares, size):
-    expected_filters = ['type', 'state', 'year', 'section', 'product']
     filters = []
+    title_attrs = {}
 
-    for filter in expected_filters:
-        value = request.args.get(filter)
-        if value:
-            filters.append((filter, value[2:] if filter == 'product' else value))
+    services = {'product': product_service, 'id_ibge': location_service, 'wld':
+                wld_service, 'occupation': occupation_service, 'industry': industry_service}
+
+    for key, value in request.args.items():
+        if key == 'type':
+            title_attrs['type'] = value
+
+        if key not in ['depths', 'sizes', 'group', 'depth', 'color', 'filter'] and value and key in services:
+            filters.append(services[key](value))
+            if key == 'id_ibge':
+              title_attrs['location'] = value
+            elif key == 'wld':
+              title_attrs['partner'] = value
+            else:
+              title_attrs[key] = value
+        else:
+            filters.append((key, value))
 
     filters = urllib.urlencode(filters)
 
-    group = request.args.get('group') or ''
-
-    params = {}
-    for param in ['depths', 'values']:
-        value = request.args.get(param)
-        params[param] = value if value and len(value.split()) > 1 else ''
+    title, subtitle = get_title(dataset, squares, 'tree_map', title_attrs)
 
     return render_template('tree_map/index.html',
                            dataset=dataset,
                            squares=squares,
                            size=size,
-                           group=group,
-                           depths=params['depths'],
-                           values=params['values'],
                            filters=filters,
+                           title=title or 'Title',
+                           subtitle=subtitle or '',
                            dictionary=json.dumps(dictionary()))
