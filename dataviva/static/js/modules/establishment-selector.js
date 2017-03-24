@@ -54,7 +54,7 @@ var EstablishmentSelector = (function(){
 		        '<div class="search_title" style="color: rgb(47, 47, 109);">{{name}}</div>' +
 		        '<div class="search_data">ID: {{id}}</div>' +
 		    '</div>' +
-		    '<a href="/en/health/{{id}}" class="m-l-xs btn btn-primary btn-outline btn-toggle" style="position: absolute; right: 0; top: 13px;">' + 
+		    '<a href="/en/health/{{id}}" class="m-l-xs btn btn-primary btn-outline btn-toggle" style="position: absolute; right: 15px; top: 13px;">' + 
 		        'Selecione' + 
 		    '</a>' + 
 		'</div>' +
