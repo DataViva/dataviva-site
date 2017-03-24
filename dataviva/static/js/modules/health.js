@@ -343,17 +343,22 @@ var getMetadata = function(key){
 
 var General = (function(){
     var template = '' +
-          '<dt>{{title}}</dt>'+
-          '<dd>'+
-            '<small>{{label}}</small>'+
-            '<strong class="counter">{{preffix}} {{value}} </strong>'+
-            '<span>{{magnitude}}</span>'+
-          '</dd>';
+          '<dl class="dl-horizontal loading">' +
+              '<dt>{{title}}</dt>'+
+              '<dd>'+
+                '<small>{{label}}</small>'+
+                '<strong class="counter">{{preffix}} {{value}} </strong>'+
+                '<span>{{magnitude}}</span>'+
+              '</dd>'+
+          '</dl>';
 
     var add = function(data){
 
         var api;
         var metadata;
+
+        data['template'] = $(template);
+        $('#general-' + data.value).append(data.template);
 
         $.when(
             $.ajax({
@@ -380,9 +385,10 @@ var General = (function(){
                                 .replace('{{label}}', label.toUpperCase() || '')
                                 .replace('{{value}}', value)
                                 .replace('{{magnitude}}', magnitude)
-                                .replace('{{preffix}}', data.preffix || '' );
+                                .replace('{{preffix}}', data.preffix || '' )
+                                .replace('dl-horizontal loading', 'dl-horizontal');
 
-            $('#general-' + data.value + ' .dl-horizontal').append(filledTemplate);
+            data.template.replaceWith(filledTemplate);
         });
     }
 
@@ -394,7 +400,7 @@ var General = (function(){
 var Indicator = (function(){
     var template = '' +
     '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">' +
-        '<div class="widget">' +
+        '<div class="widget loading">' +
             '<h2 class="text-left text-uppercase">{{title}}</h2>' +
             '<div class="number">' +
                 '{{preffix}} <strong class="counter">{{value}}</strong><br/>' +
@@ -404,6 +410,12 @@ var Indicator = (function(){
     '</div>';
     
     var add = function(data){
+        var api;
+        var metadata;
+
+        data['template'] = $(template);
+        $('#header .indices .row').append(data.template);
+
         $.ajax({
             url: data.url,
             type: 'GET',
@@ -417,9 +429,10 @@ var Indicator = (function(){
                 var filledTemplate = template.replace('{{title}}', data.title || '')
                                     .replace('{{value}}', value)
                                     .replace('{{magnitude}}', magnitude)
-                                    .replace('{{preffix}}', data.prefix || '' );
+                                    .replace('{{preffix}}', data.prefix || '' )
+                                    .replace('loading', '');
 
-                $('#header .indices .row').append(filledTemplate);
+                data.template.replaceWith(filledTemplate);
             }
         });
     }
@@ -432,11 +445,11 @@ var Indicator = (function(){
 var BlueBox = (function(){
     var template = '' +
     '<div class="col-xs-12 col-sm-6 col-md-4">' +
-        '<div class="blue-box title">' +
+        '<div class="blue-box title blue-box--loading">' +
             '{{title}}' +
             '<small>{{subtitle}}</small>' +
         '</div>' +
-        '<div class="blue-box">' +
+        '<div class="blue-box blue-box--loading">' +
             '<p class="label">{{label}}</p>' +
             '<div class="number">' +
                 '<strong class="counter">{{value}}</strong><span>{{magnitude}} {{suffix}}</span>' +
@@ -448,6 +461,9 @@ var BlueBox = (function(){
 
         var api;
         var metadata;
+
+        data['template'] = $(template);
+        $('#' + data.tab + ' .row').append(data.template);
 
         $.when(
             $.ajax({
@@ -476,9 +492,11 @@ var BlueBox = (function(){
                                 .replace('{{value}}', value)
                                 .replace('{{magnitude}}', magnitude)
                                 .replace('{{prefix}}', data.prefix || '' )
-                                .replace('{{suffix}}', data.suffix || '');
+                                .replace('{{suffix}}', data.suffix || '')
+                                .replace('blue-box--loading', '')
+                                .replace('blue-box--loading', '');
 
-            $('#' + data.tab + ' .row').append(filledTemplate);
+            data.template.replaceWith(filledTemplate);
         });       
     }
 

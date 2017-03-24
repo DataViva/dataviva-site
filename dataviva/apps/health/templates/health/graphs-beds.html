@@ -3,19 +3,75 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
             <div class="list-group panel">            
                 <h4>{% trans %}Beds per{% endtrans %}</h4>
-                <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">Tipo</a>
-                 <div class="collapse" id="beds-type">
-                <a href="/{{g.locale}}/bar/cnes_bed/beds/bed_type?options=singlecolor"
-                   target="graphs-frame-wages" class="list-group-item selected" data-parent="#beds-type" >
+            <a href="#beds-municipality" class="list-group-item" data-toggle="collapse" data-parent="#beds-municipality">Municipio</a>
+            <div class="collapse" id="beds-municipality">
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
+                    {% trans %}Map{% endtrans %}
+                </a>
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
+                    {% trans %}Treemap{% endtrans %}
+                </a>
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+
+            
+             <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">Tipo de Prestador</a>
+             <div class="collapse" id="beds-type">
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-provider_type">
+                    {% trans %}Treemap{% endtrans %}
+                </a>
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-provider_type">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+
+             <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">Tipo e Especialidade</a>
+             <div class="collapse" id="beds-type">
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
+                    {% trans %}Treemap{% endtrans %}
+                </a>
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+
+             <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">Tipo de Leito</a>
+             <div class="collapse" id="beds-type">
+                <a href="#"
+                   target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
                     {% trans %}Bar{% endtrans %}
                 </a>
             </div>
+
                 <a href="#beds" class="list-group-item" data-toggle="collapse" data-parent="#beds">Atendimento ao SUS</a>
+                 <div class="collapse" id="beds-type">
+                    <a href="#"
+                       target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
+                        {% trans %}Treemap{% endtrans %}
+                    </a>
+                </div>
+
+                <a href="#beds" class="list-group-item" data-toggle="collapse" data-parent="#beds">Disponibilidade</a>
+                 <div class="collapse" id="beds-type">
+                    <a href="#"
+                       target="graphs-frame-wages" class="list-group-item" data-parent="#beds-municipality">
+                        {% trans %}bar{% endtrans %}
+                    </a>
+                </div>
             </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
-            <iframe src="{% if not graph %} /{{g.locale}}/bar/cnes_bed/beds/bed_type?options=singlecolor {% endif %}"
+            <iframe src="{% if not graph %} #"
                     name="graphs-frame-wages"
                     id="graphs-frame-wages"
                     class="embed-responsive-item" >
