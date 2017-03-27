@@ -2,6 +2,7 @@
 
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
+import requests
 
 mod = Blueprint('health', __name__,
                 template_folder='templates',
@@ -25,9 +26,10 @@ def add_language_code(endpoint, values):
 @mod.route('/<cnes_id>', defaults={'tab': 'general'})
 @mod.route('/<cnes_id>/<tab>')
 def index(cnes_id, tab):
+    response = requests.get('http://api.staging.dataviva.info/cnes/id/name_pt/?id=' + cnes_id + '&limit=1').json()
+
     establishment = {
-        'name' : u"Hospital João 23",
-        'img' : ""
+        'name' : response['data'][0][1]
     }
 
     return render_template('health/index.html', tab=tab, establishment=establishment)
