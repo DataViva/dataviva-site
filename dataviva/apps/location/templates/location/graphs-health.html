@@ -5,98 +5,199 @@
             <h4>{% trans %}Equipments by{% endtrans %}</h4>
             <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Type{% endtrans %}</a>
             <div class="collapse" id="equipments-type">
-                <a href="#"
+                 <a href="#"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-tree_map' or not graph}} data-parent="#equipments-type">
                     TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}} data-parent="#equipments-type">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}} data-parent="#equipments-type">
+                    {% trans %}Bar{% endtrans %}
                 </a>
             </div>
             <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="equipments-sus-bond">
                 <a href="#"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-sus-bond-tree_map'}}" data-parent="#equipments-sus-bond">
-                    TreeMap
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-sus-bond-bar'}}" data-parent="#equipments-sus-bond">
+                    {% trans %}Bar{% endtrans %}
                 </a>
             </div>
             {% if not is_municipality %}
               <a href="#equipments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#equipments-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="equipments-municipality">
                   <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-map'}}" data-parent="#equipments-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="#"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-tree_map'}}" data-parent="#equipments-municipality">
                       TreeMap
+                  </a>
+                  <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-stacked'}}" data-parent="#equipments-municipality">
+                      {% trans %}Stacked{% endtrans %}
                   </a>
               </div>
             {% endif %}
 
             <h4>{% trans %}Establishments by{% endtrans %}</h4>
-            <a href="#establishments-type" class="list-group-item" data-toggle="collapse" data-parent="#establishments-type">{% trans %}Type{% endtrans %}</a>
-            <div class="collapse" id="establishments-type">
-                <a href="/{{ g.locale }}/tree_map/cnes_establishment/unit_type/establishments?id_ibge={{ id_ibge }}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-type-tree_map'}}" data-parent="#establishments-type">
-                    TreeMap
-                </a>
-            </div>
-            <a href="#establishments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#establishments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
-            <!-- establishment sus bond graphs -->
-
             {% if not is_municipality %}
               <a href="#establishments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#establishments-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="establishments-municipality">
+                  <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-map'}}" data-parent="#establishments-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
                   <a href="/{{ g.locale }}/tree_map/cnes_establishment/municipality/establishments?id_ibge={{ id_ibge }}&depth=municipality&color=health_region"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-tree_map'}}" data-parent="#establishments-municipality">
                       TreeMap
                   </a>
+                  <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-stacked'}}" data-parent="#establishments-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>
               </div>
-            {% endif %}            
+            {% endif %}       
+
+            <a href="#establishments-provider-unit" class="list-group-item" data-toggle="collapse" data-parent="#establishments-provider-unit">{% trans %}Provider/Unit{% endtrans %}</a>
+            <div class="collapse" id="establishments-provider-unit">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-provider-unit-tree_map'}}" data-parent="#establishments-provider-unit">
+                    TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-provider-unit-stacked'}}" data-parent="#establishments-provider-unit">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+            <a href="#establishments-installations" class="list-group-item" data-toggle="collapse" data-parent="#establishments-installations">{% trans %}Installations{% endtrans %}</a>
+            <div class="collapse" id="establishments-installations">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-installations-tree_map'}}" data-parent="#establishments-installations">
+                    TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-installations-stacked'}}" data-parent="#establishments-installations">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
 
             <h4>{% trans %}Beds by{% endtrans %}</h4>
+            {% if not is_municipality %}
+              <a href="#beds-municipality" class="list-group-item" data-toggle="collapse" data-parent="#beds-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="beds-municipality">
+                  <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-map'}}" data-parent="#beds-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-tree_map'}}" data-parent="#beds-municipality">
+                      TreeMap
+                  </a>
+                  <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-stacked'}}" data-parent="#beds-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>
+              </div>
+            {% endif %}
+             <a href="#beds-provider-unit" class="list-group-item" data-toggle="collapse" data-parent="#beds-provider-unit">{% trans %}Provider/Unit{% endtrans %}</a>
+            <div class="collapse" id="beds-provider-unit">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-provider-unit-tree_map'}}" data-parent="#beds-provider-unit">
+                    TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-provider-unit-stacked'}}" data-parent="#beds-provider-unit">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+            <a href="#beds-type-speciality" class="list-group-item" data-toggle="collapse" data-parent="#beds-type-speciality">{% trans %}Type and Speciality{% endtrans %}</a>
+            <div class="collapse" id="beds-type-speciality">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-speciality-tree_map'}}" data-parent="#beds-type-speciality">
+                    TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-speciality-stacked'}}" data-parent="#beds-type-speciality">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
             <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">{% trans %}Type{% endtrans %}</a>
             <div class="collapse" id="beds-type">
                 <a href="#"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-tree_map'}}" data-parent="#beds-type">
-                    TreeMap
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-bar'}}" data-parent="#beds-type">
+                    {% trans %}Bar{% endtrans %}
                 </a>
             </div>
             <a href="#beds-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="beds-sus-bond">
                 <a href="#"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-sus-bond-tree_map'}}" data-parent="#beds-sus-bond">
-                    TreeMap
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-sus-bond-bar'}}" data-parent="#beds-sus-bond">
+                    {% trans %}Bar{% endtrans %}
                 </a>
             </div>
-            {% if not is_municipality %}
-              <a href="#beds-municipality" class="list-group-item" data-toggle="collapse" data-parent="#beds-municipality">{% trans %}Municipality{% endtrans %}</a>
-              <div class="collapse" id="beds-municipality">
-                  <a href="#"
-                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-tree_map'}}" data-parent="#beds-municipality">
-                      TreeMap
-                  </a>
-              </div>
-            {% endif %}
+            <a href="#beds-availability" class="list-group-item" data-toggle="collapse" data-parent="#beds-availability">{% trans %}Availability{% endtrans %}</a>
+            <div class="collapse" id="beds-availability">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-availability-bar'}}" data-parent="#beds-availability">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
 
             <h4>{% trans %}Professionals by{% endtrans %}</h4>
-            <a href="#professionals-type" class="list-group-item" data-toggle="collapse" data-parent="#professionals-type">{% trans %}Type{% endtrans %}</a>
-            <div class="collapse" id="professionals-type">
-                <a href="#"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-type-tree_map'}}" data-parent="#professionals-type">
-                    TreeMap
-                </a>
-            </div>
-            <a href="#professionals-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#professionals-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
-            <div class="collapse" id="professionals-sus-bond">
-                <a href="#"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-sus-bond-tree_map'}}" data-parent="#professionals-sus-bond">
-                    TreeMap
-                </a>
-            </div>
             {% if not is_municipality %}
               <a href="#professionals-municipality" class="list-group-item" data-toggle="collapse" data-parent="#professionals-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="professionals-municipality">
                   <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-map'}}" data-parent="#professionals-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="#"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-tree_map'}}" data-parent="#professionals-municipality">
                       TreeMap
                   </a>
+                  <a href="#"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-stacked'}}" data-parent="#professionals-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>  
               </div>
             {% endif %}
+            <a href="#professionals-provider-unit" class="list-group-item" data-toggle="collapse" data-parent="#professionals-provider-unit">{% trans %}Provider/Unit{% endtrans %}</a>
+            <div class="collapse" id="professionals-provider-unit">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-tree_map'}}" data-parent="#professionals-provider-unit">
+                    TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-stacked'}}" data-parent="#professionals-provider-unit">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+            <a href="#professionals-occupation" class="list-group-item" data-toggle="collapse" data-parent="#professionals-occupation">{% trans %}Occupation{% endtrans %}</a>
+            <div class="collapse" id="professionals-occupation">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
+                    TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+            <a href="#professionals-bond" class="list-group-item" data-toggle="collapse" data-parent="#professionals-bond">{% trans %}Bond{% endtrans %}</a>
+            <div class="collapse" id="professionals-bond">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-bond-tree_map'}}" data-parent="#professionals-bond">
+                    TreeMap
+                </a>
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-bond-tree_map'}}" data-parent="#professionals-bond">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
