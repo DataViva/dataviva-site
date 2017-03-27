@@ -83,6 +83,20 @@ tabs = {
             'basic-education-administrative-dependencie-tree_map',
             'basic-education-level-tree_map',
         ],
+        'health': [
+            'equipments-type-tree_map',
+            'equipments-sus-bond-tree_map',
+            'equipments-municipality-tree_map',
+            'establishments-type-tree_map',
+            'establishments-sus-bond-tree_map',
+            'establishments-municipality-tree_map',
+            'beds-type-tree_map',
+            'beds-sus-bond-tree_map',
+            'beds-municipality-tree_map',
+            'professionals-type-tree_map',
+            'professionals-sus-bond-tree_map',
+            'professionals-municipality-tree_map',
+        ]
     }
 
 

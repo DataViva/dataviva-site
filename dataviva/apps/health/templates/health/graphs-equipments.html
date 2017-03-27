@@ -3,51 +3,27 @@
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Equipments per{% endtrans %}</h4>
-            <a href="#equipments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#equipments-municipality">Municipio</a>
-            <div class="collapse" id="equipments-municipality">
-                <a href="/{{g.locale}}/map/cnes_equipment/equipments/municipality"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#equipments-municipality">
-                    {% trans %}Map{% endtrans %}
-                </a>
-                <a href="/{{g.locale}}/tree_map/cnes_equipment/municipality/equipments"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#equipments-municipality">
-                    {% trans %}Treemap{% endtrans %}
-                </a>
-                <a href="/{{g.locale}}/stacked/cnes_equipment/equipments/municipality"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#equipments-municipality">
-                    {% trans %}Stacked{% endtrans %}
-                </a>
-            </div>
-
-            <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">Tipo e Equipamento</a>
+            <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Type{% endtrans %}</a>
             <div class="collapse" id="equipments-type">
-                <a href="/{{g.locale}}/map/cnes_equipment/equipments/equipment_type"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#equipments-type">
-                    {% trans %}Map{% endtrans %}
-                </a>
-                <a href="/{{g.locale}}/tree_map/cnes_equipment/equipment_type/equipments"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#equipments-type">
-                    {% trans %}Treemap{% endtrans %}
-                </a>
-                <a href="/{{g.locale}}/stacked/cnes_equipment/equipments/equipment_type"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#equipments-type">
-                    {% trans %}Stacked{% endtrans %}
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item" data-parent="#equipments-type">
+                    {% trans %}TreeMap{% endtrans %}
                 </a>
             </div>
-
-            <a href="#equipments-sus_bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments">Atendimento no SUS</a>
-            <div class="collapse" id="equipments-sus_bond">
-                <a href="/{{g.locale}}/bar/cnes_equipment/equipments/sus_bond"
-                   target="graphs-frame-wages" class="list-group-item" data-parent="#equipments-sus_bond">
-                    {% trans %}Bar{% endtrans %}
+            <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
+            <div class="collapse" id="equipments-sus-bond">
+                <a href="#"
+                   target="graphs-frame-health" class="list-group-item" data-parent="#equipments-sus-bond">
+                    {% trans %}TreeMap{% endtrans %}
                 </a>
             </div>
+        </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
             <iframe src="{% if not graph %} /{{g.locale}}/bar/cnes_equipment/equipments/equipment_type?options=singlecolor {% endif %}"
-                    name="graphs-frame-wages"
-                    id="graphs-frame-wages"
+                    name="graphs-frame-health"
+                    id="graphs-frame-health"
                     class="embed-responsive-item" >
             </iframe>
         </div>

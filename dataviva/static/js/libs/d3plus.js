@@ -15114,7 +15114,6 @@ module.exports = function() {
       // Set first element in data as focus if there is no focus set.
       //------------------------------------------------------------------------
       if ( vars.focus.value === false ) {
-
         var element = vars.data.element.value;
 
         if ( element && element.node().tagName.toLowerCase() === "select" ) {
@@ -26464,7 +26463,7 @@ module.exports = function(vars) {
     family = vars.title.sub.font.family.value;
     weight = "bold";
     padding = vars.title.sub.padding;
-    margin = "5px 0px";
+    // margin = "5px 0px";
     titleClass = false;
     if (vars.title.sub.value && ["start", "left"].indexOf(vars.title.sub.font.align) < 0) {
       titleClass = "sub";

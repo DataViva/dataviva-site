@@ -1,4 +1,5 @@
-var lang = document.documentElement.lang;
+var lang = document.documentElement.lang,
+    API_DOMAIN = 'http://api.staging.dataviva.info';
 
 var DICT = {
     'secex': {
@@ -30,7 +31,8 @@ var DICT = {
     },
     'cnes_establishment': {
         'item_id': {
-            'municipality': 'ibge_id'
+            'municipality': 'ibge_id',
+            'state': 'ibge_id'
         }
     }
 };
@@ -44,12 +46,15 @@ var DEPTHS = {
     },
     'rais': {
         'industry_class': ['industry_section', 'industry_division', 'industry_class'],
-        'municipality': ['state', 'mesoregion', 'microregion', 'municipality'],
+        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'municipality'],
         'occupation_family': ['occupation_group', 'occupation_family']
     },
     'cnes_establishment': {
-        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'municipality']
-    }
+       'municipality': ['health_region', 'municipality'],
+       'provider_type': ['provider_type'],
+       'unit_type': ['unit_type'],
+       'administrative_sphere': ['administrative_sphere']
+   }
 };
 
 var SIZES = {
@@ -65,7 +70,49 @@ var SIZES = {
         'occupation_family': ['jobs', 'wage']
     },
     'cnes_establishment': {
-        'municipality': ['establishments']
+        'municipality': ['establishments'],
+        'health_region': ['establishments'],
+        'state': ['establishments'],
+        'provider_type': ['establishments'],
+        'unit_type': ['establishments'],
+        'administrative_sphere': ['establishments']
+    }
+};
+
+var COLORS = {
+    'secex': {},
+    'rais': {},
+    'cnes_establishment': {
+        'municipality': [],
+        'provider_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
+        'unit_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
+        'administrative_sphere': []
+        // 'administrative_sphere': ['ambulatory_care_facilities', 'emergency_facilities', 'neonatal_unit_facilities', 'obstetrical_center_facilities', 'surgery_center_facilities', 'selective_waste_collection']
+    }
+};
+
+var FILTERS = {
+    'secex': {},
+    'rais': {},
+    'cnes_establishment': {
+        'municipality': [],
+        'administrative_sphere': ['sus_bond'],
+        'provider_type': [],
+        'unit_type': [],
+    }
+};
+
+var DIMENSION_COLOR = {
+    'provider_type': {
+        '30': '#4575B4',
+        '40': '#74ADD1',
+        '50': '#ABD9E9',
+        '61': '#E0F3F8',
+        '80': '#F46D43',
+        '20': '#D73027',
+        '22': '#FDAE61',
+        '60': '#FEE090',
+        '99': '#FFFFBF'
     }
 };
 
@@ -138,7 +185,34 @@ dictionary['occupation_family'] = lang == 'en' ? 'Family' : 'Família';
 dictionary['occupation_group'] = lang == 'en' ? 'Main Group' : 'Grande Grupo';
 dictionary['establishments'] = lang == 'en' ? 'Total Establishments' : 'Total de Estabelecimentos';
 dictionary['Creating URL'] = lang == 'en' ? 'Creating URL' : 'Criando URL';
+dictionary['sus_bond'] = lang == 'en' ? 'SUS Bond' : 'Vínculo com o SUS';
+dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
+dictionary['ambulatory_care_level'] = lang == 'en' ? 'Ambulatory Care Level' : 'Nível de atenção ambulatorial';
+dictionary['hospital_care_level'] = lang == 'en' ? 'Hospital Care Level' : 'Nível de atenção hospitalar';
+dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
+dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
+dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
+dictionary['tax_withholding'] = lang == 'en' ? 'Withholding Tax' : 'Retenção Tributária';
+dictionary['emergency_facilities'] = lang == 'en' ? 'Emergency Facilities' : 'Instalações Físicas de Urgência e Emergência';
+dictionary['neonatal_unit_facilities'] = lang == 'en' ? 'Neonatal Unit Facilities' : 'Instalações de Unidade Neonatal';
+dictionary['obstetrical_center_facilities'] = lang == 'en' ? 'Obstetrical Center Facilities' : 'Instalação Fisica de Centro Obstétrico ';
+dictionary['surgery_center_facilities'] = lang == 'en' ? 'Surgery Center Facilities' : 'Instalação Fisica de Centro Cirúrgico';
+dictionary['selective_waste_collection'] = lang == 'en' ? 'Selective Waste Collection' : 'Coleta seletiva de rejeitos';
+dictionary['facilities'] = lang == 'en' ? 'Facilities' : 'Instalações';
+dictionary['hospital_attention'] = lang == 'en' ? 'Hospital attention' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory attention' : 'Nível de Atenção Ambulatorial';
+dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de hierarquia';
+dictionary['cnes_establishment'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['facilities'] = lang == 'en' ? 'Facilities' : 'Instalações';
+dictionary['including'] = lang == 'en' ? 'Including' : 'Inclui';
+dictionary['drawer_color_by'] = lang == 'en' ? 'Color by' : 'Colorir por';
+dictionary['drawer_group'] = lang == 'en' ? 'Group' : 'Agrupar';
+dictionary['yes'] = lang == 'en' ? 'Yes' : 'Sim';
+dictionary['no'] = lang == 'en' ? 'No' : 'Não';
+dictionary['drawer_filter'] = lang == 'en' ? 'Filter' : 'Filtrar';
+dictionary['Filter by'] = lang == 'en' ? 'Filter by' : 'Filtrar por';
 dictionary['kg'] = 'KG';
+dictionary['id'] = 'ID';
 
 var PLURAL = {
     'municipality': dictionary['municipalities'],
