@@ -99,7 +99,10 @@ var FILTERS = {
         'administrative_sphere': ['sus_bond'],
         'provider_type': [],
         'unit_type': [],
-    }
+    },
+    'cnes_equipment': {},
+    'cnes_professional': {},
+    'cnes_bed': {}
 };
 
 var DIMENSION_COLOR = {
@@ -119,7 +122,10 @@ var DIMENSION_COLOR = {
 var BASIC_VALUES = {
     'secex': ['value', 'kg'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
-    'cnes_establishment': ['establishments']
+    'cnes_establishment': ['establishments'],
+    'cnes_equipment':['equipments'],
+    'cnes_professional':['professionals'],
+    'cnes_bed':['beds'],
 };
 
 if (document.getElementById('rings'))

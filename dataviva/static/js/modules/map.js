@@ -24,15 +24,23 @@ var buildData = function(apiResponse,statesMetadata, otherMetadata) {
             headers.forEach(function(header) {
                 dataItem[header] = getAttrByName(item, header);
             });
-            dataItem['id'] = statesMetadata[dataItem['state']]['abbr_' + lang];
-            data.push(dataItem);
 
+            dataItem['id'] = statesMetadata[dataItem['state']]['abbr_' + lang];
+            dataItem['stateName'] = statesMetadata[dataItem['state']]['name_' + lang];
+            filters.forEach(function(filter){
+                try{
+                for (d in otherMetadata)
+                   dataItem[d] = otherMetadata[d][dataItem[d]]['name_' + lang];
+
+                }catch(e){
+                } 
+            });
+            data.push(dataItem);
             
         } catch(e) {
 
         };
     });
-
     return data;
 }
 
@@ -40,24 +48,35 @@ var loadViz = function(data){
     var uiBuilder = function() {
         var ui = [];
         var statements = function(filter, value){
-            if(value == 1)
-                return data.filter(function(item) {return item[filter] == value})
-            else if(value == 2)
-                return data.filter(function(item) {return item[filter] == 0})
-            return data;
+
+            return data.filter(function(item) {
+                return  item[filter] == value});
         };
         // Adds filters selector
         filters.forEach(function(filter) {
+            var options = [];
+            var key = -1;
+            var values = {};
+            var label = dictionary['all'];
+            values[label] = label
+            options.push(values);
+            for (id in otherMetadata[filter]) {
+                            key = otherMetadata[filter][id].id;
+                            values = {};
+                            label = otherMetadata[filter][id]['name_' + lang];
+                            values[label] = label;
+                           options.push(values)
+                       }
+
             ui.push({
                 'method': function(value) {
                     viz.data(statements(filter, value));
-                    
                     viz.draw();
                 
                 },
                 'type': 'drop',
                 'label': dictionary[filter],
-                'value': [{'TODOS': -1}, {'SIM': 1}, {'NAO': 2}]
+                'value': options,
             });
         });
 
@@ -70,6 +89,7 @@ var loadViz = function(data){
         .type('geo_map')
         .coords({'value': '/pt/map/coords'})
         .format(formatHelper())
+        .tooltip({'sub': 'stateName'})
         .ui(uiBuilder())
         .id('id')
         .time('year')
@@ -94,7 +114,7 @@ var getUrls = function() {
         API_DOMAIN + '/metadata/' + 'state'
     ];
 
-    if (dataset == 'cnes_establishment') {
+    if (dataset.match(/^cnes_/)) {
         metadata.forEach(function(attr) {
             urls.push(API_DOMAIN + '/metadata/' + attr)
         });
@@ -113,14 +133,13 @@ $(document).ready(function() {
             statesMetadata = responses[1],
             otherMetadata = {};
 
-            if (dataset == 'cnes_establishment') {
+            if (dataset.match(/^cnes_/)){
                 filters.forEach(function(depth, i) {
                     otherMetadata[depth] = responses[2+i];
                 });
             }
 
             data = buildData(data,statesMetadata,otherMetadata);
-
             loadViz(data);
 
 
