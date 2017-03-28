@@ -34,6 +34,16 @@ var DICT = {
             'municipality': 'ibge_id',
             'state': 'ibge_id'
         }
+    },
+    'cnes_equipment': {
+        'item_id': {
+            'equipment_type': 'id'
+        }
+    },
+    'cnes_bed': {
+        'item_id': {
+            'bed_type': 'id'
+        }
     }
 };
 
@@ -50,10 +60,17 @@ var DEPTHS = {
         'occupation_family': ['occupation_group', 'occupation_family']
     },
     'cnes_establishment': {
-       'municipality': ['health_region', 'municipality'],
+       'municipality': ['municipality'],
        'provider_type': ['provider_type'],
        'unit_type': ['unit_type'],
        'administrative_sphere': ['administrative_sphere']
+   },
+   'cnes_equipment': {
+        'equipment_type': ['equipment_type'],
+        'municipality': ['health_region', 'municipality']
+   },
+    'cnes_bed': {
+        'bed_type': ['bed_type']
    }
 };
 
@@ -76,33 +93,17 @@ var SIZES = {
         'provider_type': ['establishments'],
         'unit_type': ['establishments'],
         'administrative_sphere': ['establishments']
-    }
+    },
+    'cnes_equipment': {
+        'municipality': ['equipments'],
+        'equipment_type': ['equipments']
+    },
+    'cnes_bed': {
+        'bed_type': ['beds']
+   }
 };
 
 var COLORS = {
-    'secex': {},
-    'rais': {},
-    'cnes_establishment': {
-        'municipality': [],
-        'provider_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
-        'unit_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
-        'administrative_sphere': []
-        // 'administrative_sphere': ['ambulatory_care_facilities', 'emergency_facilities', 'neonatal_unit_facilities', 'obstetrical_center_facilities', 'surgery_center_facilities', 'selective_waste_collection']
-    }
-};
-
-var FILTERS = {
-    'secex': {},
-    'rais': {},
-    'cnes_establishment': {
-        'municipality': [],
-        'administrative_sphere': ['sus_bond'],
-        'provider_type': [],
-        'unit_type': [],
-    }
-};
-
-var DIMENSION_COLOR = {
     'provider_type': {
         '30': '#4575B4',
         '40': '#74ADD1',
@@ -119,7 +120,9 @@ var DIMENSION_COLOR = {
 var BASIC_VALUES = {
     'secex': ['value', 'kg'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
-    'cnes_establishment': ['establishments']
+    'cnes_establishment': ['establishments'],
+    'cnes_equipment': ['equipments'],
+    'cnes_bed': ['beds']
 };
 
 if (document.getElementById('rings'))
@@ -135,7 +138,8 @@ var CALC_BASIC_VALUES = {
         }
     },
     'rais': {},
-    'cnes_establishment': {}
+    'cnes_establishment': {},
+    'cnes_equipment': {}
 };
 
 var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group'];
@@ -205,7 +209,7 @@ dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de hi
 dictionary['cnes_establishment'] = lang == 'en' ? 'datasus' : 'datasus';
 dictionary['facilities'] = lang == 'en' ? 'Facilities' : 'Instalações';
 dictionary['including'] = lang == 'en' ? 'Including' : 'Inclui';
-dictionary['drawer_color_by'] = lang == 'en' ? 'Color by' : 'Colorir por';
+dictionary['drawer_color_by'] = lang == 'en' ? 'Group by' : 'Agregar por';
 dictionary['drawer_group'] = lang == 'en' ? 'Group' : 'Agrupar';
 dictionary['yes'] = lang == 'en' ? 'Yes' : 'Sim';
 dictionary['no'] = lang == 'en' ? 'No' : 'Não';
