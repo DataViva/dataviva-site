@@ -63,7 +63,12 @@ if(y.length > 1){
             if(colorHelper[currentY] != undefined)
                 viz.color(currentY + "_color");
 
-            viz.draw();
+            solo = updateSolo(data);
+
+            viz.id({
+                'solo': solo,
+            })
+            .draw();
         }
     });
 }
