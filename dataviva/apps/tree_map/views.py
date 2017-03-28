@@ -41,7 +41,9 @@ def index(dataset, squares, size):
         if key == 'type':
             title_attrs['type'] = value
 
-        if key not in ['depths', 'sizes', 'group', 'depth', 'color', 'filter'] and value and key in services:
+        if key in ['depths', 'sizes', 'group', 'depth', 'color', 'filter', 'filters', 'hierarchy']:
+          continue
+        if value and key in services:
             filters.append(services[key](value))
             if key == 'id_ibge':
               title_attrs['location'] = value

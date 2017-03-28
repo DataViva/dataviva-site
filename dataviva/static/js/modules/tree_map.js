@@ -44,7 +44,7 @@ var buildData = function(apiResponse, squaresMetadata, otherMetadata) {
             if (group && HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
             
-            if (squares in DICT[dataset]['item_id'])
+            if (DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(squares))
                 dataItem[DICT[dataset]['item_id'][squares]] = dataItem[squares];
             else
                 dataItem['id'] = dataItem[squares];
@@ -87,7 +87,7 @@ var loadViz = function(data) {
         // Adds depth selector
         if (depths.length > 1) {
             if (hierarchy) {
-                var options = moveToPos(0, getUrlArgs()['depth'] || squares, depths);           
+                var options = moveToPos(0, args['depth'] || squares, depths);
                 options.forEach(function(item, i) {
                     options[i] = {[dictionary[item]] : item};
                 });
@@ -101,8 +101,12 @@ var loadViz = function(data) {
                     'type': options.length > 3 ? 'drop' : '',
                     'label': dictionary['depth'],
                     'value': options
-                });       
+                });
             } else {
+                var options = moveToPos(0, args['depth'] || depths[0], depths);
+                if (options.indexOf(squares) >= 0)
+                    options.splice(options.indexOf(squares), 1);
+
                 ui.push({
                     'method': function(value) {
                         viz.data(data);
@@ -112,23 +116,17 @@ var loadViz = function(data) {
                     },
                     'type': depths.length > 3 ? 'drop' : '',
                     'label': dictionary['drawer_color_by'],
-                    'value': moveToPos(0, getUrlArgs()['color'] || depths[0], depths)
+                    'value': options
                 });
 
-                // var value;
-                // if (args.hasOwnProperty('depth') && args['depth'] == squares)
-                //     value = [{[dictionary['no']]: 1}, {[dictionary['yes']]: 0}];
-                // else
-                //     value = [{[dictionary['yes']]: 0}, {[dictionary['no']]: 1}];
-                
-                // ui.push({
-                //     'type': 'button',
-                //     'method': function(value) {
-                //         viz.depth(value).draw();
-                //     },
-                //     'label': dictionary['drawer_group'],
-                //     'value': value
-                // });
+                ui.push({
+                    'type': 'button',
+                    'method': function(value) {
+                        viz.depth(value).draw();
+                    },
+                    'label': dictionary['drawer_group'],
+                    'value': [{[dictionary['no']]: 1}, {[dictionary['yes']]: 0}]
+                });
             }
         }
 
