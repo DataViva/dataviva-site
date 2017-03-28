@@ -255,6 +255,7 @@ def index(bra_id, tab):
     is_municipality = location and len(location.id) == 9
     menu = request.args.get('menu')
     url = request.args.get('url')
+    import pdb; pdb.set_trace()
 
     if bra_id == 'all':
         depth = None

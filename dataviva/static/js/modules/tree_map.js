@@ -104,7 +104,7 @@ var loadViz = function(data) {
                 });
             } else {
                 var options = moveToPos(0, args['depth'] || depths[0], depths);
-                if (options.indexOf(squares) >= 0)
+                if (options.indexOf(squares) >= 0 && depths.indexOf(squares) >= 0)
                     options.splice(options.indexOf(squares), 1);
 
                 ui.push({
@@ -226,7 +226,10 @@ var loadViz = function(data) {
     }
 
     var titleHelper = function(depth) {
+        if (!baseTitle)
+            baseTitle = dictionary[size] + ' ' + dictionary['per'] + ' ' + dictionary[squares];
         var title = titleBuilder(depth, dataset, getUrlArgs(), yearRange);
+
         return {
             'value': title['title'],
             'font': {'size': 22, 'align': 'left'},

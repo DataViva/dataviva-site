@@ -63,6 +63,6 @@ def index(dataset, squares, size):
                            squares=squares,
                            size=size,
                            filters=filters,
-                           title=title or 'Title',
+                           title=title or '',
                            subtitle=subtitle or '',
                            dictionary=json.dumps(dictionary()))
