@@ -30,14 +30,14 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}} data-parent="#equipments-type">
                     {% trans %}Stacked{% endtrans %}
                 </a>
-                <a href="#"
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code,unit_type,sus_availability_indicator?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}} data-parent="#equipments-type">
                     {% trans %}Bar{% endtrans %}
                 </a>
             </div>
             <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="equipments-sus-bond">
-                <a href="#"
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/sus_availability_indicator,equipment_type,equipment_code,unit_type?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-sus-bond-bar'}}" data-parent="#equipments-sus-bond">
                     {% trans %}Bar{% endtrans %}
                 </a>
@@ -127,21 +127,21 @@
             </div>
             <a href="#beds-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-type">{% trans %}Type{% endtrans %}</a>
             <div class="collapse" id="beds-type">
-                <a href="#"
+                <a href="/{{ g.locale }}/bar/cnes_bed/number_existing_bed,number_sus_bed,number_non_sus_bed/health_region?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-bar'}}" data-parent="#beds-type">
                     {% trans %}Bar{% endtrans %}
                 </a>
             </div>
             <a href="#beds-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="beds-sus-bond">
-                <a href="#"
+                <a href="/{{ g.locale }}/bar/cnes_bed/beds/bed_type,bed_type_per_specialty,health_region?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-sus-bond-bar'}}" data-parent="#beds-sus-bond">
                     {% trans %}Bar{% endtrans %}
                 </a>
             </div>
             <a href="#beds-availability" class="list-group-item" data-toggle="collapse" data-parent="#beds-availability">{% trans %}Availability{% endtrans %}</a>
             <div class="collapse" id="beds-availability">
-                <a href="#"
+                <a href="/{{ g.locale }}/bar/cnes_bed/beds,number_sus_bed,number_non_sus_bed/bed_type,bed_type_per_specialty,health_region?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-availability-bar'}}" data-parent="#beds-availability">
                     {% trans %}Bar{% endtrans %}
                 </a>

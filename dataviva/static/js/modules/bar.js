@@ -235,6 +235,21 @@ dictionary['professionals'] = lang == 'en' ? "Professionals" : "Profissionais";
 dictionary['equipment_type'] = lang == 'en' ? "Equipment Type" : "Tipo de Equipamento";
 dictionary['equipments'] = lang == 'en' ? "Equipments" : "Equipamentos";
 
+dictionary['equipment_quantity'] = lang == 'en' ? 'Quantity of existing equipment' : 'Quantidade de equipamentos existentes';
+dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Quantity of equipment in use': 'Quantidade de equipamentos em uso';
+dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type': 'Tipo de Equipamento';
+dictionary['equipment_code'] = lang == 'en' ? 'Equipment Code': 'Código do Equipamento';
+dictionary['sus_availability_indicator'] = lang == 'en' ? 'Availability indicator for SUS': 'Indicador de Disponibilidade para o SUS';
+dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
+
+dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
+dictionary['number_sus_bed'] = lang == 'en' ? 'Number of SUS beds' : 'Quantidade de leitos SUS';
+dictionary['number_non_sus_bed'] = lang == 'en' ? 'Number of non SUS beds' : 'Quantidade de leitos não SUS';
+dictionary['beds'] = lang == 'en' ? 'Beds' : 'Leitos';
+dictionary['bed_type'] = lang == 'en' ? 'Type of Bed' : 'Tipo de Leito';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Type of Bed / Specialty' : 'Tipo de Leito/Especialidade';
+dictionary['health_region'] = lang == 'en' ? 'Health Region' : 'Região de Saúde';
+
 var formatNumber = function(digit){
     var lastDigit = digit.slice(-1);
 
