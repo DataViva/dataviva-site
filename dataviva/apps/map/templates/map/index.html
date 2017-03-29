@@ -5,18 +5,12 @@
     <link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/css/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/graphs-tools.css" />
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon"/>
 
-<!-- load D3js -->
-<script src="//d3plus.org/js/d3.js"></script>
-
-<!-- load topojson library -->
-<script src="//d3plus.org/js/topojson.js"></script>
-
-<!-- load D3plus after D3js -->
-<script src="//d3plus.org/js/d3plus.js"></script>
-
+    <script src="//d3plus.org/js/d3.js"></script>
+    <script src="//d3plus.org/js/topojson.js"></script>
+    <script src="//d3plus.org/js/d3plus.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-
     <script src="/static/js/modules/embed/utils.dataviva.js"></script>
     <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
     <script type="text/javascript" src="/static/js/libs/async.js"></script>
@@ -31,13 +25,15 @@
 </head>
 <body>
 
+    <div id="mask" class="loading"></div>
     <div id="map"
         class="embed-responsive responsive-wrapper"
         dataset="{{ dataset }}"
         value="{{ value }}"
-        filters="{{ filters }}"
-        ">
+        filters="{{ filters }}">
     </div>
+    <div id="controls"></div>
+
     <script type="text/javascript">
         var dictionary = {{ dictionary|safe }};
     </script>
