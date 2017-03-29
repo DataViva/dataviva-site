@@ -7,14 +7,15 @@ var tree_map = document.getElementById('tree_map'),
     baseSubtitle = tree_map.getAttribute('graph-subtitle');
 
 var args = getUrlArgs(),
-    yearRange = args['year'] ? [0, +args['year']] : [0, 0],
-    depths = args['depths'] || DEPTHS[dataset][squares] || [squares],
+    yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
+    depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
+    hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
     group = depths[0],
     sizes = args['sizes'] || SIZES[dataset][squares] || [size],
-    colors = args['colors'] || COLORS[dataset][squares] || [],
-    filters = args['filter'] ? args['filter'].split('+') : FILTERS[dataset][squares] || [],
+    filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [],
     basicValues = BASIC_VALUES[dataset] || [],
-    calcBasicValues = CALC_BASIC_VALUES[dataset] || {};
+    calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
+    currentFilters = {};
 
 var buildData = function(apiResponse, squaresMetadata, otherMetadata) {
 
@@ -35,15 +36,15 @@ var buildData = function(apiResponse, squaresMetadata, otherMetadata) {
                 if (['wage', 'average_wage'].indexOf(header) >= 0)
                     dataItem[header] = +dataItem[header]
                 
-                if (DIMENSION_COLOR[header]) {
-                    dataItem['color'] = DIMENSION_COLOR[header][dataItem[header]];
+                if (COLORS[header]) {
+                    dataItem['color'] = COLORS[header][dataItem[header]];
                 }
             });
 
             if (group && HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
             
-            if (squares in DICT[dataset]['item_id'])
+            if (DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(squares))
                 dataItem[DICT[dataset]['item_id'][squares]] = dataItem[squares];
             else
                 dataItem['id'] = dataItem[squares];
@@ -52,11 +53,10 @@ var buildData = function(apiResponse, squaresMetadata, otherMetadata) {
                 dataItem[key] = calcBasicValues[key](dataItem);
 
 
-            if (dataset == 'cnes_establishment') {
-                for (d in otherMetadata) {
+            if (dataset.match(/^cnes_/)) {
+                for (d in otherMetadata)
                     dataItem[d] = otherMetadata[d][dataItem[d]]['name_' + lang];
-                }
-            } else {
+            } else if (depths.length > 1) {
                 depths.forEach(function(depth) {
                     if (depth != squares)
                         dataItem[depth] = squaresMetadata[dataItem[squares]][depth]['name_' + lang];
@@ -86,21 +86,48 @@ var loadViz = function(data) {
 
         // Adds depth selector
         if (depths.length > 1) {
-            var options = moveToPos(0, getUrlArgs()['depth'] || squares, depths);           
-            options.forEach(function(item, i) {
-                options[i] = {[dictionary[item]] : item};
-            });
+            if (hierarchy) {
+                var options = moveToPos(0, args['depth'] || squares, depths);
+                options.forEach(function(item, i) {
+                    options[i] = {[dictionary[item]] : item};
+                });
 
-            ui.push({
-                'method': function(value) {
-                    viz.depth(depths.indexOf(value));
-                    viz.title(titleHelper(value));
-                    viz.draw();
-                },
-                'type': options.length > 3 ? 'drop' : '',
-                'label': dictionary['depth'],
-                'value': options
-            });
+                ui.push({
+                    'method': function(value) {
+                        viz.depth(depths.indexOf(value));
+                        viz.title(titleHelper(value));
+                        viz.draw();
+                    },
+                    'type': options.length > 3 ? 'drop' : '',
+                    'label': dictionary['depth'],
+                    'value': options
+                });
+            } else {
+                var options = moveToPos(0, args['depth'] || depths[0], depths);
+                if (options.indexOf(squares) >= 0 && depths.indexOf(squares) >= 0)
+                    options.splice(options.indexOf(squares), 1);
+
+                ui.push({
+                    'method': function(value) {
+                        viz.data(data);
+                        viz.id([value, squares]);
+                        viz.color(value);
+                        viz.draw();
+                    },
+                    'type': depths.length > 3 ? 'drop' : '',
+                    'label': dictionary['drawer_color_by'],
+                    'value': options
+                });
+
+                ui.push({
+                    'type': 'button',
+                    'method': function(value) {
+                        viz.depth(value).draw();
+                    },
+                    'label': dictionary['drawer_group'],
+                    'value': [{[dictionary['no']]: 1}, {[dictionary['yes']]: 0}]
+                });
+            }
         }
 
         // Adds size selector
@@ -118,41 +145,7 @@ var loadViz = function(data) {
             });
         }
 
-        // Adds color by selector
-        if (colors.length) {
-            ui.push({
-                'method': function(value) {
-                    viz.data(data);
-                    viz.id([value, squares]);
-                    viz.color(value);
-                    viz.draw();
-                },
-                'type': colors.length > 3 ? 'drop' : '',
-                'label': dictionary['drawer_color_by'],
-                'value': moveToPos(0, getUrlArgs()['color'] || colors[0], colors)
-            });
-
-            // Adds depth level selector
-            if (depths.length <= 1) {
-                var value;
-                if (tree_map.getAttribute('depth') == squares)
-                    value = [{[dictionary['no']]: 1}, {[dictionary['yes']]: 0}];
-                else
-                    value = [{[dictionary['yes']]: 0}, {[dictionary['no']]: 1}];
-                
-                ui.push({
-                    'type': 'button',
-                    'method': function(value) {
-                        viz.depth(value).draw();
-                    },
-                    'label': dictionary['drawer_group'] + ' ' + dictionary[squares],
-                    'value': value
-                });
-            }
-        }
-
         // Adds year selector
-        var args = getUrlArgs();
         if (args['year']) {
             ui.push({
                 'method': function(value) {
@@ -168,31 +161,75 @@ var loadViz = function(data) {
             })
         }
 
-        // Adds filters selector
-        filters.forEach(function(filter) {        
-            var options = [];
-            for (id in otherMetadata[filter]) {
-                options.push(otherMetadata[filter][id]['name_' + lang])
-            }
-            options.sort(function(a, b) {return a ? a.toUpperCase() > b.toUpperCase() : a});
-            options.unshift({[dictionary['all']]: 0});
+        // Adds filters selector        
+        var filteredData = function(filter, value) {
+            currentFilters[filter] = value;
+            return data.filter(function(item) {
+                var valid = true,
+                    keys = Object.keys(currentFilters);
+                
+                for (var i = 0; i < keys.length; i++) {
+                    if (currentFilters[keys[i]] == -1)
+                        continue;
+                    if (item[keys[i]] != currentFilters[keys[i]]) {
+                        valid = false;
+                        break;
+                    }
+                }
 
-            ui.push({
-                'method': function(value) {
-                    viz.data(value ? data.filter(function(item) {return item[filter] == value}) : data);
-                    viz.draw();
-                },
-                'type': 'drop',
-                'label': dictionary[filter],
-                'value': options
+                return valid;
             });
+        };
+
+        filters.forEach(function(filter, j) {
+            currentFilters[filter] = -1;
+            var options = [];
+            if (!j) {
+                for (id in otherMetadata[filter]) {
+                    var label = otherMetadata[filter][id]['name_' + lang],
+                        option = {};
+                    option[label] = label;
+                    options.push(option);
+                }
+                options.unshift({[dictionary['all']]: -1});
+                ui.push({
+                    'method': function(value) {
+                        viz.data(filteredData(filter, value));
+                        viz.draw();
+                    },
+                    'label': dictionary[filter],
+                    'type': 'drop',
+                    'value': options
+                });
+            } else {
+                for (id in otherMetadata[filter]) {
+                    options.push({'id': otherMetadata[filter][id]['name_' + lang], 'label': otherMetadata[filter][id]['name_' + lang]})
+                }
+                options.unshift({'id': -1, 'label': dictionary['all']});
+                d3plus.form()
+                    .container(d3.select('#controls'))
+                    .data(options)
+                    .id('id')
+                    .text('label')
+                    .title(dictionary[filter])
+                    .type('drop')
+                    .font({'size': 11})
+                    .focus(-1, function(value) {
+                        viz.data(filteredData(filter, value));
+                        viz.draw();
+                    })
+                    .draw();
+            }
         });
 
         return ui;
     }
 
     var titleHelper = function(depth) {
+        if (!baseTitle)
+            baseTitle = dictionary[size] + ' ' + dictionary['per'] + ' ' + dictionary[squares];
         var title = titleBuilder(depth, dataset, getUrlArgs(), yearRange);
+
         return {
             'value': title['title'],
             'font': {'size': 22, 'align': 'left'},
@@ -201,14 +238,18 @@ var loadViz = function(data) {
         }
     };
 
+    var hasIdLabel = function() {
+        return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(squares);
+    }
+
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': DICT[dataset]['item_id'][squares] || 'id',
+                '': hasIdLabel() ? DICT[dataset]['item_id'][squares] : 'id',
                 [dictionary['basic_values']]: [size]
             },
             'long': {
-                '': DICT[dataset]['item_id'][squares] || 'id',
+                '': hasIdLabel() ? DICT[dataset]['item_id'][squares] : 'id',
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
@@ -242,30 +283,30 @@ var loadViz = function(data) {
         .format(formatHelper())
         .ui(uiBuilder());
 
-    if (colors.length) {
-        viz.id([args['color'] || colors[0], squares]);
-        viz.depth(depths.indexOf(tree_map.getAttribute('depth')) || 1);
-        viz.zoom(true);
-    } else {
+    if (hierarchy) {
         viz.id(depths); 
         viz.depth(args['depth'] || depths.indexOf(squares));
         viz.zoom(false);
+    } else {
+        viz.id([args['depth'] || depths[0], squares]);
+        viz.depth(1);
+        viz.zoom(true);
     }
 
-    if (getUrlArgs()['color']) {
-        viz.color({'scale':'category20', 'value': args['color']});
-    }
-    else {
-        if (colors.length && depths.length == 1) {
-            viz.color({'scale':'category20', 'value': args['color'] || colors[0]});
-        } else if (depths.length > 1) {
-            viz.color({'scale':'category20', 'value': group});
-        } else {
-            viz.color({'scale':'category20'});
-        }
-    }
+    viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
     viz.draw();
 
+    var addForms = function() {
+        if ($('#d3plus_drawer').length == 0){
+            setTimeout(addForms, 1000);
+            return;
+        }
+
+        $('#d3plus_drawer').append($('#controls').children());
+        $('#controls').remove();
+    };
+
+    addForms();
     toolsBuilder(viz, data, titleHelper().value, uiBuilder());
 };
 
@@ -274,7 +315,7 @@ var getUrls = function() {
     var dimensions = [dataset, 'year', squares];
     var metadata = [];
     
-    depths.concat(colors).concat(filters).forEach(function(attr) {
+    depths.concat(filters).forEach(function(attr) {
         if (attr != squares && dimensions.indexOf(attr) == -1) {
             dimensions.push(attr);
             metadata.push(attr);
@@ -285,7 +326,7 @@ var getUrls = function() {
         API_DOMAIN + '/metadata/' + squares
     ];
 
-    if (dataset == 'cnes_establishment') {
+    if (dataset.match(/^cnes_/)) {
         metadata.forEach(function(attr) {
             urls.push(API_DOMAIN + '/metadata/' + attr)
         });
@@ -306,13 +347,13 @@ $(document).ready(function() {
             squaresMetadata = responses[1],
             otherMetadata = {};
 
-            if (dataset == 'cnes_establishment') {
+            if (dataset.match(/^cnes_/)) {
                 var offset = 0;
-                depths.concat(colors).concat(filters).forEach(function(depth, i) {
-                    if (depth != squares)
-                        otherMetadata[depth] = responses[2+i-offset];
+                depths.concat(filters).forEach(function(attr, i) {
+                    if (attr != squares && !otherMetadata.hasOwnProperty(attr))
+                        otherMetadata[attr] = responses[2+i-offset];
                     else
-                        offset = 1;
+                        offset++;
                 });
             }
 

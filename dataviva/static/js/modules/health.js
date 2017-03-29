@@ -116,12 +116,12 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: "http://api.staging.dataviva.info/cnes_establishment/establishment_type/?year=2015&" + filters,
+        url: "http://api.staging.dataviva.info/cnes_establishment/unit_type/?year=2015&" + filters,
         title: 'Principal Tipo Estabelecimento',
         subtitle: 'por Quantidade',
         label: {
             metadata: true,
-            value: 'establishment_type'
+            value: 'unit_type'
         },
         value: 'establishments',
         tab: 'establishments'
