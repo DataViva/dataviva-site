@@ -125,6 +125,32 @@ var SIZES = {
 };
 
 var COLORS = {
+    'secex': {},
+    'rais': {},
+    'cnes_establishment': {
+        'municipality': [],
+        'provider_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
+        'unit_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
+        'administrative_sphere': []
+        // 'administrative_sphere': ['ambulatory_care_facilities', 'emergency_facilities', 'neonatal_unit_facilities', 'obstetrical_center_facilities', 'surgery_center_facilities', 'selective_waste_collection']
+    }
+};
+
+var FILTERS = {
+    'secex': {},
+    'rais': {},
+    'cnes_establishment': {
+        'municipality': [],
+        'administrative_sphere': ['sus_bond'],
+        'provider_type': [],
+        'unit_type': [],
+    },
+    'cnes_equipment': {},
+    'cnes_professional': {},
+    'cnes_bed': {}
+};
+
+var DIMENSION_COLOR = {
     'provider_type': {
         '30': '#4575B4',
         '40': '#74ADD1',
