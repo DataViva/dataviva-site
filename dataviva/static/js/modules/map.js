@@ -49,6 +49,13 @@ var buildData = function(apiResponse,statesMetadata, otherMetadata) {
 var loadViz = function(data){
     var uiBuilder = function() {
         var ui = [];
+        config = {
+            'id': 'id',
+            'text': 'label',
+            'font': {'size': 11},
+            'container': d3.select('#controls'),
+            'search': false
+        };
 
         var filteredData = function() {
             return data.filter(function(item) {
@@ -67,29 +74,29 @@ var loadViz = function(data){
                 return valid;
             });
         };
-
-        // Adds size selector
+        // Adds value selector
         if (values.length > 1) {
-            var options = [];
-            values.forEach(function(item) {
-                options.push({[dictionary[item]]: item});
-            });
+           var options = [];
+           values.forEach(function(item) {
+               options.push({'id': item, 'label': dictionary[item]});
+           });
 
-            ui.push({
-                'method': function(value) {
-                    var d = filteredData();
+           d3plus.form()
+               .config(config)
+               .data(options)
+               .type('toggle')
+               .focus(value, function(value) {
+                   viz.title(titleHelper(value))
+                   var d = filteredData();
                     d.forEach(function(item) {
                         if (item[value] == 0)
                             item[value] = null;
                     });
-                    viz.data(d);
-                    viz.color(value);
-                    viz.draw();
-                },
-                'type': options.length > 3 ? 'drop' : '',
-                'label': dictionary['value'],
-                'value' : options
-            });
+                    viz.data(d)
+                       .color(value)
+                       .draw();
+                })
+             .draw();
         }
 
         var statements = function(filter, value){
@@ -104,78 +111,59 @@ var loadViz = function(data){
         filters.forEach(function(filter, j) {
             currentFilters[filter] = -1;
             var options = [];
-            if (!j) {
-                for (id in otherMetadata[filter]) {
-                    if (filter == 'occupation_family' && !validOccupations.hasOwnProperty(id))
-                        continue;
-                    var label = otherMetadata[filter][id]['name_' + lang],
-                        option = {};
-                    option[label] = label;
-                    options.push(option);
-                }
-
-                options.sort(function(a, b) {
-                    if (Object.keys(a)[0] < Object.keys(b)[0])
-                        return -1;
-                    if (Object.keys(a)[0] > Object.keys(b)[0])
-                        return 1;
-                    return 0;
-                });
-
-                options.unshift({[dictionary['all']]: -1});
-                ui.push({
-                    'method': function(value) {
-                        currentFilters[filter] = value;
-                        viz.data(filteredData());
-                        viz.draw();
-                    },
-                    'label': dictionary[filter],
-                    'type': 'drop',
-                    'value': options
-                });
-            } else {
-                for (id in otherMetadata[filter]) {
-                    if (filter == 'occupation_family' && !validOccupations.hasOwnProperty(id))
-                        continue;
-                    options.push({'id': otherMetadata[filter][id]['name_' + lang], 'label': otherMetadata[filter][id]['name_' + lang]})
-                }
-
-                options.sort(function(a, b) {
-                    if (a['label'] < b['label'])
-                        return -1;
-                    if (a['label'] > b['label'])
-                        return 1;
-                    return 0;
-                });
-
-                options.unshift({'id': -1, 'label': dictionary['all']});
-                d3plus.form()
-                    .container(d3.select('#controls'))
-                    .data(options)
-                    .id('id')
-                    .text('label')
-                    .title(dictionary[filter])
-                    .type('drop')
-                    .font({'size': 11})
-                    .focus(-1, function(value) {
-                        currentFilters[filter] = value;
-                        viz.data(filteredData());
-                        viz.draw();
-                    })
-                    .draw();
+            for (id in otherMetadata[filter]) {
+                if (filter == 'occupation_family' && !validOccupations.hasOwnProperty(id))
+                    continue;
+                options.push({'id': otherMetadata[filter][id]['name_' + lang], 'label': otherMetadata[filter][id]['name_' + lang]})
             }
-        });
+            options.sort(function(a, b) {
+                if (a['label'] < b['label'])
+                    return -1;
+                if (a['label'] > b['label'])
+                    return 1;
+                return 0;
+            });
 
+            options.unshift({'id': -1, 'label': dictionary['all']});
+            d3plus.form()
+                .config(config)
+                .data(options)
+                .title(dictionary[filter])
+                .type('drop')
+                .focus(-1, function(value) {
+                    currentFilters[filter] = value;
+                    viz.data(filteredData());
+                    viz.draw();
+                })
+            .draw();
+        });
         return ui;
+    };
+
+    var titleHelper = function(value) {
+        var title = {};
+            if(dataset.match(/^cnes_/)) {
+                title = dictionary[value] + ' ' + dictionary['per'] + ' ' + dictionary['state'];
+            } else {
+                title = titleBuilder(depth, dataset, getUrlArgs(), yearRange);
+            }
+        return {
+            'value':  title,
+            'font': {'size': 22, 'align': 'left'},
+            'total': {'prefix': dictionary[value] + ': '}
+        }
     };
 
     var viz = d3plus.viz()
         .container('#map')
         .data(data)
+        .title(titleHelper(value))
+        .title({'total': {'font': {'align': 'left'}}})
         .type('geo_map')
         .coords({'value': '/pt/map/coords'})
         .format(formatHelper())
         .tooltip({'sub': 'stateName'})
+        .background('transparent')
         .ui(uiBuilder())
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large'})
@@ -183,20 +171,9 @@ var loadViz = function(data){
         .time('year')
         .color({'heatmap': ["#282F6B", "#B22200"],
                 'value': value})
-        .draw();
 
-    var addForms = function() {
-        if ($('#d3plus_drawer').length == 0){
-            setTimeout(addForms, 1000);
-            return;
-        }
-
-        $('#d3plus_drawer').append($('#controls').children());
-        $('#controls').remove();
-    };
-
-    addForms();
-
+        $('#map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
+        viz.draw();
 }
 
 
@@ -227,7 +204,7 @@ var getUrls = function() {
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function() {
-         ajaxQueue(
+    ajaxQueue(
         getUrls(),
         function(responses) {
             var data = responses[0];
