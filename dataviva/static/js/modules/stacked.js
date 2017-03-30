@@ -8,9 +8,12 @@ var stacked = document.getElementById('stacked'),
     type = stacked.getAttribute('type').split(' '),
     lang = document.documentElement.lang;
     basicValues = BASIC_VALUES[dataset],
-    calcBasicValues = CALC_BASIC_VALUES[dataset];
+    calcBasicValues = CALC_BASIC_VALUES[dataset],
+    metadata = {},
+    currentFilters = {},
+    stackedFilters = getUrlArgs()['filters'] ? getUrlArgs()['filters'].split('+') : [];
 
-var buildData = function(apiData, areaMetadata, groupMetadata) {
+var buildData = function(apiData) {
     
     var getAttrByName = function(item, attr) {
         var index = headers.indexOf(attr);
@@ -37,18 +40,15 @@ var buildData = function(apiData, areaMetadata, groupMetadata) {
             }
 
             depths.forEach(function(depth) {
-                if (depth != area && depth != group) {
-                    dataItem[depth] = areaMetadata[dataItem[area]][depth]['name_' + lang];
-                }
+                dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
             });
             
-            dataItem[area] = areaMetadata[dataItem[area]]['name_' + lang];
-            
-            if (group) {
-                if (HAS_ICONS.indexOf(group) >= 0)
-                    dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
-                dataItem[group] = groupMetadata[dataItem[group]]['name_' + lang];
+            if(depths.indexOf(area) == -1) {
+                dataItem[area] = metadata[area][dataItem[area]]['name_' + lang];
             }
+            
+            if (HAS_ICONS.indexOf(group) >= 0)
+                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
             
             if (dataItem.microregion){
                 dataItem.microregion = dataItem.microregion + ' ';
@@ -61,7 +61,7 @@ var buildData = function(apiData, areaMetadata, groupMetadata) {
 
             data.push(dataItem);
         } catch(e) {
-
+            debugger
         };
     });
 
@@ -79,14 +79,18 @@ var loadViz = function (data){
         }
     };
 
+    var hasIdLabel = function() {
+        return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(area);
+    };
+
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': DICT[dataset]['item_id'][area],
-                [dictionary['basic_values']]: 'value'
+                '': hasIdLabel() ? DICT[dataset]['item_id'][area] : 'id',
+                [dictionary['basic_values']]: [values[0]]
             },
             'long': {
-                '': DICT[dataset]['item_id'][area],
+                '': hasIdLabel() ? DICT[dataset]['item_id'][area] : 'id',
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
@@ -94,6 +98,13 @@ var loadViz = function (data){
 
     var uiBuilder = function() {
         ui = [];
+        var config = {
+            'id': 'id',
+            'text': 'label',
+            'font': {'size': 11},
+            'container': d3.select('#controls'),
+            'search': false
+        };
 
         ui.push( {
             "label": "Layout",
@@ -206,6 +217,73 @@ var loadViz = function (data){
             });
         }
 
+        if(values.length > 1) {
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(values.map(function(value){
+                    return {
+                        id: value,
+                        label: dictionary[value]
+                    };
+                }))
+                .title(dictionary['value'])
+                .type('drop')
+                .font({'size': 11})
+                .focus(-1, function(value) {
+                    viz.y(value).draw();
+                })
+                .draw();
+        }
+
+        var filteredData = function(filter, value) {
+            currentFilters[filter] = value;
+            return data.filter(function(item) {
+                var valid = true,
+                    keys = Object.keys(currentFilters);
+                
+                for (var i = 0; i < keys.length; i++) {
+                    if (currentFilters[keys[i]] == -1)
+                        continue;
+                    if (item[keys[i]] != currentFilters[keys[i]]) {
+                        valid = false;
+                        break;
+                    }
+                }
+
+                return valid;
+            });
+        };
+
+        stackedFilters.forEach(function(filter, j) {
+            currentFilters[filter] = -1;
+            var options = [];
+            for (id in metadata[filter]) {
+                options.push({'id': metadata[filter][id]['name_' + lang], 'label': metadata[filter][id]['name_' + lang]})
+            }
+            options.unshift({'id': -1, 'label': dictionary['all']});
+            
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(options)
+                .title(dictionary[filter])
+                .type('drop')
+                .font({'size': 11})
+                .focus(-1, function(value) {
+                    viz.data(filteredData(filter, value));
+                    viz.draw();
+                })
+                .draw();
+        });
+
+        ui.push({
+            "value": ['bed_type', 'unit_type'],
+            "method": function(value){
+                viz.id(value).color(value).draw()
+            }
+        });
+
         return ui;
     }
 
@@ -269,6 +347,8 @@ var loadViz = function (data){
             viz.id(depths);
         }
 
+        $('#stacked').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
+
         viz.draw()
 
         toolsBuilder(stacked.id, viz, data, titleBuilder().value, uiBuilder());
@@ -276,24 +356,27 @@ var loadViz = function (data){
 
 var getUrls = function() {
     var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year'), area];
-    if (group && depths.length && depths.indexOf(group) == -1 || !depths.length)
-        dimensions.push(group);
+
     depths.forEach(function(depth) {
         if (depth != area)
             dimensions.push(depth);
     });
 
-    var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
+    var urls = [
+        'http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
         'http://api.staging.dataviva.info/metadata/' + area
     ];
 
-    if (group)
-        urls.push('http://api.staging.dataviva.info/metadata/' + group);
+    depths.forEach(function(depth) {
+        urls.push('http://api.staging.dataviva.info/metadata/' + depth);
+    });
+
+    stackedFilters.forEach(function(filter){
+        urls.push('http://api.staging.dataviva.info/metadata/' + filter);
+    });
+    
     return urls;
 };
-
-var areaMetadata = [],
-    groupMetadata = [];
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
 
@@ -303,11 +386,13 @@ $(document).ready(function() {
         getUrls(), 
         function(responses) {
             var data = responses[0];
-            areaMetadata = responses[1];
-            if (group)
-                groupMetadata = responses[2];
+            metadata[area] = responses[1];
 
-            data = buildData(data, areaMetadata, groupMetadata);
+            depths.concat(stackedFilters).forEach(function(attr, i) {
+                metadata[attr] = responses[i + 2];
+            });
+
+            data = buildData(data);
 
             loadViz(data);
 

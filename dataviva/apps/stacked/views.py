@@ -103,8 +103,7 @@ def index(dataset, area, value):
 
 	params = {}
 	for param in ['depths', 'values']:
-		value = request.args.get(param)
-		params[param] = value if value and len(value.split()) > 1 else ''
+		params[param] = request.args.get(param, '')
 
 
 	return render_template('stacked/index.html',

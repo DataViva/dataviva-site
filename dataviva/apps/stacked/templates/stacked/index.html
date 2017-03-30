@@ -21,22 +21,28 @@
         body {
             background: none;
         }
+        #controls {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>    
     {% include "graphs/tools.html" %}
+    <div class="embed-responsive responsive-wrapper graph-wrapper">
 
-    <div id="stacked"
-        class="embed-responsive responsive-wrapper"
-        dataset="{{ dataset }}"
-        area="{{ area }}"
-        filters="{{filters}}"
-        depths="{{ depths }}"
-        values="{{ values }}"
-        group="{{ group }}"
-        type="{{ type }}"
-        value="{{value}}">
+        <div id="stacked"
+            class="embed-responsive responsive-wrapper"
+            dataset="{{ dataset }}"
+            area="{{ area }}"
+            filters="{{filters}}"
+            depths="{{ depths }}"
+            values="{{ values }}"
+            group="{{ group }}"
+            type="{{ type }}"
+            value="{{value}}">
+        </div>
+        <div id="controls"></div>
     </div>
 	<div id="mask" class="loading"></div>
 
