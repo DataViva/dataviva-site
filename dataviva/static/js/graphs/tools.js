@@ -15,7 +15,7 @@ var toolsBuilder = function(app, viz, data, title, ui) {
             .attr("xmlns", "http://www.w3.org/2000/svg")
             .node()
         svg.insert('defs',":first-child")
-        var svg_xml = (new XMLSerializer).serializeToString(svg.node());            
+        var svg_xml = (new XMLSerializer).serializeToString(svg.node());
         var style = "\n";
         var requiredSheets = ['phylogram_d3.css', 'open_sans.css'];
 
@@ -31,7 +31,7 @@ var toolsBuilder = function(app, viz, data, title, ui) {
                         }
                     }
                 }
-            } 
+            }
         }
 
         img = new Image();
@@ -82,13 +82,13 @@ var toolsBuilder = function(app, viz, data, title, ui) {
         var loadingPopover = dataviva.ui.loading('#share-popover'),
             url = window.location.href;
 
-        if (currentYear) {
+        if (!yearRange[0] && yearRange[1]) {
             if (url.match(/year=[0-9]{4}/))
-                url = url.replace(/year=[0-9]{4}/, 'year=' + currentYear);
+                url = url.replace(/year=[0-9]{4}/, 'year=' + yearRange[1]);
             else if (url.match(/\?/))
-                url += '&year=' + currentYear;
+                url += '&year=' + yearRange[1];
             else
-                url += '?year=' + currentYear;
+                url += '?year=' + yearRange[1];
         } else {
             url = url.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}&?/, '?');
         }
@@ -146,7 +146,7 @@ var toolsBuilder = function(app, viz, data, title, ui) {
         pdf = new jsPDF('l', 'mm', [w, h]);
         pdf.addImage(canvas, 'JPEG', 0,0,w,h);
         pdf.save(title);
-        
+
         dataviva.popover.hide();
         expireCookie("downloadToken");
     });
@@ -155,7 +155,7 @@ var toolsBuilder = function(app, viz, data, title, ui) {
         var initialize = initializeDownload();
         canvas = initialize[0];
         title = initialize[3];
-        
+
         img_download = canvas.toDataURL("image/png");
         var download = document.createElement('a');
         download.href = img_download;
@@ -170,7 +170,7 @@ var toolsBuilder = function(app, viz, data, title, ui) {
         var initialize = initializeDownload();
         title = initialize[3];
         svg = initialize[4];
-        
+
         var svgBlob = new Blob([svg], {type:"image/svg+xml;charset=utf-8"});
         saveAs(svgBlob, title + ".svg");
 

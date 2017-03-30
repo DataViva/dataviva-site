@@ -237,6 +237,14 @@
                        data-toggle="tab">{% trans %}Education{% endtrans %}</a>
                 </li>
                 {% endif %}
+                <li role="presentation" class="{{ 'active' if tab == 'health' }}">
+                    <a href="#health"
+                       aria-controls="health"
+                       role="tab"
+                       graph
+                       data-id="{{ location.id }}"
+                       data-toggle="tab">{% trans %}Health{% endtrans %}</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -257,6 +265,8 @@
           {% if body.university_year is not none %}
             {% include "location/tab-education.html" %}
           {% endif %}
+
+          {% include "location/tab-health.html" %}
         </div>
     </div>
 </section>

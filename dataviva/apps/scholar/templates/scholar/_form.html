@@ -31,8 +31,13 @@
     </p>
     <p>
         <label for="abstract">Resumo</label>
+        <button id="abstract-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
+        <button id="abstract-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
         {{ form.abstract(class="form-control", rows=5)}}
         {{ messages(form.abstract) }}
+        <div class="summernote-wrapper">
+                <div id="text-content-editor" class="summernote"></div>
+        </div>
     </p>
     <button id='submit' type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
 </form>

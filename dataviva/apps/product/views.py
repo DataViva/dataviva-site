@@ -27,6 +27,7 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
 def location_depth(bra_id):
     locations = {
         1: "region",    #todo
@@ -37,6 +38,7 @@ def location_depth(bra_id):
     }
 
     return locations[len(bra_id)]
+
 
 def handle_region_bra_id(bra_id):
     return {
@@ -86,6 +88,7 @@ def index(product_id, tab):
     url = request.args.get('url')
 
     bra_id = request.args.get('bra_id')
+    bra_id = bra_id if bra_id != 'all' else None
     if not bra_id:
         depth = None
         id_ibge = None
@@ -111,7 +114,8 @@ def index(product_id, tab):
     tabs = {
         'general': [],
         'opportunities': [
-            'economic-opportunities-rings'
+            'economic-opportunities-rings',
+            'new-api-economic-opportunities-rings'
         ],
         'trade-partner': [
             'trade-balance-product-line',

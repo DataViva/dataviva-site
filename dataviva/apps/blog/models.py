@@ -10,6 +10,8 @@ association_table = db.Table('blog_post_subject',
 
 class Post(db.Model):
     __tablename__ = 'blog_post'
+    __searchable__ = ['title', 'author', 'main_subject', 'text_call']
+
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(400))
     author = db.Column(db.String(100))
