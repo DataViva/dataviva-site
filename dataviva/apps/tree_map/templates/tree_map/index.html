@@ -22,23 +22,26 @@
         body {
             background: none;
         }
+        #controls {
+            text-align: center;
+        }
     </style>
 </head>
 
 <body>
     {% include "graphs/tools.html" %}
-
-    <div id="tree_map"
-        class="embed-responsive responsive-wrapper"
-        dataset="{{ dataset }}"
-        squares="{{ squares }}"
-        size="{{ size }}"
-        filters="{{ filters }}"
-        graph-title="{{ title }}"
-        graph-subtitle="{{ subtitle }}">
+    <div class="embed-responsive responsive-wrapper graph-wrapper">
+        <div id="tree_map"
+            dataset="{{ dataset }}"
+            squares="{{ squares }}"
+            size="{{ size }}"
+            filters="{{ filters }}"
+            graph-title="{{ title }}"
+            graph-subtitle="{{ subtitle }}">
+        </div>
+        <div id="controls"></div>
     </div>
     <div id="mask" class="loading"></div>
-    <div id="controls"></div>
 
     <script type="text/javascript">
         var dictionary = {{ dictionary|safe }};
