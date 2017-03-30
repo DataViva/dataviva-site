@@ -23,7 +23,7 @@
             <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Type{% endtrans %}</a>
             <div class="collapse" id="equipments-type">
                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/equipment_type/equipments{{ '?id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-tree_map' or not graph}} data-parent="#equipments-type">
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-tree_map' or not graph }}" data-parent="#equipments-type">
                     TreeMap
                 </a>
                 <a href="#"

@@ -74,59 +74,64 @@ var buildData = function(apiResponse, squaresMetadata, otherMetadata) {
 }
 
 var loadViz = function(data) {
-    var moveToPos = function(pos, elem, array) {
-        var newArray = array.slice(0);
-        newArray.splice(newArray.indexOf(elem), 1);
-        newArray.splice(pos, 0, elem);
-        return newArray;
-    };
-
     var uiBuilder = function() {
-        var ui = [];
+        var ui = [],
+            config = {
+                'id': 'id',
+                'text': 'label',
+                'font': {'size': 11},
+                'container': d3.select('#controls'),
+                'search': false
+            };
 
         // Adds depth selector
         if (depths.length > 1) {
+            var options = [];
             if (hierarchy) {
-                var options = moveToPos(0, args['depth'] || squares, depths);
-                options.forEach(function(item, i) {
-                    options[i] = {[dictionary[item]] : item};
+                depths.forEach(function(item) {
+                    options.push({'id': item, 'label': dictionary[item]});
                 });
 
-                ui.push({
-                    'method': function(value) {
+                d3plus.form()
+                    .config(config)
+                    .data(options)
+                    .title(dictionary['depth'])
+                    .type(options.length > 3 ? 'drop' : 'toggle')
+                    .focus(squares, function(value) {
                         viz.depth(depths.indexOf(value));
                         viz.title(titleHelper(value));
                         viz.draw();
-                    },
-                    'type': options.length > 3 ? 'drop' : '',
-                    'label': dictionary['depth'],
-                    'value': options
-                });
+                    })
+                    .draw();
             } else {
-                var options = moveToPos(0, args['depth'] || depths[0], depths);
-                if (options.indexOf(squares) >= 0 && depths.indexOf(squares) >= 0)
-                    options.splice(options.indexOf(squares), 1);
+                depths.forEach(function(item) {
+                    if (item != squares)
+                        options.push({'id': item, 'label': dictionary[item]});
+                });
 
-                ui.push({
-                    'method': function(value) {
+                d3plus.form()
+                    .config(config)
+                    .data(options)
+                    .title(dictionary['drawer_color_by'])
+                    .type(depths.length > 3 ? 'drop' : 'toggle')
+                    .focus(options[0]['id'], function(value) {
                         viz.data(data);
                         viz.id([value, squares]);
                         viz.color(value);
                         viz.draw();
-                    },
-                    'type': depths.length > 3 ? 'drop' : '',
-                    'label': dictionary['drawer_color_by'],
-                    'value': options
-                });
+                    })
+                    .draw();
 
-                ui.push({
-                    'type': 'button',
-                    'method': function(value) {
-                        viz.depth(value).draw();
-                    },
-                    'label': dictionary['drawer_group'],
-                    'value': [{[dictionary['no']]: 1}, {[dictionary['yes']]: 0}]
-                });
+                d3plus.form()
+                    .config(config)
+                    .data([{'id': 0, 'label': dictionary['yes']}, {'id': 1, 'label': dictionary['no']}])
+                    .title(dictionary['drawer_group'])
+                    .type('toggle')
+                    .focus(1, function(value) {
+                        viz.depth(value);
+                        viz.draw();
+                    })
+                    .draw();
             }
         }
 
@@ -134,31 +139,37 @@ var loadViz = function(data) {
         if (sizes.length > 1) {
             var options = [];
             sizes.forEach(function(item) {
-                options.push({[dictionary[item]]: item});
+                options.push({'id': item, 'label': dictionary[item]});
             });
 
-            ui.push({
-                'method' : 'size',
-                'type': options.length > 3 ? 'drop' : '',
-                'label': dictionary['sizing'],
-                'value' : options
-            });
+            d3plus.form()
+                .config(config)
+                .data(options)
+                .title(dictionary['sizing'])
+                .type('toggle')
+                .focus(size, function(value) {
+                    viz.size(value);
+                    viz.draw();
+                })
+                .draw();
         }
 
         // Adds year selector
         if (args['year']) {
-            ui.push({
-                'method': function(value) {
-                    if (value == args['year']) {
+            d3plus.form()
+                .config(config)
+                .data([{'id': 1, 'label': args['year']}, {'id': 0, 'label': dictionary['all']}])
+                .title(dictionary['year'])
+                .type('toggle')
+                .focus(args['year'] ? 1 : 0, function(value) {
+                     if (value) {
                         loadViz(data);
                     } else {
                         var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
                         window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
                     }
-                },
-                'value': [args['year'], dictionary['all']],
-                'label': dictionary['year']
-            })
+                })
+                .draw();
         }
 
         // Adds filters selector        
@@ -184,42 +195,23 @@ var loadViz = function(data) {
         filters.forEach(function(filter, j) {
             currentFilters[filter] = -1;
             var options = [];
-            if (!j) {
-                for (id in otherMetadata[filter]) {
-                    var label = otherMetadata[filter][id]['name_' + lang],
-                        option = {};
-                    option[label] = label;
-                    options.push(option);
-                }
-                options.unshift({[dictionary['all']]: -1});
-                ui.push({
-                    'method': function(value) {
-                        viz.data(filteredData(filter, value));
-                        viz.draw();
-                    },
-                    'label': dictionary[filter],
-                    'type': 'drop',
-                    'value': options
-                });
-            } else {
-                for (id in otherMetadata[filter]) {
-                    options.push({'id': otherMetadata[filter][id]['name_' + lang], 'label': otherMetadata[filter][id]['name_' + lang]})
-                }
-                options.unshift({'id': -1, 'label': dictionary['all']});
-                d3plus.form()
-                    .container(d3.select('#controls'))
-                    .data(options)
-                    .id('id')
-                    .text('label')
-                    .title(dictionary[filter])
-                    .type('drop')
-                    .font({'size': 11})
-                    .focus(-1, function(value) {
-                        viz.data(filteredData(filter, value));
-                        viz.draw();
-                    })
-                    .draw();
+            for (id in otherMetadata[filter]) {
+                options.push({'id': otherMetadata[filter][id]['name_' + lang], 'label': otherMetadata[filter][id]['name_' + lang]})
             }
+            options.unshift({'id': -1, 'label': dictionary['all']});
+            
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(options)
+                .title(dictionary[filter])
+                .type('drop')
+                .font({'size': 11})
+                .focus(-1, function(value) {
+                    viz.data(filteredData(filter, value));
+                    viz.draw();
+                })
+                .draw();
         });
 
         return ui;
@@ -276,7 +268,7 @@ var loadViz = function(data) {
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
-        .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
+        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .messages({'branding': true, 'style': 'large'})
         .title(titleHelper(squares))
         .tooltip(tooltipBuilder())
@@ -294,19 +286,11 @@ var loadViz = function(data) {
     }
 
     viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+
+    $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
+    
     viz.draw();
 
-    var addForms = function() {
-        if ($('#d3plus_drawer').length == 0){
-            setTimeout(addForms, 1000);
-            return;
-        }
-
-        $('#d3plus_drawer').append($('#controls').children());
-        $('#controls').remove();
-    };
-
-    addForms();
     toolsBuilder(viz, data, titleHelper().value, uiBuilder());
 };
 

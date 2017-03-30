@@ -84,18 +84,39 @@ tabs = {
             'basic-education-level-tree_map',
         ],
         'health': [
-            'equipments-type-tree_map',
-            'equipments-sus-bond-tree_map',
             'equipments-municipality-tree_map',
-            'establishments-type-tree_map',
-            'establishments-sus-bond-tree_map',
+            'equipments-municipality-map',
+            'equipments-municipality-stacked',
+            'equipments-type-tree_map',
+            'equipments-type-bar',
+            'equipments-type-stacked',
+            'equipments-sus-bond-bar',
             'establishments-municipality-tree_map',
-            'beds-type-tree_map',
-            'beds-sus-bond-tree_map',
+            'establishments-municipality-map',
+            'establishments-municipality-stacked',
+            'establishments-provider-type-tree_map',
+            'establishments-provider-type-stacked',
+            'establishments-unit-type-tree_map',
+            'establishments-unit-type-stacked',
             'beds-municipality-tree_map',
-            'professionals-type-tree_map',
-            'professionals-sus-bond-tree_map',
+            'beds-municipality-map',
+            'beds-municipality-stacked',
+            'beds-bed-type-tree_map',
+            'beds-bed-type-stacked', 
+            'beds-type-speciality-tree_map',
+            'beds-type-speciality-stacked',
+            'beds-type-bar',
+            'beds-sus-bond-bar',
+            'beds-availability-bar',
             'professionals-municipality-tree_map',
+            'professionals-municipality-map',
+            'professionals-municipality-stacked',
+            'professionals-provider-unit-tree_map',
+            'professionals-provider-unit-stacked',
+            'professionals-occupation-tree_map',
+            'professionals-occupation-stacked',  
+            'professionals-bond-tree_map',
+            'professionals-bond-stacked',
         ]
     }
 
@@ -187,7 +208,7 @@ def all(tab):
     if menu:
         graph['menu'] = menu
     if url:
-        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') or tab == 'health' else 'embed/'
         graph['url'] = url_prefix + url
 
     profile = {}
