@@ -118,6 +118,7 @@ var loadViz = function(data) {
                         viz.data(data);
                         viz.id([value, squares]);
                         viz.color(value);
+                        viz.title(titleHelper(value));
                         viz.draw();
                     })
                     .draw();
@@ -146,10 +147,11 @@ var loadViz = function(data) {
                 .config(config)
                 .data(options)
                 .title(dictionary['sizing'])
-                .type('toggle')
+                .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(size, function(value) {
-                    viz.size(value);
-                    viz.draw();
+                    viz.size(value)
+                        .title({'total': {'prefix': dictionary[value] + ': '}})
+                        .draw();
                 })
                 .draw();
         }
@@ -219,14 +221,14 @@ var loadViz = function(data) {
 
     var titleHelper = function(depth) {
         if (!baseTitle)
-            baseTitle = dictionary[size] + ' ' + dictionary['per'] + ' ' + dictionary[squares];
-        var title = titleBuilder(depth, dataset, getUrlArgs(), yearRange);
+            baseTitle = hierarchy ? dictionary[squares] : dictionary[squares] + ' ' + dictionary['per'] + ' <shapes>';
+
+        var title = titleBuilder(baseTitle, baseSubtitle, depth, dataset, getUrlArgs(), yearRange);
 
         return {
             'value': title['title'],
             'font': {'size': 22, 'align': 'left'},
             'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
-            'total': {'font': {'align': 'left'}, 'value': true}
         }
     };
 
@@ -254,8 +256,8 @@ var loadViz = function(data) {
             yearRange = [0, years[0].getFullYear()];
         else
             yearRange = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
-        toolsBuilder(viz, data, titleHelper().value, uiBuilder());
-        viz.title(titleHelper());
+        toolsBuilder(viz, data, titleHelper(hierarchy ? squares : depths[0]).value, uiBuilder());
+        viz.title(titleHelper(hierarchy ? squares : depths[0]));
     };
 
     var viz = d3plus.viz()
@@ -270,7 +272,9 @@ var loadViz = function(data) {
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .messages({'branding': true, 'style': 'large'})
-        .title(titleHelper(squares))
+        .title(titleHelper(hierarchy ? squares : depths[0]))
+        .title({'total': {'font': {'align': 'left'}}})
+        .title({'total': {'prefix': dictionary[size] + ': '}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
         .ui(uiBuilder());

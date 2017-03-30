@@ -301,10 +301,7 @@ var PLURAL = {
     'occupation_family': dictionary['occupations']
 };
 
-var titleBuilder = function(shapes, dataset, filters, yearRange) {
-    var title = baseTitle,
-        subtitle = baseSubtitle;
-
+var titleBuilder = function(title, subtitle, shapes, dataset, filters, yearRange) {
     var formatYearRange = function() {
         if (yearRange[0] && yearRange[1])
             return '(' + yearRange[0] + '-' + yearRange[1] + ')';
@@ -315,7 +312,7 @@ var titleBuilder = function(shapes, dataset, filters, yearRange) {
     if (yearRange[0] || yearRange[1])
         title += ' ' + formatYearRange();
 
-    title = title.replace('<shapes>', PLURAL[shapes]);
+    title = title.replace('<shapes>', PLURAL[shapes] || dictionary[shapes]);
     title = title.charAt(0).toUpperCase() + title.slice(1);
 
     return {'title': title, 'subtitle': subtitle};
