@@ -15,6 +15,47 @@ $(document).ready(function () {
     select2Config.placeholder = 'Separe as palavras-chave por vírgula';
     $('#keywords').select2(select2Config);
 
+    var scholarSummernoteConfig = {
+        lang: lang_code,
+        height: 200,
+        fontNames: [
+            'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New',
+            'Helvetica Neue', 'Helvetica', 'Impact', 'Lucida Grande',
+            'Open Sans', 'Tahoma', 'Times New Roman', 'Verdana'
+        ],
+        toolbar: [
+            ['style', ['style']],
+            ['font', ['bold', 'italic', 'underline', 'clear']],
+            ['fontname', ['fontname']],
+            ['fontsize', ['fontsize']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+    };
+
+    $('#abstract-edit').click(function() {
+        var editor = $('#text-content-editor');
+        $('#abstract-preview').prop('disabled', false);
+        $('#abstract-edit').prop('disabled', true);
+        scholarSummernoteConfig['focus'] = true;
+        editor.summernote(scholarSummernoteConfig);
+    });
+
+    $('#abstract-preview').click(function() {
+        var editor = $('#text-content-editor');
+        $('#abstract-preview').prop('disabled', true);
+        $('#abstract-edit').prop('disabled', false);
+        editor.summernote('destroy');
+        var aHTML = editor.html();
+        $('text_content').val(aHTML);
+    });
+
+    $('#abstract-edit').prop('disabled', true);
+
+    $('#text-content-editor').append($('#text_content').val());
+    $('#text-content-editor').summernote(scholarSummernoteConfig);
+
     function uploadFiles(url, files) {
         var formData = new FormData();
         var file = files[0];
@@ -95,6 +136,18 @@ $(document).ready(function () {
     $('#scholar-form').submit(function() {
         var submitLoading = dataviva.ui.loading('section#scholar');
         submitLoading.text('Enviando... Por favor aguarde.');
+
+        $('#scholar-form > button[type=submit]').prop('disabled', true);
+        $('#summernote').hide();
+
+        $('#text-content-editor').summernote('destroy');
+
+        var htmlAbstract = $('#text-content-editor').html();
+        $('#abstract').val(htmlAbstract);
+        if ($('#text-content-editor').summernote('isEmpty'))
+            $('#abstract').val('');
+
+        return true;
     });
 
 });

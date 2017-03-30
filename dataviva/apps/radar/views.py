@@ -19,8 +19,27 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+def location_service(id_ibge):
+    locations = {
+        1: "region",    #todo
+        2: "state",
+        4: "mesoregion",
+        5: "microregion",
+        7: "municipality"
+    }
+
+    return (locations[len(id_ibge)], id_ibge)
+
 @mod.route('/<dataset>/<polygon>/<label>/<value>')
 def index(dataset, polygon, label, value):
-    filters = urllib.urlencode(request.args.items())
+
+    id_ibge = request.args.get('id_ibge')
+
+    filters = []
+
+    if id_ibge:
+        filters.append(location_service(id_ibge))
+
+    filters = urllib.urlencode(filters)
 
     return render_template('radar/index.html', dataset=dataset, polygon=polygon, label=label, value=value, filters=filters)

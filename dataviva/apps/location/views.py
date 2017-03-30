@@ -26,7 +26,7 @@ from decimal import *
 import sys
 
 
-reload(sys)  
+reload(sys)
 sys.setdefaultencoding('utf8')
 
 mod = Blueprint('location', __name__,
@@ -44,12 +44,16 @@ tabs = {
 
         'wages': [
             'jobs-industry-tree_map',
+            'new-api-jobs-industry-tree_map',
             'jobs-industry-stacked',
             'jobs-occupation-tree_map',
+            'new-api-jobs-occupation-tree_map',
             'jobs-occupation-stacked',
             'wage-industry-tree_map',
+            'new-api-wage-industry-tree_map',
             'wage-industry-stacked',
             'wage-occupation-tree_map',
+            'new-api-wage-occupation-tree_map',
             'wage-occupation-stacked',
         ],
 
@@ -79,6 +83,41 @@ tabs = {
             'basic-education-administrative-dependencie-tree_map',
             'basic-education-level-tree_map',
         ],
+        'health': [
+            'equipments-municipality-tree_map',
+            'equipments-municipality-map',
+            'equipments-municipality-stacked',
+            'equipments-type-tree_map',
+            'equipments-type-bar',
+            'equipments-type-stacked',
+            'equipments-sus-bond-bar',
+            'establishments-municipality-tree_map',
+            'establishments-municipality-map',
+            'establishments-municipality-stacked',
+            'establishments-provider-type-tree_map',
+            'establishments-provider-type-stacked',
+            'establishments-unit-type-tree_map',
+            'establishments-unit-type-stacked',
+            'beds-municipality-tree_map',
+            'beds-municipality-map',
+            'beds-municipality-stacked',
+            'beds-bed-type-tree_map',
+            'beds-bed-type-stacked', 
+            'beds-type-speciality-tree_map',
+            'beds-type-speciality-stacked',
+            'beds-type-bar',
+            'beds-sus-bond-bar',
+            'beds-availability-bar',
+            'professionals-municipality-tree_map',
+            'professionals-municipality-map',
+            'professionals-municipality-stacked',
+            'professionals-provider-unit-tree_map',
+            'professionals-provider-unit-stacked',
+            'professionals-occupation-tree_map',
+            'professionals-occupation-stacked',  
+            'professionals-bond-tree_map',
+            'professionals-bond-stacked',
+        ]
     }
 
 
@@ -108,6 +147,7 @@ def location_depth(bra_id):
 
     return locations[len(bra_id)]
 
+
 def handle_region_bra_id(bra_id):
     return {
         "1": "1",
@@ -116,6 +156,18 @@ def handle_region_bra_id(bra_id):
         "4": "3",
         "5": "4"
     }[bra_id]
+
+
+def _location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
 
 @mod.route('/<bra_id>/graphs/<tab>', methods=['POST'])
 def graphs(bra_id, tab):
@@ -127,7 +179,7 @@ def graphs(bra_id, tab):
     else:
         location = Bra.query.filter_by(id=bra_id).first()
         depth = location_depth(bra_id)
-        id_ibge = str(location.id_ibge)[:6] if location.id_ibge else handle_region_bra_id(location.bra_id[0])
+        id_ibge = _location_service(depth, location)
 
     return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None)
 
@@ -152,11 +204,11 @@ def all(tab):
     url = request.args.get('url')
 
     graph = {}
-    
+
     if menu:
         graph['menu'] = menu
     if url:
-        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') or tab == 'health' else 'embed/'
         graph['url'] = url_prefix + url
 
     profile = {}
@@ -205,13 +257,13 @@ def all(tab):
             body['highest_enrolled_by_university'] is None and body['highest_enrolled_by_basic_course'] is None and \
             body['highest_enrolled_by_major'] is None:
             abort(404)
-    
+
     if tab not in tabs:
         abort(404)
 
     if menu and menu not in tabs[tab]:
         abort(404)
-    
+
     else:
         return render_template('location/index.html',
                             header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
@@ -225,41 +277,74 @@ def index(bra_id, tab):
     menu = request.args.get('menu')
     url = request.args.get('url')
 
+    if bra_id == 'all':
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = _location_service(depth, location)
+        if depth == 'municipality':
+            is_municipality = True
+
+    if location:
+        location_id = location.id
+    else:
+        location_id = None
+
     graph = {}
-    
+
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') or tab == 'health' else 'embed/'
+        graph['url'] = url_prefix + url
+
+    depth = location_depth(bra_id)
+    if depth == 'region':
+        id_ibge = handle_region_bra_id(location.id)
+    elif depth == 'mesoregion':
+        id_ibge = str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    elif depth == 'microregion':
+        id_ibge = str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        id_ibge = location.id_ibge
 
     if not is_municipality:
         tabs['wages'] += [
             'jobs-municipalities-tree_map',
+            'new-api-jobs-municipalities-tree_map',
             'jobs-municipalities-geo_map',
             'jobs-municipalities-stacked',
             'wages-municipalities-tree_map',
+            'new-api-wages-municipalities-tree_map',
             'wages-municipalities-geo_map',
             'wages-municipalities-stacked',
         ]
 
         tabs['wages'] += [
             'jobs-municipality-tree_map',
+            'new-api-jobs-municipality-tree_map',
             'jobs-municipality-stacked',
             'wages-municipality-tree_map',
+            'new-api-wages-municipality-tree_map',
             'wages-municipality-stacked',
         ]
 
         tabs['trade-partner'] += [
             'exports-municipality-tree_map',
+            'new-api-exports-municipality-tree_map',
             'exports-municipality-stacked',
             'imports-municipality-tree_map',
+            'new-api-imports-municipality-tree_map',
             'imports-municipality-stacked',
 
         ]
 
         tabs['education'] += [
             'education-municipality-tree_map',
+            'new-api-education-municipality-tree_map',
             'basic-education-municipality-tree_map',
+            'new-api-basic-education-municipality-tree_map',
         ]
 
     location_service = LocationService(bra_id=bra_id)
@@ -427,4 +512,4 @@ def index(bra_id, tab):
 
     else:
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)

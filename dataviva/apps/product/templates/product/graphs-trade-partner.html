@@ -62,14 +62,14 @@
             </div>
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{%trans%}Port{%endtrans%}</a>
             <div class="collapse" id="exports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=export&value=value&value=kg&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
+                <a href="/{{ g.locale }}/line/secex/port?type=export&value=value&value=kg&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-destination">
                     {%trans%}Line{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-destination">
                     {%trans%}Bar{%endtrans%}
-                <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2016&type=export{% if product.id %}&product={{ product.id }}{% endif %}"
+                <a href="/{{ g.locale }}/tree_map/secex/port/value?values=value+kg&type=export&year=2016{% if product.id %}&product={{ product.id }}{% endif %}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-tree_map'}}" data-parent="#new-api-exports-port">
                     TreeMap new API
                 </a>
@@ -126,14 +126,14 @@
             </div>
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Port{%endtrans%}</a>
             <div class="collapse" id="imports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-port">
+                <a href="/{{ g.locale }}/line/secex/port?type=import&value=value&value=kg&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-destination">
                     {%trans%}Line{%endtrans%}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-port">
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-destination">
                     {%trans%}Bar{%endtrans%}
-                  <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2016&type=import{% if product.id %}&product={{ product.id }}{% endif %}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/tree_map/secex/port/value?values=value+kg&type=import&year=2016{% if product.id %}&product={{ product.id }}{% endif %}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-tree_map'}}" data-parent="#new-api-imports-port">
                     TreeMap new API
                 </a>

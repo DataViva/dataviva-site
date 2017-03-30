@@ -14,6 +14,8 @@ from dataviva.utils.upload_helper import log_operation, save_b64_image, delete_s
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
+import flask_whooshalchemy
+
 
 mod = Blueprint('blog', __name__,
                 template_folder='templates',
@@ -52,9 +54,14 @@ def active_posts_subjects(language):
 def index(page=1):
     posts_query = Post.query.filter_by(active=True, language=g.locale)
     posts = []
-
+    search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     subject = request.args.get('subject')
-    if subject:
+    
+    if search:
+        posts = posts_query.whoosh_search(search).order_by(
+            desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_posts = len(posts_query.whoosh_search(search).all())
+    elif subject:
         posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).order_by(
             desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_posts = posts_query.filter(
@@ -72,6 +79,7 @@ def index(page=1):
     return render_template('blog/index.html',
                            posts=posts,
                            subjects=active_posts_subjects(g.locale),
+                           search_result=search,
                            pagination=pagination)
 
 

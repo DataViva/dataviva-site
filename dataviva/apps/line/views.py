@@ -62,6 +62,8 @@ def index(dataset, line):
     product = request.args.get('product')
     id_ibge = request.args.get('id_ibge')
     wld = request.args.get('wld')
+    options = request.args.get('options')
+    subtitle = request.args.get('subtitle', '')
 
     filters = []
 
@@ -79,4 +81,5 @@ def index(dataset, line):
 
     filters = urllib.urlencode(filters)
 
-    return render_template('line/index.html', dataset=dataset, line=line, filters=filters, values=values, type=type)
+    return render_template('line/index.html', dataset=dataset, line=line, filters=filters, values=values, options=options, subtitle=subtitle, type=type)
+    

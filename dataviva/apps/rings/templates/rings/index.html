@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="{{ g.locale }}">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" media="all" href="/static/css/graphs-tools.css" />
+
+    <script type="text/javascript" src="/static/js/libs/d3.min.js"></script>
+    <script type="text/javascript" src="/static/js/libs/d3plus.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+
+    <script src="/static/js/modules/embed/utils.dataviva.js"></script>
+    <script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
+    <script type="text/javascript" src="/static/js/libs/async.js"></script>
+    <script src="/static/js/modules/embed/utils.general.js"></script>
+
+    <style type="text/css">
+        body {
+            background: none;
+        }
+    </style>
+</head>
+
+<body>
+    {% include "graphs/tools.html" %}
+
+    <div id="rings"
+        class="embed-responsive responsive-wrapper"
+        dataset="{{ dataset }}"
+        circles="{{ circles }}"
+        focus="{{ focus }}"
+        filters="{{ filters }}"
+        graph-title="{{ title }}"
+        graph-subtitle="{{ subtitle }}">
+    </div>
+    <div id="mask" class="loading"></div>
+
+    <script type="text/javascript">
+        var dictionary = {{ dictionary|safe }};
+    </script>
+
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+    <script type="text/javascript" src="/static/js/modules/rings.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/tools.js"></script>
+    <script src="/static/js/plugins/jspdf/FileSaver.js"></script>
+    <script src="/static/js/plugins/jspdf/jspdf.js"></script>
+    <script src="/static/js/plugins/jspdf/addimage.js"></script>
+</body>

@@ -27,7 +27,7 @@
                 </p>
             </div>
             <p>
-                {{ article.abstract }}
+                {{ article.abstract|safe }}
             </p>
             <p>
                 {% if g.user.is_authenticated %}

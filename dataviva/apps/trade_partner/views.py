@@ -27,12 +27,73 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
+def location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+
+def location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
 
 @mod.route('/<wld_id>/graphs/<tab>', methods=['POST'])
 def graphs(wld_id, tab):
     trade_partner = Wld.query.filter_by(id=wld_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('trade_partner/graphs-' + tab + '.html', trade_partner=trade_partner, location=location, graph=None)
+
+    bra_id = request.args.get('bra_id')
+    if not bra_id:
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = location_service(depth, location)
+
+    return render_template('trade_partner/graphs-' + tab + '.html', trade_partner=trade_partner, location=location, graph=None, id_ibge=id_ibge)
 
 
 @mod.route('/<wld_id>', defaults={'tab': 'general'})
@@ -56,6 +117,15 @@ def index(wld_id, tab):
     location = Bra.query.filter_by(id=bra_id).first()
     max_year_query = db.session.query(
         func.max(Ymw.year)).filter_by(wld_id=wld_id)
+
+    bra_id = bra_id if bra_id != 'all' else None
+
+    if not bra_id:
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = location_service(depth, location)
 
     if bra_id:
         trade_partner_service = TradePartner(wld_id, bra_id)
@@ -184,4 +254,4 @@ def index(wld_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
-    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location, tab=tab, graph=graph)
+    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location, tab=tab, graph=graph, id_ibge=id_ibge)

@@ -79,7 +79,7 @@
       <form id="svgform" action="/{{g.locale}}/embed/download/" method="post">
           {{ form.hidden_tag() }}
       </form>
-    
+
     <script type="text/javascript">
 
       if (!window.location.origin) {
@@ -515,7 +515,7 @@
         return title;
 
       }
-      
+
       app.build.title = format_title(app.build.title);
       app.viz.title(app.build.title);
       required_bras();
@@ -2691,7 +2691,7 @@
             pdf.addImage(canvas, 'JPEG', 0,0,w,h)
             pdf.save(title);
             downloadDone();
-          } 
+          }
           else {
             img_download = canvas.toDataURL("image/png");
             var download = document.createElement('a');
@@ -2700,7 +2700,7 @@
             download.click();
             downloadDone();
           }
-        } 
+        }
         else{
           form['data'].value = svg_xml;
           // Submit the <FORM> to the server.
@@ -2975,7 +2975,7 @@
 
                 d3.select(pid).append("h3")
                   .text(dataviva.format.text("embed_url"))
-  
+
                 // make input box with embed iframe
                 d3.select(pid).append("input")
                   .attr("type", "text")
