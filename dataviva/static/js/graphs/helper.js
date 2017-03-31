@@ -240,43 +240,6 @@ dictionary['occupation_family'] = lang == 'en' ? 'Family' : 'Família';
 dictionary['occupation_group'] = lang == 'en' ? 'Main Group' : 'Grande Grupo';
 dictionary['establishments'] = lang == 'en' ? 'Total Establishments' : 'Total de Estabelecimentos';
 dictionary['Creating URL'] = lang == 'en' ? 'Creating URL' : 'Criando URL';
-dictionary['sus_bond'] = lang == 'en' ? 'SUS Bond' : 'Vínculo com o SUS';
-dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
-dictionary['ambulatory_care_level'] = lang == 'en' ? 'Ambulatory Care Level' : 'Nível de Atenção Ambulatorial';
-dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento Ambulatorial';
-dictionary['hospital_care_level'] = lang == 'en' ? 'Hospital Care Level' : 'Nível de atenção hospitalar';
-dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
-dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
-dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
-dictionary['sus_healthcare_professional'] = lang == 'en' ? 'SUS Professionals' : 'Profissionais do SUS';
-dictionary['tax_withholding'] = lang == 'en' ? 'Withholding Tax' : 'Retenção Tributária';
-dictionary['emergency_facility'] = lang == 'en' ? 'Emergency Facilities' : 'Instalações Físicas de Urgência e Emergência';
-dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
-dictionary['neonatal_unit_facility'] = lang == 'en' ? 'Neonatal Unit Facilities' : 'Instalações de Unidade Neonatal';
-dictionary['obstetrical_center_facility'] = lang == 'en' ? 'Obstetrical Center Facilities' : 'Instalação Fisica de Centro Obstétrico ';
-dictionary['surgery_center_facility'] = lang == 'en' ? 'Surgery Center Facilities' : 'Instalação Física de Centro Cirúrgico';
-dictionary['selective_waste_collection'] = lang == 'en' ? 'Selective Waste Collection' : 'Coleta Seletiva de Rejeitos';
-dictionary['facilities'] = lang == 'en' ? 'Facilities' : 'Instalações';
-dictionary['hospital_attention'] = lang == 'en' ? 'Hospital attention' : 'Nível de Atenção Hospitalar';
-dictionary['equipments'] = lang == 'en' ? 'Total Equipments' : 'Total de Equipamentos';
-dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
-dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
-dictionary['bed_type'] = lang == 'en' ? 'Bed type' : 'Tipo de leito';
-dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Type Per Speciality' : 'Tipo de Especialidade do Leito';
-dictionary['professional_link'] = lang == 'en' ? 'Link' : 'Vinculação';
-dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory attention' : 'Nível de Atenção Ambulatorial';
-dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de Hierarquia';
-dictionary['cnes_establishment'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['cnes_bed'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['cnes_professional'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
-dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
-dictionary['number_non_sus_bed'] = lang == 'en' ? 'Non SUS Beds' : 'Leitos não SUS';
-dictionary['including'] = lang == 'en' ? 'Including' : 'Inclui';
-dictionary['professionals'] = lang == 'en' ? 'Total Professionals' : 'Total de Profissionais';
-dictionary['drawer_color_by'] = lang == 'en' ? 'Group by' : 'Agregar por';
-dictionary['number_existing_contract'] = lang == 'en' ? 'Existing Contracts Number' : 'Quantidade de contratos existentes';
 dictionary['drawer_group'] = lang == 'en' ? 'Group' : 'Agrupar';
 dictionary['yes'] = lang == 'en' ? 'Yes' : 'Sim';
 dictionary['no'] = lang == 'en' ? 'No' : 'Não';
@@ -284,6 +247,57 @@ dictionary['drawer_filter'] = lang == 'en' ? 'Filter' : 'Filtrar';
 dictionary['Filter by'] = lang == 'en' ? 'Filter by' : 'Filtrar por';
 dictionary['kg'] = 'KG';
 dictionary['id'] = 'ID';
+
+// CNES
+dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
+dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
+
+// CNES BEDS
+dictionary['bed_type'] = lang == 'en' ? 'Bed type' : 'Tipo de leito';
+dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed type per specialty' : 'Tipo de especialidade do leito';
+dictionary['cnes_bed'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
+dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
+dictionary['number_non_sus_bed'] = lang == 'en' ? 'Non SUS Beds' : 'Leitos não SUS';
+dictionary['number_existing_contract'] = lang == 'en' ? 'Existing contracts number' : 'Quantidade de contratos existentes';
+
+// CNES PROFESSIONALS
+dictionary['sus_healthcare_professional'] = lang == 'en' ? 'SUS Professionals' : 'Profissionais do SUS';
+dictionary['professional_link'] = lang == 'en' ? 'Link' : 'Vinculação';
+dictionary['cnes_professional'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['professionals'] = lang == 'en' ? 'Total Professionals' : 'Total de Profissionais';
+dictionary['other_hours_worked'] = lang == 'en' ? 'Other Hours Worked' : 'Outras horas trabalhadas';
+dictionary['hospital_hour'] = lang == 'en' ? 'Hospital Hours' : 'Horas Hospitalares';
+dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulatoriais';
+
+// CNES ESTABLISHMENTS
+dictionary['sus_bond'] = lang == 'en' ? 'SUS Bond' : 'Vínculo com o SUS';
+dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
+dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento ambulatorial';
+dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
+dictionary['tax_withholding'] = lang == 'en' ? 'Withholding Tax' : 'Retenção Tributária';
+dictionary['emergency_facility'] = lang == 'en' ? 'Emergency Facilities' : 'Instalações Físicas de Urgência e Emergência';
+dictionary['neonatal_unit_facility'] = lang == 'en' ? 'Neonatal Unit Facilities' : 'Instalações de Unidade Neonatal';
+dictionary['obstetrical_center_facility'] = lang == 'en' ? 'Obstetrical Center Facilities' : 'Instalação Fisica de Centro Obstétrico ';
+dictionary['surgery_center_facility'] = lang == 'en' ? 'Surgery Center Facilities' : 'Instalação Fisica de Centro Cirúrgico';
+dictionary['selective_waste_collection'] = lang == 'en' ? 'Selective Waste Collection' : 'Coleta seletiva de rejeitos';
+dictionary['hospital_attention'] = lang == 'en' ? 'Hospital attention' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory attention' : 'Nível de Atenção Ambulatorial';
+dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de hierarquia';
+dictionary['cnes_establishment'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['hospital_attention'] = lang == 'en' ? 'Level Of Hospital Care' : 'Nível de atenção hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Level Of Ambulatory Care' : 'Nível de atenção ambulatorial';
+dictionary['ambulatory_care_facilities'] = lang == 'en' ? 'Physical Facilities Of Outpatient Care' : 'Instalações Físicas de Atendimento ambulatorial';
+dictionary['hospital_care'] = lang == 'en' ? 'Hospital Care' : 'Atendimento Hospitalar';
+dictionary['dependency_level'] = lang == 'en' ? 'Dependency Level' : 'Nível de dependência';
+
+// CNES EQUIPMENTS
+dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
+dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
+dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
+dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
+dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
 
 var PLURAL = {
     'municipality': dictionary['municipalities'],
@@ -301,10 +315,7 @@ var PLURAL = {
     'occupation_family': dictionary['occupations']
 };
 
-var titleBuilder = function(shapes, dataset, filters, yearRange) {
-    var title = baseTitle,
-        subtitle = baseSubtitle;
-
+var titleBuilder = function(title, subtitle, shapes, dataset, filters, yearRange) {
     var formatYearRange = function() {
         if (yearRange[0] && yearRange[1])
             return '(' + yearRange[0] + '-' + yearRange[1] + ')';
@@ -315,7 +326,7 @@ var titleBuilder = function(shapes, dataset, filters, yearRange) {
     if (yearRange[0] || yearRange[1])
         title += ' ' + formatYearRange();
 
-    title = title.replace('<shapes>', PLURAL[shapes]);
+    title = title.replace('<shapes>', PLURAL[shapes] || dictionary[shapes]);
     title = title.charAt(0).toUpperCase() + title.slice(1);
 
     return {'title': title, 'subtitle': subtitle};

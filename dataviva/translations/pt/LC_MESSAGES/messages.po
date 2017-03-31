@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-03-28 19:44-0300\n"
+"POT-Creation-Date: 2017-03-30 16:25-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -899,12 +899,12 @@ msgstr "Finalizar edição"
 #: dataviva/apps/blog/templates/blog/_form.html:79
 #: dataviva/apps/news/templates/news/_form.html:79
 msgid "Call Image Source"
-msgstr ""
+msgstr "Fonte da Imagem de Chamada"
 
 #: dataviva/apps/blog/templates/blog/_form.html:79
 #: dataviva/apps/news/templates/news/_form.html:79
 msgid "optional"
-msgstr ""
+msgstr "opcional"
 
 #: dataviva/apps/blog/templates/blog/_form.html:84
 #: dataviva/apps/calls/templates/calls/new.html:7
@@ -1921,7 +1921,7 @@ msgstr "Nível de Ensino"
 #: dataviva/apps/location/templates/location/graphs-health.html:5
 #, fuzzy
 msgid "Equipments by"
-msgstr "Equipamentos per"
+msgstr "Equipamentos por"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:46
 #, fuzzy

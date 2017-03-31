@@ -283,6 +283,8 @@ def index(bra_id, tab):
     else:
         depth = location_depth(bra_id)
         id_ibge = _location_service(depth, location)
+        if depth == 'municipality':
+            is_municipality = True
 
     if location:
         location_id = location.id
@@ -294,7 +296,7 @@ def index(bra_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') or tab == 'health' else 'embed/'
         graph['url'] = url_prefix + url
 
     depth = location_depth(bra_id)
