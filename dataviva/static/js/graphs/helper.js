@@ -332,6 +332,17 @@ var titleBuilder = function(title, subtitle, shapes, dataset, filters, yearRange
     return {'title': title, 'subtitle': subtitle};
 };
 
+dictionary['time-resolution'] =  lang == 'en' ? 'Time Resolution' : 'Resolução temporal';
+dictionary['Order'] =  lang == 'en' ? 'Order' : 'Ordem';
+dictionary['sort'] =  lang == 'en' ? 'Sort' : 'Ordenar';
+dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Particiação de Mercado';
+dictionary['y-axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
+dictionary['desc'] = lang == 'en' ? 'Descending' : 'Descendente';
+dictionary['asc'] = lang == 'en' ? 'Ascending' : 'Ascendente';
+dictionary['value'] = lang == 'en' ? 'Value' : 'Valor';
+dictionary['name'] = lang == 'en' ? 'Name' : 'Nome';
+dictionary['unknown-region'] = lang == 'en' ? 'Unknown Region' : 'Região Desconhecida';
+
 var getUrlArgs = function() {
     var args = {};
     if (window.location.search) {
