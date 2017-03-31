@@ -39,6 +39,9 @@ var buildData = function(apiData) {
             for (key in calcBasicValues) {
                 dataItem[key] = calcBasicValues[key](dataItem);   
             }
+            
+            if (HAS_ICONS.indexOf(group) >= 0)
+                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
 
             depths.forEach(function(depth) {
                 dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
@@ -47,9 +50,6 @@ var buildData = function(apiData) {
             if(depths.indexOf(area) == -1) {
                 dataItem[area] = metadata[area][dataItem[area]]['name_' + lang];
             }
-            
-            if (HAS_ICONS.indexOf(group) >= 0)
-                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
             
             if (dataItem.microregion){
                 dataItem.microregion = dataItem.microregion + ' ';
@@ -336,7 +336,7 @@ var loadViz = function (data){
         .tooltip(tooltipBuilder())
         .ui(uiBuilder())
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
-        .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
+        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .format(formatHelper())
 
         if (group) {
