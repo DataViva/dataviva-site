@@ -79,8 +79,13 @@ def industry_service(industry):
 
 @mod.route('/<dataset>/<area>/<value>')
 def index(dataset, area, value):
+
+	group = request.args.get('group', '')
+	type = request.args.get('type', '')
+	depths = request.args.get('depths', '')
+	values = request.args.get('values', value)	
+
 	filters = []
-	
 	for key, value in request.args.items():
 		if key not in ['depths', 'values', 'group'] and value:
 			if key == 'product':
@@ -98,20 +103,12 @@ def index(dataset, area, value):
 
 	filters = urllib.urlencode(filters)
 
-	group = request.args.get('group') or ''
-	type = request.args.get('type') or ''
-
-	params = {}
-	for param in ['depths', 'values']:
-		params[param] = request.args.get(param, '')
-
-
 	return render_template('stacked/index.html',
 							dataset=dataset,
 							area=area,
 							type=type,
 							group=group,
-							depths=params['depths'],
-							values=params['values'],
+							depths=depths,
+							values=values,
 							filters=filters,
 							dictionary=json.dumps(dictionary()))	

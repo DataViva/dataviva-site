@@ -2,7 +2,8 @@ var stacked = document.getElementById('stacked'),
     dataset = stacked.getAttribute('dataset'),
     filters = stacked.getAttribute('filters'),
     area = stacked.getAttribute('area'),
-    depths = DEPTHS[dataset][area],
+    args = getUrlArgs(),
+    depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][area] || [area],
     group = depths[0],
     values = stacked.getAttribute('values').split(' '),
     type = stacked.getAttribute('type').split(' '),
@@ -277,12 +278,13 @@ var loadViz = function (data){
                 .draw();
         });
 
-        ui.push({
-            "value": ['bed_type', 'unit_type'],
-            "method": function(value){
-                viz.id(value).color(value).draw()
-            }
-        });
+        // TODO: change depths
+        // ui.push({
+        //     "value": ['bed_type', 'unit_type'],
+        //     "method": function(value){
+        //         viz.id(value).color(value).draw()
+        //     }
+        // });
 
         return ui;
     }
