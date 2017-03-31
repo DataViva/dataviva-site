@@ -39,6 +39,9 @@ var buildData = function(apiData) {
             for (key in calcBasicValues) {
                 dataItem[key] = calcBasicValues[key](dataItem);   
             }
+            
+            if (HAS_ICONS.indexOf(group) >= 0)
+                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
 
             depths.forEach(function(depth) {
                 dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
@@ -47,9 +50,6 @@ var buildData = function(apiData) {
             if(depths.indexOf(area) == -1) {
                 dataItem[area] = metadata[area][dataItem[area]]['name_' + lang];
             }
-            
-            if (HAS_ICONS.indexOf(group) >= 0)
-                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
             
             if (dataItem.microregion){
                 dataItem.microregion = dataItem.microregion + ' ';
