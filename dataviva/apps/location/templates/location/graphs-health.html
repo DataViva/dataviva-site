@@ -27,11 +27,11 @@
                     TreeMap
                 </a>
                 <a href="/{{ g.locale }}/stacked/cnes_equipment/equipment_type/equipment_quantity?&values=equipment_quantity+equipment_quantity_in_use&depths=equipment_type+equipment_code+health_region+unit_type+sus_availability_indicator&filters=unit_type+sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}} data-parent="#equipments-type">
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}}" data-parent="#equipments-type">
                     {% trans %}Stacked{% endtrans %}
                 </a>
                 <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code,unit_type,sus_availability_indicator?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}} data-parent="#equipments-type">
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}}" data-parent="#equipments-type">
                     {% trans %}Bar{% endtrans %}
                 </a>
             </div>
