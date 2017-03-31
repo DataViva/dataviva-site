@@ -298,6 +298,7 @@ dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
 dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['sus_availability_indicator'] = lang == 'en' ? 'Sus Availability Indicator' : 'Indicador de Disponibilidade para o SUS';
 
 var PLURAL = {
     'municipality': dictionary['municipalities'],
@@ -331,6 +332,17 @@ var titleBuilder = function(title, subtitle, shapes, dataset, filters, yearRange
 
     return {'title': title, 'subtitle': subtitle};
 };
+
+dictionary['time-resolution'] =  lang == 'en' ? 'Time Resolution' : 'Resolução temporal';
+dictionary['Order'] =  lang == 'en' ? 'Order' : 'Ordem';
+dictionary['sort'] =  lang == 'en' ? 'Sort' : 'Ordenar';
+dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Particiação de Mercado';
+dictionary['y-axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
+dictionary['desc'] = lang == 'en' ? 'Descending' : 'Descendente';
+dictionary['asc'] = lang == 'en' ? 'Ascending' : 'Ascendente';
+dictionary['value'] = lang == 'en' ? 'Value' : 'Valor';
+dictionary['name'] = lang == 'en' ? 'Name' : 'Nome';
+dictionary['unknown-region'] = lang == 'en' ? 'Unknown Region' : 'Região Desconhecida';
 
 var getUrlArgs = function() {
     var args = {};

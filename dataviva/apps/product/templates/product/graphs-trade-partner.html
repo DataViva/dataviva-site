@@ -30,6 +30,10 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-stacked'}}" data-parent="#exports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
+                <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=export{% if product.id %}&product={{ product.id }}{% endif %}{% if location %}&id_ibge={{ location.id_ibge }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-municipality">
+                    New Stacked
+                </a>
             </div>
             {% endif %}
             <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">{%trans%}Destination{%endtrans%}</a>
@@ -47,8 +51,13 @@
                     {%trans%}Line{%endtrans%}
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color"
+
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
                     {%trans%}Stacked{%endtrans%}
+                </a>
+                <a href="/{{ g.locale }}/stacked/secex/country/value?values=value+kg&group=continent&depths=continent+country&type=export{% if product.id %}&product={{ product.id }}{% endif %}{% if location %}&id_ibge={{ location.id_ibge }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-stacked'}}" data-parent="#new-api-exports-destination">
+                    New Stacked
                 </a>
             </div>
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{%trans%}Port{%endtrans%}</a>
@@ -85,6 +94,10 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-municipality-stacked'}}" data-parent="#imports-municipality">
                     {%trans%}Stacked{%endtrans%}
                 </a>
+                <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=import{% if product.id %}&product={{ product.id }}{% endif %}{% if location %}&id_ibge={{ location.id_ibge }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-stacked'}}" data-parent="#new-api-imports-municipality">
+                    New Stacked
+                </a>
             </div>
 
             {% endif %}
@@ -105,6 +118,10 @@
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
                     {%trans%}Stacked{%endtrans%}
+                </a>
+                <a href="/{{ g.locale }}/stacked/secex/country/value?values=value+kg&group=continent&depths=continent+country&type=import{% if product.id %}&product={{ product.id }}{% endif %}{% if location   %}&id_ibge={{ location.id_ibge }}{% endif %}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-stacked'}}" data-parent="#new-api-imports-origin">
+                    New Stacked
                 </a>
             </div>
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Port{%endtrans%}</a>
