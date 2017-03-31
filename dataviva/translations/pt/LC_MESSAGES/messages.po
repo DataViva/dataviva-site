@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-03-31 16:36-0300\n"
+"POT-Creation-Date: 2017-03-31 16:59-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -1944,7 +1944,7 @@ msgstr "Instalações"
 #: dataviva/apps/location/templates/location/graphs-health.html:99
 #, fuzzy
 msgid "Beds by"
-msgstr "Empregos por"
+msgstr "Leitos por"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:117
 #, fuzzy
