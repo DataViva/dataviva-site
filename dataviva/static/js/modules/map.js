@@ -141,14 +141,8 @@ var loadViz = function(data){
     };
 
     var titleHelper = function(value) {
-        var title = {};
-            if(dataset.match(/^cnes_/)) {
-                title = dictionary[value] + ' ' + dictionary['per'] + ' ' + dictionary['state'];
-            } else {
-                title = titleBuilder(depth, dataset, getUrlArgs(), yearRange);
-            }
         return {
-            'value':  title,
+            'value':  dictionary[value] + ' ' + dictionary['per'] + ' ' + dictionary['state'],
             'font': {'size': 22, 'align': 'left'},
             'total': {'prefix': dictionary[value] + ': '}
         }
