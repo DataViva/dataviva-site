@@ -71,7 +71,7 @@ var DEPTHS = {
        'administrative_sphere': ['administrative_sphere']
    },
    'cnes_equipment': {
-        'equipment_type': ['equipment_type'],
+        'equipment_type': ['health_region', 'unit_type'],
         'municipality': ['health_region', 'equipment_type', 'unit_type']
    },
     'cnes_bed': {
@@ -294,6 +294,7 @@ dictionary['dependency_level'] = lang == 'en' ? 'Dependency Level' : 'Nível de 
 
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
+dictionary['equipment_code'] = lang == 'en' ? 'Equipment Code' : 'Código de Equipamento';
 dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
@@ -316,7 +317,7 @@ var PLURAL = {
     'occupation_family': dictionary['occupations']
 };
 
-var titleBuilder = function(title, subtitle, shapes, dataset, filters, yearRange) {
+var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {
     var formatYearRange = function() {
         if (yearRange[0] && yearRange[1])
             return '(' + yearRange[0] + '-' + yearRange[1] + ')';
@@ -327,7 +328,9 @@ var titleBuilder = function(title, subtitle, shapes, dataset, filters, yearRange
     if (yearRange[0] || yearRange[1])
         title += ' ' + formatYearRange();
 
-    title = title.replace('<shapes>', PLURAL[shapes] || dictionary[shapes]);
+    for (attr in attrs) {
+        title = title.replace('<' + attr + '>', PLURAL[attrs[attr]] || dictionary[attrs[attr]]);
+    }
     title = title.charAt(0).toUpperCase() + title.slice(1);
 
     return {'title': title, 'subtitle': subtitle};

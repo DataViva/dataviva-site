@@ -10,9 +10,13 @@ var stacked = document.getElementById('stacked'),
     lang = document.documentElement.lang;
     basicValues = BASIC_VALUES[dataset],
     calcBasicValues = CALC_BASIC_VALUES[dataset],
+    yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
     metadata = {},
     currentFilters = {},
-    stackedFilters = getUrlArgs()['filters'] ? getUrlArgs()['filters'].split('+') : [];
+    currentTitleAttrs = {'area': area, 'value': values[0]},
+    baseTitle = '',
+    baseSubtitle = '',
+    stackedFilters = args['filters'] ? args['filters'].split('+') : [];
 
 var buildData = function(apiData) {
     
@@ -62,7 +66,6 @@ var buildData = function(apiData) {
 
             data.push(dataItem);
         } catch(e) {
-            debugger
         };
     });
 
@@ -70,16 +73,6 @@ var buildData = function(apiData) {
 }
 
 var loadViz = function (data){
-
-    var titleBuilder = function() {
-        return {
-            'value': 'Title',
-            'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}, 'value': 'Subtitle'},
-            'total': {'font': {'align': 'left'}, 'value': true}
-        }
-    };
-
     var hasIdLabel = function() {
         return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(area);
     };
@@ -218,7 +211,7 @@ var loadViz = function (data){
             });
         }
 
-        if(values.length > 1) {
+        if (values.length > 1) {
             d3plus.form()
                 .config(config)
                 .container(d3.select('#controls'))
@@ -232,7 +225,11 @@ var loadViz = function (data){
                 .type('drop')
                 .font({'size': 11})
                 .focus(-1, function(value) {
-                    viz.y(value).draw();
+                    currentTitleAttrs['value'] = value;
+                    viz.y(value)
+                        .title({'total': {'prefix': dictionary[value] + ': '}})
+                        .title(titleHelper())
+                        .draw();
                 })
                 .draw();
         }
@@ -289,6 +286,21 @@ var loadViz = function (data){
         return ui;
     }
 
+    var titleHelper = function() {
+        if (!baseTitle) {
+            baseTitle = '<value> ' + dictionary['per'] + ' <area>';
+        }
+
+        var title = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+
+        return {
+            'value': title['title'],
+            'font': {'size': 22, 'align': 'left'},
+            'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
+        }
+    };
+
+
     var yAxisLabelBuilder = function (type) {
         if (type == 'export')
         {
@@ -330,14 +342,19 @@ var loadViz = function (data){
         .time("year")
         .background("transparent")
         .shape({"interpolate": "monotone"})
-        .title({
-            "sub": {"value" : "Inserir sub-título", "font": {"align": "left"}}
-        })
+        .title(titleHelper())
+        .title({'total': {'font': {'align': 'left'}}})
+        .title({'total': {'prefix': dictionary[values[0]] + ': '}})
         .tooltip(tooltipBuilder())
+        .messages({'branding': true, 'style': 'large'})
         .ui(uiBuilder())
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .format(formatHelper())
+        .depth(0, function(d) {
+            currentTitleAttrs['area'] = depths[d];
+            viz.title(titleHelper());
+        })
 
         if (group) {
             viz.color(group);
@@ -353,7 +370,7 @@ var loadViz = function (data){
 
         viz.draw()
 
-        toolsBuilder(stacked.id, viz, data, titleBuilder().value, uiBuilder());
+        toolsBuilder(stacked.id, viz, data, titleBuilder(baseTitle, baseSubtitle, {}, dataset, getUrlArgs(), yearRange).value, uiBuilder());
 }
 
 var getUrls = function() {

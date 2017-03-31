@@ -10,7 +10,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-map'}}" data-parent="#equipments-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
-                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/municipality/equipments?hierarchy=false&year=2015"
+                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/municipality/equipments?hierarchy=false&year=2015{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                      target="graphs-frame-health" class="list-group-item {{ 'selected' if graph.menu == 'equipments-municipality-treemap' }}" data-parent="#equipments-municipality">
                       TreeMap
                   </a>
@@ -55,7 +55,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-tree_map'}}" data-parent="#establishments-municipality">
                       TreeMap
                   </a>
-                  <a href="/{{ g.locale }}/stacked/cnes_establishment/municipality/establishments?values=establishments&depths=municipality+unit_type+provider_type+sus_bond+ambulatory_attention+hospital_attention&filters=sus_bond+ambulatory_attention+hospital_attentionhospital_attention{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                  <a href="/{{ g.locale }}/stacked/cnes_establishment/municipality/establishments?values=establishments&depths=municipality+unit_type+provider_type+sus_bond+ambulatory_attention+hospital_attention&filters=sus_bond+ambulatory_attention+hospital_attention{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-stacked'}}" data-parent="#establishments-municipality">
                       {% trans %}Stacked{% endtrans %}
                   </a>
@@ -195,17 +195,6 @@
                 </a>
                 <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_group/other_hours_worked?values=other_hours_worked+hospital_hour+ambulatory_hour&depths=occupation_group+occupation_family+sus_healthcare_professional+health_region&filters=sus_healthcare_professional+health_region{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
-                    {% trans %}Stacked{% endtrans %}
-                </a>
-            </div>
-            <a href="#professionals-bond" class="list-group-item" data-toggle="collapse" data-parent="#professionals-bond">{% trans %}Bond{% endtrans %}</a>
-            <div class="collapse" id="professionals-bond">
-                <a href="/{{ g.locale }}/tree_map/cnes_professional/professional_link/professionals?year=2015&hierarchy=false{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-bond-tree_map'}}" data-parent="#professionals-bond">
-                    TreeMap
-                </a>
-                <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_group/professionals?values=professionals&depths=occupation_group+occupation_family+sus_healthcare_professional+health_region&filters=sus_healthcare_professional+health_region{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-bond-tree_map'}}" data-parent="#professionals-bond">
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
