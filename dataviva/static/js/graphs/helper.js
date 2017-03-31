@@ -298,6 +298,7 @@ dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
 dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['sus_availability_indicator'] = lang == 'en' ? 'Sus Availability Indicator' : 'Indicador de Disponibilidade para o SUS';
 
 var PLURAL = {
     'municipality': dictionary['municipalities'],
