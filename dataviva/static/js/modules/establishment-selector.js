@@ -3,6 +3,7 @@ var dictionary = {};
 var establishments_xhr;
 
 dictionary['establishments'] = lang == 'en' ? 'Establishments' : 'Estabelecimentos';
+dictionary['select'] = lang == 'en' ? 'Select' : 'Selecione';
 dictionary['search-input-placeholder'] = lang == 'en' ? 'SEARCH' : 'PESQUISE';
 dictionary['search-input-helper'] = lang == 'en' ? 'Press ENTER to search' : 'Aperte ENTER para pesquisar';
 dictionary['no-data-clusterize'] = lang == 'en' ? 'No data found' : 'Nenhum registro encontrado';
@@ -34,7 +35,7 @@ var EstablishmentSelector = (function(){
 		        '<div class="search_data">{{municipality}}</div>' +
 		    '</div>' +
 		    '<a href="/en/health/{{id}}" class="m-l-xs btn btn-primary btn-outline btn-toggle" style="position: absolute; right: 15px; top: 13px;">' + 
-		        'Selecione' + 
+		        dictionary['select'] + 
 		    '</a>' + 
 		'</div>' +
 		'<div class="d3plus_tooltip_data_seperator"></div>';
