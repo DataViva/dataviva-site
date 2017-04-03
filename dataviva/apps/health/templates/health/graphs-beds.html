@@ -4,7 +4,7 @@
         <div class="list-group panel">            
             <h4>{% trans %}Beds per{% endtrans %}</h4>
             
-            <a href="#beds-bed-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-bed-type">{% trans %}Bed Type{% endtrans %} {% trans %}and{% endtrans %} {% trans %}Specialty{% endtrans %}</a>
+            <a href="#beds-bed-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-bed-type">{% trans %}Bed Type/Specialty{% endtrans %}</a>
             <div class="collapse" id="beds-bed-type">
                 <a href="/{{ g.locale }}/tree_map/cnes_bed/bed_type_per_specialty/beds?depths=bed_type+bed_type_per_specialty&zoom=true&sizes=beds+number_sus_bed+number_non_sus_bed&establishment={{ establishment.id }}"
                    target="graphs-frame-beds" class="list-group-item {{ 'selected' if graph.menu == 'beds-bed-type-tree_map' or not graph.menu }}" data-parent="#beds-bed-type">

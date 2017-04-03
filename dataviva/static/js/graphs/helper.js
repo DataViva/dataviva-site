@@ -279,7 +279,7 @@ dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
 // CNES BEDS
 dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
 dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
-dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Type Per Specialty' : 'Tipo de Especialidade do Leito';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Type Per Specialty' : 'Tipo de Leito por Especialidade';
 dictionary['cnes_bed'] = lang == 'en' ? 'Datasus' : 'Datasus';
 dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
@@ -363,7 +363,7 @@ var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange)
 dictionary['time-resolution'] =  lang == 'en' ? 'Time Resolution' : 'Resolução temporal';
 dictionary['Order'] =  lang == 'en' ? 'Order' : 'Ordem';
 dictionary['sort'] =  lang == 'en' ? 'Sort' : 'Ordenar';
-dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Particiação de Mercado';
+dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Participação de Mercado';
 dictionary['y-axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
 dictionary['desc'] = lang == 'en' ? 'Descending' : 'Descendente';
 dictionary['asc'] = lang == 'en' ? 'Ascending' : 'Ascendente';
