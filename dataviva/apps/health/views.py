@@ -29,11 +29,32 @@ def index(cnes_id, tab):
     response = requests.get('http://api.staging.dataviva.info/cnes/id/name_pt/?id=' + cnes_id + '&limit=1').json()
 
     establishment = {
-        'name' : response['data'][0][1]
+        'id': response['data'][0][0],
+        'name' : response['data'][0][1].title()
     }
+    # establishment = {
+    #     'name' : '<name>'
+    # }
 
-    return render_template('health/index.html', tab=tab, establishment=establishment)
+    graph = {}
+    url = request.args.get('url', '')
+    menu = request.args.get('menu', '')
+    if menu and url:
+        graph['menu'] = menu
+        graph['url'] = '/' + menu.split('-')[-1] + '/' + url
 
-@mod.route('/<id>/graphs/<tab>', methods=['POST'])
-def graphs(id, tab):
-    return render_template('health/graphs-' + tab + '.html')
+    return render_template('health/index.html', tab=tab, establishment=establishment, graph=graph)
+
+@mod.route('/<cnes_id>/graphs/<tab>', methods=['POST'])
+def graphs(cnes_id, tab):
+    response = requests.get('http://api.staging.dataviva.info/cnes/id/name_pt/?id=' + cnes_id + '&limit=1').json()
+    establishment = {'id': response['data'][0][0], 'name': response['data'][0][1]}
+
+    graph = {}
+    url = request.args.get('url', '')
+    menu = request.args.get('menu', '')
+    if menu and url:
+        graph['menu'] = menu
+        graph['url'] = menu.split('-')[-1] + '/' + url
+
+    return render_template('health/graphs-' + tab + '.html', establishment=establishment, graph=graph)

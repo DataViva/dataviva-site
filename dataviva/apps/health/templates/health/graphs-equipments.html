@@ -2,29 +2,37 @@
     <nav class="nav-graph col-xs-12 col-sm-3 col-md-3" >
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
-            <h4>{% trans %}Equipments per{% endtrans %}</h4>
-            <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Type{% endtrans %}</a>
+            <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Equipment Type{% endtrans %}</a>
             <div class="collapse" id="equipments-type">
-                <a href="#"
-                   target="graphs-frame-health" class="list-group-item" data-parent="#equipments-type">
-                    {% trans %}TreeMap{% endtrans %}
+                 <a href="/{{ g.locale }}/tree_map/cnes_equipment/equipment_code/equipment_quantity?establishment={{ establishment.id }}&depths=equipment_type+equipment_code"
+                   target="graphs-frame-equipments" class="list-group-item {{ 'selected' if graph.menu == 'equipments-type-tree_map' or not graph.menu }}" data-parent="#equipments-type">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_equipment/equipment_type/equipment_quantity?&values=equipment_quantity+equipment_quantity_in_use&depths=equipment_type+equipment_code&establishment={{ establishment.id }}"
+                   target="graphs-frame-equipments" class="list-group-item {{ 'selected' if graph.menu == 'equipments-type-stacked' }}" data-parent="#equipments-type">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code,unit_type,sus_availability_indicator?options=singlecolor&establishment={{ establishment.id }}"
+                   target="graphs-frame-equipments" class="list-group-item {{ 'selected' if graph.menu == 'equipments-type-bar' }}" data-parent="#equipments-type">
+                    {% trans %}Bar{% endtrans %}
                 </a>
             </div>
+
             <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="equipments-sus-bond">
-                <a href="#"
-                   target="graphs-frame-health" class="list-group-item" data-parent="#equipments-sus-bond">
-                    {% trans %}TreeMap{% endtrans %}
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/sus_availability_indicator,equipment_type,equipment_code,unit_type?options=singlecolor&establishment={{ establishment.id }}"
+                   target="graphs-frame-equipments" class="list-group-item {{ 'selected' if graph.menu == 'equipments-sus-bond-bar' }}" data-parent="#equipments-sus-bond">
+                    {% trans %}Bar{% endtrans %}
                 </a>
             </div>
         </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
-            <iframe src="{% if not graph %} /{{g.locale}}/bar/cnes_equipment/equipments/equipment_type?options=singlecolor {% endif %}"
-                    name="graphs-frame-health"
-                    id="graphs-frame-health"
-                    class="embed-responsive-item" >
+            <iframe src="/{{ g.locale }}{% if graph.url %}{{ graph.url }}{% else %}/tree_map/cnes_equipment/equipment_code/equipment_quantity?establishment={{ establishment.id }}&depths=equipment_type+equipment_code{% endif %}"
+                    name="graphs-frame-equipments"
+                    id="graphs-frame-equipments"
+                    class="embed-responsive-item">
             </iframe>
         </div>
     </div>

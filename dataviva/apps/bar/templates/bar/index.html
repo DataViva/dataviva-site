@@ -4,12 +4,15 @@
 		<meta charset="utf-8">
 		<link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
 		<link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
+		<link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" type="text/css"  media="all" href="/static/css/graphs-tools.css">
+		<link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
 
 		<script type="text/javascript" src="/static/js/libs/d3.min.js"></script>
 		<script type="text/javascript" src="/static/js/libs/d3plus.min.js"></script>
 
 		<script type="text/javascript" src="/static/js/libs/modernizr.custom.js"></script>
-		<script type="text/javascript" src="/static/js/utils/utils.dataviva.js"></script>
+		<script type="text/javascript" src="/static/js/modules/embed/utils.dataviva.js"></script>
 		<script type="text/javascript" src="/static/js/libs/jquery-2.1.1.js"></script>
 
 		<script type="text/javascript" src="/static/js/libs/async.js"></script>
@@ -39,7 +42,7 @@
 		    filters="{{filters}}">
 		</div>
 
-		<div class="loading"></div>
+		<div id="mask" class="loading"></div>
 		
 		<script type="text/javascript" src="/static/js/modules/bar.js"></script>
 	</body>

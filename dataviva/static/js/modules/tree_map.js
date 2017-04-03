@@ -8,8 +8,9 @@ var tree_map = document.getElementById('tree_map'),
     yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
     hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
+    zoom = args.hasOwnProperty('zoom') && args['zoom'] == 'true' ? true : false;
     group = depths[0],
-    sizes = args['sizes'] || SIZES[dataset][squares] || [size],
+    sizes = args.hasOwnProperty('sizes') ? args['sizes'].split('+') : SIZES[dataset][squares] || [size],
     filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [],
     basicValues = BASIC_VALUES[dataset] || [],
     calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
@@ -77,7 +78,17 @@ var loadViz = function(data) {
                 'text': 'label',
                 'font': {'size': 11},
                 'container': d3.select('#controls'),
-                'search': false
+                'search': false,
+                'format': {
+                    'text': function(text, key) {
+                        if ([dictionary['number_sus_bed'], dictionary['number_non_sus_bed'], dictionary['sus_healthcare_professional'], 
+                            dictionary['sus_bond'], dictionary['sus_availability_indicator']].indexOf(text) >= 0)
+                            return text;
+                        return text.replace(/\w\S*/g, function(txt) {
+                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                        });
+                    }
+                }
             };
 
         // Adds depth selector
@@ -220,17 +231,17 @@ var loadViz = function(data) {
 
     var titleHelper = function(depth) {
         if (!baseTitle) {
-            baseTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <squares>' : '<size> ' + dictionary['per'] + ' <squares>';
-            if (depths.length > 1)
-                baseTitle += '/<depth>';
+            var genericTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <squares>' : '<size> ' + dictionary['per'] + ' <squares>';
+            if (depths.length > 1 && currentTitleAttrs['depth'] != currentTitleAttrs['squares'])
+                genericTitle += '/<depth>';
         }
 
-        var title = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
 
         return {
-            'value': title['title'],
+            'value': header['title'],
             'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
+            'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
         }
     };
 
@@ -284,11 +295,11 @@ var loadViz = function(data) {
     if (hierarchy) {
         viz.id(depths); 
         viz.depth(args['depth'] || depths.indexOf(squares));
-        viz.zoom(false);
+        viz.zoom(zoom || false);
     } else {
         viz.id([args['depth'] || depths[0], squares]);
         viz.depth(1);
-        viz.zoom(true);
+        viz.zoom(zoom || true);
     }
 
     viz.color({'scale':'category20', 'value': args['color'] || depths[0]});

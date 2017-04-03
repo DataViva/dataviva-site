@@ -3,21 +3,32 @@
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Professionals per{% endtrans %}</h4>
+            <a href="#professionals-provider-unit" class="list-group-item" data-toggle="collapse" data-parent="#professionals-provider-unit">{% trans %}Provider/Unit{% endtrans %}</a>
+            <div class="collapse" id="professionals-provider-unit">
+                <a href="/{{ g.locale }}/stacked/cnes_professional/unit_type/professionals?values=professionals&depths=unit_type&establishment={{ establishment.id }}"
+                   target="graphs-frame-professionals" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-stacked' or not graph.menu }}" data-parent="#professionals-provider-unit">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
             <a href="#professionals-occupation" class="list-group-item" data-toggle="collapse" data-parent="#professionals-occupation">{% trans %}Occupation{% endtrans %}</a>
             <div class="collapse" id="professionals-occupation">
-                <a href="#"
-                   target="graphs-frame-health" class="list-group-item" data-parent="#professionals-occupation">
-                    {% trans %}TreeMap{% endtrans %}
+                <a href="/{{ g.locale }}/tree_map/cnes_professional/occupation_family/professionals?filters=sus_healthcare_professional&depths=occupation_group+occupation_family&establishment={{ establishment.id }}"
+                   target="graphs-frame-professionals" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_family/other_hours_worked?values=other_hours_worked+hospital_hour+ambulatory_hour&depths=occupation_group+occupation_family&filters=sus_healthcare_professional&establishment={{ establishment.id }}"
+                   target="graphs-frame-professionals" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-stacked'}}" data-parent="#professionals-occupation">
+                    {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
         </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
-            <iframe src="#"
-                    name="graphs-frame-health"
-                    id="graphs-frame-health"
-                    class="embed-responsive-item" >
+            <iframe src="/{{ g.locale }}{% if graph.url %}{{ graph.url }}{% else %}/stacked/cnes_professional/unit_type/professionals?values=professionals&depths=unit_type&establishment={{ establishment.id }}{% endif %}"
+                    name="graphs-frame-professionals"
+                    id="graphs-frame-professionals"
+                    class="embed-responsive-item">
             </iframe>
         </div>
     </div>

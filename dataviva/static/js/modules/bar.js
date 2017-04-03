@@ -195,6 +195,8 @@ var addOrder = function(data){
 
 var dictionary = {};
 
+dictionary['Building Visualization'] = lang == 'en' ? 'Building Visualization' : 'Construindo Visualização';
+
 dictionary['loading'] = lang == 'en' ? 'loading ...' : 'carregando ...';
 dictionary['average_wage'] = lang == 'en' ? 'Salário Médio Mensal' : 'Average Monthly Wage';
 dictionary['jobs'] = lang == 'en' ? 'Jobs' : 'Empregos';
@@ -380,6 +382,7 @@ var loadViz = function(data){
             "value": dictionary["data_provided_by"] + dataset.toUpperCase()
         })
         .legend(false)
+        .messages({'branding': true, 'style': 'large'})
 
         if(colorHelper[currentY] != undefined)
             visualization.color(currentY + "_color");
@@ -505,7 +508,6 @@ var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
             if(metadatas[itemY][item[itemY]] == undefined){
-                console.log(item[itemY])
                 item[itemY] = 'NOT FOUND!';
             }
             else{
@@ -607,7 +609,7 @@ var lastYear = function(data){
     return year;
 };
 
-var loading = dataviva.ui.loading('.loading').text(dictionary.loading);
+var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization'] + '...');
 
 $(document).ready(function(){
     var urls = [url];
@@ -634,6 +636,7 @@ $(document).ready(function(){
             solo = updateSolo(data);
 
             loading.hide();
+            d3.select('#mask').remove();
             loadViz(data);
         }
     );

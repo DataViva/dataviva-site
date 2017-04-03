@@ -46,8 +46,8 @@
 
             <div class="indices">
                 <div class="row">
-                </div><!--/.row-->
-            </div><!--/.indices-->
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -57,40 +57,40 @@
     <nav class="">
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="{{ 'active' if tab == 'general' }}">
-                <a  href="#general"
-                    aria-controls="general"
-                    role="tab"
-                    data-toggle="tab">{% trans %}General{% endtrans %}</a>
-            </li>
-            <li role="presentation" class="{{ 'active' if tab == 'establishments' }}">
-                <a  href="#establishments"
-                    aria-controls="establishments"
-                    role="tab"
-                    graph
-                    data-toggle="tab">{% trans %}Establishments{% endtrans %}</a>
-            </li>
-            <li role="presentation" class="{{ 'active' if tab == 'equipments' }}">
-                <a  href="#equipments"
-                    aria-controls="equipments"
-                    role="tab"
-                    graph
-                    data-toggle="tab">{% trans %}Equipments{% endtrans %}</a>
-            </li>
-            <li role="presentation" class="{{ 'active' if tab == 'beds' }}">
-                <a  href="#beds"
-                    aria-controls="beds"
-                    role="tab"
-                    graph
-                    data-toggle="tab">{% trans %}Beds{% endtrans %}</a>
-            </li>
-            <li role="presentation" class="{{ 'active' if tab == 'professionals' }}">
-                <a  href="#professionals"
-                    aria-controls="professionals"
-                    role="tab"
-                    graph
-                    data-toggle="tab">{% trans %}Professionals{% endtrans %}</a>
-            </li>
+                <li role="presentation" class="{{ 'active' if tab == 'general' }}">
+                    <a  href="#general"
+                        aria-controls="general"
+                        role="tab"
+                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
+                </li>
+<!--                 <li role="presentation" class="{{ 'active' if tab == 'establishments' }}">
+                    <a  href="#establishments"
+                        aria-controls="establishments"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Establishments{% endtrans %}</a>
+                </li> -->
+                <li role="presentation" class="{{ 'active' if tab == 'equipments' }}">
+                    <a  href="#equipments"
+                        aria-controls="equipments"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Equipments{% endtrans %}</a>
+                </li>
+                <li role="presentation" class="{{ 'active' if tab == 'beds' }}">
+                    <a  href="#beds"
+                        aria-controls="beds"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Beds{% endtrans %}</a>
+                </li>
+                <li role="presentation" class="{{ 'active' if tab == 'professionals' }}">
+                    <a  href="#professionals"
+                        aria-controls="professionals"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Professionals{% endtrans %}</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -102,12 +102,14 @@
             {% include "health/tab-equipments.html" %}
             {% include "health/tab-beds.html" %}
             {% include "health/tab-professionals.html" %}
-
         </div>
     </div>
 </section>
 
 <section id="graphs" class="graphs bg-gray">
+{% if tab != "general" %}
+    {% include "health/graphs-" + tab + ".html" %}
+{% endif %}
 </section>
 
 {% endblock content %}

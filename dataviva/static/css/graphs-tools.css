@@ -318,7 +318,7 @@ h3 {
 }
 
 div.loading {
-    background-color: #fff;
+    background-color: transparent;
     bottom: 0px;
     left: 0px;
     opacity: 1;

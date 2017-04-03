@@ -397,8 +397,7 @@ var getUrls = function() {
     return urls;
 };
 
-var loading = dataviva.ui.loading('.loading').text(dictionary['loading'] + '...');
-
+var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization'] + '...');
 
 $(document).ready(function() {
     ajaxQueue(

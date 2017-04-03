@@ -107,8 +107,8 @@ var SIZES = {
         'administrative_sphere': ['establishments']
     },
     'cnes_equipment': {
-        'municipality': ['equipments', 'equipment_quantity', 'equipment_quantity_in_use'],
-        'equipment_type': ['equipments', 'equipment_quantity', 'equipment_quantity_in_use']
+        'municipality': ['equipment_quantity', 'equipment_quantity_in_use'],
+        'equipment_type': ['equipment_quantity', 'equipment_quantity_in_use']
     },
     'cnes_bed': {
         'bed_type': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract'],
@@ -119,9 +119,8 @@ var SIZES = {
     'cnes_professional': {
         'municipality': ['professionals'],
         'unit_type': ['professionals'],
-        'occupation': ['professionals'],
-        'professional_link': ['professionals']
-   }
+        'occupation_family': ['professionals', 'other_hours_worked', 'hospital_hour', 'ambulatory_hour']
+    }
 };
 
 var COLORS = {
@@ -168,9 +167,9 @@ var BASIC_VALUES = {
     'secex': ['value', 'kg'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
     'cnes_establishment': ['establishments'],
-    'cnes_equipment': ['equipments'],
+    'cnes_equipment': ['equipment_quantity', 'equipment_quantity_in_use'],
     'cnes_bed': ['beds'],
-    'cnes_professional': ['professionals']
+    'cnes_professional': ['professionals', 'other_hours_worked', 'hospital_hour', 'ambulatory_hour']
 };
 
 if (document.getElementById('rings'))
@@ -253,21 +252,21 @@ dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúd
 dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
 
 // CNES BEDS
-dictionary['bed_type'] = lang == 'en' ? 'Bed type' : 'Tipo de leito';
+dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
 dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
-dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed type per specialty' : 'Tipo de especialidade do leito';
-dictionary['cnes_bed'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Type Per Specialty' : 'Tipo de Especialidade do Leito';
+dictionary['cnes_bed'] = lang == 'en' ? 'Datasus' : 'Datasus';
 dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
 dictionary['number_non_sus_bed'] = lang == 'en' ? 'Non SUS Beds' : 'Leitos não SUS';
-dictionary['number_existing_contract'] = lang == 'en' ? 'Existing contracts number' : 'Quantidade de contratos existentes';
+dictionary['number_existing_contract'] = lang == 'en' ? 'Existing Contracts Number' : 'Quantidade de Contratos Existentes';
 
 // CNES PROFESSIONALS
 dictionary['sus_healthcare_professional'] = lang == 'en' ? 'SUS Professionals' : 'Profissionais do SUS';
 dictionary['professional_link'] = lang == 'en' ? 'Link' : 'Vinculação';
 dictionary['cnes_professional'] = lang == 'en' ? 'datasus' : 'datasus';
 dictionary['professionals'] = lang == 'en' ? 'Total Professionals' : 'Total de Profissionais';
-dictionary['other_hours_worked'] = lang == 'en' ? 'Other Hours Worked' : 'Outras horas trabalhadas';
+dictionary['other_hours_worked'] = lang == 'en' ? 'Other Hours Worked' : 'Outras Horas Trabalhadas';
 dictionary['hospital_hour'] = lang == 'en' ? 'Hospital Hours' : 'Horas Hospitalares';
 dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulatoriais';
 
@@ -282,15 +281,15 @@ dictionary['neonatal_unit_facility'] = lang == 'en' ? 'Neonatal Unit Facilities'
 dictionary['obstetrical_center_facility'] = lang == 'en' ? 'Obstetrical Center Facilities' : 'Instalação Fisica de Centro Obstétrico ';
 dictionary['surgery_center_facility'] = lang == 'en' ? 'Surgery Center Facilities' : 'Instalação Fisica de Centro Cirúrgico';
 dictionary['selective_waste_collection'] = lang == 'en' ? 'Selective Waste Collection' : 'Coleta seletiva de rejeitos';
-dictionary['hospital_attention'] = lang == 'en' ? 'Hospital attention' : 'Nível de Atenção Hospitalar';
-dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory attention' : 'Nível de Atenção Ambulatorial';
-dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de hierarquia';
+dictionary['hospital_attention'] = lang == 'en' ? 'Hospital Attention' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory Attention' : 'Nível de Atenção Ambulatorial';
+dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de Hierarquia';
 dictionary['cnes_establishment'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['hospital_attention'] = lang == 'en' ? 'Level Of Hospital Care' : 'Nível de atenção hospitalar';
-dictionary['ambulatory_attention'] = lang == 'en' ? 'Level Of Ambulatory Care' : 'Nível de atenção ambulatorial';
-dictionary['ambulatory_care_facilities'] = lang == 'en' ? 'Physical Facilities Of Outpatient Care' : 'Instalações Físicas de Atendimento ambulatorial';
+dictionary['hospital_attention'] = lang == 'en' ? 'Level Of Hospital Care' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Level Of Ambulatory Care' : 'Nível de Atenção Ambulatorial';
+dictionary['ambulatory_care_facilities'] = lang == 'en' ? 'Physical Facilities Of Outpatient Care' : 'Instalações Físicas de Atendimento Ambulatorial';
 dictionary['hospital_care'] = lang == 'en' ? 'Hospital Care' : 'Atendimento Hospitalar';
-dictionary['dependency_level'] = lang == 'en' ? 'Dependency Level' : 'Nível de dependência';
+dictionary['dependency_level'] = lang == 'en' ? 'Dependency Level' : 'Nível de Dependência';
 
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
@@ -372,9 +371,16 @@ var formatHelper = function() {
                 case 'jobs':
                     return dictionary[DICT[dataset][text]];
                 case 'primary connections':
-                    return text.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+                    return text.replace(/\w\S*/g, function(txt) {
+                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                    })
                 default:
-                    return dictionary[text] || text;
+                if ([dictionary['number_sus_bed'], dictionary['number_non_sus_bed'], dictionary['sus_healthcare_professional'], 
+                    dictionary['sus_bond'], dictionary['sus_availability_indicator']].indexOf(text) >= 0)
+                    return text;
+                return dictionary[text] || text.replace(/\w\S*/g, function(txt) {
+                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                });
             };
 
         },

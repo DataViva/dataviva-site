@@ -78,6 +78,7 @@ def index(dataset, x, y):
     id_ibge = request.args.get('id_ibge')
     type = request.args.get('type')
     wld = request.args.get('wld')
+    establishment = request.args.get('establishment')
     occupation = request.args.get('occupation')
     industry = request.args.get('industry')
     counts = request.args.getlist('count')
@@ -107,6 +108,9 @@ def index(dataset, x, y):
 
     if id_ibge:
         filters.append(location_service(id_ibge))
+
+    if establishment:
+        filters.append(('establishment', establishment))
 
     filters = urllib.urlencode(filters)
 
