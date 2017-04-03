@@ -25,6 +25,11 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-products-stacked'}}" data-parent="#exports-products">
                     {% trans %}Stacked{% endtrans %}
                </a>
+
+              <a href="/{{ g.locale }}/stacked/secex/product/value?values=value+kg&type=export{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-product">
+                    {% trans %}New Stacked{% endtrans %}
+               </a>
             </div>
             <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">{% trans %}Destination{% endtrans %}</a>
             <div class="collapse" id="exports-destination">
@@ -39,6 +44,10 @@
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/wld/?sort=asc&layout=value&color=color&time=year&y=export_val&order=color" 
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
                     {% trans %}Stacked{% endtrans %}
+               </a>
+               <a href="/{{ g.locale }}/stacked/secex/country/value?values=value+kg&type=export{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-product">
+                    {% trans %}New Stacked{% endtrans %}
                </a>
             </div>
 
@@ -57,6 +66,10 @@
                      target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-stacked'}}" data-parent="#exports-municipality">
                       {% trans %}Stacked{% endtrans %}
                  </a>
+                 <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&type=export{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-product">
+                    {% trans %}New Stacked{% endtrans %}
+               </a>
               </div>
             {% endif %}
 
@@ -91,6 +104,10 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-products-stacked'}}" data-parent="#imports-products">
                     {% trans %}Stacked{% endtrans %}
                </a>
+               <a href="/{{ g.locale }}/stacked/secex/product/value?values=value+kg&type=import{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-product">
+                    {% trans %}New Stacked{% endtrans %}
+               </a>
             </div>
 
             <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{% trans %}Origin{% endtrans %}</a>
@@ -106,6 +123,10 @@
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{location.id}}/all/all/wld/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
                     {% trans %}Stacked{% endtrans %}
+               </a>
+               <a href="/{{ g.locale }}/stacked/secex/country/value?values=value+kg&type=import{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-product">
+                    {% trans %}New Stacked{% endtrans %}
                </a>
             </div>
 
@@ -124,6 +145,10 @@
                      target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-municipality-stacked'}}" data-parent="#imports-municipality">
                       {% trans %}Stacked{% endtrans %}
                  </a>
+                 <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&type=import{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-product">
+                    {% trans %}New Stacked{% endtrans %}
+               </a>
               </div>
             {% endif %}
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{% trans %}Port{% endtrans %}</a>
