@@ -16,6 +16,7 @@ var stacked = document.getElementById('stacked'),
     currentTitleAttrs = {'area': area, 'value': values[0]},
     baseTitle = '',
     baseSubtitle = '',
+    lastYear = 0,
     stackedFilters = args['filters'] ? args['filters'].split('+') : [];
 
 var buildData = function(apiData) {
@@ -65,6 +66,9 @@ var buildData = function(apiData) {
             }
 
             data.push(dataItem);
+
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > lastYear)
+                lastYear = dataItem['year'];
         } catch(e) {
         };
     });
@@ -275,14 +279,6 @@ var loadViz = function (data){
                 .draw();
         });
 
-        // TODO: change depths
-        // ui.push({
-        //     "value": ['bed_type', 'unit_type'],
-        //     "method": function(value){
-        //         viz.id(value).color(value).draw()
-        //     }
-        // });
-
         return ui;
     }
 
@@ -339,7 +335,7 @@ var loadViz = function (data){
         .data(data)
         .y(data_type)  
         .x({"value": "year", "label": ""})
-        .time("year")
+        .time({'value': 'year', 'solo': {'value': lastYear}})
         .background("transparent")
         .shape({"interpolate": "monotone"})
         .title(titleHelper())
