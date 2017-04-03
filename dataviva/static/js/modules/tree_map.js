@@ -273,7 +273,7 @@ var loadViz = function(data) {
             yearRange = [0, years[0].getFullYear()];
         else
             yearRange = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
-        toolsBuilder(viz, data, titleHelper().value, uiBuilder());
+        toolsBuilder('tree_map', viz, data, titleHelper().value);
         viz.title(titleHelper());
     };
 
@@ -312,7 +312,7 @@ var loadViz = function(data) {
     
     viz.draw();
 
-    toolsBuilder(viz, data, titleHelper().value, uiBuilder());
+    toolsBuilder('tree_map', viz, data, titleHelper().value);
 };
 
 

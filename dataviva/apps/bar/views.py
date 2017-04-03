@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
+from dataviva.translations.dictionary import dictionary
 import urllib
+import json
 
 mod = Blueprint('bar', __name__,
                 template_folder='templates',
@@ -114,5 +116,5 @@ def index(dataset, x, y):
 
     filters = urllib.urlencode(filters)
 
-    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options, subtitle=subtitle)
+    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options, subtitle=subtitle, dictionary=json.dumps(dictionary()))
     

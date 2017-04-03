@@ -16,7 +16,6 @@ var stacked = document.getElementById('stacked'),
     currentTitleAttrs = {'area': area, 'value': values[0]},
     baseTitle = '',
     baseSubtitle = '',
-    lastYear = 0,
     stackedFilters = args['filters'] ? args['filters'].split('+') : [];
 
 var buildData = function(apiData) {
@@ -66,9 +65,6 @@ var buildData = function(apiData) {
             }
 
             data.push(dataItem);
-
-            if (dataItem.hasOwnProperty('year') && dataItem['year'] > lastYear)
-                lastYear = dataItem['year'];
         } catch(e) {
         };
     });
@@ -335,7 +331,7 @@ var loadViz = function (data){
         .data(data)
         .y(data_type)  
         .x({"value": "year", "label": ""})
-        .time({'value': 'year', 'solo': {'value': lastYear}})
+        .time({'value': 'year'})
         .background("transparent")
         .shape({"interpolate": "monotone"})
         .title(titleHelper())
@@ -366,7 +362,7 @@ var loadViz = function (data){
 
         viz.draw()
 
-        toolsBuilder(stacked.id, viz, data, titleBuilder(baseTitle, baseSubtitle, {}, dataset, getUrlArgs(), yearRange).value, uiBuilder());
+        toolsBuilder(stacked.id, viz, data, titleHelper().value);
 }
 
 var getUrls = function() {

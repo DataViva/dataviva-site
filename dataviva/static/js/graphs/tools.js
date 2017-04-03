@@ -1,11 +1,8 @@
-var toolsBuilder = function(app, viz, data, title, ui) {
+var toolsBuilder = function(app, viz, data, title) {
 
-    function expireCookie( cName ) {
-        document.cookie =
-        encodeURIComponent( cName ) +
-        "=deleted; expires=" +
-        new Date( 0 ).toUTCString();
-      }
+    function expireCookie(cName) {
+        document.cookie = encodeURIComponent(cName) + "=deleted; expires=" + new Date(0).toUTCString();
+    }
 
     var initializeDownload = function(){
         var svg = d3.select("#" + app + " > svg")
@@ -178,10 +175,7 @@ var toolsBuilder = function(app, viz, data, title, ui) {
         expireCookie("downloadToken");
     });
 
-    var controls = true;
     d3.select('#controls-toggle-btn').on('click', function() {
-        controls = !controls;
-        viz.ui(controls ? ui : []);
-        viz.draw();
+        $('#controls').fadeToggle();
     });
 };
