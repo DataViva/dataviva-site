@@ -16,7 +16,8 @@ var tree_map = document.getElementById('tree_map'),
     calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
     currentFilters = {},
     currentTitleAttrs = {'size': size, 'squares': squares}
-    metadata = {};
+    metadata = {},
+    lastYear = 0;
 
 if (depths.length > 1)
     currentTitleAttrs['depth'] = depths[0];
@@ -63,6 +64,9 @@ var buildData = function(apiResponse) {
            
             dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
             data.push(dataItem);
+
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > lastYear)
+                lastYear = dataItem['year'];
         } catch(e) {
 
         };
@@ -280,7 +284,7 @@ var loadViz = function(data) {
         .size(size)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
-        .time({'value': 'year', 'solo': {'callback': timelineCallback}})
+        .time({'value': 'year', 'solo': {'value': lastYear, 'callback': timelineCallback}})
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
