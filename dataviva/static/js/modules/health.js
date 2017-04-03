@@ -348,7 +348,7 @@ var General = (function(){
               '<dd>'+
                 '<small>{{label}}</small>'+
                 '<strong class="counter">{{preffix}} {{value}} </strong>'+
-                '<span>{{magnitude}}</span>'+
+                '<span> {{magnitude}}</span>'+
               '</dd>'+
           '</dl>';
 
