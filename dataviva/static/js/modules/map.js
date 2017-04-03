@@ -137,7 +137,6 @@ var loadViz = function(data){
                 })
             .draw();
         });
-        return ui;
     };
 
     var titleHelper = function(value) {

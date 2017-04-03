@@ -10,8 +10,8 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-map'}}" data-parent="#equipments-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
-                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/municipality/equipments?hierarchy=false&year=2015{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                     target="graphs-frame-health" class="list-group-item {{ 'selected' if graph.menu == 'equipments-municipality-treemap' }}" data-parent="#equipments-municipality">
+                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/municipality/equipments?hierarchy=false&year=2015&filters=sus_availability_indicator"
+                     target="graphs-frame-health" class="list-group-item {{ 'selected' if graph.menu == 'equipments-municipality-map' }}" data-parent="#equipments-municipality">
                       TreeMap
                   </a>
                   <a href="/{{ g.locale }}/stacked/cnes_equipment/municipality/equipment_quantity?values=equipment_quantity+equipment_quantity_in_use&depths=municipality+health_region+equipment_type+equipment_code+unit_type+sus_availability_indicator&filters=equipment_type+equipment_code+unit_type+sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
@@ -22,7 +22,7 @@
             {% endif %}
             <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Type{% endtrans %}</a>
             <div class="collapse" id="equipments-type">
-                 <a href="/{{ g.locale }}/tree_map/cnes_equipment/equipment_type/equipments{{ '?id_ibge=%s' % id_ibge if id_ibge}}"
+                 <a href="/{{ g.locale }}/tree_map/cnes_equipment/equipment_type/equipments?hierarchy=false&filters=sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-tree_map' or not graph }}" data-parent="#equipments-type">
                     TreeMap
                 </a>
@@ -125,7 +125,7 @@
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
-            <a href="#beds-type-speciality" class="list-group-item" data-toggle="collapse" data-parent="#beds-type-speciality">{% trans %}Type and Speciality{% endtrans %}</a>
+            <a href="#beds-type-speciality" class="list-group-item" data-toggle="collapse" data-parent="#beds-type-speciality">{% trans %}Provider and Unit Type{% endtrans %}</a>
             <div class="collapse" id="beds-type-speciality">
                 <a href="/{{ g.locale }}/tree_map/cnes_bed/bed_type/beds?hierarchy=false&year=2015{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-speciality-tree_map'}}" data-parent="#beds-type-speciality">
@@ -166,7 +166,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-map'}}" data-parent="#professionals-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
-                  <a href="/{{ g.locale }}/tree_map/cnes_professional/municipality/professionals?filters=sus_healthcare_professional&year=2015{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                  <a href="/{{ g.locale }}/tree_map/cnes_professional/municipality/professionals?filters=sus_healthcare_professional+occupation_family&year=2015{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-tree_map'}}" data-parent="#professionals-municipality">
                       TreeMap
                   </a>
@@ -178,7 +178,7 @@
             {% endif %}
             <a href="#professionals-provider-unit" class="list-group-item" data-toggle="collapse" data-parent="#professionals-provider-unit">{% trans %}Provider/Unit{% endtrans %}</a>
             <div class="collapse" id="professionals-provider-unit">
-                <a href="/{{ g.locale }}/tree_map/cnes_professional/unit_type/professionals?year=2015&filters=sus_healthcare_professional{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                <a href="/{{ g.locale }}/tree_map/cnes_professional/unit_type/professionals?year=2015&hierarchy=false&filters=sus_healthcare_professional{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-tree_map'}}" data-parent="#professionals-provider-unit">
                     TreeMap
                 </a>

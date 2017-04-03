@@ -63,7 +63,6 @@ var buildData = function(apiResponse) {
             dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
             data.push(dataItem);
         } catch(e) {
-
         };
     });
 

@@ -505,7 +505,7 @@ var addNameToData = function(data){
     y.forEach(function(itemY){
         data = data.map(function(item){
             if(metadatas[itemY][item[itemY]] == undefined){
-                console.log(item[itemY])
+                // console.log(item[itemY])
                 item[itemY] = 'NOT FOUND!';
             }
             else{
