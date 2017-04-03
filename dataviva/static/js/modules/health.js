@@ -1,6 +1,9 @@
 $(document).ready(function(){
     var filters = location.search.slice(1);
 
+    if(location.pathname.split('/')[2] == 'health')
+        filters = 'establishment=' + location.pathname.split('/')[3];
+
     if(filters.split('=').indexOf('municipality') == -1){
         // BlueBox.add({
         //     url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?order=beds&direction=desc&limit=1&' + filters,
@@ -19,133 +22,133 @@ $(document).ready(function(){
 //GENERAL ADD
 
 //ESTABLISHMENT
-    General.add({
-        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
-        title:  dictionary.total_of_establishments,
-        label: '',
-        value: 'establishments'
-    });
+    // General.add({
+    //     url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+    //     title:  dictionary['total_of_establishments'],
+    //     label: '',
+    //     value: 'establishments'
+    // });
 
-    General.add({
-        url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filters,
-        title: dictionary.municipality_with_highest_number_of_establishments,
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'establishments',
-    });
+    // General.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filters,
+    //     title: dictionary['municipality_with_highest_number_of_establishments'],
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'establishments',
+    // });
 
 //BED
     General.add({
         url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
-        title:  dictionary.total_of_beds,
+        title:  dictionary['total_of_beds'],
         label: '',
         value: 'beds'
 
     });
-    General.add({
-        url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filters,
-        title: dictionary.municipality_with_highest_number_of_beds,
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'beds'
-    });
+    // General.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filters,
+    //     title: dictionary['municipality_with_highest_number_of_beds'],
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'beds'
+    // });
 
 //PROFESSIONAL
     General.add({
         url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
-        title:  dictionary.total_of_professionals,
+        title:  dictionary['total_of_professionals'],
         label: '',
         value: 'professionals',
-        prefix: 'Total of professionals '
+        prefix: dictionary['total_of_professionals'] + ' '
 
     });
-    General.add({
-        url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
-        title: dictionary.municipality_with_highest_number_of_professionals,
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'professionals',
-        prefix: 'Total of profissionais'
-    });
+    // General.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
+    //     title: dictionary['municipality_with_highest_number_of_professionals'],
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'professionals',
+    //     prefix: 'Total of profissionais'
+    // });
 
 //EQUIPMENT
     General.add({
         url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
-        title: dictionary.total_of_equipments,
+        title: dictionary['total_of_equipments'],
         label: '',
         value: 'equipments',
-        prefix: 'Total of Equipments '
+        prefix: dictionary['total_of_equipments'] + ' '
 
     });
-    General.add({
-        url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filters,
-        title: dictionary.municipality_with_highest_number_of_equipments,
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'equipments'
-    });
+    // General.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filters,
+    //     title: dictionary['municipality_with_highest_number_of_equipments'],
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'equipments'
+    // });
     // ESTABLISHMENTS
 
-    BlueBox.add({
-        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
-        title: 'Total de Estabelecimentos',
-        label: 'Total de Estabelecimentos',
-        value: 'establishments',
-        tab: 'establishments'
-    });
+    // BlueBox.add({
+    //     url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+    //     title: 'Total de Estabelecimentos',
+    //     label: 'Total de Estabelecimentos',
+    //     value: 'establishments',
+    //     tab: 'establishments'
+    // });
 
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filters,
-        title: 'Município com Maior',
-        subtitle: 'Número de Estabelecimentos',
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'establishments',
-        suffix: 'Estabelecimentos',
-        tab: 'establishments'
-    });
+    // BlueBox.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filters,
+    //     title: 'Município com Maior',
+    //     subtitle: 'Número de Estabelecimentos',
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'establishments',
+    //     suffix: 'Estabelecimentos',
+    //     tab: 'establishments'
+    // });
 
-    BlueBox.add({
-        url: "http://api.staging.dataviva.info/cnes_establishment/unit_type/?year=2015&" + filters,
-        title: 'Principal Tipo Estabelecimento',
-        subtitle: 'por Quantidade',
-        label: {
-            metadata: true,
-            value: 'unit_type'
-        },
-        value: 'establishments',
-        tab: 'establishments'
-    });
+    // BlueBox.add({
+    //     url: "http://api.staging.dataviva.info/cnes_establishment/unit_type/?year=2015&" + filters,
+    //     title: 'Principal Tipo Estabelecimento',
+    //     subtitle: 'por Quantidade',
+    //     label: {
+    //         metadata: true,
+    //         value: 'unit_type'
+    //     },
+    //     value: 'establishments',
+    //     tab: 'establishments'
+    // });
 
     // BEDS
 
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filters,
-        title: 'Município com Maior',
-        subtitle: 'Número de Leitos',
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'beds',
-        suffix: 'Leitos',
-        tab: 'beds'
-    });
+    // BlueBox.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filters,
+    //     title: 'Município com Maior',
+    //     subtitle: 'Número de Leitos',
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'beds',
+    //     suffix: 'Leitos',
+    //     tab: 'beds'
+    // });
 
     BlueBox.add({
         url: 'http://api.staging.dataviva.info/cnes_bed/year/bed_type/?year=2015&order=beds&direction=desc&limit=1&' + filters,
-        title: 'Principal Tipo Leito',
-        subtitle: 'por Quantidade',
+        title: dictionary['main_bed_type'],
+        subtitle: dictionary['by_quantity'],
         label: {
             metadata: true,
             value: 'bed_type'
@@ -156,31 +159,31 @@ $(document).ready(function(){
 
     BlueBox.add({
         url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
-        title: 'Total de Leitos',
-        label: 'Total de Leitos',
+        title: dictionary['total_of_beds'],
+        label: dictionary['total_of_beds'],
         value: 'beds',
         tab: 'beds'
     });
 
     // PROFESSIONALS
 
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
-        title: 'Município com Maior',
-        subtitle: 'Número de Profissionais',
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'professionals',
-        suffix: 'Profissionais',
-        tab: 'professionals'
-    });
+    // BlueBox.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
+    //     title: 'Município com Maior',
+    //     subtitle: 'Número de Profissionais',
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'professionals',
+    //     suffix: 'Profissionais',
+    //     tab: 'professionals'
+    // });
 
     BlueBox.add({
         url: 'http://api.staging.dataviva.info/cnes_professional/year/occupation_family/?year=2015&order=professionals&direction=desc&limit=1&' + filters,
-        title: 'Principal Ocupação',
-        subtitle: 'por Empregos',
+        title: dictionary['main_occupation'],
+        subtitle: dictionary['by_jobs'],
         label: {
             metadata: true,
             value: 'occupation_family'
@@ -191,8 +194,8 @@ $(document).ready(function(){
 
     BlueBox.add({
         url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
-        title: 'Total de Profissionais',
-        label: 'Total de Profissionais',
+        title: dictionary['total_of_professionals'],
+        label: dictionary['total_of_professionals'],
         value: 'professionals',
         tab: 'professionals'
     });
@@ -201,67 +204,68 @@ $(document).ready(function(){
 
     BlueBox.add({
         url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
-        title: 'Total de Equipamentos',
-        label: 'Total de Equipamentos',
+        title: dictionary['total_of_equipments'],
+        label: dictionary['total_of_equipments'],
         value: 'equipments',
         tab: 'equipments'
     });
 
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filters,
-        title: 'Município com Maior',
-        subtitle: 'Número de Equipamentos',
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'equipments',
-        suffix: 'Equipamentos',
-        tab: 'equipments'
-    });
+    // BlueBox.add({
+    //     url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filters,
+    //     title: 'Município com Maior',
+    //     subtitle: 'Número de Equipamentos',
+    //     label: {
+    //         metadata: true,
+    //         value: 'municipality'
+    //     },
+    //     value: 'equipments',
+    //     suffix: 'Equipamentos',
+    //     tab: 'equipments'
+    // });
 
     BlueBox.add({
         url: "http://api.staging.dataviva.info/cnes_equipment/equipment_type/?year=2015&" + filters,
-        title: 'Principal Equipamento',
-        subtitle: 'por Quantidade',
+        title: dictionary['main_equipment_type'],
+        subtitle: dictionary['by_quantity'],
         label: {
             metadata: true,
             value: 'equipment_type'
         },
         value: 'equipments',
-        suffix: 'Equipamentos',
+        suffix: dictionary['equipments'],
         tab: 'equipments'
     });
+
 
 //INDICATOR ADD
 
     //LEITOS
     Indicator.add({
         url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filters,
-        title: dictionary.number_beds,
+        title: dictionary['number_beds'],
         value:  'beds'
     });
 
     //EQUIPAMENTOS
     Indicator.add({
         url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filters,
-        title: dictionary.number_equipments,
+        title: dictionary['number_equipments'],
         value:  'equipments'
     });
 
     //PROFISSIONAIS
     Indicator.add({
         url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filters,
-        title: dictionary.number_professionals,
+        title: dictionary['number_professionals'],
         value:  'professionals'
     });
 
     //ESTABELECIMENTOS
-    Indicator.add({
-        url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
-        title: dictionary.number_establishments,
-        value:  'establishments'
-    });
+    // Indicator.add({
+    //     url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filters,
+    //     title: dictionary.number_establishments,
+    //     value:  'establishments'
+    // });
     //
 
 
@@ -284,12 +288,20 @@ dictionary['beds'] = lang == 'en' ? 'beds' : 'Leitos';
 
 dictionary['total_of_equipments'] = lang == 'en' ? 'Total of equipments' : 'Total de Equipamentos';
 dictionary['municipality_with_highest_number_of_equipments'] = lang == 'en' ? 'Municipality with the highest number of equipments' : 'Município com maior numero de Equipamentos';
-dictionary['equipments'] = lang == 'en' ? 'equipments' : 'Equipamentos';
+dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 
 dictionary['number_establishments'] = lang == 'en' ? 'Number of Establishments' : 'Numero de Estabelecimentos';
 dictionary['number_beds'] = lang == 'en' ? 'Number of Beds' : 'Numero de Leitos';
 dictionary['number_professionals'] = lang == 'en' ? 'Number of Professionals' : 'Numero de Profissionais';
 dictionary['number_equipments'] = lang == 'en' ? 'Number of Equipments' : 'Numero de Equipamentos';
+
+dictionary['main_equipment_type'] = lang == 'en' ? 'Main Equipment Type' : 'Principal Tipo Equipamento';
+
+dictionary['main_occupation'] = lang == 'en' ? 'Main Occupation' : 'Principal Ocupação';
+dictionary['by_jobs'] = lang == 'en' ? 'by jobs' : 'por empregos';
+
+dictionary['main_bed_type'] = lang == 'en' ? 'Main Bed Type' : 'Principal Tipo Leito';
+dictionary['by_quantity'] = lang == 'en' ? 'by quantity' : 'por quantidade';
 
 dictionary['trillion'] = lang == 'en' ? 'Trillion' : 'Trilhão';
 dictionary['billion'] = lang == 'en' ? 'Billion' : 'Bilhão';
@@ -373,6 +385,11 @@ var General = (function(){
                 metadata = response;
             })
         ).then(function() {
+            if(api == undefined){
+                data.template.hide();
+                return;
+            }
+
             var label = data.label;
             if (typeof data.label == 'object')
                 label = metadata[api[data.label.value]].name_pt;
@@ -421,6 +438,11 @@ var Indicator = (function(){
             type: 'GET',
             success: function(response){
                 var api = buildData(response)[0];
+
+                if(api == undefined){
+                    data.template.hide();
+                    return;
+                }
 
                 var formattedValue = Magnitude(api[data.value]);
                 var value = formattedValue.split(' ')[0].replace('.', ',');
@@ -478,6 +500,11 @@ var BlueBox = (function(){
                 metadata = response;
             })
         ).then(function() {
+            if(api == undefined){
+                data.template.hide();
+                return;
+            }
+
             var label = data.label;
             if (typeof data.label == 'object')
                 label = metadata[api[data.label.value]].name_pt;
