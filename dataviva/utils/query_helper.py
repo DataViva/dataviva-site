@@ -50,18 +50,18 @@ def query_table(table, columns=[], filters=[], groups=[], limit=0, order=None, s
         column_names = [c.key for c in columns]
         data = [dict(zip(column_names, vals)) for vals in query.all()]
     
-    if  'bra_id' in data['headers']:
+    if 'bra_id' in data['headers']:
         index_bra = data['headers'].index('bra_id')
-        data['headers'].insert(0, 'location')
         data['headers'].insert(0, 'id_ibge')
+        data['headers'].insert(1, 'location')
         
         locations = {}
         for row in Bra.query.all():
             locations[row.id] = row
 
-        for i, row  in enumerate(data['data']):
-            data['data'][i].insert(0, locations[row[index_bra]].name())
-            data['data'][i].insert(0, locations[row[index_bra + 1]].id_ibge)  
+        for i, row in enumerate(data['data']):
+            data['data'][i].insert(0, locations[row[index_bra]].id_ibge)
+            data['data'][i].insert(1, locations[row[index_bra + 1]].name())
                               
     return data
 
