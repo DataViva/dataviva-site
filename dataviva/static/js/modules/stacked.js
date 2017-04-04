@@ -343,6 +343,7 @@ var loadViz = function (data){
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .format(formatHelper())
+        .legend({'filters': true})
         .depth(0, function(d) {
             currentTitleAttrs['area'] = depths[d];
             viz.title(titleHelper());
