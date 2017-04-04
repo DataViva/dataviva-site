@@ -11,7 +11,7 @@ var data = [],
     currentY = y[0],
     filters = $("#bar").attr("filters"),
     url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + ( options.indexOf('month') != -1 ? 'month/' : '' ) + y.join("/") + ( filters ? "?" + filters : '');
+        dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + y.join("/") + ( filters ? "?" + filters : '');
 
 
 // TODO: Title creator
@@ -315,7 +315,7 @@ var loadViz = function(data){
             'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
         })
         .footer({
-            "value": dictionary["data_provided_by"] + dataset.toUpperCase()
+            "value": dictionary["data_provided_by"] + (dictionary[dataset] || dataset).toUpperCase()
         })
         .legend(false)
         .messages({'branding': true, 'style': 'large'})

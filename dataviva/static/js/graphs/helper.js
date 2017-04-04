@@ -271,6 +271,8 @@ dictionary['scale'] = lang == 'en' ? 'Scale' : 'Escala';
 dictionary['yaxis'] = lang == 'en' ? 'Y-Axis' : 'Eixo Y';
 dictionary['xaxis'] = lang == 'en' ? 'X-Axis' : 'Eixo X';
 dictionary['locale'] = lang == 'en' ? 'en_US' : 'pt_BR';
+dictionary['secex'] = 'SECEX';
+dictionary['rais'] = 'RAIS';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
