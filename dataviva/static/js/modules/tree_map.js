@@ -15,7 +15,7 @@ var tree_map = document.getElementById('tree_map'),
     basicValues = BASIC_VALUES[dataset] || [],
     calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
     currentFilters = {},
-    currentTitleAttrs = {'size': size, 'squares': squares}
+    currentTitleAttrs = {'size': size, 'shapes': squares}
     metadata = {},
     lastYear = 0;
 
@@ -58,6 +58,7 @@ var buildData = function(apiResponse) {
                 dataItem[key] = calcBasicValues[key](dataItem);
 
             depths.forEach(function(depth) {
+
                 if (depth != squares)
                     dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
             });
@@ -72,6 +73,28 @@ var buildData = function(apiResponse) {
         };
     });
 
+    // Removes depths that all data items are part of
+    // For example, if data is filtered by state, there is no reason to have region or state as depths, since all data is from the same state and region
+    if (hierarchy && depths.length > 1) {
+        var invalidDepths = [];
+        depths.forEach(function(depth) {
+            if (depth != squares) {
+                var valid = false;
+                for (var i = 1; i < data.length; i++) {
+                    if (data[i][depth] != data[i-1][depth]) {
+                        valid = true;
+                        break;
+                    }
+                }
+                if (!valid)
+                    invalidDepths.push(depth);
+            }
+        });
+        invalidDepths.forEach(function(depth) {
+            depths.splice(depths.indexOf(depth), 1);
+        });
+    }
+
     return data;
 }
 
@@ -82,17 +105,7 @@ var loadViz = function(data) {
                 'text': 'label',
                 'font': {'size': 11},
                 'container': d3.select('#controls'),
-                'search': false,
-                'format': {
-                    'text': function(text, key) {
-                        if ([dictionary['number_sus_bed'], dictionary['number_non_sus_bed'], dictionary['sus_healthcare_professional'], 
-                            dictionary['sus_bond'], dictionary['sus_availability_indicator']].indexOf(text) >= 0)
-                            return text;
-                        return text.replace(/\w\S*/g, function(txt) {
-                            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                        });
-                    }
-                }
+                'search': false
             };
 
         // Adds depth selector
@@ -109,7 +122,7 @@ var loadViz = function(data) {
                     .title(dictionary['depth'])
                     .type(options.length > 3 ? 'drop' : 'toggle')
                     .focus(squares, function(value) {
-                        currentTitleAttrs['depth'] = value;
+                        currentTitleAttrs['shapes'] = value;
                         viz.depth(depths.indexOf(value))
                             .title(titleHelper())
                             .draw();
@@ -127,7 +140,7 @@ var loadViz = function(data) {
                     .title(dictionary['drawer_color_by'])
                     .type(depths.length > 3 ? 'drop' : 'toggle')
                     .focus(options[0]['id'], function(value) {
-                        currentTitleAttrs['depth'] = value;
+                        currentTitleAttrs['shapes'] = value;
                         viz.data(data)
                             .id([value, squares])
                             .color(value)
@@ -216,8 +229,12 @@ var loadViz = function(data) {
                 options.push({'id': id, 'label': metadata[filter][id]['name_' + lang]})
             }
 
+            options = options.sort(function(a, b) {
+                return (a.label.toLowerCase() < b.label.toLowerCase()) ? -1 : 1;
+            });
+
             options.unshift({'id': -1, 'label': dictionary['all']});
-            
+
             d3plus.form()
                 .config(config)
                 .container(d3.select('#controls'))
@@ -235,8 +252,8 @@ var loadViz = function(data) {
 
     var titleHelper = function(depth) {
         if (!baseTitle) {
-            var genericTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <squares>' : '<size> ' + dictionary['per'] + ' <squares>';
-            if (depths.length > 1 && currentTitleAttrs['depth'] != currentTitleAttrs['squares'])
+            var genericTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <shapes>' : '<size> ' + dictionary['per'] + ' <shapes>';
+            if (depths.length > 1 && currentTitleAttrs['shapes'] != currentTitleAttrs['shapes'])
                 genericTitle += '/<depth>';
         }
 
@@ -245,7 +262,9 @@ var loadViz = function(data) {
         return {
             'value': header['title'],
             'font': {'size': 22, 'align': 'left'},
+            'padding': 5,
             'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
         }
     };
 
@@ -306,7 +325,12 @@ var loadViz = function(data) {
         viz.zoom(zoom || true);
     }
 
-    viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+    if (COLORS.hasOwnProperty(group)) {
+        viz.attrs(COLORS[group]);
+        viz.color('color');
+    } else {
+        viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+    }
 
     $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     

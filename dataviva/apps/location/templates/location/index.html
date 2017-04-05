@@ -191,7 +191,7 @@
     <nav>
         <div class="container">
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="{{ 'active' if not tab }}">
+                <li role="presentation" class="{{ 'active' if not tab or tab == 'general' }}">
                     <a href="#general"
                        aria-controls="general"
                        role="tab"

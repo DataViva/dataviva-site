@@ -510,6 +510,7 @@ def index(bra_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
+
     else:
         return render_template('location/index.html',
                             header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)

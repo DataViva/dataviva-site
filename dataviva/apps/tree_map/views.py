@@ -45,12 +45,7 @@ def index(dataset, squares, size):
           continue
         if value and key in services:
             filters.append(services[key](value))
-            if key == 'id_ibge':
-              title_attrs['location'] = value
-            elif key == 'wld':
-              title_attrs['partner'] = value
-            else:
-              title_attrs[key] = value
+            title_attrs[services[key](value)[0]] = value
         else:
             filters.append((key, value))
 
