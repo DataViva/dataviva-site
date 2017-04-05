@@ -9,6 +9,10 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'trade-balance-product-line' or not graph }}" data-parent="#trade-balance-product">
                     {% trans %}Line{% endtrans %}
                 </a>
+                <a href="/{{ g.locale }}/line/secex/type/value?values=value+kg&product={{ product.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-trade-balance-product-line'}}" data-parent="#new-api-trade-balance-product">
+                    Line New API
+                </a>
             </div>
             <h4>{%trans%}Exports By{%endtrans%}</h4>
             {% if not is_municipality%}
@@ -50,8 +54,11 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-line'}}" data-parent="#exports-destination">
                     {%trans%}Line{%endtrans%}
                </a>
+               <a href="/{{ g.locale }}/line/secex/country/value?values=value+kg&group=continent&depths=continent+country&type=export&product={{ product.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-line'}}" data-parent="#new-api-exports-destination">
+                    Line New API
+                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/wld/?y=export_val?y=export_val&time=year&order=color&layout=value&sort=asc&color=color"
-
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
                     {%trans%}Stacked{%endtrans%}
                 </a>
