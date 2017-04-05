@@ -300,7 +300,7 @@ dictionary['hospital_hour'] = lang == 'en' ? 'Hospital Hours' : 'Horas Hospitala
 dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulatoriais';
 
 // CNES ESTABLISHMENTS
-dictionary['sus_bond'] = lang == 'en' ? 'SUS Bond' : 'Vínculo com o SUS';
+dictionary['sus_bond'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
 dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento ambulatorial';
 dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
@@ -320,6 +320,12 @@ dictionary['ambulatory_care_facilities'] = lang == 'en' ? 'Physical Facilities O
 dictionary['hospital_care'] = lang == 'en' ? 'Hospital Care' : 'Atendimento Hospitalar';
 dictionary['dependency_level'] = lang == 'en' ? 'Dependency Level' : 'Nível de Dependência';
 
+dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
+dictionary['hospital'] = lang == 'en' ? 'Hospital' : 'Hospitalar';
+dictionary['ambulatory'] = lang == 'en' ? 'Ambulatory' : 'Ambulatorial';
+dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
+dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de Atenção';
+
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
 dictionary['equipment_code'] = lang == 'en' ? 'Equipment Code' : 'Código de Equipamento';
@@ -327,7 +333,7 @@ dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
 dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['sus_availability_indicator'] = lang == 'en' ? 'Sus Availability' : 'Disponibilidade para o SUS';
+dictionary['sus_availability_indicator'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 
 var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {
     var formatYearRange = function() {

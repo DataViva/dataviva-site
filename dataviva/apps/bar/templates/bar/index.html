@@ -34,14 +34,16 @@
     </head>
     <body>
         {% include "graphs/tools.html" %}
-        <div id="bar"
-            class="embed-responsive responsive-wrapper"
-            dataset="{{dataset}}"
-            x="{{x}}"
-            y="{{y}}"
-            options="{{options}}"
-            subtitle="{{subtitle}}"
-            filters="{{filters}}">
+        <div class="embed-responsive responsive-wrapper graph-wrapper">
+            <div id="bar"
+                class="embed-responsive responsive-wrapper"
+                dataset="{{dataset}}"
+                x="{{x}}"
+                y="{{y}}"
+                options="{{options}}"
+                subtitle="{{subtitle}}"
+                filters="{{filters}}">
+            </div>
         </div>
         <div id="controls" style="text-align: center"></div>
 
