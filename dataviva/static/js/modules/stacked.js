@@ -314,8 +314,9 @@ var loadViz = function (data){
                 .type('drop')
                 .font({'size': 11})
                 .focus(-1, function(value) {
-                    viz.id(depthsList[value]);
-                    viz.draw();
+                    viz.id(depthsList[value])
+                       .color(depthsList[value][0])
+                       .draw();
                 })
                 .draw();
         }
