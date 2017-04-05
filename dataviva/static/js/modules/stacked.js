@@ -128,7 +128,7 @@ var loadViz = function (data){
             "type" : "drop",
             "value" : [
                 {
-                    [dictionary['year']]: "linear"
+                    [dictionary['value']]: "linear"
                 }, 
                 {
                     [dictionary['market-share']]: "share"
