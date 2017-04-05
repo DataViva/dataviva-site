@@ -85,9 +85,9 @@
             </div>
             <a href="#establishments-facilities" class="list-group-item" data-toggle="collapse" data-parent="#establishments-facilities">{% trans %}Facilities{% endtrans %}</a>
             <div class="collapse" id="establishments-facilities">
-                <a href="/{{ g.locale }}/stacked/cnes_establishment/administrative_sphere/establishments?values=establishments&depths=administrative_sphere+tax_withholding+sus_bond+ambulatory_care_facility+emergency_facility+selective_waste_collection+neonatal_unit_facility&filters=sus_bond+ambulatory_care_facility+emergency_facility+selective_waste_collection+neonatal_unit_facility{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-facilities-stacked'}}" data-parent="#establishments-facilities">
-                    {% trans %}Stacked{% endtrans %}
+                <a href="/{{ g.locale }}/bar/cnes_establishment/establishments/emergency_facility,ambulatory_care_facility,surgery_center_facility,obstetrical_center_facility,neonatal_unit_facility?options=singlecolor,attention_level&filters=sus_bond,unit_type,provider_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-facilities-bar'}}" data-parent="#establishments-facilities">
+                    {% trans %}Bar{% endtrans %}
                 </a>
             </div>
 
