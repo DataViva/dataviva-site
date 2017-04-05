@@ -1,29 +1,12 @@
-<div id="graphs-education" class="container">
+<div id="graphs-health" class="container">
     <nav class="nav-graph col-xs-12 col-sm-3 col-md-3">
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Equipments by{% endtrans %}</h4>
-            {% if not is_municipality %}
-              <a href="#equipments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#equipments-municipality">{% trans %}Municipality{% endtrans %}</a>
-              <div class="collapse" id="equipments-municipality">
-                  <a href="/{{ g.locale }}/map/cnes_equipment/equipment_quantity?filters=equipment_type"
-                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-map'}}" data-parent="#equipments-municipality">
-                      {% trans %}Map{% endtrans %}
-                  </a>
-                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/municipality/equipment_quantity?hierarchy=false{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                     target="graphs-frame-health" class="list-group-item {{ 'selected' if graph.menu == 'equipments-municipality-treemap' }}" data-parent="#equipments-municipality">
-                      TreeMap
-                  </a>
-                  <a href="/{{ g.locale }}/stacked/cnes_equipment/municipality/equipment_quantity?values=equipment_quantity+equipment_quantity_in_use&depths=municipality+health_region+equipment_type+equipment_code+unit_type+sus_availability_indicator&filters=equipment_type+equipment_code+unit_type+sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-stacked'}}" data-parent="#equipments-municipality">
-                      {% trans %}Stacked{% endtrans %}
-                  </a>
-              </div>
-            {% endif %}
             <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Type{% endtrans %}</a>
             <div class="collapse" id="equipments-type">
                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/equipment_type/equipment_quantity{{ '?id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-tree_map' or not graph }}" data-parent="#equipments-type">
+                   target="graphs-frame-health" class="list-group-item {{'selected' if not graph or graph.menu == 'equipments-type-tree_map' }}" data-parent="#equipments-type">
                     TreeMap
                 </a>
                 <a href="/{{ g.locale }}/stacked/cnes_equipment/equipment_type/equipment_quantity?&values=equipment_quantity+equipment_quantity_in_use&depths=equipment_type+equipment_code+health_region+unit_type+sus_availability_indicator&filters=unit_type+sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
@@ -35,6 +18,23 @@
                     {% trans %}Bar{% endtrans %}
                 </a>
             </div>
+            {% if not is_municipality %}
+              <a href="#equipments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#equipments-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="equipments-municipality">
+                  <a href="/{{ g.locale }}/map/cnes_equipment/equipment_quantity?filters=equipment_type"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-map'}}" data-parent="#equipments-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/municipality/equipment_quantity?depths=region+state+mesoregion+microregion+health_region+municipality&sizes=equipment_quantity+equipment_quantity_in_use&filters=sus_availability_indicator+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-tree_map' }}" data-parent="#equipments-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/stacked/cnes_equipment/municipality/equipment_quantity?values=equipment_quantity+equipment_quantity_in_use&depths=municipality+health_region+equipment_type+equipment_code+unit_type+sus_availability_indicator&filters=equipment_type+equipment_code+unit_type+sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-stacked'}}" data-parent="#equipments-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>
+              </div>
+            {% endif %}
             <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="equipments-sus-bond">
                 <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/sus_availability_indicator,equipment_type,equipment_code,unit_type?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
@@ -199,7 +199,7 @@
         <div class="embed-responsive responsive-wrapper">
             <iframe src="{% if graph %}/{{ g.locale }}/{{ graph.url }}{% else %}/{{ g.locale }}/tree_map/cnes_equipment/equipment_type/equipment_quantity{{ '?id_ibge=%s' % id_ibge if id_ibge}}{% endif %}"
                     name="graphs-frame-health"
-                    id="graphs-frame-education"
+                    id="graphs-frame-health"
                     class="embed-responsive-item" >
             </iframe>
         </div>

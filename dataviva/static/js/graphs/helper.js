@@ -37,7 +37,8 @@ var DICT = {
     },
     'cnes_equipment': {
         'item_id': {
-            'equipment_type': 'id'
+            'equipment_type': 'id',
+            'municipality': 'ibge_id'
         }
     },
     'cnes_bed': {
@@ -123,18 +124,6 @@ var SIZES = {
     }
 };
 
-var COLORS = {
-    'secex': {},
-    'rais': {},
-    'cnes_establishment': {
-        'municipality': [],
-        'provider_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
-        'unit_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
-        'administrative_sphere': []
-        // 'administrative_sphere': ['ambulatory_care_facilities', 'emergency_facilities', 'neonatal_unit_facilities', 'obstetrical_center_facilities', 'surgery_center_facilities', 'selective_waste_collection']
-    }
-};
-
 var FILTERS = {
     'secex': {},
     'rais': {},
@@ -149,7 +138,7 @@ var FILTERS = {
     'cnes_bed': {}
 };
 
-var DIMENSION_COLOR = {
+var COLORS = {
     'provider_type': {
         '30': '#4575B4',
         '40': '#74ADD1',
@@ -160,6 +149,13 @@ var DIMENSION_COLOR = {
         '22': '#FDAE61',
         '60': '#FEE090',
         '99': '#FFFFBF'
+    },
+    'region': {
+        '1': '#00994c',
+        '2': '#101070',
+        '3': '#c40008',
+        '4': '#a9d046',
+        '5': '#f3e718'
     }
 };
 
@@ -197,7 +193,7 @@ var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['states'] = lang == 'en' ? 'States' : 'Estados';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';
-dictionary['municipalities'] = lang == 'en' ? 'Municipalities' : 'Municípios';
+dictionary['plural_municipality'] = lang == 'en' ? 'Municipalities' : 'Municípios';
 dictionary['product_section'] = lang == 'en' ? 'Section' : 'Seção';
 dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
 dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
@@ -207,15 +203,15 @@ dictionary['of'] = lang == 'en' ? 'of' : 'de';
 dictionary['number of'] = lang == 'en' ? 'number of' : 'número de';
 dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
 dictionary['country'] = lang == 'en' ? 'Country' : 'País';
-dictionary['countries'] = lang == 'en' ? 'Countries' : 'Países';
+dictionary['plural_country'] = lang == 'en' ? 'Countries' : 'Países';
 dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
-dictionary['continents'] = lang == 'en' ? 'Continents' : 'Continentes';
+dictionary['plural_continent'] = lang == 'en' ? 'Continents' : 'Continentes';
 dictionary['mesoregion'] = lang == 'en' ? 'Mesoregion' : 'Mesorregião';
-dictionary['mesoregions'] = lang == 'en' ? 'Mesoregions' : 'Mesorregiões';
+dictionary['plural_mesoregion'] = lang == 'en' ? 'Mesoregions' : 'Mesorregiões';
 dictionary['microregion'] = lang == 'en' ? 'Microregion' : 'Microrregião';
-dictionary['microregions'] = lang == 'en' ? 'Microregions' : 'Microrregiões';
+dictionary['plural_microregion'] = lang == 'en' ? 'Microregions' : 'Microrregiões';
 dictionary['region'] = lang == 'en' ? 'Region' : 'Região';
-dictionary['regions'] = lang == 'en' ? 'Regions' : 'Regiões';
+dictionary['plural_region'] = lang == 'en' ? 'Regions' : 'Regiões';
 dictionary['basic_values'] = lang == 'en' ? 'Basic Values' : 'Valores Básicos';
 dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
 dictionary['item_id'] = 'ID';
@@ -243,6 +239,7 @@ dictionary['drawer_group'] = lang == 'en' ? 'Group' : 'Agrupar';
 dictionary['yes'] = lang == 'en' ? 'Yes' : 'Sim';
 dictionary['no'] = lang == 'en' ? 'No' : 'Não';
 dictionary['drawer_filter'] = lang == 'en' ? 'Filter' : 'Filtrar';
+dictionary['including'] = lang == 'en' ? 'Including' : 'Inclui';
 dictionary['Filter by'] = lang == 'en' ? 'Filter by' : 'Filtrar por';
 dictionary['kg'] = 'KG';
 dictionary['id'] = 'ID';
@@ -275,9 +272,11 @@ dictionary['secex'] = 'SECEX';
 dictionary['rais'] = 'RAIS';
 dictionary['hide'] = lang == 'en' ? 'Hide' : 'Ocultar';
 dictionary['isolate'] = lang == 'en' ? 'Isolate' : 'Isolar';
+dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
+dictionary['plural_health_region'] = lang == 'en' ? 'Health regions' : 'Regiões de Saúde';
 dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
 
 // CNES BEDS
@@ -329,22 +328,6 @@ dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in 
 dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
 dictionary['sus_availability_indicator'] = lang == 'en' ? 'Sus Availability Indicator' : 'Indicador de Disponibilidade para o SUS';
 
-var PLURAL = {
-    'municipality': dictionary['municipalities'],
-    'state': dictionary['states'],
-    'microregion': dictionary['microregions'],
-    'mesoregion': dictionary['mesoregions'],
-    'region': dictionary['regions'],
-    'country': dictionary['countries'],
-    'product': dictionary['products'],
-    'industry_class': dictionary['industries'],
-    'industry_section': dictionary['industries'],
-    'industry_division': dictionary['industries'],
-    'industry_division': dictionary['industries'],
-    'occupation_group': dictionary['occupations'],
-    'occupation_family': dictionary['occupations']
-};
-
 var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {
     var formatYearRange = function() {
         if (yearRange[0] && yearRange[1])
@@ -357,7 +340,7 @@ var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange)
         title += ' ' + formatYearRange();
 
     for (attr in attrs) {
-        title = title.replace('<' + attr + '>', PLURAL[attrs[attr]] || dictionary[attrs[attr]]);
+        title = title.replace('<' + attr + '>', dictionary['plural_' + attrs[attr]] || dictionary[attrs[attr]]);
     }
     title = title.charAt(0).toUpperCase() + title.slice(1);
 
@@ -404,12 +387,7 @@ var formatHelper = function() {
                         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
                     })
                 default:
-                if ([dictionary['number_sus_bed'], dictionary['number_non_sus_bed'], dictionary['sus_healthcare_professional'], 
-                    dictionary['sus_bond'], dictionary['sus_availability_indicator']].indexOf(text) >= 0)
-                    return text;
-                return dictionary[text] || text.replace(/\w\S*/g, function(txt) {
-                    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
-                });
+                    return dictionary[text] || text;
             };
 
         },
