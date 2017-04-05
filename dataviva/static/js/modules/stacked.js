@@ -3,8 +3,6 @@ var stacked = document.getElementById('stacked'),
     filters = stacked.getAttribute('filters'),
     area = stacked.getAttribute('area'),
     args = getUrlArgs(),
-    depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][area] || [area],
-    group = depths[0],
     values = stacked.getAttribute('values').split(' '),
     type = stacked.getAttribute('type').split(' '),
     lang = document.documentElement.lang;
@@ -17,6 +15,31 @@ var stacked = document.getElementById('stacked'),
     baseTitle = '',
     baseSubtitle = '',
     stackedFilters = args['filters'] ? args['filters'].split('+') : [];
+
+
+
+// We can have many aggretation options. e.g:
+// ?depths=region+municipality
+//    depthList = [[region, municipality]]
+// ?depths=region+municipality,mesoregion+state
+//    depthList = [[region, municipality], [mesoregionstate]]
+// This will create a form to select the aggregation.
+
+var depthsList = [];
+
+if(args['depths'] != undefined) {
+    depthsList = args['depths'].split(',').map(function(item){
+        return item.split('+');
+    });
+}
+else {
+    depthsList = DEPTHS[dataset][area] || [area];
+}
+
+var depths = depthsList[0],
+    group = depths[0],
+    allDepths = depthsList.reduce(function(item, arr){ return arr.concat(item)}, []).filter(function(item, i, arr){ return arr.indexOf(item) == i });
+
 
 var buildData = function(apiData) {
     
@@ -47,11 +70,11 @@ var buildData = function(apiData) {
             if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
 
-            depths.forEach(function(depth) {
+            allDepths.forEach(function(depth) {
                 dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
             });
             
-            if(depths.indexOf(area) == -1) {
+            if(allDepths.indexOf(area) == -1) {
                 dataItem[area] = metadata[area][dataItem[area]]['name_' + lang];
             }
             
@@ -275,6 +298,28 @@ var loadViz = function (data){
                 .draw();
         });
 
+        if(depthsList.length > 1) {
+            var options = depthsList.map(function(list, i){
+                return {
+                    label: dictionary[list[0]],
+                    id: i
+                };
+            })
+
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(options)
+                .title(dictionary['drawer_group'])
+                .type('drop')
+                .font({'size': 11})
+                .focus(-1, function(value) {
+                    viz.id(depthsList[value]);
+                    viz.draw();
+                })
+                .draw();
+        }
+
         return ui;
     }
 
@@ -369,7 +414,7 @@ var loadViz = function (data){
 var getUrls = function() {
     var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year'), area];
 
-    depths.forEach(function(depth) {
+    allDepths.forEach(function(depth) {
         if (depth != area)
             dimensions.push(depth);
     });
@@ -379,7 +424,7 @@ var getUrls = function() {
         'http://api.staging.dataviva.info/metadata/' + area
     ];
 
-    depths.forEach(function(depth) {
+    allDepths.forEach(function(depth) {
         urls.push('http://api.staging.dataviva.info/metadata/' + depth);
     });
 
@@ -399,7 +444,7 @@ $(document).ready(function() {
             var data = responses[0];
             metadata[area] = responses[1];
 
-            depths.concat(stackedFilters).forEach(function(attr, i) {
+            allDepths.concat(stackedFilters).forEach(function(attr, i) {
                 metadata[attr] = responses[i + 2];
             });
 

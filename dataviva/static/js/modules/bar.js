@@ -1,6 +1,7 @@
 var data = [],
     solo = [],
     MAX_BARS = 10,
+    currentFilters = {},
     lang = document.documentElement.lang,
     dataset = $("#bar").attr("dataset"),
     subtitle = $("#bar").attr("subtitle"),
@@ -10,8 +11,10 @@ var data = [],
     y = $("#bar").attr("y").split(","),
     currentY = y[0],
     filters = $("#bar").attr("filters"),
+    uiFilters = getUrlArgs().filters ? getUrlArgs().filters.split(',') : [],
+    dimensions = y.concat(uiFilters).filter(function(item, i, arr){ return arr.indexOf(item) == i }),
     url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + y.join("/") + ( filters ? "?" + filters : '');
+        dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
 
 // TODO: Title creator
@@ -179,6 +182,57 @@ var orderHelper = {
         '7': 7
     }
 }
+
+var addUiFilters = function(){
+    var config = {
+        'id': 'id',
+        'text': 'label',
+        'font': {'size': 11},
+        'container': d3.select('#controls'),
+        'search': false
+    };
+
+    var filteredData = function(filter, value) {
+        currentFilters[filter] = value;
+        return data.filter(function(item) {
+            var valid = true,
+                keys = Object.keys(currentFilters);
+
+            for (var i = 0; i < keys.length; i++) {
+                if (currentFilters[keys[i]] == -1)
+                    continue;
+                if (item[keys[i]] != currentFilters[keys[i]]) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            return valid;
+        });
+    };
+
+    uiFilters.forEach(function(filter, j) {
+        currentFilters[filter] = -1;
+        var options = [];
+        for (id in metadatas[filter]) {
+            options.push({'id': metadatas[filter][id]['name_' + lang], 'label': metadatas[filter][id]['name_' + lang]})
+        }
+        options.unshift({'id': -1, 'label': dictionary['all']});
+
+        d3plus.form()
+            .config(config)
+            .container(d3.select('#controls'))
+            .data(options)
+            .title(dictionary[filter])
+            .type('drop')
+            .font({'size': 11})
+            .focus(-1, function(value) {
+                visualization.data(filteredData(filter, value));
+                visualization.draw();
+            })
+            .draw();
+    });
+};
 
 var addOrder = function(data){
     data = data.map(function(item){
@@ -443,13 +497,13 @@ var addPercentage = function(data){
 }
 
 var addNameToData = function(data){
-    y.forEach(function(itemY){
+    dimensions.forEach(function(dimension){
         data = data.map(function(item){
-            if(metadatas[itemY][item[itemY]] == undefined){
-                item[itemY] = 'NOT FOUND!';
+            if(metadatas[dimension][item[dimension]] == undefined){
+                item[dimension] = 'NOT FOUND!';
             }
             else{
-                item[itemY] = metadatas[itemY][item[itemY]]['name_' + lang];
+                item[dimension] = metadatas[dimension][item[dimension]]['name_' + lang];
             }
 
 
@@ -552,7 +606,7 @@ var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualiz
 $(document).ready(function(){
     var urls = [url];
 
-    y.forEach(function(item){
+    dimensions.forEach(function(item){
         urls.push("http://api.staging.dataviva.info/metadata/" + item);
     });
 
@@ -562,7 +616,7 @@ $(document).ready(function(){
             api = responses.shift();
             metadatas = {};
 
-            y.forEach(function(item, index){
+            dimensions.forEach(function(item, index){
                 metadatas[item] = responses[index];
             });
 
@@ -572,6 +626,8 @@ $(document).ready(function(){
             data = addNameToData(data);
             data = addPercentage(data);
             solo = updateSolo(data);
+
+            addUiFilters();
 
             loading.hide();
             d3.select('#mask').remove();

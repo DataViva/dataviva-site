@@ -61,18 +61,6 @@
                   </a>
               </div>
             {% endif %}       
-
-            <a href="#establishments-provider-type" class="list-group-item" data-toggle="collapse" data-parent="#establishments-provider-type">{% trans %}Provider Type{% endtrans %}</a>
-            <div class="collapse" id="establishments-provider-type">
-                <a href="/{{ g.locale }}/tree_map/cnes_establishment/provider_type/establishments?filters=ambulatory_attention+hospital_attention&hierarchy=false{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-provider-type-tree_map'}}" data-parent="#establishments-provider-type">
-                    TreeMap
-                </a>
-                <a href="/{{ g.locale }}/stacked/cnes_establishment/provider_type/establishments?values=establishments&depths=provider_type+administrative_sphere+tax_withholding+sus_bond&filters=sus_bond{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-provider-type-stacked'}}" data-parent="#establishments-provider-type">
-                    {% trans %}Stacked{% endtrans %}
-                </a>
-            </div>
             <a href="#establishments-unit-type" class="list-group-item" data-toggle="collapse" data-parent="#establishments-unit-type">{% trans %}Unit Type{% endtrans %}</a>
             <div class="collapse" id="establishments-unit-type">
                 <a href="/{{ g.locale }}/tree_map/cnes_establishment/unit_type/establishments?filters=ambulatory_attention+hospital_attention&hierarchy=false{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
