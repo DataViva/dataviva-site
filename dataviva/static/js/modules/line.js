@@ -43,11 +43,15 @@ var buildData = function(apiResponse){
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
 
             depths.forEach(function(depth) {
-
-                //Precisa dos metadados de paises não tem nos metadados de country
-                //if (depth != line)
-                    //dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
+                if (depth != 'type'){
+                    if (depth != line)
+                        dataItem[depth] = metadata[line][dataItem[line]][depth]['name_' + lang];
+                    else 
+                        dataItem[line] = metadata[line][dataItem[line]]['name_' + lang];
+                }
             });
+
+            
 
             //if(type == 'balance') dataItem['icon'] = '/static/img/icons/' + type + '/' + dataItem['type'] + '_val.png';
 
@@ -63,6 +67,36 @@ var buildData = function(apiResponse){
 
     return data;
 }
+
+var loadViz = function(data) {
+
+    var viz = d3plus.viz()
+        .container('#lineGraph')
+        .data({'value': data, 'padding': 0})
+        .type('line')
+        .shape({'interpolate': 'monotone'})
+        .id({
+            'value': depths
+        })
+        .x({
+            'value': 'year',
+            'label': {'font': {'size': 20}},
+            'ticks': {'font': {'size': 17}
+            }
+        })
+        .y({
+            'value': 'value',
+            //'label': {'value': yAxisLabelBuilder(type), 'font': {'size': 20}},
+            'ticks': {'font': {'size': 17}}
+        })
+
+        .labels({'align': 'left', 'valign': 'top'})
+        .background('transparent')
+        .time({'value': 'year'})
+    
+    viz.draw();
+
+};
 
 var getUrls = function() {
     var dimensions = [dataset, 'year', line],
@@ -94,7 +128,7 @@ $(document).ready(function() {
 
             data = buildData(data);
 
-            debugger
+            // debugger
 
             loadViz(data);
 
