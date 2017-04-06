@@ -272,6 +272,7 @@ dictionary['secex'] = 'SECEX';
 dictionary['rais'] = 'RAIS';
 dictionary['hide'] = lang == 'en' ? 'Hide' : 'Ocultar';
 dictionary['isolate'] = lang == 'en' ? 'Isolate' : 'Isolar';
+dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
 dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
 
 // CNES
@@ -326,7 +327,7 @@ dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
 dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['sus_availability_indicator'] = lang == 'en' ? 'Sus Availability Indicator' : 'Indicador de Disponibilidade para o SUS';
+dictionary['sus_availability_indicator'] = lang == 'en' ? 'Sus Availability' : 'Disponibilidade para o SUS';
 
 var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {
     var formatYearRange = function() {
