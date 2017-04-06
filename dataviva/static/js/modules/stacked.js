@@ -15,9 +15,9 @@ var stacked = document.getElementById('stacked'),
     yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
     metadata = {},
     currentFilters = {},
-    currentTitleAttrs = {'area': area, 'value': values[0]},
-    baseTitle = '',
-    baseSubtitle = '',
+    currentTitleAttrs = {'size': values[0]}
+    baseTitle = stacked.getAttribute('graph-title'),
+    baseSubtitle = stacked.getAttribute('graph-subtitle'),
     stackedFilters = args['filters'] ? args['filters'].split('+') : [],
     attentionLevelFilter = false;
 
@@ -74,7 +74,14 @@ var buildData = function(apiData) {
                     dataItem[header] = +dataItem[header]
             });
 
-            dataItem[DICT[dataset]['item_id'][area]] = dataItem[area];
+
+            if (ID_LABELS.hasOwnProperty(area))
+                dataItem[dictionary[ID_LABELS[area]]] = dataItem[area];
+            else
+                dataItem['id'] = dataItem[area];
+
+            if (COLORS.hasOwnProperty(group))
+                dataItem['color'] = COLORS[group][dataItem[group]];
 
             for (key in calcBasicValues) {
                 dataItem[key] = calcBasicValues[key](dataItem);   
@@ -105,18 +112,14 @@ var buildData = function(apiData) {
 }
 
 var loadViz = function (data){
-    var hasIdLabel = function() {
-        return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(area);
-    };
-
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][area] : 'id',
+                '': ID_LABELS.hasOwnProperty(area) ? dictionary[ID_LABELS[area]] : 'id',
                 [dictionary['basic_values']]: [values[0]]
             },
             'long': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][area] : 'id',
+                '': ID_LABELS.hasOwnProperty(area) ? dictionary[ID_LABELS[area]] : 'id',
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
@@ -307,7 +310,7 @@ var loadViz = function (data){
                 .draw();
         });
 
-        if(depthsList.length > 1) {
+        if (depthsList.length > 1) {
             var options = depthsList.map(function(list, i){
                 return {
                     label: dictionary[list[0]],
@@ -388,17 +391,15 @@ var loadViz = function (data){
 
 
     var titleHelper = function() {
-        if (!baseTitle) {
-            baseTitle = '<value> ' + dictionary['per'] + ' <area>';
-        }
-
-        var title = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+        var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
 
         return {
-            'value': title['title'],
+            'value': header['title'],
             'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
-        }
+            'padding': 5,
+            'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+        };
     };
 
 
@@ -443,9 +444,6 @@ var loadViz = function (data){
         .time({'value': 'year'})
         .background("transparent")
         .shape({"interpolate": "monotone"})
-        .title(titleHelper())
-        .title({'total': {'font': {'align': 'left'}}})
-        .title({'total': {'prefix': dictionary[values[0]] + ': '}})
         .tooltip(tooltipBuilder())
         .messages({'branding': true, 'style': 'large'})
         .ui(uiBuilder())
@@ -454,24 +452,32 @@ var loadViz = function (data){
         .format(formatHelper())
         .legend({'filters': true})
         .depth(0, function(d) {
-            currentTitleAttrs['area'] = depths[d];
+            currentTitleAttrs['shapes'] = depths[d];
             viz.title(titleHelper());
         })
 
-        if (group) {
-            viz.color(group);
+        if (COLORS.hasOwnProperty(group)) {
+            viz.attrs(COLORS[group]);
+            viz.color('color');
+        } else {
+            viz.color({'scale':'category20', 'value': args['color'] || depths[0] || area});
         }
 
         if (depths[0] == '') {
             viz.id({'value': area})
+            currentTitleAttrs['shapes'] = area;
         } else {
             viz.id(depths);
+            currentTitleAttrs['shapes'] = depths[0];
         }
+
+        viz.title(titleHelper())
+            .title({'total': {'prefix': dictionary[values[0]] + ': '}})
+            .title({'total': {'font': {'align': 'left'}}})
 
         $('#stacked').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
 
-        viz.draw()
-
+        viz.draw();
         toolsBuilder(stacked.id, viz, data, titleHelper().value);
 }
 
