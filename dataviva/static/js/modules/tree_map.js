@@ -40,17 +40,16 @@ var buildData = function(apiResponse) {
                 dataItem[header] = getAttrByName(item, header);
                 if (['wage', 'average_wage'].indexOf(header) >= 0)
                     dataItem[header] = +dataItem[header]
-                
-                if (COLORS[header]) {
-                    dataItem['color'] = COLORS[header][dataItem[header]];
-                }
             });
 
-            if (group && HAS_ICONS.indexOf(group) >= 0)
+            if (COLORS.hasOwnProperty(group))
+                dataItem['color'] = COLORS[group][dataItem[group]];
+
+            if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
             
-            if (DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(squares))
-                dataItem[DICT[dataset]['item_id'][squares]] = dataItem[squares];
+            if (ID_LABELS.hasOwnProperty(squares))
+                dataItem[dictionary[ID_LABELS[squares]]] = dataItem[squares];
             else
                 dataItem['id'] = dataItem[squares];
 
@@ -58,7 +57,6 @@ var buildData = function(apiResponse) {
                 dataItem[key] = calcBasicValues[key](dataItem);
 
             depths.forEach(function(depth) {
-
                 if (depth != squares)
                     dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
             });
@@ -222,32 +220,67 @@ var loadViz = function(data) {
             });
         };
 
+
         filters.forEach(function(filter) {
-            currentFilters[filter] = -1;
-            var options = [];
-            for (id in metadata[filter]) {
-                options.push({'id': id, 'label': metadata[filter][id]['name_' + lang]})
+            if (filter == 'attention_level') {
+                currentFilters['ambulatory_attention'] = -1;
+                currentFilters['hospital_attention'] = -1;
+
+                var filterValues = [
+                    [-1, -1], // Todos 
+                    [0, 0],   // Nenhum
+                    [0, 1],   // Hospitalar
+                    [1, 0],   // Ambulatorial
+                    [1, 1]    // Ambulatorial/Hospitalar
+                ];
+
+                var options = [
+                    {'id': 0, 'label': dictionary['all']},
+                    {'id': 1, 'label': dictionary['none']},
+                    {'id': 2, 'label': dictionary['hospital']},
+                    {'id': 3, 'label': dictionary['ambulatory']},
+                    {'id': 4, 'label': dictionary['ambulatory/hospital']},
+                ];
+
+                d3plus.form()
+                    .config(config)
+                    .container(d3.select('#controls'))
+                    .data(options)
+                    .title(dictionary['attention_level'])
+                    .type('drop')
+                    .focus(0, function(value) {
+                        viz.data(filteredData('ambulatory_attention', filterValues[value][0]))
+                        viz.data(filteredData('hospital_attention', filterValues[value][1]))
+                        viz.draw();
+                    })
+                    .draw();
+            } else {
+                currentFilters[filter] = -1;
+                var options = [];
+                for (id in metadata[filter]) {
+                    options.push({'id': id, 'label': metadata[filter][id]['name_' + lang]})
+                }
+
+                options = options.sort(function(a, b) {
+                    return (a.label.toLowerCase() < b.label.toLowerCase()) ? -1 : 1;
+                });
+
+                options.unshift({'id': -1, 'label': dictionary['all']});
+
+                d3plus.form()
+                    .config(config)
+                    .container(d3.select('#controls'))
+                    .data(options)
+                    .title(dictionary[filter])
+                    .type('drop')
+                    .font({'size': 11})
+                    .focus(-1, function(value) {
+                        viz.data(filteredData(filter, value));
+                        viz.draw();
+                    })
+                    .draw();
             }
-
-            options = options.sort(function(a, b) {
-                return (a.label.toLowerCase() < b.label.toLowerCase()) ? -1 : 1;
-            });
-
-            options.unshift({'id': -1, 'label': dictionary['all']});
-
-            d3plus.form()
-                .config(config)
-                .container(d3.select('#controls'))
-                .data(options)
-                .title(dictionary[filter])
-                .type('drop')
-                .font({'size': 11})
-                .focus(-1, function(value) {
-                    viz.data(filteredData(filter, value));
-                    viz.draw();
-                })
-                .draw();
-        });
+        });      
     };
 
     var titleHelper = function(depth) {
@@ -265,21 +298,17 @@ var loadViz = function(data) {
             'padding': 5,
             'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
             'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
-        }
+        };
     };
-
-    var hasIdLabel = function() {
-        return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(squares);
-    }
 
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][squares] : 'id',
+                '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
                 [dictionary['basic_values']]: [size]
             },
             'long': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][squares] : 'id',
+                '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
@@ -346,8 +375,12 @@ var getUrls = function() {
     
     depths.concat(filters).forEach(function(attr) {
         if (attr != squares && dimensions.indexOf(attr) == -1) {
-            dimensions.push(attr);
-            metadataAttrs.push(attr);
+            if (attr == 'attention_level') {
+                dimensions.push('ambulatory_attention', 'hospital_attention');
+            } else {
+                metadataAttrs.push(attr);
+                dimensions.push(attr);
+            }
         }
     });
 
@@ -355,11 +388,9 @@ var getUrls = function() {
         API_DOMAIN + '/metadata/' + squares
     ];
 
-    if (dataset.match(/^cnes_/)) {
-        metadataAttrs.forEach(function(attr) {
-            urls.push(API_DOMAIN + '/metadata/' + attr)
-        });
-    }
+    metadataAttrs.forEach(function(attr) {
+        urls.push(API_DOMAIN + '/metadata/' + attr)
+    });
 
     return urls;
 };
@@ -375,10 +406,13 @@ $(document).ready(function() {
 
             var offset = 0;
             depths.concat(filters).forEach(function(attr, i) {
-                if (!metadata.hasOwnProperty(attr))
-                     metadata[attr] = responses[i-offset+2];
-                else
-                    offset++;
+                if (attr != 'attention_level') {
+                    if (!metadata.hasOwnProperty(attr)) {
+                         metadata[attr] = responses[i-offset+2];
+                    } else {
+                        offset++;
+                    }       
+                }
             });
 
             data = buildData(data);
@@ -386,6 +420,9 @@ $(document).ready(function() {
 
             loading.hide();
             d3.select('#mask').remove();
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });
