@@ -32,7 +32,9 @@ var DICT = {
     'cnes_establishment': {
         'item_id': {
             'municipality': 'ibge_id',
-            'state': 'ibge_id'
+            'state': 'ibge_id',
+            'unit_type': 'id',
+            'provider_type': 'id'
         }
     },
     'cnes_equipment': {

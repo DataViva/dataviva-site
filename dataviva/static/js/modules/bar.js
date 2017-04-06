@@ -17,7 +17,7 @@ var data = [],
     filters = $("#bar").attr("filters"),
     uiFilters = getUrlArgs().filters ? getUrlArgs().filters.split(',') : [],
     dimensions = y.concat(uiFilters).filter(unique),
-    dimensions = options.indexOf('attention_level') ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
+    dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
@@ -253,8 +253,6 @@ var addUiFilters = function(){
             [metadatas['ambulatory_attention'][1]['name_' + lang], metadatas['hospital_attention'][0]['name_' + lang]],   // Ambulatorial
             [metadatas['ambulatory_attention'][1]['name_' + lang], metadatas['hospital_attention'][1]['name_' + lang]]    // Ambulatorial/Hospitalar
         ];
-
-
 
         var menuOptions = [
             {

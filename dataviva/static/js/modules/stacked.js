@@ -1,3 +1,7 @@
+var unique = function(item, i, arr){
+    return arr.indexOf(item) == i;
+}
+
 var stacked = document.getElementById('stacked'),
     dataset = stacked.getAttribute('dataset'),
     filters = stacked.getAttribute('filters'),
@@ -14,9 +18,14 @@ var stacked = document.getElementById('stacked'),
     currentTitleAttrs = {'area': area, 'value': values[0]},
     baseTitle = '',
     baseSubtitle = '',
-    stackedFilters = args['filters'] ? args['filters'].split('+') : [];
+    stackedFilters = args['filters'] ? args['filters'].split('+') : [],
+    attentionLevelFilter = false;
 
-
+if(stackedFilters.indexOf('attention_level') != -1) {
+    var i = stackedFilters.indexOf('attention_level');
+    stackedFilters.splice(i, 1);
+    attentionLevelFilter = true;
+}
 
 // We can have many aggretation options. e.g:
 // ?depths=region+municipality
@@ -38,8 +47,12 @@ else {
 
 var depths = depthsList[0],
     group = depths[0],
-    allDepths = depthsList.reduce(function(item, arr){ return arr.concat(item)}, []).filter(function(item, i, arr){ return arr.indexOf(item) == i });
+    allDepths = depthsList.reduce(function(item, arr){ return arr.concat(item)}, []).filter(unique),
+    dimensions = [].concat(allDepths, stackedFilters, [area]).filter(unique);
 
+if(attentionLevelFilter){
+    dimensions.push('ambulatory_attention', 'hospital_attention');
+}
 
 var buildData = function(apiData) {
     
@@ -70,13 +83,9 @@ var buildData = function(apiData) {
             if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
 
-            allDepths.forEach(function(depth) {
-                dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
+            dimensions.forEach(function(dimension) {
+                dataItem[dimension] = metadata[dimension][dataItem[dimension]]['name_' + lang];
             });
-            
-            if(allDepths.indexOf(area) == -1) {
-                dataItem[area] = metadata[area][dataItem[area]]['name_' + lang];
-            }
             
             if (dataItem.microregion){
                 dataItem.microregion = dataItem.microregion + ' ';
@@ -321,8 +330,62 @@ var loadViz = function (data){
                 .draw();
         }
 
+        // Custom filter to Attention Level
+        // To use, add: filters=attention_level
+        if(attentionLevelFilter) {
+
+            currentFilters['ambulatory_attention'] = -1;
+            currentFilters['hospital_attention'] = -1;
+
+            var filterValues = [
+                [-1, -1], // Todos
+                [metadata['ambulatory_attention'][0]['name_' + lang], metadata['hospital_attention'][0]['name_' + lang]],   // Nenhum
+                [metadata['ambulatory_attention'][0]['name_' + lang], metadata['hospital_attention'][1]['name_' + lang]],   // Hospitalar
+                [metadata['ambulatory_attention'][1]['name_' + lang], metadata['hospital_attention'][0]['name_' + lang]],   // Ambulatorial
+                [metadata['ambulatory_attention'][1]['name_' + lang], metadata['hospital_attention'][1]['name_' + lang]]    // Ambulatorial/Hospitalar
+            ];
+
+            var menuOptions = [
+                {
+                    id: 0,
+                    label: dictionary['all']
+                },
+                {
+                    id: 1,
+                    label: dictionary['none']
+                },
+                {
+                    id: 2,
+                    label: dictionary['hospital']
+                },
+                {
+                    id: 3,
+                    label: dictionary['ambulatory']
+                },
+                {
+                    id: 4,
+                    label: dictionary['ambulatory/hospital']
+                },
+            ];
+
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(menuOptions)
+                .title('Nível de Atenção')
+                .type('drop')
+                .font({'size': 11})
+                .focus(-1, function(pos) {
+                    viz.data(filteredData('ambulatory_attention', filterValues[pos][0]))
+                    viz.data(filteredData('hospital_attention', filterValues[pos][1]))
+                    viz.draw();
+                })
+                .draw();
+        }
+
         return ui;
     }
+
 
     var titleHelper = function() {
         if (!baseTitle) {
@@ -413,24 +476,12 @@ var loadViz = function (data){
 }
 
 var getUrls = function() {
-    var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year'), area];
-
-    allDepths.forEach(function(depth) {
-        if (depth != area)
-            dimensions.push(depth);
-    });
-
     var urls = [
-        'http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
-        'http://api.staging.dataviva.info/metadata/' + area
+        'http://api.staging.dataviva.info/' + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '?' + filters
     ];
 
-    allDepths.forEach(function(depth) {
-        urls.push('http://api.staging.dataviva.info/metadata/' + depth);
-    });
-
-    stackedFilters.forEach(function(filter){
-        urls.push('http://api.staging.dataviva.info/metadata/' + filter);
+    dimensions.forEach(function(dimension) {
+        urls.push('http://api.staging.dataviva.info/metadata/' + dimension);
     });
     
     return urls;
@@ -442,11 +493,10 @@ $(document).ready(function() {
     ajaxQueue(
         getUrls(), 
         function(responses) {
-            var data = responses[0];
-            metadata[area] = responses[1];
+            var data = responses.shift();
 
-            allDepths.concat(stackedFilters).forEach(function(attr, i) {
-                metadata[attr] = responses[i + 2];
+            dimensions.forEach(function(attr, i) {
+                metadata[attr] = responses[i];
             });
 
             data = buildData(data);
