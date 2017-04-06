@@ -13,7 +13,7 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}}" data-parent="#equipments-type">
                     {% trans %}Stacked{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code,unit_type,sus_availability_indicator?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?options=singlecolor&filters=sus_availability_indicator,unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}}" data-parent="#equipments-type">
                     {% trans %}Bar{% endtrans %}
                 </a>
@@ -78,7 +78,7 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-unit-type-tree_map'}}" data-parent="#establishments-unit-type">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/stacked/cnes_establishment/unit_type/establishments?values=establishments&depths=unit_type+administrative_sphere+tax_withholding+sus_bond&filters=sus_bond{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/stacked/cnes_establishment/unit_type/establishments?values=establishments&depths=provider_type,unit_type&filters=sus_bond+hierarchy_level+attention_level{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-unit-type-stacked'}}" data-parent="#establishments-unit-type">
                     {% trans %}Stacked{% endtrans %}
                 </a>
