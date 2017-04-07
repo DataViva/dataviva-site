@@ -1,7 +1,10 @@
 # -*- coding: utf-8 -*-
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
+from dataviva.translations.dictionary import dictionary
+from dataviva.apps.title.views import get_title
 import urllib
+import json
 
 mod = Blueprint('bar', __name__,
                 template_folder='templates',
@@ -78,9 +81,12 @@ def index(dataset, x, y):
     id_ibge = request.args.get('id_ibge')
     type = request.args.get('type')
     wld = request.args.get('wld')
+    establishment = request.args.get('establishment')
     occupation = request.args.get('occupation')
     industry = request.args.get('industry')
     counts = request.args.getlist('count')
+
+    title_attrs = {}
 
     options = request.args.get('options')
     subtitle = request.args.get('subtitle', '')
@@ -93,22 +99,36 @@ def index(dataset, x, y):
     if type:
         filters.append(('type', type))
 
+    if request.args.get('filters'):
+        filters.append(('filters', request.args.get('filters')))
+
     if wld:
         filters.append(wld_service(wld))
+        title_attrs[wld_service(wld)[0]] = wld_service(wld)[1]
 
     if occupation:
         filters.append(occupation_service(occupation))
+        title_attrs[occupation_service(wld)[0]] = occupation_service(wld)[1]
 
     if industry:
         filters.append(industry_service(industry))
+        title_attrs[industry_service(wld)[0]] = industry_service(wld)[1]
 
     if product:
         filters.append(product_service(product))
+        title_attrs[product_service(wld)[0]] = product_service(wld)[1]
 
     if id_ibge:
         filters.append(location_service(id_ibge))
+        title_attrs[location_service(id_ibge)[0]] = location_service(id_ibge)[1]
+
+    if establishment:
+        filters.append(('establishment', establishment))
 
     filters = urllib.urlencode(filters)
+    graph_title, graph_subtitle = get_title(dataset, y.split(',')[0], 'bar', title_attrs)
 
-    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options, subtitle=subtitle)
+    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options,
+                           subtitle=subtitle, graph_title=graph_title or '', graph_subtitle=graph_subtitle or '',
+                           dictionary=json.dumps(dictionary()))
     

@@ -1,7 +1,7 @@
-var ajaxQueue = function(urls, callback, ajax) {
+var ajaxQueue = function(urls, callback, error) {
     var results = urls.slice(),
         queue = urls.slice(),
-        config = ajax || {};
+        config = {};
 
     var ready = function(result, url) {
         queue.splice(queue.indexOf(url), 1);
@@ -17,7 +17,7 @@ var ajaxQueue = function(urls, callback, ajax) {
             method: config['method'] || 'GET',
             url: url,
             success: function(result) { ready(result, url); },
-            error: function(result) { ready(null, url); },
+            error: function(result) { if (error !== undefined) error(url); },
         });
     });
 }

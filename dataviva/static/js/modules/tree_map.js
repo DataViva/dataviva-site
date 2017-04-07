@@ -5,16 +5,17 @@ var tree_map = document.getElementById('tree_map'),
     baseTitle = tree_map.getAttribute('graph-title'),
     baseSubtitle = tree_map.getAttribute('graph-subtitle'),
     args = getUrlArgs(),
-    yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
+    yearRange = [Number.POSITIVE_INFINITY, 0],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
     hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
+    zoom = args.hasOwnProperty('zoom') && args['zoom'] == 'true' ? true : false;
     group = depths[0],
-    sizes = args['sizes'] || SIZES[dataset][squares] || [size],
+    sizes = args.hasOwnProperty('sizes') ? args['sizes'].split('+') : SIZES[dataset][squares] || [size],
     filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [],
     basicValues = BASIC_VALUES[dataset] || [],
     calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
     currentFilters = {},
-    currentTitleAttrs = {'size': size, 'squares': squares}
+    currentTitleAttrs = {'size': size, 'shapes': squares}
     metadata = {};
 
 if (depths.length > 1)
@@ -38,17 +39,16 @@ var buildData = function(apiResponse) {
                 dataItem[header] = getAttrByName(item, header);
                 if (['wage', 'average_wage'].indexOf(header) >= 0)
                     dataItem[header] = +dataItem[header]
-                
-                if (COLORS[header]) {
-                    dataItem['color'] = COLORS[header][dataItem[header]];
-                }
             });
 
-            if (group && HAS_ICONS.indexOf(group) >= 0)
+            if (COLORS.hasOwnProperty(group))
+                dataItem['color'] = COLORS[group][dataItem[group]];
+
+            if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
             
-            if (DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(squares))
-                dataItem[DICT[dataset]['item_id'][squares]] = dataItem[squares];
+            if (ID_LABELS.hasOwnProperty(squares))
+                dataItem[dictionary[ID_LABELS[squares]]] = dataItem[squares];
             else
                 dataItem['id'] = dataItem[squares];
 
@@ -61,11 +61,43 @@ var buildData = function(apiResponse) {
             });
            
             dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
+
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+                yearRange[1] = dataItem['year'];
+            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+                yearRange[0] = dataItem['year'];
+            
             data.push(dataItem);
+
         } catch(e) {
         };
     });
 
+    // Removes depths that all data items are part of
+    // For example, if data is filtered by state, there is no reason to have region or state as depths, since all data is from the same state and region
+    if (hierarchy && depths.length > 1) {
+        var invalidDepths = [];
+        depths.forEach(function(depth) {
+            if (depth != squares) {
+                var valid = false;
+                for (var i = 1; i < data.length; i++) {
+                    if (data[i][depth] != data[i-1][depth]) {
+                        valid = true;
+                        break;
+                    }
+                }
+                if (!valid)
+                    invalidDepths.push(depth);
+            }
+        });
+        invalidDepths.forEach(function(depth) {
+            depths.splice(depths.indexOf(depth), 1);
+        });
+    }
+
+    if (yearRange[0] == yearRange[1])
+        yearRange[0] = 0;
+    
     return data;
 }
 
@@ -93,9 +125,9 @@ var loadViz = function(data) {
                     .title(dictionary['depth'])
                     .type(options.length > 3 ? 'drop' : 'toggle')
                     .focus(squares, function(value) {
-                        currentTitleAttrs['depth'] = value;
+                        currentTitleAttrs['shapes'] = value;
                         viz.depth(depths.indexOf(value))
-                            .title(titleHelper())
+                            .title(titleHelper(yearRange))
                             .draw();
                     })
                     .draw();
@@ -111,11 +143,11 @@ var loadViz = function(data) {
                     .title(dictionary['drawer_color_by'])
                     .type(depths.length > 3 ? 'drop' : 'toggle')
                     .focus(options[0]['id'], function(value) {
-                        currentTitleAttrs['depth'] = value;
+                        currentTitleAttrs['shapes'] = value;
                         viz.data(data)
                             .id([value, squares])
                             .color(value)
-                            .title(titleHelper())
+                            .title(titleHelper(yearRange))
                             .draw();
                     })
                     .draw();
@@ -148,7 +180,7 @@ var loadViz = function(data) {
                 .focus(size, function(value) {
                     currentTitleAttrs['size'] = value;
                     viz.size(value)
-                        .title(titleHelper())
+                        .title(titleHelper(yearRange))
                         .title({'total': {'prefix': dictionary[value] + ': '}})
                         .draw();
                 })
@@ -193,72 +225,110 @@ var loadViz = function(data) {
             });
         };
 
-        filters.forEach(function(filter) {
-            currentFilters[filter] = -1;
-            var options = [];
-            for (id in metadata[filter]) {
-                options.push({'id': id, 'label': metadata[filter][id]['name_' + lang]})
-            }
 
-            options.unshift({'id': -1, 'label': dictionary['all']});
-            
-            d3plus.form()
-                .config(config)
-                .container(d3.select('#controls'))
-                .data(options)
-                .title(dictionary[filter])
-                .type('drop')
-                .font({'size': 11})
-                .focus(-1, function(value) {
-                    viz.data(filteredData(filter, value));
-                    viz.draw();
-                })
-                .draw();
-        });
+        filters.forEach(function(filter) {
+            if (filter == 'attention_level') {
+                currentFilters['ambulatory_attention'] = -1;
+                currentFilters['hospital_attention'] = -1;
+
+                var filterValues = [
+                    [-1, -1], // Todos 
+                    [0, 0],   // Nenhum
+                    [0, 1],   // Hospitalar
+                    [1, 0],   // Ambulatorial
+                    [1, 1]    // Ambulatorial/Hospitalar
+                ];
+
+                var options = [
+                    {'id': 0, 'label': dictionary['all']},
+                    {'id': 1, 'label': dictionary['none']},
+                    {'id': 2, 'label': dictionary['hospital']},
+                    {'id': 3, 'label': dictionary['ambulatory']},
+                    {'id': 4, 'label': dictionary['ambulatory/hospital']},
+                ];
+
+                d3plus.form()
+                    .config(config)
+                    .container(d3.select('#controls'))
+                    .data(options)
+                    .title(dictionary['attention_level'])
+                    .type('drop')
+                    .focus(0, function(value) {
+                        viz.data(filteredData('ambulatory_attention', filterValues[value][0]))
+                        viz.data(filteredData('hospital_attention', filterValues[value][1]))
+                        viz.draw();
+                    })
+                    .draw();
+            } else {
+                currentFilters[filter] = -1;
+                var options = [];
+                for (id in metadata[filter]) {
+                    options.push({'id': id, 'label': metadata[filter][id]['name_' + lang]})
+                }
+
+                options = options.sort(function(a, b) {
+                    return (a.label.toLowerCase() < b.label.toLowerCase()) ? -1 : 1;
+                });
+
+                options.unshift({'id': -1, 'label': dictionary['all']});
+
+                d3plus.form()
+                    .config(config)
+                    .container(d3.select('#controls'))
+                    .data(options)
+                    .title(dictionary[filter])
+                    .type('drop')
+                    .font({'size': 11})
+                    .focus(-1, function(value) {
+                        viz.data(filteredData(filter, value));
+                        viz.draw();
+                    })
+                    .draw();
+            }
+        });      
     };
 
-    var titleHelper = function(depth) {
+    var titleHelper = function(years) {
         if (!baseTitle) {
-            baseTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <squares>' : '<size> ' + dictionary['per'] + ' <squares>';
-            if (depths.length > 1)
-                baseTitle += '/<depth>';
+            var genericTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <shapes>' : '<size> ' + dictionary['per'] + ' <shapes>';
+            if (depths.length > 1 && currentTitleAttrs['shapes'] != currentTitleAttrs['shapes'])
+                genericTitle += '/<depth>';
         }
 
-        var title = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
 
         return {
-            'value': title['title'],
+            'value': header['title'],
             'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
-        }
+            'padding': 5,
+            'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+        };
     };
-
-    var hasIdLabel = function() {
-        return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(squares);
-    }
 
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][squares] : 'id',
+                '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
                 [dictionary['basic_values']]: [size]
             },
             'long': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][squares] : 'id',
+                '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
     };
 
     var timelineCallback = function(years) {
+        var selectedYears = [];
         if (!years.length)
-            yearRange = [0, 0];
+            selectedYears = yearRange;
         else if (years.length == 1)
-            yearRange = [0, years[0].getFullYear()];
+            selectedYears = [0, years[0].getFullYear()];
         else
-            yearRange = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
-        toolsBuilder(viz, data, titleHelper().value, uiBuilder());
-        viz.title(titleHelper());
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('tree_map', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
     };
 
     var viz = d3plus.viz()
@@ -268,12 +338,12 @@ var loadViz = function(data) {
         .size(size)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
-        .time({'value': 'year', 'solo': {'callback': timelineCallback}})
+        .time({'value': 'year', 'solo': {'value': yearRange[1], 'callback': timelineCallback}})
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .messages({'branding': true, 'style': 'large'})
-        .title(titleHelper())
+        .title(titleHelper([0, yearRange[1]]))
         .title({'total': {'font': {'align': 'left'}}})
         .title({'total': {'prefix': dictionary[size] + ': '}})
         .tooltip(tooltipBuilder())
@@ -283,20 +353,25 @@ var loadViz = function(data) {
     if (hierarchy) {
         viz.id(depths); 
         viz.depth(args['depth'] || depths.indexOf(squares));
-        viz.zoom(false);
+        viz.zoom(zoom || false);
     } else {
         viz.id([args['depth'] || depths[0], squares]);
         viz.depth(1);
-        viz.zoom(true);
+        viz.zoom(zoom || true);
     }
 
-    viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+    if (COLORS.hasOwnProperty(group)) {
+        viz.attrs(COLORS[group]);
+        viz.color('color');
+    } else {
+        viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+    }
 
     $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     
     viz.draw();
 
-    toolsBuilder(viz, data, titleHelper().value, uiBuilder());
+    toolsBuilder('tree_map', viz, data, titleHelper(yearRange).value);
 };
 
 
@@ -306,8 +381,12 @@ var getUrls = function() {
     
     depths.concat(filters).forEach(function(attr) {
         if (attr != squares && dimensions.indexOf(attr) == -1) {
-            dimensions.push(attr);
-            metadataAttrs.push(attr);
+            if (attr == 'attention_level') {
+                dimensions.push('ambulatory_attention', 'hospital_attention');
+            } else {
+                metadataAttrs.push(attr);
+                dimensions.push(attr);
+            }
         }
     });
 
@@ -315,11 +394,9 @@ var getUrls = function() {
         API_DOMAIN + '/metadata/' + squares
     ];
 
-    if (dataset.match(/^cnes_/)) {
-        metadataAttrs.forEach(function(attr) {
-            urls.push(API_DOMAIN + '/metadata/' + attr)
-        });
-    }
+    metadataAttrs.forEach(function(attr) {
+        urls.push(API_DOMAIN + '/metadata/' + attr)
+    });
 
     return urls;
 };
@@ -335,10 +412,13 @@ $(document).ready(function() {
 
             var offset = 0;
             depths.concat(filters).forEach(function(attr, i) {
-                if (!metadata.hasOwnProperty(attr))
-                     metadata[attr] = responses[i-offset+2];
-                else
-                    offset++;
+                if (attr != 'attention_level') {
+                    if (!metadata.hasOwnProperty(attr)) {
+                         metadata[attr] = responses[i-offset+2];
+                    } else {
+                        offset++;
+                    }       
+                }
             });
 
             data = buildData(data);
@@ -346,6 +426,9 @@ $(document).ready(function() {
 
             loading.hide();
             d3.select('#mask').remove();
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });

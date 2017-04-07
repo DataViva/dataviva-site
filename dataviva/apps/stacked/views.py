@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.translations.dictionary import dictionary
+from dataviva.apps.title.views import get_title
 import urllib
 import json
 
@@ -79,29 +80,36 @@ def industry_service(industry):
 
 @mod.route('/<dataset>/<area>/<value>')
 def index(dataset, area, value):
-
 	group = request.args.get('group', '')
 	type = request.args.get('type', '')
 	depths = request.args.get('depths', '')
-	values = request.args.get('values', value)	
+	values = request.args.get('values', value)
+	title_attrs = {}
 
 	filters = []
 	for key, value in request.args.items():
-		if key not in ['depths', 'values', 'group'] and value:
+		if key not in ['depths', 'values', 'group', 'filters'] and value:
 			if key == 'product':
 				filters.append(product_service(value))
+				title_attrs[product_service(value)[0]] = product_service(value)[1]
 			elif key == 'id_ibge':
 				filters.append(location_service(value))
+				title_attrs[location_service(value)[0]] = location_service(value)[1]
 			elif key == 'wld':
 				filters.append(wld_service(value))
+				title_attrs[wld_service(value)[0]] = wld_service(value)[1]
 			elif key == 'occupation':
 				filters.append(occupation_service(value))
+				title_attrs[occupation_service(value)[0]] = occupation_service(value)[1]
 			elif key == 'industry':
 				filters.append(industry_service(value))
+				title_attrs[industry_service(value)[0]] = industry_service(value)[1]
 			else:
 				filters.append((key, value))
 
 	filters = urllib.urlencode(filters)
+
+	title, subtitle = get_title(dataset, area, 'stacked', title_attrs)
 
 	return render_template('stacked/index.html',
 							dataset=dataset,
@@ -110,5 +118,7 @@ def index(dataset, area, value):
 							group=group,
 							depths=depths,
 							values=values,
+							title=title or '',
+							subtitle=subtitle or '',
 							filters=filters,
-							dictionary=json.dumps(dictionary()))	
+							dictionary=json.dumps(dictionary()))

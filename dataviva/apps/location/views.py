@@ -176,12 +176,14 @@ def graphs(bra_id, tab):
         location.id = 'all'
         depth = None
         id_ibge = None
+        is_municipality = False
     else:
         location = Bra.query.filter_by(id=bra_id).first()
         depth = location_depth(bra_id)
         id_ibge = _location_service(depth, location)
+        is_municipality = True if depth == 'municipality' else False
 
-    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None)
+    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None, is_municipality=is_municipality)
 
 
 @mod.route('/all', defaults={'tab': 'general'})
@@ -509,6 +511,7 @@ def index(bra_id, tab):
 
     if menu and menu not in tabs[tab]:
         abort(404)
+
 
     else:
         return render_template('location/index.html',

@@ -1,13 +1,31 @@
 var lang = document.documentElement.lang,
     API_DOMAIN = 'http://api.staging.dataviva.info';
 
+var ID_LABELS = {
+    'municipality': 'ibge_id',
+    'state': 'ibge_id',
+    'region': 'ibge_id',
+    'mesoregion': 'ibge_id',
+    'microregion': 'ibge_id',
+    'health_region': 'id',
+    'product': 'hs_id',
+    'product_chapter': 'hs_id',
+    'product_section': 'hs_id',
+    'country': 'wld_id',
+    'continent': 'wld_id',
+    'unit_type': 'id',
+    'provider_type': 'id',
+    'occupation_family': 'cbo_id',
+    'occupation_group': 'cbo_id',
+    'equipment_type': 'id',
+    'equipment_code': 'id',
+    'industry_class': 'cnae_id',
+    'industry_section': 'cnae_id',
+    'industry_division': 'cnae_id',
+};
+
 var DICT = {
     'secex': {
-        'item_id': {
-            'municipality': 'ibge_id',
-            'product': 'hs_id',
-            'country': 'wld_id'
-        },
         'kg': {
             'export': 'export_kg',
             'import': 'import_kg'
@@ -22,33 +40,7 @@ var DICT = {
         }
     },
     'rais': {
-        'item_id': {
-            'industry_class': 'cnae_id',
-            'municipality': 'ibge_id',
-            'occupation_family': 'cbo_id'
-        },
         'jobs': 'total_jobs'
-    },
-    'cnes_establishment': {
-        'item_id': {
-            'municipality': 'ibge_id',
-            'state': 'ibge_id'
-        }
-    },
-    'cnes_equipment': {
-        'item_id': {
-            'equipment_type': 'id'
-        }
-    },
-    'cnes_bed': {
-        'item_id': {
-            'bed_type': 'id'
-        }
-    },
-    'cnes_professional': {
-        'item_id': {
-            'municipality': 'ibge_id'
-        }
     }
 };
 
@@ -65,10 +57,8 @@ var DEPTHS = {
         'occupation_family': ['occupation_group', 'occupation_family']
     },
     'cnes_establishment': {
-       'municipality': ['health_region', 'unit_type', 'provider_type'],
-       'provider_type': ['tax_withholding', 'hierarchy_level', 'administrative_sphere'],
-       'unit_type': ['tax_withholding', 'hierarchy_level', 'administrative_sphere'],
-       'administrative_sphere': ['administrative_sphere']
+       'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality'],
+       'unit_type': ['provider_type', 'unit_type'],
    },
    'cnes_equipment': {
         'equipment_type': ['health_region', 'equipment_type', 'unit_type', 'equipment_code', 'equipment_type'],
@@ -76,16 +66,12 @@ var DEPTHS = {
         'unit_type': ['health_region', 'equipment_type', 'equipment_code']
    },
     'cnes_bed': {
-        'municipality': ['health_region', 'bed_type', 'bed_type_per_specialty', 'unit_type'],
-        'unit_type': ['health_region', 'bed_type', 'bed_type_per_specialty'],
-        'provider_type': ['health_region', 'bed_type', 'bed_type_per_specialty'],
+        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality'],
+        'unit_type': ['provider_type', 'unit_type'],
         'bed_type': ['health_region', 'bed_type_per_specialty']
    },
    'cnes_professional': {
-        'municipality': ['health_region', 'municipality'],
-        'professional_link': ['health_region', 'occupation_family', 'sus_healthcare_professional'],
-        'unit_type': ['health_region', 'occupation_family'],
-        'occupation_family' : ['health_region']
+        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality']
    }
 };
 
@@ -110,8 +96,8 @@ var SIZES = {
         'administrative_sphere': ['establishments']
     },
     'cnes_equipment': {
-        'municipality': ['equipments', 'equipment_quantity', 'equipment_quantity_in_use'],
-        'equipment_type': ['equipments', 'equipment_quantity', 'equipment_quantity_in_use']
+        'municipality': ['equipment_quantity', 'equipment_quantity_in_use'],
+        'equipment_type': ['equipment_quantity', 'equipment_quantity_in_use']
     },
     'cnes_bed': {
         'bed_type': ['beds', 'number_sus_bed', 'number_non_sus_bed'],
@@ -122,20 +108,7 @@ var SIZES = {
     'cnes_professional': {
         'municipality': ['professionals'],
         'unit_type': ['professionals'],
-        'occupation': ['professionals'],
-        'professional_link': ['professionals']
-   }
-};
-
-var COLORS = {
-    'secex': {},
-    'rais': {},
-    'cnes_establishment': {
-        'municipality': [],
-        'provider_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
-        'unit_type': ['administrative_sphere', 'tax_withholding', 'hierarchy_level'],
-        'administrative_sphere': []
-        // 'administrative_sphere': ['ambulatory_care_facilities', 'emergency_facilities', 'neonatal_unit_facilities', 'obstetrical_center_facilities', 'surgery_center_facilities', 'selective_waste_collection']
+        'occupation_family': ['professionals', 'other_hours_worked', 'hospital_hour', 'ambulatory_hour']
     }
 };
 
@@ -153,7 +126,7 @@ var FILTERS = {
     'cnes_bed': {}
 };
 
-var DIMENSION_COLOR = {
+var COLORS = {
     'provider_type': {
         '30': '#4575B4',
         '40': '#74ADD1',
@@ -164,6 +137,13 @@ var DIMENSION_COLOR = {
         '22': '#FDAE61',
         '60': '#FEE090',
         '99': '#FFFFBF'
+    },
+    'region': {
+        '1': '#00994c',
+        '2': '#101070',
+        '3': '#c40008',
+        '4': '#a9d046',
+        '5': '#f3e718'
     }
 };
 
@@ -171,9 +151,9 @@ var BASIC_VALUES = {
     'secex': ['value', 'kg'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
     'cnes_establishment': ['establishments'],
-    'cnes_equipment': ['equipments'],
+    'cnes_equipment': ['equipment_quantity', 'equipment_quantity_in_use'],
     'cnes_bed': ['beds'],
-    'cnes_professional': ['professionals']
+    'cnes_professional': ['professionals', 'other_hours_worked', 'hospital_hour', 'ambulatory_hour']
 };
 
 if (document.getElementById('rings'))
@@ -201,7 +181,7 @@ var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['states'] = lang == 'en' ? 'States' : 'Estados';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';
-dictionary['municipalities'] = lang == 'en' ? 'Municipalities' : 'Municípios';
+dictionary['plural_municipality'] = lang == 'en' ? 'Municipalities' : 'Municípios';
 dictionary['product_section'] = lang == 'en' ? 'Section' : 'Seção';
 dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
 dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
@@ -211,15 +191,15 @@ dictionary['of'] = lang == 'en' ? 'of' : 'de';
 dictionary['number of'] = lang == 'en' ? 'number of' : 'número de';
 dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
 dictionary['country'] = lang == 'en' ? 'Country' : 'País';
-dictionary['countries'] = lang == 'en' ? 'Countries' : 'Países';
+dictionary['plural_country'] = lang == 'en' ? 'Countries' : 'Países';
 dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
-dictionary['continents'] = lang == 'en' ? 'Continents' : 'Continentes';
+dictionary['plural_continent'] = lang == 'en' ? 'Continents' : 'Continentes';
 dictionary['mesoregion'] = lang == 'en' ? 'Mesoregion' : 'Mesorregião';
-dictionary['mesoregions'] = lang == 'en' ? 'Mesoregions' : 'Mesorregiões';
+dictionary['plural_mesoregion'] = lang == 'en' ? 'Mesoregions' : 'Mesorregiões';
 dictionary['microregion'] = lang == 'en' ? 'Microregion' : 'Microrregião';
-dictionary['microregions'] = lang == 'en' ? 'Microregions' : 'Microrregiões';
+dictionary['plural_microregion'] = lang == 'en' ? 'Microregions' : 'Microrregiões';
 dictionary['region'] = lang == 'en' ? 'Region' : 'Região';
-dictionary['regions'] = lang == 'en' ? 'Regions' : 'Regiões';
+dictionary['plural_region'] = lang == 'en' ? 'Regions' : 'Regiões';
 dictionary['basic_values'] = lang == 'en' ? 'Basic Values' : 'Valores Básicos';
 dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
 dictionary['item_id'] = 'ID';
@@ -247,35 +227,69 @@ dictionary['drawer_group'] = lang == 'en' ? 'Group' : 'Agrupar';
 dictionary['yes'] = lang == 'en' ? 'Yes' : 'Sim';
 dictionary['no'] = lang == 'en' ? 'No' : 'Não';
 dictionary['drawer_filter'] = lang == 'en' ? 'Filter' : 'Filtrar';
+dictionary['including'] = lang == 'en' ? 'Including' : 'Inclui';
 dictionary['Filter by'] = lang == 'en' ? 'Filter by' : 'Filtrar por';
 dictionary['kg'] = 'KG';
 dictionary['id'] = 'ID';
+dictionary['establishment_size'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
+dictionary['average_establishment_size'] = lang == 'en' ? 'Average Establishment Size' : 'Tamanho Médio do Estabelecimento';
+dictionary['establishment_count'] = lang == 'en' ? 'Establishments' : 'Estabelecimentos';
+dictionary['wage'] = lang == 'en' ? 'Salary Mass' : 'Massa Salarial';
+dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
+dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
+dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
+dictionary['month'] = lang == 'en' ? 'Month' : 'Mês';
+dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
+dictionary['legal_nature'] = lang == 'en' ? 'Legal Nature' : 'Natureza Jurídica';
+dictionary['size_establishment'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
+dictionary['time_resolution'] = lang == 'en' ? 'Time Resolution' : 'Resolução Temporal';
+dictionary['total_of'] = lang == 'en' ? 'Total in selected years: ' : 'Total nos anos selecionados: ';
+dictionary['data_provided_by'] = lang == 'en' ? "Data provided by " : "Dados fornecidos por ";
+dictionary['percentage_terms'] = lang == 'en' ? 'Percentage Terms' : 'Termos Percentuais';
+dictionary['values'] = lang == 'en' ? 'Values' : 'Valores';
+dictionary['exporting_municipality'] = lang == 'en' ? 'Based on the Exporting Municipality' : 'Baseado nos Municípios Exportadores';
+dictionary['state_production'] = lang == 'en' ? 'Based on State Production' : 'Baseado nos Estados Produtores';
+dictionary['average_wage'] = lang == 'en' ? 'Salário Médio Mensal' : 'Average Monthly Wage';
+dictionary['jobs'] = lang == 'en' ? 'Jobs' : 'Empregos';
+dictionary['year'] = lang == 'en' ? 'Year' : 'Ano';
+dictionary['scale'] = lang == 'en' ? 'Scale' : 'Escala';
+dictionary['yaxis'] = lang == 'en' ? 'Y-Axis' : 'Eixo Y';
+dictionary['xaxis'] = lang == 'en' ? 'X-Axis' : 'Eixo X';
+dictionary['locale'] = lang == 'en' ? 'en_US' : 'pt_BR';
+dictionary['secex'] = 'SECEX';
+dictionary['rais'] = 'RAIS';
+dictionary['hide'] = lang == 'en' ? 'Hide' : 'Ocultar';
+dictionary['isolate'] = lang == 'en' ? 'Isolate' : 'Isolar';
+dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
+dictionary['Unable to load visualization'] = lang == 'en' ? 'Unable to load visualization' : 'Não foi possível carregar a visualização';
+dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
+dictionary['plural_health_region'] = lang == 'en' ? 'Health regions' : 'Regiões de Saúde';
 dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
 
 // CNES BEDS
-dictionary['bed_type'] = lang == 'en' ? 'Bed type' : 'Tipo de leito';
+dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
 dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
-dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed type per specialty' : 'Tipo de especialidade do leito';
-dictionary['cnes_bed'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Type Per Specialty' : 'Tipo de Leito por Especialidade';
+dictionary['cnes_bed'] = lang == 'en' ? 'Datasus' : 'Datasus';
 dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
 dictionary['number_non_sus_bed'] = lang == 'en' ? 'Non SUS Beds' : 'Leitos não SUS';
-dictionary['number_existing_contract'] = lang == 'en' ? 'Existing contracts number' : 'Quantidade de contratos existentes';
+dictionary['number_existing_contract'] = lang == 'en' ? 'Existing Contracts Number' : 'Quantidade de Contratos Existentes';
 
 // CNES PROFESSIONALS
 dictionary['sus_healthcare_professional'] = lang == 'en' ? 'SUS Professionals' : 'Profissionais do SUS';
 dictionary['professional_link'] = lang == 'en' ? 'Link' : 'Vinculação';
 dictionary['cnes_professional'] = lang == 'en' ? 'datasus' : 'datasus';
 dictionary['professionals'] = lang == 'en' ? 'Total Professionals' : 'Total de Profissionais';
-dictionary['other_hours_worked'] = lang == 'en' ? 'Other Hours Worked' : 'Outras horas trabalhadas';
+dictionary['other_hours_worked'] = lang == 'en' ? 'Other Hours Worked' : 'Outras Horas Trabalhadas';
 dictionary['hospital_hour'] = lang == 'en' ? 'Hospital Hours' : 'Horas Hospitalares';
 dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulatoriais';
 
 // CNES ESTABLISHMENTS
-dictionary['sus_bond'] = lang == 'en' ? 'SUS Bond' : 'Vínculo com o SUS';
+dictionary['sus_bond'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
 dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento ambulatorial';
 dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
@@ -285,40 +299,34 @@ dictionary['neonatal_unit_facility'] = lang == 'en' ? 'Neonatal Unit Facilities'
 dictionary['obstetrical_center_facility'] = lang == 'en' ? 'Obstetrical Center Facilities' : 'Instalação Fisica de Centro Obstétrico ';
 dictionary['surgery_center_facility'] = lang == 'en' ? 'Surgery Center Facilities' : 'Instalação Fisica de Centro Cirúrgico';
 dictionary['selective_waste_collection'] = lang == 'en' ? 'Selective Waste Collection' : 'Coleta seletiva de rejeitos';
-dictionary['hospital_attention'] = lang == 'en' ? 'Hospital attention' : 'Nível de Atenção Hospitalar';
-dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory attention' : 'Nível de Atenção Ambulatorial';
-dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de hierarquia';
+dictionary['hospital_attention'] = lang == 'en' ? 'Hospital Attention' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory Attention' : 'Nível de Atenção Ambulatorial';
+dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de Hierarquia';
 dictionary['cnes_establishment'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['hospital_attention'] = lang == 'en' ? 'Level Of Hospital Care' : 'Nível de atenção hospitalar';
-dictionary['ambulatory_attention'] = lang == 'en' ? 'Level Of Ambulatory Care' : 'Nível de atenção ambulatorial';
-dictionary['ambulatory_care_facilities'] = lang == 'en' ? 'Physical Facilities Of Outpatient Care' : 'Instalações Físicas de Atendimento ambulatorial';
+dictionary['hospital_attention'] = lang == 'en' ? 'Level Of Hospital Care' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Level Of Ambulatory Care' : 'Nível de Atenção Ambulatorial';
+dictionary['ambulatory_care_facilities'] = lang == 'en' ? 'Physical Facilities Of Outpatient Care' : 'Instalações Físicas de Atendimento Ambulatorial';
 dictionary['hospital_care'] = lang == 'en' ? 'Hospital Care' : 'Atendimento Hospitalar';
-dictionary['dependency_level'] = lang == 'en' ? 'Dependency Level' : 'Nível de dependência';
+dictionary['ambulatory'] = lang == 'en' ? 'Ambulatory' : 'Ambulatorial';
+dictionary['hospital'] = lang == 'en' ? 'Hospital' : 'Hospitalar';
+dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
+dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
+dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de atenção';
+
+dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
+dictionary['hospital'] = lang == 'en' ? 'Hospital' : 'Hospitalar';
+dictionary['ambulatory'] = lang == 'en' ? 'Ambulatory' : 'Ambulatorial';
+dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
+dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de Atenção';
 
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
-dictionary['equipment_code'] = lang == 'en' ? 'Equipment Code' : 'Código de Equipamento';
+dictionary['equipment_code'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
 dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
-dictionary['sus_availability_indicator'] = lang == 'en' ? 'Sus Availability Indicator' : 'Indicador de Disponibilidade para o SUS';
-
-var PLURAL = {
-    'municipality': dictionary['municipalities'],
-    'state': dictionary['states'],
-    'microregion': dictionary['microregions'],
-    'mesoregion': dictionary['mesoregions'],
-    'region': dictionary['regions'],
-    'country': dictionary['countries'],
-    'product': dictionary['products'],
-    'industry_class': dictionary['industries'],
-    'industry_section': dictionary['industries'],
-    'industry_division': dictionary['industries'],
-    'industry_division': dictionary['industries'],
-    'occupation_group': dictionary['occupations'],
-    'occupation_family': dictionary['occupations']
-};
+dictionary['sus_availability_indicator'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 
 var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {
     var formatYearRange = function() {
@@ -332,7 +340,7 @@ var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange)
         title += ' ' + formatYearRange();
 
     for (attr in attrs) {
-        title = title.replace('<' + attr + '>', PLURAL[attrs[attr]] || dictionary[attrs[attr]]);
+        title = title.replace('<' + attr + '>', dictionary['plural_' + attrs[attr]] || dictionary[attrs[attr]]);
     }
     title = title.charAt(0).toUpperCase() + title.slice(1);
 
@@ -342,7 +350,7 @@ var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange)
 dictionary['time-resolution'] =  lang == 'en' ? 'Time Resolution' : 'Resolução temporal';
 dictionary['Order'] =  lang == 'en' ? 'Order' : 'Ordem';
 dictionary['sort'] =  lang == 'en' ? 'Sort' : 'Ordenar';
-dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Particiação de Mercado';
+dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Participação de Mercado';
 dictionary['y-axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
 dictionary['desc'] = lang == 'en' ? 'Descending' : 'Descendente';
 dictionary['asc'] = lang == 'en' ? 'Ascending' : 'Ascendente';
@@ -375,7 +383,9 @@ var formatHelper = function() {
                 case 'jobs':
                     return dictionary[DICT[dataset][text]];
                 case 'primary connections':
-                    return text.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+                    return text.replace(/\w\S*/g, function(txt) {
+                        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+                    })
                 default:
                     return dictionary[text] || text;
             };

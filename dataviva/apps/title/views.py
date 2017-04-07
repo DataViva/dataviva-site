@@ -5,6 +5,7 @@ from dataviva.translations.dictionary import dictionary
 from dataviva.utils.graphs_services import filter_service
 from dataviva.api.attrs.models import Cbo, Cnae, Hs, Wld, Bra
 from models import GraphTitle
+import requests
 
 mod = Blueprint('title', __name__,
                 template_folder='templates',
@@ -36,6 +37,8 @@ def filter_service(key):
         return 'industry'
     if key in ['occupation_group', 'occupation_family']:
         return 'occupation'
+    if key in ['equipment_type', 'equipment_code']:
+        return 'equipment'
     return key
 
 
@@ -91,10 +94,16 @@ def get_title(dataset, shapes, graph, api_filters):
             query['type'] = value
             values['type'] = value
         else:
+            if dataset.startswith('cnes_'):
+                url = 'http://api.staging.dataviva.info/metadata/' + key + '/' + str(value)
             filter = filter_service(key)
             if filter:
                 query[filter] = 1
-                values[filter] = value_service(filter, value)
+                if dataset.startswith('cnes_'):
+                    response = requests.get(url).json()
+                    values[filter] = response['name_' + g.locale]
+                else:
+                    values[filter] = value_service(filter, value)
             else:
                 query[filter] = 0
 
@@ -104,7 +113,6 @@ def get_title(dataset, shapes, graph, api_filters):
     query['shapes'] = filter_service(shapes)
     query['dataset'] = dataset
     query['graph'] = graph
-
     result = GraphTitle.query.filter_by(**query).first()
 
     if result:       
@@ -114,10 +122,13 @@ def get_title(dataset, shapes, graph, api_filters):
 
         title = title.replace('<location>', 'Brazil' if g.locale == 'en' else 'Brasil')
 
+        possible_location_filters = [location for location in ['municipality', 'microregion', 'mesoregion', 'health_region', 'state', 'region'] if location in api_filters]
+        if len(possible_location_filters) > 0:
+            api_filters['location'] = api_filters[possible_location_filters[0]]
+
         if 'location' in api_filters:
             id = ('id' if len(api_filters['location']) == 1 else 'id_ibge', location_service(api_filters['location']))
             location = Bra.query.filter_by(**{id[0]: id[1]}).first()
-
             for preposition in ['in', 'from', 'of']:
                 if '<location_' + preposition + '>' in title:
                     title = inflect(title, location, preposition, 'location')
