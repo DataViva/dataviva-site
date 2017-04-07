@@ -15,7 +15,7 @@ var lineGraph = document.getElementById('lineGraph'),
     currentFilters = {},
     currentTitleAttrs = {'yValue': yValue, 'Line': line}
     metadata = {},
-    lastYear = 0;
+    balance = line == 'type' ? true : false;
 
 function string2date(dateString) {
     dateString = dateString.split('-');
@@ -53,22 +53,19 @@ var buildData = function(apiResponse){
             for (key in calcBasicValues)
                 dataItem[key] = calcBasicValues[key](dataItem);
 
-            depths.forEach(function(depth) {
-                if (depth != 'type'){ //Refatorar
+            if (balance)
+                dataItem['icon'] = '/static/img/icons/balance/' + dataItem['type'] + '_val.png';
+            else {
+                depths.forEach(function(depth) {
                     if (depth != line)
                         dataItem[depth] = metadata[line][dataItem[line]][depth]['name_' + lang];
                     else 
                         dataItem[line] = metadata[line][dataItem[line]]['name_' + lang];
-                }
-            });
-
-            //if(type == 'balance') dataItem['icon'] = '/static/img/icons/' + type + '/' + dataItem['type'] + '_val.png';
+                });
+            }
 
             dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
             data.push(dataItem);
-
-            //if (dataItem.hasOwnProperty('year') && dataItem['year'] > lastYear)
-                //lastYear = dataItem['year'];
 
         } catch(e) {
 
@@ -77,6 +74,14 @@ var buildData = function(apiResponse){
 
     return data;
 }
+
+var processData = function(data){
+    //return data;
+};
+
+var buildTradeBalanceData = function(data){
+    //return data;
+};
 
 var loadViz = function(data) {
     var uiBuilder = function() {
@@ -105,9 +110,25 @@ var loadViz = function(data) {
                     viz.y({
                         'value': value
                     })
-                        //.title(titleHelper())
-                        //.title({'total': {'prefix': dictionary[value] + ': '}})
                     .draw();
+                })
+                .draw();
+        }
+
+        // Adds trade balance selector
+        if (balance) {
+            d3plus.form()
+                .config(config)
+                .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'balance', 'label': dictionary['trade_balance']}])
+                .title(dictionary['depth'])
+                .type('toggle')
+                .focus(dictionary['value'] ? 'value' : 'balance', function(value) {
+                    //Adicionar campo 'balance' ao data ou criar outro conjunto de dados balanceData?
+                    viz.y({
+                        'value': value
+                    });
+                    viz.data(balanceData)
+                    viz.draw();
                 })
                 .draw();
         }
@@ -211,7 +232,7 @@ var getUrls = function() {
 
     var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + lineGraph.getAttribute('filters')]
 
-    if (line != 'type') urls.push(API_DOMAIN + '/metadata/' + line);
+    if (!balance) urls.push(API_DOMAIN + '/metadata/' + line);
 
     return urls;
 };
@@ -226,6 +247,13 @@ $(document).ready(function() {
             metadata[line] = responses[1];
 
             data = buildData(data);
+            //data = processData(data);
+
+            //if (balance)
+                //data = buildTradeBalanceData(data);
+                //loadViz(balanceData);
+
+
             loadViz(data);
 
             loading.hide();
@@ -234,17 +262,26 @@ $(document).ready(function() {
     );
 });
 
-// Montar o gráfico:
-// http://localhost:5000/en/product/021201/trade-partner?menu=exports-destination-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fwld%2F%3Fy%3Dexport_val%26color%3Dcolor
+// Tasks to do:
 
-// Url:
-// http://localhost:5000/en/line/secex/country/value?product=021201&type=export
-
-//ToDo:
-// 1. Montar gráfico Anual (Padrão) e Mensal (Seletores UI). DONE
-// 2. Interpolar dados faltantes.
-// 3. Calcular Balança Comercial.
-// 4. Verificar tooltips:
+// Geral:
+// 1. Testar todas as bases de dados
+// 2. Valores Anuais (Padrão) e Mensais para SECEX (Seletores UI) >> DONE
+// 3. Verificar tooltips:
 //      - Valores;
 //      - Ícones para países;
-// 5. Rótulos dos eixos.
+// 4. Rótulos dos eixos.
+
+// Modelo: http://localhost:5000/en/product/021201/trade-partner?menu=exports-destination-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fwld%2F%3Fy%3Dexport_val%26color%3Dcolor
+// URL: http://localhost:5000/en/line/secex/country/value?values=value+kg&product=021201&type=export
+
+// Gráfico de Balança Comercial:
+// 1. Interpolar dados faltantes (line-saulo.js).
+// 2. Calcular Balança Comercial (line-bk.js).
+
+// Modelo: http://localhost:5000/en/product/021201/trade-partner?menu=trade-balance-product-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fbalance%2F%3Ftime%3Dyear
+// URL: http://localhost:5000/en/line/secex/type/value?values=value+kg&product=021201
+
+//Testar Interpolação:
+// Modelo: http://localhost:5000/en/product/021201/trade-partner?bra_id=4mg030000
+// URL: http://localhost:5000/en/line/secex/type/value?values=value+kg&product=021201&id_ibge=3106200
