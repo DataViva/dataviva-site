@@ -54,7 +54,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-destination-line'}}" data-parent="#exports-destination">
                     {%trans%}Line{%endtrans%}
                </a>
-               <a href="/{{ g.locale }}/line/secex/country/value?values=value+kg&group=continent&depths=continent+country&type=export&product={{ product.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
+               <a href="/{{ g.locale }}/line/secex/country/value?values=value+kg&type=export&product={{ product.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-line'}}" data-parent="#new-api-exports-destination">
                     Line New API
                 </a>

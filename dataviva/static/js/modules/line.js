@@ -8,7 +8,7 @@ var lineGraph = document.getElementById('lineGraph'),
     yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][line] || [line],
     group = depths[0],
-    yValues = args.hasOwnProperty('yValues') ? args['yValues'].split('+') : SIZES[dataset][yValue] || [yValue],
+    yValues = args.hasOwnProperty('values') ? args['values'].split('+') : SIZES[dataset][yValue] || [yValue],
     filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [],
     basicValues = BASIC_VALUES[dataset] || [],
     calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
@@ -69,6 +69,7 @@ var buildData = function(apiResponse){
 
             //if (dataItem.hasOwnProperty('year') && dataItem['year'] > lastYear)
                 //lastYear = dataItem['year'];
+
         } catch(e) {
 
         };
@@ -86,25 +87,46 @@ var loadViz = function(data) {
                 'container': d3.select('#controls'),
                 'search': false
             };
-    
+
+        // Adds values selector
+        if (yValues.length > 1) {
+            var options = [];
+            yValues.forEach(function(item) {
+                options.push({'id': item, 'label': dictionary[item]});
+            });
+
+            d3plus.form()
+                .config(config)
+                .data(options)
+                .title(dictionary['values'])
+                .type(options.length > 3 ? 'drop' : 'toggle')
+                .focus(yValue, function(value) {
+                    currentTitleAttrs['size'] = value;
+                    viz.y({
+                        'value': value
+                    })
+                        //.title(titleHelper())
+                        //.title({'total': {'prefix': dictionary[value] + ': '}})
+                    .draw();
+                })
+                .draw();
+        }
+
+        // Adds time resolution selector
         if (dataset == 'secex') {
             d3plus.form()
                 .config(config)
-                .data([{'id': 1, 'label': dictionary['year']}, {'id': 0, 'label': dictionary['month']}])
+                .data([{'id': 'year', 'label': dictionary['year']}, {'id': 'date', 'label': dictionary['month']}])
                 .title(dictionary['time_resolution'])
                 .type('toggle')
-                .focus(dictionary['year'] ? 1 : 0, function(value) {
-                    debugger;
+                .focus(dictionary['year'] ? 'year' : 'date', function(value) {
                     viz.x({
-                        'value': 'month'
+                        'value': value
                     });
+                    viz.time({
+                        'value': value
+                    })
                     viz.draw();
-                //      if (value) {
-                //         loadViz(data);
-                //     } else {
-                //         var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
-                //         window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
-                //     }
                 })
                 .draw();
         }
@@ -153,7 +175,8 @@ var loadViz = function(data) {
         .messages({'branding': true, 'style': 'large'})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
-        .ui(uiBuilder());
+        .ui(uiBuilder())
+        .axes({'background': {'color': '#FFFFFF'}});
 
         if (group){
             viz.id([group, line]);
@@ -218,9 +241,10 @@ $(document).ready(function() {
 // http://localhost:5000/en/line/secex/country/value?product=021201&type=export
 
 //ToDo:
-// 1. Montar gráfico Anual (Padrão) e Mensal (Seletores UI).
+// 1. Montar gráfico Anual (Padrão) e Mensal (Seletores UI). DONE
 // 2. Interpolar dados faltantes.
 // 3. Calcular Balança Comercial.
 // 4. Verificar tooltips:
 //      - Valores;
 //      - Ícones para países;
+// 5. Rótulos dos eixos.
