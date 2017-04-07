@@ -37,6 +37,8 @@ def filter_service(key):
         return 'industry'
     if key in ['occupation_group', 'occupation_family']:
         return 'occupation'
+    if key in ['equipment_type', 'equipment_code']:
+        return 'equipment'
     return key
 
 

@@ -1,3 +1,7 @@
+var unique = function(item, i, arr){ 
+    return arr.indexOf(item) == i;
+}
+
 var data = [],
     solo = [],
     MAX_BARS = 10,
@@ -11,19 +15,34 @@ var data = [],
     y = $("#bar").attr("y").split(","),
     currentY = y[0],
     filters = $("#bar").attr("filters"),
+    baseTitle = $("#bar").attr('graph-title'),
+    baseSubtitle = $("#bar").attr('graph-subtitle'),
     uiFilters = getUrlArgs().filters ? getUrlArgs().filters.split(',') : [],
-    dimensions = y.concat(uiFilters).filter(function(item, i, arr){ return arr.indexOf(item) == i }),
+    dimensions = y.concat(uiFilters).filter(unique),
+    dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
+    yearRange = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
 
-// TODO: Title creator
-var title = 'Title';
+var currentTitleAttrs = {'shapes': y[0]}
 
 var visualization;
 var percentage = false;
 
 var uis = [];
+
+var titleHelper = function() {
+    var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+
+    return {
+        'value': header['title'],
+        'font': {'size': 22, 'align': 'left'},
+        'padding': 5,
+        'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+        'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+    };
+};
 
 if(x.length > 1){
     uis.push({
@@ -41,8 +60,8 @@ if(x.length > 1){
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
                     'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
                 })
-            totalOfCurrentX()
-            viz.draw()
+            totalOfCurrentX();
+            viz.draw();
         }
     });
 }
@@ -71,7 +90,11 @@ if(y.length > 1){
             viz.id({
                 'solo': solo,
             })
-            .draw();
+
+            currentTitleAttrs['shapes'] = value;
+            viz.title(titleHelper());
+
+            viz.draw();
         }
     });
 }
@@ -232,6 +255,59 @@ var addUiFilters = function(){
             })
             .draw();
     });
+
+    // Custom filter to Attention Level
+    // To use, add: options=attention_level
+    if(options.indexOf('attention_level') != -1) {
+
+        currentFilters['ambulatory_attention'] = -1;
+        currentFilters['hospital_attention'] = -1;
+
+        var filterValues = [
+            [-1, -1], // Todos 
+            [metadatas['ambulatory_attention'][0]['name_' + lang], metadatas['hospital_attention'][0]['name_' + lang]],   // Nenhum
+            [metadatas['ambulatory_attention'][0]['name_' + lang], metadatas['hospital_attention'][1]['name_' + lang]],   // Hospitalar
+            [metadatas['ambulatory_attention'][1]['name_' + lang], metadatas['hospital_attention'][0]['name_' + lang]],   // Ambulatorial
+            [metadatas['ambulatory_attention'][1]['name_' + lang], metadatas['hospital_attention'][1]['name_' + lang]]    // Ambulatorial/Hospitalar
+        ];
+
+        var menuOptions = [
+            {
+                id: 0,
+                label: dictionary['all']
+            },
+            {
+                id: 1,
+                label: dictionary['none']
+            },
+            {
+                id: 2,
+                label: dictionary['hospital']
+            },
+            {
+                id: 3,
+                label: dictionary['ambulatory']
+            },
+            {
+                id: 4,
+                label: dictionary['ambulatory/hospital']
+            },
+        ];
+
+        d3plus.form()
+            .config(config)
+            .container(d3.select('#controls'))
+            .data(menuOptions)
+            .title('Nível de Atenção')
+            .type('drop')
+            .font({'size': 11})
+            .focus(-1, function(pos) {
+                visualization.data(filteredData('ambulatory_attention', filterValues[pos][0]))
+                visualization.data(filteredData('hospital_attention', filterValues[pos][1]))
+                visualization.draw();
+            })
+            .draw();
+    }
 };
 
 var addOrder = function(data){
@@ -316,11 +392,26 @@ var formatHelper = {
 };
 
 var loadViz = function(data){
-     visualization = d3plus.viz()
+    var timelineCallback = function(years) {
+        if (!years.length)
+            yearRange = [0, 0];
+        else if (years.length == 1)
+            yearRange = [0, years[0].getFullYear()];
+        else
+            yearRange = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('bar', visualization, data, titleHelper().value);
+        visualization.title(titleHelper());
+        totalOfCurrentX(years);
+    };
+
+    yearRange = [0, lastYear(data)];
+
+    visualization = d3plus.viz()
         .container("#bar")
         .data(data)
         .background("transparent")
         .type("bar")
+        .height(window.innerHeight - $('#controls').height() - 40)
         .font({
             'size': 13
         })
@@ -352,7 +443,7 @@ var loadViz = function(data){
             'value': 'year',
             'solo': {
                 'value': [lastYear(data)],
-                'callback': totalOfCurrentX
+                'callback': timelineCallback
             }
         })
         .aggs({
@@ -373,6 +464,7 @@ var loadViz = function(data){
         })
         .legend(false)
         .messages({'branding': true, 'style': 'large'})
+        .title(titleHelper())
 
         if(colorHelper[currentY] != undefined)
             visualization.color(currentY + "_color");
@@ -586,6 +678,12 @@ var updateSolo = function(data){
     var copiedData = (JSON.parse(JSON.stringify(data)));
     var groupedData = groupDataByCurrentY(copiedData);
     solo = getTopCurrentYNames(groupedData);
+
+    var binaryVariables = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'obstetrical_center_facility', 'neonatal_unit_facility']
+
+    if(binaryVariables.indexOf(currentY) != -1){
+        return [metadatas[currentY][1]['name_' + lang]];
+    }
 
     return solo;
 };
