@@ -3,7 +3,6 @@ var unique = function(item, i, arr){
 }
 
 var data = [],
-    solo = [],
     MAX_BARS = 10,
     currentFilters = {},
     lang = document.documentElement.lang,
@@ -14,11 +13,13 @@ var data = [],
     currentX = x[0],
     y = $("#bar").attr("y").split(","),
     currentY = y[0],
+    vizId = getUrlArgs()['id'] ? getUrlArgs()['id'] : undefined,
     filters = $("#bar").attr("filters"),
     baseTitle = $("#bar").attr('graph-title'),
     baseSubtitle = $("#bar").attr('graph-subtitle'),
     uiFilters = getUrlArgs().filters ? getUrlArgs().filters.split(',') : [],
     dimensions = y.concat(uiFilters).filter(unique),
+    dimensions = vizId ? dimensions.concat(vizId).filter(unique) : dimensions,
     dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
     yearRange = [Number.POSITIVE_INFINITY, 0],
     url = "http://api.staging.dataviva.info/" + 
@@ -75,7 +76,7 @@ if(y.length > 1){
             currentY = value;
 
             viz.y(value)
-                .id(value)
+                .id(vizId ? vizId : value)
                 .order({
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
                     'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
@@ -85,16 +86,11 @@ if(y.length > 1){
             if(colorHelper[currentY] != undefined)
                 viz.color(currentY + "_color");
 
-            solo = updateSolo(data);
-
-            viz.id({
-                'solo': solo,
-            })
-
             currentTitleAttrs['shapes'] = value;
-            viz.title(titleHelper(yearRange));
 
-            viz.draw();
+            viz.title(titleHelper(yearRange))
+                .data(filterTopData())
+                .draw();
         }
     });
 }
@@ -415,8 +411,7 @@ var loadViz = function(data){
             'size': 13
         })
         .id({
-            'value': currentY,
-            'solo': solo
+            'value': vizId ? vizId : currentY,
         })
         .y({
             "value": currentY,
@@ -461,7 +456,7 @@ var loadViz = function(data){
         .footer({
             "value": dictionary["data_provided_by"] + (dictionary[dataset] || dataset).toUpperCase()
         })
-        .legend(false)
+        .color(vizId)
         .messages({'branding': true, 'style': 'large'})
         .title(titleHelper([0, yearRange[1]]))
 
@@ -602,7 +597,6 @@ var addNameToData = function(data){
                 item[dimension] = metadatas[dimension][item[dimension]]['name_' + lang];
             }
 
-
             return item;
         });
     });
@@ -634,63 +628,42 @@ var addNameToData = function(data){
     return data;
 };
 
-var groupDataByCurrentY = function(data){
-    var sumByItem = {};
+var filterTopData = function(){
+    var items = {}; // name: totalValue
 
     data.forEach(function(item){
-        if(sumByItem[item[currentY]] == undefined)
-            sumByItem[item[currentY]] = {
-                "sum": 0,
-                "name": item[currentY]
-            };
+        var name = item[currentY],
+            value = item[currentX];
 
-        sumByItem[item[currentY]].sum += item[currentX];
+        if(items[name] == undefined)
+            items[name] = 0;
+
+        items[name] += value;
     });
 
-    var list = [];
-
-    for(var item in sumByItem){
-        list.push({
-            name: sumByItem[item].name,
-            sum: sumByItem[item].sum
-        });
+    var sortable = [];
+    for (var name in items) {
+        sortable.push([name, items[name]]);
     }
 
-    return list;
-}
-
-var getTopCurrentYNames = function(groupedData){
-    var compare = function(a, b){
-        if(a.sum < b.sum)
-            return 1;
-        if(a.sum > b.sum)
-            return -1;
-
-        return 0;
-    }
-
-    var list = groupedData.sort(compare).slice(0, MAX_BARS);
-
-    var selected = list.map(function(item){
-        return item.name;
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
     });
 
-    return selected;
-}
-
-var updateSolo = function(data){
-    var copiedData = (JSON.parse(JSON.stringify(data)));
-    var groupedData = groupDataByCurrentY(copiedData);
-    solo = getTopCurrentYNames(groupedData);
+    var tops = sortable.splice(0, MAX_BARS);
+    tops = tops.map(function(item){return item[0]})
 
     var binaryVariables = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'obstetrical_center_facility', 'neonatal_unit_facility']
 
     if(binaryVariables.indexOf(currentY) != -1){
-        return [metadatas[currentY][1]['name_' + lang]];
+        tops = [metadatas[currentY][1]['name_' + lang]];
     }
 
-    return solo;
-};
+    return data.filter(function(item){
+        return tops.indexOf(item[currentY]) != -1;
+    });
+}
+
 
 var lastYear = function(data){
     var year = 0;
@@ -727,13 +700,12 @@ $(document).ready(function(){
             data = addOrder(data);
             data = addNameToData(data);
             data = addPercentage(data);
-            solo = updateSolo(data);
 
             addUiFilters();
 
             loading.hide();
             d3.select('#mask').remove();
-            loadViz(data);
+            loadViz(filterTopData());
         }
     );
 });

@@ -320,7 +320,7 @@ dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de At
 
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
-dictionary['equipment_code'] = lang == 'en' ? 'Equipment Code' : 'Código de Equipamento';
+dictionary['equipment_code'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
