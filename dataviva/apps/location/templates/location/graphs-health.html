@@ -37,7 +37,7 @@
             {% endif %}
             <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="equipments-sus-bond">
-                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/sus_availability_indicator,equipment_type,equipment_code,unit_type?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?filters=unit_type&id=sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-sus-bond-bar'}}" data-parent="#equipments-sus-bond">
                     {% trans %}Bar{% endtrans %}
                 </a>
