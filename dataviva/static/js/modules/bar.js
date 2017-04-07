@@ -15,21 +15,34 @@ var data = [],
     y = $("#bar").attr("y").split(","),
     currentY = y[0],
     filters = $("#bar").attr("filters"),
+    baseTitle = $("#bar").attr('graph-title'),
+    baseSubtitle = $("#bar").attr('graph-subtitle'),
     uiFilters = getUrlArgs().filters ? getUrlArgs().filters.split(',') : [],
     dimensions = y.concat(uiFilters).filter(unique),
     dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
+    yearRange = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
 
-
-// TODO: Title creator
-var title = 'Title';
+var currentTitleAttrs = {'shapes': y[0]}
 
 var visualization;
 var percentage = false;
 
 var uis = [];
+
+var titleHelper = function() {
+    var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+
+    return {
+        'value': header['title'],
+        'font': {'size': 22, 'align': 'left'},
+        'padding': 5,
+        'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+        'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+    };
+};
 
 if(x.length > 1){
     uis.push({
@@ -47,8 +60,8 @@ if(x.length > 1){
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
                     'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
                 })
-            totalOfCurrentX()
-            viz.draw()
+            totalOfCurrentX();
+            viz.draw();
         }
     });
 }
@@ -77,7 +90,11 @@ if(y.length > 1){
             viz.id({
                 'solo': solo,
             })
-            .draw();
+
+            currentTitleAttrs['shapes'] = value;
+            viz.title(titleHelper());
+
+            viz.draw();
         }
     });
 }
@@ -375,7 +392,21 @@ var formatHelper = {
 };
 
 var loadViz = function(data){
-     visualization = d3plus.viz()
+    var timelineCallback = function(years) {
+        if (!years.length)
+            yearRange = [0, 0];
+        else if (years.length == 1)
+            yearRange = [0, years[0].getFullYear()];
+        else
+            yearRange = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('bar', visualization, data, titleHelper().value);
+        visualization.title(titleHelper());
+        totalOfCurrentX(years);
+    };
+
+    yearRange = [0, lastYear(data)];
+
+    visualization = d3plus.viz()
         .container("#bar")
         .data(data)
         .background("transparent")
@@ -412,7 +443,7 @@ var loadViz = function(data){
             'value': 'year',
             'solo': {
                 'value': [lastYear(data)],
-                'callback': totalOfCurrentX
+                'callback': timelineCallback
             }
         })
         .aggs({
@@ -433,6 +464,7 @@ var loadViz = function(data){
         })
         .legend(false)
         .messages({'branding': true, 'style': 'large'})
+        .title(titleHelper())
 
         if(colorHelper[currentY] != undefined)
             visualization.color(currentY + "_color");
