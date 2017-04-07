@@ -89,7 +89,7 @@ if(y.length > 1){
             currentTitleAttrs['shapes'] = value;
 
             viz.title(titleHelper(yearRange))
-                .data(filterTopData())
+                .data(filterTopData(data))
                 .draw();
         }
     });
@@ -211,7 +211,7 @@ var addUiFilters = function(){
         'search': false
     };
 
-    var filteredData = function(filter, value) {
+    var filteredData = function(data, filter, value) {
         currentFilters[filter] = value;
         return data.filter(function(item) {
             var valid = true,
@@ -246,7 +246,9 @@ var addUiFilters = function(){
             .type('drop')
             .font({'size': 11})
             .focus(-1, function(value) {
-                visualization.data(filteredData(filter, value));
+                var filtered = filteredData(data, filter, value);
+                filtered = filterTopData(filtered);
+                visualization.data(filtered);
                 visualization.draw();
             })
             .draw();
@@ -298,9 +300,10 @@ var addUiFilters = function(){
             .type('drop')
             .font({'size': 11})
             .focus(-1, function(pos) {
-                visualization.data(filteredData('ambulatory_attention', filterValues[pos][0]))
-                visualization.data(filteredData('hospital_attention', filterValues[pos][1]))
-                visualization.draw();
+                var filtered = filteredData(data, 'ambulatory_attention', filterValues[pos][0]);
+                filtered = filteredData(data, 'hospital_attention', filterValues[pos][1]);
+                filtered = filterTopData(filtered);
+                visualization.data(filtered).draw();
             })
             .draw();
     }
@@ -628,7 +631,7 @@ var addNameToData = function(data){
     return data;
 };
 
-var filterTopData = function(){
+var filterTopData = function(data){
     var items = {}; // name: totalValue
 
     data.forEach(function(item){
@@ -705,7 +708,7 @@ $(document).ready(function(){
 
             loading.hide();
             d3.select('#mask').remove();
-            loadViz(filterTopData());
+            loadViz(filterTopData(data));
         }
     );
 });
