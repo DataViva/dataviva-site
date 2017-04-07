@@ -21,7 +21,7 @@ var data = [],
     dimensions = y.concat(uiFilters).filter(unique),
     dimensions = vizId ? dimensions.concat(vizId).filter(unique) : dimensions,
     dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
-    yearRange = [],
+    yearRange = [Number.POSITIVE_INFINITY, 0],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
@@ -33,8 +33,8 @@ var percentage = false;
 
 var uis = [];
 
-var titleHelper = function() {
-    var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+var titleHelper = function(years) {
+    var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
 
     return {
         'value': header['title'],
@@ -87,8 +87,10 @@ if(y.length > 1){
                 viz.color(currentY + "_color");
 
             currentTitleAttrs['shapes'] = value;
-            viz.title(titleHelper());
-            viz.data(filterTopData(data)).draw();
+
+            viz.title(titleHelper(yearRange))
+                .data(filterTopData(data))
+                .draw();
         }
     });
 }
@@ -390,18 +392,17 @@ var formatHelper = {
 
 var loadViz = function(data){
     var timelineCallback = function(years) {
+        var selectedYears = [];
         if (!years.length)
-            yearRange = [0, 0];
+            selectedYears = yearRange;
         else if (years.length == 1)
-            yearRange = [0, years[0].getFullYear()];
+            selectedYears = [0, years[0].getFullYear()];
         else
-            yearRange = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
-        toolsBuilder('bar', visualization, data, titleHelper().value);
-        visualization.title(titleHelper());
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('bar', visualization, data, titleHelper(selectedYears).value);
+        visualization.title(titleHelper(selectedYears));
         totalOfCurrentX(years);
     };
-
-    yearRange = [0, lastYear(data)];
 
     visualization = d3plus.viz()
         .container("#bar")
@@ -460,7 +461,7 @@ var loadViz = function(data){
         })
         .color(vizId)
         .messages({'branding': true, 'style': 'large'})
-        .title(titleHelper())
+        .title(titleHelper([0, yearRange[1]]))
 
         if(colorHelper[currentY] != undefined)
             visualization.color(currentY + "_color");
@@ -475,7 +476,7 @@ var loadViz = function(data){
         totalOfCurrentX();
         visualization.draw()
 
-        toolsBuilder('bar', visualization, data, 'title');
+        toolsBuilder('bar', visualization, data, titleHelper(yearRange));
 };
 
 var getSelectedYears = function() {
@@ -528,6 +529,11 @@ var buildData = function(responseApi){
         headers.forEach(function(header){
             dataItem[header] = getAttrByName(item, header);
         });
+
+        if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+            yearRange[1] = dataItem['year'];
+        else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+            yearRange[0] = dataItem['year'];
 
         data.push(dataItem);
     });

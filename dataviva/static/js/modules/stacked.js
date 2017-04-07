@@ -12,7 +12,7 @@ var stacked = document.getElementById('stacked'),
     lang = document.documentElement.lang;
     basicValues = BASIC_VALUES[dataset],
     calcBasicValues = CALC_BASIC_VALUES[dataset],
-    yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
+    yearRange = [Number.POSITIVE_INFINITY, 0],
     metadata = {},
     currentFilters = {},
     currentTitleAttrs = {'size': values[0]}
@@ -42,7 +42,7 @@ if(args['depths'] != undefined) {
     });
 }
 else {
-    depthsList = DEPTHS[dataset][area] || [area];
+    depthsList = [DEPTHS[dataset][area] || [area]];
 }
 
 var depths = depthsList[0],
@@ -103,10 +103,18 @@ var buildData = function(apiData) {
                 dataItem.month = dataItem.year + "/" + dataItem.month + "/01";
             }
 
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+                yearRange[1] = dataItem['year'];
+            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+                yearRange[0] = dataItem['year'];
+
             data.push(dataItem);
         } catch(e) {
         };
     });
+
+    if (yearRange[0] == yearRange[1])
+        yearRange[0] = 0;
 
     return data;
 }
@@ -135,115 +143,70 @@ var loadViz = function (data){
             'search': false
         };
 
-        ui.push( {
-            "label": "Layout",
-            "type" : "drop",
-            "value" : [
-                {
-                    [dictionary['value']]: "linear"
-                }, 
-                {
-                    [dictionary['market-share']]: "share"
-                }
-            ],
-            "method" : function(value, viz){
-                viz.y({
-                    "scale": value
+        d3plus.form()
+            .config(config)
+            .container(d3.select('#controls'))
+            .data([{'id': 'linear', 'label': dictionary['value']}, {'id': 'share', 'label': dictionary['market-share']}])
+            .title('Layout')
+            .type('drop')
+            .focus('linear', function(value, viz) {
+                viz.y({'scale': value}).draw();
+            })
+            .draw();
+
+        d3plus.form()
+            .config(config)
+            .container(d3.select('#controls'))
+            .data([{'id': 'desc', 'label': dictionary['desc']}, {'id': 'asc', 'label': dictionary['asc']}])
+            .title(dictionary['sort'])
+            .type('drop')
+            .focus('desc', function(value, viz) {
+                viz.order({'sort': value}).draw();
+            })
+            .draw();
+
+        d3plus.form()
+            .config(config)
+            .container(d3.select('#controls'))
+            .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'name', 'label': dictionary['name']}])
+            .title(dictionary['Order'])
+            .type('drop')
+            .focus('value', function(value, viz) {
+                viz.order({'value': value == 'value' ? viz.y() : viz.id()}).draw();
+            })
+            .draw();
+
+
+        if (dataset == 'secex') {
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data([{'id': 'year', 'label': dictionary['year']}, {'id': 'month', 'label': dictionary['month']}])
+                .title(dictionary['time-resolution'])
+                .type('drop')
+                .focus('year', function(value, viz) {
+                    viz.x({'value': value, 'label': value})
+                        .time({'value': value})
+                        .draw();
                 })
                 .draw();
-            }
-        });
+        } else if (dataset == 'rais') {
+            var axisValues = [];
+            for (var i = 0; i < values.length; i++)
+              axisValues.push({'id': values[i], 'label': [dictionary[values[i]]]})
 
-        ui.push({
-            "label": dictionary['sort'],
-            "type": "drop",
-            "value": [
-                {
-                    [dictionary['desc']] : "desc"
-                },
-                {
-                    [dictionary['asc']] : "asc"
-                }
-            ],
-            "method": function(value, viz){
-                viz.order({
-                    "sort": value
-                }).draw();
-            }
-        });
-
-        ui.push({
-            "label": dictionary['Order'],
-            "type": "drop",
-            "value": [
-                {
-                    [dictionary['value']] : "value"
-                },
-                {
-                    [dictionary['name']] : "name"
-                }
-            ],
-            "method": function(value, viz){
-
-                if (value == "value"){
-                    value = viz.y();
-                }
-                else {
-                    value = viz.id();
-                }
-
-                viz.order({
-                    "value": value
-                }).draw();
-            }
-        });
-
-        if (dataset == 'secex'){
-            ui.push({
-                "label": dictionary['time-resolution'],
-                "value": [
-                    {
-                        [dictionary['year']]: "year"
-                    },
-                    {
-                        [dictionary['month']]: "month"
-                    }
-                ],
-                "method": function(value, viz){
-                    viz.x({
-                            "value": value,
-                            "label": value
-                    });
-                    viz.time({
-                        "value": value
-                    }).draw();
-                }
-            });
-        }
-
-        if (dataset == 'rais'){
-            var axis_values = [];
-
-            for (var i = 0, len = values.length; i < len; i++) {
-              axis_values.push({[dictionary[values[i]]] : values[i]})
-            }
-
-            ui.push({
-                "label": dictionary['y-axis'],
-                "type": "drop",
-                "value": axis_values,
-                "method": function(value, viz){
-
-                    viz.y({
-                        "value": value,
-                        "label": yAxisLabelBuilder(value)
-                    });
-
-                    viz.order({
-                        "value": value
-                    }).draw();
-                }
-            });
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(axisValues)
+                .title(dictionary['time-resolution'])
+                .type('drop')
+                .focus(values[0], function(value, viz) {
+                    viz.y({'value': value, 'label': yAxisLabelBuilder(value)})
+                        .order({'value': value})
+                        .draw();
+                })
+                .draw();
         }
 
         if (values.length > 1) {
@@ -258,12 +221,11 @@ var loadViz = function (data){
                 }))
                 .title(dictionary['value'])
                 .type('drop')
-                .font({'size': 11})
-                .focus(-1, function(value) {
+                .focus(values[0], function(value) {
                     currentTitleAttrs['value'] = value;
                     viz.y(value)
                         .title({'total': {'prefix': dictionary[value] + ': '}})
-                        .title(titleHelper())
+                        .title(titleHelper(yearRange))
                         .draw();
                 })
                 .draw();
@@ -302,7 +264,6 @@ var loadViz = function (data){
                 .data(options)
                 .title(dictionary[filter])
                 .type('drop')
-                .font({'size': 11})
                 .focus(-1, function(value) {
                     viz.data(filteredData(filter, value));
                     viz.draw();
@@ -324,7 +285,6 @@ var loadViz = function (data){
                 .data(options)
                 .title(dictionary['drawer_group'])
                 .type('drop')
-                .font({'size': 11})
                 .focus(-1, function(value) {
                     viz.id(depthsList[value])
                        .color(depthsList[value][0])
@@ -377,7 +337,6 @@ var loadViz = function (data){
                 .data(menuOptions)
                 .title('Nível de Atenção')
                 .type('drop')
-                .font({'size': 11})
                 .focus(-1, function(pos) {
                     viz.data(filteredData('ambulatory_attention', filterValues[pos][0]))
                     viz.data(filteredData('hospital_attention', filterValues[pos][1]))
@@ -390,12 +349,12 @@ var loadViz = function (data){
     }
 
 
-    var titleHelper = function() {
-        var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+    var titleHelper = function(years) {
+        var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
 
         return {
             'value': header['title'],
-            'font': {'size': 22, 'align': 'left'},
+            'font': {'size': 22, 'align': 'left', 'family': 'sans-serif'},
             'padding': 5,
             'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
             'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
@@ -433,6 +392,18 @@ var loadViz = function (data){
     
     data_type = { "value": values[0], "label": (type == "" ? yAxisLabelBuilder(values[0]) : yAxisLabelBuilder(type))}
 
+    var timelineCallback = function(years) {
+        var selectedYears = [];
+        if (!years.length)
+            selectedYears = yearRange;
+        else if (years.length == 1)
+            selectedYears = [0, years[0].getFullYear()];
+        else
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('stacked', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
+    };
+
     var viz = d3plus.viz()
         .title({"value": "Inserir título", "font": {"family": "Times", "size": "24","align": "left"}})
         .axes({"background": {"color": "white"}})
@@ -441,7 +412,7 @@ var loadViz = function (data){
         .data(data)
         .y(data_type)  
         .x({"value": "year", "label": ""})
-        .time({'value': 'year'})
+        .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .background("transparent")
         .shape({"interpolate": "monotone"})
         .tooltip(tooltipBuilder())
@@ -453,7 +424,7 @@ var loadViz = function (data){
         .legend({'filters': true})
         .depth(0, function(d) {
             currentTitleAttrs['shapes'] = depths[d];
-            viz.title(titleHelper());
+            viz.title(titleHelper(yearRange));
         })
 
         if (COLORS.hasOwnProperty(group)) {
@@ -471,14 +442,14 @@ var loadViz = function (data){
             currentTitleAttrs['shapes'] = depths[0];
         }
 
-        viz.title(titleHelper())
+        viz.title(titleHelper(yearRange))
             .title({'total': {'prefix': dictionary[values[0]] + ': '}})
             .title({'total': {'font': {'align': 'left'}}})
 
         $('#stacked').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
 
         viz.draw();
-        toolsBuilder(stacked.id, viz, data, titleHelper().value);
+        toolsBuilder(stacked.id, viz, data, titleHelper(yearRange).value);
 }
 
 var getUrls = function() {
@@ -493,7 +464,7 @@ var getUrls = function() {
     return urls;
 };
 
-var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization'] + '...');
+var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function() {
     ajaxQueue(
