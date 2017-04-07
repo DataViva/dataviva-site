@@ -30,7 +30,7 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}}" data-parent="#equipments-type">
                     {% trans %}Stacked{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?options=singlecolor&filters=sus_availability_indicator,unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?options=singlecolor,nolabely&filters=sus_availability_indicator,unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}}" data-parent="#equipments-type">
                     {% trans %}Bar{% endtrans %}
                 </a>
