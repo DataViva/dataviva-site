@@ -285,9 +285,11 @@ var loadViz = function (data){
                 .data(options)
                 .title(dictionary['drawer_group'])
                 .type('drop')
-                .focus(-1, function(value) {
+                .focus(0, function(value) {
+                    currentTitleAttrs['shapes'] = depthsList[value][0];
                     viz.id(depthsList[value])
                        .color(depthsList[value][0])
+                       .title(titleHelper(yearRange))
                        .draw();
                 })
                 .draw();
