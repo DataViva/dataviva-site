@@ -61,8 +61,9 @@ var DEPTHS = {
        'unit_type': ['provider_type', 'unit_type'],
    },
    'cnes_equipment': {
-        'equipment_type': ['health_region', 'unit_type'],
-        'municipality': ['health_region', 'equipment_type', 'unit_type']
+        'equipment_type': ['health_region', 'equipment_type', 'unit_type', 'equipment_code', 'equipment_type'],
+        'municipality': ['health_region', 'equipment_type', 'equipment_code', 'unit_type'],
+        'unit_type': ['health_region', 'equipment_type', 'equipment_code']
    },
     'cnes_bed': {
         'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality'],
@@ -99,9 +100,9 @@ var SIZES = {
         'equipment_type': ['equipment_quantity', 'equipment_quantity_in_use']
     },
     'cnes_bed': {
-        'bed_type': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract'],
-        'municipality': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract'],
-        'unit_type': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract'],
+        'bed_type': ['beds', 'number_sus_bed', 'number_non_sus_bed'],
+        'municipality': ['beds', 'number_sus_bed', 'number_non_sus_bed'],
+        'unit_type': ['beds', 'number_sus_bed', 'number_non_sus_bed'],
         'provider_type': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract']
    },
     'cnes_professional': {

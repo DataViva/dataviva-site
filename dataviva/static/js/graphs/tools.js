@@ -5,7 +5,7 @@ var toolsBuilder = function(app, viz, data, title) {
     }
 
     var initializeDownload = function(){
-        var svg = d3.select("#" + app + " > svg")
+        var svg = d3.select("#" + app + (app == "map" ? " svg" : " > svg"))
         // Add necessary name space junk and get raw node
 
         svg.attr("version", 1.1)
@@ -38,7 +38,7 @@ var toolsBuilder = function(app, viz, data, title) {
             .attr('type','text/css')
             .html(style);
 
-        img.src = 'data:image/svg+xml;base64,'+window.btoa(unescape(encodeURIComponent(svg_xml)));
+        img.src = 'data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svg_xml)));
 
         var canvas = document.createElement("canvas");
 
@@ -49,8 +49,8 @@ var toolsBuilder = function(app, viz, data, title) {
         canvas.height = h;
         var context = canvas.getContext("2d")
         context.fillStyle = "white";
-        context.fillRect(0,0,w,h);
-        context.drawImage(img,0,0,w,h);
+        context.fillRect(0, 0, w, h);
+        context.drawImage(img, 0, 0, w, h);
 
         title = title.removeAccents().split(" ").join("_");
 
@@ -70,6 +70,8 @@ var toolsBuilder = function(app, viz, data, title) {
     });
 
     d3.select('#refresh-btn').on('click', function() {
+        if (app == 'map')
+            $('#map').empty();
         loadViz(data);
     });
 

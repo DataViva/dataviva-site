@@ -70,7 +70,6 @@ var buildData = function(apiResponse) {
             data.push(dataItem);
 
         } catch(e) {
-
         };
     });
 
