@@ -88,7 +88,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-map'}}" data-parent="#beds-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
-                  <a href="/{{ g.locale }}/tree_map/cnes_bed/municipality/beds?hierarchy=false&year=2015{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/tree_map/cnes_bed/municipality/number_existing_bed?depths=region+state+mesoregion+microregion+health_region+municipality&sizes=number_existing_bed+number_sus_bed+number_non_sus_bed&filters=unit_type+bed_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-tree_map'}}" data-parent="#beds-municipality">
                       TreeMap
                   </a>
@@ -100,7 +100,7 @@
             {% endif %}
             <a href="#beds-bed-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-bed-type">{% trans %}Bed Type{% endtrans %}</a>
             <div class="collapse" id="beds-bed-type">
-                <a href="/{{ g.locale }}/tree_map/cnes_bed/bed_type/beds?hierarchy=false{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/cnes_bed/bed_type_per_specialty/number_existing_bed?depths=bed_type+bed_type_per_specialty&sizes=number_existing_bed+number_sus_bed+number_non_sus_bed&filters=unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-bed-type-tree_map'}}" data-parent="#beds-bed-type">
                     TreeMap
                 </a>
