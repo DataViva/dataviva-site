@@ -189,7 +189,6 @@ var loadViz = function(data){
         .type('geo_map')
         .coords({'value': '/pt/map/coords/' + state})
         .format(formatHelper())
-        .tooltip({'sub': 'name'})
         .background('transparent')
         .ui(uiBuilder())
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
@@ -210,7 +209,12 @@ var loadViz = function(data){
         .height(window.innerHeight - $('#controls').height() - 40)
         .title(titleHelper([0, yearRange[1]]))
         .title({'total': {'font': {'align': 'left'}}})
-        .title({'total': {'prefix': dictionary[value] + ': '}})
+        .title({'total': {'prefix': dictionary[value] + ': '}});
+
+        if(!state){
+            viz.tooltip({'sub': 'name'});
+        }
+
         viz.draw();
 
         toolsBuilder('map', viz, data, titleHelper(yearRange).value);

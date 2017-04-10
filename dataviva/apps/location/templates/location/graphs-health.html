@@ -21,7 +21,7 @@
             {% if not is_municipality %}
               <a href="#equipments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#equipments-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="equipments-municipality">
-                  <a href="/{{ g.locale }}/map/cnes_equipment/equipment_quantity/{{ 'id_ibge=%s' % id_ibge if id_ibge }}?values=equipment_quantity+equipment_quantity_in_use&filters=unit_type+equipment_type+sus_availability_indicator"
+                  <a href="/{{ g.locale }}/map/cnes_equipment/equipment_quantity/{{ id_ibge if id_ibge }}?values=equipment_quantity+equipment_quantity_in_use&filters=unit_type+equipment_type+sus_availability_indicator"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-map'}}" data-parent="#equipments-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
@@ -47,7 +47,7 @@
             {% if not is_municipality %}
               <a href="#establishments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#establishments-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="establishments-municipality">
-                  <a href="/{{ g.locale }}/map/cnes_establishment/establishments/{{ 'id_ibge=%s' % id_ibge if id_ibge }}?filters=sus_bond+provider_type+unit_type"
+                  <a href="/{{ g.locale }}/map/cnes_establishment/establishments/{{ id_ibge if id_ibge }}?filters=sus_bond+provider_type+unit_type"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-map'}}" data-parent="#establishments-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
@@ -84,7 +84,7 @@
             {% if not is_municipality %}
               <a href="#beds-municipality" class="list-group-item" data-toggle="collapse" data-parent="#beds-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="beds-municipality">
-                  <a href="/{{ g.locale }}/map/cnes_bed/beds?filters=bed_type+unit_type&values=beds+number_sus_bed+number_non_sus_bed"
+                  <a href="/{{ g.locale }}/map/cnes_bed/number_existing_bed/{{ id_ibge if id_ibge }}?filters=bed_type+unit_type&values=number_existing_bed+number_sus_bed+number_non_sus_bed"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-map'}}" data-parent="#beds-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
