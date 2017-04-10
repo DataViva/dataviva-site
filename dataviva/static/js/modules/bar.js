@@ -367,7 +367,7 @@ var formatHelper = {
     "number": function(number, params) {
         var formatted = d3plus.number.format(number, params);
 
-        formatted = formatNumber(formatted)
+        // formatted = formatNumber(formatted)
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
