@@ -113,6 +113,28 @@ var buildData = function(apiData) {
         };
     });
 
+    depthsList.forEach(function(depths) {
+        if (depths.length > 1) {
+            var invalidDepths = [];
+            depths.forEach(function(depth) {
+                if (depth != area) {
+                    var valid = false;
+                    for (var i = 1; i < data.length; i++) {
+                        if (data[i][depth] != data[i-1][depth]) {
+                            valid = true;
+                            break;
+                        }
+                    }
+                    if (!valid)
+                        invalidDepths.push(depth);
+                }
+            });
+            invalidDepths.forEach(function(depth) {
+                depths.splice(depths.indexOf(depth), 1);
+            });
+        }
+    });
+
     if (yearRange[0] == yearRange[1])
         yearRange[0] = 0;
 

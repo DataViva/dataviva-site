@@ -92,7 +92,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-tree_map'}}" data-parent="#beds-municipality">
                       TreeMap
                   </a>
-                  <a href="/{{ g.locale }}/stacked/cnes_bed/municipality/beds?values=beds+number_existing_bed+number_sus_bed+number_non_sus_bed&depths=municipality+unit_type+bed_type+bed_type_per_specialty&filters=unit_type+bed_type+bed_type_per_specialty{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/stacked/cnes_bed/municipality/number_existing_bed?values=number_existing_bed+number_sus_bed+number_non_sus_bed&depths=region+state+mesoregion+microregion+health_region+municipality&filters=unit_type+bed_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}&hierarchy=true"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-stacked'}}" data-parent="#beds-municipality">
                       {% trans %}Stacked{% endtrans %}
                   </a>
