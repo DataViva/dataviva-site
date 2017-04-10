@@ -14,7 +14,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-tree_map' }}" data-parent="#equipments-municipality">
                       TreeMap
                   </a>
-                  <a href="/{{ g.locale }}/stacked/cnes_equipment/municipality/equipment_quantity?values=equipment_quantity+equipment_quantity_in_use&depths=municipality+health_region+equipment_type+equipment_code+unit_type+sus_availability_indicator&filters=equipment_type+equipment_code+unit_type+sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/stacked/cnes_equipment/municipality/equipment_quantity?depths=region+state+mesoregion+microregion+health_region+municipality&hierarchy=true&values=equipment_quantity+equipment_quantity_in_use&filters=sus_availability_indicator+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-stacked'}}" data-parent="#equipments-municipality">
                       {% trans %}Stacked{% endtrans %}
                   </a>

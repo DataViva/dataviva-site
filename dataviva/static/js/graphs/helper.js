@@ -179,7 +179,7 @@ var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation
 
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
-dictionary['states'] = lang == 'en' ? 'States' : 'Estados';
+dictionary['plural_state'] = lang == 'en' ? 'States' : 'Estados';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';
 dictionary['plural_municipality'] = lang == 'en' ? 'Municipalities' : 'Municípios';
 dictionary['product_section'] = lang == 'en' ? 'Section' : 'Seção';
