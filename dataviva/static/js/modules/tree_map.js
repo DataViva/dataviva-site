@@ -5,7 +5,7 @@ var tree_map = document.getElementById('tree_map'),
     baseTitle = tree_map.getAttribute('graph-title'),
     baseSubtitle = tree_map.getAttribute('graph-subtitle'),
     args = getUrlArgs(),
-    yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
+    yearRange = [Number.POSITIVE_INFINITY, 0],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
     hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
     zoom = args.hasOwnProperty('zoom') && args['zoom'] == 'true' ? true : false;
@@ -16,8 +16,7 @@ var tree_map = document.getElementById('tree_map'),
     calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
     currentFilters = {},
     currentTitleAttrs = {'size': size, 'shapes': squares}
-    metadata = {},
-    lastYear = 0;
+    metadata = {};
 
 if (depths.length > 1)
     currentTitleAttrs['depth'] = depths[0];
@@ -63,12 +62,15 @@ var buildData = function(apiResponse) {
             });
            
             dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
+
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+                yearRange[1] = dataItem['year'];
+            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+                yearRange[0] = dataItem['year'];
+            
             data.push(dataItem);
 
-            if (dataItem.hasOwnProperty('year') && dataItem['year'] > lastYear)
-                lastYear = dataItem['year'];
         } catch(e) {
-
         };
     });
 
@@ -94,6 +96,9 @@ var buildData = function(apiResponse) {
         });
     }
 
+    if (yearRange[0] == yearRange[1])
+        yearRange[0] = 0;
+    
     return data;
 }
 
@@ -104,7 +109,7 @@ var loadViz = function(data) {
                 'text': 'label',
                 'font': {'size': 11},
                 'container': d3.select('#controls'),
-                'search': false
+                'search': false,
             };
 
         // Adds depth selector
@@ -123,7 +128,7 @@ var loadViz = function(data) {
                     .focus(squares, function(value) {
                         currentTitleAttrs['shapes'] = value;
                         viz.depth(depths.indexOf(value))
-                            .title(titleHelper())
+                            .title(titleHelper(yearRange))
                             .draw();
                     })
                     .draw();
@@ -143,7 +148,7 @@ var loadViz = function(data) {
                         viz.data(data)
                             .id([value, squares])
                             .color(value)
-                            .title(titleHelper())
+                            .title(titleHelper(yearRange))
                             .draw();
                     })
                     .draw();
@@ -176,7 +181,7 @@ var loadViz = function(data) {
                 .focus(size, function(value) {
                     currentTitleAttrs['size'] = value;
                     viz.size(value)
-                        .title(titleHelper())
+                        .title(titleHelper(yearRange))
                         .title({'total': {'prefix': dictionary[value] + ': '}})
                         .draw();
                 })
@@ -195,6 +200,7 @@ var loadViz = function(data) {
                         loadViz(data);
                     } else {
                         var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
+                        d3.select('.loading').style('background-color', '#fff');
                         window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
                     }
                 })
@@ -284,14 +290,14 @@ var loadViz = function(data) {
         });      
     };
 
-    var titleHelper = function(depth) {
+    var titleHelper = function(years) {
         if (!baseTitle) {
             var genericTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <shapes>' : '<size> ' + dictionary['per'] + ' <shapes>';
             if (depths.length > 1 && currentTitleAttrs['shapes'] != currentTitleAttrs['shapes'])
                 genericTitle += '/<depth>';
         }
 
-        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), yearRange);
+        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
 
         return {
             'value': header['title'],
@@ -316,14 +322,15 @@ var loadViz = function(data) {
     };
 
     var timelineCallback = function(years) {
+        var selectedYears = [];
         if (!years.length)
-            yearRange = [0, 0];
+            selectedYears = yearRange;
         else if (years.length == 1)
-            yearRange = [0, years[0].getFullYear()];
+            selectedYears = [0, years[0].getFullYear()];
         else
-            yearRange = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
-        toolsBuilder('tree_map', viz, data, titleHelper().value);
-        viz.title(titleHelper());
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('tree_map', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
     };
 
     var viz = d3plus.viz()
@@ -333,12 +340,12 @@ var loadViz = function(data) {
         .size(size)
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
-        .time({'value': 'year', 'solo': {'value': lastYear, 'callback': timelineCallback}})
+        .time({'value': 'year', 'solo': {'value': yearRange[1], 'callback': timelineCallback}})
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .messages({'branding': true, 'style': 'large'})
-        .title(titleHelper())
+        .title(titleHelper([0, yearRange[1]]))
         .title({'total': {'font': {'align': 'left'}}})
         .title({'total': {'prefix': dictionary[size] + ': '}})
         .tooltip(tooltipBuilder())
@@ -366,7 +373,7 @@ var loadViz = function(data) {
     
     viz.draw();
 
-    toolsBuilder('tree_map', viz, data, titleHelper().value);
+    toolsBuilder('tree_map', viz, data, titleHelper(yearRange).value);
 };
 
 

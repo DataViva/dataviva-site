@@ -61,8 +61,9 @@ var DEPTHS = {
        'unit_type': ['provider_type', 'unit_type'],
    },
    'cnes_equipment': {
-        'equipment_type': ['health_region', 'unit_type'],
-        'municipality': ['health_region', 'equipment_type', 'unit_type']
+        'equipment_type': ['health_region', 'equipment_type', 'unit_type', 'equipment_code', 'equipment_type'],
+        'municipality': ['health_region', 'equipment_type', 'equipment_code', 'unit_type'],
+        'unit_type': ['health_region', 'equipment_type', 'equipment_code']
    },
     'cnes_bed': {
         'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality'],
@@ -99,9 +100,9 @@ var SIZES = {
         'equipment_type': ['equipment_quantity', 'equipment_quantity_in_use']
     },
     'cnes_bed': {
-        'bed_type': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract'],
-        'municipality': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract'],
-        'unit_type': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract'],
+        'bed_type': ['beds', 'number_sus_bed', 'number_non_sus_bed'],
+        'municipality': ['beds', 'number_sus_bed', 'number_non_sus_bed'],
+        'unit_type': ['beds', 'number_sus_bed', 'number_non_sus_bed'],
         'provider_type': ['beds', 'number_sus_bed', 'number_non_sus_bed', 'number_existing_contract']
    },
     'cnes_professional': {
@@ -262,6 +263,7 @@ dictionary['isolate'] = lang == 'en' ? 'Isolate' : 'Isolar';
 dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
 dictionary['Unable to load visualization'] = lang == 'en' ? 'Unable to load visualization' : 'Não foi possível carregar a visualização';
 dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
+dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
@@ -271,7 +273,7 @@ dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
 // CNES BEDS
 dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
 dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
-dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Type Per Specialty' : 'Tipo de Leito por Especialidade';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Specialty' : 'Especialidade de Leito';
 dictionary['cnes_bed'] = lang == 'en' ? 'Datasus' : 'Datasus';
 dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
@@ -290,7 +292,7 @@ dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulat
 // CNES ESTABLISHMENTS
 dictionary['sus_bond'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
-dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento ambulatorial';
+dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento Ambulatorial';
 dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
 dictionary['tax_withholding'] = lang == 'en' ? 'Withholding Tax' : 'Retenção Tributária';
 dictionary['emergency_facility'] = lang == 'en' ? 'Emergency Facilities' : 'Instalações Físicas de Urgência e Emergência';
@@ -320,7 +322,7 @@ dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de At
 
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
-dictionary['equipment_code'] = lang == 'en' ? 'Equipment Code' : 'Código de Equipamento';
+dictionary['equipment_code'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
 dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
