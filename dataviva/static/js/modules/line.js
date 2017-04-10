@@ -35,6 +35,7 @@ var buildData = function(apiResponse){
     var headers = apiResponse.headers;
 
     apiResponse.data.forEach(function(item){
+        
         try{
             var dataItem = {};
 
@@ -64,19 +65,107 @@ var buildData = function(apiResponse){
                 });
             }
 
-            dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
+            if (dataItem['month'])
+                dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
             data.push(dataItem);
 
-        } catch(e) {
-
-        };
+        } catch(e) {};
     });
 
     return data;
 }
 
-var processData = function(data){
-    //return data;
+var firstYear = function(data){
+    var minYear = 9999;
+
+    data.forEach(function(item){
+        if(item.year < minYear)
+            minYear = item.year;
+    });
+
+    return minYear;
+};
+
+var lastYear = function(data){
+    var maxYear = 0;
+
+    data.forEach(function(item){
+        if(item.year > maxYear)
+            maxYear = item.year;
+    });
+
+    return maxYear;
+};
+
+var allDates = function(minYear, maxYear, hasMonth){
+
+        var dates = [];
+        
+        if (hasMonth){
+            var months = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+                for(var year = minYear; year <= maxYear; year++){
+                    months.forEach(function(month){
+                        dates.push(new Date(year, month));
+                    })
+                }
+        }
+        else {
+            for(var year = minYear; year <= maxYear; year++){
+                dates.push(year);
+            }
+        }
+
+    return dates;
+};
+
+/* The values are set as 1 because the logarithmic scale on the d3plus line chart 
+does not work when the data has more than one value equal to 0.*/
+
+FAKE_VALUE = 0.0833;
+
+var fillMissingDates = function(data){
+    var lines = new Set();
+    var check = {};
+    var hasMonth = data[0]["month"] == undefined ? false : true;
+
+    data.forEach(function(item){
+        lines.add(item[line]);
+
+        if(check[item[line]] == undefined)
+            check[item[line]] = {};
+
+        check[item[line]][item.date] = true;
+    });
+
+    var dates = allDates(firstYear(data), lastYear(data), hasMonth);
+    lines = Array.from(lines);
+
+    dates.forEach(function(date){
+        lines.forEach(function(lineValue){
+            if(check[lineValue][date] == undefined){
+                var dataItem = {};
+
+                if(hasMonth){
+                    dataItem['date'] = date;
+                    dataItem['year'] = date.getFullYear();
+                    dataItem['month'] = date.getMonth() + 1;
+                    dataItem[line] = lineValue;
+
+                } else {
+                    dataItem['year'] = date;
+                    dataItem[line] = lineValue;
+                }
+
+                yValues.forEach(function(value){
+                    dataItem[value] = FAKE_VALUE;
+                });
+
+                data.push(dataItem);
+            }
+        });
+    });
+
+    return data;
 };
 
 var buildTradeBalanceData = function(data){
@@ -147,6 +236,19 @@ var loadViz = function(data) {
                     viz.time({
                         'value': value
                     })
+                    viz.draw();
+                })
+                .draw();
+
+            d3plus.form()
+                .config(config)
+                .data([{'id': 'linear', 'label': dictionary['linear']}, {'id': 'log', 'label': dictionary['log']}])
+                .title(dictionary['scale'])
+                .type('toggle')
+                .focus(dictionary['linear'] ? 'linear' : 'log', function(value) {
+                    viz.y({
+                        'scale': value
+                    });
                     viz.draw();
                 })
                 .draw();
@@ -247,11 +349,12 @@ $(document).ready(function() {
             metadata[line] = responses[1];
 
             data = buildData(data);
-            //data = processData(data);
+            data = fillMissingDates(data);
 
-            //if (balance)
-                //data = buildTradeBalanceData(data);
-                //loadViz(balanceData);
+            // if (balance)
+            //     data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
+            //     data = buildTradeBalanceData(data);
+            //     loadViz(balanceData);
 
 
             loadViz(data);
@@ -276,7 +379,7 @@ $(document).ready(function() {
 // URL: http://localhost:5000/en/line/secex/country/value?values=value+kg&product=021201&type=export
 
 // Gráfico de Balança Comercial:
-// 1. Interpolar dados faltantes (line-saulo.js).
+// 1. Interpolar dados faltantes >> DONE !FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
 // 2. Calcular Balança Comercial (line-bk.js).
 
 // Modelo: http://localhost:5000/en/product/021201/trade-partner?menu=trade-balance-product-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fbalance%2F%3Ftime%3Dyear
