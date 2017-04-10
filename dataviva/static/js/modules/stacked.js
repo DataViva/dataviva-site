@@ -113,6 +113,30 @@ var buildData = function(apiData) {
         };
     });
 
+    // Removes depths that all data items are part of
+    // For example, if data is filtered by state, there is no reason to have region or state as depths, since all data is from the same state and region
+    depthsList.forEach(function(depths) {
+        if (depths.length > 1) {
+            var invalidDepths = [];
+            depths.forEach(function(depth) {
+                if (depth != area) {
+                    var valid = false;
+                    for (var i = 1; i < data.length; i++) {
+                        if (data[i][depth] != data[i-1][depth]) {
+                            valid = true;
+                            break;
+                        }
+                    }
+                    if (!valid)
+                        invalidDepths.push(depth);
+                }
+            });
+            invalidDepths.forEach(function(depth) {
+                depths.splice(depths.indexOf(depth), 1);
+            });
+        }
+    });
+
     if (yearRange[0] == yearRange[1])
         yearRange[0] = 0;
 
@@ -209,6 +233,50 @@ var loadViz = function (data){
                 .draw();
         }
 
+        if (depthsList.length == 1 && args['hierarchy'] == 'true') {
+            var options = [];
+            depthsList[0].forEach(function(depth) {
+                options.push({'id': depth, 'label': dictionary[depth]});
+            });
+
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(options)
+                .title(dictionary['drawer_group'])
+                .type('drop')
+                .focus(depthsList[0][0], function(value) {
+                    currentTitleAttrs['shapes'] = depthsList[0][value];
+                    viz.depth(depthsList[0].indexOf(value))
+                        .order(depthsList[0][0])
+                        .title(titleHelper(yearRange))
+                        .draw();
+                })
+                .draw();
+        } else if (depthsList.length > 1) {
+            var options = depthsList.map(function(list, i){
+                return {
+                    label: dictionary[list[0]],
+                    id: i
+                };
+            })
+
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(options)
+                .title(dictionary['drawer_group'])
+                .type('drop')
+                .focus(0, function(value) {
+                    currentTitleAttrs['shapes'] = depthsList[value][0];
+                    viz.id(depthsList[value])
+                       .color(depthsList[value][0])
+                       .title(titleHelper(yearRange))
+                       .draw();
+                })
+                .draw();
+        }
+
         if (values.length > 1) {
             d3plus.form()
                 .config(config)
@@ -270,50 +338,6 @@ var loadViz = function (data){
                 })
                 .draw();
         });
-
-        if (depthsList.length == 1 && args['hierarchy'] == 'true') {
-            var options = [];
-            depthsList[0].forEach(function(depth) {
-                options.push({'id': depth, 'label': dictionary[depth]});
-            });
-
-            d3plus.form()
-                .config(config)
-                .container(d3.select('#controls'))
-                .data(options)
-                .title(dictionary['drawer_group'])
-                .type('drop')
-                .focus(depthsList[0][0], function(value) {
-                    currentTitleAttrs['shapes'] = depthsList[0][value];
-                    viz.depth(depthsList[0].indexOf(value))
-                        .order(depthsList[0][0])
-                        .title(titleHelper(yearRange))
-                        .draw();
-                })
-                .draw();
-        } else if (depthsList.length > 1) {
-            var options = depthsList.map(function(list, i){
-                return {
-                    label: dictionary[list[0]],
-                    id: i
-                };
-            })
-
-            d3plus.form()
-                .config(config)
-                .container(d3.select('#controls'))
-                .data(options)
-                .title(dictionary['drawer_group'])
-                .type('drop')
-                .focus(0, function(value) {
-                    currentTitleAttrs['shapes'] = depthsList[value][0];
-                    viz.id(depthsList[value])
-                       .color(depthsList[value][0])
-                       .title(titleHelper(yearRange))
-                       .draw();
-                })
-                .draw();
-        }
 
         // Custom filter to Attention Level
         // To use, add: filters=attention_level

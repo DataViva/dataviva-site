@@ -55,7 +55,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-tree_map'}}" data-parent="#establishments-municipality">
                       TreeMap
                   </a>
-                  <a href="/{{ g.locale }}/stacked/cnes_establishment/municipality/establishments?values=establishments&depths=municipality+unit_type+provider_type+sus_bond+ambulatory_attention+hospital_attention&filters=sus_bond+ambulatory_attention+hospital_attention{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/stacked/cnes_establishment/municipality/establishments?depths=region+state+mesoregion+microregion+health_region+municipality&filters=sus_bond+provider_type+attention_level+unit_type&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-stacked'}}" data-parent="#establishments-municipality">
                       {% trans %}Stacked{% endtrans %}
                   </a>
