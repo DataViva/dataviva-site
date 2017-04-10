@@ -149,7 +149,7 @@ var loadViz = function (data){
             .data([{'id': 'linear', 'label': dictionary['value']}, {'id': 'share', 'label': dictionary['market-share']}])
             .title('Layout')
             .type('drop')
-            .focus('linear', function(value, viz) {
+            .focus('linear', function(value) {
                 viz.y({'scale': value}).draw();
             })
             .draw();
@@ -160,7 +160,7 @@ var loadViz = function (data){
             .data([{'id': 'desc', 'label': dictionary['desc']}, {'id': 'asc', 'label': dictionary['asc']}])
             .title(dictionary['sort'])
             .type('drop')
-            .focus('desc', function(value, viz) {
+            .focus('desc', function(value) {
                 viz.order({'sort': value}).draw();
             })
             .draw();
@@ -171,7 +171,7 @@ var loadViz = function (data){
             .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'name', 'label': dictionary['name']}])
             .title(dictionary['Order'])
             .type('drop')
-            .focus('value', function(value, viz) {
+            .focus('value', function(value) {
                 viz.order({'value': value == 'value' ? viz.y() : viz.id()}).draw();
             })
             .draw();
@@ -184,7 +184,7 @@ var loadViz = function (data){
                 .data([{'id': 'year', 'label': dictionary['year']}, {'id': 'month', 'label': dictionary['month']}])
                 .title(dictionary['time-resolution'])
                 .type('drop')
-                .focus('year', function(value, viz) {
+                .focus('year', function(value) {
                     viz.x({'value': value, 'label': value})
                         .time({'value': value})
                         .draw();
@@ -201,7 +201,7 @@ var loadViz = function (data){
                 .data(axisValues)
                 .title(dictionary['time-resolution'])
                 .type('drop')
-                .focus(values[0], function(value, viz) {
+                .focus(values[0], function(value) {
                     viz.y({'value': value, 'label': yAxisLabelBuilder(value)})
                         .order({'value': value})
                         .draw();
@@ -271,7 +271,27 @@ var loadViz = function (data){
                 .draw();
         });
 
-        if (depthsList.length > 1) {
+        if (depthsList.length == 1 && args['hierarchy'] == 'true') {
+            var options = [];
+            depthsList[0].forEach(function(depth) {
+                options.push({'id': depth, 'label': dictionary[depth]});
+            });
+
+            d3plus.form()
+                .config(config)
+                .container(d3.select('#controls'))
+                .data(options)
+                .title(dictionary['drawer_group'])
+                .type('drop')
+                .focus(depthsList[0][0], function(value) {
+                    currentTitleAttrs['shapes'] = depthsList[0][value];
+                    viz.depth(depthsList[0].indexOf(value))
+                        .order(depthsList[0][0])
+                        .title(titleHelper(yearRange))
+                        .draw();
+                })
+                .draw();
+        } else if (depthsList.length > 1) {
             var options = depthsList.map(function(list, i){
                 return {
                     label: dictionary[list[0]],
@@ -285,9 +305,11 @@ var loadViz = function (data){
                 .data(options)
                 .title(dictionary['drawer_group'])
                 .type('drop')
-                .focus(-1, function(value) {
+                .focus(0, function(value) {
+                    currentTitleAttrs['shapes'] = depthsList[value][0];
                     viz.id(depthsList[value])
                        .color(depthsList[value][0])
+                       .title(titleHelper(yearRange))
                        .draw();
                 })
                 .draw();
@@ -405,7 +427,6 @@ var loadViz = function (data){
     };
 
     var viz = d3plus.viz()
-        .title({"value": "Inserir título", "font": {"family": "Times", "size": "24","align": "left"}})
         .axes({"background": {"color": "white"}})
         .container("#stacked")
         .type("stacked")

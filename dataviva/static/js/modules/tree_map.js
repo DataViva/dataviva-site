@@ -70,7 +70,6 @@ var buildData = function(apiResponse) {
             data.push(dataItem);
 
         } catch(e) {
-
         };
     });
 
@@ -109,7 +108,7 @@ var loadViz = function(data) {
                 'text': 'label',
                 'font': {'size': 11},
                 'container': d3.select('#controls'),
-                'search': false
+                'search': false,
             };
 
         // Adds depth selector
@@ -200,6 +199,7 @@ var loadViz = function(data) {
                         loadViz(data);
                     } else {
                         var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
+                        d3.select('.loading').style('background-color', '#fff');
                         window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
                     }
                 })

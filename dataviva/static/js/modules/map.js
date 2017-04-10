@@ -2,14 +2,21 @@ var map = document.getElementById('map'),
     dataset = map.getAttribute('dataset'),
     value = map.getAttribute('value'),
     apiFilters = map.getAttribute('filters'),
+    state = map.getAttribute('state'),
+    area = state ? 'municipality': 'state',
+    baseTitle = map.getAttribute('graph-title'),
+    baseSubtitle = map.getAttribute('graph-subtitle'),
+    yearRange = [Number.POSITIVE_INFINITY, 0],
     validOccupations = {},
-    currentFilters = {};
+    currentFilters = {},
+    currentTitleAttrs = {'shapes': area}
+    metadata = {};
 
 var args = getUrlArgs(),
     filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [],
-    values = args.hasOwnProperty('values') ? args['values'].split('+') : SIZES[dataset]['state'] || [value];
+    values = getUrlArgs().hasOwnProperty('values') ? args['values'].split('+') : [value];
 
-var buildData = function(apiResponse,statesMetadata, otherMetadata) {
+var buildData = function(apiResponse) {
 
     var getAttrByName = function(item, attr) {
         var index = headers.indexOf(attr);
@@ -18,7 +25,6 @@ var buildData = function(apiResponse,statesMetadata, otherMetadata) {
 
     var data = [];
     var headers = apiResponse.headers;
-
 
     apiResponse.data.forEach(function(item) {
         try {
@@ -31,18 +37,26 @@ var buildData = function(apiResponse,statesMetadata, otherMetadata) {
             if (dataItem.hasOwnProperty('occupation_family'))
                 validOccupations[dataItem['occupation_family']] = 1;
 
-            dataItem['id'] = statesMetadata[dataItem['state']]['abbr_' + lang];
-            dataItem['stateName'] = statesMetadata[dataItem['state']]['name_' + lang];
+            dataItem['name'] = metadata[area][dataItem[area]]['name_' + lang];
+            dataItem['id'] = metadata[area][dataItem[area]][area == 'state' ? ('abbr_' + lang) : 'id'];
 
-            for (d in otherMetadata)
-                dataItem[d] = otherMetadata[d][dataItem[d]]['name_' + lang];
+            for (d in metadata)
+                dataItem[d] = metadata[d][dataItem[d]]['name_' + lang];
+
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+                yearRange[1] = dataItem['year'];
+            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+                yearRange[0] = dataItem['year'];
 
             data.push(dataItem);
-    
         } catch(e) {
 
         };
     });
+
+    if (yearRange[0] == yearRange[1])
+        yearRange[0] = 0;
+
     return data;
 }
 
@@ -74,7 +88,8 @@ var loadViz = function(data){
                 return valid;
             });
         };
-        // Adds value selector
+
+        // Adds values selector
         if (values.length > 1) {
            var options = [];
            values.forEach(function(item) {
@@ -86,15 +101,18 @@ var loadViz = function(data){
                .data(options)
                .type('toggle')
                .focus(value, function(value) {
-                   viz.title(titleHelper(value))
+                   viz.title(titleHelper(yearRange))
                    var d = filteredData();
                     d.forEach(function(item) {
                         if (item[value] == 0)
                             item[value] = null;
                     });
+
                     viz.data(d)
-                       .color(value)
-                       .draw();
+                        .color(value)
+                        .title(titleHelper(yearRange))
+                        .title({'total': {'prefix': dictionary[value] + ': '}})
+                        .draw();
                 })
              .draw();
         }
@@ -111,10 +129,10 @@ var loadViz = function(data){
         filters.forEach(function(filter, j) {
             currentFilters[filter] = -1;
             var options = [];
-            for (id in otherMetadata[filter]) {
+            for (id in metadata[filter]) {
                 if (filter == 'occupation_family' && !validOccupations.hasOwnProperty(id))
                     continue;
-                options.push({'id': otherMetadata[filter][id]['name_' + lang], 'label': otherMetadata[filter][id]['name_' + lang]})
+                options.push({'id': metadata[filter][id]['name_' + lang], 'label': metadata[filter][id]['name_' + lang]})
             }
             options.sort(function(a, b) {
                 if (a['label'] < b['label'])
@@ -137,60 +155,92 @@ var loadViz = function(data){
                 })
             .draw();
         });
-        return ui;
     };
 
-    var titleHelper = function(value) {
+    var titleHelper = function(years) {
+        var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
+
         return {
-            'value':  dictionary[value] + ' ' + dictionary['per'] + ' ' + dictionary['state'],
+            'value': header['title'],
             'font': {'size': 22, 'align': 'left'},
-            'total': {'prefix': dictionary[value] + ': '}
-        }
+            'padding': 5,
+            'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+        };
+    };
+
+    var timelineCallback = function(years) {
+        var selectedYears = [];
+        if (!years.length)
+            selectedYears = yearRange;
+        else if (years.length == 1)
+            selectedYears = [0, years[0].getFullYear()];
+        else
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('map', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
     };
 
     var viz = d3plus.viz()
         .container('#map')
         .data(data)
-        .title(titleHelper(value))
+        .title(titleHelper(yearRange))
         .title({'total': {'font': {'align': 'left'}}})
         .type('geo_map')
-        .coords({'value': '/pt/map/coords'})
+        .coords({'value': '/pt/map/coords/' + state})
         .format(formatHelper())
-        .tooltip({'sub': 'stateName'})
         .background('transparent')
         .ui(uiBuilder())
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large'})
         .id('id')
-        .time('year')
+        .time({'value': 'year', 'solo': {'value': yearRange[1], 'callback': timelineCallback}})
+        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .color({'heatmap': ["#282F6B", "#B22200"],
                 'value': value})
+        .format({
+                "text": function(text, params) {
+                    var re = new RegExp(state + "[0-9]{5}");
+                    if (text.match(re))
+                        return metadata[area][text]['name_' + lang];
+                    return dictionary[text] || text;
+                },
+        })
+        .height(window.innerHeight - $('#controls').height() - 40)
+        .title(titleHelper([0, yearRange[1]]))
+        .title({'total': {'font': {'align': 'left'}}})
+        .title({'total': {'prefix': dictionary[value] + ': '}});
 
-        $('#map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
+        if(!state){
+            viz.tooltip({'sub': 'name'});
+        }
+
         viz.draw();
+
+        toolsBuilder('map', viz, data, titleHelper(yearRange).value);
 }
 
 
 var getUrls = function() {
-    var dimensions = [dataset, 'year', 'state'];
-    var metadata = [];
-    
+    var dimensions = [dataset, 'year'];
+    var metadataAttrs = [];
+
+    dimensions.push(area);
+
     filters.forEach(function(attr) {
-        if (attr != 'state' && dimensions.indexOf(attr) == -1) {
+        if (attr != area && dimensions.indexOf(attr) == -1) {
             dimensions.push(attr);
-            metadata.push(attr);
+            metadataAttrs.push(attr);
         }
     });
 
     var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + apiFilters,
-        API_DOMAIN + '/metadata/' + 'state'
+        API_DOMAIN + '/metadata/' + area
     ];
 
-    if (dataset.match(/^cnes_/)) {
-        metadata.forEach(function(attr) {
-            urls.push(API_DOMAIN + '/metadata/' + attr)
-        });
-    }
+    metadataAttrs.forEach(function(attr) {
+        urls.push(API_DOMAIN + '/metadata/' + attr)
+    });
 
     return urls;
 };
@@ -202,20 +252,15 @@ $(document).ready(function() {
         getUrls(),
         function(responses) {
             var data = responses[0];
-            statesMetadata = responses[1],
-            otherMetadata = {};
+            metadata[area] = responses[1];
 
-            if (dataset.match(/^cnes_/)){
-                filters.forEach(function(depth, i) {
-                    otherMetadata[depth] = responses[2+i];
-                });
-            }
+            filters.forEach(function(filter, i) {
+                metadata[filter] = responses[2+i];
+            });
 
-            data = buildData(data,statesMetadata,otherMetadata);
+            data = buildData(data);
             loadViz(data);
 
-
-            // loading.hide();
             d3.select('#mask').remove();
         }
     );
