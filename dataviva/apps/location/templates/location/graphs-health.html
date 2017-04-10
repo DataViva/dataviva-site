@@ -109,17 +109,6 @@
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
-            <a href="#beds-type-speciality" class="list-group-item" data-toggle="collapse" data-parent="#beds-type-speciality">{% trans %}Unit Type{% endtrans %}</a>
-            <div class="collapse" id="beds-type-speciality">
-                <a href="/{{ g.locale }}/tree_map/cnes_bed/bed_type/beds?hierarchy=false{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-speciality-tree_map'}}" data-parent="#beds-type-speciality">
-                    TreeMap
-                </a>
-                <a href="/{{ g.locale }}/stacked/cnes_bed/bed_type/beds?values=beds+number_existing_bed+number_sus_bed+number_non_sus_bed&depths=bed_type+health_region&filters=health_region{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-type-speciality-stacked'}}" data-parent="#beds-type-speciality">
-                    {% trans %}Stacked{% endtrans %}
-                </a>
-            </div>
             <a href="#beds-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="beds-sus-bond">
                 <a href="/{{ g.locale }}/bar/cnes_bed/beds/bed_type,bed_type_per_specialty,health_region?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
