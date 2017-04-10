@@ -314,12 +314,6 @@ dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
 dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
 dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de atenção';
 
-dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
-dictionary['hospital'] = lang == 'en' ? 'Hospital' : 'Hospitalar';
-dictionary['ambulatory'] = lang == 'en' ? 'Ambulatory' : 'Ambulatorial';
-dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
-dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de Atenção';
-
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
 dictionary['equipment_code'] = lang == 'en' ? 'Equipments' : 'Equipamentos';

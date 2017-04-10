@@ -297,7 +297,7 @@ var addUiFilters = function(){
             .config(config)
             .container(d3.select('#controls'))
             .data(menuOptions)
-            .title('Nível de Atenção')
+            .title(dictionary['attention_level'])
             .type('drop')
             .font({'size': 11})
             .focus(-1, function(pos) {
@@ -367,7 +367,7 @@ var formatHelper = {
     "number": function(number, params) {
         var formatted = d3plus.number.format(number, params);
 
-        formatted = formatNumber(formatted)
+        // formatted = formatNumber(formatted)
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
