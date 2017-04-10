@@ -30,14 +30,14 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}}" data-parent="#equipments-type">
                     {% trans %}Stacked{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?options=singlecolor,nolabely&filters=sus_availability_indicator,unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?options=singlecolor,nolabely&filters=sus_availability_indicator,unit_type&shapes=quantity{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}}" data-parent="#equipments-type">
                     {% trans %}Bar{% endtrans %}
                 </a>
             </div>
             <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="equipments-sus-bond">
-                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?filters=unit_type&id=sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?filters=unit_type&id=sus_availability_indicator&options=nolabely&shapes=sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-sus-bond-bar'}}" data-parent="#equipments-sus-bond">
                     {% trans %}Bar{% endtrans %}
                 </a>

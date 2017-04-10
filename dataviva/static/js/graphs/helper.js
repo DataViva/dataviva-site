@@ -263,6 +263,7 @@ dictionary['isolate'] = lang == 'en' ? 'Isolate' : 'Isolar';
 dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
 dictionary['Unable to load visualization'] = lang == 'en' ? 'Unable to load visualization' : 'Não foi possível carregar a visualização';
 dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
+dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
