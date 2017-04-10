@@ -1,6 +1,7 @@
 <html lang="{{ g.locale }}">
 <head>
     <meta charset="utf-8">
+    <title>DataViva</title>
     <link rel="stylesheet" type="text/css" href="/static/css/main.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="/static/css/bgs.css" type="text/css">
     <link type="text/css" rel="stylesheet" media="all" href="/static/css/libs/font-awesome/css/font-awesome.min.css" />
@@ -27,16 +28,18 @@
     </style>
 </head>
 <body>
-
-    <div id="mask" class="loading"></div>
+    {% include "graphs/tools.html" %}
     <div id="map"
         class="embed-responsive responsive-wrapper"
         dataset="{{ dataset }}"
         value="{{ value }}"
         filters="{{ filters }}"
+        graph-title="{{ title }}"
+        graph-subtitle="{{ subtitle }}"
         state="{{ state }}">
     </div>
     <div id="controls"></div>
+    <div id="mask" class="loading"></div>
 
     <script type="text/javascript">
         var dictionary = {{ dictionary|safe }};
@@ -44,5 +47,8 @@
 
     <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
     <script type="text/javascript" src="/static/js/modules/map.js"></script>
-
+    <script type="text/javascript" src="/static/js/graphs/tools.js"></script>
+    <script src="/static/js/plugins/jspdf/FileSaver.js"></script>
+    <script src="/static/js/plugins/jspdf/jspdf.js"></script>
+    <script src="/static/js/plugins/jspdf/addimage.js"></script>
 </body>
