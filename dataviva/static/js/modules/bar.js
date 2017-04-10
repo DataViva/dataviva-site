@@ -466,6 +466,12 @@ var loadViz = function(data){
         if(colorHelper[currentY] != undefined)
             visualization.color(currentY + "_color");
 
+        if(options.indexOf('nolabely') != -1){
+            visualization.y({
+                'label': false
+            })
+        }
+
         if(options.indexOf('singlecolor') != -1){
             visualization.color({
                 "value" : function(d){

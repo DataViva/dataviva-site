@@ -337,7 +337,7 @@ var loadViz = function (data){
                 .config(config)
                 .container(d3.select('#controls'))
                 .data(menuOptions)
-                .title('Nível de Atenção')
+                .title(dictionary['attention_level'])
                 .type('drop')
                 .focus(-1, function(pos) {
                     viz.data(filteredData('ambulatory_attention', filterValues[pos][0]))
