@@ -272,7 +272,7 @@ dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
 // CNES BEDS
 dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
 dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
-dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Type Per Specialty' : 'Tipo de Leito por Especialidade';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Specialty' : 'Especialidade de Leito';
 dictionary['cnes_bed'] = lang == 'en' ? 'Datasus' : 'Datasus';
 dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
