@@ -26,6 +26,13 @@ var data = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
+var config = {
+    'id': 'id',
+    'text': 'label',
+    'font': {'size': 11},
+    'container': d3.select('#controls'),
+    'search': false
+};
 
 var currentTitleAttrs = {'shapes': shapes || y[0]}
 
@@ -46,37 +53,48 @@ var titleHelper = function(years) {
     };
 };
 
-if(x.length > 1){
-    uis.push({
-        'value': x,
-        'type': 'drop',
-        'label': 'xaxis',
-        'method': function(value, viz){
+if (x.length > 1) {
+    d3plus.form()
+        .config(config)
+        .container(d3.select('#controls'))
+        .data(x.map(function(item) {
+            return {'id': item, 'label': dictionary[item]};
+        }))
+        .title(dictionary['xaxis'])
+        .type('drop')
+        .font({'size': 11})
+        .focus(x[0], function(value) {
             currentX = value;
 
-            if(percentage)
+            if (percentage)
                 currentX = currentX + '_pct';
 
-            viz.x(currentX)
+            visualization.x(currentX)
                .order({
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
                     'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
-                })
+                });
+
             totalOfCurrentX();
-            viz.draw();
-        }
-    });
+            visualization.draw();
+        })
+        .draw();
 }
 
-if(y.length > 1){
-    uis.push({
-        'value': y,
-        'type': 'drop',
-        'label': 'yaxis',
-        'method': function(value, viz){
+if (y.length > 1) {
+    d3plus.form()
+        .config(config)
+        .container(d3.select('#controls'))
+        .data(y.map(function(item) {
+            return {'id': item, 'label': dictionary[item]}
+        }))
+        .title(dictionary['yaxis'])
+        .type('drop')
+        .font({'size': 11})
+        .focus(y[0], function(value) {
             currentY = value;
 
-            viz.y(value)
+            visualization.y(value)
                 .id(vizId ? vizId : value)
                 .order({
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
@@ -85,15 +103,15 @@ if(y.length > 1){
                 .legend(false)
 
             if(colorHelper[currentY] != undefined)
-                viz.color(currentY + "_color");
+                visualization.color(currentY + "_color");
 
             currentTitleAttrs['shapes'] = shapes || value;
 
-            viz.title(titleHelper(yearRange))
+            visualization.title(titleHelper(yearRange))
                 .data(filterTopData(data))
                 .draw();
-        }
-    });
+        })
+        .draw();
 }
 
 var colorHelper = {
@@ -204,14 +222,6 @@ var orderHelper = {
 }
 
 var addUiFilters = function(){
-    var config = {
-        'id': 'id',
-        'text': 'label',
-        'font': {'size': 11},
-        'container': d3.select('#controls'),
-        'search': false
-    };
-
     var filteredData = function(data, filter, value) {
         currentFilters[filter] = value;
         return data.filter(function(item) {
@@ -480,9 +490,10 @@ var loadViz = function(data){
                 }
             }).legend(false)
         }
+
         totalOfCurrentX();
         visualization.draw()
-
+        $('#controls').fadeToggle();
         toolsBuilder('bar', visualization, data, titleHelper(yearRange));
 };
 

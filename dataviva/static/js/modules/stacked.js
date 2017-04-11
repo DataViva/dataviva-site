@@ -178,7 +178,6 @@ var loadViz = function (data){
     };
 
     var uiBuilder = function() {
-        ui = [];
         var config = {
             'id': 'id',
             'text': 'label',
@@ -410,10 +409,7 @@ var loadViz = function (data){
                 })
                 .draw();
         }
-
-        return ui;
-    }
-
+    };
 
     var titleHelper = function(years) {
         var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
@@ -482,7 +478,6 @@ var loadViz = function (data){
         .shape({"interpolate": "monotone"})
         .tooltip(tooltipBuilder())
         .messages({'branding': true, 'style': 'large'})
-        .ui(uiBuilder())
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .format(formatHelper())
@@ -511,9 +506,10 @@ var loadViz = function (data){
             .title({'total': {'prefix': dictionary[values[0]] + ': '}})
             .title({'total': {'font': {'align': 'left'}}})
 
+        uiBuilder();
         $('#stacked').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
-
         viz.draw();
+        $('#controls').fadeToggle();
         toolsBuilder(stacked.id, viz, data, titleHelper(yearRange).value);
 }
 

@@ -269,11 +269,14 @@ dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
 dictionary['plural_health_region'] = lang == 'en' ? 'Health regions' : 'Regiões de Saúde';
 dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
+dictionary['plural_unit_type'] = lang == 'en' ? 'Unit Types' : 'Tipos de Unidade';
 
 // CNES BEDS
 dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
+dictionary['plural_bed_type'] = lang == 'en' ? 'Bed Types' : 'Tipos de Leito';
 dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
 dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Specialty' : 'Especialidade de Leito';
+dictionary['plural_bed_type_per_specialty'] = lang == 'en' ? 'Bed Specialties' : 'Especialidades de Leito';
 dictionary['cnes_bed'] = lang == 'en' ? 'Datasus' : 'Datasus';
 dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
