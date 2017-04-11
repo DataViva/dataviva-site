@@ -88,7 +88,7 @@ def index(dataset, area, value):
 
 	filters = []
 	for key, value in request.args.items():
-		if key not in ['depths', 'values', 'group', 'filters'] and value:
+		if key not in ['depths', 'values', 'group', 'filters', 'hierarchy'] and value:
 			if key == 'product':
 				filters.append(product_service(value))
 				title_attrs[product_service(value)[0]] = product_service(value)[1]

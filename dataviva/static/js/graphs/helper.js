@@ -179,7 +179,7 @@ var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation
 
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
-dictionary['states'] = lang == 'en' ? 'States' : 'Estados';
+dictionary['plural_state'] = lang == 'en' ? 'States' : 'Estados';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';
 dictionary['plural_municipality'] = lang == 'en' ? 'Municipalities' : 'Municípios';
 dictionary['product_section'] = lang == 'en' ? 'Section' : 'Seção';
@@ -263,6 +263,7 @@ dictionary['isolate'] = lang == 'en' ? 'Isolate' : 'Isolar';
 dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
 dictionary['Unable to load visualization'] = lang == 'en' ? 'Unable to load visualization' : 'Não foi possível carregar a visualização';
 dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
+dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
@@ -312,12 +313,6 @@ dictionary['hospital'] = lang == 'en' ? 'Hospital' : 'Hospitalar';
 dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
 dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
 dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de atenção';
-
-dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
-dictionary['hospital'] = lang == 'en' ? 'Hospital' : 'Hospitalar';
-dictionary['ambulatory'] = lang == 'en' ? 'Ambulatory' : 'Ambulatorial';
-dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
-dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de Atenção';
 
 // CNES EQUIPMENTS
 dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';

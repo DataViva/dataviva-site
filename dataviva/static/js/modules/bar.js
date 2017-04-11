@@ -22,11 +22,12 @@ var data = [],
     dimensions = vizId ? dimensions.concat(vizId).filter(unique) : dimensions,
     dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
     yearRange = [Number.POSITIVE_INFINITY, 0],
+    shapes = getUrlArgs()['shapes'] ? getUrlArgs()['shapes'] : undefined,
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
 
-var currentTitleAttrs = {'shapes': y[0]}
+var currentTitleAttrs = {'shapes': shapes || y[0]}
 
 var visualization;
 var percentage = false;
@@ -86,7 +87,7 @@ if(y.length > 1){
             if(colorHelper[currentY] != undefined)
                 viz.color(currentY + "_color");
 
-            currentTitleAttrs['shapes'] = value;
+            currentTitleAttrs['shapes'] = shapes || value;
 
             viz.title(titleHelper(yearRange))
                 .data(filterTopData(data))
@@ -296,7 +297,7 @@ var addUiFilters = function(){
             .config(config)
             .container(d3.select('#controls'))
             .data(menuOptions)
-            .title('Nível de Atenção')
+            .title(dictionary['attention_level'])
             .type('drop')
             .font({'size': 11})
             .focus(-1, function(pos) {
@@ -366,7 +367,7 @@ var formatHelper = {
     "number": function(number, params) {
         var formatted = d3plus.number.format(number, params);
 
-        formatted = formatNumber(formatted)
+        // formatted = formatNumber(formatted)
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
