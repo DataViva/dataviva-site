@@ -125,7 +125,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-map'}}" data-parent="#professionals-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
-                  <a href="/{{ g.locale }}/tree_map/cnes_professional/municipality/professionals?filters=sus_healthcare_professional{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/tree_map/cnes_professional/municipality/professionals?depths=region+state+mesoregion+microregion+health_region+municipality&filters=sus_healthcare_professional+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-tree_map'}}" data-parent="#professionals-municipality">
                       TreeMap
                   </a>
