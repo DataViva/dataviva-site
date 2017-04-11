@@ -213,6 +213,7 @@ def index(wld_id, tab):
         'general': [],
         'international-trade': [
             'trade-balance-partner-line',
+            'new-api-trade-balance-partner-line',
             'exports-municipality-tree_map',
             'new-api-exports-municipality-tree_map',
             'exports-municipality-stacked',

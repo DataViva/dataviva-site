@@ -5,7 +5,7 @@ var lineGraph = document.getElementById('lineGraph'),
     baseTitle = lineGraph.getAttribute('graph-title'),
     baseSubtitle = lineGraph.getAttribute('graph-subtitle'),
     args = getUrlArgs(),
-    yearRange = args.hasOwnProperty('year') ? [0, +args['year']] : [0, 0],
+    yearRange = [Number.POSITIVE_INFINITY, 0],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][line] || [line],
     group = depths[0],
     yValues = args.hasOwnProperty('values') ? args['values'].split('+') : SIZES[dataset][yValue] || [yValue],
@@ -13,7 +13,7 @@ var lineGraph = document.getElementById('lineGraph'),
     basicValues = BASIC_VALUES[dataset] || [],
     calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
     currentFilters = {},
-    currentTitleAttrs = {'yValue': yValue, 'Line': line}
+    currentTitleAttrs = {'yValue': yValue, 'line': line}
     metadata = {},
     balance = line == 'type' ? true : false;
 
@@ -67,10 +67,19 @@ var buildData = function(apiResponse){
 
             if (dataItem['month'])
                 dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
+
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+                yearRange[1] = dataItem['year'];
+            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+                yearRange[0] = dataItem['year'];
+
             data.push(dataItem);
 
         } catch(e) {};
     });
+
+    if (yearRange[0] == yearRange[1])
+        yearRange[0] = 0;
 
     return data;
 }
@@ -98,7 +107,6 @@ var lastYear = function(data){
 };
 
 var allDates = function(minYear, maxYear, hasMonth){
-
         var dates = [];
         
         if (hasMonth){
@@ -168,7 +176,7 @@ var fillMissingDates = function(data){
     return data;
 };
 
-var insertTradeBalanceData = function(data){
+var buildTradeBalanceData = function(data){
     
     data.forEach(function(item, index, allItems) {
         var tradeBalance = {}
@@ -230,7 +238,7 @@ var loadViz = function(data) {
                 .title(dictionary['values'])
                 .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(yValue, function(value) {
-                    currentTitleAttrs['size'] = value;
+                    currentTitleAttrs['line'] = value;
                     viz.y({
                         'value': value
                     })
@@ -247,14 +255,12 @@ var loadViz = function(data) {
                 .title(dictionary['depth'])
                 .type('toggle')
                 .focus(dictionary['value'] ? 'type' : 'trade_balance', function(value) {
-                    
                     viz.id({
                         'value' : value == 'trade_balance' ? value : [group, value]
                     })
                     viz.draw();
                 })
                 .draw();
-
         }
 
         // Adds time resolution selector
@@ -294,6 +300,24 @@ var loadViz = function(data) {
         return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(line);
     }
 
+    var titleHelper = function(years) {
+        if (!baseTitle) {
+            var genericTitle = '<line> ' + dictionary['per'] + ' <yValue>';
+            if (depths.length > 1 && currentTitleAttrs['yValue'] != currentTitleAttrs['yValue'])
+                genericTitle += '/<depth>';
+        }
+
+        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
+
+        return {
+            'value': header['title'],
+            'font': {'size': 22, 'align': 'left'},
+            'padding': 5,
+            'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+        };
+    };
+
     var tooltipBuilder = function() {
         return {
             'short': {
@@ -320,7 +344,6 @@ var loadViz = function(data) {
         })
         .y({
             'value': 'value',
-            //'label': {'value': yAxisLabelBuilder(type), 'font': {'size': 20}},
             'ticks': {'font': {'size': 17}}
         })
 
@@ -331,11 +354,13 @@ var loadViz = function(data) {
         .legend({'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .messages({'branding': true, 'style': 'large'})
+        .title(titleHelper([0, yearRange[1]]))
+        .title({'total': {'font': {'align': 'left'}}})
+        .title({'total': {'prefix': dictionary[line] + ': '}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
         .ui(uiBuilder())
         .axes({'background': {'color': '#FFFFFF'}});
-
 
         if (group){
             viz.id([group, line]);
@@ -351,14 +376,19 @@ var loadViz = function(data) {
             viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
         }
 
+        if (balance)
+            viz.y({'label': {'value': dictionary['trade_value']}})       
+
         $('#lineGraph').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     
     viz.draw();
 
+    toolsBuilder('line', viz, data, titleHelper(yearRange).value);
+
 };
 
 var getUrls = function() {
-    var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year'), line],
+    var dimensions = [dataset, (dataset == 'secex' ? 'year' : 'year'), line],
     metadataAttrs = [];
     
     depths.concat(filters).forEach(function(attr) {
@@ -389,7 +419,7 @@ $(document).ready(function() {
 
             if (balance){
                 data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
-                var tradeBalanceData = insertTradeBalanceData(data);
+                var tradeBalanceData = buildTradeBalanceData(data);
             }
 
             loadViz(data);
@@ -404,22 +434,22 @@ $(document).ready(function() {
 
 // Geral:
 // 1. Testar todas as bases de dados
-// 2. Valores Anuais (Padrão) e Mensais para SECEX (Seletores UI) >> DONE
-// 3. Verificar tooltips:
+// 2. Verificar tooltips:
 //      - Valores;
 //      - Ícones para países;
-// 4. Rótulos dos eixos.
-
-// Modelo: http://localhost:5000/en/product/021201/trade-partner?menu=exports-destination-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fwld%2F%3Fy%3Dexport_val%26color%3Dcolor
-// URL: http://localhost:5000/en/line/secex/country/value?values=value+kg&product=021201&type=export
+// 3. Rótulos dos eixos.
+// 4. Inserir gráfico nas categorias:
+//      - Location
+//      - Products (Falta Porto) >> DONE
+//      - Trade Partners (Falta Porto) >> DONE
+//      - High Education
+// 5. Line Porto
 
 // Gráfico de Balança Comercial:
-// 1. Interpolar dados faltantes >> DONE !FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
-// 2. Calcular Balança Comercial (line-bk.js). >>> DONE
+// 1. Calcular Balança Comercial >> DONE
+// 2. ERRO! Interpolar dados faltantes
 
-// Modelo: http://localhost:5000/en/product/021201/trade-partner?menu=trade-balance-product-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fbalance%2F%3Ftime%3Dyear
-// URL: http://localhost:5000/en/line/secex/type/value?values=value+kg&product=021201
-
-//Testar Interpolação:
-// Modelo: http://localhost:5000/en/product/021201/trade-partner?bra_id=4mg030000
-// URL: http://localhost:5000/en/line/secex/type/value?values=value+kg&product=021201&id_ibge=3106200
+// Não funciona: Interpolação, mensal...O gráfico de export não funciona na granularidade de país
+// http://localhost:5000/en/line/secex/country/value?values=value+kg&type=import&product=021201
+// http://localhost:5000/en/line/secex/country/value?values=value+kg&type=export&product=021201
+// *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.

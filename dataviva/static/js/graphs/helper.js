@@ -182,6 +182,7 @@ dictionary['export'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
 dictionary['import'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
 dictionary['exports'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
 dictionary['imports'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
+dictionary['trade_value'] = lang == 'en' ? 'Trade Value (USD)' : 'Valor do Comércio (USD)';
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['plural_state'] = lang == 'en' ? 'States' : 'Estados';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';

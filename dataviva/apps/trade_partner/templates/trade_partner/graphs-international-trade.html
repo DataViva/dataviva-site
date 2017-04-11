@@ -2,7 +2,6 @@
     <nav class="nav-graph col-xs-12 col-sm-3 col-md-3" >
         <h3>{%trans%}Preview{%endtrans%}:</h3>
         <div class="list-group panel">
-            
             <h4>{% trans %}Trade Balance{% endtrans %}</h4>
             <a href="#trade-balance-partner" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-partner">{% trans %}Trade Partner{% endtrans %}</a>
             <div class="collapse" id="trade-balance-partner">
@@ -11,8 +10,11 @@
                    class="list-group-item {{'selected' if graph.menu == 'trade-balance-partner-line' or not graph }}" data-parent="#trade-balance-partner">
                     {% trans %}Line{% endtrans %}
                 </a>
+                <a href="/{{ g.locale }}/line/secex/type/value?values=value+kg&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                    target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-trade-balance-partner-line'}}" data-parent="#new-api-trade-balance-partner">
+                      Line New API
+                </a>
             </div>
-            
             <h4>{% trans %}Exports By{% endtrans %}</h4>
             <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="exports-municipality">
