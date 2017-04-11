@@ -169,7 +169,42 @@ var fillMissingDates = function(data){
 };
 
 var buildTradeBalanceData = function(data){
-    //return data;
+
+    var tradeBalanceData = [];
+    
+    data.forEach(function(item, index, allItems) {
+        var tradeBalance = {}
+        var nextItem = allItems[index + 1]
+        
+        if (index % 2 !== 0 || nextItem === undefined)
+            return;
+
+        try{
+            tradeBalance['date'] = string2date(item['year'] + '-' + item['month'])
+            tradeBalance['year'] = item['year'];
+            tradeBalance['month'] = item['month'];
+
+            if(item['year'] == nextItem['year'] && item['month'] == nextItem['month'] &&
+                item['type'] != nextItem['type']){
+
+                if(item['type'] == 'export'){
+                    tradeBalance['value'] = item['value'] - nextItem['value'];
+                    tradeBalance['kg'] = item['kg'] - nextItem['kg']
+                }
+                else{
+                    tradeBalance['value'] = - nextItem['value'] + item['value'];
+                    tradeBalance['kg'] = - nextItem['kg'] + item['kg'];
+                }
+            }
+
+            tradeBalanceData.push(tradeBalance);
+            index = index + 1;
+            return;
+            
+        } catch(e) {};
+    });
+
+    return tradeBalanceData;
 };
 
 var loadViz = function(data) {
@@ -216,7 +251,10 @@ var loadViz = function(data) {
                     viz.y({
                         'value': value
                     });
-                    viz.data(balanceData)
+                    if (value == 'value')
+                        viz.data(data);
+                    else
+                        viz.data(tradeBalanceData);
                     viz.draw();
                 })
                 .draw();
@@ -351,13 +389,12 @@ $(document).ready(function() {
             data = buildData(data);
             data = fillMissingDates(data);
 
-            // if (balance)
-            //     data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
-            //     data = buildTradeBalanceData(data);
-            //     loadViz(balanceData);
-
-
-            loadViz(data);
+            if (balance){
+                data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
+                var tradeBalanceData = buildTradeBalanceData(data);
+                loadViz(tradeBalanceData);
+            } else 
+                loadViz(data);
 
             loading.hide();
             d3.select('#mask').remove();
