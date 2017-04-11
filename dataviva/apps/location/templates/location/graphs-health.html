@@ -129,7 +129,7 @@
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-tree_map'}}" data-parent="#professionals-municipality">
                       TreeMap
                   </a>
-                  <a href="/{{ g.locale }}/stacked/cnes_professional/municipality/professionals?values=professionals&depths=municipality+occupation_family+sus_healthcare_professional+health_region&filters=occupation_family+sus_healthcare_professional+health_region{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/stacked/cnes_professional/municipality/professionals?values=professionals&depths=region+state+mesoregion+microregion+health_region+municipality&filters=sus_healthcare_professional+unit_type&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-stacked'}}" data-parent="#professionals-municipality">
                       {% trans %}Stacked{% endtrans %}
                   </a>  
