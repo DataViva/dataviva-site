@@ -168,9 +168,7 @@ var fillMissingDates = function(data){
     return data;
 };
 
-var buildTradeBalanceData = function(data){
-
-    var tradeBalanceData = [];
+var insertTradeBalanceData = function(data){
     
     data.forEach(function(item, index, allItems) {
         var tradeBalance = {}
@@ -192,19 +190,21 @@ var buildTradeBalanceData = function(data){
                     tradeBalance['kg'] = item['kg'] - nextItem['kg']
                 }
                 else{
-                    tradeBalance['value'] = - nextItem['value'] + item['value'];
-                    tradeBalance['kg'] = - nextItem['kg'] + item['kg'];
+                    tradeBalance['value'] =  nextItem['value'] - item['value'];
+                    tradeBalance['kg'] =  nextItem['kg'] - item['kg'];
                 }
+
+                tradeBalance['type_bal'] = 'balance'
             }
 
-            tradeBalanceData.push(tradeBalance);
+            data.push(tradeBalance);
             index = index + 1;
             return;
             
         } catch(e) {};
     });
 
-    return tradeBalanceData;
+    return data;
 };
 
 var loadViz = function(data) {
@@ -243,21 +243,18 @@ var loadViz = function(data) {
         if (balance) {
             d3plus.form()
                 .config(config)
-                .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'balance', 'label': dictionary['trade_balance']}])
+                .data([{'id': 'type', 'label': dictionary['value']}, {'id': 'type_bal', 'label': dictionary['trade_balance']}])
                 .title(dictionary['depth'])
                 .type('toggle')
-                .focus(dictionary['value'] ? 'value' : 'balance', function(value) {
-                    //Adicionar campo 'balance' ao data ou criar outro conjunto de dados balanceData?
-                    viz.y({
-                        'value': value
-                    });
-                    if (value == 'value')
-                        viz.data(data);
-                    else
-                        viz.data(tradeBalanceData);
+                .focus(dictionary['value'] ? 'type' : 'balance', function(value) {
+                    
+                    viz.id({
+                        'value' : value
+                    })
                     viz.draw();
                 })
                 .draw();
+
         }
 
         // Adds time resolution selector
@@ -339,6 +336,7 @@ var loadViz = function(data) {
         .ui(uiBuilder())
         .axes({'background': {'color': '#FFFFFF'}});
 
+
         if (group){
             viz.id([group, line]);
             viz.color(group);
@@ -391,10 +389,10 @@ $(document).ready(function() {
 
             if (balance){
                 data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
-                var tradeBalanceData = buildTradeBalanceData(data);
-                loadViz(tradeBalanceData);
-            } else 
-                loadViz(data);
+                var tradeBalanceData = insertTradeBalanceData(data);
+            }
+
+            loadViz(data);
 
             loading.hide();
             d3.select('#mask').remove();
