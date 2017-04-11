@@ -248,6 +248,7 @@
             </ul>
         </div>
     </nav>
+    <input type="hidden" id="id_ibge" value="{{id_ibge}}">
 
     <div class="container">
         <div class="tab-content">
@@ -277,4 +278,10 @@
   {% endif %}
 </section>
 {% endblock content %}
+
+
+{% block script %}
+    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+    <script type="text/javascript" src="/static/js/modules/location.js"></script>
+{% endblock %}
 
