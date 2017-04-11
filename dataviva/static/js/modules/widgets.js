@@ -15,13 +15,13 @@ dictionary['municipality_with_highest_number_of_beds'] = lang == 'en' ? 'Municip
 dictionary['beds'] = lang == 'en' ? 'beds' : 'Leitos';
 
 dictionary['total_of_equipments'] = lang == 'en' ? 'Total of equipments' : 'Total de Equipamentos';
-dictionary['municipality_with_highest_number_of_equipments'] = lang == 'en' ? 'Municipality with the highest number of equipments' : 'Município com maior numero de Equipamentos';
+dictionary['municipality_with_highest_number_of_equipments'] = lang == 'en' ? 'Municipality With the Highest Number of Equipments' : 'Município com Maior Número de Equipamentos';
 dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 
 dictionary['number_establishments'] = lang == 'en' ? 'Number of Establishments' : 'Numero de Estabelecimentos';
-dictionary['number_beds'] = lang == 'en' ? 'Number of Beds' : 'Numero de Leitos';
-dictionary['number_professionals'] = lang == 'en' ? 'Number of Professionals' : 'Numero de Profissionais';
-dictionary['number_equipments'] = lang == 'en' ? 'Number of Equipments' : 'Numero de Equipamentos';
+dictionary['number_beds'] = lang == 'en' ? 'Number of Beds' : 'Número de Leitos';
+dictionary['number_professionals'] = lang == 'en' ? 'Number of Professionals' : 'Número de Profissionais';
+dictionary['number_equipments'] = lang == 'en' ? 'Number of Equipments' : 'Número de Equipamentos';
 
 dictionary['main_equipment_type'] = lang == 'en' ? 'Main Equipment Type' : 'Principal Tipo Equipamento';
 
