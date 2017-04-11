@@ -322,7 +322,7 @@ dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipa
 dictionary['equipment_code'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
 dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
-dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment quantity in use' : 'Quantidade existente em uso';
+dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment Quantity in Use' : 'Quantidade Existente em Uso';
 dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
 dictionary['sus_availability_indicator'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 
