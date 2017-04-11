@@ -1,4 +1,4 @@
-<div id="graphs-health" class="container">
+  <div id="graphs-health" class="container">
     <nav class="nav-graph col-xs-12 col-sm-3 col-md-3">
     <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
@@ -145,7 +145,7 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-tree_map'}}" data-parent="#professionals-provider-unit">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/stacked/cnes_professional/unit_type/professionals?values=professionals&depths=unit_type+occupation_family+sus_healthcare_professional+health_region&filters=occupation_family+sus_healthcare_professional+health_region{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/stacked/cnes_professional/unit_type/professionals?values=professionals&depths=unit_type+occupation_family+sus_healthcare_professional+health_region&filters=occupation_family+sus_healthcare_professional+health_region+hierarchy_level{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-stacked'}}" data-parent="#professionals-provider-unit">
                     {% trans %}Stacked{% endtrans %}
                 </a>
