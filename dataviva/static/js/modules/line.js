@@ -168,9 +168,7 @@ var fillMissingDates = function(data){
     return data;
 };
 
-var buildTradeBalanceData = function(data){
-
-    var tradeBalanceData = [];
+var insertTradeBalanceData = function(data){
     
     data.forEach(function(item, index, allItems) {
         var tradeBalance = {}
@@ -192,19 +190,21 @@ var buildTradeBalanceData = function(data){
                     tradeBalance['kg'] = item['kg'] - nextItem['kg']
                 }
                 else{
-                    tradeBalance['value'] = - nextItem['value'] + item['value'];
-                    tradeBalance['kg'] = - nextItem['kg'] + item['kg'];
+                    tradeBalance['value'] =  nextItem['value'] - item['value'];
+                    tradeBalance['kg'] =  nextItem['kg'] - item['kg'];
                 }
+
+                tradeBalance['trade_balance'] = 'trade_balance'
             }
 
-            tradeBalanceData.push(tradeBalance);
+            data.push(tradeBalance);
             index = index + 1;
             return;
             
         } catch(e) {};
     });
 
-    return tradeBalanceData;
+    return data;
 };
 
 var loadViz = function(data) {
@@ -243,21 +243,18 @@ var loadViz = function(data) {
         if (balance) {
             d3plus.form()
                 .config(config)
-                .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'balance', 'label': dictionary['trade_balance']}])
+                .data([{'id': 'type', 'label': dictionary['value']}, {'id': 'trade_balance', 'label': dictionary['trade_balance']}])
                 .title(dictionary['depth'])
                 .type('toggle')
-                .focus(dictionary['value'] ? 'value' : 'balance', function(value) {
-                    //Adicionar campo 'balance' ao data ou criar outro conjunto de dados balanceData?
-                    viz.y({
-                        'value': value
-                    });
-                    if (value == 'value')
-                        viz.data(data);
-                    else
-                        viz.data(tradeBalanceData);
+                .focus(dictionary['value'] ? 'type' : 'trade_balance', function(value) {
+                    
+                    viz.id({
+                        'value' : value == 'trade_balance' ? value : [group, value]
+                    })
                     viz.draw();
                 })
                 .draw();
+
         }
 
         // Adds time resolution selector
@@ -339,6 +336,7 @@ var loadViz = function(data) {
         .ui(uiBuilder())
         .axes({'background': {'color': '#FFFFFF'}});
 
+
         if (group){
             viz.id([group, line]);
             viz.color(group);
@@ -391,10 +389,10 @@ $(document).ready(function() {
 
             if (balance){
                 data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
-                var tradeBalanceData = buildTradeBalanceData(data);
-                loadViz(tradeBalanceData);
-            } else 
-                loadViz(data);
+                var tradeBalanceData = insertTradeBalanceData(data);
+            }
+
+            loadViz(data);
 
             loading.hide();
             d3.select('#mask').remove();
@@ -417,7 +415,7 @@ $(document).ready(function() {
 
 // Gráfico de Balança Comercial:
 // 1. Interpolar dados faltantes >> DONE !FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
-// 2. Calcular Balança Comercial (line-bk.js).
+// 2. Calcular Balança Comercial (line-bk.js). >>> DONE
 
 // Modelo: http://localhost:5000/en/product/021201/trade-partner?menu=trade-balance-product-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fbalance%2F%3Ftime%3Dyear
 // URL: http://localhost:5000/en/line/secex/type/value?values=value+kg&product=021201
