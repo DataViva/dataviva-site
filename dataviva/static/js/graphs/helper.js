@@ -178,6 +178,10 @@ var CALC_BASIC_VALUES = {
 var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group'];
 
 // Temporarily translates text until dictionary is updated
+dictionary['export'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
+dictionary['import'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
+dictionary['exports'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
+dictionary['imports'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['states'] = lang == 'en' ? 'States' : 'Estados';
 dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';

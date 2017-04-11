@@ -194,7 +194,7 @@ var insertTradeBalanceData = function(data){
                     tradeBalance['kg'] =  nextItem['kg'] - item['kg'];
                 }
 
-                tradeBalance['type_bal'] = 'balance'
+                tradeBalance['trade_balance'] = 'trade_balance'
             }
 
             data.push(tradeBalance);
@@ -243,13 +243,13 @@ var loadViz = function(data) {
         if (balance) {
             d3plus.form()
                 .config(config)
-                .data([{'id': 'type', 'label': dictionary['value']}, {'id': 'type_bal', 'label': dictionary['trade_balance']}])
+                .data([{'id': 'type', 'label': dictionary['value']}, {'id': 'trade_balance', 'label': dictionary['trade_balance']}])
                 .title(dictionary['depth'])
                 .type('toggle')
-                .focus(dictionary['value'] ? 'type' : 'balance', function(value) {
+                .focus(dictionary['value'] ? 'type' : 'trade_balance', function(value) {
                     
                     viz.id({
-                        'value' : value
+                        'value' : value == 'trade_balance' ? value : [group, value]
                     })
                     viz.draw();
                 })
@@ -415,7 +415,7 @@ $(document).ready(function() {
 
 // Gráfico de Balança Comercial:
 // 1. Interpolar dados faltantes >> DONE !FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
-// 2. Calcular Balança Comercial (line-bk.js).
+// 2. Calcular Balança Comercial (line-bk.js). >>> DONE
 
 // Modelo: http://localhost:5000/en/product/021201/trade-partner?menu=trade-balance-product-line&url=line%2Fsecex%2Fall%2F021201%2Fall%2Fbalance%2F%3Ftime%3Dyear
 // URL: http://localhost:5000/en/line/secex/type/value?values=value+kg&product=021201
