@@ -146,7 +146,7 @@
             {% if not is_municipality %}
               <a href="#professionals-municipality" class="list-group-item" data-toggle="collapse" data-parent="#professionals-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="professionals-municipality">
-                  <a href="/{{ g.locale }}/map/cnes_professional/professionals?filters=sus_healthcare_professional+occupation_family"
+                  <a href="/{{ g.locale }}/map/cnes_professional/professionals/{{ id_ibge if id_ibge }}?filters=sus_healthcare_professional+unit_type"
                      target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-map'}}" data-parent="#professionals-municipality">
                       {% trans %}Map{% endtrans %}
                   </a>
