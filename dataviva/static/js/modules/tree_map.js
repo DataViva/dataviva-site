@@ -109,7 +109,7 @@ var loadViz = function(data) {
                 'text': 'label',
                 'font': {'size': 11},
                 'container': d3.select('#controls'),
-                'search': false,
+                'search': false
             };
 
         // Adds depth selector
@@ -349,8 +349,7 @@ var loadViz = function(data) {
         .title({'total': {'font': {'align': 'left'}}})
         .title({'total': {'prefix': dictionary[size] + ': '}})
         .tooltip(tooltipBuilder())
-        .format(formatHelper())
-        .ui(uiBuilder());
+        .format(formatHelper());
 
     if (hierarchy) {
         viz.id(depths); 
@@ -369,10 +368,10 @@ var loadViz = function(data) {
         viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
     }
 
+    uiBuilder();
     $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
-    
     viz.draw();
-
+    $('#controls').fadeToggle();
     toolsBuilder('tree_map', viz, data, titleHelper(yearRange).value);
 };
 
