@@ -142,6 +142,9 @@ var fillMissingDates = function(data){
         if(check[item[line]] == undefined)
             check[item[line]] = {};
 
+        if(group)
+            check[item[line]][group] = item[group];
+
         check[item[line]][item.date] = true;
     });
 
@@ -152,6 +155,8 @@ var fillMissingDates = function(data){
         lines.forEach(function(lineValue){
             if(check[lineValue][date] == undefined){
                 var dataItem = {};
+
+                dataItem[group] = check[lineValue][group];
 
                 if(hasMonth){
                     dataItem['date'] = date;
@@ -272,7 +277,8 @@ var loadViz = function(data) {
                 .type('toggle')
                 .focus(dictionary['year'] ? 'year' : 'date', function(value) {
                     viz.x({
-                        'value': value
+                        'value': value,
+                        'label': value == 'year' ? dictionary['year'] : dictionary['month']
                     });
                     viz.time({
                         'value': value
@@ -346,7 +352,6 @@ var loadViz = function(data) {
             'value': 'value',
             'ticks': {'font': {'size': 17}}
         })
-
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
         .time({'value': 'year'})
@@ -388,7 +393,7 @@ var loadViz = function(data) {
 };
 
 var getUrls = function() {
-    var dimensions = [dataset, (dataset == 'secex' ? 'year' : 'year'), line],
+    var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year'), line],
     metadataAttrs = [];
     
     depths.concat(filters).forEach(function(attr) {
@@ -445,11 +450,4 @@ $(document).ready(function() {
 //      - High Education
 // 5. Line Porto
 
-// Gráfico de Balança Comercial:
-// 1. Calcular Balança Comercial >> DONE
-// 2. ERRO! Interpolar dados faltantes
-
-// Não funciona: Interpolação, mensal...O gráfico de export não funciona na granularidade de país
-// http://localhost:5000/en/line/secex/country/value?values=value+kg&type=import&product=021201
-// http://localhost:5000/en/line/secex/country/value?values=value+kg&type=export&product=021201
 // *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
