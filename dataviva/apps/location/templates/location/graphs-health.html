@@ -115,7 +115,7 @@
             </div>
             <a href="#beds-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="beds-sus-bond">
-                <a href="/{{ g.locale }}/bar/cnes_bed/beds/bed_type,bed_type_per_specialty,health_region?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/bar/cnes_bed/beds/bed_type,bed_type_per_specialty,health_region?options=singlecolor,nolabely&filters=unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-sus-bond-bar'}}" data-parent="#beds-sus-bond">
                     {% trans %}Bar{% endtrans %}
                 </a>
