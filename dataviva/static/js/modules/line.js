@@ -15,7 +15,8 @@ var lineGraph = document.getElementById('lineGraph'),
     currentFilters = {},
     currentTitleAttrs = {'yValue': yValue, 'line': line}
     metadata = {},
-    balance = line == 'type' ? true : false;
+    balance = line == 'type' ? true : false,
+    port = line == 'port' ? true : false;
 
 function string2date(dateString) {
     dateString = dateString.split('-');
@@ -129,7 +130,7 @@ var allDates = function(minYear, maxYear, hasMonth){
 /* The values are set as 1 because the logarithmic scale on the d3plus line chart 
 does not work when the data has more than one value equal to 0.*/
 
-FAKE_VALUE = 0.0833;
+FAKE_VALUE = 1;
 
 var fillMissingDates = function(data){
     var lines = new Set();
@@ -218,6 +219,62 @@ var buildTradeBalanceData = function(data){
     });
 
     return data;
+};
+
+var currentY = line;
+var currentX = yValue;
+var MAX_BARS = 10;
+
+var groupDataByCurrentY = function(data){
+    var sumByItem = {};
+
+    data.forEach(function(item){
+        if(sumByItem[item[currentY]] == undefined)
+            sumByItem[item[currentY]] = {
+                "sum": 0,
+                "name": item[currentY]
+            };
+
+        sumByItem[item[currentY]].sum += item[currentX];
+    });
+
+    var list = [];
+
+    for(var item in sumByItem){
+        list.push({
+            name: sumByItem[item].name,
+            sum: sumByItem[item].sum
+        });
+    }
+
+    return list;
+}
+
+var getTopCurrentYNames = function(groupedData){
+    var compare = function(a, b){
+        if(a.sum < b.sum)
+            return 1;
+        if(a.sum > b.sum)
+            return -1;
+
+        return 0;
+    }
+
+    var list = groupedData.sort(compare).slice(0, MAX_BARS);
+
+    var selected = list.map(function(item){
+        return item.name;
+    });
+
+    return selected;
+}
+
+var updateSolo = function(data){
+    var copiedData = (JSON.parse(JSON.stringify(data)));
+    var groupedData = groupDataByCurrentY(copiedData);
+    solo = getTopCurrentYNames(groupedData);
+
+    return solo;
 };
 
 var loadViz = function(data) {
@@ -382,7 +439,10 @@ var loadViz = function(data) {
         }
 
         if (balance)
-            viz.y({'label': {'value': dictionary['trade_value']}})       
+            viz.y({'label': {'value': dictionary['trade_value']}});
+
+        if (port)
+            viz.id({'solo': solo});
 
         $('#lineGraph').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     
@@ -427,6 +487,9 @@ $(document).ready(function() {
                 var tradeBalanceData = buildTradeBalanceData(data);
             }
 
+            if (port)
+                var solo = updateSolo(data);
+
             loadViz(data);
 
             loading.hide();
@@ -445,9 +508,12 @@ $(document).ready(function() {
 // 3. Rótulos dos eixos.
 // 4. Inserir gráfico nas categorias:
 //      - Location
-//      - Products (Falta Porto) >> DONE
+//      - Products >> DONE
 //      - Trade Partners (Falta Porto) >> DONE
 //      - High Education
-// 5. Line Porto
+// 5. Line Porto:
+//      - Refactor solo
+//      - Get nos gráficos page not found
+//      - Ao incluir solo, o gráfico não isola o porto no drill down
 
 // *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
