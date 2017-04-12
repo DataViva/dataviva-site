@@ -156,7 +156,7 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_group/other_hours_worked?values=other_hours_worked+hospital_hour+ambulatory_hour&depths=occupation_group+occupation_family+sus_healthcare_professional+health_region&filters=sus_healthcare_professional+health_region{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_group/other_hours_worked?values=other_hours_worked+hospital_hour+ambulatory_hour&depths=occupation_group+occupation_family+sus_healthcare_professional+health_region&filters=sus_healthcare_professional+health_region+hierarchy_level{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
                     {% trans %}Stacked{% endtrans %}
                 </a>
