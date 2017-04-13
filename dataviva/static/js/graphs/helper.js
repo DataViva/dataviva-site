@@ -296,7 +296,7 @@ dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulat
 // CNES ESTABLISHMENTS
 dictionary['sus_bond'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
-dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento Ambulatorial';
+dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facilities' : 'Instalações Físicas de Atendimento Ambulatorial';
 dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
 dictionary['tax_withholding'] = lang == 'en' ? 'Withholding Tax' : 'Retenção Tributária';
 dictionary['emergency_facility'] = lang == 'en' ? 'Emergency Facilities' : 'Instalações Físicas de Urgência e Emergência';
