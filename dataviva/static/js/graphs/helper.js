@@ -282,6 +282,7 @@ dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
 dictionary['number_non_sus_bed'] = lang == 'en' ? 'Non SUS Beds' : 'Leitos não SUS';
 dictionary['number_existing_contract'] = lang == 'en' ? 'Existing Contracts Number' : 'Quantidade de Contratos Existentes';
+dictionary['beds_per_sus_availability'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 
 // CNES PROFESSIONALS
 dictionary['sus_healthcare_professional'] = lang == 'en' ? 'SUS Professionals' : 'Profissionais do SUS';
@@ -370,6 +371,7 @@ var formatHelper = function() {
     var args = getUrlArgs();
 
     return {
+        'locale': lang == 'pt' ? 'pt_BR' : 'en_US',
         'text': function(text, key) {
             switch (text) {
                 case 'item_id':

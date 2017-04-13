@@ -13,6 +13,7 @@ var stacked = document.getElementById('stacked'),
     basicValues = BASIC_VALUES[dataset],
     calcBasicValues = CALC_BASIC_VALUES[dataset],
     yearRange = [Number.POSITIVE_INFINITY, 0],
+    selectedYears = [],
     metadata = {},
     currentFilters = {},
     currentTitleAttrs = {'size': values[0]}
@@ -140,6 +141,8 @@ var buildData = function(apiData) {
     if (yearRange[0] == yearRange[1])
         yearRange[0] = 0;
 
+    selectedYears = yearRange;
+
     if (depths.length > 1) {
             var invalidDepths = [];
             depths.forEach(function(depth) {
@@ -186,6 +189,7 @@ var loadViz = function (data){
             'search': false
         };
 
+        // Adds layout selector
         d3plus.form()
             .config(config)
             .container(d3.select('#controls'))
@@ -197,6 +201,7 @@ var loadViz = function (data){
             })
             .draw();
 
+        // Adds sort selector
         d3plus.form()
             .config(config)
             .container(d3.select('#controls'))
@@ -208,6 +213,7 @@ var loadViz = function (data){
             })
             .draw();
 
+        // Adds order selector
         d3plus.form()
             .config(config)
             .container(d3.select('#controls'))
@@ -219,7 +225,7 @@ var loadViz = function (data){
             })
             .draw();
 
-
+        // Adds year/month selector
         if (dataset == 'secex') {
             d3plus.form()
                 .config(config)
@@ -252,6 +258,7 @@ var loadViz = function (data){
                 .draw();
         }
 
+        // Adds group selector
         if (depthsList.length == 1 && args['hierarchy'] == 'true') {
             var options = [];
             depthsList[0].forEach(function(depth) {
@@ -268,7 +275,7 @@ var loadViz = function (data){
                     currentTitleAttrs['shapes'] = depthsList[0][value];
                     viz.depth(depthsList[0].indexOf(value))
                         .order(depthsList[0][0])
-                        .title(titleHelper(yearRange))
+                        .title(titleHelper(selectedYears))
                         .draw();
                 })
                 .draw();
@@ -290,12 +297,13 @@ var loadViz = function (data){
                     currentTitleAttrs['shapes'] = depthsList[value][0];
                     viz.id(depthsList[value])
                        .color(depthsList[value][0])
-                       .title(titleHelper(yearRange))
+                       .title(titleHelper(selectedYears))
                        .draw();
                 })
                 .draw();
         }
 
+        // Adds values selector
         if (values.length > 1) {
             d3plus.form()
                 .config(config)
@@ -312,12 +320,13 @@ var loadViz = function (data){
                     currentTitleAttrs['value'] = value;
                     viz.y(value)
                         .title({'total': {'prefix': dictionary[value] + ': '}})
-                        .title(titleHelper(yearRange))
+                        .title(titleHelper(selectedYears))
                         .draw();
                 })
                 .draw();
         }
 
+        // Adds filters
         var filteredData = function(filter, value) {
             currentFilters[filter] = value;
             return data.filter(function(item) {
@@ -360,7 +369,7 @@ var loadViz = function (data){
 
         // Custom filter to Attention Level
         // To use, add: filters=attention_level
-        if(attentionLevelFilter) {
+        if (attentionLevelFilter) {
 
             currentFilters['ambulatory_attention'] = -1;
             currentFilters['hospital_attention'] = -1;
@@ -455,7 +464,6 @@ var loadViz = function (data){
     data_type = { "value": values[0], "label": (type == "" ? yAxisLabelBuilder(values[0]) : yAxisLabelBuilder(type))}
 
     var timelineCallback = function(years) {
-        var selectedYears = [];
         if (!years.length)
             selectedYears = yearRange;
         else if (years.length == 1)

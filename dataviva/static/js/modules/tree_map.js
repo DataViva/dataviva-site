@@ -6,6 +6,7 @@ var tree_map = document.getElementById('tree_map'),
     baseSubtitle = tree_map.getAttribute('graph-subtitle'),
     args = getUrlArgs(),
     yearRange = [Number.POSITIVE_INFINITY, 0],
+    selectedYears = [],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
     hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
     zoom = args.hasOwnProperty('zoom') && args['zoom'] == 'true' ? true : false;
@@ -95,9 +96,11 @@ var buildData = function(apiResponse) {
         });
     }
 
-    if (yearRange[0] == yearRange[1])
+    if (yearRange[0] == yearRange[1]) 
         yearRange[0] = 0;
-    
+
+    selectedYears = [0, yearRange[1]];
+
     return data;
 }
 
@@ -127,7 +130,7 @@ var loadViz = function(data) {
                     .focus(squares, function(value) {
                         currentTitleAttrs['shapes'] = value;
                         viz.depth(depths.indexOf(value))
-                            .title(titleHelper(yearRange))
+                            .title(titleHelper(selectedYears))
                             .draw();
                     })
                     .draw();
@@ -147,7 +150,7 @@ var loadViz = function(data) {
                         viz.data(data)
                             .id([value, squares])
                             .color(value)
-                            .title(titleHelper(yearRange))
+                            .title(titleHelper(selectedYears))
                             .draw();
                     })
                     .draw();
@@ -180,7 +183,7 @@ var loadViz = function(data) {
                 .focus(size, function(value) {
                     currentTitleAttrs['size'] = value;
                     viz.size(value)
-                        .title(titleHelper(yearRange))
+                        .title(titleHelper(selectedYears))
                         .title({'total': {'prefix': dictionary[value] + ': '}})
                         .draw();
                 })
@@ -321,7 +324,6 @@ var loadViz = function(data) {
     };
 
     var timelineCallback = function(years) {
-        var selectedYears = [];
         if (!years.length)
             selectedYears = yearRange;
         else if (years.length == 1)
@@ -344,7 +346,7 @@ var loadViz = function(data) {
         .legend({'filters': true, 'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .messages({'branding': true, 'style': 'large'})
-        .title(titleHelper([0, yearRange[1]]))
+        .title(titleHelper(selectedYears))
         .title({'total': {'font': {'align': 'left'}}})
         .title({'total': {'prefix': dictionary[size] + ': '}})
         .tooltip(tooltipBuilder())
@@ -412,13 +414,10 @@ $(document).ready(function() {
 
             var offset = 0;
             depths.concat(filters).forEach(function(attr, i) {
-                if (attr != 'attention_level') {
-                    if (!metadata.hasOwnProperty(attr)) {
-                         metadata[attr] = responses[i-offset+2];
-                    } else {
-                        offset++;
-                    }       
-                }
+                if (attr != 'attention_level' && !metadata.hasOwnProperty(attr))
+                    metadata[attr] = responses[i-offset+2];
+                else
+                    offset++;
             });
 
             data = buildData(data);
