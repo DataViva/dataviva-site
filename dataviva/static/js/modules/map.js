@@ -110,7 +110,6 @@ var loadViz = function(data){
 
                     viz.data(d)
                         .color(value)
-                        .title(titleHelper(yearRange))
                         .title({'total': {'prefix': dictionary[value] + ': '}})
                         .draw();
                 })
