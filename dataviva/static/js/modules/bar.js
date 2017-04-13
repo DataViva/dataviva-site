@@ -28,6 +28,14 @@ var data = [],
     url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
+if(y.indexOf('facility_type') != -1) {
+    var facilities = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'neonatal_unit_facility', 'obstetrical_center_facility'];
+    dimensions = dimensions.concat(facilities).filter(unique);
+
+    var i = dimensions.indexOf('facility_type');
+    dimensions.splice(i, 1);
+}
+
 var config = {
     'id': 'id',
     'text': 'label',
@@ -445,6 +453,27 @@ var formatHelper = {
     }
 };
 
+var addFacilityType = function(data){
+    if(y.indexOf('facility_type') == -1){
+        return data;
+    }
+
+    var facilities = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'neonatal_unit_facility', 'obstetrical_center_facility'];
+    var newData = [];
+
+    data.forEach(function(item){
+        facilities.forEach(function(facility){
+            if(item[facility] == 'YES' || item[facility] == 'SIM') {
+                var newItem = item;
+                newItem['facility_type'] = dictionary[facility];
+                newData.push(newItem);
+            }
+        });
+    });
+
+    return newData;
+}
+
 var loadViz = function(data){
     var timelineCallback = function(years) {
         if (!years.length)
@@ -775,9 +804,11 @@ $(document).ready(function(){
             data = addOrder(data);
             data = addNameToData(data);
             data = addPercentage(data);
+            data = addFacilityType(data);
+            
             if (options.indexOf('valueasfilter') >= 0)
                 data = valuesToFilter();
-
+            
             addUiFilters();
 
             loading.hide();
