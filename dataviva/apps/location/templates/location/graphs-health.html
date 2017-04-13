@@ -152,7 +152,7 @@
             </div>
             <a href="#professionals-occupation" class="list-group-item" data-toggle="collapse" data-parent="#professionals-occupation">{% trans %}Occupation{% endtrans %}</a>
             <div class="collapse" id="professionals-occupation">
-                <a href="/{{ g.locale }}/tree_map/cnes_professional/occupation_family/professionals?filters=sus_healthcare_professional{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/cnes_professional/occupation_family/professionals?filters=hierarchy_level+sus_healthcare_professional&depths=occupation_family+occupation_group&sizes=professional{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
                     TreeMap
                 </a>
