@@ -115,7 +115,7 @@
             </div>
             <a href="#beds-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
             <div class="collapse" id="beds-sus-bond">
-                <a href="/{{ g.locale }}/bar/cnes_bed/beds/bed_type,bed_type_per_specialty,health_region?options=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/bar/cnes_bed/beds/bed_type,bed_type_per_specialty,health_region?options=singlecolor,nolabely&filters=unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-sus-bond-bar'}}" data-parent="#beds-sus-bond">
                     {% trans %}Bar{% endtrans %}
                 </a>
@@ -156,7 +156,7 @@
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_group/other_hours_worked?values=other_hours_worked+hospital_hour+ambulatory_hour&depths=occupation_group+occupation_family+sus_healthcare_professional+health_region&filters=sus_healthcare_professional+health_region{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_family/professionals?values=professionals&depths=occupation_group+occupation_family&filters=sus_healthcare_professional+hierarchy_level&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
                     {% trans %}Stacked{% endtrans %}
                 </a>
