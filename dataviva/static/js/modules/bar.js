@@ -24,9 +24,7 @@ var data = [],
     dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
     yearRange = [Number.POSITIVE_INFINITY, 0],
     selectedYears = [],
-    shapes = args['shapes'] ? args['shapes'] : undefined,
-    url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
+    shapes = args['shapes'] ? args['shapes'] : undefined;
 
 if(y.indexOf('facility_type') != -1) {
     var facilities = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'neonatal_unit_facility', 'obstetrical_center_facility'];
@@ -35,6 +33,9 @@ if(y.indexOf('facility_type') != -1) {
     var i = dimensions.indexOf('facility_type');
     dimensions.splice(i, 1);
 }
+
+var url = "http://api.staging.dataviva.info/" + 
+        dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
 var config = {
     'id': 'id',
@@ -780,7 +781,7 @@ var lastYear = function(data){
     return year;
 };
 
-var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization'] + '...');
+var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function(){
     var urls = [url];
@@ -814,6 +815,9 @@ $(document).ready(function(){
             loading.hide();
             d3.select('#mask').remove();
             loadViz(filterTopData(data));
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });

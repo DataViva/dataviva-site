@@ -551,6 +551,9 @@ $(document).ready(function() {
 
             loading.hide();
             d3.select('#mask').remove();
+        }, 
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });
