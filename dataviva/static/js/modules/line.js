@@ -512,7 +512,7 @@ $(document).ready(function() {
 // 4. Inserir gráfico nas categorias:
 //      - Location
 //      - Products >> DONE
-//      - Trade Partners (Falta Porto) >> DONE
+//      - Trade Partners >> DONE
 //      - High Education
 // 5. Gráficos de exportação e importação de produtos não tem dados disponíveis
 //      metadata/country não possui continent

@@ -72,6 +72,9 @@ var DEPTHS = {
    },
    'cnes_professional': {
         'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality']
+   },
+   'hedu': {
+        'hedu_course': ['hedu_course_field', 'hedu_course']
    }
 };
 
@@ -109,7 +112,10 @@ var SIZES = {
         'municipality': ['professionals'],
         'unit_type': ['professionals'],
         'occupation_family': ['professionals', 'other_hours_worked', 'hospital_hour', 'ambulatory_hour']
-    }
+    },
+    'hedu': {
+        'hedu_course': ['graduates', 'entrants']
+   }
 };
 
 var FILTERS = {
