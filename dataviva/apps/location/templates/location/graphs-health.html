@@ -152,12 +152,12 @@
             </div>
             <a href="#professionals-occupation" class="list-group-item" data-toggle="collapse" data-parent="#professionals-occupation">{% trans %}Occupation{% endtrans %}</a>
             <div class="collapse" id="professionals-occupation">
-                <a href="/{{ g.locale }}/tree_map/cnes_professional/occupation_family/professionals?filters=hierarchy_level+sus_healthcare_professional&depths=occupation_family+occupation_group&sizes=professional{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/cnes_professional/occupation_family/professionals?filters=hierarchy_level+sus_healthcare_professional&depths=occupation_family+occupation_group&sizes=professional&depths=occupation_group+occupation_family{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
                     TreeMap
                 </a>
                 <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_family/professionals?values=professionals&depths=occupation_group+occupation_family&filters=sus_healthcare_professional+hierarchy_level&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-stacked'}}" data-parent="#professionals-occupation">
                     {% trans %}Stacked{% endtrans %}
                 </a>
             </div>
