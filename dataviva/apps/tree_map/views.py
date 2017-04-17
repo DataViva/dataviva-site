@@ -45,7 +45,7 @@ def index(dataset, squares, size):
           continue
         if value and key in services:
             filters.append(services[key](value))
-            title_attrs[services[key](value)[0]] = value
+            title_attrs[services[key](value)[0]] = services[key](value)[1]
         else:
             filters.append((key, value))
 
