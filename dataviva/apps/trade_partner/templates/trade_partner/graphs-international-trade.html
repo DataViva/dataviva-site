@@ -69,10 +69,9 @@
             {% endif %}
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{% trans %}Port{% endtrans %}</a>
             <div class="collapse" id="exports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=export&value=kg&value=value&options=singlecolor,month&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}" 
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
-                    {% trans %}Line{% endtrans %}
+                <a href="/{{ g.locale }}/line/secex/port/value?&values=value+kg&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-line'}}" data-parent="#new-api-exports-port">
+                    Line new API
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&options=singlecolor,month,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
                    target="graphs-frame-international-trade"
@@ -141,10 +140,9 @@
             {% endif %}
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{% trans %}Port{% endtrans %}</a>
             <div class="collapse" id="imports-port">
-                <a href="/{{ g.locale }}/line/secex/port?type=import&value=kg&value=value&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}&options=singlecolor,month" 
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-port">
-                    {% trans %}Line{% endtrans %}
+                <a href="/{{ g.locale }}/line/secex/port/value?&values=value+kg&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-line'}}" data-parent="#new-api-imports-port">
+                    Line new API
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&options=month,singlecolor,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}" 
                    target="graphs-frame-international-trade"
