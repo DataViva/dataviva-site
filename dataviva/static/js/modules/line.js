@@ -17,6 +17,7 @@ var lineGraph = document.getElementById('lineGraph'),
     metadata = {},
     balance = line == 'type' ? true : false,
     port = line == 'port' ? true : false;
+    MAX_LINE_LIMIT = 10;
 
 function string2date(dateString) {
     dateString = dateString.split('-');
@@ -135,7 +136,10 @@ FAKE_VALUE = 1;
 var fillMissingDates = function(data){
     var lines = new Set();
     var check = {};
-    var hasMonth = data[0]["month"] == undefined ? false : true;
+    var hasMonth = false
+    
+    if (data[0] != null)
+        hasMonth = data[0]["month"] == undefined ? false : true;
 
     data.forEach(function(item){
         lines.add(item[line]);
@@ -221,21 +225,17 @@ var buildTradeBalanceData = function(data){
     return data;
 };
 
-var currentY = line;
-var currentX = yValue;
-var MAX_BARS = 10;
-
-var groupDataByCurrentY = function(data){
+var groupDataByLine = function(data){
     var sumByItem = {};
 
     data.forEach(function(item){
-        if(sumByItem[item[currentY]] == undefined)
-            sumByItem[item[currentY]] = {
+        if(sumByItem[item[line]] == undefined)
+            sumByItem[item[line]] = {
                 "sum": 0,
-                "name": item[currentY]
+                "name": item[line]
             };
 
-        sumByItem[item[currentY]].sum += item[currentX];
+        sumByItem[item[line]].sum += item[yValue];
     });
 
     var list = [];
@@ -250,7 +250,7 @@ var groupDataByCurrentY = function(data){
     return list;
 }
 
-var getTopCurrentYNames = function(groupedData){
+var getTopCurrentLines = function(groupedData){
     var compare = function(a, b){
         if(a.sum < b.sum)
             return 1;
@@ -260,7 +260,7 @@ var getTopCurrentYNames = function(groupedData){
         return 0;
     }
 
-    var list = groupedData.sort(compare).slice(0, MAX_BARS);
+    var list = groupedData.sort(compare).slice(0, MAX_LINE_LIMIT);
 
     var selected = list.map(function(item){
         return item.name;
@@ -271,8 +271,8 @@ var getTopCurrentYNames = function(groupedData){
 
 var updateSolo = function(data){
     var copiedData = (JSON.parse(JSON.stringify(data)));
-    var groupedData = groupDataByCurrentY(copiedData);
-    solo = getTopCurrentYNames(groupedData);
+    var groupedData = groupDataByLine(copiedData);
+    solo = getTopCurrentLines(groupedData);
 
     return solo;
 };
@@ -424,7 +424,7 @@ var loadViz = function(data) {
         .ui(uiBuilder())
         .axes({'background': {'color': '#FFFFFF'}});
 
-        if (group){
+        if (group && group != line){
             viz.id([group, line]);
             viz.color(group);
         } else {
@@ -494,6 +494,9 @@ $(document).ready(function() {
 
             loading.hide();
             d3.select('#mask').remove();
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });
@@ -511,9 +514,7 @@ $(document).ready(function() {
 //      - Products >> DONE
 //      - Trade Partners (Falta Porto) >> DONE
 //      - High Education
-// 5. Line Porto:
-//      - Refactor solo
-//      - Get nos gráficos page not found
-//      - Ao incluir solo, o gráfico não isola o porto no drill down
+// 5. Gráficos de exportação e importação de produtos não tem dados disponíveis
+//      metadata/country não possui continent
 
 // *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.

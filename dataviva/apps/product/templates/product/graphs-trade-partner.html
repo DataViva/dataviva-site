@@ -70,7 +70,7 @@
             <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{%trans%}Port{%endtrans%}</a>
             <div class="collapse" id="exports-port">
                 <a href="/{{ g.locale }}/line/secex/port/value?&values=value+kg&type=export&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-line'}}" data-parent="#exports-destination">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-line'}}" data-parent="#exports-port">
                     {%trans%}Line new API{%endtrans%}
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
@@ -137,7 +137,7 @@
             <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{%trans%}Port{%endtrans%}</a>
             <div class="collapse" id="imports-port">
                 <a href="/{{ g.locale }}/line/secex/port/value?&values=value+kg&type=import&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-line'}}" data-parent="#imports-destination">
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-line'}}" data-parent="#new-api-imports-port">
                     {%trans%}Line new API{%endtrans%}
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
