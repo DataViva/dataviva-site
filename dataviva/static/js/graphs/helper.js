@@ -287,6 +287,7 @@ dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
 dictionary['number_non_sus_bed'] = lang == 'en' ? 'Non SUS Beds' : 'Leitos não SUS';
 dictionary['number_existing_contract'] = lang == 'en' ? 'Existing Contracts Number' : 'Quantidade de Contratos Existentes';
+dictionary['beds_per_sus_availability'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
 
 // CNES PROFESSIONALS
 dictionary['sus_healthcare_professional'] = lang == 'en' ? 'SUS Professionals' : 'Profissionais do SUS';
@@ -300,7 +301,7 @@ dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulat
 // CNES ESTABLISHMENTS
 dictionary['sus_bond'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
 dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
-dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facility' : 'Instalações Físicas de Atendimento Ambulatorial';
+dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facilities' : 'Instalações Físicas de Atendimento Ambulatorial';
 dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
 dictionary['tax_withholding'] = lang == 'en' ? 'Withholding Tax' : 'Retenção Tributária';
 dictionary['emergency_facility'] = lang == 'en' ? 'Emergency Facilities' : 'Instalações Físicas de Urgência e Emergência';
@@ -375,6 +376,7 @@ var formatHelper = function() {
     var args = getUrlArgs();
 
     return {
+        'locale': lang == 'pt' ? 'pt_BR' : 'en_US',
         'text': function(text, key) {
             switch (text) {
                 case 'item_id':

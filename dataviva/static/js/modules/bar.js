@@ -9,21 +9,32 @@ var data = [],
     dataset = $("#bar").attr("dataset"),
     subtitle = $("#bar").attr("subtitle"),
     options = $("#bar").attr("options").split(","),
+    args = getUrlArgs(),
     x = $("#bar").attr("x").split(","),
-    currentX = x[0],
+    currentX = options.indexOf('valueasfilter') >= 0 ? args['new_x'] : x[0],
     y = $("#bar").attr("y").split(","),
     currentY = y[0],
-    vizId = getUrlArgs()['id'] ? getUrlArgs()['id'] : undefined,
+    vizId = args['id'] ? args['id'] : undefined,
     filters = $("#bar").attr("filters"),
     baseTitle = $("#bar").attr('graph-title'),
     baseSubtitle = $("#bar").attr('graph-subtitle'),
-    uiFilters = getUrlArgs().filters ? getUrlArgs().filters.split(',') : [],
+    uiFilters = args.filters ? args.filters.split(',') : [],
     dimensions = y.concat(uiFilters).filter(unique),
     dimensions = vizId ? dimensions.concat(vizId).filter(unique) : dimensions,
     dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
     yearRange = [Number.POSITIVE_INFINITY, 0],
-    shapes = getUrlArgs()['shapes'] ? getUrlArgs()['shapes'] : undefined,
-    url = "http://api.staging.dataviva.info/" + 
+    selectedYears = [],
+    shapes = args['shapes'] ? args['shapes'] : undefined;
+
+if(y.indexOf('facility_type') != -1) {
+    var facilities = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'neonatal_unit_facility', 'obstetrical_center_facility'];
+    dimensions = dimensions.concat(facilities).filter(unique);
+
+    var i = dimensions.indexOf('facility_type');
+    dimensions.splice(i, 1);
+}
+
+var url = "http://api.staging.dataviva.info/" + 
         dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
 var config = {
@@ -42,7 +53,7 @@ var percentage = false;
 var uis = [];
 
 var titleHelper = function(years) {
-    var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
+    var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, args, years);
 
     return {
         'value': header['title'],
@@ -53,7 +64,7 @@ var titleHelper = function(years) {
     };
 };
 
-if (x.length > 1) {
+if (x.length > 1 && options.indexOf('valueasfilter') == -1) {
     d3plus.form()
         .config(config)
         .container(d3.select('#controls'))
@@ -93,26 +104,68 @@ if (y.length > 1) {
         .font({'size': 11})
         .focus(y[0], function(value) {
             currentY = value;
+            visualization.y(value);
 
-            visualization.y(value)
-                .id(vizId ? vizId : value)
-                .order({
-                    'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
-                    'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
-                })
-                .legend(false)
+            if (vizId)
+                visualization.id(vizId)
+            else if (options.indexOf('valueasfilter') >= 0)
+                visualization.id(args['new_filter']);
+            else
+                visualization.id(value);
 
-            if(colorHelper[currentY] != undefined)
+            visualization.order({
+                'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+                'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
+            })
+            .legend(false);
+
+            if (colorHelper[currentY] != undefined)
                 visualization.color(currentY + "_color");
 
             currentTitleAttrs['shapes'] = shapes || value;
 
-            visualization.title(titleHelper(yearRange))
+            visualization.title(titleHelper(selectedYears))
                 .data(filterTopData(data))
                 .draw();
         })
         .draw();
 }
+
+
+
+/* 
+    Takes attrs in x and splits into x.length elements, 
+    creating a "new_x" attr and grouping them by "new_filter" (all retrieved in url)
+
+    For example:
+    x = [a, b]
+    data = [{a: 10, b: 20}]
+
+    then data will turn into [{new_x: 10, new_filter: a}, [new_x: 20, new_filter: b}]
+
+    To use it, pass "valueasfilter" as an option
+    and "new_filter" and "new_x" as url args
+*/
+var valuesToFilter = function() {
+    var newFilter = args['new_filter'], 
+        newX = args['new_x'],
+        newData = [];
+    
+    data.forEach(function(dataItem) {
+        x.forEach(function(value, i) {
+            var newDataItem = {};
+            for (item in dataItem) {
+                if (x.indexOf(item) == -1)
+                    newDataItem[item] = dataItem[item];
+            }
+            newDataItem[newX] = dataItem[value];
+            newDataItem[newFilter] = dictionary[value] || i;
+            newData.push(newDataItem);
+        });
+    });
+
+    return newData;
+};
 
 var colorHelper = {
    'gender': {
@@ -401,9 +454,29 @@ var formatHelper = {
     }
 };
 
+var addFacilityType = function(data){
+    if(y.indexOf('facility_type') == -1){
+        return data;
+    }
+
+    var facilities = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'neonatal_unit_facility', 'obstetrical_center_facility'];
+    var newData = [];
+
+    data.forEach(function(item){
+        facilities.forEach(function(facility){
+            if(item[facility] == 'YES' || item[facility] == 'SIM') {
+                var newItem = item;
+                newItem['facility_type'] = dictionary[facility];
+                newData.push(newItem);
+            }
+        });
+    });
+
+    return newData;
+}
+
 var loadViz = function(data){
     var timelineCallback = function(years) {
-        var selectedYears = [];
         if (!years.length)
             selectedYears = yearRange;
         else if (years.length == 1)
@@ -413,7 +486,7 @@ var loadViz = function(data){
         toolsBuilder('bar', visualization, data, titleHelper(selectedYears).value);
         visualization.title(titleHelper(selectedYears));
         totalOfCurrentX(years);
-    };
+    }
 
     visualization = d3plus.viz()
         .container("#bar")
@@ -472,7 +545,7 @@ var loadViz = function(data){
         })
         .color(vizId)
         .messages({'branding': true, 'style': 'large'})
-        .title(titleHelper([0, yearRange[1]]))
+        .title(titleHelper(selectedYears))
 
         if(colorHelper[currentY] != undefined)
             visualization.color(currentY + "_color");
@@ -480,7 +553,7 @@ var loadViz = function(data){
         if(options.indexOf('nolabely') != -1){
             visualization.y({
                 'label': false
-            })
+            });
         }
 
         if(options.indexOf('singlecolor') != -1){
@@ -488,11 +561,17 @@ var loadViz = function(data){
                 "value" : function(d){
                     return "#4575b4";
                 }
-            }).legend(false)
+            }).legend(false);
+        }
+
+        if (options.indexOf('valueasfilter') >= 0) {
+            visualization.id(args['new_filter']);
+            visualization.color(args['new_filter']);
+            visualization.x(args['new_x']);
         }
 
         totalOfCurrentX();
-        visualization.draw()
+        visualization.draw();
         $('#controls').fadeToggle();
         toolsBuilder('bar', visualization, data, titleHelper(yearRange));
 };
@@ -555,6 +634,11 @@ var buildData = function(responseApi){
 
         data.push(dataItem);
     });
+
+    if (yearRange[0] == yearRange[1]) 
+        yearRange[0] = 0;
+
+    selectedYears = [0, yearRange[1]];
 
     return data;
 }
@@ -721,7 +805,11 @@ $(document).ready(function(){
             data = addOrder(data);
             data = addNameToData(data);
             data = addPercentage(data);
-
+            data = addFacilityType(data);
+            
+            if (options.indexOf('valueasfilter') >= 0)
+                data = valuesToFilter();
+            
             addUiFilters();
 
             loading.hide();

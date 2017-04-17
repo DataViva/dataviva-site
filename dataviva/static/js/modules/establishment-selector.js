@@ -34,7 +34,7 @@ var EstablishmentSelector = (function(){
 		        '<div class="search_data">ID: {{id}}</div>' +
 		        '<div class="search_data">{{municipality}}</div>' +
 		    '</div>' +
-		    '<a href="/en/health/{{id}}" class="m-l-xs btn btn-primary btn-outline btn-toggle" style="position: absolute; right: 15px; top: 13px;">' + 
+		    '<a href="/' + lang + '/health/{{id}}" class="m-l-xs btn btn-primary btn-outline btn-toggle" style="position: absolute; right: 15px; top: 13px;">' + 
 		        dictionary['select'] + 
 		    '</a>' + 
 		'</div>' +
