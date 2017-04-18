@@ -89,11 +89,10 @@ def get_title(dataset, shapes, graph, api_filters):
 
     if 'type' not in query:
         query['type'] = None
-
     query['shapes'] = filter_service(shapes)
     query['dataset'] = dataset
     query['graph'] = graph
-    query['location'] = 1
+    query['location'] = 1 if query['establishment'] == 0 else 0
     result = GraphTitle.query.filter_by(**query).first()
 
     if result:       
