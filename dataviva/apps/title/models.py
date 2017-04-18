@@ -17,3 +17,4 @@ class GraphTitle(db.Model):
     location = db.Column(db.Boolean)
     industry = db.Column(db.Boolean)
     occupation = db.Column(db.Boolean)
+    establishment = db.Column(db.Boolean)

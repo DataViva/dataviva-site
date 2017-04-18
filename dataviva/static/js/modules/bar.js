@@ -781,7 +781,7 @@ var lastYear = function(data){
     return year;
 };
 
-var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization'] + '...');
+var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function(){
     var urls = [url];
@@ -815,6 +815,9 @@ $(document).ready(function(){
             loading.hide();
             d3.select('#mask').remove();
             loadViz(filterTopData(data));
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });

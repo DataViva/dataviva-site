@@ -92,4 +92,37 @@ $(document).ready(function(){
             id: 'health'
         });
     }
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_bed/year?year=2015&" + filter,
+        title: dictionary['total_of_beds'],
+        label: dictionary['total_of_beds'],
+        value: 'beds',
+        tab: 'health'
+    });
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_professional/year?year=2015&" + filter,
+        title: dictionary['total_of_professionals'],
+        label: dictionary['total_of_professionals'],
+        value: 'professionals',
+        tab: 'health'
+    });
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_equipment/year?year=2015&" + filter,
+        title: dictionary['total_of_equipments'],
+        label: dictionary['total_of_equipments'],
+        value: 'equipments',
+        tab: 'health'
+    });
+
+    BlueBox.add({
+        url: "http://api.staging.dataviva.info/cnes_establishment/year?year=2015&" + filter,
+        title: dictionary['total_of_establishments'],
+        label: dictionary['total_of_establishments'],
+        value: 'establishments',
+        tab: 'health'
+    });
+
 });
