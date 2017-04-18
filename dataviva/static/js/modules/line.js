@@ -406,7 +406,7 @@ var loadViz = function(data) {
             }
         })
         .y({
-            'value': 'value',
+            'value': yValue,
             'ticks': {'font': {'size': 17}}
         })
         .labels({'align': 'left', 'valign': 'top'})
