@@ -194,7 +194,7 @@ var Indicator = (function(){
 
 var BlueBox = (function(){
     var template = '' +
-    '<div class="col-xs-12 col-sm-6 col-md-4">' +
+    '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">' +
         '<div class="blue-box title blue-box--loading">' +
             '{{title}}' +
             '<small>{{subtitle}}</small>' +
@@ -266,9 +266,9 @@ var Magnitude = function(n){
     if (n < 1000000)
         return (n/1000).toPrecision(3) + ' ' + dictionary.thousand;
     if (n < 1000000000)
-        return n < 2000000 ? (n/1000000).toPrecision(3) + dictionary.million : (n/1000000).toPrecision(3) + ' ' + dictionary.millions;
+        return n < 2000000 ? (n/1000000).toPrecision(3) + ' ' + dictionary.million : (n/1000000).toPrecision(3) + ' ' + dictionary.millions;
     if (n < 1000000000000)
-        return n < 2000000000 ? (n/1000000000).toPrecision(3) + dictionary.billion : (n/1000000000).toPrecision(3) + ' ' + dictionary.billions;
+        return n < 2000000000 ? (n/1000000000).toPrecision(3) + ' ' + dictionary.billion : (n/1000000000).toPrecision(3) + ' ' + dictionary.billions;
     if (n < 1000000000000000)
-        return n < 2000000000000 ? (n/1000000000000).toPrecision(3) + dictionary.trillion : (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillions;
+        return n < 2000000000000 ? (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillion : (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillions;
 };
