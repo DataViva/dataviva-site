@@ -105,6 +105,8 @@ def index(dataset, area, value):
 				filters.append(industry_service(value))
 				title_attrs[industry_service(value)[0]] = industry_service(value)[1]
 			else:
+				if key == 'establishment':
+					title_attrs[key] = value
 				filters.append((key, value))
 
 	filters = urllib.urlencode(filters)
