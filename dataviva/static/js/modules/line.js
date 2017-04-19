@@ -514,7 +514,5 @@ $(document).ready(function() {
 //      - Products >> DONE
 //      - Trade Partners >> DONE
 //      - High Education
-// 5. Gráficos de exportação e importação de produtos não tem dados disponíveis
-//      metadata/country não possui continent
 
 // *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.

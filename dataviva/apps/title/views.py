@@ -94,6 +94,7 @@ def get_title(dataset, shapes, graph, api_filters):
     query['dataset'] = dataset
     query['graph'] = graph
     query['location'] = 1
+
     result = GraphTitle.query.filter_by(**query).first()
 
     if result:       
@@ -113,7 +114,7 @@ def get_title(dataset, shapes, graph, api_filters):
                 if '<location_' + preposition + '>' in title:
                     title = inflect(title, response, preposition, 'location')
         else:
-            title = title.replace('<location_in>', 'no').replace('<location_from', 'do').replace('<location_of>', 'do')
+            title = title.replace('<location_in>', 'no').replace('<location_from>', 'do').replace('<location_of>', 'do')
 
         # Deals with countries and continents prepositions
         partners = [p for p in api_filters if p in ['country', 'continent']]
