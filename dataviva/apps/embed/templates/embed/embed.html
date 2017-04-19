@@ -2676,29 +2676,32 @@
 
             var w = svg.node().getBBox().width,
                 h = svg.node().getBBox().height;
+                
+            img.onload = function(){
 
-            canvas.width = w;
-            canvas.height = h;
-            var context = canvas.getContext("2d")
-            context.fillStyle = "white";
-            context.fillRect(0,0,w,h);
-            context.drawImage(img,0,0,w,h);
+              canvas.width = w;
+              canvas.height = h;
+              var context = canvas.getContext("2d")
+              context.fillStyle = "white";
+              context.fillRect(0,0,w,h);
+              context.drawImage(img,0,0,w,h);
 
-          if (type == "pdf"){
-            w = w*0.264583333;
-            h = h*0.264583333;
-            pdf = new jsPDF('l', 'mm', [w, h]);
-            pdf.addImage(canvas, 'JPEG', 0,0,w,h)
-            pdf.save(title);
-            downloadDone();
-          } 
-          else {
-            img_download = canvas.toDataURL("image/png");
-            var download = document.createElement('a');
-            download.href = img_download;
-            download.download = title + ".png";
-            download.click();
-            downloadDone();
+            if (type == "pdf"){
+              w = w*0.264583333;
+              h = h*0.264583333;
+              pdf = new jsPDF('l', 'mm', [w, h]);
+              pdf.addImage(canvas, 'JPEG', 0,0,w,h)
+              pdf.save(title);
+              downloadDone();
+            } 
+            else {
+              img_download = canvas.toDataURL("image/png");
+              var download = document.createElement('a');
+              download.href = img_download;
+              download.download = title + ".png";
+              download.click();
+              downloadDone();
+            }
           }
         } 
         else{
