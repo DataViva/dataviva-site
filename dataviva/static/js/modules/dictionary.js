@@ -1,3 +1,5 @@
+var lang = document.documentElement.lang;
+
 // Temporarily translates text until dictionary is updated
 dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
 dictionary['plural_state'] = lang == 'en' ? 'States' : 'Estados';
@@ -26,6 +28,9 @@ dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de 
 dictionary['item_id'] = 'ID';
 dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
 dictionary['per'] = lang == 'en' ? 'per' : 'por';
+dictionary['trade_value'] = lang == 'en' ? 'Trade Value (USD)' : 'Valor do Comércio (USD)';
+dictionary['export'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
+dictionary['import'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
 dictionary['exports_value'] = lang == 'en' ? 'Export Value' : 'Valor das Exportações';
 dictionary['imports_value'] = lang == 'en' ? 'Import Value' : 'Valor das Importações';
 dictionary['exports_weight'] = lang == 'en' ? 'Export Weight' : 'Peso das Exportações';

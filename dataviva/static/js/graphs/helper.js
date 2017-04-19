@@ -1,5 +1,4 @@
-var lang = document.documentElement.lang,
-    API_DOMAIN = 'http://api.staging.dataviva.info';
+var API_DOMAIN = 'http://api.staging.dataviva.info';
 
 var ID_LABELS = {
     'municipality': 'ibge_id',
@@ -219,99 +218,6 @@ var CALC_BASIC_VALUES = {
 };
 
 var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group'];
-
-// Temporarily translates text until dictionary is updated
-dictionary['export'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
-dictionary['import'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
-dictionary['exports'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
-dictionary['imports'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
-dictionary['trade_value'] = lang == 'en' ? 'Trade Value (USD)' : 'Valor do Comércio (USD)';
-dictionary['state'] = lang == 'en' ? 'State' : 'Estado';
-dictionary['plural_state'] = lang == 'en' ? 'States' : 'Estados';
-dictionary['municipality'] = lang == 'en' ? 'Municipality' : 'Município';
-dictionary['plural_municipality'] = lang == 'en' ? 'Municipalities' : 'Municípios';
-dictionary['product_section'] = lang == 'en' ? 'Section' : 'Seção';
-dictionary['product'] = lang == 'en' ? 'Product' : 'Produto';
-dictionary['data_provided_by'] = lang == 'en' ? 'Data provided by' : 'Dados fornecidos por';
-dictionary['by'] = lang == 'en' ? 'by' : 'por';
-dictionary['that trade'] = lang == 'en' ? 'that trade' : 'que comercializam';
-dictionary['of'] = lang == 'en' ? 'of' : 'de';
-dictionary['number of'] = lang == 'en' ? 'number of' : 'número de';
-dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
-dictionary['country'] = lang == 'en' ? 'Country' : 'País';
-dictionary['plural_country'] = lang == 'en' ? 'Countries' : 'Países';
-dictionary['continent'] = lang == 'en' ? 'Continent' : 'Continente';
-dictionary['plural_continent'] = lang == 'en' ? 'Continents' : 'Continentes';
-dictionary['mesoregion'] = lang == 'en' ? 'Mesoregion' : 'Mesorregião';
-dictionary['plural_mesoregion'] = lang == 'en' ? 'Mesoregions' : 'Mesorregiões';
-dictionary['microregion'] = lang == 'en' ? 'Microregion' : 'Microrregião';
-dictionary['plural_microregion'] = lang == 'en' ? 'Microregions' : 'Microrregiões';
-dictionary['region'] = lang == 'en' ? 'Region' : 'Região';
-dictionary['plural_region'] = lang == 'en' ? 'Regions' : 'Regiões';
-dictionary['basic_values'] = lang == 'en' ? 'Basic Values' : 'Valores Básicos';
-dictionary['market_share'] = lang == 'en' ? 'Market Share' : 'Participação de Mercado';
-dictionary['item_id'] = 'ID';
-dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
-dictionary['per'] = lang == 'en' ? 'per' : 'por';
-dictionary['exports_value'] = lang == 'en' ? 'Export Value' : 'Valor das Exportações';
-dictionary['imports_value'] = lang == 'en' ? 'Import Value' : 'Valor das Importações';
-dictionary['exports_weight'] = lang == 'en' ? 'Export Weight' : 'Peso das Exportações';
-dictionary['imports_weight'] = lang == 'en' ? 'Import Weight' : 'Peso das Importações';
-dictionary['imports_per_weight'] = lang == 'en' ? 'Imports per kg' : 'Importações por peso';
-dictionary['exports_per_weight'] = lang == 'en' ? 'Exports per kg' : 'Exportações por peso';
-dictionary['industry_section'] = lang == 'en' ? 'Section' : 'Seção';
-dictionary['industry_division'] = lang == 'en' ? 'Division' : 'Divisão';
-dictionary['establishment_count'] = lang == 'en' ? 'Total Establishments' : 'Total de Estabelecimentos';
-dictionary['wage'] = lang == 'en' ? 'Total Monthly Wages' : 'Renda Mensal Total';
-dictionary['average_wage'] = lang == 'en' ? 'Average Monthly Wages' : 'Renda Mensal Média';
-dictionary['industry_class'] = lang == 'en' ? 'Class' : 'Classe';
-dictionary['total_jobs'] = lang == 'en' ? 'Total Jobs' : 'Total de Empregos';
-dictionary['average_establishment_size'] = lang == 'en' ? 'Jobs per Establishment' : 'Empregos por Estabelecimento';
-dictionary['occupation_family'] = lang == 'en' ? 'Family' : 'Família';
-dictionary['occupation_group'] = lang == 'en' ? 'Main Group' : 'Grande Grupo';
-dictionary['establishments'] = lang == 'en' ? 'Total Establishments' : 'Total de Estabelecimentos';
-dictionary['Creating URL'] = lang == 'en' ? 'Creating URL' : 'Criando URL';
-dictionary['drawer_group'] = lang == 'en' ? 'Group' : 'Agrupar';
-dictionary['yes'] = lang == 'en' ? 'Yes' : 'Sim';
-dictionary['no'] = lang == 'en' ? 'No' : 'Não';
-dictionary['drawer_filter'] = lang == 'en' ? 'Filter' : 'Filtrar';
-dictionary['including'] = lang == 'en' ? 'Including' : 'Inclui';
-dictionary['Filter by'] = lang == 'en' ? 'Filter by' : 'Filtrar por';
-dictionary['kg'] = 'KG';
-dictionary['id'] = 'ID';
-dictionary['establishment_size'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
-dictionary['average_establishment_size'] = lang == 'en' ? 'Average Establishment Size' : 'Tamanho Médio do Estabelecimento';
-dictionary['establishment_count'] = lang == 'en' ? 'Establishments' : 'Estabelecimentos';
-dictionary['wage'] = lang == 'en' ? 'Salary Mass' : 'Massa Salarial';
-dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
-dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
-dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
-dictionary['month'] = lang == 'en' ? 'Month' : 'Mês';
-dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
-dictionary['legal_nature'] = lang == 'en' ? 'Legal Nature' : 'Natureza Jurídica';
-dictionary['size_establishment'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
-dictionary['time_resolution'] = lang == 'en' ? 'Time Resolution' : 'Resolução Temporal';
-dictionary['total_of'] = lang == 'en' ? 'Total in selected years: ' : 'Total nos anos selecionados: ';
-dictionary['data_provided_by'] = lang == 'en' ? "Data provided by " : "Dados fornecidos por ";
-dictionary['percentage_terms'] = lang == 'en' ? 'Percentage Terms' : 'Termos Percentuais';
-dictionary['values'] = lang == 'en' ? 'Values' : 'Valores';
-dictionary['exporting_municipality'] = lang == 'en' ? 'Based on the Exporting Municipality' : 'Baseado nos Municípios Exportadores';
-dictionary['state_production'] = lang == 'en' ? 'Based on State Production' : 'Baseado nos Estados Produtores';
-dictionary['average_wage'] = lang == 'en' ? 'Salário Médio Mensal' : 'Average Monthly Wage';
-dictionary['jobs'] = lang == 'en' ? 'Jobs' : 'Empregos';
-dictionary['year'] = lang == 'en' ? 'Year' : 'Ano';
-dictionary['scale'] = lang == 'en' ? 'Scale' : 'Escala';
-dictionary['yaxis'] = lang == 'en' ? 'Y-Axis' : 'Eixo Y';
-dictionary['xaxis'] = lang == 'en' ? 'X-Axis' : 'Eixo X';
-dictionary['locale'] = lang == 'en' ? 'en_US' : 'pt_BR';
-dictionary['secex'] = 'SECEX';
-dictionary['rais'] = 'RAIS';
-dictionary['hide'] = lang == 'en' ? 'Hide' : 'Ocultar';
-dictionary['isolate'] = lang == 'en' ? 'Isolate' : 'Isolar';
-dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
-dictionary['Unable to load visualization'] = lang == 'en' ? 'Unable to load visualization' : 'Não foi possível carregar a visualização';
-dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
-dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
 
 var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {
     var formatYearRange = function() {

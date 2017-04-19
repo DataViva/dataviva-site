@@ -448,7 +448,7 @@ var loadViz = function(data) {
     
     viz.draw();
 
-    toolsBuilder('line', viz, data, titleHelper(yearRange).value);
+    toolsBuilder('lineGraph', viz, data, titleHelper(yearRange).value);
 
 };
 
