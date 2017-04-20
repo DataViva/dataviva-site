@@ -59,6 +59,7 @@ tabs = {
 
         'trade-partner': [
             'trade-balance-location-line',
+            'new-api-trade-balance-location-line',
             'exports-products-tree_map',
             'new-api-exports-products-tree_map',
             'exports-products-stacked',
@@ -71,8 +72,10 @@ tabs = {
             'imports-origin-tree_map',
             'new-api-imports-origin-tree_map',
             'imports-origin-stacked',
-            'new-api-imports-port',
-            'new-api-exports-port',
+            'new-api-exports-port-tree_map',
+            'new-api-imports-port-tree_map',
+            'new-api-exports-port-line',
+            'new-api-imports-port-line'
         ],
 
         'education': [
