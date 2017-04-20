@@ -402,12 +402,12 @@ var loadViz = function(data) {
         .x({
             'value': 'year',
             'label': {'font': {'size': 20}},
-            'ticks': {'font': {'size': 17}
+            'ticks': {'font': {'size': 18}
             }
         })
         .y({
             'value': yValue,
-            'ticks': {'font': {'size': 17}}
+            'ticks': {'font': {'size': 18}}
         })
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
@@ -444,9 +444,11 @@ var loadViz = function(data) {
         if (port)
             viz.id({'solo': solo});
 
-        $('#lineGraph').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
+    $('#lineGraph').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     
     viz.draw();
+
+    $('#controls').fadeToggle();
 
     toolsBuilder('lineGraph', viz, data, titleHelper(yearRange).value);
 
