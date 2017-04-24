@@ -1,46 +1,5 @@
 
 var lang = location.pathname.split('/')[1];
-var dictionary = {};
-
-dictionary['total_of_establishments'] = lang == 'en' ? 'Total of Establishments' : 'Total de Estabelecimentos';
-dictionary['municipality_with_highest_number_of_establishments'] = lang == 'en' ? 'Municipality with the highest number of Establishments' : 'Município com maior numero de Estabelecimentos';
-dictionary['establishments'] = lang == 'en' ? 'establishments' : 'estabelecimentos';
-
-dictionary['total_of_professionals'] = lang == 'en' ? 'Total of Professionals' : 'Total de Profissionais';
-dictionary['municipality_with_highest_number_of_professionals'] = lang == 'en' ? 'Municipality with the highest number of Professionals' : 'Município com maior numero de Profissionais';
-dictionary['professionals'] = lang == 'en' ? 'professionals' : 'profissionais';
-
-dictionary['total_of_beds'] = lang == 'en' ? 'Total of beds' : 'Total de Leitos';
-dictionary['municipality_with_highest_number_of_beds'] = lang == 'en' ? 'Municipality with the highest number of Beds' : 'Município com maior numero de Leitos';
-dictionary['beds'] = lang == 'en' ? 'beds' : 'Leitos';
-
-dictionary['total_of_equipments'] = lang == 'en' ? 'Total of equipments' : 'Total de Equipamentos';
-dictionary['municipality_with_highest_number_of_equipments'] = lang == 'en' ? 'Municipality With the Highest Number of Equipments' : 'Município com Maior Número de Equipamentos';
-dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
-
-dictionary['number_establishments'] = lang == 'en' ? 'Number of Establishments' : 'Numero de Estabelecimentos';
-dictionary['number_beds'] = lang == 'en' ? 'Number of Beds' : 'Número de Leitos';
-dictionary['number_professionals'] = lang == 'en' ? 'Number of Professionals' : 'Número de Profissionais';
-dictionary['number_equipments'] = lang == 'en' ? 'Number of Equipments' : 'Número de Equipamentos';
-
-dictionary['main_equipment_type'] = lang == 'en' ? 'Main Equipment Type' : 'Principal Tipo Equipamento';
-
-dictionary['main_occupation'] = lang == 'en' ? 'Main Occupation' : 'Principal Ocupação';
-dictionary['by_jobs'] = lang == 'en' ? 'by jobs' : 'por empregos';
-
-dictionary['main_bed_type'] = lang == 'en' ? 'Main Bed Type' : 'Principal Tipo Leito';
-dictionary['by_quantity'] = lang == 'en' ? 'by quantity' : 'por quantidade';
-
-dictionary['trillion'] = lang == 'en' ? 'Trillion' : 'Trilhão';
-dictionary['billion'] = lang == 'en' ? 'Billion' : 'Bilhão';
-dictionary['million'] = lang == 'en' ? 'Million' : 'Milhão';
-
-dictionary['trillions'] = lang == 'en' ? 'Trillions' : 'Trilhões';
-dictionary['billions'] = lang == 'en' ? 'Billions' : 'Bilhões';
-dictionary['millions'] = lang == 'en' ? 'Millions' : 'Milhões';
-
-dictionary['thousand'] = lang == 'en' ? 'Thousand' : 'Mil';
-
 
 var buildData = function(responseApi){
     var getAttrByName = function(item, attr){
@@ -194,7 +153,7 @@ var Indicator = (function(){
 
 var BlueBox = (function(){
     var template = '' +
-    '<div class="col-xs-12 col-sm-6 col-md-4">' +
+    '<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">' +
         '<div class="blue-box title blue-box--loading">' +
             '{{title}}' +
             '<small>{{subtitle}}</small>' +
@@ -266,9 +225,9 @@ var Magnitude = function(n){
     if (n < 1000000)
         return (n/1000).toPrecision(3) + ' ' + dictionary.thousand;
     if (n < 1000000000)
-        return n < 2000000 ? (n/1000000).toPrecision(3) + dictionary.million : (n/1000000).toPrecision(3) + ' ' + dictionary.millions;
+        return n < 2000000 ? (n/1000000).toPrecision(3) + ' ' + dictionary.million : (n/1000000).toPrecision(3) + ' ' + dictionary.millions;
     if (n < 1000000000000)
-        return n < 2000000000 ? (n/1000000000).toPrecision(3) + dictionary.billion : (n/1000000000).toPrecision(3) + ' ' + dictionary.billions;
+        return n < 2000000000 ? (n/1000000000).toPrecision(3) + ' ' + dictionary.billion : (n/1000000000).toPrecision(3) + ' ' + dictionary.billions;
     if (n < 1000000000000000)
-        return n < 2000000000000 ? (n/1000000000000).toPrecision(3) + dictionary.trillion : (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillions;
+        return n < 2000000000000 ? (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillion : (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillions;
 };

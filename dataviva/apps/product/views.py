@@ -135,6 +135,7 @@ def index(product_id, tab):
             'new-api-imports-port-bar',
             'new-api-imports-port-tree_map',
             'new-api-imports-origin-stacked',
+            'new-api-imports-origin-line',
             'imports-origin-line',
             'imports-origin-stacked',
         ],

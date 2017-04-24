@@ -58,7 +58,8 @@ var buildData = function(apiResponse) {
 
             depths.forEach(function(depth) {
                 if (depth != squares)
-                    dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
+                    dataItem[depth] = metadata[squares][dataItem[squares]][depth]['name_' + lang];
+                    //dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
             });
            
             dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
