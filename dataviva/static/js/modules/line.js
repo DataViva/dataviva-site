@@ -418,7 +418,6 @@ var loadViz = function(data) {
         .messages({'branding': true, 'style': 'large'})
         .title(titleHelper([0, yearRange[1]]))
         .title({'total': {'font': {'align': 'left'}}})
-        .title({'total': {'prefix': dictionary[line] + ': '}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
         .ui(uiBuilder())
