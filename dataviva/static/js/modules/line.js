@@ -302,6 +302,11 @@ var loadViz = function(data) {
                 .focus(yValue, function(value) {
                     currentTitleAttrs['line'] = value;
                     viz.y({
+                        'label': {
+                            'value': balance ? dictionary['trade_' + value] : dictionary[value]
+                        }
+                    });
+                    viz.y({
                         'value': value
                     })
                     .draw();
@@ -407,7 +412,8 @@ var loadViz = function(data) {
         })
         .y({
             'value': yValue,
-            'ticks': {'font': {'size': 18}}
+            'ticks': {'font': {'size': 18}},
+            'label': {'font': {'size': 20}}
         })
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')

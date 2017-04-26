@@ -29,6 +29,7 @@ dictionary['item_id'] = 'ID';
 dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
 dictionary['per'] = lang == 'en' ? 'per' : 'por';
 dictionary['trade_value'] = lang == 'en' ? 'Trade Value (USD)' : 'Valor do Comércio (USD)';
+dictionary['trade_kg'] = lang == 'en' ? 'Trade Weight (Kg)' : 'Peso Total Comercializado (Kg)';
 dictionary['export'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
 dictionary['import'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
 dictionary['exports_value'] = lang == 'en' ? 'Export Value' : 'Valor das Exportações';

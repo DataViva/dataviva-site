@@ -285,19 +285,8 @@ var formatHelper = function() {
 
                 if (symbol && lang === 'pt') {
                     var digit = parseFloat(value.toString().split('.')[0]);
-                    switch (symbol) {
-                        case 'T':
-                            symbol = digit < 2 ? ' Trilh\u00e3o' : ' Trilh\u00f5es';
-                            break;
-                        case 'B':
-                            symbol = digit < 2 ? ' Bilh\u00e3o' : ' Bilh\u00f5es';
-                            break;
-                        case 'M':
-                            symbol = digit < 2 ? ' Milh\u00e3o' : ' Milh\u00f5es';
-                            break;
-                        case 'k':
-                            symbol = ' Mil';
-                    }
+                    if (symbol === 'k')
+                        symbol = 'Mil';
                 }
 
                 result = value + symbol;
@@ -318,7 +307,7 @@ var formatHelper = function() {
                 case 'value':
                 case 'imports_per_weight':
                 case 'exports_per_weight':
-                    result = '$' + result + ' USD';
+                    result = '$' + result;
                     break;
                 case 'kg':
                     result += ' kg';
