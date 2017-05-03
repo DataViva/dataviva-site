@@ -16,7 +16,8 @@ var lineGraph = document.getElementById('lineGraph'),
     currentTitleAttrs = {'yValue': yValue, 'line': line}
     metadata = {},
     balance = line == 'type' ? true : false,
-    port = line == 'port' ? true : false;
+    port = line == 'port' ? true : false,
+    students = yValue == 'students_number' ? true : false,
     MAX_LINE_LIMIT = 10;
 
 function string2date(dateString) {
@@ -45,37 +46,56 @@ var buildData = function(apiResponse){
                 dataItem[header] = getAttrByName(item, header);
             });
 
-            if (DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(line))
-                dataItem[DICT[dataset]['item_id'][line]] = dataItem[line];
-            else
-                dataItem['id'] = dataItem[line];
+            if (students){
+                var students_situation = ['enrolled', 'entrants', 'graduates'],
+                    partialArrayData = [];
+                
+                line = 'students';
 
-            if(group && HAS_ICONS.indexOf(group) >= 0)
-                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
+                students_situation.forEach(function(situation){
+                    partialDataItem = {};
+                    partialDataItem['year'] = dataItem['year'];
+                    partialDataItem['students'] = situation
+                    partialDataItem['students_number'] = dataItem[situation];
 
-            for (key in calcBasicValues)
-                dataItem[key] = calcBasicValues[key](dataItem);
-
-            if (balance)
-                dataItem['icon'] = '/static/img/icons/balance/' + dataItem['type'] + '_val.png';
-            else {
-                depths.forEach(function(depth) {
-                    if (depth != line)
-                        dataItem[depth] = metadata[line][dataItem[line]][depth]['name_' + lang];
-                    else 
-                        dataItem[line] = metadata[line][dataItem[line]]['name_' + lang];
+                    data.push(partialDataItem);
                 });
+
+            } else {
+
+                if (ID_LABELS.hasOwnProperty(line))
+                    dataItem[dictionary[ID_LABELS[line]]] = dataItem[line];
+                else
+                    dataItem['id'] = dataItem[line];
+
+                if(group && HAS_ICONS.indexOf(group) >= 0)
+                    dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
+
+                for (key in calcBasicValues)
+                    dataItem[key] = calcBasicValues[key](dataItem);
+
+                if (balance)
+                    dataItem['icon'] = '/static/img/icons/balance/' + dataItem['type'] + '_val.png';
+                else {
+                    depths.forEach(function(depth) {
+                        if (depth != line)
+                            dataItem[depth] = metadata[line][dataItem[line]][depth]['name_' + lang];
+                        else 
+                            dataItem[line] = metadata[line][dataItem[line]]['name_' + lang];
+                    });
+                }
+            
+                if (dataItem['month'])
+                    dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
+
+                if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+                    yearRange[1] = dataItem['year'];
+                else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+                    yearRange[0] = dataItem['year'];
+
+                data.push(dataItem);
+
             }
-
-            if (dataItem['month'])
-                dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
-
-            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
-                yearRange[1] = dataItem['year'];
-            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
-                yearRange[0] = dataItem['year'];
-
-            data.push(dataItem);
 
         } catch(e) {};
     });
@@ -134,9 +154,9 @@ does not work when the data has more than one value equal to 0.*/
 FAKE_VALUE = 1;
 
 var fillMissingDates = function(data){
-    var lines = new Set();
-    var check = {};
-    var hasMonth = false
+    var lines = new Set(),
+        check = {},
+        hasMonth = false;
     
     if (data[0] != null)
         hasMonth = data[0]["month"] == undefined ? false : true;
@@ -189,8 +209,8 @@ var fillMissingDates = function(data){
 var buildTradeBalanceData = function(data){
     
     data.forEach(function(item, index, allItems) {
-        var tradeBalance = {}
-        var nextItem = allItems[index + 1]
+        var tradeBalance = {},
+            nextItem = allItems[index + 1];
         
         if (index % 2 !== 0 || nextItem === undefined)
             return;
@@ -406,9 +426,8 @@ var loadViz = function(data) {
         .shape({'interpolate': 'monotone'})
         .x({
             'value': 'year',
-            'label': {'font': {'size': 20}},
-            'ticks': {'font': {'size': 18}
-            }
+            'ticks': {'font': {'size': 18}},
+            'label': {'font': {'size': 20}}
         })
         .y({
             'value': yValue,
@@ -429,7 +448,7 @@ var loadViz = function(data) {
         .ui(uiBuilder())
         .axes({'background': {'color': '#FFFFFF'}});
 
-        if (group && group != line){
+        if (group && group != line && !students){
             viz.id([group, line]);
             viz.color(group);
         } else {
@@ -440,7 +459,7 @@ var loadViz = function(data) {
             viz.attrs(COLORS[group]);
             viz.color('color');
         } else {
-            viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+            viz.color({'scale':'category20', 'value': students ? line : args['color'] || depths[0]});
         }
 
         if (balance)
@@ -462,13 +481,18 @@ var loadViz = function(data) {
 var getUrls = function() {
     var dimensions = [dataset, (dataset == 'secex' ? 'month/year' : 'year'), line],
     metadataAttrs = [];
-    
-    depths.concat(filters).forEach(function(attr) {
-        if (attr != line && dimensions.indexOf(attr) == -1) {
-            dimensions.push(attr);
-            metadataAttrs.push(attr);
-        }
-    });
+
+    if (students){
+        dimensions.pop();
+        metadataAttrs.push(group);
+    } else {
+        depths.concat(filters).forEach(function(attr) {
+            if (attr != line && dimensions.indexOf(attr) == -1) {
+                dimensions.push(attr);
+                metadataAttrs.push(attr);
+            }
+        });
+    }
 
     var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + lineGraph.getAttribute('filters')]
 
@@ -487,7 +511,9 @@ $(document).ready(function() {
             metadata[line] = responses[1];
 
             data = buildData(data);
-            data = fillMissingDates(data);
+            
+            if (!students)
+                data = fillMissingDates(data);
 
             if (balance){
                 data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
@@ -508,18 +534,27 @@ $(document).ready(function() {
     );
 });
 
-// Tasks to do:
+/*
 
-// Geral:
-// 1. Testar todas as bases de dados
-// 2. Verificar tooltips:
+:: Line Graph General Informations ::
+
+Appears in the categories: Location, Product, Trade Partner e High Education (Major)
+Data Bases usage: SECEX, HEDU
+Especific conditions or variables:
+    - Completes missing dates function 
+    - Calculates Trade Balance variable (Exports - Imports)
+    - Port variable has the function solo to filter top data
+    - Students situation need to split data into specific format  
+
+*/
+
+// Tasks to do:
+// 1. Verificar tooltips:
 //      - Valores;
 //      - Ícones para países;
-// 3. Rótulos dos eixos.
-// 4. Inserir gráfico nas categorias:
-//      - Location
-//      - Products >> DONE
-//      - Trade Partners >> DONE
-//      - High Education
+// 2. Rótulos dos eixos.
+// 3. High Education (Major):
+//      - Colocar Logaritmo;
+//      - Ajustar títulos;
 
 // *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.

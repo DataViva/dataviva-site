@@ -18,3 +18,4 @@ class GraphTitle(db.Model):
     industry = db.Column(db.Boolean)
     occupation = db.Column(db.Boolean)
     establishment = db.Column(db.Boolean)
+    hedu_course = db.Column(db.Boolean)
