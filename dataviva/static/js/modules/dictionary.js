@@ -91,6 +91,7 @@ dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
 dictionary['Unable to load visualization'] = lang == 'en' ? 'Unable to load visualization' : 'Não foi possível carregar a visualização';
 dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
 dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
+dictionary['students_number'] = lang == 'en' ? 'Students Number' : 'Número de Estudantes';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';

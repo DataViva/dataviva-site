@@ -25,6 +25,30 @@ function string2date(dateString) {
     var month = (dateString.length == 2 && dateString[1] !== '0') ? dateString[1] : 1;
     var year = dateString[0];
     return new Date(month + '/01/' + year)
+
+}
+
+function buildYearRange(dataItem) {
+    if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+        yearRange[1] = dataItem['year'];
+    else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+        yearRange[0] = dataItem['year'];
+}
+
+function buildStudentsData(data, dataItem) {
+    var students_situation = ['enrolled', 'entrants', 'graduates'],
+        partialArrayData = [];
+
+    students_situation.forEach(function(situation){
+        partialDataItem = {};
+        partialDataItem['year'] = dataItem['year'];
+        partialDataItem['students'] = situation
+        partialDataItem['students_number'] = dataItem[situation];
+
+        buildYearRange(partialDataItem);
+
+        data.push(partialDataItem);
+    });
 }
 
 var buildData = function(apiResponse){
@@ -46,22 +70,10 @@ var buildData = function(apiResponse){
                 dataItem[header] = getAttrByName(item, header);
             });
 
-            if (students){
-                var students_situation = ['enrolled', 'entrants', 'graduates'],
-                    partialArrayData = [];
-                
-                line = 'students';
+            if (students)
+                buildStudentsData(data, dataItem)
 
-                students_situation.forEach(function(situation){
-                    partialDataItem = {};
-                    partialDataItem['year'] = dataItem['year'];
-                    partialDataItem['students'] = situation
-                    partialDataItem['students_number'] = dataItem[situation];
-
-                    data.push(partialDataItem);
-                });
-
-            } else {
+            else {
 
                 if (ID_LABELS.hasOwnProperty(line))
                     dataItem[dictionary[ID_LABELS[line]]] = dataItem[line];
@@ -88,13 +100,9 @@ var buildData = function(apiResponse){
                 if (dataItem['month'])
                     dataItem['date'] = string2date(dataItem['year'] + '-' + dataItem['month'])
 
-                if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
-                    yearRange[1] = dataItem['year'];
-                else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
-                    yearRange[0] = dataItem['year'];
+                buildYearRange(dataItem);
 
                 data.push(dataItem);
-
             }
 
         } catch(e) {};
@@ -102,6 +110,8 @@ var buildData = function(apiResponse){
 
     if (yearRange[0] == yearRange[1])
         yearRange[0] = 0;
+
+    selectedYears = [yearRange[0], yearRange[1]];
 
     return data;
 }
@@ -321,6 +331,7 @@ var loadViz = function(data) {
                 .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(yValue, function(value) {
                     currentTitleAttrs['line'] = value;
+                    viz.title(titleHelper(selectedYears));
                     viz.y({
                         'label': {
                             'value': balance ? dictionary['trade_' + value] : dictionary[value]
@@ -342,6 +353,7 @@ var loadViz = function(data) {
                 .title(dictionary['depth'])
                 .type('toggle')
                 .focus(dictionary['value'] ? 'type' : 'trade_balance', function(value) {
+                    viz.title(titleHelper(selectedYears));
                     viz.id({
                         'value' : value == 'trade_balance' ? value : [group, value]
                     })
@@ -358,6 +370,7 @@ var loadViz = function(data) {
                 .title(dictionary['time_resolution'])
                 .type('toggle')
                 .focus(dictionary['year'] ? 'year' : 'date', function(value) {
+                    viz.title(titleHelper(selectedYears));
                     viz.x({
                         'value': value,
                         'label': value == 'year' ? dictionary['year'] : dictionary['month']
@@ -368,20 +381,23 @@ var loadViz = function(data) {
                     viz.draw();
                 })
                 .draw();
-
-            d3plus.form()
-                .config(config)
-                .data([{'id': 'linear', 'label': dictionary['linear']}, {'id': 'log', 'label': dictionary['log']}])
-                .title(dictionary['scale'])
-                .type('toggle')
-                .focus(dictionary['linear'] ? 'linear' : 'log', function(value) {
-                    viz.y({
-                        'scale': value
-                    });
-                    viz.draw();
-                })
-                .draw();
         }
+
+        // Adds logarithm selector
+        d3plus.form()
+            .config(config)
+            .data([{'id': 'linear', 'label': dictionary['linear']}, {'id': 'log', 'label': dictionary['log']}])
+            .title(dictionary['scale'])
+            .type('toggle')
+            .focus(dictionary['linear'] ? 'linear' : 'log', function(value) {
+                viz.title(titleHelper(selectedYears));
+                viz.y({
+                    'scale': value
+                });
+                viz.draw();
+            })
+            .draw();
+
     };
 
     var hasIdLabel = function() {
@@ -419,6 +435,17 @@ var loadViz = function(data) {
         }
     };
 
+    var timelineCallback = function(years) {
+        if (!years.length)
+            selectedYears = yearRange;
+        else if (years.length == 1)
+            selectedYears = [0, years[0].getFullYear()];
+        else
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('lineGraph', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
+    };
+
     var viz = d3plus.viz()
         .container('#lineGraph')
         .data({'value': data, 'padding': 0})
@@ -436,30 +463,34 @@ var loadViz = function(data) {
         })
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
-        .time({'value': 'year'})
+        .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon({'value': 'icon', 'style': 'knockout'})
         .legend({'order': {'sort': 'desc', 'value': 'size'}})
         .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
         .messages({'branding': true, 'style': 'large'})
-        .title(titleHelper([0, yearRange[1]]))
+        .title(titleHelper(selectedYears))
         .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
         .ui(uiBuilder())
         .axes({'background': {'color': '#FFFFFF'}});
 
-        if (group && group != line && !students){
+        if (group && group != line){
             viz.id([group, line]);
             viz.color(group);
-        } else {
+        } else
             viz.id(line).color(line);
-        }
 
         if (COLORS.hasOwnProperty(group)) {
             viz.attrs(COLORS[group]);
             viz.color('color');
-        } else {
-            viz.color({'scale':'category20', 'value': students ? line : args['color'] || depths[0]});
+        } else
+            viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+
+        if (students) {
+            viz.id(line).color(line);
+            viz.y({'label': {'value': dictionary['students_number']}});
+            viz.color({'scale':'category20', 'value': line});
         }
 
         if (balance)
@@ -511,8 +542,10 @@ $(document).ready(function() {
             metadata[line] = responses[1];
 
             data = buildData(data);
-            
-            if (!students)
+
+            if (students)
+                line = 'students';
+            else
                 data = fillMissingDates(data);
 
             if (balance){
@@ -553,8 +586,5 @@ Especific conditions or variables:
 //      - Valores;
 //      - Ícones para países;
 // 2. Rótulos dos eixos.
-// 3. High Education (Major):
-//      - Colocar Logaritmo;
-//      - Ajustar títulos;
 
 // *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
