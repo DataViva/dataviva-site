@@ -5,9 +5,14 @@ var rings = document.getElementById('rings'),
     filters = rings.getAttribute('filters'),
     baseTitle = rings.getAttribute('graph-title'),
     baseSubtitle = rings.getAttribute('graph-subtitle'),
-    yearRange = getUrlArgs()['year'] ? [0, +getUrlArgs()['year']] : [0, 0],
+    args = getUrlArgs(),
+    yearRange = [Number.POSITIVE_INFINITY, 0],
+    selectedYears = [],
+    depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][circles] || [circles],
+    group = depths[0],
     basicValues = BASIC_VALUES[dataset],
-    calcBasicValues = CALC_BASIC_VALUES[dataset];
+    calcBasicValues = CALC_BASIC_VALUES[dataset],
+    currentTitleAttrs = {'circles': circles, 'focus': focus};
 
 var buildData = function(apiResponse, circlesMetadata) {
 
@@ -29,16 +34,14 @@ var buildData = function(apiResponse, circlesMetadata) {
                     dataItem[header] = +dataItem[header]
             });
 
-            dataItem[DICT[dataset]['item_id'][circles]] = dataItem[circles];
+            dataItem[ID_LABELS[group]] = dataItem[circles];
+            dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
 
             for (key in calcBasicValues) {
                 dataItem[key] = calcBasicValues[key](dataItem);
             }
 
-            dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
-
-            var group = DEPTHS[dataset][circles][0];
-            var groupId = circlesMetadata[dataItem[DICT[dataset]['item_id'][circles]]][group]['id'];
+            var groupId = circlesMetadata[dataItem[ID_LABELS[group]]][group]['id'];
 
             if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + groupId + '.png';
@@ -47,23 +50,34 @@ var buildData = function(apiResponse, circlesMetadata) {
             connections.nodes.forEach(function(node){
                 var nodeKey;
                 if(circles == 'product')
-                    nodeKey = node[DICT[dataset]['item_id'][circles]].slice(-4);
+                    nodeKey = node[ID_LABELS[group]].slice(-4);
 
                 if(circles == 'occupation_family')
-                    nodeKey = node[DICT[dataset]['item_id'][circles]];
+                    nodeKey = node[ID_LABELS[group]];
 
                 if(circles == 'industry_class')
-                    nodeKey = node[DICT[dataset]['item_id'][circles].slice(-2)].substr(1);
+                    nodeKey = node[ID_LABELS[group].slice(-2)].substr(1);
 
-                if(nodeKey == dataItem[DICT[dataset]['item_id'][circles]])
+                if(nodeKey == dataItem[ID_LABELS[group]])
                     node[circles] = dataItem[circles]
             });
 
-            if(dataItem[DICT[dataset]['item_id'][circles]] == focus)
+            if(dataItem[ID_LABELS[group]] == focus)
                 focus = dataItem[circles];
 
+            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+                yearRange[1] = dataItem['year'];
+            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+                yearRange[0] = dataItem['year'];
+
             data.push(dataItem);
+
         } catch(e) {};
+
+        if (yearRange[0] == yearRange[1])
+        yearRange[0] = 0;
+
+        selectedYears = [0, yearRange[1]];
     });
 
     return data;
@@ -122,54 +136,74 @@ var connectionsData = function() {
 
 var loadViz = function(data) {
     var uiBuilder = function() {
-        ui = [];
+        var config = {
+                'id': 'id',
+                'text': 'label',
+                'font': {'size': 11},
+                'container': d3.select('#controls'),
+                'search': false
+            };
 
-        var args = getUrlArgs();
+        // Adds year selector
         if (args['year']) {
-            ui.push({
-                'method': function(value) {
-                    if (value == args['year']) {
+            d3plus.form()
+                .config(config)
+                .data([{'id': 1, 'label': args['year']}, {'id': 0, 'label': dictionary['all']}])
+                .title(dictionary['year'])
+                .type('toggle')
+                .focus(args['year'] ? 1 : 0, function(value) {
+                     if (value) {
                         loadViz(data);
                     } else {
                         var loadingData = dataviva.ui.loading('#rings').text(dictionary['Downloading Additional Years'] + '...');
-                        window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\year=[0-9]{4}/, '');
+                        d3.select('.loading').style('background-color', '#fff');
+                        window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
                     }
-                },
-                'value': [args['year'], dictionary['all']],
-                'label': dictionary['year']
-            })
+                })
+                .draw();
         }
-
-        return ui;
     }
 
-    var titleHelper = function() {
-        var title = titleBuilder(circles, dataset, getUrlArgs(), yearRange);
-        return {
-            'value': title['title'],
-            'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
-            'total': {'font': {'align': 'left'}, 'value': true}
+    var titleHelper = function(years) {
+        if (!baseTitle) {
+            var genericTitle = '<circles> ' + dictionary['per'] + ' <focus>';
+            if (depths.length > 1 && currentTitleAttrs['focus'] != currentTitleAttrs['focus'])
+                genericTitle += '/<depth>';
         }
+
+        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
+
+        return {
+            'value': header['title'],
+            'font': {'size': 22, 'align': 'left'},
+            'padding': 5,
+            'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+        };
     };
 
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': DICT[dataset]['item_id'][circles],
+                '': ID_LABELS[group],
                 [dictionary['basic_values']]: [focus]
             },
             'long': {
-                '': DICT[dataset]['item_id'][circles],
+                '': ID_LABELS[group],
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
     };
 
     var timelineCallback = function(years) {
-        yearRange = years.length == 1 ? [0, years[0].getFullYear()] : [years[0].getFullYear(), years[years.length - 1].getFullYear()];
-        toolsBuilder(rings.id, viz, data, titleBuilder().value, uiBuilder());
-        viz.title(titleHelper());
+        if (!years.length)
+            selectedYears = yearRange;
+        else if (years.length == 1)
+            selectedYears = [0, years[0].getFullYear()];
+        else
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('rings', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
     };
 
     var viz = d3plus.viz()
@@ -178,21 +212,29 @@ var loadViz = function(data) {
         .data(data)
         .edges(connections.edges)
         .focus(focus)
+        .id(circles)
+        .axes({'background': {'color': '#FFFFFF'}})
         .background('transparent')
+        .labels({'align': 'left', 'valign': 'top'})
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon({'value': 'icon', 'style': 'knockout'})
         .color({'scale':'category20', 'value': circles})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large' })
-        .title(titleHelper())
-        .id(circles)
+        .title(titleHelper(selectedYears))
+        .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
         .ui(uiBuilder());
 
+
+    $('#rings').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
+    
     viz.draw();
 
-    toolsBuilder(rings.id, viz, data, titleHelper().value, uiBuilder());
+    $('#controls').fadeToggle();
+
+    toolsBuilder('rings', viz, data, titleHelper(yearRange).value);
 };
 
 var getUrls = function() {
@@ -239,6 +281,27 @@ $(document).ready(function() {
 
             loading.hide();
             d3.select('#mask').remove();
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });
+
+/*
+
+:: Rings Graph General Informations ::
+
+Appears in the categories: Occupation, Industry e Product
+Data Bases usage: RAIS, SECEX
+Especific conditions or variables:
+    - Connections are pre calculated and requested in additional request:
+      File located in '/static/json/networks/'' and 
+      requested by '/rings/networks/' in 'rings/views.py'
+
+*/
+
+//To do:
+//Adicionar rings nas categorias de ocupação e indústria
+//Ajustar labels no gráfico
+//Verificar montagem do arquivo connections

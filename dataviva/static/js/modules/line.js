@@ -6,6 +6,7 @@ var lineGraph = document.getElementById('lineGraph'),
     baseSubtitle = lineGraph.getAttribute('graph-subtitle'),
     args = getUrlArgs(),
     yearRange = [Number.POSITIVE_INFINITY, 0],
+    selectedYears = [],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][line] || [line],
     group = depths[0],
     yValues = args.hasOwnProperty('values') ? args['values'].split('+') : SIZES[dataset][yValue] || [yValue],
@@ -25,7 +26,6 @@ function string2date(dateString) {
     var month = (dateString.length == 2 && dateString[1] !== '0') ? dateString[1] : 1;
     var year = dateString[0];
     return new Date(month + '/01/' + year)
-
 }
 
 function buildYearRange(dataItem) {
@@ -466,8 +466,9 @@ var loadViz = function(data) {
             'ticks': {'font': {'size': 18}},
             'label': {'font': {'size': 20}}
         })
-        .labels({'align': 'left', 'valign': 'top'})
+        .axes({'background': {'color': '#FFFFFF'}})
         .background('transparent')
+        .labels({'align': 'left', 'valign': 'top'})
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon({'value': 'icon', 'style': 'knockout'})
         .legend({'order': {'sort': 'desc', 'value': 'size'}})
@@ -477,8 +478,7 @@ var loadViz = function(data) {
         .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
-        .ui(uiBuilder())
-        .axes({'background': {'color': '#FFFFFF'}});
+        .ui(uiBuilder());
 
         if (group && group != line){
             viz.id([group, line]);

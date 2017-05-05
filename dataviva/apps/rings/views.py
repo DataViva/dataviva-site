@@ -36,6 +36,12 @@ def before_request():
 def index(dataset, circles, focus):
     filters = []
 
+    if circles == 'product':
+        focus = product_service(focus)[1]
+
+    if circles == 'industry_class':
+        focus = industry_service(focus)[1]
+
     title_attrs = {
         filter_service(circles): focus
     }
@@ -49,12 +55,6 @@ def index(dataset, circles, focus):
 
     filters = urllib.urlencode(filters)
 
-    if circles == 'product':
-        focus = product_service(focus)[1]
-
-    if circles == 'industry_class':
-        focus = industry_service(focus)[1]
-
     title, subtitle = get_title(dataset, circles, 'rings', title_attrs)
 
     return render_template('rings/index.html',
@@ -62,7 +62,7 @@ def index(dataset, circles, focus):
                            circles=circles,
                            focus=focus,
                            filters=filters,
-                           title=title or 'Title',
+                           title=title or '',
                            subtitle=subtitle or '',
                            dictionary=json.dumps(dictionary()))
 
