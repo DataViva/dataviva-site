@@ -20,7 +20,7 @@ var ID_LABELS = {
     'equipment_code': 'id',
     'industry_class': 'cnae_id',
     'industry_section': 'cnae_id',
-    'industry_division': 'cnae_id',
+    'industry_division': 'cnae_id'
 };
 
 var DICT = {
@@ -260,7 +260,7 @@ var formatHelper = function() {
                 case 'value':
                 case 'kg':
                 case 'value_per_kg':
-                    return dictionary[DICT[dataset][text][args['type']]];
+                    return dictionary[DICT[dataset][text][args['type']]] || dictionary[text];
                 case 'jobs':
                     return dictionary[DICT[dataset][text]];
                 case 'primary connections':

@@ -158,8 +158,11 @@ var allDates = function(minYear, maxYear, hasMonth){
     return dates;
 };
 
-/* The values are set as 1 because the logarithmic scale on the d3plus line chart 
-does not work when the data has more than one value equal to 0.*/
+/* The values are set as 1 because the logarithmic scale on the d3plus
+line chart does not work when the data has more than one value equal to 0.
+
+Issue: FAKE_VALUE = 1 for the monthly period, when aggregated by annual period
+the value is summarized to 12. */
 
 FAKE_VALUE = 1;
 
@@ -331,7 +334,6 @@ var loadViz = function(data) {
                 .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(yValue, function(value) {
                     currentTitleAttrs['line'] = value;
-                    viz.title(titleHelper(selectedYears));
                     viz.y({
                         'label': {
                             'value': balance ? dictionary['trade_' + value] : dictionary[value]
@@ -353,7 +355,6 @@ var loadViz = function(data) {
                 .title(dictionary['depth'])
                 .type('toggle')
                 .focus(dictionary['value'] ? 'type' : 'trade_balance', function(value) {
-                    viz.title(titleHelper(selectedYears));
                     viz.id({
                         'value' : value == 'trade_balance' ? value : [group, value]
                     })
@@ -370,7 +371,7 @@ var loadViz = function(data) {
                 .title(dictionary['time_resolution'])
                 .type('toggle')
                 .focus(dictionary['year'] ? 'year' : 'date', function(value) {
-                    viz.title(titleHelper(selectedYears));
+                    viz.data({'value': data, 'padding': 0})
                     viz.x({
                         'value': value,
                         'label': value == 'year' ? dictionary['year'] : dictionary['month']
@@ -390,7 +391,6 @@ var loadViz = function(data) {
             .title(dictionary['scale'])
             .type('toggle')
             .focus(dictionary['linear'] ? 'linear' : 'log', function(value) {
-                viz.title(titleHelper(selectedYears));
                 viz.y({
                     'scale': value
                 });
@@ -399,10 +399,6 @@ var loadViz = function(data) {
             .draw();
 
     };
-
-    var hasIdLabel = function() {
-        return DICT.hasOwnProperty(dataset) && DICT[dataset].hasOwnProperty('item_id') && DICT[dataset]['item_id'].hasOwnProperty(line);
-    }
 
     var titleHelper = function(years) {
         if (!baseTitle) {
@@ -423,13 +419,22 @@ var loadViz = function(data) {
     };
 
     var tooltipBuilder = function() {
+
+        if(balance){
+            return {
+                'short': {
+                    '': yValues
+                }
+            }
+        }
+
         return {
             'short': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][line] : 'id',
-                [dictionary['basic_values']]: [yValue]
+                '': ID_LABELS.hasOwnProperty(line) ? dictionary[ID_LABELS[line]] : 'id',
+                '': [yValue]
             },
             'long': {
-                '': hasIdLabel() ? DICT[dataset]['item_id'][line] : 'id',
+                '': ID_LABELS.hasOwnProperty(line) ? dictionary[ID_LABELS[line]] : 'id',
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
@@ -550,7 +555,7 @@ $(document).ready(function() {
 
             if (balance){
                 data.sort(function(a,b) {return (a['date'] > b['date']) ? 1 : ((b['date'] > a['date']) ? -1 : 0);})
-                var tradeBalanceData = buildTradeBalanceData(data);
+                buildTradeBalanceData(data);
             }
 
             if (port)
@@ -580,11 +585,3 @@ Especific conditions or variables:
     - Students situation need to split data into specific format  
 
 */
-
-// Tasks to do:
-// 1. Verificar tooltips:
-//      - Valores;
-//      - Ícones para países;
-// 2. Rótulos dos eixos.
-
-// *FAKE_VALUE = 1 para mensal, quando agrega por anual dado é sumarizado para 12.
