@@ -204,10 +204,10 @@ if (document.getElementById('rings'))
 var CALC_BASIC_VALUES = {
     'secex': {
         'exports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
+            return getUrlArgs()['type'] == 'export' || dataItem['type'] == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
         },
         'imports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
+            return getUrlArgs()['type'] == 'import' || dataItem['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
         }
     },
     'rais': {},

@@ -215,7 +215,6 @@ var loadViz = function(data) {
         .id(circles)
         .axes({'background': {'color': '#FFFFFF'}})
         .background('transparent')
-        .labels({'align': 'left', 'valign': 'top'})
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon({'value': 'icon', 'style': 'knockout'})
         .color({'scale':'category20', 'value': circles})
@@ -298,10 +297,7 @@ Especific conditions or variables:
     - Connections are pre calculated and requested in additional request:
       File located in '/static/json/networks/'' and 
       requested by '/rings/networks/' in 'rings/views.py'
+    - Funcion 'expandedData' unifies data in a single set after performing
+      the calculation of export and import values separately for SECEX
 
 */
-
-//To do:
-//Adicionar rings nas categorias de ocupação e indústria
-//Ajustar labels no gráfico
-//Verificar montagem do arquivo connections

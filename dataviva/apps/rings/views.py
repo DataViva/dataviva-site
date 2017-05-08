@@ -36,22 +36,20 @@ def before_request():
 def index(dataset, circles, focus):
     filters = []
 
-    if circles == 'product':
-        focus = product_service(focus)[1]
+    services = {'id_ibge': location_service, 'product': product_service,
+                'occupation_family': occupation_service, 'industry_class': industry_service}
 
-    if circles == 'industry_class':
-        focus = industry_service(focus)[1]
-
-    title_attrs = {
-        filter_service(circles): focus
-    }
+    if circles in services:
+        focus = services[circles](focus)[1]
 
     for key, value in request.args.items():
         if key == 'id_ibge':
             filters.append(location_service(value))
-            title_attrs['location'] = value
+            title_attrs[services[key](value)[0]] = services[key](value)[1]
         else:
             filters.append((key, value))
+
+    title_attrs = {circles: focus}
 
     filters = urllib.urlencode(filters)
 
