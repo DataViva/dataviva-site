@@ -224,14 +224,13 @@ var loadViz = function(data) {
         .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
-        .ui(uiBuilder());
 
-
+    uiBuilder();
     $('#rings').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
-    
     viz.draw();
 
-    $('#controls').fadeToggle();
+    if (document.getElementById('controls').style.display = 'none')
+        $('#controls').fadeToggle();
 
     toolsBuilder('rings', viz, data, titleHelper(yearRange).value);
 };

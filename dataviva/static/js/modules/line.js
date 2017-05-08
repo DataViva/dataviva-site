@@ -478,7 +478,6 @@ var loadViz = function(data) {
         .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
-        .ui(uiBuilder());
 
         if (group && group != line){
             viz.id([group, line]);
@@ -504,11 +503,12 @@ var loadViz = function(data) {
         if (port)
             viz.id({'solo': solo});
 
+    uiBuilder();
     $('#lineGraph').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
-    
     viz.draw();
 
-    $('#controls').fadeToggle();
+    if (document.getElementById('controls').style.display = 'none')
+        $('#controls').fadeToggle();
 
     toolsBuilder('lineGraph', viz, data, titleHelper(yearRange).value);
 

@@ -572,7 +572,10 @@ var loadViz = function(data){
 
         totalOfCurrentX();
         visualization.draw();
-        $('#controls').fadeToggle();
+        
+        if (document.getElementById('controls').style.display = 'none')
+            $('#controls').fadeToggle();
+        
         toolsBuilder('bar', visualization, data, titleHelper(yearRange));
 };
 

@@ -76,7 +76,7 @@ dictionary['percentage_terms'] = lang == 'en' ? 'Percentage Terms' : 'Termos Per
 dictionary['values'] = lang == 'en' ? 'Values' : 'Valores';
 dictionary['exporting_municipality'] = lang == 'en' ? 'Based on the Exporting Municipality' : 'Baseado nos Municípios Exportadores';
 dictionary['state_production'] = lang == 'en' ? 'Based on State Production' : 'Baseado nos Estados Produtores';
-dictionary['average_wage'] = lang == 'en' ? 'Salário Médio Mensal' : 'Average Monthly Wage';
+dictionary['average_wage'] = lang == 'en' ? 'Average Monthly Wage' : 'Salário Médio Mensal';
 dictionary['jobs'] = lang == 'en' ? 'Jobs' : 'Empregos';
 dictionary['year'] = lang == 'en' ? 'Year' : 'Ano';
 dictionary['scale'] = lang == 'en' ? 'Scale' : 'Escala';

@@ -517,7 +517,10 @@ var loadViz = function (data){
         uiBuilder();
         $('#stacked').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
         viz.draw();
-        $('#controls').fadeToggle();
+
+        if (document.getElementById('controls').style.display = 'none')
+            $('#controls').fadeToggle();
+        
         toolsBuilder(stacked.id, viz, data, titleHelper(yearRange).value);
 }
 

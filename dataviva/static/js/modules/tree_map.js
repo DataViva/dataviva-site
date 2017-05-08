@@ -373,7 +373,10 @@ var loadViz = function(data) {
     uiBuilder();
     $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     viz.draw();
-    $('#controls').fadeToggle();
+    
+    if (document.getElementById('controls').style.display = 'none')
+        $('#controls').fadeToggle();
+    
     toolsBuilder('tree_map', viz, data, titleHelper(yearRange).value);
 };
 
