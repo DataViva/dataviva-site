@@ -80,6 +80,9 @@ var buildData = function(apiResponse){
                 else
                     dataItem['id'] = dataItem[line];
 
+                if (COLORS.hasOwnProperty(group))
+                    dataItem['color'] = COLORS[group][dataItem[group]];
+
                 if(group && HAS_ICONS.indexOf(group) >= 0)
                     dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
 
@@ -357,7 +360,7 @@ var loadViz = function(data) {
                 .focus(dictionary['value'] ? 'type' : 'trade_balance', function(value) {
                     viz.id({
                         'value' : value == 'trade_balance' ? value : [group, value]
-                    })
+                    });
                     viz.draw();
                 })
                 .draw();

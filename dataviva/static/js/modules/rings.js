@@ -36,17 +36,19 @@ var buildData = function(apiResponse, circlesMetadata) {
 
             dataItem[ID_LABELS[group]] = dataItem[circles];
             dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
+            dataItem[group] = circlesMetadata[dataItem[ID_LABELS[group]]][group]['id'];
 
+            if (COLORS.hasOwnProperty(group))
+                    dataItem['color'] = COLORS[group][dataItem[group]];
+
+            if (HAS_ICONS.indexOf(group) >= 0)
+                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
+            
             for (key in calcBasicValues) {
                 dataItem[key] = calcBasicValues[key](dataItem);
             }
 
-            var groupId = circlesMetadata[dataItem[ID_LABELS[group]]][group]['id'];
-
-            if (HAS_ICONS.indexOf(group) >= 0)
-                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + groupId + '.png';
-
-            //Adds names to nodes IDs according to the rings' circles (e.g., '021202' > 'Soybeans')
+            //Adds names to nodes IDs according to the rings circles (e.g., '021202' > 'Soybeans')
             connections.nodes.forEach(function(node){
                 var nodeKey;
                 if(circles == 'product')
@@ -224,6 +226,12 @@ var loadViz = function(data) {
         .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
+
+    if (COLORS.hasOwnProperty(group)) {
+        viz.attrs(COLORS[group]);
+        viz.color('color');
+    } else
+        viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
 
     uiBuilder();
     $('#rings').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
