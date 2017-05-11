@@ -66,7 +66,7 @@ def index(dataset, circles, focus):
 
 
 @mod.route('/networks/<type>/')
-def networks(type="hs"):
+def networks(type="new_hs"):
     if GZIP_DATA:
         fileext = ".gz"
         filetype = "gzip"
@@ -75,6 +75,7 @@ def networks(type="hs"):
         filetype = "json"
     file_name = ("network_{0}.json" + fileext).format(type)
     cached_q = cached_query(file_name)
+
     if cached_q:
         ret = make_response(cached_q)
     else:

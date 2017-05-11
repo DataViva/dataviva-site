@@ -223,7 +223,6 @@ var fillMissingDates = function(data){
 };
 
 var buildTradeBalanceData = function(data){
-    
     data.forEach(function(item, index, allItems) {
         var tradeBalance = {},
             nextItem = allItems[index + 1];
@@ -422,7 +421,6 @@ var loadViz = function(data) {
     };
 
     var tooltipBuilder = function() {
-
         if(balance){
             return {
                 'short': {

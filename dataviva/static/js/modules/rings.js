@@ -30,16 +30,15 @@ var buildData = function(apiResponse, circlesMetadata) {
 
             headers.forEach(function(header){
                 dataItem[header] = getAttrByName(item, header);
-                if (['wage', 'average_wage'].indexOf(header) >= 0)
-                    dataItem[header] = +dataItem[header]
             });
 
             dataItem[ID_LABELS[group]] = dataItem[circles];
+            dataItem['edge_label'] = dataItem[circles];
             dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
             dataItem[group] = circlesMetadata[dataItem[ID_LABELS[group]]][group]['id'];
 
             if (COLORS.hasOwnProperty(group))
-                    dataItem['color'] = COLORS[group][dataItem[group]];
+                dataItem['color'] = COLORS[group][dataItem[group]];
 
             if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
@@ -47,25 +46,6 @@ var buildData = function(apiResponse, circlesMetadata) {
             for (key in calcBasicValues) {
                 dataItem[key] = calcBasicValues[key](dataItem);
             }
-
-            //Adds names to nodes IDs according to the rings circles (e.g., '021202' > 'Soybeans')
-            connections.nodes.forEach(function(node){
-                var nodeKey;
-                if(circles == 'product')
-                    nodeKey = node[ID_LABELS[group]].slice(-4);
-
-                if(circles == 'occupation_family')
-                    nodeKey = node[ID_LABELS[group]];
-
-                if(circles == 'industry_class')
-                    nodeKey = node[ID_LABELS[group].slice(-2)].substr(1);
-
-                if(nodeKey == dataItem[ID_LABELS[group]])
-                    node[circles] = dataItem[circles]
-            });
-
-            if(dataItem[ID_LABELS[group]] == focus)
-                focus = dataItem[circles];
 
             if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
                 yearRange[1] = dataItem['year'];
@@ -86,13 +66,13 @@ var buildData = function(apiResponse, circlesMetadata) {
 };
 
 var expandedData = function(data) {
-
     var expandedData = [];
 
     data.forEach(function(item){
         if(item['type'] == 'export'){
             data.forEach(function(importItem){
                 if(item['product'] == importItem['product'] && importItem['type'] == 'import' && item['year'] == importItem['year']){
+                    
                     item['exports_value'] = item['value'];
                     item['exports_weight'] = item['kg'];
                     item['imports_value'] = importItem['value'];
@@ -112,27 +92,20 @@ var expandedData = function(data) {
     return expandedData;
 };
 
-var connectionsData = function() {
+var connectionsNodes = function() {
+    connections.edges.forEach(function(edge){
+        edge.source = connections.nodes[edge.source][ID_LABELS[group]];
+        edge.target = connections.nodes[edge.target][ID_LABELS[group]];
+    });
+};
 
-    if(dataset == 'secex'){
-        connections.edges.forEach(function(edge){
-            edge.source = connections.nodes[edge.source][circles];
-            edge.target = connections.nodes[edge.target][circles];
-        });
-    }
-
-    if(dataset == 'rais'){
-        var id = circles == 'occupation_family' ? 'cbo_id' : 'id';
-
-        for (var i = 0; i < connections.edges.length; i++) {
-            for (var j = 0; j < connections.nodes.length; j++) {
-                if (connections.edges[i]['source'] == connections.nodes[j][id])
-                    connections.edges[i]['source'] = connections.nodes[j][circles];
-
-                if (connections.edges[i]['target'] == connections.nodes[j][id])
-                    connections.edges[i]['target'] = connections.nodes[j][circles];
-            };
-        };
+var formatEdgesLabels = function() {
+    return {
+        'text': function(text, params) {
+            if(params.key == 'edge_label' && text in circlesMetadata )
+                return circlesMetadata[text]['name_' + lang];
+            return dictionary[text] || text;
+        }
     }
 };
 
@@ -214,7 +187,7 @@ var loadViz = function(data) {
         .data(data)
         .edges(connections.edges)
         .focus(focus)
-        .id(circles)
+        .id('edge_label')
         .axes({'background': {'color': '#FFFFFF'}})
         .background('transparent')
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
@@ -226,6 +199,7 @@ var loadViz = function(data) {
         .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
+        .format(formatEdgesLabels())
 
     if (COLORS.hasOwnProperty(group)) {
         viz.attrs(COLORS[group]);
@@ -254,9 +228,9 @@ var getUrls = function() {
     ];
 
     var connectionsHelper = {
-        'product': 'hs',
-        'occupation_family': 'cbo',
-        'industry_class': 'cnae'
+        'product': 'api_hs',
+        'occupation_family': 'api_cbo',
+        'industry_class': 'api_cnae'
     };
 
     urls.push('/' + lang + '/rings/networks/' + connectionsHelper[circles] + '/');
@@ -279,10 +253,11 @@ $(document).ready(function() {
 
             data = buildData(data, circlesMetadata);
 
-            if(dataset == 'secex')
+            if(dataset == 'secex'){
                 data = expandedData(data);
+                connectionsNodes();
+            }
 
-            connectionsData(data);
             loadViz(data);
 
             loading.hide();
@@ -303,8 +278,30 @@ Data Bases usage: RAIS, SECEX
 Especific conditions or variables:
     - Connections are pre calculated and requested in additional request:
       File located in '/static/json/networks/'' and 
-      requested by '/rings/networks/' in 'rings/views.py'
+      requested by '/rings/networks/<id>' (id = hs,cnae or cbo) in 'rings/views.py'
     - Funcion 'expandedData' unifies data in a single set after performing
       the calculation of export and import values separately for SECEX
+    - Funcion 'connectionsNodes' relate 'edges' and 'nodes' arrays for SECEX / hs.
+      The 'source' and 'target' fields in 'edges' array refer to position of a item
+      in 'nodes' arrays. Measure taken to decrease json size with relationships  
+
+{
+    "nodes":[
+        {
+            "y":753.5362439817109, //node position in space, unused in rings
+            "x":1553.2536950412032,
+            "<id>":"<id_value>" //hs: "hs_id":"6208", cnae: "cnae_id":"31021", cbo: "cbo_id": "7661"
+        },
+        ...
+    ],
+    "edges":[
+        {
+            "source":"<id_value> or <position>",
+            "proximity":"<value>",
+            "target":"<id_value> or <position>"
+        },
+        ...
+    ]
+}
 
 */
