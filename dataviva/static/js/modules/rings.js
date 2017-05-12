@@ -92,13 +92,6 @@ var expandedData = function(data) {
     return expandedData;
 };
 
-var connectionsNodes = function() {
-    connections.edges.forEach(function(edge){
-        edge.source = connections.nodes[edge.source][ID_LABELS[group]];
-        edge.target = connections.nodes[edge.target][ID_LABELS[group]];
-    });
-};
-
 var formatEdgesLabels = function() {
     return {
         'text': function(text, params) {
@@ -253,10 +246,8 @@ $(document).ready(function() {
 
             data = buildData(data, circlesMetadata);
 
-            if(dataset == 'secex'){
+            if(dataset == 'secex')
                 data = expandedData(data);
-                connectionsNodes();
-            }
 
             loadViz(data);
 
@@ -280,10 +271,7 @@ Especific conditions or variables:
       File located in '/static/json/networks/'' and 
       requested by '/rings/networks/<id>' (id = hs,cnae or cbo) in 'rings/views.py'
     - Funcion 'expandedData' unifies data in a single set after performing
-      the calculation of export and import values separately for SECEX
-    - Funcion 'connectionsNodes' relate 'edges' and 'nodes' arrays for SECEX / hs.
-      The 'source' and 'target' fields in 'edges' array refer to position of a item
-      in 'nodes' arrays. Measure taken to decrease json size with relationships  
+      the calculation of export and import values separately for SECEX 
 
 {
     "nodes":[
@@ -296,9 +284,9 @@ Especific conditions or variables:
     ],
     "edges":[
         {
-            "source":"<id_value> or <position>",
+            "source":"<id_value>",
             "proximity":"<value>",
-            "target":"<id_value> or <position>"
+            "target":"<id_value>"
         },
         ...
     ]
