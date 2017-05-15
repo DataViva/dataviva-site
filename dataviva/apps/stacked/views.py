@@ -7,19 +7,19 @@ import urllib
 import json
 
 mod = Blueprint('stacked', __name__,
-				template_folder='templates',
-				url_prefix='/<lang_code>/stacked',
-				static_folder='static')
+                template_folder='templates',
+                url_prefix='/<lang_code>/stacked',
+                static_folder='static')
 
 
 @mod.url_value_preprocessor
 def pull_lang_code(endpoint, values):
-	g.locale = values.pop('lang_code')
+    g.locale = values.pop('lang_code')
 
 
 @mod.url_defaults
 def add_language_code(endpoint, values):
-	values.setdefault('lang_code', get_locale())
+    values.setdefault('lang_code', get_locale())
 
 
 @mod.before_request
@@ -80,47 +80,47 @@ def industry_service(industry):
 
 @mod.route('/<dataset>/<area>/<value>')
 def index(dataset, area, value):
-	group = request.args.get('group', '')
-	type = request.args.get('type', '')
-	depths = request.args.get('depths', '')
-	values = request.args.get('values', value)
-	title_attrs = {}
+    group = request.args.get('group', '')
+    type = request.args.get('type', '')
+    depths = request.args.get('depths', '')
+    values = request.args.get('values', value)
+    title_attrs = {}
 
-	filters = []
-	for key, value in request.args.items():
-		if key not in ['depths', 'values', 'group', 'filters', 'hierarchy'] and value:
-			if key == 'product':
-				filters.append(product_service(value))
-				title_attrs[product_service(value)[0]] = product_service(value)[1]
-			elif key == 'id_ibge':
-				filters.append(location_service(value))
-				title_attrs[location_service(value)[0]] = location_service(value)[1]
-			elif key == 'wld':
-				filters.append(wld_service(value))
-				title_attrs[wld_service(value)[0]] = wld_service(value)[1]
-			elif key == 'occupation':
-				filters.append(occupation_service(value))
-				title_attrs[occupation_service(value)[0]] = occupation_service(value)[1]
-			elif key == 'industry':
-				filters.append(industry_service(value))
-				title_attrs[industry_service(value)[0]] = industry_service(value)[1]
-			else:
-				if key == 'establishment':
-					title_attrs[key] = value
-				filters.append((key, value))
+    filters = []
+    for key, value in request.args.items():
+        if key not in ['depths', 'values', 'group', 'filters', 'hierarchy'] and value:
+            if key == 'product':
+                filters.append(product_service(value))
+                title_attrs[product_service(value)[0]] = product_service(value)[1]
+            elif key == 'id_ibge':
+                filters.append(location_service(value))
+                title_attrs[location_service(value)[0]] = location_service(value)[1]
+            elif key == 'wld':
+                filters.append(wld_service(value))
+                title_attrs[wld_service(value)[0]] = wld_service(value)[1]
+            elif key == 'occupation':
+                filters.append(occupation_service(value))
+                title_attrs[occupation_service(value)[0]] = occupation_service(value)[1]
+            elif key == 'industry':
+                filters.append(industry_service(value))
+                title_attrs[industry_service(value)[0]] = industry_service(value)[1]
+            else:
+                if key in ['establishment', 'type']:
+                    title_attrs[key] = value
+                filters.append((key, value))
 
-	filters = urllib.urlencode(filters)
+    filters = urllib.urlencode(filters)
 
-	title, subtitle = get_title(dataset, area, 'stacked', title_attrs)
+    title, subtitle = get_title(dataset, area, 'stacked', title_attrs)
 
-	return render_template('stacked/index.html',
-							dataset=dataset,
-							area=area,
-							type=type,
-							group=group,
-							depths=depths,
-							values=values,
-							title=title or '',
-							subtitle=subtitle or '',
-							filters=filters,
-							dictionary=json.dumps(dictionary()))
+    return render_template('stacked/index.html',
+                            dataset=dataset,
+                            area=area,
+                            type=type,
+                            group=group,
+                            depths=depths,
+                            values=values,
+                            title=title or '',
+                            subtitle=subtitle or '',
+                            filters=filters,
+                            dictionary=json.dumps(dictionary()))
