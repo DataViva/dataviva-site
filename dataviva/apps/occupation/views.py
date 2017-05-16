@@ -175,9 +175,11 @@ def index(occupation_id, tab):
             'jobs-economic-activities-tree_map',
             'new-api-jobs-economic-activities-tree_map',
             'jobs-economic-activities-stacked',
+            'new-api-jobs-economic-activities-stacked',
             'wages-economic-activities-tree_map',
             'new-api-wages-economic-activities-tree_map',
             'wages-economic-activities-stacked',
+            'new-api-wages-economic-activities-stacked',
         ],
     }
 
@@ -187,10 +189,12 @@ def index(occupation_id, tab):
             'new-api-jobs-municipality-tree_map',
             'jobs-municipality-geo_map',
             'jobs-municipality-stacked',
+            'new-api-jobs-municipality-stacked',
             'wages-municipality-tree_map',
             'new-api-wages-municipality-tree_map',
             'wages-municipality-geo_map',
             'wages-municipality-stacked',
+            'new-api-wages-municipality-stacked',
         ]
 
     occupation_municipalities_service = OccupationMunicipalities(
