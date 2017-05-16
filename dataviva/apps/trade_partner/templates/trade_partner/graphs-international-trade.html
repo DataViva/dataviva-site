@@ -34,8 +34,8 @@
                     {% trans %}Stacked{% endtrans %}
                </a>
                <a href="/{{ g.locale }}/stacked/secex/product/value?values=value+kg&group=product_section&depths=product_section+product&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-new-stacked'}}" data-parent="#exports-municipality">
-                    {% trans %}New Stacked{% endtrans %}
+                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-municipality">
+                    Stacked new API
                </a>
             </div>
             {% if location.id | length != 9 %}
@@ -57,8 +57,8 @@
                     {% trans %}Stacked{% endtrans %}
                </a>
                <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-new-stacked'}}" data-parent="#exports-municipality">
-                    {% trans %}New Stacked{% endtrans %}
+                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-stacked'}}" data-parent="#new-api-exports-destination">
+                    Stacked new API
                </a>
                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=export_val&controls=true"
                    target="graphs-frame-international-trade"
@@ -104,8 +104,8 @@
                     {% trans %}Stacked{% endtrans %}
                 </a>
                 <a href="/{{ g.locale }}/stacked/secex/product/value?values=value+kg&group=product_section&depths=product_section+product&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-new-stacked'}}" data-parent="#exports-municipality">
-                    {% trans %}New Stacked{% endtrans %}
+                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-stacked'}}" data-parent="#new-api-imports-municipality">
+                    Stacked new API
                </a>
             </div>
             {% if location.id | length != 9 %}
@@ -127,8 +127,8 @@
                     {% trans %}Stacked{% endtrans %}
                </a>
                <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-new-stacked'}}" data-parent="#exports-municipality">
-                    {% trans %}New Stacked{% endtrans %}
+                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-stacked'}}" data-parent="#new-api-imports-origin">
+                    Stacked new API
                </a>
 
                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=import_val&controls=true"

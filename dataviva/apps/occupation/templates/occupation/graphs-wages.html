@@ -19,7 +19,7 @@
                </a>
                <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=jobs+wage+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-economic-activities-stacked' }}" data-parent="#new-api-jobs-economic-activities">
-                    New Stacked
+                    Stacked new API
                 </a>
             </div>
             {% if not is_municipality %}
@@ -43,7 +43,7 @@
                 </a>
                 <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=jobs+wage+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-stacked' }}" data-parent="#new-api-jobs-municipality">
-                    New Stacked
+                    Stacked new API
                 </a>
             </div>
             {% endif %}
@@ -81,7 +81,7 @@
                </a>
                <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=wage+jobs+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-economic-activities-stacked' }}" data-parent="#new-api-wages-economic-activities">
-                    New Stacked
+                    Stacked new API
                 </a>
             </div>
             {% if not is_municipality %}
@@ -105,7 +105,7 @@
                 </a>
                 <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=wage+jobs+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-stacked' }}" data-parent="#new-api-wages-municipalities">
-                    New Stacked
+                    Stacked new API
                 </a>
             </div>
             {% endif %}
