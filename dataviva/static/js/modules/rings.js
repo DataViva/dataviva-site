@@ -6,12 +6,12 @@ var rings = document.getElementById('rings'),
     baseTitle = rings.getAttribute('graph-title'),
     baseSubtitle = rings.getAttribute('graph-subtitle'),
     args = getUrlArgs(),
-    yearRange = [Number.POSITIVE_INFINITY, 0],
-    selectedYears = [],
+    selectedYears = [0, args['year']] || [0, 2014],
+    yearsRange = [],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][circles] || [circles],
     group = depths[0],
-    basicValues = BASIC_VALUES[dataset],
-    calcBasicValues = CALC_BASIC_VALUES[dataset],
+    basicValues = BASIC_VALUES[dataset] || [],
+    calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
     currentTitleAttrs = {'circles': circles, 'focus': focus};
 
 var buildData = function(apiResponse, circlesMetadata) {
@@ -30,6 +30,8 @@ var buildData = function(apiResponse, circlesMetadata) {
 
             headers.forEach(function(header){
                 dataItem[header] = getAttrByName(item, header);
+                if (['wage', 'average_wage'].indexOf(header) >= 0)
+                    dataItem[header] = +dataItem[header]
             });
 
             dataItem[ID_LABELS[group]] = dataItem[circles];
@@ -47,19 +49,10 @@ var buildData = function(apiResponse, circlesMetadata) {
                 dataItem[key] = calcBasicValues[key](dataItem);
             }
 
-            if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
-                yearRange[1] = dataItem['year'];
-            else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
-                yearRange[0] = dataItem['year'];
-
             data.push(dataItem);
 
         } catch(e) {};
 
-        if (yearRange[0] == yearRange[1])
-        yearRange[0] = 0;
-
-        selectedYears = [0, yearRange[1]];
     });
 
     return data;
@@ -114,19 +107,20 @@ var loadViz = function(data) {
 
         // Adds year selector
         if (args['year']) {
+            var options = [];
+            yearsRange.forEach(function(item) {
+                options.push({'id': item, 'label': item.toString()});
+            });
+
             d3plus.form()
                 .config(config)
-                .data([{'id': 1, 'label': args['year']}, {'id': 0, 'label': dictionary['all']}])
+                .data(options)
                 .title(dictionary['year'])
-                .type('toggle')
-                .focus(args['year'] ? 1 : 0, function(value) {
-                     if (value) {
-                        loadViz(data);
-                    } else {
-                        var loadingData = dataviva.ui.loading('#rings').text(dictionary['Downloading Additional Years'] + '...');
+                .type(options.length > 3 ? 'drop' : 'toggle')
+                .focus(Number(args['year']), function(year) {
+                        var loadingData = dataviva.ui.loading('#rings').text(dictionary['Downloading Additional Year'] + '...');
                         d3.select('.loading').style('background-color', '#fff');
-                        window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
-                    }
+                        window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '/&year=' + year).replace(/\?year=[0-9]{4}/, '?year=' + year);
                 })
                 .draw();
         }
@@ -164,12 +158,6 @@ var loadViz = function(data) {
     };
 
     var timelineCallback = function(years) {
-        if (!years.length)
-            selectedYears = yearRange;
-        else if (years.length == 1)
-            selectedYears = [0, years[0].getFullYear()];
-        else
-            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
         toolsBuilder('rings', viz, data, titleHelper(selectedYears).value);
         viz.title(titleHelper(selectedYears));
     };
@@ -207,7 +195,7 @@ var loadViz = function(data) {
     if (document.getElementById('controls').style.display = 'none')
         $('#controls').fadeToggle();
 
-    toolsBuilder('rings', viz, data, titleHelper(yearRange).value);
+    toolsBuilder('rings', viz, data, titleHelper(selectedYears).value);
 };
 
 var getUrls = function() {
@@ -216,8 +204,9 @@ var getUrls = function() {
     if (dataset == 'secex')
         dimensions.push('type')
 
-    var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
-        'http://api.staging.dataviva.info/metadata/' + circles
+    var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + filters,
+        API_DOMAIN + '/metadata/' + circles,
+        API_DOMAIN + '/years/' + dataset
     ];
 
     var connectionsHelper = {
@@ -242,8 +231,10 @@ $(document).ready(function() {
         function(responses) {
             var data = responses[0];
             circlesMetadata = responses[1];
-            connections = responses[2];
+            range = responses[2];
+            connections = responses[3];
 
+            yearsRange = range.years;
             data = buildData(data, circlesMetadata);
 
             if(dataset == 'secex')
