@@ -28,7 +28,11 @@
                 </a>
                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?color=export_val"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-geo_map'}}" data-parent="#exports-municipality">
-                    {%trans%}Geo Map{%endtrans%}
+                    {%trans%}Map{%endtrans%}
+               </a>                
+               <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&type=export{% if product.id %}&product={{ product.id }}{% endif %}&year=2014"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-geo_map'}}" data-parent="#new-api-exports-municipality">
+                    {%trans%}Map new API{%endtrans%}
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?y=export_val&layout=value&sort=asc"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-municipality-stacked'}}" data-parent="#exports-municipality">
@@ -95,7 +99,11 @@
                 </a>
                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?color=import_val"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-municipality-geo_map'}}" data-parent="#imports-municipality">
-                    {%trans%}Geo Map{%endtrans%}
+                    {%trans%}Map{%endtrans%}
+               </a>
+                <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&type=import{% if product.id %}&product={{ product.id }}{% endif %}&year=2014"
+                   target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-geo_map'}}" data-parent="#new-api-imports-municipality">
+                    {%trans%}Map new API{%endtrans%}
                </a>
                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/{{product.id}}/all/bra/?y=import_val&time=year&order=color&layout=value&sort=asc&color=color"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-municipality-stacked'}}" data-parent="#imports-municipality">

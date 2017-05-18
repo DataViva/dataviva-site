@@ -37,6 +37,10 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-geo_map'}}" data-parent="#jobs-municipality">
                     {% trans %}Map{% endtrans %}
                </a>
+                <a href="/{{ g.locale }}/map/rais/jobs/{{ id_ibge if id_ibge }}?count=establishments&values=jobs+wage&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-geo_map'}}" data-parent="#new-api-imports-municipality">
+                    {%trans%}Map new API{%endtrans%}
+               </a>
                 <a href="/{{g.locale}}/embed/stacked/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?sort=asc&layout=value&y=num_jobs&order=color"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-stacked'}}" data-parent="#jobs-municipality">
                     {% trans %}Stacked{% endtrans %}
@@ -98,6 +102,10 @@
                 <a href="/{{g.locale}}/embed/geo_map/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?color=wage"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-municipalities-geo_map'}}" data-parent="#wages-municipalities">
                     {% trans %}Map{% endtrans %}
+               </a>
+                <a href="/{{ g.locale }}/map/rais/wage/{{ id_ibge if id_ibge }}?count=establishments&values=jobs+wage&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-geo_map'}}" data-parent="#new-api-imports-municipality">
+                    {%trans%}Map new API{%endtrans%}
                </a>
                 <a href="/{{g.locale}}/embed/stacked/rais/{{ location.id if location else 'all' }}/all/{{occupation.id}}/bra/?sort=asc&layout=value&y=wage&order=color"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-municipalities-stacked'}}" data-parent="#wages-municipalities">

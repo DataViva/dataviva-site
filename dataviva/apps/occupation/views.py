@@ -188,11 +188,13 @@ def index(occupation_id, tab):
             'jobs-municipality-tree_map',
             'new-api-jobs-municipality-tree_map',
             'jobs-municipality-geo_map',
+            'new-api-jobs-municipality-geo_map',
             'jobs-municipality-stacked',
             'new-api-jobs-municipality-stacked',
             'wages-municipality-tree_map',
             'new-api-wages-municipality-tree_map',
             'wages-municipality-geo_map',
+            'new-api-wages-municipality-geo_map',
             'wages-municipality-stacked',
             'new-api-wages-municipality-stacked',
         ]
