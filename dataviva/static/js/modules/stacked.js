@@ -518,7 +518,7 @@ var loadViz = function (data){
         $('#stacked').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
         viz.draw();
 
-        if (document.getElementById('controls').style.display = 'none')
+        if ($('#controls').css('display') == 'none')
             $('#controls').fadeToggle();
         
         toolsBuilder(stacked.id, viz, data, titleHelper(yearRange).value);
