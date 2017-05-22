@@ -31,7 +31,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<university_id>/graphs/<tab>', methods=['POST'])
 def graphs(university_id, tab):
     university = UniversityModel.query.filter_by(id=university_id).first_or_404()
-    return render_template('university/graphs-'+tab+'.html', university=university, graph=None)
+    return render_template('university/graphs-' + tab + '.html', university=university, graph=None)
 
 
 @mod.route('/<university_id>', defaults={'tab': 'general'})
@@ -50,7 +50,8 @@ def index(university_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     header = {
         'year': university_service.year(),
@@ -76,6 +77,7 @@ def index(university_id, tab):
             'category-major-tree_map',
             'category-major-stacked',
             'category-status-line',
+            'new-api-category-status-line',
             'category-shift-stacked',
         ],
     }

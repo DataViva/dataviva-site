@@ -83,7 +83,7 @@ def get_title(dataset, shapes, graph, api_filters):
             response = requests.get(url).json()
             values[filter] = response['name_' + g.locale]
 
-    for filter in ['product', 'partner', 'occupation', 'industry', 'establishment', 'hedu_course']:
+    for filter in ['product', 'partner', 'occupation', 'industry', 'establishment', 'hedu_course', 'university']:
         if filter not in query:
             query[filter] = 0
 
@@ -94,11 +94,15 @@ def get_title(dataset, shapes, graph, api_filters):
     query['dataset'] = dataset
     query['graph'] = graph
     query['location'] = 1 if query['establishment'] == 0 else 0
+
+    if query['university'] == 1:
+        query['location'] = 0
+
     result = GraphTitle.query.filter_by(**query).first()
 
-    if result:       
+    if result:
         title = getattr(result, 'title_' + g.locale)
-        
+
         for key, value in values.iteritems():
             title = title.replace('<' + key + '>', value)
 

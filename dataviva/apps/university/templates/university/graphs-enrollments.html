@@ -16,10 +16,18 @@
                 </div>
                 <a href="#category-status" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Students Status{% endtrans %}</a>
                 <div class="collapse" id="category-status">
-                    <a href="/{{ g.locale }}/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" 
-                       target="graphs-frame-enrollments"
-                       class="list-group-item {{'selected' if graph.menu == 'category-status-line'}}"
-                       data-parent="#category-status">{% trans %}Line{% endtrans %}</a>
+                  <a href="/{{ g.locale }}/embed/line/hedu/all/{{university.id}}/all/type/?y=students&scale=linear" 
+                     target="graphs-frame-enrollments"
+                     class="list-group-item {{'selected' if graph.menu == 'category-status-line'}}"
+                     data-parent="#category-status">
+                     {% trans %}Line{% endtrans %}
+                  </a>
+                  <a href="/{{ g.locale }}/line/hedu/university/students_number?university={{university.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                    target="graphs-frame-enrollments"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-category-status-line'}}"
+                    data-parent="#new-api-category-status">
+                    Line new API
+                  </a>
                 </div>
                 <a href="#category-shift" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Shift{% endtrans %}</a>
                 <div class="collapse" id="category-shift">
@@ -36,7 +44,7 @@
                     {% if not graph %}
                         /{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled
                     {% else %}
-                        /{{ g.locale }}/embed/{{graph.url}}
+                        /{{ g.locale }}/{{graph.url}}
                     {% endif %}"
                     name="graphs-frame-enrollments"
                     id="graphs-frame-enrollments"

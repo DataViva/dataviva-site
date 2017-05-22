@@ -18,7 +18,7 @@
             <a href="#enrollments-status" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Students Situation{% endtrans %}</a>
             <div class="collapse" id="enrollments-status">
                 <a href="/{{ g.locale }}/embed/line/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/type/?y=students&scale=linear&controls=true&year=2009_2013" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-status-line' }}" data-parent="#enrollments-status">{% trans %}Line{% endtrans %}</a>
-                <a href="/{{ g.locale }}/line/hedu/hedu_course/students_number?hedu_course={{major.id if major.id else 'all'}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                <a href="/{{ g.locale }}/line/hedu/hedu_course/students_number?hedu_course={{major.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                 target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'new-api-enrollments-status-line'}}" data-parent="#new-api-enrollments-status">
                     Line new API
                 </a>

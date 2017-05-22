@@ -43,7 +43,7 @@ function buildStudentsData(data, dataItem) {
         partialDataItem = {};
         partialDataItem['year'] = dataItem['year'];
         partialDataItem['students'] = situation
-        partialDataItem['students_number'] = dataItem[situation];
+        partialDataItem['students_number'] = Number(dataItem[situation]);
 
         buildYearRange(partialDataItem);
 
