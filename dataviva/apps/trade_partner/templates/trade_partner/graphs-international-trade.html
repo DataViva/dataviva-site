@@ -76,7 +76,7 @@
                 <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&options=singlecolor,month,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
-                    {% trans %}Bar{% endtrans %}
+                    Bar new API
                 </a>
                 <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2016&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-international-trade"
@@ -147,7 +147,7 @@
                 <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&options=month,singlecolor,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}" 
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'import-port-bar'}}" data-parent="#import-port">
-                    {% trans %}Bar{% endtrans %}
+                    Bar new API
                 </a>
                 <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2016&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % location.id_ibge if location }}"
                    target="graphs-frame-international-trade"

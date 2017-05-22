@@ -85,7 +85,7 @@
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=month,percentage,singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
-                    {% trans %}Bar{% endtrans %}
+                    Bar new API
                 </a>
                 <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2016&type=export{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-tree_map'}}" data-parent="#new-api-exports-port">
@@ -163,7 +163,7 @@
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=month,percentage,singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-port">
-                    {% trans %}Bar{% endtrans %}
+                    Bar new API
                 </a>
                 <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2016&type=import{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-tree_map'}}" data-parent="#new-api-imports-port">

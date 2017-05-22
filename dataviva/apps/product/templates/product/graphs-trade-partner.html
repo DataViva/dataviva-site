@@ -79,7 +79,7 @@
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-destination">
-                    {%trans%}Bar{%endtrans%}
+                    Bar New API
                 <a href="/{{ g.locale }}/tree_map/secex/port/value?values=value+kg&type=export&year=2016&product={{ product.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-tree_map'}}" data-parent="#new-api-exports-port">
                     TreeMap new API
@@ -150,7 +150,7 @@
                 </a>
                 <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-destination">
-                    {%trans%}Bar{%endtrans%}
+                    Bar New API
                   <a href="/{{ g.locale }}/tree_map/secex/port/value?values=value+kg&type=import&year=2016&product={{ product.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-tree_map'}}" data-parent="#new-api-imports-port">
                     TreeMap new API
