@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request,abort
+from flask import Blueprint, render_template, g, request, abort
 from dataviva.apps.general.views import get_locale
 from dataviva.api.rais.services import Occupation
 from dataviva.api.rais.services import OccupationByLocation
@@ -30,35 +30,6 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
-def location_depth(bra_id):
-    locations = {
-        1: "region",    #todo
-        3: "state",
-        5: "mesoregion",
-        7: "microregion",
-        9: "municipality"
-    }
-
-    return locations[len(bra_id)]
-
-def handle_region_bra_id(bra_id):
-    return {
-        "1": "1",
-        "2": "2",
-        "3": "5",
-        "4": "3",
-        "5": "4"
-    }[bra_id]
-
-def location_service(depth, location):
-    if depth == 'region':
-        return handle_region_bra_id(location.id)
-    if depth == 'mesoregion':
-        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
-    if depth == 'microregion':
-        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
-    else:
-        return location.id_ibge
 
 def location_depth(bra_id):
     locations = {
