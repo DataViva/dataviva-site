@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, g, request
+from flask import Blueprint, g
 from dataviva.apps.general.views import get_locale
-from dataviva.translations.dictionary import dictionary
 from dataviva.utils.graphs_services import filter_service
 from models import GraphTitle
 import requests
@@ -25,24 +24,6 @@ def add_language_code(endpoint, values):
 @mod.before_request
 def before_request():
     g.page_type = mod.name
-
-
-def filter_service(key):
-    if key in ['region', 'state', 'mesoregion', 'microregion', 'municipality']:
-        return 'location'
-    if key in  ['continent', 'country']:
-        return 'partner'
-    if key in ['industry_division', 'industry_section', 'industry_class']:
-        return 'industry'
-    if key in ['occupation_group', 'occupation_family']:
-        return 'occupation'
-    if key in ['product_section', 'product_chapter', 'product']:
-        return 'product'
-    if key in ['equipment_type', 'equipment_code']:
-        return 'equipment'
-    if key in ['bed_type', 'bed_type_per_specialty']:
-        return 'bed_type'
-    return key
 
 
 def location_service(id_ibge):

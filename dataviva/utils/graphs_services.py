@@ -41,4 +41,10 @@ def filter_service(key):
         return 'industry'
     if key in ['occupation_group', 'occupation_family']:
         return 'occupation'
+    if key in ['product_section', 'product_chapter', 'product']:
+        return 'product'
+    if key in ['equipment_type', 'equipment_code']:
+        return 'equipment'
+    if key in ['bed_type', 'bed_type_per_specialty']:
+        return 'bed_type'
     return key
