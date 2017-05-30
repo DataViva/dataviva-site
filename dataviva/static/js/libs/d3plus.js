@@ -21544,8 +21544,12 @@ module.exports = function(vars) {
   if (!vars.error.internal && reqs.indexOf("edges") >= 0 && reqs.indexOf("focus") >= 0) {
     var connections = vars.edges.connections(vars.focus.value[0],vars.id.value)
     if (connections.length == 0) {
-      var name = fetchText(vars,vars.focus.value[0],vars.depth.value)
-        , str = vars.format.locale.value.error.connections
+      var name = fetchText(vars,vars.focus.value[0],vars.depth.value),
+          str = vars.format.locale.value.error.connections
+
+      if (Object.keys(name).length === 0 && typeof circlesMetadata !== 'undefined')
+          name = typeof lang !== 'undefined' ? circlesMetadata[vars.focus.value[0]]["name_" + lang] : circlesMetadata[vars.focus.value[0]].name_en
+      
       vars.error.internal = stringFormat(str,"\""+name+"\"")
     }
   }
