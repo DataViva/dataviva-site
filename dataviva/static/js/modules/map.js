@@ -17,7 +17,6 @@ var filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [];
 var values = getUrlArgs().hasOwnProperty('values') ? args['values'].split('+') : [value];
 
 var buildData = function(apiResponse) {
-
     var getAttrByName = function(item, attr) {
         var index = headers.indexOf(attr);
         return item[index];
@@ -51,6 +50,11 @@ var buildData = function(apiResponse) {
                 yearRange[1] = dataItem['year'];
             else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
                 yearRange[0] = dataItem['year'];
+
+            if (dataItem.hasOwnProperty('entrants'))
+                dataItem.entrants = parseInt(dataItem.entrants)
+            if (dataItem.hasOwnProperty('graduates'))
+                dataItem.graduates = parseInt(dataItem.graduates)
 
             data.push(dataItem);
         } catch(e) {
