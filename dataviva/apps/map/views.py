@@ -7,6 +7,7 @@ from config import GZIP_DATA
 from dataviva.utils.cached_query import cached_query
 from dataviva.utils.graphs_services import location_service
 from dataviva.apps.title.views import get_title
+from dataviva.utils.graphs_services import *
 import urllib
 import json
 
@@ -36,21 +37,29 @@ def before_request():
 @mod.route('/<dataset>/<value>/<id_ibge>')
 def index(dataset, value, id_ibge):
     filters = []
+    title_attrs = {}
+    services = {'product': product_service, 'id_ibge': location_service, 'wld':
+            wld_service, 'occupation': occupation_service, 'industry': industry_service}
+
     for k, v in request.args.items():
-        if k not in ['values', 'filters']:
-            filters.append((k, v))
+        if k not in ['values', 'filters', 'count', 'year']:
+            if v and k in services:
+                filters.append(services[k](v))
+                title_attrs[services[k](v)[0]] = services[k](v)[1]
+            else:
+                filters.append((k, v))
+                title_attrs[k] = v
     if id_ibge:
         location = location_service(id_ibge)[0]
         filters.append((location, id_ibge))
         state = '' if location == 'region' else id_ibge[:2]
+        title_attrs['state'] = state
     else:
         state = id_ibge
         location = 'municipality'
 
     filters = urllib.urlencode(filters)
-    title, subtitle = get_title(dataset, location, 'map', {
-                                location: id_ibge} if id_ibge else {})
-
+    title, subtitle = get_title(dataset, location, 'map', title_attrs)
     return render_template('map/index.html',
                            dataset=dataset,
                            value=value,

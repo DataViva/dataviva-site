@@ -146,11 +146,13 @@ def index(product_id, tab):
             'exports-municipality-tree_map',
             'new-api-exports-municipality-tree_map',
             'exports-municipality-geo_map',
+            'new-api-exports-municipality-geo_map',
             'exports-municipality-stacked',
             'new-api-exports-municipality-stacked',
             'imports-municipality-tree_map',
             'new-api-imports-municipality-tree_map',
             'imports-municipality-geo_map',
+            'new-api-imports-municipality-geo_map',
             'imports-municipality-stacked',
             'new-api-imports-municipality-stacked'
         ]

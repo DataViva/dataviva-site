@@ -1,20 +1,20 @@
-var map = document.getElementById('map'),
-    dataset = map.getAttribute('dataset'),
-    value = map.getAttribute('value'),
-    apiFilters = map.getAttribute('filters'),
-    state = map.getAttribute('state'),
-    area = state ? 'municipality': 'state',
-    baseTitle = map.getAttribute('graph-title'),
-    baseSubtitle = map.getAttribute('graph-subtitle'),
-    yearRange = [Number.POSITIVE_INFINITY, 0],
-    validOccupations = {},
-    currentFilters = {},
-    currentTitleAttrs = {'shapes': area}
-    metadata = {};
-
-var args = getUrlArgs(),
-    filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [],
-    values = getUrlArgs().hasOwnProperty('values') ? args['values'].split('+') : [value];
+var map = document.getElementById('map');
+var dataset = map.getAttribute('dataset');
+var value = map.getAttribute('value');
+var apiFilters = map.getAttribute('filters');
+var state = map.getAttribute('state');
+var area = state ? 'municipality': 'state';
+var baseTitle = map.getAttribute('graph-title');
+var baseSubtitle = map.getAttribute('graph-subtitle');
+var yearRange = [Number.POSITIVE_INFINITY, 0];
+var selectedYears = [];
+var validOccupations = {};
+var currentFilters = {};
+var currentTitleAttrs = {'shapes': area};
+var metadata = {};
+var args = getUrlArgs();
+var filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [];
+var values = getUrlArgs().hasOwnProperty('values') ? args['values'].split('+') : [value];
 
 var buildData = function(apiResponse) {
 
@@ -32,12 +32,16 @@ var buildData = function(apiResponse) {
 
             headers.forEach(function(header) {
                 dataItem[header] = getAttrByName(item, header);
+                if (['wage', 'average_wage'].indexOf(header) >= 0) {
+                    dataItem[header] = +dataItem[header]
+                }
             });
 
             if (dataItem.hasOwnProperty('occupation_family'))
                 validOccupations[dataItem['occupation_family']] = 1;
 
             dataItem['name'] = metadata[area][dataItem[area]]['name_' + lang];
+            dataItem['id_ibge'] = dataItem[area];
             dataItem['id'] = metadata[area][dataItem[area]][area == 'state' ? ('abbr_' + lang) : 'id'];
 
             for (d in metadata)
@@ -56,6 +60,8 @@ var buildData = function(apiResponse) {
 
     if (yearRange[0] == yearRange[1])
         yearRange[0] = 0;
+
+    selectedYears = [0, yearRange[1]];
 
     return data;
 }
@@ -111,6 +117,7 @@ var loadViz = function(data){
                     viz.data(d)
                         .color(value)
                         .title({'total': {'prefix': dictionary[value] + ': '}})
+                        .title(titleHelper(selectedYears))
                         .draw();
                 })
              .draw();
@@ -168,8 +175,20 @@ var loadViz = function(data){
         };
     };
 
+    var tooltipBuilder = function() {
+        return {
+            short: {
+                '': 'id_ibge',
+                [dictionary.basic_values]: [value]
+            },
+            long: {
+                '': 'id_ibge',
+                [dictionary.basic_values]: values
+            }
+        }
+    };
+
     var timelineCallback = function(years) {
-        var selectedYears = [];
         if (!years.length)
             selectedYears = yearRange;
         else if (years.length == 1)
@@ -210,11 +229,21 @@ var loadViz = function(data){
         .title({'total': {'font': {'align': 'left'}}})
         .title({'total': {'prefix': dictionary[value] + ': '}});
 
-        if(!state){
-            viz.tooltip({'sub': 'name'});
+        if (!state) {
+            viz.tooltip({
+                '': 'id_ibge', 
+                [dictionary.basic_values]: 'name'
+            });
         }
 
+
+
+
         viz.draw();
+
+        if (document.getElementById('controls').style.display = 'none') {
+            $('#controls').fadeToggle();
+        }
 
         toolsBuilder('map', viz, data, titleHelper(yearRange).value);
 }

@@ -20,7 +20,7 @@ var ID_LABELS = {
     'equipment_code': 'id',
     'industry_class': 'cnae_id',
     'industry_section': 'cnae_id',
-    'industry_division': 'cnae_id',
+    'industry_division': 'cnae_id'
 };
 
 var DICT = {
@@ -143,12 +143,20 @@ var COLORS = {
         '60': '#FEE090',
         '99': '#FFFFBF'
     },
+    'continent': {
+        'as': '#CC2A21',
+        'af': '#FEC932',
+        'eu': '#823783',
+        'na': '#080C79',
+        'oc': '#E98319',
+        'sa': '#199C51'
+    },
     'region': {
-        '1': '#00994c',
+        '1': '#00994C',
         '2': '#101070',
-        '3': '#c40008',
-        '4': '#a9d046',
-        '5': '#f3e718'
+        '3': '#C40008',
+        '4': '#A9D046',
+        '5': '#F3E718'
     },
     'product_section': {
         '01': '#FFE999',
@@ -157,34 +165,62 @@ var COLORS = {
         '04': '#D1FF00',
         '05': '#330000',
         '06': '#E377C2',
-        '07': '#f7b6d2',
-        '08': '#98df8a',
+        '07': '#F7B6D2',
+        '08': '#98DF8A',
         '09': '#B00000',
-        '10': '#b7834b',
+        '10': '#B7834B',
         '11': '#105B10',
-        '12': '#3ab11a',
+        '12': '#3AB11A',
         '13': '#D66011',
         '14': '#752277',
         '15': '#5E1F05',
         '16': '#17BCEF',
-        '17': '#9edae5',
+        '17': '#9EDAE5',
         '18': '#AA1F61',
         '19': '#A4BD99',
         '20': '#7F7F7F',
         '21': '#93789E',
         '22': '#C7C7C7'
     },
+    'type': {
+        'export': '#0B1097',
+        'import': '#AF1F24',
+    },
     'occupation_group': {
         '0': '#A4BD99',
         '1': '#752277',
-        '2': '#cc0000',
-        '3': '#d66011',
-        '4': '#b7834b',
-        '5': '#17bcef',
+        '2': '#CC0000',
+        '3': '#D66011',
+        '4': '#B7834B',
+        '5': '#17BCEF',
         '6': '#105B10',
-        '7': '#9edae5',
-        '8': '#ffc41c',
-        '9': '#581f05',
+        '7': '#9EDAE5',
+        '8': '#FFC41C',
+        '9': '#581F05',
+        'X': '#C7C7C7'
+    },
+    'industry_section': {
+        'a': '#105B10',
+        'b': '#330000',
+        'c': '#5E1F05',
+        'd': '#e377c2',
+        'e': '#2F2F6D',
+        'f': '#E87600',
+        'g': '#17bcef',
+        'h': '#9edae5',
+        'i': '#FFC41C',
+        'j': '#57D200',
+        'k': '#408e60',
+        'l': '#a4bd99',
+        'm': '#cc0000',
+        'n': '#b7834b',
+        'o': '#752277',
+        'p': '#d66011',
+        'q': '#800000',
+        'r': '#93789e',
+        's': '#c7c7c7',
+        't': '#f7b6d2',
+        'u': '#4C4C4C',
         'x': '#C7C7C7'
     }
 };
@@ -204,10 +240,10 @@ if (document.getElementById('rings'))
 var CALC_BASIC_VALUES = {
     'secex': {
         'exports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
+            return getUrlArgs()['type'] == 'export' || dataItem['type'] == 'export' ? dataItem['value'] / dataItem['kg'] : undefined;
         },
         'imports_per_weight': function(dataItem) {
-            return getUrlArgs()['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
+            return getUrlArgs()['type'] == 'import' || dataItem['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
         }
     },
     'rais': {},
@@ -260,7 +296,7 @@ var formatHelper = function() {
                 case 'value':
                 case 'kg':
                 case 'value_per_kg':
-                    return dictionary[DICT[dataset][text][args['type']]];
+                    return dictionary[DICT[dataset][text][args['type']]] || dictionary[text];
                 case 'jobs':
                     return dictionary[DICT[dataset][text]];
                 case 'primary connections':
@@ -285,19 +321,8 @@ var formatHelper = function() {
 
                 if (symbol && lang === 'pt') {
                     var digit = parseFloat(value.toString().split('.')[0]);
-                    switch (symbol) {
-                        case 'T':
-                            symbol = digit < 2 ? ' Trilh\u00e3o' : ' Trilh\u00f5es';
-                            break;
-                        case 'B':
-                            symbol = digit < 2 ? ' Bilh\u00e3o' : ' Bilh\u00f5es';
-                            break;
-                        case 'M':
-                            symbol = digit < 2 ? ' Milh\u00e3o' : ' Milh\u00f5es';
-                            break;
-                        case 'k':
-                            symbol = ' Mil';
-                    }
+                    if (symbol === 'k')
+                        symbol = 'Mil';
                 }
 
                 result = value + symbol;
@@ -318,7 +343,7 @@ var formatHelper = function() {
                 case 'value':
                 case 'imports_per_weight':
                 case 'exports_per_weight':
-                    result = '$' + result + ' USD';
+                    result = '$' + result;
                     break;
                 case 'kg':
                     result += ' kg';

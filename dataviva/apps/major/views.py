@@ -31,9 +31,9 @@ def add_language_code(endpoint, values):
 @mod.route('/<course_hedu_id>', defaults={'tab': 'general'})
 @mod.route('/<course_hedu_id>/<tab>')
 def index(course_hedu_id, tab):
-    bra_id = request.args.get('bra_id') 
+    bra_id = request.args.get('bra_id')
     bra_id = bra_id if bra_id != 'all' else None
-    
+
     menu = request.args.get('menu')
     url = request.args.get('url')
     graph = {}
@@ -41,7 +41,8 @@ def index(course_hedu_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     max_year_query = db.session.query(
         func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
@@ -119,6 +120,7 @@ def index(course_hedu_id, tab):
             'enrollments-municipality-stacked',
             'enrollments-municipality-tree_map',
             'enrollments-status-line',
+            'new-api-enrollments-status-line',
             'enrollments-shift-stacked',
         ],
     }
@@ -131,7 +133,6 @@ def index(course_hedu_id, tab):
     location = Bra.query.filter(Bra.id == bra_id).first()
 
     major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
-
 
     if tab not in tabs:
         abort(404)

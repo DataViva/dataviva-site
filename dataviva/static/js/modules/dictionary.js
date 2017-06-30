@@ -29,6 +29,7 @@ dictionary['item_id'] = 'ID';
 dictionary['ibge_id'] = lang == 'en' ? 'IBGE ID' : 'ID IBGE';
 dictionary['per'] = lang == 'en' ? 'per' : 'por';
 dictionary['trade_value'] = lang == 'en' ? 'Trade Value (USD)' : 'Valor do Comércio (USD)';
+dictionary['trade_kg'] = lang == 'en' ? 'Trade Weight (Kg)' : 'Peso Total Comercializado (Kg)';
 dictionary['export'] = lang == 'en' ? 'Exports (USD)' : 'Exportações (USD)';
 dictionary['import'] = lang == 'en' ? 'Imports (USD)' : 'Importações (USD)';
 dictionary['exports_value'] = lang == 'en' ? 'Export Value' : 'Valor das Exportações';
@@ -75,7 +76,7 @@ dictionary['percentage_terms'] = lang == 'en' ? 'Percentage Terms' : 'Termos Per
 dictionary['values'] = lang == 'en' ? 'Values' : 'Valores';
 dictionary['exporting_municipality'] = lang == 'en' ? 'Based on the Exporting Municipality' : 'Baseado nos Municípios Exportadores';
 dictionary['state_production'] = lang == 'en' ? 'Based on State Production' : 'Baseado nos Estados Produtores';
-dictionary['average_wage'] = lang == 'en' ? 'Salário Médio Mensal' : 'Average Monthly Wage';
+dictionary['average_wage'] = lang == 'en' ? 'Average Monthly Wage' : 'Salário Médio Mensal';
 dictionary['jobs'] = lang == 'en' ? 'Jobs' : 'Empregos';
 dictionary['year'] = lang == 'en' ? 'Year' : 'Ano';
 dictionary['scale'] = lang == 'en' ? 'Scale' : 'Escala';
@@ -90,6 +91,8 @@ dictionary['all'] = lang == 'en' ? 'All' : 'Todos';
 dictionary['Unable to load visualization'] = lang == 'en' ? 'Unable to load visualization' : 'Não foi possível carregar a visualização';
 dictionary['click for more info'] = lang == 'en' ? 'click for more info' : 'clique para ver mais';
 dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
+dictionary['students_number'] = lang == 'en' ? 'Students Number' : 'Número de Estudantes';
+dictionary['Downloading Additional Year'] = lang == 'en' ? 'Downloading Additional Year' : 'Baixando Ano Adicional';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
