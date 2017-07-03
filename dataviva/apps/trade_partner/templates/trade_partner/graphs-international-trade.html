@@ -65,7 +65,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-geo_map'}}" data-parent="#exports-destination">
                     {% trans %}Map{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/map/secex/value/{{ location.id_ibge if location }}?values=value+kg&country={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}&type=export"
+                <a href="/{{ g.locale }}/map/secex/value/{{ location.id_ibge if location }}?values=value+kg&country={{ '%03d' % (trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id) }}&type=export"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}" data-parent="#exports-destination">
                     {% trans %}Map new API{% endtrans %}
@@ -141,7 +141,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'imports-origin-geo_map'}}" data-parent="#imports-origin">
                     {% trans %}Map{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/map/secex/value/{{ location.id_ibge if location }}?values=value+kg&country={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}&type=import"
+                <a href="/{{ g.locale }}/map/secex/value/{{ location.id_ibge if location }}?values=value+kg&country={{ '%03d' % (trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id) }}&type=import"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}" data-parent="#exports-destination">
                     {% trans %}Map new API{% endtrans %}
