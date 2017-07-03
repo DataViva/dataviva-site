@@ -38,8 +38,14 @@ def before_request():
 def index(dataset, value, id_ibge):
     filters = []
     title_attrs = {}
-    services = {'product': product_service, 'id_ibge': location_service, 'wld':
-            wld_service, 'occupation': occupation_service, 'industry': industry_service}
+    services = {
+        'product': product_service,
+        'id_ibge': location_service,
+        'wld': wld_service,
+        'occupation': occupation_service,
+        'industry': industry_service,
+        'basic_course': sc_service,
+    }
 
     for k, v in request.args.items():
         if k not in ['values', 'filters', 'count', 'year']:
@@ -49,6 +55,7 @@ def index(dataset, value, id_ibge):
             else:
                 filters.append((k, v))
                 title_attrs[k] = v
+
     if id_ibge:
         location = location_service(id_ibge)[0]
         filters.append((location, id_ibge))
@@ -59,7 +66,7 @@ def index(dataset, value, id_ibge):
         location = 'municipality'
 
     filters = urllib.urlencode(filters)
-    title, subtitle = get_title(dataset, location, 'map', title_attrs)
+    title, subtitle = get_title(dataset, value, 'map', title_attrs)
     return render_template('map/index.html',
                            dataset=dataset,
                            value=value,

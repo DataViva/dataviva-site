@@ -19,6 +19,12 @@ def product_service(product):
     return ('product', product[2:])
 
 
+def sc_service(sc_course):
+    if len(sc_course) == 2:
+        return ('sc_course_field', str(int(sc_course)))
+    return ('sc_course', str(int(sc_course)))
+
+
 def occupation_service(occupation):
     occupations = {1: 'occupation_group', 4: 'occupation_family'}
     return (occupations[len(occupation)], occupation)
