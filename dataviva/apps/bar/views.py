@@ -98,6 +98,7 @@ def index(dataset, x, y):
 
     if type:
         filters.append(('type', type))
+        title_attrs['type'] = type
 
     if request.args.get('filters'):
         filters.append(('filters', request.args.get('filters')))
