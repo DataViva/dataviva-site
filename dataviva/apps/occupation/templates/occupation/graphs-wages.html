@@ -128,7 +128,7 @@
 
             <a href="#wages-establishments" class="list-group-item" data-toggle="collapse" data-parent="#wages-establishments">{% trans %}Establishments Informations{% endtrans %}</a>
             <div class="collapse" id="wages-establishments">
-                <a href="/{{g.locale}}/bar/rais/wage_received,average_monthly_wage/simple,establishment_size?occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/bar/rais/wage,average_wage/simple,establishment_size?occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-establishments-bar'}}" data-parent="#wages-establishments">
                     Bar new API
                 </a>
