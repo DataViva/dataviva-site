@@ -68,23 +68,23 @@ def index(dataset, circles, focus):
 @mod.route('/networks/<type>/')
 def networks(type="new_hs"):
     if GZIP_DATA:
-        fileext = ".gz"
-        filetype = "gzip"
+        file_extension = ".gz"
+        file_type = "gzip"
     else:
-        fileext = ""
-        filetype = "json"
-    file_name = ("network_{0}.json" + fileext).format(type)
-    cached_q = cached_query(file_name)
+        file_extension = ""
+        file_type = "json"
+    file_name = ("network_{0}.json" + file_extension).format(type)
+    cached_connection = cached_query(file_name)
 
-    if cached_q:
-        ret = make_response(cached_q)
+    if cached_connection:
+        connections_result = make_response(cached_connection)
     else:
         path = datavivadir + "/static/json/networks/{0}".format(file_name)
         gzip_file = open(path).read()
         cached_query(file_name, gzip_file)
-        ret = make_response(gzip_file)
+        connections_result = make_response(gzip_file)
 
-    ret.headers['Content-Encoding'] = filetype
-    ret.headers['Content-Length'] = str(len(ret.data))
+    connections_result.headers['Content-Encoding'] = file_type
+    connections_result.headers['Content-Length'] = str(len(connections_result.data))
 
-    return ret
+    return connections_result

@@ -43,7 +43,7 @@ function buildStudentsData(data, dataItem) {
         partialDataItem = {};
         partialDataItem['year'] = dataItem['year'];
         partialDataItem['students'] = situation
-        partialDataItem['students_number'] = dataItem[situation];
+        partialDataItem['students_number'] = Number(dataItem[situation]);
 
         buildYearRange(partialDataItem);
 
@@ -508,7 +508,7 @@ var loadViz = function(data) {
     $('#lineGraph').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     viz.draw();
 
-    if (document.getElementById('controls').style.display = 'none')
+    if ($('#controls').css('display') == 'none')
         $('#controls').fadeToggle();
 
     toolsBuilder('lineGraph', viz, data, titleHelper(yearRange).value);

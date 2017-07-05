@@ -2,7 +2,6 @@
 from flask import Blueprint, render_template, g, request
 from dataviva.apps.general.views import get_locale
 from dataviva.translations.dictionary import dictionary
-from dataviva.apps.embed.models import Build
 from dataviva.apps.title.views import get_title
 from dataviva.utils.graphs_services import *
 import urllib
@@ -43,13 +42,13 @@ def index(dataset, line, y_value):
             title_attrs['type'] = value
 
         if key in ['depths', 'values', 'group']:
-          continue
+            continue
         if value and key in services:
             filters.append(services[key](value))
             title_attrs[services[key](value)[0]] = services[key](value)[1]
         else:
-            if key == 'hedu_course':
-              title_attrs[key] = value
+            if key == 'hedu_course' or key == 'university':
+                title_attrs[key] = value
             filters.append((key, value))
 
     filters = urllib.urlencode(filters)

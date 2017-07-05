@@ -109,15 +109,15 @@ def index(dataset, x, y):
 
     if occupation:
         filters.append(occupation_service(occupation))
-        title_attrs[occupation_service(wld)[0]] = occupation_service(wld)[1]
+        title_attrs[occupation_service(occupation)[0]] = occupation_service(occupation)[1]
 
     if industry:
         filters.append(industry_service(industry))
-        title_attrs[industry_service(wld)[0]] = industry_service(wld)[1]
+        title_attrs[industry_service(industry)[0]] = industry_service(industry)[1]
 
     if product:
         filters.append(product_service(product))
-        title_attrs[product_service(wld)[0]] = product_service(wld)[1]
+        title_attrs[product_service(product)[0]] = product_service(product)[1]
 
     if id_ibge:
         filters.append(location_service(id_ibge))
