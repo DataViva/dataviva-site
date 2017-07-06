@@ -62,7 +62,8 @@ var DEPTHS = {
    'cnes_equipment': {
         'equipment_type': ['health_region', 'equipment_type', 'unit_type', 'equipment_code', 'equipment_type'],
         'municipality': ['health_region', 'equipment_type', 'equipment_code', 'unit_type'],
-        'unit_type': ['health_region', 'equipment_type', 'equipment_code']
+        'unit_type': ['health_region', 'equipment_type', 'equipment_code'],
+        'equipment_code': ['equipment_type', 'equipment_code']
    },
     'cnes_bed': {
         'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality'],
