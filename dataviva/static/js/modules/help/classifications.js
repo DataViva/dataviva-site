@@ -812,6 +812,255 @@ window.showBasicCourses = function() {
     window.basicCourses = new BasicCoursesTable();
 };
 
+window.showDemographicInformations = function() {
+    // @todo: move translate to babel
+    dataviva.dictionary['health_region'] = lang == 'en' ? 'Health Region' : 'Região de Saúde';
+    dataviva.dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
+    dataviva.dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
+    dataviva.dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
+
+    var loadingDemographicInformations = dataviva.ui.loading('.classifications-demographic-informations .classifications-demographic-informations-wrapper');
+    loadingDemographicInformations.text(dataviva.dictionary['loading'] + "...");
+
+    var DemographicInformationsTable = function () {
+        this.tableId = '#demographic-informations-table';
+
+        this.table = $(this.tableId).DataTable({
+            "dom": '<"classifications-demographic-informations-control">Bfrtip',
+             "buttons": [
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-demographic-informations'
+                }
+            ],
+            "ajax": {
+                "url": "/attrs/demographic_information/literacy?lang=" + lang,
+                "dataSrc": "data",
+                "cache": true,
+            },
+            "order": [],
+            "columns": [
+                {
+                    data: "id"
+                },
+                {
+                    data: "name"
+                },
+            ],
+            "deferRender": true,
+            "language": dataviva.datatables.language,
+            "scrollY": 500,
+            "scrollX": true,
+            "scrollCollapse": true,
+            "scroller": true,
+            initComplete: function () {
+                loadingDemographicInformations.show();
+                var buttons = $("<div></div>").addClass("btn-group");
+
+                var literacy = dataviva.dictionary['literacy'];
+                    ethnicity = dataviva.dictionary['ethnicity'],
+                    gender = dataviva.dictionary['gender'];
+
+                buttons.append($("<button>" + literacy + "</button>").attr("id", 'demographic-informations-literacy').addClass("btn btn-white"));
+                buttons.append($("<button>" + ethnicity + "</button>").attr("id", 'demographic-informations-ethnicity').addClass("btn btn-white"));
+                buttons.append($("<button>" + gender + "</button>").attr("id", 'demographic-informations-gender').addClass("btn btn-white"));
+
+                $('.classifications-demographic-informations-content .classifications-demographic-informations-control').append(buttons);
+
+                $('#demographic-informations-table_filter input').removeClass('input-sm');
+                $('#demographic-informations-table_filter').addClass('pull-right');
+                $('#demographic-informations-literacy').addClass('active');
+
+                $('#demographic-informations-literacy').click(function() {
+                    loadingDemographicInformations.show();
+                    DemographicInformations.table.ajax.url("/attrs/demographic_information/literacy?lang=" + lang).load(loadingDemographicInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#demographic-informations-ethnicity').click(function() {
+                    loadingDemographicInformations.show();
+                    DemographicInformations.table.ajax.url("/attrs/demographic_information/ethnicity?lang=" + lang).load(loadingDemographicInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#demographic-informations-gender').click(function() {
+                    loadingDemographicInformations.show();
+                    DemographicInformations.table.ajax.url("/attrs/demographic_information/gender?lang=" + lang).load(loadingDemographicInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('.classifications-demographic-informations .classifications-demographic-informations-wrapper .classifications-demographic-informations-content').show();
+                loadingDemographicInformations.hide();
+            }
+        });
+    };
+    window.DemographicInformations = new DemographicInformationsTable();
+};
+
+window.showEstablishmentInformations = function() {
+    // @todo: move translate to babel
+    dataviva.dictionary['health_region'] = lang == 'en' ? 'Health Region' : 'Região de Saúde';
+    dataviva.dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
+    dataviva.dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
+    dataviva.dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
+    dataviva.dictionary['legal_nature'] = lang == 'en' ? 'Legal Nature' : 'Natureza Jurídica';
+    dataviva.dictionary['simple'] = lang == 'en' ? 'Simples' : 'Simples';
+    dataviva.dictionary['establishment_size'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
+
+    var loadingEstablishmentInformations = dataviva.ui.loading('.classifications-establishment-informations .classifications-establishment-informations-wrapper');
+    loadingEstablishmentInformations.text(dataviva.dictionary['loading'] + "...");
+
+    var EstablishmentInformationsTable = function () {
+        this.tableId = '#establishment-informations-table';
+
+        this.table = $(this.tableId).DataTable({
+            "dom": '<"classifications-establishment-informations-control">Bfrtip',
+             "buttons": [
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-establishment-informations'
+                }
+            ],
+            "ajax": {
+                "url": "/attrs/establishment_information/legal_nature?lang=" + lang,
+                "dataSrc": "data",
+                "cache": true,
+            },
+            "order": [],
+            "columns": [
+                {
+                    data: "id"
+                },
+                {
+                    data: "name"
+                },
+            ],
+            "deferRender": true,
+            "language": dataviva.datatables.language,
+            "scrollY": 500,
+            "scrollX": true,
+            "scrollCollapse": true,
+            "scroller": true,
+            initComplete: function () {
+                loadingEstablishmentInformations.show();
+                var buttons = $("<div></div>").addClass("btn-group");
+
+                var legal_nature = dataviva.dictionary['legal_nature'];
+                    simple = dataviva.dictionary['simple'],
+                    establishment_size = dataviva.dictionary['establishment_size'];
+
+                buttons.append($("<button>" + legal_nature + "</button>").attr("id", 'establishment-informations-legal_nature').addClass("btn btn-white"));
+                buttons.append($("<button>" + simple + "</button>").attr("id", 'establishment-informations-simple').addClass("btn btn-white"));
+                buttons.append($("<button>" + establishment_size + "</button>").attr("id", 'establishment-informations-establishment_size').addClass("btn btn-white"));
+
+                $('.classifications-establishment-informations-content .classifications-establishment-informations-control').append(buttons);
+
+                $('#establishment-informations-table_filter input').removeClass('input-sm');
+                $('#establishment-informations-table_filter').addClass('pull-right');
+                $('#establishment-informations-legal_nature').addClass('active');
+
+                $('#establishment-informations-legal_nature').click(function() {
+                    loadingEstablishmentInformations.show();
+                    EstablishmentInformations.table.ajax.url("/attrs/establishment_information/legal_nature?lang=" + lang).load(loadingEstablishmentInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#establishment-informations-simple').click(function() {
+                    loadingEstablishmentInformations.show();
+                    EstablishmentInformations.table.ajax.url("/attrs/establishment_information/simple?lang=" + lang).load(loadingEstablishmentInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#establishment-informations-establishment_size').click(function() {
+                    loadingEstablishmentInformations.show();
+                    EstablishmentInformations.table.ajax.url("/attrs/establishment_information/establishment_size?lang=" + lang).load(loadingEstablishmentInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('.classifications-establishment-informations .classifications-establishment-informations-wrapper .classifications-establishment-informations-content').show();
+                loadingEstablishmentInformations.hide();
+            }
+        });
+    };
+    window.EstablishmentInformations = new EstablishmentInformationsTable();
+};
+
+window.showPort = function() {
+    // @todo: move translate to babel
+    dataviva.dictionary['health_region'] = lang == 'en' ? 'Health Region' : 'Região de Saúde';
+    dataviva.dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
+    dataviva.dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
+    dataviva.dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
+    dataviva.dictionary['legal_nature'] = lang == 'en' ? 'Legal Nature' : 'Natureza Jurídica';
+    dataviva.dictionary['simple'] = lang == 'en' ? 'Simples' : 'Simples';
+    dataviva.dictionary['establishment_size'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
+    dataviva.dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
+
+    var loadingPort = dataviva.ui.loading('.classifications-port .classifications-port-wrapper');
+    loadingPort.text(dataviva.dictionary['loading'] + "...");
+
+    var PortTable = function () {
+        this.tableId = '#port-table';
+
+        this.table = $(this.tableId).DataTable({
+            "dom": '<"classifications-port-control">Bfrtip',
+             "buttons": [
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-port'
+                }
+            ],
+            "ajax": {
+                "url": "/attrs/port/port?lang=" + lang,
+                "dataSrc": "data",
+                "cache": true,
+            },
+            "order": [],
+            "columns": [
+                {
+                    data: "id"
+                },
+                {
+                    data: "name"
+                },
+            ],
+            "deferRender": true,
+            "language": dataviva.datatables.language,
+            "scrollY": 500,
+            "scrollX": true,
+            "scrollCollapse": true,
+            "scroller": true,
+            initComplete: function () {
+                loadingPort.show();
+                var buttons = $("<div></div>").addClass("btn-group");
+
+                var port = dataviva.dictionary['port'];
+
+                buttons.append($("<button>" + port + "</button>").attr("id", 'port-port').addClass("btn btn-white"));
+
+                $('.classifications-port-content .classifications-port-control').append(buttons);
+
+                $('#port-table_filter input').removeClass('input-sm');
+                $('#port-table_filter').addClass('pull-right');
+                $('#port-port').addClass('active');
+
+                $('#port-port').click(function() {
+                    loadingPort.show();
+                    Port.table.ajax.url("/attrs/port/port?lang=" + lang).load(loadingPort.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('.classifications-port .classifications-port-wrapper .classifications-port-content').show();
+                loadingPort.hide();
+            }
+        });
+    };
+    window.Port = new PortTable();
+};
+
 $('.help-classifications-locations').on('click', function(){
     dataviva.requireAttrs(['bra'], function() {
         if(!window.locations){ 
@@ -874,4 +1123,22 @@ $('.help-classifications-basic-courses').on('click', function(){
             showBasicCourses();
         }
     });
+});
+
+$('.help-classifications-demographic-informations').on('click', function(){
+    if(!window.DemographicInformations){
+        showDemographicInformations();
+    }
+});
+
+$('.help-classifications-establishment-informations').on('click', function(){
+    if(!window.EstablishmentInformations){
+        showEstablishmentInformations();
+    }
+});
+
+$('.help-classifications-port').on('click', function(){
+    if(!window.Port){
+        showPort();
+    }
 });

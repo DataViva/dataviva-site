@@ -128,6 +128,9 @@
 .help .classifications-products-wrapper,
 .help .classifications-trade-partners-wrapper,
 .help .classifications-majors-wrapper,
+.help .classifications-demographic-informations-wrapper,
+.help .classifications-establishment-informations-wrapper,
+.help .classifications-port-wrapper,
 .help .classifications-universities-wrapper,
 .help .classifications-basic-courses-wrapper {
     padding-bottom: 30px;
@@ -140,6 +143,9 @@
 .help .classifications-products-content .dataTable,
 .help .classifications-trade-partners-content .dataTable,
 .help .classifications-majors-content .dataTable,
+.help .classifications-demographic-informations-content .dataTable,
+.help .classifications-establishment-informations-content .dataTable,
+.help .classifications-port-content .dataTable,
 .help .classifications-universities-content .dataTable,
 .help .classifications-basic-courses-content .dataTable {
   border-radius: 0;
@@ -151,6 +157,9 @@
 .help .classifications-products-content .dataTable thead tr th,
 .help .classifications-trade-partners-content .dataTable thead tr th,
 .help .classifications-majors-content .dataTable thead tr th,
+.help .classifications-demographic-informations-content .dataTable thead tr th,
+.help .classifications-establishment-informations-content .dataTable thead tr th,
+.help .classifications-port-content .dataTable thead tr th,
 .help .classifications-universities-content .dataTable thead tr th,
 .help .classifications-basic-courses-content .dataTable thead tr th {
   background: #eee;
@@ -163,6 +172,9 @@
 .help .classifications-products-control,
 .help .classifications-trade-partners-control,
 .help .classifications-majors-control,
+.help .classifications-demographic-informations-control,
+.help .classifications-establishment-informations-control,
+.help .classifications-port-control,
 .help .classifications-basic-courses-control {
     display: inline-block;
     margin-bottom: 10px
@@ -174,6 +186,9 @@
 .help .classifications-products-control .btn-group,
 .help .classifications-trade-partners-control .btn-group,
 .help .classifications-majors-control .btn-group,
+.help .classifications-demographic-informations-control .btn-group,
+.help .classifications-establishment-informations-control .btn-group,
+.help .classifications-port-control .btn-group,
 .help .classifications-basic-courses-control .btn-group,
 .help .buttons-html5 {
     margin-right: 5px;
@@ -185,6 +200,9 @@
 .help .classifications-products-control .btn-group button.active,
 .help .classifications-trade-partners-control .btn-group button.active,
 .help .classifications-majors-control .btn-group button.active,
+.help .classifications-demographic-informations-control .btn-group button.active,
+.help .classifications-establishment-informations-control .btn-group button.active,
+.help .classifications-port-control .btn-group button.active,
 .help .classifications-basic-courses-control .btn-group button.active {
     background-color: #A25A6D;
     border-color: #A25A6D;
