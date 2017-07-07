@@ -135,6 +135,13 @@
                                     {%trans%}Demographic Information{%endtrans%}
                                 </a></br>
                             </div>
+
+                            <div class="help-classifications-establishment-informations">
+                                <a href="#tab-classifications-establishment-informations" aria-controls="geral" role="tab" data-toggle="tab" 
+                                    target="classifications-establishment-informations" class="list-group-item" data-parent="#classifications">
+                                    {%trans%}Establishment Information{%endtrans%}
+                                </a></br>
+                            </div>
                         </ol>         
                         </div>
                     </li>
@@ -319,6 +326,17 @@
                                         </div>
                                     </h2>
                                 </div>
+
+                                <div class="panel-heading">
+                                    <h2>
+                                        <div class="help-classifications-establishment-informations">
+                                        <a href="#tab-classifications-establishment-informations" aria-controls="geral" role="tab" data-toggle="tab" 
+                                            target="classifications-establishment-informations" data-parent="#classifications">
+                                            {%trans%}Establishment Information{%endtrans%}
+                                        </a>
+                                        </div>
+                                    </h2>
+                                </div>
                             </div>
 
                         </div>
@@ -367,6 +385,7 @@
                     {% include "help/tab-classifications-majors.html"%}
                     {% include "help/tab-classifications-basic-courses.html"%}
                     {% include "help/tab-classifications-demographic-informations.html"%}
+                    {% include "help/tab-classifications-establishment-informations.html"%}
             </div>
         </div>
     </div>
