@@ -913,10 +913,6 @@ window.showDemographicInformations = function() {
 
 window.showEstablishmentInformations = function() {
     // @todo: move translate to babel
-    dataviva.dictionary['health_region'] = lang == 'en' ? 'Health Region' : 'Região de Saúde';
-    dataviva.dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
-    dataviva.dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
-    dataviva.dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
     dataviva.dictionary['legal_nature'] = lang == 'en' ? 'Legal Nature' : 'Natureza Jurídica';
     dataviva.dictionary['simple'] = lang == 'en' ? 'Simples' : 'Simples';
     dataviva.dictionary['establishment_size'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
@@ -1000,6 +996,109 @@ window.showEstablishmentInformations = function() {
     window.EstablishmentInformations = new EstablishmentInformationsTable();
 };
 
+window.showDatasus = function() {
+    // @todo: move translate to babel
+    dataviva.dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
+    dataviva.dictionary['equipment_code'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
+    dataviva.dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de Hierarquia';
+    dataviva.dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
+    dataviva.dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
+
+    var loadingDatasus = dataviva.ui.loading('.classifications-datasus .classifications-datasus-wrapper');
+    loadingDatasus.text(dataviva.dictionary['loading'] + "...");
+
+    var DatasusTable = function () {
+        this.tableId = '#datasus-table';
+
+        this.table = $(this.tableId).DataTable({
+            "dom": '<"classifications-datasus-control">Bfrtip',
+             "buttons": [
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-datasus'
+                }
+            ],
+            "ajax": {
+                "url": "/attrs/datasus/equipment_type?lang=" + lang,
+                "dataSrc": "data",
+                "cache": true,
+            },
+            "order": [],
+            "columns": [
+                {
+                    data: "id"
+                },
+                {
+                    data: "name"
+                },
+            ],
+            "deferRender": true,
+            "language": dataviva.datatables.language,
+            "scrollY": 500,
+            "scrollX": true,
+            "scrollCollapse": true,
+            "scroller": true,
+            initComplete: function () {
+                loadingDatasus.show();
+                var buttons = $("<div></div>").addClass("btn-group");
+
+                var equipment_type = dataviva.dictionary['equipment_type'],
+                    equipment_code = dataviva.dictionary['equipment_code'],
+                    hierarchy_level = dataviva.dictionary['hierarchy_level'],
+                    bed_type = dataviva.dictionary['bed_type'],
+                    unit_type = dataviva.dictionary['unit_type'];
+
+                buttons.append($("<button>" + equipment_type + "</button>").attr("id", 'datasus-equipment_type').addClass("btn btn-white"));
+                buttons.append($("<button>" + equipment_code + "</button>").attr("id", 'datasus-equipment_code').addClass("btn btn-white"));
+                buttons.append($("<button>" + hierarchy_level + "</button>").attr("id", 'datasus-hierarchy_level').addClass("btn btn-white"));
+                buttons.append($("<button>" + bed_type + "</button>").attr("id", 'datasus-bed_type').addClass("btn btn-white"));
+                buttons.append($("<button>" + unit_type + "</button>").attr("id", 'datasus-unit_type').addClass("btn btn-white"));
+
+                $('.classifications-datasus-content .classifications-datasus-control').append(buttons);
+
+                $('#datasus-table_filter input').removeClass('input-sm');
+                $('#datasus-table_filter').addClass('pull-right');
+                $('#datasus-equipment_type').addClass('active');
+
+                $('#datasus-equipment_type').click(function() {
+                    loadingDatasus.show();
+                    Datasus.table.ajax.url("/attrs/datasus/equipment_type?lang=" + lang).load(loadingDatasus.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#datasus-equipment_code').click(function() {
+                    loadingDatasus.show();
+                    Datasus.table.ajax.url("/attrs/datasus/equipment_code?lang=" + lang).load(loadingDatasus.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#datasus-hierarchy_level').click(function() {
+                    loadingDatasus.show();
+                    Datasus.table.ajax.url("/attrs/datasus/hierarchy_level?lang=" + lang).load(loadingDatasus.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#datasus-bed_type').click(function() {
+                    loadingDatasus.show();
+                    Datasus.table.ajax.url("/attrs/datasus/bed_type?lang=" + lang).load(loadingDatasus.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#datasus-unit_type').click(function() {
+                    loadingDatasus.show();
+                    Datasus.table.ajax.url("/attrs/datasus/unit_type?lang=" + lang).load(loadingDatasus.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('.classifications-datasus .classifications-datasus-wrapper .classifications-datasus-content').show();
+                loadingDatasus.hide();
+            }
+        });
+    };
+    window.Datasus = new DatasusTable();
+};
+
 $('.help-classifications-locations').on('click', function(){
     dataviva.requireAttrs(['bra'], function() {
         if(!window.locations){ 
@@ -1073,5 +1172,11 @@ $('.help-classifications-demographic-informations').on('click', function(){
 $('.help-classifications-establishment-informations').on('click', function(){
     if(!window.EstablishmentInformations){
         showEstablishmentInformations();
+    }
+});
+
+$('.help-classifications-datasus').on('click', function(){
+    if(!window.Datasus){
+        showDatasus();
     }
 });

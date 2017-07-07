@@ -129,6 +129,7 @@
 .help .classifications-trade-partners-wrapper,
 .help .classifications-majors-wrapper,
 .help .classifications-demographic-informations-wrapper,
+.help .classifications-datasus-wrapper,
 .help .classifications-establishment-informations-wrapper,
 .help .classifications-universities-wrapper,
 .help .classifications-basic-courses-wrapper {
@@ -143,6 +144,7 @@
 .help .classifications-trade-partners-content .dataTable,
 .help .classifications-majors-content .dataTable,
 .help .classifications-demographic-informations-content .dataTable,
+.help .classifications-datasus-content .dataTable,
 .help .classifications-establishment-informations-content .dataTable,
 .help .classifications-universities-content .dataTable,
 .help .classifications-basic-courses-content .dataTable {
@@ -156,6 +158,7 @@
 .help .classifications-trade-partners-content .dataTable thead tr th,
 .help .classifications-majors-content .dataTable thead tr th,
 .help .classifications-demographic-informations-content .dataTable thead tr th,
+.help .classifications-datasus-content .dataTable thead tr th,
 .help .classifications-establishment-informations-content .dataTable thead tr th,
 .help .classifications-universities-content .dataTable thead tr th,
 .help .classifications-basic-courses-content .dataTable thead tr th {
@@ -170,6 +173,7 @@
 .help .classifications-trade-partners-control,
 .help .classifications-majors-control,
 .help .classifications-demographic-informations-control,
+.help .classifications-datasus-control,
 .help .classifications-establishment-informations-control,
 .help .classifications-basic-courses-control {
     display: inline-block;
@@ -183,6 +187,7 @@
 .help .classifications-trade-partners-control .btn-group,
 .help .classifications-majors-control .btn-group,
 .help .classifications-demographic-informations-control .btn-group,
+.help .classifications-datasus-control .btn-group,
 .help .classifications-establishment-informations-control .btn-group,
 .help .classifications-basic-courses-control .btn-group,
 .help .buttons-html5 {
@@ -196,6 +201,7 @@
 .help .classifications-trade-partners-control .btn-group button.active,
 .help .classifications-majors-control .btn-group button.active,
 .help .classifications-demographic-informations-control .btn-group button.active,
+.help .classifications-datasus-control .btn-group button.active,
 .help .classifications-establishment-informations-control .btn-group button.active,
 .help .classifications-basic-courses-control .btn-group button.active {
     background-color: #A25A6D;

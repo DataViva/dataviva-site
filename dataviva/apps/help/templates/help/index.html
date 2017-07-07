@@ -142,6 +142,13 @@
                                     {%trans%}Establishment Information{%endtrans%}
                                 </a></br>
                             </div>
+
+                            <div class="help-classifications-datasus">
+                                <a href="#tab-classifications-datasus" aria-controls="geral" role="tab" data-toggle="tab" 
+                                    target="classifications-datasus" class="list-group-item" data-parent="#classifications">
+                                    Datasus
+                                </a></br>
+                            </div>
                         </ol>         
                         </div>
                     </li>
@@ -337,6 +344,17 @@
                                         </div>
                                     </h2>
                                 </div>
+
+                                <div class="panel-heading">
+                                    <h2>
+                                        <div class="help-classifications-datasus">
+                                        <a href="#tab-classifications-datasus" aria-controls="geral" role="tab" data-toggle="tab" 
+                                            target="classifications-datasus" data-parent="#classifications">
+                                            Datasus
+                                        </a>
+                                        </div>
+                                    </h2>
+                                </div>
                             </div>
 
                         </div>
@@ -386,6 +404,7 @@
                     {% include "help/tab-classifications-basic-courses.html"%}
                     {% include "help/tab-classifications-demographic-informations.html"%}
                     {% include "help/tab-classifications-establishment-informations.html"%}
+                    {% include "help/tab-classifications-datasus.html"%}
             </div>
         </div>
     </div>

@@ -1,0 +1,25 @@
+<div role="tabpanel" class="tab-pane" id="tab-classifications-datasus">
+    <div class="col-xs-12">
+        <h2>{%trans%}Demographic Information{%endtrans%}</h2>
+        <div class="panel-body">
+            <div class="classifications-datasus">
+                <div class="classifications-datasus-wrapper">
+                    <div class="classifications-datasus-content">
+                        <table id="datasus-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>{% trans %}ID{% endtrans %}</th>
+                                    <th>{% trans %}Name{% endtrans %}</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block js_assets %}
+        <script src="/static/js/modules/help/classifications.js"></script>
+{% endblock js_assets %}
