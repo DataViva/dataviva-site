@@ -573,7 +573,7 @@ var loadViz = function(data){
         totalOfCurrentX();
         visualization.draw();
         
-        if (document.getElementById('controls').style.display = 'none')
+        if ($('#controls').css('display') == 'none')
             $('#controls').fadeToggle();
         
         toolsBuilder('bar', visualization, data, titleHelper(yearRange));
