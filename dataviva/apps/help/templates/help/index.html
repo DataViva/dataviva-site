@@ -130,6 +130,7 @@
                             </div>
 
                             <div class="help-classifications-demographic-informations">
+                                <a href="#tab-classifications-demographic-informations" aria-controls="geral" role="tab" data-toggle="tab"
                                 <a href="#tab-classifications-demographic-informations" aria-controls="geral" role="tab" data-toggle="tab" 
                                     target="classifications-demographic-informations" class="list-group-item" data-parent="#classifications">
                                     {%trans%}Demographic Information{%endtrans%}
@@ -137,9 +138,17 @@
                             </div>
 
                             <div class="help-classifications-establishment-informations">
+                                <a href="#tab-classifications-establishment-informations" aria-controls="geral" role="tab" data-toggle="tab"
                                 <a href="#tab-classifications-establishment-informations" aria-controls="geral" role="tab" data-toggle="tab" 
                                     target="classifications-establishment-informations" class="list-group-item" data-parent="#classifications">
                                     {%trans%}Establishment Information{%endtrans%}
+                                </a></br>
+                            </div>
+
+                            <div class="help-classifications-port">
+                                <a href="#tab-classifications-port" aria-controls="geral" role="tab" data-toggle="tab"
+                                    target="classifications-port" class="list-group-item" data-parent="#classifications">
+                                    {%trans%}Port Information{%endtrans%}
                                 </a></br>
                             </div>
                         </ol>         
@@ -319,6 +328,7 @@
                                 <div class="panel-heading">
                                     <h2>
                                         <div class="help-classifications-demographic-informations">
+                                        <a href="#tab-classifications-demographic-informations" aria-controls="geral" role="tab" data-toggle="tab"
                                         <a href="#tab-classifications-demographic-informations" aria-controls="geral" role="tab" data-toggle="tab" 
                                             target="classifications-demographic-informations" data-parent="#classifications">
                                             {%trans%}Demographic Information{%endtrans%}
@@ -330,9 +340,21 @@
                                 <div class="panel-heading">
                                     <h2>
                                         <div class="help-classifications-establishment-informations">
+                                        <a href="#tab-classifications-establishment-informations" aria-controls="geral" role="tab" data-toggle="tab"
                                         <a href="#tab-classifications-establishment-informations" aria-controls="geral" role="tab" data-toggle="tab" 
                                             target="classifications-establishment-informations" data-parent="#classifications">
                                             {%trans%}Establishment Information{%endtrans%}
+                                        </a>
+                                        </div>
+                                    </h2>
+                                </div>
+
+                                <div class="panel-heading">
+                                    <h2>
+                                        <div class="help-classifications-port">
+                                        <a href="#tab-classifications-port" aria-controls="geral" role="tab" data-toggle="tab"
+                                            target="classifications-port" data-parent="#classifications">
+                                            {%trans%}Port Information{%endtrans%}
                                         </a>
                                         </div>
                                     </h2>
@@ -386,6 +408,7 @@
                     {% include "help/tab-classifications-basic-courses.html"%}
                     {% include "help/tab-classifications-demographic-informations.html"%}
                     {% include "help/tab-classifications-establishment-informations.html"%}
+                    {% include "help/tab-classifications-port.html"%}
             </div>
         </div>
     </div>

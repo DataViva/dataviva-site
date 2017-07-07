@@ -921,6 +921,7 @@ window.showEstablishmentInformations = function() {
     dataviva.dictionary['simple'] = lang == 'en' ? 'Simples' : 'Simples';
     dataviva.dictionary['establishment_size'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
 
+    var loadingEstablishmentInformations = dataviva.ui.loading('.classifications-establishment-informations .classifications-establishment-informations-wrapper');
     var loadingEstablishmentInformations = dataviva.ui.loading('.classifications-demographic-informations .classifications-demographic-informations-wrapper');
     loadingEstablishmentInformations.text(dataviva.dictionary['loading'] + "...");
 
@@ -1000,6 +1001,80 @@ window.showEstablishmentInformations = function() {
     window.EstablishmentInformations = new EstablishmentInformationsTable();
 };
 
+window.showPort = function() {
+    // @todo: move translate to babel
+    dataviva.dictionary['health_region'] = lang == 'en' ? 'Health Region' : 'Região de Saúde';
+    dataviva.dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
+    dataviva.dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
+    dataviva.dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
+    dataviva.dictionary['legal_nature'] = lang == 'en' ? 'Legal Nature' : 'Natureza Jurídica';
+    dataviva.dictionary['simple'] = lang == 'en' ? 'Simples' : 'Simples';
+    dataviva.dictionary['establishment_size'] = lang == 'en' ? 'Establishment Size' : 'Tamanho do Estabelecimento';
+    dataviva.dictionary['port'] = lang == 'en' ? 'Port' : 'Porto';
+
+    var loadingPort = dataviva.ui.loading('.classifications-port .classifications-port-wrapper');
+    loadingPort.text(dataviva.dictionary['loading'] + "...");
+
+    var PortTable = function () {
+        this.tableId = '#port-table';
+
+        this.table = $(this.tableId).DataTable({
+            "dom": '<"classifications-port-control">Bfrtip',
+             "buttons": [
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-port'
+                }
+            ],
+            "ajax": {
+                "url": "/attrs/port/port?lang=" + lang,
+                "dataSrc": "data",
+                "cache": true,
+            },
+            "order": [],
+            "columns": [
+                {
+                    data: "id"
+                },
+                {
+                    data: "name"
+                },
+            ],
+            "deferRender": true,
+            "language": dataviva.datatables.language,
+            "scrollY": 500,
+            "scrollX": true,
+            "scrollCollapse": true,
+            "scroller": true,
+            initComplete: function () {
+                loadingPort.show();
+                var buttons = $("<div></div>").addClass("btn-group");
+
+                var port = dataviva.dictionary['port'];
+
+                buttons.append($("<button>" + port + "</button>").attr("id", 'port-port').addClass("btn btn-white"));
+
+                $('.classifications-port-content .classifications-port-control').append(buttons);
+
+                $('#port-table_filter input').removeClass('input-sm');
+                $('#port-table_filter').addClass('pull-right');
+                $('#port-port').addClass('active');
+
+                $('#port-port').click(function() {
+                    loadingPort.show();
+                    Port.table.ajax.url("/attrs/port/port?lang=" + lang).load(loadingPort.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('.classifications-port .classifications-port-wrapper .classifications-port-content').show();
+                loadingPort.hide();
+            }
+        });
+    };
+    window.Port = new PortTable();
+};
+
 $('.help-classifications-locations').on('click', function(){
     dataviva.requireAttrs(['bra'], function() {
         if(!window.locations){ 
@@ -1073,5 +1148,11 @@ $('.help-classifications-demographic-informations').on('click', function(){
 $('.help-classifications-establishment-informations').on('click', function(){
     if(!window.EstablishmentInformations){
         showEstablishmentInformations();
+    }
+});
+
+$('.help-classifications-port').on('click', function(){
+    if(!window.Port){
+        showPort();
     }
 });
