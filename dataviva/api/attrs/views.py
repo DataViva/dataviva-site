@@ -1,5 +1,6 @@
 import gzip
 import json
+import requests
 from StringIO import StringIO
 
 from sqlalchemy import func, asc, desc, and_
@@ -493,7 +494,23 @@ def trade_partner():
         status=(200 if returned_entries.count() else 404)
     )
 
+@mod.route('/health_region/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_health_region"))
+def health_region():
+    r = requests.get('http://api.staging.dataviva.info/metadata/health_region')
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
 
-@mod.route('/datasets/')
-def datasets():
-    return jsonify({'data': attrs_datasets})
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]  
+        region['color'] = '-'
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
+    )
+

@@ -54,12 +54,17 @@ window.showLocations = function() {
                 },
                 {
                     render: function (data, type, row, meta){
-                        return dataviva.bra[row.id].name;
+                        try {
+                            return dataviva.bra[row.id].name;
+                        } catch (e) {
+                            return row.name;
+                        }
                     }
                 },
                 {
                     render: function (data, type, row, meta){
-                        return dataviva.format.number(row.population, {"key": headers[11]});
+                        var population = dataviva.format.number(row.population, {"key": headers[11]});
+                        return population == 'NaN' ? '-' : population;
                     },
                     className: "table-number",
                     type: 'num-dataviva'
@@ -80,13 +85,15 @@ window.showLocations = function() {
                     bra_3 = dataviva.dictionary['bra_3'],
                     bra_5 = dataviva.dictionary['bra_5'],
                     bra_7 = dataviva.dictionary['bra_7'],
-                    bra_9 = dataviva.dictionary['bra_9'];
+                    bra_9 = dataviva.dictionary['bra_9'],
+                    health_region = dataviva.dictionary['health_region'];
 
                 buttons.append($("<button>"+bra_1+"</button>").attr("id", 'location-wages-regions').addClass("btn btn-white"));
                 buttons.append($("<button>"+bra_3+"</button>").attr("id", 'location-wages-states').addClass("btn btn-white"));
                 buttons.append($("<button>"+bra_5+"</button>").attr("id", 'location-wages-mesoregions').addClass("btn btn-white"));
                 buttons.append($("<button>"+bra_7+"</button>").attr("id", 'location-wages-microregions').addClass("btn btn-white"));
                 buttons.append($("<button>"+bra_9+"</button>").attr("id", 'location-wages-municipalities').addClass("btn btn-white"));
+                buttons.append($("<button>"+health_region+"</button>").attr("id", 'location-wages-health-region').addClass("btn btn-white"));
 
                 $('.classifications-locations-content .classifications-locations-control').append(buttons);
 
@@ -121,6 +128,12 @@ window.showLocations = function() {
                 $('#location-wages-municipalities').click(function() {
                     loadingLocations.show();
                     locations.table.ajax.url("/attrs/bra/?depth=9").load(loadingLocations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#location-wages-health-region').click(function() {
+                    loadingLocations.show();
+                    locations.table.ajax.url("/attrs/health_region/?lang=" + lang).load(loadingLocations.hide);
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
@@ -811,6 +824,8 @@ window.showBasicCourses = function() {
     };
     window.basicCourses = new BasicCoursesTable();
 };
+
+
 
 $('.help-classifications-locations').on('click', function(){
     dataviva.requireAttrs(['bra'], function() {
