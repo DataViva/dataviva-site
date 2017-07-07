@@ -514,3 +514,25 @@ def health_region():
         status=200
     )
 
+@mod.route('/demographic_information/<attr>/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_demographic_information"))
+def demographic_information(attr):
+    r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
+
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
+    )
+
+@mod.route('/datasets/')
+def datasets():
+    return jsonify({'data': attrs_datasets})

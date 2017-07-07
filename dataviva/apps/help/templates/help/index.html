@@ -128,6 +128,13 @@
                                     {%trans%}Basic Courses{%endtrans%}
                                 </a></br>
                             </div>
+
+                            <div class="help-classifications-demographic-informations">
+                                <a href="#tab-classifications-demographic-informations" aria-controls="geral" role="tab" data-toggle="tab" 
+                                    target="classifications-demographic-informations" class="list-group-item" data-parent="#classifications">
+                                    {%trans%}Demographic Information{%endtrans%}
+                                </a></br>
+                            </div>
                         </ol>         
                         </div>
                     </li>
@@ -301,6 +308,17 @@
                                         </div>
                                     </h2>
                                 </div>
+
+                                <div class="panel-heading">
+                                    <h2>
+                                        <div class="help-classifications-demographic-informations">
+                                        <a href="#tab-classifications-demographic-informations" aria-controls="geral" role="tab" data-toggle="tab" 
+                                            target="classifications-demographic-informations" data-parent="#classifications">
+                                            {%trans%}Demographic Information{%endtrans%}
+                                        </a>
+                                        </div>
+                                    </h2>
+                                </div>
                             </div>
 
                         </div>
@@ -348,6 +366,7 @@
                     {% include "help/tab-classifications-universities.html"%}
                     {% include "help/tab-classifications-majors.html"%}
                     {% include "help/tab-classifications-basic-courses.html"%}
+                    {% include "help/tab-classifications-demographic-informations.html"%}
             </div>
         </div>
     </div>

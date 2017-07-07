@@ -825,7 +825,91 @@ window.showBasicCourses = function() {
     window.basicCourses = new BasicCoursesTable();
 };
 
+window.showDemographicInformations = function() {
+    // @todo: move translate to babel
+    dataviva.dictionary['health_region'] = lang == 'en' ? 'Health Region' : 'Região de Saúde';
+    dataviva.dictionary['literacy'] = lang == 'en' ? 'Literacy' : 'Escolaridade';
+    dataviva.dictionary['gender'] = lang == 'en' ? 'Gender' : 'Gênero';
+    dataviva.dictionary['ethnicity'] = lang == 'en' ? 'Ethnicity' : 'Etnia';
 
+    var loadingDemographicInformations = dataviva.ui.loading('.classifications-demographic-informations .classifications-demographic-informations-wrapper');
+    loadingDemographicInformations.text(dataviva.dictionary['loading'] + "...");
+
+    var DemographicInformationsTable = function () {
+        this.tableId = '#demographic-informations-table';
+
+        this.table = $(this.tableId).DataTable({
+            "dom": '<"classifications-demographic-informations-control">Bfrtip',
+             "buttons": [
+                {
+                    extend: 'csvHtml5',
+                    text: '<i class="fa fa-floppy-o fa-lg"></i>',
+                    filename: 'dataviva-help-demographic-informations'
+                }
+            ],
+            "ajax": {
+                "url": "/attrs/demographic_information/literacy?lang=" + lang,
+                "dataSrc": "data",
+                "cache": true,
+            },
+            "order": [],
+            "columns": [
+                {
+                    data: "id"
+                },
+                {
+                    data: "name"
+                },
+            ],
+            "deferRender": true,
+            "language": dataviva.datatables.language,
+            "scrollY": 500,
+            "scrollX": true,
+            "scrollCollapse": true,
+            "scroller": true,
+            initComplete: function () {
+                loadingDemographicInformations.show();
+                var buttons = $("<div></div>").addClass("btn-group");
+
+                var literacy = dataviva.dictionary['literacy'];
+                    ethnicity = dataviva.dictionary['ethnicity'],
+                    gender = dataviva.dictionary['gender'];
+
+                buttons.append($("<button>" + literacy + "</button>").attr("id", 'demographic-informations-literacy').addClass("btn btn-white"));
+                buttons.append($("<button>" + ethnicity + "</button>").attr("id", 'demographic-informations-ethnicity').addClass("btn btn-white"));
+                buttons.append($("<button>" + gender + "</button>").attr("id", 'demographic-informations-gender').addClass("btn btn-white"));
+
+                $('.classifications-demographic-informations-content .classifications-demographic-informations-control').append(buttons);
+
+                $('#demographic-informations-table_filter input').removeClass('input-sm');
+                $('#demographic-informations-table_filter').addClass('pull-right');
+                $('#demographic-informations-literacy').addClass('active');
+
+                $('#demographic-informations-literacy').click(function() {
+                    loadingDemographicInformations.show();
+                    DemographicInformations.table.ajax.url("/attrs/demographic_information/literacy?lang=" + lang).load(loadingDemographicInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#demographic-informations-ethnicity').click(function() {
+                    loadingDemographicInformations.show();
+                    DemographicInformations.table.ajax.url("/attrs/demographic_information/ethnicity?lang=" + lang).load(loadingDemographicInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('#demographic-informations-gender').click(function() {
+                    loadingDemographicInformations.show();
+                    DemographicInformations.table.ajax.url("/attrs/demographic_information/gender?lang=" + lang).load(loadingDemographicInformations.hide);
+                    $(this).addClass('active').siblings().removeClass('active');
+                });
+
+                $('.classifications-demographic-informations .classifications-demographic-informations-wrapper .classifications-demographic-informations-content').show();
+                loadingDemographicInformations.hide();
+            }
+        });
+    };
+    window.DemographicInformations = new DemographicInformationsTable();
+};
 
 $('.help-classifications-locations').on('click', function(){
     dataviva.requireAttrs(['bra'], function() {
@@ -889,4 +973,10 @@ $('.help-classifications-basic-courses').on('click', function(){
             showBasicCourses();
         }
     });
+});
+
+$('.help-classifications-demographic-informations').on('click', function(){
+    if(!window.DemographicInformations){
+        showDemographicInformations();
+    }
 });
