@@ -552,8 +552,9 @@ def establishment_information(attr):
         status=200
     )
 
+
 @mod.route('/datasus/<attr>/')
-# @view_cache.cached(key_prefix=api_cache_key("attrs_datasus"))
+@view_cache.cached(key_prefix=api_cache_key("attrs_datasus"))
 def datasus(attr):
     r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
     data = []
@@ -570,6 +571,27 @@ def datasus(attr):
         json.dumps({'data': data}),
         status=200
     )
+
+
+@mod.route('/port/')
+# @view_cache.cached(key_prefix=api_cache_key("attrs_port"))
+def port():
+    r = requests.get('http://api.staging.dataviva.info/metadata/port')
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
+
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
+    )
+
 
 @mod.route('/datasets/')
 def datasets():
