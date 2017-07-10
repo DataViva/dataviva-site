@@ -329,7 +329,7 @@ var formatHelper = function() {
                         symbol = 'Mil';
                 }
 
-                result = value + symbol;
+                result = value + ' ' + symbol;
             }
 
             if (!result) {
