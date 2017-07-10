@@ -5,9 +5,14 @@ var rings = document.getElementById('rings'),
     filters = rings.getAttribute('filters'),
     baseTitle = rings.getAttribute('graph-title'),
     baseSubtitle = rings.getAttribute('graph-subtitle'),
-    yearRange = getUrlArgs()['year'] ? [0, +getUrlArgs()['year']] : [0, 0],
-    basicValues = BASIC_VALUES[dataset],
-    calcBasicValues = CALC_BASIC_VALUES[dataset];
+    args = getUrlArgs(),
+    selectedYears = [0, args['year']] || [0, 2014],
+    yearsRange = [],
+    depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][circles] || [circles],
+    group = depths[0],
+    basicValues = BASIC_VALUES[dataset] || [],
+    calcBasicValues = CALC_BASIC_VALUES[dataset] || {},
+    currentTitleAttrs = {'circles': circles, 'focus': focus};
 
 var buildData = function(apiResponse, circlesMetadata) {
 
@@ -29,54 +34,38 @@ var buildData = function(apiResponse, circlesMetadata) {
                     dataItem[header] = +dataItem[header]
             });
 
-            dataItem[DICT[dataset]['item_id'][circles]] = dataItem[circles];
+            dataItem[ID_LABELS[group]] = dataItem[circles];
+            dataItem['edge_label'] = dataItem[circles];
+            dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
+            dataItem[group] = circlesMetadata[dataItem[ID_LABELS[group]]][group]['id'];
 
+            if (COLORS.hasOwnProperty(group))
+                dataItem['color'] = COLORS[group][dataItem[group]];
+
+            if (HAS_ICONS.indexOf(group) >= 0)
+                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
+            
             for (key in calcBasicValues) {
                 dataItem[key] = calcBasicValues[key](dataItem);
             }
 
-            dataItem[circles] = circlesMetadata[dataItem[circles]]['name_' + lang];
-
-            var group = DEPTHS[dataset][circles][0];
-            var groupId = circlesMetadata[dataItem[DICT[dataset]['item_id'][circles]]][group]['id'];
-
-            if (HAS_ICONS.indexOf(group) >= 0)
-                dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + groupId + '.png';
-
-            //Adds names to nodes IDs according to the rings' circles (e.g., '021202' > 'Soybeans')
-            connections.nodes.forEach(function(node){
-                var nodeKey;
-                if(circles == 'product')
-                    nodeKey = node[DICT[dataset]['item_id'][circles]].slice(-4);
-
-                if(circles == 'occupation_family')
-                    nodeKey = node[DICT[dataset]['item_id'][circles]];
-
-                if(circles == 'industry_class')
-                    nodeKey = node[DICT[dataset]['item_id'][circles].slice(-2)].substr(1);
-
-                if(nodeKey == dataItem[DICT[dataset]['item_id'][circles]])
-                    node[circles] = dataItem[circles]
-            });
-
-            if(dataItem[DICT[dataset]['item_id'][circles]] == focus)
-                focus = dataItem[circles];
-
             data.push(dataItem);
+
         } catch(e) {};
+
     });
 
     return data;
 };
 
 var expandedData = function(data) {
-
     var expandedData = [];
 
     data.forEach(function(item){
         if(item['type'] == 'export'){
             data.forEach(function(importItem){
                 if(item['product'] == importItem['product'] && importItem['type'] == 'import' && item['year'] == importItem['year']){
+                    
                     item['exports_value'] = item['value'];
                     item['exports_weight'] = item['kg'];
                     item['imports_value'] = importItem['value'];
@@ -96,80 +85,81 @@ var expandedData = function(data) {
     return expandedData;
 };
 
-var connectionsData = function() {
-
-    if(dataset == 'secex'){
-        connections.edges.forEach(function(edge){
-            edge.source = connections.nodes[edge.source][circles];
-            edge.target = connections.nodes[edge.target][circles];
-        });
-    }
-
-    if(dataset == 'rais'){
-        var id = circles == 'occupation_family' ? 'cbo_id' : 'id';
-
-        for (var i = 0; i < connections.edges.length; i++) {
-            for (var j = 0; j < connections.nodes.length; j++) {
-                if (connections.edges[i]['source'] == connections.nodes[j][id])
-                    connections.edges[i]['source'] = connections.nodes[j][circles];
-
-                if (connections.edges[i]['target'] == connections.nodes[j][id])
-                    connections.edges[i]['target'] = connections.nodes[j][circles];
-            };
-        };
+var formatEdgesLabels = function() {
+    return {
+        'text': function(text, params) {
+            if(params.key == 'edge_label' && text in circlesMetadata )
+                return circlesMetadata[text]['name_' + lang];
+            return dictionary[text] || text;
+        }
     }
 };
 
 var loadViz = function(data) {
     var uiBuilder = function() {
-        ui = [];
+        var config = {
+                'id': 'id',
+                'text': 'label',
+                'font': {'size': 11},
+                'container': d3.select('#controls'),
+                'search': false
+            };
 
-        var args = getUrlArgs();
+        // Adds year selector
         if (args['year']) {
-            ui.push({
-                'method': function(value) {
-                    if (value == args['year']) {
-                        loadViz(data);
-                    } else {
-                        var loadingData = dataviva.ui.loading('#rings').text(dictionary['Downloading Additional Years'] + '...');
-                        window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\year=[0-9]{4}/, '');
-                    }
-                },
-                'value': [args['year'], dictionary['all']],
-                'label': dictionary['year']
-            })
-        }
+            var options = [];
+            yearsRange.forEach(function(item) {
+                options.push({'id': item, 'label': item.toString()});
+            });
 
-        return ui;
+            d3plus.form()
+                .config(config)
+                .data(options)
+                .title(dictionary['year'])
+                .type(options.length > 3 ? 'drop' : 'toggle')
+                .focus(Number(args['year']), function(year) {
+                        var loadingData = dataviva.ui.loading('#rings').text(dictionary['Downloading Additional Year'] + '...');
+                        d3.select('.loading').style('background-color', '#fff');
+                        window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '/&year=' + year).replace(/\?year=[0-9]{4}/, '?year=' + year);
+                })
+                .draw();
+        }
     }
 
-    var titleHelper = function() {
-        var title = titleBuilder(circles, dataset, getUrlArgs(), yearRange);
-        return {
-            'value': title['title'],
-            'font': {'size': 22, 'align': 'left'},
-            'sub': {'font': {'align': 'left'}, 'value': title['subtitle']},
-            'total': {'font': {'align': 'left'}, 'value': true}
+    var titleHelper = function(years) {
+        if (!baseTitle) {
+            var genericTitle = '<circles> ' + dictionary['per'] + ' <focus>';
+            if (depths.length > 1 && currentTitleAttrs['focus'] != currentTitleAttrs['focus'])
+                genericTitle += '/<depth>';
         }
+
+        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
+
+        return {
+            'value': header['title'],
+            'font': {'size': 22, 'align': 'left'},
+            'padding': 5,
+            'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+        };
     };
 
     var tooltipBuilder = function() {
         return {
             'short': {
-                '': DICT[dataset]['item_id'][circles],
+                '': ID_LABELS[group],
                 [dictionary['basic_values']]: [focus]
             },
             'long': {
-                '': DICT[dataset]['item_id'][circles],
+                '': ID_LABELS[group],
                 [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
             }
         }
     };
 
     var timelineCallback = function(years) {
-        yearRange = years.length == 1 ? [0, years[0].getFullYear()] : [years[0].getFullYear(), years[years.length - 1].getFullYear()];
-        toolsBuilder(rings.id, viz, data, titleBuilder().value, uiBuilder());
-        viz.title(titleHelper());
+        toolsBuilder('rings', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
     };
 
     var viz = d3plus.viz()
@@ -178,21 +168,34 @@ var loadViz = function(data) {
         .data(data)
         .edges(connections.edges)
         .focus(focus)
+        .id('edge_label')
+        .axes({'background': {'color': '#FFFFFF'}})
         .background('transparent')
         .time({'value': 'year', 'solo': {'callback': timelineCallback}})
         .icon({'value': 'icon', 'style': 'knockout'})
         .color({'scale':'category20', 'value': circles})
         .footer(dictionary['data_provided_by'] + ' ' + dataset.toUpperCase())
         .messages({'branding': true, 'style': 'large' })
-        .title(titleHelper())
-        .id(circles)
+        .title(titleHelper(selectedYears))
+        .title({'total': {'font': {'align': 'left'}}})
         .tooltip(tooltipBuilder())
         .format(formatHelper())
-        .ui(uiBuilder());
+        .format(formatEdgesLabels())
 
+    if (COLORS.hasOwnProperty(group)) {
+        viz.attrs(COLORS[group]);
+        viz.color('color');
+    } else
+        viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+
+    uiBuilder();
+    $('#rings').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     viz.draw();
 
-    toolsBuilder(rings.id, viz, data, titleHelper().value, uiBuilder());
+    if ($('#controls').css('display') == 'none')
+        $('#controls').fadeToggle();
+
+    toolsBuilder('rings', viz, data, titleHelper(selectedYears).value);
 };
 
 var getUrls = function() {
@@ -201,14 +204,15 @@ var getUrls = function() {
     if (dataset == 'secex')
         dimensions.push('type')
 
-    var urls = ['http://api.staging.dataviva.info/' + dimensions.join('/') + '?' + filters,
-        'http://api.staging.dataviva.info/metadata/' + circles
+    var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + filters,
+        API_DOMAIN + '/metadata/' + circles,
+        API_DOMAIN + '/years/' + dataset
     ];
 
     var connectionsHelper = {
-        'product': 'hs',
-        'occupation_family': 'cbo',
-        'industry_class': 'cnae'
+        'product': 'api_hs',
+        'occupation_family': 'api_cbo',
+        'industry_class': 'api_cnae'
     };
 
     urls.push('/' + lang + '/rings/networks/' + connectionsHelper[circles] + '/');
@@ -227,18 +231,56 @@ $(document).ready(function() {
         function(responses) {
             var data = responses[0];
             circlesMetadata = responses[1];
-            connections = responses[2];
+            range = responses[2];
+            connections = responses[3];
 
+            yearsRange = range.years;
             data = buildData(data, circlesMetadata);
 
             if(dataset == 'secex')
                 data = expandedData(data);
 
-            connectionsData(data);
             loadViz(data);
 
             loading.hide();
             d3.select('#mask').remove();
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });
+
+/*
+
+:: Rings Graph General Informations ::
+
+Appears in the categories: Occupation, Industry e Product
+Data Bases usage: RAIS, SECEX
+Especific conditions or variables:
+    - Connections are pre calculated and requested in additional request:
+      File located in '/static/json/networks/'' and 
+      requested by '/rings/networks/<id>' (id = hs,cnae or cbo) in 'rings/views.py'
+    - Funcion 'expandedData' unifies data in a single set after performing
+      the calculation of export and import values separately for SECEX 
+
+{
+    "nodes":[
+        {
+            "y":753.5362439817109, //node position in space, unused in rings
+            "x":1553.2536950412032,
+            "<id>":"<id_value>" //hs: "hs_id":"6208", cnae: "cnae_id":"31021", cbo: "cbo_id": "7661"
+        },
+        ...
+    ],
+    "edges":[
+        {
+            "source":"<id_value>",
+            "proximity":"<value>",
+            "target":"<id_value>"
+        },
+        ...
+    ]
+}
+
+*/

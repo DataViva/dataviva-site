@@ -100,8 +100,7 @@ var toolsBuilder = function(app, viz, data, title) {
     });
 
     d3.select('#refresh-btn').on('click', function() {
-        if (app == 'map')
-            $('#map').empty();
+        $('#' + app).empty();
         loadViz(data);
     });
 

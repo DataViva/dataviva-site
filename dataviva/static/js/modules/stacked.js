@@ -71,8 +71,8 @@ var buildData = function(apiData) {
 
             headers.forEach(function(header){
                 dataItem[header] = getAttrByName(item, header);
-                if (['wage', 'average_wage'].indexOf(header) >= 0)
-                    dataItem[header] = +dataItem[header]
+                if (NEEDS_CASTING.indexOf(header) >= 0)
+                    dataItem[header] = +dataItem[header];
             });
 
 
@@ -195,8 +195,8 @@ var loadViz = function (data){
             .container(d3.select('#controls'))
             .data([{'id': 'linear', 'label': dictionary['value']}, {'id': 'share', 'label': dictionary['market-share']}])
             .title('Layout')
-            .type('drop')
-            .focus('linear', function(value) {
+            .type('toggle')
+            .focus(args['scale'] || 'linear', function(value) {
                 viz.y({'scale': value}).draw();
             })
             .draw();
@@ -207,7 +207,7 @@ var loadViz = function (data){
             .container(d3.select('#controls'))
             .data([{'id': 'desc', 'label': dictionary['desc']}, {'id': 'asc', 'label': dictionary['asc']}])
             .title(dictionary['sort'])
-            .type('drop')
+            .type('toggle')
             .focus('desc', function(value) {
                 viz.order({'sort': value}).draw();
             })
@@ -219,7 +219,7 @@ var loadViz = function (data){
             .container(d3.select('#controls'))
             .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'name', 'label': dictionary['name']}])
             .title(dictionary['Order'])
-            .type('drop')
+            .type('toggle')
             .focus('value', function(value) {
                 viz.order({'value': value == 'value' ? viz.y() : viz.id()}).draw();
             })
@@ -242,14 +242,14 @@ var loadViz = function (data){
         } else if (dataset == 'rais') {
             var axisValues = [];
             for (var i = 0; i < values.length; i++)
-              axisValues.push({'id': values[i], 'label': [dictionary[values[i]]]})
+              axisValues.push({'id': values[i], 'label': dictionary[values[i]]})
 
             d3plus.form()
                 .config(config)
                 .container(d3.select('#controls'))
                 .data(axisValues)
                 .title(dictionary['time-resolution'])
-                .type('drop')
+                .type(axisValues.length > 3 ? 'drop' : 'toggle')
                 .focus(values[0], function(value) {
                     viz.y({'value': value, 'label': yAxisLabelBuilder(value)})
                         .order({'value': value})
@@ -270,7 +270,7 @@ var loadViz = function (data){
                 .container(d3.select('#controls'))
                 .data(options)
                 .title(dictionary['drawer_group'])
-                .type('drop')
+                .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(depthsList[0][0], function(value) {
                     currentTitleAttrs['shapes'] = depthsList[0][value];
                     viz.depth(depthsList[0].indexOf(value))
@@ -292,7 +292,7 @@ var loadViz = function (data){
                 .container(d3.select('#controls'))
                 .data(options)
                 .title(dictionary['drawer_group'])
-                .type('drop')
+                .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(0, function(value) {
                     currentTitleAttrs['shapes'] = depthsList[value][0];
                     viz.id(depthsList[value])
@@ -461,7 +461,11 @@ var loadViz = function (data){
 
     }
     
-    data_type = { "value": values[0], "label": (type == "" ? yAxisLabelBuilder(values[0]) : yAxisLabelBuilder(type))}
+    data_type = {
+        "value": values[0], 
+        "label": (type == "" ? yAxisLabelBuilder(values[0]) : yAxisLabelBuilder(type)),
+        "scale": args['scale'] || false
+    };
 
     var timelineCallback = function(years) {
         if (!years.length)
@@ -487,7 +491,7 @@ var loadViz = function (data){
         .tooltip(tooltipBuilder())
         .messages({'branding': true, 'style': 'large'})
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
-        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
+        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset))
         .format(formatHelper())
         .legend({'filters': true})
         .depth(0, function(d) {
@@ -517,7 +521,10 @@ var loadViz = function (data){
         uiBuilder();
         $('#stacked').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
         viz.draw();
-        $('#controls').fadeToggle();
+
+        if ($('#controls').css('display') == 'none')
+            $('#controls').fadeToggle();
+        
         toolsBuilder(stacked.id, viz, data, titleHelper(yearRange).value);
 }
 

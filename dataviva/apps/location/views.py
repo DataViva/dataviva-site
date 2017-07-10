@@ -46,15 +46,19 @@ tabs = {
             'jobs-industry-tree_map',
             'new-api-jobs-industry-tree_map',
             'jobs-industry-stacked',
+            'new-api-jobs-industry-stacked',
             'jobs-occupation-tree_map',
             'new-api-jobs-occupation-tree_map',
             'jobs-occupation-stacked',
+            'new-api-jobs-occupation-stacked',
             'wage-industry-tree_map',
             'new-api-wage-industry-tree_map',
             'wage-industry-stacked',
+            'new-api-wage-industry-stacked',
             'wage-occupation-tree_map',
             'new-api-wage-occupation-tree_map',
             'wage-occupation-stacked',
+            'new-api-wage-occupation-stacked'
         ],
 
         'trade-partner': [
@@ -63,15 +67,19 @@ tabs = {
             'exports-products-tree_map',
             'new-api-exports-products-tree_map',
             'exports-products-stacked',
+            'new-api-exports-products-stacked',
             'exports-destination-tree_map',
             'new-api-exports-destination-tree_map',
             'exports-destination-stacked',
+            'new-api-exports-destination-stacked',
             'imports-products-tree_map',
             'new-api-imports-products-tree_map',
             'imports-products-stacked',
+            'new-api-imports-products-stacked',
             'imports-origin-tree_map',
             'new-api-imports-origin-tree_map',
             'imports-origin-stacked',
+            'new-api-imports-origin-stacked',
             'new-api-exports-port-tree_map',
             'new-api-imports-port-tree_map',
             'new-api-exports-port-line',
@@ -135,7 +143,7 @@ def add_language_code(endpoint, values):
 
 def location_depth(bra_id):
     locations = {
-        1: "region",    #todo
+        1: "region",
         3: "state",
         5: "mesoregion",
         7: "microregion",
@@ -310,32 +318,25 @@ def index(bra_id, tab):
 
     if not is_municipality:
         tabs['wages'] += [
-            'jobs-municipalities-tree_map',
-            'new-api-jobs-municipalities-tree_map',
-            'jobs-municipalities-geo_map',
-            'jobs-municipalities-stacked',
-            'wages-municipalities-tree_map',
-            'new-api-wages-municipalities-tree_map',
-            'wages-municipalities-geo_map',
-            'wages-municipalities-stacked',
-        ]
-
-        tabs['wages'] += [
             'jobs-municipality-tree_map',
             'new-api-jobs-municipality-tree_map',
             'jobs-municipality-stacked',
+            'new-api-jobs-municipality-stacked',
             'wages-municipality-tree_map',
             'new-api-wages-municipality-tree_map',
             'wages-municipality-stacked',
+            'new-api-wages-municipality-stacked'
         ]
 
         tabs['trade-partner'] += [
             'exports-municipality-tree_map',
             'new-api-exports-municipality-tree_map',
             'exports-municipality-stacked',
+            'new-api-exports-municipality-stacked',
             'imports-municipality-tree_map',
             'new-api-imports-municipality-tree_map',
             'imports-municipality-stacked',
+            'new-api-imports-municipality-stacked',
 
         ]
 
@@ -508,7 +509,6 @@ def index(bra_id, tab):
 
     if menu and menu not in tabs[tab]:
         abort(404)
-
 
     else:
         return render_template('location/index.html',

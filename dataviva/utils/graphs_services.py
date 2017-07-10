@@ -19,6 +19,12 @@ def product_service(product):
     return ('product', product[2:])
 
 
+def sc_service(sc_course):
+    if len(sc_course) == 2:
+        return ('sc_course_field', str(int(sc_course)))
+    return ('sc_course', str(int(sc_course)))
+
+
 def occupation_service(occupation):
     occupations = {1: 'occupation_group', 4: 'occupation_family'}
     return (occupations[len(occupation)], occupation)
@@ -41,4 +47,12 @@ def filter_service(key):
         return 'industry'
     if key in ['occupation_group', 'occupation_family']:
         return 'occupation'
+    if key in ['product_section', 'product_chapter', 'product']:
+        return 'product'
+    if key in ['equipment_type', 'equipment_code']:
+        return 'equipment'
+    if key in ['bed_type', 'bed_type_per_specialty']:
+        return 'bed_type'
+    if key in ['hedu_course', 'hedu_course_field']:
+        return 'hedu_course'
     return key

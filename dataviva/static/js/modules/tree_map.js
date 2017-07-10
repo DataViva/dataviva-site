@@ -39,9 +39,14 @@ var buildData = function(apiResponse) {
 
             headers.forEach(function(header) {
                 dataItem[header] = getAttrByName(item, header);
-                if (['wage', 'average_wage'].indexOf(header) >= 0)
-                    dataItem[header] = +dataItem[header]
+                if (NEEDS_CASTING.indexOf(header) >= 0)
+                    dataItem[header] = +dataItem[header];
             });
+
+            if (dataItem.hasOwnProperty('sc_course') && dataItem.sc_course.length == 4){
+                dataItem.sc_course = "0" + dataItem.sc_course;
+                dataItem.sc_course_field = "0" + dataItem.sc_course_field.slice(0, 1);
+            }
 
             if (COLORS.hasOwnProperty(group))
                 dataItem['color'] = COLORS[group][dataItem[group]]
@@ -57,10 +62,10 @@ var buildData = function(apiResponse) {
             for (key in calcBasicValues)
                 dataItem[key] = calcBasicValues[key](dataItem);
 
-            depths.forEach(function(depth) {
-                if (depth != squares)
-                    dataItem[depth] = metadata[squares][dataItem[squares]][depth]['name_' + lang];
-                    //dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
+            depths.forEach(function(depth, index) {
+                if (depth != squares){
+                    dataItem[depth] = metadata[depth][dataItem[depth]]['name_' + lang];
+                }
             });
            
             dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
@@ -73,7 +78,7 @@ var buildData = function(apiResponse) {
                 yearRange[1] = dataItem['year'];
             else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
                 yearRange[0] = dataItem['year'];
-            
+
             data.push(dataItem);
 
         } catch(e) {
@@ -399,7 +404,11 @@ var loadViz = function(data) {
     uiBuilder();
     $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     viz.draw();
-    $('#controls').fadeToggle();
+    
+    if ($('#controls').css('display') == 'none') {
+        $('#controls').fadeToggle();
+    }
+    
     toolsBuilder('tree_map', viz, data, titleHelper(yearRange).value);
 };
 
@@ -407,7 +416,7 @@ var loadViz = function(data) {
 var getUrls = function() {
     var dimensions = [dataset, 'year', squares],
     metadataAttrs = [];
-    
+
     depths.concat(filters).forEach(function(attr) {
         if (attr != squares && dimensions.indexOf(attr) == -1) {
             if (attr == 'attention_level') {
