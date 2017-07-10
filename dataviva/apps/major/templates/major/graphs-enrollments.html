@@ -6,6 +6,7 @@
             <a href="#enrollments-university" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Universities{% endtrans %}</a>
             <div class="collapse" id="enrollments-university">
                 <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/university/?color=color&depth=university_5&size=enrolled" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-university-tree_map' or not graph }}" data-parent="#enrollments-university">TreeMap</a>
+                <a href="/{{ g.locale }}/tree_map/hedu/university/enrolled?sizes=enrolled+entrants+graduates&depths=funding_type+university&hedu_course={{ major.id if major.id else 'all' }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-university-tree_map_new_api' }}" data-parent="#enrollments-university">TreeMap new API</a>
             </div>
             {% if location.id | length != 9 %}
             <a href="#enrollments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Municipality{% endtrans %}</a>
@@ -15,6 +16,7 @@
                 <a href="/{{ g.locale }}/embed/stacked/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?y=enrolled&layout=value&order=color" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked' }}" data-parent="#enrollments-municipality">{% trans %}Stacked{% endtrans %}</a>
                 <a href="/{{ g.locale }}/stacked/hedu/region/enrolled?depths=region+state+mesoregion+microregion+municipality&values=enrolled+graduates+entrants&hedu_course={{major.id if major.id else 'all'}}" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked' }}" data-parent="#enrollments-municipality">{% trans %}Stacked New Api{% endtrans %}</a>
                 <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id if location.id else 'all'}}/all/{{major.id if major.id else 'all'}}/bra/?color=color&depth=bra_9&size=enrolled" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map' }}" data-parent="#enrollments-municipality">TreeMap</a>
+                <a href="/{{ g.locale }}/tree_map/hedu/municipality/enrolled?sizes=enrolled+entrants+graduates&hedu_course={{ major.id if major.id else 'all' }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}" target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map_new_api' }}" data-parent="#enrollments-municipality">TreeMap new API</a>
             </div>
             {% endif %}
             <a href="#enrollments-status" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-university">{% trans %}Students Situation{% endtrans %}</a>
