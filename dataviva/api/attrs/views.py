@@ -1,5 +1,6 @@
 import gzip
 import json
+import requests
 from StringIO import StringIO
 
 from sqlalchemy import func, asc, desc, and_
@@ -491,6 +492,104 @@ def trade_partner():
     return Response(
         json.dumps(map(lambda x: x.serialize(), returned_entries)),
         status=(200 if returned_entries.count() else 404)
+    )
+
+@mod.route('/health_region/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_health_region"))
+def health_region():
+    r = requests.get('http://api.staging.dataviva.info/metadata/health_region')
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
+
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]  
+        region['color'] = '-'
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
+    )
+
+@mod.route('/demographic_information/<attr>/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_demographic_information"))
+def demographic_information(attr):
+    r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
+
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
+    )
+
+@mod.route('/establishment_information/<attr>/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_establishment_information"))
+def establishment_information(attr):
+    r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
+
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
+    )
+
+
+@mod.route('/datasus/<attr>/')
+@view_cache.cached(key_prefix=api_cache_key("attrs_datasus"))
+def datasus(attr):
+    r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
+
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
+    )
+
+
+@mod.route('/port/')
+# @view_cache.cached(key_prefix=api_cache_key("attrs_port"))
+def port():
+    r = requests.get('http://api.staging.dataviva.info/metadata/port')
+    data = []
+    response = r.json()
+    lang = request.args.get('lang', 'pt')
+
+    for key in response:
+        region = {}
+        region['id'] = key
+        region['name'] = response[key]['name_' + lang]
+        data.append(region)
+
+    return Response(
+        json.dumps({'data': data}),
+        status=200
     )
 
 

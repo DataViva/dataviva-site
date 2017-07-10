@@ -35,21 +35,20 @@ def index(dataset, squares, size):
     title_attrs = {}
 
     services = {'product': product_service, 'id_ibge': location_service, 'wld':
-                wld_service, 'occupation': occupation_service, 'industry': industry_service}
+                wld_service, 'occupation': occupation_service, 'industry': industry_service, 'basic_course': sc_service}
 
     for key, value in request.args.items():
         if key == 'type':
             title_attrs['type'] = value
 
-        if key not in ['depths', 'sizes', 'group'] and value and key in services:
+        if key in ['depths', 'sizes', 'group', 'depth', 'color', 'filter', 'filters', 'hierarchy']:
+          continue
+        if value and key in services:
             filters.append(services[key](value))
-            if key == 'id_ibge':
-              title_attrs['location'] = value
-            elif key == 'wld':
-              title_attrs['partner'] = value
-            else:
-              title_attrs[key] = value
+            title_attrs[services[key](value)[0]] = services[key](value)[1]
         else:
+            if key == 'establishment':
+              title_attrs[key] = value
             filters.append((key, value))
 
     filters = urllib.urlencode(filters)
@@ -61,6 +60,6 @@ def index(dataset, squares, size):
                            squares=squares,
                            size=size,
                            filters=filters,
-                           title=title or 'Title',
+                           title=title or '',
                            subtitle=subtitle or '',
                            dictionary=json.dumps(dictionary()))

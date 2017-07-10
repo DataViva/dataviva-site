@@ -126,6 +126,7 @@ def index(product_id, tab):
             'new-api-exports-port-line',
             'new-api-exports-port-bar',
             'new-api-exports-port-tree_map',
+            'new-api-exports-destination-stacked',
             'exports-destination-line',
             'exports-destination-stacked',
             'imports-origin-tree_map',
@@ -133,6 +134,8 @@ def index(product_id, tab):
             'new-api-imports-port-line',
             'new-api-imports-port-bar',
             'new-api-imports-port-tree_map',
+            'new-api-imports-origin-stacked',
+            'new-api-imports-origin-line',
             'imports-origin-line',
             'imports-origin-stacked',
         ],
@@ -143,11 +146,15 @@ def index(product_id, tab):
             'exports-municipality-tree_map',
             'new-api-exports-municipality-tree_map',
             'exports-municipality-geo_map',
+            'new-api-exports-municipality-geo_map',
             'exports-municipality-stacked',
+            'new-api-exports-municipality-stacked',
             'imports-municipality-tree_map',
             'new-api-imports-municipality-tree_map',
             'imports-municipality-geo_map',
+            'new-api-imports-municipality-geo_map',
             'imports-municipality-stacked',
+            'new-api-imports-municipality-stacked'
         ]
 
     trade_partners_service = ProductTradePartnersService(

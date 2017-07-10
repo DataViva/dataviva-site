@@ -1,0 +1,35 @@
+<div id="graphs-beds" class="container">
+    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3">
+        <h3>{% trans %}Preview{% endtrans %}:</h3>
+        <div class="list-group panel">            
+            <h4>{% trans %}Beds per{% endtrans %}</h4>
+            
+            <a href="#beds-bed-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-bed-type">{% trans %}Bed Type/Specialty{% endtrans %}</a>
+            <div class="collapse" id="beds-bed-type">
+                <a href="/{{ g.locale }}/tree_map/cnes_bed/bed_type_per_specialty/beds?depths=bed_type+bed_type_per_specialty&zoom=true&sizes=beds+number_sus_bed+number_non_sus_bed&establishment={{ establishment.id }}"
+                   target="graphs-frame-beds" class="list-group-item {{ 'selected' if graph.menu == 'beds-bed-type-tree_map' or not graph.menu }}" data-parent="#beds-bed-type">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_bed/bed_type_per_specialty/beds?values=beds+number_sus_bed+number_non_sus_bed&depths=bed_type+bed_type_per_specialty&establishment={{ establishment.id }}"
+                   target="graphs-frame-beds" class="list-group-item {{ 'selected' if graph.menu == 'beds-bed-type-stacked' }}" data-parent="#beds-bed-type">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+            <a href="#beds-availability" class="list-group-item" data-toggle="collapse" data-parent="#beds-availability">{% trans %}Availability{% endtrans %}</a>
+            <div class="collapse" id="beds-availability">
+                <a href="/{{ g.locale }}/bar/cnes_bed/beds,number_sus_bed,number_non_sus_bed/bed_type,bed_type_per_specialty,health_region?options=singlecolor&establishment={{ establishment.id }}"
+                   target="graphs-frame-beds" class="list-group-item {{ 'selected' if graph.menu == 'beds-availability-bar' }}" data-parent="#beds-availability">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>   
+    </nav>
+    <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
+        <div class="embed-responsive responsive-wrapper">
+            <iframe src="/{{ g.locale }}{% if graph.url %}{{ graph.url }}{% else %}/tree_map/cnes_bed/bed_type/beds?hierarchy=false&year=2015&establishment={{ establishment.id }}{% endif %}"
+                    name="graphs-frame-beds"
+                    id="graphs-frame-beds"
+                    class="embed-responsive-item" >
+            </iframe>
+        </div>
+    </div>
+</div>

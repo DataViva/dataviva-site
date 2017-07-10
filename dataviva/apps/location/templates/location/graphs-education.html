@@ -9,6 +9,10 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'higher-education-university-tree_map' or not graph }}" data-parent="#higher-education-university">
                     TreeMap
                 </a>
+                <a href="/{{ g.locale }}/tree_map/hedu/university/enrolled?sizes=enrolled+entrants+graduates&depths=university{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'higher-education-university-tree_map_new_api' }}" data-parent="#higher-education-university">
+                    TreeMap New API
+                </a>
             </div>
 
             <a href="#education-course" class="list-group-item" data-toggle="collapse" data-parent="#education-course">{% trans %}Course{% endtrans %}</a>
@@ -16,6 +20,10 @@
                 <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-course-tree_map'}}" data-parent="#education-course">
                     TreeMap
+                </a>
+                 <a href="/{{ g.locale }}/tree_map/hedu/hedu_course/enrolled?sizes=enrolled+entrants+graduates&depths=hedu_course_field+hedu_course&colors=hedu_course_field{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-course-tree_map_new_api' }}" data-parent="#education-course">
+                    TreeMap New API
                 </a>
             </div>
 
@@ -26,6 +34,10 @@
                      target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-municipality-tree_map'}}" data-parent="#education-municipality">
                       TreeMap
                   </a>
+                   <a href="/{{ g.locale }}/tree_map/hedu/municipality/enrolled?sizes=enrolled+graduates+entrants{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-municipality-tree_map_new_api' }}" data-parent="#education-municipality">
+                    TreeMap New API
+                </a>
               </div>
             {% endif %}
 
@@ -43,6 +55,10 @@
                 <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/course_sc/?color=color&depth=course_sc_5&size=enrolled"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-course-tree_map'}}" data-parent="#professional-education-course">
                     TreeMap
+                </a>
+                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?colors=students+average_age&depths=sc_course_field+sc_course{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-course-tree_map_new_api' }}" data-parent="#professional-education-course">
+                    TreeMap New API
                 </a>
             </div>
 
@@ -70,6 +86,10 @@
                      target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'basic-education-municipality-tree_map'}}" data-parent="#basic-education-municipality">
                       TreeMap
                   </a>
+                  <a href="/{{ g.locale }}/tree_map/sc/municipality/students?colors=students+average_age{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'basic-education-municipality-tree_map_new_api' }}" data-parent="#basic-education-municipality">
+                    TreeMap New API
+                </a>
               </div>
             {% endif %}
         </div>

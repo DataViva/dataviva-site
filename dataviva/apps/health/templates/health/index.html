@@ -1,0 +1,122 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ url_for('general.home') }}">Home</a>
+            </li>
+            <li {{ 'class="active"' if not location else '' }}>
+                <a href="#" title="Trocar"> {{ establishment.name }}</a>
+            </li>
+        </ol>
+    </div>
+</div>
+<!-- BREADCRUMB -->
+
+<section id="header" class="header" style="background: url(static/saude-bg.jpg) no-repeat center center fixed; background-size: cover;">
+
+  <div class="photo-credit">
+    <div class="container">
+    <a href="#" target="blank">
+    <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} 'Rodrigo W. Blum'</a>
+    </div>
+  </div>
+
+    <div class="summary-box">
+        <div class="container">
+
+            <span class="portrait hidden-xs"></span>
+            <h1>{{ establishment.name }}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {% trans %}change{% endtrans %} <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#" onclick="EstablishmentSelector.show()" >{% trans %}Establishments{% endtrans %}</a></li>
+                  </ul>
+                </div>
+            </h1>
+            <span class="clearfix"></span>
+
+            <div class="indices">
+                <div class="row">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="profile" class="profile">
+
+    <nav class="">
+        <div class="container">
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="{{ 'active' if tab == 'general' }}">
+                    <a  href="#general"
+                        aria-controls="general"
+                        role="tab"
+                        data-toggle="tab">{% trans %}General{% endtrans %}</a>
+                </li>
+<!--                 <li role="presentation" class="{{ 'active' if tab == 'establishments' }}">
+                    <a  href="#establishments"
+                        aria-controls="establishments"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Establishments{% endtrans %}</a>
+                </li> -->
+                <li role="presentation" class="{{ 'active' if tab == 'equipments' }}">
+                    <a  href="#equipments"
+                        aria-controls="equipments"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Equipments{% endtrans %}</a>
+                </li>
+                <li role="presentation" class="{{ 'active' if tab == 'beds' }}">
+                    <a  href="#beds"
+                        aria-controls="beds"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Beds{% endtrans %}</a>
+                </li>
+                <li role="presentation" class="{{ 'active' if tab == 'professionals' }}">
+                    <a  href="#professionals"
+                        aria-controls="professionals"
+                        role="tab"
+                        graph
+                        data-toggle="tab">{% trans %}Professionals{% endtrans %}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="tab-content">
+            {% include "health/tab-general.html" %}
+            {% include "health/tab-establishments.html" %}
+            {% include "health/tab-equipments.html" %}
+            {% include "health/tab-beds.html" %}
+            {% include "health/tab-professionals.html" %}
+        </div>
+    </div>
+</section>
+
+<section id="graphs" class="graphs bg-gray">
+{% if tab != "general" %}
+    {% include "health/graphs-" + tab + ".html" %}
+{% endif %}
+</section>
+
+{% endblock content %}
+
+{% block script %}
+    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+    <script type="text/javascript" src="/static/js/modules/health.js"></script>
+{% endblock %}
