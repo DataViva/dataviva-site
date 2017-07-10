@@ -71,8 +71,8 @@ var buildData = function(apiData) {
 
             headers.forEach(function(header){
                 dataItem[header] = getAttrByName(item, header);
-                if (['wage', 'average_wage'].indexOf(header) >= 0)
-                    dataItem[header] = +dataItem[header]
+                if (NEEDS_CASTING.indexOf(header) >= 0)
+                    dataItem[header] = +dataItem[header];
             });
 
 
@@ -487,7 +487,7 @@ var loadViz = function (data){
         .tooltip(tooltipBuilder())
         .messages({'branding': true, 'style': 'large'})
         .icon(group == 'state' ? {'value': 'icon'} : {'value': 'icon', 'style': 'knockout'})
-        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
+        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset))
         .format(formatHelper())
         .legend({'filters': true})
         .depth(0, function(d) {

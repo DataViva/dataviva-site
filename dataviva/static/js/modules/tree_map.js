@@ -39,8 +39,8 @@ var buildData = function(apiResponse) {
 
             headers.forEach(function(header) {
                 dataItem[header] = getAttrByName(item, header);
-                if (['wage', 'average_wage'].indexOf(header) >= 0)
-                    dataItem[header] = +dataItem[header]
+                if (NEEDS_CASTING.indexOf(header) >= 0)
+                    dataItem[header] = +dataItem[header];
             });
 
             if (COLORS.hasOwnProperty(group))
