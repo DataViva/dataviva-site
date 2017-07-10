@@ -36,24 +36,22 @@ def before_request():
 def index(dataset, circles, focus):
     filters = []
 
-    title_attrs = {
-        filter_service(circles): focus
-    }
+    services = {'id_ibge': location_service, 'product': product_service,
+                'occupation_family': occupation_service, 'industry_class': industry_service}
+
+    if circles in services:
+        focus = services[circles](focus)[1]
 
     for key, value in request.args.items():
         if key == 'id_ibge':
             filters.append(location_service(value))
-            title_attrs['location'] = value
+            title_attrs[services[key](value)[0]] = services[key](value)[1]
         else:
             filters.append((key, value))
 
+    title_attrs = {circles: focus}
+
     filters = urllib.urlencode(filters)
-
-    if circles == 'product':
-        focus = product_service(focus)[1]
-
-    if circles == 'industry_class':
-        focus = industry_service(focus)[1]
 
     title, subtitle = get_title(dataset, circles, 'rings', title_attrs)
 
@@ -62,30 +60,31 @@ def index(dataset, circles, focus):
                            circles=circles,
                            focus=focus,
                            filters=filters,
-                           title=title or 'Title',
+                           title=title or '',
                            subtitle=subtitle or '',
                            dictionary=json.dumps(dictionary()))
 
 
 @mod.route('/networks/<type>/')
-def networks(type="hs"):
+def networks(type="new_hs"):
     if GZIP_DATA:
-        fileext = ".gz"
-        filetype = "gzip"
+        file_extension = ".gz"
+        file_type = "gzip"
     else:
-        fileext = ""
-        filetype = "json"
-    file_name = ("network_{0}.json" + fileext).format(type)
-    cached_q = cached_query(file_name)
-    if cached_q:
-        ret = make_response(cached_q)
+        file_extension = ""
+        file_type = "json"
+    file_name = ("network_{0}.json" + file_extension).format(type)
+    cached_connection = cached_query(file_name)
+
+    if cached_connection:
+        connections_result = make_response(cached_connection)
     else:
         path = datavivadir + "/static/json/networks/{0}".format(file_name)
         gzip_file = open(path).read()
         cached_query(file_name, gzip_file)
-        ret = make_response(gzip_file)
+        connections_result = make_response(gzip_file)
 
-    ret.headers['Content-Encoding'] = filetype
-    ret.headers['Content-Length'] = str(len(ret.data))
+    connections_result.headers['Content-Encoding'] = file_type
+    connections_result.headers['Content-Length'] = str(len(connections_result.data))
 
-    return ret
+    return connections_result

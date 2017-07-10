@@ -1,69 +1,171 @@
+var unique = function(item, i, arr){ 
+    return arr.indexOf(item) == i;
+}
+
 var data = [],
-    solo = [],
     MAX_BARS = 10,
+    currentFilters = {},
     lang = document.documentElement.lang,
     dataset = $("#bar").attr("dataset"),
     subtitle = $("#bar").attr("subtitle"),
     options = $("#bar").attr("options").split(","),
+    args = getUrlArgs(),
     x = $("#bar").attr("x").split(","),
-    currentX = x[0],
+    currentX = options.indexOf('valueasfilter') >= 0 ? args['new_x'] : x[0],
     y = $("#bar").attr("y").split(","),
     currentY = y[0],
+    vizId = args['id'] ? args['id'] : undefined,
     filters = $("#bar").attr("filters"),
-    url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + ( options.indexOf('month') != -1 ? 'month/' : '' ) + y.join("/") + ( filters ? "?" + filters : '');
+    baseTitle = $("#bar").attr('graph-title'),
+    baseSubtitle = $("#bar").attr('graph-subtitle'),
+    uiFilters = args.filters ? args.filters.split(',') : [],
+    dimensions = y.concat(uiFilters).filter(unique),
+    dimensions = vizId ? dimensions.concat(vizId).filter(unique) : dimensions,
+    dimensions = options.indexOf('attention_level') != -1 ? dimensions.concat(['ambulatory_attention', 'hospital_attention']).filter(unique) : dimensions,
+    yearRange = [Number.POSITIVE_INFINITY, 0],
+    selectedYears = [],
+    shapes = args['shapes'] ? args['shapes'] : undefined;
 
+if(y.indexOf('facility_type') != -1) {
+    var facilities = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'neonatal_unit_facility', 'obstetrical_center_facility'];
+    dimensions = dimensions.concat(facilities).filter(unique);
 
-// TODO: Title creator
-var title = 'Title';
+    var i = dimensions.indexOf('facility_type');
+    dimensions.splice(i, 1);
+}
+
+var url = "http://api.staging.dataviva.info/" + 
+        dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
+
+var config = {
+    'id': 'id',
+    'text': 'label',
+    'font': {'size': 11},
+    'container': d3.select('#controls'),
+    'search': false
+};
+
+var currentTitleAttrs = {'shapes': shapes || y[0]}
 
 var visualization;
 var percentage = false;
 
 var uis = [];
 
-if(x.length > 1){
-    uis.push({
-        'value': x,
-        'type': 'drop',
-        'label': 'xaxis',
-        'method': function(value, viz){
+var titleHelper = function(years) {
+    var header = titleBuilder(baseTitle, baseSubtitle, currentTitleAttrs, dataset, args, years);
+
+    return {
+        'value': header['title'],
+        'font': {'size': 22, 'align': 'left'},
+        'padding': 5,
+        'sub': {'font': {'align': 'left'}, 'value': header['subtitle']},
+        'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
+    };
+};
+
+if (x.length > 1 && options.indexOf('valueasfilter') == -1) {
+    d3plus.form()
+        .config(config)
+        .container(d3.select('#controls'))
+        .data(x.map(function(item) {
+            return {'id': item, 'label': dictionary[item]};
+        }))
+        .title(dictionary['xaxis'])
+        .type('drop')
+        .font({'size': 11})
+        .focus(x[0], function(value) {
             currentX = value;
 
-            if(percentage)
+            if (percentage)
                 currentX = currentX + '_pct';
 
-            viz.x(currentX)
+            visualization.x(currentX)
                .order({
                     'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
                     'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
-                })
-            totalOfCurrentX()
-            viz.draw()
-        }
-    });
+                });
+
+            totalOfCurrentX();
+            visualization.draw();
+        })
+        .draw();
 }
 
-if(y.length > 1){
-    uis.push({
-        'value': y,
-        'type': 'drop',
-        'label': 'yaxis',
-        'method': function(value, viz){
+if (y.length > 1) {
+    d3plus.form()
+        .config(config)
+        .container(d3.select('#controls'))
+        .data(y.map(function(item) {
+            return {'id': item, 'label': dictionary[item]}
+        }))
+        .title(dictionary['yaxis'])
+        .type('drop')
+        .font({'size': 11})
+        .focus(y[0], function(value) {
             currentY = value;
+            visualization.y(value);
 
-            viz.y(value)
-                .id(value)
-                .order({
-                    'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
-                    'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
-                })
-                .color(currentY + "_color")
-                .legend(false)
+            if (vizId)
+                visualization.id(vizId)
+            else if (options.indexOf('valueasfilter') >= 0)
+                visualization.id(args['new_filter']);
+            else
+                visualization.id(value);
+
+            visualization.order({
+                'value': data[0][currentY + '_order'] == undefined ? currentX : currentY + '_order',
+                'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
+            })
+            .legend(false);
+
+            if (colorHelper[currentY] != undefined)
+                visualization.color(currentY + "_color");
+
+            currentTitleAttrs['shapes'] = shapes || value;
+
+            visualization.title(titleHelper(selectedYears))
+                .data(filterTopData(data))
                 .draw();
-        }
-    });
+        })
+        .draw();
 }
+
+
+
+/* 
+    Takes attrs in x and splits into x.length elements, 
+    creating a "new_x" attr and grouping them by "new_filter" (all retrieved in url)
+
+    For example:
+    x = [a, b]
+    data = [{a: 10, b: 20}]
+
+    then data will turn into [{new_x: 10, new_filter: a}, [new_x: 20, new_filter: b}]
+
+    To use it, pass "valueasfilter" as an option
+    and "new_filter" and "new_x" as url args
+*/
+var valuesToFilter = function() {
+    var newFilter = args['new_filter'], 
+        newX = args['new_x'],
+        newData = [];
+    
+    data.forEach(function(dataItem) {
+        x.forEach(function(value, i) {
+            var newDataItem = {};
+            for (item in dataItem) {
+                if (x.indexOf(item) == -1)
+                    newDataItem[item] = dataItem[item];
+            }
+            newDataItem[newX] = dataItem[value];
+            newDataItem[newFilter] = dictionary[value] || i;
+            newData.push(newDataItem);
+        });
+    });
+
+    return newData;
+};
 
 var colorHelper = {
    'gender': {
@@ -172,6 +274,105 @@ var orderHelper = {
     }
 }
 
+var addUiFilters = function(){
+    var filteredData = function(data, filter, value) {
+        currentFilters[filter] = value;
+        return data.filter(function(item) {
+            var valid = true,
+                keys = Object.keys(currentFilters);
+
+            for (var i = 0; i < keys.length; i++) {
+                if (currentFilters[keys[i]] == -1)
+                    continue;
+                if (item[keys[i]] != currentFilters[keys[i]]) {
+                    valid = false;
+                    break;
+                }
+            }
+
+            return valid;
+        });
+    };
+
+    uiFilters.forEach(function(filter, j) {
+        currentFilters[filter] = -1;
+        var options = [];
+        for (id in metadatas[filter]) {
+            options.push({'id': metadatas[filter][id]['name_' + lang], 'label': metadatas[filter][id]['name_' + lang]})
+        }
+        options.unshift({'id': -1, 'label': dictionary['all']});
+
+        d3plus.form()
+            .config(config)
+            .container(d3.select('#controls'))
+            .data(options)
+            .title(dictionary[filter])
+            .type('drop')
+            .font({'size': 11})
+            .focus(-1, function(value) {
+                var filtered = filteredData(data, filter, value);
+                filtered = filterTopData(filtered);
+                visualization.data(filtered);
+                visualization.draw();
+            })
+            .draw();
+    });
+
+    // Custom filter to Attention Level
+    // To use, add: options=attention_level
+    if(options.indexOf('attention_level') != -1) {
+
+        currentFilters['ambulatory_attention'] = -1;
+        currentFilters['hospital_attention'] = -1;
+
+        var filterValues = [
+            [-1, -1], // Todos 
+            [metadatas['ambulatory_attention'][0]['name_' + lang], metadatas['hospital_attention'][0]['name_' + lang]],   // Nenhum
+            [metadatas['ambulatory_attention'][0]['name_' + lang], metadatas['hospital_attention'][1]['name_' + lang]],   // Hospitalar
+            [metadatas['ambulatory_attention'][1]['name_' + lang], metadatas['hospital_attention'][0]['name_' + lang]],   // Ambulatorial
+            [metadatas['ambulatory_attention'][1]['name_' + lang], metadatas['hospital_attention'][1]['name_' + lang]]    // Ambulatorial/Hospitalar
+        ];
+
+        var menuOptions = [
+            {
+                id: 0,
+                label: dictionary['all']
+            },
+            {
+                id: 1,
+                label: dictionary['none']
+            },
+            {
+                id: 2,
+                label: dictionary['hospital']
+            },
+            {
+                id: 3,
+                label: dictionary['ambulatory']
+            },
+            {
+                id: 4,
+                label: dictionary['ambulatory/hospital']
+            },
+        ];
+
+        d3plus.form()
+            .config(config)
+            .container(d3.select('#controls'))
+            .data(menuOptions)
+            .title(dictionary['attention_level'])
+            .type('drop')
+            .font({'size': 11})
+            .focus(-1, function(pos) {
+                var filtered = filteredData(data, 'ambulatory_attention', filterValues[pos][0]);
+                filtered = filteredData(data, 'hospital_attention', filterValues[pos][1]);
+                filtered = filterTopData(filtered);
+                visualization.data(filtered).draw();
+            })
+            .draw();
+    }
+};
+
 var addOrder = function(data){
     data = data.map(function(item){
         for(key in orderHelper){
@@ -183,153 +384,6 @@ var addOrder = function(data){
     });
 
     return data;
-};
-
-var textHelper = {
-    'loading': {
-        'en': 'loading ...',
-        'pt': 'carregando ...'
-    },
-    'average_wage': {
-        'en': 'Salário Médio Mensal',
-        'pt': 'Average Monthly Wage'
-    },
-    'jobs': {
-        'en': 'Jobs',
-        'pt': 'Empregos'
-    },
-    'year': {
-        'en': 'Year',
-        'pt': 'Ano'
-    },
-    'scale': {
-        'en': "Scale",
-        'pt': "Escala"
-    },
-    'yaxis': {
-        'en': "Y-Axis",
-        'pt': "Eixo Y"
-    },
-    'xaxis': {
-        'en': "X-Axis",
-        'pt': "Eixo X"
-    },
-    'locale': {
-        'en': 'en_US',
-        'pt': 'pt_BR'
-    },
-    'average_wage': {
-        'en': "Average Wage",
-        'pt': "Salário Médio"  
-    },
-    'kg': {
-        'en': 'kg',
-        'pt': 'kg'
-    },
-    'value': {
-        'en': "US$",
-        'pt': "US$"
-    },
-    'kg_label': {
-        'en': 'Amount [kg]',
-        'pt': 'Quantidade [kg]'
-    },
-    'value_label': {
-        'en': "Value [$ USD]",
-        'pt': "Valor [$ USD]"
-    },
-    'average_wage_label': {
-        'en': "Average Monthly Wage [$ USD]",
-        'pt': "Salário Médio Mensal [$ USD]"  
-    },
-    'jobs_label': {
-        'en': "Jobs",
-        'pt': "Empregos"  
-    },
-    'kg_pct': {
-        'en': "% of kg",
-        'pt': "% de kg"  
-    },
-    'value_pct': {
-        'en': "% of US$",
-        'pt': "% de US$"  
-    },
-    'simple': {
-        'en': "Simples",
-        'pt': "Simples"  
-    },
-    'establishment_size': {
-        'en': "Establishment Size",
-        'pt': "Tamanho do Estabelecimento"  
-    },
-    'average_establishment_size': {
-        'en': "Average Establishment Size",
-        'pt': "Tamanho Médio do Estabelecimento"  
-    },
-    'establishment_count': {
-        'en': "Establishments",
-        'pt': "Estabelecimentos"  
-    },
-    'wage': {
-        'en': "Salary Mass",
-        'pt': "Massa Salarial"   
-    },
-    'gender': {
-        'en': "Gender",
-        'pt': "Gênero"  
-    },
-    'ethnicity': {
-        'en': "Ethnicity",
-        'pt': "Etnia"  
-    },
-    'literacy': {
-        'en': "Literacy",
-        'pt': "Escolaridade"  
-    },
-    'month': {
-        'en': "Month",
-        'pt': "Mês"  
-    },
-    'port': {
-        'en': "Port",
-        'pt': "Porto"  
-    },
-    'legal_nature': {
-        'en': "Legal Nature",
-        'pt': "Natureza Jurídica"  
-    },
-    'size_establishment': {
-        'en': "Establishment Size ",
-        'pt': "Tamanho do Estabelecimento"  
-    },
-    'time_resolution': {
-        'en': "Time Resolution",
-        'pt': "Resolução Temporal"  
-    },
-    'total_of': {
-        'en': "Total in selected years: ",
-        'pt': "Total nos anos selecionados: ",
-    },
-    'data_provided_by': {
-        'en': "Data provided by ",
-        'pt': "Dados fornecidos por ",
-    },
-    'percentage_terms': {
-        'en': 'Percentage Terms',
-        'pt': 'Termos Percentuais'
-    },
-    'values': {
-        'en': 'Values',
-        'pt': 'Valores'
-    },
-    'exporting_municipality': {
-        'en': "Based on the Exporting Municipality",
-        'pt': "Baseado nos Municípios Exportadores" 
-    },
-    'state_production': {
-        'en': "Based on State Production",
-        'pt': "Baseado nos Estados Produtores" 
-    }
 };
 
 var formatNumber = function(digit){
@@ -367,8 +421,8 @@ var formatHelper = {
         if(params.labels == false)
             return text;
 
-        if (textHelper[text] != undefined)
-            return textHelper[text][lang];
+        if (dictionary[text] != undefined)
+            return dictionary[text];
 
         return d3plus.string.title(text, params); 
     },
@@ -376,7 +430,7 @@ var formatHelper = {
     "number": function(number, params) {
         var formatted = d3plus.number.format(number, params);
 
-        formatted = formatNumber(formatted)
+        // formatted = formatNumber(formatted)
         
         if (params.key == "value" && params.labels == undefined)
             return "$" + formatted + " USD";
@@ -400,18 +454,51 @@ var formatHelper = {
     }
 };
 
+var addFacilityType = function(data){
+    if(y.indexOf('facility_type') == -1){
+        return data;
+    }
+
+    var facilities = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'neonatal_unit_facility', 'obstetrical_center_facility'];
+    var newData = [];
+
+    data.forEach(function(item){
+        facilities.forEach(function(facility){
+            if(item[facility] == 'YES' || item[facility] == 'SIM') {
+                var newItem = item;
+                newItem['facility_type'] = dictionary[facility];
+                newData.push(newItem);
+            }
+        });
+    });
+
+    return newData;
+}
+
 var loadViz = function(data){
-     visualization = d3plus.viz()
+    var timelineCallback = function(years) {
+        if (!years.length)
+            selectedYears = yearRange;
+        else if (years.length == 1)
+            selectedYears = [0, years[0].getFullYear()];
+        else
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('bar', visualization, data, titleHelper(selectedYears).value);
+        visualization.title(titleHelper(selectedYears));
+        totalOfCurrentX(years);
+    }
+
+    visualization = d3plus.viz()
         .container("#bar")
         .data(data)
         .background("transparent")
         .type("bar")
+        .height(window.innerHeight - $('#controls').height() - 40)
         .font({
             'size': 13
         })
         .id({
-            'value': currentY,
-            'solo': solo
+            'value': vizId ? vizId : currentY,
         })
         .y({
             "value": currentY,
@@ -437,7 +524,7 @@ var loadViz = function(data){
             'value': 'year',
             'solo': {
                 'value': [lastYear(data)],
-                'callback': totalOfCurrentX
+                'callback': timelineCallback
             }
         })
         .aggs({
@@ -454,20 +541,42 @@ var loadViz = function(data){
             'sort': data[0][currentY + '_order'] == undefined ? 'asc' : 'desc'
         })
         .footer({
-            "value": textHelper["data_provided_by"][lang] + dataset.toUpperCase()
+            "value": dictionary["data_provided_by"] + (dictionary[dataset] || dataset).toUpperCase()
         })
-        .color(currentY + "_color")
-        .legend(false)
+        .color(vizId)
+        .messages({'branding': true, 'style': 'large'})
+        .title(titleHelper(selectedYears))
+
+        if(colorHelper[currentY] != undefined)
+            visualization.color(currentY + "_color");
+
+        if(options.indexOf('nolabely') != -1){
+            visualization.y({
+                'label': false
+            });
+        }
 
         if(options.indexOf('singlecolor') != -1){
             visualization.color({
                 "value" : function(d){
                     return "#4575b4";
                 }
-            }).legend(false)
+            }).legend(false);
         }
+
+        if (options.indexOf('valueasfilter') >= 0) {
+            visualization.id(args['new_filter']);
+            visualization.color(args['new_filter']);
+            visualization.x(args['new_x']);
+        }
+
         totalOfCurrentX();
-        visualization.draw()
+        visualization.draw();
+        
+        if ($('#controls').css('display') == 'none')
+            $('#controls').fadeToggle();
+        
+        toolsBuilder('bar', visualization, data, titleHelper(yearRange));
 };
 
 var getSelectedYears = function() {
@@ -496,7 +605,7 @@ var totalOfCurrentX = function(){
 
     visualization.title({
         'sub': {
-            'value': textHelper["total_of"][lang] + formatHelper.number(total, {key: key}) + (subtitle ? ' - ' + textHelper[subtitle][lang] : ''),
+            'value': dictionary["total_of"] + formatHelper.number(total, {key: key}) + (subtitle ? ' - ' + dictionary[subtitle] : ''),
             'font': {
                 'align': 'left'
             }
@@ -521,8 +630,18 @@ var buildData = function(responseApi){
             dataItem[header] = getAttrByName(item, header);
         });
 
+        if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
+            yearRange[1] = dataItem['year'];
+        else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
+            yearRange[0] = dataItem['year'];
+
         data.push(dataItem);
     });
+
+    if (yearRange[0] == yearRange[1]) 
+        yearRange[0] = 0;
+
+    selectedYears = [0, yearRange[1]];
 
     return data;
 }
@@ -577,15 +696,14 @@ var addPercentage = function(data){
 }
 
 var addNameToData = function(data){
-    y.forEach(function(itemY){
+    dimensions.forEach(function(dimension){
         data = data.map(function(item){
-            if(metadatas[itemY][item[itemY]] == undefined){
-                item[itemY] = 'NOT FOUND!';
+            if(metadatas[dimension][item[dimension]] == undefined){
+                item[dimension] = 'NOT FOUND!';
             }
             else{
-                item[itemY] = metadatas[itemY][item[itemY]]['name_' + lang];
+                item[dimension] = metadatas[dimension][item[dimension]]['name_' + lang];
             }
-
 
             return item;
         });
@@ -618,57 +736,42 @@ var addNameToData = function(data){
     return data;
 };
 
-var groupDataByCurrentY = function(data){
-    var sumByItem = {};
+var filterTopData = function(data){
+    var items = {}; // name: totalValue
 
     data.forEach(function(item){
-        if(sumByItem[item[currentY]] == undefined)
-            sumByItem[item[currentY]] = {
-                "sum": 0,
-                "name": item[currentY]
-            };
+        var name = item[currentY],
+            value = item[currentX];
 
-        sumByItem[item[currentY]].sum += item[currentX];
+        if(items[name] == undefined)
+            items[name] = 0;
+
+        items[name] += value;
     });
 
-    var list = [];
-
-    for(var item in sumByItem){
-        list.push({
-            name: sumByItem[item].name,
-            sum: sumByItem[item].sum
-        });
+    var sortable = [];
+    for (var name in items) {
+        sortable.push([name, items[name]]);
     }
 
-    return list;
-}
-
-var getTopCurrentYNames = function(groupedData){
-    var compare = function(a, b){
-        if(a.sum < b.sum)
-            return 1;
-        if(a.sum > b.sum)
-            return -1;
-
-        return 0;
-    }
-
-    var list = groupedData.sort(compare).slice(0, MAX_BARS);
-
-    var selected = list.map(function(item){
-        return item.name;
+    sortable.sort(function(a, b) {
+        return b[1] - a[1];
     });
 
-    return selected;
+    var tops = sortable.splice(0, MAX_BARS);
+    tops = tops.map(function(item){return item[0]})
+
+    var binaryVariables = ['emergency_facility', 'ambulatory_care_facility', 'surgery_center_facility', 'obstetrical_center_facility', 'neonatal_unit_facility']
+
+    if(binaryVariables.indexOf(currentY) != -1){
+        tops = [metadatas[currentY][1]['name_' + lang]];
+    }
+
+    return data.filter(function(item){
+        return tops.indexOf(item[currentY]) != -1;
+    });
 }
 
-var updateSolo = function(data){
-    var copiedData = (JSON.parse(JSON.stringify(data)));
-    var groupedData = groupDataByCurrentY(copiedData);
-    solo = getTopCurrentYNames(groupedData);
-
-    return solo;
-};
 
 var lastYear = function(data){
     var year = 0;
@@ -681,12 +784,12 @@ var lastYear = function(data){
     return year;
 };
 
-var loading = dataviva.ui.loading('.loading').text(textHelper.loading[lang]);
+var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function(){
     var urls = [url];
 
-    y.forEach(function(item){
+    dimensions.forEach(function(item){
         urls.push("http://api.staging.dataviva.info/metadata/" + item);
     });
 
@@ -696,7 +799,7 @@ $(document).ready(function(){
             api = responses.shift();
             metadatas = {};
 
-            y.forEach(function(item, index){
+            dimensions.forEach(function(item, index){
                 metadatas[item] = responses[index];
             });
 
@@ -705,10 +808,19 @@ $(document).ready(function(){
             data = addOrder(data);
             data = addNameToData(data);
             data = addPercentage(data);
-            solo = updateSolo(data);
+            data = addFacilityType(data);
+            
+            if (options.indexOf('valueasfilter') >= 0)
+                data = valuesToFilter();
+            
+            addUiFilters();
 
             loading.hide();
-            loadViz(data);
+            d3.select('#mask').remove();
+            loadViz(filterTopData(data));
+        },
+        function(error) {
+            loading.text(dictionary['Unable to load visualization']);
         }
     );
 });
