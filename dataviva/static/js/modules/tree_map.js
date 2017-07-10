@@ -8,6 +8,7 @@ var tree_map = document.getElementById('tree_map'),
     yearRange = [Number.POSITIVE_INFINITY, 0],
     selectedYears = [],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
+    colors = args.hasOwnProperty('colors') ? args['colors'].split('+') : DEPTHS[dataset][squares] || '',
     hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
     zoom = args.hasOwnProperty('zoom') && args['zoom'] == 'true' ? true : false;
     group = depths[0],
@@ -43,7 +44,7 @@ var buildData = function(apiResponse) {
             });
 
             if (COLORS.hasOwnProperty(group))
-                dataItem['color'] = COLORS[group][dataItem[group]];
+                dataItem['color'] = COLORS[group][dataItem[group]]
 
             if (HAS_ICONS.indexOf(group) >= 0)
                 dataItem['icon'] = '/static/img/icons/' + group + '/' + group + '_' + dataItem[group] + '.png';
@@ -64,6 +65,10 @@ var buildData = function(apiResponse) {
            
             dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
 
+            if (dataItem.hasOwnProperty('entrants'))
+                dataItem['entrants'] = parseInt(dataItem['entrants']);
+            if (dataItem.hasOwnProperty('graduates'))
+                dataItem['graduates'] = parseInt(dataItem['graduates']);
             if (dataItem.hasOwnProperty('year') && dataItem['year'] > yearRange[1])
                 yearRange[1] = dataItem['year'];
             else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
@@ -167,6 +172,27 @@ var loadViz = function(data) {
                     })
                     .draw();
             }
+        }
+
+        // Adds color selector
+        if (colors.length > 1){
+            var options = [];
+            colors.forEach(function(item) {
+                options.push({'id': item, 'label': dictionary[item]});
+            });
+
+            d3plus.form()
+                .config(config)
+                .data(options)
+                .title(lang == 'en' ? 'Color' : 'Cor')
+                .type(options.length > 3 ? 'drop' : 'toggle')
+                .focus(size, function(value) {
+                    currentTitleAttrs['size'] = value;
+                    selectedColor = value == 'students' ? {'scale':'category20', 'value': args['color'] || depths[0]} : {"value": value};
+                    viz.color(selectedColor)
+                    viz.draw()
+                })
+                .draw();
         }
 
         // Adds size selector
