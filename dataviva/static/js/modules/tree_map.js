@@ -43,6 +43,11 @@ var buildData = function(apiResponse) {
                     dataItem[header] = +dataItem[header];
             });
 
+            if (dataItem.hasOwnProperty('sc_course') && dataItem.sc_course.length == 4){
+                dataItem.sc_course = "0" + dataItem.sc_course;
+                dataItem.sc_course_field = "0" + dataItem.sc_course_field.slice(0, 1);
+            }
+
             if (COLORS.hasOwnProperty(group))
                 dataItem['color'] = COLORS[group][dataItem[group]]
 

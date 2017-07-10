@@ -52,12 +52,13 @@ def inflect(title, object, preposition, name):
 def get_title(dataset, shapes, graph, api_filters):
     query = {}
     values = {}
-
     for key, value in api_filters.iteritems():
         if key == 'type':
             query['type'] = value
             values['type'] = value
         else:
+            if key == 'sc_course' and len(value) == 4:
+                value = '0'+value
             url = 'http://api.staging.dataviva.info/metadata/' + key + '/' + str(value)
             filter = filter_service(key)
             query[filter] = 1

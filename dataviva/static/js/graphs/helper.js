@@ -74,7 +74,12 @@ var DEPTHS = {
         'municipality': ['region', 'state', 'mesoregion', 'microregion', 'health_region', 'municipality']
    },
    'hedu': {
-        'hedu_course': ['hedu_course_field', 'hedu_course']
+        'hedu_course': ['hedu_course_field', 'hedu_course'],
+        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'municipality']
+   },
+   'sc': {
+        'sc_course': ['sc_course_field' , 'sc_course'],
+        'municipality': ['region', 'state', 'mesoregion', 'microregion', 'municipality']
    }
 };
 
@@ -114,7 +119,11 @@ var SIZES = {
         'occupation_family': ['professionals', 'other_hours_worked', 'hospital_hour', 'ambulatory_hour']
     },
     'hedu': {
-        'hedu_course': ['graduates', 'entrants']
+        'hedu_course': ['graduates', 'entrants'],
+        'municipality': ['enrolled','graduates', 'entrants']
+   },
+    'sc': {
+        'sc_course': ['students']
    }
 };
 
