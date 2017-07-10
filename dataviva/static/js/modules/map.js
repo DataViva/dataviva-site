@@ -50,12 +50,12 @@ var buildData = function(apiResponse) {
                 yearRange[1] = dataItem['year'];
             else if (dataItem.hasOwnProperty('year') && dataItem['year'] < yearRange[0])
                 yearRange[0] = dataItem['year'];
-
             if (dataItem.hasOwnProperty('entrants'))
                 dataItem.entrants = parseInt(dataItem.entrants)
             if (dataItem.hasOwnProperty('graduates'))
                 dataItem.graduates = parseInt(dataItem.graduates)
-
+            if (dataItem.hasOwnProperty('sc_class'))
+                dataItem.sc_class = parseInt(dataItem.sc_class)
             data.push(dataItem);
         } catch(e) {
 
@@ -265,8 +265,10 @@ var getUrls = function() {
             metadataAttrs.push(attr);
         }
     });
-
-    var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + apiFilters,
+    var urls = [
+        dimensions[0] == 'sc' ?
+        API_DOMAIN + '/' + dimensions.join('/') + '?' + apiFilters + '&count=sc_class':
+            API_DOMAIN + '/' + dimensions.join('/') + '?' + apiFilters,
         API_DOMAIN + '/metadata/' + area
     ];
 
