@@ -9,7 +9,7 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'higher-education-university-tree_map' or not graph }}" data-parent="#higher-education-university">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/hedu/university/enrolled?sizes=enrolled+entrants+graduates&depths=university{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/hedu/university/enrolled?sizes=enrolled+entrants+graduates&depths=funding_type+university{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'higher-education-university-tree_map_new_api' }}" data-parent="#higher-education-university">
                     TreeMap New API
                 </a>

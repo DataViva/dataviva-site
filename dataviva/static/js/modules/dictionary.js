@@ -102,6 +102,8 @@ dictionary['students'] = lang == 'en' ? 'Enrolled' : 'Matriculados';
 dictionary['average_age'] = lang == 'en' ? 'Average Age' : 'Idade Média';
 dictionary['hedu'] = lang == 'en' ? 'INEP/MEC' : 'INEP/MEC';
 dictionary['sc'] = lang == 'en' ? 'INEP/MEC' : 'INEP/MEC';
+dictionary['enrolled'] = lang == 'en' ? 'Enrolled' : 'Matriculados';
+dictionary['funding_type'] = lang == 'en' ? 'Funding' : 'Financiamento';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
