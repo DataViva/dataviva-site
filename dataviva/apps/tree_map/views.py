@@ -35,7 +35,7 @@ def index(dataset, squares, size):
     title_attrs = {}
 
     services = {'product': product_service, 'id_ibge': location_service, 'wld':
-                wld_service, 'occupation': occupation_service, 'industry': industry_service}
+                wld_service, 'occupation': occupation_service, 'industry': industry_service, 'basic_course': sc_service}
 
     for key, value in request.args.items():
         if key == 'type':
