@@ -94,6 +94,12 @@ dictionary['quantity'] = lang == 'en' ? 'Quantity' : 'Quantidade';
 dictionary['students_number'] = lang == 'en' ? 'Students Number' : 'Número de Estudantes';
 dictionary['Downloading Additional Year'] = lang == 'en' ? 'Downloading Additional Year' : 'Baixando Ano Adicional';
 dictionary['simple'] = lang == 'en' ? 'Simples' : 'Simples';
+dictionary['hedu_course'] = lang == 'en' ? 'Course' : 'Curso';
+dictionary['hedu_course_field'] = lang == 'en' ? 'Field' : 'Campo';
+dictionary['sc_course'] = lang == 'en' ? 'Course' : 'Curso';
+dictionary['sc_course_field'] = lang == 'en' ? 'Field' : 'Campo';
+dictionary['students'] = lang == 'en' ? 'Enrolled' : 'Matriculados';
+dictionary['average_age'] = lang == 'en' ? 'Average Age' : 'Idade Média'
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
