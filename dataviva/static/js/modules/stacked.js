@@ -196,7 +196,7 @@ var loadViz = function (data){
             .data([{'id': 'linear', 'label': dictionary['value']}, {'id': 'share', 'label': dictionary['market-share']}])
             .title('Layout')
             .type('toggle')
-            .focus('linear', function(value) {
+            .focus(args['scale'] || 'linear', function(value) {
                 viz.y({'scale': value}).draw();
             })
             .draw();
@@ -461,7 +461,11 @@ var loadViz = function (data){
 
     }
     
-    data_type = { "value": values[0], "label": (type == "" ? yAxisLabelBuilder(values[0]) : yAxisLabelBuilder(type))}
+    data_type = {
+        "value": values[0], 
+        "label": (type == "" ? yAxisLabelBuilder(values[0]) : yAxisLabelBuilder(type)),
+        "scale": args['scale'] || false
+    };
 
     var timelineCallback = function(years) {
         if (!years.length)
