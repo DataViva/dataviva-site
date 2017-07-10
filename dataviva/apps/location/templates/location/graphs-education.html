@@ -34,7 +34,7 @@
                      target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-municipality-tree_map'}}" data-parent="#education-municipality">
                       TreeMap
                   </a>
-                   <a href="/{{ g.locale }}/tree_map/hedu/municipality/enrolled?sizes=enrolled+graduates+entrants{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   <a href="/{{ g.locale }}/tree_map/hedu/municipality/enrolled?sizes=enrolled+graduates+entrants&colors=enrolled{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-municipality-tree_map_new_api' }}" data-parent="#education-municipality">
                     TreeMap New API
                 </a>
