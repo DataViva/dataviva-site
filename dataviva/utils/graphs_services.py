@@ -53,4 +53,6 @@ def filter_service(key):
         return 'equipment'
     if key in ['bed_type', 'bed_type_per_specialty']:
         return 'bed_type'
+    if key in ['hedu_course', 'hedu_course_field']:
+        return 'hedu_course'
     return key

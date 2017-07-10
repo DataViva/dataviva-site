@@ -39,6 +39,10 @@
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'category-shift-stacked'}}"
                        data-parent="#category-shift">{% trans %}Stacked{% endtrans %}</a>
+                    <a href="/{{ g.locale }}/stacked/hedu/shift/enrolled?university={{university.id}}&scale=share&values=enrolled+graduates+entrants" 
+                       target="graphs-frame-enrollments" 
+                       class="list-group-item {{'selected' if graph.menu == 'category-shift-stacked-new-api'}}"
+                       data-parent="#category-shift">{% trans %}Stacked{% endtrans %} new API</a>
                 </div>
         </div>
     </nav>
