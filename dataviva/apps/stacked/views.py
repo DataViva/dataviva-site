@@ -42,7 +42,7 @@ def index(dataset, area, value):
                 wld_service, 'occupation': occupation_service, 'industry': industry_service}
 
     for key, value in request.args.items():
-        if key in ['type', 'establishment', 'university']:
+        if key in ['type', 'establishment', 'university', 'hedu_course']:
             title_attrs[key] = value
 
         if key in ['depths', 'values', 'group', 'filters', 'hierarchy'] and value:
@@ -55,7 +55,6 @@ def index(dataset, area, value):
             filters.append((key, value))
 
     filters = urllib.urlencode(filters)
-
     title, subtitle = get_title(dataset, area, 'stacked', title_attrs)
 
     return render_template('stacked/index.html',
