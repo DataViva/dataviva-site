@@ -13,6 +13,10 @@
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'category-major-stacked'}}"
                        data-parent="#category-major">{% trans %}Stacked{% endtrans %}</a>
+                    <a href="/{{ g.locale }}/stacked/hedu/hedu_course_field/enrolled?depths=hedu_course_field+hedu_course&values=enrolled+graduates+entrants&university={{ university.id }}" 
+                       target="graphs-frame-enrollments" 
+                       class="list-group-item {{'selected' if graph.menu == 'category-major-stacked-new-api'}}"
+                       data-parent="#category-major">{% trans %}Stacked{% endtrans %} new API</a>
                 </div>
                 <a href="#category-status" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Students Status{% endtrans %}</a>
                 <div class="collapse" id="category-status">

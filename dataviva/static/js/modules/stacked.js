@@ -195,7 +195,7 @@ var loadViz = function (data){
             .container(d3.select('#controls'))
             .data([{'id': 'linear', 'label': dictionary['value']}, {'id': 'share', 'label': dictionary['market-share']}])
             .title('Layout')
-            .type('drop')
+            .type('toggle')
             .focus('linear', function(value) {
                 viz.y({'scale': value}).draw();
             })
@@ -207,7 +207,7 @@ var loadViz = function (data){
             .container(d3.select('#controls'))
             .data([{'id': 'desc', 'label': dictionary['desc']}, {'id': 'asc', 'label': dictionary['asc']}])
             .title(dictionary['sort'])
-            .type('drop')
+            .type('toggle')
             .focus('desc', function(value) {
                 viz.order({'sort': value}).draw();
             })
@@ -219,7 +219,7 @@ var loadViz = function (data){
             .container(d3.select('#controls'))
             .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'name', 'label': dictionary['name']}])
             .title(dictionary['Order'])
-            .type('drop')
+            .type('toggle')
             .focus('value', function(value) {
                 viz.order({'value': value == 'value' ? viz.y() : viz.id()}).draw();
             })
@@ -249,7 +249,7 @@ var loadViz = function (data){
                 .container(d3.select('#controls'))
                 .data(axisValues)
                 .title(dictionary['time-resolution'])
-                .type('drop')
+                .type(axisValues.length > 3 ? 'drop' : 'toggle')
                 .focus(values[0], function(value) {
                     viz.y({'value': value, 'label': yAxisLabelBuilder(value)})
                         .order({'value': value})
@@ -270,7 +270,7 @@ var loadViz = function (data){
                 .container(d3.select('#controls'))
                 .data(options)
                 .title(dictionary['drawer_group'])
-                .type('drop')
+                .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(depthsList[0][0], function(value) {
                     currentTitleAttrs['shapes'] = depthsList[0][value];
                     viz.depth(depthsList[0].indexOf(value))
@@ -292,7 +292,7 @@ var loadViz = function (data){
                 .container(d3.select('#controls'))
                 .data(options)
                 .title(dictionary['drawer_group'])
-                .type('drop')
+                .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(0, function(value) {
                     currentTitleAttrs['shapes'] = depthsList[value][0];
                     viz.id(depthsList[value])
