@@ -9,6 +9,9 @@
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'category-major-tree_map' or not graph }}"
                        data-parent="#category-major">TreeMap</a>
+                    <a href="/{{ g.locale }}/tree_map/hedu/hedu_course/enrolled?sizes=enrolled+entrants+graduates&depths=hedu_course_field+hedu_course&university={{university.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'category-major-tree_map_new_api' }}" data-parent="#category-major">
+                    TreeMap New API</a>
                     <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" 
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'category-major-stacked'}}"

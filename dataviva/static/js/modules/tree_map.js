@@ -8,7 +8,7 @@ var tree_map = document.getElementById('tree_map'),
     yearRange = [Number.POSITIVE_INFINITY, 0],
     selectedYears = [],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
-    colors = args.hasOwnProperty('colors') ? args['colors'].split('+') : DEPTHS[dataset][squares] || '',
+    colors = args.hasOwnProperty('colors') ? args['colors'].split('+') : '',
     hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
     zoom = args.hasOwnProperty('zoom') && args['zoom'] == 'true' ? true : false;
     group = depths[0],
