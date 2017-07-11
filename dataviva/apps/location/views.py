@@ -88,11 +88,20 @@ tabs = {
 
         'education': [
             'higher-education-university-tree_map',
+            'new-api-higher-education-university-tree_map',
             'education-course-tree_map',
+            'new-api-education-course-tree_map',
             'professional-education-school-tree_map',
+            'new-api-professional-education-school-tree_map',
             'professional-education-course-tree_map',
+            'new-api-professional-education-course-tree_map',
             'basic-education-administrative-dependencie-tree_map',
+            'new-api-basic-education-administrative-dependencie-tree_map',
             'basic-education-level-tree_map',
+            'new-api-basic-education-level-tree_map',
+            'basic-education-municipality-tree_map',
+            'new-api-basic-education-municipality-tree_map',
+            'basic-education-municipality-tree_map',
         ],
         'health': [
             'equipments-municipality-map',
