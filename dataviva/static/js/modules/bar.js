@@ -45,7 +45,10 @@ var config = {
     'search': false
 };
 
-var currentTitleAttrs = {'shapes': shapes || y[0]}
+var currentTitleAttrs = {
+    'shapes': shapes || y[0],
+    'values': currentX
+}
 
 var visualization;
 var percentage = false;
@@ -77,6 +80,8 @@ if (x.length > 1 && options.indexOf('valueasfilter') == -1) {
         .focus(x[0], function(value) {
             currentX = value;
 
+            currentTitleAttrs['values'] = currentX;
+
             if (percentage)
                 currentX = currentX + '_pct';
 
@@ -87,7 +92,9 @@ if (x.length > 1 && options.indexOf('valueasfilter') == -1) {
                 });
 
             totalOfCurrentX();
-            visualization.draw();
+
+            visualization.title(titleHelper(selectedYears))
+                .draw();
         })
         .draw();
 }
