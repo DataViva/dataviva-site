@@ -148,12 +148,17 @@ def index(course_hedu_id, tab):
         'general': [],
         'enrollments': [
             'enrollments-university-tree_map',
+            'new-api-enrollments-university-tree_map',
             'enrollments-municipality-geo_map',
+            'new-api-enrollments-municipality-geo_map',
             'enrollments-municipality-stacked',
+            'new-api-enrollments-municipality-stacked',
             'enrollments-municipality-tree_map',
+            'new-api-enrollments-municipality-tree_map',
             'enrollments-status-line',
             'new-api-enrollments-status-line',
             'enrollments-shift-stacked',
+            'new-api-enrollments-shift-stacked',
         ],
     }
     id_ibge =   None
