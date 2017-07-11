@@ -205,7 +205,10 @@ var loadViz = function (data){
         d3plus.form()
             .config(config)
             .container(d3.select('#controls'))
-            .data([{'id': 'desc', 'label': dictionary['desc']}, {'id': 'asc', 'label': dictionary['asc']}])
+            .data([
+                {'id': 'desc', 'label': dictionary['desc']},
+                {'id': 'asc', 'label': dictionary['asc']}
+            ])
             .title(dictionary['sort'])
             .type('toggle')
             .focus('desc', function(value) {
@@ -214,14 +217,34 @@ var loadViz = function (data){
             .draw();
 
         // Adds order selector
+
+        var orderOptions = [
+            {'id': 'value', 'label': dictionary['value']},
+            {'id': 'name', 'label': dictionary['name']},
+        ]
+
+        if (args['order']) {
+            args['order'].split('+').forEach(function(order) {
+                orderOptions.push({
+                    id: order,
+                    label: dictionary[order]
+                })
+            })
+        }
+
         d3plus.form()
             .config(config)
             .container(d3.select('#controls'))
-            .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'name', 'label': dictionary['name']}])
+            .data(orderOptions)
             .title(dictionary['Order'])
             .type('toggle')
             .focus('value', function(value) {
-                viz.order({'value': value == 'value' ? viz.y() : viz.id()}).draw();
+                if (value == 'value')
+                    value = viz.y();
+                else if (value == 'name')
+                    value = viz.id();
+
+                viz.order({'value': value}).draw();
             })
             .draw();
 
@@ -512,6 +535,9 @@ var loadViz = function (data){
         } else {
             viz.id(depths);
             currentTitleAttrs['shapes'] = depths[0];
+
+            if (args['depth'])
+                viz.depth(depths.indexOf(args['depth']));
         }
 
         viz.title(titleHelper(yearRange))

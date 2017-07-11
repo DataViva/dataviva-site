@@ -18,6 +18,10 @@
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked'}}" data-parent="#enrollments-municipality">
                     {% trans %}Stacked{% endtrans %}</a>
                </a>
+               <a href="/{{ g.locale }}/stacked/sc/region/students?values=students&depths=region+state+mesoregion+microregion+municipality&depth=state&order=region"
+                   target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked_new_api'}}" data-parent="#enrollments-municipality">
+                    {% trans %}Stacked new API{% endtrans %}</a>
+               </a>
                 <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map'}}" data-parent="#enrollments-municipality">
                     TreeMap
