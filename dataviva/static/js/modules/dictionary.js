@@ -43,6 +43,7 @@ dictionary['industry_division'] = lang == 'en' ? 'Division' : 'Divisão';
 dictionary['establishment_count'] = lang == 'en' ? 'Total Establishments' : 'Total de Estabelecimentos';
 dictionary['wage'] = lang == 'en' ? 'Total Monthly Wages' : 'Renda Mensal Total';
 dictionary['average_wage'] = lang == 'en' ? 'Average Monthly Wages' : 'Renda Mensal Média';
+dictionary['average_class_size'] = lang == 'en' ? 'Average Class Size' : 'Tamanho Médio da Turma';
 dictionary['industry_class'] = lang == 'en' ? 'Class' : 'Classe';
 dictionary['total_jobs'] = lang == 'en' ? 'Total Jobs' : 'Total de Empregos';
 dictionary['average_establishment_size'] = lang == 'en' ? 'Jobs per Establishment' : 'Empregos por Estabelecimento';
