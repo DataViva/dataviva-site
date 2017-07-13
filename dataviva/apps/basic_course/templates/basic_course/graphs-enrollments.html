@@ -10,7 +10,7 @@
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-geo_map' or not graph }}" data-parent="#enrollments-municipality">
                     {% trans %}Map{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/map/sc/students/{{ id_ibge if id_ibge }}?values=students&basic_course={{basic_course.id}}"
+                <a href="/{{ g.locale }}/map/sc/students/{{ id_ibge if id_ibge }}?values=students&basic_course={{basic_course.id}}&colors=students+classes+average_class_size"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-map_new_api'}}" data-parent="#enrollments-municipality">
                     {% trans %}Map new API{% endtrans %}
                 </a>
