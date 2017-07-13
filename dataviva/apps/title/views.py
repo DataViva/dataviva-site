@@ -65,7 +65,7 @@ def get_title(dataset, shapes, graph, api_filters):
             response = requests.get(url).json()
             values[filter] = response['name_' + g.locale]
 
-    for filter in ['product', 'partner', 'occupation', 'industry', 'establishment', 'hedu_course', 'university', 'sc_course']:
+    for filter in ['product', 'partner', 'occupation', 'industry', 'establishment', 'hedu_course', 'university', 'sc_course', 'sc_course_field']:
         if filter not in query:
             query[filter] = 0
 
