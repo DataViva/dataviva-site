@@ -16,11 +16,15 @@ var stacked = document.getElementById('stacked'),
     selectedYears = [],
     metadata = {},
     currentFilters = {},
-    currentTitleAttrs = {'size': values[0]}
     baseTitle = stacked.getAttribute('graph-title'),
     baseSubtitle = stacked.getAttribute('graph-subtitle'),
     stackedFilters = args['filters'] ? args['filters'].split('+') : [],
     attentionLevelFilter = false;
+
+var currentTitleAttrs = {
+    'size': values[0],
+    'depths': args.depths[0]
+}
 
 if(stackedFilters.indexOf('attention_level') != -1) {
     var i = stackedFilters.indexOf('attention_level');
@@ -519,6 +523,7 @@ var loadViz = function (data){
         .legend({'filters': true})
         .depth(0, function(d) {
             currentTitleAttrs['shapes'] = depths[d];
+            currentTitleAttrs['depths'] = depths[d];
             viz.title(titleHelper(yearRange));
         })
 
