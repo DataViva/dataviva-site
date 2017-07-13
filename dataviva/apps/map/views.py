@@ -46,21 +46,21 @@ def index(dataset, value, id_ibge):
         'industry': industry_service,
         'basic_course': sc_service,
     }
-
     for k, v in request.args.items():
         if k not in ['values', 'filters', 'count', 'year']:
             if v and k in services:
                 filters.append(services[k](v))
                 title_attrs[services[k](v)[0]] = services[k](v)[1]
             else:
-                filters.append((k, v))
-                title_attrs[k] = v
+                if k != 'colors':
+                    filters.append((k, v))
+                    title_attrs[k] = v
 
     if id_ibge:
         location = location_service(id_ibge)[0]
         filters.append((location, id_ibge))
         state = '' if location == 'region' else id_ibge[:2]
-        title_attrs['state'] = state
+        title_attrs[location] = id_ibge
     else:
         state = id_ibge
         location = 'municipality'
