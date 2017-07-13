@@ -23,7 +23,7 @@ var stacked = document.getElementById('stacked'),
 
 var currentTitleAttrs = {
     'size': values[0],
-    'depths': args.depths[0]
+    'depths': args.depths ? args.depths[0] : area
 }
 
 if(stackedFilters.indexOf('attention_level') != -1) {
