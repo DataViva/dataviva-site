@@ -36,7 +36,6 @@ def index(dataset, squares, size):
 
     services = {'product': product_service, 'id_ibge': location_service, 'wld':
                 wld_service, 'occupation': occupation_service, 'industry': industry_service, 'basic_course': sc_service}
-
     for key, value in request.args.items():
         if key == 'type':
             title_attrs['type'] = value
@@ -47,7 +46,7 @@ def index(dataset, squares, size):
             filters.append(services[key](value))
             title_attrs[services[key](value)[0]] = services[key](value)[1]
         else:
-            if key in ['establishment', 'hedu_course', 'university']:
+            if key in ['establishment', 'hedu_course', 'university', 'sc_course_field']:
               title_attrs[key] = value
             filters.append((key, value))
 
