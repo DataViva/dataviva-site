@@ -244,6 +244,7 @@ var COLORS = {
 
 var BASIC_VALUES = {
     'secex': ['value', 'kg'],
+    'sc': ['students'],
     'hedu': ['enrolled', 'entrants', 'graduates'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
     'cnes_establishment': ['establishments'],
@@ -264,6 +265,7 @@ var CALC_BASIC_VALUES = {
             return getUrlArgs()['type'] == 'import' || dataItem['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
         }
     },
+    'sc': {},
     'hedu': {},
     'rais': {},
     'cnes_establishment': {},
