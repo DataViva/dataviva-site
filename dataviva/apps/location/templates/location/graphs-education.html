@@ -77,6 +77,10 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'basic-education-level-tree_map'}}" data-parent="#basic-education-level">
                     TreeMap
                 </a>
+                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?sizes=students&colors=students+average_age&sc_course_field=xx&nuances=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-basic-education-level-tree_map' }}" data-parent="#new-api-basic-education-level">
+                    TreeMap new API
+                </a>
             </div>
 
             {% if not is_municipality %}

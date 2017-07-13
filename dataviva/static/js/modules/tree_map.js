@@ -9,6 +9,7 @@ var tree_map = document.getElementById('tree_map'),
     selectedYears = [],
     depths = args.hasOwnProperty('depths') ? args['depths'].split('+') : DEPTHS[dataset][squares] || [squares],
     colors = args.hasOwnProperty('colors') ? args['colors'].split('+') : '',
+    nuances = args.hasOwnProperty('nuances') ? args['nuances'].split('+') : '',
     hierarchy = args.hasOwnProperty('hierarchy') && args['hierarchy'] == 'false' ? false : true;
     zoom = args.hasOwnProperty('zoom') && args['zoom'] == 'true' ? true : false;
     group = depths[0],
@@ -193,7 +194,7 @@ var loadViz = function(data) {
                 .type(options.length > 3 ? 'drop' : 'toggle')
                 .focus(size, function(value) {
                     currentTitleAttrs['size'] = value;
-                    selectedColor = value == 'students' ? {'scale':'category20', 'value': args['color'] || depths[0]} : {"value": value};
+                    selectedColor = value == 'students' && !args.sc_course_field ? {'scale':'category20', 'value': args['color'] || depths[0]} : value == 'students' ?  function(d){return "#252558";} : {"value": value};
                     viz.color(selectedColor)
                     viz.draw()
                 })
@@ -260,7 +261,6 @@ var loadViz = function(data) {
                 return valid;
             });
         };
-
 
         filters.forEach(function(filter) {
             if (filter == 'attention_level') {
@@ -399,6 +399,14 @@ var loadViz = function(data) {
         viz.color('color');
     } else {
         viz.color({'scale':'category20', 'value': args['color'] || depths[0]});
+    }
+
+    if(nuances.indexOf('singlecolor') != -1){
+        viz.color({
+            "value" : function(d){
+                return "#252558";
+            }
+        });
     }
 
     uiBuilder();
