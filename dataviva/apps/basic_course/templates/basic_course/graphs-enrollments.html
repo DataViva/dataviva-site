@@ -18,7 +18,7 @@
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked'}}" data-parent="#enrollments-municipality">
                     {% trans %}Stacked{% endtrans %}</a>
                </a>
-               <a href="/{{ g.locale }}/stacked/sc/region/students?values=students&depths=region+state+mesoregion+microregion+municipality&depth=state&order=region"
+               <a href="/{{ g.locale }}/stacked/sc/region/students?values=students&depths=region+state+mesoregion+microregion+municipality&depth=state&order=region&basic_course={{basic_course.id}}"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked_new_api'}}" data-parent="#enrollments-municipality">
                     {% trans %}Stacked new API{% endtrans %}</a>
                </a>
