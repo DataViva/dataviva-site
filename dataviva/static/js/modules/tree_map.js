@@ -186,7 +186,6 @@ var loadViz = function(data) {
             colors.forEach(function(item) {
                 options.push({'id': item, 'label': dictionary[item]});
             });
-
             d3plus.form()
                 .config(config)
                 .data(options)
