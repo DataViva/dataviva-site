@@ -111,6 +111,7 @@ dictionary['main_municipality'] = lang == 'en' ? 'Main Municipality' : 'Principa
 dictionary['number_enrolled_students'] = lang == 'en' ? 'by Number of Enrolled Students' : 'por Número de Alunos Matriculados';
 dictionary['number_entrant_students'] = lang == 'en' ? 'by Number of Entering Students' : 'por Número de Alunos Ingressantes';
 dictionary['number_graduates_students'] = lang == 'en' ? 'by Number of Graduates Students' : 'por Número de Alunos Graduados';
+dictionary['administrative_dependency'] = lang == 'en' ? 'Administrative Dependency' : 'Dependência Administrativa';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
