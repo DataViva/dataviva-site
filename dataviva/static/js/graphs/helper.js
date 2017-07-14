@@ -120,7 +120,7 @@ var SIZES = {
     },
     'hedu': {
         'hedu_course': ['graduates', 'entrants'],
-        'municipality': ['enrolled','graduates', 'entrants']
+        'municipality': ['enrolleds','graduates', 'entrants']
    },
     'sc': {
         'sc_course': ['students']
@@ -245,7 +245,7 @@ var COLORS = {
 var BASIC_VALUES = {
     'secex': ['value', 'kg'],
     'sc': ['students'],
-    'hedu': ['enrolled', 'entrants', 'graduates'],
+    'hedu': ['enrolleds', 'entrants', 'graduates'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
     'cnes_establishment': ['establishments'],
     'cnes_equipment': ['equipment_quantity', 'equipment_quantity_in_use'],

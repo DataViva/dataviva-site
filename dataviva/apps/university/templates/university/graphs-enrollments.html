@@ -5,18 +5,18 @@
             <h4>{% trans %}Enrollments By{% endtrans %}</h4>
                 <a href="#category-major" class="list-group-item" data-toggle="collapse" data-parent="#category-major">{% trans %}Courses{% endtrans %}</a>
                 <div class="collapse" id="category-major">
-                    <a href="/{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled" 
+                    <a href="/{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolleds"
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'category-major-tree_map' or not graph }}"
                        data-parent="#category-major">TreeMap</a>
-                    <a href="/{{ g.locale }}/tree_map/hedu/hedu_course/enrolled?sizes=enrolled+entrants+graduates&depths=hedu_course_field+hedu_course&university={{university.id}}"
+                    <a href="/{{ g.locale }}/tree_map/hedu/hedu_course/enrolleds?sizes=enrolleds+entrants+graduates&depths=hedu_course_field+hedu_course&university={{university.id}}"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'new-api-category-major-tree_map' }}" data-parent="#new-api-category-major">
                     TreeMap new API</a>
-                    <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolled&layout=value&order=color" 
-                       target="graphs-frame-enrollments" 
+                    <a href="/{{ g.locale }}/embed/stacked/hedu/all/{{university.id}}/all/course_hedu/?y=enrolleds&layout=value&order=color"
+                       target="graphs-frame-enrollments"
                        class="list-group-item {{'selected' if graph.menu == 'category-major-stacked'}}"
                        data-parent="#category-major">{% trans %}Stacked{% endtrans %}</a>
-                    <a href="/{{ g.locale }}/stacked/hedu/hedu_course_field/enrolled?depths=hedu_course_field+hedu_course&values=enrolled+graduates+entrants&university={{ university.id }}" 
+                    <a href="/{{ g.locale }}/stacked/hedu/hedu_course_field/enrolleds?depths=hedu_course_field+hedu_course&values=enrolleds+graduates+entrants&university={{ university.id }}"
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'new-api-category-major-stacked'}}"
                        data-parent="#new-api-category-major">{% trans %}Stacked{% endtrans %} new API</a>
@@ -42,7 +42,7 @@
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'category-shift-stacked'}}"
                        data-parent="#category-shift">{% trans %}Stacked{% endtrans %}</a>
-                    <a href="/{{ g.locale }}/stacked/hedu/shift/enrolled?university={{university.id}}&scale=share&values=enrolled+graduates+entrants" 
+                    <a href="/{{ g.locale }}/stacked/hedu/shift/enrolleds?university={{university.id}}&scale=share&values=enrolleds+graduates+entrants"
                        target="graphs-frame-enrollments" 
                        class="list-group-item {{'selected' if graph.menu == 'new-api-category-shift-stacked'}}"
                        data-parent="#new-api-category-shift">{% trans %}Stacked{% endtrans %} new API</a>
@@ -53,7 +53,7 @@
         <div class="embed-responsive responsive-wrapper">
             <iframe src="
                     {% if not graph %}
-                        /{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled
+                        /{{ g.locale }}/embed/tree_map/hedu/all/{{university.id}}/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolleds
                     {% else %}
                         /{{ g.locale }}/{{graph.url}}
                     {% endif %}"

@@ -5,11 +5,11 @@
             <h4>{% trans %}Higher Education By{% endtrans %}</h4>
             <a href="#higher-education-university" class="list-group-item" data-toggle="collapse" data-parent="#higher-education-university">{% trans %}University{% endtrans %}</a>
             <div class="collapse" id="higher-education-university">
-                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/university/?color=color&depth=university_5&size=enrolled"
+                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/university/?color=color&depth=university_5&size=enrolleds"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'higher-education-university-tree_map' or not graph }}" data-parent="#higher-education-university">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/hedu/university/enrolled?sizes=enrolled+entrants+graduates&depths=funding_type+university{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/hedu/university/enrolleds?sizes=enrolleds+entrants+graduates&depths=funding_type+university{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-higher-education-university-tree_map' }}" data-parent="#new-api-higher-education-university">
                     TreeMap new API
                 </a>
@@ -17,11 +17,11 @@
 
             <a href="#education-course" class="list-group-item" data-toggle="collapse" data-parent="#education-course">{% trans %}Course{% endtrans %}</a>
             <div class="collapse" id="education-course"> 
-                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolled"
+                <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/course_hedu/?color=color&depth=course_hedu_6&size=enrolleds"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-course-tree_map'}}" data-parent="#education-course">
                     TreeMap
                 </a>
-                 <a href="/{{ g.locale }}/tree_map/hedu/hedu_course/enrolled?sizes=enrolled+entrants+graduates&depths=hedu_course_field+hedu_course&colors=hedu_course_field{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                 <a href="/{{ g.locale }}/tree_map/hedu/hedu_course/enrolleds?sizes=enrolleds+entrants+graduates&depths=hedu_course_field+hedu_course&colors=hedu_course_field{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-education-course-tree_map' }}" data-parent="#new-api-education-course">
                     TreeMap new API
                 </a>
@@ -30,11 +30,11 @@
             {% if not is_municipality %}
               <a href="#education-municipality" class="list-group-item" data-toggle="collapse" data-parent="#education-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="education-municipality">
-                  <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=enrolled"
+                  <a href="/{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=enrolleds"
                      target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'education-municipality-tree_map'}}" data-parent="#education-municipality">
                       TreeMap
                   </a>
-                   <a href="/{{ g.locale }}/tree_map/hedu/municipality/enrolled?sizes=enrolled+graduates+entrants{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   <a href="/{{ g.locale }}/tree_map/hedu/municipality/enrolleds?sizes=enrolleds+graduates+entrants{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-education-municipality-tree_map' }}" data-parent="#new-api-education-municipality">
                     TreeMap new API
                 </a>
@@ -100,7 +100,7 @@
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
-            <iframe src="{% if not graph %} /{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/university/?color=color&depth=university_5&size=enrolled
+            <iframe src="{% if not graph %} /{{ g.locale }}/embed/tree_map/hedu/{{location.id}}/all/all/university/?color=color&depth=university_5&size=enrolleds
                          {% else %} /{{ g.locale }}/embed/{{graph.url}} {% endif %}"
                     name="graphs-frame-education"
                     id="graphs-frame-education"
