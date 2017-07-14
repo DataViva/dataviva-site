@@ -90,13 +90,13 @@
                     data-parent="#new-api-wages-municipality">Stacked new API</a>
                 </div>
                 {% endif %}
-                {% if not location.id %}
+              <!--   {% if not location.id %}
                 <a href="#wages-distribution" class="list-group-item" data-toggle="collapse" data-parent="#wages-occupation">{% trans %}Distribution{% endtrans %}</a>
                 <div class="collapse" id="wages-distribution">
                     <a href="/{{ g.locale }}/embed/bar/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae/" 
                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-distribution-bar'}}" data-parent="#wages-distribution">{% trans %}Bar Chart{% endtrans %}</a>
                 </div>
-                {% endif %}
+                {% endif %} -->
 
                 <a href="#wages-demographic" class="list-group-item" data-toggle="collapse" data-parent="#wages-demographic">{% trans %}Demographic Informations{% endtrans %}</a>
                 <div class="collapse" id="wages-demographic">
