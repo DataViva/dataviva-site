@@ -48,6 +48,10 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map'}}" data-parent="#professional-education-school">
                     TreeMap
                 </a>
+                <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency&sc_course_field!=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map'}}" data-parent="#professional-education-school">
+                    TreeMap new API
+                </a>
             </div>
 
             <a href="#professional-education-course" class="list-group-item" data-toggle="collapse" data-parent="#professional-education-course">{% trans %}Course{% endtrans %}</a>
@@ -68,6 +72,10 @@
                 <a href="/{{ g.locale }}/embed/tree_map/sc/{{location.id}}/all/all/adm/?color=color&depth=school_type_id&size=enrolled"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'basic-education-administrative-dependencie-tree_map'}}" data-parent="#basic-education-administrative-dependencie">
                     TreeMap
+                </a>
+                <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency&sc_course_field=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map'}}" data-parent="#professional-education-school">
+                    TreeMap new API
                 </a>
             </div>
 
