@@ -26,7 +26,7 @@
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map'}}" data-parent="#enrollments-municipality">
                     TreeMap
                 </a>
-                 <a href="/{{ g.locale }}/tree_map/sc/municipality/students?sizes=students&colors=students+average_age&basic_course={{ basic_course.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                 <a href="/{{ g.locale }}/tree_map/sc/municipality/students?sizes=students+classes&colors=students+average_age&basic_course={{ basic_course.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map_new_api' }}" data-parent="#enrollments-municipality">
                     TreeMap New API
                 </a>

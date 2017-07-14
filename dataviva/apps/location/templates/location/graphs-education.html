@@ -56,7 +56,7 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-course-tree_map'}}" data-parent="#professional-education-course">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?colors=students+average_age&depths=sc_course_field+sc_course{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?colors=students+average_age&sizes=students+classes&depths=sc_course_field+sc_course{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-professional-education-course-tree_map' }}" data-parent="#new-api-professional-education-course">
                     TreeMap new API
                 </a>
@@ -77,7 +77,7 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'basic-education-level-tree_map'}}" data-parent="#basic-education-level">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?sizes=students&colors=students+average_age&sc_course_field=xx&nuances=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?sizes=students+classes&colors=students+average_age&sc_course_field=xx&nuances=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-basic-education-level-tree_map' }}" data-parent="#new-api-basic-education-level">
                     TreeMap new API
                 </a>
@@ -90,7 +90,7 @@
                      target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'basic-education-municipality-tree_map'}}" data-parent="#basic-education-municipality">
                       TreeMap
                   </a>
-                  <a href="/{{ g.locale }}/tree_map/sc/municipality/students?colors=students+average_age{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                  <a href="/{{ g.locale }}/tree_map/sc/municipality/students?sizes=students+classes&colors=students+average_age{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-basic-education-municipality-tree_map' }}" data-parent="#new-api-basic-education-municipality">
                     TreeMap new API
                 </a>

@@ -13,6 +13,36 @@ mod = Blueprint('basic_course', __name__,
                 url_prefix='/<lang_code>/basic_course',
                 static_folder='static')
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
+
+def _location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
 
 @mod.before_request
 def before_request():
@@ -132,6 +162,16 @@ def index(course_sc_id, tab):
 
     sc_max_year = db.session.query(func.max(Yc_sc.year)).first()[0]
 
+    id_ibge =   None
+
+
+    location = Bra.query.filter(Bra.id == bra_id).first()
+
+    if bra_id:
+        depth = location_depth(bra_id)
+        id_ibge = _location_service(depth, location)
+        is_municipality = True if depth == 'municipality' else False
+
     if tab not in tabs:
         abort(404)
 
@@ -141,4 +181,4 @@ def index(course_sc_id, tab):
     if header['course_enrolled'] is None or sc_max_year != header['course_year']:
         abort(404)
     else:
-        return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, basic_course=basic_course, tab=tab, graph=graph)
+        return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, id_ibge=id_ibge, basic_course=basic_course, tab=tab, graph=graph)
