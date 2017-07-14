@@ -106,6 +106,11 @@ dictionary['sc'] = lang == 'en' ? 'INEP/MEC' : 'INEP/MEC';
 dictionary['enrolled'] = lang == 'en' ? 'Enrolled' : 'Matriculado';
 dictionary['enrolleds'] = lang == 'en' ? 'Enrolleds' : 'Matriculados';
 dictionary['funding_type'] = lang == 'en' ? 'Funding' : 'Financiamento';
+dictionary['main_university'] = lang == 'en' ? 'Main University' : 'Principal Universidade';
+dictionary['main_municipality'] = lang == 'en' ? 'Main Municipality' : 'Principal Município';
+dictionary['number_enrolled_students'] = lang == 'en' ? 'by Number of Enrolled Students' : 'por Número de Alunos Matriculados';
+dictionary['number_entrant_students'] = lang == 'en' ? 'by Number of Entering Students' : 'por Número de Alunos Ingressantes';
+dictionary['number_graduates_students'] = lang == 'en' ? 'by Number of Graduates Students' : 'por Número de Alunos Graduados';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
