@@ -99,4 +99,90 @@ $(document).ready(function(){
         tab: 'enrollments'
     });
 
+    //GENERAL ADD
+    General.add({
+        url: 'http://api.staging.dataviva.info/hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+        title: dictionary['main_university_enrolled'],
+        label: {
+                metadata: true,
+                value: 'university'
+            },
+        value: 'enrolleds',
+        id: 'enrolleds',
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+        title: dictionary['main_municipality_students'],
+        label: {
+                metadata: true,
+                value: 'municipality'
+            },
+        value: 'enrolleds',
+        id: 'enrolleds',
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/hedu/year/university?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+        title: dictionary['main_university_entrants'],
+        label: {
+                metadata: true,
+                value: 'university'
+            },
+        value: 'entrants',
+        id: 'enrolleds',
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+        title: dictionary['main_municipality_entrants'],
+        label: {
+                metadata: true,
+                value: 'municipality'
+            },
+        value: 'entrants',
+        id: 'enrolleds',
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/hedu/year/university?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+        title: dictionary['main_university_graduates'],
+        label: {
+                metadata: true,
+                value: 'university'
+            },
+        value: 'graduates',
+        id: 'enrolleds',
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+        title: dictionary['main_municipality_graduates'],
+        label: {
+                metadata: true,
+                value: 'municipality'
+            },
+        value: 'graduates',
+        id: 'enrolleds',
+    });
+
+    //INDICATORS ADD
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/hedu/year/?count=enrollments&year=2015&" + filter,
+        title: dictionary['number_enrolleds'] + ' (2015)',
+        value:  'enrolleds'
+    });
+
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/hedu/year/?count=entrants&year=2015&" + filter,
+        title: dictionary['number_entrants'] + ' (2015)',
+        value:  'entrants'
+    });
+
+    Indicator.add({
+        url: "http://api.staging.dataviva.info/hedu/year/?count=graduates&year=2015&" + filter,
+        title: dictionary['number_graduates'] + ' (2015)',
+        value:  'graduates'
+    });
+
 });
