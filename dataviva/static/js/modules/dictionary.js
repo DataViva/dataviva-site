@@ -97,6 +97,7 @@ dictionary['Downloading Additional Year'] = lang == 'en' ? 'Downloading Addition
 dictionary['simple'] = lang == 'en' ? 'Simples' : 'Simples';
 dictionary['hedu_course'] = lang == 'en' ? 'Course' : 'Curso';
 dictionary['hedu_course_field'] = lang == 'en' ? 'Field' : 'Campo';
+dictionary['sc_school'] = lang == 'en' ? 'School' : 'Escola';
 dictionary['sc_course'] = lang == 'en' ? 'Course' : 'Curso';
 dictionary['sc_course_field'] = lang == 'en' ? 'Field' : 'Campo';
 dictionary['students'] = lang == 'en' ? 'Enrolled' : 'Matriculados';

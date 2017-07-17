@@ -38,6 +38,10 @@
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-school-tree_map'}}" data-parent="#enrollments-school">
                     TreeMap
                 </a>
+                <a href="/{{ g.locale }}/tree_map/sc/sc_school/students?sizes=students+classes&depths=administrative_dependency+sc_school&colors=students+average_age&basic_course={{ basic_course.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-school-tree_map_new_api'}}" data-parent="#enrollments-school">
+                    TreeMap New API
+                </a>
             </div>
         </div>
     </nav>
