@@ -21,6 +21,46 @@ $(document).ready(function(){
     	locationFilter = idIbge ? locations[idIbge.length] + '=' + idIbge : '';
 
     filter = [courseFilter, locationFilter].join('&');
+    var isMunicipality = idIbge.length == 7;
+
+    if(!isMunicipality) {
+	    BlueBox.add({
+	        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+	        title: dictionary['main_municipality'],
+	        subtitle: dictionary['number_enrolled_students'],
+	        label: {
+	            metadata: true,
+	            value: 'municipality'
+	        },
+
+	        value: 'enrolleds',
+	        tab: 'enrollments'
+	    });
+
+	    BlueBox.add({
+	        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+	        title: dictionary['main_municipality'],
+	        subtitle: dictionary['number_entrant_students'],
+	        label: {
+	            metadata: true,
+	            value: 'municipality'
+	        },
+	        value: 'entrants',
+	        tab: 'enrollments'
+	    });
+
+	    BlueBox.add({
+	        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+	        title: dictionary['main_municipality'],
+	        subtitle: dictionary['number_graduates_students'],
+	        label: {
+	            metadata: true,
+	            value: 'municipality'
+	        },
+	        value: 'graduates',
+	        tab: 'enrollments'
+	    });
+	}
 
     BlueBox.add({
         url: 'http://api.staging.dataviva.info/hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
@@ -30,19 +70,6 @@ $(document).ready(function(){
             metadata: true,
             value: 'university'
         },
-        value: 'enrolleds',
-        tab: 'enrollments'
-    });
-
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
-        title: dictionary['main_municipality'],
-        subtitle: dictionary['number_enrolled_students'],
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-
         value: 'enrolleds',
         tab: 'enrollments'
     });
@@ -59,17 +86,6 @@ $(document).ready(function(){
         tab: 'enrollments'
     });
 
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=entrants&year=2015&direction=desc&limit=1&' + filter,
-        title: dictionary['main_municipality'],
-        subtitle: dictionary['number_entrant_students'],
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'entrants',
-        tab: 'enrollments'
-    });
 
     BlueBox.add({
         url: 'http://api.staging.dataviva.info/hedu/year/university?order=graduates&year=2015&direction=desc&limit=1&' + filter,
@@ -83,15 +99,4 @@ $(document).ready(function(){
         tab: 'enrollments'
     });
 
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=graduates&year=2015&direction=desc&limit=1&' + filter,
-        title: dictionary['main_municipality'],
-        subtitle: dictionary['number_graduates_students'],
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'graduates',
-        tab: 'enrollments'
-    });
 });
