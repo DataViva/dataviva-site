@@ -107,6 +107,9 @@ dictionary['enrolled'] = lang == 'en' ? 'Enrolled' : 'Matriculado';
 dictionary['enrolleds'] = lang == 'en' ? 'Enrolleds' : 'Matriculados';
 dictionary['funding_type'] = lang == 'en' ? 'Funding' : 'Financiamento';
 dictionary['main_university'] = lang == 'en' ? 'Main University' : 'Principal Universidade';
+dictionary['main_university_enrolled'] = lang == 'en' ? 'Main University by Number of Enrolled Students' : 'Principal Universidade por Número de Alunos Matriculados';
+dictionary['main_university_entrants'] = lang == 'en' ? 'Main University by Number of Entering Students' : 'Principal Universidade por Número de Alunos Ingressantes';
+dictionary['main_university_graduates'] = lang == 'en' ? 'Main University by Number of Graduates' : 'Principal Universidade por Número de Alunos Concluintes';
 dictionary['main_school'] = lang == 'en' ? 'Main School' : 'Principal Escola';
 dictionary['main_municipality'] = lang == 'en' ? 'Main Municipality' : 'Principal Município';
 dictionary['number_enrolled_students'] = lang == 'en' ? 'by Number of Enrolled Students' : 'por Número de Alunos Matriculados';
@@ -117,6 +120,8 @@ dictionary['number_classes'] = lang == 'en' ? 'Number of Classes' : 'Número de 
 dictionary['average_class_size'] = lang == 'en' ? 'Average Class Size' : 'Tamanho Médio das Turmas';
 dictionary['number_schools'] = lang == 'en' ? 'Number of Schools' : 'Número de Escolas';
 dictionary['main_municipality_students'] = lang == 'en' ? 'Main Municipality by Number of Enrolled Students' : 'Principal Município por Número de Alunos Matriculados';
+dictionary['main_municipality_entrants'] = lang == 'en' ? 'Main Municipality by Number of Entering Students' : 'Principal Município por Número de Alunos Ingressantes';
+dictionary['main_municipality_graduates'] = lang == 'en' ? 'Main Municipality by Number of Graduates' : 'Principal Município por Número de Alunos Concluintes';
 dictionary['administrative_dependency'] = lang == 'en' ? 'Administrative Dependency' : 'Dependência Administrativa';
 dictionary['number_enrolleds'] = lang == 'en' ? 'Number of Enrollments' : 'Número de Matrículas';
 dictionary['number_entrants'] = lang == 'en' ? 'Number of Entering Students' : 'Número de Ingressantes';
