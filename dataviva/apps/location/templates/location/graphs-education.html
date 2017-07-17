@@ -48,7 +48,7 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map'}}" data-parent="#professional-education-school">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency&sc_course_field!=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency+sc_school&sc_course_field!=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map'}}" data-parent="#professional-education-school">
                     TreeMap new API
                 </a>
@@ -60,7 +60,7 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-course-tree_map'}}" data-parent="#professional-education-course">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?colors=students+average_age&sizes=students+classes&depths=sc_course_field+sc_course{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?colors=students+average_age&sizes=students+classes&depths=sc_course_field+sc_course&sc_course_field!=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-professional-education-course-tree_map' }}" data-parent="#new-api-professional-education-course">
                     TreeMap new API
                 </a>
@@ -73,7 +73,7 @@
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'basic-education-administrative-dependencie-tree_map'}}" data-parent="#basic-education-administrative-dependencie">
                     TreeMap
                 </a>
-                <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency&sc_course_field=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency+sc_school&sc_course_field=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map'}}" data-parent="#professional-education-school">
                     TreeMap new API
                 </a>
