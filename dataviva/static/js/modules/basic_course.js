@@ -26,7 +26,7 @@ $(document).ready(function(){
     //BLUEBOXES ADD
     if(!isMunicipality){
         BlueBox.add({
-            url: 'http://api.staging.dataviva.info/sc/year/municipality?order=students&year=2015&direction=desc&limit=1&' + filter,
+            url: 'http://api.staging.dataviva.info/sc/year/municipality?order=students&year=2016&direction=desc&limit=1&' + filter,
             title: dictionary['main_municipality'],
             subtitle: dictionary['number_enrolled_students'],
             label: {
@@ -40,34 +40,34 @@ $(document).ready(function(){
 
     //INDICATORS ADD
     Indicator.add({
-        url: "http://api.staging.dataviva.info/sc/year?year=2014&" + filter,
-        title: dictionary['number_enrolled'],
+        url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
+        title: dictionary['number_enrolled'] + ['2016'],
         value:  'students'
     });
     Indicator.add({
-        url: "http://api.staging.dataviva.info/sc/year?year=2014&" + filter,
-        title: dictionary['number_classes'],
+        url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
+        title: dictionary['number_classes'] + ['2016'],
         value:  'classes'
     });
     Indicator.add({
-        url: "http://api.staging.dataviva.info/sc/year?year=2014&" + filter,
-        title: dictionary['number_schools'],
+        url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
+        title: dictionary['number_schools'] + ['2016'],
         value:  'schools'
     });
     Indicator.add({
-        url: "http://api.staging.dataviva.info/sc/year?year=2014&" + filter,
-        title: dictionary['average_class_size'],
+        url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
+        title: dictionary['average_class_size'] + ['2016'],
         value:  'average_class_size'
     });
     Indicator.add({
-        url: "http://api.staging.dataviva.info/sc/year?year=2014&" + filter,
-        title: dictionary['average_age'],
+        url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
+        title: dictionary['average_age'] + ['2016'],
         value:  'average_age'
     });
 
     //GENERAL ADD 
     General.add({
-        url: 'http://api.staging.dataviva.info/sc/year/municipality?order=students&year=2015&direction=desc&limit=1&' + filter,
+        url: 'http://api.staging.dataviva.info/sc/year/municipality?order=students&year=2016&direction=desc&limit=1&' + filter,
         title: dictionary['main_municipality_students'],
         label: {
                 metadata: true,
