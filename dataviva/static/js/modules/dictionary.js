@@ -118,6 +118,16 @@ dictionary['average_class_size'] = lang == 'en' ? 'Average Class Size' : 'Tamanh
 dictionary['number_schools'] = lang == 'en' ? 'Number of Schools' : 'Número de Escolas';
 dictionary['main_municipality_students'] = lang == 'en' ? 'Main Municipality by Number of Enrolled Students' : 'Principal Município por Número de Alunos Matriculados';
 dictionary['administrative_dependency'] = lang == 'en' ? 'Administrative Dependency' : 'Dependência Administrativa';
+dictionary['number_enrolleds'] = lang == 'en' ? 'Number of Enrollments' : 'Número de Matrículas';
+dictionary['number_entrants'] = lang == 'en' ? 'Number of Entering Students' : 'Número de Ingressantes';
+dictionary['number_graduates'] = lang == 'en' ? 'Number of Graduates' : 'Número de Concluintes';
+dictionary['main_course'] = lang == 'en' ? 'Main Course' : 'Principal Curso';
+dictionary['main_course_enrolleds'] = lang == 'en' ? 'Main Course by Number of Enrolled Students' : 'Principal Curso por Número de Alunos Matriculados';
+dictionary['by_number_enrolled'] = lang == 'en' ? 'by Number of Enrolled Students' : 'por Número de Alunos Matriculados';
+dictionary['main_course_entrants'] = lang == 'en' ? 'Main Course by Number of Entering Students' : 'Principal Curso por Número de Alunos Ingressantes';
+dictionary['by_number_entrants'] = lang == 'en' ? 'by Number of Entering Students' : 'por Número de Alunos Ingressantes';
+dictionary['main_course_graduates'] = lang == 'en' ? 'Main Course by Number of Graduates' : 'Principal Curso por Número de Alunos Concluintes';
+dictionary['by_number_graduates'] = lang == 'en' ? 'by Number of Graduates' : 'por Número de Alunos Concluintes';
 
 
 // CNES
