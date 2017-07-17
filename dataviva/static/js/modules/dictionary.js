@@ -107,11 +107,18 @@ dictionary['enrolled'] = lang == 'en' ? 'Enrolled' : 'Matriculado';
 dictionary['enrolleds'] = lang == 'en' ? 'Enrolleds' : 'Matriculados';
 dictionary['funding_type'] = lang == 'en' ? 'Funding' : 'Financiamento';
 dictionary['main_university'] = lang == 'en' ? 'Main University' : 'Principal Universidade';
+dictionary['main_school'] = lang == 'en' ? 'Main School' : 'Principal Escola';
 dictionary['main_municipality'] = lang == 'en' ? 'Main Municipality' : 'Principal Município';
 dictionary['number_enrolled_students'] = lang == 'en' ? 'by Number of Enrolled Students' : 'por Número de Alunos Matriculados';
 dictionary['number_entrant_students'] = lang == 'en' ? 'by Number of Entering Students' : 'por Número de Alunos Ingressantes';
 dictionary['number_graduates_students'] = lang == 'en' ? 'by Number of Graduates Students' : 'por Número de Alunos Graduados';
+dictionary['number_enrolled'] = lang == 'en' ? 'Number of Enrolled Students' : 'Número de Alunos Matriculados';
+dictionary['number_classes'] = lang == 'en' ? 'Number of Classes' : 'Número de Turmas';
+dictionary['average_class_size'] = lang == 'en' ? 'Average Class Size' : 'Tamanho Médio das Turmas';
+dictionary['number_schools'] = lang == 'en' ? 'Number of Schools' : 'Número de Escolas';
+dictionary['main_municipality_students'] = lang == 'en' ? 'Main Municipality by Number of Enrolled Students' : 'Principal Município por Número de Alunos Matriculados';
 dictionary['administrative_dependency'] = lang == 'en' ? 'Administrative Dependency' : 'Dependência Administrativa';
+
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
