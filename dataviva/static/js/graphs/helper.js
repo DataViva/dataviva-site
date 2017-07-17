@@ -274,7 +274,7 @@ var CALC_BASIC_VALUES = {
     'cnes_professional': {}
 };
 
-var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group', 'hedu_course_field', 'shift'];
+var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group', 'hedu_course_field', 'shift', 'administrative_dependency'];
 var NEEDS_CASTING = ['wage', 'average_wage', 'enrolled', 'entrants', 'graduates'];
 
 var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {

@@ -117,6 +117,8 @@ dictionary['number_classes'] = lang == 'en' ? 'Number of Classes' : 'Número de 
 dictionary['average_class_size'] = lang == 'en' ? 'Average Class Size' : 'Tamanho Médio das Turmas';
 dictionary['number_schools'] = lang == 'en' ? 'Number of Schools' : 'Número de Escolas';
 dictionary['main_municipality_students'] = lang == 'en' ? 'Main Municipality by Number of Enrolled Students' : 'Principal Município por Número de Alunos Matriculados';
+dictionary['administrative_dependency'] = lang == 'en' ? 'Administrative Dependency' : 'Dependência Administrativa';
+
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
