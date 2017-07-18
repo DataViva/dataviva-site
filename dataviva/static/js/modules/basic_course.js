@@ -41,27 +41,27 @@ $(document).ready(function(){
     //INDICATORS ADD
     Indicator.add({
         url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
-        title: dictionary['number_enrolled'] + ['2016'],
+        title: dictionary['number_enrolled'] + ' (2016)',
         value:  'students'
     });
     Indicator.add({
         url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
-        title: dictionary['number_classes'] + ['2016'],
+        title: dictionary['number_classes'] + ' (2016)',
         value:  'classes'
     });
     Indicator.add({
         url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
-        title: dictionary['number_schools'] + ['2016'],
+        title: dictionary['number_schools'] + ' (2016)',
         value:  'schools'
     });
     Indicator.add({
         url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
-        title: dictionary['average_class_size'] + ['2016'],
+        title: dictionary['average_class_size'] + ' (2016)',
         value:  'average_class_size'
     });
     Indicator.add({
         url: "http://api.staging.dataviva.info/sc/year?year=2016&" + filter,
-        title: dictionary['average_age'] + ['2016'],
+        title: dictionary['average_age'] + ' (2016)',
         value:  'average_age'
     });
 
