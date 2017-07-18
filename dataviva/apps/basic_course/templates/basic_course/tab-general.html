@@ -1,9 +1,60 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
+                {% if not location.id %}
+            <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{basic_course.name()}} 
+            {% trans %}course/field of study in Brazil is in the municipality of {% endtrans %}{{body["city_name"]}} - {{body.city_state.upper()}}, 
+            {% trans %}with{% endtrans %} {{body["city_enrolled"] | max_digits(3) }} {{body["city_enrolled"] | magnitude }} 
+            {% trans %}students. The country has a total of{% endtrans %} {{header["course_enrolled"] | max_digits(3)}} {{header["course_enrolled"] | magnitude }} 
+            {% trans %}enrolled students in this course/field, with {% endtrans %}{{header["course_average_class_size"] | max_digits(3)}} {{header["course_average_class_size"] | magnitude}} 
+            {% trans %}students per class in average{% endtrans %}.</p>
+        {% else %}
+            {% if location.id|length == 1 %}
+                <p>{% trans %}The highest number of enrollments in {% endtrans %}{{ basic_course.name() }} 
+                {% trans %}in {% endtrans %}{{ location.name() }} 
+                {% trans %}is in the state of {% endtrans %}{{ location.preposition("de") }} {{ header.location_rank }}, 
+                {% trans %}with {% endtrans %} {{ header.location_enrolled| max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                {% trans %}students. The region has a total of {% endtrans %}{{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
+                {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
+                {% trans %}students per class in average{% endtrans %}.</p>
+            {% elif location.id|length == 3 %}
+                <p>{% trans %}The highest number of enrollments in {% endtrans %}{{ basic_course.name() }}
+                 {% trans %}in the state of {% endtrans %}{{location.preposition('de')}} {{ location.name() }} 
+                 {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
+                 {% trans %}with {% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                 {% trans %}students. The state has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
+                 {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
+                 {% trans %}students per class in average{% endtrans %}.</p>
+            {% elif location.id|length == 5 %}
+                <p>{% trans %}The highest number of enrollments in {% endtrans %} {{ basic_course.name() }} 
+                {% trans %}in the mesoregion {% endtrans %} {{ location.name() }} 
+                {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
+                {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                {% trans %}students. The mesoregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
+                {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
+                {% trans %}students per class in average{% endtrans %}.</p>
+            {% elif location.id|length == 7 %}
+                <p>{% trans %}The highest number of enrollments in {% endtrans %} {{ basic_course.name() }} 
+                {% trans %}in the microregion {% endtrans %} {{ location.name() }} 
+                {% trans %}is in the municipality of {% endtrans %}{{ header.location_rank }}, 
+                {% trans %}with{% endtrans %} {{ header.location_enrolled | max_digits(3) }} {{ (header.location_enrolled | magnitude).lower() }} 
+                {% trans %}students. The microregion has a total of {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
+                {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
+                {% trans %}students per class in average{% endtrans %}.</p>
+            {% else %}
+                <p>{{ location.name() }}
+                {% trans %} is the number{% endtrans %} {{ header.rank }}{% if g.locale == "pt" %}º{% endif %} 
+                {% trans %}city in number of enrollments {% endtrans %}{{basic_course.preposition('em')}} {{ basic_course.name() }} 
+                {% trans %}in the state {% endtrans %} {{location.preposition('de')}} {{ header.state_name }}. 
+                {% trans %}The city has {% endtrans %} {{ header.course_enrolled | max_digits(3) }} {{ (header.course_enrolled | magnitude).lower() }} 
+                {% trans %}enrolled students in this course/field, with {% endtrans %}{{ header.course_average_class_size|max_digits(3) }} 
+                {% trans %}students per class in average{% endtrans %}.</p>
+            {% endif %}
+        {% endif %}
         <div class="row">
 
+
         <div class="dl-box col-xs-12 col-md-6" id='general-students'>
-            <h3>{% trans %}Enrollments{% endtrans %} (2014)</h3>
+            <h3>{% trans %}Enrollments{% endtrans %} (2016)</h3>
             <a href="#enrollments" 
                     aria-controls="enrollments" 
                     role="tab"        
