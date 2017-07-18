@@ -113,6 +113,7 @@ dictionary['main_university_entrants'] = lang == 'en' ? 'Main University by Numb
 dictionary['main_university_graduates'] = lang == 'en' ? 'Main University by Number of Graduates' : 'Principal Universidade por Número de Alunos Concluintes';
 dictionary['main_school'] = lang == 'en' ? 'Main School' : 'Principal Escola';
 dictionary['main_municipality'] = lang == 'en' ? 'Main Municipality' : 'Principal Município';
+dictionary['main_product'] = lang == 'en' ? 'Main Product' : 'Principal Produto';
 dictionary['number_enrolled_students'] = lang == 'en' ? 'by Number of Enrolled Students' : 'por Número de Alunos Matriculados';
 dictionary['number_entrant_students'] = lang == 'en' ? 'by Number of Entering Students' : 'por Número de Alunos Ingressantes';
 dictionary['number_graduates_students'] = lang == 'en' ? 'by Number of Graduates Students' : 'por Número de Alunos Graduados';
@@ -134,6 +135,21 @@ dictionary['main_course_entrants'] = lang == 'en' ? 'Main Course by Number of En
 dictionary['by_number_entrants'] = lang == 'en' ? 'by Number of Entering Students' : 'por Número de Alunos Ingressantes';
 dictionary['main_course_graduates'] = lang == 'en' ? 'Main Course by Number of Graduates' : 'Principal Curso por Número de Alunos Concluintes';
 dictionary['by_number_graduates'] = lang == 'en' ? 'by Number of Graduates' : 'por Número de Alunos Concluintes';
+dictionary['main_municipality_export'] = lang == 'en' ? 'Main Municipality by Total Value Exported' : 'Principal Município por Valor Total Exportado';
+dictionary['main_municipality_import'] = lang == 'en' ? 'Main Municipality by Total Value Imported' : 'Principal Município por Valor Total Importado';
+dictionary['main_product_export'] = lang == 'en' ? 'Main Product by Total Value Exported' : 'Principal Produto por Valor Total Exportado';
+dictionary['main_product_import'] = lang == 'en' ? 'Main Product by Total Value Imported' : 'Principal Produto por Valor Total Importado';
+dictionary['by_value_exported'] = lang == 'en' ? 'by Total Value Exported' : 'por Valor Total Exportado';
+dictionary['by_value_imported'] = lang == 'en' ? 'by Total Value Imported' : 'por Valor Total Importado';
+dictionary['total_value_exported'] = lang == 'en' ? 'Total Value Exported' : 'Total de Exportações';
+dictionary['total_value_imported'] = lang == 'en' ? 'Total Value Imported' : 'Total de Importações';
+dictionary['trade_balance'] = lang == 'en' ? 'Trade Balance' : 'Balança Comercial';
+dictionary['average_price_exported'] = lang == 'en' ? 'Average Price Exported' : 'Preço Médio Exportado';
+dictionary['average_price_imported'] = lang == 'en' ? 'Average Price Imported' : 'Preço Médio Importado';
+dictionary['product_highest_balance'] = lang == 'en' ? 'Product with Highest Trade Balance Surplus' : 'Produto com Maior Saldo da Balança Comercial';
+dictionary['product_lowest_balance'] = lang == 'en' ? 'Product with Lowest Trade Balance Surplus' : 'Produto com Menor Saldo da Balança Comercial';
+dictionary['product_highest'] = lang == 'en' ? 'Product with Highest' : 'Produto com Maior';
+dictionary['product_lowest'] = lang == 'en' ? 'Product with Lowest' : 'Produto com Menor';
 
 
 // CNES

@@ -31,65 +31,11 @@
     {% endif %}
 
     <div class="row">
-        <div class="dl-box col-xs-12 col-md-10 col-lg-8">
-            <h3>{% trans %}International Trade{% endtrans %} ({{ header.year }})</h3>
-            <dl class="dl-horizontal">
-                {% if location.id | length != 9 %}
-                    {% if body.highest_export_value %}
-                        <dt>
-                            {% trans %}Main Municipality by Total Value Exported{% endtrans %}
-                        </dt>
-                        <dd>
-                            <small>{{body.municipality_with_more_exports}} - {{body.municipality_with_more_exports_state.upper()}}</small>
-                            USD <strong class="counter">{{body.highest_export_value | max_digits(3, True) }}</strong> <span>{{body.highest_export_value | magnitude }}</span>
-                        </dd>
-                    {% endif %}
-                    {% if body.highest_import_value %}
-                        <dt>
-                            {% trans %}Main Municipality by Total Value Imported{% endtrans %}
-                        </dt>
-                        <dd>
-                            <small>{{body.municipality_with_more_imports}} - {{body.municipality_with_more_imports_state.upper()}}</small>
-                            USD <strong class="counter">{{body.highest_import_value | max_digits(3, True) }}</strong> <span>{{body.highest_import_value | magnitude }}</span>
-                        </dd>
-                    {% endif %}
-                {% endif %}
-                    {% if body.product_with_highest_export_value %}
-                        <dt>
-                            {% trans %}Main Product by Total Value Exported{% endtrans %}
-                        </dt>
-                        <dd>
-                            <small>{{body.product_with_more_exports}}</small>
-                            USD <strong class="counter">{{body.product_with_highest_export_value | max_digits(3, True) }}</strong> <span>{{body.product_with_highest_export_value | magnitude }}</span>
-                        </dd>
-                    {% endif %}
-                    {% if body.product_with_highest_import_value %}
-                        <dt>
-                            {% trans %}Main Product by Total Value Imported{% endtrans %}
-                        </dt>
-                        <dd>
-                            <small>{{body.product_with_more_imports}}</small>
-                            USD <strong class="counter">{{body.product_with_highest_import_value | max_digits(3, True) }}</strong> <span>{{body.product_with_highest_import_value | magnitude }}</span>
-                        </dd>
-                    {% endif %}
-                        <dt>
-                            {% trans %}Product with Highest Trade Balance Surplus{% endtrans %}
-                        </dt>
-                        <dd>
-                            <small>{{body.product_with_highest_balance}}</small>
-                            USD <strong class="counter">{{body.highest_balance | max_digits(3, True) }}</strong> <span>{{body.highest_balance | magnitude }}</span>
-                        </dd>
-                        <dt>
-                            {% trans %}Product with Lowest Trade Balance Surplus{% endtrans %}
-                        </dt>
-                        <dd>
-                            <small>{{body.product_with_lowest_balance}}</small>
-                            USD <strong class="counter">{{body.lowest_balance | max_digits(3, True) }}</strong> <span>{{body.lowest_balance | magnitude }}</span>
-                        </dd>
-                    </dl>
+        <div class="dl-box col-xs-12 col-md-10 col-lg-8" id="general-partner">
+            <h3>{% trans %}International Trade{% endtrans %} (2016)</h3>
             <a href="#international-trade" 
                 aria-controls="international-trade" 
-                role="tab"        
+                role="tab"
                 data-toggle="tab" 
                 class="pull-right btn btn-primary btn-xs m-r-lg" 
                 graph
@@ -100,17 +46,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
