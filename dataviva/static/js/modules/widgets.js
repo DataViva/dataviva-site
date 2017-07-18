@@ -64,7 +64,7 @@ var General = (function(){
                 url: data.url,
                 type: 'GET',
                 success: function(response){
-                    api = buildData(response)[0];
+                    api = buildData(response);
                 }
             }),
 
@@ -72,16 +72,35 @@ var General = (function(){
                 metadata = response;
             })
         ).then(function() {
-            if(api == undefined){
+
+            if(api[0] == undefined){
                 data.template.hide();
                 return;
             }
 
             var label = data.label;
-            if (typeof data.label == 'object')
-                label = metadata[api[data.label.value]].name_pt;
+            if (typeof data.label == 'object') {
+                if (typeof data.label.funct == 'function') {
+                    label = data.label.funct(api, metadata);
+                } else {
+                   label = metadata[api[0][data.label.value]]['name_' + lang];
+                }
+            }
 
-            var formattedValue = Magnitude(api[data.value]);
+            if (typeof data.label == 'function') {
+                label = data.label(api, metadata);
+            }
+
+            var formattedValue;
+
+            if (typeof data.value == 'function'){
+                formattedValue = data.value(api);
+                formattedValue = Magnitude(formattedValue)
+            }
+            else {
+                formattedValue = Magnitude(api[0][data.value]);
+            }
+
             var value = formattedValue.split(' ')[0].replace('.', ',');
             var magnitude = formattedValue.split(' ')[1] || '';
 
@@ -131,14 +150,23 @@ var Indicator = (function(){
                     return;
                 }
 
-                var formattedValue = Magnitude(api[data.value]);
+                var formattedValue;
+
+                if (typeof data.value == 'function'){
+                    formattedValue = data.value(buildData(response));
+                    formattedValue = Magnitude(formattedValue)
+                }
+                else {
+                    formattedValue = Magnitude(api[data.value]);
+                }
+
                 var value = formattedValue.split(' ')[0].replace('.', ',');
                 var magnitude = formattedValue.split(' ')[1] || '';
                 
                 var filledTemplate = template.replace('{{title}}', data.title || '')
                                     .replace('{{value}}', value)
                                     .replace('{{magnitude}}', magnitude)
-                                    .replace('{{preffix}}', data.prefix || '' )
+                                    .replace('{{preffix}}', data.preffix || '' )
                                     .replace('loading', '');
 
                 data.template.replaceWith(filledTemplate);
@@ -179,7 +207,7 @@ var BlueBox = (function(){
                 url: data.url, 
                 type: 'GET',    
                 success: function(response){
-                    api = buildData(response)[0];
+                    api = buildData(response);
                 }           
             }),
 
@@ -187,16 +215,34 @@ var BlueBox = (function(){
                 metadata = response;
             })
         ).then(function() {
-            if(api == undefined){
+            if(api[0] == undefined){
                 data.template.hide();
                 return;
             }
 
             var label = data.label;
-            if (typeof data.label == 'object')
-                label = metadata[api[data.label.value]].name_pt;
+            if (typeof data.label == 'object') {
+                if (typeof data.label.funct == 'function') {
+                    label = data.label.funct(api, metadata);
+                } else {
+                   label = metadata[api[0][data.label.value]]['name_' + lang];
+                }
+            }
 
-            var formattedValue = Magnitude(api[data.value]);
+            if (typeof data.label == 'function') {
+                label = data.label(api, metadata);
+            }
+
+            var formattedValue;
+
+            if (typeof data.value == 'function'){
+                formattedValue = data.value(api);
+                formattedValue = Magnitude(formattedValue)
+            }
+            else {
+                formattedValue = Magnitude(api[0][data.value]);
+            }
+
             var value = formattedValue.split(' ')[0].replace('.', ',');
             var magnitude = formattedValue.split(' ')[1] || '';
 
@@ -220,14 +266,15 @@ var BlueBox = (function(){
 })();
 
 var Magnitude = function(n){
-    if (n < 1000)
+    var nAbs = Math.abs(n);
+    if (nAbs < 1000)
         return n + '';
-    if (n < 1000000)
+    if (nAbs < 1000000)
         return (n/1000).toPrecision(3) + ' ' + dictionary.thousand;
-    if (n < 1000000000)
-        return n < 2000000 ? (n/1000000).toPrecision(3) + ' ' + dictionary.million : (n/1000000).toPrecision(3) + ' ' + dictionary.millions;
-    if (n < 1000000000000)
-        return n < 2000000000 ? (n/1000000000).toPrecision(3) + ' ' + dictionary.billion : (n/1000000000).toPrecision(3) + ' ' + dictionary.billions;
-    if (n < 1000000000000000)
-        return n < 2000000000000 ? (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillion : (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillions;
+    if (nAbs < 1000000000)
+        return nAbs < 2000000 ? (n/1000000).toPrecision(3) + ' ' + dictionary.million : (n/1000000).toPrecision(3) + ' ' + dictionary.millions;
+    if (nAbs < 1000000000000)
+        return nAbs < 2000000000 ? (n/1000000000).toPrecision(3) + ' ' + dictionary.billion : (n/1000000000).toPrecision(3) + ' ' + dictionary.billions;
+    if (nAbs < 1000000000000000)
+        return nAbs < 2000000000000 ? (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillion : (n/1000000000000).toPrecision(3) + ' ' + dictionary.trillions;
 };
