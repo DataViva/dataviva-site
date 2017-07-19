@@ -150,6 +150,10 @@ dictionary['product_highest_balance'] = lang == 'en' ? 'Product with Highest Tra
 dictionary['product_lowest_balance'] = lang == 'en' ? 'Product with Lowest Trade Balance Surplus' : 'Produto com Menor Saldo da Balança Comercial';
 dictionary['product_highest'] = lang == 'en' ? 'Product with Highest' : 'Produto com Maior';
 dictionary['product_lowest'] = lang == 'en' ? 'Product with Lowest' : 'Produto com Menor';
+dictionary['main_destination_exported'] = lang == 'en' ? 'Main Destination by Total Value Exported' : 'Principal Destino por Valor Total Exportado';
+dictionary['main_destination'] = lang == 'en' ? 'Main Destination' : 'Principal Destino';
+dictionary['main_origin_imported'] = lang == 'en' ? 'Main Origin by Total Value Imported' : 'Principal Origem por Valor Total Importado';
+dictionary['main_origin'] = lang == 'en' ? 'Main Origin' : 'Principal Origem';
 
 
 // CNES

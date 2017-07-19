@@ -26,6 +26,7 @@
 {% block content %}
 
 <!-- BREADCRUMB -->
+<input type="hidden" id="id_ibge" value="{{id_ibge}}">
 <div class="container">
     <div class="row bg-white">
         <ol class="breadcrumb">
@@ -82,61 +83,6 @@
 
         <div class="indices">
           <div class="row">
-          {% if header.export_value and header.import_value %}
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-              <div class="widget">
-                <h2 class="text-left text-uppercase">{%trans%}Trade Balance{%endtrans%} ({{ header.year }})</h2>
-                <div class="number">
-                    USD <strong class="counter">{{ header.trade_balance | max_digits(3, True) }}</strong><br/>
-                    <small class="magnitude">{% if header.trade_balance != 0 %}{{ header.trade_balance | magnitude }}{% endif %}</small>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if header.export_value %}
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-              <div class="widget">
-                <h2 class="text-left text-uppercase">{%trans%}Total Value Exported{%endtrans%} ({{ header.year }})</h2>
-                <div class="number">
-                    USD <strong class="counter">{{ header.export_value | max_digits(3, True) }}</strong><br/>
-                    <small class="magnitude">{{ header.export_value | magnitude }}</small>
-                </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if header.export_net_weight %}
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <div class="widget">
-                  <h2 class="text-left text-uppercase">{%trans%}Average Price Exported{%endtrans%} ({{ header.year }})</h2>
-                  <div class="number">
-                      <strong class="counter">{{ header.export_net_weight | max_digits(3, True) }}</strong><br/>
-                      <small class="magnitude">USD / kg</small>
-                  </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if header.import_value %}
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                <div class="widget">
-                  <h2 class="text-left text-uppercase">{%trans%}Total Value Imported{%endtrans%} ({{ header.year }})</h2>
-                  <div class="number">
-                      USD <strong class="counter">{{ header.import_value | max_digits(3, True) }}</strong><br/>
-                      <small class="magnitude">{{ header.import_value | magnitude }}</small>
-                  </div>
-              </div>
-            </div>
-            {% endif %}
-            {% if header.import_net_weight %}
-            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-              <div class="widget">
-                <h2 class="text-left text-uppercase">{%trans%}Average Price Imported{%endtrans%} ({{ header.year }})</h2>
-                <div class="number">
-                    <strong class="counter">{{ header.import_net_weight | max_digits(3, True) }}</strong><br/>
-                    <small class="magnitude">USD / kg</small>
-                </div>
-              </div>
-            </div>
-            {% endif %}
             {% if (product.id|length) == 6 %}
               {% if header.pci %}
               <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -245,3 +191,11 @@
 </section>
 
 {% endblock content %}
+
+{% block script %}
+    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+    <script type="text/javascript" src="/static/js/modules/product.js"></script>
+{% endblock %}
+

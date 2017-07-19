@@ -127,7 +127,7 @@ var Indicator = (function(){
             '<h2 class="text-left text-uppercase">{{title}}</h2>' +
             '<div class="number">' +
                 '{{preffix}} <strong class="counter">{{value}}</strong><br/>' +
-                '<small class="magnitude">{{magnitude}}</small>' +
+                '<small class="magnitude">{{magnitude}}{{suffix}}</small>' +
             '</div>' +
         '</div>' +
     '</div>';
@@ -167,6 +167,7 @@ var Indicator = (function(){
                                     .replace('{{value}}', value)
                                     .replace('{{magnitude}}', magnitude)
                                     .replace('{{preffix}}', data.preffix || '' )
+                                    .replace('{{suffix}}', data.suffix || '' )
                                     .replace('loading', '');
 
                 data.template.replaceWith(filledTemplate);
