@@ -150,7 +150,39 @@ dictionary['product_highest_balance'] = lang == 'en' ? 'Product with Highest Tra
 dictionary['product_lowest_balance'] = lang == 'en' ? 'Product with Lowest Trade Balance Surplus' : 'Produto com Menor Saldo da Balança Comercial';
 dictionary['product_highest'] = lang == 'en' ? 'Product with Highest' : 'Produto com Maior';
 dictionary['product_lowest'] = lang == 'en' ? 'Product with Lowest' : 'Produto com Menor';
-
+dictionary['average_monthly_income'] = lang == 'en' ? 'Average Monthly Income' : 'Renda Média Mensal';
+dictionary['payroll']  = lang == 'en' ? 'Payroll' : 'Massa Salarial';
+dictionary['total_employment'] = lang == 'en' ? 'Total Employment' : 'Total de Empregos';
+dictionary['total_establishments'] = lang == 'en' ? 'Total of Establishments' : 'Total de Estabelecimentos';
+dictionary['main_municipality_jobs'] = lang == 'en' ? 'Main Municipality by Jobs' : 'Principal Município por Empregos';
+dictionary['main_activity_jobs'] = lang == 'en' ? 'Main employer activity' : 'Principal Atividade por Empregos';
+dictionary['municipality_highest_average_income'] = lang == 'en' ? 'Municipality with highest monthly average income' : 'Município com maior renda média mensal';
+dictionary['activity_highest_average_income'] = lang == 'en' ? 'Activity with highest monthly average income' : 'Atividade com maior renda média mensal';
+dictionary['university_higher_enrollments'] = lang == 'en' ? 'University with Highest Number of Enrollments' : 'Universidade com Maior Número de Matrículas';
+dictionary['course_higher_enrollments'] = lang == 'en' ? 'Major with Highest Number of Enrollments' : 'Curso Superior com Maior Número de Matrículas';
+dictionary['sc_course_higher_enrollments'] = lang == 'en' ? 'Basic Course with Highest Number of Enrollments' : 'Curso Básico com Maior Número de Matrículas';
+dictionary['school_higher_enrollments'] = lang == 'en' ? 'School with Highest Number of Enrollments' : 'Escola com Maior Número de Matrículas';
+dictionary['sc_school']  = lang == 'en' ? 'School' : 'Escola';
+dictionary['main_product_export'] = lang == 'en' ? 'Main Product by Total Value Exported' : 'Principal Produto por Valor Total Exportado';
+dictionary['main_product_import'] = lang == 'en' ? 'Main Product by Total Value Imported' : 'Principal Produto por Valor Total Importado';
+dictionary['total_export'] = lang == 'en' ? 'Total of Exports' : 'Total de Exportações';
+dictionary['total_import'] = lang == 'en' ? 'Total of Imports' : 'Total de Importações';
+dictionary['main_product'] = lang == 'en' ? 'Main Product' : 'Principal Produto';
+dictionary['by_export'] = lang == 'en' ? 'by Export Value' : 'por Valor Exportado';
+dictionary['by_import'] = lang == 'en' ? 'by Import Value' : 'por Valor Importado';
+dictionary['main_destination'] = lang == 'en' ? 'Main Destination' : 'Principal Destino';
+dictionary['main_origin'] = lang == 'en' ? 'Main Origin' : 'Principal Origem';
+dictionary['university'] = lang == 'en' ? 'University' : 'Universidade';
+dictionary['major'] = lang == 'en' ? 'Major' : 'Ensino Superior';
+dictionary['school']  = lang == 'en' ? 'School' : 'Escola';
+dictionary['basic_course']  = lang == 'en' ? 'Basic Course' : 'Curso Básico';
+dictionary['highest_enrolleds'] = lang == 'en' ? 'with Highest Number of Enrollments' : 'com Maior Número de Matrículas';
+dictionary['municipality_highest'] = lang == 'en' ? 'Municipality with highest' : 'Município com Maior';
+dictionary['average_income'] = lang == 'en' ? 'Monthly Average Income' : 'Renda Média Mensal';
+dictionary['main'] = lang == 'en' ? 'Main' : 'Principal';
+dictionary['activity_jobs'] = lang == 'en' ? 'Employer activity' : 'Atividade por Empregos';
+dictionary['activity_highest'] = lang == 'en' ? 'Activity with highest' : 'Atividade com maior';
+dictionary['main_economic_activity'] = lang == 'en' ? 'Main Economic Activity' : 'Principal atividade econômica';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
