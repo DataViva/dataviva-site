@@ -190,7 +190,7 @@ var BlueBox = (function(){
         '<div class="blue-box blue-box--loading">' +
             '<p class="label">{{label}}</p>' +
             '<div class="number">' +
-                '<strong class="counter">{{value}}</strong><span>{{magnitude}} {{suffix}}</span>' +
+                '<small>{{prefix}}</small><strong class="counter">{{value}}</strong><span>{{magnitude}} {{suffix}}</span>' +
             '</div>' +
         '</div>' +
     '</div>';
