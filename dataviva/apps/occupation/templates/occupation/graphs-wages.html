@@ -120,7 +120,7 @@
 
             <a href="#wages-demographic" class="list-group-item" data-toggle="collapse" data-parent="#wages-demographic">{% trans %}Demographic Informations{% endtrans %}</a>
             <div class="collapse" id="wages-demographic">
-                <a href="/{{g.locale}}/bar/rais/wage_received,average_monthly_wage/gender,ethnicity,literacy?occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/bar/rais/wage,average_wage/gender,ethnicity,literacy?occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-demographic-bar'}}" data-parent="#wages-demographic">
                     Bar new API
                 </a>

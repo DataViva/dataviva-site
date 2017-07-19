@@ -21,8 +21,8 @@ def product_service(product):
 
 def sc_service(sc_course):
     if len(sc_course) == 2:
-        return ('sc_course_field', str(int(sc_course)))
-    return ('sc_course', str(int(sc_course)))
+        return ('sc_course_field', sc_course)
+    return ('sc_course', sc_course)
 
 
 def occupation_service(occupation):

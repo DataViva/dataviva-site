@@ -120,7 +120,7 @@ var SIZES = {
     },
     'hedu': {
         'hedu_course': ['graduates', 'entrants'],
-        'municipality': ['enrolled','graduates', 'entrants']
+        'municipality': ['enrolleds','graduates', 'entrants']
    },
     'sc': {
         'sc_course': ['students']
@@ -244,7 +244,8 @@ var COLORS = {
 
 var BASIC_VALUES = {
     'secex': ['value', 'kg'],
-    'hedu': ['enrolled', 'entrants', 'graduates'],
+    'sc': ['students'],
+    'hedu': ['enrolleds', 'entrants', 'graduates'],
     'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
     'cnes_establishment': ['establishments'],
     'cnes_equipment': ['equipment_quantity', 'equipment_quantity_in_use'],
@@ -264,6 +265,7 @@ var CALC_BASIC_VALUES = {
             return getUrlArgs()['type'] == 'import' || dataItem['type'] == 'import' ? dataItem['value'] / dataItem['kg'] : undefined;
         }
     },
+    'sc': {},
     'hedu': {},
     'rais': {},
     'cnes_establishment': {},
@@ -272,7 +274,7 @@ var CALC_BASIC_VALUES = {
     'cnes_professional': {}
 };
 
-var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group', 'hedu_course_field', 'shift'];
+var HAS_ICONS = ['continent', 'industry_section', 'product_section', 'occupation_group', 'hedu_course_field', 'shift', 'administrative_dependency', 'sc_course_field'];
 var NEEDS_CASTING = ['wage', 'average_wage', 'enrolled', 'entrants', 'graduates'];
 
 var titleBuilder = function(title, subtitle, attrs, dataset, filters, yearRange) {

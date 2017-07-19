@@ -36,7 +36,7 @@ function buildYearRange(dataItem) {
 }
 
 function buildStudentsData(data, dataItem) {
-    var students_situation = ['enrolled', 'entrants', 'graduates'],
+    var students_situation = ['enrolleds', 'entrants', 'graduates'],
         partialArrayData = [];
 
     students_situation.forEach(function(situation){

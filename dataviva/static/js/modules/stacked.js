@@ -16,11 +16,15 @@ var stacked = document.getElementById('stacked'),
     selectedYears = [],
     metadata = {},
     currentFilters = {},
-    currentTitleAttrs = {'size': values[0]}
     baseTitle = stacked.getAttribute('graph-title'),
     baseSubtitle = stacked.getAttribute('graph-subtitle'),
     stackedFilters = args['filters'] ? args['filters'].split('+') : [],
     attentionLevelFilter = false;
+
+var currentTitleAttrs = {
+    'size': values[0],
+    'depths': args.depths ? args.depths[0] : area
+}
 
 if(stackedFilters.indexOf('attention_level') != -1) {
     var i = stackedFilters.indexOf('attention_level');
@@ -205,7 +209,10 @@ var loadViz = function (data){
         d3plus.form()
             .config(config)
             .container(d3.select('#controls'))
-            .data([{'id': 'desc', 'label': dictionary['desc']}, {'id': 'asc', 'label': dictionary['asc']}])
+            .data([
+                {'id': 'desc', 'label': dictionary['desc']},
+                {'id': 'asc', 'label': dictionary['asc']}
+            ])
             .title(dictionary['sort'])
             .type('toggle')
             .focus('desc', function(value) {
@@ -214,14 +221,34 @@ var loadViz = function (data){
             .draw();
 
         // Adds order selector
+
+        var orderOptions = [
+            {'id': 'value', 'label': dictionary['value']},
+            {'id': 'name', 'label': dictionary['name']},
+        ]
+
+        if (args['order']) {
+            args['order'].split('+').forEach(function(order) {
+                orderOptions.push({
+                    id: order,
+                    label: dictionary[order]
+                })
+            })
+        }
+
         d3plus.form()
             .config(config)
             .container(d3.select('#controls'))
-            .data([{'id': 'value', 'label': dictionary['value']}, {'id': 'name', 'label': dictionary['name']}])
+            .data(orderOptions)
             .title(dictionary['Order'])
             .type('toggle')
             .focus('value', function(value) {
-                viz.order({'value': value == 'value' ? viz.y() : viz.id()}).draw();
+                if (value == 'value')
+                    value = viz.y();
+                else if (value == 'name')
+                    value = viz.id();
+
+                viz.order({'value': value}).draw();
             })
             .draw();
 
@@ -496,6 +523,7 @@ var loadViz = function (data){
         .legend({'filters': true})
         .depth(0, function(d) {
             currentTitleAttrs['shapes'] = depths[d];
+            currentTitleAttrs['depths'] = depths[d];
             viz.title(titleHelper(yearRange));
         })
 
@@ -512,6 +540,9 @@ var loadViz = function (data){
         } else {
             viz.id(depths);
             currentTitleAttrs['shapes'] = depths[0];
+
+            if (args['depth'])
+                viz.depth(depths.indexOf(args['depth']));
         }
 
         viz.title(titleHelper(yearRange))

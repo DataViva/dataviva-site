@@ -15,13 +15,13 @@ var metadata = {};
 var args = getUrlArgs();
 var filters = args.hasOwnProperty('filters') ? args['filters'].split('+') : [];
 var values = getUrlArgs().hasOwnProperty('values') ? args['values'].split('+') : [value];
+var colors = args.hasOwnProperty('colors') ? args['colors'].split('+') : [];
 
 var buildData = function(apiResponse) {
     var getAttrByName = function(item, attr) {
         var index = headers.indexOf(attr);
         return item[index];
     };
-
     var data = [];
     var headers = apiResponse.headers;
 
@@ -125,6 +125,27 @@ var loadViz = function(data){
                         .draw();
                 })
              .draw();
+        }
+
+        // Adds color selector
+        if (colors.length > 1){
+            var options = [];
+            colors.forEach(function(item) {
+                options.push({'id': item, 'label': dictionary[item]});
+            });
+
+            d3plus.form()
+                .config(config)
+                .data(options)
+                .title(lang == 'en' ? 'Color' : 'Cor')
+                .type(options.length > 3 ? 'drop' : 'toggle')
+                .focus(value, function(v) {
+                    currentTitleAttrs['value'] = v;
+                    selectedColor = v == 'students' ? {'scale':'category20', 'value': args['color'] || v} : {"value": v};
+                    viz.color(selectedColor)
+                    viz.draw()
+                })
+                .draw();
         }
 
         var statements = function(filter, value){

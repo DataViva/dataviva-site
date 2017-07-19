@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
-        {% if not location.id %}
+                {% if not location.id %}
             <p>{% trans %}The highest number of enrollments in the {% endtrans %}{{basic_course.name()}} 
             {% trans %}course/field of study in Brazil is in the municipality of {% endtrans %}{{body["city_name"]}} - {{body.city_state.upper()}}, 
             {% trans %}with{% endtrans %} {{body["city_enrolled"] | max_digits(3) }} {{body["city_enrolled"] | magnitude }} 
@@ -50,35 +50,16 @@
                 {% trans %}students per class in average{% endtrans %}.</p>
             {% endif %}
         {% endif %}
-
         <div class="row">
 
-        <div class="dl-box col-xs-12 col-md-6">
-            <h3>{% trans %}Enrollments{% endtrans %} ({{header.course_year}})</h3>
-            <dl class="dl-horizontal">
-                    <dt>{% trans %}Main School{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
-                    <dd>
-                        <small>{{body.school_name }}</small>
-                        <strong class="counter">{{body.school_enrolled | max_digits(3, True) }}</strong> 
-                        <span>{{ (body.school_enrolled | magnitude).lower() }}</span>
-                    </dd>
-                    {% if location.id | length < 9 %}
-                    <dt>{% trans %}Main Municipality{% endtrans %} {% trans %}by Number of Enrolled Students{% endtrans %}</dt>
-                    <dd>
-                        <small>{{body.city_name }} - {{body.city_state.upper()}}</small>
-                        <strong class="counter">{{body.city_enrolled | max_digits(3, True)}}</strong>
-                        <span>{{ (body.city_enrolled | magnitude).lower() }}</span>
-                    </dd>
-                    {% endif %}
-            </dl>
+
+        <div class="dl-box col-xs-12 col-md-6" id='general-students'>
+            <h3>{% trans %}Enrollments{% endtrans %} (2016)</h3>
             <a href="#enrollments" 
                     aria-controls="enrollments" 
                     role="tab"        
                     data-toggle="tab" 
-                    class="pull-right btn btn-primary btn-xs m-r-lg" 
-                    graph
-                    data-id="{{ basic_course.id }}"
-                    data-location="{{ location.id }}">
+                    graph class="pull-right btn btn-primary btn-xs m-r-lg">
                 {% trans %}More details{% endtrans %}
             </a>
         </div>
