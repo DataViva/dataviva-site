@@ -95,10 +95,9 @@ $(document).ready(function(){
             value: 'equipments',
             id: 'health'
         });
-
     }
-    //ADD GENERAL IN TRADE IF ID_IBGE IS EQUAL TO BRAZIL OR IF IT IS AGGREGATE
-    if(!id_ibge){
+
+    if(!idIbge){
         General.add({
             url: "http://api.staging.dataviva.info/secex/product_section/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_export'],
@@ -222,28 +221,51 @@ $(document).ready(function(){
         value: 'value',
         id: 'trade'
     });
+    if(idIbge){
+        General.add({
+            url: 'http://api.staging.dataviva.info/rais/year/industry_class?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            title: dictionary['main_economic_activity'],
+            label: {
+                    metadata: true,
+                    value: 'industry_class'
+                },
+            value: 'jobs',
+            id: 'wage'
+        });
+        General.add({
+            url: 'http://api.staging.dataviva.info/rais/year/occupation_family?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            title: dictionary['main_occupation'],
+            label: {
+                    metadata: true,
+                    value: 'occupation_family'
+                },
+            value: 'jobs',
+            id: 'wage'
+        });
+    }
+    else{
+        General.add({
+            url: 'http://api.staging.dataviva.info/rais/year/industry_section?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            title: dictionary['main_economic_activity'],
+            label: {
+                    metadata: true,
+                    value: 'industry_section'
+                },
+            value: 'jobs',
+            id: 'wage'
+        });
+        General.add({
+            url: 'http://api.staging.dataviva.info/rais/year/occupation_group?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            title: dictionary['main_occupation'],
+            label: {
+                    metadata: true,
+                    value: 'occupation_group'
+                },
+            value: 'jobs',
+            id: 'wage'
+        });
+    }
 
-    General.add({
-        url: 'http://api.staging.dataviva.info/rais/year/industry_class?order=jobs&year=2014&direction=desc&limit=1&' + filter,
-        title: dictionary['main_economic_activity'],
-        label: {
-                metadata: true,
-                value: 'industry_class'
-            },
-        value: 'jobs',
-        id: 'wage'
-    });
-
-    General.add({
-        url: 'http://api.staging.dataviva.info/rais/year/occupation_family?order=jobs&year=2014&direction=desc&limit=1&' + filter,
-        title: dictionary['main_occupation'],
-        label: {
-                metadata: true,
-                value: 'occupation_family'
-            },
-        value: 'jobs',
-        id: 'wage'
-    });
 
     General.add({
         url: 'http://api.staging.dataviva.info/rais/year?year=2014&' + filter,
@@ -534,9 +556,9 @@ $(document).ready(function(){
 
     BlueBox.add({
         url: 'http://api.staging.dataviva.info/rais/year?year=2014&' + filter,
-        title: dictionary['average_wage'],
+        title: dictionary['avg_wage'],
         prefix: 'R$',
-        label: dictionary['average_wage'],
+        label: dictionary['avg_wage'],
         value: 'average_wage',
         tab: 'wages'
     });

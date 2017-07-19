@@ -77,7 +77,6 @@ dictionary['percentage_terms'] = lang == 'en' ? 'Percentage Terms' : 'Termos Per
 dictionary['values'] = lang == 'en' ? 'Values' : 'Valores';
 dictionary['exporting_municipality'] = lang == 'en' ? 'Based on the Exporting Municipality' : 'Baseado nos Municípios Exportadores';
 dictionary['state_production'] = lang == 'en' ? 'Based on State Production' : 'Baseado nos Estados Produtores';
-dictionary['average_wage'] = lang == 'en' ? 'Average Monthly Wage' : 'Salário Médio Mensal';
 dictionary['jobs'] = lang == 'en' ? 'Jobs' : 'Empregos';
 dictionary['year'] = lang == 'en' ? 'Year' : 'Ano';
 dictionary['scale'] = lang == 'en' ? 'Scale' : 'Escala';
@@ -183,6 +182,7 @@ dictionary['main'] = lang == 'en' ? 'Main' : 'Principal';
 dictionary['activity_jobs'] = lang == 'en' ? 'Employer activity' : 'Atividade por Empregos';
 dictionary['activity_highest'] = lang == 'en' ? 'Activity with highest' : 'Atividade com maior';
 dictionary['main_economic_activity'] = lang == 'en' ? 'Main Economic Activity' : 'Principal atividade econômica';
+dictionary['avg_wage'] = lang == 'en' ? 'Average Wage' : 'Renda Média'
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
