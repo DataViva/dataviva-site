@@ -11,14 +11,14 @@ $(document).ready(function(){
     var courseFilter;
 
     if (course.length == 2)
-    	courseFilter = 'sc_course_field=' + course;
+        courseFilter = 'sc_course_field=' + course;
     else if (course.length == 5)
-    	courseFilter = 'sc_course=' + course;
+        courseFilter = 'sc_course=' + course;
 
     var idIbge = $('#id_ibge').val();
     var locationFilter = ''
     if (idIbge != 'None')
-    	locationFilter = idIbge ? locations[idIbge.length] + '=' + idIbge : '';
+        locationFilter = idIbge ? locations[idIbge.length] + '=' + idIbge : '';
 
     filter = [courseFilter, locationFilter].join('&');
     var isMunicipality = idIbge.length == 7;
@@ -37,6 +37,28 @@ $(document).ready(function(){
             tab: 'enrollments'
         });
     }
+
+    BlueBox.add({
+        url: 'http://api.staging.dataviva.info/sc/year/sc_school?order=students&year=2016&direction=desc&limit=1&' + filter,
+        title: dictionary['main_school'],
+        subtitle: dictionary['number_enrolled_students'],
+        label: {
+            funct: function(response) {
+                var metadata = '';
+                $.ajax({
+                    url: 'http://api.staging.dataviva.info/metadata/sc_school/'+response[0]['sc_school'],
+                    type: 'GET',
+                    async: false,
+                    success: function(school){
+                        metadata = school['name_' + lang];
+                    }
+                });
+                return metadata;
+            }
+        },
+        value: 'students',
+        tab: 'enrollments'
+    });
 
     //INDICATORS ADD
     Indicator.add({
@@ -73,6 +95,26 @@ $(document).ready(function(){
                 metadata: true,
                 value: 'municipality'
             },
+        value: 'students',
+    });
+
+    General.add({
+        url: 'http://api.staging.dataviva.info/sc/year/sc_school?order=students&year=2016&direction=desc&limit=1&' + filter,
+        title: dictionary['main_school'],
+        label: {
+            funct: function(response) {
+                var metadata = '';
+                $.ajax({
+                    url: 'http://api.staging.dataviva.info/metadata/sc_school/'+response[0]['sc_school'],
+                    type: 'GET',
+                    async: false,
+                    success: function(school){
+                        metadata = school['name_' + lang];
+                    }
+                });
+                return metadata;
+            }
+        },
         value: 'students',
     });
 });
