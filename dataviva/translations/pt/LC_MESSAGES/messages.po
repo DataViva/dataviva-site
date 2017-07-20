@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2017-07-19 20:43-0300\n"
+"POT-Creation-Date: 2017-07-20 11:50-0300\n"
 "PO-Revision-Date: 2015-04-30 16:08-0500\n"
 "Last-Translator: Dave Landry <landry.dave@gmail.com>\n"
 "Language: pt\n"
@@ -5705,12 +5705,11 @@ msgstr "Nova versão - novos dados e novos gráficos"
 
 #: dataviva/templates/modal/new_release.html:9
 msgid ""
-"The new version of DataViva brings as a main novelty the inclusion of "
-"health data provided by DATASUS. DataViva presents annual information "
-"from Brazilian health establishments from 2008 to 2015. The main "
-"variables are: health facilities/establishments, equipment, beds and "
-"professionals. You can find this data by browsing the profiles of the "
-"Locations."
+"DataViva has a new version. As highlight, health data is now available on"
+" the platform, provided by DATASUS. DataViva presents annual infformation"
+" from Brazilian health facilities from 2008 to 2015. The main variables "
+"are: health facilities, health equipment, hospital beds and health "
+"professionals. You can find this data by browsing the locations profiles."
 msgstr ""
 "A nova versão do DataViva traz como principal novidade a inclusão de "
 "dados de saúde fornecidos pelo DATASUS. O DataViva apresenta informações "
@@ -5720,7 +5719,8 @@ msgstr ""
 "das Localidades."
 
 #: dataviva/templates/modal/new_release.html:11
-msgid "New data were included:"
+#, fuzzy
+msgid "New data was included:"
 msgstr "Novos dados foram incluídos:"
 
 #: dataviva/templates/modal/new_release.html:14
@@ -5729,17 +5729,19 @@ msgid "International trade: port;"
 msgstr "Comércio internacional: porto;"
 
 #: dataviva/templates/modal/new_release.html:15
+#, fuzzy
 msgid ""
 "Formal employment and establishments: workers' information (sex, "
-"educational level, ethnicity) and company information (size, simple and "
-"legal nature)."
+"educational level and ethnicity) and company information (size, Simple - "
+"a differentiated tax regime - and legal nature)."
 msgstr ""
 "Emprego formal e estabelecimentos: informações dos trabalhadores (sexo, "
 "grau de escolaridade, etnia) e informações das empresas (tamanho, simples"
 " e natureza jurídica)."
 
 #: dataviva/templates/modal/new_release.html:18
-msgid "The platform now has a new"
+#, fuzzy
+msgid "The platform has a new"
 msgstr "A plataforma conta agora com nova"
 
 #: dataviva/templates/modal/new_release.html:21
