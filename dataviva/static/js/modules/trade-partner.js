@@ -25,33 +25,59 @@ $(document).ready(function(){
 
     var isMunicipality = idIbge.length == 7;
 
+    if(!isMunicipality) {
+        BlueBox.add({
+            url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
+            title: dictionary['main_municipality'],
+            subtitle: dictionary['by_value_exported'],
+            preffix: 'USD ',
+            label: {
+                metadata: true,
+                value: 'municipality'
+            },
+            value: 'value',
+            tab: 'international-trade'
+        });
+
+        BlueBox.add({
+            url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
+            title: dictionary['main_municipality'],
+            subtitle: dictionary['by_value_imported'],
+            preffix: 'USD ',
+            label: {
+                metadata: true,
+                value: 'municipality'
+            },
+            value: 'value',
+            tab: 'international-trade'
+        });
+
+        General.add({
+            url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
+            title: dictionary['main_municipality_export'],
+            preffix: 'USD ',
+            label: {
+                    metadata: true,
+                    value: 'municipality'
+                },
+            value: 'value',
+            id: 'partner',
+        });
+
+        General.add({
+            url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
+            title: dictionary['main_municipality_import'],
+            preffix: 'USD ',
+            label: {
+                    metadata: true,
+                    value: 'municipality'
+                },
+            value: 'value',
+            id: 'partner',
+        });
+    }
+
     //BLUEBOXES ADD
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
-        title: dictionary['main_municipality'],
-        subtitle: dictionary['by_value_exported'],
-        preffix: 'USD ',
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'value',
-        tab: 'international-trade'
-    });
-
-    BlueBox.add({
-        url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
-        title: dictionary['main_municipality'],
-        subtitle: dictionary['by_value_imported'],
-        preffix: 'USD ',
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'value',
-        tab: 'international-trade'
-    });
-
     BlueBox.add({
         url: 'http://api.staging.dataviva.info/secex/year/product/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
         title: dictionary['main_product'],
@@ -122,7 +148,6 @@ $(document).ready(function(){
 
 
     //INDICATORS ADD
-
     Indicator.add({
         url: "http://api.staging.dataviva.info/secex/year/type/?year=2016&" + filter,
         title: dictionary['trade_balance'] + ' (2016)',
@@ -165,30 +190,6 @@ $(document).ready(function(){
     });
 
     //GENERAL ADD 
-    General.add({
-        url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
-        title: dictionary['main_municipality_export'],
-        preffix: 'USD ',
-        label: {
-                metadata: true,
-                value: 'municipality'
-            },
-        value: 'value',
-        id: 'partner',
-    });
-
-    General.add({
-        url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
-        title: dictionary['main_municipality_import'],
-        preffix: 'USD ',
-        label: {
-                metadata: true,
-                value: 'municipality'
-            },
-        value: 'value',
-        id: 'partner',
-    });
-
     General.add({
         url: 'http://api.staging.dataviva.info/secex/year/product/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
         title: dictionary['main_product_export'],
