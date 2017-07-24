@@ -6,42 +6,42 @@
             {% if location.id | length != 9 %}
             <a href="#enrollments-basic-course" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-basic-course">{%trans%}Municipality{%endtrans%}</a>
             <div class="collapse" id="enrollments-municipality">
-                <a href="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled"
+<!--                 <a href="/{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-geo_map' or not graph }}" data-parent="#enrollments-municipality">
                     {% trans %}Map{% endtrans %}
-                </a>
+                </a> -->
                 <a href="/{{ g.locale }}/map/sc/students/{{ id_ibge if id_ibge }}?values=students&basic_course={{basic_course.id}}&colors=students+classes+average_class_size"
-                   target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-map_new_api'}}" data-parent="#enrollments-municipality">
-                    {% trans %}Map new API{% endtrans %}
+                   target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-map_new_api' or not graph}}" data-parent="#enrollments-municipality">
+                    {% trans %}Map{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?y=enrolled&layout=value&order=color"
+<!--                 <a href="/{{ g.locale }}/embed/stacked/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?y=enrolled&layout=value&order=color"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked'}}" data-parent="#enrollments-municipality">
                     {% trans %}Stacked{% endtrans %}</a>
-               </a>
+               </a> -->
                <a href="/{{ g.locale }}/stacked/sc/region/students?values=students+classes+average_class_size&depths=region+state+mesoregion+microregion+municipality&depth=state&order=region&basic_course={{basic_course.id}}"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-stacked_new_api'}}" data-parent="#enrollments-municipality">
-                    {% trans %}Stacked new API{% endtrans %}</a>
+                    {% trans %}Stacked{% endtrans %}</a>
                </a>
-                <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled"
+<!--                 <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=color&depth=bra_9&size=enrolled"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map'}}" data-parent="#enrollments-municipality">
                     TreeMap
-                </a>
+                </a> -->
                  <a href="/{{ g.locale }}/tree_map/sc/municipality/students?sizes=students+classes&colors=students+average_age&basic_course={{ basic_course.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-municipality-tree_map_new_api' }}" data-parent="#enrollments-municipality">
-                    TreeMap New API
+                    TreeMap
                 </a>
             </div>
             {% endif %}
             {% if location.id %}
             <a href="#enrollments-school" class="list-group-item" data-toggle="collapse" data-parent="#enrollments-school">{%trans%}School{%endtrans%}</a>
             <div class="collapse" id="enrollments-school">
-                <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/school/?color=color&depth=school_8&size=enrolled"
+<!--                 <a href="/{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/school/?color=color&depth=school_8&size=enrolled"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-school-tree_map'}}" data-parent="#enrollments-school">
                     TreeMap
-                </a>
+                </a> -->
                 <a href="/{{ g.locale }}/tree_map/sc/sc_school/students?sizes=students+classes&depths=administrative_dependency+sc_school&colors=students+average_age&basic_course={{ basic_course.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-enrollments" class="list-group-item {{'selected' if graph.menu == 'enrollments-school-tree_map_new_api'}}" data-parent="#enrollments-school">
-                    TreeMap New API
+                    TreeMap
                 </a>
             </div>
             {% endif %}
@@ -50,11 +50,11 @@
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
         <div class="embed-responsive responsive-wrapper">
                 <iframe src="{% if graph %}
-                                /{{ g.locale }}/embed/{{graph.url}}
+                                /{{ g.locale }}/{{graph.url}}
                             {% elif location.id | length != 9 %} 
-                                /{{ g.locale }}/embed/geo_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/bra/?color=enrolled
+                                /{{ g.locale }}/map/sc/students/{{ id_ibge if id_ibge }}?values=students&basic_course={{basic_course.id}}&colors=students+classes+average_class_size
                             {% else %}
-                                /{{ g.locale }}/embed/tree_map/sc/{{ location.id if location else 'all' }}/all/{{basic_course.id}}/school/?color=color&depth=school_8&size=enrolled
+                                /{{ g.locale }}/tree_map/sc/sc_school/students?sizes=students+classes&depths=administrative_dependency+sc_school&colors=students+average_age&basic_course={{ basic_course.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}
                              {% endif %}"
                         name="graphs-frame-enrollments"
                         id="graphs-frame-enrollments"

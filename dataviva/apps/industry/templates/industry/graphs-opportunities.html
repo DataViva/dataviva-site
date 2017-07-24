@@ -3,13 +3,13 @@
         <h3>{% trans %}Preview{% endtrans %}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Economic Activities{% endtrans %}</h4>
-            <a href="/{{ g.locale }}/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
+<!--             <a href="/{{ g.locale }}/embed/rings/rais/{{ location.id if location else 'all' }}/{{ industry.id }}/all/cnae"
                 target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'economic-activities-rings'}}"
                 data-parent="#economic-activities">{% trans %}Rings{% endtrans %}
-            </a>
+            </a> -->
             <a href="/{{ g.locale }}/rings/rais/industry_class/{{ industry.id }}?year=2014&count=establishments{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                 target="graphs-frame-opportunities" class="list-group-item {{'selected' if graph.menu == 'new-api-economic-activities-rings' or not graph}}"
-                data-parent="#new-api-economic-activities">Rings New API
+                data-parent="#new-api-economic-activities">{% trans %}Rings{% endtrans %}
             </a>
         </div>
     </nav>

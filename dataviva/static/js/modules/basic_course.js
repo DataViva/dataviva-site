@@ -11,14 +11,14 @@ $(document).ready(function(){
     var courseFilter;
 
     if (course.length == 2)
-    	courseFilter = 'sc_course_field=' + course;
+        courseFilter = 'sc_course_field=' + course;
     else if (course.length == 5)
-    	courseFilter = 'sc_course=' + course;
+        courseFilter = 'sc_course=' + course;
 
     var idIbge = $('#id_ibge').val();
     var locationFilter = ''
     if (idIbge != 'None')
-    	locationFilter = idIbge ? locations[idIbge.length] + '=' + idIbge : '';
+        locationFilter = idIbge ? locations[idIbge.length] + '=' + idIbge : '';
 
     filter = [courseFilter, locationFilter].join('&');
     var isMunicipality = idIbge.length == 7;
