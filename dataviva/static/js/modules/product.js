@@ -62,7 +62,6 @@ $(document).ready(function(){
                     metadata: true,
                     value: 'municipality',
                     funct: function(response, metadata) {
-                        debugger
                         var id = response[0].municipality;
                         return metadata[id].name_pt + ' - ' + metadata[id].state.abbr_pt;
                     }
@@ -79,7 +78,6 @@ $(document).ready(function(){
                     metadata: true,
                     value: 'municipality',
                     funct: function(response, metadata) {
-                        debugger
                         var id = response[0].municipality;
                         return metadata[id].name_pt + ' - ' + metadata[id].state.abbr_pt;
                     }
