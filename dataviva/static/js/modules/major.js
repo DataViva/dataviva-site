@@ -25,7 +25,7 @@ $(document).ready(function(){
 
     if(!isMunicipality) {
 	    BlueBox.add({
-	        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+	        url: dataviva.api_url + 'hedu/year/municipality?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
 	        title: dictionary['main_municipality'],
 	        subtitle: dictionary['number_enrolled_students'],
 	        label: {
@@ -38,7 +38,7 @@ $(document).ready(function(){
 	    });
 
 	    BlueBox.add({
-	        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+	        url: dataviva.api_url + 'hedu/year/municipality?order=entrants&year=2015&direction=desc&limit=1&' + filter,
 	        title: dictionary['main_municipality'],
 	        subtitle: dictionary['number_entrant_students'],
 	        label: {
@@ -50,7 +50,7 @@ $(document).ready(function(){
 	    });
 
 	    BlueBox.add({
-	        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+	        url: dataviva.api_url + 'hedu/year/municipality?order=graduates&year=2015&direction=desc&limit=1&' + filter,
 	        title: dictionary['main_municipality'],
 	        subtitle: dictionary['number_graduates_students'],
 	        label: {
@@ -63,7 +63,7 @@ $(document).ready(function(){
 	}
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_university'],
         subtitle: dictionary['number_enrolled_students'],
         label: {
@@ -75,7 +75,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/university?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/university?order=entrants&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_university'],
         subtitle: dictionary['number_entrant_students'],
         label: {
@@ -88,7 +88,7 @@ $(document).ready(function(){
 
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/university?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/university?order=graduates&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_university'],
         subtitle: dictionary['number_graduates_students'],
         label: {
@@ -101,7 +101,7 @@ $(document).ready(function(){
 
     //GENERAL ADD
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_university_enrolled'],
         label: {
                 metadata: true,
@@ -112,7 +112,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/municipality?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_municipality_students'],
         label: {
                 metadata: true,
@@ -123,7 +123,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/university?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/university?order=entrants&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_university_entrants'],
         label: {
                 metadata: true,
@@ -134,7 +134,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/municipality?order=entrants&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_municipality_entrants'],
         label: {
                 metadata: true,
@@ -145,7 +145,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/university?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/university?order=graduates&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_university_graduates'],
         label: {
                 metadata: true,
@@ -156,7 +156,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/municipality?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/municipality?order=graduates&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_municipality_graduates'],
         label: {
                 metadata: true,
@@ -168,20 +168,20 @@ $(document).ready(function(){
 
     //INDICATORS ADD
     Indicator.add({
-        url: "http://api.staging.dataviva.info/hedu/year/?count=enrollments&year=2015&" + filter,
+        url: dataviva.api_url + "hedu/year/?count=enrollments&year=2015&" + filter,
         title: dictionary['number_enrolleds'] + ' (2015)',
         preffix: 'USD',
         value:  'enrolleds'
     });
 
     Indicator.add({
-        url: "http://api.staging.dataviva.info/hedu/year/?count=entrants&year=2015&" + filter,
+        url: dataviva.api_url + "hedu/year/?count=entrants&year=2015&" + filter,
         title: dictionary['number_entrants'] + ' (2015)',
         value:  'entrants'
     });
 
     Indicator.add({
-        url: "http://api.staging.dataviva.info/hedu/year/?count=graduates&year=2015&" + filter,
+        url: dataviva.api_url + "hedu/year/?count=graduates&year=2015&" + filter,
         title: dictionary['number_graduates'] + ' (2015)',
         value:  'graduates'
     });

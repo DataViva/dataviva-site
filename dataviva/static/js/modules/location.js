@@ -16,7 +16,7 @@ $(document).ready(function(){
     if(isMunicipality) {
     //HEALTH
         General.add({
-            url: "http://api.staging.dataviva.info/cnes_establishment/year/?year=2015&" + filter,
+            url: dataviva.api_url + "cnes_establishment/year/?year=2015&" + filter,
             title:  dictionary['total_of_establishments'],
             label: '',
             value: 'establishments',
@@ -24,7 +24,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: "http://api.staging.dataviva.info/cnes_bed/year/?year=2015&" + filter,
+            url: dataviva.api_url + "cnes_bed/year/?year=2015&" + filter,
             title:  dictionary['total_of_beds'],
             label: '',
             value: 'beds',
@@ -32,7 +32,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: "http://api.staging.dataviva.info/cnes_professional/year/?year=2015&" + filter,
+            url: dataviva.api_url + "cnes_professional/year/?year=2015&" + filter,
             title:  dictionary['total_of_professionals'],
             label: '',
             value: 'professionals',
@@ -41,7 +41,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: "http://api.staging.dataviva.info/cnes_equipment/year/?year=2015&" + filter,
+            url: dataviva.api_url + "cnes_equipment/year/?year=2015&" + filter,
             title: dictionary['total_of_equipments'],
             label: '',
             value: 'equipments',
@@ -52,7 +52,7 @@ $(document).ready(function(){
     } else {
     //HEALTH
         General.add({
-            url: 'http://api.staging.dataviva.info/cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'cnes_establishment/municipality/?year=2015&order=establishments&direction=desc&limit=1&' + filter,
             title: dictionary['municipality_with_highest_number_of_establishments'],
             label: {
                 metadata: true,
@@ -63,7 +63,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: 'http://api.staging.dataviva.info/cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'cnes_bed/municipality/?year=2015&order=beds&direction=desc&limit=1&' + filter,
             title: dictionary['municipality_with_highest_number_of_beds'],
             label: {
                 metadata: true,
@@ -74,7 +74,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: 'http://api.staging.dataviva.info/cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'cnes_professional/municipality/?year=2015&order=professionals&direction=desc&limit=1&' + filter,
             title: dictionary['municipality_with_highest_number_of_professionals'],
             label: {
                 metadata: true,
@@ -86,7 +86,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: 'http://api.staging.dataviva.info/cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'cnes_equipment/municipality/?year=2015&order=equipments&direction=desc&limit=1&' + filter,
             title: dictionary['municipality_with_highest_number_of_equipments'],
             label: {
                 metadata: true,
@@ -99,7 +99,7 @@ $(document).ready(function(){
 
     if(!idIbge){
         General.add({
-            url: "http://api.staging.dataviva.info/secex/product_section/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
+            url: dataviva.api_url + "secex/product_section/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_export'],
             preffix: 'USD',
             label: {
@@ -111,7 +111,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: "http://api.staging.dataviva.info/secex/product_section/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
+            url: dataviva.api_url + "secex/product_section/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_import'],
             preffix: 'USD',
             label: {
@@ -123,7 +123,7 @@ $(document).ready(function(){
         });
     } else {
         General.add({
-            url: "http://api.staging.dataviva.info/secex/product/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
+            url: dataviva.api_url + "secex/product/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_export'],
             preffix: 'USD',
             label: {
@@ -135,7 +135,7 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: "http://api.staging.dataviva.info/secex/product/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
+            url: dataviva.api_url + "secex/product/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_import'],
             preffix: 'USD',
             label: {
@@ -148,7 +148,7 @@ $(document).ready(function(){
     }
     //EDUCATION
     General.add({
-        url: "http://api.staging.dataviva.info/hedu/university/?year=2015&order=enrolleds&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "hedu/university/?year=2015&order=enrolleds&direction=desc&limit=1&" + filter,
         title:  dictionary['university_higher_enrollments'],
         label: {
                 metadata: true,
@@ -159,7 +159,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: "http://api.staging.dataviva.info/hedu/hedu_course/?year=2015&order=enrolleds&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "hedu/hedu_course/?year=2015&order=enrolleds&direction=desc&limit=1&" + filter,
         title:  dictionary['course_higher_enrollments'],
         label: {
                 metadata: true,
@@ -170,13 +170,13 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: "http://api.staging.dataviva.info/sc/sc_school/?year=2015&order=students&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "sc/sc_school/?year=2015&order=students&direction=desc&limit=1&" + filter,
         title:  dictionary['school_higher_enrollments'],
         label: {
             funct: function(response) {
                 var metadata = '';
                 $.ajax({
-                    url: 'http://api.staging.dataviva.info/metadata/sc_school/'+response[0]['sc_school'],
+                    url: dataviva.api_url + 'metadata/sc_school/'+response[0]['sc_school'],
                     type: 'GET',
                     async: false,
                     success: function(school){
@@ -191,7 +191,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: "http://api.staging.dataviva.info/sc/sc_course/?year=2015&order=students&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "sc/sc_course/?year=2015&order=students&direction=desc&limit=1&" + filter,
         title:  dictionary['sc_course_higher_enrollments'],
         label: {
                 metadata: true,
@@ -205,7 +205,7 @@ $(document).ready(function(){
 
 
     General.add({
-        url: "http://api.staging.dataviva.info/secex/year/?type=export&year=2016&" + filter,
+        url: dataviva.api_url + "secex/year/?type=export&year=2016&" + filter,
         title:  dictionary['total_export'],
         preffix: 'USD',
         label: '',
@@ -214,7 +214,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: "http://api.staging.dataviva.info/secex/year/?type=import&year=2016&" + filter,
+        url: dataviva.api_url + "secex/year/?type=import&year=2016&" + filter,
         title:  dictionary['total_import'],
         preffix: 'USD',
         label: '',
@@ -223,7 +223,7 @@ $(document).ready(function(){
     });
     if(idIbge){
         General.add({
-            url: 'http://api.staging.dataviva.info/rais/year/industry_class?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_class?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             label: {
                     metadata: true,
@@ -233,7 +233,7 @@ $(document).ready(function(){
             id: 'wage'
         });
         General.add({
-            url: 'http://api.staging.dataviva.info/rais/year/occupation_family?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_family?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             label: {
                     metadata: true,
@@ -245,7 +245,7 @@ $(document).ready(function(){
     }
     else{
         General.add({
-            url: 'http://api.staging.dataviva.info/rais/year/industry_section?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_section?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             label: {
                     metadata: true,
@@ -255,7 +255,7 @@ $(document).ready(function(){
             id: 'wage'
         });
         General.add({
-            url: 'http://api.staging.dataviva.info/rais/year/occupation_group?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_group?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             label: {
                     metadata: true,
@@ -268,7 +268,7 @@ $(document).ready(function(){
 
 
     General.add({
-        url: 'http://api.staging.dataviva.info/rais/year?year=2014&' + filter,
+        url: dataviva.api_url + 'rais/year?year=2014&' + filter,
         preffix: 'R$',
         title: dictionary['average_wage'],
         label: '',
@@ -277,7 +277,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/rais/year?year=2014&' + filter,
+        url: dataviva.api_url + 'rais/year?year=2014&' + filter,
         title: dictionary['total_jobs'],
         label: '',
         value: 'jobs',
@@ -287,7 +287,7 @@ $(document).ready(function(){
 //BLUEBOXES ADDS
     //HEALTH
     BlueBox.add({
-        url: "http://api.staging.dataviva.info/cnes_bed/year?year=2015&" + filter,
+        url: dataviva.api_url + "cnes_bed/year?year=2015&" + filter,
         title: dictionary['total_of_beds'],
         label: dictionary['total_of_beds'],
         value: 'beds',
@@ -295,7 +295,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: "http://api.staging.dataviva.info/cnes_professional/year?year=2015&" + filter,
+        url: dataviva.api_url + "cnes_professional/year?year=2015&" + filter,
         title: dictionary['total_of_professionals'],
         label: dictionary['total_of_professionals'],
         value: 'professionals',
@@ -303,7 +303,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: "http://api.staging.dataviva.info/cnes_equipment/year?year=2015&" + filter,
+        url: dataviva.api_url + "cnes_equipment/year?year=2015&" + filter,
         title: dictionary['total_of_equipments'],
         label: dictionary['total_of_equipments'],
         value: 'equipments',
@@ -311,7 +311,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: "http://api.staging.dataviva.info/cnes_establishment/year?year=2015&" + filter,
+        url: dataviva.api_url + "cnes_establishment/year?year=2015&" + filter,
         title: dictionary['total_of_establishments'],
         label: dictionary['total_of_establishments'],
         value: 'establishments',
@@ -321,7 +321,7 @@ $(document).ready(function(){
     //INTERNATIONAL TRADE
     if(!idIbge){
             BlueBox.add({
-                url: "http://api.staging.dataviva.info/secex/product_section/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
+                url: dataviva.api_url + "secex/product_section/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
                 title: dictionary['main_product'],
                 subtitle: dictionary['by_export'],
                 label:{
@@ -334,7 +334,7 @@ $(document).ready(function(){
             });
 
             BlueBox.add({
-                url: "http://api.staging.dataviva.info/secex/product_section/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
+                url: dataviva.api_url + "secex/product_section/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
                 title: dictionary['main_product'],
                 subtitle: dictionary['by_import'],
                 label:{
@@ -349,7 +349,7 @@ $(document).ready(function(){
 
     }else{
             BlueBox.add({
-                url: "http://api.staging.dataviva.info/secex/product/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
+                url: dataviva.api_url + "secex/product/?type=export&year=2016&order=value&direction=desc&limit=1&" + filter,
                 title: dictionary['main_product'],
                 subtitle: dictionary['by_export'],
                 label:{
@@ -362,7 +362,7 @@ $(document).ready(function(){
             });
 
             BlueBox.add({
-                url: "http://api.staging.dataviva.info/secex/product/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
+                url: dataviva.api_url + "secex/product/?type=import&year=2016&order=value&direction=desc&limit=1&" + filter,
                 title: dictionary['main_product'],
                 subtitle: dictionary['by_import'],
                 label:{
@@ -375,7 +375,7 @@ $(document).ready(function(){
             });
 
             BlueBox.add({
-                url: "http://api.staging.dataviva.info/secex/country/?year=2016&order=value&direction=desc&limit=1&type=export&" + filter,
+                url: dataviva.api_url + "secex/country/?year=2016&order=value&direction=desc&limit=1&type=export&" + filter,
                 title: dictionary['main_destination'],
                 subtitle: dictionary['by_export'],
                 label: {
@@ -388,7 +388,7 @@ $(document).ready(function(){
             });
 
             BlueBox.add({
-                url: "http://api.staging.dataviva.info/secex/country/?year=2016&order=value&direction=desc&limit=1&type=import&" + filter,
+                url: dataviva.api_url + "secex/country/?year=2016&order=value&direction=desc&limit=1&type=import&" + filter,
                 title: dictionary['main_origin'],
                 subtitle: dictionary['by_import'],
                 label: {
@@ -401,7 +401,7 @@ $(document).ready(function(){
             });
     }
     BlueBox.add({
-        url: "http://api.staging.dataviva.info/secex/year/?year=2016&type=export&" + filter,
+        url: dataviva.api_url + "secex/year/?year=2016&type=export&" + filter,
         title: dictionary['total_export'],
         label: dictionary['total_export'],
         value: 'value',
@@ -410,7 +410,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: "http://api.staging.dataviva.info/secex/year?year=2016&type=import&" + filter,
+        url: dataviva.api_url + "secex/year?year=2016&type=import&" + filter,
         title: dictionary['total_import'],
         label: dictionary['total_import'],
         value: 'value',
@@ -420,7 +420,7 @@ $(document).ready(function(){
 
     //EDUCATION
     BlueBox.add({
-            url: 'http://api.staging.dataviva.info/hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'hedu/year/university?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
             title: dictionary['university'],
             subtitle: dictionary['highest_enrolleds'],
             label: {
@@ -432,7 +432,7 @@ $(document).ready(function(){
     });
     if(idIbge){
         BlueBox.add({
-                url: 'http://api.staging.dataviva.info/hedu/year/hedu_course?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'hedu/year/hedu_course?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
                 title: dictionary['major'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
@@ -444,7 +444,7 @@ $(document).ready(function(){
         });
     }else{
         BlueBox.add({
-                url: 'http://api.staging.dataviva.info/hedu/year/hedu_course_field?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'hedu/year/hedu_course_field?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
                 title: dictionary['major'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
@@ -456,14 +456,14 @@ $(document).ready(function(){
         });
     }
     BlueBox.add({
-            url: 'http://api.staging.dataviva.info/sc/year/sc_school?order=students&year=2015&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'sc/year/sc_school?order=students&year=2015&direction=desc&limit=1&' + filter,
             title: dictionary['school'],
             subtitle: dictionary['highest_enrolleds'],
               label: {
                 funct: function(response) {
                     var metadata = '';
                     $.ajax({
-                        url: 'http://api.staging.dataviva.info/metadata/sc_school/'+response[0]['sc_school'],
+                        url: dataviva.api_url + 'metadata/sc_school/'+response[0]['sc_school'],
                         type: 'GET',
                         async: false,
                         success: function(school){
@@ -478,7 +478,7 @@ $(document).ready(function(){
     });
     if(idIbge){
         BlueBox.add({
-                url: 'http://api.staging.dataviva.info/sc/year/sc_course?order=students&year=2015&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'sc/year/sc_course?order=students&year=2015&direction=desc&limit=1&' + filter,
                 title: dictionary['basic_course'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
@@ -490,7 +490,7 @@ $(document).ready(function(){
         });
     }else{
         BlueBox.add({
-                url: 'http://api.staging.dataviva.info/sc/year/sc_course_field?order=students&year=2015&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'sc/year/sc_course_field?order=students&year=2015&direction=desc&limit=1&' + filter,
                 title: dictionary['basic_course'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
@@ -505,7 +505,7 @@ $(document).ready(function(){
     //WAGE AND JOBS
     if(!idIbge){
         BlueBox.add({
-            url: 'http://api.staging.dataviva.info/rais/year/industry_section?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_section?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -517,7 +517,7 @@ $(document).ready(function(){
         });
 
         BlueBox.add({
-            url: 'http://api.staging.dataviva.info/rais/year/occupation_group?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_group?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -529,7 +529,7 @@ $(document).ready(function(){
         });
     } else {
         BlueBox.add({
-            url: 'http://api.staging.dataviva.info/rais/year/industry_class?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_class?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -541,7 +541,7 @@ $(document).ready(function(){
         });
 
         BlueBox.add({
-            url: 'http://api.staging.dataviva.info/rais/year/occupation_family?order=jobs&year=2014&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_family?order=jobs&year=2014&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -555,7 +555,7 @@ $(document).ready(function(){
     }
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/rais/year?year=2014&' + filter,
+        url: dataviva.api_url + 'rais/year?year=2014&' + filter,
         title: dictionary['avg_wage'],
         prefix: 'R$',
         label: dictionary['avg_wage'],
@@ -564,7 +564,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/rais/year?year=2014&' + filter,
+        url: dataviva.api_url + 'rais/year?year=2014&' + filter,
         title: dictionary['wage'],
         prefix: 'R$',
         label: dictionary['wage'],
@@ -573,7 +573,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/rais/year?year=2014&' + filter,
+        url: dataviva.api_url + 'rais/year?year=2014&' + filter,
         title: dictionary['total_jobs'],
         label: dictionary['total_jobs'],
         value: 'jobs',

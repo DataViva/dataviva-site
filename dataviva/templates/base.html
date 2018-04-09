@@ -148,14 +148,15 @@
     {% endblock %}
 
     <script>
-      if(redirect) window.location = "/upgrade/"
+      if(redirect) window.location = "/upgrade/";
       dataviva.language = "{{ g.locale }}";
       dataviva.dictionary = {{ g.dictionary|safe }};
       dataviva.attr_version = {{ g.attr_version|safe }};
       dataviva.color = "{{ g.color }}";
       dataviva.page = "{{ g.page_type }}";
-      dataviva.s3_host = "{{ g.s3_host }}"
-      dataviva.s3_bucket = "{{ g.s3_bucket }}"
+      dataviva.s3_host = "{{ g.s3_host }}";
+      dataviva.s3_bucket = "{{ g.s3_bucket }}";
+      dataviva.api_url = "{{ g.api_url|safe }}";
     </script>
 
     <!-- Javascript modules -->
