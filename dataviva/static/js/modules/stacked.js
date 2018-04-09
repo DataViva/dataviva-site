@@ -561,11 +561,11 @@ var loadViz = function (data){
 
 var getUrls = function() {
     var urls = [
-        'http://api.staging.dataviva.info/' + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '?' + filters
+        api_url + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '?' + filters
     ];
 
     dimensions.forEach(function(dimension) {
-        urls.push('http://api.staging.dataviva.info/metadata/' + dimension);
+        urls.push(api_url + 'metadata/' + dimension);
     });
     
     return urls;

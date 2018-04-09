@@ -204,9 +204,9 @@ var getUrls = function() {
     if (dataset == 'secex')
         dimensions.push('type')
 
-    var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + filters,
-        API_DOMAIN + '/metadata/' + circles,
-        API_DOMAIN + '/years/' + dataset
+    var urls = [api_url + '/' + dimensions.join('/') + '?' + filters,
+        api_url + '/metadata/' + circles,
+        api_url + '/years/' + dataset
     ];
 
     var connectionsHelper = {

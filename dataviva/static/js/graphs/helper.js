@@ -1,5 +1,3 @@
-var API_DOMAIN = 'http://api.staging.dataviva.info';
-
 var ID_LABELS = {
     'municipality': 'ibge_id',
     'state': 'ibge_id',
