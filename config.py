@@ -70,6 +70,11 @@ LANGUAGES = {
 WHOOSH_BASE = os.path.join(basedir, 'dataviva/utils/search_indices')
 
 '''
+    API base URL
+'''
+API_BASE_URL = get_env_variable("DATAVIVA_API_BASE_URL")
+
+'''
     Oauth tokens set in environment variables from their respecive sources
 '''
 GOOGLE_OAUTH_ID = get_env_variable("DATAVIVA_OAUTH_GOOGLE_ID")
