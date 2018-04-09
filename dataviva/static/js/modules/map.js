@@ -288,13 +288,13 @@ var getUrls = function() {
     });
     var urls = [
         dimensions[0] == 'sc' ?
-        API_DOMAIN + '/' + dimensions.join('/') + '?' + apiFilters + '&count=sc_class':
-            API_DOMAIN + '/' + dimensions.join('/') + '?' + apiFilters,
-        API_DOMAIN + '/metadata/' + area
+        api_url + '/' + dimensions.join('/') + '?' + apiFilters + '&count=sc_class':
+            api_url + '/' + dimensions.join('/') + '?' + apiFilters,
+        api_url + '/metadata/' + area
     ];
 
     metadataAttrs.forEach(function(attr) {
-        urls.push(API_DOMAIN + '/metadata/' + attr)
+        urls.push(api_url + '/metadata/' + attr)
     });
 
     return urls;

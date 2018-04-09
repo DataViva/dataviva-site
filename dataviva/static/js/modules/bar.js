@@ -34,8 +34,7 @@ if(y.indexOf('facility_type') != -1) {
     dimensions.splice(i, 1);
 }
 
-var url = "http://api.staging.dataviva.info/" + 
-        dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
+var url = api_url + dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
 
 var config = {
     'id': 'id',
@@ -797,7 +796,7 @@ $(document).ready(function(){
     var urls = [url];
 
     dimensions.forEach(function(item){
-        urls.push("http://api.staging.dataviva.info/metadata/" + item);
+        urls.push(api_url + "metadata/" + item);
     });
 
     ajaxQueue(

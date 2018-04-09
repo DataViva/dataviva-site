@@ -1,4 +1,3 @@
-
 var lang = location.pathname.split('/')[1];
 
 var buildData = function(responseApi){
@@ -30,7 +29,7 @@ var getMetadata = function(key){
         }
         else {
             $.ajax({
-                url: "http://api.staging.dataviva.info/metadata/" + key,
+                url: dataviva.api_url + "metadata/" + key,
                 success: function (data) {
                     localStorage.setItem(key, JSON.stringify(data));
                     resolve(JSON.parse(localStorage.getItem(key)));
