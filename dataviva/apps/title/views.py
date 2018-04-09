@@ -4,6 +4,7 @@ from dataviva.apps.general.views import get_locale
 from dataviva.utils.graphs_services import filter_service
 from models import GraphTitle
 import requests
+from config import API_BASE_URL
 
 mod = Blueprint('title', __name__,
                 template_folder='templates',
@@ -59,7 +60,7 @@ def get_title(dataset, shapes, graph, api_filters):
         else:
             if key == 'sc_course' and len(value) == 4:
                 value = '0'+value
-            url = 'http://api.staging.dataviva.info/metadata/' + key + '/' + str(value)
+            url = API_BASE_URL + 'metadata/' + key + '/' + str(value)
             filter = filter_service(key)
             query[filter] = 1
             response = requests.get(url).json()
@@ -88,23 +89,28 @@ def get_title(dataset, shapes, graph, api_filters):
         for key, value in values.iteritems():
             title = title.replace('<' + key + '>', value)
 
-        title = title.replace('<location>', 'Brazil' if g.locale == 'en' else 'Brasil')
+        title = title.replace(
+            '<location>', 'Brazil' if g.locale == 'en' else 'Brasil')
 
         # Deals with brazilian locations prepositions
-        locations = [l for l in api_filters if l in ['region', 'state', 'mesoregion', 'microregion', 'municipality']]
+        locations = [l for l in api_filters if l in [
+            'region', 'state', 'mesoregion', 'microregion', 'municipality']]
         if len(locations) > 0:
-            url = 'http://api.staging.dataviva.info/metadata/inflection/' + str(api_filters[locations[0]])
+            url = API_BASE_URL + 'metadata/inflection/' + \
+                str(api_filters[locations[0]])
             response = requests.get(url).json()
             for preposition in ['in', 'from', 'of']:
                 if '<location_' + preposition + '>' in title:
                     title = inflect(title, response, preposition, 'location')
         else:
-            title = title.replace('<location_in>', 'no').replace('<location_from>', 'do').replace('<location_of>', 'do')
+            title = title.replace('<location_in>', 'no').replace(
+                '<location_from>', 'do').replace('<location_of>', 'do')
 
         # Deals with countries and continents prepositions
         partners = [p for p in api_filters if p in ['country', 'continent']]
         if len(partners) > 0:
-            url = 'http://api.staging.dataviva.info/metadata/inflection/' + str(api_filters[partners[0]])
+            url = API_BASE_URL + 'metadata/inflection/' + \
+                str(api_filters[partners[0]])
             response = requests.get(url).json()
             if '<partner_to>' in title:
                 title = inflect(title, response, 'to', 'partner')

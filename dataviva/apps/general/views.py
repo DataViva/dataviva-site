@@ -25,7 +25,7 @@ from dataviva.api.stats.helper import stats_list, make_items
 from dataviva.utils.cached_query import cached_query, api_cache_key
 from dataviva.utils.gzip_data import gzipped
 
-from config import ACCOUNTS, DEBUG
+from config import ACCOUNTS, DEBUG, API_BASE_URL
 
 #utils
 # from dataviva.utils.send_mail import send_mail
@@ -33,12 +33,16 @@ from config import ACCOUNTS, DEBUG
 ###############################
 # General functions for ALL views
 # ---------------------------
+
+
 @app.before_request
 def before_request():
 
     g.user = current_user
-    g.accounts = True if ACCOUNTS in ["True","true","Yes","yes","Y","y",1] else False
+    g.accounts = True if ACCOUNTS in [
+        "True", "true", "Yes", "yes", "Y", "y", 1] else False
     g.color = "#af1f24"
+    g.api_url = API_BASE_URL
     g.dictionary = json.dumps(dictionary())
     g.attr_version = 17
     g.production = False if DEBUG else True
@@ -64,9 +68,11 @@ def before_request():
         if url_path[1] not in data_viva_apis:
             if g.locale not in url_path:
                 if url.query:
-                    new_url= "{}://{}/{}{}?{}".format(url.scheme, url.netloc, g.locale, url.path, url.query)
+                    new_url = "{}://{}/{}{}?{}".format(
+                        url.scheme, url.netloc, g.locale, url.path, url.query)
                 else:
-                    new_url= "{}://{}/{}{}".format(url.scheme, url.netloc, g.locale, url.path)
+                    new_url = "{}://{}/{}{}".format(url.scheme,
+                                                    url.netloc, g.locale, url.path)
                 return redirect(new_url)
 
 
@@ -74,9 +80,11 @@ def before_request():
 def pull_lang_code(endpoint, values):
     g.locale = values.pop('lang_code')
 
+
 @mod.url_defaults
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
+
 
 @babel.localeselector
 def get_locale(lang=None):
@@ -115,6 +123,7 @@ def get_locale(lang=None):
 
     return new_lang
 
+
 @babel.timezoneselector
 def get_timezone():
     user = getattr(g, 'user', None)
@@ -124,20 +133,26 @@ def get_timezone():
 ###############################
 # General views
 # ---------------------------
+
+
 @app.after_request
 def after_request(response):
     return response
+
 
 @mod.route('/', methods=['GET'])
 def home():
     g.page_type = 'home'
 
-    news_publications = Publication.query.filter(str(Publication.id) != str(id), Publication.active, Publication.show_home, Publication.language == g.locale).all()
-    blog_posts = Post.query.filter(str(Post.id) != str(id), Post.active, Post.show_home, Post.language == g.locale).all()
+    news_publications = Publication.query.filter(str(Publication.id) != str(
+        id), Publication.active, Publication.show_home, Publication.language == g.locale).all()
+    blog_posts = Post.query.filter(str(Post.id) != str(
+        id), Post.active, Post.show_home, Post.language == g.locale).all()
 
     news_publications += blog_posts
 
-    all_publications = sorted(news_publications, key=lambda x: x.publish_date, reverse=True)
+    all_publications = sorted(
+        news_publications, key=lambda x: x.publish_date, reverse=True)
 
     if len(all_publications) > 6:
         all_publications = all_publications[0:6]
@@ -155,9 +170,11 @@ def search():
 def close():
     return render_template("general/close.html")
 
+
 @mod.route('upgrade/')
 def upgrade():
     return render_template("general/upgrade.html")
+
 
 @mod.route('/None/')
 def none_page():
@@ -166,24 +183,29 @@ def none_page():
 ###############################
 # Set language views
 # ---------------------------
+
+
 @mod.route('set_lang/<lang>')
 def set_lang(lang):
     g.locale = get_locale(lang)
-    return redirect(request.args.get('next') or \
-               request.referrer or \
-               url_for('general.home'))
+    return redirect(request.args.get('next') or
+                    request.referrer or
+                    url_for('general.home'))
 
 ###############################
 # Handle shortened URLs
 # ---------------------------
+
+
 @mod.route('/<slug>/')
 def redirect_short_url(slug):
-    short = Short.query.filter_by(slug = slug).first_or_404()
+    short = Short.query.filter_by(slug=slug).first_or_404()
     short.clicks += 1
     # db.session.add(short)
     db.session.commit()
 
     return redirect(short.long_url)
+
 
 # ###############################
 # # 404 view
@@ -220,7 +242,7 @@ if not DEBUG:
         sabrina["hat"] = None
 
         return render_template('general/error.html',
-            error = error, sabrina = sabrina), error_code
+                               error=error, sabrina=sabrina), error_code
 
 
 @mod.route('/error/')
@@ -236,4 +258,4 @@ def error():
         error_code = int(error)
 
         return render_template('general/error.html',
-            error = error, sabrina = sabrina), error_code
+                               error=error, sabrina=sabrina), error_code
