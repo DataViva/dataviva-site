@@ -8,7 +8,7 @@ $(document).ready(function(){
 
     //BLUEBOXES ADD
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/hedu_course/?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/hedu_course/?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_course'],
         subtitle: dictionary['by_number_enrolled'],
         label: {
@@ -20,7 +20,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/hedu_course/?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/hedu_course/?order=entrants&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_course'],
         subtitle: dictionary['by_number_entrants'],
         label: {
@@ -32,7 +32,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/hedu_course/?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/hedu_course/?order=graduates&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_course'],
         subtitle: dictionary['by_number_graduates'],
         label: {
@@ -45,26 +45,26 @@ $(document).ready(function(){
 
     //INDICATORS ADD
     Indicator.add({
-        url: "http://api.staging.dataviva.info/hedu/year/?count=enrollments&year=2015&" + filter,
+        url: dataviva.api_url + "hedu/year/?count=enrollments&year=2015&" + filter,
         title: dictionary['number_enrolleds'] + ' (2015)',
         value:  'enrolleds'
     });
 
     Indicator.add({
-        url: "http://api.staging.dataviva.info/hedu/year/?count=enrollments&year=2015&" + filter,
+        url: dataviva.api_url + "hedu/year/?count=enrollments&year=2015&" + filter,
         title: dictionary['number_entrants'] + ' (2015)',
         value:  'entrants'
     });
 
     Indicator.add({
-        url: "http://api.staging.dataviva.info/hedu/year/?count=enrollments&year=2015&" + filter,
+        url: dataviva.api_url + "hedu/year/?count=enrollments&year=2015&" + filter,
         title: dictionary['number_graduates'] + ' (2015)',
         value:  'graduates'
     });
 
     //GENERAL ADD
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/hedu_course/?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/hedu_course/?order=enrolleds&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_course_enrolleds'],
         label: {
                 metadata: true,
@@ -75,7 +75,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/hedu_course/?order=entrants&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/hedu_course/?order=entrants&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_course_entrants'],
         label: {
                 metadata: true,
@@ -86,7 +86,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/hedu/year/hedu_course/?order=graduates&year=2015&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'hedu/year/hedu_course/?order=graduates&year=2015&direction=desc&limit=1&' + filter,
         title: dictionary['main_course_graduates'],
         label: {
                 metadata: true,
