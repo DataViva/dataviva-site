@@ -531,9 +531,9 @@ var getUrls = function() {
         });
     }
 
-    var urls = [API_DOMAIN + '/' + dimensions.join('/') + '?' + lineGraph.getAttribute('filters')]
+    var urls = [api_url + '/' + dimensions.join('/') + '?' + lineGraph.getAttribute('filters')]
 
-    if (!balance) urls.push(API_DOMAIN + '/metadata/' + line);
+    if (!balance) urls.push(api_url + '/metadata/' + line);
 
     return urls;
 };
