@@ -27,9 +27,10 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
 def location_depth(bra_id):
     locations = {
-        1: "region",    #todo
+        1: "region",  # todo
         3: "state",
         5: "mesoregion",
         7: "microregion",
@@ -37,6 +38,7 @@ def location_depth(bra_id):
     }
 
     return locations[len(bra_id)]
+
 
 def handle_region_bra_id(bra_id):
     return {
@@ -46,27 +48,6 @@ def handle_region_bra_id(bra_id):
         "4": "3",
         "5": "4"
     }[bra_id]
-
-def location_service(depth, location):
-    if depth == 'region':
-        return handle_region_bra_id(location.id)
-    if depth == 'mesoregion':
-        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
-    if depth == 'microregion':
-        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
-    else:
-        return location.id_ibge
-
-def location_depth(bra_id):
-    locations = {
-        1: "region",    #todo
-        3: "state",
-        5: "mesoregion",
-        7: "microregion",
-        9: "municipality"
-    }
-
-    return locations[len(bra_id)]
 
 
 def location_service(depth, location):
@@ -107,7 +88,8 @@ def index(wld_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        url_prefix = menu.split(
+            '-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
         graph['url'] = url_prefix + url
 
     if wld_id == 'sabra':
@@ -261,4 +243,12 @@ def index(wld_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
-    return render_template('trade_partner/index.html', body_class='perfil-estado', header=header, body=body, trade_partner=trade_partner, location=location, tab=tab, graph=graph, id_ibge=id_ibge)
+    return render_template('trade_partner/index.html',
+                           body_class='perfil-estado',
+                           header=header,
+                           body=body,
+                           trade_partner=trade_partner,
+                           location=location,
+                           tab=tab,
+                           graph=graph,
+                           id_ibge=id_ibge)

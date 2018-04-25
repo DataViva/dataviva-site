@@ -35,6 +35,14 @@ def before_request():
 @mod.route('/<dataset>/<circles>/<focus>')
 def index(dataset, circles, focus):
     filters = []
+    title_attrs = {}
+
+    if dataset == 'rais' and circles == 'occupation_family':
+        title_attrs[circles] = focus
+    elif dataset == 'rais' and circles == 'industry_class':
+        title_attrs[circles] = focus[1:6]
+    elif dataset == 'secex' and circles == 'product':
+        title_attrs[circles] = focus[2:6]
 
     services = {'id_ibge': location_service, 'product': product_service,
                 'occupation_family': occupation_service, 'industry_class': industry_service}
@@ -49,10 +57,7 @@ def index(dataset, circles, focus):
         else:
             filters.append((key, value))
 
-    title_attrs = {circles: focus}
-
     filters = urllib.urlencode(filters)
-
     title, subtitle = get_title(dataset, circles, 'rings', title_attrs)
 
     return render_template('rings/index.html',
