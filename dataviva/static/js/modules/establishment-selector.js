@@ -122,7 +122,7 @@ var EstablishmentSelector = (function(){
 			var loading = dataviva.ui.loading('#modal-selector-content').text('Carregando');
 
 			establishments_xhr = $.ajax({
-				url: 'http://api.staging.dataviva.info/search/cnes',
+				url: dataviva.api_url + 'search/cnes',
 				data: {
 					query: query
 				},

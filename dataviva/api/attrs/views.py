@@ -24,6 +24,7 @@ from sqlalchemy import desc
 from dataviva.utils.gzip_data import gzipped
 from dataviva.utils.cached_query import api_cache_key
 from dataviva.translations.translate import translate
+from config import API_BASE_URL
 
 mod = Blueprint('attrs', __name__, url_prefix='/attrs')
 
@@ -192,7 +193,8 @@ def attrs(attr="bra", Attr_id=None, depth=None):
         elif "show." in Attr_id:
             ret["nesting_level"] = Attr_id.split(".")[1]
             # filter table by requested nesting level
-            attrs = Attr.query.filter(func.char_length(Attr.id) == ret["nesting_level"]).all()
+            attrs = Attr.query.filter(func.char_length(
+                Attr.id) == ret["nesting_level"]).all()
 
         # the '.' here means we want to see all attrs within a certain distance
         elif "." in Attr_id:
@@ -222,9 +224,11 @@ def attrs(attr="bra", Attr_id=None, depth=None):
                 if latest_month != 12:
                     latest_year -= 1
 
-        conds += [getattr(Attr_weight_tbl, "{0}_id".format(attr)) == Attr.id, Attr_weight_tbl.year == latest_year]
+        conds += [getattr(Attr_weight_tbl, "{0}_id".format(attr))
+                  == Attr.id, Attr_weight_tbl.year == latest_year]
 
-        query = db.session.query(Attr, Attr_weight_tbl).outerjoin(Attr_weight_tbl, and_(*conds))
+        query = db.session.query(Attr, Attr_weight_tbl).outerjoin(
+            Attr_weight_tbl, and_(*conds))
         if Attr == School:
             query = query.filter(Attr.is_vocational == 1)
 
@@ -360,7 +364,8 @@ def dl_csv():
     csv_str = ','.join(headerArray) + '\n' + '\n'.join(linesArray)
 
     response = make_response(csv_str)
-    response.headers['Content-Disposition'] = "attachment; filename=dataviva_attr_{}_{}.csv".format(attr_type, depth)
+    response.headers['Content-Disposition'] = "attachment; filename=dataviva_attr_{}_{}.csv".format(
+        attr_type, depth)
     response.headers["Content-type"] = "text/csv"
 
     return response
@@ -379,7 +384,8 @@ def attrs_search(term=None):
     result = []
     lang = request.args.get('lang', 'en') or g.locale
     name_col = Search.name_en if lang == 'en' else Search.name_pt
-    profiles = Search.query.filter(name_col.like(u'%{}%'.format(term))).order_by(Search.weight.desc()).limit(20)
+    profiles = Search.query.filter(name_col.like(
+        u'%{}%'.format(term))).order_by(Search.weight.desc()).limit(20)
     result = [p.serialize(lang == "pt") for p in profiles]
     ret = jsonify({"activities": result})
     return ret
@@ -494,10 +500,11 @@ def trade_partner():
         status=(200 if returned_entries.count() else 404)
     )
 
+
 @mod.route('/health_region/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_health_region"))
 def health_region():
-    r = requests.get('http://api.staging.dataviva.info/metadata/health_region')
+    r = requests.get(API_BASE_URL + 'metadata/health_region')
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -505,7 +512,7 @@ def health_region():
     for key in response:
         region = {}
         region['id'] = key
-        region['name'] = response[key]['name_' + lang]  
+        region['name'] = response[key]['name_' + lang]
         region['color'] = '-'
         data.append(region)
 
@@ -514,10 +521,11 @@ def health_region():
         status=200
     )
 
+
 @mod.route('/demographic_information/<attr>/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_demographic_information"))
 def demographic_information(attr):
-    r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
+    r = requests.get(API_BASE_URL + 'metadata/' + attr)
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -533,10 +541,11 @@ def demographic_information(attr):
         status=200
     )
 
+
 @mod.route('/establishment_information/<attr>/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_establishment_information"))
 def establishment_information(attr):
-    r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
+    r = requests.get(API_BASE_URL + 'metadata/' + attr)
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -556,7 +565,7 @@ def establishment_information(attr):
 @mod.route('/datasus/<attr>/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_datasus"))
 def datasus(attr):
-    r = requests.get('http://api.staging.dataviva.info/metadata/' + attr)
+    r = requests.get(API_BASE_URL + 'metadata/' + attr)
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -576,7 +585,7 @@ def datasus(attr):
 @mod.route('/port/')
 # @view_cache.cached(key_prefix=api_cache_key("attrs_port"))
 def port():
-    r = requests.get('http://api.staging.dataviva.info/metadata/port')
+    r = requests.get(API_BASE_URL + 'metadata/port')
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')

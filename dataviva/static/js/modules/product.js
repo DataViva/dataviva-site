@@ -29,7 +29,7 @@ $(document).ready(function(){
 
     if(!isMunicipality) {
         BlueBox.add({
-            url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
+            url: dataviva.api_url + 'secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
             title: dictionary['main_municipality'],
             subtitle: dictionary['by_value_exported'],
             preffix: 'USD ',
@@ -42,7 +42,7 @@ $(document).ready(function(){
         });
 
         BlueBox.add({
-            url: 'http://api.staging.dataviva.info/secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
+            url: dataviva.api_url + 'secex/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
             title: dictionary['main_municipality'],
             subtitle: dictionary['by_value_imported'],
             preffix: 'USD ',
@@ -55,14 +55,13 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
+            url: dataviva.api_url + 'secex/' + productDepth + '/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
             title: dictionary['main_municipality_export'],
             preffix: 'USD ',
             label: {
                     metadata: true,
                     value: 'municipality',
                     funct: function(response, metadata) {
-                        debugger
                         var id = response[0].municipality;
                         return metadata[id].name_pt + ' - ' + metadata[id].state.abbr_pt;
                     }
@@ -72,14 +71,13 @@ $(document).ready(function(){
         });
 
         General.add({
-            url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
+            url: dataviva.api_url + 'secex/' + productDepth + '/year/municipality/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
             title: dictionary['main_municipality_import'],
             preffix: 'USD ',
             label: {
                     metadata: true,
                     value: 'municipality',
                     funct: function(response, metadata) {
-                        debugger
                         var id = response[0].municipality;
                         return metadata[id].name_pt + ' - ' + metadata[id].state.abbr_pt;
                     }
@@ -91,7 +89,7 @@ $(document).ready(function(){
 
     //BLUEBOXES ADD
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
         title: dictionary['main_destination'],
         subtitle: dictionary['by_value_exported'],
         preffix: 'USD ',
@@ -104,7 +102,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
         title: dictionary['main_origin'],
         subtitle: dictionary['by_value_imported'],
         preffix: 'USD ',
@@ -120,7 +118,7 @@ $(document).ready(function(){
     //INDICATORS ADD
 
     Indicator.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/type/?year=2016&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/type/?year=2016&' + filter,
         title: dictionary['trade_balance'] + ' (2016)',
         preffix: 'R$ ',
         value:  function (response) {
@@ -135,14 +133,14 @@ $(document).ready(function(){
     });
 
     Indicator.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/year?year=2016&type=export&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/year?year=2016&type=export&' + filter,
         title: dictionary['total_value_exported'] + ' (2016)',
         preffix: 'R$ ',
         value:  'value'
     });
 
     Indicator.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/?year=2016&type=export&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/?year=2016&type=export&' + filter,
         title: dictionary['average_price_exported'] + ' (2016)',
         suffix: 'USD / kg',
         value:  function (response) {
@@ -151,14 +149,14 @@ $(document).ready(function(){
     });
 
     Indicator.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/year?year=2016&type=import&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/year?year=2016&type=import&' + filter,
         title: dictionary['total_value_imported'] + ' (2016)',
         preffix: 'R$ ',
         value:  'value'
     });
 
     Indicator.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/year/?year=2016&type=import&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/year/?year=2016&type=import&' + filter,
         title: dictionary['average_price_imported'] + ' (2016)',
         suffix: 'USD / kg',
         value:  function (response) {
@@ -168,7 +166,7 @@ $(document).ready(function(){
 
     //GENERAL ADD 
     General.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=export&' + filter,
         title: dictionary['main_destination_exported'],
         preffix: 'USD ',
         label: {
@@ -180,7 +178,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: 'http://api.staging.dataviva.info/secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/country/year/?order=value&year=2016&direction=desc&limit=1&type=import&' + filter,
         title: dictionary['main_origin_imported'],
         preffix: 'USD ',
         label: {

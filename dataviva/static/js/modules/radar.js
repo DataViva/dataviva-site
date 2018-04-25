@@ -5,7 +5,7 @@ var data = [],
     label = $("#radar").attr("label"),
     value = $("#radar").attr("value"),
     filters = $("#radar").attr("filters"),
-    url = "http://api.staging.dataviva.info/" + 
+    url = api_url + 
         dataset + "/year/" + polygon + "/" + label + ( filters ? "?" + filters : '');
 
 var titleHelper = {
@@ -210,8 +210,8 @@ window.onmousemove = function (e) {
 $(document).ready(function(){
     ajaxQueue([
         url,
-        "http://api.staging.dataviva.info/metadata/" + polygon,
-        "http://api.staging.dataviva.info/metadata/" + label
+        api_url + "metadata/" + polygon,
+        api_url + "metadata/" + label
     ], 
 
     function(responses){
