@@ -28,11 +28,53 @@ def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",    #todo
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
+
+def location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
+
 @mod.route('/<product_id>/graphs/<tab>', methods=['POST'])
 def graphs(product_id, tab):
     product = Hs.query.filter_by(id=product_id).first_or_404()
     location = Bra.query.filter_by(id=request.args.get('bra_id')).first()
-    return render_template('product/graphs-'+tab+'.html', product=product, location=location, graph=None)
+
+    bra_id = request.args.get('bra_id')
+    if not bra_id:
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = location_service(depth, location)
+
+    return render_template('product/graphs-'+tab+'.html', product=product, location=location, graph=None, id_ibge=id_ibge)
 
 
 @mod.route('/<product_id>', defaults={'tab': 'general'})
@@ -44,6 +86,15 @@ def index(product_id, tab):
 
     menu = request.args.get('menu')
     url = request.args.get('url')
+
+    bra_id = request.args.get('bra_id')
+    bra_id = bra_id if bra_id != 'all' else None
+    if not bra_id:
+        depth = None
+        id_ibge = None
+    else:
+        depth = location_depth(bra_id)
+        id_ibge = location_service(depth, location)
 
     if location:
         location_id = location.id
@@ -57,19 +108,34 @@ def index(product_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     tabs = {
         'general': [],
         'opportunities': [
-            'economic-opportunities-rings'
+            'economic-opportunities-rings',
+            'new-api-economic-opportunities-rings'
         ],
         'trade-partner': [
-            'trade-balance-product-',
-            'exports-destination-tree',
+            'trade-balance-product-line',
+            'new-api-trade-balance-product-line',
+            'exports-destination-tree_map',
+            'new-api-exports-destination-tree_map',
+            'new-api-exports-destination-line',
+            'new-api-exports-port-line',
+            'new-api-exports-port-bar',
+            'new-api-exports-port-tree_map',
+            'new-api-exports-destination-stacked',
             'exports-destination-line',
             'exports-destination-stacked',
-            'imports-origin-tree',
+            'imports-origin-tree_map',
+            'new-api-imports-origin-tree_map',
+            'new-api-imports-port-line',
+            'new-api-imports-port-bar',
+            'new-api-imports-port-tree_map',
+            'new-api-imports-origin-stacked',
+            'new-api-imports-origin-line',
             'imports-origin-line',
             'imports-origin-stacked',
         ],
@@ -77,12 +143,18 @@ def index(product_id, tab):
 
     if not is_municipality:
         tabs['trade-partner'] += [
-            'exports-municipality-tree',
-            'exports-municipality-geo',
+            'exports-municipality-tree_map',
+            'new-api-exports-municipality-tree_map',
+            'exports-municipality-geo_map',
+            'new-api-exports-municipality-geo_map',
             'exports-municipality-stacked',
-            'imports-municipality-tree',
-            'imports-municipality-geo',
+            'new-api-exports-municipality-stacked',
+            'imports-municipality-tree_map',
+            'new-api-imports-municipality-tree_map',
+            'imports-municipality-geo_map',
+            'new-api-imports-municipality-geo_map',
             'imports-municipality-stacked',
+            'new-api-imports-municipality-stacked'
         ]
 
     trade_partners_service = ProductTradePartnersService(
@@ -225,4 +297,4 @@ def index(product_id, tab):
     elif secex_max_year != header['year']:
         abort(404)
     else:
-        return render_template('product/index.html', header=header, body=body, product=product, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
+        return render_template('product/index.html', header=header, body=body, product=product, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)

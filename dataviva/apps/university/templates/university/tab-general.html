@@ -10,37 +10,17 @@
     {% trans %}graduates{% endtrans %}.</p>
 
     <div class="row">
-        <div class="dl-box col-xs-12 col-md-6">
+        <div class="dl-box col-xs-12 col-md-6" id='general-enrolleds'>
             <h3>{% trans %}Enrollments{% endtrans %} ({{body.year}})</h3>
-            <dl class="dl-horizontal">
-                <dt>{% trans %}Main Course by Number of Enrolled Students{% endtrans %}</dt>
-                <dd>
-                    <small>{{ body.major_with_more_enrollments }}</small>
-                    <strong class="counter">{{ body.highest_enrollment_number_by_major | max_digits(3, True) }}</strong>
-                    <span>{{ body.highest_enrollment_number_by_major | magnitude }} {% trans %}Students{% endtrans %}</span>
-                </dd>
-                <dt>{% trans %}Main Course by Number of Entering Students{% endtrans %}</dt>
-                <dd>
-                    <small>{{ body.major_with_more_entrants }}</small>
-                    <strong class="counter">{{ body.highest_entrant_number_by_major | max_digits(3, True) }}</strong>
-                    <span>{{ body.highest_entrant_number_by_major | magnitude}} {% trans %}Students{% endtrans %}</span>
-                </dd>
-                <dt>{% trans %}Main Course by Number of Graduates{% endtrans %}</dt>
-                <dd>                
-                    <small>{{ body.major_with_more_graduates }}</small>
-                    <strong class="counter">{{ body.highest_graduate_number_by_major | max_digits(3, True) }}</strong>
-                    <span>{{ body.highest_graduate_number_by_major | magnitude }} {% trans %}Students{% endtrans %}</span>
-
-                </dd>
-            </dl>
-            <a href="#enrollments" 
+                <a href="#enrollments"
                     aria-controls="enrollments" 
                     role="tab"        
                     data-toggle="tab" 
                     class="pull-right btn btn-primary btn-xs m-r-lg" 
                     graph
                     data-id="{{ university.id }}">
-                    {% trans %}More details{% endtrans %}</a>
-            </div>
+                    {% trans %}More details{% endtrans %}
+                </a>
         </div>
     </div>
+</div>

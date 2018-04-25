@@ -1,4 +1,4 @@
-# DataViva [![Build Status](https://snap-ci.com/DataViva/dataviva-site/branch/master/build_image)](https://snap-ci.com/DataViva/dataviva-site/branch/master)
+# DataViva
 
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
@@ -60,6 +60,7 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         export DATAVIVA_OAUTH_FACEBOOK_ID=
         export DATAVIVA_OAUTH_FACEBOOK_SECRET=
         * export DATAVIVA_ACCOUNTS=True
+        export DATAVIVA_API_BASE_URL=http://api.staging.dataviva.info/
 
         * only necessary if you want to enable user accounts
 

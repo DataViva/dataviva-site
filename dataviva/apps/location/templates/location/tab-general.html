@@ -93,84 +93,26 @@
 
   <div class="row">
     {% if body.secex_year is not none %}
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}International Trade{% endtrans %} ({{body.product_year}})</h3>
-        <dl class="dl-horizontal">
-          {% if body.main_product_by_export_value %}
-          <dt>{% trans %}Main Product by Total Value Exported{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.main_product_by_export_value_name }}</small>
-            USD <strong class="counter">{{ body.main_product_by_export_value | max_digits(3, True) }}</strong>
-            <span>{{ body.main_product_by_export_value | magnitude }}</span>
-          </dd>
-          {% endif %}
-          {% if body.main_product_by_import_value %}
-          <dt>{% trans %}Main Product by Total Value Imported{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.main_product_by_import_value_name}}</small>
-            USD <strong class="counter">{{ body.main_product_by_import_value | max_digits(3, True) }}</strong>
-            <span>{{ body.main_product_by_import_value | magnitude }}</span>
-          </dd>
-          {% endif %}
-          <dt>{% trans %}Total of Exports{% endtrans %}</dt>
-          <dd>
-            USD <strong class="counter">{{ body.total_exports | max_digits(3, True) }}</strong>
-            <span>{{ body.total_exports | magnitude }}</span>
-          </dd>
-          <dt>{% trans %}Total of Imports{% endtrans %}</dt>
-          <dd>
-            USD <strong class="counter">{{ body.total_imports | max_digits(3, True) }}</strong>
-            <span>{{ body.total_imports | magnitude }}</span>
-          </dd>
-        </dl>
+      <div class="dl-box col-xs-12 col-md-6" id='general-trade'>
+        <h3>{% trans %}International Trade{% endtrans %} (2016)</h3>
         <a href="#trade-partner"
                       aria-controls="trade-partner"
                       role="tab"
                       data-toggle="tab"
-                      class="pull-right btn btn-primary btn-xs m-r-lg"
-                      graph
-                      data-id="{{ location.id }}">
+                      graph class="pull-right btn btn-primary btn-xs m-r-lg">
           {% trans %}More details{% endtrans %}
         </a>
       </div>
     {% endif %}
 
     {% if body.rais_year is not none %}
-      <div class="dl-box col-xs-12 col-md-6">
+      <div class="dl-box col-xs-12 col-md-6" id='general-wage'>
         <h3>{% trans %}Wages and Jobs{% endtrans %} ({{body.industry_year}})</h3>
-        <dl class="dl-horizontal">
-          <dt>{% trans %}Main Economic Activity{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.main_industry_by_num_jobs_name}}</small>
-            <strong class="counter">{{ body.main_industry_by_num_jobs | max_digits(3, True) }}</strong>
-            <span>{{ body.main_industry_by_num_jobs | magnitude }}</span>
-            {% trans %}Jobs{% endtrans %}
-          </dd>
-          <dt>{% trans %}Main Occupation{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.main_occupation_by_num_jobs_name}}</small>
-            <strong class="counter">{{ body.main_occupation_by_num_jobs | max_digits(3, True) }}</strong>
-            <span>{{ body.main_occupation_by_num_jobs | magnitude }}</span>
-            {% trans %}Occupations{% endtrans %}
-          </dd>
-          <dt>{% trans %}Average Wage{% endtrans %}</dt>
-          <dd>
-            R$ <strong class="counter">{{ body.avg_wage | max_digits(3, True) }}</strong>
-            <span>{{ body.avg_wage | magnitude }}</span>
-          </dd>
-          <dt>{% trans %}Total of Jobs{% endtrans %}</dt>
-          <dd>
-            <strong class="counter">{{ body.total_jobs | max_digits(3, True) }}</strong>
-            <span>{{ body.total_jobs | magnitude }}</span>
-          </dd>
-        </dl>
         <a href="#wages"
                       aria-controls="wages"
                       role="tab"
                       data-toggle="tab"
-                      class="pull-right btn btn-primary btn-xs m-r-lg"
-                      graph
-                      data-id="{{ location.id }}">
+                      graph class="pull-right btn btn-primary btn-xs m-r-lg">
           {% trans %}More details{% endtrans %}
         </a>
       </div>
@@ -226,52 +168,26 @@
     {% endif %}
 
     {% if body.university_year is not none %}
-      <div class="dl-box col-xs-12 col-md-6">
-        <h3>{% trans %}Education{% endtrans %} ({{body.university_year}})</h3>
-        <dl class="dl-horizontal">
-        {% if body.highest_enrolled_by_university %}
-          <dt>{% trans %}University with Highest Number of Enrollments{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.highest_enrolled_by_university_name}}</small>
-            <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3, True)}}</strong>
-            <span>{{ body.highest_enrolled_by_university | magnitude }}</span>
-          </dd>
-          {% endif %}
-          {% if body.highest_enrolled_by_major %}
-          <dt>{% trans %}Major with Highest Number of Enrollments{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.highest_enrolled_by_major_name}}</small>
-            <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3, True)}}</strong>
-            <span>{{ body.highest_enrolled_by_major | magnitude }}</span>
-          </dd>
-          {% endif %}
-          {% if body.highest_enrolled_by_school %}
-          <dt>{% trans %}School with Highest Number of Enrollments{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.highest_enrolled_by_school_name}}</small>
-            <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3, True)}}</strong>
-            <span>{{ body.highest_enrolled_by_school | magnitude }}</span>
-          </dd>
-          {% endif %}
-          {% if body.highest_enrolled_by_basic_course %}
-          <dt>{% trans %}Basic Course with Highest Number of Enrollments{% endtrans %}</dt>
-          <dd>
-            <small>{{ body.highest_enrolled_by_basic_course_name}}</small>
-            <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3, True)}}</strong>
-            <span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
-          </dd>
-          {% endif %}
-        </dl>
+      <div class="dl-box col-xs-12 col-md-6" id="general-education">
+        <h3>{% trans %}Education{% endtrans %} (2015)</h3>
         <a href="#education"
                       aria-controls="education"
                       role="tab"
                       data-toggle="tab"
-                      class="pull-right btn btn-primary btn-xs m-r-lg"
-                      graph
-                      data-id="{{ location.id }}">
+                      graph class="pull-right btn btn-primary btn-xs m-r-lg"">
             {% trans %}More details{% endtrans %}
         </a>
       </div>
     {% endif %}
+
+    <div class="dl-box col-xs-12 col-md-6" id="general-health">
+    <h3>{% trans %}Health{% endtrans %} (2015)</h3>
+     <a href="#health"
+         aria-controls="health"
+         role="tab"
+         data-toggle="tab"
+         graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+     </a>
+    </div>
   </div>
 </div>

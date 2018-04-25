@@ -13,6 +13,38 @@ mod = Blueprint('major', __name__,
                 static_folder='static')
 
 
+def location_depth(bra_id):
+    locations = {
+        1: "region",
+        3: "state",
+        5: "mesoregion",
+        7: "microregion",
+        9: "municipality"
+    }
+
+    return locations[len(bra_id)]
+
+def handle_region_bra_id(bra_id):
+    return {
+        "1": "1",
+        "2": "2",
+        "3": "5",
+        "4": "3",
+        "5": "4"
+    }[bra_id]
+
+
+def _location_service(depth, location):
+    if depth == 'region':
+        return handle_region_bra_id(location.id)
+    if depth == 'mesoregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-2:]
+    if depth == 'microregion':
+        return str(location.id_ibge)[:2] + str(location.id_ibge)[-3:]
+    else:
+        return location.id_ibge
+
+
 @mod.before_request
 def before_request():
     g.page_type = 'category'
@@ -31,9 +63,9 @@ def add_language_code(endpoint, values):
 @mod.route('/<course_hedu_id>', defaults={'tab': 'general'})
 @mod.route('/<course_hedu_id>/<tab>')
 def index(course_hedu_id, tab):
-    bra_id = request.args.get('bra_id') 
+    bra_id = request.args.get('bra_id')
     bra_id = bra_id if bra_id != 'all' else None
-    
+
     menu = request.args.get('menu')
     url = request.args.get('url')
     graph = {}
@@ -41,7 +73,8 @@ def index(course_hedu_id, tab):
     if menu:
         graph['menu'] = menu
     if url:
-        graph['url'] = url
+        url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
+        graph['url'] = url_prefix + url
 
     max_year_query = db.session.query(
         func.max(Yc_hedu.year)).filter_by(course_hedu_id=course_hedu_id)
@@ -115,14 +148,20 @@ def index(course_hedu_id, tab):
         'general': [],
         'enrollments': [
             'enrollments-university-tree_map',
+            'new-api-enrollments-university-tree_map',
             'enrollments-municipality-geo_map',
+            'new-api-enrollments-municipality-geo_map',
             'enrollments-municipality-stacked',
+            'new-api-enrollments-municipality-stacked',
             'enrollments-municipality-tree_map',
+            'new-api-enrollments-municipality-tree_map',
             'enrollments-status-line',
+            'new-api-enrollments-status-line',
             'enrollments-shift-stacked',
+            'new-api-enrollments-shift-stacked',
         ],
     }
-
+    id_ibge =   None
     for index, maj in enumerate(rank):
         if rank[index].course_hedu_id == course_hedu_id:
             header['rank'] = index + 1
@@ -130,8 +169,12 @@ def index(course_hedu_id, tab):
 
     location = Bra.query.filter(Bra.id == bra_id).first()
 
-    major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
+    if bra_id:
+        depth = location_depth(bra_id)
+        id_ibge = _location_service(depth, location)
+        is_municipality = True if depth == 'municipality' else False
 
+    major = Course_hedu.query.filter(Course_hedu.id == course_hedu_id).first()
 
     if tab not in tabs:
         abort(404)
@@ -142,7 +185,7 @@ def index(course_hedu_id, tab):
     if header['enrolled'] is None or hedu_max_year != header['year']:
         abort(404)
     else:
-        return render_template('major/index.html', header=header, body=body, location=location, major=major, tab=tab, graph=graph)
+        return render_template('major/index.html', header=header, body=body, id_ibge=id_ibge, location=location, major=major, tab=tab, graph=graph)
 
 
 @mod.route('/<course_hedu_id>/graphs/<tab>', methods=['POST'])
@@ -150,4 +193,5 @@ def graphs(course_hedu_id, tab):
     bra = request.args.get('bra_id')
     major = Course_hedu.query.filter_by(id=course_hedu_id).first_or_404()
     location = Bra.query.filter_by(id=bra).first()
+
     return render_template('major/graphs-'+tab+'.html', major=major, location=location, graph=None)

@@ -492,11 +492,9 @@ def networks(type="hs"):
 
 @mod.route('/shorten/', methods=['GET', 'POST'])
 def shorten_url():
-
     if request.method == 'POST':
-
-        long_url = urllib.unquote(
-            request.form["url"].encode('utf-8')).decode("utf-8")
+        response = request.form['url'] if 'url' in request.form else request.json['url']
+        long_url = urllib.unquote(response.encode('utf-8')).decode('utf-8')
 
         short = Short.query.filter_by(long_url=long_url).first()
         if short is None:

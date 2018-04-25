@@ -1,0 +1,174 @@
+  <div id="graphs-health" class="container">
+    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3">
+    <h3>{% trans %}Preview{% endtrans %}:</h3>
+        <div class="list-group panel">
+            <h4>{% trans %}Equipments by{% endtrans %}</h4>
+            {% if not is_municipality %}
+              <a href="#equipments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#equipments-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="equipments-municipality">
+                  <a href="/{{ g.locale }}/map/cnes_equipment/equipment_quantity/{{ id_ibge if id_ibge }}?values=equipment_quantity+equipment_quantity_in_use&filters=unit_type+equipment_type+sus_availability_indicator"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-map' or not graph }}" data-parent="#equipments-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="/{{ g.locale }}/tree_map/cnes_equipment/municipality/equipment_quantity?depths=region+state+mesoregion+microregion+health_region+municipality&sizes=equipment_quantity+equipment_quantity_in_use&filters=sus_availability_indicator+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-tree_map' }}" data-parent="#equipments-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/stacked/cnes_equipment/municipality/equipment_quantity?depths=region+state+mesoregion+microregion+health_region+municipality&hierarchy=true&values=equipment_quantity+equipment_quantity_in_use&filters=sus_availability_indicator+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-municipality-stacked'}}" data-parent="#equipments-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>
+              </div>
+            {% endif %}
+            <a href="#equipments-type" class="list-group-item" data-toggle="collapse" data-parent="#equipments-type">{% trans %}Type{% endtrans %}</a>
+            <div class="collapse" id="equipments-type">
+                 <a href="/{{ g.locale }}/tree_map/cnes_equipment/equipment_code/equipment_quantity?depths=equipment_type+equipment_code&sizes=equipment_quantity+equipment_quantity_in_use&filters=sus_availability_indicator+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if (not graph and is_municipality) or graph.menu == 'equipments-type-tree_map' }}" data-parent="#equipments-type">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_equipment/equipment_code/equipment_quantity?values=equipment_quantity+equipment_quantity_in_use&depths=equipment_type+equipment_code&filters=unit_type+sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-stacked'}}" data-parent="#equipments-type">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?options=singlecolor,nolabely&filters=sus_availability_indicator,unit_type&shapes=quantity{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-type-bar'}}" data-parent="#equipments-type">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+            <a href="#equipments-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#equipments-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
+            <div class="collapse" id="equipments-sus-bond">
+                <a href="/{{ g.locale }}/bar/cnes_equipment/equipment_quantity,equipment_quantity_in_use/equipment_type,equipment_code?filters=unit_type&id=sus_availability_indicator&options=nolabely&shapes=sus_availability_indicator{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'equipments-sus-bond-bar'}}" data-parent="#equipments-sus-bond">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+
+            <h4>{% trans %}Establishments by{% endtrans %}</h4>
+            {% if not is_municipality %}
+              <a href="#establishments-municipality" class="list-group-item" data-toggle="collapse" data-parent="#establishments-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="establishments-municipality">
+                  <a href="/{{ g.locale }}/map/cnes_establishment/establishments/{{ id_ibge if id_ibge }}?filters=sus_bond+provider_type+unit_type"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-map'}}" data-parent="#establishments-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="/{{ g.locale }}/tree_map/cnes_establishment/municipality/establishments?depths=region+state+mesoregion+microregion+health_region+municipality&sizes=establishments&filters=sus_bond+unit_type+provider_type+attention_level{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-tree_map'}}" data-parent="#establishments-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/stacked/cnes_establishment/municipality/establishments?depths=region+state+mesoregion+microregion+health_region+municipality&filters=sus_bond+provider_type+attention_level+unit_type&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-municipality-stacked'}}" data-parent="#establishments-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>
+              </div>
+            {% endif %}       
+            <a href="#establishments-unit-type" class="list-group-item" data-toggle="collapse" data-parent="#establishments-unit-type">{% trans %}Unit Type{% endtrans %}</a>
+            <div class="collapse" id="establishments-unit-type">
+                <a href="/{{ g.locale }}/tree_map/cnes_establishment/unit_type/establishments?depths=provider_type+unit_type&filters=hierarchy_level+attention_level+sus_bond{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-unit-type-tree_map'}}" data-parent="#establishments-unit-type">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_establishment/unit_type/establishments?values=establishments&depths=provider_type,unit_type&filters=sus_bond+hierarchy_level+attention_level{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-unit-type-stacked'}}" data-parent="#establishments-unit-type">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+            <a href="#establishments-facilities" class="list-group-item" data-toggle="collapse" data-parent="#establishments-facilities">{% trans %}Facilities{% endtrans %}</a>
+            <div class="collapse" id="establishments-facilities">
+                <a href="/{{ g.locale }}/bar/cnes_establishment/establishments/facility_type?options=singlecolor,nolabely,attention_level&filters=sus_bond,unit_type,provider_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'establishments-facilities-bar'}}" data-parent="#establishments-facilities">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+
+            <h4>{% trans %}Beds by{% endtrans %}</h4>
+            {% if not is_municipality %}
+              <a href="#beds-municipality" class="list-group-item" data-toggle="collapse" data-parent="#beds-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="beds-municipality">
+                  <a href="/{{ g.locale }}/map/cnes_bed/number_existing_bed/{{ id_ibge if id_ibge }}?filters=bed_type+unit_type&values=number_existing_bed+number_sus_bed+number_non_sus_bed"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-map'}}" data-parent="#beds-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="/{{ g.locale }}/tree_map/cnes_bed/municipality/number_existing_bed?depths=region+state+mesoregion+microregion+health_region+municipality&sizes=number_existing_bed+number_sus_bed+number_non_sus_bed&filters=unit_type+bed_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-tree_map'}}" data-parent="#beds-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/stacked/cnes_bed/municipality/number_existing_bed?values=number_existing_bed+number_sus_bed+number_non_sus_bed&depths=region+state+mesoregion+microregion+health_region+municipality&filters=unit_type+bed_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}&hierarchy=true"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-municipality-stacked'}}" data-parent="#beds-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>
+              </div>
+            {% endif %}
+            <a href="#beds-bed-type" class="list-group-item" data-toggle="collapse" data-parent="#beds-bed-type">{% trans %}Bed Type{% endtrans %}</a>
+            <div class="collapse" id="beds-bed-type">
+                <a href="/{{ g.locale }}/tree_map/cnes_bed/bed_type_per_specialty/number_existing_bed?depths=bed_type+bed_type_per_specialty&sizes=number_existing_bed+number_sus_bed+number_non_sus_bed&filters=unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-bed-type-tree_map'}}" data-parent="#beds-bed-type">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_bed/bed_type_per_specialty/number_existing_bed?values=number_existing_bed+number_sus_bed+number_non_sus_bed&filters=unit_type&depths=bed_type+bed_type_per_specialty&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-bed-type-stacked'}}" data-parent="#beds-bed-type">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+                <a href="/{{ g.locale }}/bar/cnes_bed/number_existing_bed,number_sus_bed,number_non_sus_bed/bed_type,bed_type_per_specialty?options=singlecolor,nolabely&filters=unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-bed-type-bar'}}" data-parent="#beds-bed-type">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+            <a href="#beds-sus-bond" class="list-group-item" data-toggle="collapse" data-parent="#beds-sus-bond">{% trans %}SUS Bond{% endtrans %}</a>
+            <div class="collapse" id="beds-sus-bond">
+                <a href="/{{ g.locale }}/bar/cnes_bed/number_sus_bed,number_non_sus_bed/bed_type,bed_type_per_specialty?options=nolabely,valueasfilter&filters=unit_type&new_filter=sus_bond&new_x=beds_per_sus_availability{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'beds-sus-bond-bar'}}" data-parent="#beds-sus-bond">
+                    {% trans %}Bar{% endtrans %}
+                </a>
+            </div>
+
+            <h4>{% trans %}Professionals by{% endtrans %}</h4>
+            {% if not is_municipality %}
+              <a href="#professionals-municipality" class="list-group-item" data-toggle="collapse" data-parent="#professionals-municipality">{% trans %}Municipality{% endtrans %}</a>
+              <div class="collapse" id="professionals-municipality">
+                  <a href="/{{ g.locale }}/map/cnes_professional/professionals/{{ id_ibge if id_ibge }}?filters=sus_healthcare_professional+unit_type"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-map'}}" data-parent="#professionals-municipality">
+                      {% trans %}Map{% endtrans %}
+                  </a>
+                  <a href="/{{ g.locale }}/tree_map/cnes_professional/municipality/professionals?depths=region+state+mesoregion+microregion+health_region+municipality&filters=sus_healthcare_professional+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-tree_map'}}" data-parent="#professionals-municipality">
+                      TreeMap
+                  </a>
+                  <a href="/{{ g.locale }}/stacked/cnes_professional/municipality/professionals?values=professionals&depths=region+state+mesoregion+microregion+health_region+municipality&filters=sus_healthcare_professional+unit_type+hierarchy_level&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                     target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-municipality-stacked'}}" data-parent="#professionals-municipality">
+                      {% trans %}Stacked{% endtrans %}
+                  </a>  
+              </div>
+            {% endif %}
+            <a href="#professionals-provider-unit" class="list-group-item" data-toggle="collapse" data-parent="#professionals-provider-unit">{% trans %}Unit Type{% endtrans %}</a>
+            <div class="collapse" id="professionals-provider-unit">
+                <a href="/{{ g.locale }}/tree_map/cnes_professional/unit_type/professionals?depths=unit_type&filters=sus_healthcare_professional+hierarchy_level{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-tree_map'}}" data-parent="#professionals-provider-unit">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_professional/unit_type/professionals?values=professionals&filters=sus_healthcare_professional+hierarchy_level{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-provider-unit-stacked'}}" data-parent="#professionals-provider-unit">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+            <a href="#professionals-occupation" class="list-group-item" data-toggle="collapse" data-parent="#professionals-occupation">{% trans %}Occupation{% endtrans %}</a>
+            <div class="collapse" id="professionals-occupation">
+                <a href="/{{ g.locale }}/tree_map/cnes_professional/occupation_family/professionals?filters=hierarchy_level+sus_healthcare_professional&depths=occupation_family+occupation_group&sizes=professional&depths=occupation_group+occupation_family{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-tree_map'}}" data-parent="#professionals-occupation">
+                    TreeMap
+                </a>
+                <a href="/{{ g.locale }}/stacked/cnes_professional/occupation_family/professionals?values=professionals&depths=occupation_group+occupation_family&filters=sus_healthcare_professional+hierarchy_level&hierarchy=true{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                   target="graphs-frame-health" class="list-group-item {{'selected' if graph.menu == 'professionals-occupation-stacked'}}" data-parent="#professionals-occupation">
+                    {% trans %}Stacked{% endtrans %}
+                </a>
+            </div>
+    </nav>
+    <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
+        <div class="embed-responsive responsive-wrapper">
+            <iframe src="{% if graph %}/{{ g.locale }}/{{ graph.url }}{% else %}/{{ g.locale }}/tree_map/cnes_equipment/equipment_code/equipment_quantity?depths=equipment_type+equipment_code&sizes=equipment_quantity+equipment_quantity_in_use&filters=sus_availability_indicator+unit_type{{ '&id_ibge=%s' % id_ibge if id_ibge }}{% endif %}"
+                    name="graphs-frame-health"
+                    id="graphs-frame-health"
+                    class="embed-responsive-item" >
+            </iframe>
+        </div>
+    </div>
+</div>

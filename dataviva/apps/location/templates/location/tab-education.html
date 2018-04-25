@@ -1,67 +1,8 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'education' }}" id="education">
 
-    <h2>{% trans %}Education{% endtrans %} ({{body.university_year}})</h2>
+    <h2>{% trans %}Education{% endtrans %} (2015)</h2>
 
     <div class="row">
-        {% if body.highest_enrolled_by_university %}
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="blue-box title">
-                {% trans %}University{% endtrans %}
-                <small>{% trans %}with Highest Number of Enrollments{% endtrans %}</small>
-            </div>
-            <div class="blue-box">
-                <p class="label">{{ body.highest_enrolled_by_university_name }}</p>
-                <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_university | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_university | magnitude }}</span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if body.highest_enrolled_by_major %}
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="blue-box title">
-                {% trans %}Major{% endtrans %}
-                <small>{% trans %}with Highest Number of Enrollments{% endtrans %}</small>
-            </div>
-            <div class="blue-box">
-                <p class="label">{{ body.highest_enrolled_by_major_name }}</p>
-                <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_major | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_major | magnitude }}</span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if body.highest_enrolled_by_school %}
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="blue-box title">
-                {% trans %}School{% endtrans %}
-                <small>{% trans %}with Highest Number of Enrollments{% endtrans %}</small>
-            </div>
-            <div class="blue-box">
-                <p class="label">{{ body.highest_enrolled_by_school_name }}</p>
-                <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_school | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_school | magnitude }}</span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        {% if body.highest_enrolled_by_basic_course %}
-        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-            <div class="blue-box title">
-                {% trans %}Basic Course{% endtrans %}
-                <small>{% trans %}with Highest Number of Enrollments{% endtrans %}</small>
-            </div>
-            <div class="blue-box">
-                <p class="label">{{ body.highest_enrolled_by_basic_course_name }}</p>
-                <div class="number">
-                    <strong class="counter">{{ body.highest_enrolled_by_basic_course | max_digits(3, True)}}</strong><span>{{ body.highest_enrolled_by_basic_course | magnitude }}</span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
     </div><!--/.row-->
 </div>
 
