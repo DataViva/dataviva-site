@@ -1,0 +1,45 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="dataviva-new-release">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">{% trans %}New version - New data and new graphics{% endtrans %}</h4>
+      </div>
+      <div class="modal-body">
+      	<p>{% trans %}DataViva has a new version. As highlight, health data is now available on the platform, provided by DATASUS. DataViva presents annual infformation from Brazilian health facilities from 2008 to 2015. The main variables are: health facilities, health equipment, hospital beds and health professionals. You can find this data by browsing the locations profiles.{% endtrans %}</p>
+
+      	<p>{% trans %}New data was included:{% endtrans %}</p>
+
+    		<ul>
+    			<li>{% trans %}International trade: port;{% endtrans %}</li>
+    			<li>{% trans %}Formal employment and establishments: workers' information (sex, educational level and ethnicity) and company information (size, Simple - a differentiated tax regime - and legal nature).{% endtrans %}</li>
+    		</ul>
+
+		    <p>{% trans %}The platform has a new{% endtrans %} <a target="blank" href="https://github.com/DataViva/dataviva-api/wiki/documentation">API</a>.</p>
+        <div class="modal-footer">
+          <label>
+              <input type="checkbox" value="1"> {% trans %}Do not show this message again{% endtrans %} 
+          </label>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	$(document).ready(function(){
+    var showModal = localStorage.getItem('show-new-release-modal');
+
+    if(showModal == undefined) {
+		  $('#dataviva-new-release').modal('show');
+    }
+
+    $('#dataviva-new-release button[data-dismiss]').click(function(item){
+      if($('#dataviva-new-release input:checked').length) {
+        localStorage.setItem('show-new-release-modal', 'false');
+      }
+    })
+
+	})
+</script>

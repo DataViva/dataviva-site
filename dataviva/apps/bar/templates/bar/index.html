@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="{{ g.locale }}">
+    <head>
+        <meta charset="utf-8">
+        {% include "graphs/css_assets.html" %}
+        {% include "graphs/js_assets.html" %}
+        </style>
+    </head>
+    <body>
+        {% include "graphs/tools.html" %}
+        <div class="embed-responsive responsive-wrapper graph-wrapper">
+            <div id="bar"
+                class="embed-responsive responsive-wrapper"
+                dataset="{{dataset}}"
+                x="{{x}}"
+                y="{{y}}"
+                options="{{options}}"
+                subtitle="{{subtitle}}"
+                graph-title="{{graph_title}}"
+                graph-subtitle="{{graph_subtitle}}"
+                filters="{{filters}}">
+            </div>
+        </div>
+        <div id="controls"></div>
+
+        <div id="mask" class="loading"></div>
+
+        <script type="text/javascript">
+            var dictionary = {{ dictionary|safe }};
+        </script>
+        <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+        <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+        <script type="text/javascript" src="/static/js/modules/bar.js"></script>
+        <script type="text/javascript" src="/static/js/graphs/tools.js"></script>
+    </body>
+</html>

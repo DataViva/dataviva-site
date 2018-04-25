@@ -18,6 +18,14 @@
 {% block content %}
 
 <!-- BREADCRUMB -->
+<input type="hidden" id="id_ibge" value="{{id_ibge}}">
+
+{% if trade_partner.id_mdic %}
+    <input type="hidden" id="id_country" value="{{ '%03d' % trade_partner.id_mdic}}">
+{% else %}
+    <input type="hidden" id="id_continent" value="{{trade_partner.id}}">
+{% endif %}
+
 <div class="container">
     <div class="row bg-white">
         <ol class="breadcrumb">
@@ -75,59 +83,6 @@
 
             <div class="indices">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Trade Balance{% endtrans %} ({{ header.year }})</h2>
-                            <div class="number">
-                                R$ <strong class="counter">{{ header.trade_balance | max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">{{ header.trade_balance | magnitude  }}</small>
-                            </div>
-                        </div>
-                    </div><!--/.col-->
-                    {% if header.total_exported %}
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total Value Exported{% endtrans %} ({{ header.year }})</h2>
-                            <div class="number">
-                                R$ <strong class="counter">{{ header.total_exported | max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">{{ header.total_exported | magnitude }}</small>
-                            </div>
-                        </div>
-                    </div><!--/.col-->
-                    {% endif %}
-                    {% if header.unity_weight_export_price %}
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Average Price Exported{% endtrans %} ({{ header.year }})</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.unity_weight_export_price | max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">USD / kg</small>
-                            </div>
-                        </div>
-                    </div><!--/.col-->
-                    {% endif %}
-                    {% if header.total_imported %}
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total Value Imported{% endtrans %} ({{ header.year }})</h2>
-                            <div class="number">
-                                R$ <strong class="counter">{{ header.total_imported | max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">{{ header.total_imported | magnitude }}</small>
-                            </div>
-                        </div>
-                    </div><!--/.col-->
-                    {% endif %}
-                    {% if header.unity_weight_import_price %}
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Average Price Imported{% endtrans %} ({{ header.year }})</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.unity_weight_import_price | max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">USD / kg</small>
-                            </div>
-                        </div>
-                    </div><!--/.col-->
-                    {% endif %}
                 </div><!--/.row-->
             </div>
         </div>
@@ -175,3 +130,9 @@
 
 {% endblock content %}
 
+{% block script %}
+    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+    <script type="text/javascript" src="/static/js/modules/trade-partner.js"></script>
+{% endblock %}

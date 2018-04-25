@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="{{ g.locale }}">
+<head>
+    <meta charset="utf-8">
+    <title>DataViva</title>
+    {% include "graphs/css_assets.html" %}
+    {% include "graphs/js_assets.html" %}
+</head>
+<body>
+    {% include "graphs/tools.html" %}
+    <div class="embed-responsive responsive-wrapper graph-wrapper">
+        <div id="rings"
+            dataset="{{ dataset }}"
+            circles="{{ circles }}"
+            focus="{{ focus }}"
+            filters="{{ filters }}"
+            graph-title="{{ title }}"
+            graph-subtitle="{{ subtitle }}">
+        </div>
+        <div id="controls"></div>
+    </div>
+    <div id="mask" class="loading"></div>
+
+    <script type="text/javascript">
+        var dictionary = {{ dictionary|safe }};
+    </script>
+    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+    <script type="text/javascript" src="/static/js/modules/rings.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/tools.js"></script>
+</body>
