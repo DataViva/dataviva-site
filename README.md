@@ -1,4 +1,4 @@
-#DataViva [![Build Status](https://snap-ci.com/DataViva/dataviva-site/branch/master/build_image)](https://snap-ci.com/DataViva/dataviva-site/branch/master)
+# DataViva
 
 A Collaborative Planning Tool.
 [dataviva.info](http://www.dataviva.info)
@@ -7,13 +7,13 @@ A Collaborative Planning Tool.
 
 
 
-#Support
+# Support
 
 **DataViva** will run on all modern browsers so long as they have Javascript turned on and full support for SVG graphics. This includes the latest versions of Firefox, Chrome (Chromium), Safari (WebKit), Opera and IE.
 
 Note: Internet Explorer versions 8 and below will not work as they do not have SVG support built in.
 
-#Installation
+# Installation
 
 **DataViva** is a web platform built using Flask, an open source Python library for interacting with HTTP. this installation guide is written assuming a Linux or Linux-like environment. The following software is required to be installed locally in order to get DataViva running:
 
@@ -60,6 +60,7 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         export DATAVIVA_OAUTH_FACEBOOK_ID=
         export DATAVIVA_OAUTH_FACEBOOK_SECRET=
         * export DATAVIVA_ACCOUNTS=True
+        export DATAVIVA_API_BASE_URL=http://api.staging.dataviva.info/
 
         * only necessary if you want to enable user accounts
 
