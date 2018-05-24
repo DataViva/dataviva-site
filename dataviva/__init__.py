@@ -66,7 +66,8 @@ view_cache = Cache(app, config={
     'CACHE_DEFAULT_TIMEOUT': cache_timeout,
     'CACHE_REDIS_HOST': get_env_variable("DATAVIVA_REDIS_HOST", "localhost"),
     'CACHE_REDIS_PORT': get_env_variable("DATAVIVA_REDIS_PORT", 6379),
-    'CACHE_REDIS_PASSWORD': get_env_variable("DATAVIVA_REDIS_PW", None)
+    'CACHE_REDIS_PASSWORD': get_env_variable("DATAVIVA_REDIS_PW", None),
+    'CACHE_REDIS_DB': get_env_variable("DATAVIVA_REDIS_DB", 0),
 })
 
 redis_sesh = RedisSessionInterface(view_cache, "session:")
