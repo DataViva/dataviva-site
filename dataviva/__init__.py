@@ -52,7 +52,7 @@ def get_env_variable(var_name, default=-1):
         raise Exception(error_msg)
 
 
-cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "dv2016:")
+cache_prefix = get_env_variable("DATAVIVA_REDIS_PREFIX", "")
 cache_timeout = get_env_variable("DATAVIVA_REDIS_TIMEOUT", 60000000)
 s3_host = get_env_variable("S3_HOST", 'https://dataviva.s3.amazonaws.com')
 s3_bucket = get_env_variable("S3_BUCKET", 'dataviva-dev')
