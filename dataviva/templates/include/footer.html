@@ -1,7 +1,7 @@
 <footer class="bg-dark-green">
     <div class="container">
 
-    <div class="col-sm-4 col-md-2 col-lg-2 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+    <div class="col-sm-4 col-md-3 col-lg-3">
         <ul>
             <li><h3>{% trans %}About{% endtrans %}</h3></li>
             <li><a href="{{ url_for('about.index') }}" title="{% trans %}The{% endtrans %} Dataviva">{% trans %}The{% endtrans %} Dataviva</a></li>
@@ -11,7 +11,7 @@
         </ul>
     </div>
 
-    <div class="col-sm-4 col-md-2 col-lg-2">
+    <div class="col-sm-4 col-md-3 col-lg-3">
         <ul>
             <li><h3>{% trans %}Explore{%endtrans%}</h3></li>
             <li>
@@ -33,7 +33,7 @@
         </ul>
     </div>
 
-    <div class="col-sm-4 col-md-2 col-lg-2">
+    <div class="col-sm-4 col-md-3 col-lg-3">
         <ul>
             <li><h3>{% trans %}Support{% endtrans %}</h3></li>
             <li><a href="{{ url_for('help.index') }}" title="{% trans %}Help{% endtrans %}">{% trans %}Help{% endtrans %}</a></li>
@@ -42,36 +42,7 @@
         </ul>
     </div>
 
-    <div class="col-xs-12 col-md-6 col-lg-6 visible-md visible-lg">
-        <h3>{%trans%}Contact Us{%endtrans%}</h3>
-
-        <form method="post" id="contact-form" action="{{ url_for('contact.create') }}" class="form-horizontal">
-            {{ g.contact_form.hidden_tag() }}
-            <div class="form-group">
-                <div>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="{% trans %}Name{% endtrans %}">
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="E-mail">
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <textarea type="text" class="form-control" id="message" name="message" placeholder="{% trans %}Message{% endtrans %}"></textarea>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div>
-                    <button type="submit" class="btn btn-white">{% trans %}Send{% endtrans %}</button>
-                </div>
-            </div>
-        </form>
-
-    </div>
-    <div class="col-sm-4 col-md-3 col-lg-3 col-md-offset-2 col-lg-offset-2 margin-top">
+    <div class="col-xs-12 col-md-3 col-lg-3">
         <h3>{%trans%}Follow Us{%endtrans%}</h3>
         <ul class="list-inline">
             <li>
