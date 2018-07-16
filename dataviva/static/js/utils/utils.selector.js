@@ -567,7 +567,9 @@ function Selector() {
 
           icon.style("display", "inline-block");
 
-          if (x.icon) icon.style("background-image","url('"+x.icon+"')");
+          if (x.icon){
+            icon.style("background-image","url('"+dataviva.s3_host+x.icon+"')");
+          }
 
           if (["wld","bra"].indexOf(type) < 0 || (type == "wld" && x.id.length != 5)) {
             icon.style("background-color",x.color);
@@ -739,10 +741,10 @@ function Selector() {
                 "bra": 3
             }
             if ((type == "bra" && v.id.length !== 1) || (type == "wld" && v.id.length == 5)) {
-                search_icon = item.append("div").attr("class","search_icon").style("background-image","url("+v.icon+")");
+                search_icon = item.append("div")
+                                .attr("class","search_icon")
+                                .style("background-image","url("+dataviva.s3_host+v.icon+")");
             } else {
-
-
                 if (type == "university") {
                     var fontId = v.school_type_id.toLowerCase();
                 } else {
