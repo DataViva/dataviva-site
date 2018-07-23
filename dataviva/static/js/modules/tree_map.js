@@ -436,12 +436,12 @@ var getUrls = function() {
         }
     });
 
-    var urls = [api_url + '/' + dimensions.join('/') + '?' + tree_map.getAttribute('filters'),
-        api_url + '/metadata/' + squares
+    var urls = [api_url + dimensions.join('/') + '/?' + tree_map.getAttribute('filters'),
+        api_url + 'metadata/' + squares
     ];
 
     metadataAttrs.forEach(function(attr) {
-        urls.push(api_url + '/metadata/' + attr)
+        urls.push(api_url + 'metadata/' + attr)
     });
 
     return urls;
