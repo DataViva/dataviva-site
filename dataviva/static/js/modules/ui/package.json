@@ -6,7 +6,8 @@
   "scripts": {
     "build": "parcel build app/main.js -o vue-app.min.js --public-url /",
     "rebuild": "parcel build app/main.js -o vue-app.min.js --no-cache --public-url /",
-    "watch": "parcel watch app/main.js -o vue-app"
+    "watch": "parcel watch app/main.js -o vue-app",
+    "lint": "eslint app/**/*.js app/**/**/*.vue"
   },
   "keywords": [],
   "author": "datavivadev@gmail.com",
@@ -24,5 +25,61 @@
     "parcel-bundler": "^1.9.7",
     "stylus": "^0.54.5",
     "vue-template-compiler": "^2.5.16"
+  },
+  "optionalDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^8.2.3",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-html": "^4.0.3",
+    "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-vue": "4.5.0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "eslint:recommended",
+      "plugin:vue/recommended",
+      "airbnb-base"
+    ],
+    "plugins": [
+      "vue"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint",
+      "ecmaVersion": 6,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "modules": true
+      }
+    },
+    "rules": {
+      "max-len": [
+        "error",
+        {
+          "code": 80
+        }
+      ],
+      "vue/script-indent": [
+        "error",
+        2
+      ],
+      "object-shorthand": [
+        "error",
+        "always",
+        {
+          "avoidQuotes": false
+        }
+      ],
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "import/no-unresolved": [
+        "off"
+      ],
+      "no-underscore-dangle": "off"
+    }
   }
 }
