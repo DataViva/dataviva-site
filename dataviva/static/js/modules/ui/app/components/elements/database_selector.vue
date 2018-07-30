@@ -1,12 +1,12 @@
 <template>
-  <div id="selector">
-    Vue selector application
+  <div>
+    DataBase Selector 
   </div>
 </template>
 
 <script>
   export default {
-    name: 'Selector',
+    name: 'DataBaseSelector',
     data() {
       return {
       };
