@@ -1,15 +1,15 @@
 <template>
   <div>
-    DataBase Selector 
+    DataBase Selector
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'DataBaseSelector',
-    data() {
-      return {
-      };
-    }
-  };
+export default {
+  name: "DataBaseSelector",
+  data() {
+    return {
+    };
+  },
+};
 </script>
