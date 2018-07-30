@@ -5,6 +5,8 @@
 </template>
 
 <script>
+  import "../../assets/css/*.css"
+
   export default {
     name: 'DataBaseSelector',
     data() {
