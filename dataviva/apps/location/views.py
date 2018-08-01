@@ -241,32 +241,17 @@ def all(tab):
 
     body = {
         'product_year': product_service.year(),
-        'main_product_by_export_value': product_service.highest_export_value(),
-        'main_product_by_export_value_name': product_service.highest_export_value_name(),
-        'main_product_by_import_value': product_service.highest_import_value(),
-        'main_product_by_import_value_name': product_service.highest_import_value_name(),
         'total_imports': product_service.all_imported(),
         'total_exports': product_service.all_exported(),
         'all_trade_balance': product_service.all_trade_balance(),
 
         'industry_year': industry_service.get_year(),
-        'main_industry_by_num_jobs': industry_service.main_industry_by_num_jobs(),
         'main_industry_by_num_jobs_name': industry_service.main_industry_by_num_jobs_name(),
-        'main_occupation_by_num_jobs': occupation_service.main_occupation_by_num_jobs(),
-        'main_occupation_by_num_jobs_name': occupation_service.main_occupation_by_num_jobs_name(),
-        'avg_wage': industry_service.avg_wage(),
-        'wage': industry_service.all_salary_mass(),
+
         'total_jobs': industry_service.total_jobs(),
 
         'university_year': university_service.year(),
-        'highest_enrolled_by_university': university_service.highest_enrolled_by_university(),
-        'highest_enrolled_by_university_name': university_service.highest_enrolled_by_university_name(),
-        'highest_enrolled_by_major': major_service.highest_enrolled_by_major(),
-        'highest_enrolled_by_major_name': major_service.highest_enrolled_by_major_name(),
-        'highest_enrolled_by_school': scholar_service.highest_enrolled_by_school(),
-        'highest_enrolled_by_school_name': scholar_service.highest_enrolled_by_school_name(),
-        'highest_enrolled_by_basic_course': basic_course_service.highest_enrolled_by_basic_course(),
-        'highest_enrolled_by_basic_course_name': basic_course_service.highest_enrolled_by_basic_course_name()
+
     }
 
     if body['total_exports'] is None and body['total_imports'] is None and body['total_jobs'] is None and \
@@ -421,30 +406,15 @@ def index(bra_id, tab):
 
     body = {
         'product_year': location_secex_service.year(),
-        'main_product_by_export_value': location_secex_service.main_product_by_export_value(),
         'main_product_by_export_value_name': location_secex_service.main_product_by_export_value_name(),
-        'main_product_by_import_value': location_secex_service.main_product_by_import_value(),
-        'main_product_by_import_value_name': location_secex_service.main_product_by_import_value_name(),
         'total_exports': location_secex_service.total_exports(),
-        'total_imports': location_secex_service.total_imports(),
         'less_distance_by_product': location_secex_service.less_distance_by_product(),
         'less_distance_by_product_name': location_secex_service.less_distance_by_product_name(),
         'opportunity_gain_by_product': location_secex_service.opportunity_gain_by_product(),
         'opportunity_gain_by_product_name': location_secex_service.opportunity_gain_by_product_name(),
-        'main_destination_by_export_value': location_wld_service.main_destination_by_export_value(),
-        'main_destination_by_export_value_name': location_wld_service.main_destination_by_export_value_name(),
-        'main_destination_by_import_value': location_wld_service.main_destination_by_import_value(),
-        'main_destination_by_import_value_name': location_wld_service.main_destination_by_import_value_name(),
         'secex_year': location_secex_service.year(),
 
         'industry_year': location_industry_service.year(),
-        'main_industry_by_num_jobs': location_industry_service.main_industry_by_num_jobs(),
-        'main_industry_by_num_jobs_name': location_industry_service.main_industry_by_num_jobs_name(),
-        'main_occupation_by_num_jobs': location_occupation_service.main_occupation_by_num_jobs(),
-        'main_occupation_by_num_jobs_name': location_occupation_service.main_occupation_by_num_jobs_name(),
-        'avg_wage': location_jobs_service.avg_wage(),
-        'wage': location_jobs_service.wage(),
-        'total_jobs': location_jobs_service.total_jobs(),
         'rais_year': location_jobs_service.year(),
 
         'less_distance_by_occupation': location_distance_service.less_distance_by_occupation(),
@@ -453,15 +423,6 @@ def index(bra_id, tab):
         'opportunity_gain_by_occupation_name': location_opp_gain_service.opportunity_gain_by_occupation_name(),
 
         'university_year': location_university_service.year(),
-        'highest_enrolled_by_university': location_university_service.highest_enrolled_by_university(),
-        'highest_enrolled_by_university_name': location_university_service.highest_enrolled_by_university_name(),
-        'highest_enrolled_by_school': location_school_service.highest_enrolled_by_school(),
-        'highest_enrolled_by_school_name': location_school_service.highest_enrolled_by_school_name(),
-        'highest_enrolled_by_major': location_major_service.highest_enrolled_by_major(),
-        'highest_enrolled_by_major_name': location_major_service.highest_enrolled_by_major_name(),
-        'major_year': location_major_service.year(),
-        'highest_enrolled_by_basic_course': location_basic_course_service.highest_enrolled_by_basic_course(),
-        'highest_enrolled_by_basic_course_name': location_basic_course_service.highest_enrolled_by_basic_course_name(),
         'basic_course_year': location_basic_course_service.year()
     }
 

@@ -54,20 +54,14 @@ def index(university_id, tab):
         graph['url'] = url_prefix + url
 
     header = {
-        'year': university_service.year(),
         'type': university_service.university_type(),
         'enrolled': university_service.enrolled(),
-        'entrants': university_service.entrants(),
         'graduates': university_service.graduates()
     }
 
     body = {
         'major_with_more_enrollments': majors_service.major_with_more_enrollments(),
         'highest_enrollment_number_by_major': majors_service.highest_enrolled_number(),
-        'major_with_more_entrants': majors_service.major_with_more_entrants(),
-        'highest_entrant_number_by_major': majors_service.highest_entrants_number(),
-        'major_with_more_graduates': majors_service.major_with_more_graduates(),
-        'highest_graduate_number_by_major': majors_service.highest_graduates_number(),
         'year': majors_service.year(),
     }
 
