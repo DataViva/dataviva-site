@@ -19,7 +19,7 @@
         {{ item.extra_info }}: {{ item.extra_info_content }}
       </small>
       <template
-        v-if="item.filter_options">
+        v-if="item.filter_options && item.filter_options.length > 0">
         <br><span class="medium-gray f4">Show:</span>
         <a
           v-for="filter in item.filter_options"
