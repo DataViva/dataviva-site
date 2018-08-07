@@ -3,9 +3,17 @@
     id="selectable-item"
     :class="item.bg_light_grey"
     class="flex flex-row flex-nowrap pv3">
-    <img
-      :src="item.img"
-      class="search-icon-size ph2">
+
+    <div class="w4 tc">
+      <img
+        v-if="item.img"
+        :src="item.img"
+        class="search-icon-size ph2">
+      <i 
+        v-if="item.icon"
+        :class="'search_icon ph2 f-5 center ' + item.icon"></i>
+    </div>
+
     <div
       class="ph3">
       <h3
@@ -15,6 +23,7 @@
         {{ item.id_description }}: {{ item.id }}<br>
       </small>
       <small
+        v-if="item.extra_info"
         class="medium-gray f5">
         {{ item.extra_info }}: {{ item.extra_info_content }}
       </small>
