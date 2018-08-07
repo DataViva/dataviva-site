@@ -2,8 +2,8 @@
   <div>
     <div v-for="database in databases">
       <span class="pointer" v-on:click="selectDataBase(database)">
-        {{t_(database, "name")}}
-        <i v-bind:class="database.icon"></i>
+        {{ database.name }}
+        <i v-bind:class="database.icon.db"></i>
       </span>
     </div>
     
@@ -31,108 +31,132 @@ export default {
       database: "",
       databases: [
         {
-          name_en: "Brazilian Locations",
-          name_pt: "Localidades Brasileiras",
+          name: "Brazilian Locations",
           code: "location",
+          id_description: "IBGE ID",
           group_opts: ["region", "state", "mesoregion", "microregion"
             , "municipality"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Population"],
           extra_info_label: "Population", 
           endpoint: "municipality",
-          img_path: "/static/img/icons/bra/bra_",
-          icon: "dv-bra"
+          img_path: {
+            "state": "/static/img/icons/bra/",
+            "mesoregion": "/static/img/icons/bra/",
+            "microregion": "/static/img/icons/bra/",
+            "municipality": "/static/img/icons/bra/",
+          },
+          icon: {
+            db: "dv-bra",
+            item: "dv-bra-",
+          },
         },
         {
-          name_en: "Occupations",
-          name_pt: "Ocupações",
+          name: "Occupations",
           code: "occupation",
-          group_opts: ["main group", "familie"],
+          id_description: "CBO ID",
+          group_opts: ["main group", "family"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Total Jobs"],
           extra_info_label: "Total Jobs", 
-          endpoint: "occupation_group",
-          img_path: "/static/img/icons/cbo/cbo_",
-          icon: "dv-occupation"
+          endpoint: ["occupation_group", "occupation_family"],
+          icon: {
+            db: "dv-occupation",
+            item: "dv-cbo-",
+          },
         },
         {
-          name_en: "Economic Activities",
-          name_pt: "Atividades Econômicas",
+          name: "Economic Activities",
           code: "industry",
-          group_opts: ["section", "division", "classe"],
+          id_description: "CNAE ID",
+          group_opts: ["industry_section", "industry_division", "classe"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Total Jobs"],
           extra_info_label: "Total Jobs", 
-          endpoint: "municipality",
-          img_path: "",
-          icon: "dv-industry"
+          endpoint: "industry_class",
+          icon: {
+            db: "dv-industry",
+            item: "dv-hs-",
+          },
         },
         {
-          name_en: "Products",
-          name_pt: "Produtos",
+          name: "Products",
           code: "product",
+          id_description: "HS ID",
           group_opts: ["product_chapter", "position"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Exports"],
           extra_info_label: "Exports", 
           endpoint: "product",
-          img_path: "",
-          icon: "dv-product"
+          icon: {
+            db: "dv-product",
+            item: "",
+          },
         },
         {
-          name_en: "Trade Partners",
-          name_pt: "Parceiros Comerciais",
+          name: "Trade Partners",
           code: "trade_partner",
-          group_opts: ["continent", "countrie"],
+          id_description: "WLD ID",
+          group_opts: ["continent", "country"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Exports"],
           extra_info_label: "Exports", 
           endpoint: "country",
-          img_path: "/static/img/icons/wld/wld_",
-          icon: "dv-trade-partner"
+          img_path: {
+            "country": "/static/img/icons/wld/",
+            "continent": "/static/img/icons/wld/",
+          },
+          icon: {
+            db: "dv-trade-partner",
+            item: "",
+          },
         },
         {
-          name_en: "Universities",
-          name_pt: "Universidades",
+          name: "Universities",
           code: "university",
+          id_description: "ID",
           group_opts: [],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
           extra_info_label: "Enrolled", 
           endpoint: "university",
-          img_path: "",
-          icon: "dv-university"
+          icon: {
+            db: "dv-university",
+            item: "dv-university-t",
+          },
         },
         {
-          name_en: "Higher Education",
-          name_pt: "Ensino Superior",
+          name: "Higher Education",
           code: "hedu_course",
-          group_opts: ["field", "major"],
+          id_description: "ID",
+          group_opts: ["hedu_course_field", "major"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
           extra_info_label: "Enrolled", 
           endpoint: "hedu_course",
-          img_path: "",
-          icon: "dv-major"
+          icon: {
+            db: "dv-major",
+            item: "dv-course-hedu-",
+          },
         },
         {
-          name_en: "Basic Courses",
-          name_pt: "Curso Básico",
+          name: "Basic Courses",
           code: "basic_course",
+          id_description: "ID",
           group_opts: ["field", "course"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
           extra_info_label: "Enrolled", 
-          endpoint: "sc_course",
-          icon: "dv-basic-course"
+          endpoint: ["sc_course_field", "sc_course"],
+          icon: {
+            db: "dv-basic-course",
+            item: "",
+          },
         }
       ]
     };
   },
   methods: {
-    t_(item, prop) {
-      return item[prop + "_" + this.confs.lang];
-    },
     selectDataBase(database) {
       this.database = database;
       this.show = true;
