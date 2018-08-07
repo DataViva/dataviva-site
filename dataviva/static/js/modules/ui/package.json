@@ -15,7 +15,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.16",
-    "vue-hot-reload-api": "^2.3.0"
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.1.0",

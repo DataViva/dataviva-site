@@ -1,0 +1,29 @@
+pt = {
+  "message": {
+     "example": "insert translations here"
+  },
+  "dateTimeFormat": {
+	 "short": {
+       "year": "numeric",
+       "month": "short",
+       "day": "numeric"
+     },
+     "long": {
+       "year": "numeric",
+       "month": "long",
+       "day": "numeric",
+       "weekday": "short",
+       "hour": "numeric",
+       "minute": "numeric"
+     },
+  },
+  "numberFormat": {
+     "currency": {
+	   "style": "currency", 
+	   "currency": "BRL",
+	 },
+	 "percent": {
+       "style": "percent"
+	 }
+  }
+}
