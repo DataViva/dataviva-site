@@ -1,0 +1,33 @@
+en = {
+	"message": {
+		 "hello": "hello world",
+	   "apple": "apple | apples",
+	   "banana": "no bananas | one banana | {count} bananas"
+  },
+  "dateTimeFormat": {
+		 "short": {
+       "year": "numeric",
+       "month": "short",
+       "day": "numeric"
+     },
+     "long": {
+       "year": "numeric",
+       "month": "long",
+       "day": "numeric",
+       "weekday": "short",
+       "hour": "numeric",
+       "minute": "numeric",
+       "hour12": true
+     },
+  },
+  "numberFormat": {
+     "currency": {
+       "style": "currency",
+       "currency": "USD",
+     },
+     "percent": {
+       "style": "percent"
+     }
+  }
+}
+
