@@ -1,12 +1,13 @@
 <template>
   <div>
     <div v-for="database in databases">
-      <span class="pointer" v-on:click="selectDataBase(database)">
+      <span
+        class="pointer"
+        v-on:click="selectDataBase(database)">
         {{ database.name }}
         <i v-bind:class="database.icon.db"></i>
       </span>
     </div>
-    
     <selector
       v-if="show"
       v-bind:db="database"
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import "../../assets/css/*.css"
+import "../../assets/css/*.css";
 
 export default {
   name: "DataBaseSelector",
@@ -34,11 +35,11 @@ export default {
           name: "Brazilian Locations",
           code: "location",
           id_description: "IBGE ID",
-          group_opts: ["region", "state", "mesoregion", "microregion"
-            , "municipality"],
+          group_opts: ["region", "state", "mesoregion", "microregion",
+          "municipality"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Population"],
-          extra_info_label: "Population", 
+          extra_info_label: "Population",
           endpoint: "municipality",
           img_path: {
             "state": "/static/img/icons/bra/",
@@ -58,7 +59,7 @@ export default {
           group_opts: ["main group", "family"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Total Jobs"],
-          extra_info_label: "Total Jobs", 
+          extra_info_label: "Total Jobs",
           endpoint: ["occupation_group", "occupation_family"],
           icon: {
             db: "dv-occupation",
@@ -72,7 +73,7 @@ export default {
           group_opts: ["industry_section", "industry_division", "classe"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Total Jobs"],
-          extra_info_label: "Total Jobs", 
+          extra_info_label: "Total Jobs",
           endpoint: "industry_class",
           icon: {
             db: "dv-industry",
@@ -86,7 +87,7 @@ export default {
           group_opts: ["product_chapter", "position"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Exports"],
-          extra_info_label: "Exports", 
+          extra_info_label: "Exports",
           endpoint: "product",
           icon: {
             db: "dv-product",
@@ -100,7 +101,7 @@ export default {
           group_opts: ["continent", "country"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Exports"],
-          extra_info_label: "Exports", 
+          extra_info_label: "Exports",
           endpoint: "country",
           img_path: {
             "country": "/static/img/icons/wld/",
@@ -118,7 +119,7 @@ export default {
           group_opts: [],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
-          extra_info_label: "Enrolled", 
+          extra_info_label: "Enrolled",
           endpoint: "university",
           icon: {
             db: "dv-university",
@@ -132,7 +133,7 @@ export default {
           group_opts: ["hedu_course_field", "major"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
-          extra_info_label: "Enrolled", 
+          extra_info_label: "Enrolled",
           endpoint: "hedu_course",
           icon: {
             db: "dv-major",
@@ -146,14 +147,14 @@ export default {
           group_opts: ["field", "course"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
-          extra_info_label: "Enrolled", 
+          extra_info_label: "Enrolled",
           endpoint: ["sc_course_field", "sc_course"],
           icon: {
             db: "dv-basic-course",
             item: "",
           },
-        }
-      ]
+        },
+      ],
     };
   },
   methods: {
@@ -163,7 +164,7 @@ export default {
     },
     closeModal() {
       this.show = false;
-    }
-  }
+    },
+  },
 };
 </script>

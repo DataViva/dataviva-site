@@ -7,63 +7,69 @@
       <div 
         class="br3 pb1 bg-white relative mh2 mh5-ns vh-75 overflow-hidden"
         @click.stop>
-        <div>
           <!-- Header -->
-          <div class="bg-green br--top br2">
+          <div class="bg-green br--top br2 flex flex-row flex-nowrap">
             <h4 class="f2 ma0 pa4 white">{{ db.name }}</h4>
-          </div>
-
-          <!-- Search input -->
-          <form class="pa4 pb2 black-80">
-            <input
-              id="name" 
-              class="input-reset ba b--black-10 pa3 mb2 db w-100 br3"
-              type="text"
-              aria-describedby="name-desc"
-              placeholder="Search"
-              v-model="search"
-              @keyup="reset_group_filter(); filter_list();">
-          </form>
-
+            <a
+                @click="close()"
+                id="close-x"
+                class="f2 white ml-auto pr4 pt3 mt2 fw7">&times;
+            </a>  
+          </div>   
+        <div class="ph4 h-75">          
           <!-- Filters and agregations -->
           <div
             v-if="!loading && !loading_depths"
-            class="w-100 ph4 pa1 clearfix">
+            class="w-100 pt2 clearfix" >
             <div v-if="db.group_opts.length" class="fl w-100 w-auto-l pb2">
-              <h4 class="ma0 tl mb1">Group</h4>
+              <h5 class="tl mb0">Group</h5> 
               <div
                 v-for="(option,index) in db.group_opts"
-                @click="reset_group_filter(); group_by_property(option);"
-                class="tc pa2 pa3-m pa3-l ba b--black-10 fl br2 ttc"
+                @click="reset_scroll_bar(); reset_group_filter(); group_by_property(option);"
+                class="tc mv3 pv2 pv2-m pv2-l ph3 ph3-m ph3-l ba b--black-10 fl br2 ttc"
                 :class="btn_format(group, option, index, db.group_opts)">
                   {{option}}
               </div>
             </div>
 
             <div class="fr w-100 w-auto-l pb2">
-              <h4 class="ma0 tl mb1">Sort</h4>
+              <h5 class="tl mb0">Sort</h5> 
               <div
                 v-for="(option,index) in db.order_opts"
-                @click="sort_list_by_property(option); update_visible_items();"
-                class="tc pa2 pa3-m pa3-l ba b--black-10 fl br2 ttc"
+                @click="reset_scroll_bar(); sort_list_by_property(option); update_visible_items();"
+                class="tc mv3 pv2 pv2-m pv2-l ph3 ph3-m ph3-l ba b--black-10 fl br2 ttc"
                 :class="btn_format(order, option, index, db.order_opts)">
                   {{db.order_labels[index]}}  
               </div>
             </div>
-          </div>
-        </div>
+          </div> <!-- Filters and agregations end -->
 
-        <!-- Itens list -->
+          <!-- Search input -->
+          <form class="pb3 black-80">
+            <input
+              id="name" 
+              class="input-reset ba b--black-10 pa3 mb2 db w-100 br3 ttu"
+              type="text"
+              aria-describedby="name-desc"
+              placeholder="search"
+              v-model="search"
+              @keyup="reset_group_filter(); filter_list();">
+          </form>
+
+      
+
+        <!-- Item list -->
         <div
-          class="ph4 h-75 w-100 overflow-y-auto" id="selectable-item-list"
+          class="h-75 w-100 overflow-y-auto" id="selectable-item-list"
           v-if="!loading" @scroll="infinity_scroll($event)">
           <SelectableItem
             v-for="(item, index) in visible_items"
             :item="mount_item(item, index)"
             :key="item.id"
             @select-filter="function (fil) { select_group(item, fil) }"/>
-        </div>
+        </div> <!-- Item list end -->
       </div>
+     </div>
     </div>
   </div>
 </template>
@@ -215,7 +221,7 @@ export default {
 
       return true;
     },
-    // Propose: filter items witout depth
+    // Propose: filter items without depth
     // Receive: array of items and the list of groups
     remove_incomplete(array, group) {
       return array.filter(item => this.have_all_groups(item, group));
@@ -420,7 +426,11 @@ export default {
           this.update_visible_items();
         }
       }
-    }
+    },
+    reset_scroll_bar() {
+      let itemDiv = document.getElementById("selectable-item-list");
+      itemDiv.scrollTop = 0;
+    }, 
   },
   computed: {
   }

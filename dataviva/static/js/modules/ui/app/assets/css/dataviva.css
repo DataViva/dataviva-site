@@ -33,3 +33,7 @@
 #selectable-item a:hover {
   color: #a25a6d;
 }
+
+#close-x a, a:visited, a:hover, a:active {
+  color: #fff;
+}

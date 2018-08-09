@@ -8,16 +8,16 @@
       <img
         v-if="item.img"
         :src="item.img"
-        class="search-icon-size ph2">
+        class="search-icon-size ph2 mh1">
       <i 
         v-if="item.icon"
-        :class="'search_icon ph2 f-5 center ' + item.icon"></i>
+        :class="'search-icon-size ph2 mh1 f-5' + item.icon"></i>
     </div>
 
     <div
-      class="ph3">
+      class="ph1">
       <h3
-        class="red mv0 f3 fontweight-400">{{ item.name }}</h3>
+        class="red mv0 f3 fw4">{{ item.name }}</h3>
       <small
         class="medium-gray f5">
         {{ item.id_description }}: {{ item.id }}<br>
@@ -43,7 +43,7 @@
       class="ml-auto">
       <a
         :href="item.url"
-        class="f4 ba burgundy br2 ph3 pv2 mr2 dib mt2 no-underline">Select
+        class="f4 ba burgundy br2 ph3 pv2 mr3 dib mt2 no-underline">Select
       </a>
     </div>
   </div>
