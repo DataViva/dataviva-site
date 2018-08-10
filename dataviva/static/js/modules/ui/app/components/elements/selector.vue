@@ -25,7 +25,7 @@
               <h5 class="tl mb0">Group</h5> 
               <div
                 v-for="(option,index) in db.group_opts"
-                @click="reset_scroll_bar(); reset_group_filter(); group_by_property(option);"
+                @click="reset_scroll_bar(); clean_search(); reset_group_filter(); group_by_property(option);"
                 class="tc mv3 pv2 pv2-m pv2-l ph3 ph3-m ph3-l ba b--black-10 fl br2 ttc"
                 :class="btn_format(group, option, index, db.group_opts)">
                   {{option}}
@@ -45,18 +45,16 @@
           </div> <!-- Filters and agregations end -->
 
           <!-- Search input -->
-          <form class="pb3 black-80">
+          <form class="pb3 black-80" autocomplete="off">
             <input
               id="name" 
-              class="input-reset ba b--black-10 pa3 mb2 db w-100 br3 ttu"
+              class="input-reset ba b--black-10 ph3 pv2 mb2 db w-100 br3 lh-copy"
               type="text"
               aria-describedby="name-desc"
-              placeholder="search"
+              placeholder="SEARCH"
               v-model="search"
               @keyup="reset_group_filter(); filter_list();">
           </form>
-
-      
 
         <!-- Item list -->
         <div
@@ -130,13 +128,7 @@ export default {
     //         ( 1) - if b comes first
     //         ( 0) - if they are igual
     compareName(a, b) {
-      if (this.t_(a, "name") < this.t_(b, "name")) {
-        return -1;
-      }
-      if (this.t_(a, "name") > this.t_(b, "name")) {
-        return 1;
-      }
-      return 0;
+      return (this.t_(a, "name")).localeCompare(this.t_(b, "name"));
     },
     // Propose: discovery the larger item by property
     // Receive: an object
@@ -144,14 +136,16 @@ export default {
     //         ( 1) - if a is higher than b
     //         ( 0) - if they are igual
     compareExtraInfo(a, b) {
-      if (a.extra_info_content < b.extra_info_content) {
-        return 1;
-      }
-      if (a.extra_info_content > b.extra_info_content) {
-        return -1;
-      }
-      return 0;
+      return b.extra_info_content - a.extra_info_content;
     },
+  //    if (a.extra_info_content < b.extra_info_content) {
+  //      return 1;
+  //    }
+  //    if (a.extra_info_content > b.extra_info_content) {
+  //      return -1;
+  //    }
+  //    return 0;
+  //  },
     // Propose: check if item id is present is list
     // Receive: a list and an id
     check_exist(list, id) {
@@ -292,7 +286,7 @@ export default {
         url: "/" + this.db.code + "/" + item.id,
         id_description: this.db.id_description,
         extra_info: this.db.extra_info_label,
-        extra_info_content: "",
+        extra_info_content: item.extra_info_content,
         filter_options: this.group_opts(this.db.group_opts),
       }
 
