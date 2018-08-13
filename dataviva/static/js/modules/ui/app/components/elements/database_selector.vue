@@ -8,11 +8,13 @@
         <i v-bind:class="database.icon.db"></i>
       </span>
     </div>
+   <- <transition name="fade">
     <selector
       v-if="show"
       v-bind:db="database"
       v-bind:confs="confs"
       v-on:close="closeModal"/>
+     </transition>  
   </div>
 </template>
 
