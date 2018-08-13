@@ -42,7 +42,7 @@
                   {{db.order_labels[index]}}  
               </div>
             </div>
-          </div> <!-- Filters and agregations end -->
+          </div> <!-- Filters and agregations ends -->
 
           <!-- Search input -->
           <form class="pb3 black-80" autocomplete="off">
@@ -65,7 +65,7 @@
             :item="mount_item(item, index)"
             :key="item.id"
             @select-filter="function (fil) { select_group(item, fil) }"/>
-        </div> <!-- Item list end -->
+        </div> <!-- Item list ends -->
       </div>
      </div>
     </div>
@@ -80,17 +80,17 @@ export default {
   props: ["db", "confs"],
   data() {
     return {
-      max_depth: 0, // max agregation level
-      depth: 0, // actual agregation
-      group: "", // actual agregation name
-      order: "extra_info", // actual order option
+      max_depth: 0, // max aggregation level
+      depth: 0, // current aggregation
+      group: "", // current aggregation name
+      order: "extra_info", // current order option
       search: null, // search text
       loading: true, // store if the modal is loading
-      loading_depths: true, // only show controls and finish to load levels
+      loading_depths: true, // only shows controls and finishes loading levels
       max_visible_items: 10,
-      items: null, // array of data
-      visible_items: [""], // visible items
-      filter_group: { // filter data by agregation
+      items: null, 
+      visible_items: [""], 
+      filter_group: { // filters data by aggregation
         group: "",
         search: "",
       },
@@ -99,55 +99,45 @@ export default {
   created: function() {
     if (this.db) {
       let length = this.db.group_opts.length -1;
-      // Set group level to minimal
+      // Sets group level to minimum
       this.group = this.db.group_opts[length];
       this.max_depth = length;
-      // Set actual depth level to minimal
+      // Sets current depth level to minimum
       this.depth = length;
-      // Get the first order option
+      // Gets the first order option
       this.order = this.db.order_opts[0];
     }
 
     this.get_data()
   },
   methods: {
-    // Propose: get item property according with the actual lang
-    // Receive: the item and the name of the property
-    // Return: value of the property
+    // Purpose: gets item property according to the current language
+    // Input: item and property name
+    // Output: property value
     t_(item, prop) {
       return item[prop + "_" + this.confs.lang];
     },
-    // Propose: check if object is a array
-    // Receive: an object
+
+    // Purpose: checks if object is an array
+    // Input: object
     is_array(obj) {
       return obj.constructor === Array;
     },
-    // Propose: discovery the larger item by lexical order
-    // Receive: an object
-    // Return: (-1) - if a comes first
-    //         ( 1) - if b comes first
-    //         ( 0) - if they are igual
+
+    // Purpose: finds larger item by lexical order
     compareName(a, b) {
       return (this.t_(a, "name")).localeCompare(this.t_(b, "name"));
     },
-    // Propose: discovery the larger item by property
-    // Receive: an object
-    // Return: (-1) - if a is lower than b
-    //         ( 1) - if a is higher than b
-    //         ( 0) - if they are igual
+
+    // Purpose: finds larger item by property
+    // Input: object
+    // 
     compareExtraInfo(a, b) {
       return b.extra_info_content - a.extra_info_content;
     },
-  //    if (a.extra_info_content < b.extra_info_content) {
-  //      return 1;
-  //    }
-  //    if (a.extra_info_content > b.extra_info_content) {
-  //      return -1;
-  //    }
-  //    return 0;
-  //  },
-    // Propose: check if item id is present is list
-    // Receive: a list and an id
+  
+    // Purpose: checks if item id is present in list
+    // Input: id and list
     check_exist(list, id) {
       for (var i = 0; i < list.length; i++) {
         if (list[i].id === id){
@@ -156,7 +146,8 @@ export default {
       }
       return false;
     },
-    // Propose: get data from API and call fuction to read
+
+    // Purpose: gets data from API and calls function to read data
     async get_data() {
       var ep = this.db.endpoint;
 
@@ -174,7 +165,8 @@ export default {
         }
       }
     },
-    // Propose: split data from differents levels when data
+
+    // Purpose: splits data from differents levels when data
     // comes from the same endpoint with differents depths
     async read_depths() {
       var minor_data = this.items[this.max_depth];
@@ -183,7 +175,7 @@ export default {
         for (var i = 0; i < minor_data.length; i++) {
           let item = minor_data[i][this.db.group_opts[j]];
 
-          // Add information about superior levels
+          // Adds information about higher levels
           for (var h = 0; h < j; h++) {
             var prop = minor_data[i][this.db.group_opts[h]];
 
@@ -204,8 +196,9 @@ export default {
 
       this.loading_depths = false;
     },
-    // Propose: check if item have all groups depth
-    // Receive: the item and the list of groups
+
+    // Purpose: checks whether item has all group depths
+    // Input: item and list of groups
     have_all_groups(item, group) {
       for (let i = 0; i < group.length - 1; i++) {
         if (!item[group[i]]) {
@@ -215,11 +208,13 @@ export default {
 
       return true;
     },
-    // Propose: filter items without depth
-    // Receive: array of items and the list of groups
+
+    // Purpose: filters items without depth
+    // Input: array of items and list of groups
     remove_incomplete(array, group) {
       return array.filter(item => this.have_all_groups(item, group));
     },
+
     read_data(data, group) {
       if(!this.items) {
         this.items = []
@@ -252,9 +247,10 @@ export default {
         this.update_visible_items();
       }
     },
-    // Propose: get url path for items with image
-    // Receive: the item
-    // Return: the url to respective image
+
+    // Purpose: gets url path for items with image
+    // Input: item
+    // Output: url
     img_path(item) {
       let depth = this.depth;
       switch(this.db.code) {
@@ -276,9 +272,11 @@ export default {
           }
       }
     },
+
     group_opts(list) {
       return list.slice(list.indexOf(this.group) + 1, list.length);
     },
+
     mount_item(item, index) {
       var mounted_item = {
         id: item.id,
@@ -320,25 +318,30 @@ export default {
 
       return mounted_item;
     },
-    // Propose: update visible items for user
+
+    // Purpose: updates visible items 
     update_visible_items() {
       let max = this.max_visible_items;
       this.visible_items = this.items[this.depth].slice(0, max);
     },
+
     sort_list_by_property(order) {
       this.items[this.depth].sort(this.get_compare_function(order));
 
       this.order = order;
     },
-    // Propose: get corresponding depth of a group name
-    // Receive: the group
-    // Return: the depth level
+
+    // Purpose: gets corresponding depth of a group name
+    // Input: group
+    // Output: depth level
     corresponding_depth(group) {
       return this.db.group_opts.indexOf(group);
     },
+
     set_depth(group) {
       this.depth = this.corresponding_depth(group);
     },
+
     get_compare_function(order) {
       if (order === "name"){
         return this.compareName;
@@ -346,15 +349,18 @@ export default {
         return this.compareExtraInfo;
       }
     },
+
     reset_group_filter() {
       this.filter_group = {};
     },
-    // Propose: clean the search text field
+
+    // Purpose: cleans the search text field
     clean_search() {
       this.search = null;
     },
-    // Propose: show items in group depth level 
-    // Receive: group depth name  
+
+    // Purpose: shows items in group depth level 
+    // Input: group depth name  
     group_by_property(group) {
       this.group = group;
       this.set_depth(group);
@@ -362,15 +368,17 @@ export default {
       this.sort_list_by_property(this.order);
       this.update_visible_items();
     },
+
     filter_list() {
       this.visible_items = this.items[this.depth]
         .filter(item => {
           return new RegExp(this.search.toLowerCase())
             .test(item.name_en.toLowerCase())
         })
-        .sort(this.get_compare_function(this.order))
-        .slice(0, this.max_visible_items)
+          .sort(this.get_compare_function(this.order))
+          .slice(0, this.max_visible_items)
     },
+
     filter_by_group(search, group) {
       this.visible_items = this.items[this.depth]
         .filter(item => {
@@ -380,6 +388,7 @@ export default {
         .sort(this.get_compare_function(this.order))
         .slice(0, this.max_visible_items)
     },
+
     btn_format(order, option, index, order_opts) {
       var clickable = "pointer grow"
       var classes = order == option ? "bg-moon-gray" : clickable;
@@ -387,6 +396,7 @@ export default {
       classes += index != 0 ? " br--right" : "";
       return classes;
     },
+
     select_group(item, group) {
       var father_group = this.group;
       this.set_depth(group);
@@ -395,13 +405,15 @@ export default {
       this.filter_by_group(this.t_(item, "name"), father_group);
       this.group = group;
     },
-    // Propose: request parent component to hide this modal
+
+    // Purpose: requests parent component to hide modal
     close() {
       this.$emit("close")
     },
-    // Propose: increase the number of showed items when
-    // user reaches the scroll end
-    // Receive: the scroll event
+
+    // Purpose: increases the number of showed items when
+    // the scroll end is reached
+    // Input: scroll event
     infinity_scroll(event) {
       var div = document.getElementById("selectable-item-list");
       var end_scroll = (div.scrollTop + div.offsetHeight) == div.scrollHeight;
@@ -421,6 +433,7 @@ export default {
         }
       }
     },
+
     reset_scroll_bar() {
       let itemDiv = document.getElementById("selectable-item-list");
       itemDiv.scrollTop = 0;
