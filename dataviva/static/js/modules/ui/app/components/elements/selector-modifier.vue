@@ -2,43 +2,56 @@
   <span class="cursor_default">
     <template v-if="text">
       <span
-        @click="showModal = true"
-        class="pointer">
-        {{text}}
+        class="pointer"
+        @click="showModal = true">
+        {{ text }}
       </span>
     </template>
-    
+
     <selector
       v-if="showModal"
-      v-bind:db="database"
-      v-bind:confs="confs"
-      v-bind:filter="filter"
-      v-on:close="closeModal()">
-    </selector>
+      :db="database"
+      :confs="confs"
+      :filter="filter"
+      @close="closeModal()"/>
   </span>
 </template>
 
 <script>
-import "../../assets/css/*.css"
-var configs = require("../../lib/configs.js");
+import "../../assets/css/*.css";
+
+const configs = require("../../lib/configs.js");
 
 export default {
   name: "SelectorModifier",
-  props: ["db", "text", "filter"],
+  props: {
+    db: {
+      type: Object,
+      required: true,
+    },
+    text: {
+      type: String,
+      required: true,
+    },
+    filter: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       showModal: true,
       confs: configs.env,
-      databases: configs.databases
-    }
+      databases: configs.databases,
+    };
   },
-  created: function () {
+  created() {
     this.database = this.databases[this.db];
   },
   methods: {
     closeModal() {
       this.showModal = false;
-    }
+    },
   },
 };
 </script>
