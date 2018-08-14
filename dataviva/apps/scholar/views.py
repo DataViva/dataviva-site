@@ -65,7 +65,11 @@ def index(page=1):
 
 @mod.route('/article/<id>', methods=['GET'])
 def show(id):
-    article = Article.query.filter_by(id=id).first_or_404()
+    if (g.user.is_authenticated and g.user.is_admin()):
+        article = Article.query.filter_by(id=id).first_or_404()
+    else:
+        article = Article.query.filter_by(approval_status=True, id=id).first_or_404()
+
     return render_template('scholar/show.html', article=article)
 
 

@@ -85,7 +85,10 @@ def index(page=1):
 
 @mod.route('/post/<id>', methods=['GET'])
 def show(id):
-    post = Post.query.filter_by(id=id).first_or_404()
+    if (g.user.is_authenticated and g.user.is_admin()):
+        post = Post.query.filter_by(id=id).first_or_404()
+    else:
+        post = Post.query.filter_by(active=True, id=id).first_or_404()
     posts = Post.query.filter(Post.id != id, Post.active).all()
 
     if len(posts) > 3:
