@@ -9,9 +9,9 @@
         v-if="item.img"
         :src="item.img"
         class="search-icon-size ph2 mh1">
-      <i 
+      <i
         v-if="item.icon"
-        :class="'search-icon-size ph2 mh1 f-5' + item.icon"></i>
+        :class="'search-icon-size ph2 mh1 f-5' + item.icon"/>
     </div>
 
     <div

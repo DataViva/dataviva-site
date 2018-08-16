@@ -1,20 +1,21 @@
 <template>
   <div>
-    <div v-for="database in databases">
+    <div
+      v-for="database in databases">
       <span
         class="pointer"
-        v-on:click="selectDataBase(database)">
+        @click="selectDataBase(database)">
         {{ database.name }}
-        <i v-bind:class="database.icon.db"></i>
+        <i :class="database.icon.db"/>
       </span>
     </div>
-   <- <transition name="fade">
-    <selector
-      v-if="show"
-      v-bind:db="database"
-      v-bind:confs="confs"
-      v-on:close="closeModal"/>
-     </transition>  
+    <transition name="fade">
+      <selector
+        v-if="show"
+        :db="database"
+        :confs="confs"
+        @close="closeModal"/>
+    </transition>
   </div>
 </template>
 
@@ -28,7 +29,8 @@ export default {
       show: false,
       confs: {
         api_url: dataviva.api_url || "http://api.dataviva.info/",
-        s3_host: dataviva.s3_host || "https://dataviva-site-production.s3.amazonaws.com",
+        s3_host: dataviva.s3_host ||
+          "https://dataviva-site-production.s3.amazonaws.com",
         lang: dataviva.language || "pt",
       },
       database: "",
@@ -38,16 +40,16 @@ export default {
           code: "location",
           id_description: "IBGE ID",
           group_opts: ["region", "state", "mesoregion", "microregion",
-          "municipality"],
+                       "municipality"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Population"],
           extra_info_label: "Population",
           endpoint: "municipality",
           img_path: {
-            "state": "/static/img/icons/bra/",
-            "mesoregion": "/static/img/icons/bra/",
-            "microregion": "/static/img/icons/bra/",
-            "municipality": "/static/img/icons/bra/",
+            state: "/static/img/icons/bra/",
+            mesoregion: "/static/img/icons/bra/",
+            microregion: "/static/img/icons/bra/",
+            municipality: "/static/img/icons/bra/",
           },
           icon: {
             db: "dv-bra",
@@ -62,7 +64,7 @@ export default {
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Total Jobs"],
           extra_info_label: "Total Jobs",
-          endpoint: ["occupation_group", "occupation_family"],
+          endpoint: "occupation_family",
           icon: {
             db: "dv-occupation",
             item: "dv-cbo-",
@@ -106,8 +108,8 @@ export default {
           extra_info_label: "Exports",
           endpoint: "country",
           img_path: {
-            "country": "/static/img/icons/wld/",
-            "continent": "/static/img/icons/wld/",
+            country: "/static/img/icons/wld/",
+            continent: "/static/img/icons/wld/",
           },
           icon: {
             db: "dv-trade-partner",
@@ -150,7 +152,7 @@ export default {
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
           extra_info_label: "Enrolled",
-          endpoint: ["sc_course_field", "sc_course"],
+          endpoint: "sc_course",
           icon: {
             db: "dv-basic-course",
             item: "",
