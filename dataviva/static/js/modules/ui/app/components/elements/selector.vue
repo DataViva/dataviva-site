@@ -251,7 +251,7 @@ export default {
             case 0:
             case 1:
               return `${this.confs.s3_host}${this.db.img_path[this.group]}` +
-                `${item[this.db.group_opts[0]].id}.png`;
+                `${item.id}.png`;
             default:
               return "";
           }

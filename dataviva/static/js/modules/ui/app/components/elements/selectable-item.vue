@@ -8,10 +8,12 @@
       <img
         v-if="item.img"
         :src="item.img"
-        class="search-icon-size ph2 mh1">
-      <i
-        v-if="item.icon"
-        :class="'search-icon-size ph2 mh1 f-5' + item.icon"/>
+        class="search-icon-size mh1">
+      <div class="pt3 mh3 search-icon-size">  
+        <i
+          v-if="item.icon"
+          :class="'f1 lh-copy' + item.icon"/>
+      </div>  
     </div>
 
     <div
