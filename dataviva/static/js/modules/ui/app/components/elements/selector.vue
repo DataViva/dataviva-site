@@ -72,7 +72,7 @@
             v-if="!loading"
             id="selectable-item-list"
             class="h-75 w-100 overflow-y-auto"
-            @scroll="infinity_scroll($event)">
+            @scroll="infinity_scroll()">
             <SelectableItem
               v-for="(item, index) in visible_items"
               :item="mount_item(item, index)"
@@ -109,9 +109,7 @@ export default {
       },
     };
   },
-  computed: {
-  },
-  created: function () {
+  created() {
     if (this.db) {
       const length = this.db.group_opts.length - 1;
       // Sets group level to minimum
@@ -120,7 +118,7 @@ export default {
       // Sets current depth level to minimum
       this.depth = length;
       // Gets the first order option
-      this.order = this.db.order_opts[0];
+      this.order = this.db.order_opts["0"];
     }
 
     this.get_data();
@@ -130,12 +128,7 @@ export default {
     // Input: item and property name
     // Output: property value
     t_(item, prop) {
-      return item[prop + "_" + this.confs.lang];
-    },
-    // Purpose: checks if object is an array
-    // Input: object
-    is_array(obj) {
-      return obj.constructor === Array;
+      return item[`${prop}_${this.confs.lang}`];
     },
     // Purpose: finds larger item by lexical order
     compareName(a, b) {
@@ -143,7 +136,6 @@ export default {
     },
     // Purpose: finds larger item by property
     // Input: object
-    //
     compareExtraInfo(a, b) {
       return b.extra_info_content - a.extra_info_content;
     },
@@ -160,8 +152,8 @@ export default {
     // Purpose: gets data from API and calls function to read data
     async get_data() {
       const ep = this.db.endpoint;
-      axios.get(this.confs.api_url + "metadata/" + ep)
-        .then(response => (this.read_data(response.data, null)));
+      axios.get(`${this.confs.api_url}metadata/${ep}`)
+        .then(response => (this.read_data(response.data)));
     },
     // Purpose: splits data from differents levels when data
     // comes from the same endpoint with differents depths
@@ -178,6 +170,7 @@ export default {
 
             if (prop) {
               const names = {
+                id: prop.id,
                 name_pt: prop.name_pt,
                 name_en: prop.name_en,
               };
@@ -193,7 +186,6 @@ export default {
 
       this.loading_depths = false;
     },
-
     // Purpose: checks whether item has all group depths
     // Input: item and list of groups
     have_all_groups(item, group) {
@@ -205,51 +197,42 @@ export default {
 
       return true;
     },
-
     // Purpose: filters items without depth
     // Input: array of items and list of groups
     remove_incomplete(array, group) {
       return array.filter(item => this.have_all_groups(item, group));
     },
+    // Purpose: read response and creat the dataset
+    // Input: response data
+    read_data(data) {
+      this.items = [];
+      let depth = this.depth;
 
-    read_data(data, group) {
-      if (!this.items) {
-        this.items = [];
-        const depth = group ? this.db.endpoint.indexOf(group) : this.depth;
-
-        for (let i = 0; i <= this.max_depth; i += 1) {
-          this.items[i] = [];
-        }
-
-        this.items[depth] = Object.values(data);
-
-        if (!this.is_array(this.db.endpoint)) {
-          this.items[depth] =
-            this.remove_incomplete(this.items[depth], this.db.group_opts);
-        }
-        for (let i = 0; i < this.items[depth].length; i += 1) {
-          this.items[depth][i].extra_info_content =
-            Math.floor(Math.random() * 10000);
-        }
-        if (!group) {
-          this.read_depths();
-        }
-        this.sort_list_by_property(this.order);
-        this.update_visible_items();
-        this.loading = false;
-      } else if (group) {
-        const pos = this.db.endpoint.indexOf(group);
-        this.items[pos] = Object.values(data);
-        this.loading_depths = false;
-        this.update_visible_items();
+      for (let i = 0; i <= this.max_depth; i += 1) {
+        this.items[i] = [];
       }
-    },
 
+      this.items[depth] = Object.values(data);
+      this.items[depth] =
+        this.remove_incomplete(this.items[depth], this.db.group_opts);
+
+      // Mocked data
+      for (let i = 0; i < this.items[depth].length; i += 1) {
+        this.items[depth][i].extra_info_content =
+          Math.floor(Math.random() * 10000);
+      }
+
+      this.read_depths();
+      this.sort_list_by_property(this.order);
+      this.update_visible_items();
+      this.loading = false;
+    },
     // Purpose: gets url path for items with image
     // Input: item
     // Output: url
     img_path(item) {
-      const depth = this.depth;
+      let depth = this.depth;
+
       switch (this.db.code) {
         case "location":
           switch (depth) {
@@ -257,28 +240,51 @@ export default {
             case 2:
             case 3:
             case 4:
-              return this.confs.s3_host + this.db.img_path[this.group] +
-            item.id.substring(0, 2) + ".png";
+              return `${this.confs.s3_host}${this.db.img_path[this.group]}` +
+                `${item.id.substring(0, 2)}.png`;
             default:
+              return "";
           }
-          break;
+
         case "trade_partner":
           switch (depth) {
             case 0:
             case 1:
-              return this.confs.s3_host + this.db.img_path[this.group] +
-            item.id + ".png";
+              return `${this.confs.s3_host}${this.db.img_path[this.group]}` +
+                `${item[this.db.group_opts[0]].id}.png`;
             default:
+              return "";
           }
-          break;
-      default:
+        default:
+          return "";
       }
     },
-
     group_opts(list) {
       return list.slice(list.indexOf(this.group) + 1, list.length);
     },
+    // Purpose: define img url or icon class name
+    // Input: mounted data to render and the original item
+    define_icon_img(item) {
+      let icon = ` ${this.db.icon.item}`;
 
+      // hight level need own id
+      if (this.depth === 0) {
+        icon += item.id;
+      }
+      // other levels need hight level id
+      else if (this.db.group_opts[0]) {
+        icon += item[this.db.group_opts[0]].id;
+      }
+      // universities has a different logic
+      else if (item.school_type) {
+        icon += item.school_type.toLowerCase();
+      }
+
+      return icon;
+    },
+    // Purpose: format item to be render
+    // Input: the original item and the actual index in list of items
+    // Output: mounted item with all data
     mount_item(item, index) {
       const mountedItem = {
         id: item.id,
@@ -289,25 +295,14 @@ export default {
         extra_info_content: item.extra_info_content,
         filter_options: this.group_opts(this.db.group_opts),
       };
+
       if (this.db.img_path && this.db.img_path[this.group]) {
         mountedItem.img = this.img_path(item);
       } else {
-        mountedItem.icon = this.db.icon.item;
-        if (this.db.code === "location") {
-          mountedItem.icon += item.id;
-        } else if (this.db.code === "occupation") {
-          mountedItem.icon += item.id.substring(0, 1);
-        } else if (this.db.code === "product") {
-          if (item.product_section) {
-            mountedItem.icon += item.product_section.id;
-          } else {
-            mountedItem.icon += item.id;
-          }
-        } else if (this.db.code === "hedu_course") {
-          mountedItem.icon += item.id.substring(0, 2);
-        }
+        mountedItem.icon = this.define_icon_img(item);
       }
 
+      // make striped style
       if (index % 2 === 0) {
         mountedItem.bg_light_grey = "bg-near-white";
       }
@@ -323,25 +318,21 @@ export default {
 
       this.order = order;
     },
-
     // Purpose: gets corresponding depth of a group name
     // Input: group
     // Output: depth level
     corresponding_depth(group) {
       return this.db.group_opts.indexOf(group);
     },
-
     set_depth(group) {
       this.depth = this.corresponding_depth(group);
     },
     get_compare_function(order) {
       if (order === "name") {
         return this.compareName;
-      } else {
-        return this.compareExtraInfo;
       }
+      return this.compareExtraInfo;
     },
-
     reset_group_filter() {
       this.filter_group = {};
     },
@@ -358,7 +349,6 @@ export default {
       this.sort_list_by_property(this.order);
       this.update_visible_items();
     },
-
     filter_list() {
       this.visible_items = this.items[this.depth]
         .filter(item =>
@@ -367,7 +357,6 @@ export default {
         .sort(this.get_compare_function(this.order))
         .slice(0, this.max_visible_items);
     },
-
     filter_by_group(search, group) {
       this.visible_items = this.items[this.depth]
         .filter(item =>
@@ -376,7 +365,6 @@ export default {
         .sort(this.get_compare_function(this.order))
         .slice(0, this.max_visible_items);
     },
-
     btn_format(order, option, index, order_opts) {
       const clickable = "pointer grow";
       let classes = order === option ? "bg-moon-gray" : clickable;
@@ -384,7 +372,6 @@ export default {
       classes += index !== 0 ? " br--right" : "";
       return classes;
     },
-
     select_group(item, group) {
       const parentGroup = this.group;
       this.set_depth(group);
@@ -393,15 +380,13 @@ export default {
       this.filter_by_group(this.t_(item, "name"), parentGroup);
       this.group = group;
     },
-
     // Purpose: requests parent component to hide modal
     close() {
       this.$emit("close");
     },
     // Purpose: increases the number of showed items when
     // the scroll end is reached
-    // Input: scroll event
-    infinity_scroll(event) {
+    infinity_scroll() {
       const div = document.getElementById("selectable-item-list");
       const endScroll = (div.scrollTop + div.offsetHeight) === div.scrollHeight;
       if (endScroll) {

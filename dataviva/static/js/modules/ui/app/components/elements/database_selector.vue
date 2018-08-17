@@ -1,7 +1,8 @@
 <template>
   <div>
     <div
-      v-for="database in databases">
+      v-for="database in databases"
+      :key="database.name">
       <span
         class="pointer"
         @click="selectDataBase(database)">
@@ -39,8 +40,13 @@ export default {
           name: "Brazilian Locations",
           code: "location",
           id_description: "IBGE ID",
-          group_opts: ["region", "state", "mesoregion", "microregion",
-                       "municipality"],
+          group_opts: [
+            "region",
+            "state",
+            "mesoregion",
+            "microregion",
+            "municipality",
+          ],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Population"],
           extra_info_label: "Population",
@@ -60,7 +66,7 @@ export default {
           name: "Occupations",
           code: "occupation",
           id_description: "CBO ID",
-          group_opts: ["main group", "family"],
+          group_opts: ["occupation_group", "family"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Total Jobs"],
           extra_info_label: "Total Jobs",
@@ -81,21 +87,21 @@ export default {
           endpoint: "industry_class",
           icon: {
             db: "dv-industry",
-            item: "dv-hs-",
+            item: "dv-cnae-",
           },
         },
         {
           name: "Products",
           code: "product",
           id_description: "HS ID",
-          group_opts: ["product_chapter", "position"],
+          group_opts: ["product_section", "position"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Exports"],
           extra_info_label: "Exports",
           endpoint: "product",
           icon: {
             db: "dv-product",
-            item: "",
+            item: "dv-hs-",
           },
         },
         {
@@ -109,11 +115,10 @@ export default {
           endpoint: "country",
           img_path: {
             country: "/static/img/icons/wld/",
-            continent: "/static/img/icons/wld/",
           },
           icon: {
             db: "dv-trade-partner",
-            item: "",
+            item: "dv-wld-",
           },
         },
         {
@@ -127,7 +132,7 @@ export default {
           endpoint: "university",
           icon: {
             db: "dv-university",
-            item: "dv-university-t",
+            item: "dv-university-",
           },
         },
         {
@@ -148,14 +153,14 @@ export default {
           name: "Basic Courses",
           code: "basic_course",
           id_description: "ID",
-          group_opts: ["field", "course"],
+          group_opts: ["course_field", "course"],
           order_opts: ["name", "extra_info"],
           order_labels: ["Name", "Enrolled"],
           extra_info_label: "Enrolled",
           endpoint: "sc_course",
           icon: {
             db: "dv-basic-course",
-            item: "",
+            item: "dv-course-sc-",
           },
         },
       ],
