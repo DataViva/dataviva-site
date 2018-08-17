@@ -38,7 +38,6 @@
               >{{ option }}
               </div>
             </div>
-
             <div class="fr w-100 w-auto-l pb2">
               <h5 class="tl mb0">Sort</h5>
               <div
@@ -55,6 +54,7 @@
           </div> <!-- Filters and aggregations ends -->
           <!-- Search input -->
           <form
+            v-if="!loading"
             class="pb3 black-80"
             autocomplete="off">
             <input
