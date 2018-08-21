@@ -1,6 +1,5 @@
 <template>
   <div
-    id="selectable-item"
     :class="item.bg_light_grey"
     class="flex flex-row flex-nowrap pv3">
 
@@ -9,11 +8,11 @@
         v-if="item.img"
         :src="item.img"
         class="search-icon-size mh1">
-      <div class="pt3 mh3 search-icon-size">  
+      <div class="pt3 mh3 search-icon-size">
         <i
           v-if="item.icon"
           :class="'f1 lh-copy' + item.icon"/>
-      </div>  
+      </div>
     </div>
 
     <div
@@ -45,7 +44,7 @@
       class="ml-auto">
       <a
         :href="item.url"
-        class="f4 ba burgundy br2 ph3 pv2 mr3 dib mt2 no-underline">Select
+        class="f4 ba burgundy br2 ph3 pv2 mr3 dib mt2 hover-bg-burgundy">Select
       </a>
     </div>
   </div>

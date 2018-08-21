@@ -23,15 +23,12 @@
   height: 50px;
 }
 
-#selectable-item .ml-auto .ba:hover {
-  text-decoration: none;
-  color: #fff;
-  border-color: #a25a6d;
-  background-color: #a25a6d;
+.hover-bg-burgundy:hover { 
+  background-color: #a25a6d; 
 }
 
-#selectable-item a:hover {
-  color: #a25a6d;
+.hover-bg-burgundy:focus { 
+  background-color: #a25a6d; 
 }
 
 #close-x a, a:visited, a:hover, a:active {
