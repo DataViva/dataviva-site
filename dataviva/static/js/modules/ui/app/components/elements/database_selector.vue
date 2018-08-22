@@ -4,8 +4,11 @@
     <a
       v-for="database in databases"
       :key="database.name"
+      :data-content="database.tooltip_text"
       class="no-underline burgundy bg-transparent hover-bg-burgundy mh2 h4
              w5 mh2 mb4 pt1"
+      data-toggle="popover"
+      data-placement="top"
       @click="selectDataBase(database)">
       <div class="tc">
         <div
@@ -72,6 +75,11 @@ export default {
             db: "dv-bra",
             item: "dv-bra-",
           },
+          tooltip_text: `General profile by region, state, mesoregion, 
+                         microregion or city. Check its international trade, 
+                         economic activity, employment and education data. 
+                         Examples: Southeast, Mato Grosso, Recife, 
+                         Metropolitan Region of Porto Alegre.`,
         },
         {
           name: "Occupations",
@@ -86,6 +94,11 @@ export default {
             db: "dv-occupation",
             item: "dv-cbo-",
           },
+          tooltip_text: `Regions with best employment rates by professional
+                         activity, related courses, average wage and job 
+                         statistics per year. Examples: Medium Level 
+                         Technicians, Industry workers, Receptionists, 
+                         Clinicians.`,
         },
         {
           name: "Economic Activities",
@@ -100,6 +113,11 @@ export default {
             db: "dv-industry",
             item: "dv-cnae-",
           },
+          tooltip_text: `Information on employment rate by region, average 
+                         wage by occupation, average monthly income and 
+                         economic opportunities. Examples: Businesses, Domestic
+                         Service, Education, Restaurants, Call Center, 
+                         Religious Organizations.`,
         },
         {
           name: "Products",
@@ -114,6 +132,10 @@ export default {
             db: "dv-product",
             item: "dv-hs-",
           },
+          tooltip_text: `Trade Balance data by product, import origin and 
+                         export destination, ranking by location, economic 
+                         activities and related occupations. Examples: Food,
+                         Art and Antiques, Iron Ore, Coffee, Auto Parts.`,
         },
         {
           name: "Trade Partners",
@@ -131,6 +153,10 @@ export default {
             db: "dv-trade-partner",
             item: "dv-wld-",
           },
+          tooltip_text: `Brazil’s top import and export partners, trade data 
+                         by type of product or supplier city. Examples: Asia,
+                         Africa, Europe, Mexico, Japan, USA, China, 
+                         the Netherlands, Iran.`,
         },
         {
           name: "Universities",
@@ -145,6 +171,9 @@ export default {
             db: "dv-university",
             item: "dv-university-",
           },
+          tooltip_text: `Number of enrollments in each offered course, student
+                         status and similar university profiles. Examples: 
+                         USP, UFMG, PUC Goiás.`,
         },
         {
           name: "Higher Education",
@@ -159,6 +188,10 @@ export default {
             db: "dv-major",
             item: "dv-course-hedu-",
           },
+          tooltip_text: `List of universities and cities that offer 
+                         post-secondary courses or the selected field of 
+                         study. Examples: Education, Health Sciences, Law, 
+                         Production Engineering, Physiotherapy.`,
         },
         {
           name: "Basic Courses",
@@ -173,6 +206,10 @@ export default {
             db: "dv-basic-course",
             item: "dv-course-sc-",
           },
+          tooltip_text: `Brazilian schools that offer professional education
+                         and enrollment ranking by city. Examples: Elementary 
+                         School, High School, Nursing Technician, Agriculture
+                        and Livestock Technician.`,
         },
       ],
     };
