@@ -1,20 +1,23 @@
 <template>
   <div
     :class="item.bg_light_grey"
-    class="flex flex-row flex-nowrap pv3">
+    class="flex flex-row flex-nowrap pt3 pb3">
 
     <div class="w4 tc">
-      <img
-        v-if="item.img"
-        :src="item.img"
-        class="search-icon-size mh1">
-      <div class="pt3 mh3 search-icon-size">
-        <i
-          v-if="item.icon"
-          :class="'f1 lh-copy' + item.icon"/>
-      </div>
+      <template v-if="item.img">
+        <div>
+          <img
+            :src="item.img"
+            class="search-icon-size mh1">
+        </div>
+      </template>
+      <template v-else-if="item.icon">
+        <div class="pt3 mh3 search-icon-size">
+          <i
+            :class="'f1 lh-copy' + item.icon"/>
+        </div>
+      </template>
     </div>
-
     <div
       class="ph1">
       <h3
@@ -31,13 +34,13 @@
       <template
         v-if="item.filter_options && item.filter_options.length > 0">
         <br><span class="medium-gray f4">Show:</span>
-        <a
+        <span
           v-for="filter in item.filter_options"
           :key="filter"
           href="#"
-          class="burgundy no-underline underline-hover f4"
+          class="burgundy no-underline underline-hover pointer f4"
           @click="$emit('select-filter', filter)">{{ filter + '  ' }}
-        </a>
+        </span>
       </template>
     </div>
     <div
