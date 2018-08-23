@@ -3,16 +3,16 @@
     :class="item.bg_light_grey"
     class="flex flex-row flex-nowrap pt3 pb3">
 
-    <div class="w4 tc">
+    <div class="tc">
       <template v-if="item.img">
-        <div>
+        <div class="w4">
           <img
             :src="item.img"
             class="search-icon-size mh1">
         </div>
       </template>
       <template v-else-if="item.icon">
-        <div class="pt3 mh3 search-icon-size">
+        <div class="pt2 w4">
           <i
             :class="'f1 lh-copy' + item.icon"/>
         </div>
@@ -21,6 +21,7 @@
     <div
       class="ph1">
       <h3
+        id="item-title"
         class="red mv0 f3 fw4">{{ item.name }}</h3>
       <small
         class="medium-gray f5">
@@ -47,7 +48,8 @@
       class="ml-auto">
       <a
         :href="item.url"
-        class="f4 ba burgundy br2 ph3 pv2 mr3 dib mt2 hover-bg-burgundy">Select
+        class="select-button f4 ba burgundy br2 ph3 pv2 mr3 dib mt2
+               hover-bg-burgundy">Select
       </a>
     </div>
   </div>

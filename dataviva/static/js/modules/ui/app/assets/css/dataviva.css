@@ -23,6 +23,16 @@
   height: 50px;
 }
 
+#item-title {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+#modal-header-title {
+  font-size: 18px;
+  font-weight: 400;
+}
+
 .hover-bg-burgundy:hover { 
   background-color: #a25a6d; 
 }
@@ -41,4 +51,12 @@
 
 .fade-enter, .fade-leave-to {
   opacity: 0;
+}
+
+.select-button:visited {
+  color: #a25a6d;
+}
+
+.select-button:hover {
+  color: #fff;
 }

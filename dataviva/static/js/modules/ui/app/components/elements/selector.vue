@@ -6,11 +6,13 @@
     @click="close()">
     <div class="dtc v-mid">
       <div
-        class="br3 pb1 bg-white relative mh2 mh5-ns vh-75 overflow-hidden"
+        class="br3 pb1 bg-white relative mh3 mh5-ns vh-75 overflow-hidden"
         @click.stop>
         <!-- Header -->
         <div class="bg-green br--top br2 flex flex-row flex-nowrap">
-          <h4 class="f2 ma0 pa4 white">{{ db.name }}</h4>
+          <h4
+            id="modal-header-title"
+            class="f2 ma0 pa4 white">{{ db.name }}</h4>
           <a
             id="close-x"
             class="f2 white ml-auto pr4 pt3 mt2 fw7"
