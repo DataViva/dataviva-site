@@ -5,24 +5,24 @@
 
     <div class="tc">
       <template v-if="item.img">
-        <div class="w4">
+        <div class="w3 w4-ns">
           <img
             :src="item.img"
-            class="search-icon-size mh1">
+            class="search-icon-size">
         </div>
       </template>
       <template v-else-if="item.icon">
-        <div class="pt2 w4">
+        <div class="pt2 w3 w4-ns">
           <i
-            :class="'f1 lh-copy' + item.icon"/>
+            :class="'f1-ns f2 lh-copy' + item.icon"/>
         </div>
       </template>
     </div>
-    <div
-      class="ph1">
+    <div class="ph3 ph0-ns">
       <h3
         id="item-title"
-        class="red mv0 f3 fw4">{{ item.name }}</h3>
+        class="red mv0 fw4 lh-title measure-narrow measure-wide-ns">
+        {{ item.name }}</h3>
       <small
         class="medium-gray f5">
         {{ item.id_description }}: {{ item.id }}<br>

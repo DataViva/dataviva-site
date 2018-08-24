@@ -6,7 +6,8 @@
     @click="close()">
     <div class="dtc v-mid">
       <div
-        class="br3 pb1 bg-white relative mh3 mh5-ns vh-75 overflow-hidden"
+        class="br3 pb1 bg-white relative mh3 mh5-ns vh-75-ns vh-100
+               overflow-hidden"
         @click.stop>
         <!-- Header -->
         <div class="bg-green br--top br2 flex flex-row flex-nowrap">
@@ -33,7 +34,7 @@
                 v-for="(option,index) in db.group_opts"
                 :key="option"
                 :class="btn_format(group, option, index, db.group_opts)"
-                class="tc mv3 pv2 pv2-m pv2-l ph3 ph3-m ph3-l ba b--black-10
+                class="tc mv2 mv3-ns pv2 ph3 ba b--black-10
                        fl br2 ttc"
                 @click="reset_scroll_bar(); clean_search();
                         reset_group_filter(); group_by_property(option);"
@@ -46,7 +47,7 @@
                 v-for="(option,index) in db.order_opts"
                 :key="option"
                 :class="btn_format(order, option, index, db.order_opts)"
-                class="tc mv3 pv2 pv2-m pv2-l ph3 ph3-m ph3-l ba b--black-10 fl
+                class="tc mv2 mv3-ns pv2 ph3 ba b--black-10 fl
                        br2 ttc"
                 @click="reset_scroll_bar(); sort_list_by_property(option);
                         update_visible_items();"
