@@ -101,7 +101,7 @@ export default {
       group: "", // current aggregation name
       order: "extra_info", // current order option
       search: null, // search text
-      loading: true, // store if the modal is loading
+      loading: true, // stores if the modal is loading
       loading_depths: true, // only shows controls and finishes loading levels
       max_visible_items: 10,
       items: null,
@@ -158,8 +158,8 @@ export default {
       axios.get(`${this.confs.api_url}metadata/${ep}`)
         .then(response => (this.read_data(response.data)));
     },
-    // Purpose: splits data from differents levels when data
-    // comes from the same endpoint with differents depths
+    // Purpose: splits data from different levels when data
+    // comes from the same endpoint with diverse depths
     async read_depths() {
       const minorData = this.items[this.max_depth];
 
@@ -205,7 +205,7 @@ export default {
     remove_incomplete(array, group) {
       return array.filter(item => this.have_all_groups(item, group));
     },
-    // Purpose: read response and creat the dataset
+    // Purpose: reads response and creates dataset
     // Input: response data
     read_data(data) {
       this.items = [];
@@ -219,7 +219,7 @@ export default {
       this.items[depth] =
         this.remove_incomplete(this.items[depth], this.db.group_opts);
 
-      // Mocked data
+      // Mock data
       for (let i = 0; i < this.items[depth].length; i += 1) {
         this.items[depth][i].extra_info_content =
           Math.floor(Math.random() * 10000);
@@ -265,28 +265,28 @@ export default {
     group_opts(list) {
       return list.slice(list.indexOf(this.group) + 1, list.length);
     },
-    // Purpose: define img url or icon class name
+    // Purpose: defines img url or icon class name
     // Input: mounted data to render and the original item
     define_icon_img(item) {
       let icon = ` ${this.db.icon.item}`;
 
-      // hight level need own id
+      // highest level needs own id
       if (this.depth === 0) {
         icon += item.id;
       }
-      // other levels need hight level id
+      // other levels need highest level id
       else if (this.db.group_opts[0]) {
         icon += item[this.db.group_opts[0]].id;
       }
-      // universities has a different logic
+      // universities
       else if (item.school_type) {
         icon += item.school_type.toLowerCase();
       }
 
       return icon;
     },
-    // Purpose: format item to be render
-    // Input: the original item and the actual index in list of items
+    // Purpose: formats item to be rendered
+    // Input: the original item and the current index in list of items
     // Output: mounted item with all data
     mount_item(item, index) {
       const mountedItem = {
@@ -305,7 +305,7 @@ export default {
         mountedItem.icon = this.define_icon_img(item);
       }
 
-      // make striped style
+      // alternating column colours
       if (index % 2 === 0) {
         mountedItem.bg_light_grey = "bg-near-white";
       }
