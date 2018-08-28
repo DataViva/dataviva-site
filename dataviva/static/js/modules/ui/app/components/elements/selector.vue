@@ -21,7 +21,7 @@
           </a>
         </div>
         <div
-          class="ph4 h-75">
+          class="ph4 h-75 relative">
           <!-- Filters and aggregations -->
           <div
             v-if="!loading && !loading_depths"
@@ -70,6 +70,10 @@
               placeholder="SEARCH"
               @keyup="reset_group_filter(); filter_list();">
           </form>
+          <img
+            v-if="loading"
+            id="dataviva-logo-position"
+            src="../../assets/img/dataviva-logo.png" >
           <!-- Item list -->
           <div
             v-if="!loading"
@@ -356,7 +360,7 @@ export default {
       this.visible_items = this.items[this.depth]
         .filter(item =>
           new RegExp(this.search.toLowerCase())
-            .test(item.name_en.toLowerCase()))
+            .test(this.t_(item, "name").toLowerCase()))
         .sort(this.get_compare_function(this.order))
         .slice(0, this.max_visible_items);
     },

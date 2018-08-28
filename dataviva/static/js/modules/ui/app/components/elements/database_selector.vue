@@ -209,7 +209,7 @@ export default {
           tooltip_text: `Brazilian schools that offer professional education
                          and enrollment ranking by city. Examples: Elementary 
                          School, High School, Nursing Technician, Agriculture
-                        and Livestock Technician.`,
+                         and Livestock Technician.`,
         },
       ],
     };

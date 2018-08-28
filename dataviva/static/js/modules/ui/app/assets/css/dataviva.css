@@ -60,3 +60,11 @@
 .select-button:hover {
   color: #fff;
 }
+
+#dataviva-logo-position { 
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+  height: 100px;
+  width: 100px;
+}
