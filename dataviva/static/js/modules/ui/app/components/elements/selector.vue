@@ -70,10 +70,7 @@
               placeholder="SEARCH"
               @keyup="reset_group_filter(); filter_list();">
           </form>
-          <img
-            v-if="loading"
-            id="dataviva-logo-position"
-            src="../../assets/img/dataviva-logo.png" >
+          <Loader v-if="loading"/>
           <!-- Item list -->
           <div
             v-if="!loading"
