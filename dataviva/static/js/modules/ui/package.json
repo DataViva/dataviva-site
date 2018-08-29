@@ -6,7 +6,7 @@
   "scripts": {
     "build": "parcel build app/main.js -o vue-app.min.js --public-url /",
     "rebuild": "parcel build app/main.js -o vue-app.min.js --no-cache --public-url /",
-    "watch": "parcel watch app/main.js -o vue-app",
+    "watch": "parcel watch app/main.js -o vue-app  --public-url /static/js/modules/ui/dist/",
     "lint": "eslint app/**/*.js app/**/**/*.vue"
   },
   "keywords": [],
