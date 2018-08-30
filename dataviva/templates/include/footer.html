@@ -1,17 +1,15 @@
 <footer class="bg-dark-green">
     <div class="container">
 
-    <div class="col-sm-4 col-md-2 col-lg-2 col-sm-offset-0 col-md-offset-0 col-lg-offset-0">
+    <div class="col-sm-4 col-md-3 col-lg-3">
         <ul>
             <li><h3>{% trans %}About{% endtrans %}</h3></li>
             <li><a href="{{ url_for('about.index') }}" title="{% trans %}The{% endtrans %} Dataviva">{% trans %}The{% endtrans %} Dataviva</a></li>
             <li><a href="{{ url_for('partners.index') }}" title="{% trans %}Partners{% endtrans %}">{% trans %}Partners{% endtrans %}</a></li>
-            <li><a href="{{ url_for('news.index') }}" title="{% trans %}News{% endtrans %}">{% trans %}News{% endtrans %}</a></li>
-            <li><a href="{{ url_for('blog.index') }}" title="Blog">Blog</a></li>
         </ul>
     </div>
 
-    <div class="col-sm-4 col-md-2 col-lg-2">
+    <div class="col-sm-4 col-md-3 col-lg-3">
         <ul>
             <li><h3>{% trans %}Explore{%endtrans%}</h3></li>
             <li>
@@ -33,62 +31,16 @@
         </ul>
     </div>
 
-    <div class="col-sm-4 col-md-2 col-lg-2">
+    <div class="col-sm-4 col-md-3 col-lg-3">
         <ul>
             <li><h3>{% trans %}Support{% endtrans %}</h3></li>
             <li><a href="{{ url_for('help.index') }}" title="{% trans %}Help{% endtrans %}">{% trans %}Help{% endtrans %}</a></li>
-            <li><a href="{{ url_for('help.index') }}" title="{% trans %}Virtual Tour{% endtrans %}">{% trans %}Virtual Tour{% endtrans %}</a></li>
-            <li><a href="{{ url_for('contact.create') }}" title="{%trans%}Contact Us{%endtrans%}">{%trans%}Contact Us{%endtrans%}</a></li>
         </ul>
     </div>
 
-    <div class="col-xs-12 col-md-6 col-lg-6 visible-md visible-lg">
-        <h3>{%trans%}Contact Us{%endtrans%}</h3>
-
-        <form method="post" id="contact-form" action="{{ url_for('contact.create') }}" class="form-horizontal">
-            {{ g.contact_form.hidden_tag() }}
-            <div class="form-group">
-                <div>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="{% trans %}Name{% endtrans %}">
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="E-mail">
-                </div>
-            </div>
-            <div class="form-group">
-                <div>
-                    <textarea type="text" class="form-control" id="message" name="message" placeholder="{% trans %}Message{% endtrans %}"></textarea>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div>
-                    <button type="submit" class="btn btn-white">{% trans %}Send{% endtrans %}</button>
-                </div>
-            </div>
-        </form>
-
-    </div>
-    <div class="col-sm-4 col-md-3 col-lg-3 col-md-offset-2 col-lg-offset-2 margin-top">
+    <div class="col-xs-12 col-md-3 col-lg-3">
         <h3>{%trans%}Follow Us{%endtrans%}</h3>
         <ul class="list-inline">
-            <li>
-                <a class="btn btn-block btn-social btn-facebook" href="http://www.facebook.com/dataviva" target="blank" title="Facebook" >
-                    <span class="fa fa-facebook"></span>
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-block btn-social btn-twitter" href="https://twitter.com/_dataviva" target="blank" title="Twitter">
-                    <span class="fa fa-twitter"></span>
-                </a>
-            </li>
-            <li>
-                <a class="btn btn-md btn-google" href="https://www.youtube.com/channel/UCr3LFrH_7cI_PYSgnDXV7KA" target="blank" title="Youtube">
-                    <span class="fa fa-youtube"></span>
-                </a>
-            </li>
             <li>
                 <a class="btn btn-md btn-github" href="https://github.com/DataViva" target="blank" title="GitHub">
                     <span class="fa fa-github"></span>

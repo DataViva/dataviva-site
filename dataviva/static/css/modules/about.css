@@ -14,3 +14,7 @@ h3 {
 p {
 	text-align: justify;
 }
+
+#history {
+	min-height: 40vh;
+}

@@ -1,5 +1,10 @@
 @media (max-width: 767px) {
-	#partners .container.text-center div:last-child a img {
+	#partners .container.text-center div a img {
     	margin-top: 50px;
+    	max-width: 100%;
     }
+}
+
+#partners {
+	margin-bottom: 1em;
 }

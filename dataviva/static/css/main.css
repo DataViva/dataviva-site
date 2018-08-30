@@ -531,6 +531,9 @@ footer .form-control:focus,
 .m-xl {
   margin: 50px;
 }
+.m-auto {
+  margin: auto;
+}
 .m-n {
   margin: 0 !important;
 }
@@ -777,6 +780,19 @@ footer .form-control:focus,
 @media (min-width: 768px) {
   .navbar-brand > img {
     height: 60px;
+  }
+
+  @media (max-width: 992px) {
+    .navbar-brand > img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+}
+@media (min-width: 992px) {
+  .navbar-brand > img {
+    height: 50px;
+    padding-top: 10px;
   }
 }
 /* Medium devices (desktops, 992px and up) */

@@ -10,7 +10,6 @@
             <p>
                 <a href="{{ url_for('general.search') }}" class="btn btn-primary" title="Inicie uma pesquisa">{% trans %}Get started{% endtrans %} <i class="m-l-xl fa fa-angle-right"></i></a>
             </p>
-            <a href="https://www.youtube.com/embed/LCxbPfOFSDk" class="embed-video-link" title="{% trans %}Watch the site video{% endtrans %}">{% trans %}Watch the site video{% endtrans %}</a>
         </div>
         <div class="m-t-lg col-xs-12 col-sm-6 wow fadeInRight">
             <ul>
@@ -21,7 +20,6 @@
                             {% trans %}Identify the economic profile and business opportunities of a region{% endtrans %}
                         </p>
                     </a>
-                    <a href="https://www.youtube.com/embed/Rh_PC-GGCAs" class="embed-video-link" title="{% trans %}Watch the testimonials{% endtrans %}">{% trans %}Watch the testimonials{% endtrans %}</a>
                 </li>
                 <li data-toggle="popover" data-placement="top" data-content="{% trans %}Main business partners of a product by region, states that lead importation of a specific product, economic activity by locality, employment and income by segment, and more…{% endtrans %}">
                     <a data-search="development_agents">
@@ -30,7 +28,6 @@
                             {% trans %}Assess development policies setting by location{% endtrans %}
                         </p>
                     </a>
-                    <a href="https://www.youtube.com/embed/2AApavYc5iw" class="embed-video-link" title="{% trans %}Watch the testimonials{% endtrans %}">{% trans %}Watch the testimonials{% endtrans %}</a>
                 </li>
                 <li data-toggle="popover" data-placement="top" data-content="{% trans %}Average wage of an activity or occupation, cities with best employment rates in an activity, courses offered by region, number of students enrolled in each university and more…{% endtrans %}">
                     <a data-search="students">
@@ -39,7 +36,6 @@
                             {% trans %}Find information about available jobs, income per occupation and courses{% endtrans %}
                         </p>
                     </a>
-                    <a href="https://www.youtube.com/embed/Lg17I1_8DsE" class="embed-video-link" title="{% trans %}Watch the testimonials{% endtrans %}">{% trans %}Watch the testimonials{% endtrans %}</a>
                 </li>
             </ul>
         </div>
@@ -116,23 +112,6 @@
     </div>
 </section>
 
-<section id="news" class="news bg-white">
-    <div class="container text-center">
-        <div class="navy-line wow fadeInDown"></div>
-        <h2 class="m-b-lg wow fadeInDown">{%trans%}Headlines{%endtrans%}</h2>
-        <div class="row">
-            {% for publication in publications %}
-                <div class="col-sm-4 wow {% if (loop.index + 2) % 3 == 0 %} fadeInLeftBig {% elif loop.index % 3 == 0 %} fadeInRightBig {% else %} fadeInDown {% endif %}">
-                    <a href="{{ url_for(publication.__tablename__.split('_')[0]+'.show', id=publication.id) }}" title="{{ publication.title }}">
-                        <img src="{{ publication.thumb }}" class="img-responsive">
-                    </a>
-                    <p>{{ publication.title }}</p>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
 <section id="signup" class="signup bg-greeny">
     <div class="navy-line"></div>
     <div class="container text-center wow fadeInDown">
@@ -143,8 +122,6 @@
 </section>
 
 {% include "include/partners.html" %}
-
-{% include "include/promoters.html" %}
 
 {% endblock content %}
 
