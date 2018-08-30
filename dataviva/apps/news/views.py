@@ -83,7 +83,10 @@ def index(page=1):
 
 @mod.route('/publication/<id>', methods=['GET'])
 def show(id):
-    publication = Publication.query.filter_by(id=id).first_or_404()
+    if (g.user.is_authenticated and g.user.is_admin()):
+        publication = Publication.query.filter_by(id=id).first_or_404()
+    else:
+        publication = Publication.query.filter_by(active=True, id=id).first_or_404()
     publications = Publication.query.filter(
         Publication.id != id, Publication.active).all()
     if len(publications) > 3:

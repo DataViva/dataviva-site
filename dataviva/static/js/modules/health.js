@@ -22,7 +22,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: dataviva.api_url + "cnes_professional/year?" + filters,
+        url: dataviva.api_url + "cnes_professional/year/?" + filters,
         title:  dictionary['total_of_professionals'],
         label: '',
         value: 'professionals',
@@ -39,7 +39,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: dataviva.api_url + "cnes_equipment/year?" + filters,
+        url: dataviva.api_url + "cnes_equipment/year/?" + filters,
         title: dictionary['total_of_equipments'],
         label: '',
         value: 'equipments',
@@ -59,7 +59,7 @@ $(document).ready(function(){
   
     // BEDS
     BlueBox.add({
-        url: dataviva.api_url + "cnes_bed/year?" + filters,
+        url: dataviva.api_url + "cnes_bed/year/?" + filters,
         title: dictionary['total_of_beds'],
         label: dictionary['total_of_beds'],
         value: 'beds',
@@ -67,7 +67,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: dataviva.api_url + 'cnes_bed/year/bed_type?order=beds&direction=desc&limit=1&' + filters,
+        url: dataviva.api_url + 'cnes_bed/year/bed_type/?order=beds&direction=desc&limit=1&' + filters,
         title: dictionary['main_bed_type'],
         subtitle: dictionary['by_quantity'],
         label: {
@@ -81,7 +81,7 @@ $(document).ready(function(){
 
     // PROFESSIONALS
     BlueBox.add({
-        url: dataviva.api_url + "cnes_professional/year?" + filters,
+        url: dataviva.api_url + "cnes_professional/year/?" + filters,
         title: dictionary['total_of_professionals'],
         label: dictionary['total_of_professionals'],
         value: 'professionals',
@@ -89,7 +89,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: dataviva.api_url + 'cnes_professional/year/occupation_family?order=professionals&direction=desc&limit=1&' + filters,
+        url: dataviva.api_url + 'cnes_professional/year/occupation_family/?order=professionals&direction=desc&limit=1&' + filters,
         title: dictionary['main_occupation'],
         subtitle: dictionary['by_jobs'],
         label: {
@@ -103,7 +103,7 @@ $(document).ready(function(){
 
     // EQUIPMENTS
     BlueBox.add({
-        url: dataviva.api_url + "cnes_equipment/year?" + filters,
+        url: dataviva.api_url + "cnes_equipment/year/?" + filters,
         title: dictionary['total_of_equipments'],
         label: dictionary['total_of_equipments'],
         value: 'equipments',
@@ -111,7 +111,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: dataviva.api_url + "cnes_equipment/equipment_type?" + filters,
+        url: dataviva.api_url + "cnes_equipment/equipment_type/?" + filters,
         title: dictionary['main_equipment_type'],
         subtitle: dictionary['by_quantity'],
         label: {
@@ -128,21 +128,21 @@ $(document).ready(function(){
 
     //LEITOS
     Indicator.add({
-        url: dataviva.api_url + "cnes_bed/year?" + filters,
+        url: dataviva.api_url + "cnes_bed/year/?" + filters,
         title: dictionary['number_beds'],
         value:  'beds'
     });
 
     //EQUIPAMENTOS
     Indicator.add({
-        url: dataviva.api_url + "cnes_equipment/year?" + filters,
+        url: dataviva.api_url + "cnes_equipment/year/?" + filters,
         title: dictionary['number_equipments'],
         value:  'equipments'
     });
 
     //PROFISSIONAIS
     Indicator.add({
-        url: dataviva.api_url + "cnes_professional/year?" + filters,
+        url: dataviva.api_url + "cnes_professional/year/?" + filters,
         title: dictionary['number_professionals'],
         value:  'professionals'
     });

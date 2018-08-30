@@ -133,7 +133,7 @@ $(document).ready(function(){
     });
 
     Indicator.add({
-        url: dataviva.api_url + 'secex/' + productDepth + '/year?year=2016&type=export&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/year/?year=2016&type=export&' + filter,
         title: dictionary['total_value_exported'] + ' (2016)',
         preffix: 'R$ ',
         value:  'value'
@@ -149,7 +149,7 @@ $(document).ready(function(){
     });
 
     Indicator.add({
-        url: dataviva.api_url + 'secex/' + productDepth + '/year?year=2016&type=import&' + filter,
+        url: dataviva.api_url + 'secex/' + productDepth + '/year/?year=2016&type=import&' + filter,
         title: dictionary['total_value_imported'] + ' (2016)',
         preffix: 'R$ ',
         value:  'value'

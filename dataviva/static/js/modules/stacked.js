@@ -561,7 +561,7 @@ var loadViz = function (data){
 
 var getUrls = function() {
     var urls = [
-        api_url + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '?' + filters
+        api_url + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '/?' + filters
     ];
 
     dimensions.forEach(function(dimension) {
