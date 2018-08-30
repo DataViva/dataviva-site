@@ -286,6 +286,21 @@ export default {
 
       return icon;
     },
+
+    define_color(item, colors) {
+      // highest level needs own id
+      if (this.depth === 0) {
+        return colors[item.id];
+      }
+      // other levels need highest level id
+      else if (this.db.group_opts[0]) {
+        return colors[item[this.db.group_opts[0]].id];
+      }
+      // universities
+      else if (item.school_type) {
+        return colors[item.school_type];
+      }
+    },
     // Purpose: formats item to be rendered
     // Input: the original item and the current index in list of items
     // Output: mounted item with all data
@@ -298,6 +313,7 @@ export default {
         extra_info: this.db.extra_info_label,
         extra_info_content: item.extra_info_content,
         filter_options: this.group_opts(this.db.group_opts),
+        color: this.define_color(item, this.db.colors),
       };
 
       if (this.db.img_path && this.db.img_path[this.group]) {

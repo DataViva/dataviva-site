@@ -14,6 +14,7 @@
       <template v-else-if="item.icon">
         <div class="pt2 w3 w4-ns">
           <i
+            :style="'color: ' + item.color"
             :class="'f1-ns f2 lh-copy' + item.icon"/>
         </div>
       </template>
@@ -21,7 +22,8 @@
     <div class="ph3 ph0-ns">
       <h3
         id="item-title"
-        class="red mv0 fw4 lh-title measure-narrow measure-wide-ns">
+        :style="'color: ' + item.color"
+        class="mv0 fw4 lh-title measure-narrow measure-wide-ns">
         {{ item.name }}</h3>
       <small
         class="medium-gray f5">
