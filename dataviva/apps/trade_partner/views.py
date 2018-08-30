@@ -145,28 +145,20 @@ def index(wld_id, tab):
 
     if not bra_id:
         header = {
-            'continent_id': wld_id[0:2],
             'name': trade_partner_service.country_name(),
             'year': trade_partner_service.year(),
-            'trade_balance': trade_partner_service.trade_balance(),
             'total_exported': trade_partner_service.total_exported(),
-            'unity_weight_export_price': trade_partner_service.unity_weight_export_price(),
             'total_imported': trade_partner_service.total_imported(),
-            'unity_weight_import_price': trade_partner_service.unity_weight_import_price(),
             'wld_id': wld_id,
             'bra_id': bra_id
         }
 
     else:
         header = {
-            'continent_id': wld_id[0:2],
             'name': trade_partner_service.country_name(),
             'year': trade_partner_service.year(),
-            'trade_balance': trade_partner_service.trade_balance(),
             'total_exported': trade_partner_service.total_exported(),
-            'unity_weight_export_price': trade_partner_service.unity_weight_export_price(),
             'total_imported': trade_partner_service.total_imported(),
-            'unity_weight_import_price': trade_partner_service.unity_weight_import_price(),
             'wld_id': wld_id,
             'bra_id': bra_id,
             'location_name': trade_partner_service.location_name(),
@@ -174,21 +166,9 @@ def index(wld_id, tab):
         }
 
     body = {
-        'municipality_with_more_exports': municipalities_service.municipality_with_more_exports(),
-        'municipality_with_more_exports_state': municipalities_service.municipality_with_more_exports_state(),
         'highest_export_value': municipalities_service.highest_export_value(),
-        'municipality_with_more_imports': municipalities_service.municipality_with_more_imports(),
-        'municipality_with_more_imports_state': municipalities_service.municipality_with_more_imports_state(),
-        'highest_import_value': municipalities_service.highest_import_value(),
-
-        'product_with_more_imports': products_service.product_with_more_imports(),
-        'product_with_highest_import_value': products_service.highest_import_value(),
         'product_with_more_exports': products_service.product_with_more_exports(),
         'product_with_highest_export_value': products_service.highest_export_value(),
-        'product_with_highest_balance': products_service.product_with_highest_balance(),
-        'highest_balance': products_service.highest_balance(),
-        'product_with_lowest_balance': products_service.product_with_lowest_balance(),
-        'lowest_balance': products_service.lowest_balance()
     }
 
     tabs = {

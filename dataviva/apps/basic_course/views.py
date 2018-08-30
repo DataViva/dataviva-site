@@ -113,20 +113,13 @@ def index(course_sc_id, tab):
         location = None
 
     header = {
-        'course_sc_id': course_sc_id,
-        'field_id': course_sc_id[0:2],
-        'course_classes': sc_service.course_classes(),
-        'course_age': sc_service.course_age(),
         'course_enrolled': sc_service.course_enrolled(),
         'course_average_class_size': sc_service.course_average_class_size(),
         'course_year': sc_service.course_year(),
-        'school_count': school_service.school_count(),
-        'bra_id': bra_id
     }
 
     if bra_id:
-        header.update({'location_name': sc_service.location_name(),
-                       'state_name': sc_service.state_name()})
+        header.update({'state_name': sc_service.state_name()})
 
     if len(bra_id) == 1:
         header.update({'location_rank': state_service.location_rank(),
@@ -136,9 +129,6 @@ def index(course_sc_id, tab):
                        'location_enrolled': city_service.city_enrolled()})
 
     body = {
-        'bra_id': bra_id,
-        'school_name': school_service.school_name(),
-        'school_enrolled': school_service.school_enrolled(),
         'city_name': city_service.city_name(),
         'city_state': city_service.city_state(),
         'city_enrolled': city_service.city_enrolled(),
