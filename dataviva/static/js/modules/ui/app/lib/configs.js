@@ -37,6 +37,7 @@ export const databases = {
                    economic activity, employment and education data. 
                    Examples: Southeast, Mato Grosso, Recife, 
                    Metropolitan Region of Porto Alegre.`,
+    hidden_ids: [""],
     colors: {
       "1": "#00994c",
       "2": "#101070",
@@ -63,6 +64,7 @@ export const databases = {
                    statistics per year. Examples: Medium Level 
                    Technicians, Industry workers, Receptionists, 
                    Clinicians.`,
+    hidden_ids: ["0", "x"],
     colors: {
       "1": "#752277",
       "2": "#cc0000",
@@ -93,6 +95,7 @@ export const databases = {
                    economic opportunities. Examples: Businesses, Domestic
                    Service, Education, Restaurants, Call Center, 
                    Religious Organizations.`,
+    hidden_ids: [""],
     colors: {
       a: "#105b10",
       b: "#330000",
@@ -134,6 +137,7 @@ export const databases = {
                    export destination, ranking by location, economic 
                    activities and related occupations. Examples: Food,
                    Art and Antiques, Iron Ore, Coffee, Auto Parts.`,
+    hidden_ids: ["22"],
     colors: {
       "01": "#cfa717",
       "02": "#cf9f17",
@@ -178,6 +182,7 @@ export const databases = {
                    by type of product or supplier city. Examples: Asia,
                    Africa, Europe, Mexico, Japan, USA, China, 
                    the Netherlands, Iran.`,
+    hidden_ids: ["xx"],
     colors: {
       as: "#c8140a",
       eu: "#752277",
@@ -203,6 +208,7 @@ export const databases = {
     tooltip_text: `Number of enrollments in each offered course, student
                    status and similar university profiles. Examples: 
                    USP, UFMG, PUC Goiás.`,
+    hidden_ids: ["x"],
     colors: {
       T: "#31a0b5",
       S: "#2f2f6d",
@@ -227,6 +233,7 @@ export const databases = {
                    post-secondary courses or the selected field of 
                    study. Examples: Education, Health Sciences, Law, 
                    Production Engineering, Physiotherapy.`,
+    hidden_ids: ["00"],
     colors: {
       "01": "#737373",
       "14": "#cc0000",
@@ -270,6 +277,7 @@ export const databases = {
                    and enrollment ranking by city. Examples: Elementary 
                    School, High School, Nursing Technician, Agriculture
                    and Livestock Technician.`,
+    hidden_ids: ["00"],
     colors: {
       "XX": "#2f2f6d",
       "01": "#800000",

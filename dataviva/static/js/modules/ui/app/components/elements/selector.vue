@@ -217,6 +217,17 @@ export default {
       }
 
       this.items[depth] = Object.values(data);
+
+      if (["Occupations", "Products", "Trade Partners", "Higher Education",
+           "Basic Courses"].includes(this.db.name)) {
+        this.items[depth] = this.items[depth]
+          .filter(item =>
+          !this.db.hidden_ids.includes(String(item[this.db.group_opts[0]].id)));
+      } else if (this.db.name === "Universities") {
+        this.items[depth] = this.items[depth]
+          .filter(item =>
+          !this.db.hidden_ids.includes((item.school_type).toLowerCase()));
+      }
       this.items[depth] =
         this.remove_incomplete(this.items[depth], this.db.group_opts);
 
@@ -286,7 +297,6 @@ export default {
 
       return icon;
     },
-
     define_color(item, colors) {
       // highest level needs own id
       if (this.depth === 0) {
@@ -315,7 +325,6 @@ export default {
         filter_options: this.group_opts(this.db.group_opts),
         color: this.define_color(item, this.db.colors),
       };
-
       if (this.db.img_path && this.db.img_path[this.group]) {
         mountedItem.img = this.img_path(item);
       } else {
