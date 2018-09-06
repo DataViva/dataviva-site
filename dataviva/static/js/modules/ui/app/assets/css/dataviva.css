@@ -10,6 +10,10 @@
   margin-left: auto;
 }
 
+.dark-gray {
+  color: #676a6c;
+}
+
 .medium-gray {
   color: #999;
 } 
@@ -30,7 +34,7 @@
 
 #modal-header-title {
   font-size: 18px;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 .hover-bg-burgundy:hover { 

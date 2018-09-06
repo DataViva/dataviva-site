@@ -1,8 +1,6 @@
 <template>
   <div
-    :class="item.bg_light_grey"
-    class="flex flex-row flex-nowrap pt3 pb3">
-
+    class="bg-light-gray flex flex-row flex-nowrap pt3 pb3">
     <div class="tc">
       <template v-if="item.img">
         <div class="w3 w4-ns">
@@ -12,7 +10,7 @@
         </div>
       </template>
       <template v-else-if="item.icon">
-        <div class="pt2 w3 w4-ns">
+        <div class="w3 w4-ns">
           <i
             :style="'color: ' + item.color"
             :class="'f1-ns f2 lh-copy' + item.icon"/>
@@ -25,29 +23,16 @@
         :style="'color: ' + item.color"
         class="mv0 fw4 lh-title measure-narrow measure-wide-ns">
         {{ item.name }}</h3>
-      <small
-        class="medium-gray f5">
-        {{ item.id_description }}: {{ item.id }}<br>
-      </small>
-      <small
-        v-if="item.extra_info"
-        class="medium-gray f5">
-        {{ item.extra_info }}: {{ item.extra_info_content }}
-      </small>
-      <template
-        v-if="item.filter_options && item.filter_options.length > 0">
-        <br><span class="medium-gray f4">Show:</span>
+      <div
+        class="burgundy">
         <span
-          v-for="filter in item.filter_options"
-          :key="filter"
-          href="#"
-          class="burgundy no-underline underline-hover pointer f4"
-          @click="$emit('select-filter', filter)">{{ filter + '  ' }}
+          class="f3 fw4 pr4 pt3 mt2 pointer"
+          @click="$emit('remove-filter')">&times; Remove this filter
         </span>
-      </template>
+      </div>
     </div>
     <div
-      class="ml-auto">
+      class="ml-auto mr2-ns mr0">
       <a
         :href="item.url"
         class="select-button f4 ba burgundy br2 ph3 pv2 mr3 dib mt2
@@ -59,7 +44,7 @@
 
 <script>
 export default {
-  name: "SelectableItem",
+  name: "SelectedFilter",
   props: {
     item: {
       type: Object,
@@ -73,6 +58,8 @@ export default {
     };
   },
   methods: {
+    removeFilter() {
+    },
   },
 };
 </script>

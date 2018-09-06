@@ -20,6 +20,10 @@
             @click="close()">&times;
           </a>
         </div>
+        <SelectedFilter
+          v-if="filter_item"
+          :item="mount_item(filter_item, 0, filter_item_depth)"
+          @remove-filter="clear_filter();"/>
         <div
           class="ph4 h-75 relative">
           <!-- Filters and aggregations -->
@@ -29,29 +33,25 @@
             <div
               v-if="db.group_opts.length"
               class="fl w-100 w-auto-l pb2">
-              <h5 class="tl mb0">Group</h5>
+              <h5 class="tl mb0">Group by</h5>
               <div
                 v-for="(option,index) in db.group_opts"
                 :key="option"
                 :class="btn_format(group, option, index, db.group_opts)"
                 class="tc mv2 mv3-ns pv2 ph3 ba b--black-10
                        fl br2 ttc"
-                @click="reset_scroll_bar(); clean_search();
-                        reset_group_filter(); group_by_property(option);"
-              >{{ option }}
+                @click="group_data(option);">{{ option }}
               </div>
             </div>
             <div class="fr w-100 w-auto-l pb2">
-              <h5 class="tl mb0">Sort</h5>
+              <h5 class="tl mb0">Sort by</h5>
               <div
                 v-for="(option,index) in db.order_opts"
                 :key="option"
                 :class="btn_format(order, option, index, db.order_opts)"
                 class="tc mv2 mv3-ns pv2 ph3 ba b--black-10 fl
                        br2 ttc"
-                @click="reset_scroll_bar(); sort_list_by_property(option);
-                        update_visible_items();"
-              >{{ db.order_labels[index] }}
+                @click="sort_data(option);">{{ db.order_labels[index] }}
               </div>
             </div>
           </div> <!-- Filters and aggregations ends -->
@@ -68,7 +68,7 @@
               type="text"
               aria-describedby="name-desc"
               placeholder="SEARCH"
-              @keyup="reset_group_filter(); filter_list();">
+              @keyup="update_search();">
           </form>
           <Loader v-if="loading"/>
           <!-- Item list -->
@@ -76,7 +76,7 @@
             v-if="!loading"
             id="selectable-item-list"
             class="h-75 w-100 overflow-y-auto"
-            @scroll="infinity_scroll()">
+            @scroll="infinity_scroll();">
             <SelectableItem
               v-for="(item, index) in visible_items"
               :item="mount_item(item, index)"
@@ -111,6 +111,8 @@ export default {
         group: "",
         search: "",
       },
+      filter_item: null,
+      filter_item_depth: 0,
     };
   },
   created() {
@@ -210,7 +212,7 @@ export default {
     // Input: response data
     read_data(data) {
       this.items = [];
-      let depth = this.depth;
+      const depth = this.depth;
 
       for (let i = 0; i <= this.max_depth; i += 1) {
         this.items[i] = [];
@@ -245,8 +247,8 @@ export default {
     // Purpose: gets url path for items with image
     // Input: item
     // Output: url
-    img_path(item) {
-      let depth = this.depth;
+    img_path(item, item_depth) {
+      const depth = item_depth !== undefined ? item_depth : this.depth;
 
       switch (this.db.code) {
         case "location":
@@ -279,11 +281,12 @@ export default {
     },
     // Purpose: defines img url or icon class name
     // Input: mounted data to render and the original item
-    define_icon_img(item) {
+    define_icon_img(item, item_depth) {
+      let depth = item_depth !== undefined ? item_depth : this.depth;
       let icon = ` ${this.db.icon.item}`;
 
       // highest level needs own id
-      if (this.depth === 0) {
+      if (depth === 0) {
         icon += item.id;
       }
       // other levels need highest level id
@@ -297,9 +300,11 @@ export default {
 
       return icon;
     },
-    define_color(item, colors) {
+    define_color(item, colors, item_depth) {
+      let depth = item_depth !== undefined ? item_depth : this.depth;
+
       // highest level needs own id
-      if (this.depth === 0) {
+      if (depth === 0) {
         return colors[item.id];
       }
       // other levels need highest level id
@@ -314,7 +319,7 @@ export default {
     // Purpose: formats item to be rendered
     // Input: the original item and the current index in list of items
     // Output: mounted item with all data
-    mount_item(item, index) {
+    mount_item(item, index, depth) {
       const mountedItem = {
         id: item.id,
         name: item.name_pt,
@@ -323,12 +328,16 @@ export default {
         extra_info: this.db.extra_info_label,
         extra_info_content: item.extra_info_content,
         filter_options: this.group_opts(this.db.group_opts),
-        color: this.define_color(item, this.db.colors),
+        color: this.define_color(item, this.db.colors, depth),
       };
-      if (this.db.img_path && this.db.img_path[this.group]) {
-        mountedItem.img = this.img_path(item);
+
+      if (depth === 0 && (["location", "trade_partner"].includes(this.db.code))) {
+        mountedItem.icon = this.define_icon_img(item, depth);
+      }
+      else if (this.db.img_path && this.db.img_path[this.group]) {
+        mountedItem.img = this.img_path(item, depth);
       } else {
-        mountedItem.icon = this.define_icon_img(item);
+        mountedItem.icon = this.define_icon_img(item, depth);
       }
 
       // alternating column colours
@@ -364,6 +373,8 @@ export default {
     },
     reset_group_filter() {
       this.filter_group = {};
+      this.filter_item = null;
+      this.filter_item_depth = 0;
     },
     // Purpose: cleans the search text field
     clean_search() {
@@ -402,12 +413,15 @@ export default {
       return classes;
     },
     select_group(item, group) {
+      this.filter_item_depth = this.depth;
       const parentGroup = this.group;
       this.set_depth(group);
       this.filter_group.group = parentGroup;
       this.filter_group.search = this.t_(item, "name");
       this.filter_by_group(this.t_(item, "name"), parentGroup);
       this.group = group;
+      this.filter_item = item;
+      this.reset_scroll_bar();
     },
     // Purpose: requests parent component to hide modal
     close() {
@@ -433,6 +447,26 @@ export default {
     reset_scroll_bar() {
       const itemDiv = document.getElementById("selectable-item-list");
       itemDiv.scrollTop = 0;
+    },
+    group_data(opt) {
+      this.reset_scroll_bar();
+      this.clean_search();
+      this.reset_group_filter();
+      this.group_by_property(opt);
+    },
+    sort_data(opt) {
+      this.reset_scroll_bar();
+      this.sort_list_by_property(opt);
+      this.update_visible_items();
+    },
+    update_search() {
+      this.reset_group_filter();
+      this.filter_list();
+    },
+    clear_filter() {
+      this.reset_group_filter();
+      this.update_visible_items();
+      this.reset_scroll_bar();
     },
   },
 };

@@ -9,7 +9,7 @@
              w5 mh2 mb4 pt1"
       data-toggle="popover"
       data-placement="top"
-      @click="selectDataBase(database)">
+      @click="selectDataBase(database);">
       <div class="tc">
         <div
           class="f1 mt3 mb2">

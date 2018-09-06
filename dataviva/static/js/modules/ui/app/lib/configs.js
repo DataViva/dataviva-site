@@ -1,3 +1,5 @@
+/* eslint quote-props:
+  ["error", "as-needed", { "keywords": true, "unnecessary": false }] */
 const dv = dataviva;
 
 export const env = {
