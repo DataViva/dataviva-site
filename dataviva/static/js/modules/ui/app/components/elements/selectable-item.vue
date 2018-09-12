@@ -30,9 +30,10 @@
         {{ item.id_description }}: {{ item.id }}<br>
       </small>
       <small
-        v-if="item.extra_info"
+        v-if="item.extra_info_content !== null"
         class="medium-gray f5">
-        {{ item.extra_info }}: {{ item.extra_info_content }}
+        {{ item.extra_info }}: {{ item.prefix }}
+        {{ item.extra_info_content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
       </small>
       <template
         v-if="item.filter_options && item.filter_options.length > 0">

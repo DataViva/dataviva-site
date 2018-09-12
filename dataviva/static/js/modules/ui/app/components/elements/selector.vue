@@ -83,6 +83,11 @@
               :key="item.id"
               @select-filter="function (fil) { select_group(item, fil) }"/>
           </div> <!-- Item list ends -->
+          <div
+            v-if="!loading"
+            class="mt4 tc f5">
+            <p>Source: {{ db.source.database }} {{ db.source.year }}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -113,6 +118,7 @@ export default {
       },
       filter_item: null,
       filter_item_depth: 0,
+      numeric_data: null,
     };
   },
   created() {
@@ -127,7 +133,7 @@ export default {
       this.order = this.db.order_opts["0"];
     }
 
-    this.get_data();
+    this.get_numeric_data();
   },
   methods: {
     // Purpose: gets item property according to the current language
@@ -155,20 +161,44 @@ export default {
       }
       return false;
     },
+    get_position(list, id) {
+      for (let i = 0; i < list.length; i += 1) {
+        if (list[i].id === id) {
+          return i;
+        }
+      }
+    },
+    sum_extra_info(list, id, value) {
+      for (let i = 0; i < list.length; i += 1) {
+        if (list[i].id === id) {
+          return parseFloat(list[i].extra_info_content) + parseFloat(value);
+        }
+      }
+      return 0;
+    },
     // Purpose: gets data from API and calls function to read data
     async get_data() {
       const ep = this.db.endpoint;
       axios.get(`${this.confs.api_url}metadata/${ep}`)
         .then(response => (this.read_data(response.data)));
     },
+    async get_numeric_data() {
+      const ep = `${this.confs.api_url}${this.db.extra_info.endpoint}`;
+      axios.get(ep)
+        .then(response => (this.read_numeric_data(response.data)));
+    },
     // Purpose: splits data from different levels when data
     // comes from the same endpoint with diverse depths
     async read_depths() {
       const minorData = this.items[this.max_depth];
+      let info = 0;
+      let pos = 0;
 
       for (let j = 0; j < this.max_depth; j += 1) {
         for (let i = 0; i < minorData.length; i += 1) {
           const item = minorData[i][this.db.group_opts[j]];
+          info = minorData[i].extra_info_content;
+          info = isNaN(info) || info === null ? 0 : info;
 
           // Adds information about higher levels
           for (let h = 0; h < j; h += 1) {
@@ -185,7 +215,12 @@ export default {
           }
 
           if (item && !this.check_exist(this.items[j], item.id)) {
+            item.extra_info_content = info;
             this.items[j].push(item);
+          } else {
+            pos = this.get_position(this.items[j], item.id);
+            this.items[j][pos].extra_info_content =
+              this.sum_extra_info(this.items[j], item.id, info);
           }
         }
       }
@@ -221,10 +256,11 @@ export default {
       this.items[depth] = Object.values(data);
 
       if (["Occupations", "Products", "Trade Partners", "Higher Education",
-           "Basic Courses"].includes(this.db.name)) {
-        this.items[depth] = this.items[depth]
-          .filter(item =>
-          !this.db.hidden_ids.includes(String(item[this.db.group_opts[0]].id)));
+        "Basic Courses"].includes(this.db.name)) {
+             this.items[depth] = this.items[depth]
+               .filter(item =>
+           !this.db.hidden_ids.includes(String(item[this.db.group_opts[0]].id))
+           && !this.db.hidden_ids.includes(String(item.id)));
       } else if (this.db.name === "Universities") {
         this.items[depth] = this.items[depth]
           .filter(item =>
@@ -233,16 +269,53 @@ export default {
       this.items[depth] =
         this.remove_incomplete(this.items[depth], this.db.group_opts);
 
-      // Mock data
-      for (let i = 0; i < this.items[depth].length; i += 1) {
-        this.items[depth][i].extra_info_content =
-          Math.floor(Math.random() * 10000);
-      }
-
+      this.set_data_to_metadata();
       this.read_depths();
       this.sort_list_by_property(this.order);
       this.update_visible_items();
       this.loading = false;
+    },
+    get_prop_position(prop, header) {
+      for (let i = 0; i < header.length; i += 1) {
+        if (prop === header[i]) {
+          return i;
+        }
+      }
+      return -1;
+    },
+    set_data_to_metadata() {
+      const context = this;
+      let data = null;
+      const depth = this.depth;
+
+      for (let i = 0; i < this.items[depth].length; i += 1) {
+        data = this.numeric_data.find (
+          function (obj) {
+            return obj.id === context.items[depth][i].id;
+          },
+        );
+        this.items[depth][i].extra_info_content = data ? data.extra_info : null;
+      }
+    },
+    read_numeric_data(response_data) {
+      let formatted_data = [];
+      let data = Object.values(response_data.data);
+      let header = Object.values(response_data.headers);
+      let info = {};
+      let id = this.db.extra_info.id;
+      let data_value = this.db.extra_info.data_value;
+
+      for (let item in data) {
+        if (data[item] !== null) {
+          info.id = data[item][this.get_prop_position(id, header)];
+          info.extra_info = 
+            data[item][this.get_prop_position(data_value, header)];
+        }
+        formatted_data[item] = Object.assign({}, info);
+      }
+
+      this.numeric_data = formatted_data;
+      this.get_data();
     },
     // Purpose: gets url path for items with image
     // Input: item
@@ -325,19 +398,27 @@ export default {
         name: item.name_pt,
         url: `/${this.db.code}/${item.id}`,
         id_description: this.db.id_description,
-        extra_info: this.db.extra_info_label,
+        extra_info: this.db.extra_info.label,
         extra_info_content: item.extra_info_content,
         filter_options: this.group_opts(this.db.group_opts),
         color: this.define_color(item, this.db.colors, depth),
       };
 
-      if (depth === 0 && (["location", "trade_partner"].includes(this.db.code))) {
+      if (depth === 0 &&
+      (["location", "trade_partner"].includes(this.db.code))) {
         mountedItem.icon = this.define_icon_img(item, depth);
       }
       else if (this.db.img_path && this.db.img_path[this.group]) {
         mountedItem.img = this.img_path(item, depth);
       } else {
         mountedItem.icon = this.define_icon_img(item, depth);
+      }
+
+      if (["product", "trade_partner"].includes(this.db.code)) {
+        mountedItem.prefix = "USD ";
+      }
+      else {
+        mountedItem.prefix ="";
       }
 
       // alternating column colours
@@ -390,12 +471,33 @@ export default {
       this.update_visible_items();
     },
     filter_list() {
-      this.visible_items = this.items[this.depth]
-        .filter(item =>
-          new RegExp(this.search.toLowerCase())
-            .test(this.t_(item, "name").toLowerCase()))
-        .sort(this.get_compare_function(this.order))
-        .slice(0, this.max_visible_items);
+      if (this.filter_group.group) {
+        this.visible_items = this.items[this.depth]
+          .filter(item =>
+              new RegExp(this.search.toLowerCase())
+                .test(this.t_(item, "name").toLowerCase())
+              ||
+              new RegExp(this.search)
+                .test(item.id)
+            )
+          .filter(item =>
+            new RegExp(this.filter_group.search.toLowerCase())
+              .test(item[this.filter_group.group].name_pt.toLowerCase()))
+          .sort(this.get_compare_function(this.order))
+          .slice(0, this.max_visible_items);
+      }
+      else {
+        this.visible_items = this.items[this.depth]
+          .filter(item =>
+            new RegExp(this.search.toLowerCase())
+              .test(this.t_(item, "name").toLowerCase())
+            ||
+            new RegExp(this.search)
+              .test(item.id)
+            )
+          .sort(this.get_compare_function(this.order))
+          .slice(0, this.max_visible_items);
+      }
     },
     filter_by_group(search, group) {
       this.visible_items = this.items[this.depth]
@@ -460,7 +562,7 @@ export default {
       this.update_visible_items();
     },
     update_search() {
-      this.reset_group_filter();
+      // this.reset_group_filter();
       this.filter_list();
     },
     clear_filter() {

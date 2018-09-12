@@ -22,7 +22,10 @@ export const databases = {
     ],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Population"],
-    extra_info_label: "Population",
+    extra_info: {
+      label: "Population",
+      endpoint: "",
+    },
     endpoint: "municipality",
     img_path: {
       state: "/static/img/icons/bra/",
@@ -55,7 +58,12 @@ export const databases = {
     group_opts: ["occupation_group", "family"],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Total Jobs"],
-    extra_info_label: "Total Jobs",
+    extra_info: {
+      label: "Total Jobs",
+      endpoint: "rais/occupation_family/?value=employee&year=2016&order=occupation_family",
+      id: "occupation_family",
+      data_value: "jobs",
+    },
     endpoint: "occupation_family",
     icon: {
       db: "dv-occupation",
@@ -78,6 +86,10 @@ export const databases = {
       "8": "#cf9f17",
       "9": "#581f05",
     },
+    source: {
+      database: "RAIS",
+      year: "2016",
+    },
   },
   industry: {
     name: "Economic Activities",
@@ -86,7 +98,12 @@ export const databases = {
     group_opts: ["industry_section", "industry_division", "classe"],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Total Jobs"],
-    extra_info_label: "Total Jobs",
+    extra_info: {
+      label: "Total Jobs",
+      endpoint: "rais/industry_class/?value=employee&year=2016&order=industry_class",
+      id: "industry_class",
+      data_value: "jobs",
+    },
     endpoint: "industry_class",
     icon: {
       db: "dv-industry",
@@ -121,6 +138,10 @@ export const databases = {
       t: "#cf1766",
       u: "#4c4c4c",
     },
+    source: {
+      database: "RAIS",
+      year: "2016",
+    },
   },
   product: {
     name: "Products",
@@ -129,7 +150,12 @@ export const databases = {
     group_opts: ["product_section", "position"],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Exports"],
-    extra_info_label: "Exports",
+    extra_info: {
+      label: "Exports",
+      endpoint: "secex/product/?value=value&year=2017&order=product",
+      id: "product",
+      data_value: "value",
+    },
     endpoint: "product",
     icon: {
       db: "dv-product",
@@ -163,6 +189,10 @@ export const databases = {
       "20": "#737373",
       "21": "#7b6086",
     },
+    source: {
+      database: "SECEX",
+      year: "2017",
+    },
   },
   trade_partner: {
     name: "Trade Partners",
@@ -171,7 +201,12 @@ export const databases = {
     group_opts: ["continent", "country"],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Exports"],
-    extra_info_label: "Exports",
+    extra_info: {
+      label: "Exports",
+      endpoint: "secex/country/?value=value&year=2017&order=country",
+      id: "country",
+      data_value: "value",
+    },
     endpoint: "country",
     img_path: {
       country: "/static/img/icons/wld/",
@@ -184,7 +219,7 @@ export const databases = {
                    by type of product or supplier city. Examples: Asia,
                    Africa, Europe, Mexico, Japan, USA, China, 
                    the Netherlands, Iran.`,
-    hidden_ids: ["xx"],
+    hidden_ids: ["xx", "367"],
     colors: {
       as: "#c8140a",
       eu: "#752277",
@@ -192,6 +227,10 @@ export const databases = {
       sa: "#00923f",
       af: "#cf9f17",
       oc: "#cf7417",
+    },
+    source: {
+      database: "SECEX",
+      year: "2017",
     },
   },
   university: {
@@ -201,7 +240,12 @@ export const databases = {
     group_opts: [],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Enrolled"],
-    extra_info_label: "Enrolled",
+    extra_info: {
+      label: "Enrolled",
+      endpoint: "hedu/university/?value=enrolled&year=2016&order=university",
+      id: "university",
+      data_value: "enrolleds",
+    },
     endpoint: "university",
     icon: {
       db: "dv-university",
@@ -217,6 +261,10 @@ export const databases = {
       Q: "#009b3a",
       P: "#105b10",
     },
+    source: {
+      database: "Censo da Educação Superior",
+      year: "2016",
+    },
   },
   hedu_course: {
     name: "Higher Education",
@@ -225,7 +273,12 @@ export const databases = {
     group_opts: ["hedu_course_field", "major"],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Enrolled"],
-    extra_info_label: "Enrolled",
+    extra_info: {
+      label: "Enrolled",
+      endpoint: "hedu/hedu_course/?value=enrolled&year=2016&order=hedu_course",
+      id: "hedu_course",
+      data_value: "enrolleds",
+    },
     endpoint: "hedu_course",
     icon: {
       db: "dv-major",
@@ -261,6 +314,10 @@ export const databases = {
       "85": "#2f2f6d",
       "86": "#698b5a",
     },
+    source: {
+      database: "Censo da Educação Superior",
+      year: "2016",
+    },
   },
   basic_course: {
     name: "Basic Courses",
@@ -269,7 +326,12 @@ export const databases = {
     group_opts: ["course_field", "course"],
     order_opts: ["name", "extra_info"],
     order_labels: ["Name", "Enrolled"],
-    extra_info_label: "Enrolled",
+    extra_info: {
+      label: "Enrolled",
+      endpoint: "sc/sc_course/?value=students&year=2017&order=sc_course",
+      id: "sc_course",
+      data_value: "students",
+    },
     endpoint: "sc_course",
     icon: {
       db: "dv-basic-course",
@@ -295,6 +357,10 @@ export const databases = {
       "11": "#581f05",
       "12": "#105b10",
       "13": "#cf7417",
+    },
+    source: {
+      database: "Censo Escolar",
+      year: "2017",
     },
   },
 };
