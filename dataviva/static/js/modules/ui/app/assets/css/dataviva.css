@@ -10,6 +10,10 @@
   margin-left: auto;
 }
 
+.capitalize:first-letter {
+  text-transform: uppercase;
+}
+
 .medium-gray {
   color: #676a6c;
 } 

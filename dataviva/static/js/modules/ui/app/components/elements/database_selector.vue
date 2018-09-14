@@ -4,7 +4,7 @@
     <a
       v-for="database in databases"
       :key="database.name"
-      :data-content="database.tooltip_text"
+      :data-content=$t(database.tooltip_text)
       class="no-underline burgundy bg-transparent hover-bg-burgundy mh2 h4
              w5 mh2 mb4 pt1"
       data-toggle="popover"
@@ -17,10 +17,10 @@
             :class="database.icon.db" />
         </div>
         <div>
-          <span
-            class="f3">
-            {{ database.name }}
-          </span>
+          <p
+            class="f3 capitalize">
+            {{ $t(database.name) }}
+          </p>
         </div>
       </div>
     </a>

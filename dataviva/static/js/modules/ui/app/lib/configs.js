@@ -10,9 +10,9 @@ export const env = {
 
 export const databases = {
   location: {
-    name: "Brazilian Locations",
+    name: "message.brazilian_locations",
     code: "location",
-    id_description: "IBGE ID",
+    id_description: "message.id_ibge",
     group_opts: [
       "region",
       "state",
@@ -20,8 +20,15 @@ export const databases = {
       "microregion",
       "municipality",
     ],
+    group_labels: [
+      "region",
+      "state",
+      "mesoregion",
+      "microregion",
+      "municipality",
+    ],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Population"],
+    order_labels: ["message.name", "message.population"],
     extra_info: {
       label: "Population",
       endpoint: "",
@@ -37,11 +44,7 @@ export const databases = {
       db: "dv-bra",
       item: "dv-bra-",
     },
-    tooltip_text: `General profile by region, state, mesoregion, 
-                   microregion or city. Check its international trade, 
-                   economic activity, employment and education data. 
-                   Examples: Southeast, Mato Grosso, Recife, 
-                   Metropolitan Region of Porto Alegre.`,
+    tooltip_text: "message.brazilian_locations_tooltip",
     hidden_ids: [""],
     colors: {
       "1": "#00994c",
@@ -52,14 +55,15 @@ export const databases = {
     },
   },
   occupation: {
-    name: "Occupations",
+    name: "message.occupations",
     code: "occupation",
-    id_description: "CBO ID",
+    id_description: "message.id_cbo",
     group_opts: ["occupation_group", "family"],
+    group_labels: ["message.main_group", "message.family"],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Total Jobs"],
+    order_labels: ["message.name", "message.jobs"],
     extra_info: {
-      label: "Total Jobs",
+      label: "message.jobs",
       endpoint: "rais/occupation_family/?value=employee&year=2016&order=occupation_family",
       id: "occupation_family",
       data_value: "jobs",
@@ -69,11 +73,7 @@ export const databases = {
       db: "dv-occupation",
       item: "dv-cbo-",
     },
-    tooltip_text: `Regions with best employment rates by professional
-                   activity, related courses, average wage and job 
-                   statistics per year. Examples: Medium Level 
-                   Technicians, Industry workers, Receptionists, 
-                   Clinicians.`,
+    tooltip_text: "message.occupations_tooltip",
     hidden_ids: ["0", "x"],
     colors: {
       "1": "#752277",
@@ -92,14 +92,15 @@ export const databases = {
     },
   },
   industry: {
-    name: "Economic Activities",
+    name: "message.economic_activities",
     code: "industry",
-    id_description: "CNAE ID",
+    id_description: "message.id_cnae",
     group_opts: ["industry_section", "industry_division", "classe"],
+    group_labels: ["message.section", "message.division", "message.class"],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Total Jobs"],
+    order_labels: ["message.name", "message.jobs"],
     extra_info: {
-      label: "Total Jobs",
+      label: "message.jobs",
       endpoint: "rais/industry_class/?value=employee&year=2016&order=industry_class",
       id: "industry_class",
       data_value: "jobs",
@@ -109,11 +110,7 @@ export const databases = {
       db: "dv-industry",
       item: "dv-cnae-",
     },
-    tooltip_text: `Information on employment rate by region, average 
-                   wage by occupation, average monthly income and 
-                   economic opportunities. Examples: Businesses, Domestic
-                   Service, Education, Restaurants, Call Center, 
-                   Religious Organizations.`,
+    tooltip_text: "message.economic_activities_tooltip",
     hidden_ids: [""],
     colors: {
       a: "#105b10",
@@ -144,14 +141,15 @@ export const databases = {
     },
   },
   product: {
-    name: "Products",
+    name: "message.products",
     code: "product",
-    id_description: "HS ID",
+    id_description: "message.id_hs",
     group_opts: ["product_section", "position"],
+    group_labels: ["message.section", "message.position"],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Exports"],
+    order_labels: ["message.name", "message.exports"],
     extra_info: {
-      label: "Exports",
+      label: "message.exports",
       endpoint: "secex/product/?value=value&year=2017&order=product",
       id: "product",
       data_value: "value",
@@ -161,10 +159,7 @@ export const databases = {
       db: "dv-product",
       item: "dv-hs-",
     },
-    tooltip_text: `Trade balance data by product, import origin and 
-                   export destination, ranking by location, economic 
-                   activities and related occupations. Examples: Food,
-                   Art and Antiques, Iron Ore, Coffee, Auto Parts.`,
+    tooltip_text: "message.products_tooltip",
     hidden_ids: ["22"],
     colors: {
       "01": "#cfa717",
@@ -195,14 +190,15 @@ export const databases = {
     },
   },
   trade_partner: {
-    name: "Trade Partners",
+    name: "message.trade_partners",
     code: "trade_partner",
-    id_description: "WLD ID",
+    id_description: "message.id_wld",
     group_opts: ["continent", "country"],
+    group_labels: ["message.continent", "message.country"],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Exports"],
+    order_labels: ["message.name", "message.exports"],
     extra_info: {
-      label: "Exports",
+      label: "message.exports",
       endpoint: "secex/country/?value=value&year=2017&order=country",
       id: "country",
       data_value: "value",
@@ -215,10 +211,7 @@ export const databases = {
       db: "dv-trade-partner",
       item: "dv-wld-",
     },
-    tooltip_text: `Brazil’s top import and export partners, trade data 
-                   by type of product or supplier city. Examples: Asia,
-                   Africa, Europe, Mexico, Japan, USA, China, 
-                   the Netherlands, Iran.`,
+    tooltip_text: "message.trade_partners_tooltip",
     hidden_ids: ["xx", "367"],
     colors: {
       as: "#c8140a",
@@ -234,14 +227,14 @@ export const databases = {
     },
   },
   university: {
-    name: "Universities",
+    name: "message.universities",
     code: "university",
-    id_description: "ID",
+    id_description: "message.id",
     group_opts: [],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Enrolled"],
+    order_labels: ["message.name", "message.enrolled"],
     extra_info: {
-      label: "Enrolled",
+      label: "message.enrolled",
       endpoint: "hedu/university/?value=enrolled&year=2016&order=university",
       id: "university",
       data_value: "enrolleds",
@@ -251,9 +244,7 @@ export const databases = {
       db: "dv-university",
       item: "dv-university-",
     },
-    tooltip_text: `Number of enrollments in each offered course, student
-                   status and similar university profiles. Examples: 
-                   USP, UFMG, PUC Goiás.`,
+    tooltip_text: "message.universities_tooltip",
     hidden_ids: ["x"],
     colors: {
       T: "#31a0b5",
@@ -267,14 +258,15 @@ export const databases = {
     },
   },
   hedu_course: {
-    name: "Higher Education",
+    name: "message.higher_education",
     code: "hedu_course",
-    id_description: "ID",
+    id_description: "message.id",
     group_opts: ["hedu_course_field", "major"],
+    group_labels: ["message.field", "message.major"],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Enrolled"],
+    order_labels: ["message.name", "message.enrolled"],
     extra_info: {
-      label: "Enrolled",
+      label: "message.enrolled",
       endpoint: "hedu/hedu_course/?value=enrolled&year=2016&order=hedu_course",
       id: "hedu_course",
       data_value: "enrolleds",
@@ -284,10 +276,7 @@ export const databases = {
       db: "dv-major",
       item: "dv-course-hedu-",
     },
-    tooltip_text: `List of universities and cities that offer 
-                   post-secondary courses or the selected field of 
-                   study. Examples: Education, Health Sciences, Law, 
-                   Production Engineering, Physiotherapy.`,
+    tooltip_text: "message.higher_education_tooltip",
     hidden_ids: ["00"],
     colors: {
       "01": "#737373",
@@ -320,14 +309,15 @@ export const databases = {
     },
   },
   basic_course: {
-    name: "Basic Courses",
+    name: "message.basic_courses",
     code: "basic_course",
-    id_description: "ID",
+    id_description: "message.id",
     group_opts: ["course_field", "course"],
+    group_labels: ["message.field", "message.course"],
     order_opts: ["name", "extra_info"],
-    order_labels: ["Name", "Enrolled"],
+    order_labels: ["message.name", "message.enrolled"],
     extra_info: {
-      label: "Enrolled",
+      label: "message.enrolled",
       endpoint: "sc/sc_course/?value=students&year=2017&order=sc_course",
       id: "sc_course",
       data_value: "students",
@@ -337,10 +327,7 @@ export const databases = {
       db: "dv-basic-course",
       item: "dv-course-sc-",
     },
-    tooltip_text: `Brazilian schools that offer professional education
-                   and enrollment ranking by city. Examples: Elementary 
-                   School, High School, Nursing Technician, Agriculture
-                   and Livestock Technician.`,
+    tooltip_text: "message.basic_courses_tooltip",
     hidden_ids: ["00"],
     colors: {
       "XX": "#2f2f6d",

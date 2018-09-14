@@ -13,7 +13,7 @@
         <div class="bg-green br--top br2 flex flex-row flex-nowrap">
           <h4
             id="modal-header-title"
-            class="f2 ma0 pa4 white">{{ db.name }}</h4>
+            class="f2 ma0 pa4 white capitalize">{{ $t(db.name) }}</h4>
           <a
             id="close-x"
             class="f2 white ml-auto pr4 pt3 mt2 fw7"
@@ -33,25 +33,25 @@
             <div
               v-if="db.group_opts.length"
               class="fl w-100 w-auto-l pb2">
-              <h5 class="tl mb0">Group by</h5>
+              <h5 class="tl mb0 capitalize">{{ $t("message.group_by") }}</h5>
               <div
                 v-for="(option,index) in db.group_opts"
                 :key="option"
                 :class="btn_format(group, option, index, db.group_opts)"
                 class="tc mv2 mv3-ns pv2 ph3 ba b--black-10
                        fl br2 ttc"
-                @click="group_data(option);">{{ option }}
+                @click="group_data(option);">{{ $t(db.group_labels[index]) }}
               </div>
             </div>
             <div class="fr w-100 w-auto-l pb2">
-              <h5 class="tl mb0">Sort by</h5>
+              <h5 class="tl mb0 capitalize">{{ $t("message.sort_by") }}</h5>
               <div
                 v-for="(option,index) in db.order_opts"
                 :key="option"
                 :class="btn_format(order, option, index, db.order_opts)"
                 class="tc mv2 mv3-ns pv2 ph3 ba b--black-10 fl
                        br2 ttc"
-                @click="sort_data(option);">{{ db.order_labels[index] }}
+                @click="sort_data(option);">{{ $t(db.order_labels[index]) }}
               </div>
             </div>
           </div> <!-- Filters and aggregations ends -->
@@ -63,11 +63,11 @@
             <input
               id="name"
               v-model="search"
+              :placeholder="$t('message.search')"
               class="input-reset ba b--black-10 ph3 pv2 mb2 db w-100 br3
                      lh-copy"
               type="text"
               aria-describedby="name-desc"
-              placeholder="SEARCH"
               @keyup="update_search();">
           </form>
           <Loader v-if="loading"/>
@@ -85,8 +85,9 @@
           </div> <!-- Item list ends -->
           <div
             v-if="!loading"
-            class="mt4 tc f5">
-            <p>Source: {{ db.source.database }} {{ db.source.year }}</p>
+            class="mt4 tc f5 capitalize">
+            <p>{{ $t("message.source") }}: {{ db.source.database }}
+              {{ db.source.year }}</p>
           </div>
         </div>
       </div>
@@ -198,7 +199,7 @@ export default {
         for (let i = 0; i < minorData.length; i += 1) {
           const item = minorData[i][this.db.group_opts[j]];
           info = minorData[i].extra_info_content;
-          info = isNaN(info) || info === null ? 0 : info;
+          info = Number.isNaN(info) || info === null ? 0 : info;
 
           // Adds information about higher levels
           for (let h = 0; h < j; h += 1) {
@@ -255,16 +256,15 @@ export default {
 
       this.items[depth] = Object.values(data);
 
-      if (["Occupations", "Products", "Trade Partners", "Higher Education",
-        "Basic Courses"].includes(this.db.name)) {
-             this.items[depth] = this.items[depth]
-               .filter(item =>
-           !this.db.hidden_ids.includes(String(item[this.db.group_opts[0]].id))
-           && !this.db.hidden_ids.includes(String(item.id)));
-      } else if (this.db.name === "Universities") {
+      if (["occupation", "product", "trade_partner", "hedu_course",
+        "basic_course"].includes(this.db.code)) {
+             this.items[depth] = this.items[depth].filter(item =>
+               !this.db.hidden_ids.includes(String(item[this.db.group_opts[0]]
+               .id)) && !this.db.hidden_ids.includes(String(item.id)));
+      } else if (this.db.code === "university") {
         this.items[depth] = this.items[depth]
           .filter(item =>
-          !this.db.hidden_ids.includes((item.school_type).toLowerCase()));
+            !this.db.hidden_ids.includes((item.school_type).toLowerCase()));
       }
       this.items[depth] =
         this.remove_incomplete(this.items[depth], this.db.group_opts);
@@ -289,26 +289,24 @@ export default {
       const depth = this.depth;
 
       for (let i = 0; i < this.items[depth].length; i += 1) {
-        data = this.numeric_data.find (
-          function (obj) {
+        data = this.numeric_data.find(function (obj) {
             return obj.id === context.items[depth][i].id;
-          },
-        );
+        });
         this.items[depth][i].extra_info_content = data ? data.extra_info : null;
       }
     },
     read_numeric_data(response_data) {
-      let formatted_data = [];
-      let data = Object.values(response_data.data);
-      let header = Object.values(response_data.headers);
-      let info = {};
-      let id = this.db.extra_info.id;
-      let data_value = this.db.extra_info.data_value;
+      const formatted_data = [];
+      const data = Object.values(response_data.data);
+      const header = Object.values(response_data.headers);
+      const info = {};
+      const id = this.db.extra_info.id;
+      const data_value = this.db.extra_info.data_value;
 
-      for (let item in data) {
+      for (const item in data) {
         if (data[item] !== null) {
           info.id = data[item][this.get_prop_position(id, header)];
-          info.extra_info = 
+          info.extra_info =
             data[item][this.get_prop_position(data_value, header)];
         }
         formatted_data[item] = Object.assign({}, info);
@@ -355,7 +353,7 @@ export default {
     // Purpose: defines img url or icon class name
     // Input: mounted data to render and the original item
     define_icon_img(item, item_depth) {
-      let depth = item_depth !== undefined ? item_depth : this.depth;
+      const depth = item_depth !== undefined ? item_depth : this.depth;
       let icon = ` ${this.db.icon.item}`;
 
       // highest level needs own id
@@ -370,12 +368,10 @@ export default {
       else if (item.school_type) {
         icon += item.school_type.toLowerCase();
       }
-
       return icon;
     },
     define_color(item, colors, item_depth) {
-      let depth = item_depth !== undefined ? item_depth : this.depth;
-
+      const depth = item_depth !== undefined ? item_depth : this.depth;
       // highest level needs own id
       if (depth === 0) {
         return colors[item.id];
@@ -418,7 +414,7 @@ export default {
         mountedItem.prefix = "USD ";
       }
       else {
-        mountedItem.prefix ="";
+        mountedItem.prefix = "";
       }
 
       // alternating column colours
@@ -474,27 +470,22 @@ export default {
       if (this.filter_group.group) {
         this.visible_items = this.items[this.depth]
           .filter(item =>
-              new RegExp(this.search.toLowerCase())
-                .test(this.t_(item, "name").toLowerCase())
-              ||
-              new RegExp(this.search)
-                .test(item.id)
-            )
+            new RegExp(this.search.toLowerCase())
+              .test(this.t_(item, "name").toLowerCase()) ||
+            new RegExp(this.search).test(item.id))
           .filter(item =>
             new RegExp(this.filter_group.search.toLowerCase())
               .test(item[this.filter_group.group].name_pt.toLowerCase()))
           .sort(this.get_compare_function(this.order))
           .slice(0, this.max_visible_items);
-      }
-      else {
+      } else {
         this.visible_items = this.items[this.depth]
           .filter(item =>
             new RegExp(this.search.toLowerCase())
               .test(this.t_(item, "name").toLowerCase())
             ||
             new RegExp(this.search)
-              .test(item.id)
-            )
+              .test(item.id))
           .sort(this.get_compare_function(this.order))
           .slice(0, this.max_visible_items);
       }

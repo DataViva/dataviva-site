@@ -27,7 +27,8 @@
         class="burgundy">
         <span
           class="f3 fw4 pr4 pt3 mt2 pointer"
-          @click="$emit('remove-filter')">&times; Remove this filter
+          @click="$emit('remove-filter')">&times;
+          {{ $t("message.remove_filter") }}
         </span>
       </div>
     </div>
@@ -36,7 +37,7 @@
       <a
         :href="item.url"
         class="select-button f4 ba burgundy br2 ph3 pv2 mr3 dib mt2
-               hover-bg-burgundy">Select
+               hover-bg-burgundy capitalize">{{ $t("message.select") }}
       </a>
     </div>
   </div>

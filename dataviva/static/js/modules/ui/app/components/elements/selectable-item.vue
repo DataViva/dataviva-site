@@ -27,17 +27,19 @@
         {{ item.name }}</h3>
       <small
         class="medium-gray f5">
-        {{ item.id_description }}: {{ item.id }}<br>
+        {{ $t(item.id_description) }}: {{ item.id }}<br>
       </small>
-      <small
+      <p
         v-if="item.extra_info_content !== null"
-        class="medium-gray f5">
-        {{ item.extra_info }}: {{ item.prefix }}
-        {{ item.extra_info_content.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
-      </small>
+        class="medium-gray f5 capitalize dib mb0">
+        {{ $t(item.extra_info) }}: {{ item.prefix }}
+        {{ item.extra_info_content.toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+      </p>
       <template
         v-if="item.filter_options && item.filter_options.length > 0">
-        <br><span class="medium-gray f4">Show:</span>
+        <br><p class="medium-gray f4 capitalize dib mb0">
+          {{ $t("message.show") }}:</p>
         <span
           v-for="filter in item.filter_options"
           :key="filter"
@@ -51,8 +53,8 @@
       class="ml-auto">
       <a
         :href="item.url"
-        class="select-button f4 ba burgundy br2 ph3 pv2 mr3 dib mt2
-               hover-bg-burgundy">Select
+        class="select-button f4 ba burgundy br2 ph3 pv2 mr3 dib mt2 capitalize
+               hover-bg-burgundy">{{ $t("message.select") }}
       </a>
     </div>
   </div>
