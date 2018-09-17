@@ -123,6 +123,14 @@ export default {
     };
   },
   created() {
+    if (checkLocalStorageSupport) {
+      // local storage can be used
+
+    }
+    else {
+      // local storage cannot be used
+    }
+
     if (this.db) {
       const length = this.db.group_opts.length - 1;
       // Sets group level to minimum
@@ -137,6 +145,22 @@ export default {
     this.get_numeric_data();
   },
   methods: {
+    checkLocalStorageSupport() {
+      if (typeof(Storage) !== "undefined") {
+        return true;
+      } else {
+        return false;
+      }  
+    },
+    retrieveDataFromLocalStorage(dbCode) {
+      if (localStorage.getItem("dbCode")) {
+      try {
+        x = JSON.parse(localStorage.getItem("dbCode"));
+        console.log(x)
+      } catch(e) {
+        localStorage.removeItem("dbCode")
+      }
+    },
     // Purpose: gets item property according to the current language
     // Input: item and property name
     // Output: property value
@@ -282,6 +306,11 @@ export default {
         }
       }
       return -1;
+    },
+    saveDataToLocalStorage(db) {
+      localStorage.removeItem("db.code");
+      const parsedData = JSON.stringify(db);
+      localStorage.setItem("db.code", parsedData);
     },
     set_data_to_metadata() {
       const context = this;
