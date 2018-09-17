@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
-    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}<small> (2015)</small></h2>
     {% if header.bra_id %}
         <p>{% if g.locale == 'pt' %}{{ trade_partner.article() | capitalize }}{% endif %} {{ header.name }} 
         {% trans %} is number {% endtrans %}{{ header.import_rank }}
@@ -25,14 +25,14 @@
                 {% trans %}number {% endtrans %}
                 {{ header.export_rank }}
                 {% trans %} in the export destinations of Brazil by trade value. The most exported product from Brazil to this country is {% endtrans %}{{ body.product_with_more_exports }} ({{ body.product_with_highest_export_value | max_digits(3) }} {{ (body.product_with_highest_export_value | magnitude).lower() }}) 
-                {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ (header.total_imported | magnitude).lower() }} ({{ header.year }}).
+                {% trans %} and the total of imports is {% endtrans %}{{ header.total_imported | max_digits(3) }} {{ (header.total_imported | magnitude).lower() }}.
             {% endif %}</p>
         {% endif %}
     {% endif %}
 
     <div class="row">
         <div class="dl-box col-xs-12 col-md-10 col-lg-8" id="general-partner">
-            <h3>{% trans %}International Trade{% endtrans %} (2016)</h3>
+            <h3>{% trans %}International Trade{% endtrans %} (2017)</h3>
             <a href="#international-trade" 
                 aria-controls="international-trade" 
                 role="tab"
