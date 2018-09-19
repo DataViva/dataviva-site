@@ -230,7 +230,6 @@ export const databases = {
     name: "message.universities",
     code: "university",
     id_description: "message.id",
-    group_opts: [],
     order_opts: ["name", "extra_info"],
     order_labels: ["message.name", "message.enrolled"],
     extra_info: {
