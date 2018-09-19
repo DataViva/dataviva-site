@@ -35,6 +35,7 @@ for (let index in modifiers_el) {
 
       if (modifier_data) {
         new selector_modifier({
+          i18n,
           name: "selector_modifier",
           el: modifier_el,
           propsData: modifier_data
