@@ -1,6 +1,14 @@
 /* eslint quote-props:
   ["error", "as-needed", { "keywords": true, "unnecessary": false }] */
 
+export function get_lang() {
+  if (window.location.pathname.indexOf("pt") != -1) {
+    return "pt";
+  } else {
+    return "en";
+  }
+}
+
 export const env = {
   api_url: process.env.API_URL ?
     process.env.API_URL : "http://api.dataviva.info/",
