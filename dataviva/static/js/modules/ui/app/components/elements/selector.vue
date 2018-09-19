@@ -120,23 +120,96 @@ export default {
       filter_item: null,
       filter_item_depth: 0,
       numeric_data: null,
+      maxJsonSize: 200000,
     };
   },
   created() {
+    let length =  0;
+
     if (this.db) {
-      const length = this.db.group_opts.length - 1;
-      // Sets group level to minimum
-      this.group = this.db.group_opts[length];
+
+      if (this.db.group_opts) {
+        length = this.db.group_opts.length - 1;    
+        // Sets group level to minimum
+        this.group = this.db.group_opts[length];
+        // Gets the second order option
+        this.order = this.db.order_opts["1"];
+      } else {
+        this.db.group_opts = [];
+      }
+
       this.max_depth = length;
       // Sets current depth level to minimum
       this.depth = length;
-      // Gets the first order option
-      this.order = this.db.order_opts["0"];
     }
 
-    this.get_numeric_data();
+    this.readMountedDataFromLocalStorage();
+
+    if (!this.items) {
+      this.get_numeric_data();
+    }
   },
   methods: {
+    splitString(string, size) {
+      var re = new RegExp('.{1,' + size + '}', 'g');
+      return string.match(re);
+    },
+    readMountedDataFromLocalStorage() {
+      if (this.checkLocalStorageSupport()) {
+        this.items = this.retrieveDataFromLocalStorage(this.db.code);
+        
+        if (this.items) {
+          this.sort_list_by_property(this.order);
+          this.update_visible_items();
+          this.loading = false;
+          this.loading_depths = false;
+        }
+      }
+    },
+    checkLocalStorageSupport() {
+      if (typeof(Storage) !== "undefined") {
+        return true;
+      } else {
+        return false;
+      }  
+    },
+    retrieveDataFromLocalStorage(key) {
+      let keyName = "modal_data_" + key;
+
+      try {
+        let data = "";
+        let part = "";
+
+        for (let i = 0; part != null; i++) {
+          part = localStorage.getItem(`${keyName}_${i}`);
+
+          if (part) {
+            data += part;
+          }
+        }
+
+        return JSON.parse(data);
+      } catch(e) {
+        let result = '';
+
+        for (let i = 0; `${keyName}_${i}` in localStorage; i++) {
+          localStorage.removeItem(`${keyName}_${i}`);
+        }
+        return "";
+      }
+    },
+    saveDataToLocalStorage(key, data) {
+      if (this.checkLocalStorageSupport()) {
+        let parsedJson = JSON.stringify(data)
+        let nParts = this.splitString(parsedJson, this.maxJsonSize);
+        let keyName = "";
+
+        for (let i = 0; i < nParts.length; i++) {
+          keyName = `modal_data_${key}_${i}`;
+          localStorage.setItem(keyName, nParts[i]);
+        }
+      }
+    },
     // Purpose: gets item property according to the current language
     // Input: item and property name
     // Output: property value
@@ -266,13 +339,17 @@ export default {
           .filter(item =>
             !this.db.hidden_ids.includes((item.school_type).toLowerCase()));
       }
-      this.items[depth] =
-        this.remove_incomplete(this.items[depth], this.db.group_opts);
+
+      if (this.group) {
+        this.items[depth] =
+          this.remove_incomplete(this.items[depth], this.db.group_opts);
+      }
 
       this.set_data_to_metadata();
       this.read_depths();
       this.sort_list_by_property(this.order);
       this.update_visible_items();
+      this.saveDataToLocalStorage(this.db.code, this.items);
       this.loading = false;
     },
     get_prop_position(prop, header) {
@@ -348,7 +425,11 @@ export default {
       }
     },
     group_opts(list) {
-      return list.slice(list.indexOf(this.group) + 1, list.length);
+      if (list) {
+        return list.slice(list.indexOf(this.group) + 1, list.length);
+      }
+
+      return "";
     },
     // Purpose: defines img url or icon class name
     // Input: mounted data to render and the original item
@@ -356,33 +437,33 @@ export default {
       const depth = item_depth !== undefined ? item_depth : this.depth;
       let icon = ` ${this.db.icon.item}`;
 
+      // universities
+      if (item.school_type) {
+        icon += item.school_type.toLowerCase();
+      }
       // highest level needs own id
-      if (depth === 0) {
+      else if (depth === 0) {
         icon += item.id;
       }
       // other levels need highest level id
       else if (this.db.group_opts[0]) {
         icon += item[this.db.group_opts[0]].id;
       }
-      // universities
-      else if (item.school_type) {
-        icon += item.school_type.toLowerCase();
-      }
       return icon;
     },
     define_color(item, colors, item_depth) {
       const depth = item_depth !== undefined ? item_depth : this.depth;
+      // universities
+      if (item.school_type) {
+        return colors[item.school_type];
+      }
       // highest level needs own id
-      if (depth === 0) {
+      else if (depth === 0) {
         return colors[item.id];
       }
       // other levels need highest level id
       else if (this.db.group_opts[0]) {
         return colors[item[this.db.group_opts[0]].id];
-      }
-      // universities
-      else if (item.school_type) {
-        return colors[item.school_type];
       }
     },
     // Purpose: formats item to be rendered
@@ -426,10 +507,14 @@ export default {
     // Purpose: updates visible items
     update_visible_items() {
       const max = this.max_visible_items;
-      this.visible_items = this.items[this.depth].slice(0, max);
+      let depth = this.depth != -1 ? this.depth : 0;
+
+      this.visible_items = this.items[depth].slice(0, max);
     },
     sort_list_by_property(order) {
-      this.items[this.depth].sort(this.get_compare_function(order));
+      let depth = this.depth != -1 ? this.depth : 0;
+
+      this.items[depth].sort(this.get_compare_function(order));
 
       this.order = order;
     },
@@ -467,8 +552,10 @@ export default {
       this.update_visible_items();
     },
     filter_list() {
+      let depth = this.depth != -1 ? this.depth : 0;
+
       if (this.filter_group.group) {
-        this.visible_items = this.items[this.depth]
+        this.visible_items = this.items[depth]
           .filter(item =>
             new RegExp(this.search.toLowerCase())
               .test(this.t_(item, "name").toLowerCase()) ||
@@ -479,7 +566,7 @@ export default {
           .sort(this.get_compare_function(this.order))
           .slice(0, this.max_visible_items);
       } else {
-        this.visible_items = this.items[this.depth]
+        this.visible_items = this.items[depth]
           .filter(item =>
             new RegExp(this.search.toLowerCase())
               .test(this.t_(item, "name").toLowerCase())
