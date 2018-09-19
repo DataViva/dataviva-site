@@ -1,11 +1,12 @@
 /* eslint quote-props:
   ["error", "as-needed", { "keywords": true, "unnecessary": false }] */
-const dv = dataviva;
 
 export const env = {
-  api_url: dv.api_url || "http://api.dataviva.info/",
-  s3_host: dv.s3_host || "https://dataviva-site-production.s3.amazonaws.com",
-  lang: dv.language || "pt",
+  api_url: process.env.API_URL ?
+    process.env.API_URL : "http://api.dataviva.info/",
+  s3_host: process.env.S3_HOST ?
+    process.env.S3_HOST : "https://dataviva-site-production.s3.amazonaws.com",
+  lang: "pt",
 };
 
 export const databases = {
