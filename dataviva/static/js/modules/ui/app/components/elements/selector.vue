@@ -98,11 +98,17 @@
 <script>
 import axios from "axios";
 
+const configs = require("../../lib/configs.js");
+
+// confs: configs.env,
+// databases: configs.databases,
+
 export default {
   name: "Selector",
-  props: ["db", "confs"],
+  props: ["db_name"],
   data() {
     return {
+      db: [],
       max_depth: 0, // max aggregation level
       depth: 0, // current aggregation
       group: "", // current aggregation name
@@ -124,10 +130,12 @@ export default {
     };
   },
   created() {
-    let length =  0;
+    if (this.db_name) {
+      this.db = configs.databases[this.db_name];
+      this.confs = configs.env;
+      let length =  0;
 
-    if (this.db) {
-
+      // Test if have agregations levels
       if (this.db.group_opts) {
         length = this.db.group_opts.length - 1;    
         // Sets group level to minimum
@@ -141,12 +149,14 @@ export default {
       this.max_depth = length;
       // Sets current depth level to minimum
       this.depth = length;
-    }
 
-    this.readMountedDataFromLocalStorage();
+      this.readMountedDataFromLocalStorage();
 
-    if (!this.items) {
-      this.get_numeric_data();
+      if (!this.items) {
+        this.get_numeric_data();
+      }
+    } else {
+      this.close();
     }
   },
   methods: {

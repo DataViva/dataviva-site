@@ -10,8 +10,7 @@
 
     <selector
       v-if="showModal"
-      :db="database"
-      :confs="confs"
+      :db_name="database"
       :filter="filter"
       @close="closeModal()"/>
   </span>
@@ -42,11 +41,10 @@ export default {
     return {
       showModal: true,
       confs: configs.env,
-      databases: configs.databases,
     };
   },
   created() {
-    this.database = this.databases[this.db];
+    this.database = this.db;
   },
   methods: {
     closeModal() {
