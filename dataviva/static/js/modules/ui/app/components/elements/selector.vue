@@ -84,7 +84,7 @@
               @select-filter="function (fil) { select_group(item, fil) }"/>
           </div> <!-- Item list ends -->
           <div
-            v-if="!loading"
+            v-if="!loading && db.source"
             class="mt4 tc f5 capitalize">
             <p>{{ $t("message.source") }}: {{ db.source.database }}
               {{ db.source.year }}</p>
@@ -150,8 +150,10 @@ export default {
 
       this.readMountedDataFromLocalStorage();
 
-      if (!this.items) {
+      if (!this.items && this.db.extra_info.endpoint) {
         this.get_numeric_data();
+      } else if (!this.items) {
+        this.get_data();
       }
     } else {
       this.close();

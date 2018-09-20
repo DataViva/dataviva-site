@@ -40,7 +40,6 @@ export const databases = {
     order_labels: ["message.name", "message.population"],
     extra_info: {
       label: "Population",
-      endpoint: "",
     },
     endpoint: "municipality",
     img_path: {
