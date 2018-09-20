@@ -124,7 +124,7 @@ export default {
       filter_item: null,
       filter_item_depth: 0,
       numeric_data: null,
-      maxJsonSize: 200000,
+      maxJsonSize: 500000,
     };
   },
   created() {
