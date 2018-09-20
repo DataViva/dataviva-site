@@ -97,11 +97,9 @@
 
 <script>
 import axios from "axios";
+const LZUTF8 = require('lzutf8');
 
 const configs = require("../../lib/configs.js");
-
-// confs: configs.env,
-// databases: configs.databases,
 
 export default {
   name: "Selector",
@@ -189,11 +187,15 @@ export default {
       try {
         let data = "";
         let part = "";
+        let comp = "";
 
-        for (let i = 0; part != null; i++) {
-          part = localStorage.getItem(`${keyName}_${i}`);
+        for (let i = 0; comp != null; i++) {
+          comp = localStorage.getItem(`${keyName}_${i}`);
+          
+          if (comp) {
+            comp = new Uint8Array(JSON.parse("[" + comp + "]"));
+            part = LZUTF8.decompress(comp);
 
-          if (part) {
             data += part;
           }
         }
@@ -210,13 +212,15 @@ export default {
     },
     saveDataToLocalStorage(key, data) {
       if (this.checkLocalStorageSupport()) {
-        let parsedJson = JSON.stringify(data)
+        let parsedJson = JSON.stringify(data);
         let nParts = this.splitString(parsedJson, this.maxJsonSize);
         let keyName = "";
+        let comp = "";
 
         for (let i = 0; i < nParts.length; i++) {
           keyName = `modal_data_${key}_${i}`;
-          localStorage.setItem(keyName, nParts[i]);
+          comp = LZUTF8.compress(nParts[i]);
+          localStorage.setItem(keyName, comp);
         }
       }
     },
@@ -269,7 +273,8 @@ export default {
     async get_numeric_data() {
       const ep = `${this.confs.api_url}${this.db.extra_info.endpoint}`;
       axios.get(ep)
-        .then(response => (this.read_numeric_data(response.data)));
+        .then(response => (this.read_numeric_data(response.data)))
+        .catch(response => this.get_data());
     },
     // Purpose: splits data from different levels when data
     // comes from the same endpoint with diverse depths
@@ -355,7 +360,9 @@ export default {
           this.remove_incomplete(this.items[depth], this.db.group_opts);
       }
 
-      this.set_data_to_metadata();
+      if(this.numeric_data) {
+        this.set_data_to_metadata();
+      }
       this.read_depths();
       this.sort_list_by_property(this.order);
       this.update_visible_items();
