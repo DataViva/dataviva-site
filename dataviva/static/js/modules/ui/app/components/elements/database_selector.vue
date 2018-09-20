@@ -45,7 +45,11 @@ export default {
       show: false,
       databases: configs.databases,
       database: "",
+      lang: configs.get_lang(),
     };
+  },
+  created() {
+    this.setLang();
   },
   methods: {
     selectDataBase(database) {
@@ -55,6 +59,9 @@ export default {
     closeModal() {
       this.show = false;
     },
+    setLang() {
+      this._i18n.locale = this.lang;
+    }
   },
 };
 </script>
