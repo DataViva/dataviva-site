@@ -492,6 +492,32 @@ export default {
         return colors[item[this.db.group_opts[0]].id];
       }
     },
+    get_url(item) {
+      switch (this.db.code) {
+        case "location":
+          switch (this.depth) {
+            case 1:
+              return `/${this.db.code}/${item.id}`;
+          }
+        case "industry":
+          switch (this.depth) {
+            case 1:
+            case 2:
+              return `/${this.db.code}/${item.industry_section.id}${item.id}`;
+          }
+        case "product":
+          switch (this.depth) {
+            case 1:
+              return `/${this.db.code}/${item.product_section.id}${item.id}`;
+          }
+        case "trade_partner":
+          switch (this.depth) {
+            case 1:
+              return `/${this.db.code}/${item.abbrv}`;
+          }
+      }
+      return `/${this.db.code}/${item.id}`;
+    },
     // Purpose: formats item to be rendered
     // Input: the original item and the current index in list of items
     // Output: mounted item with all data
@@ -499,7 +525,7 @@ export default {
       const mountedItem = {
         id: item.id,
         name: this.t_(item, "name"),
-        url: `/${this.db.code}/${item.id}`,
+        url: this.get_url(item),
         id_description: this.db.id_description,
         extra_info: this.db.extra_info.label,
         extra_info_content: item.extra_info_content,
