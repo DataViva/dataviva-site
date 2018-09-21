@@ -36,7 +36,7 @@ export const databases = {
       "microregion",
       "municipality",
     ],
-    order_opts: ["name", "extra_info"],
+    order_opts: ["name"],
     order_labels: ["message.name", "message.population"],
     extra_info: {
       label: "Population",
