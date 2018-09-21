@@ -5,7 +5,7 @@
       v-for="database in databases"
       :key="database.name"
       :data-content=$t(database.tooltip_text)
-      class="no-underline burgundy bg-transparent hover-bg-burgundy mh2 h4
+      class="no-underline burgundy t-bg-transparent hover-bg-burgundy mh2 h4
              w5 mh2 mb4 pt1"
       data-toggle="popover"
       data-placement="top"

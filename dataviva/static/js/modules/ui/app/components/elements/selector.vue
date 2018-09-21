@@ -2,15 +2,15 @@
   <div
     v-if="db"
     class="fixed z-9999 top-0 left-0 bottom-0 right-0 w-100 h-100
-           dt bg-black-50"
+           dt t-bg-black-50"
     @click="close()">
     <div class="dtc v-mid">
       <div
-        class="br3 pb1 bg-white relative mh3 mh5-ns vh-75-ns vh-100
+        class="br3 pb1 t-bg-white relative mh3 mh5-ns vh-75-ns vh-100
                overflow-hidden"
         @click.stop>
         <!-- Header -->
-        <div class="bg-green br--top br2 flex flex-row flex-nowrap">
+        <div class="t-bg-green br--top br2 flex flex-row flex-nowrap">
           <h4
             id="modal-header-title"
             class="f2 ma0 pa4 white capitalize">{{ $t(db.name) }}</h4>
@@ -526,7 +526,7 @@ export default {
 
       // alternating column colours
       if (index % 2 === 0) {
-        mountedItem.bg_light_grey = "bg-near-white";
+        mountedItem.bg_light_grey = "t-bg-near-white";
       }
       return mountedItem;
     },
@@ -613,7 +613,7 @@ export default {
     },
     btn_format(order, option, index, order_opts) {
       const clickable = "pointer grow";
-      let classes = order === option ? "bg-moon-gray" : clickable;
+      let classes = order === option ? "t-bg-moon-gray" : clickable;
       classes += index === order_opts.length - 1 ? " br--right" : " br--left";
       classes += index !== 0 ? " br--right" : "";
       return classes;

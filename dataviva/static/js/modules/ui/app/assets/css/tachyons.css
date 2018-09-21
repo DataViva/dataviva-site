@@ -270,11 +270,11 @@ img { max-width: 100%; }
       -l  = large
 
  */
-.bg-center { background-repeat: no-repeat; background-position: center center; }
-.bg-top { background-repeat: no-repeat; background-position: top center; }
-.bg-right { background-repeat: no-repeat; background-position: center right; }
-.bg-bottom { background-repeat: no-repeat; background-position: bottom center; }
-.bg-left { background-repeat: no-repeat; background-position: center left; }
+.t-bg-center { background-repeat: no-repeat; background-position: center center; }
+.t-bg-top { background-repeat: no-repeat; background-position: top center; }
+.t-bg-right { background-repeat: no-repeat; background-position: center right; }
+.t-bg-bottom { background-repeat: no-repeat; background-position: bottom center; }
+.t-bg-left { background-repeat: no-repeat; background-position: center left; }
 /*
 
    OUTLINES
@@ -1126,64 +1126,64 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .washed-yellow { color: #fffceb; }
 .washed-red { color: #ffdfdf; }
 .color-inherit { color: inherit; }
-.bg-black-90 { background-color: rgba( 0, 0, 0, .9 ); }
-.bg-black-80 { background-color: rgba( 0, 0, 0, .8 ); }
-.bg-black-70 { background-color: rgba( 0, 0, 0, .7 ); }
-.bg-black-60 { background-color: rgba( 0, 0, 0, .6 ); }
-.bg-black-50 { background-color: rgba( 0, 0, 0, .5 ); }
-.bg-black-40 { background-color: rgba( 0, 0, 0, .4 ); }
-.bg-black-30 { background-color: rgba( 0, 0, 0, .3 ); }
-.bg-black-20 { background-color: rgba( 0, 0, 0, .2 ); }
-.bg-black-10 { background-color: rgba( 0, 0, 0, .1 ); }
-.bg-black-05 { background-color: rgba( 0, 0, 0, .05 ); }
-.bg-white-90 { background-color: rgba( 255, 255, 255, .9 ); }
-.bg-white-80 { background-color: rgba( 255, 255, 255, .8 ); }
-.bg-white-70 { background-color: rgba( 255, 255, 255, .7 ); }
-.bg-white-60 { background-color: rgba( 255, 255, 255, .6 ); }
-.bg-white-50 { background-color: rgba( 255, 255, 255, .5 ); }
-.bg-white-40 { background-color: rgba( 255, 255, 255, .4 ); }
-.bg-white-30 { background-color: rgba( 255, 255, 255, .3 ); }
-.bg-white-20 { background-color: rgba( 255, 255, 255, .2 ); }
-.bg-white-10 { background-color: rgba( 255, 255, 255, .1 ); }
+.t-bg-black-90 { background-color: rgba( 0, 0, 0, .9 ); }
+.t-bg-black-80 { background-color: rgba( 0, 0, 0, .8 ); }
+.t-bg-black-70 { background-color: rgba( 0, 0, 0, .7 ); }
+.t-bg-black-60 { background-color: rgba( 0, 0, 0, .6 ); }
+.t-bg-black-50 { background-color: rgba( 0, 0, 0, .5 ); }
+.t-bg-black-40 { background-color: rgba( 0, 0, 0, .4 ); }
+.t-bg-black-30 { background-color: rgba( 0, 0, 0, .3 ); }
+.t-bg-black-20 { background-color: rgba( 0, 0, 0, .2 ); }
+.t-bg-black-10 { background-color: rgba( 0, 0, 0, .1 ); }
+.t-bg-black-05 { background-color: rgba( 0, 0, 0, .05 ); }
+.t-bg-white-90 { background-color: rgba( 255, 255, 255, .9 ); }
+.t-bg-white-80 { background-color: rgba( 255, 255, 255, .8 ); }
+.t-bg-white-70 { background-color: rgba( 255, 255, 255, .7 ); }
+.t-bg-white-60 { background-color: rgba( 255, 255, 255, .6 ); }
+.t-bg-white-50 { background-color: rgba( 255, 255, 255, .5 ); }
+.t-bg-white-40 { background-color: rgba( 255, 255, 255, .4 ); }
+.t-bg-white-30 { background-color: rgba( 255, 255, 255, .3 ); }
+.t-bg-white-20 { background-color: rgba( 255, 255, 255, .2 ); }
+.t-bg-white-10 { background-color: rgba( 255, 255, 255, .1 ); }
 /* Background colors */
-.bg-black { background-color: #000; }
-.bg-near-black { background-color: #111; }
-.bg-dark-gray { background-color: #333; }
-.bg-mid-gray { background-color: #555; }
-.bg-gray { background-color: #777; }
-.bg-silver { background-color: #999; }
-.bg-light-silver { background-color: #aaa; }
-.bg-moon-gray { background-color: #ccc; }
-.bg-light-gray { background-color: #eee; }
-.bg-near-white { background-color: #f4f4f4; }
-.bg-white { background-color: #fff; }
-.bg-transparent { background-color: transparent; }
-.bg-dark-red { background-color: #e7040f; }
-.bg-red { background-color: #ff4136; }
-.bg-light-red { background-color: #ff725c; }
-.bg-orange { background-color: #ff6300; }
-.bg-gold { background-color: #ffb700; }
-.bg-yellow { background-color: #ffd700; }
-.bg-light-yellow { background-color: #fbf1a9; }
-.bg-purple { background-color: #5e2ca5; }
-.bg-light-purple { background-color: #a463f2; }
-.bg-dark-pink { background-color: #d5008f; }
-.bg-hot-pink { background-color: #ff41b4; }
-.bg-pink { background-color: #ff80cc; }
-.bg-light-pink { background-color: #ffa3d7; }
-.bg-dark-green { background-color: #7bccd0; }
-.bg-green { background-color: #9EDDBF; }
-.bg-light-green { background-color: #9eebcf; }
-.bg-navy { background-color: #001b44; }
-.bg-dark-blue { background-color: #00449e; }
-.bg-blue { background-color: #357edd; }
-.bg-light-blue { background-color: #96ccff; }
-.bg-lightest-blue { background-color: #cdecff; }
-.bg-washed-blue { background-color: #f6fffe; }
-.bg-washed-green { background-color: #e8fdf5; }
-.bg-washed-yellow { background-color: #fffceb; }
-.bg-washed-red { background-color: #ffdfdf; }
-.bg-inherit { background-color: inherit; }
+.t-bg-black { background-color: #000; }
+.t-bg-near-black { background-color: #111; }
+.t-bg-dark-gray { background-color: #333; }
+.t-bg-mid-gray { background-color: #555; }
+.t-bg-gray { background-color: #777; }
+.t-bg-silver { background-color: #999; }
+.t-bg-light-silver { background-color: #aaa; }
+.t-bg-moon-gray { background-color: #ccc; }
+.t-bg-light-gray { background-color: #eee; }
+.t-bg-near-white { background-color: #f4f4f4; }
+.t-bg-white { background-color: #fff; }
+.t-bg-transparent { background-color: transparent; }
+.t-bg-dark-red { background-color: #e7040f; }
+.t-bg-red { background-color: #ff4136; }
+.t-bg-light-red { background-color: #ff725c; }
+.t-bg-orange { background-color: #ff6300; }
+.t-bg-gold { background-color: #ffb700; }
+.t-bg-yellow { background-color: #ffd700; }
+.t-bg-light-yellow { background-color: #fbf1a9; }
+.t-bg-purple { background-color: #5e2ca5; }
+.t-bg-light-purple { background-color: #a463f2; }
+.t-bg-dark-pink { background-color: #d5008f; }
+.t-bg-hot-pink { background-color: #ff41b4; }
+.t-bg-pink { background-color: #ff80cc; }
+.t-bg-light-pink { background-color: #ffa3d7; }
+.t-bg-dark-green { background-color: #7bccd0; }
+.t-bg-green { background-color: #9EDDBF; }
+.t-bg-light-green { background-color: #9eebcf; }
+.t-bg-navy { background-color: #001b44; }
+.t-bg-dark-blue { background-color: #00449e; }
+.t-bg-blue { background-color: #357edd; }
+.t-bg-light-blue { background-color: #96ccff; }
+.t-bg-lightest-blue { background-color: #cdecff; }
+.t-bg-washed-blue { background-color: #f6fffe; }
+.t-bg-washed-green { background-color: #e8fdf5; }
+.t-bg-washed-yellow { background-color: #fffceb; }
+.t-bg-washed-red { background-color: #ffdfdf; }
+.t-bg-inherit { background-color: inherit; }
 /* 
   
    SKINS:PSEUDO
@@ -1882,7 +1882,7 @@ code, .code { font-family: Consolas, monaco, monospace; }
 .shadow-hover:hover::after, .shadow-hover:focus::after { opacity: 1; }
 /* Combine with classes in skins and skins-pseudo for 
  * many different transition possibilities. */
-.bg-animate, .bg-animate:hover, .bg-animate:focus { transition: background-color .15s ease-in-out; }
+.t-bg-animate, .t-bg-animate:hover, .t-bg-animate:focus { transition: background-color .15s ease-in-out; }
 /*
 
   Z-INDEX
@@ -2045,11 +2045,11 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .aspect-ratio--object-ns { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
  .cover-ns { background-size: cover !important; }
  .contain-ns { background-size: contain !important; }
- .bg-center-ns { background-repeat: no-repeat; background-position: center center; }
- .bg-top-ns { background-repeat: no-repeat; background-position: top center; }
- .bg-right-ns { background-repeat: no-repeat; background-position: center right; }
- .bg-bottom-ns { background-repeat: no-repeat; background-position: bottom center; }
- .bg-left-ns { background-repeat: no-repeat; background-position: center left; }
+ .t-bg-center-ns { background-repeat: no-repeat; background-position: center center; }
+ .t-bg-top-ns { background-repeat: no-repeat; background-position: top center; }
+ .t-bg-right-ns { background-repeat: no-repeat; background-position: center right; }
+ .t-bg-bottom-ns { background-repeat: no-repeat; background-position: bottom center; }
+ .t-bg-left-ns { background-repeat: no-repeat; background-position: center left; }
  .outline-ns { outline: 1px solid; }
  .outline-transparent-ns { outline: 1px solid transparent; }
  .outline-0-ns { outline: 0; }
@@ -2468,11 +2468,11 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .aspect-ratio--object-m { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
  .cover-m { background-size: cover !important; }
  .contain-m { background-size: contain !important; }
- .bg-center-m { background-repeat: no-repeat; background-position: center center; }
- .bg-top-m { background-repeat: no-repeat; background-position: top center; }
- .bg-right-m { background-repeat: no-repeat; background-position: center right; }
- .bg-bottom-m { background-repeat: no-repeat; background-position: bottom center; }
- .bg-left-m { background-repeat: no-repeat; background-position: center left; }
+ .t-bg-center-m { background-repeat: no-repeat; background-position: center center; }
+ .t-bg-top-m { background-repeat: no-repeat; background-position: top center; }
+ .t-bg-right-m { background-repeat: no-repeat; background-position: center right; }
+ .t-bg-bottom-m { background-repeat: no-repeat; background-position: bottom center; }
+ .t-bg-left-m { background-repeat: no-repeat; background-position: center left; }
  .outline-m { outline: 1px solid; }
  .outline-transparent-m { outline: 1px solid transparent; }
  .outline-0-m { outline: 0; }
@@ -2891,11 +2891,11 @@ code, .code { font-family: Consolas, monaco, monospace; }
  .aspect-ratio--object-l { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; z-index: 100; }
  .cover-l { background-size: cover !important; }
  .contain-l { background-size: contain !important; }
- .bg-center-l { background-repeat: no-repeat; background-position: center center; }
- .bg-top-l { background-repeat: no-repeat; background-position: top center; }
- .bg-right-l { background-repeat: no-repeat; background-position: center right; }
- .bg-bottom-l { background-repeat: no-repeat; background-position: bottom center; }
- .bg-left-l { background-repeat: no-repeat; background-position: center left; }
+ .t-bg-center-l { background-repeat: no-repeat; background-position: center center; }
+ .t-bg-top-l { background-repeat: no-repeat; background-position: top center; }
+ .t-bg-right-l { background-repeat: no-repeat; background-position: center right; }
+ .t-bg-bottom-l { background-repeat: no-repeat; background-position: bottom center; }
+ .t-bg-left-l { background-repeat: no-repeat; background-position: center left; }
  .outline-l { outline: 1px solid; }
  .outline-transparent-l { outline: 1px solid transparent; }
  .outline-0-l { outline: 0; }
