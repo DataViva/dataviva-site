@@ -107,6 +107,7 @@ export default {
   data() {
     return {
       db: [],
+      confs: [],
       max_depth: 0, // max aggregation level
       depth: 0, // current aggregation
       group: "", // current aggregation name
@@ -125,9 +126,12 @@ export default {
       filter_item_depth: 0,
       numeric_data: null,
       maxJsonSize: 500000,
+      lang: configs.get_lang(),
     };
   },
   created() {
+    this.setLang();
+
     if (this.db_name) {
       this.db = configs.databases[this.db_name];
       this.confs = configs.env;
@@ -160,6 +164,9 @@ export default {
     }
   },
   methods: {
+    setLang() {
+      this._i18n.locale = this.lang;
+    },
     splitString(string, size) {
       var re = new RegExp('.{1,' + size + '}', 'g');
       return string.match(re);
@@ -230,7 +237,7 @@ export default {
     // Input: item and property name
     // Output: property value
     t_(item, prop) {
-      return item[`${prop}_${this.confs.lang}`];
+      return item[`${prop}_${this.lang}`];
     },
     // Purpose: finds larger item by lexical order
     compareName(a, b) {
@@ -491,7 +498,7 @@ export default {
     mount_item(item, index, depth) {
       const mountedItem = {
         id: item.id,
-        name: item.name_pt,
+        name: this.t_(item, "name"),
         url: `/${this.db.code}/${item.id}`,
         id_description: this.db.id_description,
         extra_info: this.db.extra_info.label,
