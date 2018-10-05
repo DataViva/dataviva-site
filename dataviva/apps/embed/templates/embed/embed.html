@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="Description" content="{% block description %}{% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %} {% trans %}through more than 100 million interactive visualizations.{% endtrans %}{% endblock %}">
+    <meta name="Description" content="{% block description %}{% trans %}DataViva is opening up data for the entire formal sector of the Brazilian economy{% endtrans %} {% trans %}through more than 1 billion interactive visualizations.{% endtrans %}{% endblock %}">
 
     <!-- Facebook Properties -->
     <meta property="og:image" content="http://www.dataviva.info/static/img/facebook.jpg" />
@@ -3020,7 +3020,7 @@
                       // Facebook link
                       var description = "{{ _('DataViva is opening up data for the entire formal sector of the Brazilian economy') }}"
                       description += " "
-                      description += "{{ _('through more than 100 million interactive visualizations.') }}"
+                      description += "{{ _('through more than 1 billion interactive visualizations.') }}"
                       d3.select(pid).append("a")
                         .attr("href", "http://www.facebook.com/dialog/feed?display=popup&app_id={{facebook_id}}&description="+description+"&name="+app.viz.title()+"&link="+share_url+"&picture="+url_image+"&redirect_uri="+window.location.origin+"/close/")
                         .attr("class", "share_button")
