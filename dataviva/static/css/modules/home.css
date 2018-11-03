@@ -179,3 +179,7 @@ img {
   max-height: 15px;
 }
 /* NEWS END */
+
+.m-auto {
+  margin: auto;
+}
