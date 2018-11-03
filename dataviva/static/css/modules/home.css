@@ -1,3 +1,6 @@
+img {
+  max-width: 100%;
+}
 .home section {
   padding: 4.5rem 0;
 }
@@ -176,3 +179,7 @@
   max-height: 15px;
 }
 /* NEWS END */
+
+.m-auto {
+  margin: auto;
+}
