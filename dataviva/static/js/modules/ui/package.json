@@ -17,6 +17,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
+    "lzutf8": "^0.5.5",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0",
     "vue-i18n": "^8.0.0"

@@ -125,7 +125,7 @@ export default {
       filter_item: null,
       filter_item_depth: 0,
       numeric_data: null,
-      maxJsonSize: 500000,
+      maxJsonSize: 300000,
       lang: configs.get_lang(),
     };
   },
@@ -353,7 +353,7 @@ export default {
 
       this.items[depth] = Object.values(data);
 
-      if (["occupation", "product", "trade_partner", "hedu_course",
+      if (["occupation", "product", "trade_partner", "major",
         "basic_course"].includes(this.db.code)) {
              this.items[depth] = this.items[depth].filter(item =>
                !this.db.hidden_ids.includes(String(item[this.db.group_opts[0]]
@@ -469,7 +469,12 @@ export default {
       }
       // highest level needs own id
       else if (depth === 0) {
-        icon += item.id;
+        // locations needs the old code (different from IBGE)
+        if (this.db.code === "location") {
+          icon += item.old_id;
+        } else {
+          icon += item.id;
+        }
       }
       // other levels need highest level id
       else if (this.db.group_opts[0]) {
@@ -495,10 +500,7 @@ export default {
     get_url(item) {
       switch (this.db.code) {
         case "location":
-          switch (this.depth) {
-            case 1:
-              return `/${this.db.code}/${item.id}`;
-          }
+          return `/${this.db.code}/${item.old_id}`;
         case "industry":
           switch (this.depth) {
             case 1:
@@ -512,8 +514,17 @@ export default {
           }
         case "trade_partner":
           switch (this.depth) {
+            case 0:
+              return `/${this.db.code}/${item.id}`;
             case 1:
               return `/${this.db.code}/${item.abbrv}`;
+          }
+        case "major":
+          switch (this.depth) {
+            case 0:
+            case 1:
+              return `/${this.db.code}/${item.id}`;
+              break;
           }
       }
       return `/${this.db.code}/${item.id}`;

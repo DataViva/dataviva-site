@@ -2,11 +2,10 @@
   ["error", "as-needed", { "keywords": true, "unnecessary": false }] */
 
 export function get_lang() {
-  if (window.location.pathname.indexOf("pt") != -1) {
+  if (window.location.pathname.indexOf("pt") !== -1) {
     return "pt";
-  } else {
-    return "en";
   }
+  return "en";
 }
 
 export const env = {
@@ -264,9 +263,9 @@ export const databases = {
       year: "2016",
     },
   },
-  hedu_course: {
+  major: {
     name: "message.higher_education",
-    code: "hedu_course",
+    code: "major",
     id_description: "message.id",
     group_opts: ["hedu_course_field", "major"],
     group_labels: ["message.field", "message.major"],
