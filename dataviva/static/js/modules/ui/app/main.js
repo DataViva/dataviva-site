@@ -1,46 +1,44 @@
 import Vue from "vue";
-import i18n from "/lib/i18n";
+import i18n from "./lib/i18n";
 import * as Components from "./components/**/*.vue";
-import "./assets/css/*.css"
+import "./assets/css/*.css";
 
 const selector = new Vue({ render: h => h("DataBaseSelector"), i18n });
-let selector_modifier = null;
+let selectorModifier = null;
 
-for(let i in Components) {
-  let item = Components[i];
-
+Object.values(Components).forEach((item) => {
   // Selector modifier componente need to be created dynamic
-  if (item.name == 'SelectorModifier'){
-    selector_modifier = Vue.extend(item);
-  }
-  else {
+  if (item.name === "SelectorModifier") {
+    selectorModifier = Vue.extend(item);
+  } else {
     Vue.component(item.name, item);
   }
-}
+});
 
-const selector_el = document.getElementById("database-selector");
-const modifiers_el = document.getElementsByTagName("optionChanger");
+const selectorEL = document.getElementById("database-selector");
+const modifiersEL = document.getElementsByTagName("optionChanger");
 
 // Render if the DOM element exist (only in front page)
-if (selector_el) {
+if (selectorEL) {
   selector.$mount("database-selector");
 }
 
 // Every tag name optionChanger create the component on click
-for (let index in modifiers_el) {
-  if(modifiers_el[index].dataset) {
-    modifiers_el[index].onclick = function($event) {
-      let modifier_el = $event.currentTarget;
-      let modifier_data = modifier_el.dataset;
+Object.values(modifiersEL).forEach((element) => {
+  if (element.dataset) {
+    const item = element;
+    item.onclick = ($event) => {
+      const modifierEL = $event.currentTarget;
+      const modifierData = modifierEL.dataset;
 
-      if (modifier_data) {
-        new selector_modifier({
+      if (modifierData) {
+        selectorModifier({
           i18n,
-          name: "selector_modifier",
-          el: modifier_el,
-          propsData: modifier_data
+          name: "selectorModifier",
+          el: modifierEL,
+          propsData: modifierData,
         });
       }
-    }
+    };
   }
-}
+});
