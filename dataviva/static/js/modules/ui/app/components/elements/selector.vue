@@ -143,29 +143,33 @@ export default {
       this.confs = configs.env;
       let length = 0;
 
-      // Test if have agregations levels
-      if (this.db.groupOpts) {
-        length = this.db.groupOpts.length - 1;
-        // Sets group level to minimum
-        this.group = this.db.groupOpts[length];
-
-        const { orderOpts } = this.db;
-        // Gets the second order option
-        this.order = orderOpts[1] ? orderOpts[1] : orderOpts[0];
+      if (this.db) {
+        // Test if have agregations levels
+        if (this.db.groupOpts) {
+          length = this.db.groupOpts.length - 1;
+          // Sets group level to minimum
+          this.group = this.db.groupOpts[length];
+  
+          const { orderOpts } = this.db;
+          // Gets the second order option
+          this.order = orderOpts[1] ? orderOpts[1] : orderOpts[0];
+        } else {
+          this.db.groupOpts = [];
+        }
+  
+        this.maxDepth = length;
+        // Sets current depth level to minimum
+        this.depth = length;
+  
+        // this.readMountedDataFromLocalStorage();
+  
+        if (!this.items && this.db.extraInfo.endpoint) {
+          this.getNumericData();
+        } else if (!this.items) {
+          this.getData();
+        }
       } else {
-        this.db.groupOpts = [];
-      }
-
-      this.maxDepth = length;
-      // Sets current depth level to minimum
-      this.depth = length;
-
-      // this.readMountedDataFromLocalStorage();
-
-      if (!this.items && this.db.extraInfo.endpoint) {
-        this.getNumericData();
-      } else if (!this.items) {
-        this.getData();
+        this.close();
       }
     } else {
       this.close();
@@ -354,7 +358,7 @@ export default {
       this.items = [];
       const { depth } = this;
       const dbs = [
-        "occupation", "product", "tradePartner", "major", "basicCourse",
+        "occupation", "product", "trade_partner", "major", "basic_course",
       ];
 
       for (let i = 0; i <= this.maxDepth; i += 1) {
@@ -447,7 +451,7 @@ export default {
               return "";
           }
 
-        case "tradePartner":
+        case "trade_partner":
           switch (depth) {
             case 0:
             case 1:
@@ -509,7 +513,7 @@ export default {
       return null;
     },
     getUrl(item, selectedDepth) {
-      const depth = selectedDepth ? selectedDepth : this.depth;
+      const depth = selectedDepth !== null ? selectedDepth : this.depth;
       /* eslint-disable */
       switch (this.db.code) {
         case "location":
@@ -533,7 +537,7 @@ export default {
                 return `/${this.db.code}/${item.product_section.id}${item.id}`;
               }
           }
-        case "tradePartner":
+        case "trade_partner":
           switch (depth) {
             case 0:
               return `/${this.db.code}/${item.id}`;
@@ -568,7 +572,7 @@ export default {
       };
 
       if (depth === 0 &&
-      (["location", "tradePartner"].includes(this.db.code))) {
+      (["location", "trade_partner"].includes(this.db.code))) {
         mountedItem.icon = this.defineIconImg(item, depth);
       } else if (this.db.imgPath && this.db.imgPath[this.group]) {
         mountedItem.img = this.imgPath(item, depth);
@@ -576,7 +580,7 @@ export default {
         mountedItem.icon = this.defineIconImg(item, depth);
       }
 
-      if (["product", "tradePartner"].includes(this.db.code)) {
+      if (["product", "trade_partner"].includes(this.db.code)) {
         mountedItem.prefix = "USD ";
       } else {
         mountedItem.prefix = "";
