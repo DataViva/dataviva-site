@@ -508,13 +508,14 @@ export default {
 
       return null;
     },
-    getUrl(item) {
+    getUrl(item, selectedDepth) {
+      const depth = selectedDepth ? selectedDepth : this.depth;
       /* eslint-disable */
       switch (this.db.code) {
         case "location":
           return `/${this.db.code}/${item.old_id}`;
         case "industry":
-          switch (this.depth) {
+          switch (depth) {
             case 1:
             case 2:
               if (item.industry_section) {
@@ -524,7 +525,7 @@ export default {
               break;
           }
         case "product":
-          switch (this.depth) {
+          switch (depth) {
             case 0:
               break;
             case 1:
@@ -533,14 +534,14 @@ export default {
               }
           }
         case "tradePartner":
-          switch (this.depth) {
+          switch (depth) {
             case 0:
               return `/${this.db.code}/${item.id}`;
             case 1:
               return `/${this.db.code}/${item.abbrv}`;
           }
         case "major":
-          switch (this.depth) {
+          switch (depth) {
             case 0:
             case 1:
               return `/${this.db.code}/${item.id}`;
@@ -682,6 +683,7 @@ export default {
       this.setDepth(group);
       this.filter_by_group(this.t_(item, "name"), parentGroup);
       this.group = group;
+      item.url = this.getUrl(item, this.filterItemDepth);
       this.filterItem = item;
       this.reset_scroll_bar();
     },
