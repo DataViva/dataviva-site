@@ -10,7 +10,7 @@
 
     <selector
       v-if="showModal"
-      :db_name="database"
+      :database="database"
       @close="closeModal()"/>
   </span>
 </template>
@@ -36,7 +36,7 @@ export default {
     return {
       showModal: true,
       confs: configs.env,
-      lang: configs.get_lang(),
+      lang: configs.getLang(),
     };
   },
   created() {
@@ -46,7 +46,7 @@ export default {
   mounted() {
     const modal = document.getElementById("dv-selector-modal");
     const body = document.getElementsByTagName("body")[0];
-    if(modal) {
+    if (modal) {
       body.appendChild(modal);
     }
   },
@@ -56,7 +56,7 @@ export default {
     },
     setLang() {
       this._i18n.locale = this.lang;
-    }
+    },
   },
 };
 </script>

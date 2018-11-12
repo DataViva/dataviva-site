@@ -24,21 +24,20 @@ if (selectorEL) {
 }
 
 // Every tag name optionChanger create the component on click
-Object.values(modifiersEL).forEach((element) => {
-  if (element.dataset) {
-    const item = element;
-    item.onclick = ($event) => {
-      const modifierEL = $event.currentTarget;
-      const modifierData = modifierEL.dataset;
+for (let index in Object.keys(modifiersEL)) {
+  if (modifiersEL[index].dataset) {
+    modifiersEL[index].onclick = function ($event) {
+      const modifiersEL = $event.currentTarget;
+      const modifierData = modifiersEL.dataset;
 
       if (modifierData) {
-        selectorModifier({
+        new selectorModifier({
           i18n,
           name: "selectorModifier",
-          el: modifierEL,
-          propsData: modifierData,
+          el: modifiersEL,
+          propsData: modifierData
         });
       }
-    };
+    }
   }
-});
+}
