@@ -161,7 +161,7 @@ export default {
         // Sets current depth level to minimum
         this.depth = length;
   
-        // this.readMountedDataFromLocalStorage();
+        this.readMountedDataFromLocalStorage();
   
         if (!this.items && this.db.extraInfo.endpoint) {
           this.getNumericData();
@@ -209,7 +209,7 @@ export default {
         let part = "";
         let comp = "";
 
-        for (let i = 0; comp != null; i + 1) {
+        for (let i = 0; comp != null;i++) {
           comp = localStorage.getItem(`${keyName}_${i}`);
 
           if (comp) {
@@ -222,20 +222,21 @@ export default {
 
         return JSON.parse(data);
       } catch (e) {
-        for (let i = 0; `${keyName}_${i}` in localStorage; i + 1) {
+        for (let i = 0; `${keyName}_${i}` in localStorage;i++) {
           localStorage.removeItem(`${keyName}_${i}`);
         }
         return "";
       }
     },
     saveDataToLocalStorage(key, data) {
+      debugger;
       if (this.checkLocalStorageSupport()) {
         const parsedJson = JSON.stringify(data);
         const nParts = this.splitString(parsedJson, this.maxJsonSize);
         let keyName = "";
         let comp = "";
 
-        for (let i = 0; i < nParts.length; i + 1) {
+        for (let i = 0; i < nParts.length; i++) {
           keyName = `modal_data_${key}_${i}`;
           comp = LZUTF8.compress(nParts[i]);
           localStorage.setItem(keyName, comp);
@@ -260,7 +261,7 @@ export default {
     // Purpose: checks if item id is present in list
     // Input: id and list
     checkExist(list, id) {
-      for (let i = 0; i < list.length; i += 1) {
+      for (let i = 0; i < list.length; i++) {
         if (list[i].id === id) {
           return true;
         }
@@ -268,7 +269,7 @@ export default {
       return false;
     },
     getPosition(list, id) {
-      for (let i = 0; i < list.length; i += 1) {
+      for (let i = 0; i < list.length; i++) {
         if (list[i].id === id) {
           return i;
         }
@@ -277,7 +278,7 @@ export default {
       return -1;
     },
     sumExtraInfo(list, id, value) {
-      for (let i = 0; i < list.length; i += 1) {
+      for (let i = 0; i < list.length; i++) {
         if (list[i].id === id) {
           return parseFloat(list[i].extra_info_content) + parseFloat(value);
         }
@@ -303,14 +304,14 @@ export default {
       let info = 0;
       let pos = 0;
 
-      for (let j = 0; j < this.maxDepth; j += 1) {
-        for (let i = 0; i < minorData.length; i += 1) {
+      for (let j = 0; j < this.maxDepth; j++) {
+        for (let i = 0; i < minorData.length; i++) {
           const item = minorData[i][this.db.groupOpts[j]];
           info = minorData[i].extra_info_content;
           info = Number.isNaN(info) || info === null ? 0 : info;
 
           // Adds information about higher levels
-          for (let h = 0; h < j; h += 1) {
+          for (let h = 0; h < j; h++) {
             const prop = minorData[i][this.db.groupOpts[h]];
 
             if (prop) {
@@ -339,7 +340,7 @@ export default {
     // Purpose: checks whether item has all group depths
     // Input: item and list of groups
     have_all_groups(item, group) {
-      for (let i = 0; i < group.length - 1; i += 1) {
+      for (let i = 0; i < group.length - 1; i++) {
         if (!item[group[i]]) {
           return false;
         }
@@ -361,7 +362,7 @@ export default {
         "occupation", "product", "trade_partner", "major", "basic_course",
       ];
 
-      for (let i = 0; i <= this.maxDepth; i += 1) {
+      for (let i = 0; i <= this.maxDepth; i++) {
         this.items[i] = [];
       }
 
@@ -389,11 +390,11 @@ export default {
       this.readDepths();
       this.sortListByProperty(this.order);
       this.updateVisibleItems();
-      // this.saveDataToLocalStorage(this.db.code, this.items);
+      this.saveDataToLocalStorage(this.db.code, this.items);
       this.loading = false;
     },
     getPropPosition(prop, header) {
-      for (let i = 0; i < header.length; i += 1) {
+      for (let i = 0; i < header.length; i++) {
         if (prop === header[i]) {
           return i;
         }
@@ -405,7 +406,7 @@ export default {
       let data = null;
       const { depth } = this;
 
-      for (let i = 0; i < this.items[depth].length; i += 1) {
+      for (let i = 0; i < this.items[depth].length; i++) {
         data = this.numericData.find(o => o.id === context.items[depth][i].id);
         this.items[depth][i].extra_info_content = data ? data.extraInfo : null;
       }
