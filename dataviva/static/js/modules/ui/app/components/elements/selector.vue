@@ -663,8 +663,7 @@ export default {
     filter_by_group(search, group) {
       this.visibleItems = this.items[this.depth]
         .filter(item =>
-          new RegExp(search.toLowerCase())
-            .test(item[group].name_pt.toLowerCase()))
+          search.toLowerCase() === item[group].name_pt.toLowerCase())
         .sort(this.getCompareFunction(this.order))
         .slice(0, this.maxVisibleItems);
     },
