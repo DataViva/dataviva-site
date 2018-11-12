@@ -71,8 +71,7 @@ export const databases = {
     orderLabels: ["message.name", "message.jobs"],
     extraInfo: {
       label: "message.jobs",
-      endpoint: `rais/occupation_family/?value=employee&year=2016
-        &order=occupation_family`,
+      endpoint: "rais/occupation_family/?value=employee&year=2016&order=occupation_family",
       id: "occupation_family",
       dataValue: "jobs",
     },
@@ -109,8 +108,7 @@ export const databases = {
     orderLabels: ["message.name", "message.jobs"],
     extraInfo: {
       label: "message.jobs",
-      endpoint: `rais/industry_class/?value=employee&year=2016&order=indu
-        stry_class`,
+      endpoint: "rais/industry_class/?value=employee&year=2016&order=industry_class",
       id: "industry_class",
       dataValue: "jobs",
     },
@@ -198,9 +196,9 @@ export const databases = {
       year: "2017",
     },
   },
-  tradePartner: {
+  trade_partner: {
     name: "message.trade_partners",
-    code: "tradePartner",
+    code: "trade_partner",
     idDescription: "message.id_wld",
     groupOpts: ["continent", "country"],
     groupLabels: ["message.continent", "message.country"],
@@ -316,9 +314,9 @@ export const databases = {
       year: "2016",
     },
   },
-  basicCourse: {
+  basic_course: {
     name: "message.basic_courses",
-    code: "basicCourse",
+    code: "basic_course",
     idDescription: "message.id",
     groupOpts: ["course_field", "course"],
     groupLabels: ["message.field", "message.course"],
