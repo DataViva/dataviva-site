@@ -256,10 +256,10 @@ export default {
     // Purpose: finds larger item by property
     // Input: object
     compareExtraInfo(a, b) {
-      if (a.extra_info_content < b.extra_info_content) {
+      if (a.extra_info_content > b.extra_info_content) {
         return -1;
       }
-      if (a.extra_info_content > b.extra_info_content) {
+      if (a.extra_info_content < b.extra_info_content) {
         return 1;
       }
       return 0;
