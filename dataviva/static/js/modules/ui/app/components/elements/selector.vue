@@ -256,7 +256,13 @@ export default {
     // Purpose: finds larger item by property
     // Input: object
     compareExtraInfo(a, b) {
-      return b.extra_info_content - a.extra_info_content;
+      if (a.extra_info_content < b.extra_info_content) {
+        return -1;
+      }
+      if (a.extra_info_content > b.extra_info_content) {
+        return 1;
+      }
+      return 0;
     },
     // Purpose: checks if item id is present in list
     // Input: id and list
