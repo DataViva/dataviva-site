@@ -35,7 +35,7 @@ export const databases = {
       "microregion",
       "municipality",
     ],
-    orderOpts: ["name"],
+    orderOpts: ["name", "extraInfo"],
     orderLabels: ["message.name", "message.population"],
     extraInfo: {
       label: "Population",
@@ -59,6 +59,10 @@ export const databases = {
       "3": "#cfc417",
       "4": "#c40008",
       "5": "#90b72e",
+    },
+    source: {
+      database: "IBGE",
+      year: "2017",
     },
   },
   occupation: {
