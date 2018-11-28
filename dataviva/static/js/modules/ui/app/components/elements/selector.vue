@@ -664,7 +664,7 @@ export default {
             new RegExp(this.search).test(item.id))
           .filter(item =>
             new RegExp(this.filterGroup.search.toLowerCase())
-              .test(item[this.filterGroup.group].name_pt.toLowerCase()))
+              .test((t_(item[this.filterGroup.group]), 'name').toLowerCase()))
           .sort(this.getCompareFunction(this.order))
           .slice(0, this.maxVisibleItems);
       } else {
@@ -682,7 +682,7 @@ export default {
     filter_by_group(search, group) {
       this.visibleItems = this.items[this.depth]
         .filter(item =>
-          search.toLowerCase() === item[group].name_pt.toLowerCase())
+          search.toLowerCase() === this.t_(item[group], 'name').toLowerCase())
         .sort(this.getCompareFunction(this.order))
         .slice(0, this.maxVisibleItems);
     },
