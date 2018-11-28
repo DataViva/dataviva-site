@@ -229,7 +229,6 @@ export default {
       }
     },
     saveDataToLocalStorage(key, data) {
-      debugger;
       if (this.checkLocalStorageSupport()) {
         const parsedJson = JSON.stringify(data);
         const nParts = this.splitString(parsedJson, this.maxJsonSize);
