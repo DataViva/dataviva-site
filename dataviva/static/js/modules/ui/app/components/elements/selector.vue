@@ -563,6 +563,13 @@ export default {
       /* eslint-enable */
       return `/${this.db.code}/${item.id}`;
     },
+    formatNumber(num) {
+      if(this.lang === 'pt' && num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      } else if(num) {
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+      }
+    },
     // Purpose: formats item to be rendered
     // Input: the original item and the current index in list of items
     // Output: mounted item with all data
@@ -573,7 +580,7 @@ export default {
         url: this.getUrl(item),
         id_description: this.db.idDescription,
         extra_info: this.db.extraInfo.label,
-        extra_info_content: item.extra_info_content,
+        extra_info_content: this.formatNumber(item.extra_info_content),
         filter_options: this.groupOpts(this.db.groupOpts),
         color: this.defineColor(item, this.db.colors, depth),
       };
