@@ -34,8 +34,7 @@
         <p
           class="medium-gray f5 capitalize dib mb0">
           {{ $t(item.extra_info) }}: {{ item.prefix }}
-          {{ item.extra_info_content.toString()
-          .replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
+          {{ item.extra_info_content }}
         </p>
       </template>
       <template
@@ -47,7 +46,7 @@
           :key="filter"
           href="#"
           class="burgundy no-underline underline-hover pointer f4"
-          @click="$emit('select-filter', filter)">{{ filter + '  ' }}
+          @click="$emit('select-filter', filter)">{{ $t(`message.${filter}`) + '  ' }}
         </span>
       </template>
     </div>
