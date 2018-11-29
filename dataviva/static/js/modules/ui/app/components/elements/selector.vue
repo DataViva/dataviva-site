@@ -236,9 +236,13 @@ export default {
         let comp = "";
 
         for (let i = 0; i < nParts.length; i++) {
+          try {
           keyName = `modal_data_${key}_${i}`;
           comp = LZUTF8.compress(nParts[i]);
           localStorage.setItem(keyName, comp);
+          } catch (error) {
+            console.log("Error: cannot save to localstorage.");
+          }
         }
       }
     },
