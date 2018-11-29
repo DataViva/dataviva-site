@@ -228,6 +228,17 @@ export default {
         return "";
       }
     },
+    removeDataFromLocalStorage(key, nParts) {
+      let keyName = "";
+
+      for (let i = 0; i < nParts; i++) {
+        try {
+          keyName = `modal_data_${key}_${i}`;
+          localStorage.setItem(keyName);
+        } catch (error) {
+        }
+      }
+    },
     saveDataToLocalStorage(key, data) {
       if (this.checkLocalStorageSupport()) {
         const parsedJson = JSON.stringify(data);
@@ -236,9 +247,15 @@ export default {
         let comp = "";
 
         for (let i = 0; i < nParts.length; i++) {
+          try {
           keyName = `modal_data_${key}_${i}`;
           comp = LZUTF8.compress(nParts[i]);
           localStorage.setItem(keyName, comp);
+          } catch (error) {
+            this.removeDataFromLocalStorage(key, i);
+            console.log("Error: cannot save to localstorage.");
+            return;
+          }
         }
       }
     },
