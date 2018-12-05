@@ -236,6 +236,7 @@ export default {
           keyName = `modal_data_${key}_${i}`;
           localStorage.setItem(keyName);
         } catch (error) {
+          return;
         }
       }
     },
@@ -536,7 +537,7 @@ export default {
       return null;
     },
     getUrl(item, selectedDepth) {
-      const depth = selectedDepth !== null ? selectedDepth : this.depth;
+      const depth = selectedDepth ? selectedDepth : this.depth;
       /* eslint-disable */
       switch (this.db.code) {
         case "location":
