@@ -548,7 +548,7 @@ export default {
       }
       /* eslint-enable */
     },
-    productPath(item, depth, search) {
+    productPath(item, search, depth) {
       /* eslint-disable */
       switch (depth) {
         case 1:
