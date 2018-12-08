@@ -134,11 +134,13 @@ export default {
       numericData: null,
       maxJsonSize: 300000,
       lang: configs.getLang(),
+      isInternal: false,
     };
   },
   created() {
     this.setLang();
     if (this.database) {
+      this.isInternal = this.isInternalPage();
       this.db = configs.databases[this.database];
       this.confs = configs.env;
       let length = 0;
@@ -571,13 +573,57 @@ export default {
     defaultPath(item, search) {
       return `/${this.db.code}/${item.id}${search}`;
     },
+    hasPath() {
+      const path = window.location.pathname || location.pathname;
+      return (path != "" && path != undefined);
+    },
+    getDBsCodes() {
+      return Object.keys(configs.databases);
+    },
+    isInternalPage() {
+      const path = window.location.pathname || location.pathname;
+      const dbs = this.getDBsCodes();
+
+      for(const db in dbs) {
+        if (path.indexOf(dbs[db]) !== -1) {
+          return true;
+        }
+      }
+
+      return false;
+    },
+    isLocation() {
+      const path = window.location.pathname || location.pathname;
+      return (path.indexOf("location") !== -1);
+    },
+    hasQueryString() {
+      const search = window.location.search || location.search;
+      return (search != "" && search != undefined);
+    },
+    getQueryString() {
+      const search = window.location.search || location.search;
+      return search;
+    },
+    pathWithlocationQuery(item) {
+      const path = window.location.pathname || location.pathname;
+      const search = `?bra_id=${item.old_id}`;
+      return `${path}${search}`;
+    },
     getUrl(item, selectedDepth) {
-      const search = "";
+      let search = "";
       const depth = selectedDepth ? selectedDepth : this.depth;
+
+      if(this.hasPath() && this.hasQueryString()) {
+        search = this.getQueryString();
+      }
 
       switch (this.db.code) {
         case "location":
-          return this.locationPath(item);
+          if (this.isInternal && !this.isLocation()) {
+            return this.pathWithlocationQuery(item);
+          } else {
+            return this.locationPath(item);
+          }
         case "industry":
           return this.industryPath(item, search, depth);
         case "product":
