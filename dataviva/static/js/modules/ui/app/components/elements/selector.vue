@@ -151,20 +151,20 @@ export default {
           length = this.db.groupOpts.length - 1;
           // Sets group level to minimum
           this.group = this.db.groupOpts[length];
-  
+
           const { orderOpts } = this.db;
           // Gets the second order option
           this.order = orderOpts[1] ? orderOpts[1] : orderOpts[0];
         } else {
           this.db.groupOpts = [];
         }
-  
+
         this.maxDepth = length;
         // Sets current depth level to minimum
         this.depth = length;
-  
+
         this.readMountedDataFromLocalStorage();
-  
+
         if (!this.items && this.db.extraInfo.endpoint) {
           this.getNumericData();
         } else if (!this.items) {
@@ -211,7 +211,7 @@ export default {
         let part = "";
         let comp = "";
 
-        for (let i = 0; comp != null;i++) {
+        for (let i = 0; comp != null; i += 1) {
           comp = localStorage.getItem(`${keyName}_${i}`);
 
           if (comp) {
@@ -224,7 +224,7 @@ export default {
 
         return JSON.parse(data);
       } catch (e) {
-        for (let i = 0; `${keyName}_${i}` in localStorage;i++) {
+        for (let i = 0; `${keyName}_${i}` in localStorage; i += 1) {
           localStorage.removeItem(`${keyName}_${i}`);
         }
         return "";
@@ -233,7 +233,7 @@ export default {
     removeDataFromLocalStorage(key, nParts) {
       let keyName = "";
 
-      for (let i = 0; i < nParts; i++) {
+      for (let i = 0; i < nParts; i += 1) {
         try {
           keyName = `modal_data_${key}_${i}`;
           localStorage.setItem(keyName);
@@ -249,11 +249,11 @@ export default {
         let keyName = "";
         let comp = "";
 
-        for (let i = 0; i < nParts.length; i++) {
+        for (let i = 0; i < nParts.length; i += 1) {
           try {
-          keyName = `modal_data_${key}_${i}`;
-          comp = LZUTF8.compress(nParts[i]);
-          localStorage.setItem(keyName, comp);
+            keyName = `modal_data_${key}_${i}`;
+            comp = LZUTF8.compress(nParts[i]);
+            localStorage.setItem(keyName, comp);
           } catch (error) {
             this.removeDataFromLocalStorage(key, i);
             console.log("Error: cannot save to localstorage.");
@@ -286,7 +286,7 @@ export default {
     // Purpose: checks if item id is present in list
     // Input: id and list
     checkExist(list, id) {
-      for (let i = 0; i < list.length; i++) {
+      for (let i = 0; i < list.length; i += 1) {
         if (list[i].id === id) {
           return true;
         }
@@ -294,7 +294,7 @@ export default {
       return false;
     },
     getPosition(list, id) {
-      for (let i = 0; i < list.length; i++) {
+      for (let i = 0; i < list.length; i += 1) {
         if (list[i].id === id) {
           return i;
         }
@@ -303,7 +303,7 @@ export default {
       return -1;
     },
     sumExtraInfo(list, id, value) {
-      for (let i = 0; i < list.length; i++) {
+      for (let i = 0; i < list.length; i += 1) {
         if (list[i].id === id) {
           return parseFloat(list[i].extra_info_content) + parseFloat(value);
         }
@@ -329,14 +329,14 @@ export default {
       let info = 0;
       let pos = 0;
 
-      for (let j = 0; j < this.maxDepth; j++) {
-        for (let i = 0; i < minorData.length; i++) {
+      for (let j = 0; j < this.maxDepth; j += 1) {
+        for (let i = 0; i < minorData.length; i += 1) {
           const item = minorData[i][this.db.groupOpts[j]];
           info = minorData[i].extra_info_content;
           info = Number.isNaN(info) || info === null ? 0 : info;
 
           // Adds information about higher levels
-          for (let h = 0; h < j; h++) {
+          for (let h = 0; h < j; h += 1) {
             const prop = minorData[i][this.db.groupOpts[h]];
 
             if (prop) {
@@ -365,7 +365,7 @@ export default {
     // Purpose: checks whether item has all group depths
     // Input: item and list of groups
     have_all_groups(item, group) {
-      for (let i = 0; i < group.length - 1; i++) {
+      for (let i = 0; i < group.length - 1; i += 1) {
         if (!item[group[i]]) {
           return false;
         }
@@ -387,7 +387,7 @@ export default {
         "occupation", "product", "trade_partner", "major", "basic_course",
       ];
 
-      for (let i = 0; i <= this.maxDepth; i++) {
+      for (let i = 0; i <= this.maxDepth; i += 1) {
         this.items[i] = [];
       }
 
@@ -419,7 +419,7 @@ export default {
       this.loading = false;
     },
     getPropPosition(prop, header) {
-      for (let i = 0; i < header.length; i++) {
+      for (let i = 0; i < header.length; i += 1) {
         if (prop === header[i]) {
           return i;
         }
@@ -431,7 +431,7 @@ export default {
       let data = null;
       const { depth } = this;
 
-      for (let i = 0; i < this.items[depth].length; i++) {
+      for (let i = 0; i < this.items[depth].length; i += 1) {
         data = this.numericData.find(o => o.id === context.items[depth][i].id);
         this.items[depth][i].extra_info_content = data ? data.extraInfo : null;
       }
@@ -443,7 +443,7 @@ export default {
       const info = {};
       const { id, dataValue } = this.db.extraInfo;
 
-      for (const item in data) {
+      for (const item in Object.keys(data)) {
         if (item) {
           if (data[item] !== null) {
             info.id = data[item][this.getPropPosition(id, header)];
@@ -514,9 +514,7 @@ export default {
         } else {
           icon += item.id;
         }
-      }
-      // other levels need highest level id
-      else if (this.db.groupOpts[0]) {
+      } else if (this.db.groupOpts[0]) { // other levels need highest level id
         icon += item[this.db.groupOpts[0]].id;
       }
       return icon;
@@ -526,13 +524,9 @@ export default {
       // universities
       if (item.school_type) {
         return colors[item.school_type];
-      }
-      // highest level needs own id
-      else if (depth === 0) {
+      } else if (depth === 0) { // highest level needs own id
         return colors[item.id];
-      }
-      // other levels need highest level id
-      else if (this.db.groupOpts[0]) {
+      } else if (this.db.groupOpts[0]) { // other levels need highest level id
         return colors[item[this.db.groupOpts[0]].id];
       }
 
@@ -542,6 +536,7 @@ export default {
       return `/${this.db.code}/${item.old_id}`;
     },
     industryPath(item, search, depth) {
+      /* eslint-disable */
       switch (depth) {
         case 1:
         case 2:
@@ -551,40 +546,46 @@ export default {
         default:
           return this.defaultPath(item, search);
       }
+      /* eslint-enable */
     },
-    productPath() {
+    productPath(item, depth, search) {
+      /* eslint-disable */
       switch (depth) {
         case 1:
           if (item.product_section) {
             return `/${this.db.code}/${item.product_section.id}${item.id}${search}`;
           }
+          break;
         default:
           return this.defaultPath(item, search);
       }
+      /* eslint-enable */
     },
     tradepartnerPath(item, search, depth) {
+      /* eslint-disable */
       switch (depth) {
         case 1:
           return `/${this.db.code}/${item.abbrv}${search}`;
         default:
           return this.defaultPath(item, search);
       }
+      /* eslint-enable */
     },
     defaultPath(item, search) {
       return `/${this.db.code}/${item.id}${search}`;
     },
     hasPath() {
-      const path = window.location.pathname || location.pathname;
-      return (path != "" && path != undefined);
+      const path = window.location.pathname;
+      return (path !== "" && path !== undefined);
     },
     getDBsCodes() {
       return Object.keys(configs.databases);
     },
     isInternalPage() {
-      const path = window.location.pathname || location.pathname;
+      const path = window.location.pathname;
       const dbs = this.getDBsCodes();
 
-      for(const db in dbs) {
+      for (const db in dbs) {
         if (path.indexOf(dbs[db]) !== -1) {
           return true;
         }
@@ -593,37 +594,37 @@ export default {
       return false;
     },
     isLocation() {
-      const path = window.location.pathname || location.pathname;
+      const path = window.location.pathname;
       return (path.indexOf("location") !== -1);
     },
     hasQueryString() {
-      const search = window.location.search || location.search;
-      return (search != "" && search != undefined);
+      const { search } = window.location;
+      return (search !== "" && search !== undefined);
     },
     getQueryString() {
-      const search = window.location.search || location.search;
+      const { search } = window.location;
       return search;
     },
     pathWithlocationQuery(item) {
-      const path = window.location.pathname || location.pathname;
+      const path = window.location.pathname;
       const search = `?bra_id=${item.old_id}`;
       return `${path}${search}`;
     },
     getUrl(item, selectedDepth) {
       let search = "";
-      const depth = selectedDepth ? selectedDepth : this.depth;
+      const depth = selectedDepth || this.depth;
 
-      if(this.hasPath() && this.hasQueryString()) {
+      if (this.hasPath() && this.hasQueryString()) {
         search = this.getQueryString();
       }
 
+      /* eslint-disable */
       switch (this.db.code) {
         case "location":
           if (this.isInternal && !this.isLocation()) {
             return this.pathWithlocationQuery(item);
-          } else {
-            return this.locationPath(item);
           }
+          return this.locationPath(item);
         case "industry":
           return this.industryPath(item, search, depth);
         case "product":
@@ -633,13 +634,15 @@ export default {
         default:
           return this.defaultPath(item, search);
       }
+      /* eslint-enable */
     },
     formatNumber(num) {
-      if(this.lang === 'pt' && num) {
+      if (this.lang === "pt" && num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-      } else if(num) {
+      } else if (num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
+      return "";
     },
     // Purpose: formats item to be rendered
     // Input: the original item and the current index in list of items
@@ -735,7 +738,7 @@ export default {
             new RegExp(this.search).test(item.id))
           .filter(item =>
             new RegExp(this.filterGroup.search.toLowerCase())
-              .test((t_(item[this.filterGroup.group]), 'name').toLowerCase()))
+              .test((this.t_(item[this.filterGroup.group]), "name").toLowerCase()))
           .sort(this.getCompareFunction(this.order))
           .slice(0, this.maxVisibleItems);
       } else {
@@ -753,7 +756,7 @@ export default {
     filter_by_group(search, group) {
       this.visibleItems = this.items[this.depth]
         .filter(item =>
-          search.toLowerCase() === this.t_(item[group], 'name').toLowerCase())
+          search.toLowerCase() === this.t_(item[group], "name").toLowerCase())
         .sort(this.getCompareFunction(this.order))
         .slice(0, this.maxVisibleItems);
     },
