@@ -536,49 +536,57 @@ export default {
 
       return null;
     },
-    getUrl(item, selectedDepth) {
-      const depth = selectedDepth ? selectedDepth : this.depth;
-      /* eslint-disable */
-      switch (this.db.code) {
-        case "location":
-          return `/${this.db.code}/${item.old_id}`;
-        case "industry":
-          switch (depth) {
-            case 1:
-            case 2:
-              if (item.industry_section) {
-                return `/${this.db.code}/${item.industry_section.id}${item.id}`;
-              }
-            default:
-              break;
-          }
-        case "product":
-          switch (depth) {
-            case 0:
-              break;
-            case 1:
-              if (item.product_section) {
-                return `/${this.db.code}/${item.product_section.id}${item.id}`;
-              }
-          }
-        case "trade_partner":
-          switch (depth) {
-            case 0:
-              return `/${this.db.code}/${item.id}`;
-            case 1:
-              return `/${this.db.code}/${item.abbrv}`;
-          }
-        case "major":
-          switch (depth) {
-            case 0:
-            case 1:
-              return `/${this.db.code}/${item.id}`;
+    locationPath(item) {
+      return `/${this.db.code}/${item.old_id}`;
+    },
+    industryPath(item, search, depth) {
+      switch (depth) {
+        case 1:
+        case 2:
+          if (item.industry_section) {
+            return `/${this.db.code}/${item.industry_section.id}${item.id}${search}`;
           }
         default:
-          break;
+          return this.defaultPath(item, search);
       }
-      /* eslint-enable */
-      return `/${this.db.code}/${item.id}`;
+    },
+    productPath() {
+      switch (depth) {
+        case 1:
+          if (item.product_section) {
+            return `/${this.db.code}/${item.product_section.id}${item.id}${search}`;
+          }
+        default:
+          return this.defaultPath(item, search);
+      }
+    },
+    tradepartnerPath(item, search, depth) {
+      switch (depth) {
+        case 1:
+          return `/${this.db.code}/${item.abbrv}${search}`;
+        default:
+          return this.defaultPath(item, search);
+      }
+    },
+    defaultPath(item, search) {
+      return `/${this.db.code}/${item.id}${search}`;
+    },
+    getUrl(item, selectedDepth) {
+      const search = "";
+      const depth = selectedDepth ? selectedDepth : this.depth;
+
+      switch (this.db.code) {
+        case "location":
+          return this.locationPath(item);
+        case "industry":
+          return this.industryPath(item, search, depth);
+        case "product":
+          return this.productPath(item, search, depth);
+        case "trade_partner":
+          return this.tradepartnerPath(item, search, depth);
+        default:
+          return this.defaultPath(item, search);
+      }
     },
     formatNumber(num) {
       if(this.lang === 'pt' && num) {
