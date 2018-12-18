@@ -62,7 +62,7 @@ def index(university_id, tab):
     body = {
         'major_with_more_enrollments': majors_service.major_with_more_enrollments(),
         'highest_enrollment_number_by_major': majors_service.highest_enrolled_number(),
-        'year': majors_service.year(),
+        'year': '2016',
     }
 
     tabs = {
@@ -76,7 +76,7 @@ def index(university_id, tab):
         ],
     }
 
-    hedu_max_year = db.session.query(func.max(Yu.year)).first()[0]
+    hedu_max_year = '2016'
 
     if tab not in tabs:
         abort(404)
@@ -84,7 +84,7 @@ def index(university_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
-    if header['enrolled'] is None or hedu_max_year != body['year']:
+    if header['enrolled'] is None:
         abort(404)
     else:
         return render_template('university/index.html', university=university, header=header, body=body, tab=tab, graph=graph)

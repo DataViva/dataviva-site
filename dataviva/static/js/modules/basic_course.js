@@ -26,7 +26,7 @@ $(document).ready(function(){
     //BLUEBOXES ADD
     if(!isMunicipality){
         BlueBox.add({
-            url: dataviva.api_url + 'sc/year/municipality/?order=students&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'sc/year/municipality/?order=students&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_municipality'],
             subtitle: dictionary['number_enrolled_students'],
             label: {
@@ -39,7 +39,7 @@ $(document).ready(function(){
     }
 
     BlueBox.add({
-        url: dataviva.api_url + 'sc/year/sc_school/?order=students&year=2016&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'sc/year/sc_school/?order=students&year=2017&direction=desc&limit=1&' + filter,
         title: dictionary['main_school'],
         subtitle: dictionary['number_enrolled_students'],
         label: {
@@ -62,34 +62,34 @@ $(document).ready(function(){
 
     //INDICATORS ADD
     Indicator.add({
-        url: dataviva.api_url + "sc/year/?year=2016&" + filter,
-        title: dictionary['number_enrolled'] + ' (2016)',
+        url: dataviva.api_url + "sc/year/?year=2017&" + filter,
+        title: dictionary['number_enrolled'] + ' (2017)',
         value:  'students'
     });
     Indicator.add({
-        url: dataviva.api_url + "sc/year/?year=2016&" + filter,
-        title: dictionary['number_classes'] + ' (2016)',
+        url: dataviva.api_url + "sc/year/?year=2017&" + filter,
+        title: dictionary['number_classes'] + ' (2017)',
         value:  'classes'
     });
     Indicator.add({
-        url: dataviva.api_url + "sc/year/?year=2016&" + filter,
-        title: dictionary['number_schools'] + ' (2016)',
+        url: dataviva.api_url + "sc/year/?year=2017&" + filter,
+        title: dictionary['number_schools'] + ' (2017)',
         value:  'schools'
     });
     Indicator.add({
-        url: dataviva.api_url + "sc/year/?year=2016&" + filter,
-        title: dictionary['average_class_size'] + ' (2016)',
+        url: dataviva.api_url + "sc/year/?year=2017&" + filter,
+        title: dictionary['average_class_size'] + ' (2017)',
         value:  'average_class_size'
     });
     Indicator.add({
-        url: dataviva.api_url + "sc/year/?year=2016&" + filter,
-        title: dictionary['average_age'] + ' (2016)',
+        url: dataviva.api_url + "sc/year/?year=2017&" + filter,
+        title: dictionary['average_age'] + ' (2017)',
         value:  'average_age'
     });
 
     //GENERAL ADD 
     General.add({
-        url: dataviva.api_url + 'sc/year/municipality/?order=students&year=2016&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'sc/year/municipality/?order=students&year=2017&direction=desc&limit=1&' + filter,
         title: dictionary['main_municipality_students'],
         label: {
                 metadata: true,
@@ -99,7 +99,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: dataviva.api_url + 'sc/year/sc_school/?order=students&year=2016&direction=desc&limit=1&' + filter,
+        url: dataviva.api_url + 'sc/year/sc_school/?order=students&year=2017&direction=desc&limit=1&' + filter,
         title: dictionary['main_school'],
         label: {
             funct: function(response) {

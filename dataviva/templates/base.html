@@ -18,6 +18,11 @@
       DataViva {% block title %}{% endblock %}
     </title>
 
+    {% if g.production %}
+    <!-- Google verification -->
+    <meta name="google-site-verification" content="JQcOfCMmtnSxLsAvX8K2tsNrPxF9j9EIrWYhpXP2Smk" />
+    {% endif %}
+
     <link rel='shortcut icon' href='/static/img/favicon.ico' type='image/x-icon' />
     <!-- Bootstrap core CSS -->
 

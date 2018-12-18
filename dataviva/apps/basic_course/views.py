@@ -83,9 +83,6 @@ def index(course_sc_id, tab):
     if url:
         graph['url'] = url
 
-    max_year_query = db.session.query(
-        func.max(Ybc_sc.year)).filter_by(course_sc_id=course_sc_id)
-
     if bra_id:
         sc_service = Basic_course_by_location(
             course_sc_id=course_sc_id, bra_id=bra_id)
@@ -97,7 +94,7 @@ def index(course_sc_id, tab):
             course_sc_id=course_sc_id, bra_id=bra_id)
 
         rank_query = Ybc_sc.query.filter(
-            Ybc_sc.year == max_year_query,
+            Ybc_sc.year == '2017',
             Ybc_sc.course_sc_id == course_sc_id,
             Ybc_sc.bra_id.like(bra_id[:3] + '%'),
             Ybc_sc.bra_id_len == 9).order_by(Ybc_sc.enrolled.desc())
@@ -150,8 +147,6 @@ def index(course_sc_id, tab):
                 header['rank'] = index + 1
                 break
 
-    sc_max_year = db.session.query(func.max(Yc_sc.year)).first()[0]
-
     id_ibge =   None
 
 
@@ -168,7 +163,7 @@ def index(course_sc_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
-    if header['course_enrolled'] is None or sc_max_year != header['course_year']:
+    if header['course_enrolled'] is None:
         abort(404)
     else:
         return render_template('basic_course/index.html', header=header, body=body, body_class='perfil-estado', location=location, id_ibge=id_ibge, basic_course=basic_course, tab=tab, graph=graph)
