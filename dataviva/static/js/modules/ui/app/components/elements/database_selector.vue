@@ -4,12 +4,12 @@
     <a
       v-for="database in databases"
       :key="database.name"
-      :data-content=$t(database.tooltip_text)
-      class="no-underline burgundy bg-transparent hover-bg-burgundy mh2 h4
+      :data-content="$t(database.tooltipText)"
+      class="no-underline burgundy t-bg-transparent hover-bg-burgundy mh2 h4
              w5 mh2 mb4 pt1"
       data-toggle="popover"
       data-placement="top"
-      @click="selectDataBase(database);">
+      @click="selectDataBase(database.code);">
       <div class="tc">
         <div
           class="f1 mt3 mb2">
@@ -27,9 +27,8 @@
     <transition name="fade">
       <selector
         v-if="show"
-        :db="database"
-        :confs="confs"
-        @close="closeModal"/>
+        :database="database"
+        @close="closeModal()"/>
     </transition>
   </div>
 </template>
@@ -44,9 +43,13 @@ export default {
   data() {
     return {
       show: false,
-      confs: configs.env,
       databases: configs.databases,
+      database: "",
+      lang: configs.getLang(),
     };
+  },
+  created() {
+    this.setLang();
   },
   methods: {
     selectDataBase(database) {
@@ -55,6 +58,9 @@ export default {
     },
     closeModal() {
       this.show = false;
+    },
+    setLang() {
+      this._i18n.locale = this.lang;
     },
   },
 };

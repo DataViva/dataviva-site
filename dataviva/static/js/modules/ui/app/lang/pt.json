@@ -37,6 +37,7 @@ pt = {
                                   selecionado. Exemplos: educação, ciências da saúde\
                                   direito, engenharia de produção, fisioterapia.",
      "id": "ID",
+     "industry_division": "divisões",
      "id_cbo": "ID CBO",
      "id_cnae": "ID CNAE",
      "id_hs": "ID HS",
@@ -61,6 +62,11 @@ pt = {
                           antiguidades, minério de ferro, café, peças\
                           para veículos.",
      "remove_filter": "remover este filtro",
+     "region": "região",
+     "state": "estado",
+     "mesoregion": "mesorregião",
+     "microregion": "microregião",
+     "municipality": "município",
      "search": "pesquise",
      "section": "seção",
      "select": "selecione",

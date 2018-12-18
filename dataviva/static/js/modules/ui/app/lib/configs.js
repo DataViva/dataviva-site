@@ -1,40 +1,47 @@
 /* eslint quote-props:
   ["error", "as-needed", { "keywords": true, "unnecessary": false }] */
-const dv = dataviva;
+
+export function getLang() {
+  if (window.location.pathname.indexOf("pt") !== -1) {
+    return "pt";
+  }
+  return "en";
+}
 
 export const env = {
-  api_url: dv.api_url || "http://api.dataviva.info/",
-  s3_host: dv.s3_host || "https://dataviva-site-production.s3.amazonaws.com",
-  lang: dv.language || "pt",
+  apiUrl: process.env.API_URL ?
+    process.env.API_URL : "http://api.dataviva.info/",
+  s3Host: process.env.S3_HOST ?
+    process.env.S3_HOST : "https://dataviva-site-production.s3.amazonaws.com",
+  lang: "pt",
 };
 
 export const databases = {
   location: {
     name: "message.brazilian_locations",
     code: "location",
-    id_description: "message.id_ibge",
-    group_opts: [
+    idDescription: "message.id_ibge",
+    groupOpts: [
       "region",
       "state",
       "mesoregion",
       "microregion",
       "municipality",
     ],
-    group_labels: [
-      "region",
-      "state",
-      "mesoregion",
-      "microregion",
-      "municipality",
+    groupLabels: [
+      "message.region",
+      "message.state",
+      "message.mesoregion",
+      "message.microregion",
+      "message.municipality",
     ],
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.population"],
-    extra_info: {
-      label: "Population",
-      endpoint: "",
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.population"],
+    extraInfo: {
+      label: "message.population",
     },
     endpoint: "municipality",
-    img_path: {
+    imgPath: {
       state: "/static/img/icons/bra/",
       mesoregion: "/static/img/icons/bra/",
       microregion: "/static/img/icons/bra/",
@@ -44,8 +51,8 @@ export const databases = {
       db: "dv-bra",
       item: "dv-bra-",
     },
-    tooltip_text: "message.brazilian_locations_tooltip",
-    hidden_ids: [""],
+    tooltipText: "message.brazilian_locations_tooltip",
+    hiddenIds: [""],
     colors: {
       "1": "#00994c",
       "2": "#101070",
@@ -53,28 +60,32 @@ export const databases = {
       "4": "#c40008",
       "5": "#90b72e",
     },
+    source: {
+      database: "IBGE",
+      year: "2017",
+    },
   },
   occupation: {
     name: "message.occupations",
     code: "occupation",
-    id_description: "message.id_cbo",
-    group_opts: ["occupation_group", "family"],
-    group_labels: ["message.main_group", "message.family"],
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.jobs"],
-    extra_info: {
+    idDescription: "message.id_cbo",
+    groupOpts: ["occupation_group", "family"],
+    groupLabels: ["message.main_group", "message.family"],
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.jobs"],
+    extraInfo: {
       label: "message.jobs",
       endpoint: "rais/occupation_family/?value=employee&year=2016&order=occupation_family",
       id: "occupation_family",
-      data_value: "jobs",
+      dataValue: "jobs",
     },
     endpoint: "occupation_family",
     icon: {
       db: "dv-occupation",
       item: "dv-cbo-",
     },
-    tooltip_text: "message.occupations_tooltip",
-    hidden_ids: ["0", "x"],
+    tooltipText: "message.occupations_tooltip",
+    hiddenIds: ["0", "x"],
     colors: {
       "1": "#752277",
       "2": "#cc0000",
@@ -94,24 +105,24 @@ export const databases = {
   industry: {
     name: "message.economic_activities",
     code: "industry",
-    id_description: "message.id_cnae",
-    group_opts: ["industry_section", "industry_division", "classe"],
-    group_labels: ["message.section", "message.division", "message.class"],
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.jobs"],
-    extra_info: {
+    idDescription: "message.id_cnae",
+    groupOpts: ["industry_section", "industry_division", "class"],
+    groupLabels: ["message.section", "message.division", "message.class"],
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.jobs"],
+    extraInfo: {
       label: "message.jobs",
       endpoint: "rais/industry_class/?value=employee&year=2016&order=industry_class",
       id: "industry_class",
-      data_value: "jobs",
+      dataValue: "jobs",
     },
     endpoint: "industry_class",
     icon: {
       db: "dv-industry",
       item: "dv-cnae-",
     },
-    tooltip_text: "message.economic_activities_tooltip",
-    hidden_ids: [""],
+    tooltipText: "message.economic_activities_tooltip",
+    hiddenIds: [""],
     colors: {
       a: "#105b10",
       b: "#330000",
@@ -143,24 +154,24 @@ export const databases = {
   product: {
     name: "message.products",
     code: "product",
-    id_description: "message.id_hs",
-    group_opts: ["product_section", "position"],
-    group_labels: ["message.section", "message.position"],
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.exports"],
-    extra_info: {
+    idDescription: "message.id_hs",
+    groupOpts: ["product_section", "position"],
+    groupLabels: ["message.section", "message.position"],
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.exports"],
+    extraInfo: {
       label: "message.exports",
       endpoint: "secex/product/?value=value&year=2017&order=product",
       id: "product",
-      data_value: "value",
+      dataValue: "value",
     },
     endpoint: "product",
     icon: {
       db: "dv-product",
       item: "dv-hs-",
     },
-    tooltip_text: "message.products_tooltip",
-    hidden_ids: ["22"],
+    tooltipText: "message.products_tooltip",
+    hiddenIds: ["22"],
     colors: {
       "01": "#cfa717",
       "02": "#cf9f17",
@@ -192,27 +203,27 @@ export const databases = {
   trade_partner: {
     name: "message.trade_partners",
     code: "trade_partner",
-    id_description: "message.id_wld",
-    group_opts: ["continent", "country"],
-    group_labels: ["message.continent", "message.country"],
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.exports"],
-    extra_info: {
+    idDescription: "message.id_wld",
+    groupOpts: ["continent", "country"],
+    groupLabels: ["message.continent", "message.country"],
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.exports"],
+    extraInfo: {
       label: "message.exports",
       endpoint: "secex/country/?value=value&year=2017&order=country",
       id: "country",
-      data_value: "value",
+      dataValue: "value",
     },
     endpoint: "country",
-    img_path: {
+    imgPath: {
       country: "/static/img/icons/wld/",
     },
     icon: {
       db: "dv-trade-partner",
       item: "dv-wld-",
     },
-    tooltip_text: "message.trade_partners_tooltip",
-    hidden_ids: ["xx", "367"],
+    tooltipText: "message.trade_partners_tooltip",
+    hiddenIds: ["xx", "367"],
     colors: {
       as: "#c8140a",
       eu: "#752277",
@@ -229,22 +240,22 @@ export const databases = {
   university: {
     name: "message.universities",
     code: "university",
-    id_description: "message.id",
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.enrolled"],
-    extra_info: {
+    idDescription: "message.id",
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.enrolled"],
+    extraInfo: {
       label: "message.enrolled",
       endpoint: "hedu/university/?value=enrolled&year=2016&order=university",
       id: "university",
-      data_value: "enrolleds",
+      dataValue: "enrolleds",
     },
     endpoint: "university",
     icon: {
       db: "dv-university",
       item: "dv-university-",
     },
-    tooltip_text: "message.universities_tooltip",
-    hidden_ids: ["x"],
+    tooltipText: "message.universities_tooltip",
+    hiddenIds: ["x"],
     colors: {
       T: "#31a0b5",
       S: "#2f2f6d",
@@ -256,27 +267,27 @@ export const databases = {
       year: "2016",
     },
   },
-  hedu_course: {
+  major: {
     name: "message.higher_education",
-    code: "hedu_course",
-    id_description: "message.id",
-    group_opts: ["hedu_course_field", "major"],
-    group_labels: ["message.field", "message.major"],
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.enrolled"],
-    extra_info: {
+    code: "major",
+    idDescription: "message.id",
+    groupOpts: ["hedu_course_field", "major"],
+    groupLabels: ["message.field", "message.major"],
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.enrolled"],
+    extraInfo: {
       label: "message.enrolled",
       endpoint: "hedu/hedu_course/?value=enrolled&year=2016&order=hedu_course",
       id: "hedu_course",
-      data_value: "enrolleds",
+      dataValue: "enrolleds",
     },
     endpoint: "hedu_course",
     icon: {
       db: "dv-major",
       item: "dv-course-hedu-",
     },
-    tooltip_text: "message.higher_education_tooltip",
-    hidden_ids: ["00"],
+    tooltipText: "message.higher_education_tooltip",
+    hiddenIds: ["00"],
     colors: {
       "01": "#737373",
       "14": "#cc0000",
@@ -310,24 +321,24 @@ export const databases = {
   basic_course: {
     name: "message.basic_courses",
     code: "basic_course",
-    id_description: "message.id",
-    group_opts: ["course_field", "course"],
-    group_labels: ["message.field", "message.course"],
-    order_opts: ["name", "extra_info"],
-    order_labels: ["message.name", "message.enrolled"],
-    extra_info: {
+    idDescription: "message.id",
+    groupOpts: ["course_field", "course"],
+    groupLabels: ["message.field", "message.course"],
+    orderOpts: ["name", "extraInfo"],
+    orderLabels: ["message.name", "message.enrolled"],
+    extraInfo: {
       label: "message.enrolled",
       endpoint: "sc/sc_course/?value=students&year=2017&order=sc_course",
       id: "sc_course",
-      data_value: "students",
+      dataValue: "students",
     },
     endpoint: "sc_course",
     icon: {
       db: "dv-basic-course",
       item: "dv-course-sc-",
     },
-    tooltip_text: "message.basic_courses_tooltip",
-    hidden_ids: ["00"],
+    tooltipText: "message.basic_courses_tooltip",
+    hiddenIds: ["00"],
     colors: {
       "XX": "#2f2f6d",
       "01": "#800000",

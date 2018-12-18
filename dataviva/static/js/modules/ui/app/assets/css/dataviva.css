@@ -61,7 +61,7 @@
   color: #a25a6d;
 }
 
-.select-button:hover {
+.select-button:hover, .select-button:focus {
   color: #fff;
 }
 

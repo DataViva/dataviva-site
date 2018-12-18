@@ -27,15 +27,16 @@
         {{ item.name }}</h3>
       <small
         class="medium-gray f5">
-        {{ $t(item.id_description) }}: {{ item.id }}<br>
+        {{ $t(item.id_description) }}: {{ item.id }}
       </small>
-      <p
-        v-if="item.extra_info_content !== null"
-        class="medium-gray f5 capitalize dib mb0">
-        {{ $t(item.extra_info) }}: {{ item.prefix }}
-        {{ item.extra_info_content.toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",") }}
-      </p>
+      <template v-if="item.extra_info_content && item.extra_info">
+        <br>
+        <p
+          class="medium-gray f5 capitalize dib mb0">
+          {{ $t(item.extra_info) }}: {{ item.prefix }}
+          {{ item.extra_info_content }}
+        </p>
+      </template>
       <template
         v-if="item.filter_options && item.filter_options.length > 0">
         <br><p class="medium-gray f4 capitalize dib mb0">
@@ -45,7 +46,7 @@
           :key="filter"
           href="#"
           class="burgundy no-underline underline-hover pointer f4"
-          @click="$emit('select-filter', filter)">{{ filter + '  ' }}
+          @click="$emit('select-filter', filter)">{{ $t(`message.${filter}`) + '  ' }}
         </span>
       </template>
     </div>

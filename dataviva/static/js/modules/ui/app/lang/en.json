@@ -33,6 +33,7 @@ en = {
                                   of study. Examples: education, health sciences\
                                   law, production engineering, physiotherapy.",
      "id": "ID",
+     "industry_division": "industry division",
      "id_cbo": "CBO ID",
      "id_cnae": "CNAE ID",
      "id_hs": "HS ID",
@@ -41,6 +42,11 @@ en = {
      "jobs": "jobs",
      "main_group": "main group",
      "major": "major",
+     "mesoregion": "mesoregion",
+     "region": "region",
+     "state": "state",
+     "microregion": "microregion",
+     "municipality": "municipality",
      "name": "name",
      "occupations": "occupations",
      "occupations_tooltip": "Regions with high employment rates by professional\

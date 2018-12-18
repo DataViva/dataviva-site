@@ -4,16 +4,21 @@
   "description": "DataViva User Interface",
   "main": "vue-app.js",
   "scripts": {
-    "build": "parcel build app/main.js -o vue-app.min.js --public-url /",
-    "rebuild": "parcel build app/main.js -o vue-app.min.js --no-cache --public-url /",
+    "build": "parcel build app/main.js -o vue-app.js --public-url http://dataviva-site-production.s3.amazonaws.com/APP/ --no-minify",
+    "build_staging": "parcel build app/main.js -o vue-app.js --public-url http://dataviva-site-staging.s3.amazonaws.com/APP/ --no-minify",
+    "rebuild": "parcel build app/main.js -o vue-app.js --no-cache --public-url /",
     "watch": "parcel watch app/main.js -o vue-app  --public-url /static/js/modules/ui/dist/",
-    "lint": "eslint app/**/*.js app/**/**/*.vue"
+    "lint": "eslint app/**/*.js app/**/**/*.vue",
+    "deploy": "npm run build; aws s3 sync dist s3://dataviva-site-production/APP --delete",
+    "deploy_staging": "npm run build_staging; aws s3 sync dist s3://dataviva-site-staging/APP --delete"
   },
   "keywords": [],
   "author": "datavivadev@gmail.com",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^6.0.0",
+    "lzutf8": "^0.5.5",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0",
     "vue-i18n": "^8.0.0"

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-light-gray flex flex-row flex-nowrap pt3 pb3">
+    class="t-bg-light-gray flex flex-row flex-nowrap pt3 pb3">
     <div class="tc">
       <template v-if="item.img">
         <div class="w3 w4-ns">

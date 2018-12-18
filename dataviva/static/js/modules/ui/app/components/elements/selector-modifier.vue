@@ -10,9 +10,7 @@
 
     <selector
       v-if="showModal"
-      :db="database"
-      :confs="confs"
-      :filter="filter"
+      :database="database"
       @close="closeModal()"/>
   </span>
 </template>
@@ -26,14 +24,10 @@ export default {
   name: "SelectorModifier",
   props: {
     db: {
-      type: Object,
-      required: true,
-    },
-    text: {
       type: String,
       required: true,
     },
-    filter: {
+    text: {
       type: String,
       required: true,
     },
@@ -42,15 +36,26 @@ export default {
     return {
       showModal: true,
       confs: configs.env,
-      databases: configs.databases,
+      lang: configs.getLang(),
     };
   },
   created() {
-    this.database = this.databases[this.db];
+    this.database = this.db;
+    this.setLang();
+  },
+  mounted() {
+    const modal = document.getElementById("dv-selector-modal");
+    const body = document.getElementsByTagName("body")[0];
+    if (modal) {
+      body.appendChild(modal);
+    }
   },
   methods: {
     closeModal() {
       this.showModal = false;
+    },
+    setLang() {
+      this._i18n.locale = this.lang;
     },
   },
 };
