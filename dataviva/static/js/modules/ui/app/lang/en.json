@@ -1,0 +1,106 @@
+en = {
+	"message": {
+     "basic_courses": "basic courses",
+     "basic_courses_tooltip": "Brazilian schools that provide technical education\
+                               and enrollment ranking by city. Examples: elementary\
+                               school, high school, nursing technician, agriculture\
+                               and technician.",
+     "brazilian_locations": "brazilian locations",
+     "brazilian_locations_tooltip": "General profile by region, state, mesoregion\
+                                     microregion or city, including international\
+                                     trade, economic activity, employment and\
+                                     education data. Examples: Southeast Region,\
+                                     Mato Grosso, Recife, Metropolitan Area of\
+                                     Porto Alegre.",                       
+     "class": "class",
+     "continent": "continent",
+     "country": "country",
+     "course": "course",
+     "division": "division",
+     "economic_activities": "economic activities",
+     "economic_activities_tooltip": "Information on employment rate by region,\
+                                     average wage by occupation, average monthly\
+                                     income and economic opportunities. Examples:\
+                                     education, restaurants, religious organizations.",
+     "enrolled": "enrolled",
+     "exports": "exports",
+     "family": "family",
+     "field": "field",
+     "group_by": "group by",
+     "higher_education": "higher education",
+     "higher_education_tooltip": "List of universities and cities that offer\
+                                  post-seconday courses or the selected field\
+                                  of study. Examples: education, health sciences\
+                                  law, production engineering, physiotherapy.",
+     "id": "ID",
+     "industry_division": "industry division",
+     "id_cbo": "CBO ID",
+     "id_cnae": "CNAE ID",
+     "id_hs": "HS ID",
+     "id_ibge": "IBGE ID",
+     "id_wld": "WLD ID",
+     "jobs": "jobs",
+     "main_group": "main group",
+     "major": "major",
+     "mesoregion": "mesoregion",
+     "region": "region",
+     "state": "state",
+     "microregion": "microregion",
+     "municipality": "municipality",
+     "name": "name",
+     "occupations": "occupations",
+     "occupations_tooltip": "Regions with high employment rates by professional\
+                             activity, related courses, average wage and job\
+                             statistics per year. Examples: technicians, industry\
+                             workers, receptionists and clinicians.",
+     "population": "population",
+     "position": "position",
+     "products": "products",
+     "products_tooltip": "Trade balance data by product, sending and receiving\
+                          countries, ranking by location, economic activities\
+                          and related occupations. Examples: food, art and antiques\
+                          iron ore, coffee, auto parts.",
+     "remove_filter": "remove this filter",
+     "search": "search",
+     "section": "section",
+     "select": "select",
+     "show": "show",
+     "source": "source",
+     "sort_by": "sort by",
+     "trade_partners": "trade partners",
+     "trade_partners_tooltip": "Brazil’s top import and export partners, trade data\
+                                by type of product or supplier city. Examples: Asia,\
+                                Europe, Iran, USA.",
+     "universities": "universities",
+     "universities_tooltip": "Number of enrollments in each offered course, student\
+                              status and similar university profiles. Examples:\
+                              USP, UFMG, PUC Goiás.",
+     
+  },
+  "dateTimeFormat": {
+		 "short": {
+       "year": "numeric",
+       "month": "short",
+       "day": "numeric"
+     },
+     "long": {
+       "year": "numeric",
+       "month": "long",
+       "day": "numeric",
+       "weekday": "short",
+       "hour": "numeric",
+       "minute": "numeric",
+       "hour12": true
+     },
+  },
+  "numberFormat": {
+     "currency": {
+       "style": "currency",
+       "currency": "USD",
+     },
+     "percent": {
+       "style": "percent"
+     }
+  }
+}
+

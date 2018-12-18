@@ -1,0 +1,109 @@
+pt = {
+  "message": {
+     "basic_courses": "curso básico",
+     "basic_courses_tooltip": "Escolas brasileiras que oferecem educação\
+                               profissionalizante e ranking de matrículas\
+                               por município. Exemplos: ensino fundamental,\
+                               ensino médio, técnico em enfermagem, técnico\
+                               em agropecuária.",
+     "brazilian_locations": "localidades brasileiras",
+     "brazilian_locations_tooltip": "Perfil geral por região, estado,\
+                                     mesoregião, microrregião ou município,\
+                                     incluindo dados sobre comércio exterior,\
+                                     atividade econômica,empregos e educação.\
+                                     Exemplos: Região Sudeste, Mato Grosso,\
+                                     Recife, Região Metropolitana de Porto\
+                                     Alegre.",
+                                                        
+     "class": "classe",
+     "continent": "continente",
+     "country": "país",
+     "course": "curso",
+     "division": "divisão",
+     "economic_activities": "atividades econômicas",
+     "economic_activities_tooltip": "Informações sobre taxa de emprego por região,\
+                                     salário médio por tipo de ocupação, renda\
+                                     mensal média e oportunidades econômicas.\
+                                     Exemplos: educação, restaurantes, religious\
+                                     organizations.",
+     "enrolled": "matriculados",
+     "exports": "exportações",
+     "family": "família",
+     "field": "campo",
+     "group_by": "agrupar por",
+     "higher_education": "ensino superior",
+     "higher_education_tooltip": "Lista de universidades e municípios que ofertam\
+                                  cursos de educação superior ou campo de estudo\
+                                  selecionado. Exemplos: educação, ciências da saúde\
+                                  direito, engenharia de produção, fisioterapia.",
+     "id": "ID",
+     "industry_division": "divisões",
+     "id_cbo": "ID CBO",
+     "id_cnae": "ID CNAE",
+     "id_hs": "ID HS",
+     "id_ibge": "ID IBGE",
+     "id_wld": "ID WLD",
+     "jobs": "empregos",
+     "main_group": "grande grupo",
+     "major": "curso superior",
+     "name": "nomes",
+     "occupations": "ocupações",
+     "occupations_tooltip": "Regiões que mais empregam por atividade profissional,\
+                             cursos relacionados, salário médio e estatísticas de\
+                             emprego por ano. Exemplos: técnicos de nível médio,\
+                             trabalhadores da indústria, recepcionistas, clínicos.",
+     "population": "população",
+     "position": "posição",
+     "products": "produtos",
+     "products_tooltip": "Dados da balança comercial por produto, origem das\
+                          importações e destino das exportações, ranking por\
+                          localidade, atividades econômicas e ocupações\
+                          relacionadas. Exemplos: alimentos, artes e\
+                          antiguidades, minério de ferro, café, peças\
+                          para veículos.",
+     "remove_filter": "remover este filtro",
+     "region": "região",
+     "state": "estado",
+     "mesoregion": "mesorregião",
+     "microregion": "microregião",
+     "municipality": "município",
+     "search": "pesquise",
+     "section": "seção",
+     "select": "selecione",
+     "show": "mostrar",
+     "source": "fonte",
+     "sort_by": "orderar por",
+     "trade_partners": "parceiros comerciais",
+     "trade_partners_tooltip": "Principais parceiros comericais do Brasil, dados\
+                                de comercialização por tipo de produto ou município\
+                                comercializador. Exemplos: Ásia, Europa, Irã, EUA.",
+     "universities": "universidades",
+     "universities_tooltip": "Número de matrículas em cada curso ofertado,\
+                              situação dos estudantes, perfis semelhantes de\
+                              universidades; Exemplos: USP, UFMG, PUC Goiás."
+  },
+  "dateTimeFormat": {
+	 "short": {
+       "year": "numeric",
+       "month": "short",
+       "day": "numeric"
+     },
+     "long": {
+       "year": "numeric",
+       "month": "long",
+       "day": "numeric",
+       "weekday": "short",
+       "hour": "numeric",
+       "minute": "numeric"
+     },
+  },
+  "numberFormat": {
+     "currency": {
+	   "style": "currency", 
+	   "currency": "BRL",
+	 },
+	 "percent": {
+       "style": "percent"
+	 }
+  }
+}

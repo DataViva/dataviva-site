@@ -70,7 +70,14 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" onclick="select_attr('bra');"> {{ location.name() }}</a>
+                <a title="Trocar">
+                    <optionChanger
+                        class="selector-modifier"
+                        data-db="location"
+                        data-text="{{ location.name() }}">
+                        {{ location.name() }}
+                    </optionChanger>
+                </a>
             </li>
         </ol>
     </div>
@@ -102,7 +109,14 @@
             {% else %}
                 {{ location.name() }} - {{ location.abbreviation }}
             {% endif %}
-                   <small class="btn btn-link btn-xs" onclick="select_attr('bra');">{% trans %}change{% endtrans %} </small>
+                <small class="btn btn-link btn-xs">
+                    <optionChanger
+                       class="selector-modifier"
+                       data-db="location"
+                       data-text="{% trans %}change{% endtrans %}">
+                    {% trans %}change{% endtrans %}
+                    </optionChanger>
+                </small>
             </h1>
 
             <span class="clearfix"></span>

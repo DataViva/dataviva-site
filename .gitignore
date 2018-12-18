@@ -19,3 +19,5 @@ scripts/data
 launch.json
 dataviva/static/js/modules/ui/node_modules/*
 dataviva/static/js/modules/ui/dist/*
+dataviva/static/js/modules/ui/dist/*
+.env*
