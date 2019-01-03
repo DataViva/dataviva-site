@@ -15,3 +15,9 @@ dataviva/utils/search_indices/
 dump.rdb
 *.log
 scripts/data
+.cache
+launch.json
+dataviva/static/js/modules/ui/node_modules/*
+dataviva/static/js/modules/ui/dist/*
+dataviva/static/js/modules/ui/dist/*
+.env*
