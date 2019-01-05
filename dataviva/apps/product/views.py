@@ -213,14 +213,14 @@ def index(product_id, tab):
 
     if location:
         secex_query_export = Ymbp.query.filter(
-            Ymbp.year == max_year_query,
+            Ymbp.year == 2017,
             Ymbp.hs_id_len == len(product.id),
             Ymbp.bra_id == location_id,
             Ymbp.month == 0).order_by(Ymbp.export_val.desc())
         secex_export = secex_query_export.all()
 
         secex_query_import = Ymbp.query.filter(
-            Ymbp.year == max_year_query,
+            Ymbp.year == 2017,
             Ymbp.hs_id_len == len(product_id),
             Ymbp.bra_id == location_id,
             Ymbp.month == 0).order_by(Ymbp.import_val.desc())
