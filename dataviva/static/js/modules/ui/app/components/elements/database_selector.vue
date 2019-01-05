@@ -6,7 +6,7 @@
       :key="database.name"
       :data-content="$t(database.tooltipText)"
       class="no-underline burgundy t-bg-transparent hover-bg-burgundy mh2 h4
-             w5 mh2 mb4 pt1"
+             w5 mh2 mb4 pt1 hover-white"
       data-toggle="popover"
       data-placement="top"
       @click="selectDataBase(database.code);">
