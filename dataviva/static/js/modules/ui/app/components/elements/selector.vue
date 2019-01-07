@@ -82,6 +82,7 @@
               v-for="(item, index) in visibleItems"
               :item="mountItem(item, index)"
               :key="item.id"
+              @select-item="() => setLoading()"
               @select-filter="(filter) => select_group(item, filter)"/>
           </div> <!-- Item list ends -->
           <div
@@ -178,6 +179,9 @@ export default {
     }
   },
   methods: {
+    setLoading() {
+      this.loading = true;
+    },
     setLang() {
       this._i18n.locale = this.lang;
     },
