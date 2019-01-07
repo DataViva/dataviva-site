@@ -53,6 +53,7 @@
     <div
       class="ml-auto">
       <a
+        @click="loader($event)"
         :href="item.url"
         class="select-button f4 ba burgundy br2 ph3 pv2 mr3 dib mt2 capitalize
                hover-bg-burgundy">{{ $t("message.select") }}
@@ -77,6 +78,11 @@ export default {
     };
   },
   methods: {
+    loader(event) {
+      if(event.ctrlKey === false) {
+        this.$emit('select-item');
+      }
+    }
   },
 };
 </script>
