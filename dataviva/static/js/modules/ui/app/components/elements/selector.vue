@@ -24,7 +24,11 @@
         <SelectedFilter
           v-if="filterItem"
           :item="mountItem(filterItem, 0, filterItemDepth)"
-          @remove-filter="clear_filter();"/>
+          @remove-filter="clear_filter();"
+          canRemove/>
+        <SelectedFilter
+          v-else-if="defaultOption"
+          :item="defaultOption"/>
         <div
           class="ph4 h-75 relative">
           <!-- Filters and aggregations -->
@@ -131,6 +135,7 @@ export default {
         search: "",
       },
       filterItem: null,
+      defaultOption: null,
       filterItemDepth: 0,
       numericData: null,
       maxJsonSize: 300000,
@@ -166,6 +171,8 @@ export default {
 
         this.readMountedDataFromLocalStorage();
 
+        this.setDefaultOption(this.db);
+
         if (!this.items && this.db.extraInfo.endpoint) {
           this.getNumericData();
         } else if (!this.items) {
@@ -188,6 +195,12 @@ export default {
     splitString(string, size) {
       const re = new RegExp(`.{1,${size}}`, "g");
       return string.match(re);
+    },
+    setDefaultOption({defaultOption}) {
+      if (defaultOption) {
+        this.defaultOption = defaultOption;
+        this.defaultOption.name = this.$t(this.defaultOption.name);
+      }
     },
     readMountedDataFromLocalStorage() {
       if (this.checkLocalStorageSupport()) {

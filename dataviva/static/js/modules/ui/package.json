@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.1.0",
+    "babel-core": "^6.26.3",
     "babel-plugin-import-glob": "^2.0.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",
@@ -33,7 +34,6 @@
     "vue-template-compiler": "^2.5.16"
   },
   "optionalDependencies": {
-    "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",

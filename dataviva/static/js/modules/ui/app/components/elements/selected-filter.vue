@@ -24,6 +24,7 @@
         class="mv0 fw4 lh-title measure-narrow measure-wide-ns">
         {{ item.name }}</h3>
       <div
+        v-if="canRemove"
         class="burgundy">
         <span
           class="f3 fw4 pr4 pt3 mt2 pointer"
@@ -52,6 +53,10 @@ export default {
       default() {
         return null;
       },
+    },
+    canRemove: {
+      type: Boolean,
+      default: false
     },
   },
   data() {
