@@ -561,7 +561,7 @@ export default {
         case 1:
         case 2:
           if (item.industry_section) {
-            return `/${this.db.code}/${item.industry_section.id}${item.id}${search}`;
+            return `/${this.lang}/${this.db.code}/${item.industry_section.id}${item.id}${search}`;
           }
         default:
           return this.defaultPath(item, search);
@@ -573,7 +573,7 @@ export default {
       switch (depth) {
         case 1:
           if (item.product_section) {
-            return `/${this.db.code}/${item.product_section.id}${item.id}${search}`;
+            return `/${this.lang}/${this.db.code}/${item.product_section.id}${item.id}${search}`;
           }
           break;
         default:
@@ -585,14 +585,14 @@ export default {
       /* eslint-disable */
       switch (depth) {
         case 1:
-          return `/${this.db.code}/${item.abbrv}${search}`;
+          return `/${this.lang}/${this.db.code}/${item.abbrv}${search}`;
         default:
           return this.defaultPath(item, search);
       }
       /* eslint-enable */
     },
     defaultPath(item, search) {
-      return `/${this.db.code}/${item.id}${search}`;
+      return `/${this.lang}/${this.db.code}/${item.id}${search}`;
     },
     hasPath() {
       const path = window.location.pathname;
