@@ -1163,7 +1163,7 @@ msgstr ""
 #: dataviva/apps/embed/templates/embed/embed.html:6
 #: dataviva/apps/embed/templates/embed/embed.html:3023
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
-msgid "through more than 100 million interactive visualizations."
+msgid "through more than 1 billion interactive visualizations."
 msgstr ""
 
 #: dataviva/apps/embed/templates/embed/embed.html:63
@@ -3996,7 +3996,7 @@ msgstr ""
 msgid ""
 "DataViva is a visualization tool that provides official data on trade, "
 "industries, and education throughout Brazil, in eleven visualizations and"
-" over 100 million views."
+" over 1 billion views."
 msgstr ""
 
 #: dataviva/templates/about/ask/index.html:9
