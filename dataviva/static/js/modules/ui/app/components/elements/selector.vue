@@ -21,14 +21,16 @@
             @click="close()">&times;
           </a>
         </div>
-        <SelectedFilter
-          v-if="filterItem"
-          :item="mountItem(filterItem, 0, filterItemDepth)"
-          @remove-filter="clear_filter();"
-          canRemove/>
-        <SelectedFilter
-          v-else-if="defaultOption"
-          :item="defaultOption"/>
+        <template v-if="!loading">
+          <SelectedFilter
+            v-if="filterItem"
+            :item="mountItem(filterItem, 0, filterItemDepth)"
+            @remove-filter="clear_filter();"
+            canRemove/>
+          <SelectedFilter
+            v-else-if="defaultOption"
+            :item="defaultOption"/>
+        </template>
         <div
           class="ph4 h-75 relative">
           <!-- Filters and aggregations -->
@@ -200,6 +202,7 @@ export default {
       if (defaultOption) {
         this.defaultOption = defaultOption;
         this.defaultOption.name = this.$t(this.defaultOption.name);
+        this.defaultOption.url = `/${this.lang}/${defaultOption.url}`;
       }
     },
     readMountedDataFromLocalStorage() {
@@ -550,7 +553,7 @@ export default {
       return null;
     },
     locationPath(item) {
-      return `/${this.db.code}/${item.old_id}`;
+      return `/${this.lang}/${this.db.code}/${item.old_id}`;
     },
     industryPath(item, search, depth) {
       /* eslint-disable */
