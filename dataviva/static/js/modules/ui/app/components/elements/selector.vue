@@ -202,7 +202,7 @@ export default {
       if (defaultOption) {
         this.defaultOption = defaultOption;
         this.defaultOption.name = this.$t(this.defaultOption.name);
-        this.defaultOption.url = `/${this.lang}/${defaultOption.url}`;
+        this.defaultOption.url = this.getUrl(defaultOption);
       }
     },
     readMountedDataFromLocalStorage() {

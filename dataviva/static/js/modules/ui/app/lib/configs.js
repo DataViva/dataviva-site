@@ -69,6 +69,7 @@ export const databases = {
       color: "#676a6c",
       name: "message.brazil",
       url: "location/all",
+      old_id: "all"
     },
   },
   occupation: {
