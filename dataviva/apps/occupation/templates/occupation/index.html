@@ -27,11 +27,24 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar" onclick="select_attr('cbo');"> {{ occupation.name() }}</a>
+                <a href="#" title="Trocar">
+                  <optionChanger
+                      data-db="occupation"
+                      data-filter="{{ id_ibge }}"
+                      data-text="{{ occupation.name() }}">
+                      {{ occupation.name() }}
+                  </optionChanger>
+                </a>
             </li>
             {% if location %}
                 <li class="active">
-                    <a href="#" title="Trocar" onclick="select_attr_search('bra');"> {{ location.name() }}</a>
+                    <a href="#" title="Trocar">
+                      <optionChanger
+                          data-db="location"
+                          data-text="{{ location.name() }}">
+                          {{ location.name() }}
+                      </optionChanger>
+                    </a>
                 </li>
             {% endif %}
         </ol>
@@ -69,8 +82,25 @@
                     {% trans %}change{% endtrans %} <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">
-                    <li><a href="#" onclick="select_attr('cbo');">{% trans %}Occupation{% endtrans %}</a></li>
-                    <li><a href="#" onclick="select_attr_search('bra');">{% trans %}Location{% endtrans %}</a></li>
+                    <li onclick="event.stopPropagation();">
+                      <a onclick="click_on_children(event)">
+                        <optionChanger
+                          data-db="occupation"
+                          data-filter="{{ id_ibge }}"
+                          data-text="{% trans %}Occupation{% endtrans %}">
+                          {% trans %}Occupation{% endtrans %}
+                        </optionChanger>
+                      </a>
+                    </li>
+                    <li onclick="event.stopPropagation();">
+                      <a onclick="click_on_children(event)">
+                        <optionChanger
+                          data-db="location"
+                          data-text="{% trans %}Location{% endtrans %}">
+                          {% trans %}Location{% endtrans %}
+                        </optionChanger>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </h1>

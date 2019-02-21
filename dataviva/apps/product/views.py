@@ -212,18 +212,15 @@ def index(product_id, tab):
     from sqlalchemy.sql.expression import func, desc
 
     if location:
-        max_year_query = db.session.query(
-        func.max(Ymbp.year)).filter(Ymbp.hs_id == product.id, Ymbp.month == 12)
-
         secex_query_export = Ymbp.query.filter(
-            Ymbp.year == max_year_query,
+            Ymbp.year == 2017,
             Ymbp.hs_id_len == len(product.id),
             Ymbp.bra_id == location_id,
             Ymbp.month == 0).order_by(Ymbp.export_val.desc())
         secex_export = secex_query_export.all()
 
         secex_query_import = Ymbp.query.filter(
-            Ymbp.year == max_year_query,
+            Ymbp.year == 2017,
             Ymbp.hs_id_len == len(product_id),
             Ymbp.bra_id == location_id,
             Ymbp.month == 0).order_by(Ymbp.import_val.desc())
@@ -255,9 +252,6 @@ def index(product_id, tab):
             header['import_value_ranking'] = ranking + 1
             break
 
-    secex_max_year = db.session.query(func.max(Ymp.year)).filter(
-        Ymp.month == 12).first()[0]
-
     if tab not in tabs:
         abort(404)
 
@@ -266,7 +260,6 @@ def index(product_id, tab):
 
     if header['export_value'] is None and header['import_value'] is None:
         abort(404)
-    elif secex_max_year != header['year']:
-        abort(404)
+
     else:
         return render_template('product/index.html', header=header, body=body, product=product, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)

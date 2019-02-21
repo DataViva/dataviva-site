@@ -18,6 +18,11 @@
       DataViva {% block title %}{% endblock %}
     </title>
 
+    {% if g.production %}
+    <!-- Google verification -->
+    <meta name="google-site-verification" content="JQcOfCMmtnSxLsAvX8K2tsNrPxF9j9EIrWYhpXP2Smk" />
+    {% endif %}
+
     <link rel='shortcut icon' href='/static/img/favicon.ico' type='image/x-icon' />
     <!-- Bootstrap core CSS -->
 
@@ -140,6 +145,15 @@
     <script type="text/javascript" src="/static/js/modules/metadata.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/clusterize.js/0.17.6/clusterize.js"></script>
     <script type="text/javascript" src="/static/js/modules/establishment-selector.js"></script>
+    
+    <!-- Vue application -->
+    {% if g.production %}
+        <script type="text/javascript" src="{{g.s3_host}}/APP/vue-app.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{g.s3_host}}/APP/vue-app.css">
+    {% else %}
+        <script type="text/javascript" src="/static/js/modules/ui/dist/vue-app.js"></script>
+        <link rel="stylesheet" type="text/css" href="/static/js/modules/ui/dist/vue-app.css">
+    {% endif %}
 
     {% block script %}
       

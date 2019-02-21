@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
-    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}<small> (2015)</small></h2>
     {% if not header.bra_id %}
         <p>{% trans %}The course of{% endtrans %} {{ header.name }} 
         {% trans %}is the {% endtrans %} {{ header.rank }}{{ header.rank | ordinal }}
@@ -59,7 +59,7 @@
         <div class="row">
 
         <div class="dl-box col-xs-12 col-md-6" id='general-enrolleds'>
-            <h3>{% trans %}Enrollments{% endtrans %} (2015)</h3>
+            <h3>{% trans %}Enrollments{% endtrans %} (2016)</h3>
             <a href="#enrollments" 
                     aria-controls="enrollments" 
                     role="tab"        

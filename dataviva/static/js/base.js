@@ -853,3 +853,11 @@ $(document).ready(function() {
         $('.row-offcanvas').toggleClass('active');
     });
 });
+
+function click_on_children($e) {
+    var first_child = $e.target.firstElementChild;
+
+    if(first_child) {
+        first_child.click();
+    }
+}

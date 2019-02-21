@@ -208,13 +208,8 @@ def index(wld_id, tab):
         if import_rank[index].wld_id == wld_id:
             header['import_rank'] = index + 1
             break
-    secex_max_year = db.session.query(func.max(Ymw.year)).filter(
-        Ymw.month == 12).first()[0]
 
     if body['highest_export_value'] is None and body['highest_import_value'] is None:
-        abort(404)
-
-    if secex_max_year != header['year']:
         abort(404)
 
     if tab not in tabs:

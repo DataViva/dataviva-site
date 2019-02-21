@@ -198,7 +198,7 @@ def embed(app_name="tree_map", dataset="rais", bra_id="4mg",
         year_range_dict = __year_range__.copy()
 
         if current_build.app.type in ['network', 'rings', 'scatter']:
-            year_range_dict["secex"] = ["2000-1", "2015-12"]
+            year_range_dict["secex"] = ["2000-1", "2017-12"]
 
         year_range = json.dumps(year_range_dict)
         ret = make_response(render_template("embed/embed.html",
