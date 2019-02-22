@@ -205,6 +205,7 @@ def index(product_id, tab):
     header['year'] = product_service.year()
     header['export_value'] = product_service.total_exported()
     header['export_net_weight'] = product_service.unity_weight_export_price()
+    header['import_value'] = product_service.total_imported()
 
     # Get rankings vars, code should be refactored
     from dataviva.api.secex.models import Ymp, Ymbp
