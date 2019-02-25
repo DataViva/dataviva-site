@@ -1215,8 +1215,8 @@ msgstr ""
 #: dataviva/apps/embed/templates/embed/embed.html:6
 #: dataviva/apps/embed/templates/embed/embed.html:3023
 #: dataviva/templates/base.html:7 dataviva/templates/base.html:14
-msgid "through more than 100 million interactive visualizations."
-msgstr "brasileira em mais de 100 milhões de visualizações interativas."
+msgid "through more than 1 billion interactive visualizations."
+msgstr "brasileira em mais de 1 bilhão de visualizações interativas."
 
 #: dataviva/apps/embed/templates/embed/embed.html:63
 #: dataviva/templates/graphs/tools.html:2
@@ -4340,11 +4340,11 @@ msgstr "Equipe"
 msgid ""
 "DataViva is a visualization tool that provides official data on trade, "
 "industries, and education throughout Brazil, in eleven visualizations and"
-" over 100 million views."
+" over 1 billion views."
 msgstr ""
 "O DataViva é uma ferramenta de visualização que disponibiliza dados "
 "oficiais sobre  exportações, atividades econômicas, localidades e "
-"ocupações de todo o Brasil, em onze visualizações e mais de 100 milhões "
+"ocupações de todo o Brasil, em onze visualizações e mais de 1 bilhão "
 "de visualizações."
 
 #: dataviva/templates/about/ask/index.html:9
