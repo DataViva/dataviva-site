@@ -21,10 +21,16 @@
             @click="close()">&times;
           </a>
         </div>
-        <SelectedFilter
-          v-if="filterItem"
-          :item="mountItem(filterItem, 0, filterItemDepth)"
-          @remove-filter="clear_filter();"/>
+        <template v-if="!loading">
+          <SelectedFilter
+            v-if="filterItem"
+            :item="mountItem(filterItem, 0, filterItemDepth)"
+            @remove-filter="clear_filter();"
+            canRemove/>
+          <SelectedFilter
+            v-else-if="defaultOption"
+            :item="defaultOption"/>
+        </template>
         <div
           class="ph4 h-75 relative">
           <!-- Filters and aggregations -->
@@ -131,6 +137,7 @@ export default {
         search: "",
       },
       filterItem: null,
+      defaultOption: null,
       filterItemDepth: 0,
       numericData: null,
       maxJsonSize: 300000,
@@ -166,6 +173,8 @@ export default {
 
         this.readMountedDataFromLocalStorage();
 
+        this.setDefaultOption(this.db);
+
         if (!this.items && this.db.extraInfo.endpoint) {
           this.getNumericData();
         } else if (!this.items) {
@@ -188,6 +197,13 @@ export default {
     splitString(string, size) {
       const re = new RegExp(`.{1,${size}}`, "g");
       return string.match(re);
+    },
+    setDefaultOption({defaultOption}) {
+      if (defaultOption) {
+        this.defaultOption = defaultOption;
+        this.defaultOption.name = this.$t(this.defaultOption.name);
+        this.defaultOption.url = this.getUrl(defaultOption);
+      }
     },
     readMountedDataFromLocalStorage() {
       if (this.checkLocalStorageSupport()) {
@@ -537,7 +553,7 @@ export default {
       return null;
     },
     locationPath(item) {
-      return `/${this.db.code}/${item.old_id}`;
+      return `/${this.lang}/${this.db.code}/${item.old_id}`;
     },
     industryPath(item, search, depth) {
       /* eslint-disable */
@@ -545,7 +561,7 @@ export default {
         case 1:
         case 2:
           if (item.industry_section) {
-            return `/${this.db.code}/${item.industry_section.id}${item.id}${search}`;
+            return `/${this.lang}/${this.db.code}/${item.industry_section.id}${item.id}${search}`;
           }
         default:
           return this.defaultPath(item, search);
@@ -557,7 +573,7 @@ export default {
       switch (depth) {
         case 1:
           if (item.product_section) {
-            return `/${this.db.code}/${item.product_section.id}${item.id}${search}`;
+            return `/${this.lang}/${this.db.code}/${item.product_section.id}${item.id}${search}`;
           }
           break;
         default:
@@ -569,14 +585,14 @@ export default {
       /* eslint-disable */
       switch (depth) {
         case 1:
-          return `/${this.db.code}/${item.abbrv}${search}`;
+          return `/${this.lang}/${this.db.code}/${item.abbrv}${search}`;
         default:
           return this.defaultPath(item, search);
       }
       /* eslint-enable */
     },
     defaultPath(item, search) {
-      return `/${this.db.code}/${item.id}${search}`;
+      return `/${this.lang}/${this.db.code}/${item.id}${search}`;
     },
     hasPath() {
       const path = window.location.pathname;

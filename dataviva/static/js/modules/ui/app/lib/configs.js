@@ -64,6 +64,13 @@ export const databases = {
       database: "IBGE",
       year: "2017",
     },
+    defaultOption: {
+      img: "https://dataviva-site-production.s3.amazonaws.com/static/img/icons/wld/105.png",
+      color: "#676a6c",
+      name: "message.brazil",
+      url: "location/all",
+      old_id: "all"
+    },
   },
   occupation: {
     name: "message.occupations",
