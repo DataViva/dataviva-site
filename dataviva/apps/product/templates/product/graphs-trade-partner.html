@@ -77,7 +77,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-line'}}" data-parent="#exports-port">
                     {% trans %}Line{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=export&excluded_year=2018&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-destination">
                     {%trans%}Bar{%endtrans%}
                 <a href="/{{ g.locale }}/tree_map/secex/port/value?values=value+kg&type=export&year=2017&product={{ product.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
@@ -148,7 +148,7 @@
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-line'}}" data-parent="#new-api-imports-port">
                     {% trans %}Line{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                <a href="/{{ g.locale }}/bar/secex/value,kg/port?type=import&excluded_year=2018&options=singlecolor,month&product={{product.id}}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-trade-partner" class="list-group-item {{'selected' if graph.menu == 'imports-port-bar'}}" data-parent="#imports-destination">
                     {%trans%}Bar{%endtrans%}
                   <a href="/{{ g.locale }}/tree_map/secex/port/value?values=value+kg&type=import&year=2017&product={{ product.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
