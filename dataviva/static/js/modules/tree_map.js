@@ -69,7 +69,12 @@ var buildData = function(apiResponse) {
                 }
             });
            
-            dataItem[squares] = metadata[squares][dataItem[squares]]['name_' + lang];
+            var propName = metadata[squares][dataItem[squares]]['name_' + lang];
+
+            if (propName.indexOf(">") > 0) {
+                propName += ' ';
+            }
+            dataItem[squares] = propName;
 
             if (dataItem.hasOwnProperty('entrants'))
                 dataItem['entrants'] = parseInt(dataItem['entrants']);
