@@ -252,7 +252,7 @@ export const databases = {
     orderLabels: ["message.name", "message.enrolled"],
     extraInfo: {
       label: "message.enrolled",
-      endpoint: "hedu/university/?value=enrolled&year=2016&order=university",
+      endpoint: "hedu/university/?value=enrolled&year=2017&order=university",
       id: "university",
       dataValue: "enrolleds",
     },
@@ -271,7 +271,7 @@ export const databases = {
     },
     source: {
       database: "Censo da Educação Superior",
-      year: "2016",
+      year: "2017",
     },
   },
   major: {
@@ -284,7 +284,7 @@ export const databases = {
     orderLabels: ["message.name", "message.enrolled"],
     extraInfo: {
       label: "message.enrolled",
-      endpoint: "hedu/hedu_course/?value=enrolled&year=2016&order=hedu_course",
+      endpoint: "hedu/hedu_course/?value=enrolled&year=2017&order=hedu_course",
       id: "hedu_course",
       dataValue: "enrolleds",
     },
@@ -322,7 +322,7 @@ export const databases = {
     },
     source: {
       database: "Censo da Educação Superior",
-      year: "2016",
+      year: "2017",
     },
   },
   basic_course: {
