@@ -81,6 +81,7 @@ def index(dataset, x, y):
     id_ibge = request.args.get('id_ibge')
     type = request.args.get('type')
     wld = request.args.get('wld')
+    excluded_year= request.args.get('excluded_year')
     establishment = request.args.get('establishment')
     occupation = request.args.get('occupation')
     industry = request.args.get('industry')
@@ -99,6 +100,9 @@ def index(dataset, x, y):
     if type:
         filters.append(('type', type))
         title_attrs['type'] = type
+
+    if excluded_year:
+        filters.append(('year!', excluded_year))
 
     if request.args.get('filters'):
         filters.append(('filters', request.args.get('filters')))
