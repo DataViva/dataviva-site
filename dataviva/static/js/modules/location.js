@@ -268,7 +268,7 @@ $(document).ready(function(){
 
 
     General.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         preffix: 'R$',
         title: dictionary['average_wage'],
         label: '',
@@ -277,7 +277,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['total_jobs'],
         label: '',
         value: 'jobs',
@@ -555,7 +555,7 @@ $(document).ready(function(){
     }
 
     BlueBox.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['avg_wage'],
         prefix: 'R$',
         label: dictionary['avg_wage'],
@@ -564,7 +564,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['wage'],
         prefix: 'R$',
         label: dictionary['wage'],
@@ -573,7 +573,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['total_jobs'],
         label: dictionary['total_jobs'],
         value: 'jobs',
