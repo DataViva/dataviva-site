@@ -223,7 +223,7 @@ $(document).ready(function(){
     });
     if(idIbge){
         General.add({
-            url: dataviva.api_url + 'rais/year/industry_class/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_class/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             label: {
                     metadata: true,
@@ -233,7 +233,7 @@ $(document).ready(function(){
             id: 'wage'
         });
         General.add({
-            url: dataviva.api_url + 'rais/year/occupation_family/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_family/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             label: {
                     metadata: true,
@@ -245,7 +245,7 @@ $(document).ready(function(){
     }
     else{
         General.add({
-            url: dataviva.api_url + 'rais/year/industry_section/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_section/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             label: {
                     metadata: true,
@@ -255,7 +255,7 @@ $(document).ready(function(){
             id: 'wage'
         });
         General.add({
-            url: dataviva.api_url + 'rais/year/occupation_group/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_group/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             label: {
                     metadata: true,
@@ -268,7 +268,7 @@ $(document).ready(function(){
 
 
     General.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         preffix: 'R$',
         title: dictionary['average_wage'],
         label: '',
@@ -277,7 +277,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['total_jobs'],
         label: '',
         value: 'jobs',
@@ -505,7 +505,7 @@ $(document).ready(function(){
     //WAGE AND JOBS
     if(!idIbge){
         BlueBox.add({
-            url: dataviva.api_url + 'rais/year/industry_section/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_section/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -517,7 +517,7 @@ $(document).ready(function(){
         });
 
         BlueBox.add({
-            url: dataviva.api_url + 'rais/year/occupation_group/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_group/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -529,7 +529,7 @@ $(document).ready(function(){
         });
     } else {
         BlueBox.add({
-            url: dataviva.api_url + 'rais/year/industry_class/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/industry_class/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_economic_activity'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -541,7 +541,7 @@ $(document).ready(function(){
         });
 
         BlueBox.add({
-            url: dataviva.api_url + 'rais/year/occupation_family/?order=jobs&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'rais/year/occupation_family/?order=jobs&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['main_occupation'],
             subtitle: dictionary['by_jobs'],
             label: {
@@ -555,7 +555,7 @@ $(document).ready(function(){
     }
 
     BlueBox.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['avg_wage'],
         prefix: 'R$',
         label: dictionary['avg_wage'],
@@ -564,7 +564,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['wage'],
         prefix: 'R$',
         label: dictionary['wage'],
@@ -573,7 +573,7 @@ $(document).ready(function(){
     });
 
     BlueBox.add({
-        url: dataviva.api_url + 'rais/year/?year=2016&' + filter,
+        url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
         title: dictionary['total_jobs'],
         label: dictionary['total_jobs'],
         value: 'jobs',
