@@ -1,0 +1,19 @@
+<div id="graphs-education" class="container">
+    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3" >
+        <h3>{% trans %}Preview{% endtrans %}:</h3>
+        <div class="list-group panel">
+            {% include "location/basic-education-particle.html" %}
+        </div>
+    </nav>
+    <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
+        <div class="embed-responsive responsive-wrapper">
+            <iframe src="{% if not graph %} /{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency+sc_school&sc_course_field!=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}
+                        {% else %} /{{ g.locale }}/{{graph.url}} {% endif %}"
+                name="graphs-frame-education"
+                id="graphs-frame-education"
+                class="embed-responsive-item">
+            </iframe>
+        </div>
+    </div>
+</div>
+    
