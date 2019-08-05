@@ -120,13 +120,13 @@
                 {% if trade_partner.id_mdic %}
                 <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&country={{ '%03d' % (trade_partner.id_mdic) }}&type=import"
                     target="graphs-frame-international-trade"
-                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}"
-                    data-parent="#exports-destination">
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-map'}}"
+                    data-parent="#new-api-imports-origin">
                 {% else %}
                 <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&continent={{ trade_partner.id }}&type=import"
                     target="graphs-frame-international-trade"
-                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}"
-                    data-parent="#exports-destination">
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-map'}}"
+                    data-parent="#new-api-imports-origin">
                 {% endif %}
                     {% trans %}Map{% endtrans %}
                 </a>
