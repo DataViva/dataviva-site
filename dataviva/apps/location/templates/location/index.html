@@ -14,7 +14,7 @@
             {% trans %}Wages and Jobs{% endtrans %}
         {% elif tab == 'opportunities' %}
             {% trans %}Economic Opportunities{% endtrans %}
-        {% elif tab == 'education' %}
+        {% elif tab == 'education' or tab == 'basic-education' %}
             {% trans %}Education{% endtrans %}
         {% endif %}"/>
     <meta property="og:description" content="
@@ -250,6 +250,15 @@
                        data-id="{{ location.id }}"
                        data-toggle="tab">{% trans %}Education{% endtrans %}</a>
                 </li>
+                {% else %}
+                <li role="presentation" class="{{ 'active' if tab == 'basic-education' }}">
+                    <a href="#basic-education"
+                        aria-controls="basic-education"
+                        role="tab"
+                        graph
+                        data-id="{{ location.id }}"
+                        data-toggle="tab">{% trans %}Education{% endtrans %}</a>
+                </li>
                 {% endif %}
                 <li role="presentation" class="{{ 'active' if tab == 'health' }}">
                     <a href="#health"
@@ -279,6 +288,8 @@
 
           {% if body.university_year is not none %}
             {% include "location/tab-education.html" %}
+          {% else %}
+            {% include "location/tab-basic-education.html" %}
           {% endif %}
 
           {% include "location/tab-health.html" %}

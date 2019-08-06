@@ -1,0 +1,44 @@
+<h4>{% trans %}Professional Education By{% endtrans %}</h4>
+<a href="#professional-education-school" class="list-group-item" data-toggle="collapse" data-parent="#professional-education-school">{% trans %}School{% endtrans %}</a>
+<div class="collapse" id="professional-education-school">
+    <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency+sc_school&sc_course_field!=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+        target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map' }}"
+        data-parent="#professional-education-school">
+        TreeMap
+    </a>
+</div>
+
+<a href="#professional-education-course" class="list-group-item" data-toggle="collapse" data-parent="#professional-education-course">{% trans %}Course{% endtrans %}</a>
+<div class="collapse" id="professional-education-course">
+    <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?colors=students+average_age&sizes=students+classes&depths=sc_course_field+sc_course&sc_course_field!=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+        target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-professional-education-course-tree_map' }}" data-parent="#new-api-professional-education-course">
+        TreeMap
+    </a>
+</div>
+
+<h4>{% trans %}Basic Education By{% endtrans %}</h4>
+<a href="#basic-education-administrative-dependencie" class="list-group-item" data-toggle="collapse" data-parent="#basic-education-administrative-dependencie">{% trans %}Administrative Dependency{% endtrans %}</a>
+<div class="collapse" id="basic-education-administrative-dependencie">
+    <a href="/{{ g.locale }}/tree_map/sc/administrative_dependency/students?colors=students+average_age&sizes=students+classes&depths=administrative_dependency+sc_school&sc_course_field=xx{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+        target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'professional-education-school-tree_map'}}" data-parent="#professional-education-school">
+        TreeMap
+    </a>
+</div>
+
+<a href="#basic-education-level" class="list-group-item" data-toggle="collapse" data-parent="#basic-education-level">{% trans %}Education Level{% endtrans %}</a>
+<div class="collapse" id="basic-education-level">
+    <a href="/{{ g.locale }}/tree_map/sc/sc_course/students?sizes=students+classes&colors=students+average_age&sc_course_field=xx&nuances=singlecolor{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+        target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-basic-education-level-tree_map' or tab == 'basic-education' }}" data-parent="#new-api-basic-education-level">
+        TreeMap
+    </a>
+</div>
+
+{% if not is_municipality %}
+    <a href="#basic-education-municipality" class="list-group-item" data-toggle="collapse" data-parent="#basic-education-municipality">{% trans %}Municipality{% endtrans %}</a>
+    <div class="collapse" id="basic-education-municipality">
+        <a href="/{{ g.locale }}/tree_map/sc/municipality/students?sizes=students+classes&colors=students+average_age{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+        target="graphs-frame-education" class="list-group-item {{'selected' if graph.menu == 'new-api-basic-education-municipality-tree_map' }}" data-parent="#new-api-basic-education-municipality">
+            TreeMap
+        </a>
+    </div>
+{% endif %}
