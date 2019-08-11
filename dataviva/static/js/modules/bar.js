@@ -582,7 +582,7 @@ var loadViz = function(data){
         if ($('#controls').css('display') == 'none')
             $('#controls').fadeToggle();
         
-        toolsBuilder('bar', visualization, data, titleHelper(yearRange));
+        toolsBuilder('bar', visualization, data, titleHelper(yearRange).value);
 };
 
 var getSelectedYears = function() {
