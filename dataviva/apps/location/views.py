@@ -400,7 +400,8 @@ def index(bra_id, tab):
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
             'bg_class_image': background_image,
-            'year': location_service.year()
+            'year': location_service.year(),
+            'year_dhs': location_service.year_dhs()
         }
 
     if eci is not None:

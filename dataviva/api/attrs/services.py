@@ -60,6 +60,7 @@ class Location:
 
     def __init__(self, bra_id):
         self._attrs_list = None
+        self._attrs_list_dhs = None
         self._ybs_sorted_by_ranking = None
         self.bra_id = bra_id
         if len(bra_id) != 9 and len(bra_id) != 3:
@@ -73,9 +74,13 @@ class Location:
         else:
             self.max_year_query = db.session.query(
                 func.max(Ybs.year)).filter_by(bra_id=bra_id)
+            self.max_year_dhs = self.year_dhs()
             self.attrs_query = Ybs.query.filter(
                 Ybs.bra_id == self.bra_id,
                 Ybs.year == self.max_year_query)
+            self.attrs_query_dhs = Ybs.query.filter(
+                Ybs.bra_id == self.bra_id,
+                Ybs.year == self.max_year_dhs)
 
     def __ybs_sorted_by_ranking__(self):
         if not self._ybs_sorted_by_ranking:
@@ -99,6 +104,12 @@ class Location:
             self._attrs_list = attrs_data
         return self._attrs_list
 
+    def __attrs_list_dhs__(self):
+        if not self._attrs_list_dhs:
+            attrs_data = self.attrs_query_dhs.all()
+            self._attrs_list_dhs = attrs_data
+        return self._attrs_list_dhs
+
     def gdp(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'gdp'),
@@ -106,13 +117,13 @@ class Location:
         return attr.stat_val
 
     def hdi(self):
-        attrs = self.__attrs_list__()
+        attrs = self.__attrs_list_dhs__()
         attr = next((attr for attr in attrs if attr.stat_id == 'hdi'),
                     None)
         return attr.stat_val
 
     def life_expectation(self):
-        attrs = self.__attrs_list__()
+        attrs = self.__attrs_list_dhs__()
         attr = next((attr for attr in attrs if attr.stat_id == 'life_exp'),
                     None)
         return attr.stat_val
@@ -135,6 +146,9 @@ class Location:
 
     def year(self):
         return self.max_year_query.first()[0]
+
+    def year_dhs(self):
+        return 2010
 
     def number_of_locations(self, bra_length):
         if bra_length == 1 or bra_length == 3:
