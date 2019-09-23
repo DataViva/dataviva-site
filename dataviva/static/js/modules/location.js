@@ -148,7 +148,7 @@ $(document).ready(function(){
     }
     //EDUCATION
     General.add({
-        url: dataviva.api_url + "hedu/university/?year=2016&order=enrolleds&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "hedu/university/?year=2017&order=enrolleds&direction=desc&limit=1&" + filter,
         title:  dictionary['university_higher_enrollments'],
         label: {
                 metadata: true,
@@ -159,7 +159,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: dataviva.api_url + "hedu/hedu_course/?year=2016&order=enrolleds&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "hedu/hedu_course/?year=2017&order=enrolleds&direction=desc&limit=1&" + filter,
         title:  dictionary['course_higher_enrollments'],
         label: {
                 metadata: true,
@@ -420,7 +420,7 @@ $(document).ready(function(){
 
     //EDUCATION
     BlueBox.add({
-            url: dataviva.api_url + 'hedu/year/university/?order=enrolleds&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'hedu/year/university/?order=enrolleds&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['university'],
             subtitle: dictionary['highest_enrolleds'],
             label: {
@@ -432,7 +432,7 @@ $(document).ready(function(){
     });
     if(idIbge){
         BlueBox.add({
-                url: dataviva.api_url + 'hedu/year/hedu_course/?order=enrolleds&year=2016&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'hedu/year/hedu_course/?order=enrolleds&year=2017&direction=desc&limit=1&' + filter,
                 title: dictionary['major'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
@@ -444,7 +444,7 @@ $(document).ready(function(){
         });
     }else{
         BlueBox.add({
-                url: dataviva.api_url + 'hedu/year/hedu_course_field/?order=enrolleds&year=2016&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'hedu/year/hedu_course_field/?order=enrolleds&year=2017&direction=desc&limit=1&' + filter,
                 title: dictionary['major'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
