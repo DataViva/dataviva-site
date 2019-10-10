@@ -299,3 +299,7 @@ dictionary['billions'] = lang == 'en' ? 'Billions' : 'Bilhões';
 dictionary['millions'] = lang == 'en' ? 'Millions' : 'Milhões';
 
 dictionary['thousand'] = lang == 'en' ? 'Thousand' : 'Mil';
+
+// Occupation
+dictionary['principal'] = lang == 'en' ? 'Principal' : 'Principal';
+dictionary['municipality_by_jobs'] = lang == 'en' ? 'Municipality by Jobs' : 'Municípios por Empregos';
