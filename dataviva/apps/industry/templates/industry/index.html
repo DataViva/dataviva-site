@@ -19,6 +19,8 @@
 
 {% block content %}
 
+<input type="hidden" id="id_ibge" value="{{id_ibge}}">
+<input type="hidden" id="industry_id" value="{{industry.id}}">
 <!-- BREADCRUMB -->
 <div class="container">
     <div class="row bg-white">
@@ -233,3 +235,9 @@
 </section>
 
 {% endblock content %}
+
+{% block script %}
+    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+    <script type="text/javascript" src="/static/js/modules/industry.js"></script>
+{% endblock %}

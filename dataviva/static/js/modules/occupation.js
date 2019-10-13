@@ -19,7 +19,7 @@ $(document).ready(function () {
     var occupationId = $('#occupation_id').val();
     var occupationFilter = isNaN(occupationId) ? '' : `${occupations[occupationId.length]}=${occupationId}`;
 
-    var isMunicipality = idIbge.length == 7;
+    var isMunicipality = idIbge.length === 7;
     var { pathname } = location;
     var lang = pathname && pathname.split('/')[1];
 

@@ -285,6 +285,8 @@ dictionary['number_equipments'] = lang == 'en' ? 'Number of Equipments' : 'Núme
 dictionary['main_equipment_type'] = lang == 'en' ? 'Main Equipment Type' : 'Principal Tipo Equipamento';
 
 dictionary['main_occupation'] = lang == 'en' ? 'Main Occupation' : 'Principal Ocupação';
+dictionary['occupation'] = lang == 'en' ? 'Occupation' : 'Ocupação';
+dictionary['with_more_jobs'] = lang == 'en' ? 'with highest number of jobs' : 'com maior número de empregos';
 dictionary['by_jobs'] = lang == 'en' ? 'by jobs' : 'por empregos';
 
 dictionary['main_bed_type'] = lang == 'en' ? 'Main Bed Type' : 'Principal Tipo Leito';
@@ -300,6 +302,6 @@ dictionary['millions'] = lang == 'en' ? 'Millions' : 'Milhões';
 
 dictionary['thousand'] = lang == 'en' ? 'Thousand' : 'Mil';
 
-// Occupation
 dictionary['principal'] = lang == 'en' ? 'Principal' : 'Principal';
 dictionary['municipality_by_jobs'] = lang == 'en' ? 'Municipality by Jobs' : 'Municípios por Empregos';
+dictionary['highest_average_income'] = lang == 'en' ? 'with highest monthly average income' : 'com maior renda média mensal';
