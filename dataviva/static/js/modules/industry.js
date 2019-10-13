@@ -1,12 +1,11 @@
 var notDefined = 'None';
 
-// Ocupação com maior número de empregos
 function addMainOccupationJobs(filters, id, tab) {
      var query = {
-        url: dataviva.api_url + 'rais/year/industry_class/industry_section/industry_division/?order=jobs&' + filters,
+        url: dataviva.api_url + 'rais/year/occupation_family/?order=jobs&' + filters,
         label: {
             metadata: true,
-            value: 'industry_class'
+            value: 'occupation_family'
         },
         value: 'jobs'
     }
@@ -19,7 +18,6 @@ function addMainOccupationJobs(filters, id, tab) {
     );
 }
 
-// Município com maior número de empregos
 function addMainMunicipalityJobs(filters, id, tab) {
     var query = {
         url: dataviva.api_url + 'rais/municipality/?order=jobs&' + filters,
@@ -38,13 +36,12 @@ function addMainMunicipalityJobs(filters, id, tab) {
     );
 }
 
-// Ocupação com maior renda média mensal
 function addOccupationWithHighestAverageWage(filters, id, tab) {
      var query = {
-        url: dataviva.api_url + 'rais/year/industry_class/?order=average_wage&' + filters,
+        url: dataviva.api_url + 'rais/year/occupation_family/?order=average_wage&' + filters,
         label: {    
             metadata: true,
-            value: 'industry_class'
+            value: 'occupation_family'
         },
         value: 'average_wage',
     }
@@ -57,7 +54,6 @@ function addOccupationWithHighestAverageWage(filters, id, tab) {
     );
 }
 
-// Município com maior renda média mensal
 function addMunicipalityWithHighestAverageWage(filters, id, tab) {
      var query = {
         url: dataviva.api_url + 'rais/municipality/?order=average_wage&' + filters,
@@ -89,13 +85,20 @@ function getLocationFilter(idIbge) {
 } 
 
 function getIndustryFilter(industryId) {
+    var idLen = industryId.length;
     var industrys = {
         1: "industry_section",
         3: "industry_division",
-        6: "class"
+        6: "industry_class"
     }
 
-    return industryId && industryId === notDefined ? '' : industrys[industryId.length] + '=' + industryId;
+    if(!industryId || industryId === notDefined || !industrys[idLen]) {
+        return '';
+    }
+
+    var id = idLen === 1 ? industryId : industryId.replace(/\D/g,'');
+
+    return  industrys[idLen] + '=' + id;
 }
 
 $(document).ready(function () {
@@ -114,7 +117,7 @@ $(document).ready(function () {
 
     var year = "year=2015&";
     var filterBiggest = "limit=1&direction=desc&";
-    var filters = filterBiggest + year + locationFilter + industryFilter;
+    var filters = filterBiggest + year + industryFilter + '&' + locationFilter;
 
     addMainOccupationJobs(filters, id, tab);
 
