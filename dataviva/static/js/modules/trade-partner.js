@@ -30,7 +30,7 @@ $(document).ready(function(){
             url: dataviva.api_url + 'secex/year/municipality/?order=value&year=2018&direction=desc&limit=1&type=export&' + filter,
             title: dictionary['main_municipality'],
             subtitle: dictionary['by_value_exported'],
-            preffix: 'USD ',
+            prefix: 'USD ',
             label: {
                 metadata: true,
                 value: 'municipality'
@@ -43,7 +43,7 @@ $(document).ready(function(){
             url: dataviva.api_url + 'secex/year/municipality/?order=value&year=2018&direction=desc&limit=1&type=import&' + filter,
             title: dictionary['main_municipality'],
             subtitle: dictionary['by_value_imported'],
-            preffix: 'USD ',
+            prefix: 'USD ',
             label: {
                 metadata: true,
                 value: 'municipality'
@@ -55,7 +55,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + 'secex/year/municipality/?order=value&year=2018&direction=desc&limit=1&type=export&' + filter,
             title: dictionary['main_municipality_export'],
-            preffix: 'USD ',
+            prefix: 'USD ',
             label: {
                     metadata: true,
                     value: 'municipality'
@@ -67,7 +67,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + 'secex/year/municipality/?order=value&year=2018&direction=desc&limit=1&type=import&' + filter,
             title: dictionary['main_municipality_import'],
-            preffix: 'USD ',
+            prefix: 'USD ',
             label: {
                     metadata: true,
                     value: 'municipality'
@@ -82,7 +82,7 @@ $(document).ready(function(){
         url: dataviva.api_url + 'secex/year/product/?order=value&year=2018&direction=desc&limit=1&type=export&' + filter,
         title: dictionary['main_product'],
         subtitle: dictionary['exported'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
             metadata: true,
             value: 'product'
@@ -95,7 +95,7 @@ $(document).ready(function(){
         url: dataviva.api_url + 'secex/year/product/?order=value&year=2018&direction=desc&limit=1&type=import&' + filter,
         title: dictionary['main_product'],
         subtitle: dictionary['imported'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
             metadata: true,
             value: 'product'
@@ -108,7 +108,7 @@ $(document).ready(function(){
         url: dataviva.api_url + 'secex/year/type/product/?year=2018&' + filter,
         title: dictionary['product_highest'],
         subtitle: dictionary['trade_balance'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
             metadata: true,
             value: 'product',
@@ -129,7 +129,7 @@ $(document).ready(function(){
         url: dataviva.api_url + 'secex/year/type/product/?year=2018&' + filter,
         title: dictionary['product_lowest'],
         subtitle: dictionary['trade_balance'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
             metadata: true,
             value: 'product',
@@ -151,7 +151,7 @@ $(document).ready(function(){
     Indicator.add({
         url: dataviva.api_url + "secex/year/type/?year=2018&" + filter,
         title: dictionary['trade_balance'] + ' (2018)',
-        preffix: 'R$ ',
+        prefix: 'R$ ',
         value:  function (response) {
             var importValue = response.filter(function(item){return item.type == 'import'})[0].value;
             var exportValue = response.filter(function(item){return item.type == 'export'})[0].value;
@@ -162,7 +162,7 @@ $(document).ready(function(){
     Indicator.add({
         url: dataviva.api_url + "secex/year/?year=2018&type=export&" + filter,
         title: dictionary['total_value_exported'] + ' (2018)',
-        preffix: 'R$ ',
+        prefix: 'R$ ',
         value:  'value'
     });
 
@@ -177,7 +177,7 @@ $(document).ready(function(){
     Indicator.add({
         url: dataviva.api_url + "secex/year/?year=2018&type=import&" + filter,
         title: dictionary['total_value_imported'] + ' (2018)',
-        preffix: 'R$ ',
+        prefix: 'R$ ',
         value:  'value'
     });
 
@@ -193,7 +193,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + 'secex/year/product/?order=value&year=2018&direction=desc&limit=1&type=export&' + filter,
         title: dictionary['main_product_export'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
                 metadata: true,
                 value: 'product'
@@ -205,7 +205,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + 'secex/year/product/?order=value&year=2018&direction=desc&limit=1&type=import&' + filter,
         title: dictionary['main_product_import'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
                 metadata: true,
                 value: 'product'
@@ -281,7 +281,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + 'secex/year/type/product/?year=2018&' + filter,
         title: dictionary['product_highest_balance'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
             metadata: true,
             value: 'product',
@@ -301,7 +301,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + 'secex/year/type/product/?year=2018&' + filter,
         title: dictionary['product_lowest_balance'],
-        preffix: 'USD ',
+        prefix: 'USD ',
         label: {
             metadata: true,
             value: 'product',

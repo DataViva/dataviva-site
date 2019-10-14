@@ -101,7 +101,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product_section/?type=export&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_export'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product_section'
@@ -113,7 +113,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product_section/?type=import&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_import'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product_section'
@@ -125,7 +125,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product/?type=export&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_export'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product'
@@ -137,7 +137,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product/?type=import&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_import'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product'
@@ -207,7 +207,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + "secex/year/?type=export&year=2018&" + filter,
         title:  dictionary['total_export'],
-        preffix: 'USD',
+        prefix: 'USD',
         label: '',
         value: 'value',
         id: 'trade'
@@ -216,7 +216,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + "secex/year/?type=import&year=2018&" + filter,
         title:  dictionary['total_import'],
-        preffix: 'USD',
+        prefix: 'USD',
         label: '',
         value: 'value',
         id: 'trade'
@@ -269,7 +269,7 @@ $(document).ready(function(){
 
     General.add({
         url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
-        preffix: 'R$',
+        prefix: 'R$',
         title: dictionary['average_wage'],
         label: '',
         value: 'average_wage',

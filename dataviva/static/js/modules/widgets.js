@@ -45,7 +45,7 @@ var General = (function(){
               '<dt>{{title}}</dt>'+
               '<dd>'+
                 '<small>{{label}}</small>'+
-                '<strong class="counter">{{preffix}} {{value}} </strong>'+
+                '<strong class="counter">{{prefix}} {{value}} </strong>'+
                 '<span> {{magnitude}}</span>'+
               '</dd>'+
           '</dl>';
@@ -107,7 +107,7 @@ var General = (function(){
                                 .replace('{{label}}', label.toUpperCase() || '')
                                 .replace('{{value}}', value)
                                 .replace('{{magnitude}}', magnitude)
-                                .replace('{{preffix}}', data.preffix || '' )
+                                .replace('{{prefix}}', data.prefix || '' )
                                 .replace('dl-horizontal loading', 'dl-horizontal');
 
             data.template.replaceWith(filledTemplate);
@@ -125,7 +125,7 @@ var Indicator = (function(){
         '<div class="widget loading">' +
             '<h2 class="text-left text-uppercase">{{title}}</h2>' +
             '<div class="number">' +
-                '{{preffix}} <strong class="counter">{{value}}</strong><br/>' +
+                '{{prefix}} <strong class="counter">{{value}}</strong><br/>' +
                 '<small class="magnitude">{{magnitude}}{{suffix}}</small>' +
             '</div>' +
         '</div>' +
@@ -165,7 +165,7 @@ var Indicator = (function(){
                 var filledTemplate = template.replace('{{title}}', data.title || '')
                                     .replace('{{value}}', value)
                                     .replace('{{magnitude}}', magnitude)
-                                    .replace('{{preffix}}', data.preffix || '' )
+                                    .replace('{{prefix}}', data.prefix || '' )
                                     .replace('{{suffix}}', data.suffix || '' )
                                     .replace('loading', '');
 
