@@ -39,6 +39,7 @@ function addMainMunicipalityJobs(filters, id, tab) {
 function addOccupationWithHighestAverageWage(filters, id, tab) {
      var query = {
         url: dataviva.api_url + 'rais/year/occupation_family/?order=average_wage&' + filters,
+        prefix: 'R$',
         label: {    
             metadata: true,
             value: 'occupation_family'
@@ -57,6 +58,7 @@ function addOccupationWithHighestAverageWage(filters, id, tab) {
 function addMunicipalityWithHighestAverageWage(filters, id, tab) {
      var query = {
         url: dataviva.api_url + 'rais/municipality/?order=average_wage&' + filters,
+        prefix: 'R$',
         label: {
             metadata: true,
             value: 'municipality'
