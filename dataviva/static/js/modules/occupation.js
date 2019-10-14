@@ -1,5 +1,78 @@
-$(document).ready(function () {
+var notDefined = 'None';
 
+function addMainMunicipalityJobs(filters, id, tab) {
+    var query = {
+        url: dataviva.api_url + 'rais/municipality/?order=jobs&' + filters,
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'jobs'
+    }
+
+    General.add(
+        $.extend({}, query, { title: dictionary['main_municipality_jobs'], id })
+    );
+    BlueBox.add(
+        $.extend({}, query, { title: dictionary['main'], subtitle: dictionary['municipality_by_jobs'], tab })
+    );
+}
+
+function addMainActivityJobs(filters, id, tab) {
+    var query = {
+        url: dataviva.api_url + 'rais/year/industry_class/industry_section/industry_division/?order=jobs&' + filters,
+        label: {
+            metadata: true,
+            value: 'industry_class'
+        },
+        value: 'jobs'
+    }
+
+    General.add(
+        $.extend({}, query, { title: dictionary['main_activity_jobs'], id })
+    );
+    BlueBox.add(
+        $.extend({}, query, { title: dictionary['main'], subtitle: dictionary['activity_jobs'], tab })
+    );
+}
+
+function addAverageWage(filters, id, tab) {
+    var query = {
+        url: dataviva.api_url + 'rais/municipality/?order=average_wage&' + filters,
+        label: {
+            metadata: true,
+            value: 'municipality'
+        },
+        value: 'average_wage',
+    }
+
+    General.add(
+        $.extend({}, query, { title: dictionary['municipality_highest_average_income'], id })
+    );
+    BlueBox.add(
+        $.extend({}, query, { title: dictionary['principal'], subtitle: dictionary['activity_jobs'], tab })
+    );
+}
+
+function addAverageMonthlyIncome(filters, id, tab) {
+    var query = {
+        url: dataviva.api_url + 'rais/year/industry_class/?order=average_wage&' + filters,
+        label: {    
+            metadata: true,
+            value: 'industry_class'
+        },
+        value: 'average_wage',
+    }
+
+    General.add(
+        $.extend({}, query, { title: dictionary['activity_highest_average_income'], id })
+    );
+    BlueBox.add(
+        $.extend({}, query, { title: dictionary['activity_highest'], subtitle: dictionary['average_monthly_income'], tab })
+    );
+}
+
+function getLocationFilter(idIbge) {
     var locations = {
         1: "region",
         2: "state",
@@ -8,111 +81,50 @@ $(document).ready(function () {
         7: "municipality"
     };
 
+    return isNaN(idIbge) ? '' : locations[idIbge.length] + '=' + idIbge;
+} 
+
+function getOccupationFilter(occupationId) {
+    var idLen = occupationId.length;
     var occupations = {
         1: "occupation_group",
         4: "occupation_family"
     }
 
+    if(!occupationId || occupationId === notDefined || !occupations[idLen]) {
+        return '';
+    }
+
+    return  occupations[idLen] + '=' + occupationId;
+}
+
+$(document).ready(function () {
+    var id = 'occupation';
+    var tab = 'wages';
+
     var idIbge = $('#id_ibge').val();
-    var locationFilter = isNaN(idIbge) ? '' : `${locations[idIbge.length]}=${idIbge}&`;
+    var locationFilter = getLocationFilter(idIbge);
 
     var occupationId = $('#occupation_id').val();
-    var occupationFilter = isNaN(occupationId) ? '' : `${occupations[occupationId.length]}=${occupationId}`;
+    var occupationFilter = getOccupationFilter(occupationId);
 
     var isMunicipality = idIbge.length === 7;
-    var { pathname } = location;
+    var pathname = location.pathname;
     var lang = pathname && pathname.split('/')[1];
 
-    var year = "year=2015&";
-    var filter = `${year}${locationFilter}${occupationFilter}`;
-    var filterBiggest = "limit=1&direction=desc";
-    
-    var mainMunicipalityJobs = {
-        url: dataviva.api_url + `rais/municipality/?order=jobs&${filterBiggest}&${filter}`,
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'jobs'
-    }
-
-    var mainActivityJobs = {
-        url: dataviva.api_url + `rais/year/industry_class/industry_section/industry_division/?order=jobs&${filterBiggest}&${filter}`,
-        label: {
-            metadata: true,
-            value: 'industry_class'
-        },
-        value: 'jobs'
-    }
-
-    var averageWage = {
-        url: dataviva.api_url + `rais/municipality/?order=average_wage&${filterBiggest}&${filter}`,
-        label: {
-            metadata: true,
-            value: 'municipality'
-        },
-        value: 'average_wage',
-    }
-
-    // fix query
-    var averageMonthlyIncome = {
-        url: dataviva.api_url + `rais/year/industry_class/?order=average_wage&${filterBiggest}&${filter}`,
-        label: {    
-            metadata: true,
-            value: 'industry_class'
-        },
-        value: 'average_wage',
-    }
+    var year = 'year=2015&';
+    var filterBiggest = 'limit=1&direction=desc&';
+    var filters = filterBiggest + year + occupationFilter + '&' + locationFilter;
 
     if(!isMunicipality) {
-        General.add({
-            ...mainMunicipalityJobs,
-            title: dictionary['main_municipality_jobs'],
-            id: 'occupation'
-        });
-        BlueBox.add({
-            ...mainMunicipalityJobs,
-            title: dictionary['main'],
-            subtitle: dictionary['municipality_by_jobs'],
-            tab: 'wages'
-        });
+        addMainMunicipalityJobs(filters, id, tab)
     }
 
-    General.add({
-        ...mainActivityJobs,
-        title: dictionary['main_activity_jobs'],
-        id: 'occupation'
-    });
-    BlueBox.add({
-        ...mainActivityJobs,
-        title: dictionary['main'],
-        subtitle: dictionary['activity_jobs'],
-        tab: 'wages'
-    });
+    addMainActivityJobs(filters, id, tab)
 
     if(!isMunicipality) {
-        General.add({
-            ...averageWage,
-            title: dictionary['municipality_highest_average_income'],
-            id: 'occupation'
-        });
-        BlueBox.add({
-            ...averageWage,
-            title: dictionary['principal'],
-            subtitle: dictionary['activity_jobs'],
-            tab: 'wages'
-        });
+        addAverageWage(filters, id, tab);
     }
 
-    General.add({
-        ...averageMonthlyIncome,
-        title: dictionary['activity_highest_average_income'],
-        id: 'occupation'
-    });
-    BlueBox.add({
-        ...averageMonthlyIncome,
-        title: dictionary['activity_highest'],
-        subtitle: dictionary['average_monthly_income'],
-        tab: 'wages'
-    });
+    addAverageMonthlyIncome(filters, id, tab);
 });
