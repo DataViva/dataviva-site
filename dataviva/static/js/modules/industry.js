@@ -67,7 +67,7 @@ function addMunicipalityWithHighestAverageWage(filters, id, tab) {
     }
 
     General.add(
-        $.extend({}, query, { title: dictionary['municipality'] + '' + dictionary['highest_average_income'], id })
+        $.extend({}, query, { title: dictionary['municipality'] + ' ' + dictionary['highest_average_income'], id })
     );
     BlueBox.add(
         $.extend({}, query, { title: dictionary['municipality'], subtitle: dictionary['highest_average_income'], tab })
