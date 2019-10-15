@@ -74,38 +74,38 @@ function addMunicipalityWithHighestAverageWage(filters, id, tab) {
     );
 }
 
-function addIndicators(filters) {
+function addIndicators(filters, year) {
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?" + filters,
-        title: dictionary['average_income'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?' + filters,
+        title: dictionary['average_income'] + ' (' + year + ')',
         prefix: 'R$',
         value:  'average_wage'
     });
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?" + filters,
-        title: dictionary['payroll'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?' + filters,
+        title: dictionary['payroll'] + ' (' + year + ')',
         prefix: 'R$',
         value:  'wage'
     });
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?" + filters,
-        title: dictionary['total_employment'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?' + filters,
+        title: dictionary['total_employment'] + ' (' + year + ')',
         value:  'jobs'
     });
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?count=establishment&" + filters,
-        title: dictionary['total_establishments'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?count=establishment&' + filters,
+        title: dictionary['total_establishments'] + ' (' + year + ')',
         value:  'establishment_count'
     });
 }
 
 function getLocationFilter(idIbge) {
     var locations = {
-        1: "region",
-        2: "state",
-        4: "mesoregion",
-        5: "microregion",
-        7: "municipality"
+        1: 'region',
+        2: 'state',
+        4: 'mesoregion',
+        5: 'microregion',
+        7: 'municipality'
     };
 
     return isNaN(idIbge) ? '' : locations[idIbge.length] + '=' + idIbge;
@@ -114,9 +114,9 @@ function getLocationFilter(idIbge) {
 function getIndustryFilter(industryId) {
     var idLen = industryId.length;
     var industrys = {
-        1: "industry_section",
-        3: "industry_division",
-        6: "industry_class"
+        1: 'industry_section',
+        3: 'industry_division',
+        6: 'industry_class'
     }
 
     if(!industryId || industryId === notDefined || !industrys[idLen]) {
@@ -142,11 +142,12 @@ $(document).ready(function () {
     var tab = 'wages';
     var id = 'industry';
 
-    var year = "year=2017&";
-    var filterBiggest = "limit=1&direction=desc&";
-    var filters = filterBiggest + year + industryFilter + '&' + locationFilter;
+    var year = 2017;
+    var yearFilter = 'year=' + year + '&';
+    var filterBiggest = 'limit=1&direction=desc&';
+    var filters = filterBiggest + yearFilter + industryFilter + '&' + locationFilter;
 
-    addIndicators(filters);
+    addIndicators(filters, year);
 
     addMainOccupationJobs(filters, id, tab);
 

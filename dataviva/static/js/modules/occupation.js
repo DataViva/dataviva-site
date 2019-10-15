@@ -43,6 +43,7 @@ function addAverageWage(filters, id, tab) {
             metadata: true,
             value: 'municipality'
         },
+        prefix: 'R$',
         value: 'average_wage',
     }
 
@@ -61,6 +62,7 @@ function addAverageMonthlyIncome(filters, id, tab) {
             metadata: true,
             value: 'industry_class'
         },
+        prefix: 'R$',
         value: 'average_wage',
     }
 
@@ -72,38 +74,38 @@ function addAverageMonthlyIncome(filters, id, tab) {
     );
 }
 
-function addIndicators(filters) {
+function addIndicators(filters, year) {
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?" + filters,
-        title: dictionary['average_income'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?' + filters,
+        title: dictionary['average_income'] + ' (' + year + ')',
         prefix: 'R$',
         value:  'average_wage'
     });
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?" + filters,
-        title: dictionary['payroll'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?' + filters,
+        title: dictionary['payroll'] + ' (' + year + ')',
         prefix: 'R$',
         value:  'wage'
     });
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?" + filters,
-        title: dictionary['total_employment'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?' + filters,
+        title: dictionary['total_employment'] + ' (' + year + ')',
         value:  'jobs'
     });
     Indicator.add({
-        url: dataviva.api_url + "rais/year/?count=establishment&" + filters,
-        title: dictionary['total_establishments'] + ' (2017)',
+        url: dataviva.api_url + 'rais/year/?count=establishment&' + filters,
+        title: dictionary['total_establishments'] + ' (' + year + ')',
         value:  'establishment_count'
     });
 }
 
 function getLocationFilter(idIbge) {
     var locations = {
-        1: "region",
-        2: "state",
-        4: "mesoregion",
-        5: "microregion",
-        7: "municipality"
+        1: 'region',
+        2: 'state',
+        4: 'mesoregion',
+        5: 'microregion',
+        7: 'municipality'
     };
 
     return isNaN(idIbge) ? '' : locations[idIbge.length] + '=' + idIbge;
@@ -112,8 +114,8 @@ function getLocationFilter(idIbge) {
 function getOccupationFilter(occupationId) {
     var idLen = occupationId.length;
     var occupations = {
-        1: "occupation_group",
-        4: "occupation_family"
+        1: 'occupation_group',
+        4: 'occupation_family'
     }
 
     if(!occupationId || occupationId === notDefined || !occupations[idLen]) {
@@ -137,11 +139,12 @@ $(document).ready(function () {
     var pathname = location.pathname;
     var lang = pathname && pathname.split('/')[1];
 
-    var year = 'year=2017&';
+    var year = 2017;
+    var yearFilter = 'year=' + year + '&';
     var filterBiggest = 'limit=1&direction=desc&';
-    var filters = filterBiggest + year + occupationFilter + '&' + locationFilter;
+    var filters = filterBiggest + yearFilter + occupationFilter + '&' + locationFilter;
 
-    addIndicators(filters);
+    addIndicators(filters, year);
 
     if(!isMunicipality) {
         addMainMunicipalityJobs(filters, id, tab)
