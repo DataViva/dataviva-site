@@ -72,6 +72,31 @@ function addAverageMonthlyIncome(filters, id, tab) {
     );
 }
 
+function addIndicators(filters) {
+    Indicator.add({
+        url: dataviva.api_url + "rais/year/?" + filters,
+        title: dictionary['average_income'] + ' (2017)',
+        prefix: 'R$',
+        value:  'average_wage'
+    });
+    Indicator.add({
+        url: dataviva.api_url + "rais/year/?" + filters,
+        title: dictionary['payroll'] + ' (2017)',
+        prefix: 'R$',
+        value:  'wage'
+    });
+    Indicator.add({
+        url: dataviva.api_url + "rais/year/?" + filters,
+        title: dictionary['total_employment'] + ' (2017)',
+        value:  'jobs'
+    });
+    Indicator.add({
+        url: dataviva.api_url + "rais/year/?count=establishment&" + filters,
+        title: dictionary['total_establishments'] + ' (2017)',
+        value:  'establishment_count'
+    });
+}
+
 function getLocationFilter(idIbge) {
     var locations = {
         1: "region",
@@ -112,9 +137,11 @@ $(document).ready(function () {
     var pathname = location.pathname;
     var lang = pathname && pathname.split('/')[1];
 
-    var year = 'year=2015&';
+    var year = 'year=2017&';
     var filterBiggest = 'limit=1&direction=desc&';
     var filters = filterBiggest + year + occupationFilter + '&' + locationFilter;
+
+    addIndicators(filters);
 
     if(!isMunicipality) {
         addMainMunicipalityJobs(filters, id, tab)

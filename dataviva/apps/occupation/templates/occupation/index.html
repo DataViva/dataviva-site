@@ -110,43 +110,6 @@
 
             <div class="indices">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                      <div class="widget">
-                          <h2 class="text-left text-uppercase">{% trans %}Average Monthly Income{% endtrans %} ({{header.year}})</h2>
-                          <div class="number">
-                              R$ <strong class="counter">{{header.average_monthly_income | max_digits(3, True)}}</strong><br/>
-                              <small class="magnitude">{{header.average_monthly_income | magnitude}}</small>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                      <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Payroll{% endtrans %} ({{header.year}})</h2>
-                        <div class="number">
-                            R$ <strong class="counter">{{header.salary_mass | max_digits(3, True)}}</strong><br/>
-                            <small class="magnitude">{{header.salary_mass | magnitude}}</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                      <div class="widget">
-                        <h2 class="text-left text-uppercase">{% trans %}Total Employment{% endtrans %} ({{header.year}})</h2>
-                        <div class="number">
-                            <strong class="counter">{{header.total_employment | max_digits(3, True)}}</strong><br/>
-                            <small class="magnitude">{{header.total_employment | magnitude}}</small>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                          <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %} ({{header.year}})</h2>
-                          <div class="number">
-                              <strong class="counter">{{header.total_establishments | max_digits(3, True)}}</strong><br/>
-                              <small class="magnitude">{{header.total_establishments | magnitude}}</small>
-                          </div>
-                        </div>
-                    </div>
-                  </div>
                 </div>
             </div>
         </div>
