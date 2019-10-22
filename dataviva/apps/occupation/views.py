@@ -116,11 +116,6 @@ def index(occupation_id, tab):
         depth = location_depth(bra_id)
         id_ibge = location_service(depth, location)
 
-    if location:
-        location_id = location.id
-    else:
-        location_id = None
-
 
     header['family_id'] = occupation_id[0]
 
@@ -176,27 +171,17 @@ def index(occupation_id, tab):
         occupation_id=occupation_id, bra_id=bra_id)
 
     header['average_monthly_income'] = occupation_service.average_monthly_income()
-    header['salary_mass'] = occupation_service.salary_mass()
     header['total_employment'] = occupation_service.total_employment()
-    header['total_establishments'] = occupation_service.total_establishments()
     header['year'] = occupation_service.year()
     header['age_avg'] = occupation_service.age_avg()
 
     if not is_municipality:
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
-        body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
         body['municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
         body['municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
-        body['municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.biggest_wage_average()
-        body['municipality_with_biggest_wage_avg_state'] = occupation_municipalities_service.municipality_with_biggest_wage_average_state()
 
     body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
-    body['activity_with_more_jobs_value'] = occupation_activities_service.highest_number_of_jobs()
-    body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
-    body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
     body['year'] = occupation_activities_service.year()
-
-    rais_max_year = db.session.query(func.max(Yo.year)).first()[0]
 
     if location:
         max_year_query_location = db.session.query(func.max(Ybo.year)).filter(
@@ -229,7 +214,7 @@ def index(occupation_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
-    if header['total_employment'] == None or rais_max_year != header['year']:
+    if header['total_employment'] == None:
         abort(404)
     else:
         return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)

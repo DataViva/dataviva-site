@@ -122,14 +122,8 @@ def index(cnae_id, tab):
 
         if len(location_id) != 9:
             body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
-            body[
-                'municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
-            body[
-                'municipality_with_more_num_jobs_state'] = industry_municipality_service.municipality_with_more_jobs_state()
-            body[
-                'municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
-            body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
-            body['municipality_with_more_wage_avg_state'] = industry_municipality_service.municipality_with_biggest_wage_average_state()
+            body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
+            body['municipality_with_more_num_jobs_state'] = industry_municipality_service.municipality_with_more_jobs_state()
 
 
     else:
@@ -137,22 +131,10 @@ def index(cnae_id, tab):
 
         body['municipality_with_more_num_jobs_value'] = industry_municipality_service.highest_number_of_jobs()
         body['municipality_with_more_num_jobs_name'] = industry_municipality_service.municipality_with_more_num_jobs()
-        body[
-            'municipality_with_more_wage_avg_name'] = industry_municipality_service.municipality_with_more_wage_average()
-        body['municipality_with_more_wage_avg_value'] = industry_municipality_service.biggest_wage_average()
         body['municipality_with_more_num_jobs_state'] = industry_municipality_service.municipality_with_more_jobs_state()
-        body['municipality_with_more_wage_avg_state'] = industry_municipality_service.municipality_with_biggest_wage_average_state()
 
-    body['occ_with_more_wage_avg_name'] = industry_occupation_service.occupation_with_biggest_wage_average()
-    body['occ_with_more_wage_avg_value'] = industry_occupation_service.biggest_wage_average()
     body['occ_with_more_number_jobs_name'] = industry_occupation_service.occupation_with_more_jobs()
-    body['occ_with_more_number_jobs_value'] = industry_occupation_service.highest_number_of_jobs()
-
-    header['average_monthly_income'] = industry_service.average_monthly_income()
-    header['salary_mass'] = industry_service.salary_mass()
-    header['num_jobs'] = industry_service.num_jobs()
     header['num_establishments'] = industry_service.num_establishments()
-    #header['name_bra'] = industry_service.name()
 
     # Get rankings vars, code should be refactored
     from dataviva import db
@@ -180,8 +162,6 @@ def index(cnae_id, tab):
     industry_service_num_establishments = Industry(cnae_id=industry.id)
     header['num_establishments_brazil'] = industry_service_num_establishments.num_establishments()
     header['year'] = industry_service.get_year()
-
-    rais_max_year = db.session.query(func.max(Yi.year)).first()[0]
 
     tabs = {
         'general': [],
@@ -220,9 +200,6 @@ def index(cnae_id, tab):
         abort(404)
 
     if menu and menu not in tabs[tab]:
-        abort(404)
-
-    if header['num_jobs'] is None or rais_max_year != header['year']:
         abort(404)
 
     return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph, id_ibge=id_ibge)

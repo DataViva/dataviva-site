@@ -13,7 +13,6 @@
         {% elif tab == 'opportunities' %}
             {% trans %}Economic Opportunities{% endtrans %}
         {% endif %}"/>
-    <meta property="og:description" content="{% trans %}The {% endtrans %}{{occupation.name()}} {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}} ..."/>
     <meta property="og:type" content="website" />
 {% endblock facebook_metadata %}
 
