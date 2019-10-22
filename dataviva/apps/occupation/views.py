@@ -109,14 +109,6 @@ def index(occupation_id, tab):
         url_prefix = menu.split('-')[-1] + '/' if menu and menu.startswith('new-api-') else 'embed/'
         graph['url'] = url_prefix + url
 
-    if not bra_id:
-        depth = None
-        id_ibge = None
-    else:
-        depth = location_depth(bra_id)
-        id_ibge = location_service(depth, location)
-
-
     header['family_id'] = occupation_id[0]
 
     if len(occupation_id) == 4:
@@ -180,7 +172,9 @@ def index(occupation_id, tab):
         body['municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
         body['municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
 
-    body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
+    if not bra_id:
+        body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
+
     body['year'] = occupation_activities_service.year()
 
     if location:
