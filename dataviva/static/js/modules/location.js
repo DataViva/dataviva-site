@@ -101,7 +101,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product_section/?type=export&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_export'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product_section'
@@ -113,7 +113,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product_section/?type=import&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_import'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product_section'
@@ -125,7 +125,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product/?type=export&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_export'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product'
@@ -137,7 +137,7 @@ $(document).ready(function(){
         General.add({
             url: dataviva.api_url + "secex/product/?type=import&year=2018&order=value&direction=desc&limit=1&" + filter,
             title:  dictionary['main_product_import'],
-            preffix: 'USD',
+            prefix: 'USD',
             label: {
                     metadata: true,
                     value: 'product'
@@ -148,7 +148,7 @@ $(document).ready(function(){
     }
     //EDUCATION
     General.add({
-        url: dataviva.api_url + "hedu/university/?year=2016&order=enrolleds&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "hedu/university/?year=2017&order=enrolleds&direction=desc&limit=1&" + filter,
         title:  dictionary['university_higher_enrollments'],
         label: {
                 metadata: true,
@@ -159,7 +159,7 @@ $(document).ready(function(){
     });
 
     General.add({
-        url: dataviva.api_url + "hedu/hedu_course/?year=2016&order=enrolleds&direction=desc&limit=1&" + filter,
+        url: dataviva.api_url + "hedu/hedu_course/?year=2017&order=enrolleds&direction=desc&limit=1&" + filter,
         title:  dictionary['course_higher_enrollments'],
         label: {
                 metadata: true,
@@ -207,7 +207,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + "secex/year/?type=export&year=2018&" + filter,
         title:  dictionary['total_export'],
-        preffix: 'USD',
+        prefix: 'USD',
         label: '',
         value: 'value',
         id: 'trade'
@@ -216,7 +216,7 @@ $(document).ready(function(){
     General.add({
         url: dataviva.api_url + "secex/year/?type=import&year=2018&" + filter,
         title:  dictionary['total_import'],
-        preffix: 'USD',
+        prefix: 'USD',
         label: '',
         value: 'value',
         id: 'trade'
@@ -269,7 +269,7 @@ $(document).ready(function(){
 
     General.add({
         url: dataviva.api_url + 'rais/year/?year=2017&' + filter,
-        preffix: 'R$',
+        prefix: 'R$',
         title: dictionary['average_wage'],
         label: '',
         value: 'average_wage',
@@ -420,7 +420,7 @@ $(document).ready(function(){
 
     //EDUCATION
     BlueBox.add({
-            url: dataviva.api_url + 'hedu/year/university/?order=enrolleds&year=2016&direction=desc&limit=1&' + filter,
+            url: dataviva.api_url + 'hedu/year/university/?order=enrolleds&year=2017&direction=desc&limit=1&' + filter,
             title: dictionary['university'],
             subtitle: dictionary['highest_enrolleds'],
             label: {
@@ -432,7 +432,7 @@ $(document).ready(function(){
     });
     if(idIbge){
         BlueBox.add({
-                url: dataviva.api_url + 'hedu/year/hedu_course/?order=enrolleds&year=2016&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'hedu/year/hedu_course/?order=enrolleds&year=2017&direction=desc&limit=1&' + filter,
                 title: dictionary['major'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
@@ -444,7 +444,7 @@ $(document).ready(function(){
         });
     }else{
         BlueBox.add({
-                url: dataviva.api_url + 'hedu/year/hedu_course_field/?order=enrolleds&year=2016&direction=desc&limit=1&' + filter,
+                url: dataviva.api_url + 'hedu/year/hedu_course_field/?order=enrolleds&year=2017&direction=desc&limit=1&' + filter,
                 title: dictionary['major'],
                 subtitle: dictionary['highest_enrolleds'],
                 label: {
