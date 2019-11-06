@@ -304,12 +304,7 @@ var getUrlArgs = function() {
     return args;
 };
 
-var formatHelper = function() {
-    var args = getUrlArgs();
-
-    return {
-        'locale': lang == 'pt' ? 'pt_BR' : 'en_US',
-        'text': function(text, key) {
+var formatText = function(text, key) {
             switch (text) {
                 case 'item_id':
                     return dictionary[DICT[dataset][text][squares]] || dictionary[text];
@@ -326,9 +321,9 @@ var formatHelper = function() {
                 default:
                     return dictionary[text] || text;
             };
+}
 
-        },
-        'number': function(value, opts) {
+var formatNumber = function(value, opts) {
             var result;
 
             if (value.toString().split('.')[0].length > 3) {
@@ -385,5 +380,29 @@ var formatHelper = function() {
 
             return result || value;
         }
+
+var formatHelper = function() {
+    var args = getUrlArgs();
+
+    return {
+        'locale': lang == 'pt' ? 'pt_BR' : 'en_US',
+        'text': formatText,
+        'number': formatNumber
     }
 };
+
+var averageWageAggregation = function(data) {
+    if(!data) {
+        return 0;
+    }
+
+    const summarize = data.reduce(function (a, b) {
+        return { wage: a.wage + b.wage, jobs: a.jobs + b.jobs };
+    });
+
+    if (!summarize.wage || !summarize.jobs) {
+        return 0;
+    }
+
+    return summarize.wage/summarize.jobs;
+}
