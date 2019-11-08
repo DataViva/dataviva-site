@@ -375,7 +375,7 @@ var loadViz = function(data) {
         .data({'value': data, 'padding': 0})
         .type('tree_map')
         .size(size)
-        .aggs({'average_age': 'mean'})
+        .aggs({'average_age': 'mean', 'average_wage': averageWageAggregation })
         .labels({'align': 'left', 'valign': 'top'})
         .background('transparent')
         .time({'value': 'year', 'solo': {'value': yearRange[1], 'callback': timelineCallback}})
