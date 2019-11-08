@@ -46,6 +46,6 @@ six==1.10.0
 speaklater==1.3
 SQLAlchemy==0.8.1
 validators==0.10
-Werkzeug==0.11.3
+Werkzeug==0.15.3
 Whoosh==2.6.0
 WTForms==2.0.2
