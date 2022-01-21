@@ -1,7 +1,7 @@
 appnope==0.1.0
 decorator==4.0.9
 gnureadline==6.3.3
-ipython==4.1.2
+ipython==7.16.3
 ipython-genutils==0.1.0
 MySQL-python==1.2.5
 numpy==1.11.0
