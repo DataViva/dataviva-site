@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from smtplib import SMTPException
+from sqlalchemy.exc import SQLAlchemyError
 from dataviva import db, lm
 from dataviva.apps.general.views import get_locale
 from dataviva.apps.user.models import User
@@ -70,6 +72,10 @@ def create():
                 )
                 db.session.add(user)
                 db.session.commit()
+            except SMTPException:
+                return Response(dictionary()["Email Error"], status=500, mimetype='application/json')
+            except SQLAlchemyError: 
+                return Response(dictionary()["DB Error"], status=500, mimetype='application/json')
             except:
                 return Response(dictionary()["500"], status=500, mimetype='application/json')
 
@@ -78,6 +84,7 @@ def create():
             message = dictionary()["check_your_inbox"] + ' ' + user.email
 
             return Response(message, status=200, mimetype='application/json')
+        
 
     return render_template('user/new.html', form=form)
 

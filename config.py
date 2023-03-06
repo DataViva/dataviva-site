@@ -93,12 +93,12 @@ S3_HOST = get_env_variable('S3_HOST', 'https://dataviva-site-production.s3.amazo
 '''
     Mail credentials to send automatic emails to users
 '''
-MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER", 'smtp.gmail.com')
-MAIL_PORT = get_env_variable("DATAVIVA_MAIL_PORT", 587)
-MAIL_USE_TLS = get_env_variable("DATAVIVA_MAIL_USE_TLS", False)
-MAIL_USE_SSL = get_env_variable("DATAVIVA_MAIL_USE_SSL", False)
-MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME", 'contato@dataviva.info')
-MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD", "")
+MAIL_SERVER = get_env_variable("DATAVIVA_MAIL_SERVER")
+MAIL_PORT = int(get_env_variable("DATAVIVA_MAIL_PORT"))
+MAIL_USE_TLS = True if get_env_variable("DATAVIVA_MAIL_USE_TLS") == "True" else False
+MAIL_USE_SSL = True if get_env_variable("DATAVIVA_MAIL_USE_SSL") == "True" else False
+MAIL_USERNAME = get_env_variable("DATAVIVA_MAIL_USERNAME")
+MAIL_PASSWORD = get_env_variable("DATAVIVA_MAIL_PASSWORD")
 
 '''
     Administrator email
