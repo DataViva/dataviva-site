@@ -504,7 +504,7 @@ def trade_partner():
 @mod.route('/health_region/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_health_region"))
 def health_region():
-    r = requests.get(API_BASE_URL + 'metadata/health_region')
+    r = requests.get(API_BASE_URL + '/metadata/health_region')
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -525,7 +525,7 @@ def health_region():
 @mod.route('/demographic_information/<attr>/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_demographic_information"))
 def demographic_information(attr):
-    r = requests.get(API_BASE_URL + 'metadata/' + attr)
+    r = requests.get(API_BASE_URL + '/metadata/' + attr)
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -545,7 +545,7 @@ def demographic_information(attr):
 @mod.route('/establishment_information/<attr>/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_establishment_information"))
 def establishment_information(attr):
-    r = requests.get(API_BASE_URL + 'metadata/' + attr)
+    r = requests.get(API_BASE_URL + '/metadata/' + attr)
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -565,7 +565,7 @@ def establishment_information(attr):
 @mod.route('/datasus/<attr>/')
 @view_cache.cached(key_prefix=api_cache_key("attrs_datasus"))
 def datasus(attr):
-    r = requests.get(API_BASE_URL + 'metadata/' + attr)
+    r = requests.get(API_BASE_URL + '/metadata/' + attr)
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')
@@ -585,7 +585,7 @@ def datasus(attr):
 @mod.route('/port/')
 # @view_cache.cached(key_prefix=api_cache_key("attrs_port"))
 def port():
-    r = requests.get(API_BASE_URL + 'metadata/port')
+    r = requests.get(API_BASE_URL + '/metadata/port')
     data = []
     response = r.json()
     lang = request.args.get('lang', 'pt')

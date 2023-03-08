@@ -569,6 +569,7 @@ $(document).ready(function() {
         },
         function(error) {
             loading.text(dictionary['Unable to load visualization']);
+            console.log("Error 572, lineJS" ,error);
         }
     );
 });

@@ -53,7 +53,9 @@ def index(dataset, line, y_value):
 
     filters = urllib.urlencode(filters)
 
-    title, subtitle = get_title(dataset, line, 'line', title_attrs)
+    """ title, subtitle = get_title(dataset, line, 'line', title_attrs) """
+    title = "samuel"
+    subtitle = "marcos"
 
     return render_template('line/index.html',
                            dataset=dataset,

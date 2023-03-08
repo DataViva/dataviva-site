@@ -29,7 +29,7 @@ var getMetadata = function(key){
         }
         else {
             $.ajax({
-                url: dataviva.api_url + "metadata/" + key,
+                url: dataviva.api_url + "/metadata/" + key,
                 success: function (data) {
                     localStorage.setItem(key, JSON.stringify(data));
                     resolve(JSON.parse(localStorage.getItem(key)));

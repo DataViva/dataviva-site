@@ -30,7 +30,7 @@ def add_language_code(endpoint, values):
 @mod.route('/<cnes_id>/<tab>')
 def index(cnes_id, tab):
     response = requests.get(
-        API_BASE_URL + 'cnes/id/name_pt/?id=' + cnes_id + '&limit=1').json()
+        API_BASE_URL + '/cnes/id/name_pt/?id=' + cnes_id + '&limit=1').json()
 
     establishment = {
         'id': response['data'][0][0],
@@ -56,7 +56,7 @@ def index(cnes_id, tab):
 @mod.route('/<cnes_id>/graphs/<tab>', methods=['POST'])
 def graphs(cnes_id, tab):
     response = requests.get(
-        API_BASE_URL + 'cnes/id/name_pt/?id=' + cnes_id + '&limit=1').json()
+        API_BASE_URL + '/cnes/id/name_pt/?id=' + cnes_id + '&limit=1').json()
     establishment = {'id': response['data'][0]
                      [0], 'name': response['data'][0][1]}
 

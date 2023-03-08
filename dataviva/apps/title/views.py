@@ -60,7 +60,7 @@ def get_title(dataset, shapes, graph, api_filters):
         else:
             if key == 'sc_course' and len(value) == 4:
                 value = '0'+value
-            url = API_BASE_URL + 'metadata/' + key + '/' + str(value)
+            url = API_BASE_URL + '/metadata/' + key + '/' + str(value)
             filter = filter_service(key)
             query[filter] = 1
             response = requests.get(url).json()
@@ -96,7 +96,7 @@ def get_title(dataset, shapes, graph, api_filters):
         locations = [l for l in api_filters if l in [
             'region', 'state', 'mesoregion', 'microregion', 'municipality']]
         if len(locations) > 0:
-            url = API_BASE_URL + 'metadata/inflection/' + \
+            url = API_BASE_URL + '/metadata/inflection/' + \
                 str(api_filters[locations[0]])
             response = requests.get(url).json()
             for preposition in ['in', 'from', 'of']:
@@ -109,12 +109,12 @@ def get_title(dataset, shapes, graph, api_filters):
         # Deals with countries and continents prepositions
         partners = [p for p in api_filters if p in ['country', 'continent']]
         if len(partners) > 0:
-            url = API_BASE_URL + 'metadata/inflection/' + \
+            url = API_BASE_URL + '/metadata/inflection/' + \
                 str(api_filters[partners[0]])
             response = requests.get(url).json()
             if '<partner_to>' in title:
                 title = inflect(title, response, 'to', 'partner')
 
-        return title, getattr(result, 'subtitle_' + g.locale)
+        return "teste", "teste"
 
     return None, None
