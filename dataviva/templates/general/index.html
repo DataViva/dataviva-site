@@ -2,7 +2,80 @@
 
 {% block content %}
 
-<section id="welcome" class="welcome bg-buildings">
+<!-- Carousel container -->
+<div id="my-pics" class="carousel slide" data-ride="carousel" style="width:100%;margin:auto;">
+
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#my-pics" data-slide-to="0" class="active"></li>
+        <li data-target="#my-pics" data-slide-to="1"></li>
+        <li data-target="#my-pics" data-slide-to="2"></li>
+        <li data-target="#my-pics" data-slide-to="3"></li>
+        <li data-target="#my-pics" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Content -->
+    <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="item active">
+            <div class="hero-image" style="
+                background-image: url('https://3.bp.blogspot.com/-lAPkSoKi_jU/TZ9XbWPQCtI/AAAAAAAAcFU/WAvKmfZCOds/s1600/Las%2Bimagenes%2Bmas%2Bbonitas%2Bde%2BInternet%2B-%2BA%2Borillas%2Bdel%2BMar.jpg');
+                background-color: #cccccc;
+                height: 500px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;">
+                
+                <div class="hero-text" style="text-align: center;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    color: white;">
+                    <h1 style="font-size:50px">I am Jane Doe</h1>
+                    <h3>And I'm a Photographer</h3>
+                    <button>Hire me</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="item">
+            <img src="/static/img/partners/Logoipead-new.png" width="100%" style="object-fit: cover;" alt="Rob Roy Glacier">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="item">
+            <img src="/static/img/partners/Logoipead-new.png" width="100%" style="object-fit: cover;" alt="Longtail boats at Phi Phi">
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="item">
+            <img src="/static/img/partners/Logoipead-new.png" width="100%" style="object-fit: cover;" alt="Longtail boats at Phi Phi">
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="item">
+            <img src="/static/img/partners/Logoipead-new.png" width="100%" style="object-fit: cover;" alt="Longtail boats at Phi Phi">
+        </div>
+
+    </div>
+
+    <!-- Previous/Next controls -->
+    <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+        <span class="icon-prev" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+        <span class="icon-next" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+
+</div>
+
+<!-- <section id="welcome" class="welcome bg-buildings">
     <div class="container">
         <div class="col-xs-12 col-sm-6 wow fadeInLeft">
             <h2 class="m-b-md">{% trans %}Brazil's largest platform for social and economic data search.{% endtrans %}<br/>{% trans %}Totally open and free.{% endtrans %}</h2>
@@ -44,17 +117,19 @@
             </ul>
         </div>
     </div>
-</section>
+</section> -->
 
 
 <section id="databases" class="databases bg-greeny">
     <div class="container text-center wow fadeInDown">
         <div class="navy-line"></div>
         <h2>{% trans %}Explore our database{% endtrans %}</h2>
-        <p class="tagline">{% trans %}DataViva gathers data from several sources: Employment and Income (RAIS), Brazilian International Trade (SECEX/MDCI), Basic and Technical Education (Censo Escolar), Post-Secondary Education (Censo da Educação Superior) and UN Comtrade International Trade.{% endtrans %}</p>
+        <p class="tagline">{% trans %}DataViva gathers data from several sources: Employment and Income (RAIS),
+            Brazilian International Trade (SECEX/MDCI), Basic and Technical Education (Censo Escolar), Post-Secondary
+            Education (Censo da Educação Superior) and UN Comtrade International Trade.{% endtrans %}</p>
         <div class="text-divider">
             <h3 class="inner">{% trans %}What would you like to know?{% endtrans %}</h3>
-            <hr/>
+            <hr />
         </div>
 
     </div>
@@ -69,12 +144,14 @@
         <h2 class="m-b-lg wow fadeInDown">{%trans%}Headlines{%endtrans%}</h2>
         <div class="row">
             {% for publication in publications %}
-                <div class="col-sm-4 wow {% if (loop.index + 2) % 3 == 0 %} fadeInLeftBig {% elif loop.index % 3 == 0 %} fadeInRightBig {% else %} fadeInDown {% endif %}">
-                    <a href="{{ url_for(publication.__tablename__.split('_')[0]+'.show', id=publication.id) }}" title="{{ publication.title }}">
-                        <img src="{{ publication.thumb }}" class="img-responsive">
-                    </a>
-                    <p>{{ publication.title }}</p>
-                </div>
+            <div
+                class="col-sm-4 wow {% if (loop.index + 2) % 3 == 0 %} fadeInLeftBig {% elif loop.index % 3 == 0 %} fadeInRightBig {% else %} fadeInDown {% endif %}">
+                <a href="{{ url_for(publication.__tablename__.split('_')[0]+'.show', id=publication.id) }}"
+                    title="{{ publication.title }}">
+                    <img src="{{ publication.thumb }}" class="img-responsive">
+                </a>
+                <p>{{ publication.title }}</p>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -84,8 +161,10 @@
     <div class="navy-line"></div>
     <div class="container text-center wow fadeInDown">
         <h2>{% trans %}Sign Up free and make the most of DataViva{% endtrans %}</h2>
-        <p class="tagline">{% trans %}Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research.{% endtrans %}</p>
-        <a role="button" class="m-t-lg btn btn-primary" data-toggle="modal" data-target="#dataviva-signup">{% trans %}Free Sign Up{% endtrans %}</a>
+        <p class="tagline">{% trans %}Save the graphs you need and get our free content in your e-mail. Signing up gives
+            you access to exclusive resources to facilitate your research.{% endtrans %}</p>
+        <a role="button" class="m-t-lg btn btn-primary" data-toggle="modal" data-target="#dataviva-signup">{% trans
+            %}Free Sign Up{% endtrans %}</a>
     </div>
 </section>
 
@@ -94,4 +173,3 @@
 {% include "include/promoters.html" %}
 
 {% endblock content %}
-
