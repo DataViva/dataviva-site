@@ -1,6 +1,10 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
+{% block head %}
 
+  <link type="text/css" rel="stylesheet" media="all" href="/static/css/modules/embed/styles.about.css" />
+
+{% endblock %}
 {% block content %}
 
 
@@ -19,19 +23,59 @@
 
 
 <section id="history">
-    <div class="container">
-        <div class="col-md-4">
-            <h3>{% trans %}DataViva is an open search platform that allows users to access more than 1 billion visualizations of socioeconomic data from more than 5 thousand Brazilian cities.{% endtrans %}</h3>
-        </div>
-        <div class="col-md-8">
-            <h2>{% trans %}The{% endtrans %} DataViva</h2>
-            <p>{% trans %}Collaborative Planning, economic diversification, competitiveness and transparency: these are the objectives of DataViva which was created to strengthen the culture of data use and guide the country's development. An information and analysis tool which proposes a new way of thinking about building the future, from the transformation of data into knowledge and action.{% endtrans %}</p>
+    <div class="container"> 
+        <div class="col-md-12">
+            <h2 style="text-align: center; font-weight: 600;font-size: 32px; line-height: 58px; color:#676A6C;text-transform: uppercase;">SOBRE O DATAVIVA</h2>
+            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}Collaborative Planning, economic diversification, competitiveness and transparency: these are the objectives of DataViva which was created to strengthen the culture of data use and guide the country's development. An information and analysis tool which proposes a new way of thinking about building the future, from the transformation of data into knowledge and action.{% endtrans %}</p>
 
-            <h2>{% trans %}Project History{% endtrans %}</h2>
-            <p>{% trans %}DataViva is currently being maintained and developed by the Center for Development and Regional Planning (CEDEPLAR), a complementary body of the Faculty of Economic Sciences of the Federal University of Minas Gerais, with support from the Research Support Foundation of the State of Minas Gerais (FAPEMIG). The platform offers the user a dynamic access experience to a large set of public data. Entirely developed with an open source software and open to everyone's access, DataViva was created with the objective of contributing to the implementation of public policies, public and private investments, as well as carrying out academic studies.{% endtrans %}</p>
-            <p>{% trans %}Initially designed to help the economic development policy of the government of the State of Minas Gerais, the project emerged from the need to make access to data on the Brazilian economy easier and more intuitive. Developed by the Government of Minas Gerais, in partnership with researchers from the MIT Media Lab (one of the main innovation centers in the world), the platform presents an unpublished solution in the country, based on databases made available by the Ministry of Labor and Employment (MTE), Ministry of Development, Industry and Foreign Trade (MDIC) and Ministry of Education (MEC).{% endtrans %}</p>
-            <p>{% trans %}One of the design pillars of DataViva is BigData technology, a technique for generating knowledge and intelligence from the processing of a large volume of data. Based on international references, the project provides, in its current version, national data for the last ten years, referring to the economy, education, industry, professional market, among other categories, visualized by location. By providing free and open access to this information, DataViva provides a more detailed knowledge of the Brazilian economy, generating inputs for planning and decision-making by businessmen, students, investors and professionals from any economic sector and from any place in the world.{% endtrans %}</p>
+            <!-- 
+            <h3 style="text-align: center;">{% trans %}DataViva is an open search platform that allows users to access more than 1 billion visualizations of socioeconomic data from more than 5 thousand Brazilian cities.{% endtrans %}</h3> -->
         </div>
+        
+    </div>
+    
+    <div style="background-color: #f3f6f3;">
+        <div class="container">
+            <!-- <h2 style="text-align: center; font-weight: 600;font-size: 32px; line-height: 58px; color:#676A6C; margin-bottom: 16px">{% trans %}The{% endtrans %} DataViva</h2> -->
+            <h2 style="text-align: center; font-weight: 600;font-size: 32px; line-height: 58px; color:#676A6C;text-transform: uppercase;">{% trans %}Project History{% endtrans %}</h2>
+            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}DataViva is currently being maintained and developed by the Center for Development and Regional Planning (CEDEPLAR), a complementary body of the Faculty of Economic Sciences of the Federal University of Minas Gerais, with support from the Research Support Foundation of the State of Minas Gerais (FAPEMIG). The platform offers the user a dynamic access experience to a large set of public data. Entirely developed with an open source software and open to everyone's access, DataViva was created with the objective of contributing to the implementation of public policies, public and private investments, as well as carrying out academic studies.{% endtrans %}</p>
+            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}Initially designed to help the economic development policy of the government of the State of Minas Gerais, the project emerged from the need to make access to data on the Brazilian economy easier and more intuitive. Developed by the Government of Minas Gerais, in partnership with researchers from the MIT Media Lab (one of the main innovation centers in the world), the platform presents an unpublished solution in the country, based on databases made available by the Ministry of Labor and Employment (MTE), Ministry of Development, Industry and Foreign Trade (MDIC) and Ministry of Education (MEC).{% endtrans %}</p>
+            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}One of the design pillars of DataViva is BigData technology, a technique for generating knowledge and intelligence from the processing of a large volume of data. Based on international references, the project provides, in its current version, national data for the last ten years, referring to the economy, education, industry, professional market, among other categories, visualized by location. By providing free and open access to this information, DataViva provides a more detailed knowledge of the Brazilian economy, generating inputs for planning and decision-making by businessmen, students, investors and professionals from any economic sector and from any place in the world.{% endtrans %}</p>
+        </div>
+    </div>
+    
+</section>
+    <div class="container">
+        <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3">
+            <div style="margin:12px; align-items: center;">
+                <img width="160px" src="https://images-ext-2.discordapp.net/external/4Whw1T9tnEZqQHWAe_r4mjZ21gIjiPpz0azU4f5bPVA/%3Fw%3D2000/https/img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?width=702&height=702"/>
+                <h4 style="font-size:16px; text-align: center;">ROGERIO JOGADOR</h4>
+                <h4 style="font-size:14px; text-align: center;">DESENVOLVEDOR</h4>
+                
+                <div style="margin-top: 18px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+            
+                    <img width="24px" src="/static/img/about/github.svg"/>
+                    <img width="30px" src="/static/img/about/Icone_Lattes1.png"/>
+                    <img width="24px" src="/static/img/about/linkedin.svg"/>
+                </div>
+            </div>
+        </div>
+        <div style="align-items: center; justify-content: center; display: flex;  flex-direction: column" class="col-md-3">
+            <img width="160px" src="https://images-ext-2.discordapp.net/external/4Whw1T9tnEZqQHWAe_r4mjZ21gIjiPpz0azU4f5bPVA/%3Fw%3D2000/https/img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?width=702&height=702"/>
+
+        </div>
+        <div style="align-items: center; justify-content: center; display: flex;  flex-direction: column" class="col-md-3">
+            <img width="160px" src="https://images-ext-2.discordapp.net/external/4Whw1T9tnEZqQHWAe_r4mjZ21gIjiPpz0azU4f5bPVA/%3Fw%3D2000/https/img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?width=702&height=702"/>
+
+        </div>
+        <div style="align-items: center; justify-content: center; display: flex;  flex-direction: column" class="col-md-3">
+            <img width="160px" src="https://images-ext-2.discordapp.net/external/4Whw1T9tnEZqQHWAe_r4mjZ21gIjiPpz0azU4f5bPVA/%3Fw%3D2000/https/img.freepik.com/free-vector/businessman-character-avatar-isolated_24877-60111.jpg?width=702&height=702"/>
+
+        </div>
+    </div>
+    
+<section>
+
     </div>
 </section>
 
