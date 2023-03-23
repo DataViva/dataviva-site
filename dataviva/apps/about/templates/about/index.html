@@ -1,12 +1,11 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
+
 {% block head %}
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/modules/about.css" />
+{% endblock head %}
 
-  <link type="text/css" rel="stylesheet" media="all" href="/static/css/modules/embed/styles.about.css" />
-
-{% endblock %}
 {% block content %}
-
 
 <!-- BREADCRUMB -->
 <div class="container">
@@ -21,44 +20,43 @@
 </div>
 <!-- BREADCRUMB -->
 
-<div style="justify-content: center; align-items: center; flex-direction: column; display: flex;" class="width: 100%">
-    <div style="width: 120px; height: 2px; border: 1px solid #9EDDBF; margin: 24px 24px 6px 24px;"></div>
+<div class="centralize">
+    <div class="divider"></div>
 </div>
 
 <section id="history">
     <div class="container">
         <div class="col-md-12">
-            <h2 style="text-align: center; font-weight: 600;font-size: 32px; line-height: 58px; color:#676A6C;text-transform: uppercase;">SOBRE O DATAVIVA</h2>
-            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}Collaborative Planning, economic diversification, competitiveness and transparency: these are the objectives of DataViva which was created to strengthen the culture of data use and guide the country's development. An information and analysis tool which proposes a new way of thinking about building the future, from the transformation of data into knowledge and action.{% endtrans %}</p>
+            <h2 class="title">SOBRE O DATAVIVA</h2>
+            <p class="paragraph">{% trans %}Collaborative Planning, economic diversification, competitiveness and transparency: these are the objectives of DataViva which was created to strengthen the culture of data use and guide the country's development. An information and analysis tool which proposes a new way of thinking about building the future, from the transformation of data into knowledge and action.{% endtrans %}</p>
         </div>
     </div>
     
     <div style="background-color: #f3f6f3;">
         <div class="container">
-            <!-- <h2 style="text-align: center; font-weight: 600;font-size: 32px; line-height: 58px; color:#676A6C; margin-bottom: 16px">{% trans %}The{% endtrans %} DataViva</h2> -->
-            <h2 style="text-align: center; font-weight: 600;font-size: 32px; line-height: 58px; color:#676A6C;text-transform: uppercase;">{% trans %}Project History{% endtrans %}</h2>
-            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}DataViva is currently being maintained and developed by the Center for Development and Regional Planning (CEDEPLAR), a complementary body of the Faculty of Economic Sciences of the Federal University of Minas Gerais, with support from the Research Support Foundation of the State of Minas Gerais (FAPEMIG). The platform offers the user a dynamic access experience to a large set of public data. Entirely developed with an open source software and open to everyone's access, DataViva was created with the objective of contributing to the implementation of public policies, public and private investments, as well as carrying out academic studies.{% endtrans %}</p>
-            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}Initially designed to help the economic development policy of the government of the State of Minas Gerais, the project emerged from the need to make access to data on the Brazilian economy easier and more intuitive. Developed by the Government of Minas Gerais, in partnership with researchers from the MIT Media Lab (one of the main innovation centers in the world), the platform presents an unpublished solution in the country, based on databases made available by the Ministry of Labor and Employment (MTE), Ministry of Development, Industry and Foreign Trade (MDIC) and Ministry of Education (MEC).{% endtrans %}</p>
-            <p style="text-align: center; font-size: 16px; line-height: 29px; color:#676A6C; margin-bottom: 26px">{% trans %}One of the design pillars of DataViva is BigData technology, a technique for generating knowledge and intelligence from the processing of a large volume of data. Based on international references, the project provides, in its current version, national data for the last ten years, referring to the economy, education, industry, professional market, among other categories, visualized by location. By providing free and open access to this information, DataViva provides a more detailed knowledge of the Brazilian economy, generating inputs for planning and decision-making by businessmen, students, investors and professionals from any economic sector and from any place in the world.{% endtrans %}</p>
+            <h2 class="title">{% trans %}Project History{% endtrans %}</h2>
+            <p class="paragraph">{% trans %}DataViva is currently being maintained and developed by the Center for Development and Regional Planning (CEDEPLAR), a complementary body of the Faculty of Economic Sciences of the Federal University of Minas Gerais, with support from the Research Support Foundation of the State of Minas Gerais (FAPEMIG). The platform offers the user a dynamic access experience to a large set of public data. Entirely developed with an open source software and open to everyone's access, DataViva was created with the objective of contributing to the implementation of public policies, public and private investments, as well as carrying out academic studies.{% endtrans %}</p>
+            <p class="paragraph">{% trans %}Initially designed to help the economic development policy of the government of the State of Minas Gerais, the project emerged from the need to make access to data on the Brazilian economy easier and more intuitive. Developed by the Government of Minas Gerais, in partnership with researchers from the MIT Media Lab (one of the main innovation centers in the world), the platform presents an unpublished solution in the country, based on databases made available by the Ministry of Labor and Employment (MTE), Ministry of Development, Industry and Foreign Trade (MDIC) and Ministry of Education (MEC).{% endtrans %}</p>
+            <p class="paragraph">{% trans %}One of the design pillars of DataViva is BigData technology, a technique for generating knowledge and intelligence from the processing of a large volume of data. Based on international references, the project provides, in its current version, national data for the last ten years, referring to the economy, education, industry, professional market, among other categories, visualized by location. By providing free and open access to this information, DataViva provides a more detailed knowledge of the Brazilian economy, generating inputs for planning and decision-making by businessmen, students, investors and professionals from any economic sector and from any place in the world.{% endtrans %}</p>
         </div>
     </div>
     
 </section>
 
-<section id="team" style="display: flex; justify-content: center; align-items: center; flex-direction: column; margin-bottom: 32px;">
-    <div style="width: 120px; height: 2px; border: 1px solid #9EDDBF; margin: 24px 24px 6px 24px;"></div>
-
+<section id="team" class="centralize" style="margin-bottom: 32px;">
+    <div class="divider"></div>
+    
     <div class="container">
-        <h3 style="text-align: center; font-weight: 600;font-size: 24px; line-height: 58px; color:#676A6C;text-transform: uppercase;">NOSSA EQUIPE</h3>
+        <h3 id="teamTitle">NOSSA EQUIPE</h3>
         <div class="row">
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px;" src="/static/img/about/team/Elton.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Elton.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Elton Freitas</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Elton Freitas</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/eltonfreitas"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/eltonfreitas7/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/7115134234408070"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -67,14 +65,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Ramon.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Ramon Torres</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Ramon Torres</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/rsnatorres"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/ramon-torres-5b1164119/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/4650341120288709"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -83,14 +81,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Rodrigo-Dias.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Rodrigo-Dias.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Rodrigo Dias</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Rodrigo Dias</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/rodrigo1406"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/rodrigo-dias-62450044/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/4984843924680283"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -99,14 +97,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Felipe.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Felipe.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Felipe Amaral</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Felipe Amaral</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/fsilvaamaral"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/felipesilvaamaral/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/5514054318263728"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -115,14 +113,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Marcos.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Marcos.png"/>
                     <div>
-                        <h4 style=" font-size:16px; text-align: center;">Marcos Pantuza</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Marcos Pantuza</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/Marcosap19"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/marcos-pantuza-595b361a3/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/1834691756954011"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -131,14 +129,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Joao-Vitor.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Joao-Vitor.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Joao Vitor Otoni</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Joao Vitor Otoni</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/Akayy0"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/joão-vitor-andrade-otoni-566a89247/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/2887143499477252"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -147,14 +145,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Ramon.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Kayque Siqueira</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Kayque Siqueira</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/Kayross54x"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/kayque-siqueira-ba8a34230/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/4444696804048072"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -163,14 +161,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Ramon.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Rubens Castro</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Rubens Castro</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/RCastro13"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/rubens-castro-382ba6219/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/6234711422898935"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -178,14 +176,14 @@
                     </div>
                 </div>
             </div>
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Ramon.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
                     <div>
-                        <h4 style=" font-size:16px; text-align: center;">Samuel Bernardes</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Samuel Bernardes</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href="https://github.com/samuel-bernardes"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href="https://www.linkedin.com/in/samuel-bernardes-lopes-santos/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href="http://lattes.cnpq.br/5834217676401916"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -194,14 +192,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Ramon.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Samuel Bernardes</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Samuel Bernardes</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href=""><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href=""><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href=""><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -210,14 +208,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Ramon.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Kayque Siqueira</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Kayque Siqueira</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href=""><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href=""><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href=""><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
@@ -226,14 +224,14 @@
                 </div>
             </div>
 
-            <div style="align-items: center; justify-content: center; display: flex; flex-direction: column;" class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
-                <div style="margin:12px; align-items: center; justify-content: center; display: flex; flex-direction: column;">
-                    <img width="100%" style="min-width: 180px" src="/static/img/about/team/Ramon.png"/>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
                     <div>
-                        <h4 style="font-size:16px; text-align: center;">Rubens Castro</h4>
-                        <h4 style="font-weight:bold; font-size:14px; text-align: center; color: #9EDDBF">DESENVOLVEDOR</h4>
+                        <h4 class="cardTitle">Rubens Castro</h4>
+                        <h4 class="cardPosition">DESENVOLVEDOR</h4>
                         
-                        <div style="margin-top: 14px; width:100%; display: flex; align-items: center; justify-content: space-evenly;">
+                        <div class="cardSocials">
                             <a target="_blank" href=""><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
                             <a target="_blank" href=""><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
                             <a target="_blank" href=""><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
