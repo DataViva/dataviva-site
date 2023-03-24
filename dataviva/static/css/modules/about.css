@@ -78,7 +78,8 @@ p {
     font-weight: bold;
     font-size: 14px;
     text-align: center;
-    color: #9EDDBF
+    color: #9EDDBF;
+    text-transform: uppercase;
 }
 
 .cardSocials {
