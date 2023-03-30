@@ -84,8 +84,20 @@ p {
 
 .cardSocials {
     margin-top: 14px;
-    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+}
+
+.cardSocials a {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+@media (max-width: 390px) {
+    .cardTitle {
+        font-size: 16px;
+        text-align: center;
+        white-space: nowrap;
+    }
 }
