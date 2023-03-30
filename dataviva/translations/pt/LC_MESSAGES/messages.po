@@ -265,6 +265,55 @@ msgstr "Um dos pilares de concepção do DataViva é a tecnologia do BigData, t�
 msgid "Our Team"
 msgstr "Nosso Time"
 
+
+#: dataviva/apps/about/templates/about/index.html:73
+msgid "general coordinator"
+msgstr "cordenador geral"
+
+#: dataviva/apps/about/templates/about/index.html:88
+msgid "director"
+msgstr "diretor"
+
+#: dataviva/apps/about/templates/about/index.html:167
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:183
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:199
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:214
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:230
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:246
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:262
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:278
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:294
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+
+
+
+
 #: dataviva/apps/admin/views.py:21 dataviva/templates/general/error.html:12
 msgid "You dont have permission to view this page."
 msgstr "Você não tem permissão para ver essa página."
@@ -7511,4 +7560,3 @@ msgstr "com"
 
 #~ msgid "Main Origin by Total Value Imported"
 #~ msgstr "Principal Origem por Valor Total Importado"
-
