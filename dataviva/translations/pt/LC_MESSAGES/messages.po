@@ -5124,11 +5124,47 @@ msgstr ""
 "Identifique o perfil econômico e as oportunidades de negócios de uma "
 "região"
 
-#: dataviva/templates/general/index.html:24
-#: dataviva/templates/general/index.html:33
-#: dataviva/templates/general/index.html:42
-msgid "Watch the testimonials"
-msgstr "Veja depoimentos"
+
+#: dataviva/templates/general/index.html:36
+msgid "Cars"
+msgstr "Carros"
+
+#: dataviva/templates/general/index.html:37
+msgid "The Brazilian trade balance in cars is in surplus. This means that we export more than we import this type of product."
+msgstr "A balança comercial brasileira em carros é superavitária. Isso significa que mais exportamos que importamos esse tipo de produto. "
+
+#: dataviva/templates/general/index.html:61
+msgid "Petroleum"
+msgstr "Petróleo"
+
+#: dataviva/templates/general/index.html:63
+msgid "Crude oil is in the top ten positions in both Brazilian rankings of imports and exports."
+msgstr "O petróleo cru se encontra nas dez primeiras posições em ambos os rankings brasileiros de importações e exportações."
+
+#: dataviva/templates/general/index.html:85
+msgid "Business management"
+msgstr "Gestão Empresarial""
+
+#: dataviva/templates/general/index.html:86
+msgid "In need of business management solutions? São Paulo (SP) concentrates more professionals in the area of ​​Consulting in the activity!"
+msgstr "Precisando de soluções em Gestão Empresarial? São Paulo (SP) concentra mais profissionais na área de Consultoria na atividade!"
+
+#: dataviva/templates/general/index.html:110
+msgid "Largest Commercial Partner"
+msgstr "Maior Parceiro Comercial"
+
+#: dataviva/templates/general/index.html:111
+msgid "Both in imports and exports, China is Brazil's largest trading partner."
+msgstr "Tanto em importações quanto em exportações, a China é a maior parceira comercial do Brasil."
+
+#: dataviva/templates/general/index.html:135
+msgid "Higher Education - First Place"
+msgstr "Ensino Superior - Primeiro Lugar"
+
+#: dataviva/templates/general/index.html:136
+msgid "In Brazil, Law courses are the ones with the most enrollments."
+msgstr "No Brasil, os cursos de Direito são os que reúnem mais matriculados."
+
 
 #: dataviva/templates/general/index.html:26
 msgid ""
