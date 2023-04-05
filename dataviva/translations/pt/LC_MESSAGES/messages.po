@@ -5143,7 +5143,7 @@ msgstr "O petróleo cru se encontra nas dez primeiras posições em ambos os ran
 
 #: dataviva/templates/general/index.html:85
 msgid "Business management"
-msgstr "Gestão Empresarial""
+msgstr "Gestão Empresarial"
 
 #: dataviva/templates/general/index.html:86
 msgid "In need of business management solutions? São Paulo (SP) concentrates more professionals in the area of ​​Consulting in the activity!"

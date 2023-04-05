@@ -192,3 +192,20 @@ img {
   background-size: cover;
   position: relative;
 }
+
+.text-carousel {
+
+  text-shadow:0 0 20px #000, 0 0 20px #000;
+  font-weight: 400; 
+  font-size: 42px; 
+  margin-bottom:20px
+}
+
+.button-carousel {
+  margin-top:6px;
+  background-color: #A25A6D; 
+  padding: 8px; 
+  width: 260px; 
+  border-radius: 20px;
+  border: none;
+}
