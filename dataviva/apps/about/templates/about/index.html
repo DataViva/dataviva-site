@@ -1,8 +1,11 @@
 <!-- extend from base layout -->
 {% extends "base.html" %}
 
-{% block content %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="../../../../static/css/modules/about.css" />
+{% endblock head %}
 
+{% block content %}
 
 <!-- BREADCRUMB -->
 <div class="container">
@@ -17,23 +20,292 @@
 </div>
 <!-- BREADCRUMB -->
 
+<div class="centralize">
+    <div class="divider"></div>
+</div>
 
 <section id="history">
     <div class="container">
-        <div class="col-md-4">
-            <h3>{% trans %}DataViva is an open search platform that allows users to access more than 1 billion visualizations of socioeconomic data from more than 5 thousand Brazilian cities.{% endtrans %}</h3>
+        <div class="col-md-12">
+            <h2 class="title">{% trans %}The{% endtrans %} Dataviva</h2>
+            <p class="paragraph">{% trans %}Collaborative Planning, economic diversification, competitiveness and transparency: these are the objectives of DataViva which was created to strengthen the culture of data use and guide the country's development. An information and analysis tool which proposes a new way of thinking about building the future, from the transformation of data into knowledge and action.{% endtrans %}</p>
         </div>
-        <div class="col-md-8">
-            <h2>{% trans %}The{% endtrans %} DataViva</h2>
-            <p>{% trans %}Collaborative Planning, economic diversification, competitiveness and transparency: these are the objectives of DataViva which was created to strengthen the culture of data use and guide the country's development. An information and analysis tool which proposes a new way of thinking about building the future, from the transformation of data into knowledge and action.{% endtrans %}</p>
+    </div>
+    
+    <div style="background-color: #f3f6f3;">
+        <div class="container">
+            <h2 class="title">{% trans %}Project History{% endtrans %}</h2>
+            <p class="paragraph">{% trans %}DataViva is currently being maintained and developed by the Center for Development and Regional Planning (CEDEPLAR), a complementary body of the Faculty of Economic Sciences of the Federal University of Minas Gerais, with support from the Research Support Foundation of the State of Minas Gerais (FAPEMIG). The platform offers the user a dynamic access experience to a large set of public data. Entirely developed with an open source software and open to everyone's access, DataViva was created with the objective of contributing to the implementation of public policies, public and private investments, as well as carrying out academic studies.{% endtrans %}</p>
+            <p class="paragraph">{% trans %}Initially designed to help the economic development policy of the government of the State of Minas Gerais, the project emerged from the need to make access to data on the Brazilian economy easier and more intuitive. Developed by the Government of Minas Gerais, in partnership with researchers from the MIT Media Lab (one of the main innovation centers in the world), the platform presents an unpublished solution in the country, based on databases made available by the Ministry of Labor and Employment (MTE), Ministry of Development, Industry and Foreign Trade (MDIC) and Ministry of Education (MEC).{% endtrans %}</p>
+            <p class="paragraph">{% trans %}One of the design pillars of DataViva is BigData technology, a technique for generating knowledge and intelligence from the processing of a large volume of data. Based on international references, the project provides, in its current version, national data for the last ten years, referring to the economy, education, industry, professional market, among other categories, visualized by location. By providing free and open access to this information, DataViva provides a more detailed knowledge of the Brazilian economy, generating inputs for planning and decision-making by businessmen, students, investors and professionals from any economic sector and from any place in the world.{% endtrans %}</p>
+        </div>
+    </div>
+    
+</section>
 
-            <h2>{% trans %}Project History{% endtrans %}</h2>
-            <p>{% trans %}DataViva is currently being maintained and developed by the Center for Development and Regional Planning (CEDEPLAR), a complementary body of the Faculty of Economic Sciences of the Federal University of Minas Gerais, with support from the Research Support Foundation of the State of Minas Gerais (FAPEMIG). The platform offers the user a dynamic access experience to a large set of public data. Entirely developed with an open source software and open to everyone's access, DataViva was created with the objective of contributing to the implementation of public policies, public and private investments, as well as carrying out academic studies.{% endtrans %}</p>
-            <p>{% trans %}Initially designed to help the economic development policy of the government of the State of Minas Gerais, the project emerged from the need to make access to data on the Brazilian economy easier and more intuitive. Developed by the Government of Minas Gerais, in partnership with researchers from the MIT Media Lab (one of the main innovation centers in the world), the platform presents an unpublished solution in the country, based on databases made available by the Ministry of Labor and Employment (MTE), Ministry of Development, Industry and Foreign Trade (MDIC) and Ministry of Education (MEC).{% endtrans %}</p>
-            <p>{% trans %}One of the design pillars of DataViva is BigData technology, a technique for generating knowledge and intelligence from the processing of a large volume of data. Based on international references, the project provides, in its current version, national data for the last ten years, referring to the economy, education, industry, professional market, among other categories, visualized by location. By providing free and open access to this information, DataViva provides a more detailed knowledge of the Brazilian economy, generating inputs for planning and decision-making by businessmen, students, investors and professionals from any economic sector and from any place in the world.{% endtrans %}</p>
+<section id="team" class="centralize" style="margin-bottom: 32px;">
+    <div class="divider"></div>
+    
+    <div class="container">
+        <h3 id="teamTitle">NOSSA EQUIPE</h3>
+        <div class="row">
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Elton.png"/>
+                    <div>
+                        <h4 class="cardTitle">Elton Freitas</h4>
+                        <h4 class="cardPosition">product owner</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/eltonfreitas"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/eltonfreitas7/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/7115134234408070"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Gustavo.png"/>
+                    <div>
+                        <h4 class="cardTitle">Gustavo Brito</h4>
+                        <h4 class="cardPosition">{% trans %}general coordinator{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://www.linkedin.com/in/gustavo-de-britto-rocha/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/5668137663316742"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Joao-Diretor.png"/>
+                    <div>
+                        <h4 class="cardTitle">João Romero</h4>
+                        <h4 class="cardPosition">{% trans %}director{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://www.linkedin.com/in/jo%C3%A3o-prates-romero-01870a89/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/3753946953125246"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ramon.png"/>
+                    <div>
+                        <h4 class="cardTitle">Ramon Torres</h4>
+                        <h4 class="cardPosition">scrum master</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/rsnatorres"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/ramon-torres-5b1164119/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/4650341120288709"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Alexandre.png"/>
+                    <div>
+                        <h4 class="cardTitle">Alexandre Stein</h4>
+                        <h4 class="cardPosition">scrum master</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/alexandreqstein"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/alexandrequeirozstein/ "><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/5292452157017372"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Gabriela.png"/>
+                    <div>
+                        <h4 class="cardTitle">Gabriela Andrade</h4>
+                        <h4 class="cardPosition">scrum master</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/gabrielarabelo/"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/gabrielarabelo/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/7445655357089178"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Rafael.png"/>
+                    <div>
+                        <h4 class="cardTitle">Rafael Medina</h4>
+                        <h4 class="cardPosition">tech lead</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/rafaelsmedina"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/rafaelsmedina/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/5572599370036384"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Joao-Vitor.png"/>
+                    <div>
+                        <h4 class="cardTitle">Joao Vitor Otoni</h4>
+                        <h4 class="cardPosition">{% trans %}developer{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/Akayy0"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/joão-vitor-andrade-otoni-566a89247/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/2887143499477252"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Kayque.png"/>
+                    <div>
+                        <h4 class="cardTitle">Kayque Siqueira</h4>
+                        <h4 class="cardPosition">{% trans %}developer{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/Kayross54x"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/kayque-siqueira-ba8a34230/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/4444696804048072"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Rubens.png"/>
+                    <div>
+                        <h4 class="cardTitle">Rubens Castro</h4>
+                        <h4 class="cardPosition">{% trans %}developer{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/RCastro13"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/rubens-castro-382ba6219/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/6234711422898935"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Samuel.png"/>
+                    <div>
+                        <h4 class="cardTitle">Samuel Bernardes</h4>
+                        <h4 class="cardPosition">{% trans %}developer{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/samuel-bernardes"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/samuel-bernardes-lopes-santos/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/5834217676401916"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Marcos.png"/>
+                    <div>
+                        <h4 class="cardTitle">Marcos Pantuza</h4>
+                        <h4 class="cardPosition">{% trans %}developer{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/Marcosap19"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/marcos-pantuza-595b361a3/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/1834691756954011"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Felipe.png"/>
+                    <div>
+                        <h4 class="cardTitle">Felipe Amaral</h4>
+                        <h4 class="cardPosition">{% trans %}data analyst{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/fsilvaamaral"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/felipesilvaamaral/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/5514054318263728"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Rodrigo-Dias.png"/>
+                    <div>
+                        <h4 class="cardTitle">Rodrigo Dias</h4>
+                        <h4 class="cardPosition">{% trans %}data analyst{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/rodrigo1406"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/rodrigo-dias-62450044/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/4984843924680283"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Ana-Clara.png"/>
+                    <div>
+                        <h4 class="cardTitle">Ana Clara Freire</h4>
+                        <h4 class="cardPosition">{% trans %}data analyst{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/anaclarafreire"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/ana-clara-freire-rodrigues-096b37211/"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/2319560632212473"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-sm-4 col-xs-6 m-b-lg wow fadeInUp">
+                <div class="cardDiv">
+                    <img class="cardImg" src="/static/img/about/team/Marco.png"/>
+                    <div>
+                        <h4 class="cardTitle">Marco Azevedo</h4>
+                        <h4 class="cardPosition">{% trans %}data analyst{% endtrans %}</h4>
+                        
+                        <div class="cardSocials">
+                            <a target="_blank" href="https://github.com/marcooantonios"><img width="26px" src="/static/img/about/mediaIcons/github1.svg" alt="logo GitHub"/></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/marco-ant%C3%B4nio-silva-azevedo-"><img width="26px" src="/static/img/about/mediaIcons/linkedin1.svg" alt="logo Linkedin"/></a>
+                            <a target="_blank" href="http://lattes.cnpq.br/1907431638395236"><img width="30px" src="/static/img/about/mediaIcons/Icone_Lattes1.png" alt="logo Lattes"/></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+
 
 {% include "include/promoters.html" %}
 {% endblock content %}

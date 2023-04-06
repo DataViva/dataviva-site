@@ -12,5 +12,92 @@ h3 {
 }
 
 p {
-	text-align: justify;
+    text-align: justify;
+}
+
+.divider {
+    width: 120px;
+    height: 2px;
+    border: 1px solid #9EDDBF;
+    margin: 24px 24px 6px 24px;
+}
+
+.centralize {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+}
+
+.title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 58px;
+    color: #676A6C;
+    text-transform: uppercase;
+}
+
+.paragraph {
+    text-align: center;
+    font-size: 16px;
+    line-height: 29px;
+    color: #676A6C;
+    margin-bottom: 26px
+}
+
+#teamTitle {
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 58px;
+    color: #676A6C;
+    text-transform: uppercase;
+}
+
+.cardDiv {
+    margin: 12px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardImg {
+    width: 100%;
+    min-width: 180px;
+}
+
+.cardTitle {
+    font-size: 16px;
+    text-align: center;
+}
+
+.cardPosition {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    color: #9EDDBF;
+    text-transform: uppercase;
+}
+
+.cardSocials {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardSocials a {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+@media (max-width: 390px) {
+    .cardTitle {
+        font-size: 16px;
+        text-align: center;
+        white-space: nowrap;
+    }
 }
