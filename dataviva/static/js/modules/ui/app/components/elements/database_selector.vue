@@ -1,61 +1,21 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6">
-        <div class="row">
-          <div
-            v-for="database in databases.slice(0, 4)"
-            :key="database.name"
-            class="col-sm-6">
-            <a
-              :data-content="$t(database.tooltipText)"
-              class="no-underline burgundy t-bg-transparent hover-bg-burgundy mh2 h4 w5 mh2 mb4 pt1 hover-white"
-              data-toggle="popover"
-              data-placement="top"
-              @click="selectDataBase(database.code);">
-              <div class="tc">
-                <div class="f1 mt3 mb2">
-                  <i :class="database.icon.db" />
-                </div>
-                <div>
-                  <p class="f3 capitalize">
-                    {{ $t(database.name) }}
-                  </p>
-                </div>
-              </div>
-            </a>
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" v-for="database in databases" :key="database.name">
+      <a :data-content="$t(database.tooltipText)" class="no-underline burgundy t-bg-transparent hover-bg-burgundy h4 w100 mb4 pt1 hover-white" data-toggle="popover" data-placement="top" @click="selectDataBase(database.code);">
+        <div class="tc">
+          <div class="f1 mt3 mb2">
+            <i :class="database.icon.db" />
+          </div>
+          <div>
+            <p class="f3 capitalize">
+              {{ $t(database.name) }}
+            </p>
           </div>
         </div>
-      </div>
-      <div class="col-md-6">
-        <div class="row">
-          <div
-            v-for="database in databases.slice(4, 8)"
-            :key="database.name"
-            class="col-sm-6">
-            <a
-              :data-content="$t(database.tooltipText)"
-              class="no-underline burgundy t-bg-transparent hover-bg-burgundy mh2 h4 w5 mh2 mb4 pt1 hover-white"
-              data-toggle="popover"
-              data-placement="top"
-              @click="selectDataBase(database.code);">
-              <div class="tc">
-                <div class="f1 mt3 mb2">
-                  <i :class="database.icon.db" />
-                </div>
-                <div>
-                  <p class="f3 capitalize">
-                    {{ $t(database.name) }}
-                  </p>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
+      </a>
     </div>
     <transition name="fade">
-      <selector v-if="show" :database="database" @close="closeModal()" />
+      <selector v-if="show" :database="database" @close="closeModal()"/>
     </transition>
   </div>
 </template>
