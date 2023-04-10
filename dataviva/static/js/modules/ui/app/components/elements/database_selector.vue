@@ -1,15 +1,18 @@
 <template>
   <div class="row">
-    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6" v-for="database in databases" :key="database.name">
-      <a :data-content="$t(database.tooltipText)" class="no-underline burgundy t-bg-transparent hover-bg-burgundy h4 w100 mb4 pt1 hover-white" data-toggle="popover" data-placement="top" @click="selectDataBase(database.code);">
+    <div v-for="database in databases" class="col-lg-3 col-xs-6">
+      <a :key="database.name"
+         :data-content="$t(database.tooltipText)"
+         class="no-underline burgundy t-bg-transparent hover-bg-burgundy mh2 h4 w5 mh2 mb4 pt1 hover-white"
+         data-toggle="popover"
+         data-placement="top"
+         @click="selectDataBase(database.code);">
         <div class="tc">
           <div class="f1 mt3 mb2">
             <i :class="database.icon.db" />
           </div>
           <div>
-            <p class="f3 capitalize">
-              {{ $t(database.name) }}
-            </p>
+            <p class="f3 capitalize">{{ $t(database.name) }}</p>
           </div>
         </div>
       </a>
@@ -19,6 +22,7 @@
     </transition>
   </div>
 </template>
+
 
 <script>
 import "../../assets/css/*.css";
