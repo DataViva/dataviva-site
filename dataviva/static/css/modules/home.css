@@ -208,4 +208,51 @@ img {
   width: 260px; 
   border-radius: 20px;
   border: none;
+  transition: ease-in-out 0.4s;
+}
+
+.button-carousel:hover {
+  background-color: #905262;
+}
+
+@media (max-width: 840px) {
+  .text-carousel{
+    font-size:32px;
+  }
+
+  .button-carousel{
+    width: 240px;
+    padding:4px;
+    padding-bottom:8px;
+  }
+}
+@media (max-width: 740px) {
+  .text-carousel{
+    font-size:32px;
+  }
+
+  .button-carousel{
+    width: 240px;
+    padding:4px;
+  }
+}
+
+@media (max-width: 640px) {
+  .text-carousel{
+    font-size:26px;
+  }
+
+  .button-carousel{
+    width: 200px;
+    padding:4px;
+  }
+}
+@media (max-width: 390px) {
+  .text-carousel{
+    font-size:22px;
+  }
+  .button-carousel{
+    width: 100%;
+    padding:4px;
+  }
 }
