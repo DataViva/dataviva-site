@@ -5165,6 +5165,23 @@ msgstr "Ensino Superior - Primeiro Lugar"
 msgid "In Brazil, Law courses are the ones with the most enrollments."
 msgstr "No Brasil, os cursos de Direito são os que reúnem mais matriculados."
 
+#: dataviva/templates/general/index.html:41
+msgid "Access Here"
+msgstr "Acesse Aqui"
+#: dataviva/templates/general/index.html:65
+msgid "Access Here"
+msgstr "Acesse Aqui"
+#: dataviva/templates/general/index.html:88
+msgid "Access Here"
+msgstr "Acesse Aqui"
+#: dataviva/templates/general/index.html:113
+msgid "Access Here"
+msgstr "Acesse Aqui"
+#: dataviva/templates/general/index.html:137
+msgid "Access Here"
+msgstr "Acesse Aqui"
+
+
 
 #: dataviva/templates/general/index.html:26
 msgid ""
