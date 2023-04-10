@@ -222,7 +222,7 @@ msgstr "Principal Município por Matrículas"
 msgid "Average Age"
 msgstr "Idade Média"
 
-#: dataviva/apps/about/templates/about/index.html:14
+#: dataviva/apps/about/templates/about/index.html:17
 #: dataviva/templates/include/footer.html:6
 #: dataviva/translations/dictionary.py:591
 msgid "About"
@@ -232,7 +232,7 @@ msgstr "Sobre"
 msgid "DataViva is an open search platform that allows users to access more than 1 billion visualizations of socioeconomic data from more than 5 thousand Brazilian cities."
 msgstr "DataViva é uma plataforma aberta de pesquisa, que permite ao usuário acessar mais de 1 bilhão de visualizações com dados socioeconômicos dos mais de 5 mil municípios brasileiros."
 
-#: dataviva/apps/about/templates/about/index.html:27
+#: dataviva/apps/about/templates/about/index.html:30
 #: dataviva/templates/include/footer.html:7
 #: dataviva/translations/dictionary.py:594
 msgid "The"
@@ -240,26 +240,78 @@ msgstr "O"
 
 #: dataviva/apps/about/templates/about/index.html:31
 msgid "Collaborative Planning, economic diversification, competitiveness and transparency: these are the objectives of DataViva which was created to strengthen the culture of data use and guide the country's development. An information and analysis tool which proposes a new way of thinking about building the future, from the transformation of data into knowledge and action." 
-msgstr "Planejamento Colaborativo, diversificação da economia, competitividade e transparência: são esses os objetivos do DataViva que foi criado para fortalecer a cultura do uso de dados e orientar o desenvolvimento do país. Uma ferramenta de informações e análises que propõe uma nova forma de pensar a construção do futuro, a partir da transformação de dados em conhecimento e ação"
+msgstr "Planejamento Colaborativo, diversificação da economia, competitividade e transparência: são esses os objetivos do DataViva que foi criado para fortalecer a cultura do uso de dados e orientar o desenvolvimento do país. Uma ferramenta de informações e análises que propõe uma nova forma de pensar a construção do futuro, a partir da transformação de dados em conhecimento e ação."
 
 
-#: dataviva/apps/about/templates/about/index.html:33
+#: dataviva/apps/about/templates/about/index.html:37
 msgid "Project History"
-msgstr "Historia do Projeto"
+msgstr "História do Projeto"
 
-#: dataviva/apps/about/templates/about/index.html:34
+#: dataviva/apps/about/templates/about/index.html:38
 msgid "DataViva is currently being maintained and developed by the Center for Development and Regional Planning (CEDEPLAR), a complementary body of the Faculty of Economic Sciences of the Federal University of Minas Gerais, with support from the Research Support Foundation of the State of Minas Gerais (FAPEMIG). The platform offers the user a dynamic access experience to a large set of public data. Entirely developed with an open source software and open to everyone's access, DataViva was created with the objective of contributing to the implementation of public policies, public and private investments, as well as carrying out academic studies."
 msgstr "O DataViva é atualmente mantido e desenvolvido pelo Centro de Desenvolvimento e Planejamento Regional (CEDEPLAR), órgão complementar da Faculdade de Ciências Econômicas da Universidade Federal de Minas gerais, com apoio da Fundação de Amparo à Pesquisa do Estado de Minas Gerais (FAPEMIG. A plataforma oferece ao usuário uma experiência dinâmica de acesso a um grande conjunto de dados públicos. Totalmente desenvolvido em software livre e aberto ao acesso de todos, o DataViva foi criado com o objetivo de contribuir para a implementação de políticas públicas, investimentos públicos e privados, bem como para a realização de estudos acadêmicos."
 
 
-#: dataviva/apps/about/templates/about/index.html:35
+#: dataviva/apps/about/templates/about/index.html:39
 msgid "Initially designed to help the economic development policy of the government of the State of Minas Gerais, the project emerged from the need to make access to data on the Brazilian economy easier and more intuitive. Developed by the Government of Minas Gerais, in partnership with researchers from the MIT Media Lab (one of the main innovation centers in the world), the platform presents an unpublished solution in the country, based on databases made available by the Ministry of Labor and Employment (MTE), Ministry of Development, Industry and Foreign Trade (MDIC) and Ministry of Education (MEC)."
 msgstr "Elaborado inicialmente para auxiliar a política de desenvolvimento econômico do governo do Estado de Minas Gerais, o projeto surgiu a partir da necessidade de tornar o acesso aos dados sobre a economia brasileira mais fácil e intuitivo. Desenvolvida pelo Governo de Minas Gerais, em parceria com pesquisadores do MIT Media Lab (um dos principais centros de inovação do mundo), a plataforma apresenta uma solução inédita no país, a partir de bases de dados disponibilizadas pelo Ministério do Trabalho e Emprego (MTE), Ministério do Desenvolvimento, Indústria e Comércio Exterior (MDIC) e Ministério da Educação (MEC)."
 
 
-#: dataviva/apps/about/templates/about/index.html:36
+#: dataviva/apps/about/templates/about/index.html:40
 msgid "One of the design pillars of DataViva is BigData technology, a technique for generating knowledge and intelligence from the processing of a large volume of data. Based on international references, the project provides, in its current version, national data for the last ten years, referring to the economy, education, industry, professional market, among other categories, visualized by location. By providing free and open access to this information, DataViva provides a more detailed knowledge of the Brazilian economy, generating inputs for planning and decision-making by businessmen, students, investors and professionals from any economic sector and from any place in the world."
 msgstr "Um dos pilares de concepção do DataViva é a tecnologia do BigData, técnica de geração de conhecimento e inteligência a partir do processamento de um grande volume de dados. Baseado em referências internacionais, o projeto disponibiliza, na versão atual, dados nacionais dos últimos dez anos, referentes à economia, educação, indústria, mercado profissional, entre outras categorias, visualizadas por localidade. Ao proporcionar o acesso livre e gratuito a essas informações, o DataViva disponibiliza um conhecimento mais detalhado da economia brasileira, gerando insumos para o planejamento e a tomada de decisão por parte de empresários, estudantes, investidores e profissionais de qualquer setor econômico e a partir de qualquer lugar do mundo. "
+
+#: dataviva/apps/about/templates/about/index.html:50
+msgid "Our Team"
+msgstr "Nosso Time"
+
+
+#: dataviva/apps/about/templates/about/index.html:73
+msgid "general coordinator"
+msgstr "cordenador geral"
+
+#: dataviva/apps/about/templates/about/index.html:88
+msgid "director"
+msgstr "diretor"
+
+#: dataviva/apps/about/templates/about/index.html:167
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:183
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:199
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:214
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:230
+msgid "developer"
+msgstr "desenvolvedor"
+
+#: dataviva/apps/about/templates/about/index.html:246
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:262
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:278
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:294
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+
+
 
 
 #: dataviva/apps/admin/views.py:21 dataviva/templates/general/error.html:12
@@ -7561,4 +7613,3 @@ msgstr "com"
 
 #~ msgid "Main Origin by Total Value Imported"
 #~ msgstr "Principal Origem por Valor Total Importado"
-
