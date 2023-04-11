@@ -9,7 +9,7 @@
 						<i :class="database.icon.db" />
 					</div>
 					<div>
-						<p class="f3 capitalize">{{ $t(database.name) }}</p>
+						<p class="f3 capitalize">teste</p>
 					</div>
 				</div>
 			</a>
