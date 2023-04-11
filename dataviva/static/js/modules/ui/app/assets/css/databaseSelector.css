@@ -1,0 +1,9 @@
+.buttons-base {
+  width: 25%;
+}
+
+@media (max-width: 768px) {
+  .buttons-base {
+    width: 50%;
+  }
+}
