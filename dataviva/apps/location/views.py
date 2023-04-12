@@ -379,7 +379,6 @@ def index(bra_id, tab):
     else:
         background_image = "bg-" + location.id[:3] + "_" + str(randint(1, 2))
 
-
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
             'name': location_service.name(),
@@ -393,8 +392,10 @@ def index(bra_id, tab):
         header = {
             'name': location_service.name(),
             'gdp': location_service.gdp(),
+            'life_expectation': location_service.life_expectation(),
             'population': location_service.population(),
             'gdp_per_capita': location_service.gdp_per_capita(),
+            'hdi': location_service.hdi(),
             'bg_class_image': background_image,
             'year': location_service.year()
         }
