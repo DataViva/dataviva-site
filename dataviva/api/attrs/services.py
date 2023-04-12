@@ -103,45 +103,45 @@ class Location:
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'gdp'),
                     None)
-        if (attr):
+        if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
-        
+
         return attr
 
     def hdi(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'hdi'),
                     None)
-        if (attr):
+        if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
-        
+
         return attr
 
     def life_expectation(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'life_exp'),
                     None)
-        if (attr):
+        if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
-        
+
         return attr
 
     def population(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'pop'),
                     None)
-        if (attr):
+        if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
-        
+
         return attr
 
     def gdp_per_capita(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'gdp_pc'),
                     None)
-        if (attr):
+        if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
-        
+
         return attr
 
     def name(self):
