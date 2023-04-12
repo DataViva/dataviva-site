@@ -136,7 +136,7 @@
                     </div>
                     {% endif %}
 
-                    {% if header.life_expectation %}
+                    {% if header.life_expectation and header.life_expectation != 0 %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %} ({{header.year}})</h2>
@@ -172,7 +172,7 @@
                     </div>
                     {% endif %}
 
-                    {% if header.hdi %}
+                    {% if header.hdi and header.hdi != 0 %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %} ({{header.year}})</h2>

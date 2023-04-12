@@ -381,23 +381,23 @@ def index(bra_id, tab):
 
     if len(bra_id) != 9 and len(bra_id) != 3:
         header = {
-            'name': location_service.name(),
-            'gdp': location_service.gdp(),
-            'population': location_service.population(),
+            'name': location_service.name() or 'N/A',
+            'gdp': location_service.gdp() or 0,
+            'population': location_service.population() or 0,
             'gdp_per_capita': location_service.gdp() / location_service.population(),
-            'bg_class_image': background_image,
-            'year': location_service.year()
+            'bg_class_image': background_image or 'default.jpg',
+            'year': location_service.year() or 0
         }
     else:
         header = {
-            'name': location_service.name(),
-            'gdp': location_service.gdp(),
-            'life_expectation': location_service.life_expectation(),
-            'population': location_service.population(),
-            'gdp_per_capita': location_service.gdp_per_capita(),
-            'hdi': location_service.hdi(),
-            'bg_class_image': background_image,
-            'year': location_service.year()
+            'name': location_service.name() or 'N/A',
+            'gdp': location_service.gdp() or 0,
+            'life_expectation': location_service.life_expectation() or 0,
+            'population': location_service.population() or 0,
+            'gdp_per_capita': location_service.gdp_per_capita() or 0,
+            'hdi': location_service.hdi() or 0,
+            'bg_class_image': background_image or 'default.jpg',
+            'year': location_service.year() or 0
         }
 
     if eci is not None:
