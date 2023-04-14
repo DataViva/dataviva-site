@@ -7,11 +7,25 @@ from dataviva.api.attrs.models import Wld, Bra
 from sqlalchemy.sql.expression import func
 from dataviva.translations.dictionary import dictionary
 from dataviva import db
+import requests
 
 mod = Blueprint('trade_partner', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/trade_partner')
 
+def getSecexLatestYear():
+    latestSecexYear = "2022"
+
+    response = requests.get(g.api_url + "secex/year")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data['data']
+        
+        localData.sort(key=lambda x: x[0], reverse=True)
+        latestSecexYear = localData[0][0]
+
+    return latestSecexYear
 
 @mod.before_request
 def before_request():
@@ -74,7 +88,9 @@ def graphs(wld_id, tab):
         depth = location_depth(bra_id)
         id_ibge = location_service(depth, location)
 
-    return render_template('trade_partner/graphs-' + tab + '.html', trade_partner=trade_partner, location=location, graph=None, id_ibge=id_ibge)
+    latestSecexYear = getSecexLatestYear()
+
+    return render_template('trade_partner/graphs-' + tab + '.html', trade_partner=trade_partner, location=location, graph=None, id_ibge=id_ibge, latestSecexYear=latestSecexYear)
 
 
 @mod.route('/<wld_id>', defaults={'tab': 'general'})
@@ -218,6 +234,8 @@ def index(wld_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
+    latestSecexYear = getSecexLatestYear()
+
     return render_template('trade_partner/index.html',
                            body_class='perfil-estado',
                            header=header,
@@ -226,4 +244,5 @@ def index(wld_id, tab):
                            location=location,
                            tab=tab,
                            graph=graph,
-                           id_ibge=id_ibge)
+                           id_ibge=id_ibge,
+                           latestSecexYear=latestSecexYear)
