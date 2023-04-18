@@ -24,6 +24,7 @@ from sqlalchemy import desc, func
 from random import randint
 from decimal import *
 import sys
+import requests
 
 
 reload(sys)
@@ -134,6 +135,19 @@ tabs = {
         ]
     }
 
+def getSecexLatestYear():
+    latestSecexYear = "2022"
+
+    response = requests.get(g.api_url + "secex/year")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data['data']
+        
+        localData.sort(key=lambda x: x[0], reverse=True)
+        latestSecexYear = localData[0][0]
+
+    return latestSecexYear
 
 @mod.before_request
 def before_request():
@@ -196,8 +210,10 @@ def graphs(bra_id, tab):
         depth = location_depth(bra_id)
         id_ibge = _location_service(depth, location)
         is_municipality = True if depth == 'municipality' else False
+    
+    latestSecexYear = getSecexLatestYear()
 
-    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None, is_municipality=is_municipality)
+    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None, is_municipality=is_municipality, latestSecexYear=latestSecexYear)
 
 
 @mod.route('/all', defaults={'tab': 'general'})
@@ -266,8 +282,9 @@ def all(tab):
         abort(404)
 
     else:
+        latestSecexYear = getSecexLatestYear()
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, latestSecexYear=latestSecexYear)
 
 
 @mod.route('/<bra_id>', defaults={'tab': 'general'})
@@ -481,5 +498,6 @@ def index(bra_id, tab):
         abort(404)
 
     else:
+        latestSecexYear = getSecexLatestYear()
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear)

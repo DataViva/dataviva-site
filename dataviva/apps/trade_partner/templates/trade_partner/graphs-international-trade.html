@@ -23,7 +23,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'exports-municipality-tree_map' }}" data-parent="#exports-municipality">
                     TreeMap
                 </a> -->
-                <a href="/{{ g.locale }}/tree_map/secex/product/value?year=2018&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/secex/product/value?year={{latestSecexYear}}&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-tree_map' }}" data-parent="#new-api-exports-municipality">
                     TreeMap
@@ -46,7 +46,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-tree_map'}}" data-parent="#exports-destination">
                     TreeMap
                 </a> -->
-                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?year=2018&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?year={{latestSecexYear}}&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-tree_map'}}" data-parent="#new-api-exports-destination">
                     TreeMap
@@ -78,7 +78,7 @@
                    target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-line'}}" data-parent="#new-api-exports-port">
                     {% trans %}Line{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&excluded_year=2018&options=singlecolor,month,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
+                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&excluded_year=2022&options=singlecolor,month,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
                     {% trans %}Bar{% endtrans %}
@@ -98,7 +98,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'imports-municipality-tree_map'}}" data-parent="#imports-municipality">
                     TreeMap
                 </a> -->
-                <a href="/{{ g.locale }}/tree_map/secex/product/value?year=2018&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/secex/product/value?year={{latestSecexYear}}&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-tree_map' }}" data-parent="#new-api-imports-municipality">
                     TreeMap
@@ -121,7 +121,7 @@
                    class="list-group-item {{'selected' if graph.menu == 'imports-origin-tree_map'}}" data-parent="#imports-origin">
                     TreeMap
                 </a> -->
-                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?year=2018&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{ g.locale }}/tree_map/secex/municipality/value?year={{latestSecexYear}}&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-destination-tree_map'}}" data-parent="#new-api-imports-destination">
                     TreeMap
@@ -154,7 +154,7 @@
                    target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-line'}}" data-parent="#new-api-imports-port">
                     {% trans %}Line{% endtrans %}
                 </a>
-                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&excluded_year=2018&options=month,singlecolor,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}" 
+                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&excluded_year=2022&options=month,singlecolor,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}" 
                    target="graphs-frame-international-trade"
                    class="list-group-item {{'selected' if graph.menu == 'import-port-bar'}}" data-parent="#import-port">
                     {% trans %}Bar{% endtrans %}

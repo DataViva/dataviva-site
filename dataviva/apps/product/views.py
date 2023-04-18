@@ -6,12 +6,26 @@ from dataviva.api.secex.services import ProductTradePartners as ProductTradePart
 from dataviva.api.secex.services import ProductMunicipalities as ProductMunicipalitiesService
 from dataviva.api.secex.services import ProductLocations as ProductLocationsService
 from dataviva.api.attrs.models import Bra, Hs
+import requests
 
 mod = Blueprint('product', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/product',
                 static_folder='static')
 
+def getSecexLatestYear():
+    latestSecexYear = "2022"
+
+    response = requests.get(g.api_url + "secex/year")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data['data']
+        
+        localData.sort(key=lambda x: x[0], reverse=True)
+        latestSecexYear = localData[0][0]
+
+    return latestSecexYear
 
 @mod.before_request
 def before_request():
@@ -73,8 +87,10 @@ def graphs(product_id, tab):
     else:
         depth = location_depth(bra_id)
         id_ibge = location_service(depth, location)
+    
+    latestSecexYear = getSecexLatestYear()
 
-    return render_template('product/graphs-'+tab+'.html', product=product, location=location, graph=None, id_ibge=id_ibge)
+    return render_template('product/graphs-'+tab+'.html', product=product, location=location, graph=None, id_ibge=id_ibge, latestSecexYear=latestSecexYear)
 
 
 @mod.route('/<product_id>', defaults={'tab': 'general'})
@@ -263,4 +279,7 @@ def index(product_id, tab):
         abort(404)
 
     else:
-        return render_template('product/index.html', header=header, body=body, product=product, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)
+        latestSecexYear = getSecexLatestYear()
+        return render_template('product/index.html', 
+                               header=header, 
+                               body=body, product=product, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear)

@@ -591,9 +591,11 @@ var getSelectedYears = function() {
     })
 
     years = Array.from(years);
+
     years = years.filter(function(item){
         return item > 0;
     });
+    
     return years;
 }
 
@@ -606,6 +608,7 @@ var totalOfCurrentX = function(){
         if(years.indexOf(item.year) != -1){
             acc += item[key];
         }
+
         return acc;
     }, 0);
 
@@ -648,6 +651,11 @@ var buildData = function(responseApi){
         yearRange[0] = 0;
 
     selectedYears = [0, yearRange[1]];
+
+    if(dimensions[0] == "port") {
+        selectedYears = [0, 2017];
+        yearRange[1] = 2017;
+    }
 
     return data;
 }
@@ -746,13 +754,15 @@ var filterTopData = function(data){
     var items = {}; // name: totalValue
 
     data.forEach(function(item){
-        var name = item[currentY],
+        if(item.year <= 2017 || dimensions[0] != "port") {
+            var name = item[currentY],
             value = item[currentX];
-
-        if(items[name] == undefined)
-            items[name] = 0;
-
-        items[name] += value;
+    
+            if(items[name] == undefined)
+                items[name] = 0;
+    
+            items[name] += value;
+        }
     });
 
     var sortable = [];
@@ -786,6 +796,8 @@ var lastYear = function(data){
         if(item.year > year)
             year = item.year;
     });
+
+    if(dimensions[0] == "port") year = 2017
 
     return year;
 };
