@@ -208,7 +208,7 @@ body {
   }
   .login-buttons-nav{
     float:left !important;
-    padding-left: 15px;
+    padding-left: 0px;
   }
   .lang-form-choose-nav{
     float:left !important;
