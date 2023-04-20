@@ -155,8 +155,37 @@ body {
   color: #A5CADF;
   background: none;
 }
+.teste1 {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  margin-right:50px;
+
+}
+.teste {
+  display:flex;
+  align-items:center;
+  justify-content: left;
+  cursor: pointer;
+  padding: 0px 6px;
+}
 .navbar-default .navbar-nav > li:not(:last-child) > a {
   border-right: 1px solid #5A9DC4;
+}
+@media (min-width: 768px){
+  .navbar-nav {
+    float: left!important;
+    margin: 0;
+  }
+}
+@media (max-width: 1199px) {
+  .teste1{
+    margin-right:0px;
+  }
+  .navbar-brand {
+    width: 200px;
+    padding: 5px 15px;
+  }
 }
 @media (max-width: 991px) {
   .navbar-default .navbar-left > li:hover {

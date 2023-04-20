@@ -24,7 +24,7 @@
         </div>
 
         <div class="navbar-collapse collapse" id="navbar">
-            <ul class="nav navbar-nav navbar-left">
+            <ul class="teste1 nav navbar-nav navbar-left">
                 <li><a href="{{ url_for('about.index') }}">{% trans %}ABOUT{% endtrans %}</a></li>
                 <li><a href="{{ url_for('build_graph.index') }}">{% trans %}EXPLORE{% endtrans %}</a></li>
                 <li><a href="{{ url_for('rankings.index') }}">{% trans %}RANKING{% endtrans %}</a></li>
@@ -45,7 +45,7 @@
                 </div>
                 <li><a href="{{ url_for('help.index') }}">{% trans %}HELP{% endtrans %}</a></li>
             </ul>
-            <ul class="nav navbar-nav navbar-right form-inline">
+            <ul class="teste nav navbar-nav form-inline">
                 {% if not g.user.is_authenticated %}
                     <li class="form-group login-buttons-nav">
                         <!-- <a class="login" data-toggle="modal" data-target="#dataviva-login"><i class="fa fa-sign-in m-r-xs"></i>{% trans %}Login{% endtrans %}</a>
@@ -71,7 +71,7 @@
                         </div>
                     </li>
                 {% endif %}
-                <li style="margin-right:100px;" class="form-group lang-form-choose-nav">
+                <li class="button-nav form-group lang-form-choose-nav">
                     <select class="form-control visible-lg visible-md visible-sm visible-xs" name="language-selector">
                         <option value="en">{% trans %}EN{% endtrans %}</option>
                         <option value="pt" selected="selected">{% trans %}PT{% endtrans %}</option>
