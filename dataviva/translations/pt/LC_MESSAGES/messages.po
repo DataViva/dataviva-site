@@ -5257,8 +5257,8 @@ msgstr ""
 
 #: dataviva/templates/general/index.html:53
 #: dataviva/translations/dictionary.py:579
-msgid "Explore our database"
-msgstr "Explore nossos bancos de dados"
+msgid "Explore our analytical reports by categories"
+msgstr "Explore os nossos relatórios analíticos por categorias"
 
 #: dataviva/templates/general/index.html:54
 #: dataviva/translations/dictionary.py:580
@@ -5553,35 +5553,19 @@ msgstr "PESQUISE"
 msgid "Basic Features"
 msgstr "Recursos Básicos"
 
-#: dataviva/templates/include/header.html:35
-#: dataviva/translations/dictionary.py:552
-msgid "START A SEARCH"
-msgstr "INICIE UMA PESQUISA"
-
-#: dataviva/templates/include/header.html:36
-#: dataviva/translations/dictionary.py:562
-msgid "VIEW RANKINGS"
-msgstr "VISUALIZE RANKINGS"
+#: dataviva/templates/include/header.html:33
+msgid "PUBLICATIONS"
+msgstr "PUBLICAÇÕES"
 
 #: dataviva/templates/include/header.html:38
-#: dataviva/translations/dictionary.py:559
-msgid "Advanced Features"
-msgstr "Recursos Avançados"
+msgid "STUDIES"
+msgstr "ESTUDOS"
 
 #: dataviva/templates/include/header.html:39
-#: dataviva/translations/dictionary.py:563
-msgid "MAKE GRAPHS"
-msgstr "CONSTRUA GRÁFICOS"
+msgid "NEWS"
+msgstr "NOTÍCIAS"
 
-#: dataviva/templates/include/header.html:40
-#: dataviva/translations/dictionary.py:564
-msgid "DATABASE DOWNLOAD"
-msgstr "DOWNLOAD DE BANCO DE DADOS"
 
-#: dataviva/templates/include/header.html:43
-#: dataviva/translations/dictionary.py:553
-msgid "PARTNERS"
-msgstr "PARCERIAS"
 
 #: dataviva/templates/include/header.html:44
 #: dataviva/translations/dictionary.py:554

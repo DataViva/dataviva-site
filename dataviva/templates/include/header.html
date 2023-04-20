@@ -30,13 +30,13 @@
                 <li><a href="{{ url_for('rankings.index') }}">{% trans %}RANKING{% endtrans %}</a></li>
                 <li><a href="{{ url_for('data.index') }}">{% trans %}DOWNLOAD{% endtrans %}</a></li>
                 <li>
-                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#dropdown-nav-submenu" role="button"  aria-expanded="false">{% trans %}PUBLICAÇÕES{% endtrans %}<span class="caret"></span></a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" data-target="#dropdown-nav-submenu" role="button"  aria-expanded="false">{% trans %}PUBLICATIONS{% endtrans %}<span class="caret"></span></a>
                 </li>
                 <div class="dropdown dropdown-nav-submenu" id="dropdown-nav-submenu" >
                     <ul class="dropdown-menu submenu-dropdown-items">
                         <!-- <li class="divisor">{% trans %}Basic Features{% endtrans %}</li> -->
-                        <li><a href="{{ url_for('scholar.index') }}"><i class="fa fa-angle-right"></i> {% trans %}ESTUDOS{% endtrans %}</a></li>
-                        <li><a href="{{ url_for('news.index') }}"><i class="fa fa-angle-right"></i> {% trans %}NOTÍCIAS{% endtrans %}</a></li>
+                        <li><a href="{{ url_for('scholar.index') }}"><i class="fa fa-angle-right"></i> {% trans %}STUDIES{% endtrans %}</a></li>
+                        <li><a href="{{ url_for('news.index') }}"><i class="fa fa-angle-right"></i> {% trans %}NEWS{% endtrans %}</a></li>
                         <!-- <li role="separator" class="divider"></li> -->
                         <!-- <li class="divisor">{% trans %}Advanced Features{% endtrans %}</li> -->
                         <li><a href="{{ url_for('blog.index') }}"><i class="fa fa-angle-right"></i> {% trans %}BLOG{% endtrans %}</a></li>
