@@ -46,11 +46,16 @@ p {
 }
 
 .paragraph {
-    text-align: center;
+    text-align: justify;
     font-size: 16px;
     line-height: 29px;
     color: #676A6C;
     margin-bottom: 26px
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 4em;
 }
 
 #teamTitle {

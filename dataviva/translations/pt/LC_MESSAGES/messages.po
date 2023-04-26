@@ -267,14 +267,17 @@ msgstr "A promoção do desenvolvimento da economia de Minas Gerais, contudo, es
 msgid "OUR TEAM"
 msgstr "NOSSA EQUIPE"
 
+#: dataviva/apps/about/templates/about/index.html:58
+msgid "technical coordinator"
+msgstr "coordenador técnico"
 
-#: dataviva/apps/about/templates/about/index.html:73
+#: dataviva/apps/about/templates/about/index.html:74
 msgid "general coordinator"
-msgstr "cordenador geral"
+msgstr "coordenador geral"
 
 #: dataviva/apps/about/templates/about/index.html:88
-msgid "director"
-msgstr "diretor"
+msgid "research coordinator"
+msgstr "coordenador de pesquisa"
 
 #: dataviva/apps/about/templates/about/index.html:167
 msgid "developer"
