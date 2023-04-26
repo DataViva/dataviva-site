@@ -112,6 +112,7 @@ body {
 .navpre {
   line-height: 26px;
   max-height: 26px;
+  height:20px;
   text-align: right;
 }
 .navpre li {
