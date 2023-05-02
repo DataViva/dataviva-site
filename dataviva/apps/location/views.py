@@ -81,10 +81,6 @@ tabs = {
             'new-api-imports-origin-tree_map',
             'imports-origin-stacked',
             'new-api-imports-origin-stacked',
-            'new-api-exports-port-tree_map',
-            'new-api-imports-port-tree_map',
-            'new-api-exports-port-line',
-            'new-api-imports-port-line'
         ],
 
         'education': [

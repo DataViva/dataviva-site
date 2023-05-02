@@ -17,7 +17,6 @@ var lineGraph = document.getElementById('lineGraph'),
     currentTitleAttrs = {'yValue': yValue, 'line': line}
     metadata = {},
     balance = line == 'type' ? true : false,
-    port = line == 'port' ? true : false,
     students = yValue == 'students_number' ? true : false,
     MAX_LINE_LIMIT = 10;
 
@@ -501,9 +500,6 @@ var loadViz = function(data) {
         if (balance)
             viz.y({'label': {'value': dictionary['trade_value']}});
 
-        if (port)
-            viz.id({'solo': solo});
-
     uiBuilder();
     $('#lineGraph').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
     viz.draw();
@@ -559,8 +555,6 @@ $(document).ready(function() {
                 buildTradeBalanceData(data);
             }
 
-            if (port)
-                var solo = updateSolo(data);
 
             loadViz(data);
 
