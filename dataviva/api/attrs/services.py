@@ -103,46 +103,31 @@ class Location:
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'gdp'),
                     None)
-        if (getattr(attr, 'stat_val', None)):
-            return attr.stat_val
-
-        return attr
+        return attr.stat_val
 
     def hdi(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'hdi'),
                     None)
-        if (getattr(attr, 'stat_val', None)):
-            return attr.stat_val
-
-        return attr
+        return attr.stat_val
 
     def life_expectation(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'life_exp'),
                     None)
-        if (getattr(attr, 'stat_val', None)):
-            return attr.stat_val
-
-        return attr
+        return attr.stat_val
 
     def population(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'pop'),
                     None)
-        if (getattr(attr, 'stat_val', None)):
-            return attr.stat_val
-
-        return attr
+        return attr.stat_val
 
     def gdp_per_capita(self):
         attrs = self.__attrs_list__()
         attr = next((attr for attr in attrs if attr.stat_id == 'gdp_pc'),
                     None)
-        if (getattr(attr, 'stat_val', None)):
-            return attr.stat_val
-
-        return attr
+        return attr.stat_val
 
     def name(self):
         bra_query = Bra.query.filter(Bra.id == self.bra_id).first()
@@ -181,8 +166,7 @@ class Location:
         return bra.total
 
     def area(self):
-        bs_query = Bs.query.filter(
-            Bs.bra_id == self.bra_id, Bs.stat_id == 'area').first()
+        bs_query = Bs.query.filter(Bs.bra_id == self.bra_id, Bs.stat_id == 'area').first()
         return bs_query.stat_val
 
     def states_in_a_region(self):
