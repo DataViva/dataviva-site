@@ -9,7 +9,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-industry-tree_map' or not graph }}" data-parent="#jobs-industry">
                     TreeMap
                 </a> -->
-                <a href="/{{g.locale}}/tree_map/rais/industry_class/jobs?count=establishment&year=2018{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/tree_map/rais/industry_class/jobs?count=establishment&year={{latestRaisYear}}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-industry-tree_map' or not graph}}" data-parent="#new-api-jobs-industry">
                     TreeMap
                 </a>
