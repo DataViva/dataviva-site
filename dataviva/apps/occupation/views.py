@@ -248,6 +248,5 @@ def index(occupation_id, tab):
     if header['total_employment'] == None or rais_max_year != header['year']:
         abort(404)
     else:
-        print("rais_max_year", rais_max_year)
         latestRaisYear = getRaisLatestYear()
         return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestRaisYear=latestRaisYear)

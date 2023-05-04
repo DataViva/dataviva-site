@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
-    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}<small> (2015)</small></h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}<small> ({{latestSecexYear}})</small></h2>
     {% if header.bra_id %}
         <p>{% if g.locale == 'pt' %}{{ trade_partner.article() | capitalize }}{% endif %} {{ header.name }} 
         {% trans %} is number {% endtrans %}{{ header.import_rank }}
@@ -32,7 +32,7 @@
 
     <div class="row">
         <div class="dl-box col-xs-12 col-md-10 col-lg-8" id="general-partner">
-            <h3>{% trans %}International Trade{% endtrans %} (2022)</h3>
+            <h3>{% trans %}International Trade{% endtrans %} ({{latestSecexYear}})</h3>
             <a href="#international-trade" 
                 aria-controls="international-trade" 
                 role="tab"

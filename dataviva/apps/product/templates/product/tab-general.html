@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
-    <h2 class="m-t-xl">{%trans%}General Profile{%endtrans%}<small> (2017)</small></h2>
+    <h2 class="m-t-xl">{%trans%}General Profile{%endtrans%}<small> ({{header.year}})</small></h2>
     {% if not location %}
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
