@@ -72,23 +72,6 @@
                 </a>
             </div>
             {% endif %}
-            <a href="#exports-port" class="list-group-item" data-toggle="collapse" data-parent="#exports-port">{% trans %}Port{% endtrans %}</a>
-            <div class="collapse" id="exports-port">
-                <a href="/{{ g.locale }}/line/secex/port/value?&values=value+kg&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-line'}}" data-parent="#new-api-exports-port">
-                    {% trans %}Line{% endtrans %}
-                </a>
-                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=export&excluded_year=2022&options=singlecolor,month,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}{{ '&subtitle=%s' % ('exporting_municipality' if depth == 'municipality' else 'state_production') }}"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-port-bar'}}" data-parent="#exports-port">
-                    {% trans %}Bar{% endtrans %}
-                </a>
-                <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2017&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'new-api-exports-port-tree_map'}}" data-parent="#new-api-exports-port">
-                    TreeMap
-                </a>
-            </div>
            
             <h4>{% trans %}Imports By{% endtrans %}</h4>
             <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{% trans %}Product{% endtrans %}</a>
@@ -148,23 +131,6 @@
                 </a>
             </div>
             {% endif %}
-            <a href="#imports-port" class="list-group-item" data-toggle="collapse" data-parent="#imports-port">{% trans %}Port{% endtrans %}</a>
-            <div class="collapse" id="imports-port">
-                <a href="/{{ g.locale }}/line/secex/port/value?&values=value+kg&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-line'}}" data-parent="#new-api-imports-port">
-                    {% trans %}Line{% endtrans %}
-                </a>
-                <a href="/{{ g.locale }}/bar/secex/kg,value/port?type=import&excluded_year=2022&options=month,singlecolor,percentage&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge}}" 
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'import-port-bar'}}" data-parent="#import-port">
-                    {% trans %}Bar{% endtrans %}
-                </a>
-                <a href="/{{ g.locale }}/tree_map/secex/port/value?year=2017&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'new-api-imports-port-tree_map'}}" data-parent="#new-api-imports-port">
-                    TreeMap
-                </a>
-            </div>
         </div>
     </nav>
     <div class="responsive-frame col-xs-12 col-sm-9 col-md-9">
