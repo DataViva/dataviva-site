@@ -86,6 +86,14 @@ p {
     text-align: center;
 }
 
+@media (max-width: 1200px) and (min-width:996px) {
+    .romero {
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
 .cardPosition {
     font-weight: bold;
     font-size: 14px;
