@@ -272,7 +272,7 @@ var loadViz = function(data, date_interval, interval) {
             d3plus.form()
                 .config(config)
                 .data(dropdown_options)
-                .title("Mais anos")
+                .title("Período")
                 .type('drop')
                 .focus(1, (value) => {
                     var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
