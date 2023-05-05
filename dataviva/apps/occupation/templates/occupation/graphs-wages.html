@@ -6,7 +6,7 @@
             <a href="#jobs-economic-activities" class="list-group-item" data-toggle="collapse" data-parent="#jobs-economic-activities">{% trans %}Economic Activities{% endtrans %}</a>
             <div class="collapse" id="jobs-economic-activities">
 
-                <a href="/{{g.locale}}/tree_map/rais/industry_class/jobs?count=establishment&year=2017&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/tree_map/rais/industry_class/jobs?count=establishment&year={{latestRaisYear}}&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-economic-activities-tree_map' or not graph }}" data-parent="#new-api-jobs-economic-activities">
                     TreeMap
                 </a>
@@ -23,7 +23,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-tree_map'}}" data-parent="#jobs-municipality">
                     TreeMap
                 </a> -->
-                <a href="/{{g.locale}}/tree_map/rais/municipality/jobs?count=establishment&year=2017&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/tree_map/rais/municipality/jobs?count=establishment&year={{latestRaisYear}}&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-tree_map' }}" data-parent="#new-api-jobs-municipality">
                     TreeMap
                 </a>
@@ -69,7 +69,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-economic-activities-tree_map'}}" data-parent="#wages-economic-activities">
                     TreeMap
                 </a> -->
-                <a href="/{{g.locale}}/tree_map/rais/industry_class/wage?count=establishment&year=2017&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/tree_map/rais/industry_class/wage?count=establishment&year={{latestRaisYear}}&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-economic-activities-tree_map' }}" data-parent="#new-api-wages-economic-activities">
                     TreeMap
                 </a>
@@ -89,7 +89,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-municipality-tree_map'}}" data-parent="#wages-municipality">
                     TreeMap
                 </a> -->
-                <a href="/{{g.locale}}/tree_map/rais/municipality/wage?count=establishment&year=2017&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/tree_map/rais/municipality/wage?count=establishment&year={{latestRaisYear}}&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-municipality-tree_map' }}" data-parent="#new-api-wages-municipality">
                     TreeMap
                 </a>
@@ -134,7 +134,7 @@
         <div class="embed-responsive responsive-wrapper">
             <iframe src="
                     {% if not graph %}
-                        /{{g.locale}}/tree_map/rais/industry_class/jobs?count=establishment&year=2017&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}
+                        /{{g.locale}}/tree_map/rais/industry_class/jobs?count=establishment&year={{latestRaisYear}}&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}
                     {% else %}
                         /{{ g.locale }}/{{ graph.url }}
                     {% endif %}"

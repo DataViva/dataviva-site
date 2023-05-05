@@ -230,14 +230,14 @@ def index(product_id, tab):
 
     if location:
         secex_query_export = Ymbp.query.filter(
-            Ymbp.year == 2017,
+            Ymbp.year == getSecexLatestYear(),
             Ymbp.hs_id_len == len(product.id),
             Ymbp.bra_id == location_id,
             Ymbp.month == 0).order_by(Ymbp.export_val.desc())
         secex_export = secex_query_export.all()
 
         secex_query_import = Ymbp.query.filter(
-            Ymbp.year == 2017,
+            Ymbp.year == getSecexLatestYear(),
             Ymbp.hs_id_len == len(product_id),
             Ymbp.bra_id == location_id,
             Ymbp.month == 0).order_by(Ymbp.import_val.desc())
@@ -246,7 +246,6 @@ def index(product_id, tab):
     else:
         max_year_query = db.session.query(
             func.max(Ymp.year)).filter(Ymp.hs_id == product.id, Ymp.month == 12)
-
         secex_query_export = Ymp.query.filter(
             Ymp.year == max_year_query,
             Ymp.hs_id_len == len(product.id),

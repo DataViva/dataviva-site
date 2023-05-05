@@ -134,16 +134,28 @@ tabs = {
 def getSecexLatestYear():
     latestSecexYear = "2022"
 
-    response = requests.get(g.api_url + "secex/year")
+    response = requests.get(g.api_url + "years/secex")
 
     if response.status_code == 200:
         data = response.json()
-        localData = data['data']
+        localData = data["years"]
         
-        localData.sort(key=lambda x: x[0], reverse=True)
-        latestSecexYear = localData[0][0]
+        latestSecexYear = localData[len(localData) - 1]
 
     return latestSecexYear
+
+def getRaisLatestYear():
+    latestRaisYear = "2020"
+
+    response = requests.get(g.api_url + "years/rais")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data["years"]
+        
+        latestRaisYear = localData[len(localData) - 1]
+
+    return latestRaisYear
 
 @mod.before_request
 def before_request():
@@ -208,8 +220,9 @@ def graphs(bra_id, tab):
         is_municipality = True if depth == 'municipality' else False
     
     latestSecexYear = getSecexLatestYear()
+    latestRaisYear = getRaisLatestYear()
 
-    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None, is_municipality=is_municipality, latestSecexYear=latestSecexYear)
+    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None, is_municipality=is_municipality, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)
 
 
 @mod.route('/all', defaults={'tab': 'general'})
@@ -279,8 +292,10 @@ def all(tab):
 
     else:
         latestSecexYear = getSecexLatestYear()
+        latestRaisYear = getRaisLatestYear()
+
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, latestSecexYear=latestSecexYear)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)
 
 
 @mod.route('/<bra_id>', defaults={'tab': 'general'})
@@ -495,5 +510,7 @@ def index(bra_id, tab):
 
     else:
         latestSecexYear = getSecexLatestYear()
+        latestRaisYear = getRaisLatestYear()
+
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)
