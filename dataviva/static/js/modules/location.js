@@ -19,7 +19,7 @@ $(document).ready(function(){
     Promise.all([fetch(dataviva.api_url + "years/secex"), fetch(dataviva.api_url + "years/rais")]).then((values) => {
         values.forEach((value, index) => {
             value.json().then((data) => {
-                let localData = data.data.at(-1);
+                let localData = data.years.at(-1);
 
                 switch (index) {
                     case 0:
