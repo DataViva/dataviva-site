@@ -18,7 +18,8 @@ p {
 .divider {
     width: 120px;
     height: 2px;
-    border: 1px solid #9EDDBF;
+    border: 1px solid #2D3A4E;
+    background-color: #2D3A4E;
     margin: 24px 24px 6px 24px;
 }
 
@@ -89,7 +90,7 @@ p {
     font-weight: bold;
     font-size: 14px;
     text-align: center;
-    color: #9EDDBF;
+    color: #2D3A4E;
     text-transform: uppercase;
 }
 

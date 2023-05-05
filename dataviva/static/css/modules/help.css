@@ -6,13 +6,13 @@
     padding-left: 10px;
 }
 .help .form-group.search .input-group-addon {
-    color:#9eddbf;
+    color:#2D3A4E;
     border-right: 0px;
     padding-right: 0px;
 }
 
 .help h2 {
-    border-bottom: 4px solid #9eddbf;
+    border-bottom: 4px solid #2D3A4E;
     color: inherit;
     font-size: 20px;
     font-weight: 300;
@@ -210,8 +210,8 @@
 .help .classifications-datasus-control .btn-group button.active,
 .help .classifications-establishment-informations-control .btn-group button.active,
 .help .classifications-basic-courses-control .btn-group button.active {
-    background-color: #A25A6D;
-    border-color: #A25A6D;
+    background-color: #E6673D;
+    border-color: #E6673D;
     color: #FFFFFF;
 }
 

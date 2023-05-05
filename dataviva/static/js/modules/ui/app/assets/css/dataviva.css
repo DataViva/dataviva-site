@@ -3,7 +3,7 @@
 }
 
 .burgundy {
-  color: #a25a6d;
+  color: #2D3A4E;
 }
 
 .button-left-margin {
@@ -38,11 +38,11 @@
 }
 
 .hover-bg-burgundy:hover { 
-  background-color: #a25a6d; 
+  background-color: #e97650; 
 }
 
 .hover-bg-burgundy:focus { 
-  background-color: #a25a6d; 
+  background-color: #e97650; 
 }
 
 .fade-enter-active, .fade-leave-active {
@@ -54,7 +54,7 @@
 }
 
 .select-button:visited {
-  color: #a25a6d;
+  color: #e97650;
 }
 
 .select-button:hover, .select-button:focus {

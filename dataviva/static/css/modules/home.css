@@ -16,7 +16,7 @@ img {
   width: 60px;
   height: 1px;
   margin: 15px auto 0;
-  border-bottom: 2px solid #9EDDBF;
+  border-bottom: 2px solid #2D3A4E;
 }
 
 /* WELCOME SECTION BEGIN */
@@ -75,13 +75,13 @@ img {
     transition: color .2s linear;
 }
 .home .welcome a {
-    color: #9EDDBF;
+    color: #2D3A4E;
 }
 .home .welcome ul li a:focus,
 .home .welcome ul li a:hover,
 .home .welcome ul li a:focus h3 + p,
 .home .welcome ul li a:hover h3 + p {
-  color: #9EDDBF;
+  color: #2D3A4E;
 }
 /* WELCOME SECTION END */
 /* WELCOME DATABASES BEGIN */
@@ -107,7 +107,7 @@ img {
   }
 }
 .home .databases .database-icons button {
-  color: #9EDDBF;
+  color: #2D3A4E;
   font-size: 80px;
   border-radius: 50%;
   padding: 0px;
@@ -217,7 +217,7 @@ img {
 
 .button-carousel {
   margin-top:6px;
-  background-color: #A25A6D; 
+  background-color: #2D3A4E; 
   padding: 8px; 
   width: 260px; 
   border-radius: 20px;
@@ -226,7 +226,7 @@ img {
 }
 
 .button-carousel:hover {
-  background-color: #905262;
+  background-color: #424e60;
 }
 
 @media (max-width: 840px) {

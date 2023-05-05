@@ -10,8 +10,8 @@
     text-align: left;
 }
 .build_graph .sidebar .btn-outline:hover, .build_graph .sidebar .btn-outline:active {
-    border-color: #965566;
-    color: #965566;
+    border-color: #E6673D;
+    color: #E6673D;
 }
 .build_graph .sidebar #dimensions .form-group .btn {
     margin-top: 2px;

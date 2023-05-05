@@ -99,7 +99,7 @@
 
 .scholar .container .tit-stripe{
     color: #FFF;
-    background-color: #9eddbf;
+    background-color: #2D3A4E;
     font-size: 20px;
     font-weight: 600;
     height: 40px;
@@ -111,7 +111,7 @@
 .scholar .article-list .item:before {
     font-family: 'FontAwesome';
     content: "\f02d";
-    color: #9EDDBF;
+    color: #2D3A4E;
     display: block;
     float: left;
     height: 40px;

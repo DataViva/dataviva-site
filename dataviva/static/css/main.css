@@ -46,14 +46,14 @@ body {
 }
 /*BODY END*/
 
-.bg-green {
+/* .bg-green {
   background-color: #9EDDBF;
-}
+} */
 .bg-greeny {
   background-color: #f3f6f3;
 }
 .bg-dark-green {
-  background-color: #7bccd0;
+  background-color: #2D3A4E;
 }
 .bg-white {
   background-color: #ffffff;
@@ -109,12 +109,12 @@ body {
 }
 /* BREADCRUMB END */
 /*NAVBAR BEGIN*/
-.navpre {
+/* .navpre {
   line-height: 26px;
   max-height: 26px;
   height:20px;
   text-align: right;
-}
+} */
 .navpre li {
   display: inline-block;
   line-height: 17px;
@@ -134,18 +134,45 @@ body {
 }
 .navbar {
   border-radius: 0px;
+  min-height: 110px !important;
+}
+@media (max-width: 767px) {
+  .navbar{
+    border-radius: 0px;
+    min-height: 60px !important;
+  }
+}
+/* Small devices (less than 992px) */
+/* Medium devices (less than 1200px) */
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 1200px) {
+  .navbar{
+    border-radius: 0px;
+    min-height: 80px !important;
+  }
+}
+/* Medium devices (desktops, 992px and up) */
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1201px) {
+  .navbar{
+    border-radius: 0px;
+    min-height: 110px !important;
+  }
 }
 .navbar-default {
-  background: #FFF;
+  background: #2D3A4E ;
   border-radius: 0px;
   border: 0px;
   border-bottom: 1px solid #EEE;
   margin-bottom: 0px;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 .navbar-default .navbar-nav > li > a {
   margin-top: 5px;
   font-size: 15px;
-  color: #5A9DC4;
+  color: #FFFFFF;
   padding-top: 0px;
   padding-bottom: 0px;
 }
@@ -182,7 +209,7 @@ body {
 }
 
 .navbar-default .navbar-nav > li:not(:last-child) > a {
-  border-right: 1px solid #5A9DC4;
+  border-right: 1px solid #FFFFFF;
 }
 
 @media (min-width: 768px){
@@ -315,19 +342,25 @@ body {
   }
 }
 
-@media (min-width: 992px) {
+@media (max-width: 1200px) {
   .navbar-brand {
-    padding: 13px 15px;
+    padding: 14px 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .navbar-brand {
+    padding: 8px 15px;
   }
 }
 
 .navbar-default .navbar-toggle {
-  background-color: #9EDDBF;
+  background-color: #E6673D;
   border: 0px;
 }
 .navbar-default .navbar-toggle:hover,
 .navbar-default .navbar-toggle:focus {
-  background-color: #7ACCA5;
+  background-color: #e97650;
 }
 .navbar-default .navbar-toggle .icon-bar {
   background-color: #FFF;
@@ -364,7 +397,7 @@ nav > li span:not(.caret) {
   color: #676a6c;
 }
 .dropdown-menu > li > a .fa {
-  color: #9EDDBF;
+  color: #e97650;
 }
 .navbar-nav > li > .dropdown-menu {
   margin-top: -20px;
@@ -470,7 +503,7 @@ footer form textarea {
 footer .btn-white,
 footer .btn-white:focus,
 footer .btn-white:hover {
-  color: #36cdd1;
+  color: #2D3A4E;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
@@ -537,7 +570,7 @@ footer .form-control:focus,
   display: none;
 }
 .pace .pace-progress {
-  background: #905262;
+  background: #E6673D;
   position: fixed;
   z-index: 2040;
   top: 0;
@@ -850,7 +883,8 @@ footer .form-control:focus,
 /* Extra Small devices (less than 768px) */
 @media (max-width: 767px) {
   .navbar-brand > img {
-    height: 40px;
+    height: 52px;
+    width:100% !important;
   }
   .navbar-toggle {
     top: 4px;
@@ -859,14 +893,20 @@ footer .form-control:focus,
 /* Small devices (less than 992px) */
 /* Medium devices (less than 1200px) */
 /* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
+@media (max-width: 1200px) {
   .navbar-brand > img {
-    height: 60px;
+    height: 56px;
+    width:100% !important;
   }
 }
 /* Medium devices (desktops, 992px and up) */
 /* Large devices (large desktops, 1200px and up) */
-
+@media (min-width: 1201px) {
+  .navbar-brand > img {
+    height: 74px;
+    width:100% !important;
+  }
+}
 
 /* SUMMERNOTE */
 .note-editor {
