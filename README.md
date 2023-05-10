@@ -72,3 +72,5 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
 8. Run the site locally!
 
         python run.py runserver
+        
+        Testando commit
