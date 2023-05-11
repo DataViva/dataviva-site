@@ -15,11 +15,8 @@ class BaseRais(object):
     year = db.Column(db.Integer(4), primary_key=True)
 
     wage = db.Column(db.Numeric(16,2))
-    num_emp = db.Column(db.Integer(11))
     num_jobs = db.Column(db.Integer(11))
-    num_est = db.Column(db.Integer(11))
     wage_avg = db.Column(db.Numeric(16,2))
-    age_avg = db.Column(db.Numeric(16,2))
 
     wage_growth = db.Column(db.Float())
     wage_growth_5 = db.Column(db.Float())
