@@ -288,14 +288,14 @@ fieldset[disabled] .btn-danger.active {
   border-color: #ef6776;
 }
 .btn-link {
-  color: #337AB7;
+  color: #2d3a4e ;
 }
 .btn-link:hover,
 .btn-link:focus,
 .btn-link:active,
 .btn-link.active,
 .open .dropdown-toggle.btn-link {
-  color: #23527C;
+  color:  #293446 ;
   text-decoration: none;
 }
 .btn-link:active,

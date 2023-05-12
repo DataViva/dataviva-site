@@ -45,9 +45,6 @@
 }
 
 
-
-
-
 .category .nav-tabs {
   list-style-type: none;
   list-style: none;
@@ -67,9 +64,10 @@
   text-decoration: none;
   border: none;
   margin: 0;
+  color: #798594 ;
 }
 .category .nav-tabs li.active a {
-  background: #5a9dc4;
+  background: #2d3a4e ;
   text-decoration: none;
   border: none;
   color: #FFF;
@@ -114,7 +112,7 @@
 .category .widget {
   font-size: 10px;
   font-weight: 400;
-  border-bottom: 3px solid #5A9DC4;
+  border-bottom: 3px solid #798594 ;
   margin: 0px 10px;
 }
 .category .widget h2 {
@@ -251,7 +249,7 @@
 }
 .category table.data-detail > tbody td,
 .category table.data-detail > tbody td .label {
-  color: #5a9dc4;
+  color: #2d3a4e;
 }
 .category table.data-detail > tbody td .label {
   display: block;
@@ -273,7 +271,7 @@
 .category .profile h3 {
   height: 30px;
   text-transform: uppercase;
-  border-bottom: 1px solid #7bccd0;
+  border-bottom: 1px solid #2d3a4e;
   margin: 20px 0 20px
 }
 .category .table-responsive {
@@ -315,13 +313,13 @@
 }
 
 .category .nav-graph .list-group-item.selected {
-  background: #5a9dc4;
+  background: #2d3a4e;
   color: #FFF;
 }
 
 .category .nav-graph .list-group-item:active,
 .category .nav-graph .list-group-item:focus {
-  background: #5a9dc4;
+  background: #2d3a4e;
   color: #FFF;
 }
 

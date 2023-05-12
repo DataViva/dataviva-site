@@ -94,15 +94,15 @@ body {
   margin-bottom: 0;
 }
 .breadcrumb > li a {
-  color: #5A9DC4;
+  color: #798594 ;
 }
 .breadcrumb > li a:hover,
 .breadcrumb > li a:focus {
-  color: #23527c;
+  color: #727c88 ;
   text-decoration: none;
 }
 .breadcrumb > .active {
-  color: #5A9DC4;
+  color: #798594 ;
 }
 .breadcrumb > li + li:before {
   content: ">\00a0";
@@ -989,7 +989,7 @@ table.data-blue thead th small {
 
 /* BLUE BOX */
 .blue-box {
-  background: #5a9dc4;
+  background: #2d3a4e;
   color: #FFF;
   vertical-align: middle;
   padding: 10px 8px 8px;
