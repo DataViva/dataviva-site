@@ -94,6 +94,27 @@ p {
     }
 }
 
+
+@media (max-width: 481px) {
+    .brito{
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .freitas{
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .romero{
+        font-size: 11px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
 .cardPosition {
     font-weight: bold;
     font-size: 14px;
