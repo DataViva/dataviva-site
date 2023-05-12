@@ -431,6 +431,11 @@ nav > li span:not(.caret) {
   margin-bottom: 5px;
 }
 
+.sidebar ul li a{
+
+  color:  #798594  !important;
+}
+
 .popover {
   z-index: 2;
 }
