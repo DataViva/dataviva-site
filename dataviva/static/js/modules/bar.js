@@ -652,11 +652,6 @@ var buildData = function(responseApi){
 
     selectedYears = [0, yearRange[1]];
 
-    if(dimensions[0] == "port") {
-        selectedYears = [0, 2017];
-        yearRange[1] = 2017;
-    }
-
     return data;
 }
 
@@ -754,7 +749,7 @@ var filterTopData = function(data){
     var items = {}; // name: totalValue
 
     data.forEach(function(item){
-        if(item.year <= 2017 || dimensions[0] != "port") {
+        if(item.year <= 2017) {
             var name = item[currentY],
             value = item[currentX];
     
@@ -796,8 +791,6 @@ var lastYear = function(data){
         if(item.year > year)
             year = item.year;
     });
-
-    if(dimensions[0] == "port") year = 2017
 
     return year;
 };
