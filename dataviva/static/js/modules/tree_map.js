@@ -121,366 +121,363 @@ var buildData = function (apiResponse) {
     return data;
 }
 
-var loadViz = function (data, date_interval, interval) {
+var loadViz = function (data, years, auxData) {
 
-    let url = window.location.href;
+    var uiBuilder = function () {
+        var config = {
+            'id': 'id',
+            'text': 'label',
+            'font': { 'size': 11 },
+            'container': d3.select('#controls'),
+            'search': false
+        };
 
-    let isSecex = (url.indexOf("secex") != -1);
-
-    if (date_interval && interval && isSecex) {
-        let splited_dates = date_interval.split("-");
-
-        if (splited_dates[0] == date_interval) {
-            fetch(`http://api.dataviva.info/secex/year/product/product_section/?year=${date_interval}&type=export&municipality=${args.id_ibge}`).then((data) => {
-                data.json().then((values) => {
-                    yearRange[1] = Number(date_interval);
-                    let newData = buildData(values);
-                    loadViz(newData, splited_dates[0], false);
-                });
-            })
-        } else {
-            fetch(`http://api.dataviva.info/secex/year/product/product_section/?type=export&municipality=${args.id_ibge}`).then((data) => {
-                data.json().then((values) => {
-                    yearRange[1] = Number(date_interval[1]);
-                    let arr = values;
-                    //tratar o data pra pegar o mesmo tipo de objeto so que com dados apenas do data_interval
-                    const values_filtered = values.data.filter((value) => value[0] >= Number(splited_dates[0]) && value[0] <= Number(splited_dates[1]));
-
-                    arr.data = values_filtered;
-
-                    let newData = buildData(arr);
-                    loadViz(newData, date_interval, false);
-                })
-            })
-        }
-    }
-
-    if (!interval) {
-        var uiBuilder = function () {
-            var config = {
-                'id': 'id',
-                'text': 'label',
-                'font': { 'size': 11 },
-                'container': d3.select('#controls'),
-                'search': false
-            };
-
-            // Adds depth selector
-            if (depths.length > 1) {
-                var options = [];
-                if (hierarchy) {
-                    depths.forEach(function (item) {
-                        options.push({ 'id': item, 'label': dictionary[item] });
-                    });
-
-                    d3plus.form()
-                        .config(config)
-                        .data(options)
-                        .title(dictionary['depth'])
-                        .type(options.length > 3 ? 'drop' : 'toggle')
-                        .focus(squares, function (value) {
-                            currentTitleAttrs['shapes'] = value;
-                            viz.depth(depths.indexOf(value))
-                                .title(titleHelper(selectedYears))
-                                .draw();
-                        })
-                        .draw();
-                } else {
-                    depths.forEach(function (item) {
-                        if (item != squares)
-                            options.push({ 'id': item, 'label': dictionary[item] });
-                    });
-
-                    d3plus.form()
-                        .config(config)
-                        .data(options)
-                        .title(dictionary['drawer_color_by'])
-                        .type(depths.length > 3 ? 'drop' : 'toggle')
-                        .focus(options[0]['id'], function (value) {
-                            currentTitleAttrs['shapes'] = value;
-                            viz.data(data)
-                                .id([value, squares])
-                                .color(value)
-                                .title(titleHelper(selectedYears))
-                                .draw();
-                        })
-                        .draw();
-
-                    d3plus.form()
-                        .config(config)
-                        .data([{ 'id': 0, 'label': dictionary['yes'] }, { 'id': 1, 'label': dictionary['no'] }])
-                        .title(dictionary['drawer_group'])
-                        .type('toggle')
-                        .focus(1, function (value) {
-                            viz.depth(value)
-                            viz.draw();
-                        })
-                        .draw();
-                }
-            }
-
-            // Adds color selector
-            if (colors.length > 1) {
-                var options = [];
-                colors.forEach(function (item) {
-                    options.push({ 'id': item, 'label': dictionary[item] });
-                });
-                d3plus.form()
-                    .config(config)
-                    .data(options)
-                    .title(lang == 'en' ? 'Color' : 'Cor')
-                    .type(options.length > 3 ? 'drop' : 'toggle')
-                    .focus(size, function (value) {
-                        currentTitleAttrs['size'] = value;
-                        selectedColor = value == 'students' && !args.sc_course_field ? { 'scale': 'category20', 'value': args['color'] || depths[0] } : value == 'students' ? function (d) { return "#252558"; } : { "value": value };
-                        viz.color(selectedColor)
-                        viz.draw()
-                    })
-                    .draw();
-            }
-
-            // Adds size selector
-            if (sizes.length > 1) {
-                var options = [];
-                sizes.forEach(function (item) {
+        // Adds depth selector
+        if (depths.length > 1) {
+            var options = [];
+            if (hierarchy) {
+                depths.forEach(function (item) {
                     options.push({ 'id': item, 'label': dictionary[item] });
                 });
 
                 d3plus.form()
                     .config(config)
                     .data(options)
-                    .title(dictionary['sizing'])
+                    .title(dictionary['depth'])
                     .type(options.length > 3 ? 'drop' : 'toggle')
-                    .focus(size, function (value) {
-                        currentTitleAttrs['size'] = value;
-                        viz.size(value)
+                    .focus(squares, function (value) {
+                        currentTitleAttrs['shapes'] = value;
+                        viz.depth(depths.indexOf(value))
                             .title(titleHelper(selectedYears))
-                            .title({ 'total': { 'prefix': dictionary[value] + ': ' } })
                             .draw();
                     })
                     .draw();
-            }
-
-            var dropdown_options = [];
-
-            if (date_interval && date_interval != "2022") {
-                if (date_interval.split('-')[1] == "2022") {
-                    dropdown_options = [{ 'id': 1, 'label': "2003-2022" }, { 'id': 2, 'label': "2022" }, { 'id': 3, 'label': "1997-2002" }];
-                } else {
-                    dropdown_options = [{ 'id': 1, 'label': "1997-2002" }, { 'id': 2, 'label': "2022" }, { 'id': 3, 'label': "1997-2022" }];
-                }
             } else {
-                var dropdown_options = [{ 'id': 1, 'label': "2022" }, { 'id': 2, 'label': "2003-2022" }, { 'id': 3, 'label': "1997-2002" }];
-            }
+                depths.forEach(function (item) {
+                    if (item != squares)
+                        options.push({ 'id': item, 'label': dictionary[item] });
+                });
 
-            // Adds year selector
+                d3plus.form()
+                    .config(config)
+                    .data(options)
+                    .title(dictionary['drawer_color_by'])
+                    .type(depths.length > 3 ? 'drop' : 'toggle')
+                    .focus(options[0]['id'], function (value) {
+                        currentTitleAttrs['shapes'] = value;
+                        viz.data(data)
+                            .id([value, squares])
+                            .color(value)
+                            .title(titleHelper(selectedYears))
+                            .draw();
+                    })
+                    .draw();
+
+                d3plus.form()
+                    .config(config)
+                    .data([{ 'id': 0, 'label': dictionary['yes'] }, { 'id': 1, 'label': dictionary['no'] }])
+                    .title(dictionary['drawer_group'])
+                    .type('toggle')
+                    .focus(1, function (value) {
+                        viz.depth(value)
+                        viz.draw();
+                    })
+                    .draw();
+            }
+        }
+
+        // Adds color selector
+        if (colors.length > 1) {
+            var options = [];
+            colors.forEach(function (item) {
+                options.push({ 'id': item, 'label': dictionary[item] });
+            });
             d3plus.form()
                 .config(config)
-                .data(dropdown_options)
-                .title("Período")
-                .type('drop')
-                .focus(1, (value) => {
-                    var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
-                    d3.select('.loading').style('background-color', '#fff');
-                    loadViz(data, dropdown_options[value - 1].label, true);
-                    // if (value == 1) {
-                    //     console.log("rteawd")
-                    //     loadViz(data, dropdown_options[value - 1].label, true);
-                    // window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '&year=2022');
-                    // } else if (value == 2) {
-                    //     loadViz(data, "2003-2022", true);
-                    // console.log(window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?'))
-                    // var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
-                    // d3.select('.loading').style('background-color', '#fff');
-                    // window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
-                    // } else {
-                    //     loadViz(data, "1997-2002", true);
-                    // console.log(window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?'))
-                    // var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
-                    // d3.select('.loading').style('background-color', '#fff');
-                    // window.location.href = window.location.href.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?');
-                    // }
+                .data(options)
+                .title(lang == 'en' ? 'Color' : 'Cor')
+                .type(options.length > 3 ? 'drop' : 'toggle')
+                .focus(size, function (value) {
+                    currentTitleAttrs['size'] = value;
+                    selectedColor = value == 'students' && !args.sc_course_field ? { 'scale': 'category20', 'value': args['color'] || depths[0] } : value == 'students' ? function (d) { return "#252558"; } : { "value": value };
+                    viz.color(selectedColor)
+                    viz.draw()
                 })
                 .draw();
+        }
 
-            // Adds filters selector        
-            var filteredData = function (filter, value) {
-                currentFilters[filter] = value;
-                return data.filter(function (item) {
-                    var valid = true,
-                        keys = Object.keys(currentFilters);
+        // Adds size selector
+        if (sizes.length > 1) {
+            var options = [];
+            sizes.forEach(function (item) {
+                options.push({ 'id': item, 'label': dictionary[item] });
+            });
 
-                    for (var i = 0; i < keys.length; i++) {
-                        if (currentFilters[keys[i]] == -1)
-                            continue;
-                        if (item[keys[i]] != currentFilters[keys[i]]) {
-                            valid = false;
-                            break;
-                        }
-                    }
-
-                    return valid;
-                });
-            };
-
-            filters.forEach(function (filter) {
-                if (filter == 'attention_level') {
-                    currentFilters['ambulatory_attention'] = -1;
-                    currentFilters['hospital_attention'] = -1;
-
-                    var filterValues = [
-                        [-1, -1], // Todos 
-                        [0, 0],   // Nenhum
-                        [0, 1],   // Hospitalar
-                        [1, 0],   // Ambulatorial
-                        [1, 1]    // Ambulatorial/Hospitalar
-                    ];
-
-                    var options = [
-                        { 'id': 0, 'label': dictionary['all'] },
-                        { 'id': 1, 'label': dictionary['none'] },
-                        { 'id': 2, 'label': dictionary['hospital'] },
-                        { 'id': 3, 'label': dictionary['ambulatory'] },
-                        { 'id': 4, 'label': dictionary['ambulatory/hospital'] },
-                    ];
-
-                    d3plus.form()
-                        .config(config)
-                        .container(d3.select('#controls'))
-                        .data(options)
-                        .title(dictionary['attention_level'])
-                        .type('drop')
-                        .focus(0, function (value) {
-                            viz.data(filteredData('ambulatory_attention', filterValues[value][0]))
-                            viz.data(filteredData('hospital_attention', filterValues[value][1]))
-                            viz.draw();
-                        })
+            d3plus.form()
+                .config(config)
+                .data(options)
+                .title(dictionary['sizing'])
+                .type(options.length > 3 ? 'drop' : 'toggle')
+                .focus(size, function (value) {
+                    currentTitleAttrs['size'] = value;
+                    viz.size(value)
+                        .title(titleHelper(selectedYears))
+                        .title({ 'total': { 'prefix': dictionary[value] + ': ' } })
                         .draw();
+                })
+                .draw();
+        }
+
+        var dropdown_options = [];
+        var intervalSize = 20;
+        var numIntervals = Math.floor(years.length / intervalSize);
+
+        if (years.length % intervalSize !== 0) {
+            var startYear = years[0];
+            var endYear = years[years.length % intervalSize - 1];
+            var label = `${startYear}-${endYear}`;
+
+            dropdown_options.push({ 'id': 1 + 1, 'label': label });
+        }
+
+        for (var i = 0; i < numIntervals; i++) {
+            var startYear = years[years.length % intervalSize + i * intervalSize];
+            var endYear = years[years.length % intervalSize + (i + 1) * intervalSize - 1];
+            var label = `${startYear}-${endYear}`;
+
+            dropdown_options.push({ 'id': i + 3, 'label': label });
+        }
+
+        dropdown_options.push({ 'id': 1, 'label': `${years[years.length - 1]}` })
+
+        d3plus.form()
+            .config(config)
+            .data(dropdown_options)
+            .title("Período")
+            .type('drop')
+            .focus(1, (value) => {
+                var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
+                d3.select('.loading').style('background-color', '#fff');
+
+                if (value == 1) {
+                    let localData = Object.assign({}, auxData);
+
+                    yearRange[1] = years[years.length - 1];
+
+                    const values_filtered = localData.data.filter((value) => value[0] == years[years.length - 1]);
+
+                    localData.data = values_filtered;
+
+                    let newData = buildData(localData);
+
+                    loadViz(newData, years, auxData);
+                } else if (value == 3) {
+
+                    yearRange[1] = 2022;
+                    let localData = Object.assign({}, auxData);
+
+                    const values_filtered = localData.data.filter((value) => value[0] >= 2003 && value[0] <= 2022);
+
+                    localData.data = values_filtered;
+
+                    let newData = buildData(localData);
+
+                    loadViz(newData, years, auxData);
                 } else {
-                    currentFilters[filter] = -1;
-                    var options = [];
-                    for (id in metadata[filter]) {
-                        options.push({ 'id': id, 'label': metadata[filter][id]['name_' + lang] })
+                    yearRange[1] = 2002;
+                    let localData = Object.assign({}, auxData);
+
+                    const values_filtered = localData.data.filter((value) => value[0] >= 1997 && value[0] <= 2002);
+
+                    localData.data = values_filtered;
+
+                    let newData = buildData(localData);
+
+                    loadViz(newData, years, auxData);
+                }
+            })
+            .draw();
+
+        // Adds year selector
+
+        // Adds filters selector        
+        var filteredData = function (filter, value) {
+            currentFilters[filter] = value;
+            return data.filter(function (item) {
+                var valid = true,
+                    keys = Object.keys(currentFilters);
+
+                for (var i = 0; i < keys.length; i++) {
+                    if (currentFilters[keys[i]] == -1)
+                        continue;
+                    if (item[keys[i]] != currentFilters[keys[i]]) {
+                        valid = false;
+                        break;
                     }
-
-                    options = options.sort(function (a, b) {
-                        return (a.label.toLowerCase() < b.label.toLowerCase()) ? -1 : 1;
-                    });
-
-                    options.unshift({ 'id': -1, 'label': dictionary['all'] });
-
-                    d3plus.form()
-                        .config(config)
-                        .container(d3.select('#controls'))
-                        .data(options)
-                        .title(dictionary[filter])
-                        .type('drop')
-                        .font({ 'size': 11 })
-                        .focus(-1, function (value) {
-                            viz.data(filteredData(filter, value));
-                            viz.draw();
-                        })
-                        .draw();
                 }
+
+                return valid;
             });
         };
 
-        var titleHelper = function (years) {
-            if (!baseTitle) {
-                var genericTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <shapes>' : '<size> ' + dictionary['per'] + ' <shapes>';
-                if (depths.length > 1 && currentTitleAttrs['shapes'] != currentTitleAttrs['shapes'])
-                    genericTitle += '/<depth>';
-            }
+        filters.forEach(function (filter) {
+            if (filter == 'attention_level') {
+                currentFilters['ambulatory_attention'] = -1;
+                currentFilters['hospital_attention'] = -1;
 
-            var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
+                var filterValues = [
+                    [-1, -1], // Todos 
+                    [0, 0],   // Nenhum
+                    [0, 1],   // Hospitalar
+                    [1, 0],   // Ambulatorial
+                    [1, 1]    // Ambulatorial/Hospitalar
+                ];
 
-            return {
-                'value': header['title'],
-                'font': { 'size': 22, 'align': 'left' },
-                'padding': 5,
-                'sub': { 'font': { 'align': 'left' }, 'value': header['subtitle'] },
-                'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
-            };
-        };
+                var options = [
+                    { 'id': 0, 'label': dictionary['all'] },
+                    { 'id': 1, 'label': dictionary['none'] },
+                    { 'id': 2, 'label': dictionary['hospital'] },
+                    { 'id': 3, 'label': dictionary['ambulatory'] },
+                    { 'id': 4, 'label': dictionary['ambulatory/hospital'] },
+                ];
 
-        var tooltipBuilder = function () {
-            return {
-                'short': {
-                    '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
-                    [dictionary['basic_values']]: [size]
-                },
-                'long': {
-                    '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
-                    [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
+                d3plus.form()
+                    .config(config)
+                    .container(d3.select('#controls'))
+                    .data(options)
+                    .title(dictionary['attention_level'])
+                    .type('drop')
+                    .focus(0, function (value) {
+                        viz.data(filteredData('ambulatory_attention', filterValues[value][0]))
+                        viz.data(filteredData('hospital_attention', filterValues[value][1]))
+                        viz.draw();
+                    })
+                    .draw();
+            } else {
+                currentFilters[filter] = -1;
+                var options = [];
+                for (id in metadata[filter]) {
+                    options.push({ 'id': id, 'label': metadata[filter][id]['name_' + lang] })
                 }
+
+                options = options.sort(function (a, b) {
+                    return (a.label.toLowerCase() < b.label.toLowerCase()) ? -1 : 1;
+                });
+
+                options.unshift({ 'id': -1, 'label': dictionary['all'] });
+
+                d3plus.form()
+                    .config(config)
+                    .container(d3.select('#controls'))
+                    .data(options)
+                    .title(dictionary[filter])
+                    .type('drop')
+                    .font({ 'size': 11 })
+                    .focus(-1, function (value) {
+                        viz.data(filteredData(filter, value));
+                        viz.draw();
+                    })
+                    .draw();
             }
+        });
+    };
+
+    var titleHelper = function (years) {
+        if (!baseTitle) {
+            var genericTitle = hierarchy ? '<size> ' + dictionary['per'] + ' <shapes>' : '<size> ' + dictionary['per'] + ' <shapes>';
+            if (depths.length > 1 && currentTitleAttrs['shapes'] != currentTitleAttrs['shapes'])
+                genericTitle += '/<depth>';
+        }
+
+        var header = titleBuilder(!baseTitle ? genericTitle : baseTitle, baseSubtitle, currentTitleAttrs, dataset, getUrlArgs(), years);
+
+        return {
+            'value': header['title'],
+            'font': { 'size': 22, 'align': 'left' },
+            'padding': 5,
+            'sub': { 'font': { 'align': 'left' }, 'value': header['subtitle'] },
+            'width': window.innerWidth - d3.select('#tools').node().offsetWidth - 20
         };
+    };
 
-        var timelineCallback = function (years) {
-            if (!years.length)
-                selectedYears = yearRange;
-            else if (years.length == 1)
-                selectedYears = [0, years[0].getFullYear()];
-            else
-                selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
-            toolsBuilder('tree_map', viz, data, titleHelper(selectedYears).value);
-            viz.title(titleHelper(selectedYears));
-        };
-
-        var viz = d3plus.viz()
-            .container('#tree_map')
-            .data({ 'value': data, 'padding': 0 })
-            .type('tree_map')
-            .size(size)
-            .aggs({ 'average_age': 'mean' })
-            .labels({ 'align': 'left', 'valign': 'top' })
-            .background('transparent')
-            .time({ 'value': 'year', 'solo': { 'value': yearRange[1], 'callback': timelineCallback } })
-            .icon(group == 'state' ? { 'value': 'icon' } : { 'value': 'icon', 'style': 'knockout' })
-            .legend({ 'filters': true, 'order': { 'sort': 'desc', 'value': 'size' } })
-            .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
-            .messages({ 'branding': true, 'style': 'large' })
-            .title(titleHelper(selectedYears))
-            .title({ 'total': { 'font': { 'align': 'left' } } })
-            .title({ 'total': { 'prefix': dictionary[size] + ': ' } })
-            .tooltip(tooltipBuilder())
-            .format(formatHelper());
-
-        if (hierarchy) {
-            viz.id(depths);
-            viz.depth(args['depth'] || depths.indexOf(squares));
-            viz.zoom(zoom || false);
-        } else {
-            viz.id([args['depth'] || depths[0], squares]);
-            viz.depth(1);
-            viz.zoom(zoom || true);
+    var tooltipBuilder = function () {
+        return {
+            'short': {
+                '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
+                [dictionary['basic_values']]: [size]
+            },
+            'long': {
+                '': ID_LABELS.hasOwnProperty(squares) ? dictionary[ID_LABELS[squares]] : 'id',
+                [dictionary['basic_values']]: basicValues.concat(Object.keys(calcBasicValues))
+            }
         }
+    };
 
-        if (COLORS.hasOwnProperty(group)) {
-            viz.attrs(COLORS[group]);
-            viz.color('color');
-        } else {
-            viz.color({ 'scale': 'category20', 'value': args['color'] || depths[0] });
-        }
+    var timelineCallback = function (years) {
+        if (!years.length)
+            selectedYears = yearRange;
+        else if (years.length == 1)
+            selectedYears = [0, years[0].getFullYear()];
+        else
+            selectedYears = [years[0].getFullYear(), years[years.length - 1].getFullYear()]
+        toolsBuilder('tree_map', viz, data, titleHelper(selectedYears).value);
+        viz.title(titleHelper(selectedYears));
+    };
 
-        if (nuances.indexOf('singlecolor') != -1) {
-            viz.color({
-                "value": function (d) {
-                    return "#252558";
-                }
-            });
-        }
+    var viz = d3plus.viz()
+        .container('#tree_map')
+        .data({ 'value': data, 'padding': 0 })
+        .type('tree_map')
+        .size(size)
+        .aggs({ 'average_age': 'mean' })
+        .labels({ 'align': 'left', 'valign': 'top' })
+        .background('transparent')
+        .time({ 'value': 'year', 'solo': { 'value': yearRange[1], 'callback': timelineCallback } })
+        .icon(group == 'state' ? { 'value': 'icon' } : { 'value': 'icon', 'style': 'knockout' })
+        .legend({ 'filters': true, 'order': { 'sort': 'desc', 'value': 'size' } })
+        .footer(dictionary['data_provided_by'] + ' ' + (dictionary[dataset] || dataset).toUpperCase())
+        .messages({ 'branding': true, 'style': 'large' })
+        .title(titleHelper(selectedYears))
+        .title({ 'total': { 'font': { 'align': 'left' } } })
+        .title({ 'total': { 'prefix': dictionary[size] + ': ' } })
+        .tooltip(tooltipBuilder())
+        .format(formatHelper());
 
-        uiBuilder();
-        $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
-        viz.draw();
-
-        if ($('#controls').css('display') == 'none') {
-            $('#controls').fadeToggle();
-        }
-
-        toolsBuilder('tree_map', viz, data, titleHelper(yearRange).value);
+    if (hierarchy) {
+        viz.id(depths);
+        viz.depth(args['depth'] || depths.indexOf(squares));
+        viz.zoom(zoom || false);
+    } else {
+        viz.id([args['depth'] || depths[0], squares]);
+        viz.depth(1);
+        viz.zoom(zoom || true);
     }
+
+    if (COLORS.hasOwnProperty(group)) {
+        viz.attrs(COLORS[group]);
+        viz.color('color');
+    } else {
+        viz.color({ 'scale': 'category20', 'value': args['color'] || depths[0] });
+    }
+
+    if (nuances.indexOf('singlecolor') != -1) {
+        viz.color({
+            "value": function (d) {
+                return "#252558";
+            }
+        });
+    }
+
+    uiBuilder();
+    $('#tree_map').css('height', (window.innerHeight - $('#controls').height() - 40) + 'px');
+    viz.draw();
+
+    if ($('#controls').css('display') == 'none') {
+        $('#controls').fadeToggle();
+    }
+
+    toolsBuilder('tree_map', viz, data, titleHelper(yearRange).value);
+
 };
 
 
@@ -507,6 +504,11 @@ var getUrls = function () {
         urls.push(api_url + 'metadata/' + attr)
     });
 
+    urls.push(urls[0].replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?'));
+
+    urls.push(`${api_url}/years/${dataset}`);
+
+
     return urls;
 };
 
@@ -517,6 +519,9 @@ $(document).ready(function () {
         getUrls(),
         function (responses) {
             var data = responses[0];
+            var allData = responses[responses.length - 2];
+            var years = responses[responses.length - 1].years;
+
             metadata[squares] = responses[1];
 
             var offset = 0;
@@ -528,7 +533,8 @@ $(document).ready(function () {
             });
 
             data = buildData(data);
-            loadViz(data);
+
+            loadViz(data, years, allData);
 
             loading.hide();
             d3.select('#mask').remove();
