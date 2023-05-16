@@ -228,31 +228,31 @@ var loadViz = function (data, years, auxData) {
                 .draw();
         }
 
-        var dropdown_options = [];
-        var intervalSize = 20;
-        var numIntervals = Math.floor(years.length / intervalSize);
+        var dropdownOptions = [];
+        let intervalSize = 20;
+        let numIntervals = Math.floor(years.length / intervalSize);
 
         if (years.length % intervalSize !== 0) {
-            var startYear = years[0];
-            var endYear = years[years.length % intervalSize - 1];
-            var label = `${startYear}-${endYear}`;
+            let startYear = years[0];
+            let endYear = years[years.length % intervalSize - 1];
+            let label = `${startYear}-${endYear}`;
 
-            dropdown_options.push({ 'id': 1 + 1, 'label': label });
+            dropdownOptions.push({ 'id': 2, 'label': label });
         }
 
-        for (var i = 0; i < numIntervals; i++) {
-            var startYear = years[years.length % intervalSize + i * intervalSize];
-            var endYear = years[years.length % intervalSize + (i + 1) * intervalSize - 1];
-            var label = `${startYear}-${endYear}`;
+        for (let i = 0; i < numIntervals; i++) {
+            let startYear = years[years.length % intervalSize + i * intervalSize];
+            let endYear = years[years.length % intervalSize + (i + 1) * intervalSize - 1];
+            let label = `${startYear}-${endYear}`;
 
-            dropdown_options.push({ 'id': i + 3, 'label': label });
+            dropdownOptions.push({ 'id': i + 3, 'label': label });
         }
 
-        dropdown_options.push({ 'id': 1, 'label': `${years[years.length - 1]}` })
+        dropdownOptions.push({ 'id': 1, 'label': `${years[years.length - 1]}` })
 
         d3plus.form()
             .config(config)
-            .data(dropdown_options)
+            .data(dropdownOptions)
             .title("Período")
             .type('drop')
             .focus(1, (value) => {
@@ -264,32 +264,25 @@ var loadViz = function (data, years, auxData) {
 
                     yearRange[1] = years[years.length - 1];
 
-                    const values_filtered = localData.data.filter((value) => value[0] == years[years.length - 1]);
+                    const valuesFiltered = localData.data.filter((value) => value[0] == years[years.length - 1]);
 
-                    localData.data = values_filtered;
-
-                    let newData = buildData(localData);
-
-                    loadViz(newData, years, auxData);
-                } else if (value == 3) {
-
-                    yearRange[1] = 2022;
-                    let localData = Object.assign({}, auxData);
-
-                    const values_filtered = localData.data.filter((value) => value[0] >= 2003 && value[0] <= 2022);
-
-                    localData.data = values_filtered;
+                    localData.data = valuesFiltered;
 
                     let newData = buildData(localData);
 
                     loadViz(newData, years, auxData);
                 } else {
-                    yearRange[1] = 2002;
                     let localData = Object.assign({}, auxData);
 
-                    const values_filtered = localData.data.filter((value) => value[0] >= 1997 && value[0] <= 2002);
+                    let selectedOption = dropdownOptions.find(element => element.id == value);
 
-                    localData.data = values_filtered;
+                    let dates = selectedOption.label.split('-');
+
+                    yearRange[1] = Number(dates[1]);
+
+                    const valuesFiltered = localData.data.filter((value) => value[0] >= Number(dates[0]) && value[0] <= Number(dates[1]));
+
+                    localData.data = valuesFiltered;
 
                     let newData = buildData(localData);
 
@@ -297,8 +290,6 @@ var loadViz = function (data, years, auxData) {
                 }
             })
             .draw();
-
-        // Adds year selector
 
         // Adds filters selector        
         var filteredData = function (filter, value) {
@@ -504,10 +495,9 @@ var getUrls = function () {
         urls.push(api_url + 'metadata/' + attr)
     });
 
-    urls.push(urls[0].replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}/, '?'));
+    urls.push(urls[0].replace(/&year=[0-9]{4}/, ''));
 
     urls.push(`${api_url}/years/${dataset}`);
-
 
     return urls;
 };
