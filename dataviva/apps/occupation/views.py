@@ -194,9 +194,7 @@ def index(occupation_id, tab):
     header['average_monthly_income'] = occupation_service.average_monthly_income()
     header['salary_mass'] = occupation_service.salary_mass()
     header['total_employment'] = occupation_service.total_employment()
-    header['total_establishments'] = occupation_service.total_establishments()
     header['year'] = occupation_service.year()
-    header['age_avg'] = occupation_service.age_avg()
 
     if not is_municipality:
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()

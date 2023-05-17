@@ -134,15 +134,6 @@
                             </div>
                         </div>
                     </div><!--/.col-->
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total of Establishments{% endtrans %} ({{ header.year }})</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.num_establishments | max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">{{ header.num_establishments | magnitude }}</small>
-                            </div>
-                        </div>
-                    </div><!--/.col-->
                     {% if location and industry.id | length == 6%}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
@@ -152,16 +143,7 @@
                                 <small class="magnitude">{{ header.rca | magnitude}}</small>
                             </div>
                         </div>
-                    </div><!--/.col-->
-                    <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-                        <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Distance{% endtrans %} ({{ header.year }})</h2>
-                            <div class="number">
-                                <strong class="counter">{{ header.distance | max_digits(3, True) }}</strong><br/>
-                                <small class="magnitude">{{ header.num_establishments | magnitude }} {{"de" }} KM</small>
-                            </div>
-                        </div>
-                    </div><!--/.col-->
+                    </div>
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
                             <h2 class="text-left text-uppercase">{% trans %}Opportunity Gain{% endtrans %} ({{ header.year }})</h2>
