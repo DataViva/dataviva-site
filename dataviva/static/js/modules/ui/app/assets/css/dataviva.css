@@ -38,11 +38,11 @@
 }
 
 .hover-bg-burgundy:hover { 
-  background-color: #e97650; 
+  background-color: #2D3A4E; 
 }
 
 .hover-bg-burgundy:focus { 
-  background-color: #e97650; 
+  background-color: #2D3A4E; 
 }
 
 .fade-enter-active, .fade-leave-active {
