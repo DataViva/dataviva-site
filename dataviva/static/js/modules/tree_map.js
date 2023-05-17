@@ -232,7 +232,7 @@ var loadViz = function (data, years, auxData) {
         let intervalSize = 20;
         let numIntervals = Math.floor(years.length / intervalSize);
 
-        dropdownOptions.push({ 'id': 1, 'label': `${years[years.length - 1]}` })
+        dropdownOptions.push({ 'id': 1, 'label': `${years[years.length - 1]}` });
 
         if (years.length % intervalSize !== 0) {
             let startYear = years[0];
@@ -259,21 +259,15 @@ var loadViz = function (data, years, auxData) {
                 var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
                 d3.select('.loading').style('background-color', '#fff');
 
-                if (value == 1) {
-                    let localData = Object.assign({}, auxData);
+                let localData = Object.assign({}, auxData);
 
+                if (value == 1) {
                     yearRange[1] = years[years.length - 1];
 
                     const valuesFiltered = localData.data.filter((value) => value[0] == years[years.length - 1]);
 
                     localData.data = valuesFiltered;
-
-                    let newData = buildData(localData);
-
-                    loadViz(newData, years, auxData);
                 } else {
-                    let localData = Object.assign({}, auxData);
-
                     let selectedOption = dropdownOptions.find(element => element.id == value);
 
                     let dates = selectedOption.label.split('-');
@@ -283,11 +277,11 @@ var loadViz = function (data, years, auxData) {
                     const valuesFiltered = localData.data.filter((value) => value[0] >= Number(dates[0]) && value[0] <= Number(dates[1]));
 
                     localData.data = valuesFiltered;
-
-                    let newData = buildData(localData);
-
-                    loadViz(newData, years, auxData);
                 }
+                
+                let newData = buildData(localData);
+                
+                loadViz(newData, years, auxData);
             })
             .draw();
 
