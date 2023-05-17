@@ -232,6 +232,8 @@ var loadViz = function (data, years, auxData) {
         let intervalSize = 20;
         let numIntervals = Math.floor(years.length / intervalSize);
 
+        dropdownOptions.push({ 'id': 1, 'label': `${years[years.length - 1]}` })
+
         if (years.length % intervalSize !== 0) {
             let startYear = years[0];
             let endYear = years[years.length % intervalSize - 1];
@@ -248,12 +250,10 @@ var loadViz = function (data, years, auxData) {
             dropdownOptions.push({ 'id': i + 3, 'label': label });
         }
 
-        dropdownOptions.push({ 'id': 1, 'label': `${years[years.length - 1]}` })
-
         d3plus.form()
             .config(config)
             .data(dropdownOptions)
-            .title("Período")
+            .title(dictionary['period'])
             .type('drop')
             .focus(1, (value) => {
                 var loadingData = dataviva.ui.loading('#tree_map').text(dictionary['Downloading Additional Years'] + '...');
