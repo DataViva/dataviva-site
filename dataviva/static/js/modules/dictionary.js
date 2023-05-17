@@ -184,7 +184,8 @@ dictionary['main'] = lang == 'en' ? 'Main' : 'Principal';
 dictionary['activity_jobs'] = lang == 'en' ? 'Employer activity' : 'Atividade por Empregos';
 dictionary['activity_highest'] = lang == 'en' ? 'Activity with highest' : 'Atividade com maior';
 dictionary['main_economic_activity'] = lang == 'en' ? 'Main Economic Activity' : 'Principal atividade econômica';
-dictionary['avg_wage'] = lang == 'en' ? 'Average Wage' : 'Renda Média'
+dictionary['avg_wage'] = lang == 'en' ? 'Average Wage' : 'Renda Média';
+dictionary['period'] = lang == 'en' ? 'Period' : 'Período';
 
 // CNES
 dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
