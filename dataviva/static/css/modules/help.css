@@ -36,9 +36,13 @@
     background-color: #fff;
 }
 
+.help .panel-heading a {
+    color: #798594 !important;
+}
+
 .help .faq .panel-group .panel-default a {
     text-decoration: none;
-    color: #5a9dc4;
+    color: #798594 !important;
     font-weight: 500;
     line-height: 1.1;
     font-size: 14px;
