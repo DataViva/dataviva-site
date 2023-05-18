@@ -56,6 +56,12 @@ body .hover-bg-burgundy:focus {
   background-color: #2D3A4E !important; 
   color: #FFF !important;
 }
+
+body .t-bg-green{
+  margin-top:0px !important;
+  background-color: #2D3A4E !important;
+  font-weight: 600;
+}
 /*BODY END*/
 
 /* .bg-green {
