@@ -44,6 +44,9 @@ body {
   color: #676a6c;
   font-size: 14px;
 }
+body .burgundy{
+  color: #2D3A4E !important;
+}
 /*BODY END*/
 
 /* .bg-green {
