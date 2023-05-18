@@ -1,5 +1,5 @@
 .modal.dataviva .modal-header {
-  background: #9eddbf;
+  background: #2D3A4E;
   border-radius: 4px 4px 0px 0px;
 }
 
@@ -39,7 +39,7 @@
 }
 
 .modal.dataviva .form-group.search .input-group-addon {
-  color: #9eddbf;
+  color: #2D3A4E;
   border-right: 0px;
   padding-right: 0px;
 }
@@ -182,8 +182,8 @@
 }
 
 .modal-body .selector_body .search_buttons .btn-primary[style] {
-  background-color: #a25a6d !important;
-  border-color: #a25a6d !important;
+  background-color: #E6673D !important;
+  border-color: #E6673D !important;
   color: #ffffff !important;
   margin-bottom: 0 !important;
 }

@@ -18,7 +18,8 @@ p {
 .divider {
     width: 120px;
     height: 2px;
-    border: 1px solid #9EDDBF;
+    border: 1px solid #2D3A4E;
+    background-color: #2D3A4E;
     margin: 24px 24px 6px 24px;
 }
 
@@ -85,11 +86,40 @@ p {
     text-align: center;
 }
 
+@media (max-width: 1200px) and (min-width:996px) {
+    .romero {
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
+
+@media (max-width: 481px) {
+    .brito{
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .freitas{
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .romero{
+        font-size: 11px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
 .cardPosition {
     font-weight: bold;
     font-size: 14px;
     text-align: center;
-    color: #9EDDBF;
+    color: #2D3A4E;
     text-transform: uppercase;
 }
 
