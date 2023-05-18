@@ -33,14 +33,6 @@
   font-weight: 700;
 }
 
-.hover-bg-burgundy:hover { 
-  background-color: #2D3A4E; 
-}
-
-.hover-bg-burgundy:focus { 
-  background-color: #2D3A4E; 
-}
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s ease-out;
 }
