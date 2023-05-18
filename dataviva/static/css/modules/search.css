@@ -39,7 +39,7 @@
     }
 }
 .search section.profiles .profile a i {
-    color: #7BCCD0;
+    color: #2d3a4e ;
     font-size: 50px;
     margin-right: 10px;
 }
@@ -58,7 +58,7 @@
 .search section.profiles .profile a:focus,
 .search section.profiles .profile a:hover i,
 .search section.profiles .profile a:focus i {
-    color: #5a9dc4;
+    color: #2d3a4e ;
 }
 
 
@@ -89,7 +89,8 @@
     text-align: justify;
 }
 .search section.search-options .search-option a {
-    background-color: #E1F1E9;
+    background-color: #d9d5c7
+    ;
     border-radius: 5px;
     display: block;
     height: 150px;
@@ -110,7 +111,8 @@
 }
 
 .search section.search-options .search-option a i {
-    color: #7BCCD0;
+    color: #2d3a4e 
+    ;
     width: 50px;
     height: 50px;
     font-size: 27px;
@@ -135,11 +137,11 @@
 .search section.search-options .search-option:hover a,
 .search section.search-options .search-option:focus a{
     color: #FFF;
-    background-color: #5a9dc4;
+    background-color: #2d3a4e ;
 }
 .search section.search-options .search-option:hover i,
 .search section.search-options .search-option:focus i {
-    color: #5a9dc4;
+    color: #2d3a4e ;
 }
 
 .search .sidebar ul li a.active {
