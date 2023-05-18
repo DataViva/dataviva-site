@@ -47,6 +47,13 @@ body {
 body .burgundy{
   color: #2D3A4E !important;
 }
+body .hover-bg-burgundy:hover { 
+  background-color: #2D3A4E !important; 
+}
+
+body .hover-bg-burgundy:focus { 
+  background-color: #2D3A4E !important; 
+}
 /*BODY END*/
 
 /* .bg-green {

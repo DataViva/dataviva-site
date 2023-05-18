@@ -136,7 +136,6 @@ class Ybio(BaseRais, db.Model, AutoSerialize):
     bra_id = db.Column(db.String(8), db.ForeignKey(Bra.id), primary_key=True)
     cnae_id = db.Column(db.String(5), db.ForeignKey(Cnae.id), primary_key=True)
     cbo_id = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
-    required = db.Column(db.Float())
 
     bra_id_len = db.Column(db.Integer(1))
     cnae_id_len = db.Column(db.Integer(1))
