@@ -49,10 +49,12 @@ body .burgundy{
 }
 body .hover-bg-burgundy:hover { 
   background-color: #2D3A4E !important; 
+  color: #FFF !important;
 }
 
 body .hover-bg-burgundy:focus { 
   background-color: #2D3A4E !important; 
+  color: #FFF !important;
 }
 /*BODY END*/
 
