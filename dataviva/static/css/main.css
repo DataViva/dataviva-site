@@ -255,6 +255,9 @@ body .t-bg-green{
   .submenu-dropdown-items{
     margin-left: 0px;
   }
+  .submenu-dropdown-items2{
+    margin-left: 0px;
+  }
 
   .login-btn {
     margin-left: 0px;
@@ -325,6 +328,10 @@ body .t-bg-green{
 
 @media (min-width: 1199px) {
   .submenu-dropdown-items{
+    margin-left: -110px;
+    margin-top: 24px;
+  }
+  .submenu-dropdown-items2{
     margin-left: -140px;
     margin-top: 24px;
   }
@@ -332,6 +339,10 @@ body .t-bg-green{
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .submenu-dropdown-items{
+    margin-left: -100px;
+    margin-top: 24px;
+  }
+  .submenu-dropdown-items2{
     margin-left: -120px;
     margin-top: 24px;
   }
