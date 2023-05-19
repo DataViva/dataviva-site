@@ -14,7 +14,9 @@
     font-weight: 300;
 }
 .search section.profiles .profile h3 {
+    font-size: 30px;
     margin-top: 0px;
+    margin-bottom: 12px;
     color: #FFF;
 }
 .search section.profiles .profile p {
@@ -23,7 +25,17 @@
 
 .search section.profiles .map-div{
     margin-top:6px;
+    margin-bottom: 16px;
 }
+
+
+@media (max-width:768px){
+    .map-div{
+        display: none;
+    }
+  }
+
+
 .search section.profiles .access-button {
     margin-top:10px;
 }
@@ -168,6 +180,7 @@
 
 @media (max-width: 767px) {
     .search section.search-options .search-option a i {
+        
     }
 }
 

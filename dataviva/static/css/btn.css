@@ -479,6 +479,11 @@ button.dim:active:before {
   color: #2D3A4E;
 }
 
+.circle-br:hover {
+  
+  color: #2D3A4E;
+}
+
 @media (max-width:768px){
   .circle-br {
     width: 50px;
@@ -568,8 +573,8 @@ button.dim:active:before {
 .sweet-alert .confirm:active:focus,
 .sweet-alert .confirm:active:hover {
   color: #fff !important;
-  background-color: #905262 !important;
-  border-color: #824A58 !important;
+  background-color: #2d3a4e !important;
+  border-color: #2d3a4e !important;
 }
 
 .sweet-alert .confirm:hover,
@@ -580,7 +585,7 @@ button.dim:active:before {
 .sweet-alert .confirm:active:hover,
 .sweet-alert .confirm.active:hover,
 .sweet-alert .confirm.active:focus {
-  background-color: #905262 !important;
-  border-color: #905262 !important;
+  background-color: #2d3a4e !important;
+  border-color: #2d3a4e !important;
   color: #FFFFFF !important;
 }
