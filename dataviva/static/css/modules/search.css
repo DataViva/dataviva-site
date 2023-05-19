@@ -1,5 +1,6 @@
 .search section.profiles {
-    padding: 20px 15px 15px 15px;
+    padding: 20px 20px 15px 20px;
+    border-radius: 10px;
 }
 @media (max-width: 991px) {
     .search section.profiles .profile {
@@ -14,6 +15,17 @@
 }
 .search section.profiles .profile h3 {
     margin-top: 0px;
+    color: #FFF;
+}
+.search section.profiles .profile p {
+    color: #FFF;
+}
+
+.search section.profiles .map-div{
+    margin-top:6px;
+}
+.search section.profiles .access-button {
+    margin-top:10px;
 }
 .search section.profiles .profile h4 {
     font-size: 14px;
@@ -65,6 +77,8 @@
 
 .search section.search-options .search-option {
     margin-bottom: 10px;
+    padding-left: 2px!important;
+    padding-right: 2px!important;
 }
 .search section.search-options h2 {
     font-size: 20px;
@@ -77,6 +91,30 @@
     line-height: 34px;
     font-weight: 500;
 }
+
+@media (min-width:991px) and (max-width:1200px) {
+    .search section.search-options .search-option {
+        margin-bottom: 10px;
+        padding-left: 2px!important;
+        padding-right: 2px!important;
+    }
+    .search section.profiles .profile h3 {
+        margin-top: 0px;
+        color: #FFF;
+    }
+    .search section.profiles .profile p {
+        color: #FFF;
+    }
+    
+    .search section.profiles .map-div{
+        margin-top:10px;
+    }
+}
+
+@media (max-width:768px){
+
+}
+
 @media (max-width: 991px) {
     .search section.search-options .search-option h3 {
         margin-top: 15px;
@@ -89,8 +127,7 @@
     text-align: justify;
 }
 .search section.search-options .search-option a {
-    background-color: #d9d5c7
-    ;
+    background-color: #d9d5c7;
     border-radius: 5px;
     display: block;
     height: 150px;
