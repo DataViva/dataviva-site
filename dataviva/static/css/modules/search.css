@@ -21,6 +21,8 @@
 }
 .search section.profiles .profile p {
     color: #FFF;
+    text-align: left;
+    line-height: 18px;
 }
 
 .search section.profiles .map-div{
@@ -135,14 +137,14 @@
 .search section.search-options .search-option p {
     font-size: 13px;
     font-weight: 300;
-    line-height: 16px;
-    text-align: justify;
+    line-height: 18px;
+    text-align: left;
 }
 .search section.search-options .search-option a {
     background-color: #d9d5c7;
     border-radius: 5px;
     display: block;
-    height: 150px;
+    height: 160px;
     padding: 10px;
     color: inherit;
     text-decoration: none;
