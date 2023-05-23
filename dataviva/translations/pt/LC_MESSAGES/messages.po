@@ -398,6 +398,10 @@ msgstr "Dados"
 msgid "Publications"
 msgstr "Publicações"
 
+#: dataviva/apps/admin/templates/general/browse_categories.html:47
+msgid "Access Here"
+msgstr "Acesse Aqui"
+
 
 
 
