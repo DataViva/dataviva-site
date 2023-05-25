@@ -374,6 +374,38 @@ msgstr "Usuários"
 msgid "Help"
 msgstr "Ajuda"
 
+#: dataviva/apps/admin/templates/admin/header.html:24
+msgid "REGIONS"
+msgstr "REGIÕES"
+
+#: dataviva/apps/admin/templates/admin/header.html:25
+msgid "GRAPHS"
+msgstr "GRÁFICOS"
+
+#: dataviva/apps/admin/templates/admin/header.html:27
+msgid "STUDIES"
+msgstr "ESTUDOS"
+
+#: dataviva/apps/admin/templates/admin/header.html:32
+msgid "MORE RESOURCES"
+msgstr "MAIS RECURSOS"
+
+#: dataviva/apps/admin/templates/admin/header.html:37
+msgid "Data"
+msgstr "Dados"
+
+#: dataviva/apps/admin/templates/admin/header.html:43
+msgid "Publications"
+msgstr "Publicações"
+
+#: dataviva/apps/admin/templates/general/browse_categories.html:47
+msgid "Access Here"
+msgstr "Acesse Aqui"
+
+
+
+
+
 #: dataviva/apps/ask/views.py:111 dataviva/apps/ask/views.py:139
 msgid "You need to be logged in to vote."
 msgstr "Você precisa fazer o login para votar."

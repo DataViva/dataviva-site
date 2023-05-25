@@ -29,42 +29,31 @@
     <div class="col-md-9">
         <h1 class="text-center">{% trans %}Start a Search{% endtrans %}</h1>
         <section id="profiles" class="profiles bg-blue">
-            <h2 class="text-center">{% trans %}Select a profile to start{% endtrans %}:</h2>
+            
             <div class="row">
-                <div class="col-md-4 profile">
-                    <a data-search="entrepreneurs">
-                        <i class="pull-left dv-entrepreneur"></i>
-                        <h3>{% trans %}Entrepreneurs{% endtrans %}</h3>
-                        <h4>{% trans %}Identify the economic profile and the business opportunities in a region{% endtrans %}</h4>
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 profile">
+                    <h3 class="pull-left">{% trans %}Brazilian Locations{% endtrans %}</h3>
+                    <div class="clearfix"></div>
+                    <p class="clearfix">{% trans %}General profile by region, state, mesoregion, microregion or Brazilian locality. Visualize international trade, economic activity, jobs and education.{% endtrans %}</p>
+                    
+                </div>
+                <div class="col-xs-10 col-sm-2 col-md-2 col-lg-2 map-div">
+                    <a onclick="select_attr('bra');"></a>
+                        <i class="pull-right circle-br btn btn-white dv-bra"></i>
                     </a>
                 </div>
-                <div class="col-md-4 profile">
-                    <a data-search='development_agents'>
-                        <i class="pull-left dv-dev-agents"></i>
-                        <h3>{% trans %}Development Agents{% endtrans %}</h3>
-                        <h4>{% trans %}Assess development policies setting by location{% endtrans %}</h4>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <a onclick="select_attr('bra');">
+                        <button class="pull-right btn btn-primary access-button">{% trans %}Access Here{% endtrans %}</button>
                     </a>
                 </div>
-                <div class="col-md-4 profile">
-                    <a data-search='students'>
-                        <i class="pull-left dv-students"></i>
-                        <h3>{% trans %}Students and Professionals{% endtrans %}</h3>
-                        <h4>{% trans %}Find information about available jobs, income per occupation and courses{% endtrans %}</h4>
-                    </a>
-                </div>
+                
             </div>
         </section>
 
         <section id="search" class="search-options">
             <h2 class="text-center">... {% trans %}or search for{% endtrans %}:</h2>
-            <div class="col-md-6 col-lg-4 search-option">
-                <a onclick="select_attr('bra');">
-                    <i class="btn btn-white btn-circle dv-bra"></i>
-                    <h3 class="pull-left">{% trans %}Brazilian Locations{% endtrans %}</h3>
-                    <div class="clearfix"></div>
-                    <p class="clearfix">{% trans %}General profile by region, state, mesoregion, microregion or Brazilian locality. Visualize international trade, economic activity, jobs and education.{% endtrans %}</p>
-                </a>
-            </div>
+       
             <div class="col-md-6 col-lg-4 search-option">
                 <a onclick="select_attr('cbo');">
                     <i class="btn btn-white btn-circle dv-occupation"></i>
@@ -105,7 +94,7 @@
                     <p class="clearfix">{% trans %}Number of enrollments in each offered course, student situation and similar university profile.{% endtrans %}</p>
                 </a>
             </div>
-            <div class="col-md-6 col-lg-4 search-option col-lg-offset-2">
+            <div class="col-md-6 col-lg-4 search-option">
                 <a onclick="select_attr('course_hedu');">
                     <i class="btn btn-white btn-circle dv-major"></i>
                     <h3 class="pull-left">{% trans %}Higher Education{% endtrans %}</h3>
@@ -113,6 +102,7 @@
                     <p class="clearfix">{% trans %}University list and localities that offer the Superior Education course or the selected field of study.{% endtrans %}</p>
                 </a>
             </div>
+            <div class="col-lg-4"></div>
             <div class="col-md-6 col-lg-4 search-option">
                 <a onclick="select_attr('course_sc');">
                     <i class="btn btn-white btn-circle dv-basic-course"></i>
@@ -121,6 +111,7 @@
                     <p class="clearfix">{% trans %}Brazilian schools that offer professional education and Basic Education enrollment ranking by locality.{% endtrans %}</p>
                 </a>
             </div>
+            <div class="col-lg-4"></div>
         </section>
     </div>
 </div>
