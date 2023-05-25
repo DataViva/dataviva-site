@@ -1317,7 +1317,7 @@
             }
           })
 
-          ui_data = ui_data.filter((data) => data.text !== "Total de Estabelecimentos");
+          ui_data = ui_data.filter((data) => data.value !== "num_est");
 
           var ui_limit = app.build.ui.length > 3 ? 1 : 3;
           var form_type = ui_data.length > ui_limit ? "drop" : "toggle";
