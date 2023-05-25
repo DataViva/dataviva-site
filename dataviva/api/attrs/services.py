@@ -59,6 +59,7 @@ class All:
 class Location:
 
     def __init__(self, bra_id):
+
         self._attrs_list = None
         self._ybs_sorted_by_ranking = None
         self.bra_id = bra_id
@@ -100,12 +101,23 @@ class Location:
 
     def __attrs__max__year__(self, stat_id):
         max_year = db.session.query(
-            func.max(Ybs.year)).filter_by(stat_id=stat_id, bra_id=self.bra_id)
+            func.max(Ybs.year)).filter_by(stat_id=stat_id, bra_id=self.bra_id).all()[0][0]
         return max_year
+        
+    def gdp_year(self):
+        return self.__attrs__max__year__('gdp')
+    def hdi_year(self):
+        return self.__attrs__max__year__('hdi')
+    def life_expectation_year(self):
+        return self.__attrs__max__year__('life_exp')
+    def population_year(self):
+        return self.__attrs__max__year__('pop')
+    def gdp_per_capita_year(self):
+        return self.__attrs__max__year__('gdp_pc')
 
     def gdp(self):
         attrs = self.__attrs_list__()
-        attr = next((attr for attr in attrs if (attr.stat_id == 'gdp' and self.__attrs__max__year__('gdp'))),
+        attr = next((attr for attr in attrs if (attr.stat_id == 'gdp' and attr.year == self.gdp_year())),
                     None)
 
         if (getattr(attr, 'stat_val', None)):
@@ -115,7 +127,7 @@ class Location:
 
     def hdi(self):
         attrs = self.__attrs_list__()
-        attr = next((attr for attr in attrs if (attr.stat_id == 'hdi' and self.__attrs__max__year__('hdi'))),
+        attr = next((attr for attr in attrs if (attr.stat_id == 'hdi' and attr.year == self.hdi_year())),
                     None)
         if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
@@ -124,7 +136,7 @@ class Location:
 
     def life_expectation(self):
         attrs = self.__attrs_list__()
-        attr = next((attr for attr in attrs if (attr.stat_id == 'life_exp' and self.__attrs__max__year__('life_exp'))),
+        attr = next((attr for attr in attrs if (attr.stat_id == 'life_exp' and attr.year == self.life_expectation_year())),
                     None)
         if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
@@ -133,7 +145,7 @@ class Location:
 
     def population(self):
         attrs = self.__attrs_list__()
-        attr = next((attr for attr in attrs if (attr.stat_id == 'pop' and self.__attrs__max__year__('pop'))),
+        attr = next((attr for attr in attrs if (attr.stat_id == 'pop' and attr.year == self.population_year())),
                     None)
         if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
@@ -142,7 +154,7 @@ class Location:
 
     def gdp_per_capita(self):
         attrs = self.__attrs_list__()
-        attr = next((attr for attr in attrs if (attr.stat_id == 'gdp_pc' and self.__attrs__max__year__('gdp_pc'))),
+        attr = next((attr for attr in attrs if (attr.stat_id == 'gdp_pc' and attr.year == self.gdp_per_capita_year())),
                     None)
         if (getattr(attr, 'stat_val', None)):
             return attr.stat_val
