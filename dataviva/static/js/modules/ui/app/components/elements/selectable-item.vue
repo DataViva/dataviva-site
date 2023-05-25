@@ -29,10 +29,6 @@
         class="medium-gray f5">
         {{ $t(item.id_description) }}: {{ item.id }}
       </small>
-      <small
-        class="medium-gray f5">
-        {{ $t(item.id_description) }}: {{ item.municipality }}
-      </small>
       <template v-if="item.extra_info_content && item.extra_info">
         <br>
         <p
