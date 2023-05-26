@@ -260,8 +260,8 @@ def all(tab):
         'population': location_service_brazil.population(),
         'gdp_per_capita': location_service_brazil.gdp_per_capita(),
         'eci': 0.151,
-        'year_yb': location_service_brazil.year_yb(),
-        'year_ybs': location_service_brazil.year_ybs()
+        'year_pop': location_service_brazil.year_pop(),
+        'year_gdp': location_service_brazil.year_gdp()
     }
 
     body = {
