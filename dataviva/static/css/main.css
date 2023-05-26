@@ -80,7 +80,7 @@ body .t-bg-green{
   background-color: #f3f6f4;
 }
 .bg-blue {
-  background-color: #5a9dc4;
+  background-color: #2d3a4e ;
 }
 
 .font-bold {
@@ -255,6 +255,9 @@ body .t-bg-green{
   .submenu-dropdown-items{
     margin-left: 0px;
   }
+  .submenu-dropdown-items2{
+    margin-left: 0px;
+  }
 
   .login-btn {
     margin-left: 0px;
@@ -265,7 +268,7 @@ body .t-bg-green{
   }
 
   .navbar-default .navbar-left > li:hover {
-      background-color: #f2fffb;
+      background-color:  #424e60;
   }
   .navbar-default .navbar-nav > li {
     padding-top: 8px;
@@ -325,6 +328,10 @@ body .t-bg-green{
 
 @media (min-width: 1199px) {
   .submenu-dropdown-items{
+    margin-left: -158px;
+    margin-top: 24px;
+  }
+  .submenu-dropdown-items2{
     margin-left: -140px;
     margin-top: 24px;
   }
@@ -332,6 +339,10 @@ body .t-bg-green{
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .submenu-dropdown-items{
+    margin-left: -130px;
+    margin-top: 24px;
+  }
+  .submenu-dropdown-items2{
     margin-left: -120px;
     margin-top: 24px;
   }
@@ -354,6 +365,15 @@ body .t-bg-green{
   }
 }
 
+@media (max-width: 767px){
+  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+    color: #fff !important;
+  }
+
+  .dropdown-menu li.divisor{
+    color: #FFF !important;
+  }
+}
 @media (max-width: 991px) {
   .navbar-brand {
     padding: 8px 15px;

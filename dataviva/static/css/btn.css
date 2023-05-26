@@ -468,6 +468,35 @@ button.dim:active:before {
   font-size: 12px;
   line-height: 1.428571429;
 }
+.circle-br {
+  width: 80px;
+  height: 80px;
+  padding: 6px 0;
+  border-radius: 44px;
+  text-align: center;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #2D3A4E;
+}
+
+.circle-br:hover {
+  
+  color: #2D3A4E;
+}
+
+@media (max-width:768px){
+  .circle-br {
+    width: 50px;
+    height: 50px;
+    padding: 6px 0;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 1.2;
+    color: #2D3A4E;
+  }
+}
+
 .btn-circle.btn-lg {
   width: 50px;
   height: 50px;
@@ -544,8 +573,8 @@ button.dim:active:before {
 .sweet-alert .confirm:active:focus,
 .sweet-alert .confirm:active:hover {
   color: #fff !important;
-  background-color: #905262 !important;
-  border-color: #824A58 !important;
+  background-color: #2d3a4e !important;
+  border-color: #2d3a4e !important;
 }
 
 .sweet-alert .confirm:hover,
@@ -556,7 +585,7 @@ button.dim:active:before {
 .sweet-alert .confirm:active:hover,
 .sweet-alert .confirm.active:hover,
 .sweet-alert .confirm.active:focus {
-  background-color: #905262 !important;
-  border-color: #905262 !important;
+  background-color: #2d3a4e !important;
+  border-color: #2d3a4e !important;
   color: #FFFFFF !important;
 }
