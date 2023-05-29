@@ -2075,13 +2075,11 @@ msgid "Origin"
 msgstr "Origem"
 
 #: dataviva/apps/location/templates/location/graphs-wages.html:5
-#, fuzzy
 msgid "Job By"
 msgstr "Empregos por"
 
 #: dataviva/apps/location/templates/location/graphs-wages.html:84
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:65
-#, fuzzy
 msgid "Wage by"
 msgstr "Salário por"
 
