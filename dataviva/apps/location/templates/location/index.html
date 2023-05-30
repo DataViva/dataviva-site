@@ -163,7 +163,7 @@
                     {% if header.gdp_per_capita %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %} {% if location.id == 'all' %}({{header.year_gdp}}){% else %}({{header.gdp_per_capita_year}}) {% endif %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %} {% if location.id == 'all' %}({{header.year_per_capita}}){% else %}({{header.gdp_per_capita_year}}) {% endif %}</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.gdp_per_capita|magnitude }}</small>

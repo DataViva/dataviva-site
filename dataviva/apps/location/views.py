@@ -261,7 +261,8 @@ def all(tab):
         'gdp_per_capita': location_service_brazil.gdp_per_capita(),
         'eci': 0.151,
         'year_pop': location_service_brazil.year_pop(),
-        'year_gdp': location_service_brazil.year_gdp()
+        'year_gdp': location_service_brazil.year_gdp(),
+        'year_per_capita': location_service_brazil.max_coincident_year
     }
 
     body = {

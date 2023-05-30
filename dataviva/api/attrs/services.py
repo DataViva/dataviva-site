@@ -6,50 +6,52 @@ from sqlalchemy import func
 class All:
 
     def __init__(self):
-        
-        self.max_coincident_year = db.session.query(
-            func.max(Ybs.year)).first()[0]
-        
-        
+
+        self.max_coincident_year = db.session.query(func.max(Ybs.year)) \
+            .filter(Ybs.stat_id.in_(["gdp", "pop"])) \
+            .group_by(Ybs.year) \
+            .having(func.count(func.distinct(Ybs.stat_id)) == 2) \
+            .order_by(Ybs.year.desc()) \
+            .limit(1).first()[0]
+
         self.attrs_query_ybs_gdp = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
             func.length(Ybs.bra_id) == 1,
-            Ybs.stat_id == "gdp",
-            Ybs.year == 2020).first()[0]
+            Ybs.stat_id == "gdp")
 
         self.attrs_query_ybs_pop = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
             func.length(Ybs.bra_id) == 1,
-            Ybs.stat_id == "pop",
-            Ybs.year == 2020).first()[0]
-        
-        print("amigos do ano gdp", self.year_gdp())
-        print("amigos do ano pop", self.year_pop())
-
-    def __attrs__max__year__(self, stat_id):
-        max_year = db.session.query(
-            func.max(Ybs.year)).filter_by(stat_id=stat_id, bra_id=self.bra_id).all()[0][0]
-        return max_year
-
-    def gdp(self):
-        gdp = self.attrs_query_ybs_gdp
-        return gdp
-
-    def population(self):
-        population = self.attrs_query_ybs_pop
-        return population
-
-    def gdp_per_capita(self):
-        gdp_per_capita = self.gdp() / float(self.population())
-        return gdp_per_capita
+            Ybs.stat_id == "pop")
 
     def year_gdp(self):
-        max_year_query_ybs_gdp = db.session.query(
-            func.max(Ybs.year), Ybs.stat_id == "gdp").first()[0]
+        max_year_query_ybs_gdp = db.session.query(func.max(Ybs.year)) \
+            .filter(Ybs.stat_id == "gdp") \
+            .filter(func.length(Ybs.bra_id) == 1).first()[0]
         return max_year_query_ybs_gdp
 
     def year_pop(self):
-        max_year_query_ybs_pop = db.session.query(
-            func.max(Ybs.year), Ybs.stat_id == "pop").first()[0]
+        max_year_query_ybs_pop = db.session.query(func.max(Ybs.year)) \
+            .filter(Ybs.stat_id == "pop") \
+            .filter(func.length(Ybs.bra_id) == 1).first()[0]
         return max_year_query_ybs_pop
+
+    def gdp(self, year=""):
+        if(year==""):
+            year=self.year_gdp()
+
+        gdp = self.attrs_query_ybs_gdp.filter(
+            Ybs.year == year).first()[0]
+        return gdp
+
+    def population(self, year=""):
+        if(year==""):
+            year=self.year_pop()
+        population = self.attrs_query_ybs_pop.filter(
+            Ybs.year == year).first()[0]
+        return population
+
+    def gdp_per_capita(self):
+        gdp_per_capita = self.gdp(self.max_coincident_year) / self.population(self.max_coincident_year)
+        return gdp_per_capita
 
 
 class Location:
@@ -61,7 +63,6 @@ class Location:
         self.bra_id = bra_id
         if len(bra_id) != 9 and len(bra_id) != 3:
             like_cond = bra_id[:len(bra_id)] + '%'
-            print("like_cond", like_cond)
             self.max_year_query = db.session.query(
                 func.max(Ybs.year)).filter(Ybs.bra_id.like(like_cond))
             self.attrs_query = db.session.query(func.sum(Ybs.stat_val).label("stat_val"), Ybs.stat_id).filter(
@@ -118,7 +119,6 @@ class Location:
 
     def gdp(self):
         attrs = self.__attrs_list__()
-        print("attrs samuel", attrs)
         if len(self.bra_id) != 9 and len(self.bra_id) != 3:
             attr = next((attr for attr in attrs if (attr.stat_id == 'gdp')),
                         None)
