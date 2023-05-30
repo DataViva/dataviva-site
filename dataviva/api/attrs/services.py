@@ -71,31 +71,19 @@ class Location:
         
         if len(bra_id) != 9 and len(bra_id) != 3:
             like_cond = bra_id[:len(bra_id)] + '%'
+            
             self.max_year_query = db.session.query(
                 func.max(Ybs.year)).filter(Ybs.bra_id.like(like_cond))
             
-            condition = False;
-            self.gdp_value = 0;
-            self.pop_value = 0;
-            year = self.max_year_query.first()[0];
-            while (condition == False):
-                self.attrs_query = db.session.query(func.sum(Ybs.stat_val).label("stat_val"), Ybs.stat_id, Ybs.year).filter(
+            self.attrs_query_gdp = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
                     Ybs.bra_id.like(like_cond),
                     func.length(Ybs.bra_id) == 9,
-                    Ybs.year == year).group_by(Ybs.stat_id);
-                
-                result_gdp = self.attrs_query.filter(Ybs.stat_id == "gdp").first();
-                result_pop = self.attrs_query.filter(Ybs.stat_id == "pop").first();
+                    Ybs.stat_id == 'gdp');
 
-                if (self.gdp_value == 0):
-                    self.gdp_value = result_gdp if result_gdp is not None else 0;
-                if (self.pop_value == 0):
-                    self.pop_value = result_pop if result_pop is not None else 0;
-
-                if (self.gdp_value != 0 and self.pop_value != 0):
-                    condition = True;
-                
-                year-=1;
+            self.attrs_query_pop = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
+                    Ybs.bra_id.like(like_cond),
+                    func.length(Ybs.bra_id) == 9,
+                    Ybs.stat_id == 'pop');
         else:
             self.max_year_query = db.session.query(
                 func.max(Ybs.year)).filter_by(bra_id=bra_id)
@@ -125,8 +113,23 @@ class Location:
         return self._attrs_list
 
     def __attrs__max__year__(self, stat_id):
-        max_year = db.session.query(
-            func.max(Ybs.year)).filter_by(stat_id=stat_id, bra_id=self.bra_id).all()[0][0]
+        if len(self.bra_id) != 9 and len(self.bra_id) != 3:
+            like_cond = self.bra_id[:len(self.bra_id)] + '%'
+            max_year = self.max_coincident_year;
+
+            if(stat_id == 'gdp'):
+                max_year = db.session.query(func.max(Ybs.year)).filter(
+                    Ybs.bra_id.like(like_cond),
+                    func.length(Ybs.bra_id) == 9,
+                    Ybs.stat_id == 'gdp').first()[0];
+            elif(stat_id == 'pop'):
+                max_year = db.session.query(func.max(Ybs.year)).filter(
+                    Ybs.bra_id.like(like_cond),
+                    func.length(Ybs.bra_id) == 9,
+                    Ybs.stat_id == 'pop').first()[0];
+        else :
+            max_year = db.session.query(
+                func.max(Ybs.year)).filter_by(stat_id=stat_id, bra_id=self.bra_id).all()[0][0]
         return max_year
 
     def gdp_year(self):
@@ -147,10 +150,12 @@ class Location:
         return self.__attrs__max__year__('gdp_pc')
 
     def gdp(self):
-        attrs = self.__attrs_list__()
         if len(self.bra_id) != 9 and len(self.bra_id) != 3:
-            attr = self.gdp_value.stat_val;
+            gdp_result = self.attrs_query_gdp.filter(Ybs.year == self.gdp_year()).first()[0];
+
+            attr = gdp_result
         else:
+            attrs = self.__attrs_list__()
             attr = next((attr for attr in attrs if (attr.stat_id == 'gdp' and attr.year == self.gdp_year())),
                         None)
         if (getattr(attr, 'stat_val', None)):
@@ -185,10 +190,12 @@ class Location:
         return attr
 
     def population(self):
-        attrs = self.__attrs_list__()
         if len(self.bra_id) != 9 and len(self.bra_id) != 3:
-            attr = self.pop_value.stat_val;
+            pop_result = self.attrs_query_pop.filter(Ybs.year == self.population_year()).first()[0];
+
+            attr = pop_result;
         else:
+            attrs = self.__attrs_list__()
             attr = next((attr for attr in attrs if (attr.stat_id == 'pop' and attr.year == self.population_year())),
                         None)
         if (getattr(attr, 'stat_val', None)):
@@ -197,44 +204,14 @@ class Location:
         return attr
 
     def gdp_per_capita(self):
-        attrs = self.__attrs_list__()
         if len(self.bra_id) != 9 and len(self.bra_id) != 3:
-            like_cond = self.bra_id[:len(self.bra_id)] + '%'
 
-            if(self.max_coincident_year == self.gdp_value.year and self.max_coincident_year == self.pop_value.year):
-                attr = self.gdp_value.stat_val / self.pop_value.stat_val;
-            elif (self.max_coincident_year == self.gdp_value.year):
-                
-                pop_correspondent_year_value = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
-                    Ybs.bra_id.like(like_cond),
-                    func.length(Ybs.bra_id) == 9,
-                    Ybs.stat_id == 'pop',
-                    Ybs.year == self.max_coincident_year).group_by(Ybs.stat_id).first()[0];
-                
-                attr = self.gdp_value.stat_val / pop_correspondent_year_value;
-            elif (self.max_coincident_year == self.pop_value.year):
-                gdp_correspondent_year_value = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
-                    Ybs.bra_id.like(like_cond),
-                    func.length(Ybs.bra_id) == 9,
-                    Ybs.stat_id == 'gdp',
-                    Ybs.year == self.max_coincident_year).group_by(Ybs.stat_id).first()[0];
-                
-                attr = gdp_correspondent_year_value / self.pop_value.stat_val;
-            else:
-                pop_correspondent_year_value = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
-                    Ybs.bra_id.like(like_cond),
-                    func.length(Ybs.bra_id) == 9,
-                    Ybs.stat_id == 'pop',
-                    Ybs.year == self.max_coincident_year).group_by(Ybs.stat_id).first()[0];
-
-                gdp_correspondent_year_value = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
-                    Ybs.bra_id.like(like_cond),
-                    func.length(Ybs.bra_id) == 9,
-                    Ybs.stat_id == 'gdp',
-                    Ybs.year == self.max_coincident_year).group_by(Ybs.stat_id).first()[0];
-        
-                attr = gdp_correspondent_year_value / pop_correspondent_year_value;
+            gdp_value = self.attrs_query_gdp.filter(Ybs.year == self.max_coincident_year).first()[0];
+            pop_value = self.attrs_query_pop.filter(Ybs.year == self.max_coincident_year).first()[0];
+            
+            attr = gdp_value / pop_value;
         else:
+            attrs = self.__attrs_list__()
             attr = next((attr for attr in attrs if (attr.stat_id == 'gdp_pc' and attr.year == self.gdp_per_capita_year())),
                         None)
         if (getattr(attr, 'stat_val', None)):
