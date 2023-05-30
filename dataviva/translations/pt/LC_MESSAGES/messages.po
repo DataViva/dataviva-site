@@ -499,9 +499,30 @@ msgid "Studies"
 msgstr "Estudos"
 
 
-#: dataviva/apps/scholar/templates/show.html:5
-msgid "Publish a Study"
-msgstr "Publique um Estudo"
+#: dataviva/apps/scholar/templates/show.html:18
+msgid "Build Graphs"
+msgstr "Construa gráficos"
+
+#: dataviva/apps/build_graph/templates/index.html:25
+msgid "Visualize your Graph"
+msgstr "Visualize seu Gráfico"
+
+#: dataviva/apps/build_graph/templates/index.html:26
+msgid "Select parameters to build your graph."
+msgstr "Selecione parâmetros para construir seu gráfico."
+
+#: dataviva/apps/build_graph/templates/index.html:34
+msgid "Database"
+msgstr "Banco de Dados"
+
+#: dataviva/apps/build_graph/templates/index.html:36
+msgid "Select"
+msgstr "Selecione"
+
+
+
+
+
 
 
 
@@ -3061,7 +3082,6 @@ msgstr "é"
 #: dataviva/apps/product/templates/product/tab-general.html:115
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:131
-#, fuzzy
 msgid "and the municipality that imports the most is "
 msgstr "e o município que mais importa é "
 
