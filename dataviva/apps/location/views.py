@@ -413,7 +413,7 @@ def index(bra_id, tab):
             'name': location_service.name(),
             'gdp': location_service.gdp(),
             'population': location_service.population(),
-            'gdp_per_capita': (location_service.gdp() / location_service.population()) if (location_service.gdp() and location_service.population()) else None,
+            'gdp_per_capita': location_service.gdp_per_capita(),
             'bg_class_image': background_image,
             'year': location_service.year(),
             'gdp_year': location_service.gdp_year(),
@@ -422,8 +422,6 @@ def index(bra_id, tab):
             'population_year': location_service.population_year(),
             'gdp_per_capita_year': location_service.gdp_per_capita_year(),
         }
-
-        print("header", header)
     else:
         header = {
             'name': location_service.name(),
