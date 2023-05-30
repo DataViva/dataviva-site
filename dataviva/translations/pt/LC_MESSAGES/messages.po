@@ -494,6 +494,18 @@ msgstr "Baixar arquivo"
 msgid "Download File"
 msgstr "Baixar arquivo"
 
+#: dataviva/apps/scholar/templates/index.html:4
+msgid "Studies"
+msgstr "Estudos"
+
+
+#: dataviva/apps/scholar/templates/show.html:5
+msgid "Publish a Study"
+msgstr "Publique um Estudo"
+
+
+
+
 
 #: dataviva/apps/admin/templates/admin/index.html:54
 #: dataviva/apps/search/templates/search/admin.html:5
