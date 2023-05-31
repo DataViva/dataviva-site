@@ -44,29 +44,20 @@ body {
   color: #676a6c;
   font-size: 14px;
 }
-body .burgundy{
-  color: #2D3A4E !important;
-}
-body .hover-bg-burgundy:hover { 
-  background-color: #2D3A4E !important; 
-  color: #FFF !important;
+
+.buttons-home{
+  padding: 12px;
+  color:#2D3A4E;
+  transition: ease-in-out 0.2s;
 }
 
-body .hover-bg-burgundy:focus { 
-  background-color: #2D3A4E !important; 
-  color: #FFF !important;
+.buttons-home:hover{
+  background-color:#2D3A4E;
+  color:#FFF;
 }
 
-body .t-bg-green{
-  margin-top:0px !important;
-  background-color: #2D3A4E !important;
-  font-weight: 600;
-}
 /*BODY END*/
 
-/* .bg-green {
-  background-color: #9EDDBF;
-} */
 .bg-greeny {
   background-color: #f3f6f3;
 }
