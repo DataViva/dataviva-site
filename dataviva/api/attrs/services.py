@@ -77,12 +77,12 @@ class Location:
             
             self.attrs_query_gdp = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
                     Ybs.bra_id.like(like_cond),
-                    func.length(Ybs.bra_id) == 9,
+                    func.length(Ybs.bra_id) == len(bra_id),
                     Ybs.stat_id == 'gdp');
 
             self.attrs_query_pop = db.session.query(func.sum(Ybs.stat_val).label("stat_val")).filter(
                     Ybs.bra_id.like(like_cond),
-                    func.length(Ybs.bra_id) == 9,
+                    func.length(Ybs.bra_id) == len(bra_id),
                     Ybs.stat_id == 'pop');
         else:
             self.max_year_query = db.session.query(
@@ -287,10 +287,16 @@ class LocationGdpRankings(Location):
     def __init__(self, bra_id, stat_id):
         Location.__init__(self, bra_id)
         self.stat_id = stat_id
+
+        max_year = db.session.query(func.max(Ybs.year)) \
+            .filter(Ybs.stat_id == self.stat_id) \
+            .filter(func.length(Ybs.bra_id) == len(self.bra_id)) \
+            .filter(Ybs.bra_id.like(self.bra_id[:3] + '%')).first()[0]
+        
         self.attrs_query = Ybs.query.filter(
             Ybs.stat_id == self.stat_id,
             Ybs.bra_id.like(self.bra_id[:3] + '%'),
-            Ybs.year == self.max_year_query,
+            Ybs.year == max_year,
             func.length(Ybs.bra_id) == len(self.bra_id))
 
     def gdp_rank(self):
@@ -302,9 +308,14 @@ class LocationGdpPerCapitaRankings(Location):
 
     def __init__(self, bra_id):
         Location.__init__(self, bra_id)
+
+        max_year = db.session.query(func.max(Ybs.year)) \
+            .filter(Ybs.stat_id == 'gdp_pc') \
+            .filter(func.length(Ybs.bra_id) == len(self.bra_id)).first()[0]
+        
         self.attrs_query = Ybs.query.filter(
             Ybs.stat_id == 'gdp_pc',
-            Ybs.year == self.max_year_query,
+            Ybs.year == max_year,
             func.length(Ybs.bra_id) == len(self.bra_id))
 
     def gdp_pc_rank(self):
