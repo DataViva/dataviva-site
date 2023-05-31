@@ -2270,14 +2270,6 @@ msgstr "de habitantes e PIB per Capita de R$ "
 msgid "Located in the "
 msgstr "Localizado na Mesorregião "
 
-#: dataviva/apps/location/templates/location/tab-general.html:27
-msgid "mesoregion, it is the"
-msgstr "é o "
-
-#: dataviva/apps/location/templates/location/tab-general.html:28
-msgid "city in the state by GDP"
-msgstr "município do estado em PIB"
-
 #: dataviva/apps/location/templates/location/tab-general.html:39
 msgid "It comprehends "
 msgstr "Compreende um total de "

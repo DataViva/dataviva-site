@@ -23,9 +23,9 @@
               {% trans %} With {% endtrans %}{{ profile.area | max_digits(3) }} {{ (profile.area | magnitude).lower() }}
               {% trans %}km² of area, it has a population of {% endtrans %}{{ header.population|max_digits(3) }} {{ (header.population|magnitude).lower() }}
               {% trans %}people and a per-capita GDP of {% endtrans %}{{ header.gdp_per_capita|max_digits(3) }} {{ (header.gdp_per_capita|magnitude).lower() }}.
-              {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }},
-              {% trans %}mesoregion, it is the{% endtrans %} {% if  profile.gdp_rank  == 1 and g.locale == "en" %} top {%else%}  {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}{% endif %}
-              {% trans %}city in the state by GDP{% endtrans %}.</p>
+              {% trans %}Located in the {% endtrans %}{{ profile.mesoregion_name }}{% if  profile.gdp_rank != None and g.locale == "en" %} mesoregion, it is the {%elif profile.gdp_rank != None%}, é o {%else%} {%endif%} {% if  profile.gdp_rank  == 1 and g.locale == "en" %} top {%elif profile.gdp_rank != None%}  {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}{% endif %} {% if  profile.gdp_rank != None and g.locale == "en" %}city in the state by GDP.{%elif profile.gdp_rank != None%}município do estado em PIB.{%endif%}
+              <!-- {% trans %}mesoregion, it is the{% endtrans %} {% if  profile.gdp_rank  == 1 and g.locale == "en" %} top {%elif profile.gdp_rank != None%}  {{ profile.gdp_rank }}{{ profile.gdp_rank | ordinal }}{% endif %} -->
+              <!-- {% trans %}city in the state by GDP{% endtrans %}.</p> -->
           {% elif profile.bra_id|length == 7 %}
               <p>
               {% if g.locale == "pt" %}
