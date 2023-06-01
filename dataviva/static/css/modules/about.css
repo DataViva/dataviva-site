@@ -95,7 +95,7 @@ p {
 }
 
 
-@media (max-width: 481px) {
+@media (max-width: 530px) {
     .brito{
         font-size: 12px !important;
         text-align: center;

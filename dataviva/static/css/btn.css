@@ -11,7 +11,7 @@
   color: #FFFFFF;
 }
 .btn-success.btn-outline {
-  color: #5A9DC4;
+  color: #424e60;
 }
 .btn-info.btn-outline {
   color: #23C6C8;
@@ -97,8 +97,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success:active:hover,
 .btn-success.active:hover,
 .btn-success.active:focus {
-  background-color: #1A7BB9;
-  border-color: #1A7BB9;
+  background-color: #424e60;
+  border-color: #424e60;
   color: #FFFFFF;
 }
 .btn-success:active,
