@@ -3168,6 +3168,10 @@ msgstr "em cinco anos."
 msgid "Trade Partner"
 msgstr "Parceiro Comercial"
 
+#: dataviva/apps/scholar/templates/scholar/_base.html:27
+msgid "Themes"
+msgstr "Temas"
+
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:12
 msgid "Basic Course ID"
 msgstr "Cursos Básicos"

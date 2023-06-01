@@ -24,7 +24,7 @@
                         {% endif %}
                     </div>
                 {% endif %}
-                <h3>Temas</h3>
+                <h3>{%trans%}Themes{%endtrans%}</h3>
                 <ul class="sub-menu">
                     <li><a href="{{ url_for('scholar.index') }}" title="Todos" class="{{ 'active' if not request.args.get('keyword') }}">{% trans %}All{% endtrans %}</a></li>
                     {% for keyword in keywords %}
