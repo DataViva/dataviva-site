@@ -2762,12 +2762,12 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:131
 msgid "and the municipality that imports the most is "
-msgstr ""
+msgstr "e o município que mais importa é"
 
 #: dataviva/apps/product/templates/product/tab-general.html:43
 #: dataviva/apps/product/templates/product/tab-general.html:62
 msgid " in imports in the state of"
-msgstr ""
+msgstr "nas importações do estado de"
 
 #: dataviva/apps/product/templates/product/tab-general.html:44
 #: dataviva/apps/product/templates/product/tab-general.html:63
@@ -2777,7 +2777,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:127
 #: dataviva/translations/dictionary.py:536
 msgid " and number"
-msgstr ""
+msgstr " e número"
 
 #: dataviva/apps/product/templates/product/tab-general.html:45
 #: dataviva/apps/product/templates/product/tab-general.html:64
@@ -2786,7 +2786,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:128
 msgid " in exports. In "
-msgstr ""
+msgstr " nas exportações. Em "
 
 #: dataviva/apps/product/templates/product/tab-general.html:47
 #: dataviva/apps/product/templates/product/tab-general.html:65
@@ -2796,7 +2796,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:131
 #: dataviva/translations/dictionary.py:531
 msgid "in five years. The municipality in "
-msgstr ""
+msgstr "em cinco anos. O município em "
 
 #: dataviva/apps/product/templates/product/tab-general.html:49
 #: dataviva/apps/product/templates/product/tab-general.html:67
@@ -2805,7 +2805,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:131
 msgid ". The municipality in "
-msgstr ""
+msgstr ". O município em "
 
 #: dataviva/apps/product/templates/product/tab-general.html:52
 #: dataviva/apps/product/templates/product/tab-general.html:69
@@ -2814,12 +2814,12 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:131
 msgid " which exports more"
-msgstr ""
+msgstr " que exporta mais"
 
 #: dataviva/apps/product/templates/product/tab-general.html:82
 #: dataviva/apps/product/templates/product/tab-general.html:99
 msgid " in imports in the mesoregion of"
-msgstr ""
+msgstr " nas importações da mesorregião do"
 
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:126
@@ -2830,20 +2830,20 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:139
 #: dataviva/apps/product/templates/product/tab-general.html:148
 msgid " in exports in this municipality. In "
-msgstr ""
+msgstr " nas importações da microrregião de"
 
 #: dataviva/apps/product/templates/product/tab-general.html:140
 #: dataviva/apps/product/templates/product/tab-general.html:148
 #: dataviva/translations/dictionary.py:535
 msgid "in five years."
-msgstr ""
+msgstr "em cinco anos."
 
 #: dataviva/apps/rankings/templates/rankings/_base.html:53
 #: dataviva/apps/rankings/templates/rankings/trade-partner.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:6
 #: dataviva/templates/site.html:63 dataviva/translations/dictionary.py:363
 msgid "Trade Partner"
-msgstr ""
+msgstr "Parceiro Comercial"
 
 #: dataviva/apps/rankings/templates/rankings/basic-course.html:12
 msgid "Basic Course ID"

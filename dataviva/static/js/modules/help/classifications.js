@@ -93,7 +93,7 @@ window.showLocations = function() {
                 buttons.append($("<button>"+bra_5+"</button>").attr("id", 'location-wages-mesoregions').addClass("btn btn-white"));
                 buttons.append($("<button>"+bra_7+"</button>").attr("id", 'location-wages-microregions').addClass("btn btn-white"));
                 buttons.append($("<button>"+bra_9+"</button>").attr("id", 'location-wages-municipalities').addClass("btn btn-white"));
-                buttons.append($("<button>"+health_region+"</button>").attr("id", 'location-wages-health-region').addClass("btn btn-white"));
+                // buttons.append($("<button>"+health_region+"</button>").attr("id", 'location-wages-health-region').addClass("btn btn-white"));
 
                 $('.classifications-locations-content .classifications-locations-control').append(buttons);
 
@@ -131,11 +131,11 @@ window.showLocations = function() {
                     $(this).addClass('active').siblings().removeClass('active');
                 });
 
-                $('#location-wages-health-region').click(function() {
-                    loadingLocations.show();
-                    locations.table.ajax.url("/attrs/health_region/?lang=" + lang).load(loadingLocations.hide);
-                    $(this).addClass('active').siblings().removeClass('active');
-                });
+                // $('#location-wages-health-region').click(function() {
+                //     loadingLocations.show();
+                //     locations.table.ajax.url("/attrs/health_region/?lang=" + lang).load(loadingLocations.hide);
+                //     $(this).addClass('active').siblings().removeClass('active');
+                // });
 
                 $('.classifications-locations .classifications-locations-wrapper .classifications-locations-content').show();
                 loadingLocations.hide();
