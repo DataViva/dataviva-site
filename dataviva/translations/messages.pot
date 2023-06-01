@@ -584,7 +584,7 @@ msgstr ""
 #: dataviva/apps/basic_course/templates/basic_course/index.html:15
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:4
 msgid "The highest number of enrollments in the "
-msgstr ""
+msgstr "O maior número de matrículas para o curso/campo de "
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:15
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:5
@@ -2434,10 +2434,8 @@ msgid "professionals, being number "
 msgstr ""
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:7
-msgid ""
-"in the Brazilian occupation ranking. The Brazilian city that employs the "
-"most in this occupation is "
-msgstr ""
+msgid "in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is "
+msgstr "lugar no ranking de ocupações no Brasil. O município brasileiro que mais emprega nessa ocupação é "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:8
 msgid "and the "
@@ -2762,7 +2760,7 @@ msgstr ""
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:131
 msgid "and the municipality that imports the most is "
-msgstr ""
+msgstr " e o município que mais importa é "
 
 #: dataviva/apps/product/templates/product/tab-general.html:43
 #: dataviva/apps/product/templates/product/tab-general.html:62
