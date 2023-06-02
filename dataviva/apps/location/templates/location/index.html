@@ -70,13 +70,8 @@
                 <a href="{{ url_for('general.home') }}">Home</a>
             </li>
             <li {{ 'class="active"' if not location else '' }}>
-                <a title="Trocar">
-                    <optionChanger
-                        class="selector-modifier"
-                        data-db="location"
-                        data-text="{{ location.name() }}">
-                        {{ location.name() }}
-                    </optionChanger>
+                <a title="Trocar" onclick="select_attr('bra');">            
+                    {{ location.name()}}  
                 </a>
             </li>
         </ol>
@@ -110,12 +105,9 @@
                 {{ location.name() }} - {{ location.abbreviation }}
             {% endif %}
                 <small class="btn btn-link btn-xs">
-                    <optionChanger
-                       class="selector-modifier"
-                       data-db="location"
-                       data-text="{% trans %}change{% endtrans %}">
+                    <a title="change" onclick="select_attr('bra');">
                     {% trans %}change{% endtrans %}
-                    </optionChanger>
+                    </a>
                 </small>
             </h1>
 
