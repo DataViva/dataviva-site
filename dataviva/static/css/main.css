@@ -1285,7 +1285,8 @@ table.data-blue thead th small {
 }
 
 .blue-box.title {
-  font-size: 18px;
+  font-size: 16px;
+  font-weight:bold;
   line-height: 18px;
   vertical-align: middle;
   margin-top: 15px;

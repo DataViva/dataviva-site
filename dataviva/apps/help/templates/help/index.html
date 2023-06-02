@@ -8,7 +8,7 @@
     <div class="row bg-white">
         <ol class="breadcrumb">
             <li><a href="{{ url_for('general.home') }}">Home</a></li>
-            <li class="active">Central de Ajuda</li>
+            <li class="active">{%trans%}Help Central{%endtrans%}</li>
         </ol>
     </div>
 </div>
@@ -20,7 +20,7 @@
             <ul>
                 <li>
                     <a href="" aria-controls="geral" id="help-center">
-                        <strong>Central de Ajuda</strong>
+                        <strong>{%trans%}Help Central{%endtrans%}</strong>
                     </a>
                 </li>
                 {% for subject in subjects %}

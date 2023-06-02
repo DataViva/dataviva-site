@@ -1,8 +1,8 @@
 {% extends "scholar/_base.html" %}
 
 {% block breadcrumb %}
-    <li><a href="{{ url_for('scholar.index') }}"><span>Estudos</span></a></li>
-    <li class="active"><span>Publique um estudo<span></li>
+    <li><a href="{{ url_for('scholar.index') }}"><span>{% trans %}Studies{% endtrans %}</span></a></li>
+    <li class="active"><span>{% trans %}Publish a Study{% endtrans %}<span></li>
 {% endblock %}
 
 {% block scholar_content %}
@@ -19,12 +19,10 @@
     {% endwith %}
     </div>
     
-    <h2>Estudos sobre o DataViva</h2>
-    <h3>Bem vindo a área de estudos do DataViva.</h3>
-    <p>Aqui você encontra publicações acadêmicas e estudos que envolvem o DataViva</p>
-    <div class="tit-stripe">
-        Publicações mais recentes
-    </div>
+    <h2>{% trans %}Studies on DataViva{%endtrans%}</h2>
+    <h3>{% trans %}Welcome to DataViva's study area.{%endtrans%}</h3>
+    <p>{% trans %}Here you will find academic publications and studies involving DataViva{%endtrans%}</p>
+    <div class="tit-stripe">{% trans %}Most Recent Publications{%endtrans%}</div>
     <div class="article-list">
         {% for article in articles %}
         <div class="item">
@@ -32,9 +30,9 @@
                 <a href="{{url_for('scholar.show', id=article.id)}}" title="{{ article.title }}">{{ article.title }}</a>
             </h4>
             <p>
-                Autor(es): {{ article.authors_str() }}<br />
-                Palavras-Chave: {{ article.keywords_str() }}<br />
-                Data de Publicação: {{ article.date_str() }}
+                {% trans %}Author(s):{%endtrans%} {{ article.authors_str() }}<br />
+                {% trans %}Keywords:{%endtrans%} {{ article.keywords_str() }}<br />
+                {% trans %}Publication Date:{%endtrans%} {{ article.date_str() }}
             </p>
         </div>
         {% endfor %}
