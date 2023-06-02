@@ -129,97 +129,105 @@
     <div class="container mt3 buttons-container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1 " onclick="select_attr('bra');">
+                <a class="no-underline h4 pt1 " onclick="select_attr('bra');" data-toggle="popover" data-placement="top" 
+                data-content= "{% trans %}General profile by region, state, mesoregion microregion or city, including international trade, economic activity, employment and education data. Examples: Southeast Region, Mato Grosso, Recife, Metropolitan Area of Porto Alegre.{% endtrans %}" >
                     <div class="tc buttons-home">
                         <div class="f1 mb2" >
                             <i class="dv-bra"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Brazilian Locations</p>
+                            <p class="f3 capitalize">{% trans %}Brazilian Locations{% endtrans %}</p>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1" onclick="select_attr('cbo');">
+                <a class="no-underline h4 pt1" onclick="select_attr('cbo');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Regions with high employment rates by professional activity, related courses, average wage and job statistics per year. Examples: technicians, industry workers, receptionists and clinicians.{% endtrans %}">
                     <div class="tc buttons-home">
                         <div class="f1 mb2">
                             <i class="dv-occupation"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Occupations</p>
+                            <p class="f3 capitalize">{% trans %}Occupations{% endtrans %}</p>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1" onclick="select_attr('cnae');">
+                <a class="no-underline h4 pt1" onclick="select_attr('cnae');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Information on employment rate by region, average wage by occupation, average monthly income and economic opportunities. Examples: education, restaurants, religious organizations.{% endtrans %}">
                     <div class="tc buttons-home">
                         <div class="f1 mb2">
                             <i class="dv-industry"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Economic Activities</p>
+                            <p class="f3 capitalize">{% trans %}Economic Activities{% endtrans %}</p>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1" onclick="select_attr('hs');">
+                <a class="no-underline h4 pt1" onclick="select_attr('hs');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Trade balance data by product, sending and receiving countries, ranking by location, economic activities and related occupations. Examples: food, art and antiques iron ore, coffee, auto parts.{% endtrans %}">
                     <div class="tc buttons-home">
                         <div class="f1 mb2">
                             <i class="dv-product"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Products</p>
+                            <p class="f3 capitalize">{% trans %}Products{% endtrans %}</p>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1" onclick="select_attr('wld');">
+                <a class="no-underline h4 pt1" onclick="select_attr('wld');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Brazil’s top import and export partners, trade data by type of product or supplier city. Examples: Asia, Europe, Iran, USA.{% endtrans %}">
                     <div class="tc buttons-home">
                         <div class="f1 mb2">
                             <i class="dv-trade-partner"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Trade Partners</p>
+                            <p class="f3 capitalize">{% trans %}Trade Partners{% endtrans %}</p>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1" onclick="select_attr('university');">
+                <a class="no-underline h4 pt1" onclick="select_attr('university');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Number of enrollments in each offered course, student status and similar university profiles. Examples: USP, UFMG, PUC Goiás.{% endtrans %}">
                     <div class="tc buttons-home">
                         <div class="f1 mb2">
                             <i class="dv-university"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Universities</p>
+                            <p class="f3 capitalize">{% trans %}Universities{% endtrans %}</p>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1" onclick="select_attr('course_hedu');">
+                <a class="no-underline h4 pt1" onclick="select_attr('course_hedu');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}List of universities and cities that offer post-seconday courses or the selected field of study. Examples: education, health sciences law, production engineering, physiotherapy.{% endtrans %}">
                     <div class="tc buttons-home">
                         <div class="f1 mb2">
                             <i class="dv-major"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Higher Education</p>
+                            <p class="f3 capitalize">{% trans %}Higher Education{% endtrans %}</p>
                         </div>
                     </div>
                 </a>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 mb1">
-                <a class="no-underline h4 pt1" onclick="select_attr('course_sc');">
+                <a class="no-underline h4 pt1" onclick="select_attr('course_sc');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Brazilian schools that provide technical education and enrollment ranking by city. Examples: elementary school, high school, nursing technician, agriculture and technician.{% endtrans %}">
                     <div class="tc buttons-home">
                         <div class="f1 mb2">
                             <i class="dv-basic-course"></i>
                         </div>
                         <div>
-                            <p class="f3 capitalize">Basic Courses</p>
+                            <p class="f3 capitalize">{% trans %}Basic Courses{% endtrans %}</p>
                         </div>
                     </div>
                 </a>

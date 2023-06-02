@@ -5299,6 +5299,78 @@ msgstr "Explore os nossos relatórios analíticos"
 
 
 
+#: dataviva/templates/general/index.html:133
+msgid "General profile by region, state, mesoregion microregion or city, including international trade, economic activity, employment and education data. Examples: Southeast Region, Mato Grosso, Recife, Metropolitan Area of Porto Alegre."
+msgstr "Perfil geral por região, estado,mesoregião, microrregião ou município,incluindo dados sobre comércio exterior,atividade econômica,empregos e educação.Exemplos: Região Sudeste, Mato Grosso,Recife, Região Metropolitana de Porto Alegre "
+
+#: dataviva/templates/general/index.html:146
+msgid "Regions with high employment rates by professional activity, related courses, average wage and job statistics per year. Examples: technicians, industry workers, receptionists and clinicians."
+msgstr "Regiões que mais empregam por atividade profissional, cursos relacionados, salário médio e estatísticas de emprego por ano. Exemplos: técnicos de nível médio, trabalhadores da indústria, recepcionistas, clínicos."
+
+#: dataviva/templates/general/index.html:159
+msgid "Information on employment rate by region, average wage by occupation, average monthly income and economic opportunities. Examples: education, restaurants, religious organizations."
+msgstr "Informações sobre taxa de emprego por região, salário médio por tipo de ocupação, renda mensal média e oportunidades econômicas. Exemplos: educação, restaurantes, religious organizations."
+
+#: dataviva/templates/general/index.html:172
+msgid "Trade balance data by product, sending and receiving countries, ranking by location, economic activities and related occupations. Examples: food, art and antiques iron ore, coffee, auto parts."
+msgstr "Dados da balança comercial por produto, origem das importações e destino das exportações, ranking por localidade, atividades econômicas e ocupações relacionadas. Exemplos: alimentos, artes e antiguidades, minério de ferro, café, peças para veículos."
+
+#: dataviva/templates/general/index.html:185
+msgid "Brazil’s top import and export partners, trade data by type of product or supplier city. Examples: Asia, Europe, Iran, USA."
+msgstr "Principais parceiros comericais do Brasil, dados de comercialização por tipo de produto ou município comercializador. Exemplos: Ásia, Europa, Irã, EUA."
+
+#: dataviva/templates/general/index.html:198
+msgid "Number of enrollments in each offered course, student status and similar university profiles. Examples: USP, UFMG, PUC Goiás."
+msgstr "Número de matrículas em cada curso ofertado, situação dos estudantes, perfis semelhantes de universidades; Exemplos: USP, UFMG, PUC Goiás."
+
+#: dataviva/templates/general/index.html:211
+msgid "List of universities and cities that offer post-seconday courses or the selected field of study. Examples: education, health sciences law, production engineering, physiotherapy."
+msgstr "Lista de universidades e municípios que ofertam cursos de educação superior ou campo de estudo selecionado. Exemplos: educação, ciências da saúde direito, engenharia de produção, fisioterapia."
+
+#: dataviva/templates/general/index.html:224
+msgid "Brazilian schools that provide technical education and enrollment ranking by city. Examples: elementary school, high school, nursing technician, agriculture and technician."
+msgstr "Escolas brasileiras que oferecem educação profissionalizante e ranking de matrículas por município. Exemplos: ensino fundamental, ensino médio, técnico em enfermagem, técnico em agropecuária."
+
+
+#: dataviva/templates/general/index.html:139
+msgid "Brazilian Locations"
+msgstr "Localidades Brasileiras"
+
+#: dataviva/templates/general/index.html:152
+msgid "Occupations"
+msgstr "Ocupações"
+
+#: dataviva/templates/general/index.html:165
+msgid "Economic Activities"
+msgstr "Atividades Econômicas"
+
+#: dataviva/templates/general/index.html:178
+msgid "Products"
+msgstr "Produtos"
+
+#: dataviva/templates/general/index.html:191
+msgid "Trade Partners"
+msgstr "Parceiros Comerciais"
+
+#: dataviva/templates/general/index.html:204
+msgid "Universities"
+msgstr "Universidades"
+
+#: dataviva/templates/general/index.html:217
+msgid "Higher Education"
+msgstr "Ensino Superior"
+
+#: dataviva/templates/general/index.html:230
+msgid "Basic Courses"
+msgstr "Curso Básico"
+
+
+
+
+
+
+
+
 
 #: dataviva/templates/general/index.html:54
 #: dataviva/translations/dictionary.py:580
