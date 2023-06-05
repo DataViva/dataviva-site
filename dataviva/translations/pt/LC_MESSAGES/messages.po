@@ -829,7 +829,6 @@ msgstr "Matrículas"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:15
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:4
-#, fuzzy
 msgid "The highest number of enrollments in the "
 msgstr "O maior número de matrículas para o curso/campo de "
 
@@ -2467,14 +2466,6 @@ msgstr "de habitantes e PIB per Capita de R$ "
 msgid "Located in the "
 msgstr "Localizado na Mesorregião "
 
-#: dataviva/apps/location/templates/location/tab-general.html:27
-msgid "mesoregion, it is the"
-msgstr "é o "
-
-#: dataviva/apps/location/templates/location/tab-general.html:28
-msgid "city in the state by GDP"
-msgstr "município do estado em PIB"
-
 #: dataviva/apps/location/templates/location/tab-general.html:39
 msgid "It comprehends "
 msgstr "Compreende um total de "
@@ -2729,13 +2720,8 @@ msgid "professionals, being number "
 msgstr "profissionais, ocupando o "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:7
-#, fuzzy
-msgid ""
-"in the Brazilian occupation ranking. The Brazilian city that employs the "
-"most in this occupation is "
-msgstr ""
-"lugar no ranking de ocupações no Brasil. O município brasileiro que mais "
-"emprega nessa ocupação é "
+msgid "in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is "
+msgstr "lugar no ranking de ocupações no Brasil. O município brasileiro que mais emprega nessa ocupação é "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:8
 msgid "and the "
@@ -3083,7 +3069,7 @@ msgstr "é"
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:131
 msgid "and the municipality that imports the most is "
-msgstr "e o município que mais importa é "
+msgstr " e o município que mais importa é "
 
 #: dataviva/apps/product/templates/product/tab-general.html:43
 #: dataviva/apps/product/templates/product/tab-general.html:62
@@ -3534,12 +3520,8 @@ msgid " in the import origins of Brazil and number "
 msgstr " em importações para o Brasil e a posiçāo de número "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:16
-msgid ""
-" in the export destinations of Brazil by trade value. The most exported "
-"product from Brazil to this continent is "
-msgstr ""
-"  em exportações realizadas pelo Brasil. O produto mais exportado do "
-"Brasil para esse continente é "
+msgid " in the export destinations of Brazil by trade value. The most exported product from Brazil to this continent is "
+msgstr " em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse continente é "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:21
 msgid " in the import origins of Brazil and "
@@ -3554,13 +3536,8 @@ msgid "number "
 msgstr "posiçāo de número "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
-#, fuzzy
-msgid ""
-" in the export destinations of Brazil by trade value. The most exported "
-"product from Brazil to this country is "
-msgstr ""
-"  em exportações realizadas pelo Brasil. O produto mais exportado do "
-"Brasil para esse país é "
+msgid " in the export destinations of Brazil by trade value. The most exported product from Brazil to this country is "
+msgstr " em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é "
 
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:6
 #: dataviva/templates/selectors/basic_course.html:9

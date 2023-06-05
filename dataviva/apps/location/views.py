@@ -260,8 +260,9 @@ def all(tab):
         'population': location_service_brazil.population(),
         'gdp_per_capita': location_service_brazil.gdp_per_capita(),
         'eci': 0.151,
-        'year_yb': location_service_brazil.year_yb(),
-        'year_ybs': location_service_brazil.year_ybs()
+        'year_pop': location_service_brazil.year_pop(),
+        'year_gdp': location_service_brazil.year_gdp(),
+        'year_per_capita': location_service_brazil.max_coincident_year
     }
 
     body = {
@@ -412,9 +413,14 @@ def index(bra_id, tab):
             'name': location_service.name(),
             'gdp': location_service.gdp(),
             'population': location_service.population(),
-            'gdp_per_capita': location_service.gdp() / location_service.population(),
+            'gdp_per_capita': location_service.gdp_per_capita(),
             'bg_class_image': background_image,
-            'year': location_service.year()
+            'year': location_service.year(),
+            'gdp_year': location_service.gdp_year(),
+            'hdi_year': location_service.hdi_year(),
+            'life_expectation_year': location_service.life_expectation_year(),
+            'population_year': location_service.population_year(),
+            'gdp_per_capita_year': location_service.gdp_per_capita_year(),
         }
     else:
         header = {
@@ -425,7 +431,12 @@ def index(bra_id, tab):
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
             'bg_class_image': background_image,
-            'year': location_service.year()
+            'year': location_service.year(),
+            'gdp_year': location_service.gdp_year(),
+            'hdi_year': location_service.hdi_year(),
+            'life_expectation_year': location_service.life_expectation_year(),
+            'population_year': location_service.population_year(),
+            'gdp_per_capita_year': location_service.gdp_per_capita_year(),
         }
 
     if eci is not None:
