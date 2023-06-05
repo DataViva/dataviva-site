@@ -145,7 +145,7 @@ def getSecexLatestYear():
     return latestSecexYear
 
 def getRaisLatestYear():
-    latestRaisYear = "2020"
+    latestRaisYear = "2021"
 
     response = requests.get(g.api_url + "years/rais")
 
