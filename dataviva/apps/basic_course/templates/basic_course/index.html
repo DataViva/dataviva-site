@@ -30,12 +30,7 @@
             </li>
             <li {{ 'class="active"' if not location else '' }}>
                 <a href="#" title="Trocar"">
-                  <optionChanger
-                      data-db="basic_course"
-                      data-filter="{{id_ibge}}"
-                      data-text="{{ basic_course.name() }}">
-                      {{ basic_course.name() }}
-                  </optionChanger>
+                  {{ basic_course.name() }}
                 </a>
             </li>
             {% if location %}
@@ -83,13 +78,8 @@
               </button>
                 <ul class="dropdown-menu">
                   <li onclick="event.stopPropagation();">
-                    <a onclick="click_on_children(event)">
-                      <optionChanger
-                        data-db="basic_course"
-                        data-filter="{{id_ibge}}"
-                        data-text="{% trans %}Basic Course{% endtrans %}">
-                        {% trans %}Basic Course{% endtrans %}
-                      </optionChanger>
+                    <a onclick="select_attr('course_sc');">
+                      {% trans %}Basic Course{% endtrans %}
                     </a>
                   </li>
                   <li onclick="event.stopPropagation();">
