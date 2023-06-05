@@ -82,7 +82,7 @@ export const databases = {
     orderLabels: ["message.name", "message.jobs"],
     extraInfo: {
       label: "message.jobs",
-      endpoint: "rais/occupation_family/?value=employee&year=2020&order=occupation_family",
+      endpoint: "rais/occupation_family/?value=employee&year=2021&order=occupation_family",
       id: "occupation_family",
       dataValue: "jobs",
     },
@@ -106,7 +106,7 @@ export const databases = {
     },
     source: {
       database: "RAIS",
-      year: "2020",
+      year: "2021",
     },
   },
   industry: {
@@ -119,7 +119,7 @@ export const databases = {
     orderLabels: ["message.name", "message.jobs"],
     extraInfo: {
       label: "message.jobs",
-      endpoint: "rais/industry_class/?value=employee&year=2020&order=industry_class",
+      endpoint: "rais/industry_class/?value=employee&year=2021&order=industry_class",
       id: "industry_class",
       dataValue: "jobs",
     },
@@ -155,7 +155,7 @@ export const databases = {
     },
     source: {
       database: "RAIS",
-      year: "2020",
+      year: "2021",
     },
   },
   product: {
