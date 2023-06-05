@@ -26,12 +26,7 @@
             </li>
             <li {{ 'class="active"' if not location else '' }}>
                 <a href="#" title="Trocar">
-                  <optionChanger
-                    data-db="hedu_course"
-                    data-filter="{{id_ibge}}"
-                    data-text="{{ major.name() }}">
-                    {{ major.name() }}
-                  </optionChanger>
+                  {{ major.name() }}
                 </a>
             </li>
             {% if location %}
@@ -75,18 +70,12 @@
                   {% endif %}
                 {% endif %}
                 <div class="btn-group">
-                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    trocar <span class="caret"></span>
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{%trans%}change{%endtrans%}<span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu">
                     <li onclick="event.stopPropagation();">
-                      <a onclick="click_on_children(event)">
-                        <optionChanger
-                          data-db="hedu_course"
-                          data-filter="{{id_ibge}}"
-                          data-text="{% trans %}Major{% endtrans %}">
-                          {% trans %}Major{% endtrans %}
-                        </optionChanger>
+                      <a onclick="select_attr('course_hedu');">
+                        {% trans %}Major{% endtrans %}
                       </a>
                     </li>
                     <li onclick="event.stopPropagation();">
