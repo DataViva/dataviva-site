@@ -61,42 +61,6 @@
 	<div class="summary-box">
 		<div class="container">
 
-<<<<<<< HEAD
-            <span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
-            <h1>
-                {{ major.name() }} 
-                {% if not location.id %}
-                {% trans %}in Brazil{% endtrans %}
-                {% else %}
-                {% if location.id | length <= 3 %}
-                    {{location.preposition('em')}} {{location.name()}}
-                  {% else %}
-                    {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}
-                  {% endif %}
-                {% endif %}
-                <div class="btn-group">
-                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{%trans%}change{%endtrans%}<span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li onclick="event.stopPropagation();">
-                      <a onclick="select_attr('course_hedu');">
-                        {% trans %}Major{% endtrans %}
-                      </a>
-                    </li>
-                    <li onclick="event.stopPropagation();">
-                      <a onclick="click_on_children(event)">
-                        <optionChanger
-                          data-db="location"
-                          data-text="{% trans %}Location{% endtrans %}">
-                          {% trans %}Location{% endtrans %}
-                        </optionChanger>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-            </h1>
-            <span class="clearfix"></span>
-=======
 			<span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
 			<h1>
 				{{ major.name() }}
@@ -130,7 +94,6 @@
 			</div>
 			</h1>
 		<span class="clearfix"></span>
->>>>>>> f27404d2200d439aefb5cd6accc9fcdb8292f0a6
 
 		<div class="indices">
 			<div class="row">
