@@ -19,13 +19,8 @@
                     <li>
                         <span class="link" title="{% trans %}Locations{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="location"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Locations{% endtrans %}">
+                                <a onclick="select_attr('bra');">
                                     {% trans %}Locations{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>
@@ -33,13 +28,8 @@
                     <li>
                         <span class="link" title="{% trans %}Occupations{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="occupation"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Occupations{% endtrans %}">
+                                <a onclick="select_attr('cbo');">
                                     {% trans %}Occupations{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>
@@ -47,13 +37,8 @@
                     <li>
                         <span class="link" title="{% trans %}Economic Activities{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="industry"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Economic Activities{% endtrans %}">
+                                <a onclick="select_attr('cnae');">
                                     {% trans %}Economic Activities{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>
@@ -61,13 +46,8 @@
                     <li>
                         <span class="link" title="{% trans %}Products{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="product"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Products{% endtrans %}">
+                                <a onclick="select_attr('hs');">
                                     {% trans %}Products{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>
@@ -75,13 +55,8 @@
                     <li>
                         <span class="link" title="{% trans %}Trade Partners{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="trade_partner"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Trade Partners{% endtrans %}">
+                                <a onclick="select_attr('wld');">
                                     {% trans %}Trade Partners{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>
@@ -89,13 +64,8 @@
                     <li>
                         <span class="link" title="{% trans %}Universities{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="university"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Universities{% endtrans %}">
+                                <a onclick="select_attr('university');">
                                     {% trans %}Universities{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>
@@ -103,13 +73,8 @@
                     <li>
                         <span class="link" title="{% trans %}Higher Education{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="hedu_course"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Higher Education{% endtrans %}">
+                                <a onclick="select_attr('course_hedu');">
                                     {% trans %}Higher Education{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>
@@ -117,13 +82,8 @@
                     <li>
                         <span class="link" title="{% trans %}Basic Courses{% endtrans %}">
                             <li onclick="event.stopPropagation();">
-                                <a onclick="click_on_children(event)">
-                                    <optionChanger
-                                    data-db="basic_course"
-                                    data-filter="{{id_ibge}}"
-                                    data-text="{% trans %}Basic Courses{% endtrans %}">
+                                <a onclick="select_attr('course_sc');">
                                     {% trans %}Basic Courses{% endtrans %}
-                                    </optionChanger>
                                 </a>
                             </li>
                         </span>

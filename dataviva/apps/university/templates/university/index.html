@@ -26,11 +26,7 @@
             </li>
             <li {{ 'class="active"' if not location else '' }}>
                 <a href="#" title="Trocar">
-                  <optionChanger
-                    data-db="university"
-                    data-text="{{ university.name() }}">
-                    {{ university.name() }}
-                  </optionChanger>
+                  {{ university.name() }}
                 </a>
             </li>
         </ol>
@@ -54,12 +50,10 @@
         <h1>
           {{ university.name() }}
           <small class="btn btn-link btn-xs">
-            <optionChanger
-              data-db="university"
-              data-filter="{{id_ibge}}"
-              data-text="{% trans %}change{% endtrans %}">
+            <a title="change" onclick="select_attr('university');">
               {% trans %}change{% endtrans %}
-            </optionChanger>
+            </a>
+
           </small>
         </h1>
 

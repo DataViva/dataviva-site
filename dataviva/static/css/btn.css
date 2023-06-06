@@ -289,6 +289,7 @@ fieldset[disabled] .btn-danger.active {
 }
 .btn-link {
   color: #2d3a4e ;
+  text-decoration: none;
 }
 .btn-link:hover,
 .btn-link:focus,
