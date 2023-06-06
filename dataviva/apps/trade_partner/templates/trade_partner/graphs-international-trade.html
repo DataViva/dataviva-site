@@ -1,22 +1,21 @@
 <div id="graphs-international-trade" class="container">
-    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3" >
+    <nav class="nav-graph col-xs-12 col-sm-3 col-md-3">
         <h3>{%trans%}Preview{%endtrans%}:</h3>
         <div class="list-group panel">
             <h4>{% trans %}Trade Balance{% endtrans %}</h4>
-            <a href="#trade-balance-partner" class="list-group-item" data-toggle="collapse" data-parent="#trade-balance-partner">{% trans %}Trade Partner{% endtrans %}</a>
+            <a href="#trade-balance-partner" class="list-group-item" data-toggle="collapse"
+                data-parent="#trade-balance-partner">{% trans %}Trade Partner{% endtrans %}</a>
             <div class="collapse" id="trade-balance-partner">
-<!--                 <a href="/{{ g.locale }}/embed/line/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/balance/?scale=linear&time=year&depth=direction"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'trade-balance-partner-line' or not graph }}" data-parent="#trade-balance-partner">
-                    {% trans %}Line{% endtrans %}
-                </a> -->
                 <a href="/{{ g.locale }}/line/secex/type/value?values=value+kg&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                    target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-trade-balance-partner-line' or not graph}}" data-parent="#new-api-trade-balance-partner">
-                      {% trans %}Line{% endtrans %}
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-trade-balance-partner-line' or not graph}}"
+                    data-parent="#new-api-trade-balance-partner">
+                    {% trans %}Line{% endtrans %}
                 </a>
             </div>
             <h4>{% trans %}Exports By{% endtrans %}</h4>
-            <a href="#exports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#exports-municipality">{% trans %}Product{% endtrans %}</a>
+            <a href="#exports-municipality" class="list-group-item" data-toggle="collapse"
+                data-parent="#exports-municipality">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="exports-municipality">
 <!--                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/hs/?color=color&depth=hs_6&size=export_val"
                    target="graphs-frame-international-trade"
@@ -28,18 +27,16 @@
                    class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-tree_map' }}" data-parent="#new-api-exports-municipality">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/hs/?sort=asc&layout=value&color=color&time=year&y=export_val&order=color"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-municipality-stacked'}}" data-parent="#exports-municipality">
+                <a href="/{{ g.locale }}/stacked/secex/product/value?values=value+kg&group=product_section&depths=product_section+product&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}"
+                    data-parent="#new-api-exports-municipality">
                     {% trans %}Stacked{% endtrans %}
-               </a> -->
-               <a href="/{{ g.locale }}/stacked/secex/product/value?values=value+kg&group=product_section&depths=product_section+product&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-municipality-stacked'}}" data-parent="#new-api-exports-municipality">
-                    {% trans %}Stacked{% endtrans %}
-               </a>
+                </a>
             </div>
             {% if location.id | length != 9 %}
-            <a href="#exports-destination" class="list-group-item" data-toggle="collapse" data-parent="#exports-destination">{% trans %}Municipality{% endtrans %}</a>
+            <a href="#exports-destination" class="list-group-item" data-toggle="collapse"
+                data-parent="#exports-destination">{% trans %}Municipality{% endtrans %}</a>
             <div class="collapse" id="exports-destination">
 <!--                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=color&depth=bra_9&year=2014&controls=true&size=export_val"
                    target="graphs-frame-international-trade"
@@ -51,30 +48,31 @@
                    class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-tree_map'}}" data-parent="#new-api-exports-destination">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?sort=asc&layout=value&color=color&controls=true&time=year&y=export_val&order=color"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-destination-stacked'}}" data-parent="#exports-destination">
+                <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-stacked'}}"
+                    data-parent="#new-api-exports-destination">
                     {% trans %}Stacked{% endtrans %}
-               </a> -->
-               <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=export&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-exports-destination-stacked'}}" data-parent="#new-api-exports-destination">
-                    {% trans %}Stacked{% endtrans %}
-               </a>
-<!--                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=export_val&controls=true"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-destination-geo_map'}}" data-parent="#exports-destination">
-                    {% trans %}Map{% endtrans %}
-                </a> -->
-                <a href="/{{ g.locale }}/map/secex/value/{{ location.id_ibge if location }}?values=value+kg&country={{ '%03d' % (trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id) }}&type=export"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}" data-parent="#exports-destination">
+                </a>
+                {% if trade_partner.id_mdic %}
+                <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&country={{ '%03d' % (trade_partner.id_mdic) }}&type=export"
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}"
+                    data-parent="#exports-destination">
+                {% else %}
+                <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&continent={{ trade_partner.id }}&type=export"
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}"
+                    data-parent="#exports-destination">
+                {% endif %}
                     {% trans %}Map{% endtrans %}
                 </a>
             </div>
             {% endif %}
            
             <h4>{% trans %}Imports By{% endtrans %}</h4>
-            <a href="#imports-municipality" class="list-group-item" data-toggle="collapse" data-parent="#imports-municipality">{% trans %}Product{% endtrans %}</a>
+            <a href="#imports-municipality" class="list-group-item" data-toggle="collapse"
+                data-parent="#imports-municipality">{% trans %}Product{% endtrans %}</a>
             <div class="collapse" id="imports-municipality">
 <!--                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/hs/?color=color&depth=hs_6&size=import_val" 
                    target="graphs-frame-international-trade"
@@ -86,18 +84,16 @@
                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-tree_map' }}" data-parent="#new-api-imports-municipality">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location if location else 'all' }}/all/{{ trade_partner.id}}/hs/?sort=asc&layout=value&color=color&time=year&y=import_val&order=color"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'imports-municipality-stacked'}}" data-parent="#imports-municipality">
-                    {% trans %}Stacked{% endtrans %}
-                </a> -->
                 <a href="/{{ g.locale }}/stacked/secex/product/value?values=value+kg&group=product_section&depths=product_section+product&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-stacked'}}" data-parent="#new-api-imports-municipality">
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-municipality-stacked'}}"
+                    data-parent="#new-api-imports-municipality">
                     {% trans %}Stacked{% endtrans %}
-               </a>
+                </a>
             </div>
             {% if location.id | length != 9 %}
-            <a href="#imports-origin" class="list-group-item" data-toggle="collapse" data-parent="#imports-origin">{% trans %}Municipality{% endtrans %}</a>
+            <a href="#imports-origin" class="list-group-item" data-toggle="collapse"
+                data-parent="#imports-origin">{% trans %}Municipality{% endtrans %}</a>
             <div class="collapse" id="imports-origin">
 <!--                 <a href="/{{ g.locale }}/embed/tree_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=color&depth=bra_9&controls=true&size=import_val"
                    target="graphs-frame-international-trade"
@@ -109,24 +105,23 @@
                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-destination-tree_map'}}" data-parent="#new-api-imports-destination">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?sort=asc&layout=value&color=color&controls=true&time=year&y=import_val&order=color"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'imports-origin-stacked'}}" data-parent="#imports-origin">
+                <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-stacked'}}"
+                    data-parent="#new-api-imports-origin">
                     {% trans %}Stacked{% endtrans %}
-               </a> -->
-               <a href="/{{ g.locale }}/stacked/secex/municipality/value?values=value+kg&group=region&depths=region+state+mesoregion+microregion+municipality&type=import&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
-                   target="graphs-frame-international-trade" class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-stacked'}}" data-parent="#new-api-imports-origin">
-                    {% trans %}Stacked{% endtrans %}
-               </a>
-
-<!--                 <a href="/{{ g.locale }}/embed/geo_map/secex/{{ location.id if location else 'all' }}/all/{{ trade_partner.id }}/bra/?color=import_val&controls=true"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'imports-origin-geo_map'}}" data-parent="#imports-origin">
-                    {% trans %}Map{% endtrans %}
-                </a> -->
-                <a href="/{{ g.locale }}/map/secex/value/{{ location.id_ibge if location }}?values=value+kg&country={{ '%03d' % (trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id) }}&type=import"
-                   target="graphs-frame-international-trade"
-                   class="list-group-item {{'selected' if graph.menu == 'exports-destination-new-map'}}" data-parent="#exports-destination">
+                </a>
+                {% if trade_partner.id_mdic %}
+                <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&country={{ '%03d' % (trade_partner.id_mdic) }}&type=import"
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-map'}}"
+                    data-parent="#new-api-imports-origin">
+                {% else %}
+                <a href="/{{ g.locale }}/map/secex/value/{{ id_ibge if id_ibge }}?values=value+kg&continent={{ trade_partner.id }}&type=import"
+                    target="graphs-frame-international-trade"
+                    class="list-group-item {{'selected' if graph.menu == 'new-api-imports-origin-map'}}"
+                    data-parent="#new-api-imports-origin">
+                {% endif %}
                     {% trans %}Map{% endtrans %}
                 </a>
             </div>
@@ -140,15 +135,9 @@
                         /{{ g.locale }}/line/secex/type/value?values=value+kg&wld={{ trade_partner.id_mdic if trade_partner.id_mdic else trade_partner.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}
                     {% else %}
                         /{{ g.locale }}/{{graph.url}}
-                    {% endif %}"
-                    name="graphs-frame-international-trade"
-                    id="graphs-frame-international-trade"
-                    class="embed-responsive-item" >
+                    {% endif %}" name="graphs-frame-international-trade" id="graphs-frame-international-trade"
+                class="embed-responsive-item">
             </iframe>
         </div>
     </div>
 </div>
-
-
-
-

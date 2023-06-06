@@ -13,12 +13,13 @@
         {% elif tab == 'opportunities' %}
             {% trans %}Economic Opportunities{% endtrans %}
         {% endif %}"/>
-    <meta property="og:description" content="{% trans %}The {% endtrans %}{{occupation.name()}} {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}} ..."/>
     <meta property="og:type" content="website" />
 {% endblock facebook_metadata %}
 
 {% block content %}
 
+<input type="hidden" id="id_ibge" value="{{id_ibge}}">
+<input type="hidden" id="occupation_id" value="{{occupation.id}}">
 <!-- BREADCRUMB -->
 <div class="container">
     <div class="row bg-white">
@@ -188,3 +189,9 @@
 </section>
 
 {% endblock content %}
+
+{% block script %}
+    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+    <script type="text/javascript" src="/static/js/modules/occupation.js"></script>
+{% endblock %}

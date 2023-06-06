@@ -35,6 +35,24 @@ mod = Blueprint('location', __name__,
                 url_prefix='/<lang_code>/location',
                 static_folder='static')
 
+education = [
+    'higher-education-university-tree_map',
+    'new-api-higher-education-university-tree_map',
+    'education-course-tree_map',
+    'new-api-education-course-tree_map',
+    'professional-education-school-tree_map',
+    'new-api-professional-education-school-tree_map',
+    'professional-education-course-tree_map',
+    'new-api-professional-education-course-tree_map',
+    'basic-education-administrative-dependencie-tree_map',
+    'new-api-basic-education-administrative-dependencie-tree_map',
+    'basic-education-level-tree_map',
+    'new-api-basic-education-level-tree_map',
+    'basic-education-municipality-tree_map',
+    'new-api-basic-education-municipality-tree_map',
+    'basic-education-municipality-tree_map',
+]
+
 tabs = {
         'general': [],
         'opportunities': [
@@ -83,23 +101,8 @@ tabs = {
             'new-api-imports-origin-stacked',
         ],
 
-        'education': [
-            'higher-education-university-tree_map',
-            'new-api-higher-education-university-tree_map',
-            'education-course-tree_map',
-            'new-api-education-course-tree_map',
-            'professional-education-school-tree_map',
-            'new-api-professional-education-school-tree_map',
-            'professional-education-course-tree_map',
-            'new-api-professional-education-course-tree_map',
-            'basic-education-administrative-dependencie-tree_map',
-            'new-api-basic-education-administrative-dependencie-tree_map',
-            'basic-education-level-tree_map',
-            'new-api-basic-education-level-tree_map',
-            'basic-education-municipality-tree_map',
-            'new-api-basic-education-municipality-tree_map',
-            'basic-education-municipality-tree_map',
-        ],
+        'education': education,
+        'basic-education': education,
         'health': [
             'equipments-municipality-map',
             'equipments-municipality-tree_map',
@@ -425,7 +428,8 @@ def index(bra_id, tab):
             'gdp_per_capita': location_service.gdp_per_capita(),
             'hdi': location_service.hdi(),
             'bg_class_image': background_image,
-            'year': location_service.year()
+            'year': location_service.year(),
+            'year_dhs': location_service.year_dhs()
         }
 
     if eci is not None:

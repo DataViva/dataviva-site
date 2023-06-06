@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
-    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %} (2015)</h2>
     {% if not location.id %}
         <p>{% trans %}The {% endtrans %}{{occupation.name()}}
          {% trans %}occupation employs {% endtrans %}{{header.total_employment | max_digits(3)}} {{(header.total_employment | magnitude).lower()}}

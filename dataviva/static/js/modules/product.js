@@ -108,7 +108,7 @@ $(document).ready(function(){
             url: dataviva.api_url + 'secex/' + productDepth + `/country/year/?order=value&year=${latestSecexYear}&direction=desc&limit=1&type=export&` + filter,
             title: dictionary['main_destination'],
             subtitle: dictionary['by_value_exported'],
-            preffix: 'USD ',
+            prefix: 'USD ',
             label: {
                 metadata: true,
                 value: 'country'
@@ -121,7 +121,7 @@ $(document).ready(function(){
             url: dataviva.api_url + 'secex/' + productDepth + `/country/year/?order=value&year=${latestSecexYear}&direction=desc&limit=1&type=import&` + filter,
             title: dictionary['main_origin'],
             subtitle: dictionary['by_value_imported'],
-            preffix: 'USD ',
+            prefix: 'USD ',
             label: {
                 metadata: true,
                 value: 'country'

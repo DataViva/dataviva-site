@@ -623,7 +623,10 @@ export default {
     },
     getQueryString() {
       const { search } = window.location;
-      return search;
+      const decodedURI = decodeURIComponent(search);
+      const removeQueryParams = new RegExp('menu=[^&]*', 'g');
+
+      return decodedURI.replace(removeQueryParams, '');;
     },
     pathWithlocationQuery(item) {
       const path = window.location.pathname;

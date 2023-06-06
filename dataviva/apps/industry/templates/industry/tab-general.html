@@ -1,6 +1,6 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
     
-    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %}</h2>
+    <h2 class="m-t-xl">{% trans %}General Profile{% endtrans %} (2015)</h2>
     {% if not location %}
         <p>{% trans %}The economic activity{% endtrans %} {{industry.preposition('de')}} {{industry.name()}}
         {% trans %}is the{% endtrans %} 
@@ -29,38 +29,8 @@
     {% endif %}
 
     <div class="row">
-        <div class="col-xs-12 col-md-10 col-lg-8">
-            <h3>{% trans %}Wages and Jobs{% endtrans %} ({{ header.year }})</h3>
-            <dl class="dl-horizontal">
-                <dt>{% trans %}Occupation with highest number of jobs{% endtrans %}</dt>
-                <dd>
-                    <small>{{ body.occ_with_more_number_jobs_name }}</small>
-                    <strong class="counter">{{ body.occ_with_more_number_jobs_value | max_digits(3, True) }}</strong> 
-                    <span>{{ body.occ_with_more_number_jobs_value | magnitude }} {% trans %}Jobs{% endtrans %}</span>
-                </dd>
-                {% if location.id|length != 9 %}
-                    <dt>{% trans %}Municipality with highest number of jobs{% endtrans %}</dt>
-                    <dd>    
-                        <small>{{ body.municipality_with_more_num_jobs_name }} - {{body.municipality_with_more_num_jobs_state.upper()}}</small>
-                        <strong class="counter">{{ body.municipality_with_more_num_jobs_value | max_digits(3, True) }}</strong> 
-                        <span>{{ body.municipality_with_more_num_jobs_value | magnitude }} {% trans %}Jobs{% endtrans %}</span>
-                    </dd>
-                {% endif %}
-                <dt>{% trans %}Occupation with highest monthly average income{% endtrans %}</dt>
-                <dd>
-                    <small>{{ body.occ_with_more_wage_avg_name }}</small>
-                    R$ <strong class="counter">{{ body.occ_with_more_wage_avg_value | max_digits(3, True) }}</strong>
-                    <span>{{ body.occ_with_more_wage_avg_value | magnitude }}</span>
-                </dd>
-                {% if location.id|length != 9 %}
-                <dt>{% trans %}Municipality with highest monthly average income{% endtrans %}</dt>
-                <dd>
-                    <small>{{ body.municipality_with_more_wage_avg_name }} - {{ body.municipality_with_more_wage_avg_state }}</small>
-                    R$ <strong class="counter">{{ body.municipality_with_more_wage_avg_value | max_digits(3, True) }}</strong>
-                    <span>{{ body.municipality_with_more_wage_avg_value | magnitude }}</span>
-                </dd>
-                {% endif %}
-            </dl>
+        <div class="col-xs-12 col-md-10 col-lg-8"  id='general-industry'>
+            <h3>{% trans %}Wages and Jobs{% endtrans %} (2017)</h3>
             <a href="#wages" aria-controls="wages" role="tab" data-toggle="tab" class="pull-right btn btn-primary btn-xs m-r-lg" graph
                     data-id="{{ industry.id }}"
                     data-location="{{ location.id }}">

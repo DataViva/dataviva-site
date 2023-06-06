@@ -3,64 +3,6 @@
     <h2>{% trans %}Wages and Jobs{% endtrans %} ({{latestRaisYear}})</h2>
 
     <div class="row">
-
-        {% if not is_municipality %}
-        <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="blue-box title">
-                {% trans %}Main{% endtrans %}
-                <small>{% trans %}Employer Municipality{% endtrans %}</small>
-            </div>
-            <div class="blue-box">
-                <p class="label">{{body.municipality_with_more_jobs}} - {{body.municipality_with_more_jobs_state.upper()}}</p>
-                <div class="number">
-                    <strong class="counter">{{ body.municipality_with_more_jobs_value | max_digits(3, True) }}</strong><span>{{ body.municipality_with_more_jobs_value | magnitude }}</span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="blue-box title">
-                {% trans %}Main{% endtrans %}
-                <small>{% trans %}Employer Activity{% endtrans %}</small>
-            </div>
-            <div class="blue-box">
-                <p class="label">{{ body.activity_with_more_jobs }}</p>
-                <div class="number">
-                    <strong class="counter">{{ body.activity_with_more_jobs_value | max_digits(3, True) }}</strong><span>{{ body.activity_with_more_jobs_value | magnitude }}</span>
-                </div>
-            </div>
-        </div>                         
-         
-        {% if not is_municipality %}
-        <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="blue-box title">
-                    {% trans %}Municipality with Highest{% endtrans %}
-                    <small>{% trans %}Monthly Average Income{% endtrans %}</small>
-            </div>
-            <div class="blue-box">               
-                <p class="label">{{body.municipality_with_biggest_wage_avg}} - {{body.municipality_with_biggest_wage_avg_state.upper()}}</p>
-                <div class="number">
-                    R$ <strong class="counter">{{ body.municipality_with_biggest_wage_avg_value | max_digits(3, True) }}</strong><span>{{ body.municipality_with_biggest_wage_avg_value | magnitude }}</span>
-                </div>
-            </div>
-        </div>
-        {% endif %}
-
-        <div class="col-xs-12 col-sm-6 col-md-3">
-            <div class="blue-box title">
-                {% trans %}Activity with Highest{% endtrans %}
-                <small>{% trans %}Monthly Average Income{% endtrans %}</small>
-            </div>
-            <div class="blue-box">     
-                <p class="label">{{ body.activity_with_biggest_wage_avg }}</p>
-                <div class="number">
-                    R$ <strong class="counter">{{ body.activity_with_biggest_wage_avg_value | max_digits(3, True) }}</strong><span>{{ body.activity_with_biggest_wage_avg_value | magnitude }}</span>
-                </div>
-            </div>
-                           
-        </div>
-
     </div>
 
 </div>

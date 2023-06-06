@@ -3,13 +3,13 @@
     <template v-if="text">
       <span
         class="pointer"
-        @click="showModal = true">
+        @click="openModal()">
         {{ text }}
       </span>
     </template>
 
     <selector
-      v-if="showModal"
+      v-show="showModal"
       :database="database"
       @close="closeModal()"/>
   </span>
@@ -51,6 +51,9 @@ export default {
     }
   },
   methods: {
+    openModal() {
+      this.showModal = true;
+    },
     closeModal() {
       this.showModal = false;
     },

@@ -13,10 +13,6 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-industry-tree_map' or not graph}}" data-parent="#new-api-jobs-industry">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cnae/?sort=asc&layout=value&y=num_jobs&order=color"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-industry-stacked'}}" data-parent="#jobs-industry">
-                    {% trans %}Stacked{% endtrans %}
-               </a> -->
                <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=jobs+wage+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-industry-stacked' }}" data-parent="#new-api-jobs-industry">
                     {% trans %}Stacked{% endtrans %}
@@ -33,10 +29,6 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-occupation-tree_map' }}" data-parent="#new-api-jobs-occupation">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cbo/?sort=asc&layout=value&y=num_jobs&order=color"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-occupation-stacked'}}" data-parent="#jobs-occupation">
-                    {% trans %}Stacked{% endtrans %}
-               </a> -->
                <a href="/{{g.locale}}/stacked/rais/occupation_family/jobs?values=jobs+wage+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-occupation-stacked' }}" data-parent="#new-api-jobs-occupation">
                     {% trans %}Stacked{% endtrans %}
@@ -46,18 +38,11 @@
             {% if not is_municipality %}
               <a href="#jobs-municipality" class="list-group-item" data-toggle="collapse" data-parent="#jobs-municipality">{% trans %}Municipality{% endtrans %}</a>
               <div class="collapse" id="jobs-municipality">
-<!--                   <a href="/{{ g.locale }}/embed/tree_map/rais/{{location.id}}/all/all/bra/?color=color&depth=bra_9&size=num_jobs&controls=true"
-                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-tree_map'}}" data-parent="#jobs-municipality">
-                      TreeMap
                   </a> -->
                   <a href="/{{g.locale}}/tree_map/rais/municipality/jobs?count=establishment&year={{latestRaisYear}}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-tree_map' }}" data-parent="#new-api-jobs-municipality">
                     TreeMap
                   </a>
-<!--                   <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/bra/?sort=asc&layout=value&controls=true&y=num_jobs&order=color"
-                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-stacked'}}" data-parent="#jobs-municipality">
-                      {% trans %}Stacked{% endtrans %}
-                 </a> -->
                  <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=jobs+wage+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-stacked' }}" data-parent="#new-api-jobs-municipality">
                     {% trans %}Stacked{% endtrans %}
@@ -92,10 +77,6 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-industry-tree_map' }}" data-parent="#new-api-wage-industry">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cnae/?sort=asc&layout=value&y=wage&order=color"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wage-industry-stacked'}}" data-parent="#wage-industry">
-                    {% trans %}Stacked{% endtrans %}
-               </a> -->
                <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=wage+jobs+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-industry-stacked' }}" data-parent="#new-api-wage-industry">
                     {% trans %}Stacked{% endtrans %}
@@ -112,10 +93,6 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-occupation-tree_map' }}" data-parent="#new-api-wage-occupation">
                     TreeMap
                 </a>
-<!--                 <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/cbo/?sort=asc&layout=value&y=wage&order=color"
-                   target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wage-occupation-stacked'}}" data-parent="#wage-occupation">
-                    {% trans %}Stacked{% endtrans %}
-               </a> -->
                <a href="/{{g.locale}}/stacked/rais/occupation_family/jobs?values=wage+jobs+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-occupation-stacked' }}" data-parent="#new-api-wage-occupation">
                     {% trans %}Stacked{% endtrans %}
@@ -133,10 +110,6 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-municipality-tree_map' }}" data-parent="#new-api-wages-municipality">
                     TreeMap
                   </a>
-<!--                   <a href="/{{ g.locale }}/embed/stacked/rais/{{location.id}}/all/all/bra/?y=wage&sort=asc&layout=value&order=color&controls=true"
-                     target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-municipality-stacked'}}" data-parent="#wages-municipality">
-                      {% trans %}Stacked{% endtrans %}
-                 </a> -->
                  <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=wage+jobs+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-municipality-stacked' }}" data-parent="#new-api-wages-municipality">
                     {% trans %}Stacked{% endtrans %}

@@ -167,18 +167,26 @@
       {% endif %}
     {% endif %}
 
-    {% if body.university_year is not none %}
-      <div class="dl-box col-xs-12 col-md-6" id="general-education">
-        <h3>{% trans %}Education{% endtrans %} (2016)</h3>
+    
+    <div class="dl-box col-xs-12 col-md-6" id="general-education">
+      <h3>{% trans %}Education{% endtrans %} (2017)</h3>
+
+      {% if body.university_year is not none %}
         <a href="#education"
-                      aria-controls="education"
-                      role="tab"
-                      data-toggle="tab"
-                      graph class="pull-right btn btn-primary btn-xs m-r-lg"">
-            {% trans %}More details{% endtrans %}
+          aria-controls="education"
+          role="tab"
+          data-toggle="tab"
+          graph class="pull-right btn btn-primary btn-xs m-r-lg">
+      {% else %}
+        <a href="#basic-education"
+          aria-controls="basic-education"
+          role="tab"
+          data-toggle="tab"
+          graph class="pull-right btn btn-primary btn-xs m-r-lg">
+      {% endif %}
+          {% trans %}More details{% endtrans %}
         </a>
-      </div>
-    {% endif %}
+    </div>
 
     <div class="dl-box col-xs-12 col-md-6" id="general-health">
     <h3>{% trans %}Health{% endtrans %} (2015)</h3>
@@ -186,7 +194,7 @@
          aria-controls="health"
          role="tab"
          data-toggle="tab"
-         graph class="pull-right btn btn-primary btn-xs m-r-lg"">{% trans %}More details{% endtrans %}
+         graph class="pull-right btn btn-primary btn-xs m-r-lg">{% trans %}More details{% endtrans %}
      </a>
     </div>
   </div>
