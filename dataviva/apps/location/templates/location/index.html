@@ -119,7 +119,7 @@
                     {% if header.gdp %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %} {% if location.id == 'all' %}({{header.year_ybs}}){% else %}({{header.year}}) {% endif %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}GDP{% endtrans %} {% if location.id == 'all' %}({{header.year_gdp}}){% else %}({{header.gdp_year}}) {% endif %}</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.gdp|max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.gdp|magnitude }}</small>
@@ -131,7 +131,7 @@
                     {% if header.life_expectation %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %} ({{header.year_dhs}})</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Life Expectancy{% endtrans %} ({{header.life_expectation_year}})</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.life_expectation|max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{% trans %}Years{% endtrans %}</small>
@@ -143,7 +143,7 @@
                     {% if header.population %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}Total Population{% endtrans %} {% if location.id == 'all' %}({{header.year_yb}}){% else %}({{header.year}}) {% endif %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}Total Population{% endtrans %} {% if location.id == 'all' %}({{header.year_pop}}){% else %}({{header.population_year}}) {% endif %}</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.population|max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.population|magnitude }}</small>
@@ -155,7 +155,7 @@
                     {% if header.gdp_per_capita %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %} {% if location.id == 'all' %}({{header.year_ybs}}){% else %}({{header.year}}) {% endif %}</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}GDP per capita{% endtrans %} {% if location.id == 'all' %}({{header.year_per_capita}}){% else %}({{header.gdp_per_capita_year}}) {% endif %}</h2>
                             <div class="number">
                                 R$ <strong class="counter">{{ header.gdp_per_capita|max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.gdp_per_capita|magnitude }}</small>
@@ -167,7 +167,7 @@
                     {% if header.hdi %}
                     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                         <div class="widget">
-                            <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %} ({{header.year_dhs}})</h2>
+                            <h2 class="text-left text-uppercase">{% trans %}MHDI{% endtrans %} ({{header.hdi_year}})</h2>
                             <div class="number">
                                 <strong class="counter">{{ header.hdi|max_digits(3, True) }}</strong><br/>
                                 <small class="magnitude">{{ header.hdi|magnitude }}</small>

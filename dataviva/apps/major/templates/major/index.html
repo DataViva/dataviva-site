@@ -3,150 +3,143 @@
 
 <!-- Facebook Properties -->
 {% block facebook_metadata %}
-    <meta property="og:image" content="{{ g.s3_host }}/img/major/major_{{ major.id if major.img_link else 'all' }}.jpg"/>
-    <meta property="og:url" content="{{url_for('major.index', course_hedu_id=major.id, tab=tab, _external=True, _scheme='http')}}{% if location.id %}{{ '?bra_id=' }}{{ location.id }}{{ '&menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% elif graph.menu %}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% endif %}"/>
-    <meta property="og:title" content="DataViva: {{ major.name() }}{% if not location.id %} {% trans %}in Brazil{% endtrans %}{% else %}{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}}{% else %} {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}{% endif %}{% endif %} |
+<meta property="og:image" content="{{ g.s3_host }}/img/major/major_{{ major.id if major.img_link else 'all' }}.jpg" />
+<meta property="og:url"
+	content="{{url_for('major.index', course_hedu_id=major.id, tab=tab, _external=True, _scheme='http')}}{% if location.id %}{{ '?bra_id=' }}{{ location.id }}{{ '&menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% elif graph.menu %}{{ '?menu=' if graph.menu }}{{ graph.menu }}{{ '&url=' if graph.url }}{{ graph.url }}{% endif %}" />
+<meta property="og:title" content="DataViva: {{ major.name() }}{% if not location.id %} {% trans %}in Brazil{% endtrans %}{% else %}{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}}{% else %} {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}{% endif %}{% endif %} |
         {% if tab == 'general'%}
             {% trans %}General{% endtrans %}
         {% elif tab == 'enrollments' %}
             {% trans %}Enrollments{% endtrans %}
-        {% endif %}"/>
-    <meta property="og:description" content="{% trans %}The course of{% endtrans %}{{ header.name }} {% trans %}is the {% endtrans %} {{ header.rank }}{{ header.rank | ordinal }} ..."/>
-    <meta property="og:type" content="website" />
+        {% endif %}" />
+<meta property="og:description"
+	content="{% trans %}The course of{% endtrans %}{{ header.name }} {% trans %}is the {% endtrans %} {{ header.rank }}{{ header.rank | ordinal }} ..." />
+<meta property="og:type" content="website" />
 {% endblock facebook_metadata %}
 
 {% block content %}
 <input type="hidden" id="id_ibge" value="{{id_ibge}}">
 <!-- BREADCRUMB -->
 <div class="container">
-    <div class="row bg-white">
-        <ol class="breadcrumb">
-            <li>
-                <a href="{{ url_for('general.home') }}">Home</a>
-            </li>
-            <li {{ 'class="active"' if not location else '' }}>
-                <a href="#" title="Trocar">
-                  {{ major.name() }}
-                </a>
-            </li>
-            {% if location %}
-                <li class="active">
-                    <a href="#" title="Trocar">
-                      <optionChanger
-                        data-db="location"
-                        data-text="{{ location.name() }}">
-                        {{ location.name() }}
-                      </optionChanger>
-                    </a>
-                </li>
-            {% endif %}
-        </ol>
-    </div>
+	<div class="row bg-white">
+		<ol class="breadcrumb">
+			<li>
+				<a href="{{ url_for('general.home') }}">Home</a>
+			</li>
+			<li {{ 'class="active"' if not location else '' }}>
+				<a href="#" title="Trocar">
+					<optionChanger data-db="hedu_course" data-filter="{{id_ibge}}" data-text="{{ major.name() }}">
+						{{ major.name() }}
+					</optionChanger>
+				</a>
+			</li>
+			{% if location %}
+			<li class="active">
+				<a href="#" title="Trocar">
+					<optionChanger data-db="location" data-text="{{ location.name() }}">
+						{{ location.name() }}
+					</optionChanger>
+				</a>
+			</li>
+			{% endif %}
+		</ol>
+	</div>
 </div>
 <!-- BREADCRUMB -->
 
-<section id="header" class="header" style="background: url({{ g.s3_host }}/img/major/major_{{ major.id if major.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
+<section id="header" class="header"
+	style="background: url({{ g.s3_host }}/img/major/major_{{ major.id if major.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
 
-  <div class="photo-credit">
-    <div class="container">
-      <a href="{{ major.img_link if major.img_link else 'https://flic.kr/p/rZHehh' }}" target="blank">
-      <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ major.img_author if major.img_link else 'Rodolphe' }}</a>
-    </div>
-  </div>
+	<div class="photo-credit">
+		<div class="container">
+			<a href="{{ major.img_link if major.img_link else 'https://flic.kr/p/rZHehh' }}" target="blank">
+				<i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ major.img_author if major.img_link
+				else 'Rodolphe' }}</a>
+		</div>
+	</div>
 
-        <div class="summary-box">
-        <div class="container">
+	<div class="summary-box">
+		<div class="container">
 
-            <span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
-            <h1>
-                {{ major.name() }} 
-                {% if not location.id %}
-                {% trans %}in Brazil{% endtrans %}
-                {% else %}
-                {% if location.id | length <= 3 %}
-                    {{location.preposition('em')}} {{location.name()}}
-                  {% else %}
-                    {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}
-                  {% endif %}
-                {% endif %}
-                <div class="btn-group">
-                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{%trans%}change{%endtrans%}<span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li onclick="event.stopPropagation();">
-                      <a onclick="select_attr('course_hedu');">
-                        {% trans %}Major{% endtrans %}
-                      </a>
-                    </li>
-                    <li onclick="event.stopPropagation();">
-                      <a onclick="click_on_children(event)">
-                        <optionChanger
-                          data-db="location"
-                          data-text="{% trans %}Location{% endtrans %}">
-                          {% trans %}Location{% endtrans %}
-                        </optionChanger>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-            </h1>
-            <span class="clearfix"></span>
+			<span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
+			<h1>
+				{{ major.name() }}
+				{% if not location.id %}
+				{% trans %}in Brazil{% endtrans %}
+				{% else %}
+				{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}} {% else %}
+					{{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }} {% endif %} {%
+					endif %} <div class="btn-group">
+					<button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown"
+						aria-haspopup="true" aria-expanded="false">
+						trocar <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li onclick="event.stopPropagation();">
+							<a onclick="click_on_children(event)">
+								<optionChanger data-db="hedu_course" data-filter="{{id_ibge}}"
+									data-text="{% trans %}Major{% endtrans %}">
+									{% trans %}Major{% endtrans %}
+								</optionChanger>
+							</a>
+						</li>
+						<li onclick="event.stopPropagation();">
+							<a onclick="click_on_children(event)">
+								<optionChanger data-db="location" data-text="{% trans %}Location{% endtrans %}">
+									{% trans %}Location{% endtrans %}
+								</optionChanger>
+							</a>
+						</li>
+					</ul>
+			</div>
+			</h1>
+		<span class="clearfix"></span>
 
-            <div class="indices">
-                <div class="row">
-                  </div>
-                </div>
-            </div>
-        </div>
+		<div class="indices">
+			<div class="row">
+			</div>
+		</div>
+	</div>
 </section>
 
 <section id="profile" class="profile">
 
-  <nav class="col-xs-12">
+	<nav class="col-xs-12">
 
-    <div class="container">
-          <ul class="nav-tabs" role="tablist">
-              <li role="presentation" class="{{ 'active' if tab == 'general' }}">
-                  <a href="#general"
-                     aria-controls="general"
-                     role="tab"
-                     data-id="{{ major.id }}"
-                     data-location="{{ location.id }}"
-                     data-toggle="tab">{% trans %}General{% endtrans %}</a>
-              </li>
-              <li role="presentation" class="{{ 'active' if tab == 'enrollments' }}">
-                  <a href="#enrollments"
-                     aria-controls="enrollments"
-                     role="tab"
-                     graph
-                     data-id="{{ major.id }}"
-                     data-location="{{ location.id }}"
-                     data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
-              </li>
-          </ul>
-        </div>
-    </nav>
+		<div class="container">
+			<ul class="nav-tabs" role="tablist">
+				<li role="presentation" class="{{ 'active' if tab == 'general' }}">
+					<a href="#general" aria-controls="general" role="tab" data-id="{{ major.id }}"
+						data-location="{{ location.id }}" data-toggle="tab">{% trans %}General{% endtrans %}</a>
+				</li>
+				<li role="presentation" class="{{ 'active' if tab == 'enrollments' }}">
+					<a href="#enrollments" aria-controls="enrollments" role="tab" graph data-id="{{ major.id }}"
+						data-location="{{ location.id }}" data-toggle="tab">{% trans %}Enrollments{% endtrans %}</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 
-    <div class="container">
-        <div class="tab-content col-xs-12">
-            {% include "major/tab-general.html" %}
-            {% include "major/tab-enrollments.html" %}
-        </div>
-    </div>
+	<div class="container">
+		<div class="tab-content col-xs-12">
+			{% include "major/tab-general.html" %}
+			{% include "major/tab-enrollments.html" %}
+		</div>
+	</div>
 
 </section>
 
 <section id="graphs" class="graphs bg-gray">
-  {% if tab != 'general' %}
-    {% include "major/graphs-" + tab + ".html" %}
-  {% endif %}
+	{% if tab != 'general' %}
+	{% include "major/graphs-" + tab + ".html" %}
+	{% endif %}
 </section>
 {% endblock content %}
 
 
 {% block script %}
-    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
-    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
-    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
-    <script type="text/javascript" src="/static/js/modules/major.js"></script>
+<script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+<script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+<script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+<script type="text/javascript" src="/static/js/modules/major.js"></script>
 {% endblock %}
