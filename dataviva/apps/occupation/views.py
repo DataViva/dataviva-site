@@ -11,6 +11,8 @@ from dataviva.api.attrs.models import Cbo, Bra
 from dataviva import db
 from sqlalchemy import func
 
+import requests
+
 mod = Blueprint('occupation', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/occupation')
@@ -52,6 +54,18 @@ def handle_region_bra_id(bra_id):
         "5": "4"
     }[bra_id]
 
+def getRaisLatestYear():
+    latestRaisYear = "2021"
+
+    response = requests.get(g.api_url + "years/rais")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data["years"]
+        
+        latestRaisYear = localData[len(localData) - 1]
+
+    return latestRaisYear
 
 def location_service(depth, location):
     if depth == 'region':
@@ -76,8 +90,10 @@ def graphs(occupation_id, tab):
     else:
         depth = location_depth(bra_id)
         id_ibge = location_service(depth, location)
+    
+    latestRaisYear = getRaisLatestYear()
 
-    return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location, graph=None, id_ibge=id_ibge)
+    return render_template('occupation/graphs-'+tab+'.html', occupation=occupation, location=location, graph=None, id_ibge=id_ibge, latestRaisYear=latestRaisYear)
 
 @mod.route('/<occupation_id>', defaults={'tab': 'general'})
 @mod.route('/<occupation_id>/<tab>')
@@ -165,7 +181,6 @@ def index(occupation_id, tab):
     header['average_monthly_income'] = occupation_service.average_monthly_income()
     header['total_employment'] = occupation_service.total_employment()
     header['year'] = occupation_service.year()
-    header['age_avg'] = occupation_service.age_avg()
 
     if not is_municipality:
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
@@ -211,4 +226,5 @@ def index(occupation_id, tab):
     if header['total_employment'] == None:
         abort(404)
     else:
-        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)
+        latestRaisYear = getRaisLatestYear()
+        return render_template('occupation/index.html', header=header, body=body, occupation=occupation, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestRaisYear=latestRaisYear)

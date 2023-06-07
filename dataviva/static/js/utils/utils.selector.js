@@ -677,19 +677,19 @@ function Selector() {
         $('#leon_header_select')
           .attr('class','m-l-xs btn btn-primary btn-outline btn-toggle')
           .prepend("<i class='fa fa-check-square-o'></i>")
-          .attr('style', 'background: #fff; color:#905262; border-color:#905262')
+          .attr('style', 'background: #fff; color:#E6673D; border-color:#E6673D')
         
         $('#leon_header_select').mouseover(function(){
-          $(this).attr('style', 'background: #905262; color:#fff; border-color:#905262');
+          $(this).attr('style', 'background: #E6673D; color:#fff; border-color:#E6673D');
         });
         
         $('#leon_header_select').on('click', function(){
           $('.modal .btn-toggle').removeClass('active');
           $(this).toggleClass('active')
-            .attr('style', 'background: #905262; color:#fff ; border-color:#905262');
+            .attr('style', 'background: #E6673D; color:#fff ; border-color:#E6673D');
 
           $('#leon_header_select').mouseout(function(){
-            $(this).attr('style', 'background: #905262; color:#fff; border-color:#905262');
+            $(this).attr('style', 'background: #E6673D; color:#fff; border-color:#E6673D');
           });
 
         });

@@ -170,7 +170,6 @@ $(document).ready(function(){
     Indicator.add({
         url: dataviva.api_url + "hedu/year/?count=enrollments&year=2017&" + filter,
         title: dictionary['number_enrolleds'] + ' (2017)',
-        prefix: 'USD',
         value:  'enrolleds'
     });
 

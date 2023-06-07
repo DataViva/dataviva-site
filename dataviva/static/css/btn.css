@@ -8,10 +8,10 @@
   min-width: 120px;
 }
 .btn-primary.btn-outline {
-  color: #A25A6D;
+  color: #FFFFFF;
 }
 .btn-success.btn-outline {
-  color: #5A9DC4;
+  color: #424e60;
 }
 .btn-info.btn-outline {
   color: #23C6C8;
@@ -30,8 +30,8 @@
   color: #fff;
 }
 .btn-primary {
-  background-color: #A25A6D;
-  border-color: #A25A6D;
+  background-color: #E6673D;
+  border-color: #E6673D;
   color: #FFFFFF;
 }
 .btn-primary.active.focus,
@@ -44,8 +44,8 @@
 .open > .dropdown-toggle.btn-primary:focus,
 .open > .dropdown-toggle.btn-primary:hover {
   color: #fff;
-  background-color: #905262;
-  border-color: #824A58;
+  background-color: #cf5d37;
+  border-color: #e97650;
 }
 .btn-primary:hover,
 .btn-primary:focus,
@@ -56,8 +56,8 @@
 .btn-primary:active:hover,
 .btn-primary.active:hover,
 .btn-primary.active:focus {
-  background-color: #905262;
-  border-color: #905262;
+  background-color: #e97650;
+  border-color: #e97650;
   color: #FFFFFF;
 }
 .btn-primary:active,
@@ -80,12 +80,12 @@ fieldset[disabled] .btn-primary:hover,
 fieldset[disabled] .btn-primary:focus,
 fieldset[disabled] .btn-primary:active,
 fieldset[disabled] .btn-primary.active {
-  background-color: #A25A6D;
-  border-color: #A25A6D;
+  background-color: #E6673D;
+  border-color: #E6673D;
 }
 .btn-success {
-  background-color: #5A9DC4;
-  border-color: #5A9DC4;
+  background-color: #2D3A4E;
+  border-color: #2D3A4E;
   color: #FFFFFF;
 }
 .btn-success:hover,
@@ -97,8 +97,8 @@ fieldset[disabled] .btn-primary.active {
 .btn-success:active:hover,
 .btn-success.active:hover,
 .btn-success.active:focus {
-  background-color: #1A7BB9;
-  border-color: #1A7BB9;
+  background-color: #424e60;
+  border-color: #424e60;
   color: #FFFFFF;
 }
 .btn-success:active,
@@ -288,14 +288,15 @@ fieldset[disabled] .btn-danger.active {
   border-color: #ef6776;
 }
 .btn-link {
-  color: #337AB7;
+  color: #2d3a4e ;
+  text-decoration: none;
 }
 .btn-link:hover,
 .btn-link:focus,
 .btn-link:active,
 .btn-link.active,
 .open .dropdown-toggle.btn-link {
-  color: #23527C;
+  color:  #293446 ;
   text-decoration: none;
 }
 .btn-link:active,
@@ -381,7 +382,7 @@ fieldset[disabled] .btn-white.active {
   box-shadow: none;
 }
 .btn-outline {
-  background-color: transparent;
+  background-color: #E6673D;
   transition: all .5s;
 }
 .btn-rounded {
@@ -468,6 +469,35 @@ button.dim:active:before {
   font-size: 12px;
   line-height: 1.428571429;
 }
+.circle-br {
+  width: 80px;
+  height: 80px;
+  padding: 6px 0;
+  border-radius: 44px;
+  text-align: center;
+  font-size: 48px;
+  line-height: 1.5;
+  color: #2D3A4E;
+}
+
+.circle-br:hover {
+  
+  color: #2D3A4E;
+}
+
+@media (max-width:768px){
+  .circle-br {
+    width: 50px;
+    height: 50px;
+    padding: 6px 0;
+    border-radius: 25px;
+    text-align: center;
+    font-size: 25px;
+    line-height: 1.2;
+    color: #2D3A4E;
+  }
+}
+
 .btn-circle.btn-lg {
   width: 50px;
   height: 50px;
@@ -486,8 +516,8 @@ button.dim:active:before {
 }
 .checkbox-primary input[type="checkbox"]:checked + label::before,
 .checkbox-primary input[type="radio"]:checked + label::before {
-  background-color: #A25A6D;
-  border-color: #A25A6D;
+  background-color: #E6673D;
+  border-color: #E6673D;
 }
 .checkbox-primary input[type="checkbox"]:checked + label::after,
 .checkbox-primary input[type="radio"]:checked + label::after {
@@ -532,8 +562,8 @@ button.dim:active:before {
 
 
 .sweet-alert .confirm {
-  background-color: #A25A6D !important;
-  border-color: #A25A6D !important;
+  background-color: #E6673D !important;
+  border-color: #E6673D !important;
   color: #FFFFFF !important;
 }
 
@@ -544,8 +574,8 @@ button.dim:active:before {
 .sweet-alert .confirm:active:focus,
 .sweet-alert .confirm:active:hover {
   color: #fff !important;
-  background-color: #905262 !important;
-  border-color: #824A58 !important;
+  background-color: #2d3a4e !important;
+  border-color: #2d3a4e !important;
 }
 
 .sweet-alert .confirm:hover,
@@ -556,7 +586,7 @@ button.dim:active:before {
 .sweet-alert .confirm:active:hover,
 .sweet-alert .confirm.active:hover,
 .sweet-alert .confirm.active:focus {
-  background-color: #905262 !important;
-  border-color: #905262 !important;
+  background-color: #2d3a4e !important;
+  border-color: #2d3a4e !important;
   color: #FFFFFF !important;
 }

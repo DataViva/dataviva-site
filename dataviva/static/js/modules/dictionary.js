@@ -261,6 +261,154 @@ dictionary['total_of_professionals'] = lang == 'en' ? 'Total of Professionals' :
 dictionary['total_value_exported'] = lang == 'en' ? 'Total Value Exported' : 'Total de Exportações';
 dictionary['total_value_imported'] = lang == 'en' ? 'Total Value Imported' : 'Total de Importações';
 dictionary['trade_balance'] = lang == 'en' ? 'Trade Balance' : 'Balança Comercial';
+dictionary['average_price_exported'] = lang == 'en' ? 'Average Price Exported' : 'Preço Médio Exportado';
+dictionary['average_price_imported'] = lang == 'en' ? 'Average Price Imported' : 'Preço Médio Importado';
+dictionary['product_highest_balance'] = lang == 'en' ? 'Product with Highest Trade Balance Surplus' : 'Produto com Maior Saldo da Balança Comercial';
+dictionary['product_lowest_balance'] = lang == 'en' ? 'Product with Lowest Trade Balance Surplus' : 'Produto com Menor Saldo da Balança Comercial';
+dictionary['product_highest'] = lang == 'en' ? 'Product with Highest' : 'Produto com Maior';
+dictionary['product_lowest'] = lang == 'en' ? 'Product with Lowest' : 'Produto com Menor';
+dictionary['main_destination_exported'] = lang == 'en' ? 'Main Destination by Total Value Exported' : 'Principal Destino por Valor Total Exportado';
+dictionary['main_origin_imported'] = lang == 'en' ? 'Main Origin by Total Value Imported' : 'Principal Origem por Valor Total Importado';
+dictionary['average_monthly_income'] = lang == 'en' ? 'Average Monthly Income' : 'Renda Média Mensal';
+dictionary['payroll']  = lang == 'en' ? 'Payroll' : 'Massa Salarial';
+dictionary['total_employment'] = lang == 'en' ? 'Total Employment' : 'Total de Empregos';
+dictionary['total_establishments'] = lang == 'en' ? 'Total of Establishments' : 'Total de Estabelecimentos';
+dictionary['main_municipality_jobs'] = lang == 'en' ? 'Main Municipality by Jobs' : 'Principal Município por Empregos';
+dictionary['main_activity_jobs'] = lang == 'en' ? 'Main employer activity' : 'Principal Atividade por Empregos';
+dictionary['municipality_highest_average_income'] = lang == 'en' ? 'Municipality with highest monthly average income' : 'Município com maior renda média mensal';
+dictionary['activity_highest_average_income'] = lang == 'en' ? 'Activity with highest monthly average income' : 'Atividade com maior renda média mensal';
+dictionary['university_higher_enrollments'] = lang == 'en' ? 'University with Highest Number of Enrollments' : 'Universidade com Maior Número de Matrículas';
+dictionary['course_higher_enrollments'] = lang == 'en' ? 'Major with Highest Number of Enrollments' : 'Curso Superior com Maior Número de Matrículas';
+dictionary['sc_course_higher_enrollments'] = lang == 'en' ? 'Basic Course with Highest Number of Enrollments' : 'Curso Básico com Maior Número de Matrículas';
+dictionary['school_higher_enrollments'] = lang == 'en' ? 'School with Highest Number of Enrollments' : 'Escola com Maior Número de Matrículas';
+dictionary['sc_school']  = lang == 'en' ? 'School' : 'Escola';
+dictionary['main_product_export'] = lang == 'en' ? 'Main Product by Total Value Exported' : 'Principal Produto por Valor Total Exportado';
+dictionary['main_product_import'] = lang == 'en' ? 'Main Product by Total Value Imported' : 'Principal Produto por Valor Total Importado';
+dictionary['total_export'] = lang == 'en' ? 'Total of Exports' : 'Total de Exportações';
+dictionary['total_import'] = lang == 'en' ? 'Total of Imports' : 'Total de Importações';
+dictionary['main_product'] = lang == 'en' ? 'Main Product' : 'Principal Produto';
+dictionary['by_export'] = lang == 'en' ? 'by Export Value' : 'por Valor Exportado';
+dictionary['by_import'] = lang == 'en' ? 'by Import Value' : 'por Valor Importado';
+dictionary['main_destination'] = lang == 'en' ? 'Main Destination' : 'Principal Destino';
+dictionary['main_origin'] = lang == 'en' ? 'Main Origin' : 'Principal Origem';
+dictionary['university'] = lang == 'en' ? 'University' : 'Universidade';
+dictionary['major'] = lang == 'en' ? 'Major' : 'Ensino Superior';
+dictionary['school']  = lang == 'en' ? 'School' : 'Escola';
+dictionary['basic_course']  = lang == 'en' ? 'Basic Course' : 'Curso Básico';
+dictionary['highest_enrolleds'] = lang == 'en' ? 'with Highest Number of Enrollments' : 'com Maior Número de Matrículas';
+dictionary['municipality_highest'] = lang == 'en' ? 'Municipality with highest' : 'Município com Maior';
+dictionary['average_income'] = lang == 'en' ? 'Monthly Average Income' : 'Renda Média Mensal';
+dictionary['main'] = lang == 'en' ? 'Main' : 'Principal';
+dictionary['activity_jobs'] = lang == 'en' ? 'Employer activity' : 'Atividade por Empregos';
+dictionary['activity_highest'] = lang == 'en' ? 'Activity with highest' : 'Atividade com maior';
+dictionary['main_economic_activity'] = lang == 'en' ? 'Main Economic Activity' : 'Principal atividade econômica';
+dictionary['avg_wage'] = lang == 'en' ? 'Average Wage' : 'Renda Média';
+dictionary['period'] = lang == 'en' ? 'Period' : 'Período';
+
+// CNES
+dictionary['health_region'] = lang == 'en' ? 'Health region' : 'Região de Saúde';
+dictionary['plural_health_region'] = lang == 'en' ? 'Health regions' : 'Regiões de Saúde';
+dictionary['unit_type'] = lang == 'en' ? 'Unit Type' : 'Tipo de Unidade';
+dictionary['plural_unit_type'] = lang == 'en' ? 'Unit Types' : 'Tipos de Unidade';
+
+// CNES BEDS
+dictionary['bed_type'] = lang == 'en' ? 'Bed Type' : 'Tipo de Leito';
+dictionary['plural_bed_type'] = lang == 'en' ? 'Bed Types' : 'Tipos de Leito';
+dictionary['number_existing_bed'] = lang == 'en' ? 'Number of Existing Beds' : 'Quantidade de Leitos Existentes';
+dictionary['bed_type_per_specialty'] = lang == 'en' ? 'Bed Specialty' : 'Especialidade de Leito';
+dictionary['plural_bed_type_per_specialty'] = lang == 'en' ? 'Bed Specialties' : 'Especialidades de Leito';
+dictionary['cnes_bed'] = lang == 'en' ? 'Datasus' : 'Datasus';
+dictionary['beds'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
+dictionary['number_sus_bed'] = lang == 'en' ? 'SUS Beds' : 'Leitos SUS';
+dictionary['number_non_sus_bed'] = lang == 'en' ? 'Non SUS Beds' : 'Leitos não SUS';
+dictionary['number_existing_contract'] = lang == 'en' ? 'Existing Contracts Number' : 'Quantidade de Contratos Existentes';
+dictionary['beds_per_sus_availability'] = lang == 'en' ? 'Total Beds' : 'Total de Leitos';
+
+// CNES PROFESSIONALS
+dictionary['sus_healthcare_professional'] = lang == 'en' ? 'SUS Professionals' : 'Profissionais do SUS';
+dictionary['professional_link'] = lang == 'en' ? 'Link' : 'Vinculação';
+dictionary['cnes_professional'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['professionals'] = lang == 'en' ? 'Total Professionals' : 'Total de Profissionais';
+dictionary['other_hours_worked'] = lang == 'en' ? 'Other Hours Worked' : 'Outras Horas Trabalhadas';
+dictionary['hospital_hour'] = lang == 'en' ? 'Hospital Hours' : 'Horas Hospitalares';
+dictionary['ambulatory_hour'] = lang == 'en' ? 'Ambulary Hours' : 'Horas Ambulatoriais';
+
+// CNES ESTABLISHMENTS
+dictionary['sus_bond'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
+dictionary['provider_type'] = lang == 'en' ? 'Provider Type' : 'Tipo de Prestador';
+dictionary['ambulatory_care_facility'] = lang == 'en' ? 'Ambulatory Care Facilities' : 'Instalações Físicas de Atendimento Ambulatorial';
+dictionary['administrative_sphere'] = lang == 'en' ? 'Administrative Sphere' : 'Esfera Administrativa';
+dictionary['tax_withholding'] = lang == 'en' ? 'Withholding Tax' : 'Retenção Tributária';
+dictionary['emergency_facility'] = lang == 'en' ? 'Emergency Facilities' : 'Instalações Físicas de Urgência e Emergência';
+dictionary['neonatal_unit_facility'] = lang == 'en' ? 'Neonatal Unit Facilities' : 'Instalações de Unidade Neonatal';
+dictionary['obstetrical_center_facility'] = lang == 'en' ? 'Obstetrical Center Facilities' : 'Instalação Fisica de Centro Obstétrico ';
+dictionary['surgery_center_facility'] = lang == 'en' ? 'Surgery Center Facilities' : 'Instalação Fisica de Centro Cirúrgico';
+dictionary['selective_waste_collection'] = lang == 'en' ? 'Selective Waste Collection' : 'Coleta seletiva de rejeitos';
+dictionary['hospital_attention'] = lang == 'en' ? 'Hospital Attention' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Ambulatory Attention' : 'Nível de Atenção Ambulatorial';
+dictionary['hierarchy_level'] = lang == 'en' ? 'Hierarchy Level' : 'Nível de Hierarquia';
+dictionary['cnes_establishment'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['hospital_attention'] = lang == 'en' ? 'Level Of Hospital Care' : 'Nível de Atenção Hospitalar';
+dictionary['ambulatory_attention'] = lang == 'en' ? 'Level Of Ambulatory Care' : 'Nível de Atenção Ambulatorial';
+dictionary['ambulatory_care_facilities'] = lang == 'en' ? 'Physical Facilities Of Outpatient Care' : 'Instalações Físicas de Atendimento Ambulatorial';
+dictionary['hospital_care'] = lang == 'en' ? 'Hospital Care' : 'Atendimento Hospitalar';
+dictionary['ambulatory'] = lang == 'en' ? 'Ambulatory' : 'Ambulatorial';
+dictionary['hospital'] = lang == 'en' ? 'Hospital' : 'Hospitalar';
+dictionary['none'] = lang == 'en' ? 'None' : 'Nenhum';
+dictionary['ambulatory/hospital'] = lang == 'en' ? 'Ambulatory/Hospital' : 'Ambulatorial/Hospitalar';
+dictionary['attention_level'] = lang == 'en' ? 'Attention Level' : 'Nível de atenção';
+
+// CNES EQUIPMENTS
+dictionary['equipment_type'] = lang == 'en' ? 'Equipment Type' : 'Tipo de Equipamento';
+dictionary['equipment_code'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
+dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
+dictionary['equipment_quantity'] = lang == 'en' ? 'Equipment Quantity' : 'Quantidade Existente';
+dictionary['equipment_quantity_in_use'] = lang == 'en' ? 'Equipment Quantity in Use' : 'Quantidade Existente em Uso';
+dictionary['cnes_equipment'] = lang == 'en' ? 'datasus' : 'datasus';
+dictionary['sus_availability_indicator'] = lang == 'en' ? 'SUS Availability' : 'Disponibilidade para o SUS';
+
+dictionary['time-resolution'] =  lang == 'en' ? 'Time Resolution' : 'Resolução temporal';
+dictionary['Order'] =  lang == 'en' ? 'Order' : 'Ordem';
+dictionary['sort'] =  lang == 'en' ? 'Sort' : 'Ordenar';
+dictionary['market-share'] =  lang == 'en' ? 'Market Share' : 'Participação de Mercado';
+dictionary['y-axis'] = lang == 'en' ? 'Y Axis' : 'Eixo Y';
+dictionary['desc'] = lang == 'en' ? 'Descending' : 'Descendente';
+dictionary['asc'] = lang == 'en' ? 'Ascending' : 'Ascendente';
+dictionary['value'] = lang == 'en' ? 'Value' : 'Valor';
+dictionary['name'] = lang == 'en' ? 'Name' : 'Nome';
+dictionary['unknown-region'] = lang == 'en' ? 'Unknown Region' : 'Região Desconhecida';
+
+
+// WIDGETS.JS
+dictionary['total_of_establishments'] = lang == 'en' ? 'Total of Establishments' : 'Total de Estabelecimentos';
+dictionary['municipality_with_highest_number_of_establishments'] = lang == 'en' ? 'Municipality with the highest number of Establishments' : 'Município com maior numero de Estabelecimentos';
+dictionary['establishments'] = lang == 'en' ? 'establishments' : 'estabelecimentos';
+
+dictionary['total_of_professionals'] = lang == 'en' ? 'Total of Professionals' : 'Total de Profissionais';
+dictionary['municipality_with_highest_number_of_professionals'] = lang == 'en' ? 'Municipality with the highest number of Professionals' : 'Município com maior numero de Profissionais';
+dictionary['professionals'] = lang == 'en' ? 'professionals' : 'profissionais';
+
+dictionary['total_of_beds'] = lang == 'en' ? 'Total of beds' : 'Total de Leitos';
+dictionary['municipality_with_highest_number_of_beds'] = lang == 'en' ? 'Municipality with the highest number of Beds' : 'Município com maior numero de Leitos';
+dictionary['beds'] = lang == 'en' ? 'beds' : 'Leitos';
+
+dictionary['total_of_equipments'] = lang == 'en' ? 'Total of equipments' : 'Total de Equipamentos';
+dictionary['municipality_with_highest_number_of_equipments'] = lang == 'en' ? 'Municipality With the Highest Number of Equipments' : 'Município com Maior Número de Equipamentos';
+dictionary['equipments'] = lang == 'en' ? 'Equipments' : 'Equipamentos';
+
+dictionary['number_establishments'] = lang == 'en' ? 'Number of Establishments' : 'Numero de Estabelecimentos';
+dictionary['number_beds'] = lang == 'en' ? 'Number of Beds' : 'Número de Leitos';
+dictionary['number_professionals'] = lang == 'en' ? 'Number of Professionals' : 'Número de Profissionais';
+dictionary['number_equipments'] = lang == 'en' ? 'Number of Equipments' : 'Número de Equipamentos';
+
+dictionary['main_equipment_type'] = lang == 'en' ? 'Main Equipment Type' : 'Principal Tipo Equipamento';
+
+dictionary['main_occupation'] = lang == 'en' ? 'Main Occupation' : 'Principal Ocupação';
+dictionary['by_jobs'] = lang == 'en' ? 'by jobs' : 'por empregos';
+
+dictionary['main_bed_type'] = lang == 'en' ? 'Main Bed Type' : 'Principal Tipo Leito';
+dictionary['by_quantity'] = lang == 'en' ? 'by quantity' : 'por quantidade';
+
 dictionary['trade_kg'] = lang == 'en' ? 'Trade Weight (Kg)' : 'Peso Total Comercializado (Kg)';
 dictionary['trade_value'] = lang == 'en' ? 'Trade Value (USD)' : 'Valor do Comércio (USD)';
 dictionary['trillion'] = lang == 'en' ? 'Trillion' : 'Trilhão';

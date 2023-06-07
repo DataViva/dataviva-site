@@ -5,7 +5,7 @@ from dataviva.api.rais.services import Industry, IndustryOccupation, IndustryMun
 from dataviva.api.attrs.models import Cnae, Bra
 from os import walk
 import os
-
+import requests
 
 mod = Blueprint('industry', __name__,
                 template_folder='templates',
@@ -26,6 +26,19 @@ def pull_lang_code(endpoint, values):
 def add_language_code(endpoint, values):
     values.setdefault('lang_code', get_locale())
 
+
+def getRaisLatestYear():
+    latestRaisYear = "2021"
+
+    response = requests.get(g.api_url + "years/rais")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data["years"]
+        
+        latestRaisYear = localData[len(localData) - 1]
+
+    return latestRaisYear
 
 def location_depth(bra_id):
     locations = {
@@ -72,8 +85,9 @@ def graphs(industry_id, tab):
     else:
         depth = location_depth(bra_id)
         id_ibge = location_service(depth, location)
-
-    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location, graph=None, id_ibge=id_ibge)
+        
+    latestRaisYear = getRaisLatestYear()
+    return render_template('industry/graphs-'+tab+'.html', industry=industry, location=location, graph=None, id_ibge=id_ibge, latestRaisYear=latestRaisYear)
 
 
 @mod.route('/<cnae_id>', defaults={'tab': 'general'})
@@ -134,7 +148,12 @@ def index(cnae_id, tab):
         body['municipality_with_more_num_jobs_state'] = industry_municipality_service.municipality_with_more_jobs_state()
 
     body['occ_with_more_number_jobs_name'] = industry_occupation_service.occupation_with_more_jobs()
-    header['num_establishments'] = industry_service.num_establishments()
+    body['occ_with_more_number_jobs_value'] = industry_occupation_service.highest_number_of_jobs()
+
+    header['average_monthly_income'] = industry_service.average_monthly_income()
+    header['salary_mass'] = industry_service.salary_mass()
+    header['num_jobs'] = industry_service.num_jobs()
+    #header['name_bra'] = industry_service.name()
 
     # Get rankings vars, code should be refactored
     from dataviva import db
@@ -159,10 +178,10 @@ def index(cnae_id, tab):
             header['ranking'] = index + 1
             break
 
-    industry_service_num_establishments = Industry(cnae_id=industry.id)
-    header['num_establishments_brazil'] = industry_service_num_establishments.num_establishments()
     header['year'] = industry_service.get_year()
 
+    rais_max_year = db.session.query(func.max(Yi.year)).first()[0]
+    
     tabs = {
         'general': [],
 
@@ -202,4 +221,7 @@ def index(cnae_id, tab):
     if menu and menu not in tabs[tab]:
         abort(404)
 
-    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph, id_ibge=id_ibge)
+    if header['num_jobs'] is None or rais_max_year != header['year']:
+        abort(404)
+    latestRaisYear = getRaisLatestYear()
+    return render_template('industry/index.html', header=header, body=body, industry=industry, location=location, tab=tab, graph=graph, id_ibge=id_ibge, latestRaisYear=latestRaisYear)

@@ -59,9 +59,6 @@ class Industry:
     def num_jobs(self):
         return self.__rais__().num_jobs
 
-    def num_establishments(self):
-        return self.__rais__().num_est
-
     def highest_number_of_jobs(self):
         try:
             rais = self.__rais_sorted_by_num_jobs__()[0]
@@ -150,13 +147,6 @@ class Occupation:
     def total_employment(self):
         total_employment = self.__rais__().num_jobs
         return total_employment
-
-    def total_establishments(self):
-        total_establishments = self.__rais__().num_est
-        return total_establishments
-
-    def age_avg(self):
-        return self.__rais__().age_avg
 
     def __rais_list__(self):
         if not self._rais:

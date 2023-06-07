@@ -82,7 +82,7 @@ export const databases = {
     orderLabels: ["message.name", "message.jobs"],
     extraInfo: {
       label: "message.jobs",
-      endpoint: "rais/occupation_family/?value=employee&year=2017&order=occupation_family",
+      endpoint: "rais/occupation_family/?value=employee&year=2021&order=occupation_family",
       id: "occupation_family",
       dataValue: "jobs",
     },
@@ -106,7 +106,7 @@ export const databases = {
     },
     source: {
       database: "RAIS",
-      year: "2017",
+      year: "2021",
     },
   },
   industry: {
@@ -119,7 +119,7 @@ export const databases = {
     orderLabels: ["message.name", "message.jobs"],
     extraInfo: {
       label: "message.jobs",
-      endpoint: "rais/industry_class/?value=employee&year=2017&order=industry_class",
+      endpoint: "rais/industry_class/?value=employee&year=2021&order=industry_class",
       id: "industry_class",
       dataValue: "jobs",
     },
@@ -155,7 +155,7 @@ export const databases = {
     },
     source: {
       database: "RAIS",
-      year: "2017",
+      year: "2021",
     },
   },
   product: {
@@ -168,7 +168,7 @@ export const databases = {
     orderLabels: ["message.name", "message.exports"],
     extraInfo: {
       label: "message.exports",
-      endpoint: "secex/product/?value=value&year=2018&order=product",
+      endpoint: "secex/product/?value=value&year=2022&order=product",
       id: "product",
       dataValue: "value",
     },
@@ -204,7 +204,7 @@ export const databases = {
     },
     source: {
       database: "SECEX",
-      year: "2018",
+      year: "2022",
     },
   },
   trade_partner: {
@@ -217,7 +217,7 @@ export const databases = {
     orderLabels: ["message.name", "message.exports"],
     extraInfo: {
       label: "message.exports",
-      endpoint: "secex/country/?value=value&year=2018&order=country",
+      endpoint: "secex/country/?value=value&year=2022&order=country",
       id: "country",
       dataValue: "value",
     },
@@ -241,7 +241,7 @@ export const databases = {
     },
     source: {
       database: "SECEX",
-      year: "2018",
+      year: "2022",
     },
   },
   university: {

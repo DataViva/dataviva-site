@@ -12,5 +12,133 @@ h3 {
 }
 
 p {
-	text-align: justify;
+    text-align: justify;
+}
+
+.aboutDivider {
+    width: 120px;
+    height: 2px;
+    border: 1px solid #2D3A4E;
+    background-color: #2D3A4E;
+    margin: 24px 24px 6px 24px;
+}
+
+.centralize {
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+}
+
+.title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 58px;
+    color: #676A6C;
+    text-transform: uppercase;
+}
+
+.subtitle {
+    text-align: center;
+    font-weight: 600;
+
+}
+
+.paragraph {
+    text-align: justify;
+    font-size: 16px;
+    line-height: 29px;
+    color: #676A6C;
+    margin-bottom: 26px
+}
+
+.tab {
+    display: inline-block;
+    margin-left: 4em;
+}
+
+#teamTitle {
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 58px;
+    color: #676A6C;
+    text-transform: uppercase;
+}
+
+.cardDiv {
+    margin: 12px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.cardImg {
+    width: 100%;
+    min-width: 180px;
+}
+
+.cardTitle {
+    font-size: 16px;
+    text-align: center;
+}
+
+@media (max-width: 1200px) and (min-width:996px) {
+    .romero {
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
+
+@media (max-width: 530px) {
+    .brito{
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .freitas{
+        font-size: 12px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .romero{
+        font-size: 11px !important;
+        text-align: center;
+        white-space: nowrap;
+    }
+}
+
+.cardPosition {
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    color: #2D3A4E;
+    text-transform: uppercase;
+}
+
+.cardSocials {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cardSocials a {
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
+@media (max-width: 390px) {
+    .cardTitle {
+        font-size: 16px;
+        text-align: center;
+        white-space: nowrap;
+    }
 }

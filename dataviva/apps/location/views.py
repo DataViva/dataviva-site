@@ -24,6 +24,7 @@ from sqlalchemy import desc, func
 from random import randint
 from decimal import *
 import sys
+import requests
 
 
 reload(sys)
@@ -98,10 +99,6 @@ tabs = {
             'new-api-imports-origin-tree_map',
             'imports-origin-stacked',
             'new-api-imports-origin-stacked',
-            'new-api-exports-port-tree_map',
-            'new-api-imports-port-tree_map',
-            'new-api-exports-port-line',
-            'new-api-imports-port-line'
         ],
 
         'education': education,
@@ -137,6 +134,31 @@ tabs = {
         ]
     }
 
+def getSecexLatestYear():
+    latestSecexYear = "2022"
+
+    response = requests.get(g.api_url + "years/secex")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data["years"]
+        
+        latestSecexYear = localData[len(localData) - 1]
+
+    return latestSecexYear
+
+def getRaisLatestYear():
+    latestRaisYear = "2021"
+
+    response = requests.get(g.api_url + "years/rais")
+
+    if response.status_code == 200:
+        data = response.json()
+        localData = data["years"]
+        
+        latestRaisYear = localData[len(localData) - 1]
+
+    return latestRaisYear
 
 @mod.before_request
 def before_request():
@@ -199,8 +221,11 @@ def graphs(bra_id, tab):
         depth = location_depth(bra_id)
         id_ibge = _location_service(depth, location)
         is_municipality = True if depth == 'municipality' else False
+    
+    latestSecexYear = getSecexLatestYear()
+    latestRaisYear = getRaisLatestYear()
 
-    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None, is_municipality=is_municipality)
+    return render_template('location/graphs-' + tab + '.html', location=location, depth=depth, id_ibge=id_ibge, graph=None, is_municipality=is_municipality, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)
 
 
 @mod.route('/all', defaults={'tab': 'general'})
@@ -238,8 +263,9 @@ def all(tab):
         'population': location_service_brazil.population(),
         'gdp_per_capita': location_service_brazil.gdp_per_capita(),
         'eci': 0.151,
-        'year_yb': location_service_brazil.year_yb(),
-        'year_ybs': location_service_brazil.year_ybs()
+        'year_pop': location_service_brazil.year_pop(),
+        'year_gdp': location_service_brazil.year_gdp(),
+        'year_per_capita': location_service_brazil.max_coincident_year
     }
 
     body = {
@@ -269,8 +295,11 @@ def all(tab):
         abort(404)
 
     else:
+        latestSecexYear = getSecexLatestYear()
+        latestRaisYear = getRaisLatestYear()
+
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)
 
 
 @mod.route('/<bra_id>', defaults={'tab': 'general'})
@@ -387,9 +416,14 @@ def index(bra_id, tab):
             'name': location_service.name(),
             'gdp': location_service.gdp(),
             'population': location_service.population(),
-            'gdp_per_capita': location_service.gdp() / location_service.population(),
+            'gdp_per_capita': location_service.gdp_per_capita(),
             'bg_class_image': background_image,
-            'year': location_service.year()
+            'year': location_service.year(),
+            'gdp_year': location_service.gdp_year(),
+            'hdi_year': location_service.hdi_year(),
+            'life_expectation_year': location_service.life_expectation_year(),
+            'population_year': location_service.population_year(),
+            'gdp_per_capita_year': location_service.gdp_per_capita_year(),
         }
     else:
         header = {
@@ -401,7 +435,11 @@ def index(bra_id, tab):
             'hdi': location_service.hdi(),
             'bg_class_image': background_image,
             'year': location_service.year(),
-            'year_dhs': location_service.year_dhs()
+            'gdp_year': location_service.gdp_year(),
+            'hdi_year': location_service.hdi_year(),
+            'life_expectation_year': location_service.life_expectation_year(),
+            'population_year': location_service.population_year(),
+            'gdp_per_capita_year': location_service.gdp_per_capita_year(),
         }
 
     if eci is not None:
@@ -485,5 +523,8 @@ def index(bra_id, tab):
         abort(404)
 
     else:
+        latestSecexYear = getSecexLatestYear()
+        latestRaisYear = getRaisLatestYear()
+
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)

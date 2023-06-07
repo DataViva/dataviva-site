@@ -2,10 +2,6 @@
   background-color: #f3f6f3;
 }
 
-.burgundy {
-  color: #a25a6d;
-}
-
 .button-left-margin {
   margin-left: auto;
 }
@@ -37,14 +33,6 @@
   font-weight: 700;
 }
 
-.hover-bg-burgundy:hover { 
-  background-color: #a25a6d; 
-}
-
-.hover-bg-burgundy:focus { 
-  background-color: #a25a6d; 
-}
-
 .fade-enter-active, .fade-leave-active {
   transition: opacity 0.5s ease-out;
 }
@@ -54,7 +42,7 @@
 }
 
 .select-button:visited {
-  color: #a25a6d;
+  color: #e97650;
 }
 
 .select-button:hover, .select-button:focus {

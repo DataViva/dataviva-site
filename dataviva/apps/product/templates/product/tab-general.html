@@ -1,5 +1,5 @@
 <div role="tabpanel" class="tab-pane {{ 'active' if tab == 'general' }}" id="general">
-    <h2 class="m-t-xl">{%trans%}General Profile{%endtrans%}<small> (2017)</small></h2>
+    <h2 class="m-t-xl">{%trans%}General Profile{%endtrans%}<small> ({{header.year}})</small></h2>
     {% if not location %}
         {% if (product.id|length) == 6 %}
             {% trans %}The products of the position of {%endtrans%}{{ product.name() }} 
@@ -11,11 +11,11 @@
                 {{ header.export_value | max_digits(3) }} {{ (header.export_value | magnitude).lower() }}{% else %}0{% endif %}{% if body.municipality_export_value %}{% if body.export_value_growth_in_five_years %}{% trans %}, representing a variation of{%endtrans%} {{ body.export_value_growth_in_five_years | max_digits(3 )}} 
                 {% trans %}in five years. The municipality in Brazil which exports more{% endtrans %} {{ product.article() }} {{ product.name() }}
             {% else %}
-                {% trans %}. The municipality in Brazil which exports more{% endtrans %} {{ product.article() }} {{ product.name() }}
+                {% trans %}. The municipality in Brazil which exports more{% endtrans %} {{ product.article() }} {{ product.name()}}
             {% endif %}
             {% endif %}
 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }}
             {% if body.municipality_import_value %}
                 {% trans %}and the municipality that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
             {% endif %}
@@ -30,7 +30,7 @@
             {% endif %}
             {% endif %}
 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }} 
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }}
             {% if body.municipality_import_value %}
                 {% trans %}and the municipality that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
             {% endif %}</p>
@@ -50,7 +50,7 @@
             {% endif %}
 
             {% trans %} which exports more{%endtrans%} {{ product.article() }} {{ product.name() }} 
-            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }}.
+            {% trans %}is{%endtrans%} {{ body.municipality_name_export }} - {{ body.municipality_state_export.upper() }}
             {% endif %}
             {% if body.municipality_import_value %}
                 {% trans %}and the municipality that imports the most is {%endtrans%} {{ body.municipality_name_import }} - {{ body.municipality_state_import.upper() }}.
@@ -153,7 +153,7 @@
 
     <div class="row">
         <div class="dl-box col-xs-12 col-md-6" id='general-product'>
-            <h3>{%trans%}International Trade{%endtrans%} (2018)</h3>
+            <h3>{%trans%}International Trade{%endtrans%} ({{latestSecexYear}})</h3>
                 <a href="#trade-partner"
                         aria-controls="trade-partner"
                         role="tab"

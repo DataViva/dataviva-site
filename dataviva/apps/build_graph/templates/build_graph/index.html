@@ -15,15 +15,15 @@
     <div class="row bg-white">
         <ol class="breadcrumb">
             <li><a href="{{ url_for('general.home') }}">Home</a></li>
-            <li class="active">Construa gráficos</li>
+            <li class="active">{% trans %}Build Graphs{% endtrans %}</li>
         </ol>
     </div>
 </div>
 
 <section id="build_graph"  class="container m-b-lg">
 
-    <h1>Visualize seu Gráfico</h1>
-    <p>Selecione parâmetros para construir seu gráfico.</p>
+    <h1>{% trans %}Visualize your Graph{% endtrans %}</h1>
+    <p>{% trans %}Select parameters to build your graph.{% endtrans %}</p>
     <br />
 
     <nav class="sidebar well col-xs-12 col-sm-3 col-md-3" style="margin-top: 0">
@@ -31,7 +31,7 @@
             <li>
                 <input type="hidden" id="dataset" value="{{ dataset if dataset }}">
                 <div class="form-group">
-                    <label for="datasets" class="control-label">Banco de Dados</label>
+                    <label for="datasets" class="control-label">{% trans %}Database{% endtrans %}</label>
                     <select class="form-control" id="datasets" name="datasets">
                         <option id="dataset-empty-option" value="">{%trans%}Select{%endtrans%}</option>
                     </select>

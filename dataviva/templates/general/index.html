@@ -1,65 +1,239 @@
 {% extends 'base.html' %}
 
+{% block head %}
+<link rel="stylesheet" href="../../static/css/modules/home.css" />
+{% endblock head %}
+
 {% block content %}
 
-<section id="welcome" class="welcome bg-buildings">
-    <div class="container">
-        <div class="col-xs-12 col-sm-6 wow fadeInLeft">
-            <h2 class="m-b-md">{% trans %}Brazil's largest platform for social and economic data search.{% endtrans %}<br/>{% trans %}Totally open and free.{% endtrans %}</h2>
-            <p class="visible-md visible-lg">{% trans %}DataViva is a research tool that provides official data about exportation, economic activity, locality, education and occupation in Brazil. It consists of 11 apps that combined enable more than 1 billion visualizations.{% endtrans %}</p>
-            <p>
-                <a href="{{ url_for('general.search') }}" class="btn btn-primary" title="Inicie uma pesquisa">{% trans %}Get started{% endtrans %} <i class="m-l-xl fa fa-angle-right"></i></a>
-            </p>
-            <a href="https://www.youtube.com/embed/LCxbPfOFSDk" class="embed-video-link" title="{% trans %}Watch the site video{% endtrans %}">{% trans %}Watch the site video{% endtrans %}</a>
+<!-- Carousel container -->
+<div id="my-pics" class="carousel slide carouselContainer" data-ride="carousel">
+
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#my-pics" data-slide-to="0" class="active"></li>
+        <li data-target="#my-pics" data-slide-to="1"></li>
+        <li data-target="#my-pics" data-slide-to="2"></li>
+        <li data-target="#my-pics" data-slide-to="3"></li>
+        <li data-target="#my-pics" data-slide-to="4"></li>
+    </ol>
+
+    <!-- Content -->
+    <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div class="item active">
+            <div class="carousel-img" style="background-image: url('/static/img/carousel/Carros1.jpg');">
+                <div class="carousel-item">
+                    <h3 class="text-carousel">{% trans %}The Brazilian trade balance in cars is in surplus. This means that we export more than we import this type of product.{% endtrans %}</h3>
+
+                    <a style="color: inherit;" href="http://dataviva.info/pt/product/178703/trade-partner"><button
+                            class="button-carousel">
+                            <b style="font-size:18px">
+                                {% trans %}Access Here{% endtrans %}
+                            </b>
+                        </button></a>
+                </div>
+            </div>
         </div>
-        <div class="m-t-lg col-xs-12 col-sm-6 wow fadeInRight">
-            <ul>
-                <li data-toggle="popover" data-placement="top" data-content="{% trans %}Number of establishments per economic activity, percentage of graduated professionals per year in a given course by region, similar products by region, average wage by segment, and more… {% endtrans %}">
-                    <a data-search="entrepreneurs">
-                        <h3 class="text-uppercase">{% trans %}Entrepreneurs{% endtrans %}</h3>
-                        <p>
-                            {% trans %}Identify the economic profile and business opportunities of a region{% endtrans %}
-                        </p>
-                    </a>
-                    <a href="https://www.youtube.com/embed/Rh_PC-GGCAs" class="embed-video-link" title="{% trans %}Watch the testimonials{% endtrans %}">{% trans %}Watch the testimonials{% endtrans %}</a>
-                </li>
-                <li data-toggle="popover" data-placement="top" data-content="{% trans %}Main business partners of a product by region, states that lead importation of a specific product, economic activity by locality, employment and income by segment, and more…{% endtrans %}">
-                    <a data-search="development_agents">
-                        <h3 class="text-uppercase">{%trans%}Development Agents{%endtrans%}</h3>
-                        <p>
-                            {% trans %}Assess development policies setting by location{% endtrans %}
-                        </p>
-                    </a>
-                    <a href="https://www.youtube.com/embed/2AApavYc5iw" class="embed-video-link" title="{% trans %}Watch the testimonials{% endtrans %}">{% trans %}Watch the testimonials{% endtrans %}</a>
-                </li>
-                <li data-toggle="popover" data-placement="top" data-content="{% trans %}Average wage of an activity or occupation, cities with best employment rates in an activity, courses offered by region, number of students enrolled in each university and more…{% endtrans %}">
-                    <a data-search="students">
-                        <h3 class="text-uppercase">{% trans %}Students and Professionals{% endtrans %}</h3>
-                        <p>
-                            {% trans %}Find information about available jobs, income per occupation and courses{% endtrans %}
-                        </p>
-                    </a>
-                    <a href="https://www.youtube.com/embed/Lg17I1_8DsE" class="embed-video-link" title="{% trans %}Watch the testimonials{% endtrans %}">{% trans %}Watch the testimonials{% endtrans %}</a>
-                </li>
-            </ul>
+
+        <!-- Slide 2 -->
+        <div class="item">
+            <div class="carousel-img" style="background-image: url('/static/img/carousel/Petroleo-NP.png');">
+
+                <div class="carousel-item">
+                    <h3 class="text-carousel">{% trans %}Crude oil is in the top ten positions in both Brazilian rankings of imports and exports.{% endtrans %}</h3>
+
+                    <a style="color: inherit;" href="http://dataviva.info/pt/product/052709"><button
+                            class="button-carousel">
+                            <b style="font-size:18px">
+                                {% trans %}Access Here{% endtrans %}
+                            </b>
+                        </button></a>
+                </div>
+            </div>
         </div>
+
+        <!-- Slide 3 -->
+        <div class="item">
+            <div class="carousel-img" style="background-image: url('/static/img/carousel/Gestao-NP.png');">
+                <div class="carousel-item">
+                    <h3 class="text-carousel">{% trans %}In need of business management solutions? São Paulo (SP) concentrates more professionals in the area of ​​Consulting in the activity!{% endtrans %}</h3>
+
+                    <a style="color: inherit;" href="http://dataviva.info/pt/industry/m70204"><button
+                            class="button-carousel">
+                            <b style="font-size:18px">
+                                {% trans %}Access Here{% endtrans %}
+                            </b>
+                        </button></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="item">
+            <div class="carousel-img" style="background-image: url('/static/img/carousel/China-NP.png');">
+
+                <div class="carousel-item">
+                    <h3 class="text-carousel">{% trans %}Both in imports and exports, China is Brazil's largest trading partner.{% endtrans %}</h3>
+
+                    <a style="color: inherit;"
+                        href="http://dataviva.info/pt/trade_partner/aschn/international-trade?menu=new-api-exports-municipality-tree_map&url=secex%2Fproduct%2Fvalue%3Fyear%3D2018%26type%3Dexport%26wld%3D160">
+                        <button class="button-carousel">
+                            <b style="font-size:18px">
+                                {% trans %}Access Here{% endtrans %}
+                            </b>
+                        </button></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="item">
+            <div class="carousel-img" style="background-image: url('/static/img/carousel/Advocacia-NP-2.png');">
+
+                <div class="carousel-item">
+                    <h3 class="text-carousel">{% trans %}In Brazil, Law courses are the ones with the most enrollments.{% endtrans %}</h3>
+
+                    <a style="color: inherit;" href="http://dataviva.info/pt/major/380D01"><button
+                            class="button-carousel">
+                            <b style="font-size:18px">
+                                {% trans %}Access Here{% endtrans %}
+                            </b>
+                        </button></a>
+                </div>
+            </div>
+        </div>
+
     </div>
-</section>
 
+    <!-- Previous/Next controls -->
+    <a class="left carousel-control" href="#my-pics" role="button" data-slide="prev">
+        <span class="icon-prev" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#my-pics" role="button" data-slide="next">
+        <span class="icon-next" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
 
+</div>
+
+<!-- carousel -->
 <section id="databases" class="databases bg-greeny">
     <div class="container text-center wow fadeInDown">
         <div class="navy-line"></div>
-        <h2>{% trans %}Explore our database{% endtrans %}</h2>
-        <p class="tagline">{% trans %}DataViva gathers data from several sources: Employment and Income (RAIS), Brazilian International Trade (SECEX/MDCI), Basic and Technical Education (Censo Escolar), Post-Secondary Education (Censo da Educação Superior) and UN Comtrade International Trade.{% endtrans %}</p>
-        <div class="text-divider">
-            <h3 class="inner">{% trans %}What would you like to know?{% endtrans %}</h3>
-            <hr/>
-        </div>
+        <h2>{% trans %}Explore our analytical reports{% endtrans %}</h2>
 
     </div>
-    <div class="container">
-        <database-selector class="row wow fadeInDown" id="database-selector"></database-selector>
+    <div class="container mt3 buttons-container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1 " onclick="select_attr('bra');" data-toggle="popover" data-placement="top" 
+                data-content= "{% trans %}General profile by region, state, mesoregion microregion or city, including international trade, economic activity, employment and education data. Examples: Southeast Region, Mato Grosso, Recife, Metropolitan Area of Porto Alegre.{% endtrans %}" >
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2" >
+                            <i class="dv-bra"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Brazilian Locations{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1" onclick="select_attr('cbo');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Regions with high employment rates by professional activity, related courses, average wage and job statistics per year. Examples: technicians, industry workers, receptionists and clinicians.{% endtrans %}">
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2">
+                            <i class="dv-occupation"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Occupations{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1" onclick="select_attr('cnae');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Information on employment rate by region, average wage by occupation, average monthly income and economic opportunities. Examples: education, restaurants, religious organizations.{% endtrans %}">
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2">
+                            <i class="dv-industry"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Economic Activities{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1" onclick="select_attr('hs');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Trade balance data by product, sending and receiving countries, ranking by location, economic activities and related occupations. Examples: food, art and antiques iron ore, coffee, auto parts.{% endtrans %}">
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2">
+                            <i class="dv-product"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Products{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1" onclick="select_attr('wld');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Brazil’s top import and export partners, trade data by type of product or supplier city. Examples: Asia, Europe, Iran, USA.{% endtrans %}">
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2">
+                            <i class="dv-trade-partner"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Trade Partners{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1" onclick="select_attr('university');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Number of enrollments in each offered course, student status and similar university profiles. Examples: USP, UFMG, PUC Goiás.{% endtrans %}">
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2">
+                            <i class="dv-university"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Universities{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1" onclick="select_attr('course_hedu');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}List of universities and cities that offer post-seconday courses or the selected field of study. Examples: education, health sciences law, production engineering, physiotherapy.{% endtrans %}">
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2">
+                            <i class="dv-major"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Higher Education{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 mb1">
+                <a class="no-underline h4 pt1" onclick="select_attr('course_sc');" data-toggle="popover" data-placement="top" 
+                data-content="{% trans %}Brazilian schools that provide technical education and enrollment ranking by city. Examples: elementary school, high school, nursing technician, agriculture and technician.{% endtrans %}">
+                    <div class="tc buttons-home">
+                        <div class="f1 mb2">
+                            <i class="dv-basic-course"></i>
+                        </div>
+                        <div>
+                            <p class="f3 capitalize">{% trans %}Basic Courses{% endtrans %}</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+        </div>
     </div>
 </section>
 
@@ -69,12 +243,14 @@
         <h2 class="m-b-lg wow fadeInDown">{%trans%}Headlines{%endtrans%}</h2>
         <div class="row">
             {% for publication in publications %}
-                <div class="col-sm-4 wow {% if (loop.index + 2) % 3 == 0 %} fadeInLeftBig {% elif loop.index % 3 == 0 %} fadeInRightBig {% else %} fadeInDown {% endif %}">
-                    <a href="{{ url_for(publication.__tablename__.split('_')[0]+'.show', id=publication.id) }}" title="{{ publication.title }}">
-                        <img src="{{ publication.thumb }}" class="img-responsive">
-                    </a>
-                    <p>{{ publication.title }}</p>
-                </div>
+            <div
+                class="col-sm-4 wow {% if (loop.index + 2) % 3 == 0 %} fadeInLeftBig {% elif loop.index % 3 == 0 %} fadeInRightBig {% else %} fadeInDown {% endif %}">
+                <a href="{{ url_for(publication.__tablename__.split('_')[0]+'.show', id=publication.id) }}"
+                    title="{{ publication.title }}">
+                    <img src="{{ publication.thumb }}" class="img-responsive">
+                </a>
+                <p>{{ publication.title }}</p>
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -84,8 +260,10 @@
     <div class="navy-line"></div>
     <div class="container text-center wow fadeInDown">
         <h2>{% trans %}Sign Up free and make the most of DataViva{% endtrans %}</h2>
+
         <p class="tagline">{% trans %}Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research.{% endtrans %}</p>
-        <a role="button" class="m-t-lg btn btn-primary" data-toggle="modal" data-target="#dataviva-signup">{% trans %}Free Sign Up{% endtrans %}</a>
+        <a role="button" class="m-t-lg btn btn-primary" data-toggle="modal" data-target="#dataviva-signup">{% trans
+            %}Free Sign Up{% endtrans %}</a>
     </div>
 </section>
 
@@ -94,4 +272,3 @@
 {% include "include/promoters.html" %}
 
 {% endblock content %}
-

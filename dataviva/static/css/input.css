@@ -33,7 +33,7 @@
 .form-control:focus,
 .single-line:focus,
 .select2-container--default.select2-container--focus .select2-selection--multiple {
-  border-color: #A25A6D !important;
+  border-color: #E6673D !important;
 }
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
   background-color: #5A9DC4;
@@ -83,7 +83,7 @@
   width: 20%;
 }
 .noUi-connect {
-  background: none repeat scroll 0 0 #A25A6D;
+  background: none repeat scroll 0 0 #E6673D;
   box-shadow: none;
 }
 .slider_red .noUi-connect {

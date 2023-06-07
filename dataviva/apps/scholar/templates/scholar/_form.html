@@ -9,28 +9,28 @@
 <form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data" id="scholar-form">
     {{ form.hidden_tag() }}
     <p>
-        <label for="title">Título</label>
+        <label for="title">{% trans %}Title{% endtrans %}</label>
         {{ form.title(class="form-control")}}
         {{ messages(form.title) }}
     </p>
     <p>
-        <label for="theme">Tema</label>
+        <label for="theme">{% trans %}Theme{% endtrans %}</label>
         {{ form.theme(class="form-control")}}
         {{ messages(form.theme) }}
     </p>
     <p>
-        <label for="author">Autor(es)</label>
+        <label for="author">{% trans %}Author(s){% endtrans %}</label>
         {{ form.authors(class="form-control", placeholder="Separe os autores por vírgula")}}
         {{ messages(form.authors) }}
     </p>
     <p>
-        <label for="keywords">Palavras-Chave</label>
+        <label for="keywords">{% trans %}Keywords{% endtrans %}</label>
         {{ form.keywords(class="form-control") }}
         {{ messages(form.keywords) }}
-        <small>Você pode definir suas próprias palavras-chave</small>
+        <small>{% trans %}You can define your own keywords.{% endtrans %}</small>
     </p>
     <p>
-        <label for="abstract">Resumo</label>
+        <label for="abstract">{% trans %}Summary{% endtrans %}</label>
         <button id="abstract-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
         <button id="abstract-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
         {{ form.abstract(class="form-control", rows=5)}}
@@ -39,7 +39,7 @@
                 <div id="text-content-editor" class="summernote"></div>
         </div>
     </p>
-    <button id='submit' type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>Enviar</button>
+    <button id='submit' type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
 </form>
 
 <div class="">
@@ -47,8 +47,8 @@
     <div class="row fileupload-buttonbar">
         <div class="col-lg-7 col-xs-10 col-md-6">
                 <p>
-                    <label>Formato<br/>
-                        <small>Aceitamos artigos somente em formato PDF.</small>
+                    <label>{% trans %}Format{% endtrans %}<br/>
+                        <small>{% trans %}We accept articles only in PDF format.{% endtrans %}</small>
                     </label>
                 </p>
 
@@ -56,15 +56,15 @@
                 <input id="file" name="file" type="file" class="inputfile">
 
                 <label for="file" class="btn btn-success">
-                    <i class="fa fa-plus m-r-sm"></i> Choose File
+                    <i class="fa fa-plus m-r-sm"></i> {% trans %} Choose File {% endtrans %}
                 </label>
             </div>
 
             <div id="uploaded-file">
                 <button href="#" class="btn btn-danger" id="delete">
-                    <i class="fa fa-trash-o m-r-sm"></i> Delete File
+                    <i class="fa fa-trash-o m-r-sm"></i> {% trans %} Delete File {% endtrans %}
                 </button>
-                <a id="article-url" target="_blank" href=""> Artigo <i class="fa fa-file-pdf-o m-r-sm"></i></a>
+                <a id="article-url" target="_blank" href="">{% trans %} Article {% endtrans %}<i class="fa fa-file-pdf-o m-r-sm"></i></a>
             </div>
 
             <div id="progress">

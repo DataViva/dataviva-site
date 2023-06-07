@@ -582,7 +582,7 @@ def datasus(attr):
     )
 
 
-@mod.route('/port/')
+""" @mod.route('/port/')
 # @view_cache.cached(key_prefix=api_cache_key("attrs_port"))
 def port():
     r = requests.get(API_BASE_URL + 'metadata/port')
@@ -599,7 +599,7 @@ def port():
     return Response(
         json.dumps({'data': data}),
         status=200
-    )
+    ) """
 
 
 @mod.route('/datasets/')
