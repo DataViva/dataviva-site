@@ -829,6 +829,7 @@ msgstr "Matrículas"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:15
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:4
+#, fuzzy
 msgid "The highest number of enrollments in the "
 msgstr "O maior número de matrículas para o curso/campo de "
 
@@ -2466,6 +2467,14 @@ msgstr "de habitantes e PIB per Capita de R$ "
 msgid "Located in the "
 msgstr "Localizado na Mesorregião "
 
+#: dataviva/apps/location/templates/location/tab-general.html:27
+msgid "mesoregion, it is the"
+msgstr "é o "
+
+#: dataviva/apps/location/templates/location/tab-general.html:28
+msgid "city in the state by GDP"
+msgstr "município do estado em PIB"
+
 #: dataviva/apps/location/templates/location/tab-general.html:39
 msgid "It comprehends "
 msgstr "Compreende um total de "
@@ -2720,8 +2729,13 @@ msgid "professionals, being number "
 msgstr "profissionais, ocupando o "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:7
-msgid "in the Brazilian occupation ranking. The Brazilian city that employs the most in this occupation is "
-msgstr "lugar no ranking de ocupações no Brasil. O município brasileiro que mais emprega nessa ocupação é "
+#, fuzzy
+msgid ""
+"in the Brazilian occupation ranking. The Brazilian city that employs the "
+"most in this occupation is "
+msgstr ""
+"lugar no ranking de ocupações no Brasil. O município brasileiro que mais "
+"emprega nessa ocupação é "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:8
 msgid "and the "
@@ -3069,7 +3083,7 @@ msgstr "é"
 #: dataviva/apps/product/templates/product/tab-general.html:121
 #: dataviva/apps/product/templates/product/tab-general.html:131
 msgid "and the municipality that imports the most is "
-msgstr " e o município que mais importa é "
+msgstr "e o município que mais importa é "
 
 #: dataviva/apps/product/templates/product/tab-general.html:43
 #: dataviva/apps/product/templates/product/tab-general.html:62
@@ -3520,8 +3534,12 @@ msgid " in the import origins of Brazil and number "
 msgstr " em importações para o Brasil e a posiçāo de número "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:16
-msgid " in the export destinations of Brazil by trade value. The most exported product from Brazil to this continent is "
-msgstr " em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse continente é "
+msgid ""
+" in the export destinations of Brazil by trade value. The most exported "
+"product from Brazil to this continent is "
+msgstr ""
+"  em exportações realizadas pelo Brasil. O produto mais exportado do "
+"Brasil para esse continente é "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:21
 msgid " in the import origins of Brazil and "
@@ -3536,8 +3554,13 @@ msgid "number "
 msgstr "posiçāo de número "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
-msgid " in the export destinations of Brazil by trade value. The most exported product from Brazil to this country is "
-msgstr " em exportações realizadas pelo Brasil. O produto mais exportado do Brasil para esse país é "
+#, fuzzy
+msgid ""
+" in the export destinations of Brazil by trade value. The most exported "
+"product from Brazil to this country is "
+msgstr ""
+"  em exportações realizadas pelo Brasil. O produto mais exportado do "
+"Brasil para esse país é "
 
 #: dataviva/apps/university/templates/university/graphs-enrollments.html:6
 #: dataviva/templates/selectors/basic_course.html:9
@@ -5395,7 +5418,7 @@ msgstr ""
 msgid "Cars"
 msgstr "Carros"
 
-#: dataviva/templates/general/index.html:37
+#: dataviva/templates/general/index.html:28
 msgid "The Brazilian trade balance in cars is in surplus. This means that we export more than we import this type of product."
 msgstr "A balança comercial brasileira em carros é superavitária. Isso significa que mais exportamos que importamos esse tipo de produto. "
 
@@ -5403,7 +5426,7 @@ msgstr "A balança comercial brasileira em carros é superavitária. Isso signif
 msgid "Petroleum"
 msgstr "Petróleo"
 
-#: dataviva/templates/general/index.html:63
+#: dataviva/templates/general/index.html:45
 msgid "Crude oil is in the top ten positions in both Brazilian rankings of imports and exports."
 msgstr "O petróleo cru se encontra nas dez primeiras posições em ambos os rankings brasileiros de importações e exportações."
 
@@ -5411,7 +5434,7 @@ msgstr "O petróleo cru se encontra nas dez primeiras posições em ambos os ran
 msgid "Business management"
 msgstr "Gestão Empresarial"
 
-#: dataviva/templates/general/index.html:86
+#: dataviva/templates/general/index.html:61
 msgid "In need of business management solutions? São Paulo (SP) concentrates more professionals in the area of ​​Consulting in the activity!"
 msgstr "Precisando de soluções em Gestão Empresarial? São Paulo (SP) concentra mais profissionais na área de Consultoria na atividade!"
 
@@ -5419,7 +5442,7 @@ msgstr "Precisando de soluções em Gestão Empresarial? São Paulo (SP) concent
 msgid "Largest Commercial Partner"
 msgstr "Maior Parceiro Comercial"
 
-#: dataviva/templates/general/index.html:111
+#: dataviva/templates/general/index.html:78
 msgid "Both in imports and exports, China is Brazil's largest trading partner."
 msgstr "Tanto em importações quanto em exportações, a China é a maior parceira comercial do Brasil."
 
@@ -5427,7 +5450,7 @@ msgstr "Tanto em importações quanto em exportações, a China é a maior parce
 msgid "Higher Education - First Place"
 msgstr "Ensino Superior - Primeiro Lugar"
 
-#: dataviva/templates/general/index.html:136
+#: dataviva/templates/general/index.html:96
 msgid "In Brazil, Law courses are the ones with the most enrollments."
 msgstr "No Brasil, os cursos de Direito são os que reúnem mais matriculados."
 
@@ -5473,6 +5496,78 @@ msgstr ""
 #: dataviva/translations/dictionary.py:579
 msgid "Explore our analytical reports"
 msgstr "Explore os nossos relatórios analíticos"
+
+
+
+#: dataviva/templates/general/index.html:133
+msgid "General profile by region, state, mesoregion microregion or city, including international trade, economic activity, employment and education data. Examples: Southeast Region, Mato Grosso, Recife, Metropolitan Area of Porto Alegre."
+msgstr "Perfil geral por região, estado,mesoregião, microrregião ou município,incluindo dados sobre comércio exterior,atividade econômica,empregos e educação.Exemplos: Região Sudeste, Mato Grosso,Recife, Região Metropolitana de Porto Alegre "
+
+#: dataviva/templates/general/index.html:146
+msgid "Regions with high employment rates by professional activity, related courses, average wage and job statistics per year. Examples: technicians, industry workers, receptionists and clinicians."
+msgstr "Regiões que mais empregam por atividade profissional, cursos relacionados, salário médio e estatísticas de emprego por ano. Exemplos: técnicos de nível médio, trabalhadores da indústria, recepcionistas, clínicos."
+
+#: dataviva/templates/general/index.html:159
+msgid "Information on employment rate by region, average wage by occupation, average monthly income and economic opportunities. Examples: education, restaurants, religious organizations."
+msgstr "Informações sobre taxa de emprego por região, salário médio por tipo de ocupação, renda mensal média e oportunidades econômicas. Exemplos: educação, restaurantes, religious organizations."
+
+#: dataviva/templates/general/index.html:172
+msgid "Trade balance data by product, sending and receiving countries, ranking by location, economic activities and related occupations. Examples: food, art and antiques iron ore, coffee, auto parts."
+msgstr "Dados da balança comercial por produto, origem das importações e destino das exportações, ranking por localidade, atividades econômicas e ocupações relacionadas. Exemplos: alimentos, artes e antiguidades, minério de ferro, café, peças para veículos."
+
+#: dataviva/templates/general/index.html:185
+msgid "Brazil’s top import and export partners, trade data by type of product or supplier city. Examples: Asia, Europe, Iran, USA."
+msgstr "Principais parceiros comericais do Brasil, dados de comercialização por tipo de produto ou município comercializador. Exemplos: Ásia, Europa, Irã, EUA."
+
+#: dataviva/templates/general/index.html:198
+msgid "Number of enrollments in each offered course, student status and similar university profiles. Examples: USP, UFMG, PUC Goiás."
+msgstr "Número de matrículas em cada curso ofertado, situação dos estudantes, perfis semelhantes de universidades; Exemplos: USP, UFMG, PUC Goiás."
+
+#: dataviva/templates/general/index.html:211
+msgid "List of universities and cities that offer post-seconday courses or the selected field of study. Examples: education, health sciences law, production engineering, physiotherapy."
+msgstr "Lista de universidades e municípios que ofertam cursos de educação superior ou campo de estudo selecionado. Exemplos: educação, ciências da saúde direito, engenharia de produção, fisioterapia."
+
+#: dataviva/templates/general/index.html:224
+msgid "Brazilian schools that provide technical education and enrollment ranking by city. Examples: elementary school, high school, nursing technician, agriculture and technician."
+msgstr "Escolas brasileiras que oferecem educação profissionalizante e ranking de matrículas por município. Exemplos: ensino fundamental, ensino médio, técnico em enfermagem, técnico em agropecuária."
+
+
+#: dataviva/templates/general/index.html:139
+msgid "Brazilian Locations"
+msgstr "Localidades Brasileiras"
+
+#: dataviva/templates/general/index.html:152
+msgid "Occupations"
+msgstr "Ocupações"
+
+#: dataviva/templates/general/index.html:165
+msgid "Economic Activities"
+msgstr "Atividades Econômicas"
+
+#: dataviva/templates/general/index.html:178
+msgid "Products"
+msgstr "Produtos"
+
+#: dataviva/templates/general/index.html:191
+msgid "Trade Partners"
+msgstr "Parceiros Comerciais"
+
+#: dataviva/templates/general/index.html:204
+msgid "Universities"
+msgstr "Universidades"
+
+#: dataviva/templates/general/index.html:217
+msgid "Higher Education"
+msgstr "Ensino Superior"
+
+#: dataviva/templates/general/index.html:230
+msgid "Basic Courses"
+msgstr "Curso Básico"
+
+
+
+
+
 
 
 
@@ -5613,7 +5708,7 @@ msgstr ""
 msgid "Free Sign Up"
 msgstr "Cadastrar Gratuitamente"
 
-#: dataviva/templates/general/index.html:165
+#: dataviva/templates/general/index.html:264
 msgid "Save the graphs you need and get our free content in your e-mail. Signing up gives you access to exclusive resources to facilitate your research."
 msgstr "Salve os gráficos que você precisa e receba nosso conteúdo gratuito em seu e-mail. A inscrição dá acesso a recursos exclusivos para facilitar sua pesquisa."
 
