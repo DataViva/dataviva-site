@@ -829,7 +829,6 @@ msgstr "Matrículas"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:15
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:4
-#, fuzzy
 msgid "The highest number of enrollments in the "
 msgstr "O maior número de matrículas para o curso/campo de "
 
@@ -843,7 +842,6 @@ msgstr "do Brasil encontra-se no município de "
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:20
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:28
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:36
-#, fuzzy
 msgid "The highest number of enrollments in "
 msgstr "O maior número de matrículas para o curso/campo de "
 
@@ -2594,7 +2592,6 @@ msgstr "O curso/campo de "
 
 #: dataviva/apps/major/templates/major/index.html:14
 #: dataviva/apps/major/templates/major/tab-general.html:5
-#, fuzzy
 msgid "is the "
 msgstr "é o"
 
@@ -2729,7 +2726,6 @@ msgid "professionals, being number "
 msgstr "profissionais, ocupando o "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:7
-#, fuzzy
 msgid ""
 "in the Brazilian occupation ranking. The Brazilian city that employs the "
 "most in this occupation is "
@@ -3554,7 +3550,6 @@ msgid "number "
 msgstr "posiçāo de número "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
-#, fuzzy
 msgid ""
 " in the export destinations of Brazil by trade value. The most exported "
 "product from Brazil to this country is "

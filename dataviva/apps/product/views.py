@@ -181,7 +181,7 @@ def index(product_id, tab):
     if len(product.id) == 6:
         product_service = ProductService(product_id=product.id)
         header['pci'] = product_service.product_complexity()
-
+        header['year'] = product_service.year()
     if location:
         product_service = ProductLocationsService(
             product_id=product.id, bra_id=location_id)
