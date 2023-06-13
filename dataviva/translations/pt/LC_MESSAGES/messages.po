@@ -1515,7 +1515,6 @@ msgid "Bar"
 msgstr "Barras"
 
 #: dataviva/apps/health/templates/health/graphs-equipments.html:5
-#, fuzzy
 msgid "Equipment Type"
 msgstr "Equipamentos por"
 
@@ -2154,12 +2153,10 @@ msgid "Education Level"
 msgstr "Nível de Ensino"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:5
-#, fuzzy
 msgid "Equipments by"
 msgstr "Equipamentos por"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:46
-#, fuzzy
 msgid "Establishments by"
 msgstr "Estabelecimentos por"
 
@@ -2169,22 +2166,18 @@ msgid "Unit Type"
 msgstr "Tipo de Unidade"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:75
-#, fuzzy
 msgid "Facilities"
 msgstr "Instalações"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:83
-#, fuzzy
 msgid "Beds by"
 msgstr "Leitos por"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:101
-#, fuzzy
 msgid "Bed Type"
 msgstr "Tipo de Leito"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:124
-#, fuzzy
 msgid "Professionals by"
 msgstr "Profissionais por"
 
