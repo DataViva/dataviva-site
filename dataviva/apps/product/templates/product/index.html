@@ -107,7 +107,7 @@
               {% if header.pci %}
               <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
                 <div class="widget">
-                  <h2 class="text-left text-uppercase">{%trans%}Product Complexity{%endtrans%} (2015)</h2>
+                  <h2 class="text-left text-uppercase">{%trans%}Product Complexity{%endtrans%} ({{header.year}})</h2>
                   <div class="number">
                       <strong class="counter">{{ header.pci | max_digits(3, True) }}</strong><br/>
                       <small class="magnitude">{{ header.pci | magnitude }}</small>
@@ -218,4 +218,3 @@
     <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
     <script type="text/javascript" src="/static/js/modules/product.js"></script>
 {% endblock %}
-

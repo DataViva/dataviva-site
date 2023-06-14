@@ -588,6 +588,18 @@ footer li span.link {
   cursor: pointer;
 }
 
+body .burgundy{
+  color: #2D3A4E !important;
+}
+
+body .hover-bg-burgundy:hover {
+  background-color: #2D3A4E !important;
+}
+
+body .hover-bg-burgundy:focus {
+  background-color: #2D3A4E !important;
+}
+
 footer a:focus,
 footer a:hover {
   text-decoration: none;
@@ -1081,6 +1093,12 @@ footer .form-control:focus,
 
 .b-b {
   border-bottom: 1px solid #e7eaec;
+}
+
+body .t-bg-green{
+  margin-top:0px !important;
+  background-color: #2D3A4E !important;
+  font-weight: 600;
 }
 
 .hr-line-dashed {
