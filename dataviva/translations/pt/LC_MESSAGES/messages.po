@@ -3319,14 +3319,14 @@ msgstr "Diversidade Efetiva de Destino das Exportações"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:15
 msgid "Wage"
-msgstr "Nova Imagem"
+msgstr "Massa Salarial"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:17
 msgid "Average Monthly"
 msgstr "Renda Mensal Média"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:20
-msgid "ANominal Wage Growth (1 year)"
+msgid "Nominal Wage Growth (1 year)"
 msgstr "Crescimento Nominal dos Salários (1 ano)"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:22

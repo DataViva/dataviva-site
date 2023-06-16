@@ -3008,7 +3008,7 @@ msgid "Average Monthly"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:20
-msgid "ANominal Wage Growth (1 year)"
+msgid "Nominal Wage Growth (1 year)"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:22
