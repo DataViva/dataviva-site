@@ -1,32 +1,32 @@
 {% extends "rankings/_base.html" %}
 
 {% block breadcrumb %}
-    <li class="active">Rankings</li>
+<li class="active">Rankings</li>
 {% endblock %}
 
 {% block rankings_content %}
-<table id="occupation-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
+<table id="location-wages-table" class="dataTable table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr>
             <th>{% trans %}Year{% endtrans %}</th>
-            <th>{% trans %}CBO ID{% endtrans %}</th>
-            <th>{% trans %}Occupation{% endtrans %}</th>
+            <th>{% trans %}IBGE ID{% endtrans %}</th>
+            <th>{% trans %}Location{% endtrans %}</th>
             <th>{% trans %}Total Jobs{% endtrans %}</th>
-            <th>{% trans %}Total Monthly Wages{% endtrans %}</th>
-            <th>{% trans %}Average Monthly Wage{% endtrans %}</th>
+            <th>{% trans %}Wage{% endtrans %}</th>
+            <th>{% trans %}Average Monthly{% endtrans %}</th>
             <th>{% trans %}Nominal Employee Growth (1 year){% endtrans %}</th>
             <th>{% trans %}Nominal Employee Growth (5 year){% endtrans %}</th>
             <th>{% trans %}Nominal Wage Growth (1 year){% endtrans %}</th>
             <th>{% trans %}Nominal Wage Growth (5 year){% endtrans %}</th>
             <th>{% trans %}Industry Diversity{% endtrans %}</th>
-            <!-- <th>{% trans %}Effective Industry Diversity{% endtrans %}</th>
-            <th>{% trans %}Location Diversity{% endtrans %}</th>
-            <th>{% trans %}Effective Location Diversity{% endtrans %}</th> -->
+            <th>{% trans %}Effective Industry Diversity{% endtrans %}</th>
+            <th>{% trans %}Occupation Diversity{% endtrans %}</th>
+            <th>{% trans %}Effective Occupation Diversity{% endtrans %}</th>
         </tr>
     </thead>
 </table>
 {% endblock rankings_content %}
 
 {% block js_assets %}
-    <script src="/static/js/modules/rankings/occupation.js"></script>
+<script src="/static/js/modules/rankings/location-wages.js"></script>
 {% endblock js_assets %}
