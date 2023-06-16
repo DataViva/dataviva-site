@@ -47,7 +47,6 @@ def occupation():
 
 
 @mod.route('/economic-activities', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("apps:ranking_economic_activities"))
 def economic_activities():
     return render_template('rankings/economic-activities.html', tab='economic_activities')
 
