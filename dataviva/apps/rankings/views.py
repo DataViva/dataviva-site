@@ -36,7 +36,6 @@ def location_international_trade():
 
 
 @mod.route('/location/wages-and-employment', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("apps:ranking_location_wages"))
 def location_wages():
     return render_template('rankings/location-wages.html', tab='location-wages')
 

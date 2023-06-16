@@ -37,12 +37,7 @@ var LocationWages = function () {
         },
         "order": [],
         "columns": [
-            {
-                render: function (data, type, row, meta){
-
-                    return row[2];
-                }
-            },
+            {data: 2},
             {
                 render: function (data, type, row, meta){
 
