@@ -41,7 +41,6 @@ def location_wages():
 
 
 @mod.route('/occupation', methods=['GET'])
-@view_cache.cached(key_prefix=api_cache_key("apps:ranking_occupation"))
 def occupation():
     return render_template('rankings/occupation.html', tab='occupation')
 
