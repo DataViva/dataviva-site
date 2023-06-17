@@ -32,9 +32,9 @@ var BasicCourseTable = function () {
         "columns": [
             {data: 0},
             {data: 6},
-            {
+            {   
                 render: function (data, type, row, meta){
-                    return dataviva.course_sc[row[6]].name.truncate(35);
+                    return dataviva.course_sc[row[6]]?.name.truncate(35);
                 }
             },
             {

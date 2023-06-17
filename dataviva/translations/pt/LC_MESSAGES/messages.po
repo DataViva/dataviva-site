@@ -122,8 +122,6 @@ msgstr "Renda Mensal Média"
 
 #: dataviva/api/stats/profile_helper.py:130
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:16
-#: dataviva/apps/rankings/templates/rankings/location-wages.html:16
-#: dataviva/apps/rankings/templates/rankings/occupation.html:16
 #: dataviva/translations/dictionary.py:265
 msgid "Total Establishments"
 msgstr "Total de Estabelecimentos"
@@ -3319,14 +3317,14 @@ msgstr "Diversidade Efetiva de Destino das Exportações"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:15
 msgid "Wage"
-msgstr "Nova Imagem"
+msgstr "Massa Salarial"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:17
 msgid "Average Monthly"
 msgstr "Renda Mensal Média"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:20
-msgid "ANominal Wage Growth (1 year)"
+msgid "Nominal Wage Growth (1 year)"
 msgstr "Crescimento Nominal dos Salários (1 ano)"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:22
