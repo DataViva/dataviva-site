@@ -21,29 +21,29 @@
 <input type="hidden" id="id_ibge" value="{{id_ibge}}">
 <!-- BREADCRUMB -->
 <div class="container">
-	<div class="row bg-white">
-		<ol class="breadcrumb">
-			<li>
-				<a href="{{ url_for('general.home') }}">Home</a>
-			</li>
-			<li {{ 'class="active"' if not location else '' }}>
-				<a href="#" title="Trocar">
-					<optionChanger data-db="hedu_course" data-filter="{{id_ibge}}" data-text="{{ major.name() }}">
-						{{ major.name() }}
-					</optionChanger>
-				</a>
-			</li>
-			{% if location %}
-			<li class="active">
-				<a href="#" title="Trocar">
-					<optionChanger data-db="location" data-text="{{ location.name() }}">
-						{{ location.name() }}
-					</optionChanger>
-				</a>
-			</li>
-			{% endif %}
-		</ol>
-	</div>
+    <div class="row bg-white">
+        <ol class="breadcrumb">
+            <li>
+                <a href="{{ url_for('general.home') }}">Home</a>
+            </li>
+            <li {{ 'class="active"' if not location else '' }}>
+                <a href="#" title="Trocar">
+                  {{ major.name() }}
+                </a>
+            </li>
+            {% if location %}
+                <li class="active">
+                    <a href="#" title="Trocar">
+                      <optionChanger
+                        data-db="location"
+                        data-text="{{ location.name() }}">
+                        {{ location.name() }}
+                      </optionChanger>
+                    </a>
+                </li>
+            {% endif %}
+        </ol>
+    </div>
 </div>
 <!-- BREADCRUMB -->
 
@@ -61,39 +61,40 @@
 	<div class="summary-box">
 		<div class="container">
 
-			<span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
-			<h1>
-				{{ major.name() }}
-				{% if not location.id %}
-				{% trans %}in Brazil{% endtrans %}
-				{% else %}
-				{% if location.id | length <= 3 %} {{location.preposition('em')}} {{location.name()}} {% else %}
-					{{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }} {% endif %} {%
-					endif %} <div class="btn-group">
-					<button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false">
-						trocar <span class="caret"></span>
-					</button>
-					<ul class="dropdown-menu">
-						<li onclick="event.stopPropagation();">
-							<a onclick="click_on_children(event)">
-								<optionChanger data-db="hedu_course" data-filter="{{id_ibge}}"
-									data-text="{% trans %}Major{% endtrans %}">
-									{% trans %}Major{% endtrans %}
-								</optionChanger>
-							</a>
-						</li>
-						<li onclick="event.stopPropagation();">
-							<a onclick="click_on_children(event)">
-								<optionChanger data-db="location" data-text="{% trans %}Location{% endtrans %}">
-									{% trans %}Location{% endtrans %}
-								</optionChanger>
-							</a>
-						</li>
-					</ul>
-			</div>
-			</h1>
-		<span class="clearfix"></span>
+            <span class="portrait dv-course-hedu-{{ major.id[0:2] }} hidden-xs"></span>
+            <h1>
+                {{ major.name() }} 
+                {% if not location.id %}
+                {% trans %}in Brazil{% endtrans %}
+                {% else %}
+                {% if location.id | length <= 3 %}
+                    {{location.preposition('em')}} {{location.name()}}
+                  {% else %}
+                    {{location.preposition('em')}} {{location.name()}} - {{ location.abbreviation }}
+                  {% endif %}
+                {% endif %}
+                <div class="btn-group">
+                  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{%trans%}change{%endtrans%}<span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <li onclick="event.stopPropagation();">
+                      <a onclick="select_attr('course_hedu');">
+                        {% trans %}Major{% endtrans %}
+                      </a>
+                    </li>
+                    <li onclick="event.stopPropagation();">
+                      <a onclick="click_on_children(event)">
+                        <optionChanger
+                          data-db="location"
+                          data-text="{% trans %}Location{% endtrans %}">
+                          {% trans %}Location{% endtrans %}
+                        </optionChanger>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+            </h1>
+            <span class="clearfix"></span>
 
 		<div class="indices">
 			<div class="row">
@@ -138,8 +139,8 @@
 
 
 {% block script %}
-<script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
-<script type="text/javascript" src="/static/js/graphs/helper.js"></script>
-<script type="text/javascript" src="/static/js/modules/widgets.js"></script>
-<script type="text/javascript" src="/static/js/modules/major.js"></script>
+    <script type="text/javascript" src="/static/js/modules/dictionary.js"></script>
+    <script type="text/javascript" src="/static/js/graphs/helper.js"></script>
+    <script type="text/javascript" src="/static/js/modules/widgets.js"></script>
+    <script type="text/javascript" src="/static/js/modules/major.js"></script>
 {% endblock %}

@@ -179,17 +179,22 @@ def index(occupation_id, tab):
         occupation_id=occupation_id, bra_id=bra_id)
 
     header['average_monthly_income'] = occupation_service.average_monthly_income()
+    header['salary_mass'] = occupation_service.salary_mass()
     header['total_employment'] = occupation_service.total_employment()
     header['year'] = occupation_service.year()
 
     if not is_municipality:
         body['municipality_with_more_jobs'] = occupation_municipalities_service.municipality_with_more_jobs()
+        body['municipality_with_more_jobs_value'] = occupation_municipalities_service.highest_number_of_jobs()
         body['municipality_with_more_jobs_state'] = occupation_municipalities_service.municipality_with_more_jobs_state()
         body['municipality_with_biggest_wage_avg'] = occupation_municipalities_service.municipality_with_biggest_wage_average()
+        body['municipality_with_biggest_wage_avg_value'] = occupation_municipalities_service.biggest_wage_average()
+        body['municipality_with_biggest_wage_avg_state'] = occupation_municipalities_service.municipality_with_biggest_wage_average_state()
 
-    if not bra_id:
-        body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
-
+    body['activity_with_more_jobs'] = occupation_activities_service.activity_with_more_jobs()
+    body['activity_with_more_jobs_value'] = occupation_activities_service.highest_number_of_jobs()
+    body['activity_with_biggest_wage_avg'] = occupation_activities_service.activity_with_biggest_wage_average()
+    body['activity_with_biggest_wage_avg_value'] = occupation_activities_service.biggest_wage_average()
     body['year'] = occupation_activities_service.year()
 
     if location:

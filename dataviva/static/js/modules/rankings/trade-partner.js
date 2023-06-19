@@ -39,11 +39,11 @@ var TradePartnerTable = function () {
         },
         "order": [],
         "columns": [
-            {data: 0},
+            {data: 0},  
             {data: 15},
             {
                 render: function (data, type, row, meta){
-                    return dataviva.wld[row[15]].name.truncate(35);
+                    return dataviva.wld[row[15]]?.name.truncate(35);
                 }
             },
             {

@@ -29,7 +29,7 @@
     <nav class="sidebar well col-xs-12 col-sm-3 col-md-3" style="margin-top: 0">
         <ul class="sub-menu">
             <li>
-                <input type="hidden" id="dataset" value="{{ dataset if dataset }}">
+                <input type="hidden" id="dataset" value="{{ dataset if dataset else "rais"}}">
                 <div class="form-group">
                     <label for="datasets" class="control-label">{% trans %}Database{% endtrans %}</label>
                     <select class="form-control" id="datasets" name="datasets">
@@ -38,17 +38,17 @@
                 </div>
             </li>
             <li id="dimensions">
-                <input type="hidden" id="filter0" value="{{ filter0 if filter0 }}">
-                <input type="hidden" id="filter1" value="{{ filter1 if filter1 }}">
-                <input type="hidden" id="filter2" value="{{ filter2 if filter2 }}">
+                <input type="hidden" id="filter0" value="{{ filter0 if filter0 else "4mg030000"}}">
+                <input type="hidden" id="filter1" value="{{ filter1 if filter1 else "all"}}">
+                <input type="hidden" id="filter2" value="{{ filter2 if filter2 else "all"}}">
             </li>
 
             <li id="views">
-                <input type="hidden" id="view" value="{{ view if view }}">
+                <input type="hidden" id="view" value="{{ view if view else "Industry Space" }}">
             </li>
 
             <li id="graphs">
-                <input type="hidden" id="graph" value="{{ graph if graph }}">
+                <input type="hidden" id="graph" value="{{ graph if graph else "network"}}">
             </li>
 
             <li id="compare-location">

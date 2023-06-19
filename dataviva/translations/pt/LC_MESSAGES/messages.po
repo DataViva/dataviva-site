@@ -122,8 +122,6 @@ msgstr "Renda Mensal Média"
 
 #: dataviva/api/stats/profile_helper.py:130
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:16
-#: dataviva/apps/rankings/templates/rankings/location-wages.html:16
-#: dataviva/apps/rankings/templates/rankings/occupation.html:16
 #: dataviva/translations/dictionary.py:265
 msgid "Total Establishments"
 msgstr "Total de Estabelecimentos"
@@ -829,7 +827,6 @@ msgstr "Matrículas"
 
 #: dataviva/apps/basic_course/templates/basic_course/index.html:15
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:4
-#, fuzzy
 msgid "The highest number of enrollments in the "
 msgstr "O maior número de matrículas para o curso/campo de "
 
@@ -843,7 +840,6 @@ msgstr "do Brasil encontra-se no município de "
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:20
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:28
 #: dataviva/apps/basic_course/templates/basic_course/tab-general.html:36
-#, fuzzy
 msgid "The highest number of enrollments in "
 msgstr "O maior número de matrículas para o curso/campo de "
 
@@ -1517,7 +1513,6 @@ msgid "Bar"
 msgstr "Barras"
 
 #: dataviva/apps/health/templates/health/graphs-equipments.html:5
-#, fuzzy
 msgid "Equipment Type"
 msgstr "Equipamentos por"
 
@@ -2156,12 +2151,10 @@ msgid "Education Level"
 msgstr "Nível de Ensino"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:5
-#, fuzzy
 msgid "Equipments by"
 msgstr "Equipamentos por"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:46
-#, fuzzy
 msgid "Establishments by"
 msgstr "Estabelecimentos por"
 
@@ -2171,22 +2164,18 @@ msgid "Unit Type"
 msgstr "Tipo de Unidade"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:75
-#, fuzzy
 msgid "Facilities"
 msgstr "Instalações"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:83
-#, fuzzy
 msgid "Beds by"
 msgstr "Leitos por"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:101
-#, fuzzy
 msgid "Bed Type"
 msgstr "Tipo de Leito"
 
 #: dataviva/apps/location/templates/location/graphs-health.html:124
-#, fuzzy
 msgid "Professionals by"
 msgstr "Profissionais por"
 
@@ -2594,7 +2583,6 @@ msgstr "O curso/campo de "
 
 #: dataviva/apps/major/templates/major/index.html:14
 #: dataviva/apps/major/templates/major/tab-general.html:5
-#, fuzzy
 msgid "is the "
 msgstr "é o"
 
@@ -2729,7 +2717,6 @@ msgid "professionals, being number "
 msgstr "profissionais, ocupando o "
 
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:7
-#, fuzzy
 msgid ""
 "in the Brazilian occupation ranking. The Brazilian city that employs the "
 "most in this occupation is "
@@ -3330,14 +3317,14 @@ msgstr "Diversidade Efetiva de Destino das Exportações"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:15
 msgid "Wage"
-msgstr "Nova Imagem"
+msgstr "Massa Salarial"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:17
 msgid "Average Monthly"
 msgstr "Renda Mensal Média"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:20
-msgid "ANominal Wage Growth (1 year)"
+msgid "Nominal Wage Growth (1 year)"
 msgstr "Crescimento Nominal dos Salários (1 ano)"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:22
@@ -3554,7 +3541,6 @@ msgid "number "
 msgstr "posiçāo de número "
 
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:27
-#, fuzzy
 msgid ""
 " in the export destinations of Brazil by trade value. The most exported "
 "product from Brazil to this country is "
