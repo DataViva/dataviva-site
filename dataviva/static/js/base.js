@@ -730,11 +730,11 @@ $(document).ready(function () {
                                 text: response.message,
                                 type: "success"
                             });
-                            $form[0].reset();
                             $name.prop('disabled', false);
                             $email.prop('disabled', false);
                             $message.prop('disabled', false);
                             $submit.prop('disabled', false);
+                            $form[0].reset();
                         },
                         error: function(response) {
                             var errors = $.parseJSON(response.responseText);
