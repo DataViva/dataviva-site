@@ -28,12 +28,11 @@
 			{% endif %}
 			</div>
 
-			<div class="main-content col-md-9" id="contact-form">
+			<div class="main-content col-md-9">
 				<h2>{% trans %}Contact{% endtrans %}</h2>
 				<p>{% trans %}Got any questions or want to send a suggestion? Contact the DataViva team using the form below:{% endtrans %}</p>
 				<div class="row">
-					<form method="post" action="{{ action }}" class="form-horizontal">
-					
+					<form method="post" action="{{ action }}" class="form-horizontal" id="contact-form">
 						<div class="form-group">
 							<label for="footer-nome" class="col-xs-15 col-sm-5 col-md-3 control-label" style= "text-align: left;">{% trans %}Name{% endtrans %}</label>
 							<div class="col-xs-15 col-sm-10 col-md-11">

@@ -730,6 +730,7 @@ $(document).ready(function () {
                                 text: response.message,
                                 type: "success"
                             });
+                            $form[0].reset();
                             $name.prop('disabled', false);
                             $email.prop('disabled', false);
                             $message.prop('disabled', false);
