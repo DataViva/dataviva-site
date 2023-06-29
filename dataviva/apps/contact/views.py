@@ -39,26 +39,22 @@ def index():
 @mod.route('/', methods=['POST'])
 def create():
     form = ContactForm()
-    if form.validate() is False:
-        for error_type in form.errors:
-            if form.errors[error_type][0] in dictionary():
-                form.errors[error_type][0] = dictionary()[form.errors[error_type][0]]
-        return render_template('contact/index.html', form=form, action=url_for('contact.create'))
-    else:
-        contact = Form()
-        contact.name = form.name.data
-        contact.email = form.email.data
-        contact.subject = form.subject.data
-        contact.message = form.message.data
-        contact.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    contact = Form()
+    contact.name = form.name.data
+    contact.email = form.email.data
+    contact.subject = form.subject.data
+    contact.message = form.message.data
+    contact.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-        message_tpl = render_template('contact/message_template.html', contact=contact)
+    message_tpl = render_template(
+        'contact/message_template.html', contact=contact)
 
-        db.session.add(contact)
-        db.session.commit()
-        send_mail("Contato - DataViva", [admin_email], message_tpl)
+    db.session.add(contact)
+    db.session.commit()
+    send_mail("Contato - DataViva", [admin_email], message_tpl)
 
-        message = gettext("Your message has been sent successfully. We will soon get back to you.")
-        flash(message, 'success')
+    message = gettext(
+        "Your message has been sent successfully. We will soon get back to you.")
+    flash(message, 'success')
 
-        return redirect(url_for('contact.create'))
+    return redirect(url_for('contact.create'))
