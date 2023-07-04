@@ -173,6 +173,7 @@ img {
   margin: 0 auto;
   height: 227px;
   width: 350px;
+  -webkit-column-width: 350px;
 }
 .home .news .row .col-sm-4 p{
   margin-bottom: 30px;
