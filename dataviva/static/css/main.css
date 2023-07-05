@@ -53,10 +53,7 @@ body {
   background: #FFF;
   color: #676a6c;
   font-size: 14px;
-  all: unset; /* Remove all default styles */
 }
-
-
 
 .buttons-home {
   padding: 12px;
@@ -294,9 +291,9 @@ body {
 
 @media (max-width: 1199px) {
   .navbar-brand {
-    width: 200px !important;
+    width: 200px;
     height: auto !important;
-    padding: 5px 15px !important;
+    padding: 5px 15px;
   }
 
   .navbar-nav>li>a {
@@ -436,7 +433,7 @@ body {
 
 @media (max-width: 767px) {
   .navbar-brand {
-    padding: 5px 15px !important;
+    padding: 5px 15px;
   }
 }
 
@@ -452,19 +449,19 @@ body {
 
 @media (max-width: 991px) {
   .navbar-brand {
-    padding: 8px 15px !important;
+    padding: 8px 15px;
   }
 }
 
 @media (max-width: 1200px) {
   .navbar-brand {
-    padding: 14px 15px !important;
+    padding: 14px 15px;
   }
 }
 
 @media (min-width: 1200px) {
   .navbar-brand {
-    padding: 8px 15px !important;
+    padding: 8px 15px;
   }
 }
 
@@ -1148,7 +1145,7 @@ body .t-bg-green{
 /* Extra Small devices (less than 768px) */
 @media (max-width: 767px) {
   .navbar-brand>img {
-    height: 52px !important;
+    height: 52px;
     width: 100% !important;
   }
 
@@ -1162,7 +1159,7 @@ body .t-bg-green{
 /* Small devices (tablets, 768px and up) */
 @media (max-width: 1200px) {
   .navbar-brand>img {
-    height: 56px !important;
+    height: 56px;
     width: 100% !important;
   }
 }
@@ -1171,7 +1168,7 @@ body .t-bg-green{
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1201px) {
   .navbar-brand>img {
-    height: 74px !important;
+    height: 74px;
     width: 100% !important;
   }
 }
