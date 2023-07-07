@@ -1147,6 +1147,8 @@ body .t-bg-green{
   .navbar-brand>img {
     height: 52px;
     width: 100% !important;
+    display: -webkit-inline-box; 
+    -webkit-max-logical-height: 52px; 
   }
 
   .navbar-toggle {
@@ -1161,6 +1163,8 @@ body .t-bg-green{
   .navbar-brand>img {
     height: 56px;
     width: 100% !important;
+    display: -webkit-inline-box; 
+    -webkit-max-logical-height: 56px; 
   }
 }
 
@@ -1170,7 +1174,15 @@ body .t-bg-green{
   .navbar-brand>img {
     height: 74px;
     width: 100% !important;
+    display: -webkit-inline-box; 
+    -webkit-max-logical-height: 74px; 
   }
+}
+
+.navbar-brand>img {
+    display: -webkit-inline-box; 
+    -webkit-max-logical-width: 240px; 
+    -webkit-max-logical-height: 80px; 
 }
 
 /* SUMMERNOTE */
