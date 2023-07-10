@@ -5413,8 +5413,8 @@ msgid "Petroleum"
 msgstr "Petróleo"
 
 #: dataviva/templates/general/index.html:45
-msgid "Explore the methodology of the new Regional Economic Complexity Indicator (ICR) available on DataViva"
-msgstr "Conheça a metodologia do novo Indicador de Complexidade Econômica Regional (ICR) disponível no DataViva"
+msgid "Explore the methodology of the new Regional Economic Complexity Index (ICR) available on DataViva"
+msgstr "Conheça a metodologia do novo Índice de Complexidade Econômica Regional (ICR) disponível no DataViva"
 
 #: dataviva/templates/general/index.html:85
 msgid "Business management"
