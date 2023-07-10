@@ -3247,6 +3247,18 @@ msgstr "Diversidade de Localidades"
 msgid "Effective Location Diversity"
 msgstr "Diversidade Efetiva de Localidades"
 
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:17
+msgid "ECI-R"
+msgstr "ICE-R"
+
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:18
+msgid "Average Distance"
+msgstr "Distância média"
+
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:19
+msgid "Average Oportunity Gain"
+msgstr "Ganho de oportunidade médio"
+
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:12
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:12
 #: dataviva/translations/dictionary.py:337

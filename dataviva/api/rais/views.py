@@ -1,4 +1,3 @@
-import StringIO, csv
 from flask import Blueprint, request, jsonify, Response
 from dataviva import db
 from dataviva.api.attrs.models import Bra
@@ -12,7 +11,6 @@ from dataviva.utils.csv_helper import gen_csv, is_download
 mod = Blueprint('rais', __name__, url_prefix='/rais')
 
 @mod.route('/<year>/<bra_id>/<cnae_id>/<cbo_id>/')
-@view_cache.cached(key_prefix=api_cache_key("rais"), unless=is_download)
 def rais_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)
@@ -25,7 +23,7 @@ def rais_api(**kwargs):
     exclude = request.args.get('exclude', None) or kwargs.pop('exclude', None)
     download = request.args.get('download', None) or kwargs.pop('download', None)
     required_bras = request.args.get('required_bras', False) or kwargs.pop('required_bras', False)
-
+    
     if required_bras:
         bra_id = kwargs.get("bra_id")
         cnae_id = kwargs.get("cnae_id").split(".")[0]
@@ -38,6 +36,7 @@ def rais_api(**kwargs):
         for req in reqs:
             bras = [Bra.query.get(b).serialize() for b in req.required_bras.split(",")]
             results[req.year] = bras
+        print("resultados: 1", results)
         return jsonify(data=results)
 
     if exclude and "," in exclude:
@@ -59,7 +58,7 @@ def rais_api(**kwargs):
         stripped_columns = [Yo.year, Yo.cbo_id, Yo.cnae_diversity, Yo.cnae_diversity_eff]
         diversity_results = query_helper.query_table(Yo, columns=stripped_columns, filters=stripped_filters, groups=stripped_groups, limit=limit, order=order, sort=sort, serialize=serialize)
         results["diversity"] = diversity_results
-
+    
     if serialize or download:
         response = jsonify(results)
         if download:

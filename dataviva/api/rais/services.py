@@ -498,6 +498,18 @@ class LocationJobs(LocationIndustry):
         self.rais_query = Yb_rais.query.filter(
             Yb_rais.bra_id == self.bra_id,
             Yb_rais.year == self.max_year_query)
+        
+    def opp_gain(self):
+        return self.__rais__().opp_gain
+        
+    def density(self):
+        return self.__rais__().density
+        
+    def eci(self):
+        return self.__rais__().eci
+    
+    def distance(self):
+        return self.__rais__().distance
 
     def avg_wage(self):
         return self.__rais__().wage_avg
