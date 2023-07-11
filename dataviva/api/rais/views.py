@@ -39,7 +39,6 @@ def rais_api(**kwargs):
             bras = [Bra.query.get(b).serialize()
                     for b in req.required_bras.split(",")]
             results[req.year] = bras
-        print("resultados: 1", results)
         return jsonify(data=results)
 
     if exclude and "," in exclude:
