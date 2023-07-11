@@ -2907,7 +2907,6 @@ msgid "Occupation Diversity"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:23
-#: dataviva/apps/rankings/templates/rankings/location-wages.html:25
 #: dataviva/translations/dictionary.py:211
 msgid "Effective Occupation Diversity"
 msgstr ""
@@ -2933,6 +2932,18 @@ msgstr ""
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:12
 #: dataviva/translations/dictionary.py:337
 msgid "IBGE ID"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:19
+msgid "Average Oportunity Gain"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:18
+msgid "Average Distance"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:17
+msgid "ECI-R"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:14
@@ -3016,7 +3027,6 @@ msgstr ""
 msgid "Industry Diversity"
 msgstr ""
 
-#: dataviva/apps/rankings/templates/rankings/location-wages.html:23
 #: dataviva/apps/rankings/templates/rankings/occupation.html:24
 #: dataviva/translations/dictionary.py:206
 msgid "Effective Industry Diversity"

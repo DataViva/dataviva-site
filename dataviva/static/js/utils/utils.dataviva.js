@@ -3,27 +3,27 @@ dataviva.slide = {};
 dataviva.popover = {};
 dataviva.slide.timing = 0.75, // timing of page slides, in seconds
 
-dataviva.obj2csv = function(obj) {
-  var str = ''
+  dataviva.obj2csv = function (obj) {
+    var str = ''
 
-  for (var key in obj) {
-    str += key
-    str += ","
-    var o = obj[key]
-    for (l in o) {
-      str += o[l]
+    for (var key in obj) {
+      str += key
       str += ","
+      var o = obj[key]
+      for (l in o) {
+        str += o[l]
+        str += ","
+      }
+      str = str.substr(0, str.length - 1)
+      str += "\n"
     }
-    str = str.substr(0, str.length - 1)
-    str += "\n"
+
+    return str;
+
   }
 
-  return str;
-
-}
-
 dataviva.format = {};
-dataviva.format.text = function(text, opts) {
+dataviva.format.text = function (text, opts) {
 
   if (!opts) opts = {};
   var name = opts.key || "";
@@ -42,8 +42,8 @@ dataviva.format.text = function(text, opts) {
   }
 
   var exceptions = ["id", "bra_id", "id_ibge", "cnae_id", "cbo_id",
-                    "hs_id", "wld_id", "university_id", "course_hedu_id",
-                    "school_id", "course_sc_id"];
+    "hs_id", "wld_id", "university_id", "course_hedu_id",
+    "school_id", "course_sc_id"];
 
   if (exceptions.indexOf(name) >= 0) return text.toUpperCase()
   else if (text.indexOf("cp_bra_") == 0 && app) {
@@ -55,7 +55,7 @@ dataviva.format.text = function(text, opts) {
     if (index >= app.build.bra.length)
       index = index % app.build.bra.length;
 
-    return app.build.bra[index]["name_"+l] + " - "+format_name(text);
+    return app.build.bra[index]["name_" + l] + " - " + format_name(text);
   }
   else if (!name || (name.indexOf("_display") < 0 && name.indexOf("_id") < 0)) {
     return format_name(text)
@@ -67,16 +67,16 @@ dataviva.format.text = function(text, opts) {
     var labels = dataviva.dictionary;
 
     if (name.indexOf("_display") >= 0) {
-      name = name.split("_")[0]+"_id"
+      name = name.split("_")[0] + "_id"
     }
 
     if (!name) return name
     else if (name.indexOf("_stats_") > 0) {
       var n = name.split("_")
-      var s = {"en": "Stats", "pt": "Estat\u00edsticas"}
-      return n[2]+" "+s[l]+" ("+n[0].toUpperCase()+")"
+      var s = { "en": "Stats", "pt": "Estat\u00edsticas" }
+      return n[2] + " " + s[l] + " (" + n[0].toUpperCase() + ")"
     }
-    else if(labels[name]){
+    else if (labels[name]) {
       if (labels[name]) return labels[name]
       else return name.toTitleCase()
     }
@@ -93,8 +93,8 @@ dataviva.format.text = function(text, opts) {
     else if (name.indexOf("_") > -1) {
       year = name.split("_")[1]
       label = name.split("_")[0]
-      if (labels[label]) return labels[label] + " ("+year+")"
-      return label.toTitleCase() + " ("+year+")"
+      if (labels[label]) return labels[label] + " (" + year + ")"
+      return label.toTitleCase() + " (" + year + ")"
     }
     else return name.toTitleCase()
 
@@ -103,19 +103,19 @@ dataviva.format.text = function(text, opts) {
 }
 
 dataviva.format.affixes = {
-  "val_usd": ["USD ",""],
-  "export_val": ["USD ",""],
-  "import_val": ["USD ",""],
-  "export_kg": [""," kg"],
-  "import_kg": [""," kg"],
-  "export_val_kg": ["USD ",""],
-  "import_val_kg": ["USD ",""],
-  "purchase_value": ["R$ ",""],
-  "transfer_value": ["R$ ",""],
-  "wage": ["R$ ",""],
-  "wage_avg": ["R$ ",""],
-  "wage_month": ["R$ ",""],
-  "wage_avg_bra": ["R$ ",""]
+  "val_usd": ["USD ", ""],
+  "export_val": ["USD ", ""],
+  "import_val": ["USD ", ""],
+  "export_kg": ["", " kg"],
+  "import_kg": ["", " kg"],
+  "export_val_kg": ["USD ", ""],
+  "import_val_kg": ["USD ", ""],
+  "purchase_value": ["R$ ", ""],
+  "transfer_value": ["R$ ", ""],
+  "wage": ["R$ ", ""],
+  "wage_avg": ["R$ ", ""],
+  "wage_month": ["R$ ", ""],
+  "wage_avg_bra": ["R$ ", ""]
 };
 
 for (var a in dataviva.format.affixes) {
@@ -123,7 +123,7 @@ for (var a in dataviva.format.affixes) {
   dataviva.format.affixes["cp_bra_1_" + a] = dataviva.format.affixes[a];
 }
 
-dataviva.format.number = function(value, opts) {
+dataviva.format.number = function (value, opts) {
 
   if (!opts) opts = {};
   var name = opts.key || "";
@@ -136,13 +136,13 @@ dataviva.format.number = function(value, opts) {
   if (name.indexOf("_growth") >= 0) value = value * 100;
 
   var smalls = ["rca", "rca_bra", "rca_wld", "rcd", "distance", "distance_wld",
-                "eci", "pci", "opp_gain", "opp_gain_wld",
-                "bra_diversity_eff", "cnae_diversity_eff", "cbo_diversity_eff",
-                "hs_diversity_eff", "wld_diversity_eff"];
+    "eci", "pci", "opp_gain", "opp_gain_wld",
+    "bra_diversity_eff", "cnae_diversity_eff", "cbo_diversity_eff",
+    "hs_diversity_eff", "wld_diversity_eff"];
 
   var exceptions = ["id", "bra_id", "id_ibge", "cnae_id", "cbo_id",
-                    "hs_id", "wld_id", "university_id", "course_hedu_id",
-                    "school_id", "course_sc_id"];
+    "hs_id", "wld_id", "university_id", "course_hedu_id",
+    "school_id", "course_sc_id"];
 
   if (exceptions.indexOf(name) >= 0) return value.toString().toUpperCase();
 
@@ -158,12 +158,7 @@ dataviva.format.number = function(value, opts) {
     return_value += "%";
   }
   else if (smalls.indexOf(name) >= 0 || value < 1) {
-    var r = value.toString().split(""), len = false;
-    r.forEach(function(n,i){
-      if (n != "0" && n != "." && !len) len = i;
-    });
-    if (len > 5) len = 5;
-    return_value = d3.round(value, len + 1);
+    return_value = d3.round(value, 3);
   }
   else if (value.toString().split(".")[0].length > 3) {
 
@@ -191,7 +186,7 @@ dataviva.format.number = function(value, opts) {
       else if (symbol == "k") {
         symbol = "Mil"
       }
-      symbol = " "+symbol
+      symbol = " " + symbol
     }
 
     return_value = value + symbol;
@@ -223,20 +218,20 @@ dataviva.format.number = function(value, opts) {
   else if (growth) {
     return_value += "%";
     var arrow = negative ? "down" : "up";
-    return_value = "<span class='text-"+arrow+"'>" + (negative ? "-" : "") +
-                        return_value + "&nbsp;<i class='growth-arrow "+arrow+" fa fa-arrow-circle-"+arrow+"'></i>" +
-                    "</span>";
+    return_value = "<span class='text-" + arrow + "'>" + (negative ? "-" : "") +
+      return_value + "&nbsp;<i class='growth-arrow " + arrow + " fa fa-arrow-circle-" + arrow + "'></i>" +
+      "</span>";
   }
 
   return_value = String(return_value)
 
   if (dataviva.language === "pt") {
     var n = return_value.split(".")
-    n[0] = n[0].replace(",",".")
+    n[0] = n[0].replace(",", ".")
     return_value = n.join(",")
   }
 
-  if (negative && !growth) return_value = "-"+return_value
+  if (negative && !growth) return_value = "-" + return_value
 
   return return_value
 
@@ -244,23 +239,23 @@ dataviva.format.number = function(value, opts) {
 
 dataviva.ui = {}
 
-dataviva.ui.background = function() {
+dataviva.ui.background = function () {
   var fs = d3.select("#fullscreen")
   if (fs.node()) {
     // var filename = "clouds"
     var filename = "city_small"
-    fs.style("background-image","url('/static/img/bgs/"+filename+".jpg')")
+    fs.style("background-image", "url('/static/img/bgs/" + filename + ".jpg')")
 
-    resizebg = function() {
+    resizebg = function () {
       var w = window.innerWidth,
-          h = window.innerHeight,
-          aspect = w/h
+        h = window.innerHeight,
+        aspect = w / h
 
       if (aspect > 1.5) {
-        fs.style("background-size",w+"px "+(w/1.5)+"px")
+        fs.style("background-size", w + "px " + (w / 1.5) + "px")
       }
       else {
-        fs.style("background-size",(h*1.5)+"px "+h+"px")
+        fs.style("background-size", (h * 1.5) + "px " + h + "px")
       }
     }
 
@@ -271,22 +266,22 @@ dataviva.ui.background = function() {
   }
 }
 
-dataviva.ui.tooltip = function(id, obj, align, parent) {
+dataviva.ui.tooltip = function (id, obj, align, parent) {
   if (obj) {
 
     var size = obj.getBoundingClientRect(),
-        text = obj.getAttribute("alt") ? obj.getAttribute("alt") : id
+      text = obj.getAttribute("alt") ? obj.getAttribute("alt") : id
 
     if (!align) var align = "bottom center"
 
     var t = align.split(" ")[0]
-    if (t == "center") var offset = size.width/2
-    else var offset = size.height/2
+    if (t == "center") var offset = size.width / 2
+    else var offset = size.height / 2
 
     d3plus.tooltip.remove(id);
     d3plus.tooltip.create({
-      "x": size.left+size.width/2,
-      "y": size.top+size.height/2,
+      "x": size.left + size.width / 2,
+      "y": size.top + size.height / 2,
       "offset": offset,
       "arrow": true,
       "description": text,
@@ -309,61 +304,61 @@ dataviva.ui.tooltip = function(id, obj, align, parent) {
 // </div>
 
 
-dataviva.ui.loading = function(parent) {
+dataviva.ui.loading = function (parent) {
 
   var self = this
 
-  d3.select(parent).classed('loading',true);
+  d3.select(parent).classed('loading', true);
 
   this.div = d3.select(parent).insert("div", ":first-child")
-    .attr("class","page-loader")
+    .attr("class", "page-loader")
 
   this.icon = self.div.append("div")
-    .attr("class","loader-icon")
+    .attr("class", "loader-icon")
 
   this.words = self.div.append("span")
-    .attr("class","text")
+    .attr("class", "text")
 
-  this.timing = parseFloat(self.div.style("transition-duration"),10)*1000
+  this.timing = parseFloat(self.div.style("transition-duration"), 10) * 1000
 
-  this.show = function(callback) {
+  this.show = function (callback) {
 
-    self.div.style("display","block")
+    self.div.style("display", "block")
 
-    setTimeout(function(){
+    setTimeout(function () {
 
-      self.div.style("opacity",1)
+      self.div.style("opacity", 1)
       d3.select(parent).classed('loading', true);
 
       if (callback) {
-        setTimeout(callback,self.timing)
+        setTimeout(callback, self.timing)
       }
 
-    },5)
+    }, 5)
 
     return self
   }
 
-  this.hide = function() {
+  this.hide = function () {
 
-    self.div.style("opacity",0)
+    self.div.style("opacity", 0)
     d3.select(parent).classed('loading', false);
 
-    setTimeout(function(){
-      self.div.style("display","none")
-    },self.timing)
+    setTimeout(function () {
+      self.div.style("display", "none")
+    }, self.timing)
 
     return self
 
   }
 
-  this.text = function(text) {
+  this.text = function (text) {
     self.words.html(text)
     return self
   }
 
-  this.color = function(color) {
-    self.div.style("background-color",color)
+  this.color = function (color) {
+    self.div.style("background-color", color)
     return self
   }
 
@@ -374,10 +369,10 @@ dataviva.ui.loading = function(parent) {
       elem.style.msTransform = 'rotate(' + degree + 'deg)'
       elem.style.transform = 'rotate(' + degree + 'deg)'
       // timeout increase degrees:
-      timer = setTimeout(function() {
+      timer = setTimeout(function () {
         degree = degree + 4;
         rotate(); // loop it
-      },20);
+      }, 20);
     }
 
     rotate();
@@ -388,28 +383,28 @@ dataviva.ui.loading = function(parent) {
 }
 
 // Returns a random number between the min and max passed to the function
-dataviva.random = function(min,max) {
+dataviva.random = function (min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-dataviva.displayID = function(id,type) {
+dataviva.displayID = function (id, type) {
 
-  function romanize (num) {
-      if (!+num)
-          return false;
-      var digits = String(+num).split(""),
-          key = ["","C","CC","CCC","CD","D","DC","DCC","DCCC","CM",
-                 "","X","XX","XXX","XL","L","LX","LXX","LXXX","XC",
-                 "","I","II","III","IV","V","VI","VII","VIII","IX"],
-          roman = "",
-          i = 3;
-      while (i--)
-          roman = (key[+digits.pop() + (i * 10)] || "") + roman;
-      return Array(+digits.join("") + 1).join("M") + roman;
+  function romanize(num) {
+    if (!+num)
+      return false;
+    var digits = String(+num).split(""),
+      key = ["", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
+        "", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
+        "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"],
+      roman = "",
+      i = 3;
+    while (i--)
+      roman = (key[+digits.pop() + (i * 10)] || "") + roman;
+    return Array(+digits.join("") + 1).join("M") + roman;
   }
 
   if (id) {
-    if (["hs","wld"].indexOf(type) >= 0 && id.length > 2) {
+    if (["hs", "wld"].indexOf(type) >= 0 && id.length > 2) {
       return id.slice(2).toUpperCase();
     }
     else if (["hs"].indexOf(type) >= 0) {
@@ -424,50 +419,50 @@ dataviva.displayID = function(id,type) {
 
 }
 
-dataviva.icon = function(id,type,color) {
+dataviva.icon = function (id, type, color) {
 
-  if (["university","school"].indexOf(type) >= 0 && id !== "all") return false;
+  if (["university", "school"].indexOf(type) >= 0 && id !== "all") return false;
   if (type === "bra" && id.length === 1) return false;
 
-  if (type !== "file" && type !== "wld" && id !== "all"){
+  if (type !== "file" && type !== "wld" && id !== "all") {
     var i = type === "bra" ? 1 : 0,
-        depth = dataviva.depths(type)[i],
-        id = id.slice(0,depth);
+      depth = dataviva.depths(type)[i],
+      id = id.slice(0, depth);
   }
   else {
     var id = id;
   }
 
   if (type != "bra" && id == "all" && color == "#ffffff") {
-    id = id+"_black"
+    id = id + "_black"
   }
 
-  return "/static/img/icons/"+type+"/"+type+"_"+id+".png";
+  return "/static/img/icons/" + type + "/" + type + "_" + id + ".png";
 
 }
 
-dataviva.cleanData = function(data, dataset, output) {
+dataviva.cleanData = function (data, dataset, output) {
 
   var zerofills = {
-    "secex": ["export_val","import_val", "import_kg", "export_kg"],
-    "rais": ["wage","wage_avg","num_jobs","num_est"],
+    "secex": ["export_val", "import_val", "import_kg", "export_kg"],
+    "rais": ["wage", "wage_avg", "num_jobs", "num_est"],
     "hedu": ["enrolled"],
     "sc": ["enrolled"],
     "ei": ["purchase_value", "transfer_value"]
   }
 
   var output_attr = output === "bra_r" ? "bra" :
-                    ["age", "basic"].indexOf(output) >= 0 ? "course_sc" :
-                    output === "adm" ? "school" : output;
+    ["age", "basic"].indexOf(output) >= 0 ? "course_sc" :
+      output === "adm" ? "school" : output;
 
   var depths = dataviva.depths(output_attr);
 
   var extras = {}
 
   if ("diversity" in data) {
-    data.diversity.data.forEach(function(d){
+    data.diversity.data.forEach(function (d) {
       extras[d[1]] = {}
-      d.forEach(function(v, i){
+      d.forEach(function (v, i) {
         if (data.diversity.headers[i].indexOf("diversity") >= 0) {
           extras[d[1]][data.diversity.headers[i]] = v
         }
@@ -476,14 +471,14 @@ dataviva.cleanData = function(data, dataset, output) {
   }
 
   if ("pci" in data) {
-    data.pci.data.forEach(function(d){
-      extras[d[1]] = {"pci": d[2]}
+    data.pci.data.forEach(function (d) {
+      extras[d[1]] = { "pci": d[2] }
     })
   }
 
-  var dataObj = data.data.map(function(d){
+  var dataObj = data.data.map(function (d) {
 
-    var temp = d.reduce(function(obj, value, i){
+    var temp = d.reduce(function (obj, value, i) {
       var header = data.headers[i];
       obj[header] = value;
       return obj
@@ -503,11 +498,11 @@ dataviva.cleanData = function(data, dataset, output) {
 
       }
       else {
-        id = temp[output_attr+"_id"];
+        id = temp[output_attr + "_id"];
       }
 
-      depths.forEach(function(depth){
-        temp[output_attr+"_"+depth] = id.slice(0,depth);
+      depths.forEach(function (depth) {
+        temp[output_attr + "_" + depth] = id.slice(0, depth);
       });
 
       if (id in extras) {
@@ -517,26 +512,26 @@ dataviva.cleanData = function(data, dataset, output) {
     }
 
     if (temp.month) {
-      temp.month = new Date(temp.month+"/1/"+temp.year);
+      temp.month = new Date(temp.month + "/1/" + temp.year);
     }
 
-    zerofills[dataset].forEach(function(z){
+    zerofills[dataset].forEach(function (z) {
       if (!(z in temp)) {
         temp[z] = 0
       }
     })
 
     if (dataset === "secex") {
-      temp.export_val_kg = temp.export_kg ? temp.export_val/temp.export_kg : 0;
-      temp.import_val_kg = temp.import_kg ? temp.import_val/temp.import_kg : 0;
+      temp.export_val_kg = temp.export_kg ? temp.export_val / temp.export_kg : 0;
+      temp.import_val_kg = temp.import_kg ? temp.import_val / temp.import_kg : 0;
     }
     else if (dataset === "rais") {
-      if (temp.num_est) temp.num_jobs_est = Math.ceil(temp.num_jobs/temp.num_est);
+      if (temp.num_est) temp.num_jobs_est = Math.ceil(temp.num_jobs / temp.num_est);
       else temp.num_jobs_est = 0;
     }
 
     if ("classes" in temp && "enrolled" in temp) {
-      temp.enrolled_classes = temp.enrolled/temp.classes
+      temp.enrolled_classes = temp.enrolled / temp.classes
     }
 
     return temp
@@ -547,39 +542,39 @@ dataviva.cleanData = function(data, dataset, output) {
 
 }
 
-dataviva.depths = function(type) {
+dataviva.depths = function (type) {
 
-  if (type == "cnae") return [1,3,6];
-  else if (type == "cbo") return [1,4];
-  else if (type == "hs") return [2,6];
-  else if (type == "bra") return [1,3,5,7,9];
-  else if (type == "wld") return [2,5];
-  else if (type == "course_hedu") return [2,6];
+  if (type == "cnae") return [1, 3, 6];
+  else if (type == "cbo") return [1, 4];
+  else if (type == "hs") return [2, 6];
+  else if (type == "bra") return [1, 3, 5, 7, 9];
+  else if (type == "wld") return [2, 5];
+  else if (type == "course_hedu") return [2, 6];
   else if (type == "university") return [5];
-  else if (type == "course_sc") return [2,5];
+  else if (type == "course_sc") return [2, 5];
   else if (type == "school") return [8];
   else return [0];
 
 }
 
-dataviva.popover.create = function(params) {
+dataviva.popover.create = function (params) {
 
   var id = params.id ? params.id : "popover",
-      pop_width = params.width ? params.width : "50%",
-      pop_height = params.height ? params.height : "50%",
-      close = params.close ? params.close : true,
-      color = params.color ? params.color : "#af1f24"
+    pop_width = params.width ? params.width : "50%",
+    pop_height = params.height ? params.height : "50%",
+    close = params.close ? params.close : true,
+    color = params.color ? params.color : "#af1f24"
 
-  document.onkeyup = function(e) {
+  document.onkeyup = function (e) {
     if (e.keyCode == 27) { dataviva.popover.hide(); }   // esc
   };
 
   if (typeof pop_width == "string") {
     if (pop_width.indexOf("%") > 0) {
-      var w_px = (parseFloat(pop_width,10)/100)*window.innerWidth
+      var w_px = (parseFloat(pop_width, 10) / 100) * window.innerWidth
     }
     else {
-      var w_px = parseFloat(pop_width,10)
+      var w_px = parseFloat(pop_width, 10)
     }
   }
   else {
@@ -588,10 +583,10 @@ dataviva.popover.create = function(params) {
 
   if (typeof pop_height == "string") {
     if (pop_height.indexOf("%") > 0) {
-      var h_px = (parseFloat(pop_height,10)/100)*window.innerHeight
+      var h_px = (parseFloat(pop_height, 10) / 100) * window.innerHeight
     }
     else {
-      var h_px = parseFloat(pop_height,10)
+      var h_px = parseFloat(pop_height, 10)
     }
   }
   else {
@@ -599,46 +594,46 @@ dataviva.popover.create = function(params) {
   }
 
   var body = d3.select("body").append("div")
-    .attr("id",id)
-    .attr("class","popover")
-    .style("width",w_px+"px")
-    .style("height",h_px+"px")
-    .style("margin-left",w_px/2+"px")
-    .style("margin-top",h_px/2+"px")
+    .attr("id", id)
+    .attr("class", "popover")
+    .style("width", w_px + "px")
+    .style("height", h_px + "px")
+    .style("margin-left", w_px / 2 + "px")
+    .style("margin-top", h_px / 2 + "px")
 
   if (close) {
     body.append("div")
-      .attr("class","selector_close")
+      .attr("class", "selector_close")
       .html("\&times;")
-      .style("background-color",color)
-      .on(d3plus.client.pointer.click,function(){
-        dataviva.popover.hide("#"+id);
+      .style("background-color", color)
+      .on(d3plus.client.pointer.click, function () {
+        dataviva.popover.hide("#" + id);
         d3.select("body").style("overflow", "auto")
       })
   }
 
 }
 
-dataviva.popover.show = function(id) {
+dataviva.popover.show = function (id) {
 
   if (d3.select("#popover_mask").empty()) {
     d3.select("body").append("div")
-      .attr("id","popover_mask")
-      .on(d3plus.client.pointer.click,function(){
+      .attr("id", "popover_mask")
+      .on(d3plus.client.pointer.click, function () {
         dataviva.popover.hide();
       })
   }
 
   d3.select("#popover_mask")
-    .style("display","block")
+    .style("display", "block")
 
   d3.select(id)
-    .style("display","block")
+    .style("display", "block")
 
   if (Modernizr.cssanimations) {
-    setTimeout(function(){
+    setTimeout(function () {
       show()
-    },5)
+    }, 5)
   }
   else {
     show()
@@ -646,70 +641,70 @@ dataviva.popover.show = function(id) {
 
   function show() {
     d3.select("#popover_mask")
-      .style("opacity",0.8)
+      .style("opacity", 0.8)
 
     d3.select(id)
-      .style("opacity",1)
+      .style("opacity", 1)
   }
 
 }
 
-dataviva.popover.hide = function(id) {
+dataviva.popover.hide = function (id) {
 
   if (id) var popover = d3.select(id)
   else var popover = d3.selectAll(".popover")
 
-  popover.each(function(){
+  popover.each(function () {
 
-      if (d3.select(this).style("display") != "none") {
+    if (d3.select(this).style("display") != "none") {
 
-        var p = d3.select(this)
+      var p = d3.select(this)
 
-        d3.select("#popover_mask").style("opacity",0);
-        p.style("opacity",0);
+      d3.select("#popover_mask").style("opacity", 0);
+      p.style("opacity", 0);
 
-        if (Modernizr.cssanimations) {
-          var timing = parseFloat(p.style("transition-duration"),10)*1000
+      if (Modernizr.cssanimations) {
+        var timing = parseFloat(p.style("transition-duration"), 10) * 1000
 
-          setTimeout(function(){
-            hide()
-          },timing)
-        }
-        else {
+        setTimeout(function () {
           hide()
-        }
-
-        function hide() {
-          p.style("display","none")
-          d3.select("#popover_mask").style("display","none")
-        }
-
+        }, timing)
+      }
+      else {
+        hide()
       }
 
-    })
+      function hide() {
+        p.style("display", "none")
+        d3.select("#popover_mask").style("display", "none")
+      }
+
+    }
+
+  })
 
 }
 
-dataviva.flash = function(text) {
+dataviva.flash = function (text) {
 
-	d3.selectAll("#server_message").remove();
+  d3.selectAll("#server_message").remove();
 
-	d3.select("body").append("div")
+  d3.select("body").append("div")
     .attr("id", "server_message").html(text)
     .append("i")
-        .attr("id", "close_message")
-        .attr("class", "fa fa-times-circle")
-        .on(d3plus.client.pointer.click, function(d){
-        var div = d3.select("#server_message")
-        var timing = parseFloat(div.style("transition-duration"),10)*1000;
-        div.style("opacity",0);
-        setTimeout(function(){
-          div.remove();
-        }, timing)
-      });
+    .attr("id", "close_message")
+    .attr("class", "fa fa-times-circle")
+    .on(d3plus.client.pointer.click, function (d) {
+      var div = d3.select("#server_message")
+      var timing = parseFloat(div.style("transition-duration"), 10) * 1000;
+      div.style("opacity", 0);
+      setTimeout(function () {
+        div.remove();
+      }, timing)
+    });
 };
 
-dataviva.url = function(url,args,title) {
+dataviva.url = function (url, args, title) {
 
   try {
     var same_origin = window.parent.location.host == window.location.host;
@@ -725,7 +720,7 @@ dataviva.url = function(url,args,title) {
   var data_table = window.location.pathname.indexOf("data/table") >= 0
   var rankings = window.location.pathname.indexOf("rankings") >= 0
 
-  if (title) document.title = "DataViva : "+title
+  if (title) document.title = "DataViva : " + title
 
   var params = ""
   if (args && typeof args === "string") {
@@ -739,39 +734,39 @@ dataviva.url = function(url,args,title) {
       }
     }
     params += url_vars.join("&");
-    if (params.length) params = "?"+params
+    if (params.length) params = "?" + params
   }
-  var full_url = url+params
+  var full_url = url + params
 
   if (Modernizr.history) {
     if (replace || iframe) {
-      window.history.replaceState({'prev_request': full_url}, title, full_url)
+      window.history.replaceState({ 'prev_request': full_url }, title, full_url)
     }
     else {
-      window.history.pushState({'prev_request': full_url}, title, full_url)
+      window.history.pushState({ 'prev_request': full_url }, title, full_url)
     }
 
     if (iframe && same_origin) {
 
-      if (title && app_builder) window.parent.document.title = "DataViva : "+title
+      if (title && app_builder) window.parent.document.title = "DataViva : " + title
 
       if (app_builder) {
-        var parent_url = full_url.replace("embed","builder")
+        var parent_url = full_url.replace("embed", "builder")
       }
       else if (data_table || rankings) {
-        var parent_url = full_url.replace("table/","")
+        var parent_url = full_url.replace("table/", "")
       }
       if (replace) {
-        window.parent.history.replaceState({'prev_request': parent_url}, title, parent_url)
+        window.parent.history.replaceState({ 'prev_request': parent_url }, title, parent_url)
       }
       else {
-        window.parent.history.pushState({'prev_request': parent_url}, title, parent_url)
+        window.parent.history.pushState({ 'prev_request': parent_url }, title, parent_url)
       }
     }
   }
   else if (!replace) {
     if (app_builder) {
-      full_url = full_url.replace("embed","builder")
+      full_url = full_url.replace("embed", "builder")
       window.parent.location = full_url
     }
     else {
