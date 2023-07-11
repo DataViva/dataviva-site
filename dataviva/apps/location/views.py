@@ -307,6 +307,7 @@ def all(tab):
 def index(bra_id, tab):
     location = Bra.query.filter_by(id=bra_id).first_or_404()
     is_municipality = location and len(location.id) == 9
+
     menu = request.args.get('menu')
     url = request.args.get('url')
 
@@ -321,9 +322,11 @@ def index(bra_id, tab):
 
     if location:
         location_id = location.id
+        location_img = location_id[:3]
     else:
         location_id = None
-
+        location_img = None
+    
     graph = {}
 
     if menu:
@@ -527,4 +530,4 @@ def index(bra_id, tab):
         latestRaisYear = getRaisLatestYear()
 
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear, location_img=location_img)
