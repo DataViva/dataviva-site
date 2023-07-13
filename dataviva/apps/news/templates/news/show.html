@@ -1,11 +1,15 @@
 {% extends "news/_base.html" %}
 
-{%block head%}
+{%block facebook_metadata%}
+    <meta property="og:image" content="{{ publication.thumb }}" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1280" />
     <meta property="og:image:height" content="720" />
+    <meta property="og:url" content="{{ url_for('news.show', id=publication.id, _external=True, _scheme='http') }}" />
+    <meta property="og:title" content="{{ publication.title }}" />
+    <meta property="og:description" content="{{ publication.text_call }}" />
     <meta property="og:type" content="article" />
-{% endblock head %}
+{% endblock facebook_metadata %}
 
 {% block breadcrumb %}
 <li><a href="{{ url_for('news.index') }}">{% trans %}News{% endtrans %}</a></li>
@@ -47,19 +51,4 @@
 
 {% block script %}
 <script type="text/javascript" src="/static/js/modules/share/device.js"></script>
-<script>
-    const headmeta = document.head;
-
-    for(let i = 0; i < headmeta.children.length; i++){
-        if(headmeta.children[i].getAttribute('property') == 'og:image'){
-            headmeta.children[i].setAttribute('content', '{{ publication.thumb }}')
-        } else if (headmeta.children[i].getAttribute('property') == 'og:title'){
-            headmeta.children[i].setAttribute('content', '{{ publication.title }}')
-        } else if (headmeta.children[i].getAttribute('property') == 'og:url'){
-            headmeta.children[i].setAttribute('content', "{{url_for('news.show', id=publication.id, _external=True, _scheme='http')}}")
-        } else if (headmeta.children[i].getAttribute('property') == 'og:description'){
-            headmeta.children[i].setAttribute('content', "{{publication.text_call}}")
-        }
-    }
-</script>
 {% endblock %}
