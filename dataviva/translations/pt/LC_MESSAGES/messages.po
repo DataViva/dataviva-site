@@ -505,6 +505,10 @@ msgstr "Baixar arquivo"
 msgid "Download File"
 msgstr "Baixar arquivo"
 
+#: dataviva/apps/blog/templates/blog/show.html:28
+msgid "Share"
+msgstr "Compartilhar"
+
 #: dataviva/apps/scholar/templates/index.html:4
 msgid "Studies"
 msgstr "Estudos"
