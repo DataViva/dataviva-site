@@ -35,7 +35,7 @@ var LocationWages = function () {
         "ajax": {
             "url": "/rais/all/show.9/all/all/?order=num_jobs.desc",
             "dataSrc": "data",
-            "cache": false,
+            "cache": true,
         },
         "order": [],
         "columns": [
@@ -48,7 +48,7 @@ var LocationWages = function () {
             },
             {
                 render: function (data, type, row, meta) {
-                    var abbreviation = dataviva.bra[row[10]]?.abbreviation;
+                    var abbreviation = dataviva.bra[row[10]].abbreviation;
                     return row[1].truncate(35) + (abbreviation ? " - " + abbreviation : "");
                 }
             },
