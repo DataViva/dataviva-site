@@ -35,7 +35,7 @@ var LocationWages = function () {
         "ajax": {
             "url": "/rais/all/show.9/all/all/?order=num_jobs.desc",
             "dataSrc": "data",
-            "cache": true,
+            "cache": false,
         },
         "order": [],
         "columns": [
