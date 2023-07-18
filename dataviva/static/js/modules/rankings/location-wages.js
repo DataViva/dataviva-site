@@ -225,8 +225,6 @@ var LocationWages = function () {
             $('.rankings .rankings-wrapper .rankings-content').show();
         }
     });
-    
-    $.fn.dataTable.ext.errMode = 'throw';
 };
 
 dataviva.requireAttrs(['bra'], function () {
