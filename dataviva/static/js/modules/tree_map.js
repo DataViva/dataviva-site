@@ -491,7 +491,7 @@ var getUrls = function () {
 
     urls.push(urls[0].replace(/&year=[0-9]{4}/, ''));
 
-    urls.push(`${api_url}/years/${dataset}`);
+    urls.push(`https://api.dataviva.info/years/${dataset}`);
 
     return urls;
 };

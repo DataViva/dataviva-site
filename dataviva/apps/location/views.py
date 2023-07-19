@@ -137,7 +137,7 @@ tabs = {
 def getSecexLatestYear():
     latestSecexYear = "2022"
 
-    response = requests.get(g.api_url + "years/secex")
+    response = requests.get("https://api.dataviva.info/years/secex")
 
     if response.status_code == 200:
         data = response.json()
@@ -150,7 +150,7 @@ def getSecexLatestYear():
 def getRaisLatestYear():
     latestRaisYear = "2021"
 
-    response = requests.get(g.api_url + "years/rais")
+    response = requests.get("https://api.dataviva.info/years/rais")
 
     if response.status_code == 200:
         data = response.json()
