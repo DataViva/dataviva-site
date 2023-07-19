@@ -315,7 +315,7 @@ msgstr "Analista de Dados"
 
 #: dataviva/apps/about/templates/about/index.html:267
 msgid "Technical Council"
-msgstr "Conselho Tecnico"
+msgstr "Conselho Técnico"
 
 #: dataviva/apps/about/templates/about/index.html:275
 msgid "Counselor"
