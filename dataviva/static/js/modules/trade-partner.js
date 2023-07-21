@@ -27,19 +27,21 @@ $(document).ready(function () {
 
     let latestSecexYear = "2022";
 
-    fetch(dataviva.api_url + "secex/year").then((data) => {
-        data.json().then((data) => {
-            let localData = data.data;
+    // fetch("https://api.dataviva.info/secex/year").then((data) => {
+    //     data.json().then((data) => {
+    //         let localData = data.data;
 
-            localData.sort((latest, current) => {
-                return current[0] - latest[0];
-            });
+    //         localData.sort((latest, current) => {
+    //             return current[0] - latest[0];
+    //         });
 
-            latestSecexYear = localData[0][0];
-        });
-    }).finally(() => {
-        getData(latestSecexYear);
-    });
+    //         latestSecexYear = localData[0][0];
+    //     });
+    // }).finally(() => {
+    //     getData(latestSecexYear);
+    // });
+
+    getData(latestSecexYear);
     
     function getData(latestSecexYear) {
         if (!isMunicipality) {
