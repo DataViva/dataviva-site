@@ -499,6 +499,14 @@ var getUrls = function () {
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function () {
+    var headers = {
+        'Authority': 'api.dataviva.info',
+        'Accept': 'application/json, text/javascript, */*; q=0.01',
+        'Origin': 'https://www.dataviva.info',
+        'Referer': 'https://www.dataviva.info/',
+        'Scheme': 'https'
+    };
+
     ajaxQueue(
         getUrls(),
         function (responses) {
@@ -525,6 +533,9 @@ $(document).ready(function () {
         },
         function (error) {
             loading.text(dictionary['Unable to load visualization']);
+        },
+        {
+            headers: headers
         }
     );
 });
