@@ -502,8 +502,8 @@ $(document).ready(function () {
     var headers = {
         'Authority': 'api.dataviva.info',
         'Accept': 'application/json, text/javascript, */*; q=0.01',
-        'Origin': 'https://www.dataviva.info',
-        'Referer': 'https://www.dataviva.info/',
+        'Origin': 'http://dataviva.info',
+        'Referer': 'http://dataviva.info/',
         'Scheme': 'https'
     };
 
