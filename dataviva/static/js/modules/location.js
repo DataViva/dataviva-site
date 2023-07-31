@@ -16,7 +16,7 @@ $(document).ready(function () {
     let latestSecexYear = "2022";
     let latestRaisYear = "2021";
 
-    Promise.all([fetch("https://api.dataviva.info/years/secex", fetchObject), fetch("https://api.dataviva.info/years/rais", fetchObject)]).then((values) => {
+    Promise.all([fetch("https://api.dataviva.info/years/secex"), fetch("https://api.dataviva.info/years/rais")]).then((values) => {
         values.forEach((value, index) => {
             value.json().then((data) => {
                 let localData = data.years.at(-1);
