@@ -28,7 +28,7 @@ $(document).ready(function(){
 
     let latestSecexYear = "2022";
 
-    fetch(dataviva.api_url + "secex/year").then((data) => {
+    fetch("https://api.dataviva.info/secex/year").then((data) => {
         data.json().then((data) => {
             let localData = data.data;
             

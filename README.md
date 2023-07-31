@@ -1,7 +1,7 @@
 # DataViva
 
 A Collaborative Planning Tool.
-[dataviva.info](http://www.dataviva.info)
+[dataviva.info](http://dataviva.info)
 
 [![Stories in Progress](https://badge.waffle.io/DataViva/dataviva-site.png?label=in+progress&title=In+Progress)](https://waffle.io/Dataviva/dataviva-site) [![Stories Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/Dataviva/dataviva-site) 
 
