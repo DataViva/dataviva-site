@@ -51,6 +51,7 @@ def before_request():
     g.signin_form = LoginForm()
     g.s3_host = s3_host
     g.s3_bucket = s3_bucket
+    g.capitals = ["2al010103", "1pa020002", "3df000000", "4mg030000", "2pe020206", "2ma020003"]
 
     if request.endpoint != 'static':
         url = urlparse(request.url)
