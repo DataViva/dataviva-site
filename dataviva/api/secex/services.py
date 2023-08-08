@@ -529,9 +529,14 @@ class Location:
             for i in self.__secex_list__():
                 if i.distance != None:
                     not_nulls_list.append(i)
-            not_nulls_list.sort(
-                key=lambda secex: secex.distance_wld, reverse=False)
-            self._secex_sorted_by_distance = not_nulls_list
+            not_nulls_list.sort(key=lambda secex: secex.distance_wld, reverse=False)
+            index = 0
+            for item in not_nulls_list:
+                if(item.rca > 0.2):
+                    break
+                index = index + 1
+
+            self._secex_sorted_by_distance = not_nulls_list[index]
         return self._secex_sorted_by_distance
 
     def __secex_sorted_by_opp_gain__(self):
@@ -606,7 +611,7 @@ class Location:
 
     def less_distance_by_product(self):
         try:
-            secex = self.__secex_sorted_by_distance__()[0]
+            secex = self.__secex_sorted_by_distance__()
         except IndexError:
             return None
         else:
@@ -614,7 +619,7 @@ class Location:
 
     def less_distance_by_product_name(self):
         try:
-            secex = self.__secex_sorted_by_distance__()[0]
+            secex = self.__secex_sorted_by_distance__()
         except IndexError:
             return None
         else:
