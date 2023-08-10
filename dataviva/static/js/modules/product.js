@@ -31,13 +31,13 @@ $(document).ready(function(){
     fetch("https://api.dataviva.info/secex/year").then((data) => {
         data.json().then((data) => {
             let localData = data.data;
-            
             localData.sort((latest, current) => {
                 return current[0] - latest[0];
             });
 
             latestSecexYear = localData[0][0];
         });
+        
     }).finally(() => {
         getData(latestSecexYear);
     });

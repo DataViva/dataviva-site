@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 @click.argument('base_url', type=str)
 def main(base_url):
     if not base_url.startswith("http://"):
-        base_url = "http://" + base_url
+        base_url = "https://" + base_url
     pages = ['/', '/apps']
     for page in pages:
         target = urlparse.urljoin(base_url, page)
