@@ -1,54 +1,54 @@
 {% extends "news/_base.html" %}
 
-{% block facebook_metadata %}
+{%block facebook_metadata%}
     <meta property="og:image" content="{{ publication.thumb }}" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1280" />
+    <meta property="og:image:height" content="720" />
     <meta property="og:url" content="{{ url_for('news.show', id=publication.id, _external=True, _scheme='http') }}" />
     <meta property="og:title" content="{{ publication.title }}" />
     <meta property="og:description" content="{{ publication.text_call }}" />
     <meta property="og:type" content="article" />
-{% endblock %}
+{% endblock facebook_metadata %}
 
 {% block breadcrumb %}
-    <li><a href="{{ url_for('news.index') }}">{% trans %}News{% endtrans %}</a></li>
-    <li class="active">{% trans %}Visualize{% endtrans %}</li>
+<li><a href="{{ url_for('news.index') }}">{% trans %}News{% endtrans %}</a></li>
+<li class="active">{% trans %}Visualize{% endtrans %}</li>
 {% endblock %}
 
 {% block news_content %}
 <div class="institucional search">
     <div class="articles">
         <div class="item publication single">
-            <h4>{{ publication.title|safe }}</h4>
+            <h4 id="title">{{ publication.title|safe }}</h4>
             <div class="meta">
                 <p class="data">{% trans %}By{% endtrans %} {{ publication.author }} {{ publication.date() }}</p>
             </div>
             <ul class="social">
-                <li>
-                    <div class="fb-like" data-href="{{ url_for('news.show', id=publication.id, _external=True, _scheme='http') }}" data-width="280px" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-                </li>
-                <li>
-                    <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="{{ url_for('news.show', id=publication.id, _external=True, _scheme='http') }}" data-lang="pt">{% trans %}Tweet{% endtrans %}</a>
-                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-                </li>
-                <li>
-                    <script src="https://apis.google.com/js/platform.js" async defer></script>
-                    <g:plusone size="medium"></g:plusone>
-                </li>
+                <button id="share-button" class="btn btn-primary">{% trans %}Share{% endtrans %}</button>
             </ul>
             {{ publication.text_content|safe }}
-        <div class="clearfix"></div>
-        <div class="related">
-            <h4>{% trans %}See also{% endtrans %}</h4>
-            <div class="row">
-                {% for publication in read_more %}
-                <div class="col-xs-12 col-sm-6 col-lg-4 {% if loop.last %} hidden-sm hidden-md {% endif %} read-more">
-                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
-                        <img src="{{ publication.thumb }}" class="img-responsive">
-                    </a>
-                    <p><a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a></p>
+            <div class="clearfix"></div>
+            <div class="related">
+                <h4>{% trans %}See also{% endtrans %}</h4>
+                <div class="row">
+                    {% for publication in read_more %}
+                    <div
+                        class="col-xs-12 col-sm-6 col-lg-4 {% if loop.last %} hidden-sm hidden-md {% endif %} read-more">
+                        <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">
+                            <img src="{{ publication.thumb }}" class="img-responsive">
+                        </a>
+                        <p><a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">{{
+                                publication.title }}</a></p>
+                    </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
             </div>
         </div>
     </div>
 </div>
 {% endblock news_content %}
+
+{% block script %}
+<script type="text/javascript" src="/static/js/modules/share/device.js"></script>
+{% endblock %}

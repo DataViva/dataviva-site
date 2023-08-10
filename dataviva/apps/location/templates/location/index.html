@@ -80,12 +80,11 @@
 <!-- BREADCRUMB -->
 
 <!-- Criar classes css para os backgrunds das localidades -->
-<section id="header" class="header" style="background: url({{ g.s3_host }}/img/location/location_{{ location.id if location.img_link else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
-
+<section id="header" class="header" style="background: url({{ g.s3_host }}/img/location/location_{{ location_img if location_img else 'all' }}.jpg) no-repeat center center fixed; background-size: cover;">
     <div class="photo-credit">
       <div class="container">
-        <a href="{{ location.img_link if location.img_link else 'https://flic.kr/p/7mfM76' }}" target="blank">
-        <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ location.img_author if location.img_link else 'Hélio Merá' }}</a>
+        <a href="{{ location.img_link if location.img_link else state_location.img_link if state_location else 'https://flic.kr/p/7mfM76' }}" target="blank">
+        <i class="fa fa-camera"></i> {% trans %}picture by{% endtrans %} {{ location.img_author if location.img_link else state_location.img_author if state_location else 'Hélio Merá' }}</a>
       </div>
     </div>
 

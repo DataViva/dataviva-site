@@ -307,6 +307,11 @@ def all(tab):
 def index(bra_id, tab):
     location = Bra.query.filter_by(id=bra_id).first_or_404()
     is_municipality = location and len(location.id) == 9
+    state_location = None
+
+    if(len(location.id) > 2): #se for algo com prefixo de estado
+        state_location = Bra.query.filter_by(id=bra_id[:3]).first_or_404()
+    
     menu = request.args.get('menu')
     url = request.args.get('url')
 
@@ -321,9 +326,24 @@ def index(bra_id, tab):
 
     if location:
         location_id = location.id
+
+        has_img = False
+        for code in g.capitals:
+            if(code == str(location_id)):
+                has_img = True
+                break
+        
+        if(has_img):
+            location_img = location.id
+        else:
+            if(len(location.id) > 2):
+                location_img = location.id[:3]
+            else:
+                location_img = None
     else:
         location_id = None
-
+        location_img = None
+    
     graph = {}
 
     if menu:
@@ -527,4 +547,4 @@ def index(bra_id, tab):
         latestRaisYear = getRaisLatestYear()
 
         return render_template('location/index.html',
-                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear)
+                            header=header, body=body, profile=profile, location=location, is_municipality=is_municipality, tab=tab, graph=graph, id_ibge=id_ibge, latestSecexYear=latestSecexYear, latestRaisYear=latestRaisYear, location_img=location_img, state_location=state_location)
