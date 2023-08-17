@@ -1668,13 +1668,16 @@ msgstr "Conversão"
 #: dataviva/apps/location/templates/location/tab-opportunities.html:39
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:6
 #: dataviva/apps/product/templates/product/index.html:77
-#: dataviva/apps/rankings/templates/rankings/_base.html:50
 #: dataviva/apps/rankings/templates/rankings/product.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:19
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:94
 #: dataviva/templates/site.html:62 dataviva/translations/dictionary.py:359
 msgid "Product"
 msgstr "Produto"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:50
+msgid "PCI - Product"
+msgstr "ICP - Produto"
 
 #: dataviva/apps/help/templates/help/index.html:44
 #: dataviva/apps/help/templates/help/index.html:50
@@ -1914,13 +1917,16 @@ msgstr "ID MDIC"
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:66
-#: dataviva/apps/rankings/templates/rankings/_base.html:47
 #: dataviva/templates/general/browse_categories.html:79
 #: dataviva/templates/general/index.html:75
 #: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:583
 msgid "Economic Activities"
 msgstr "Atividades Econômicas"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:47
+msgid "PCI - Activities"
+msgstr "ICP - Atividades"
 
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:8
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:12
@@ -1971,6 +1977,10 @@ msgstr "Distribuição"
 msgid "Bar Chart"
 msgstr "Barras"
 
+#: dataviva/apps/rankings/templates/rankings/_base.html:38
+msgid "ECI - Activities"
+msgstr "ICE - Atividades"
+
 #: dataviva/apps/industry/templates/industry/index.html:12
 #: dataviva/apps/industry/templates/industry/index.html:171
 #: dataviva/apps/industry/templates/industry/tab-general.html:39
@@ -1983,7 +1993,6 @@ msgstr "Barras"
 #: dataviva/apps/occupation/templates/occupation/index.html:146
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:60
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:3
-#: dataviva/apps/rankings/templates/rankings/_base.html:38
 #: dataviva/translations/dictionary.py:612
 msgid "Wages and Jobs"
 msgstr "Salário e Emprego"
@@ -2296,7 +2305,6 @@ msgstr "Salário por"
 #: dataviva/apps/product/templates/product/index.html:159
 #: dataviva/apps/product/templates/product/tab-general.html:156
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:3
-#: dataviva/apps/rankings/templates/rankings/_base.html:31
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:12
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:111
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:35
@@ -2304,6 +2312,10 @@ msgstr "Salário por"
 #: dataviva/translations/dictionary.py:497
 msgid "International Trade"
 msgstr "Comércio Internacional"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:31
+msgid "ECI - Trade"
+msgstr "ICE - Comércio"
 
 #: dataviva/apps/location/templates/location/index.html:18
 #: dataviva/apps/location/templates/location/index.html:237

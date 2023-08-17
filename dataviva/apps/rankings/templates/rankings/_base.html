@@ -28,14 +28,14 @@
                 <a href="{{ url_for('rankings.location_international_trade') }}"
                  data-parent="#locations"
                  class="{{'active' if tab == 'location-international-trade'}}">
-                  {% trans %}International Trade{% endtrans %}
+                  {% trans %}ECI - Trade{% endtrans %}
                 </a>
               </li>
               <li>
                 <a href="{{ url_for('rankings.location_wages') }}"
                    data-parent="#locations"
                    class="{{'active' if tab == 'location-wages'}}">
-                    {% trans %}Wages and Jobs{% endtrans %}
+                    {% trans %}ECI - Activities{% endtrans %}
                 </a>
               </li>
             </ul>
@@ -44,10 +44,10 @@
             <a href="{{ url_for('rankings.occupation') }}">{% trans %}Occupation{% endtrans %}</a>
           </li>
           <li class="{{ 'active' if tab == 'economic_activities' else ''}}">
-            <a href="{{ url_for('rankings.economic_activities') }}">{% trans %}Economic Activities{% endtrans %}</a>
+            <a href="{{ url_for('rankings.economic_activities') }}">{% trans %}PCI - Activities{% endtrans %}</a>
           </li>
           <li class="{{ 'active' if tab == 'product' else ''}}">
-            <a href="{{ url_for('rankings.product') }}">{% trans %}Product{% endtrans %}</a>
+            <a href="{{ url_for('rankings.product') }}">{% trans %}PCI - Product{% endtrans %}</a>
             </li>
           <li class="{{ 'active' if tab == 'trade_partner' else ''}}">
             <a href="{{ url_for('rankings.trade_partner') }}">{% trans %}Trade Partner{% endtrans %}</a>
