@@ -113,11 +113,14 @@ msgstr "Principal Município por Empregos"
 #: dataviva/api/stats/profile_helper.py:138
 #: dataviva/api/stats/profile_helper.py:160
 #: dataviva/api/stats/profile_helper.py:169
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:17
 #: dataviva/apps/rankings/templates/rankings/occupation.html:17
 #: dataviva/apps/rankings/templates/rankings/occupation.html:18
 #: dataviva/translations/dictionary.py:269
 msgid "Average Monthly Wage"
+msgstr "Renda Mensal Média"
+
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:15
+msgid "Average Incoming"
 msgstr "Renda Mensal Média"
 
 #: dataviva/api/stats/profile_helper.py:130
@@ -170,7 +173,6 @@ msgstr "Principais Campi"
 #: dataviva/apps/major/templates/major/index.html:70
 #: dataviva/apps/occupation/templates/occupation/index.html:73
 #: dataviva/apps/product/templates/product/index.html:78
-#: dataviva/apps/rankings/templates/rankings/_base.html:24
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:13
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:78
@@ -178,6 +180,10 @@ msgstr "Principais Campi"
 #: dataviva/translations/dictionary.py:355
 msgid "Location"
 msgstr "Localidade"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:24
+msgid "Locations Complexity"
+msgstr "Complexidade das Localidades"
 
 #: dataviva/api/stats/profile_helper.py:255
 #: dataviva/apps/location/templates/location/graphs-education.html:70
@@ -1885,6 +1891,10 @@ msgstr "Cor"
 msgid "Total Jobs"
 msgstr "Total de Empregos"
 
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:14
+msgid "Jobs"
+msgstr "Empregos"
+
 #: dataviva/apps/help/templates/help/tab-classifications-locations.html:12
 msgid "ID IBGE"
 msgstr ""
@@ -1925,8 +1935,8 @@ msgid "Economic Activities"
 msgstr "Atividades Econômicas"
 
 #: dataviva/apps/rankings/templates/rankings/_base.html:47
-msgid "PCI - Activities"
-msgstr "ICP - Atividades"
+msgid "Economic Activities Complexity"
+msgstr "Complexidade das Atividades Econômicas"
 
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:8
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:12
@@ -3213,10 +3223,13 @@ msgstr "Crescimento Nominal das Matrículas (5 anos)"
 msgid "CNAE ID"
 msgstr "ID CNAE"
 
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:15
 #: dataviva/apps/rankings/templates/rankings/occupation.html:15
 #: dataviva/translations/dictionary.py:267
 msgid "Total Monthly Wages"
+msgstr "Renda Mensal Total"
+
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:16
+msgid "Total Monthly Incoming"
 msgstr "Renda Mensal Total"
 
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:18
