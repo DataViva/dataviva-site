@@ -16,10 +16,17 @@ $(document).ready(function () {
     let latestSecexYear = "2022";
     let latestRaisYear = "2021";
 
-    Promise.all([fetch("https://api.dataviva.info/years/secex"), fetch("https://api.dataviva.info/years/rais")]).then((values) => {
+    function getMaxYear(dataObject) {
+        const yearsData = dataObject.data;
+        const yearsArray = yearsData.map(item => item[0]);
+        const maxYear = Math.max(...yearsArray);
+        return maxYear;
+    }
+
+    Promise.all([fetch("https://api.dataviva.info/secex/year"), fetch("https://api.dataviva.info/rais/year")]).then((values) => {
         values.forEach((value, index) => {
             value.json().then((data) => {
-                let localData = data.years.at(-1);
+                let localData = getMaxYear(data);
 
                 switch (index) {
                     case 0:

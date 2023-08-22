@@ -134,29 +134,33 @@ tabs = {
         ]
     }
 
+def get_max_year(data_object):
+    years_data = data_object['data']
+    years_array = [item[0] for item in years_data]
+    max_year = max(years_array)
+    return max_year
+
 def getSecexLatestYear():
     latestSecexYear = "2022"
 
-    response = requests.get("https://api.dataviva.info/years/secex")
+    response = requests.get("https://api.dataviva.info/secex/year")
 
     if response.status_code == 200:
         data = response.json()
-        localData = data["years"]
         
-        latestSecexYear = localData[len(localData) - 1]
+        latestSecexYear = get_max_year(data)
 
     return latestSecexYear
 
 def getRaisLatestYear():
     latestRaisYear = "2021"
 
-    response = requests.get("https://api.dataviva.info/years/rais")
+    response = requests.get("https://api.dataviva.info/rais/year")
 
     if response.status_code == 200:
         data = response.json()
-        localData = data["years"]
         
-        latestRaisYear = localData[len(localData) - 1]
+        latestRaisYear = get_max_year(data)
 
     return latestRaisYear
 
