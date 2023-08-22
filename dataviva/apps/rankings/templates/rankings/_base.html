@@ -25,33 +25,33 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="{{ url_for('rankings.location_international_trade') }}"
-                 data-parent="#locations"
-                 class="{{'active' if tab == 'location-international-trade'}}">
-                  {% trans %}ECI - Trade{% endtrans %}
-                </a>
-              </li>
-              <li>
                 <a href="{{ url_for('rankings.location_wages') }}"
                    data-parent="#locations"
                    class="{{'active' if tab == 'location-wages'}}">
-                    {% trans %}ECI - Activities{% endtrans %}
+                    {% trans %}ECI-R - Employment{% endtrans %}
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('rankings.location_international_trade') }}"
+                 data-parent="#locations"
+                 class="{{'active' if tab == 'location-international-trade'}}">
+                  {% trans %}ECI-R - Trade{% endtrans %}
                 </a>
               </li>
             </ul>
           </li>
-          <li class="{{ 'active' if tab == 'occupation' else ''}}">
+          <!-- <li class="{{ 'active' if tab == 'occupation' else ''}}">
             <a href="{{ url_for('rankings.occupation') }}">{% trans %}Occupation{% endtrans %}</a>
+          </li> -->
+          <li class="{{ 'active' if tab == 'product' else ''}}">
+            <a href="{{ url_for('rankings.product') }}">{% trans %}Product Complexity{% endtrans %}</a>
           </li>
           <li class="{{ 'active' if tab == 'economic_activities' else ''}}">
             <a href="{{ url_for('rankings.economic_activities') }}">{% trans %}Economic Activities Complexity{% endtrans %}</a>
           </li>
-          <li class="{{ 'active' if tab == 'product' else ''}}">
-            <a href="{{ url_for('rankings.product') }}">{% trans %}PCI - Product{% endtrans %}</a>
-            </li>
-          <li class="{{ 'active' if tab == 'trade_partner' else ''}}">
+          <!-- <li class="{{ 'active' if tab == 'trade_partner' else ''}}">
             <a href="{{ url_for('rankings.trade_partner') }}">{% trans %}Trade Partner{% endtrans %}</a>
-            </li>
+            </li> -->
           <!-- <li class="{{ 'active' if tab == 'university' else ''}}">
             <a href="{{ url_for('rankings.university') }}">{% trans %}University{% endtrans %}</a>
             </li>

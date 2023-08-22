@@ -2674,10 +2674,13 @@ msgid "The products of the position of "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:90
-#: dataviva/apps/rankings/templates/rankings/product.html:14
 #: dataviva/translations/dictionary.py:196
 #: dataviva/translations/dictionary.py:504
 msgid "Product Complexity"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/product.html:14
+msgid "PCI"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:102
