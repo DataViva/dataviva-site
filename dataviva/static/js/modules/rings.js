@@ -206,7 +206,7 @@ var getUrls = function () {
 
     var urls = [api_url + dimensions.join('/') + '/?' + filters,
     api_url + 'metadata/' + circles,
-    api_url + dataset + '/year'
+    `${s3_host}/${dataset}-years.json`
     ];
 
     var connectionsHelper = {
@@ -225,23 +225,16 @@ var circlesMetadata = [];
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
-function getSortedYears(dataObject) {
-    const yearsData = dataObject.data;
-    const yearsArray = yearsData?.map(item => item[0]);
-    const sortedYears = yearsArray.sort((a, b) => a - b);
-    return sortedYears;
-}
-
 $(document).ready(function () {
     ajaxQueue(
         getUrls(),
         function (responses) {
             var data = responses[0];
             circlesMetadata = responses[1];
-            range = getSortedYears(responses[2]);
+            range = responses[2];
             connections = responses[3];
 
-            yearsRange = range;
+            yearsRange = range.years;
             data = buildData(data, circlesMetadata);
 
             if (dataset == 'secex')
