@@ -120,7 +120,6 @@ var toolsBuilder = function(app, viz, data, title) {
         } else {
             url = url.replace(/&year=[0-9]{4}/, '').replace(/\?year=[0-9]{4}&?/, '?');
         }
-        console.log(url);
 
         d3.xhr('/' + lang + '/embed/shorten/')
         .header('Content-type','application/json')
