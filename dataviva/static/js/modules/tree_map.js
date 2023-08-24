@@ -278,9 +278,9 @@ var loadViz = function (data, years, auxData) {
 
                     localData.data = valuesFiltered;
                 }
-                
+
                 let newData = buildData(localData);
-                
+
                 loadViz(newData, years, auxData);
             })
             .draw();
@@ -491,12 +491,19 @@ var getUrls = function () {
 
     urls.push(urls[0].replace(/&year=[0-9]{4}/, ''));
 
-    urls.push(`https://api.dataviva.info/years/${dataset}`);
+    urls.push(`https://api.dataviva.info/${dataset}/year`);
 
     return urls;
 };
 
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
+
+function getSortedYears(dataObject) {
+    const yearsData = dataObject.data;
+    const yearsArray = yearsData?.map(item => item[0]);
+    const sortedYears = yearsArray.sort((a, b) => a - b); 
+    return sortedYears;
+}
 
 $(document).ready(function () {
 
@@ -505,7 +512,7 @@ $(document).ready(function () {
         function (responses) {
             var data = responses[0];
             var allData = responses[responses.length - 2];
-            var years = responses[responses.length - 1].years;
+            var years = getSortedYears(responses[responses.length - 1]);
 
             metadata[squares] = responses[1];
 
