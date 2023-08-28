@@ -3,6 +3,7 @@ var unique = function(item, i, arr){
 }
 
 var data = [],
+    mainData = $("#bar").attr("data"),
     MAX_BARS = 10,
     currentFilters = {},
     lang = document.documentElement.lang,
@@ -35,6 +36,7 @@ if(y.indexOf('facility_type') != -1) {
 }
 
 var url = api_url + dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
+console.log("MAIN URL JS", url)
 
 var config = {
     'id': 'id',
@@ -798,7 +800,7 @@ var lastYear = function(data){
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function(){
-    var urls = [url];
+    var urls = [];
 
     dimensions.forEach(function(item){
         urls.push(api_url + "metadata/" + item);
@@ -807,7 +809,8 @@ $(document).ready(function(){
     ajaxQueue(
         urls, 
         function(responses){
-            api = responses.shift();
+            console.log('TESTE: ', mainData)
+            api = mainData;
             metadatas = {};
 
             dimensions.forEach(function(item, index){
