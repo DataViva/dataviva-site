@@ -97,7 +97,6 @@ def getData(url):
 
 @mod.route('/<dataset>/<x>/<y>')
 def index(dataset, x, y):
-    print("dawdwadas", y)
     product = request.args.get('product')
     id_ibge = request.args.get('id_ibge')
     type = request.args.get('type')

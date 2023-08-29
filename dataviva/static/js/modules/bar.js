@@ -36,8 +36,6 @@ if(y.indexOf('facility_type') != -1) {
 }
 
 var url = api_url + dataset + "/year/" + (options.indexOf('month') != -1 ? 'month/' : '') + dimensions.join("/") + ( filters ? "?" + filters : '');
-console.log("MAIN URL JS", url)
-
 var config = {
     'id': 'id',
     'text': 'label',
