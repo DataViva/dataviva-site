@@ -89,7 +89,7 @@ def getData(url):
     response = requests.get(url)
 
     if response.status_code == 200:
-        data = response.json()
+        data = response.content
         
         return data
     else:

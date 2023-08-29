@@ -809,8 +809,7 @@ $(document).ready(function(){
     ajaxQueue(
         urls, 
         function(responses){
-            console.log('TESTE: ', mainData)
-            api = mainData;
+            api = JSON.parse(mainData);
             metadatas = {};
 
             dimensions.forEach(function(item, index){
