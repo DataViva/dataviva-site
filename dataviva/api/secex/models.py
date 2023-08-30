@@ -1,9 +1,9 @@
 from dataviva import db
 from dataviva.api.secex.abstract_models import BaseSecex, Eci, Rca, Rca_wld, Rcd, Distance, OppGain
 from dataviva.api.secex.abstract_models import BraId, WldId, HsId
-from dataviva.api.secex.abstract_models import BraDiversity, HsDiversity, WldDiversity
+from dataviva.api.secex.abstract_models import BraDiversity, HsDiversity, WldDiversity, WldDistance
 
-class Ymb(BaseSecex, BraId, HsDiversity, WldDiversity, Eci):
+class Ymb(BaseSecex, BraId, HsDiversity, WldDiversity, Eci, WldDistance):
     __tablename__ = "secex_ymb"
 
 class Ymp(BaseSecex, HsId, BraDiversity, WldDiversity, Rca_wld):
