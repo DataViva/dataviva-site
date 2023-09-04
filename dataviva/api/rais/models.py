@@ -31,6 +31,7 @@ class Yi(BaseRais, db.Model, AutoSerialize):
     __tablename__ = 'rais_yi'
     year = db.Column(db.Integer(4), primary_key=True)
     cnae_id = db.Column(db.String(5), db.ForeignKey(Cnae.id), primary_key=True)
+    pci = db.Column(db.Float())
 
     cbo_diversity = db.Column(db.Integer(11))
     cbo_diversity_eff = db.Column(db.Float())

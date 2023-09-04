@@ -54,6 +54,13 @@ var LocationWages = function () {
             },
             {
                 render: function (data, type, row, meta) {
+                    return dataviva.format.number(row[15], { "key": headers[13] });
+                },
+                className: "table-number",
+                type: 'num-dataviva'
+            },
+            {
+                render: function (data, type, row, meta) {
                     return dataviva.format.number(row[4], { "key": headers[4] });
                 },
                 className: "table-number",
@@ -75,13 +82,6 @@ var LocationWages = function () {
             },
             {
                 render: function (data, type, row, meta) {
-                    return dataviva.format.number(row[15], { "key": headers[13] });
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta) {
                     return dataviva.format.number(row[16], { "key": headers[14] });
                 },
                 className: "table-number",
@@ -93,49 +93,7 @@ var LocationWages = function () {
                 },
                 className: "table-number",
                 type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta) {
-                    return dataviva.format.number(row[8], { "key": headers[8] });
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta) {
-                    return dataviva.format.number(row[9], { "key": headers[9] });
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta) {
-                    return dataviva.format.number(row[6], { "key": headers[6] });
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta) {
-                    return dataviva.format.number(row[7], { "key": headers[7] });
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta) {
-                    return dataviva.format.number(row[11], { "key": headers[11] });
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
-            {
-                render: function (data, type, row, meta) {
-                    return dataviva.format.number(row[12], { "key": headers[12] });
-                },
-                className: "table-number",
-                type: 'num-dataviva'
-            },
+            }
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,

@@ -23,6 +23,10 @@ class BraDiversity(object):
     bra_diversity = db.Column(db.Integer(11))
     bra_diversity_eff = db.Column(db.Float())
 
+class WldDistance(object):
+    distance_wld = db.Column(db.Float())
+    opp_gain_wld = db.Column(db.Float())
+
 class WldDiversity(object):
     wld_diversity = db.Column(db.Integer(11))
     wld_diversity_eff = db.Column(db.Float())

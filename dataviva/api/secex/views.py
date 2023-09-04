@@ -12,7 +12,6 @@ mod = Blueprint('secex', __name__, url_prefix='/secex')
 
 @mod.route('/<year>/<bra_id>/<hs_id>/<wld_id>/')
 @mod.route('/<year>-<month>/<bra_id>/<hs_id>/<wld_id>/')
-@view_cache.cached(key_prefix=api_cache_key("secex"), unless=is_download)
 def secex_api(**kwargs):
     limit = int(kwargs.pop('limit', 0)) or int(request.args.get('limit', 0) )
     order = request.args.get('order', None) or kwargs.pop('order', None)
