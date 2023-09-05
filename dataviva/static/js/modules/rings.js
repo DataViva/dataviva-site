@@ -206,7 +206,7 @@ var getUrls = function () {
 
     var urls = [api_url + dimensions.join('/') + '/?' + filters,
     api_url + 'metadata/' + circles,
-    `${s3_host}/${dataset}-years.json`
+    `${s3_host}/years/${dataset}-years.json`
     ];
 
     var connectionsHelper = {
