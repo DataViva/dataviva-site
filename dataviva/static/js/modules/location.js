@@ -16,26 +16,7 @@ $(document).ready(function () {
     let latestSecexYear = "2022";
     let latestRaisYear = "2021";
 
-    Promise.all([fetch("https://api.dataviva.info/years/secex"), fetch("https://api.dataviva.info/years/rais")]).then((values) => {
-        values.forEach((value, index) => {
-            value.json().then((data) => {
-                let localData = data.years.at(-1);
-
-                switch (index) {
-                    case 0:
-                        latestSecexYear = localData;
-                        break;
-                    case 1:
-                        latestRaisYear = localData;
-                        break;
-                    default:
-                        break;
-                }
-            });
-        })
-    }).finally(() => {
-        getData(latestSecexYear, latestRaisYear);
-    });
+    getData(latestSecexYear, latestRaisYear);
 
     function getData(latestSecexYear, latestRaisYear) {
         if (isMunicipality) {

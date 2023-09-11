@@ -5,6 +5,7 @@ from dataviva.translations.dictionary import dictionary
 from dataviva.apps.title.views import get_title
 import urllib
 import json
+import requests
 
 mod = Blueprint('bar', __name__,
                 template_folder='templates',
@@ -73,7 +74,26 @@ def industry_service(industry):
         return ('industry_division', industry[1:])
     else:
         return ('industry_class', industry[1:])
+    
+def unique(item, i, arr):
+    return arr.index(item) == i
 
+def filter_unique(arr):
+    filtered = []
+    for i, item in enumerate(arr):
+        if unique(item, i, arr):
+            filtered.append(item)
+    return filtered
+
+def getData(url):
+    response = requests.get(url)
+
+    if response.status_code == 200:
+        data = response.content
+        
+        return data
+    else:
+        abort(404)
 
 @mod.route('/<dataset>/<x>/<y>')
 def index(dataset, x, y):
@@ -133,7 +153,31 @@ def index(dataset, x, y):
     filters = urllib.urlencode(filters)
     graph_title, graph_subtitle = get_title(dataset, y.split(',')[0], 'bar', title_attrs)
 
-    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options,
+    splitedOptions = options.split(',') if options else []
+    
+    month = 'month/' if (1 if 'month' in splitedOptions else 0) else ''
+    splitedY = y.split(',') if y else []
+
+    uiFilters = request.args.get('filters').split(',') if request.args.get('filters') else [],
+    splitedY.extend(uiFilters)
+    dimensions = filter_unique(splitedY)
+    vizId = request.args.get('id') if request.args.get('id') else ''
+
+    auxDimensions = dimensions.extend(vizId)
+    dimensions = filter_unique(auxDimensions) if (vizId != '') else dimensions
+    if 'attention_level' in splitedOptions:
+        new_dimensions = dimensions + ['ambulatory_attention', 'hospital_attention']
+        dimensions = list(filter(lambda item, i, arr: arr.index(item) == i, new_dimensions))
+   
+    urlFilters = ("?" + filters) if filters else ''
+
+    dimensions.pop() #removendo a ultima posição (é um [])
+
+    main_url = g.api_url + dataset + "/year/" + month + "/".join([str(i) for i in dimensions]) + urlFilters
+
+    data = getData(main_url)
+
+    return render_template('bar/index.html', dataset=dataset, x=x, y=y, filters=filters, options=options, data=data,
                            subtitle=subtitle, graph_title=graph_title or '', graph_subtitle=graph_subtitle or '',
                            dictionary=json.dumps(dictionary()))
     

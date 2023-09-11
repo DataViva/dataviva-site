@@ -103,28 +103,7 @@ var OccupationTable = function () {
                 },
                 className: "table-number",
                 type: 'num-dataviva'
-            },
-            // {
-            //     render: function (data, type, row, meta){
-            //         return dataviva.format.number(row[13], {"key": headers[13]});
-            //     },
-            //     className: "table-number",
-            //     type: 'num-dataviva'
-            // },
-            // {
-            //     render: function (data, type, row, meta){
-            //         return dataviva.format.number(row[14], {"key": headers[14]});
-            //     },
-            //     className: "table-number",
-            //     type: 'num-dataviva'
-            // },
-            // {
-            //     render: function (data, type, row, meta){
-            //         return dataviva.format.number(row[15], {"key": headers[15]});
-            //     },
-            //     className: "table-number",
-            //     type: 'num-dataviva'
-            // },
+            }
         ],
         "deferRender": true,
         "language": dataviva.datatables.language,

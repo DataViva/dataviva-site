@@ -21,38 +21,38 @@
         <ul class="nav navbar-nav">
           <li class="{{ 'active' if tab == 'location-international-trade' or tab == 'location-wages' else ''}}" class="dropdown">
             <a href="#locations" class="dropdown-toggle" data-toggle="dropdown">
-              {% trans %}Location{% endtrans %} <span class="caret"></span>
+              {% trans %}Locations Complexity{% endtrans %} <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
-              <li>
-                <a href="{{ url_for('rankings.location_international_trade') }}"
-                 data-parent="#locations"
-                 class="{{'active' if tab == 'location-international-trade'}}">
-                  {% trans %}International Trade{% endtrans %}
-                </a>
-              </li>
               <li>
                 <a href="{{ url_for('rankings.location_wages') }}"
                    data-parent="#locations"
                    class="{{'active' if tab == 'location-wages'}}">
-                    {% trans %}Wages and Jobs{% endtrans %}
+                    {% trans %}ECI-R - Employment{% endtrans %}
+                </a>
+              </li>
+              <li>
+                <a href="{{ url_for('rankings.location_international_trade') }}"
+                 data-parent="#locations"
+                 class="{{'active' if tab == 'location-international-trade'}}">
+                  {% trans %}ECI-R - Trade{% endtrans %}
                 </a>
               </li>
             </ul>
           </li>
-          <li class="{{ 'active' if tab == 'occupation' else ''}}">
+          <!-- <li class="{{ 'active' if tab == 'occupation' else ''}}">
             <a href="{{ url_for('rankings.occupation') }}">{% trans %}Occupation{% endtrans %}</a>
+          </li> -->
+          <li class="{{ 'active' if tab == 'product' else ''}}">
+            <a href="{{ url_for('rankings.product') }}">{% trans %}Product Complexity{% endtrans %}</a>
           </li>
           <li class="{{ 'active' if tab == 'economic_activities' else ''}}">
-            <a href="{{ url_for('rankings.economic_activities') }}">{% trans %}Economic Activities{% endtrans %}</a>
+            <a href="{{ url_for('rankings.economic_activities') }}">{% trans %}Economic Activities Complexity{% endtrans %}</a>
           </li>
-          <li class="{{ 'active' if tab == 'product' else ''}}">
-            <a href="{{ url_for('rankings.product') }}">{% trans %}Product{% endtrans %}</a>
-            </li>
-          <li class="{{ 'active' if tab == 'trade_partner' else ''}}">
+          <!-- <li class="{{ 'active' if tab == 'trade_partner' else ''}}">
             <a href="{{ url_for('rankings.trade_partner') }}">{% trans %}Trade Partner{% endtrans %}</a>
-            </li>
-          <li class="{{ 'active' if tab == 'university' else ''}}">
+            </li> -->
+          <!-- <li class="{{ 'active' if tab == 'university' else ''}}">
             <a href="{{ url_for('rankings.university') }}">{% trans %}University{% endtrans %}</a>
             </li>
           <li class="{{ 'active' if tab == 'major' else ''}}">
@@ -60,7 +60,7 @@
             </li>
           <li class="{{ 'active' if tab == 'basic_course' else ''}}">
             <a href="{{ url_for('rankings.basic_course') }}">{% trans %}Basic Course{% endtrans %}</a>
-            </li>
+          </li> -->
         </ul>
       </div><!-- /.container -->
     </nav>

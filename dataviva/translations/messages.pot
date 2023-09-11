@@ -113,11 +113,14 @@ msgstr ""
 #: dataviva/api/stats/profile_helper.py:138
 #: dataviva/api/stats/profile_helper.py:160
 #: dataviva/api/stats/profile_helper.py:169
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:17
 #: dataviva/apps/rankings/templates/rankings/occupation.html:17
 #: dataviva/apps/rankings/templates/rankings/occupation.html:18
 #: dataviva/translations/dictionary.py:269
 msgid "Average Monthly Wage"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:15
+msgid "Average Incoming"
 msgstr ""
 
 #: dataviva/api/stats/profile_helper.py:130
@@ -170,13 +173,16 @@ msgstr ""
 #: dataviva/apps/major/templates/major/index.html:70
 #: dataviva/apps/occupation/templates/occupation/index.html:73
 #: dataviva/apps/product/templates/product/index.html:78
-#: dataviva/apps/rankings/templates/rankings/_base.html:24
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:13
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:78
 #: dataviva/templates/site.html:61 dataviva/templates/general/table.html:238
 #: dataviva/translations/dictionary.py:355
 msgid "Location"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:24
+msgid "Locations Complexity"
 msgstr ""
 
 #: dataviva/api/stats/profile_helper.py:255
@@ -1588,11 +1594,14 @@ msgstr ""
 
 #: dataviva/apps/help/templates/help/tab-classifications-industries.html:13
 #: dataviva/apps/help/templates/help/tab-classifications-occupations.html:13
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:14
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:14
 #: dataviva/apps/rankings/templates/rankings/occupation.html:14
 #: dataviva/translations/dictionary.py:264
 msgid "Total Jobs"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:14
+msgid "Jobs"
 msgstr ""
 
 #: dataviva/apps/help/templates/help/tab-classifications-locations.html:12
@@ -2665,10 +2674,13 @@ msgid "The products of the position of "
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:90
-#: dataviva/apps/rankings/templates/rankings/product.html:14
 #: dataviva/translations/dictionary.py:196
 #: dataviva/translations/dictionary.py:504
 msgid "Product Complexity"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/product.html:14
+msgid "PCI"
 msgstr ""
 
 #: dataviva/apps/product/templates/product/index.html:102
@@ -2866,10 +2878,13 @@ msgstr ""
 msgid "CNAE ID"
 msgstr ""
 
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:15
 #: dataviva/apps/rankings/templates/rankings/occupation.html:15
 #: dataviva/translations/dictionary.py:267
 msgid "Total Monthly Wages"
+msgstr ""
+
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:16
+msgid "Total Monthly Incoming"
 msgstr ""
 
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:18

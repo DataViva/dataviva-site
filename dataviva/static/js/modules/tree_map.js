@@ -278,9 +278,9 @@ var loadViz = function (data, years, auxData) {
 
                     localData.data = valuesFiltered;
                 }
-                
+
                 let newData = buildData(localData);
-                
+
                 loadViz(newData, years, auxData);
             })
             .draw();
@@ -491,7 +491,7 @@ var getUrls = function () {
 
     urls.push(urls[0].replace(/&year=[0-9]{4}/, ''));
 
-    urls.push(`https://api.dataviva.info/years/${dataset}`);
+    urls.push(`${s3_host}/years/${dataset}-years.json`);
 
     return urls;
 };

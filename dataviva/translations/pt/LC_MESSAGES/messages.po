@@ -113,15 +113,17 @@ msgstr "Principal Município por Empregos"
 #: dataviva/api/stats/profile_helper.py:138
 #: dataviva/api/stats/profile_helper.py:160
 #: dataviva/api/stats/profile_helper.py:169
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:17
 #: dataviva/apps/rankings/templates/rankings/occupation.html:17
 #: dataviva/apps/rankings/templates/rankings/occupation.html:18
 #: dataviva/translations/dictionary.py:269
 msgid "Average Monthly Wage"
 msgstr "Renda Mensal Média"
 
-#: dataviva/api/stats/profile_helper.py:130
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:16
+msgid "Average Incoming"
+msgstr "Renda Mensal Média"
+
+#: dataviva/api/stats/profile_helper.py:130
 #: dataviva/translations/dictionary.py:265
 msgid "Total Establishments"
 msgstr "Total de Estabelecimentos"
@@ -153,10 +155,13 @@ msgstr "Taxa Nominal de Crescimento Anual (5 anos)"
 
 #: dataviva/api/stats/profile_helper.py:228
 #: dataviva/api/stats/profile_helper.py:236
-#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:16
 #: dataviva/translations/dictionary.py:194
 msgid "Economic Complexity"
 msgstr "Complexidade Econômica"
+
+#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:14
+msgid "ECI-R - Trade"
+msgstr "ICE-R - Comércio"
 
 #: dataviva/api/stats/profile_helper.py:252
 msgid "Top Campuses"
@@ -170,7 +175,6 @@ msgstr "Principais Campi"
 #: dataviva/apps/major/templates/major/index.html:70
 #: dataviva/apps/occupation/templates/occupation/index.html:73
 #: dataviva/apps/product/templates/product/index.html:78
-#: dataviva/apps/rankings/templates/rankings/_base.html:24
 #: dataviva/apps/rankings/templates/rankings/location-international-trade.html:13
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:78
@@ -178,6 +182,10 @@ msgstr "Principais Campi"
 #: dataviva/translations/dictionary.py:355
 msgid "Location"
 msgstr "Localidade"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:24
+msgid "Locations Complexity"
+msgstr "Complexidade das Localidades"
 
 #: dataviva/api/stats/profile_helper.py:255
 #: dataviva/apps/location/templates/location/graphs-education.html:70
@@ -1668,13 +1676,16 @@ msgstr "Conversão"
 #: dataviva/apps/location/templates/location/tab-opportunities.html:39
 #: dataviva/apps/product/templates/product/graphs-trade-partner.html:6
 #: dataviva/apps/product/templates/product/index.html:77
-#: dataviva/apps/rankings/templates/rankings/_base.html:50
 #: dataviva/apps/rankings/templates/rankings/product.html:13
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:19
 #: dataviva/apps/trade_partner/templates/trade_partner/graphs-international-trade.html:94
 #: dataviva/templates/site.html:62 dataviva/translations/dictionary.py:359
 msgid "Product"
 msgstr "Produto"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:47
+msgid "Product Complexity"
+msgstr "Complexidade dos Produtos"
 
 #: dataviva/apps/help/templates/help/index.html:44
 #: dataviva/apps/help/templates/help/index.html:50
@@ -1875,12 +1886,18 @@ msgstr "Cor"
 
 #: dataviva/apps/help/templates/help/tab-classifications-industries.html:13
 #: dataviva/apps/help/templates/help/tab-classifications-occupations.html:13
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:14
-#: dataviva/apps/rankings/templates/rankings/location-wages.html:14
 #: dataviva/apps/rankings/templates/rankings/occupation.html:14
 #: dataviva/translations/dictionary.py:264
 msgid "Total Jobs"
 msgstr "Total de Empregos"
+
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:15
+msgid "Employment"
+msgstr "Empregos"
+
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:15
+msgid "Jobs"
+msgstr "Empregos"
 
 #: dataviva/apps/help/templates/help/tab-classifications-locations.html:12
 msgid "ID IBGE"
@@ -1914,13 +1931,16 @@ msgstr "ID MDIC"
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:5
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:6
 #: dataviva/apps/occupation/templates/occupation/graphs-wages.html:66
-#: dataviva/apps/rankings/templates/rankings/_base.html:47
 #: dataviva/templates/general/browse_categories.html:79
 #: dataviva/templates/general/index.html:75
 #: dataviva/templates/include/footer.html:22
 #: dataviva/translations/dictionary.py:583
 msgid "Economic Activities"
 msgstr "Atividades Econômicas"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:50
+msgid "Economic Activities Complexity"
+msgstr "Complexidade das Atividades Econômicas"
 
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:8
 #: dataviva/apps/industry/templates/industry/graphs-opportunities.html:12
@@ -1971,6 +1991,10 @@ msgstr "Distribuição"
 msgid "Bar Chart"
 msgstr "Barras"
 
+#: dataviva/apps/rankings/templates/rankings/_base.html:31
+msgid "ECI-R - Employment"
+msgstr "ICE-R - Emprego"
+
 #: dataviva/apps/industry/templates/industry/index.html:12
 #: dataviva/apps/industry/templates/industry/index.html:171
 #: dataviva/apps/industry/templates/industry/tab-general.html:39
@@ -1983,7 +2007,6 @@ msgstr "Barras"
 #: dataviva/apps/occupation/templates/occupation/index.html:146
 #: dataviva/apps/occupation/templates/occupation/tab-general.html:60
 #: dataviva/apps/occupation/templates/occupation/tab-wages.html:3
-#: dataviva/apps/rankings/templates/rankings/_base.html:38
 #: dataviva/translations/dictionary.py:612
 msgid "Wages and Jobs"
 msgstr "Salário e Emprego"
@@ -2296,7 +2319,6 @@ msgstr "Salário por"
 #: dataviva/apps/product/templates/product/index.html:159
 #: dataviva/apps/product/templates/product/tab-general.html:156
 #: dataviva/apps/product/templates/product/tab-trade-partner.html:3
-#: dataviva/apps/rankings/templates/rankings/_base.html:31
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:12
 #: dataviva/apps/trade_partner/templates/trade_partner/index.html:111
 #: dataviva/apps/trade_partner/templates/trade_partner/tab-general.html:35
@@ -2304,6 +2326,10 @@ msgstr "Salário por"
 #: dataviva/translations/dictionary.py:497
 msgid "International Trade"
 msgstr "Comércio Internacional"
+
+#: dataviva/apps/rankings/templates/rankings/_base.html:38
+msgid "ECI-R - Trade"
+msgstr "ICE-R - Comércio"
 
 #: dataviva/apps/location/templates/location/index.html:18
 #: dataviva/apps/location/templates/location/index.html:237
@@ -2993,11 +3019,15 @@ msgid "The products of the position of "
 msgstr "Os produtos da posiçāo de "
 
 #: dataviva/apps/product/templates/product/index.html:90
-#: dataviva/apps/rankings/templates/rankings/product.html:14
 #: dataviva/translations/dictionary.py:196
 #: dataviva/translations/dictionary.py:504
 msgid "Product Complexity"
 msgstr "Complexidade do Produto"
+
+#: dataviva/apps/rankings/templates/rankings/product.html:14
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:14
+msgid "PCI"
+msgstr "ICP"
 
 #: dataviva/apps/product/templates/product/index.html:102
 #: dataviva/translations/dictionary.py:241
@@ -3201,10 +3231,13 @@ msgstr "Crescimento Nominal das Matrículas (5 anos)"
 msgid "CNAE ID"
 msgstr "ID CNAE"
 
-#: dataviva/apps/rankings/templates/rankings/economic-activities.html:15
 #: dataviva/apps/rankings/templates/rankings/occupation.html:15
 #: dataviva/translations/dictionary.py:267
 msgid "Total Monthly Wages"
+msgstr "Renda Mensal Total"
+
+#: dataviva/apps/rankings/templates/rankings/economic-activities.html:17
+msgid "Total Monthly Incoming"
 msgstr "Renda Mensal Total"
 
 #: dataviva/apps/rankings/templates/rankings/economic-activities.html:18
@@ -3265,12 +3298,17 @@ msgid "Effective Location Diversity"
 msgstr "Diversidade Efetiva de Localidades"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:17
-msgid "ECI-R"
-msgstr "ICE-R"
+msgid "ECI-R - Employment"
+msgstr "ICE-R - Emprego"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:18
+#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:17
 msgid "Average Distance"
 msgstr "Distância média"
+
+#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:18
+msgid "Average Opportunity Gain"
+msgstr "Ganho de oportunidade médio"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:19
 msgid "Average Oportunity Gain"
@@ -3282,7 +3320,7 @@ msgstr "Ganho de oportunidade médio"
 msgid "IBGE ID"
 msgstr "ID IBGE"
 
-#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:14
+#: dataviva/apps/rankings/templates/rankings/location-international-trade.html:16
 #: dataviva/apps/rankings/templates/rankings/product.html:16
 #: dataviva/apps/rankings/templates/rankings/trade-partner.html:15
 #: dataviva/translations/dictionary.py:281
@@ -3344,12 +3382,12 @@ msgstr "Diversidade de Destino das Exportações"
 msgid "Effective Export Destination Diversity"
 msgstr "Diversidade Efetiva de Destino das Exportações"
 
-#: dataviva/apps/rankings/templates/rankings/location-wages.html:15
+#: dataviva/apps/rankings/templates/rankings/location-wages.html:16
 msgid "Wage"
 msgstr "Massa Salarial"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:17
-msgid "Average Monthly"
+msgid "Average Income"
 msgstr "Renda Mensal Média"
 
 #: dataviva/apps/rankings/templates/rankings/location-wages.html:20
