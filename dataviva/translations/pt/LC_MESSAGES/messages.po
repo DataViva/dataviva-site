@@ -309,15 +309,19 @@ msgstr "desenvolvedor"
 msgid "data analyst"
 msgstr "Analista de Dados"
 
-#: dataviva/apps/about/templates/about/index.html:262
+#: dataviva/apps/about/templates/about/index.html:263
 msgid "data analyst"
 msgstr "Analista de Dados"
 
-#: dataviva/apps/about/templates/about/index.html:278
+#: dataviva/apps/about/templates/about/index.html:279
 msgid "data analyst"
 msgstr "Analista de Dados"
 
-#: dataviva/apps/about/templates/about/index.html:294
+#: dataviva/apps/about/templates/about/index.html:295
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:311
 msgid "data analyst"
 msgstr "Analista de Dados"
 
