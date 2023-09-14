@@ -142,3 +142,10 @@ p {
         white-space: nowrap;
     }
 }
+
+@media (min-width: 390px) and (max-width:410px){
+    .longName{
+        font-size: 14px !important;
+        text-align: center;
+    }
+}
