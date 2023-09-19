@@ -24,7 +24,7 @@
         <div id="denied_text">
           {% trans %}Logging in has been disabled on this version of DataViva. Please visit the main site to log in.{% endtrans %}
           <br><br>
-          <a class="open_parent decision" href="http://dataviva.info/">www.dataviva.info</a>
+          <a class="open_parent decision" href="https://www.dataviva.info/">www.dataviva.info</a>
         </div>
       {% endif %}
 
@@ -63,7 +63,7 @@
 
     d3.select("a.open_parent").on("click", function(){
       d3.event.preventDefault();
-      window.opener.parent.location.href = "http://dataviva.info" + window.opener.parent.location.pathname;
+      window.opener.parent.location.href = "https://www.dataviva.info" + window.opener.parent.location.pathname;
       window.close();
     })
 
