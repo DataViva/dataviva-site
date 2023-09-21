@@ -560,9 +560,11 @@ var loadViz = function (data){
 }
 
 var getUrls = function() {
-    var urls = [
-        api_url + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '/?' + filters
-    ];
+    var urls = [];
+
+    for(let i = 1997; i < 2023; i++) {
+        urls.push(api_url + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '/?' + filters + '&year=' + i);
+    }
 
     dimensions.forEach(function(dimension) {
         urls.push(api_url + 'metadata/' + dimension);
@@ -578,7 +580,11 @@ $(document).ready(function() {
         getUrls(), 
         function(responses) {
             var data = responses.shift();
-
+            for(let i = 1998; i < 2023; i++) {
+                var aux = responses.shift();
+                data.data.push(aux.data);
+            }
+            
             dimensions.forEach(function(attr, i) {
                 metadata[attr] = responses[i];
             });
