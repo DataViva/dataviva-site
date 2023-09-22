@@ -1,7 +1,7 @@
 # DataViva
 
 A Collaborative Planning Tool.
-[dataviva.info](http://dataviva.info)
+[dataviva.info](https://www.dataviva.info)
 
 [![Stories in Progress](https://badge.waffle.io/DataViva/dataviva-site.png?label=in+progress&title=In+Progress)](https://waffle.io/Dataviva/dataviva-site) [![Stories Ready](https://badge.waffle.io/DataViva/dataviva-site.png?label=ready&title=Ready)](https://waffle.io/Dataviva/dataviva-site) 
 
@@ -60,7 +60,7 @@ Note: Internet Explorer versions 8 and below will not work as they do not have S
         export DATAVIVA_OAUTH_FACEBOOK_ID=
         export DATAVIVA_OAUTH_FACEBOOK_SECRET=
         * export DATAVIVA_ACCOUNTS=True
-        export DATAVIVA_API_BASE_URL=http://api.staging.dataviva.info/
+        export DATAVIVA_API_BASE_URL=https://api.staging.dataviva.info/
 
         * only necessary if you want to enable user accounts
 
