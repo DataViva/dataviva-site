@@ -553,11 +553,10 @@ var loadViz = function (data) {
     toolsBuilder(stacked.id, viz, data, titleHelper(yearRange).value);
 }
 
-var getUrls = function () {
-
+var getUrls = function (years) {
     var urls = [];
 
-    for (let i = 1997; i < 2023; i++) {
+    for (let i = years[0]; i <= years.at(-1); i++) {
         urls.push(api_url + [dataset, (dataset == 'secex' ? 'month/year' : 'year')].concat(dimensions).join('/') + '/?' + filters + '&year=' + i);
     }
 
@@ -571,37 +570,42 @@ var getUrls = function () {
 var loading = dataviva.ui.loading('.loading').text(dictionary['Building Visualization']);
 
 $(document).ready(function () {
-    ajaxQueue(
-        getUrls(),
-        function (responses) {
-            var data = responses[0];
+    var years = [];
 
-            let dataArray = [];
-
-            for (let i = 0; i < responses.length; i++) {
-                if (responses[i].data) {
-                    var aux = responses[i].data;
-                    dataArray.push(...aux);
+    fetch(`${s3_host}/years/${dataset}-years.json`).then((response) => response.json().then((data) => {
+        years = data.years;
+    })).finally(() => {
+        ajaxQueue(
+            getUrls(years),
+            function (responses) {
+                var data = responses[0];
+    
+                let dataArray = [];
+    
+                for (let i = 0; i < responses.length; i++) {
+                    if (responses[i].data) {
+                        dataArray.push(...responses[i].data);
+                    }
                 }
+    
+                data.data = dataArray;
+    
+                responses = responses.filter(response => !response.data);
+    
+                dimensions.forEach(function (attr, i) {
+                    metadata[attr] = responses[i];
+                });
+    
+                data = buildData(data);
+    
+                loadViz(data);
+    
+                loading.hide();
+                d3.select('#mask').remove();
+            },
+            function (error) {
+                loading.text(dictionary['Unable to load visualization']);
             }
-
-            data.data = dataArray;
-
-            responses = responses.filter(response => !response.data);
-
-            dimensions.forEach(function (attr, i) {
-                metadata[attr] = responses[i];
-            });
-
-            data = buildData(data);
-
-            loadViz(data);
-
-            loading.hide();
-            d3.select('#mask').remove();
-        },
-        function (error) {
-            loading.text(dictionary['Unable to load visualization']);
-        }
-    );
+        );
+    })
 });
