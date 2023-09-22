@@ -148,4 +148,8 @@ p {
         font-size: 14px !important;
         text-align: center;
     }
+
+    .analyst{
+        font-size: 12px !important
+    }
 }
