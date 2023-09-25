@@ -28,7 +28,7 @@
                 </h4>
                 <p>{{ post.text_call }}</p>
                 <div class="meta">
-                    <p><a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title }}">{% trans %}Continue reading{% endtrans %}</a></p>
+                    <p><a href="{{ url_for('blog.show', id=post.id) }}" title="{{ post.title }}" class="read-more-w">{% trans %}Read more{% endtrans %}<span class="glyphicon glyphicon-arrow-right" style="margin-left: 4px;" aria-hidden="true"></span></a></p>
                     <p class="data">{% trans %}By{% endtrans %} {{ post.author }} {{ post.date_str() }}</p>
                 </div>
             </div>
