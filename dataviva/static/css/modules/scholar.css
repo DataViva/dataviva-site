@@ -108,6 +108,17 @@
     text-indent: 10px;
 }
 
+.scholar .container .thin-divider{
+  color: #FFF;
+  background-color: #2D3A4E;
+  font-size: 20px;
+  font-weight: 600;
+  height: 4px;
+  line-height: 40px;
+  margin-bottom: 2rem;
+  text-indent: 10px;
+}
+
 .scholar .article-list .item:before {
     font-family: 'FontAwesome';
     content: "\f02d";
