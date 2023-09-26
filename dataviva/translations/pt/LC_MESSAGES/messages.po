@@ -309,33 +309,25 @@ msgstr "desenvolvedor"
 msgid "data analyst"
 msgstr "Analista de Dados"
 
-#: dataviva/apps/about/templates/about/index.html:262
+#: dataviva/apps/about/templates/about/index.html:263
 msgid "data analyst"
 msgstr "Analista de Dados"
 
-#: dataviva/apps/about/templates/about/index.html:278
+#: dataviva/apps/about/templates/about/index.html:279
 msgid "data analyst"
 msgstr "Analista de Dados"
 
-#: dataviva/apps/about/templates/about/index.html:294
+#: dataviva/apps/about/templates/about/index.html:295
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:311
 msgid "data analyst"
 msgstr "Analista de Dados"
 
 #: dataviva/apps/about/templates/about/index.html:267
 msgid "Technical Council"
 msgstr "Conselho Técnico"
-
-#: dataviva/apps/about/templates/about/index.html:275
-msgid "Counselor"
-msgstr "Conselheiro"
-
-#: dataviva/apps/about/templates/about/index.html:290
-msgid "Counselor"
-msgstr "Conselheiro"
-
-#: dataviva/apps/about/templates/about/index.html:305
-msgid "Counselor "
-msgstr "Conselheira"
 
 
 #: dataviva/apps/admin/views.py:21 dataviva/templates/general/error.html:12
