@@ -3,10 +3,9 @@
 {% block content %}
 
 <script>
-    function handleChange(e, type) {
+    function handleChange(e) {
         let arrayItens = []
-        let itens = document.querySelectorAll("#checkBoxes [type=checkbox]:checked")
-
+        let itens = document.querySelectorAll(".checkBoxes [type=checkbox]:checked")
         for(let item of itens) {
             arrayItens.push(Number(item.id));
         }
