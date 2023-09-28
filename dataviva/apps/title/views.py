@@ -85,6 +85,7 @@ def get_title(dataset, shapes, graph, api_filters):
 
     if result:
         title = getattr(result, 'title_' + g.locale)
+        if (title == u'Balan\xc3\xa7a comercial <location_from> <location>' or title == u'Balan\xc3\xa7a comercial <location_from> <location> <partner_to> <partner>'): title = title.encode('latin-1')
 
         for key, value in values.iteritems():
             title = title.replace('<' + key + '>', value)
