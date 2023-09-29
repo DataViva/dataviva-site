@@ -59,9 +59,18 @@ def index(page=1):
     idList = []
     
     if search:
-        posts = posts_query.whoosh_search(search).order_by(
-            desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
-        num_posts = len(posts_query.whoosh_search(search).all())
+        if subject:
+            idList = [int(idItem) for idItem in subject.split(',')]
+            filter_conditions = [Subject.id == id for id in idList]
+            filter_condition = or_(*filter_conditions)
+
+            posts = posts_query.filter(Post.subjects.any(filter_condition)).whoosh_search(search).order_by(
+                desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+            num_posts = len(posts_query.whoosh_search(search).all())
+        else: 
+            posts = posts_query.whoosh_search(search).order_by(desc(Post.publish_date)).paginate(
+                page, ITEMS_PER_PAGE, True).items
+            num_posts = len(posts_query.whoosh_search(search).all())
     elif subject:
         idList = [int(idItem) for idItem in subject.split(',')]
         filter_conditions = [Subject.id == id for id in idList]
