@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_file
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 from models import Post, Subject
 from dataviva import db
 from forms import RegistrationForm
@@ -56,16 +56,21 @@ def index(page=1):
     posts = []
     search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     subject = request.args.get('subject')
+    idList = []
     
     if search:
         posts = posts_query.whoosh_search(search).order_by(
             desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_posts = len(posts_query.whoosh_search(search).all())
     elif subject:
-        posts = posts_query.filter(Post.subjects.any(Subject.id == subject)).order_by(
-            desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        idList = [int(idItem) for idItem in subject.split(',')]
+        filter_conditions = [Subject.id == id for id in idList]
+        filter_condition = or_(*filter_conditions)
+        
+        posts = posts_query.filter(Post.subjects.any(filter_condition)).order_by(
+                desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_posts = posts_query.filter(
-            Post.subjects.any(Subject.id == subject)).count()
+            Post.subjects.any(filter_condition)).count()
     else:
         posts = posts_query.order_by(desc(Post.publish_date)).paginate(
             page, ITEMS_PER_PAGE, True).items
@@ -80,7 +85,9 @@ def index(page=1):
                            posts=posts,
                            subjects=active_posts_subjects(g.locale),
                            search_result=search,
-                           pagination=pagination)
+                           pagination=pagination,
+                           locale=g.locale,
+                           idList=idList)
 
 
 @mod.route('/post/<id>', methods=['GET'])
