@@ -34,7 +34,7 @@ class Article(db.Model):
         return ', '.join(keyword_names)
 
     def date_str(self):
-        return self.postage_date.strftime('%d/%m/%Y')
+        return self.postage_date.strftime('%d of %B, %Y')
 
     def __repr__(self):
         return '<Article %r>' % (self.title)

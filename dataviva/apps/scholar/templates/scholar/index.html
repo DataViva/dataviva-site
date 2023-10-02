@@ -45,12 +45,21 @@
     {% for article in articles %}
     <div class="item">
         <h4>
-            <a href="{{url_for('scholar.show', id=article.id)}}" title="{{ article.title }}">{{ article.title }}</a>
+            {{ article.title }}
         </h4>
         <p>
-            {% trans %}Author(s):{%endtrans%} {{ article.authors_str() }}<br />
-            {% trans %}Keywords:{%endtrans%} {{ article.keywords_str() }}<br />
-            {% trans %}Publication Date:{%endtrans%} {{ article.date_str() }}
+            {{ article.date_str() }}
+        </p>
+        <p>
+            {% trans %}<b>Author(s):</b>{%endtrans%} {{ article.authors_str() }}<br />
+        </p>
+        <ul class="horizontal-list">
+            {% for keyword in article.keywords %}
+            <li class="keywords-list">{{keyword.name}}</li>
+            {% endfor %}
+        </ul>
+        <p>
+            {{ article.abstract[:500]|safe }}
         </p>
     </div>
     {% endfor %}

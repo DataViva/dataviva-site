@@ -6,7 +6,7 @@ from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
 from forms import RegistrationForm
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
@@ -21,7 +21,6 @@ import fnmatch
 mod = Blueprint('scholar', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/scholar')
-
 
 @mod.before_request
 def before_request():
@@ -43,21 +42,26 @@ def add_language_code(endpoint, values):
 def index(page=1):
     articles_query = Article.query.filter_by(approval_status=True)
     articles = []
+    idList = []
 
     keyword = request.args.get('keyword')
     if keyword:
-        articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
-        num_articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).count()
+        idList = [int(id) for id in keyword.split(',')]
+        filter_itens = [KeyWord.id == id for id in idList]
+        filter_condition = or_(*filter_itens)
+        articles = articles_query.filter(Article.keywords.any(filter_condition)).order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_articles = articles_query.filter(Article.keywords.any(filter_condition)).count()
     else:
         articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_articles = articles_query.count()
-
+        
     pagination = Pagination(page=page,
                             total=num_articles,
                             per_page=ITEMS_PER_PAGE,
                             bs_version=BOOTSTRAP_VERSION)
-
+    
     return render_template('scholar/index.html',
+                            idList = idList,
                             articles=articles,
                             keywords=approved_articles_keywords(),
                             pagination=pagination)
