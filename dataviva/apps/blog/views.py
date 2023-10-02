@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_file
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
-from sqlalchemy import desc, or_
+from sqlalchemy import desc, or_, and_
 from models import Post, Subject
 from dataviva import db
 from forms import RegistrationForm
@@ -64,13 +64,23 @@ def index(page=1):
             filter_conditions = [Subject.id == id for id in idList]
             filter_condition = or_(*filter_conditions)
 
-            posts = posts_query.filter(Post.subjects.any(filter_condition)).whoosh_search(search).order_by(
+            string = "%" + search + "%"
+
+            title_condition = Post.title.ilike(string)
+
+            # Combine as condições usando 'and' para que ambas sejam aplicadas
+            combined_condition = and_(filter_condition, title_condition)
+
+            posts = posts_query.filter(Post.subjects.any(filter_condition)).filter(combined_condition).order_by(
                 desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
-            num_posts = len(posts_query.whoosh_search(search).all())
+
+            num_posts = len(posts)
         else: 
-            posts = posts_query.whoosh_search(search).order_by(desc(Post.publish_date)).paginate(
+            string = "%" + search + "%"
+
+            posts = posts_query.filter(Post.title.ilike(string)).order_by(desc(Post.publish_date)).paginate(
                 page, ITEMS_PER_PAGE, True).items
-            num_posts = len(posts_query.whoosh_search(search).all())
+            num_posts = len(posts)
     elif subject:
         idList = [int(idItem) for idItem in subject.split(',')]
         filter_conditions = [Subject.id == id for id in idList]
