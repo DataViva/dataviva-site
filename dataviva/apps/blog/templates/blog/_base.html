@@ -2,6 +2,21 @@
 
 {% block content %}
 
+<script>
+    function handleChange(e) {
+        let arrayItens = []
+        let itens = document.querySelectorAll(".checkBoxes [type=checkbox]:checked")
+        for(let item of itens) {
+            arrayItens.push(Number(item.id));
+        }
+
+        let page_url = window.location.href;
+        base_url = page_url.split("://")[1].split("/")[0];
+
+        window.location.href = `/${dataviva.language}/blog/${arrayItens.length != 0 ? `?subject=${arrayItens}` : ""}`;
+    }
+</script>
+
 <div class="container">
     <div class="row bg-white">
         <ol class="breadcrumb">
@@ -13,12 +28,18 @@
 
 <div class="container container-big">
     <div class="row row-offcanvas row-offcanvas-left">
-        <nav class="sidebar col-md-3 sidebar-offcanvas">
-            <h3>{% trans %}Topics{% endtrans %}</h3>
+        <nav class="sidebar sidebar-blog col-md-3 sidebar-offcanvas">
+            <h3 class="sidebar-blog-h3">{% trans %}Topics{% endtrans %}</h3>
             <ul>
-                <li><a href="{{ url_for('blog.index') }}" title="Todos" class="{{ 'active' if not request.args.get('subject') }}">{% trans %}All{% endtrans %}</a></li>
                 {% for subject in subjects %}
-                    <li><a href="{{ url_for('blog.index', subject=subject.id) }}" title="{{ subject.name }}" class="{{ 'active' if subject.id == request.args.get('subject')|int }}">{{ subject.name }}</a></li>
+                <li class="checkBoxes">
+                {% if subject.id in idList %}
+                    <input type="checkbox" id={{subject.id}} name={{subject.name}} checked onchange="handleChange(event)"/>
+                {%else %}
+                    <input type="checkbox" id={{subject.id}} name={{subject.name}} onchange="handleChange(event)"/>
+                {%endif %}
+                    <label for={{subject.id}}>{{subject.name}}</label>
+                </li>
                 {% endfor %}
             </ul>
         </nav>
@@ -31,7 +52,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-3">
+                <div class="col-xs-4 col-sm-3">
                     <h1>Blog</h1>
                 </div>
                 <div class="col-md-offset-4 col-md-5 col-sm-offset-3 col-sm-6 col-xs-8 search-form-wrapper">
@@ -47,11 +68,11 @@
                     </form>
                 </div>
             </div>
+            <div class="col-xs-12" style="width: 100%; height: 3px; border-radius: 2px; background: #666; margin-bottom: 35px;"></div>
             {% block blog_content %}
             {% endblock blog_content %}
         </section>
     </div>
 </div>
-
 
 {% endblock content %}

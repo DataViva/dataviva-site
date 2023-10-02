@@ -1229,10 +1229,13 @@ msgstr "resultado encontrado para"
 msgid "results found for"
 msgstr "resultados encontrados para"
 
-#: dataviva/apps/blog/templates/blog/index.html:31
 #: dataviva/apps/news/templates/news/index.html:31
 msgid "Continue reading"
 msgstr "Continue lendo"
+
+#: dataviva/apps/blog/templates/blog/index.html:31
+msgid "Read more"
+msgstr "Leia mais"
 
 #: dataviva/apps/blog/templates/blog/index.html:32
 #: dataviva/apps/blog/templates/blog/show.html:22
