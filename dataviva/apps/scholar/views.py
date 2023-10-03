@@ -43,6 +43,7 @@ def index(page=1):
     articles_query = Article.query.filter_by(approval_status=True)
     articles = []
     idList = []
+    lang = get_locale()
 
     keyword = request.args.get('keyword')
     if keyword:
@@ -63,6 +64,7 @@ def index(page=1):
     return render_template('scholar/index.html',
                             idList = idList,
                             articles=articles,
+                            language=lang,
                             keywords=approved_articles_keywords(),
                             pagination=pagination)
 

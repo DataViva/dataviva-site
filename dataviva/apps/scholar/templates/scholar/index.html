@@ -48,7 +48,7 @@
             {{ article.title }}
         </h4>
         <p>
-            {{ article.date_str() }}
+            {{ article.date_str(language) }}
         </p>
         <p>
             {% trans %}<b>Author(s):</b>{%endtrans%} {{ article.authors_str() }}<br />
@@ -59,8 +59,13 @@
             {% endfor %}
         </ul>
         <p>
-            {{ article.abstract[:500]|safe }}
+            {% if article.abstract|length > 500 %}
+                {{ article.abstract[:500]|safe }}...<a href="{{ article.file_url }}">Leia mais</a>
+            {% else %}
+                {{ article.abstract|safe }}
+            {% endif %}
         </p>
+
     </div>
     {% endfor %}
     <nav>{{ pagination.links }}</nav>
