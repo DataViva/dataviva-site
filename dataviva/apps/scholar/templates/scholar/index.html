@@ -43,29 +43,36 @@
 <div class="thin-divider"></div>
 <div class="article-list">
     {% for article in articles %}
-    <div class="item">
-        <h4>
-            {{ article.title }}
-        </h4>
-        <p>
-            {{ article.date_str(language) }}
-        </p>
-        <p>
-            {% trans %}<b>Author(s):</b>{%endtrans%} {{ article.authors_str() }}<br />
-        </p>
-        <ul class="horizontal-list">
-            {% for keyword in article.keywords %}
-            <li class="keywords-list">{{keyword.name}}</li>
-            {% endfor %}
-        </ul>
-        <p>
-            {% if article.abstract|length > 500 %}
-                {{ article.abstract[:500]|safe }}...<a href="{{ article.file_url }}">Leia mais</a>  
-            {% else %}
+    <div class="flex-div">
+        <img src="https://wallpapers.com/images/featured/kid-goku-background-08aqp80p017321i7.jpg" alt="article-img"
+            class="article-img" />
+        <div class="item" style="margin-left: 20px;">
+            <h4>
+                {{ article.title }}
+            </h4>
+            <p>
+                {{ article.date_str(language) }}
+            </p>
+            <p>
+                {% trans %}<b>Author(s):</b>{%endtrans%} {{ article.authors_str() }}<br />
+            </p>
+            <ul class="horizontal-list">
+                {% for keyword in article.keywords %}
+                <li class="keywords-list">{{keyword.name}}</li>
+                {% endfor %}
+            </ul>
+            <p>
+                {% if article.abstract|length > 500 %}
+                {{ article.abstract[:500] }}...<a href="{{ article.file_url }}">Leia mais</a>
+                {% else %}
                 {{ article.abstract|safe }}
-            {% endif %}
-        </p>
+                {% endif %}
+            </p>
+            <a href="{{ article.file_url }}" class="btn btn-success btn-md" style="margin-top: 12px;">{% trans
+                %}Download File{% endtrans %}
+                (PDF)</a>
 
+        </div>
     </div>
     {% endfor %}
     <nav>{{ pagination.links }}</nav>

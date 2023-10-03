@@ -49,9 +49,9 @@ class Article(db.Model):
         else:
             dateObj = datetime.datetime.strptime(date, "%B %d, %Y")
             month = monthsPt[dateObj.month - 1] 
-            return "{} de {},{}".format(dateObj.day, month, dateObj.year)
+            return "{} de {}, {}".format(dateObj.day, month, dateObj.year)
             
-
+    
     def __repr__(self):
         return '<Article %r>' % (self.title)
 

@@ -73,6 +73,13 @@ h4 {
   margin-top: 10px;
 }
 
+.scholar .flex-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
 .scholar .article p {
   color: #666;
   font-size: 13px;
@@ -148,18 +155,6 @@ h4 {
   margin: 15px 0px;
 }
 
-.scholar .article-list .item:before {
-  font-family: 'FontAwesome';
-  content: "\f02d";
-  color: #2D3A4E;
-  display: block;
-  float: left;
-  height: 40px;
-  margin: 0 2rem 2rem 0;
-  width: 50px;
-  font-size: 50px;
-}
-
 .scholar .sidebar h3 {
   border-bottom: 1px solid #f2f2f2;
   font-size: 18px;
@@ -224,6 +219,13 @@ h4 {
   display: flex;
   align-items: center;
   text-align: center;
+}
+
+.article-img {
+  min-width: 190px;
+  object-fit: cover;
+  max-height: 240px;
+  border-radius: 6px;
 }
 
 .article-abstract {

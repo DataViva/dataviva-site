@@ -6,7 +6,7 @@ from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
 from forms import RegistrationForm
-from sqlalchemy import desc, or_
+from sqlalchemy import desc, or_, and_
 from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
@@ -41,12 +41,34 @@ def add_language_code(endpoint, values):
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
     articles_query = Article.query.filter_by(approval_status=True)
+    lang = get_locale()
     articles = []
     idList = []
-    lang = get_locale()
-
+    search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     keyword = request.args.get('keyword')
-    if keyword:
+    
+    if search:
+        if keyword:
+            idList = [int(id) for id in keyword.split(',')]
+            filter_itens = [KeyWord.id == id for id in idList]
+            filter_condition = or_(*filter_itens)
+            
+            string = "%" + search + "%"
+            title_condition = Article.title.ilike(string)
+            
+            combined_condition = and_(filter_condition, title_condition)
+                        
+            articles = articles_query.filter(Article.keywords.any(filter_condition)).filter(combined_condition).order_by(
+                desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+
+            num_articles = len(articles)
+            
+        else:
+            string = "%" + search + "%"
+            articles = articles_query.filter(Article.title.ilike(string)).order_by(desc(Article.postage_date)).paginate(
+                page, ITEMS_PER_PAGE, True).items
+            num_articles = len(articles)
+    elif keyword:
         idList = [int(id) for id in keyword.split(',')]
         filter_itens = [KeyWord.id == id for id in idList]
         filter_condition = or_(*filter_itens)
