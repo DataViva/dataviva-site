@@ -6,18 +6,14 @@
     function handleChange(e) {
         let arrayItens = []
         let itens = document.querySelectorAll(".checkBoxes [type=checkbox]:checked")
-        for (let item of itens) {
+        for(let item of itens) {
             arrayItens.push(Number(item.id));
         }
 
         let page_url = window.location.href;
         base_url = page_url.split("://")[1].split("/")[0];
 
-        if (page_url.search("pt") == -1) {
-            window.location.href = `/en/blog/${arrayItens.length != 0 ? `?subject=${arrayItens}` : ""}`;
-        } else {
-            window.location.href = `/pt/blog/${arrayItens.length != 0 ? `?subject=${arrayItens}` : ""}`;
-        }
+        window.location.href = `/${dataviva.language}/blog/${arrayItens.length != 0 ? `?subject=${arrayItens}` : ""}`;
     }
 </script>
 
@@ -37,12 +33,11 @@
             <ul>
                 {% for subject in subjects %}
                 <li class="checkBoxes">
-                    {% if subject.id in idList %}
-                    <input type="checkbox" id={{subject.id}} name={{subject.name}} checked
-                        onchange="handleChange(event)" />
-                    {%else %}
-                    <input type="checkbox" id={{subject.id}} name={{subject.name}} onchange="handleChange(event)" />
-                    {%endif %}
+                {% if subject.id in idList %}
+                    <input type="checkbox" id={{subject.id}} name={{subject.name}} checked onchange="handleChange(event)"/>
+                {%else %}
+                    <input type="checkbox" id={{subject.id}} name={{subject.name}} onchange="handleChange(event)"/>
+                {%endif %}
                     <label for={{subject.id}}>{{subject.name}}</label>
                 </li>
                 {% endfor %}
@@ -76,8 +71,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xs-12"
-                style="width: 100%; height: 3px; border-radius: 2px; background: #666766; margin-bottom: 35px;"></div>
+            <div class="col-xs-12" style="width: 100%; height: 3px; border-radius: 2px; background: #666; margin-bottom: 35px;"></div>
             {% block blog_content %}
             {% endblock blog_content %}
         </section>

@@ -60,7 +60,7 @@
         </ul>
         <p>
             {% if article.abstract|length > 500 %}
-                {{ article.abstract[:500]|safe }}...<a href="{{ article.file_url }}">Leia mais</a>
+                {{ article.abstract[:500]|safe }}...<a href="{{ article.file_url }}">Leia mais</a>  
             {% else %}
                 {{ article.abstract|safe }}
             {% endif %}
