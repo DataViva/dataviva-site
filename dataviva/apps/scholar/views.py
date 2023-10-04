@@ -220,7 +220,7 @@ def create():
         db.session.add(article)
         db.session.flush()
 
-        """ if os.path.exists(upload_folder):
+        if os.path.exists(upload_folder):
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
@@ -233,7 +233,7 @@ def create():
                 }
             )
 
-            shutil.rmtree(os.path.split(upload_folder)[0]) """
+            shutil.rmtree(os.path.split(upload_folder)[0])
 
         db.session.commit()
         upload_helper.log_operation(module=mod.name, operation='create', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])
