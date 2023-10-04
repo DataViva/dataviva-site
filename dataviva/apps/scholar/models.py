@@ -19,6 +19,7 @@ class Article(db.Model):
     theme = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
     approval_status = db.Column(db.Boolean)
+    postage_img = db.Column(db.String())    
     authors = db.relationship('AuthorScholar',
                                 backref='scholar_article',
                                 lazy='eager',

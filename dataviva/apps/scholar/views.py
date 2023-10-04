@@ -11,6 +11,7 @@ from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
 from dataviva.utils.send_mail import send_mail
+from dataviva.utils.upload_helper import save_b64_image
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
@@ -157,7 +158,7 @@ def admin_activate(status, status_value):
 
 def new_article_advise(article, server_domain):
     article_url = server_domain + g.locale + '/' + mod.name + '/article/' + str(article.id)
-    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, article_url=article_url)
+    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, article_url=article_url, language=(get_locale()))
     send_mail("Novo Estudo", [admin_email], advise_message)
 
 
@@ -204,8 +205,8 @@ def create():
         article.abstract = form.abstract.data
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.approval_status = 0
-
         author_input_list = form.authors.data.replace(', ', ',').split(',')
+        article.postage_img = form.thumb.data
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
@@ -219,7 +220,7 @@ def create():
         db.session.add(article)
         db.session.flush()
 
-        if os.path.exists(upload_folder):
+        """ if os.path.exists(upload_folder):
 
             file_name = [file for file in os.listdir(upload_folder)][0]
 
@@ -232,7 +233,7 @@ def create():
                 }
             )
 
-            shutil.rmtree(os.path.split(upload_folder)[0])
+            shutil.rmtree(os.path.split(upload_folder)[0]) """
 
         db.session.commit()
         upload_helper.log_operation(module=mod.name, operation='create', user=(g.user.id, g.user.email), objs=[(article.id, article.title)])

@@ -228,6 +228,10 @@ h4 {
   border-radius: 6px;
 }
 
+.thumb-buttons {
+  margin-bottom: 14px;
+}
+
 .article-abstract {
   white-space: nowrap;
   overflow: hidden;
@@ -235,7 +239,6 @@ h4 {
   max-width: 100%;
   display: inline-block;
 }
-
 .header-title {
   display: flex;
   align-items: center;
