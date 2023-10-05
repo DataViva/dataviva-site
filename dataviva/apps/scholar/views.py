@@ -99,7 +99,7 @@ def show(id):
     else:
         article = Article.query.filter_by(approval_status=True, id=id).first_or_404()
 
-    return render_template('scholar/show.html', article=article)
+    return render_template('scholar/show.html', article=article, language=get_locale())
 
 
 @mod.route('/admin', methods=['GET'])

@@ -44,9 +44,8 @@
 <div class="article-list">
     {% for article in articles %}
     <div class="flex-div">
-        <img src="{{article.postage_img}}" alt="article-img"
-            class="article-img" />
-        <div class="item" style="margin-left: 20px;">
+        <img src="{{article.postage_img if article.postage_img else 'https://kultivi.com/wp-content/uploads/2019/07/tecnicas-de-estudo-Kultivi.jpg'}}" alt="article-img" class="article-img" />
+        <div class="item" style="margin-left: 20px; width: 100%;">
             <h4>
                 {{ article.title }}
             </h4>

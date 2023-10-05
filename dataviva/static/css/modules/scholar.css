@@ -75,7 +75,6 @@ h4 {
 
 .scholar .flex-div {
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 24px;
 }
@@ -222,9 +221,10 @@ h4 {
 }
 
 .article-img {
-  min-width: 190px;
+  min-width: 240px;
+  width: 240px;
+  height: 260px;
   object-fit: cover;
-  max-height: 240px;
   border-radius: 6px;
 }
 
@@ -239,6 +239,7 @@ h4 {
   max-width: 100%;
   display: inline-block;
 }
+
 .header-title {
   display: flex;
   align-items: center;
