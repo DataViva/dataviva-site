@@ -51,22 +51,22 @@ def index(page=1):
     if search:
         if keyword:
             idList = [int(id) for id in keyword.split(',')]
-            filter_itens = [KeyWord.id == id for id in idList]
-            filter_condition = or_(*filter_itens)
-            
+            filter_items = [KeyWord.id == id_ for id_ in idList]
+            filter_condition = or_(*filter_items)
+
             string = "%" + search + "%"
-            title_condition = Article.title.ilike(string)
-            
-            combined_condition = and_(filter_condition, title_condition)
-                        
-            articles = articles_query.filter(Article.keywords.any(filter_condition)).filter(combined_condition).order_by(
+            string_condition = or_(Article.title.ilike(string), Article.abstract.ilike(string))
+
+            combined_condition = and_(filter_condition, string_condition)
+
+            articles = articles_query.filter(combined_condition).order_by(
                 desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
 
             num_articles = len(articles)
-            
         else:
-            string = "%" + search + "%"
-            articles = articles_query.filter(Article.title.ilike(string)).order_by(desc(Article.postage_date)).paginate(
+            string = "%" + search + "%" 
+            string_condition = or_(Article.title.ilike(string), Article.abstract.ilike(string))
+            articles = articles_query.filter(string_condition).order_by(desc(Article.postage_date)).paginate(
                 page, ITEMS_PER_PAGE, True).items
             num_articles = len(articles)
     elif keyword:
