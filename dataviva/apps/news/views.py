@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_file
 from dataviva.apps.general.views import get_locale
 from flask.ext.login import login_required
-from sqlalchemy import desc
+from sqlalchemy import desc, or_, and_
 from models import Publication, PublicationSubject
 from dataviva import db
 from forms import RegistrationForm
@@ -54,19 +54,52 @@ def index(page=1):
     publications = []
     search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     subject = request.args.get('subject')
+    idList = []
 
     if search:
-        publications = publications_query.whoosh_search(search).order_by(
-            desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
-        num_publications = len(publications_query.whoosh_search(search).all())
+        if subject:
+            idList = [int(idItem) for idItem in subject.split(',')]
+            filter_conditions = [PublicationSubject.id == id for id in idList]
+            filter_condition = or_(*filter_conditions)
+
+            string = "%" + search + "%"
+
+            string_condition = or_(
+                Publication.title.ilike(string),
+                Publication.text_content.ilike(string),
+                Publication.author.ilike(string)
+            )
+            
+            combined_condition = and_(filter_condition, string_condition)
+
+            publications = publications_query.filter(Publication.subjects.any(filter_condition)).filter(combined_condition).order_by(
+                desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+
+            num_publications = len(publications)
+        else: 
+            string = "%" + search + "%"
+
+            string_condition = or_(
+                Publication.title.ilike(string),
+                Publication.text_content.ilike(string),
+                Publication.author.ilike(string)
+            )
+
+            publications = publications_query.filter(string_condition).order_by(
+                desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+            num_publications = len(publications)
     elif subject:
-        publications = publications_query.filter(Publication.subjects.any(PublicationSubject.id == subject)).order_by(
-            desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        idList = [int(idItem) for idItem in subject.split(',')]
+        filter_conditions = [PublicationSubject.id == id for id in idList]
+        filter_condition = or_(*filter_conditions)
+        
+        publications = publications_query.filter(Publication.subjects.any(filter_condition)).order_by(
+                desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_publications = publications_query.filter(
-            Publication.subjects.any(PublicationSubject.id == subject)).count()
+            Publication.subjects.any(filter_condition)).count()
     else:
-        publications = publications_query.order_by(
-            desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        publications = publications_query.order_by(desc(Publication.publish_date)).paginate(
+            page, ITEMS_PER_PAGE, True).items
         num_publications = publications_query.count()
 
     pagination = Pagination(page=page,
@@ -78,7 +111,9 @@ def index(page=1):
                            publications=publications,
                            subjects=active_publications_subjects(g.locale),
                            search_result=search,
-                           pagination=pagination)
+                           pagination=pagination,
+                           locale=g.locale,
+                           idList=idList)
 
 
 @mod.route('/publication/<id>', methods=['GET'])

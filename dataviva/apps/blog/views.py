@@ -65,21 +65,29 @@ def index(page=1):
             filter_condition = or_(*filter_conditions)
 
             string = "%" + search + "%"
-
-            title_condition = Post.title.ilike(string)
+            
+            string_condition = or_(
+                Post.title.ilike(string),
+                Post.text_content.ilike(string),
+                Post.author.ilike(string)
+            )
 
             # Combine as condições usando 'and' para que ambas sejam aplicadas
-            combined_condition = and_(filter_condition, title_condition)
+            combined_condition = and_(filter_condition, string_condition)
 
             posts = posts_query.filter(Post.subjects.any(filter_condition)).filter(combined_condition).order_by(
                 desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
-
             num_posts = len(posts)
         else: 
             string = "%" + search + "%"
-
-            posts = posts_query.filter(Post.title.ilike(string)).order_by(desc(Post.publish_date)).paginate(
-                page, ITEMS_PER_PAGE, True).items
+            string_condition = or_(
+                Post.title.ilike(string),
+                Post.text_content.ilike(string),
+                Post.author.ilike(string)
+            )
+            
+            posts = posts_query.filter(string_condition).order_by(
+                desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
             num_posts = len(posts)
     elif subject:
         idList = [int(idItem) for idItem in subject.split(',')]
