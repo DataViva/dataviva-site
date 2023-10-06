@@ -64,18 +64,15 @@ def index(page=1):
 
             string = "%" + search + "%"
 
-            title_condition = Publication.title.ilike(string)
-
-            # Combine as condições usando 'and' para que ambas sejam aplicadas
-            combined_condition = and_(filter_condition, title_condition)
-
             string_condition = or_(
                 Publication.title.ilike(string),
                 Publication.text_content.ilike(string),
                 Publication.author.ilike(string)
             )
+            
+            combined_condition = and_(filter_condition, string_condition)
 
-            publications = publications_query.filter(string_condition).order_by(
+            publications = publications_query.filter(Publication.subjects.any(filter_condition)).filter(combined_condition).order_by(
                 desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
 
             num_publications = len(publications)
