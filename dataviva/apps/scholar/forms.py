@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, TextAreaField, HiddenField, validators, ValidationError
+from wtforms import TextField, HiddenField, validators, ValidationError
 from dataviva.utils.custom_fields import TagsField
 from models import KeyWord, Article
 
@@ -38,7 +38,9 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira o(s) autor(es) do artigo."),
         validators.Length(max=500)
     ])
-
+    
+    thumb = HiddenField('thumb')
+    
     keywords = TagsField('keywords',
         choices=[],
         validators=[
@@ -47,10 +49,7 @@ class RegistrationForm(Form):
         ]
     )
 
-    abstract = HiddenField('abstract', validators=[
-        validators.Required(u"Por favor, insira o resumo do artigo."),
-        NumberOfWords(max=250)
-    ])
+    abstract = HiddenField('abstract')
 
     def set_choices(self, keywords_query):
         if self.keywords.data:

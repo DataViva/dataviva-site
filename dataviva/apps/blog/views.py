@@ -65,7 +65,7 @@ def index(page=1):
             filter_condition = or_(*filter_conditions)
 
             string = "%" + search + "%"
-            
+
             string_condition = or_(
                 Post.title.ilike(string),
                 Post.text_content.ilike(string),
@@ -85,7 +85,7 @@ def index(page=1):
                 Post.text_content.ilike(string),
                 Post.author.ilike(string)
             )
-            
+
             posts = posts_query.filter(string_condition).order_by(
                 desc(Post.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
             num_posts = len(posts)

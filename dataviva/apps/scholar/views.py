@@ -2,15 +2,17 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, send_file
 from dataviva.apps.general.views import get_locale
 from dataviva.translations.dictionary import dictionary
+from sqlalchemy.orm import aliased
 from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
 from forms import RegistrationForm
-from sqlalchemy import desc
+from sqlalchemy import desc, or_, and_
 from datetime import datetime
 from flask.ext.login import login_required
 from dataviva.apps.admin.views import required_roles
 from dataviva.utils.send_mail import send_mail
+from dataviva.utils.upload_helper import save_b64_image
 from flask_paginate import Pagination
 from config import ITEMS_PER_PAGE, BOOTSTRAP_VERSION
 import os
@@ -21,7 +23,6 @@ import fnmatch
 mod = Blueprint('scholar', __name__,
                 template_folder='templates',
                 url_prefix='/<lang_code>/scholar')
-
 
 @mod.before_request
 def before_request():
@@ -42,23 +43,67 @@ def add_language_code(endpoint, values):
 @mod.route('/<int:page>', methods=['GET'])
 def index(page=1):
     articles_query = Article.query.filter_by(approval_status=True)
+    lang = get_locale()
     articles = []
-
+    idList = []
+    search = request.args.get('search').replace('+', ' ') if request.args.get('search') else ''
     keyword = request.args.get('keyword')
-    if keyword:
-        articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
-        num_articles = articles_query.filter(Article.keywords.any(KeyWord.id == keyword)).count()
+    
+    if search:
+        if keyword:
+            idList = [int(id) for id in keyword.split(',')]
+            filter_items = [KeyWord.id == id_ for id_ in idList]
+            filter_condition = or_(*filter_items)
+
+            string = "%" + search + "%"
+
+            string_condition = or_(
+                Article.title.ilike(string),
+                Article.abstract.ilike(string),
+                AuthorScholar.query.filter(AuthorScholar.name.ilike(string)).filter(
+                    AuthorScholar.article_id == Article.id
+                ).exists()
+            )
+
+            combined_condition = and_(filter_condition, string_condition)
+
+            articles = articles_query.filter(combined_condition).order_by(
+                desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+
+            num_articles = len(articles)
+        else:
+            string = "%" + search + "%" 
+
+            string_condition = or_(
+                Article.title.ilike(string),
+                Article.abstract.ilike(string),
+                AuthorScholar.query.filter(AuthorScholar.name.ilike(string)).filter(
+                    AuthorScholar.article_id == Article.id
+                ).exists()
+            )
+
+            articles = articles_query.filter(string_condition).order_by(desc(Article.postage_date)).paginate(
+                page, ITEMS_PER_PAGE, True).items
+            num_articles = len(articles)
+    elif keyword:
+        idList = [int(id) for id in keyword.split(',')]
+        filter_itens = [KeyWord.id == id for id in idList]
+        filter_condition = or_(*filter_itens)
+        articles = articles_query.filter(Article.keywords.any(filter_condition)).order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
+        num_articles = articles_query.filter(Article.keywords.any(filter_condition)).count()
     else:
         articles = articles_query.order_by(desc(Article.postage_date)).paginate(page, ITEMS_PER_PAGE, True).items
         num_articles = articles_query.count()
-
+        
     pagination = Pagination(page=page,
                             total=num_articles,
                             per_page=ITEMS_PER_PAGE,
                             bs_version=BOOTSTRAP_VERSION)
-
+    
     return render_template('scholar/index.html',
+                            idList = idList,
                             articles=articles,
+                            language=lang,
                             keywords=approved_articles_keywords(),
                             pagination=pagination)
 
@@ -70,7 +115,7 @@ def show(id):
     else:
         article = Article.query.filter_by(approval_status=True, id=id).first_or_404()
 
-    return render_template('scholar/show.html', article=article)
+    return render_template('scholar/show.html', article=article, language=get_locale())
 
 
 @mod.route('/admin', methods=['GET'])
@@ -129,7 +174,7 @@ def admin_activate(status, status_value):
 
 def new_article_advise(article, server_domain):
     article_url = server_domain + g.locale + '/' + mod.name + '/article/' + str(article.id)
-    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, article_url=article_url)
+    advise_message = render_template('scholar/mail/new_article_advise.html', article=article, article_url=article_url, language=(get_locale()))
     send_mail("Novo Estudo", [admin_email], advise_message)
 
 
@@ -176,8 +221,8 @@ def create():
         article.abstract = form.abstract.data
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.approval_status = 0
-
         author_input_list = form.authors.data.replace(', ', ',').split(',')
+        article.postage_img = form.thumb.data
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
@@ -228,6 +273,7 @@ def edit(id):
     form.keywords.data = [keyword.name for keyword in article.keywords]
     form.abstract.data = article.abstract
     article_url = article.file_url
+    form.thumb.data = article.postage_img
 
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
@@ -252,6 +298,7 @@ def update(id):
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.authors = []
         article.keywords = []
+        article.postage_img = form.thumb.data
 
         author_input_list = form.authors.data.replace(', ', ',').split(',')
         for author_input in author_input_list:
