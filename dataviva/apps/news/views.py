@@ -69,15 +69,27 @@ def index(page=1):
             # Combine as condições usando 'and' para que ambas sejam aplicadas
             combined_condition = and_(filter_condition, title_condition)
 
-            publications = publications_query.filter(Publication.subjects.any(filter_condition)).filter(combined_condition).order_by(
+            string_condition = or_(
+                Publication.title.ilike(string),
+                Publication.text_content.ilike(string),
+                Publication.author.ilike(string)
+            )
+
+            publications = publications_query.filter(string_condition).order_by(
                 desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
 
             num_publications = len(publications)
         else: 
             string = "%" + search + "%"
 
-            publications = publications_query.filter(Publication.title.ilike(string)).order_by(desc(Publication.publish_date)).paginate(
-                page, ITEMS_PER_PAGE, True).items
+            string_condition = or_(
+                Publication.title.ilike(string),
+                Publication.text_content.ilike(string),
+                Publication.author.ilike(string)
+            )
+
+            publications = publications_query.filter(string_condition).order_by(
+                desc(Publication.publish_date)).paginate(page, ITEMS_PER_PAGE, True).items
             num_publications = len(publications)
     elif subject:
         idList = [int(idItem) for idItem in subject.split(',')]
