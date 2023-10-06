@@ -2,6 +2,7 @@
 from flask import Blueprint, render_template, g, redirect, url_for, flash, jsonify, request, send_from_directory, send_file
 from dataviva.apps.general.views import get_locale
 from dataviva.translations.dictionary import dictionary
+from sqlalchemy.orm import aliased
 from dataviva import app, db, admin_email
 from dataviva.utils import upload_helper
 from models import Article, AuthorScholar, KeyWord
@@ -55,7 +56,14 @@ def index(page=1):
             filter_condition = or_(*filter_items)
 
             string = "%" + search + "%"
-            string_condition = or_(Article.title.ilike(string), Article.abstract.ilike(string))
+
+            string_condition = or_(
+                Article.title.ilike(string),
+                Article.abstract.ilike(string),
+                AuthorScholar.query.filter(AuthorScholar.name.ilike(string)).filter(
+                    AuthorScholar.article_id == Article.id
+                ).exists()
+            )
 
             combined_condition = and_(filter_condition, string_condition)
 
@@ -65,7 +73,15 @@ def index(page=1):
             num_articles = len(articles)
         else:
             string = "%" + search + "%" 
-            string_condition = or_(Article.title.ilike(string), Article.abstract.ilike(string))
+
+            string_condition = or_(
+                Article.title.ilike(string),
+                Article.abstract.ilike(string),
+                AuthorScholar.query.filter(AuthorScholar.name.ilike(string)).filter(
+                    AuthorScholar.article_id == Article.id
+                ).exists()
+            )
+
             articles = articles_query.filter(string_condition).order_by(desc(Article.postage_date)).paginate(
                 page, ITEMS_PER_PAGE, True).items
             num_articles = len(articles)
