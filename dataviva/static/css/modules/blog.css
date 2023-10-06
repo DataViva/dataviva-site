@@ -28,15 +28,9 @@
 }
 
 .blog h1 {
-<<<<<<< HEAD
   margin: 0px 0px 15px 0px;
   font-size: 36px;
   font-weight: 500;
-=======
-    margin: 0px 0px 15px 0px;
-    font-size: 36px;
-    font-weight: 500;
->>>>>>> dfcbe8c5c21ae47594a85871d26b566c2bb67e5b
 }
 
 .blog textarea {
@@ -74,13 +68,8 @@
 }
 
 .blog .thumbnail {
-<<<<<<< HEAD
-  height: 212px;
-  width: 142px;
-=======
     height: 212px;
     width: 142px;
->>>>>>> dfcbe8c5c21ae47594a85871d26b566c2bb67e5b
 }
 
 .blog .read-more {
@@ -96,11 +85,7 @@
 .blog .post .thumbnail span {
   background: rgba(66, 78, 96, 0.3);
   bottom: 0;
-<<<<<<< HEAD
-  color: #FFF !important;
-=======
   color: #FFF!important;
->>>>>>> dfcbe8c5c21ae47594a85871d26b566c2bb67e5b
   font-size: 9px;
   height: 22px;
   line-height: 22px;
@@ -306,18 +291,13 @@
 
 .sidebar-blog {
   border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 20px;
 }
 
 .sidebar-blog-h3 {
-<<<<<<< HEAD
-  border-bottom: none !important;
-  color: rgba(103, 106, 108, 1);
-  font-weight: 600 !important;
-=======
   border-bottom: none!important;
   color: rgba(103, 106, 108, 1);
   font-weight: 600!important;
->>>>>>> dfcbe8c5c21ae47594a85871d26b566c2bb67e5b
 
 }
 
