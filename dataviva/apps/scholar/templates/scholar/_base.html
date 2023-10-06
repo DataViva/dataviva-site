@@ -2,25 +2,6 @@
 
 {% block content %}
 
-<script>
-    function handleChange(e) {
-        let arrayItens = []
-        let itens = document.querySelectorAll(".checkBoxes [type=checkbox]:checked")
-        for (let item of itens) {
-            arrayItens.push(Number(item.id));
-        }
-
-        let page_url = window.location.href;
-        base_url = page_url.split("://")[1].split("/")[0];
-
-        if (page_url.search("pt") == -1) {
-            window.location.href = `/en/scholar/${arrayItens.length != 0 ? `?keyword=${arrayItens}` : ""}`;
-        } else {
-            window.location.href = `/pt/scholar/${arrayItens.length != 0 ? `?keyword=${arrayItens}` : ""}`;
-        }
-    }
-</script>
-
 <div class="container">
     <div class="row bg-white">
         <ol class="breadcrumb">
