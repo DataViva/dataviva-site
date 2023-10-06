@@ -53,7 +53,7 @@
                 {{ article.date_str(language) }}
             </p>
             <p>
-                {% trans %}<b>Author(s):</b>{%endtrans%} {{ article.authors_str() }}<br />
+                <b>{% trans %}Author(s):{%endtrans%}</b> {{ article.authors_str() }}<br />
             </p>
             <ul class="horizontal-list">
                 {% for keyword in article.keywords %}
@@ -62,7 +62,7 @@
             </ul>
             <p>
                 {% if article.abstract|length > 500 %}
-                {{ article.abstract[:500] }}...<a href="{{ article.file_url }}">Leia mais</a>
+                {{ article.abstract[:500] }}... <a href="{{ article.file_url }}">{%trans%}Read more{%endtrans%}</a>
                 {% else %}
                 {{ article.abstract|safe }}
                 {% endif %}

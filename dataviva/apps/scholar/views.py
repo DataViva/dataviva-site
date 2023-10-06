@@ -257,6 +257,7 @@ def edit(id):
     form.keywords.data = [keyword.name for keyword in article.keywords]
     form.abstract.data = article.abstract
     article_url = article.file_url
+    form.thumb.data = article.postage_img
 
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
@@ -281,6 +282,7 @@ def update(id):
         article.postage_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         article.authors = []
         article.keywords = []
+        article.postage_img = form.thumb.data
 
         author_input_list = form.authors.data.replace(', ', ',').split(',')
         for author_input in author_input_list:
