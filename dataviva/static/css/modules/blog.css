@@ -320,6 +320,12 @@
   width: 33px;
 }
 
+@media(max-width: 500px) {
+  .responsive {
+    margin-bottom: 40px!important;
+  }
+}
+
 .blog figure figcaption {
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: italic;
