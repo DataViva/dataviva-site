@@ -20,11 +20,11 @@
 </div>
 
 <div class="header-title container-fluid">
-    <div class="col-xs-8" style="padding: 0px;">
+    <div class="col-xs-12 col-sm-6 col-md-8" style="padding: 0px;">
         <h1 class="scholar-title">{% trans %}Studies on DataViva{%endtrans%}</h1>
         <p>{% trans %}Publicações acadêmicas e estudos que envolvem o DataViva{%endtrans%}</p>
     </div>
-    <div class="col-xs-4 search-form-wrapper" style="padding: 0px;">
+    <div class="col-xs-12 col-sm-6 col-md-4 search-form-wrapper" style="padding: 0px;">
         <form id="search-form">
             <div class="input-group">
                 <input name="search" type="text" class="form-control input-sm" aria-label="..."
@@ -44,8 +44,9 @@
 <div class="article-list">
     {% for article in articles %}
     <div class="flex-div">
-        <img src="{{article.postage_img if article.postage_img else 'https://kultivi.com/wp-content/uploads/2019/07/tecnicas-de-estudo-Kultivi.jpg'}}" alt="article-img" class="article-img" />
-        <div class="item" style="margin-left: 20px; width: 100%;">
+        <img src="{{article.postage_img if article.postage_img else 'https://kultivi.com/wp-content/uploads/2019/07/tecnicas-de-estudo-Kultivi.jpg'}}"
+            alt="article-img" class="article-img" />
+        <div class="item article-item">
             <h4>
                 {{ article.title }}
             </h4>

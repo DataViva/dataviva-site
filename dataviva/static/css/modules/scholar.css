@@ -79,6 +79,12 @@ h4 {
   margin-bottom: 24px;
 }
 
+.scholar .flex-div {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
 .scholar .article p {
   color: #666;
   font-size: 13px;
@@ -224,6 +230,10 @@ h4 {
   border-radius: 6px;
 }
 
+.article-item {
+  margin-left: 20px;
+}
+
 .thumb-buttons {
   margin-bottom: 14px;
 }
@@ -245,6 +255,7 @@ h4 {
 
 .scholar-title {
   margin: 0px !important;
+  margin-bottom: 12px !important;
   font-size: 36px;
   font-weight: 500;
 }
@@ -262,4 +273,37 @@ h4 {
 
 .scholar .dataTables_wrapper .col-sm-6 .dt-buttons.btn-group {
   margin-left: 6px;
+}
+
+@media (max-width: 757px) {
+  .scholar-title {
+    font-size: 26px;
+    margin: 20px 0px !important;
+  }
+}
+
+@media (max-width: 530px) {
+  .scholar .flex-div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .article-item {
+    margin-left: 0px;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  .scholar-title {
+    font-size: 26px;
+    margin: 20px 0px !important;
+  }
+
+  .header-title {
+    flex-direction: column;
+    margin-bottom: 20px!important;
+  }
+
+
 }
