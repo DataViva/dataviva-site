@@ -16,7 +16,7 @@
     {% endif %}
     <div class="publication-list">
         {% for publication in publications %}
-            <div class="item publication">
+            <div class="item publication responsive">
                 <div class="thumbnail">
                     <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.thumb_src if publication.thumb_src }}">
                         <img src="{{ publication.thumb }}" class="thumbnail img-responsive">
@@ -24,7 +24,7 @@
                     <span>{{ publication.main_subject }}</span>
                 </div>
                 <h4>
-                    <a href="{{ url_for('news.show', id=publication.id) }}" title="{{ publication.title }}">{{ publication.title }}</a>
+                    <a href="{{ url_for('news.show', id=publication.id) }}" class="title-news" title="{{ publication.title }}">{{ publication.title }}</a>
                 </h4>
                 <p>{{ publication.text_call }}</p>
                 <div class="meta">

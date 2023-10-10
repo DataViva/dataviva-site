@@ -55,7 +55,7 @@
                 <div class="col-xs-3">
                     <h1>{% trans %}News{% endtrans %}</h1>
                 </div>
-                <div class="col-md-offset-4 col-md-5 col-sm-offset-3 col-sm-6 col-xs-8 search-form-wrapper">
+                <div class="col-md-offset-4 col-md-5 col-sm-offset-3 col-sm-6 col-xs-12 search-form-wrapper">
                     <form id="search-form">
                         <div class="input-group">
                             <input name="search" type="text" class="form-control input-sm" aria-label="..." placeholder="{% trans %}Search{% endtrans %}">
@@ -68,7 +68,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-xs-12" style="width: 100%; height: 3px; border-radius: 2px; background: #666; margin-bottom: 35px;"></div>
+            <div class="col-xs-12 title-divider"></div>
             {% block news_content %}
             {% endblock news_content %}
         </section>
