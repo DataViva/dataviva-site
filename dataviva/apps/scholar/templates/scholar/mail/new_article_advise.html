@@ -5,8 +5,7 @@
     <b>Título:</b> {{ article.title }} (<a href="{{ article_url }}" target="_blank">Acessar Estudo</a>)<br>
     <b>Autor:</b> {{ article.authors_str() }}<br>
     <b>Palavras-Chave:</b> {{ article.keywords_str() }}<br>
-    <b>Data de Publicação:</b> {{ article.date_str() }}<br>
-
+    <b>Data de Publicação:</b> {{ article.date_str(language) }}<br>
     <p>{{ article.abstract }}</p>
 
     <a href="{{ article.file_url }}">Baixar Arquivo (PDF)</a>

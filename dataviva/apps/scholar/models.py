@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 from dataviva import db
+import datetime
 from sqlalchemy import ForeignKey
 
 article_keyword_table = db.Table(
@@ -17,6 +19,7 @@ class Article(db.Model):
     theme = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
     approval_status = db.Column(db.Boolean)
+    postage_img = db.Column(db.String())    
     authors = db.relationship('AuthorScholar',
                                 backref='scholar_article',
                                 lazy='eager',
@@ -33,9 +36,23 @@ class Article(db.Model):
         keyword_names = [keyword.name for keyword in self.keywords]
         return ', '.join(keyword_names)
 
-    def date_str(self):
-        return self.postage_date.strftime('%d/%m/%Y')
+    def date_str(self, lang):
+        
+        monthsPt = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+        ]
 
+        date = self.postage_date.strftime("%B %d, %Y")
+        
+        if(lang == 'en'):
+            return self.postage_date.strftime("%d of %B, %Y")
+        else:
+            dateObj = datetime.datetime.strptime(date, "%B %d, %Y")
+            month = monthsPt[dateObj.month - 1] 
+            return "{} de {}, {}".format(dateObj.day, month, dateObj.year)
+            
+    
     def __repr__(self):
         return '<Article %r>' % (self.title)
 

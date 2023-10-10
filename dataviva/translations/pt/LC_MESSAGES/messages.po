@@ -372,7 +372,7 @@ msgstr "Aqui você encontra publicações acadêmicas e estudos que envolvem o D
 msgid "Most Recent Publications"
 msgstr "Publicações mais recentes"
 
-#: dataviva/apps/scholar/templates/index.html:33
+#: dataviva/apps/scholar/templates/index.html:56
 msgid "Author(s):"
 msgstr "Autor(es):"
 
@@ -384,6 +384,9 @@ msgstr "Palavras-Chave:"
 msgid "Publication Date:"
 msgstr "Data de Publicação:"
 
+#: dataviva/apps/scholar/templates/index.html:65
+msgid "Read more"
+msgstr "Leia mais"
 
 #: dataviva/apps/scholar/templates/_base.html:21
 msgid "Publish a Study"
@@ -533,15 +536,6 @@ msgstr "Banco de Dados"
 #: dataviva/apps/build_graph/templates/index.html:36
 msgid "Select"
 msgstr "Selecione"
-
-
-
-
-
-
-
-
-
 
 #: dataviva/apps/admin/templates/admin/index.html:54
 #: dataviva/apps/search/templates/search/admin.html:5
@@ -1229,11 +1223,8 @@ msgstr "resultado encontrado para"
 msgid "results found for"
 msgstr "resultados encontrados para"
 
-#: dataviva/apps/news/templates/news/index.html:31
-msgid "Continue reading"
-msgstr "Continue lendo"
-
 #: dataviva/apps/blog/templates/blog/index.html:31
+#: dataviva/apps/news/templates/news/index.html:31
 msgid "Read more"
 msgstr "Leia mais"
 

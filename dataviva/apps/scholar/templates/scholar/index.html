@@ -1,41 +1,83 @@
 {% extends "scholar/_base.html" %}
 
 {% block breadcrumb %}
-    <li><a href="{{ url_for('scholar.index') }}"><span>{% trans %}Studies{% endtrans %}</span></a></li>
-    <li class="active"><span>{% trans %}Publish a Study{% endtrans %}<span></li>
+<li><a href="{{ url_for('scholar.index') }}"><span>{% trans %}Studies{% endtrans %}</span></a></li>
+<li class="active"><span>{% trans %}Publish a Study{% endtrans %}<span></li>
 {% endblock %}
 
 {% block scholar_content %}
-    <div id="message">
+<div id="message">
     {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-            <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
-                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                {{ message }}
-            </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        {{ message }}
     </div>
-    
-    <h2>{% trans %}Studies on DataViva{%endtrans%}</h2>
-    <h3>{% trans %}Welcome to DataViva's study area.{%endtrans%}</h3>
-    <p>{% trans %}Here you will find academic publications and studies involving DataViva{%endtrans%}</p>
-    <div class="tit-stripe">{% trans %}Most Recent Publications{%endtrans%}</div>
-    <div class="article-list">
-        {% for article in articles %}
-        <div class="item">
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+</div>
+
+<div class="header-title container-fluid">
+    <div class="col-xs-8" style="padding: 0px;">
+        <h1 class="scholar-title">{% trans %}Studies on DataViva{%endtrans%}</h1>
+        <p>{% trans %}Publicações acadêmicas e estudos que envolvem o DataViva{%endtrans%}</p>
+    </div>
+    <div class="col-xs-4 search-form-wrapper" style="padding: 0px;">
+        <form id="search-form">
+            <div class="input-group">
+                <input name="search" type="text" class="form-control input-sm" aria-label="..."
+                    placeholder="{% trans %}Search{% endtrans %}">
+                <div class="input-group-btn">
+                    <button title="{% trans %}Search{% endtrans %}" aria-label="{% trans %}Search{% endtrans %}"
+                        class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="thin-divider"></div>
+<div class="article-list">
+    {% for article in articles %}
+    <div class="flex-div">
+        <img src="{{article.postage_img if article.postage_img else 'https://kultivi.com/wp-content/uploads/2019/07/tecnicas-de-estudo-Kultivi.jpg'}}" alt="article-img" class="article-img" />
+        <div class="item" style="margin-left: 20px; width: 100%;">
             <h4>
-                <a href="{{url_for('scholar.show', id=article.id)}}" title="{{ article.title }}">{{ article.title }}</a>
+                {{ article.title }}
             </h4>
             <p>
-                {% trans %}Author(s):{%endtrans%} {{ article.authors_str() }}<br />
-                {% trans %}Keywords:{%endtrans%} {{ article.keywords_str() }}<br />
-                {% trans %}Publication Date:{%endtrans%} {{ article.date_str() }}
+                {{ article.date_str(language) }}
             </p>
+            <p>
+                <b>{% trans %}Author(s):{%endtrans%}</b> {{ article.authors_str() }}<br />
+            </p>
+            <ul class="horizontal-list">
+                {% for keyword in article.keywords %}
+                <li class="keywords-list">{{keyword.name}}</li>
+                {% endfor %}
+            </ul>
+            <p>
+                {% if article.abstract|length > 500 %}
+                {{ article.abstract[:500] }}... <a href="{{ article.file_url }}">{%trans%}Read more{%endtrans%}</a>
+                {% else %}
+                {{ article.abstract|safe }}
+                {% endif %}
+            </p>
+            <a href="{{ article.file_url }}" class="btn btn-success btn-md" style="margin-top: 12px;">{% trans
+                %}Download File{% endtrans %}
+                (PDF)</a>
+
         </div>
-        {% endfor %}
-        <nav>{{ pagination.links }}</nav>
     </div>
+    {% endfor %}
+    <nav>{{ pagination.links }}</nav>
+</div>
 {% endblock scholar_content %}
+
+{% block js_assets %}
+<script src="/static/js/modules/scholar.js"></script>
+{% endblock js_assets %}

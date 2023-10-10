@@ -73,24 +73,24 @@ body {
 
 }
 
-.buttons-container{
+.buttons-container {
   width: 60%;
 }
 
-@media (max-width:1500px){
-  .buttons-container{
+@media (max-width:1500px) {
+  .buttons-container {
     width: 70%;
   }
 }
 
-@media (max-width:1250px){
-  .buttons-container{
+@media (max-width:1250px) {
+  .buttons-container {
     width: 80%;
   }
 }
 
-@media (max-width:1100px){
-  .buttons-container{
+@media (max-width:1100px) {
+  .buttons-container {
     width: 100%;
   }
 }
@@ -588,7 +588,7 @@ footer li span.link {
   cursor: pointer;
 }
 
-body .burgundy{
+body .burgundy {
   color: #2D3A4E !important;
 }
 
@@ -1095,8 +1095,8 @@ footer .form-control:focus,
   border-bottom: 1px solid #e7eaec;
 }
 
-body .t-bg-green{
-  margin-top:0px !important;
+body .t-bg-green {
+  margin-top: 0px !important;
   background-color: #2D3A4E !important;
   font-weight: 600;
 }
@@ -1147,8 +1147,8 @@ body .t-bg-green{
   .navbar-brand>img {
     height: 52px;
     width: 100% !important;
-    display: -webkit-inline-box; 
-    -webkit-max-logical-height: 52px; 
+    display: -webkit-inline-box;
+    -webkit-max-logical-height: 52px;
   }
 
   .navbar-toggle {
@@ -1163,8 +1163,8 @@ body .t-bg-green{
   .navbar-brand>img {
     height: 56px;
     width: 100% !important;
-    display: -webkit-inline-box; 
-    -webkit-max-logical-height: 56px; 
+    display: -webkit-inline-box;
+    -webkit-max-logical-height: 56px;
   }
 }
 
@@ -1174,15 +1174,15 @@ body .t-bg-green{
   .navbar-brand>img {
     height: 74px;
     width: 100% !important;
-    display: -webkit-inline-box; 
-    -webkit-max-logical-height: 74px; 
+    display: -webkit-inline-box;
+    -webkit-max-logical-height: 74px;
   }
 }
 
 .navbar-brand>img {
-    display: -webkit-inline-box; 
-    -webkit-max-logical-width: 240px; 
-    -webkit-max-logical-height: 80px; 
+  display: -webkit-inline-box;
+  -webkit-max-logical-width: 240px;
+  -webkit-max-logical-height: 80px;
 }
 
 /* SUMMERNOTE */
@@ -1316,7 +1316,7 @@ table.data-blue thead th small {
 
 .blue-box.title {
   font-size: 16px;
-  font-weight:bold;
+  font-weight: bold;
   line-height: 18px;
   vertical-align: middle;
   margin-top: 15px;
