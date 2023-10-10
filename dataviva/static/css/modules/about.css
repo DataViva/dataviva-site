@@ -152,4 +152,10 @@ p {
     .analyst{
         font-size: 12px !important
     }
+
+    .karine{
+        font-size: 14px;
+        text-align: center;
+        white-space: nowrap;
+    }
 }
