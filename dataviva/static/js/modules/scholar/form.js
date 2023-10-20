@@ -7,7 +7,7 @@ var inputThumbCallback = function () {
     $('.thumb-crop').show();
 
     $($('#thumb-crop')).cropper({
-        aspectRatio: 350 / 227,
+        aspectRatio: 230 / 360, // Aspect ratio vertical (100px de altura por 330px de largura)
         preview: '#thumb-preview',
         viewMode: 3
     });

@@ -274,7 +274,7 @@ def edit(id):
     form.abstract.data = article.abstract
     article_url = article.file_url
     form.thumb.data = article.postage_img
-
+    
     return render_template('scholar/edit.html', form=form, action=url_for('scholar.update', id=id), article_url=article_url)
 
 

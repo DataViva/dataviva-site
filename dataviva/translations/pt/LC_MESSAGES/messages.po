@@ -348,8 +348,8 @@ msgstr "Estudos"
 msgid "Studies"
 msgstr "Estudos"
 
-#: dataviva/apps/scholar/templates/index.html:22
-msgid "Publishing a Study"
+#: dataviva/apps/scholar/templates/index.html:5
+msgid "Publish a Study"
 msgstr "Publique um estudo"
 
 #: dataviva/apps/scholar/templates/index.html:22
