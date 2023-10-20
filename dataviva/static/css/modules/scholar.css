@@ -223,10 +223,9 @@ h4 {
 }
 
 .article-img {
-  min-width: 240px;
-  width: 240px;
-  height: 260px;
-  object-fit: cover;
+  height: 360px;
+  width: 230px;
+  object-fit: inherit;
   border-radius: 6px;
 }
 
@@ -302,7 +301,7 @@ h4 {
 
   .header-title {
     flex-direction: column;
-    margin-bottom: 20px!important;
+    margin-bottom: 20px !important;
   }
 
 
