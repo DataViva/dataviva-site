@@ -51,7 +51,7 @@
                 {{ article.title }}
             </h4>
             <p>
-                {{ article.date_str(language) }}
+                {{ article.date_str(language, article.postage_date) }}
             </p>
             <p>
                 <b>{% trans %}Author(s):{%endtrans%}</b> {{ article.authors_str() }}<br />

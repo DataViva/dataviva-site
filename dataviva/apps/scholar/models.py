@@ -18,6 +18,7 @@ class Article(db.Model):
     file_url = db.Column(db.String(400))
     theme = db.Column(db.String(250))
     postage_date = db.Column(db.DateTime)
+    publication_date = db.Column(db.DateTime)
     approval_status = db.Column(db.Boolean)
     postage_img = db.Column(db.String())    
     authors = db.relationship('AuthorScholar',
@@ -36,17 +37,17 @@ class Article(db.Model):
         keyword_names = [keyword.name for keyword in self.keywords]
         return ', '.join(keyword_names)
 
-    def date_str(self, lang):
+    def date_str(self, lang, dateType):
         
         monthsPt = [
             "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
             "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
         ]
 
-        date = self.postage_date.strftime("%B %d, %Y")
+        date = dateType.strftime("%B %d, %Y")       
         
         if(lang == 'en'):
-            return self.postage_date.strftime("%d of %B, %Y")
+            return dateType.strftime("%d of %B, %Y")
         else:
             dateObj = datetime.datetime.strptime(date, "%B %d, %Y")
             month = monthsPt[dateObj.month - 1] 

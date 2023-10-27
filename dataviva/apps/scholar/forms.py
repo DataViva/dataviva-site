@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from flask.ext.wtf import Form
-from wtforms import TextField, HiddenField, validators, ValidationError, TextAreaField
+from wtforms import TextField, HiddenField, validators, ValidationError, TextAreaField, DateTimeField
 from dataviva.utils.custom_fields import TagsField
 from models import KeyWord, Article
 
@@ -37,6 +37,8 @@ class RegistrationForm(Form):
         validators.Required(u"Por favor, insira o(s) autor(es) do artigo."),
         validators.Length(max=500)
     ])
+    
+    publication_date = DateTimeField('publication_date', validators=[validators.Required(u"Por favor, insira a data de publicação do artigo."),])
     
     thumb = HiddenField('thumb')
     
