@@ -380,6 +380,14 @@ msgstr "Palavras-Chave:"
 msgid "Publication Date:"
 msgstr "Data de Publicação:"
 
+#: dataviva/apps/scholar/templates/scholar/_form.html:68
+msgid "Publication Date:"
+msgstr "Data de Publicação:"
+
+#: dataviva/apps/scholar/templates/scholar/_form.html:74
+msgid "Put the date in the format day/month/year."
+msgstr "Insira a data no formato dia/mês/ano"
+
 #: dataviva/apps/scholar/templates/index.html:65
 msgid "Read more"
 msgstr "Leia mais"

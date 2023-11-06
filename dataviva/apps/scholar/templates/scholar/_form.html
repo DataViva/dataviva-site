@@ -64,6 +64,16 @@
             </div>
         </div>
     </div>
+    <div class="form-group m-t-sm {{ 'has-error' if form.publication_date.errors else '' }}">
+        <label class="control-label" for="publication_date">{% trans %}Publication Date:{% endtrans %}</label>
+        {{ messages(form.publication_date) }}
+        <div id="publish-date" class="input-group date">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            {{ form.publication_date(class="form-control")}}
+        </div>
+        <small>{% trans %}Put the date in the format day/month/year.{% endtrans %}</small>
+        <div name="textarea-feedback"></div>    
+    </div>
     <p>
     <div class="form-group m-t-sm {{ 'has-error' if form.abstract.errors else '' }}">
         <label class="control-label" for="abstract">{% trans %}Summary{% endtrans %}</label>

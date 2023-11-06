@@ -223,6 +223,8 @@ def create():
         article.approval_status = 0
         author_input_list = form.authors.data.replace(', ', ',').split(',')
         article.postage_img = form.thumb.data
+        article.publication_date = form.publication_date.data
+        
         for author_input in author_input_list:
             article.authors.append(AuthorScholar(author_input))
 
@@ -299,6 +301,7 @@ def update(id):
         article.authors = []
         article.keywords = []
         article.postage_img = form.thumb.data
+        article.publication_date = form.publication_date.data
 
         author_input_list = form.authors.data.replace(', ', ',').split(',')
         for author_input in author_input_list:
