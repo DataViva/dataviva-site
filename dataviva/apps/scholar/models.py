@@ -38,20 +38,21 @@ class Article(db.Model):
         return ', '.join(keyword_names)
 
     def date_str(self, lang, dateType):
-        
-        monthsPt = [
-            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-        ]
+        if(dateType):
+            monthsPt = [
+                "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+                "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+            ]
 
-        date = dateType.strftime("%B %d, %Y")       
-        
-        if(lang == 'en'):
-            return dateType.strftime("%d of %B, %Y")
-        else:
-            dateObj = datetime.datetime.strptime(date, "%B %d, %Y")
-            month = monthsPt[dateObj.month - 1] 
-            return "{} de {}, {}".format(dateObj.day, month, dateObj.year)
+            date = dateType.strftime("%B %d, %Y")       
+            
+            if(lang == 'en'):
+                return dateType.strftime("%d of %B, %Y")
+            else:
+                dateObj = datetime.datetime.strptime(date, "%B %d, %Y")
+                month = monthsPt[dateObj.month - 1] 
+                return "{} de {}, {}".format(dateObj.day, month, dateObj.year)
+        return None
             
     
     def __repr__(self):

@@ -38,7 +38,8 @@ class RegistrationForm(Form):
         validators.Length(max=500)
     ])
 
-    publication_date = DateField('publication_date',
+    publication_date = DateField('publication_date', validators=[
+        validators.Required(u"Por favor, insira a data do artigo.")],
         format='%d/%m/%Y',
         description='Formato da data: dia/mês/ano'
     )

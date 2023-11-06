@@ -23,8 +23,8 @@
                     {% trans %}Title: {% endtrans %}{{ article.title }}<br />
                     {% trans %}Author(s): {% endtrans %}{{ article.authors_str() }}<br />
                     {% trans %}Keywords: {% endtrans %}{{ article.keywords_str() }}<br />
-                    {% trans %}Publication Date: {% endtrans %}{{ article.publication_date(language) }}
-                    {% trans %}Postage Date: {% endtrans %}{{ article.date_str(language, article.postage_date) }}
+                    {% trans %}Publication Date: {% endtrans %}{{ article.date_str(language, article.publication_date) }}<br />
+                    {% trans %}Postage Date: {% endtrans %}{{ article.date_str(language, article.postage_date) }}<br />
                 </p>
             </div>
             <img src="{{article.postage_img if article.postage_img else 'https://kultivi.com/wp-content/uploads/2019/07/tecnicas-de-estudo-Kultivi.jpg'}}"
