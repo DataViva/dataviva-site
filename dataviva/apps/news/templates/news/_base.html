@@ -2,6 +2,21 @@
 
 {% block content %}
 
+<script>
+    function handleChange(e) {
+        let arrayItens = []
+        let itens = document.querySelectorAll(".checkBoxes [type=checkbox]:checked")
+        for(let item of itens) {
+            arrayItens.push(Number(item.id));
+        }
+
+        let page_url = window.location.href;
+        base_url = page_url.split("://")[1].split("/")[0];
+
+        window.location.href = `/${dataviva.language}/news/${arrayItens.length != 0 ? `?subject=${arrayItens}` : ""}`;
+    }
+</script>
+
 <div class="container">
     <div class="row bg-white">
         <ol class="breadcrumb">
@@ -13,12 +28,18 @@
 
 <div class="container container-big">
     <div class="row row-offcanvas row-offcanvas-left">
-        <nav class="sidebar col-md-3 row-offcanvas sidebar-offcanvas">
-            <h3>{% trans %}Topics{% endtrans %}</h3>
+        <nav class="sidebar sidebar-news col-md-3 sidebar-offcanvas">
+            <h3 class="sidebar-news-h3">{% trans %}Topics{% endtrans %}</h3>
             <ul>
-                <li><a href="{{ url_for('news.index') }}" title="Todos" class="{{ 'active' if not request.args.get('subject') }}">{% trans %}All{% endtrans %}</a></li>
                 {% for subject in subjects %}
-                    <li><a href="{{ url_for('news.index', subject=subject.id) }}" title="{{ subject.name }}" class="{{ 'active' if subject.id == request.args.get('subject')|int }}">{{ subject.name }}</a></li>
+                <li class="checkBoxes">
+                {% if subject.id in idList %}
+                    <input type="checkbox" id={{subject.id}} name={{subject.name}} checked onchange="handleChange(event)"/>
+                {%else %}
+                    <input type="checkbox" id={{subject.id}} name={{subject.name}} onchange="handleChange(event)"/>
+                {%endif %}
+                    <label for={{subject.id}}>{{subject.name}}</label>
+                </li>
                 {% endfor %}
             </ul>
         </nav>
@@ -34,7 +55,7 @@
                 <div class="col-xs-3">
                     <h1>{% trans %}News{% endtrans %}</h1>
                 </div>
-                <div class="col-md-offset-4 col-md-5 col-sm-offset-3 col-sm-6 col-xs-8 search-form-wrapper">
+                <div class="col-md-offset-4 col-md-5 col-sm-offset-3 col-sm-6 col-xs-12 search-form-wrapper">
                     <form id="search-form">
                         <div class="input-group">
                             <input name="search" type="text" class="form-control input-sm" aria-label="..." placeholder="{% trans %}Search{% endtrans %}">
@@ -47,6 +68,7 @@
                     </form>
                 </div>
             </div>
+            <div class="col-xs-12 title-divider"></div>
             {% block news_content %}
             {% endblock news_content %}
         </section>

@@ -1,11 +1,10 @@
 {% macro messages(input) -%}
-    {% for message in input.errors %}
-        <div class="alert alert-danger">
-            {{ message }}
-        </div>
-    {% endfor %}
+{% for message in input.errors %}
+<div class="alert alert-danger">
+    {{ message }}
+</div>
+{% endfor %}
 {%- endmacro %}
-
 <form method="post" action="{{ action }}" class="form-dataviva" enctype="multipart/form-data" id="scholar-form">
     {{ form.hidden_tag() }}
     <p>
@@ -29,28 +28,73 @@
         {{ messages(form.keywords) }}
         <small>{% trans %}You can define your own keywords.{% endtrans %}</small>
     </p>
-    <p>
-        <label for="abstract">{% trans %}Summary{% endtrans %}</label>
-        <button id="abstract-edit" class="btn btn-xs btn-white" type="button"><i class="fa fa-pencil m-r-sm"></i>{% trans %}Edit{% endtrans %}</button>
-        <button id="abstract-preview" class="btn btn-xs btn-white" type="button"><i class="fa fa-eye m-r-sm"></i>{% trans %}Preview {% endtrans %}</button>
-        {{ form.abstract(class="form-control", rows=5)}}
-        {{ messages(form.abstract) }}
-        <div class="summernote-wrapper">
-                <div id="text-content-editor" class="summernote"></div>
+    <div class="form-group {{ 'has-error' if form.thumb.errors else '' }} ">
+        <label class="control-label" for="thumb-input">{% trans %}Call Image{% endtrans %}</label>
+        {{ messages(form.thumb) }}
+        <div class="thumb row">
+            <div class="thumb-controls col-md-4">
+                <div id="thumb-preview" class="crop-preview"></div>
+                <img id="thumb-img"
+                    src="{{ form.thumb.data if form.thumb.data else 'http://placehold.it/350x227?text=Insira+uma+imagem'}}"
+                    class="article-img">
+                {{ form.thumb }}
+                <div class="thumb-buttons">
+                    <label title="Upload image file" for="thumb-input" class="btn btn-primary m-t-sm">
+                        <input type="file" accept="image/*" name="file" id="thumb-input" class="hide">
+                        <i class="fa fa-upload m-r-sm"></i>{% trans %}New Image{% endtrans %}
+                    </label>
+                </div>
+                <div class="crop-buttons">
+                    <div class="btn-group m-t-sm">
+                        <button class="btn btn-white" id="thumb-zoomIn" type="button"><i
+                                class="fa fa-search-plus"></i></button>
+                        <button class="btn btn-white" id="thumb-zoomOut" type="button"><i
+                                class="fa fa-search-minus"></i></button>
+                        <button class="btn btn-white" id="thumb-rotateRight" type="button"><i
+                                class="fa fa-undo"></i></button>
+                        <button class="btn btn-white" id="thumb-rotateLeft" type="button"><i
+                                class="fa fa-repeat"></i></button>
+                    </div>
+                    <button id="thumb-save" class="btn btn-primary m-t-sm" type="button">{% trans %}Complete Edition{%
+                        endtrans %}</button>
+                </div>
+            </div>
+            <div class="thumb-crop col-md-8">
+                <img id="thumb-crop" src="" class="img-responsive">
+            </div>
         </div>
+    </div>
+    <div class="form-group m-t-sm {{ 'has-error' if form.publication_date.errors else '' }}">
+        <label class="control-label" for="publication_date">{% trans %}Publication Date:{% endtrans %}</label>
+        {{ messages(form.publication_date) }}
+        <div id="publish-date" class="input-group date">
+            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+            {{ form.publication_date(class="form-control")}}
+        </div>
+        <small>{% trans %}Put the date in the format day/month/year.{% endtrans %}</small>
+        <div name="textarea-feedback"></div>    
+    </div>
+    <p>
+    <div class="form-group m-t-sm {{ 'has-error' if form.abstract.errors else '' }}">
+        <label class="control-label" for="abstract">{% trans %}Summary{% endtrans %}</label>
+        {{ messages(form.abstract) }}
+        {{ form.abstract(class="form-control", rows=5, maxlength=500)}}
+        <div name="textarea-feedback"></div>
+    </div>
     </p>
-    <button id='submit' type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{% trans %}Send{% endtrans %}</button>
+    <button id='submit' type="submit" class="btn btn-primary pull-right"><i class="fa fa-share-square-o m-r-sm"></i>{%
+        trans %}Send{% endtrans %}</button>
 </form>
 
 <div class="">
     {{ form.hidden_tag() }}
     <div class="row fileupload-buttonbar">
         <div class="col-lg-7 col-xs-10 col-md-6">
-                <p>
-                    <label>{% trans %}Format{% endtrans %}<br/>
-                        <small>{% trans %}We accept articles only in PDF format.{% endtrans %}</small>
-                    </label>
-                </p>
+            <p>
+                <label>{% trans %}Format{% endtrans %}<br />
+                    <small>{% trans %}We accept articles only in PDF format.{% endtrans %}</small>
+                </label>
+            </p>
 
             <div id="input-file">
                 <input id="file" name="file" type="file" class="inputfile">
@@ -64,7 +108,8 @@
                 <button href="#" class="btn btn-danger" id="delete">
                     <i class="fa fa-trash-o m-r-sm"></i> {% trans %} Delete File {% endtrans %}
                 </button>
-                <a id="article-url" target="_blank" href="">{% trans %} Article {% endtrans %}<i class="fa fa-file-pdf-o m-r-sm"></i></a>
+                <a id="article-url" target="_blank" href="">{% trans %} Article {% endtrans %}<i
+                        class="fa fa-file-pdf-o m-r-sm"></i></a>
             </div>
 
             <div id="progress">
@@ -76,18 +121,18 @@
 </div>
 
 <div id="message">
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
     {% for category, message in messages %}
-        <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
-            <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-            {{ message }}
-        </div>
+    <div class="alert alert-{{ category }} alert-dismissable animated fadeInDown">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        {{ message }}
+    </div>
     {% endfor %}
-  {% endif %}
-{% endwith %}
+    {% endif %}
+    {% endwith %}
 </div>
 
 {% block js_assets %}
-    <script src="/static/js/modules/scholar/form.js"></script>
+<script src="/static/js/modules/scholar/form.js"></script>
 {% endblock js_assets %}

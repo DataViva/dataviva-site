@@ -285,33 +285,25 @@ msgstr "coordenador geral"
 msgid "research coordinator"
 msgstr "coordenador de pesquisa"
 
-#: dataviva/apps/about/templates/about/index.html:167
-msgid "developer"
-msgstr "desenvolvedor"
-
-#: dataviva/apps/about/templates/about/index.html:183
-msgid "developer"
-msgstr "desenvolvedor"
-
 #: dataviva/apps/about/templates/about/index.html:199
 msgid "developer"
 msgstr "desenvolvedor"
 
-#: dataviva/apps/about/templates/about/index.html:214
+#: dataviva/apps/about/templates/about/index.html:215
 msgid "developer"
 msgstr "desenvolvedor"
 
-#: dataviva/apps/about/templates/about/index.html:230
+#: dataviva/apps/about/templates/about/index.html:231
 msgid "developer"
 msgstr "desenvolvedor"
 
-#: dataviva/apps/about/templates/about/index.html:246
-msgid "data analyst"
-msgstr "Analista de Dados"
+#: dataviva/apps/about/templates/about/index.html:247
+msgid "developer"
+msgstr "desenvolvedor"
 
 #: dataviva/apps/about/templates/about/index.html:263
-msgid "data analyst"
-msgstr "Analista de Dados"
+msgid "developer"
+msgstr "desenvolvedor"
 
 #: dataviva/apps/about/templates/about/index.html:279
 msgid "data analyst"
@@ -322,6 +314,10 @@ msgid "data analyst"
 msgstr "Analista de Dados"
 
 #: dataviva/apps/about/templates/about/index.html:311
+msgid "data analyst"
+msgstr "Analista de Dados"
+
+#: dataviva/apps/about/templates/about/index.html:327
 msgid "data analyst"
 msgstr "Analista de Dados"
 
@@ -352,8 +348,8 @@ msgstr "Estudos"
 msgid "Studies"
 msgstr "Estudos"
 
-#: dataviva/apps/scholar/templates/index.html:22
-msgid "Publishing a Study"
+#: dataviva/apps/scholar/templates/index.html:5
+msgid "Publish a Study"
 msgstr "Publique um estudo"
 
 #: dataviva/apps/scholar/templates/index.html:22
@@ -372,7 +368,7 @@ msgstr "Aqui você encontra publicações acadêmicas e estudos que envolvem o D
 msgid "Most Recent Publications"
 msgstr "Publicações mais recentes"
 
-#: dataviva/apps/scholar/templates/index.html:33
+#: dataviva/apps/scholar/templates/index.html:56
 msgid "Author(s):"
 msgstr "Autor(es):"
 
@@ -384,6 +380,17 @@ msgstr "Palavras-Chave:"
 msgid "Publication Date:"
 msgstr "Data de Publicação:"
 
+#: dataviva/apps/scholar/templates/scholar/_form.html:68
+msgid "Publication Date:"
+msgstr "Data de Publicação:"
+
+#: dataviva/apps/scholar/templates/scholar/_form.html:74
+msgid "Put the date in the format day/month/year."
+msgstr "Insira a data no formato dia/mês/ano"
+
+#: dataviva/apps/scholar/templates/index.html:65
+msgid "Read more"
+msgstr "Leia mais"
 
 #: dataviva/apps/scholar/templates/_base.html:21
 msgid "Publish a Study"
@@ -533,15 +540,6 @@ msgstr "Banco de Dados"
 #: dataviva/apps/build_graph/templates/index.html:36
 msgid "Select"
 msgstr "Selecione"
-
-
-
-
-
-
-
-
-
 
 #: dataviva/apps/admin/templates/admin/index.html:54
 #: dataviva/apps/search/templates/search/admin.html:5
@@ -1231,8 +1229,8 @@ msgstr "resultados encontrados para"
 
 #: dataviva/apps/blog/templates/blog/index.html:31
 #: dataviva/apps/news/templates/news/index.html:31
-msgid "Continue reading"
-msgstr "Continue lendo"
+msgid "Read more"
+msgstr "Leia mais"
 
 #: dataviva/apps/blog/templates/blog/index.html:32
 #: dataviva/apps/blog/templates/blog/show.html:22

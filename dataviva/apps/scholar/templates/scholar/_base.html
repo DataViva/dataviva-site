@@ -14,48 +14,57 @@
 <section id="scholar">
     <div class="container container-big">
         <div class="row row-offcanvas row-offcanvas-left">
-            <nav class="sidebar col-md-3 row-offcanvas sidebar-offcanvas">
-                {% if not form%}
-                    <div class="visible-md visible-lg">
-                        {% if g.user.is_authenticated %}
-                            <a href="{{ url_for('scholar.new')}}" class="btn btn-success btn-lg">{% trans %}Publish a Study{% endtrans %}</a>
-                        {% else %}
-                            <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">{% trans %}Publish a Study{% endtrans %}</a>
-                        {% endif %}
-                    </div>
-                {% endif %}
-                <h3>{%trans%}Themes{%endtrans%}</h3>
-                <ul class="sub-menu">
-                    <li><a href="{{ url_for('scholar.index') }}" title="Todos" class="{{ 'active' if not request.args.get('keyword') }}">{% trans %}All{% endtrans %}</a></li>
+            <nav class="sidebar col-md-3 sidebar-offcanvas">
+                <h3 class="sidebar-scholar-h3">{%trans%}Themes{%endtrans%}</h3>
+                <ul>
                     {% for keyword in keywords %}
-                        <li><a href="{{ url_for('scholar.index', keyword=keyword.id) }}" title="{{ keyword.name }}" class="{{ 'active' if keyword.id == request.args.get('keyword')|int }}">{{ keyword.name }}</a></li>
+                    <li class="checkBoxes">
+                        {% if keyword.id in idList %}
+                        <input type="checkbox" id={{keyword.id}} name={{keyword.name}} checked
+                            onchange="handleChange(event)" />
+                        {%else %}
+                        <input type="checkbox" id={{keyword.id}} name={{keyword.name}} onchange="handleChange(event)" />
+                        {%endif %}
+                        <label for={{keyword.id}}>{{keyword.name}}</label>
+                    </li>
                     {% endfor %}
                 </ul>
+                <div class="thin-divider-btn"></div>
+                <div class="visible-md visible-lg">
+                    {% if g.user.is_authenticated %}
+                    <a href="{{ url_for('scholar.new')}}" class="btn btn-success btn-lg">{% trans %}Publish a Study{%endtrans %}</a>
+                    {% else %}
+                    <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">{% trans%}Publish a Study{% endtrans %}</a>
+                    {% endif %}
+                </div>
             </nav>
 
             <div class="scholar-content col-md-9">
                 <div class="visible-xs visible-sm">
                     <div>
-                        <button type="button" class="fa  btn btn-white" aria-hidden="true" data-toggle="offcanvas" data-target=".sidebar-nav" >
+                        <button type="button" class="fa  btn btn-white" aria-hidden="true" data-toggle="offcanvas"
+                            data-target=".sidebar-nav">
                             <i class="fa fa-bars" aria-hidden="true"></i>
                         </button>
                     </div>
                     <div class="scholar-publish-btn">
-                    {% if g.user.is_authenticated %}
+                        {% if g.user.is_authenticated %}
                         <a href="{{ url_for('scholar.new')}}" class="btn btn-success btn-lg">{% trans %}Publish a Study{% endtrans %}</a>
-                    {% else %}
-                        <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">{% trans %}Publish a Study{% endtrans %}</a>
-                    {% endif %}
+                        {% else %}
+                        <a data-toggle="modal" data-target="#dataviva-login" class="btn btn-success btn-lg">{% trans%}Publish a Study{% endtrans %}</a>
+                        {% endif %}
                     </div>
                 </div>
                 {% block scholar_content %}
                 {% endblock scholar_content %}
             </div>
-            </div>
+        </div>
     </div>
 </section>
 {% endblock content %}
 
+
+
 {% block js_assets %}
-    <script src="/static/js/modules/scholar.js"></script>
+<script src="/static/js/modules/scholar.js"></script>
 {% endblock js_assets %}

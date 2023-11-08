@@ -7,8 +7,34 @@
 .news a {
   text-decoration: none;
 }
+
+.news label {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.news li input {
+  width: 15px;
+  height: 15px;
+  margin-top: 0px;
+}
+
+.read-more-w {
+  color: rgba(66, 78, 96, 1) !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-decoration: none;
+}
+
+.read-more-w a{
+  color: rgba(66, 78, 96, 1) !important;
+  text-decoration: none;
+}
+
 .news h1 {
-    margin: 0px 0px 30px 0px;
+  margin: 0px 0px 15px 0px;
+  font-size: 36px;
+  font-weight: 500;
 }
 .news textarea {
     resize: none;
@@ -19,25 +45,25 @@
   margin-right: 20px;
   padding: 0;
   position: relative;
+  object-fit: cover;
 }
 
 .news .thumbnail {
-    height: 227px;
-    width: 350px;
+  height: 212px;
+  width: 142px;
 }
 
 .news .publication .thumbnail span {
-  background: #5a9dc4;
+  background: rgba(66, 78, 96, 0.3);
   bottom: 0;
-  color: #FFF;
-  font-size: 13px;
-  font-weight: 300;
-  height: 33px;
-  line-height: 33px;
+  color: #FFF!important;
+  font-size: 9px;
+  height: 22px;
+  line-height: 22px;
   padding: 0 10px;
   position: absolute;
   right: 0;
-  text-transform: uppercase;
+  border-radius: 4px;
 }
 .news .related h4 {
   color: #666;
@@ -77,6 +103,12 @@
   overflow: hidden;
 }
 
+@media (max-width: 500px) {
+  .responsive {
+    margin-bottom: 40px!important;
+  }
+}
+
 .news .comments h4 {
   color: #666;
   font-size: 25px;
@@ -87,7 +119,8 @@
   margin: 0;
 }
 .news .item h4 a {
-  color: #423434;
+  color: rgba(71, 74, 77, 1);
+  font-weight: 500;
 }
 .news .item h4 a:hover {
   opacity: 0.8;
@@ -113,7 +146,7 @@
   font-size: 13px;
 }
 .news .publication p.data {
-  color: #5a9dc4;
+  color: #666;
   text-transform: uppercase;
 }
 .news .publication p.data a {
@@ -230,4 +263,31 @@
   .news .visu-wrapper {
     margin: 0px -15px 0 -15px;
   }
+}
+
+.sidebar-news {
+  border-bottom: 1px solid #f2f2f2;
+  margin-bottom: 20px;
+}
+
+.title-divider {
+  width: 100%; height: 3px; border-radius: 2px; background: #666; margin-bottom: 20px; margin-top: 15px;
+}
+
+.sidebar-news-h3 {
+  border-bottom: none!important;
+  color: rgba(103, 106, 108, 1);
+  font-weight: 600!important;
+
+}
+
+.checkBoxes label {
+  margin: 0px 0px 0px 6px;
+}
+
+.checkBoxes {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
 }
