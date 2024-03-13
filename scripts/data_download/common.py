@@ -19,7 +19,7 @@ data_base_conection = "mysql://{0}:{1}@{2}/{3}".format(
     get_env_variable("DATAVIVA_DB_HOST", "localhost"),
     get_env_variable("DATAVIVA_DB_NAME", "dataviva"))
 
-engine = create_engine( data_base_conection , echo=False)
+engine = create_engine( data_base_conection , echo=False, isolation_level="REPEATABLE READ")
 
 
 def get_colums(table, columns_deleted):
