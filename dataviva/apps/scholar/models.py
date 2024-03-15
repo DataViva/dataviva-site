@@ -23,7 +23,7 @@ class Article(db.Model):
     postage_img = db.Column(db.String())    
     authors = db.relationship('AuthorScholar',
                                 backref='scholar_article',
-                                lazy='eager',
+                                lazy='joined',
                                 cascade='all, delete-orphan')
     keywords = db.relationship('KeyWord',
                                 secondary=article_keyword_table,

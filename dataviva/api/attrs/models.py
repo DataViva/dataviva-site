@@ -138,7 +138,7 @@ class School(db.Model, AutoSerialize, ExpandedAttr, ImageAttr):
 
     __tablename__ = 'attrs_school'
     id = db.Column(db.String(8), primary_key=True)
-    is_vocational = db.Column(db.Integer(1))
+    is_vocational = db.Column(db.Integer())
     school_type_id = db.Column(db.String(1))
     school_type_en = db.Column(db.String(32))
     school_type_pt = db.Column(db.String(32))
@@ -198,8 +198,8 @@ class Wld(db.Model, AutoSerialize, BasicAttr, ImageAttr):
     id = db.Column(db.String(5), primary_key=True)
     id_2char = db.Column(db.String(2))
     id_3char = db.Column(db.String(3))
-    id_num = db.Column(db.Integer(11))
-    id_mdic = db.Column(db.Integer(11))
+    id_num = db.Column(db.Integer())
+    id_mdic = db.Column(db.Integer())
 
     ymw = db.relationship("Ymw", backref = 'wld', lazy = 'dynamic')
     ympw = db.relationship("Ympw", backref = 'wld', lazy = 'dynamic')
@@ -231,7 +231,7 @@ class Bra(db.Model, AutoSerialize, BasicAttr, ImageAttr):
 
     __tablename__ = 'attrs_bra'
     id = db.Column(db.String(10), primary_key=True)
-    id_ibge = db.Column(db.Integer(7))
+    id_ibge = db.Column(db.Integer())
     abbreviation = db.Column(db.String(2))
 
     distance = 0
@@ -322,7 +322,7 @@ class Distances(db.Model):
 class Yb(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_yb'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     population = db.Column(db.Integer)
 
@@ -353,7 +353,7 @@ class Bs(db.Model, AutoSerialize):
 class Ybs(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_ybs'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     stat_id = db.Column(db.String(20), db.ForeignKey(Stat.id), primary_key=True)
     stat_val = db.Column(db.Float)
@@ -364,7 +364,7 @@ class Ybs(db.Model, AutoSerialize):
 class Ybb(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_ybb'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     bra_id = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     bra_id_target = db.Column(db.String(10), db.ForeignKey(Bra.id), primary_key=True)
     prox_cnae = db.Column(db.Float)
@@ -378,7 +378,7 @@ class Ybb(db.Model, AutoSerialize):
 class Ypp(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_ypp'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     hs_id = db.Column(db.String(8), db.ForeignKey(Hs.id), primary_key=True)
     hs_id_target = db.Column(db.String(8), db.ForeignKey(Hs.id), primary_key=True)
     prox_bra = db.Column(db.Float)
@@ -389,7 +389,7 @@ class Ypp(db.Model, AutoSerialize):
 class Yww(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_yww'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     wld_id = db.Column(db.String(5), db.ForeignKey(Wld.id), primary_key=True)
     wld_id_target = db.Column(db.String(5), db.ForeignKey(Wld.id), primary_key=True)
     prox_bra = db.Column(db.Float)
@@ -400,7 +400,7 @@ class Yww(db.Model, AutoSerialize):
 class Yii(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_yii'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     cnae_id = db.Column(db.String(8), db.ForeignKey(Cnae.id), primary_key=True)
     cnae_id_target = db.Column(db.String(8), db.ForeignKey(Cnae.id), primary_key=True)
     prox_bra = db.Column(db.Float)
@@ -411,7 +411,7 @@ class Yii(db.Model, AutoSerialize):
 class Yoo(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_yoo'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     cbo_id = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
     cbo_id_target = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
     prox_bra = db.Column(db.Float)
@@ -422,7 +422,7 @@ class Yoo(db.Model, AutoSerialize):
 class Yuu(db.Model, AutoSerialize):
 
     __tablename__ = 'attrs_yuu'
-    year = db.Column(db.Integer(4), primary_key=True)
+    year = db.Column(db.Integer(), primary_key=True)
     university_id = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
     university_id_target = db.Column(db.String(6), db.ForeignKey(Cbo.id), primary_key=True)
     prox_course_hedu = db.Column(db.Float)
