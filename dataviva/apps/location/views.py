@@ -141,7 +141,7 @@ def get_max_year(data_object):
     return max_year
 
 def getSecexLatestYear():
-    latestSecexYear = "2022"
+    latestSecexYear = "2023"
 
     response = requests.get("https://api.dataviva.info/secex/year")
 
