@@ -26,7 +26,7 @@ $(document).ready(function(){
     filter = [productFilter, locationFilter].join('&');
     var isMunicipality = idIbge.length == 7;
 
-    let latestSecexYear = "2022";
+    let latestSecexYear = "2023";
 
     fetch("https://api.dataviva.info/secex/year").then((data) => {
         data.json().then((data) => {

@@ -13,7 +13,7 @@ $(document).ready(function () {
     var isMunicipality = idIbge.length == 7;
     var lang = location.pathname.split('/')[1];
 
-    let latestSecexYear = "2022";
+    let latestSecexYear = "2023";
     let latestRaisYear = "2021";
 
     getData(latestSecexYear, latestRaisYear);
