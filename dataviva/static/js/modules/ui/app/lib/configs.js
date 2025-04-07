@@ -168,7 +168,7 @@ export const databases = {
     orderLabels: ["message.name", "message.exports"],
     extraInfo: {
       label: "message.exports",
-      endpoint: "secex/product/?value=value&year=2023&order=product",
+      endpoint: "secex/product/?value=value&year=2024&order=product",
       id: "product",
       dataValue: "value",
     },
@@ -204,7 +204,7 @@ export const databases = {
     },
     source: {
       database: "SECEX",
-      year: "2023",
+      year: "2024",
     },
   },
   trade_partner: {
@@ -217,7 +217,7 @@ export const databases = {
     orderLabels: ["message.name", "message.exports"],
     extraInfo: {
       label: "message.exports",
-      endpoint: "secex/country/?value=value&year=2023&order=country",
+      endpoint: "secex/country/?value=value&year=2024&order=country",
       id: "country",
       dataValue: "value",
     },
@@ -241,7 +241,7 @@ export const databases = {
     },
     source: {
       database: "SECEX",
-      year: "2023",
+      year: "2024",
     },
   },
   university: {
