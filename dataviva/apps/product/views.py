@@ -14,7 +14,7 @@ mod = Blueprint('product', __name__,
                 static_folder='static')
 
 def getSecexLatestYear():
-    latestSecexYear = "2023"
+    latestSecexYear = "2024"
 
     response = requests.get(g.api_url + "secex/year")
 

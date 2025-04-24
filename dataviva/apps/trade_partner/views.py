@@ -14,7 +14,7 @@ mod = Blueprint('trade_partner', __name__,
                 url_prefix='/<lang_code>/trade_partner')
 
 def getSecexLatestYear():
-    latestSecexYear = "2023"
+    latestSecexYear = "2024"
 
     response = requests.get(g.api_url + "secex/year")
 
