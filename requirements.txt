@@ -6,7 +6,7 @@ botocore==1.4.93
 click==6.6
 decorator==4.0.9
 docutils==0.13.1
-Flask==0.10.1
+Flask==1.0
 Flask-Babel==0.8
 Flask-Cache==0.13.1
 Flask-Login==0.3.2
