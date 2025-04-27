@@ -20,4 +20,4 @@ simplegeneric==0.8.1
 six==1.10.0
 SQLAlchemy==1.0.12
 traitlets==4.2.1
-wheel==0.24.0
+wheel==0.38.1
