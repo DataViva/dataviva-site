@@ -16,7 +16,7 @@
   "author": "datavivadev@gmail.com",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "dotenv": "^6.0.0",
     "lzutf8": "^0.5.5",
     "vue": "^2.5.16",
