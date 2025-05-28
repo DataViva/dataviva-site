@@ -153,7 +153,7 @@ def getSecexLatestYear():
     return latestSecexYear
 
 def getRaisLatestYear():
-    latestRaisYear = "2021"
+    latestRaisYear = "2023"
 
     response = requests.get("https://api.dataviva.info/rais/year")
 

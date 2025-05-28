@@ -14,7 +14,7 @@ $(document).ready(function () {
     var lang = location.pathname.split('/')[1];
 
     let latestSecexYear = "2024";
-    let latestRaisYear = "2021";
+    let latestRaisYear = "2023";
 
     getData(latestSecexYear, latestRaisYear);
 
