@@ -28,7 +28,7 @@ def add_language_code(endpoint, values):
 
 
 def getRaisLatestYear():
-    latestRaisYear = "2021"
+    latestRaisYear = "2023"
 
     response = requests.get(g.api_url + "years/rais")
 
