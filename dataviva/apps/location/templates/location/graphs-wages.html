@@ -13,7 +13,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-industry-tree_map' or not graph}}" data-parent="#new-api-jobs-industry">
                     TreeMap
                 </a>
-               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=jobs+wage+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=jobs+wage&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-industry-stacked' }}" data-parent="#new-api-jobs-industry">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -29,7 +29,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-occupation-tree_map' }}" data-parent="#new-api-jobs-occupation">
                     TreeMap
                 </a>
-               <a href="/{{g.locale}}/stacked/rais/occupation_family/jobs?values=jobs+wage+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+               <a href="/{{g.locale}}/stacked/rais/occupation_family/jobs?values=jobs+wage&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-occupation-stacked' }}" data-parent="#new-api-jobs-occupation">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -43,7 +43,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-tree_map' }}" data-parent="#new-api-jobs-municipality">
                     TreeMap
                   </a>
-                 <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=jobs+wage+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                 <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=jobs+wage&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-stacked' }}" data-parent="#new-api-jobs-municipality">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -60,7 +60,7 @@
 
             <a href="#jobs-establishments" class="list-group-item" data-toggle="collapse" data-parent="#jobs-establishments">{% trans %}Establishments Informations{% endtrans %}</a>
             <div class="collapse" id="jobs-establishments">
-                <a href="/{{g.locale}}/bar/rais/jobs,wage,average_wage,establishment_count,average_establishment_size/simple,establishment_size,legal_nature?count=establishment{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
+                <a href="/{{g.locale}}/bar/rais/jobs,wage,average_wage,average_establishment_size/simple,establishment_size,legal_nature?count=establishment{{ '&id_ibge=%s' % id_ibge if id_ibge}}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-establishments-bar'}}" data-parent="#jobs-establishments">
                     {% trans %}Bar{% endtrans %}
                 </a>
@@ -77,7 +77,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-industry-tree_map' }}" data-parent="#new-api-wage-industry">
                     TreeMap
                 </a>
-               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=wage+jobs+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=wage+jobs&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-industry-stacked' }}" data-parent="#new-api-wage-industry">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -93,7 +93,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-occupation-tree_map' }}" data-parent="#new-api-wage-occupation">
                     TreeMap
                 </a>
-               <a href="/{{g.locale}}/stacked/rais/occupation_family/jobs?values=wage+jobs+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+               <a href="/{{g.locale}}/stacked/rais/occupation_family/jobs?values=wage+jobs&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wage-occupation-stacked' }}" data-parent="#new-api-wage-occupation">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -110,7 +110,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-municipality-tree_map' }}" data-parent="#new-api-wages-municipality">
                     TreeMap
                   </a>
-                 <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=wage+jobs+establishment_count&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                 <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=wage+jobs&count=establishment&{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-municipality-stacked' }}" data-parent="#new-api-wages-municipality">
                     {% trans %}Stacked{% endtrans %}
                 </a>
