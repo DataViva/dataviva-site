@@ -476,9 +476,9 @@ var loadViz = function (data) {
         if (type == 'wage') {
             return dictionary['wage']
         }
-        if (type == 'establishment_count') {
+        /* if (type == 'establishment_count') {
             return dictionary['establishment_count']
-        }
+        } */
 
     }
 
