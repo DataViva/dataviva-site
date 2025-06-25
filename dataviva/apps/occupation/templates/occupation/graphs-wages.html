@@ -11,7 +11,7 @@
                     TreeMap
                 </a>
 
-               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=jobs+wage+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=jobs+wage&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-economic-activities-stacked' }}" data-parent="#new-api-jobs-economic-activities">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -39,7 +39,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'jobs-municipality-stacked'}}" data-parent="#jobs-municipality">
                     {% trans %}Stacked{% endtrans %}
                 </a> -->
-                <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=jobs+wage+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=jobs+wage&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-municipality-stacked' }}" data-parent="#new-api-jobs-municipality">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -77,7 +77,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-economic-activities-stacked'}}" data-parent="#wages-economic-activities">
                     {% trans %}Stacked{% endtrans %}
                </a> -->
-               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=wage+jobs+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+               <a href="/{{g.locale}}/stacked/rais/industry_class/jobs?values=wage+jobs&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-jobs-economic-activities-stacked' }}" data-parent="#new-api-wages-economic-activities">
                     {% trans %}Stacked{% endtrans %}
                 </a>
@@ -105,7 +105,7 @@
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'wages-municipality-stacked'}}" data-parent="#wages-municipality">
                     {% trans %}Stacked{% endtrans %}
                 </a> -->
-                <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=wage+jobs+establishment_count&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
+                <a href="/{{g.locale}}/stacked/rais/municipality/jobs?values=wage+jobs&count=establishment&occupation={{ occupation.id }}{{ '&id_ibge=%s' % id_ibge if id_ibge }}"
                    target="graphs-frame-wages" class="list-group-item {{'selected' if graph.menu == 'new-api-wages-municipality-stacked' }}" data-parent="#new-api-wages-municipality">
                     {% trans %}Stacked{% endtrans %}
                 </a>

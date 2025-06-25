@@ -92,11 +92,11 @@ function addIndicators(filters, year) {
         title: dictionary['total_employment'] + ' (' + year + ')',
         value:  'jobs'
     });
-    Indicator.add({
+    /* Indicator.add({
         url: dataviva.api_url + 'rais/year/?count=establishment&' + filters,
         title: dictionary['total_establishments'] + ' (' + year + ')',
         value:  'establishment_count'
-    });
+    }); */
 }
 
 function getLocationFilter(idIbge) {

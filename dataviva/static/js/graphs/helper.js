@@ -89,8 +89,8 @@ var SIZES = {
         'port': ['value', 'kg']
     },
     'rais': {
-        'industry_class': ['jobs', 'wage', 'establishment_count'],
-        'municipality': ['jobs', 'wage', 'establishment_count'],
+        'industry_class': ['jobs', 'wage'],
+        'municipality': ['jobs', 'wage'],
         'occupation_family': ['jobs', 'wage']
     },
     'cnes_establishment': {
@@ -244,7 +244,7 @@ var BASIC_VALUES = {
     'secex': ['value', 'kg'],
     'sc': ['students'],
     'hedu': ['enrolleds', 'entrants', 'graduates'],
-    'rais': ['jobs', 'wage', 'average_wage', 'establishment_count', 'average_establishment_size'],
+    'rais': ['jobs', 'wage', 'average_wage', 'average_establishment_size'],
     'cnes_establishment': ['establishments'],
     'cnes_equipment': ['equipment_quantity', 'equipment_quantity_in_use'],
     'cnes_bed': ['beds'],
