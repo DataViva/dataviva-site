@@ -10,7 +10,7 @@ export function getLang() {
 
 export const env = {
   apiUrl: process.env.API_URL ?
-    process.env.API_URL : "https://legacy.api.dataviva.info/",
+    process.env.API_URL : "https://legacyapi.dataviva.info/",
   s3Host: process.env.S3_HOST ?
     process.env.S3_HOST : "https://dataviva-site-production.s3.amazonaws.com",
   lang: "pt",

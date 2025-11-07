@@ -143,7 +143,7 @@ def get_max_year(data_object):
 def getSecexLatestYear():
     latestSecexYear = "2024"
 
-    response = requests.get("https://legacy.api.dataviva.info/secex/year")
+    response = requests.get("https://legacyapi.dataviva.info/secex/year")
 
     if response.status_code == 200:
         data = response.json()
@@ -155,7 +155,7 @@ def getSecexLatestYear():
 def getRaisLatestYear():
     latestRaisYear = "2023"
 
-    response = requests.get("https://legacy.api.dataviva.info/rais/year")
+    response = requests.get("https://legacyapi.dataviva.info/rais/year")
 
     if response.status_code == 200:
         data = response.json()
