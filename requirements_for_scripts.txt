@@ -4,7 +4,7 @@ gnureadline==6.3.3
 ipython==4.1.2
 ipython-genutils==0.1.0
 MySQL-python==1.2.5
-numpy==1.11.0
+numpy==1.22.0
 pandas==0.18.0
 pathlib2==2.1.0
 patsy==0.4.1
